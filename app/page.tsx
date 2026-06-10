@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { sampleVerses } from "./data/sampleVerses";
+import { renderSacredNames } from "./data/renderSacredNames";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -41,7 +42,7 @@ export default function Home() {
                 {verse.reference}
               </h2>
 
-              <p>{verse.text}</p>
+              <p>{renderSacredNames(verse.text)}</p>
             </div>
           ))}
         </div>

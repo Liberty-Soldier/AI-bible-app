@@ -4,7 +4,7 @@ export const sampleVerses = [
     book: "Genesis",
     chapter: 1,
     verse: 1,
-    text: "In the beginning Elohim created the heaven and the earth.",
+    text: "The LORD God created the heaven and the earth.",
   },
   {
     reference: "Exodus 3:15",
