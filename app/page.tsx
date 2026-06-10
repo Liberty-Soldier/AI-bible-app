@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { sampleVerses } from "./data/sampleVerses";
 import { renderSacredNames } from "./data/renderSacredNames";
+import { normalizeReference } from "./data/normalizeReference";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const normalizedSearch = normalizeReference(search);
 
   const results = sampleVerses.filter((verse) => {
     const sourceText = verse.sources
@@ -14,7 +16,7 @@ export default function Home() {
       .toLowerCase();
 
     return (
-      verse.reference.toLowerCase().includes(search.toLowerCase()) ||
+      verse.reference.toLowerCase().includes(normalizedSearch) ||
       sourceText.includes(search.toLowerCase())
     );
   });
