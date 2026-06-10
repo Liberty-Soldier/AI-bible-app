@@ -1,38 +1,49 @@
+"use client";
+
+import { useState } from "react";
 import { sampleVerses } from "./data/sampleVerses";
 
 export default function Home() {
+  const [search, setSearch] = useState("");
+
+  const results = sampleVerses.filter(
+    (verse) =>
+      verse.text.toLowerCase().includes(search.toLowerCase()) ||
+      verse.reference.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <main className="min-h-screen bg-neutral-950 text-white px-6 py-12">
       <section className="mx-auto max-w-4xl">
-        <p className="mb-4 text-sm uppercase tracking-[0.3em] text-neutral-400">
-          Scripture Intelligence
-        </p>
-
         <h1 className="text-5xl font-bold mb-6">
           AI Bible App
         </h1>
 
-        <p className="text-xl text-neutral-300 mb-10">
-          Search Scripture. Study original languages. Ask questions grounded in the text.
+        <p className="text-neutral-300 mb-6">
+          Search Sacred Name Scriptures
         </p>
 
-        <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-6">
-          <h2 className="text-2xl font-semibold mb-4">
-            Sacred Name Scripture Preview
-          </h2>
+        <input
+          type="text"
+          placeholder="Search Scripture..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full rounded-lg bg-neutral-900 border border-neutral-700 p-4 text-white mb-8"
+        />
 
-          <div className="space-y-4">
-            {sampleVerses.map((verse) => (
-              <div key={verse.reference} className="border-b border-neutral-800 pb-4">
-                <p className="font-semibold text-neutral-100">
-                  {verse.reference}
-                </p>
-                <p className="text-neutral-300">
-                  {verse.text}
-                </p>
-              </div>
-            ))}
-          </div>
+        <div className="space-y-6">
+          {results.map((verse) => (
+            <div
+              key={verse.reference}
+              className="rounded-xl border border-neutral-800 bg-neutral-900 p-4"
+            >
+              <h2 className="font-bold mb-2">
+                {verse.reference}
+              </h2>
+
+              <p>{verse.text}</p>
+            </div>
+          ))}
         </div>
       </section>
     </main>
