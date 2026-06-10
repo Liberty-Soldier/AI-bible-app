@@ -1,30 +1,35 @@
-export const sampleVerses = [
+import type { Verse } from "./types";
+
+export const sampleVerses: Verse[] = [
   {
+    id: "gen-1-1",
     reference: "Genesis 1:1",
     book: "Genesis",
     chapter: 1,
     verse: 1,
-    text: "The LORD God created the heaven and the earth.",
-  },
-  {
-    reference: "Exodus 3:15",
-    book: "Exodus",
-    chapter: 3,
-    verse: 15,
-    text: "Yahweh Elohim of your fathers, the Elohim of Abraham, the Elohim of Isaac, and the Elohim of Jacob, has sent me unto you.",
-  },
-  {
-    reference: "Deuteronomy 6:4",
-    book: "Deuteronomy",
-    chapter: 6,
-    verse: 4,
-    text: "Hear, O Israel: Yahweh our Elohim, Yahweh is one.",
-  },
-  {
-    reference: "John 17:3",
-    book: "John",
-    chapter: 17,
-    verse: 3,
-    text: "And this is life eternal, that they might know You the only true Elohim, and Yahshua Messiah, whom You have sent.",
+    sources: [
+      {
+        tradition: "septuagint",
+        label: "Septuagint",
+        sourceName: "Brenton Septuagint",
+        language: "english",
+        text: "In the beginning God made the heaven and the earth.",
+      },
+      {
+        tradition: "masoretic",
+        label: "Masoretic / KJV",
+        sourceName: "KJV",
+        language: "english",
+        text: "In the beginning God created the heaven and the earth.",
+      },
+      {
+        tradition: "dead-sea-scrolls",
+        label: "Dead Sea Scrolls",
+        sourceName: "DSS Notes",
+        language: "hebrew",
+        text: "",
+        notes: ["Placeholder for manuscript witness notes."],
+      },
+    ],
   },
 ];
