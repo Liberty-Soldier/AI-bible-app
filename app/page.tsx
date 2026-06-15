@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { generatedGenesis1 as sampleVerses } from "./data/scripture/generatedGenesis1";
+import { generatedBrenton as sampleVerses } from "./data/scripture/generatedBrenton";
 import { renderSacredNames } from "./data/renderSacredNames";
 import { normalizeReference } from "./data/normalizeReference";
 
@@ -43,7 +43,6 @@ export default function Home() {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full rounded-lg bg-neutral-900 border border-neutral-700 p-4 text-white mb-8"
         />
-
         <div className="space-y-8">
           {results.map((verse) => (
             <article
