@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { sampleVerses } from "./data/sampleVerses";
+import { generatedGenesis1 as sampleVerses } from "./data/scripture/generatedGenesis1";
 import { renderSacredNames } from "./data/renderSacredNames";
 import { normalizeReference } from "./data/normalizeReference";
 
