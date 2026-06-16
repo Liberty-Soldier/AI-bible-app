@@ -43,7 +43,7 @@ export default function Home() {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full rounded-lg bg-neutral-900 border border-neutral-700 p-4 text-white mb-8"
         />
-        <div className="space-y-8">
+        <div className="h-[70vh] overflow-y-auto space-y-8 pr-2">
           {results.map((verse) => (
             <article
               key={verse.id}
