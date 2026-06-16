@@ -1,50 +1,85 @@
 "use client";
 
 import { useState } from "react";
-import { generatedBrenton as sampleVerses } from "./data/scripture/generatedBrenton";
+import { allScripture as sampleVerses } from "./data/scripture/allScripture";
 import { renderSacredNames } from "./data/renderSacredNames";
 import { normalizeReference } from "./data/normalizeReference";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const [visibleCount, setVisibleCount] = useState(25);
+
   const normalizedSearch = normalizeReference(search);
+  const hasSearch = search.trim().length > 0;
 
-  const results = sampleVerses.filter((verse) => {
-    const sourceText = verse.sources
-      .map((source) => source.text)
-      .join(" ")
-      .toLowerCase();
+  const results = hasSearch
+    ? sampleVerses.filter((verse) => {
+        const sourceText = verse.sources
+          .map((source) => source.text)
+          .join(" ")
+          .toLowerCase();
 
-    return (
-      verse.reference.toLowerCase().includes(normalizedSearch) ||
-      sourceText.includes(search.toLowerCase())
-    );
-  });
+        return (
+          verse.reference.toLowerCase().includes(normalizedSearch) ||
+          sourceText.includes(search.toLowerCase())
+        );
+      })
+    : [];
+
+  const totalResults = results.length;
+  const displayedResults = results.slice(0, visibleCount);
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white px-6 py-12">
       <section className="mx-auto max-w-5xl">
         <p className="mb-4 text-sm uppercase tracking-[0.3em] text-neutral-400">
-          Scripture Intelligence
+          Seek Truth
         </p>
 
         <h1 className="text-5xl font-bold mb-4">
-          AI Bible App
+          Scripture Search
         </h1>
 
         <p className="text-neutral-300 mb-8">
-          Compare the Septuagint, Masoretic tradition, and manuscript notes with sacred-name rendering.
+          Search Scripture. Compare Manuscripts.
         </p>
 
         <input
           type="text"
-          placeholder="Search Scripture..."
+          placeholder="Search Scripture... Try Genesis 1:1, Moses, wisdom, Tobit"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-lg bg-neutral-900 border border-neutral-700 p-4 text-white mb-8"
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setVisibleCount(25);
+          }}
+          className="w-full rounded-lg bg-neutral-900 border border-neutral-700 p-4 text-white mb-6"
         />
-        <div className="h-[70vh] overflow-y-auto space-y-8 pr-2">
-          {results.map((verse) => (
+
+        {hasSearch && (
+          <p className="mb-4 text-neutral-400">
+            {totalResults} results found
+            {totalResults > visibleCount &&
+              ` (showing first ${visibleCount})`}
+          </p>
+        )}
+
+        {!hasSearch && (
+          <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-6 text-neutral-300">
+            <p className="mb-3 font-semibold text-white">
+              Begin searching the Brenton Septuagint.
+            </p>
+            <p>
+              Try searches like <span className="text-white">Genesis 1:1</span>,{" "}
+              <span className="text-white">Moses</span>,{" "}
+              <span className="text-white">wisdom</span>,{" "}
+              <span className="text-white">Tobit</span>, or{" "}
+              <span className="text-white">Maccabees</span>.
+            </p>
+          </div>
+        )}
+
+        <div className="space-y-8">
+          {displayedResults.map((verse) => (
             <article
               key={verse.id}
               className="rounded-2xl border border-neutral-800 bg-neutral-900 p-6"
@@ -90,6 +125,15 @@ export default function Home() {
             </article>
           ))}
         </div>
+
+        {visibleCount < totalResults && (
+          <button
+            onClick={() => setVisibleCount(visibleCount + 25)}
+            className="mt-8 rounded-xl bg-white text-black px-6 py-3 font-semibold"
+          >
+            Load More
+          </button>
+        )}
       </section>
     </main>
   );
