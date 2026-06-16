@@ -1,13 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { allScripture as sampleVerses } from "./data/scripture/allScripture";
 import { renderSacredNames } from "./data/renderSacredNames";
 import { normalizeReference } from "./data/normalizeReference";
 
 export default function Home() {
-  const [search, setSearch] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [search, setSearch] = useState(
+    searchParams.get("q") || ""
+  );
+
   const [visibleCount, setVisibleCount] = useState(25);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const params = new URLSearchParams();
+
+      if (search.trim()) {
+        params.set("q", search);
+      }
+
+      router.replace(`?${params.toString()}`);
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [search, router]);
 
   const normalizedSearch = normalizeReference(search);
   const hasSearch = search.trim().length > 0;
@@ -80,10 +102,11 @@ export default function Home() {
 
         <div className="space-y-8">
           {displayedResults.map((verse) => (
-            <article
-              key={verse.id}
-              className="rounded-2xl border border-neutral-800 bg-neutral-900 p-6"
-            >
+            <Link
+            key={verse.id}
+            href={`/verse/${verse.id}?q=${encodeURIComponent(search)}`}
+            className="block rounded-2xl border border-neutral-800 bg-neutral-900 p-6 hover:border-neutral-500 transition"
+          >
               <h2 className="text-2xl font-bold mb-6">
                 {verse.reference}
               </h2>
@@ -122,7 +145,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 
