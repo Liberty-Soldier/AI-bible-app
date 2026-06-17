@@ -1,5 +1,5 @@
-import { generatedBrenton } from "./generatedBrenton";
-import { generatedWEB } from "./generatedWEB";
+import generatedBrenton from "./generatedBrenton.json";
+import generatedWEB from "./generatedWEB.json";
 
 export const allScripture = [
   ...generatedBrenton,

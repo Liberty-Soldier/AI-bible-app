@@ -1,5 +1,6 @@
 export type TextTradition =
   | "septuagint"
+  | "lxx-greek"
   | "masoretic"
   | "dead-sea-scrolls"
   | "new-testament";

@@ -1,11 +1,63 @@
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
 import { allScripture } from "../../data/scripture/allScripture";
-import { generatedHebrew } from "../../data/scripture/generatedHebrew";
-import { generatedKJV } from "../../data/scripture/generatedKJV";
-import { generatedLXX } from "../../data/scripture/generatedLXX";
 import ScriptureText from "../../components/ScriptureText";
 import SacredNameToggle from "../../components/SacredNameToggle";
 import { notFound } from "next/navigation";
+
+type SourceVerse = {
+  reference: string;
+  sources: {
+    label: string;
+    sourceName: string;
+    tradition: string;
+    text: string;
+  }[];
+};
+
+function getKJVVerses(): SourceVerse[] {
+  const filePath = path.join(
+    process.cwd(),
+    "app",
+    "data",
+    "scripture",
+    "generatedKJV.json"
+  );
+
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function getLXXVerses(): SourceVerse[] {
+  const filePath = path.join(
+    process.cwd(),
+    "app",
+    "data",
+    "scripture",
+    "generatedLXX.json"
+  );
+
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+type HebrewVerse = {
+  book: string;
+  chapter: number;
+  verse: number;
+  text: string;
+};
+
+function getHebrewVerses(): HebrewVerse[] {
+  const filePath = path.join(
+    process.cwd(),
+    "app",
+    "data",
+    "scripture",
+    "generatedHebrew.json"
+  );
+
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
 
 const hebrewBookMap: Record<string, string> = {
   Genesis: "Gen",
@@ -50,7 +102,6 @@ const hebrewBookMap: Record<string, string> = {
   Malachi: "Mal",
 };
 
-
 export default async function VersePage({
   params,
   searchParams,
@@ -67,14 +118,17 @@ export default async function VersePage({
     notFound();
   }
 
-const hebrewBook = hebrewBookMap[verse.book];
+  const generatedHebrew = getHebrewVerses();
+  const generatedLXX = getLXXVerses();
+  const generatedKJV = getKJVVerses();
+  const hebrewBook = hebrewBookMap[verse.book];
 
-const hebrewVerse = generatedHebrew.find(
-  (v) =>
-    v.book === hebrewBook &&
-    v.chapter === verse.chapter &&
-    v.verse === verse.verse
-);
+  const hebrewVerse = generatedHebrew.find(
+    (v) =>
+      v.book === hebrewBook &&
+      v.chapter === verse.chapter &&
+      v.verse === verse.verse
+  );
 
   const lxxVerse = generatedLXX.find(
     (v) => v.reference === verse.reference
@@ -181,7 +235,9 @@ const hebrewVerse = generatedHebrew.find(
                 dir={source.tradition === "Hebrew" ? "rtl" : "ltr"}
                 className={`leading-relaxed text-neutral-200 ${
                   source.tradition === "Hebrew"
-                    ? "text-right text-2xl"
+                    ? "text-right text-3xl"
+                    : source.isOriginalLanguage
+                    ? "text-xl"
                     : ""
                 }`}
               >
@@ -197,7 +253,7 @@ const hebrewVerse = generatedHebrew.find(
 
         <div className="mt-10 rounded-xl border border-neutral-800 bg-neutral-900 p-6">
           <h2 className="text-xl font-bold mb-4">
-            Future Analysis
+            Evidence & Analysis
           </h2>
 
           <p className="text-neutral-400">
