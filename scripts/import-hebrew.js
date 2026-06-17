@@ -26,24 +26,36 @@ const parser = new XMLParser({
   preserveOrder: false,
 });
 
+function normalizeHebrewText(text) {
+  return text
+    .replace(/\//g, "")
+    .replace(/\s+־\s+־\s+־/g, "")
+    .replace(/\s+־\s+/g, "־")
+    .replace(/\s+׃/g, "׃")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function cleanText(value) {
   if (!value) return "";
 
-  if (typeof value === "string") return value;
+  if (typeof value === "string") {
+    return value;
+  }
 
   if (Array.isArray(value)) {
-    return value.map(cleanText).join(" ").replace(/\s+/g, " ").trim();
+    return value.map(cleanText).join(" ");
   }
 
   if (typeof value === "object") {
-    let parts = [];
+    const parts = [];
 
     for (const key of Object.keys(value)) {
-      if (key === "@_osisID" || key.startsWith("@_")) continue;
+      if (key.startsWith("@_")) continue;
       parts.push(cleanText(value[key]));
     }
 
-    return parts.join(" ").replace(/\s+/g, " ").trim();
+    return parts.join(" ");
   }
 
   return "";
@@ -67,7 +79,9 @@ function walk(node, currentBook = "", currentChapter = 0, verses = []) {
   }
 
   if (node.chapter) {
-    const chapters = Array.isArray(node.chapter) ? node.chapter : [node.chapter];
+    const chapters = Array.isArray(node.chapter)
+      ? node.chapter
+      : [node.chapter];
 
     for (const chapter of chapters) {
       const osisID = chapter["@_osisID"] || "";
@@ -79,7 +93,9 @@ function walk(node, currentBook = "", currentChapter = 0, verses = []) {
   }
 
   if (node.verse) {
-    const verseList = Array.isArray(node.verse) ? node.verse : [node.verse];
+    const verseList = Array.isArray(node.verse)
+      ? node.verse
+      : [node.verse];
 
     for (const verse of verseList) {
       const osisID = verse["@_osisID"] || "";
@@ -89,7 +105,7 @@ function walk(node, currentBook = "", currentChapter = 0, verses = []) {
       const chapter = Number(parts[1] || currentChapter);
       const verseNum = Number(parts[2]);
 
-      const text = cleanText(verse);
+      const text = normalizeHebrewText(cleanText(verse));
 
       if (book && chapter && verseNum && text) {
         verses.push({

@@ -7,6 +7,50 @@ import ScriptureText from "../../components/ScriptureText";
 import SacredNameToggle from "../../components/SacredNameToggle";
 import { notFound } from "next/navigation";
 
+const hebrewBookMap: Record<string, string> = {
+  Genesis: "Gen",
+  Exodus: "Exod",
+  Leviticus: "Lev",
+  Numbers: "Num",
+  Deuteronomy: "Deut",
+  Joshua: "Josh",
+  Judges: "Judg",
+  Ruth: "Ruth",
+  "1 Samuel": "1Sam",
+  "2 Samuel": "2Sam",
+  "1 Kings": "1Kgs",
+  "2 Kings": "2Kgs",
+  "1 Chronicles": "1Chr",
+  "2 Chronicles": "2Chr",
+  Ezra: "Ezra",
+  Nehemiah: "Neh",
+  Esther: "Esth",
+  Job: "Job",
+  Psalms: "Ps",
+  Psalm: "Ps",
+  Proverbs: "Prov",
+  Ecclesiastes: "Eccl",
+  "Song of Solomon": "Song",
+  Isaiah: "Isa",
+  Jeremiah: "Jer",
+  Lamentations: "Lam",
+  Ezekiel: "Ezek",
+  Daniel: "Dan",
+  Hosea: "Hos",
+  Joel: "Joel",
+  Amos: "Amos",
+  Obadiah: "Obad",
+  Jonah: "Jonah",
+  Micah: "Mic",
+  Nahum: "Nah",
+  Habakkuk: "Hab",
+  Zephaniah: "Zeph",
+  Haggai: "Hag",
+  Zechariah: "Zech",
+  Malachi: "Mal",
+};
+
+
 export default async function VersePage({
   params,
   searchParams,
@@ -23,12 +67,14 @@ export default async function VersePage({
     notFound();
   }
 
-  const hebrewVerse = generatedHebrew.find(
-    (v) =>
-      v.book === verse.book &&
-      v.chapter === verse.chapter &&
-      v.verse === verse.verse
-  );
+const hebrewBook = hebrewBookMap[verse.book];
+
+const hebrewVerse = generatedHebrew.find(
+  (v) =>
+    v.book === hebrewBook &&
+    v.chapter === verse.chapter &&
+    v.verse === verse.verse
+);
 
   const lxxVerse = generatedLXX.find(
     (v) => v.reference === verse.reference
