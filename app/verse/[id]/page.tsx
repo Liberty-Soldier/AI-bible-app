@@ -1,4 +1,5 @@
 import { allScripture } from "../../data/scripture/allScripture";
+import { generatedKJV } from "../../data/scripture/generatedKJV";
 import { renderSacredNames } from "../../data/renderSacredNames";
 import { notFound } from "next/navigation";
 
@@ -10,6 +11,18 @@ export default async function VersePage({
   const { id } = await params;
 
   const verse = allScripture.find((v) => v.id === id);
+
+if (!verse) {
+  notFound();
+}
+
+const kjvVerse = generatedKJV.find(
+  (v) => v.reference === verse.reference
+);
+
+const sources = kjvVerse
+  ? [...verse.sources, ...kjvVerse.sources]
+  : verse.sources;
 
   if (!verse) {
     notFound();
@@ -27,7 +40,7 @@ export default async function VersePage({
         </h1>
 
         <div className="space-y-4">
-          {verse.sources.map((source) => (
+        {sources.map((source) => (
             <div
               key={source.tradition}
               className="rounded-xl border border-neutral-800 bg-neutral-900 p-6"
