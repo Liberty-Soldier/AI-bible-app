@@ -1,8 +1,8 @@
 export const nameRules = [
   {
-    id: "god-to-elohim",
-    source: "God",
-    replacement: "Elohim",
+    id: "lord-god-to-yahweh-elohim",
+    source: "LORD God",
+    replacement: "Yahweh Elohim",
   },
   {
     id: "lord-to-yahweh",
@@ -10,8 +10,8 @@ export const nameRules = [
     replacement: "Yahweh",
   },
   {
-    id: "lord-god-to-yahweh-elohim",
-    source: "LORD God",
-    replacement: "Yahweh Elohim",
+    id: "god-to-elohim",
+    source: "God",
+    replacement: "Elohim",
   },
 ];

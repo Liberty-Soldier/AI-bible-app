@@ -5,6 +5,7 @@ import { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { allScripture as sampleVerses } from "./data/scripture/allScripture";
 import { renderSacredNames } from "./data/renderSacredNames";
+import { useSacredNames } from "./data/useSacredNames";
 import { normalizeReference } from "./data/normalizeReference";
 
 function SearchPage() {
@@ -13,6 +14,7 @@ function SearchPage() {
 
   const [search, setSearch] = useState(searchParams.get("q") || "");
   const [visibleCount, setVisibleCount] = useState(25);
+  const { sacredNames, setSacredNames } = useSacredNames();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -78,6 +80,14 @@ function SearchPage() {
             {totalResults > visibleCount && ` (showing first ${visibleCount})`}
           </p>
         )}
+        <label className="flex items-center gap-2 mb-6 text-sm text-neutral-300">
+  <input
+    type="checkbox"
+    checked={sacredNames}
+    onChange={(e) => setSacredNames(e.target.checked)}
+  />
+  Sacred Name Rendering
+</label>
 
         <div className="space-y-8">
           {displayedResults.map((verse) => (
@@ -95,7 +105,9 @@ function SearchPage() {
 </p>
 
 <p className="text-neutral-300 leading-relaxed">
-  {renderSacredNames(verse.sources[0]?.text || "")}
+ {sacredNames
+  ? renderSacredNames(verse.sources[0]?.text || "")
+  : verse.sources[0]?.text || ""}
 </p>
 
 <p className="mt-4 text-sm text-neutral-500">

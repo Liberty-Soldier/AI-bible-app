@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { allScripture } from "../../data/scripture/allScripture";
+import { generatedHebrew } from "../../data/scripture/generatedHebrew";
 import { generatedKJV } from "../../data/scripture/generatedKJV";
-import { renderSacredNames } from "../../data/renderSacredNames";
+import { generatedLXX } from "../../data/scripture/generatedLXX";
+import ScriptureText from "../../components/ScriptureText";
+import SacredNameToggle from "../../components/SacredNameToggle";
 import { notFound } from "next/navigation";
 
 export default async function VersePage({
@@ -20,13 +23,53 @@ export default async function VersePage({
     notFound();
   }
 
+  const hebrewVerse = generatedHebrew.find(
+    (v) =>
+      v.book === verse.book &&
+      v.chapter === verse.chapter &&
+      v.verse === verse.verse
+  );
+
+  const lxxVerse = generatedLXX.find(
+    (v) => v.reference === verse.reference
+  );
+
   const kjvVerse = generatedKJV.find(
     (v) => v.reference === verse.reference
   );
 
-  const sources = kjvVerse
-    ? [...verse.sources, ...kjvVerse.sources]
-    : verse.sources;
+  const hebrewSource = hebrewVerse
+    ? [
+        {
+          label: "Hebrew WLC",
+          sourceName:
+            "Open Scriptures Hebrew Bible / Westminster Leningrad Codex",
+          tradition: "Hebrew",
+          text: hebrewVerse.text,
+          isOriginalLanguage: true,
+        },
+      ]
+    : [];
+
+  const sources = [
+    ...hebrewSource,
+    ...(lxxVerse
+      ? lxxVerse.sources.map((source) => ({
+          ...source,
+          isOriginalLanguage: true,
+        }))
+      : []),
+    ...verse.sources.map((source) => ({
+      ...source,
+      isOriginalLanguage: false,
+    })),
+    ...(kjvVerse
+      ? kjvVerse.sources.map((source) => ({
+          ...source,
+          isOriginalLanguage: false,
+        }))
+      : []),
+  ];
 
   const backHref = q ? `/?q=${encodeURIComponent(q)}` : "/";
 
@@ -49,6 +92,10 @@ export default async function VersePage({
           />
         </form>
 
+        <div className="mb-6">
+          <SacredNameToggle />
+        </div>
+
         <Link
           href={backHref}
           className="inline-block mb-6 text-neutral-400 hover:text-white"
@@ -61,21 +108,42 @@ export default async function VersePage({
         </h1>
 
         <div className="space-y-4">
-          {sources.map((source) => (
+          {sources.map((source, index) => (
             <div
-              key={`${verse.id}-${source.tradition}-${source.sourceName}`}
+              key={`${verse.id}-${source.tradition}-${source.sourceName}-${index}`}
               className="rounded-xl border border-neutral-800 bg-neutral-900 p-6"
             >
-              <p className="text-sm uppercase tracking-wide text-neutral-500 mb-2">
-                {source.label}
-              </p>
+              <div className="mb-4 flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-sm uppercase tracking-wide text-neutral-500 mb-2">
+                    {source.label}
+                  </p>
 
-              <p className="text-xs text-neutral-500 mb-4">
-                {source.sourceName}
-              </p>
+                  <p className="text-xs text-neutral-500">
+                    {source.sourceName}
+                  </p>
+                </div>
 
-              <p className="leading-relaxed text-neutral-200">
-                {renderSacredNames(source.text)}
+                {source.isOriginalLanguage && (
+                  <span className="rounded-full border border-neutral-700 px-3 py-1 text-xs text-neutral-400">
+                    Source Text
+                  </span>
+                )}
+              </div>
+
+              <p
+                dir={source.tradition === "Hebrew" ? "rtl" : "ltr"}
+                className={`leading-relaxed text-neutral-200 ${
+                  source.tradition === "Hebrew"
+                    ? "text-right text-2xl"
+                    : ""
+                }`}
+              >
+                {source.isOriginalLanguage ? (
+                  source.text
+                ) : (
+                  <ScriptureText text={source.text} />
+                )}
               </p>
             </div>
           ))}
@@ -87,8 +155,8 @@ export default async function VersePage({
           </h2>
 
           <p className="text-neutral-400">
-            Manuscript comparison, Greek/Hebrew source text,
-            cross references, and AI analysis will appear here.
+            Cross references, manuscript comparison, Hebrew and Greek
+            word studies, and source-first AI analysis will appear here.
           </p>
         </div>
       </section>
