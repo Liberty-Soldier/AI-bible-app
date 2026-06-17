@@ -84,30 +84,23 @@ function SearchPage() {
             <Link
               key={verse.id}
               href={`/verse/${verse.id}?q=${encodeURIComponent(search)}`}
-              className="block rounded-2xl border border-neutral-800 bg-neutral-900 p-6 hover:border-neutral-500 transition"
+             className="block border-b border-neutral-800 py-6 hover:bg-neutral-900/60 transition px-2"
             >
-              <h2 className="text-2xl font-bold mb-6">{verse.reference}</h2>
+<h2 className="text-xl font-bold mb-2 text-white">
+  {verse.reference}
+</h2>
 
-              <div className="grid gap-4 md:grid-cols-2">
-                {verse.sources.map((source) => (
-                  <div
-                    key={`${verse.id}-${source.tradition}`}
-                    className="rounded-xl border border-neutral-800 bg-neutral-950 p-4"
-                  >
-                    <p className="text-sm uppercase tracking-wide text-neutral-500 mb-2">
-                      {source.label}
-                    </p>
+<p className="text-sm text-neutral-500 mb-3">
+  {verse.sources[0]?.sourceName}
+</p>
 
-                    <p className="text-xs text-neutral-500 mb-4">
-                      {source.sourceName}
-                    </p>
+<p className="text-neutral-300 leading-relaxed">
+  {renderSacredNames(verse.sources[0]?.text || "")}
+</p>
 
-                    <p className="text-neutral-200 leading-relaxed">
-                      {renderSacredNames(source.text)}
-                    </p>
-                  </div>
-                ))}
-              </div>
+<p className="mt-4 text-sm text-neutral-500">
+  Open verse study →
+</p>
             </Link>
           ))}
         </div>
