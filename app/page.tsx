@@ -1,20 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { allScripture as sampleVerses } from "./data/scripture/allScripture";
 import { renderSacredNames } from "./data/renderSacredNames";
 import { normalizeReference } from "./data/normalizeReference";
 
-export default function Home() {
+function SearchPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [search, setSearch] = useState(
-    searchParams.get("q") || ""
-  );
-
+  const [search, setSearch] = useState(searchParams.get("q") || "");
   const [visibleCount, setVisibleCount] = useState(25);
 
   useEffect(() => {
@@ -58,9 +55,7 @@ export default function Home() {
           Seek Truth
         </p>
 
-        <h1 className="text-5xl font-bold mb-4">
-          Scripture Search
-        </h1>
+        <h1 className="text-5xl font-bold mb-4">Scripture Search</h1>
 
         <p className="text-neutral-300 mb-8">
           Search Scripture. Compare Manuscripts.
@@ -80,36 +75,18 @@ export default function Home() {
         {hasSearch && (
           <p className="mb-4 text-neutral-400">
             {totalResults} results found
-            {totalResults > visibleCount &&
-              ` (showing first ${visibleCount})`}
+            {totalResults > visibleCount && ` (showing first ${visibleCount})`}
           </p>
-        )}
-
-        {!hasSearch && (
-          <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-6 text-neutral-300">
-            <p className="mb-3 font-semibold text-white">
-              Begin searching the Brenton Septuagint.
-            </p>
-            <p>
-              Try searches like <span className="text-white">Genesis 1:1</span>,{" "}
-              <span className="text-white">Moses</span>,{" "}
-              <span className="text-white">wisdom</span>,{" "}
-              <span className="text-white">Tobit</span>, or{" "}
-              <span className="text-white">Maccabees</span>.
-            </p>
-          </div>
         )}
 
         <div className="space-y-8">
           {displayedResults.map((verse) => (
             <Link
-            key={verse.id}
-            href={`/verse/${verse.id}?q=${encodeURIComponent(search)}`}
-            className="block rounded-2xl border border-neutral-800 bg-neutral-900 p-6 hover:border-neutral-500 transition"
-          >
-              <h2 className="text-2xl font-bold mb-6">
-                {verse.reference}
-              </h2>
+              key={verse.id}
+              href={`/verse/${verse.id}?q=${encodeURIComponent(search)}`}
+              className="block rounded-2xl border border-neutral-800 bg-neutral-900 p-6 hover:border-neutral-500 transition"
+            >
+              <h2 className="text-2xl font-bold mb-6">{verse.reference}</h2>
 
               <div className="grid gap-4 md:grid-cols-2">
                 {verse.sources.map((source) => (
@@ -125,23 +102,9 @@ export default function Home() {
                       {source.sourceName}
                     </p>
 
-                    {source.text ? (
-                      <p className="text-neutral-200 leading-relaxed">
-                        {renderSacredNames(source.text)}
-                      </p>
-                    ) : (
-                      <p className="text-neutral-500 italic">
-                        No direct verse text loaded yet.
-                      </p>
-                    )}
-
-                    {source.notes && source.notes.length > 0 && (
-                      <ul className="mt-4 list-disc pl-5 text-sm text-neutral-400">
-                        {source.notes.map((note) => (
-                          <li key={note}>{note}</li>
-                        ))}
-                      </ul>
-                    )}
+                    <p className="text-neutral-200 leading-relaxed">
+                      {renderSacredNames(source.text)}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -159,5 +122,13 @@ export default function Home() {
         )}
       </section>
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={null}>
+      <SearchPage />
+    </Suspense>
   );
 }
