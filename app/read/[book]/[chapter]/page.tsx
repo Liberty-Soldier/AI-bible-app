@@ -12,6 +12,7 @@ import VerseScroller from "@/app/components/VerseScroller";
 import ChapterSwipe from "@/app/components/ChapterSwipe";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import ReaderControlsShell from "@/app/components/ReaderControlsShell";
+import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -152,7 +153,9 @@ export default async function ReadChapterPage({
           <SacredNameToggle />
         </div>
 
-<ReaderControlsShell>
+<CollapsibleReaderHeader
+  title={`${activeTranslation.toUpperCase()} • ${decodedBook} ${chapterNumber}`}
+>
   <ReaderSelector
     books={books}
     currentBook={decodedBook}
@@ -162,7 +165,7 @@ export default async function ReadChapterPage({
     currentVerse={highlightedVerse}
     maxVerse={chapterVerses.length}
   />
-</ReaderControlsShell>
+</CollapsibleReaderHeader>
 
         <div className="mb-10 flex items-center justify-between gap-4">
           {previousChapterHref ? (
