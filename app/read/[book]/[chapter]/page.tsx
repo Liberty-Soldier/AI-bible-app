@@ -11,6 +11,7 @@ import SaveReadingPosition from "@/app/components/SaveReadingPosition";
 import VerseScroller from "@/app/components/VerseScroller";
 import ChapterSwipe from "@/app/components/ChapterSwipe";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
+import ReaderControlsShell from "@/app/components/ReaderControlsShell";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -151,15 +152,17 @@ export default async function ReadChapterPage({
           <SacredNameToggle />
         </div>
 
-<ReaderSelector
-  books={books}
-  currentBook={decodedBook}
-  currentChapter={chapterNumber}
-  maxChapter={maxChapter}
-  currentTranslation={activeTranslation}
-  currentVerse={highlightedVerse}
-  maxVerse={chapterVerses.length}
-/>
+<ReaderControlsShell>
+  <ReaderSelector
+    books={books}
+    currentBook={decodedBook}
+    currentChapter={chapterNumber}
+    maxChapter={maxChapter}
+    currentTranslation={activeTranslation}
+    currentVerse={highlightedVerse}
+    maxVerse={chapterVerses.length}
+  />
+</ReaderControlsShell>
 
         <div className="mb-10 flex items-center justify-between gap-4">
           {previousChapterHref ? (
