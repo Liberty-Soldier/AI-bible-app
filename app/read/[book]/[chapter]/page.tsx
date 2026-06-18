@@ -136,10 +136,48 @@ export default async function ReadChapterPage({
 
         <VerseScroller verse={highlightedVerse} />
 
-        <ChapterSwipe
+<ChapterSwipe
   previousChapterHref={previousChapterHref}
   nextChapterHref={nextChapterHref}
-/>
+>
+  <article className="rounded-3xl border border-neutral-800 bg-neutral-950/60 px-5 py-8 shadow-2xl shadow-black/20 sm:px-10 sm:py-12">
+    <div className="mb-10 text-center">
+      <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
+        {translationLabel}
+      </p>
+
+      <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+        {decodedBook} {chapterNumber}
+      </h2>
+    </div>
+
+    <div className="space-y-5 text-[1.12rem] leading-9 text-neutral-200 sm:text-xl sm:leading-10">
+      {chapterVerses.map((v) => {
+        const isHighlighted = highlightedVerse === v.verse;
+        const selectedText = v.sources[0]?.text || "";
+
+        return (
+          <Link
+            id={`verse-${v.verse}`}
+            key={`${v.id}-${activeTranslation}`}
+            href={`/verse/${v.id}`}
+            className={`group block rounded-xl px-3 py-2 transition ${
+              isHighlighted
+                ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
+                : "hover:bg-neutral-900"
+            }`}
+          >
+            <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
+              {v.verse}
+            </span>
+
+            <ScriptureText text={selectedText} />
+          </Link>
+        );
+      })}
+    </div>
+  </article>
+</ChapterSwipe>
 
         <SaveReadingPosition
   book={decodedBook}
