@@ -11,7 +11,6 @@ import SaveReadingPosition from "@/app/components/SaveReadingPosition";
 import VerseScroller from "@/app/components/VerseScroller";
 import ChapterSwipe from "@/app/components/ChapterSwipe";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
-import ReaderControlsShell from "@/app/components/ReaderControlsShell";
 import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
 
 type Translation = "web" | "kjv" | "brenton";

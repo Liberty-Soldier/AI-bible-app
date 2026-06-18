@@ -46,9 +46,9 @@ export default function ReaderSelector({
     );
   }
 
-  return (
-  <div className="border-b border-neutral-800 bg-neutral-950/95 py-3 backdrop-blur">
-      <div className="mx-auto grid max-w-3xl grid-cols-1 gap-2 sm:grid-cols-4">
+return (
+  <div>
+    <div className="grid grid-cols-1 gap-2 sm:grid-cols-4">
         <select
           aria-label="Translation"
           value={currentTranslation}
