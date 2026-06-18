@@ -8,13 +8,41 @@ import { renderSacredNames } from "./data/renderSacredNames";
 import { useSacredNames } from "./data/useSacredNames";
 import { normalizeReference } from "./data/normalizeReference";
 
+type LastReadingPosition = {
+  book: string;
+  chapter: number;
+  translation: string;
+  timestamp: number;
+};
+
+function getTranslationLabel(translation: string) {
+  if (translation === "kjv") return "King James Version";
+  if (translation === "brenton") return "Brenton Septuagint";
+  return "World English Bible";
+}
+
 function SearchPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [search, setSearch] = useState(searchParams.get("q") || "");
   const [visibleCount, setVisibleCount] = useState(25);
+  const [lastReading, setLastReading] =
+    useState<LastReadingPosition | null>(null);
+
   const { sacredNames, setSacredNames } = useSacredNames();
+
+  useEffect(() => {
+    const saved = localStorage.getItem("lastReadingPosition");
+
+    if (saved) {
+      try {
+        setLastReading(JSON.parse(saved));
+      } catch {
+        setLastReading(null);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -53,13 +81,13 @@ function SearchPage() {
   return (
     <main className="min-h-screen bg-neutral-950 text-white px-6 py-10">
       <section className="mx-auto max-w-6xl">
-        <div className="mb-12 rounded-3xl border border-neutral-800 bg-gradient-to-b from-neutral-900 to-neutral-950 p-8 sm:p-12">
+        <div className="mb-8 rounded-3xl border border-neutral-800 bg-gradient-to-b from-neutral-900 to-neutral-950 p-8 shadow-2xl shadow-black/30 sm:p-12">
           <p className="mb-4 text-sm uppercase tracking-[0.35em] text-neutral-500">
             Source-First Scripture Study
           </p>
 
-          <h1 className="mb-5 text-5xl font-bold tracking-tight sm:text-6xl">
-            The Word
+          <h1 className="mb-5 text-5xl font-bold tracking-tight sm:text-7xl">
+            My Scripture Search
           </h1>
 
           <p className="mb-8 max-w-2xl text-lg leading-relaxed text-neutral-300">
@@ -70,11 +98,11 @@ function SearchPage() {
           <div className="grid gap-4 sm:grid-cols-3">
             <Link
               href="/read"
-              className="rounded-2xl border border-neutral-700 bg-white p-6 text-black transition hover:bg-neutral-200"
+              className="rounded-2xl border border-neutral-200 bg-white p-6 text-black transition hover:bg-neutral-200"
             >
               <p className="text-lg font-bold">Read Bible</p>
               <p className="mt-2 text-sm text-neutral-700">
-                Choose a book and chapter.
+                Choose translation, book, and chapter.
               </p>
             </Link>
 
@@ -98,19 +126,50 @@ function SearchPage() {
               </p>
             </Link>
           </div>
-
-          <div className="mt-8 rounded-2xl border border-neutral-800 bg-neutral-950/70 p-5">
-            <p className="text-sm uppercase tracking-[0.25em] text-neutral-500">
-              Evidence Order
-            </p>
-            <p className="mt-2 text-neutral-300">
-              Original Language Source → Translation Witnesses → Cross
-              References → AI Explanation
-            </p>
-          </div>
         </div>
 
-        <section id="search" className="rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6 sm:p-8">
+        {lastReading && (
+          <section className="mb-8 rounded-3xl border border-amber-500/30 bg-amber-500/10 p-6 sm:p-7">
+            <p className="mb-2 text-sm uppercase tracking-[0.25em] text-amber-300/80">
+              Continue Reading
+            </p>
+
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">
+                  {lastReading.book} {lastReading.chapter}
+                </h2>
+                <p className="mt-1 text-sm text-neutral-300">
+                  {getTranslationLabel(lastReading.translation)}
+                </p>
+              </div>
+
+              <Link
+                href={`/read/${encodeURIComponent(lastReading.book)}/${
+                  lastReading.chapter
+                }?translation=${lastReading.translation}`}
+                className="rounded-xl bg-white px-5 py-3 text-center font-semibold text-black hover:bg-neutral-200"
+              >
+                Resume Reading →
+              </Link>
+            </div>
+          </section>
+        )}
+
+        <div className="mb-8 rounded-3xl border border-neutral-800 bg-neutral-900/50 p-5">
+          <p className="text-sm uppercase tracking-[0.25em] text-neutral-500">
+            Evidence Order
+          </p>
+          <p className="mt-2 text-neutral-300">
+            Original Language Source → Translation Witnesses → Cross References
+            → AI Explanation
+          </p>
+        </div>
+
+        <section
+          id="search"
+          className="rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6 sm:p-8"
+        >
           <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <p className="mb-2 text-sm uppercase tracking-[0.3em] text-neutral-500">
@@ -137,7 +196,7 @@ function SearchPage() {
               setSearch(e.target.value);
               setVisibleCount(25);
             }}
-            className="mb-6 w-full rounded-xl border border-neutral-700 bg-neutral-950 p-4 text-white"
+            className="mb-6 w-full rounded-xl border border-neutral-700 bg-neutral-950 p-4 text-white outline-none transition focus:border-neutral-400"
           />
 
           {hasSearch && (
@@ -151,8 +210,10 @@ function SearchPage() {
             {displayedResults.map((verse, index) => (
               <Link
                 key={`${verse.id}-${index}`}
-                href={`/read/${encodeURIComponent(verse.book)}/${verse.chapter}?verse=${verse.verse}`}
-                className="block py-6 transition hover:bg-neutral-950/60"
+                href={`/read/${encodeURIComponent(verse.book)}/${
+                  verse.chapter
+                }?verse=${verse.verse}`}
+                className="block rounded-xl px-3 py-6 transition hover:bg-neutral-950/60"
               >
                 <h3 className="mb-2 text-xl font-bold text-white">
                   {verse.reference}
@@ -178,7 +239,7 @@ function SearchPage() {
           {visibleCount < totalResults && (
             <button
               onClick={() => setVisibleCount(visibleCount + 25)}
-              className="mt-8 rounded-xl bg-white px-6 py-3 font-semibold text-black"
+              className="mt-8 rounded-xl bg-white px-6 py-3 font-semibold text-black hover:bg-neutral-200"
             >
               Load More
             </button>

@@ -7,6 +7,7 @@ import SacredNameToggle from "@/app/components/SacredNameToggle";
 import { notFound } from "next/navigation";
 import AppNav from "@/app/components/AppNav";
 import ReaderSelector from "@/app/components/ReaderSelector";
+import SaveReadingPosition from "@/app/components/SaveReadingPosition";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -129,6 +130,13 @@ export default async function ReadChapterPage({
       <section className="mx-auto max-w-3xl">
         <AppNav />
 
+        <SaveReadingPosition
+  book={decodedBook}
+  chapter={chapterNumber}
+  translation={activeTranslation}
+/>
+
+
         <div className="mb-6">
           <SacredNameToggle />
         </div>
@@ -187,6 +195,25 @@ export default async function ReadChapterPage({
             })}
           </div>
         </article>
+        <div className="mt-8 flex items-center justify-between">
+  {previousChapterHref ? (
+    <Link
+      href={previousChapterHref}
+      className="rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 hover:border-neutral-600"
+    >
+      ← Previous Chapter
+    </Link>
+  ) : (
+    <span />
+  )}
+
+  <Link
+    href={nextChapterHref}
+    className="rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 hover:border-neutral-600"
+  >
+    Next Chapter →
+  </Link>
+</div>
       </section>
     </main>
   );

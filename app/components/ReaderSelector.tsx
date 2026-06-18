@@ -34,18 +34,15 @@ export default function ReaderSelector({
   }
 
   return (
-    <div className="mb-8 rounded-2xl border border-neutral-800 bg-neutral-900/80 p-4">
-      <p className="mb-3 text-xs uppercase tracking-[0.25em] text-neutral-500">
-        Reader Controls
-      </p>
-
-      <div className="grid gap-3 sm:grid-cols-3">
+    <div className="sticky top-0 z-50 mb-8 border-b border-neutral-800 bg-neutral-950/95 py-3 backdrop-blur">
+      <div className="mx-auto grid max-w-3xl grid-cols-3 gap-2">
         <select
+          aria-label="Translation"
           value={currentTranslation}
           onChange={(e) =>
             goTo(currentBook, currentChapter, e.target.value as Translation)
           }
-          className="rounded-xl border border-neutral-700 bg-neutral-950 p-3 text-white"
+          className="rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white"
         >
           {translations.map((translation) => (
             <option key={translation.value} value={translation.value}>
@@ -55,9 +52,10 @@ export default function ReaderSelector({
         </select>
 
         <select
+          aria-label="Book"
           value={currentBook}
           onChange={(e) => goTo(e.target.value, 1, currentTranslation)}
-          className="rounded-xl border border-neutral-700 bg-neutral-950 p-3 text-white"
+          className="rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white"
         >
           {books.map((book) => (
             <option key={book} value={book}>
@@ -67,16 +65,17 @@ export default function ReaderSelector({
         </select>
 
         <select
+          aria-label="Chapter"
           value={currentChapter}
           onChange={(e) =>
             goTo(currentBook, Number(e.target.value), currentTranslation)
           }
-          className="rounded-xl border border-neutral-700 bg-neutral-950 p-3 text-white"
+          className="rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white"
         >
           {Array.from({ length: maxChapter }, (_, i) => i + 1).map(
             (chapter) => (
               <option key={chapter} value={chapter}>
-                Chapter {chapter}
+                Ch. {chapter}
               </option>
             )
           )}

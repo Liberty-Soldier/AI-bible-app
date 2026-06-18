@@ -31,7 +31,7 @@ function BookGrid({ title, books }: { title: string; books: BookInfo[] }) {
         {books.map(({ book, chapters }) => (
           <Link
             key={book}
-            href={`/read/${encodeURIComponent(book)}/1`}
+            href={`/read/${encodeURIComponent(book)}`}
             className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 hover:border-neutral-600"
           >
             <p className="font-semibold">{book}</p>
