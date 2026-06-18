@@ -158,37 +158,6 @@ export default async function ReadChapterPage({
           />
         </CollapsibleReaderHeader>
 
-        <div className="mb-10 flex items-center justify-between gap-4">
-          {previousChapterHref ? (
-            <Link
-              href={previousChapterHref}
-              className="text-neutral-400 hover:text-white"
-            >
-              ← Previous
-            </Link>
-          ) : (
-            <span />
-          )}
-
-          <div className="text-center">
-            <h1 className="text-4xl font-bold">
-              {decodedBook} {chapterNumber}
-            </h1>
-            <p className="mt-2 text-sm text-neutral-500">{translationLabel}</p>
-          </div>
-
-          {nextChapterHref ? (
-            <Link
-              href={nextChapterHref}
-              className="text-neutral-400 hover:text-white"
-            >
-              Next →
-            </Link>
-          ) : (
-            <span />
-          )}
-        </div>
-
         <ChapterSwipe
           previousChapterHref={previousChapterHref}
           nextChapterHref={nextChapterHref}
