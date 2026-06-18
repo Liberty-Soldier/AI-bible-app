@@ -90,9 +90,9 @@ function SearchPage() {
 </label>
 
         <div className="space-y-8">
-          {displayedResults.map((verse) => (
+          {displayedResults.map((verse, index) => (
             <Link
-              key={verse.id}
+              key={`${verse.id}-${index}`}
               href={`/verse/${verse.id}?q=${encodeURIComponent(search)}`}
              className="block border-b border-neutral-800 py-6 hover:bg-neutral-900/60 transition px-2"
             >

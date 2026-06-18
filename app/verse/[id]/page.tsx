@@ -28,6 +28,18 @@ function getKJVVerses(): SourceVerse[] {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
+function getGNTVerses(): SourceVerse[] {
+  const filePath = path.join(
+    process.cwd(),
+    "app",
+    "data",
+    "scripture",
+    "generatedGNT.json"
+  );
+
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
 function getLXXVerses(): SourceVerse[] {
   const filePath = path.join(
     process.cwd(),
@@ -119,6 +131,7 @@ export default async function VersePage({
   }
 
   const generatedHebrew = getHebrewVerses();
+  const generatedGNT = getGNTVerses();
   const generatedLXX = getLXXVerses();
   const generatedKJV = getKJVVerses();
   const hebrewBook = hebrewBookMap[verse.book];
@@ -129,6 +142,10 @@ export default async function VersePage({
       v.chapter === verse.chapter &&
       v.verse === verse.verse
   );
+
+  const gntVerse = generatedGNT.find(
+  (v) => v.reference === verse.reference
+);
 
   const lxxVerse = generatedLXX.find(
     (v) => v.reference === verse.reference
@@ -152,24 +169,30 @@ export default async function VersePage({
     : [];
 
   const sources = [
-    ...hebrewSource,
-    ...(lxxVerse
-      ? lxxVerse.sources.map((source) => ({
-          ...source,
-          isOriginalLanguage: true,
-        }))
-      : []),
-    ...verse.sources.map((source) => ({
-      ...source,
-      isOriginalLanguage: false,
-    })),
-    ...(kjvVerse
-      ? kjvVerse.sources.map((source) => ({
-          ...source,
-          isOriginalLanguage: false,
-        }))
-      : []),
-  ];
+  ...hebrewSource,
+  ...(lxxVerse
+    ? lxxVerse.sources.map((source) => ({
+        ...source,
+        isOriginalLanguage: true,
+      }))
+    : []),
+  ...(gntVerse
+    ? gntVerse.sources.map((source) => ({
+        ...source,
+        isOriginalLanguage: true,
+      }))
+    : []),
+  ...verse.sources.map((source) => ({
+    ...source,
+    isOriginalLanguage: false,
+  })),
+  ...(kjvVerse
+    ? kjvVerse.sources.map((source) => ({
+        ...source,
+        isOriginalLanguage: false,
+      }))
+    : []),
+];
 
   const backHref = q ? `/?q=${encodeURIComponent(q)}` : "/";
 
