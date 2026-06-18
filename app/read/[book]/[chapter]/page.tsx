@@ -8,6 +8,9 @@ import { notFound } from "next/navigation";
 import AppNav from "@/app/components/AppNav";
 import ReaderSelector from "@/app/components/ReaderSelector";
 import SaveReadingPosition from "@/app/components/SaveReadingPosition";
+import VerseScroller from "@/app/components/VerseScroller";
+import ChapterSwipe from "@/app/components/ChapterSwipe";
+import MobileBottomNav from "@/app/components/MobileBottomNav";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -130,6 +133,13 @@ export default async function ReadChapterPage({
       <section className="mx-auto max-w-3xl">
         <AppNav />
 
+        <VerseScroller verse={highlightedVerse} />
+
+        <ChapterSwipe
+  previousChapterHref={previousChapterHref}
+  nextChapterHref={nextChapterHref}
+/>
+
         <SaveReadingPosition
   book={decodedBook}
   chapter={chapterNumber}
@@ -141,13 +151,15 @@ export default async function ReadChapterPage({
           <SacredNameToggle />
         </div>
 
-        <ReaderSelector
-          books={books}
-          currentBook={decodedBook}
-          currentChapter={chapterNumber}
-          maxChapter={maxChapter}
-          currentTranslation={activeTranslation}
-        />
+<ReaderSelector
+  books={books}
+  currentBook={decodedBook}
+  currentChapter={chapterNumber}
+  maxChapter={maxChapter}
+  currentTranslation={activeTranslation}
+  currentVerse={highlightedVerse}
+  maxVerse={chapterVerses.length}
+/>
 
         <div className="mb-10 flex items-center justify-between gap-4">
           {previousChapterHref ? (
@@ -170,31 +182,43 @@ export default async function ReadChapterPage({
           </Link>
         </div>
 
-        <article className="rounded-2xl border border-neutral-800 bg-neutral-900/70 p-6 sm:p-8">
-          <div className="space-y-4 text-lg leading-8 text-neutral-200">
-            {chapterVerses.map((v) => {
-              const isHighlighted = highlightedVerse === v.verse;
-              const selectedText = v.sources[0]?.text || "";
+<article className="rounded-3xl border border-neutral-800 bg-neutral-950/60 px-5 py-8 shadow-2xl shadow-black/20 sm:px-10 sm:py-12">
+  <div className="mb-10 text-center">
+    <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
+      {translationLabel}
+    </p>
 
-              return (
-                <Link
-                  key={`${v.id}-${activeTranslation}`}
-                  href={`/verse/${v.id}`}
-                  className={`block rounded-lg px-2 py-1 transition ${
-                    isHighlighted
-                      ? "bg-amber-500/15 text-white"
-                      : "hover:bg-neutral-800/70"
-                  }`}
-                >
-                  <sup className="mr-2 text-xs text-neutral-500">
-                    {v.verse}
-                  </sup>
-                  <ScriptureText text={selectedText} />
-                </Link>
-              );
-            })}
-          </div>
-        </article>
+    <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+      {decodedBook} {chapterNumber}
+    </h2>
+  </div>
+
+  <div className="space-y-5 text-[1.12rem] leading-9 text-neutral-200 sm:text-xl sm:leading-10">
+    {chapterVerses.map((v) => {
+      const isHighlighted = highlightedVerse === v.verse;
+      const selectedText = v.sources[0]?.text || "";
+
+      return (
+        <Link
+          id={`verse-${v.verse}`}
+          key={`${v.id}-${activeTranslation}`}
+          href={`/verse/${v.id}`}
+          className={`group block rounded-xl px-3 py-2 transition ${
+            isHighlighted
+              ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
+              : "hover:bg-neutral-900"
+          }`}
+        >
+          <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
+            {v.verse}
+          </span>
+
+          <ScriptureText text={selectedText} />
+        </Link>
+      );
+    })}
+  </div>
+</article>
         <div className="mt-8 flex items-center justify-between">
   {previousChapterHref ? (
     <Link
@@ -215,6 +239,7 @@ export default async function ReadChapterPage({
   </Link>
 </div>
       </section>
+      <MobileBottomNav />
     </main>
   );
 }

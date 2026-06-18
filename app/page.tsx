@@ -7,6 +7,7 @@ import { allScripture as sampleVerses } from "./data/scripture/allScripture";
 import { renderSacredNames } from "./data/renderSacredNames";
 import { useSacredNames } from "./data/useSacredNames";
 import { normalizeReference } from "./data/normalizeReference";
+import MobileBottomNav from "@/app/components/MobileBottomNav";
 
 type LastReadingPosition = {
   book: string;
@@ -246,6 +247,7 @@ function SearchPage() {
           )}
         </section>
       </section>
+      <MobileBottomNav />
     </main>
   );
 }

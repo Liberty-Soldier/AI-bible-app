@@ -1,5 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { allScripture } from "@/app/data/scripture/allScripture";
+import TranslationSelector from "@/app/components/TranslationSelector";
+
+type Translation = "web" | "kjv" | "brenton";
 
 type BookInfo = {
   book: string;
@@ -20,7 +26,15 @@ function getBooksFromScripture(): BookInfo[] {
   }));
 }
 
-function BookGrid({ title, books }: { title: string; books: BookInfo[] }) {
+function BookGrid({
+  title,
+  books,
+  translation,
+}: {
+  title: string;
+  books: BookInfo[];
+  translation: Translation;
+}) {
   if (!books.length) return null;
 
   return (
@@ -31,7 +45,7 @@ function BookGrid({ title, books }: { title: string; books: BookInfo[] }) {
         {books.map(({ book, chapters }) => (
           <Link
             key={book}
-            href={`/read/${encodeURIComponent(book)}`}
+            href={`/read/${encodeURIComponent(book)}?translation=${translation}`}
             className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 hover:border-neutral-600"
           >
             <p className="font-semibold">{book}</p>
@@ -46,7 +60,16 @@ function BookGrid({ title, books }: { title: string; books: BookInfo[] }) {
 }
 
 export default function ReadPage() {
+  const [translation, setTranslation] = useState<Translation>("web");
   const books = getBooksFromScripture();
+
+  useEffect(() => {
+    const saved = localStorage.getItem("preferredTranslation");
+
+    if (saved === "web" || saved === "kjv" || saved === "brenton") {
+      setTranslation(saved);
+    }
+  }, []);
 
   return (
     <main className="min-h-screen bg-neutral-950 px-6 py-10 text-white">
@@ -63,12 +86,17 @@ export default function ReadPage() {
           <h1 className="text-5xl font-bold">Choose a Book</h1>
 
           <p className="mt-4 max-w-2xl text-neutral-300">
-            Start reading by choosing a book. This list is generated from the
-            Scripture data currently loaded in the app.
+            Choose your preferred translation, then select a book.
           </p>
         </div>
 
-        <BookGrid title="Available Books" books={books} />
+        <TranslationSelector onTranslationChange={setTranslation} />
+
+        <BookGrid
+          title="Available Books"
+          books={books}
+          translation={translation}
+        />
       </section>
     </main>
   );

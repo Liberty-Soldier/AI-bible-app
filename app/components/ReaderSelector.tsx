@@ -10,6 +10,8 @@ type Props = {
   currentChapter: number;
   maxChapter: number;
   currentTranslation: Translation;
+  currentVerse?: number | null;
+  maxVerse: number;
 };
 
 const translations: { value: Translation; label: string }[] = [
@@ -24,18 +26,29 @@ export default function ReaderSelector({
   currentChapter,
   maxChapter,
   currentTranslation,
+  currentVerse,
+  maxVerse,
 }: Props) {
   const router = useRouter();
 
-  function goTo(book: string, chapter: number, translation: Translation) {
+  function goTo(
+    book: string,
+    chapter: number,
+    translation: Translation,
+    verse?: number | null
+  ) {
+    const verseParam = verse ? `&verse=${verse}` : "";
+
     router.push(
-      `/read/${encodeURIComponent(book)}/${chapter}?translation=${translation}`
+      `/read/${encodeURIComponent(
+        book
+      )}/${chapter}?translation=${translation}${verseParam}`
     );
   }
 
   return (
     <div className="sticky top-0 z-50 mb-8 border-b border-neutral-800 bg-neutral-950/95 py-3 backdrop-blur">
-      className="mx-auto grid max-w-3xl grid-cols-1 gap-2 sm:grid-cols-3"
+      <div className="mx-auto grid max-w-3xl grid-cols-1 gap-2 sm:grid-cols-4">
         <select
           aria-label="Translation"
           value={currentTranslation}
@@ -79,6 +92,27 @@ export default function ReaderSelector({
               </option>
             )
           )}
+        </select>
+
+        <select
+          aria-label="Verse"
+          value={currentVerse || ""}
+          onChange={(e) =>
+            goTo(
+              currentBook,
+              currentChapter,
+              currentTranslation,
+              e.target.value ? Number(e.target.value) : null
+            )
+          }
+          className="rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white"
+        >
+          <option value="">Verse</option>
+          {Array.from({ length: maxVerse }, (_, i) => i + 1).map((verse) => (
+            <option key={verse} value={verse}>
+              Verse {verse}
+            </option>
+          ))}
         </select>
       </div>
     </div>
