@@ -4,6 +4,7 @@ import generatedKJV from "@/app/data/scripture/generatedKJV.json";
 import generatedBrenton from "@/app/data/scripture/generatedBrenton.json";
 import { notFound } from "next/navigation";
 import AppNav from "@/app/components/AppNav";
+import ChapterSwipe from "../components/ChapterSwipe";
 
 type Translation = "web" | "kjv" | "brenton";
 
