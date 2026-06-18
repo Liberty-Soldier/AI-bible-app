@@ -33,8 +33,7 @@ export default function ChapterSwipe({
     const deltaX = endX - startX.current;
     const deltaY = endY - startY.current;
 
-    const minSwipeDistance = 100;
-
+    const minSwipeDistance = 80;
     const isHorizontalSwipe = Math.abs(deltaX) > Math.abs(deltaY);
     const isLongEnoughSwipe = Math.abs(deltaX) > minSwipeDistance;
 
@@ -59,7 +58,11 @@ export default function ChapterSwipe({
   }
 
   return (
-    <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+    <div
+      className="w-full touch-pan-y"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       {children}
     </div>
   );

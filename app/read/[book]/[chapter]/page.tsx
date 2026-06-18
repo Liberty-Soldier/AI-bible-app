@@ -40,21 +40,12 @@ function getTranslationLabel(translation: Translation) {
 }
 
 function getAvailableBooks() {
-  const allVerses = [
-    ...datasets.web,
-    ...datasets.kjv,
-    ...datasets.brenton,
-  ];
-
+  const allVerses = [...datasets.web, ...datasets.kjv, ...datasets.brenton];
   return Array.from(new Set(allVerses.map((v) => v.book)));
 }
 
 function getMaxChapter(book: string) {
-  const allVerses = [
-    ...datasets.web,
-    ...datasets.kjv,
-    ...datasets.brenton,
-  ];
+  const allVerses = [...datasets.web, ...datasets.kjv, ...datasets.brenton];
 
   return Math.max(
     ...allVerses.filter((v) => v.book === book).map((v) => v.chapter)
@@ -124,89 +115,55 @@ export default async function ReadChapterPage({
 
   const previousChapterHref =
     chapterNumber > 1
-      ? `/read/${encodeURIComponent(decodedBook)}/${chapterNumber - 1}?translation=${activeTranslation}`
+      ? `/read/${encodeURIComponent(decodedBook)}/${
+          chapterNumber - 1
+        }?translation=${activeTranslation}`
       : null;
 
-  const nextChapterHref = `/read/${encodeURIComponent(decodedBook)}/${chapterNumber + 1}?translation=${activeTranslation}`;
+  const nextChapterHref =
+    chapterNumber < maxChapter
+      ? `/read/${encodeURIComponent(decodedBook)}/${
+          chapterNumber + 1
+        }?translation=${activeTranslation}`
+      : null;
 
   return (
-    <main className="min-h-screen bg-neutral-950 text-white px-6 py-8">
+    <main className="min-h-screen bg-neutral-950 px-6 py-8 pb-28 text-white">
       <section className="mx-auto max-w-3xl">
         <AppNav />
 
         <VerseScroller verse={highlightedVerse} />
 
-<ChapterSwipe
-  previousChapterHref={previousChapterHref}
-  nextChapterHref={nextChapterHref}
->
-  <article className="rounded-3xl border border-neutral-800 bg-neutral-950/60 px-5 py-8 shadow-2xl shadow-black/20 sm:px-10 sm:py-12">
-    <div className="mb-10 text-center">
-      <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
-        {translationLabel}
-      </p>
-
-      <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-        {decodedBook} {chapterNumber}
-      </h2>
-    </div>
-
-    <div className="space-y-5 text-[1.12rem] leading-9 text-neutral-200 sm:text-xl sm:leading-10">
-      {chapterVerses.map((v) => {
-        const isHighlighted = highlightedVerse === v.verse;
-        const selectedText = v.sources[0]?.text || "";
-
-        return (
-          <Link
-            id={`verse-${v.verse}`}
-            key={`${v.id}-${activeTranslation}`}
-            href={`/verse/${v.id}`}
-            className={`group block rounded-xl px-3 py-2 transition ${
-              isHighlighted
-                ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
-                : "hover:bg-neutral-900"
-            }`}
-          >
-            <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
-              {v.verse}
-            </span>
-
-            <ScriptureText text={selectedText} />
-          </Link>
-        );
-      })}
-    </div>
-  </article>
-</ChapterSwipe>
-
         <SaveReadingPosition
-  book={decodedBook}
-  chapter={chapterNumber}
-  translation={activeTranslation}
-/>
-
+          book={decodedBook}
+          chapter={chapterNumber}
+          translation={activeTranslation}
+        />
 
         <div className="mb-6">
           <SacredNameToggle />
         </div>
 
-<CollapsibleReaderHeader
-  title={`${activeTranslation.toUpperCase()} • ${decodedBook} ${chapterNumber}`}
->
-  <ReaderSelector
-    books={books}
-    currentBook={decodedBook}
-    currentChapter={chapterNumber}
-    maxChapter={maxChapter}
-    currentTranslation={activeTranslation}
-    currentVerse={highlightedVerse}
-    maxVerse={chapterVerses.length}
-  />
-</CollapsibleReaderHeader>
+        <CollapsibleReaderHeader
+          title={`${activeTranslation.toUpperCase()} • ${decodedBook} ${chapterNumber}`}
+        >
+          <ReaderSelector
+            books={books}
+            currentBook={decodedBook}
+            currentChapter={chapterNumber}
+            maxChapter={maxChapter}
+            currentTranslation={activeTranslation}
+            currentVerse={highlightedVerse}
+            maxVerse={chapterVerses.length}
+          />
+        </CollapsibleReaderHeader>
 
         <div className="mb-10 flex items-center justify-between gap-4">
           {previousChapterHref ? (
-            <Link href={previousChapterHref} className="text-neutral-400 hover:text-white">
+            <Link
+              href={previousChapterHref}
+              className="text-neutral-400 hover:text-white"
+            >
               ← Previous
             </Link>
           ) : (
@@ -220,68 +177,86 @@ export default async function ReadChapterPage({
             <p className="mt-2 text-sm text-neutral-500">{translationLabel}</p>
           </div>
 
-          <Link href={nextChapterHref} className="text-neutral-400 hover:text-white">
-            Next →
-          </Link>
+          {nextChapterHref ? (
+            <Link
+              href={nextChapterHref}
+              className="text-neutral-400 hover:text-white"
+            >
+              Next →
+            </Link>
+          ) : (
+            <span />
+          )}
         </div>
 
-<article className="rounded-3xl border border-neutral-800 bg-neutral-950/60 px-5 py-8 shadow-2xl shadow-black/20 sm:px-10 sm:py-12">
-  <div className="mb-10 text-center">
-    <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
-      {translationLabel}
-    </p>
-
-    <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-      {decodedBook} {chapterNumber}
-    </h2>
-  </div>
-
-  <div className="space-y-5 text-[1.12rem] leading-9 text-neutral-200 sm:text-xl sm:leading-10">
-    {chapterVerses.map((v) => {
-      const isHighlighted = highlightedVerse === v.verse;
-      const selectedText = v.sources[0]?.text || "";
-
-      return (
-        <Link
-          id={`verse-${v.verse}`}
-          key={`${v.id}-${activeTranslation}`}
-          href={`/verse/${v.id}`}
-          className={`group block rounded-xl px-3 py-2 transition ${
-            isHighlighted
-              ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
-              : "hover:bg-neutral-900"
-          }`}
+        <ChapterSwipe
+          previousChapterHref={previousChapterHref}
+          nextChapterHref={nextChapterHref}
         >
-          <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
-            {v.verse}
-          </span>
+          <article className="rounded-3xl border border-neutral-800 bg-neutral-950/60 px-5 py-8 shadow-2xl shadow-black/20 sm:px-10 sm:py-12">
+            <div className="mb-10 text-center">
+              <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
+                {translationLabel}
+              </p>
 
-          <ScriptureText text={selectedText} />
-        </Link>
-      );
-    })}
-  </div>
-</article>
+              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                {decodedBook} {chapterNumber}
+              </h2>
+            </div>
+
+            <div className="space-y-5 text-[1.12rem] leading-9 text-neutral-200 sm:text-xl sm:leading-10">
+              {chapterVerses.map((v) => {
+                const isHighlighted = highlightedVerse === v.verse;
+                const selectedText = v.sources[0]?.text || "";
+
+                return (
+                  <Link
+                    id={`verse-${v.verse}`}
+                    key={`${v.id}-${activeTranslation}`}
+                    href={`/verse/${v.id}`}
+                    className={`group block rounded-xl px-3 py-2 transition ${
+                      isHighlighted
+                        ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
+                        : "hover:bg-neutral-900"
+                    }`}
+                  >
+                    <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
+                      {v.verse}
+                    </span>
+
+                    <ScriptureText text={selectedText} />
+                  </Link>
+                );
+              })}
+            </div>
+          </article>
+        </ChapterSwipe>
+
         <div className="mt-8 flex items-center justify-between">
-  {previousChapterHref ? (
-    <Link
-      href={previousChapterHref}
-      className="rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 hover:border-neutral-600"
-    >
-      ← Previous Chapter
-    </Link>
-  ) : (
-    <span />
-  )}
+          {previousChapterHref ? (
+            <Link
+              href={previousChapterHref}
+              className="rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 hover:border-neutral-600"
+            >
+              ← Previous Chapter
+            </Link>
+          ) : (
+            <span />
+          )}
 
-  <Link
-    href={nextChapterHref}
-    className="rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 hover:border-neutral-600"
-  >
-    Next Chapter →
-  </Link>
-</div>
+          {nextChapterHref ? (
+            <Link
+              href={nextChapterHref}
+              className="rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 hover:border-neutral-600"
+            >
+              Next Chapter →
+            </Link>
+          ) : (
+            <span />
+          )}
+        </div>
       </section>
+
       <MobileBottomNav />
     </main>
   );
