@@ -5,6 +5,7 @@ import { allScripture } from "../../data/scripture/allScripture";
 import ScriptureText from "../../components/ScriptureText";
 import SacredNameToggle from "../../components/SacredNameToggle";
 import { notFound } from "next/navigation";
+import AppNav from "@/app/components/AppNav";
 
 type SourceVerse = {
   reference: string;
@@ -199,11 +200,7 @@ export default async function VersePage({
   return (
     <main className="min-h-screen bg-neutral-950 text-white px-6 py-8">
       <section className="mx-auto max-w-4xl">
-        <Link href="/" className="block mb-4">
-          <p className="text-sm uppercase tracking-[0.3em] text-neutral-400">
-            Scripture Search
-          </p>
-        </Link>
+        <AppNav />
 
         <form action="/" className="mb-8">
           <input
