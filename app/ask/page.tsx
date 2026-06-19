@@ -1,15 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { allScripture as sampleVerses } from "@/app/data/scripture/allScripture";
 import {
   understandQuestion,
   scoreVerseForTopic,
 } from "@/app/data/askScripture";
+import MobileBottomNav from "@/app/components/MobileBottomNav";
 
-export default function AskPage() {
-  const [search, setSearch] = useState("");
+function AskContent() {
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") || "";
+
+  const [search, setSearch] = useState(initialQuery);
 
   const hasSearch = search.trim().length > 0;
   const understood = understandQuestion(search);
@@ -41,8 +46,23 @@ export default function AskPage() {
     : [];
 
   return (
-    <main className="min-h-screen bg-neutral-950 px-5 py-8 text-white">
+    <main className="min-h-screen bg-neutral-950 px-5 pb-28 pt-6 text-white">
       <div className="mx-auto max-w-4xl">
+        <nav className="mb-6 flex items-center justify-between text-sm text-neutral-400">
+          <Link href="/" className="hover:text-white">
+            ← Home
+          </Link>
+
+          <div className="flex gap-4">
+            <Link href="/read" className="hover:text-white">
+              Read
+            </Link>
+            <Link href="/study" className="hover:text-white">
+              Study
+            </Link>
+          </div>
+        </nav>
+
         <h1 className="mb-3 text-4xl font-bold">Ask Scripture</h1>
 
         <p className="mb-6 text-neutral-400">
@@ -57,17 +77,19 @@ export default function AskPage() {
           className="w-full rounded-2xl border border-neutral-700 bg-neutral-900 px-5 py-4 text-lg text-white outline-none placeholder:text-neutral-500 focus:border-neutral-400"
         />
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          {examples.map((example) => (
-            <button
-              key={example}
-              onClick={() => setSearch(example)}
-              className="rounded-full border border-neutral-700 px-3 py-2 text-sm text-neutral-300 transition hover:border-neutral-500 hover:text-white"
-            >
-              {example}
-            </button>
-          ))}
-        </div>
+        {!hasSearch && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {examples.map((example) => (
+              <button
+                key={example}
+                onClick={() => setSearch(example)}
+                className="rounded-full border border-neutral-700 px-3 py-2 text-sm text-neutral-300 transition hover:border-neutral-500 hover:text-white"
+              >
+                {example}
+              </button>
+            ))}
+          </div>
+        )}
 
         {hasSearch && understood.topic && (
           <section className="mt-6 rounded-2xl border border-neutral-800 bg-neutral-900/70 p-5">
@@ -138,6 +160,16 @@ export default function AskPage() {
           </section>
         )}
       </div>
+
+      <MobileBottomNav />
     </main>
+  );
+}
+
+export default function AskPage() {
+  return (
+    <Suspense fallback={null}>
+      <AskContent />
+    </Suspense>
   );
 }
