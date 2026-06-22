@@ -8,6 +8,7 @@ import {
   understandQuestion,
   scoreVerseForTopic,
 } from "@/app/data/askScripture";
+import { getConceptEvidence } from "@/app/data/lexicon/getConceptEvidence";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 
 function AskContent() {
@@ -17,33 +18,35 @@ function AskContent() {
   const [search, setSearch] = useState(initialQuery);
 
   const hasSearch = search.trim().length > 0;
+  const conceptEvidence = hasSearch ? getConceptEvidence(search) : null;
   const understood = understandQuestion(search);
 
   const examples = [
+    "What is Torah?",
     "What is sin?",
     "What is the Sabbath?",
     "Kingdom of God",
-    "Genesis 1:1",
   ];
 
-  const results = hasSearch
-    ? sampleVerses
-        .map((verse) => {
-          const text = verse.sources.map((source) => source.text).join(" ");
+  const fallbackResults =
+    hasSearch && !conceptEvidence
+      ? sampleVerses
+          .map((verse) => {
+            const text = verse.sources.map((source) => source.text).join(" ");
 
-          const score = understood.topic
-            ? scoreVerseForTopic(text, verse.reference, understood.topic)
-            : text.toLowerCase().includes(search.toLowerCase()) ||
-              verse.reference.toLowerCase().includes(search.toLowerCase())
-            ? 1
-            : 0;
+            const score = understood.topic
+              ? scoreVerseForTopic(text, verse.reference, understood.topic)
+              : text.toLowerCase().includes(search.toLowerCase()) ||
+                verse.reference.toLowerCase().includes(search.toLowerCase())
+              ? 1
+              : 0;
 
-          return { verse, score };
-        })
-        .filter((item) => item.score > 0)
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 25)
-    : [];
+            return { verse, score };
+          })
+          .filter((item) => item.score > 0)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 25)
+      : [];
 
   return (
     <main className="min-h-screen bg-neutral-950 px-5 pb-28 pt-6 text-white">
@@ -91,41 +94,107 @@ function AskContent() {
           </div>
         )}
 
-        {hasSearch && understood.topic && (
-          <section className="mt-6 rounded-2xl border border-neutral-800 bg-neutral-900/70 p-5">
-            <p className="text-sm uppercase tracking-[0.25em] text-neutral-500">
-              Evidence Search
+        {hasSearch && conceptEvidence && (
+          <section className="mt-6 rounded-3xl border border-amber-500/30 bg-amber-500/10 p-6">
+            <p className="text-sm uppercase tracking-[0.25em] text-amber-300/80">
+              Source Word Evidence
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold">
-              {understood.topic.label}
+            <h2 className="mt-2 text-3xl font-bold">
+              {conceptEvidence.concept.label}
             </h2>
 
-            <p className="mt-3 text-sm text-neutral-400">
-              Searching related Scripture terms:
-            </p>
+            <div className="mt-5 space-y-5">
+              {conceptEvidence.hebrewEvidence.map((entry) => {
+                if (!entry) return null;
 
-            <div className="mt-3 flex flex-wrap gap-2">
-              {understood.terms.map((term) => (
-                <span
-                  key={term}
-                  className="rounded-full border border-neutral-700 px-3 py-1 text-sm text-neutral-300"
-                >
-                  {term}
-                </span>
-              ))}
+                return (
+                  <div
+                    key={entry.lemma}
+                    className="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-5"
+                  >
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <p className="text-sm uppercase tracking-[0.25em] text-neutral-500">
+                          Hebrew Lemma
+                        </p>
+
+                        <h3 className="mt-1 text-2xl font-bold">
+                          {entry.lemma}
+                        </h3>
+                      </div>
+
+                      <p className="rounded-full border border-neutral-700 px-3 py-1 text-sm text-neutral-300">
+                        {entry.occurrenceCount} occurrences
+                      </p>
+                    </div>
+
+                    <div className="mt-4">
+                      <p className="mb-2 text-sm text-neutral-400">
+                        Common Hebrew forms:
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {entry.surfaces.slice(0, 8).map(([surface, count]) => (
+                          <span
+                            key={surface}
+                            className="rounded-full border border-neutral-700 px-3 py-1 text-sm text-neutral-300"
+                          >
+                            {surface} · {count}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-5">
+                      <p className="mb-3 text-sm text-neutral-400">
+                        First occurrences:
+                      </p>
+
+                      <div className="divide-y divide-neutral-800">
+                        {entry.occurrences.slice(0, 25).map((occurrence) => (
+                          <Link
+                            key={`${entry.lemma}-${occurrence.reference}-${occurrence.surface}`}
+                            href={`/read/${encodeURIComponent(
+                              occurrence.book
+                            )}/${occurrence.reference.split(".")[1]}?verse=${
+                              occurrence.reference.split(".")[2]
+                            }`}
+                            className="block py-3 transition hover:text-white"
+                          >
+                            <div className="flex items-center justify-between gap-4">
+                              <div>
+                                <p className="font-semibold text-white">
+                                  {occurrence.reference}
+                                </p>
+                                <p className="mt-1 text-sm text-neutral-400">
+                                  {occurrence.surface}
+                                </p>
+                              </div>
+
+                              <span className="text-sm text-neutral-500">
+                                Open →
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </section>
         )}
 
-        {hasSearch && (
+        {hasSearch && !conceptEvidence && (
           <section className="mt-6 rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6">
             <p className="mb-4 text-sm text-neutral-400">
-              {results.length} evidence results found
+              {fallbackResults.length} evidence results found
             </p>
 
             <div className="divide-y divide-neutral-800">
-              {results.map(({ verse, score }, index) => (
+              {fallbackResults.map(({ verse, score }, index) => (
                 <Link
                   key={`${verse.id}-${index}`}
                   href={`/read/${encodeURIComponent(verse.book)}/${
@@ -139,7 +208,7 @@ function AskContent() {
                     </h3>
 
                     <span className="rounded-full border border-neutral-700 px-2 py-1 text-xs text-neutral-400">
-                      score {score}
+                      text match
                     </span>
                   </div>
 

@@ -125,7 +125,11 @@ export default async function VersePage({
   const { id } = await params;
   const { q } = await searchParams;
 
-  const verse = allScripture.find((v) => v.id === id);
+ const decodedId = decodeURIComponent(id);
+
+const verse = allScripture.find(
+  (v) => v.id === decodedId || v.reference === decodedId
+);
 
   if (!verse) {
     notFound();

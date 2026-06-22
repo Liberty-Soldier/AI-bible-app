@@ -46,12 +46,23 @@ export function understandQuestion(input: string) {
         (term) => query.includes(term)
       )
     );
+    const stopWords = [
+  "what", "who", "when", "where", "why", "how",
+  "is", "are", "was", "were", "does", "do", "did",
+  "the", "a", "an", "of", "to", "in", "on", "for",
+  "about", "according", "bible", "scripture", "say",
+  "says", "mean", "means", "meaning",
+];
 
   if (!topic) {
     return {
       mode: "basic" as const,
       topic: null,
-      terms: query.split(/\s+/).filter(Boolean),
+     terms: query
+  .replace(/[?.,!]/g, "")
+  .split(/\s+/)
+  .filter((word) => word.length > 2)
+  .filter((word) => !stopWords.includes(word)),
     };
   }
 

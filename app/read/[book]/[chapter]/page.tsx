@@ -79,10 +79,10 @@ export default async function ReadChapterPage({
   searchParams,
 }: {
   params: Promise<{ book: string; chapter: string }>;
-  searchParams: Promise<{ verse?: string; translation?: string }>;
+  searchParams: Promise<{ verse?: string; translation?: string; study?: string }>;
 }) {
   const { book, chapter } = await params;
-  const { verse, translation } = await searchParams;
+  const { verse, translation, study } = await searchParams;
 
   const decodedBook = decodeURIComponent(book);
   const chapterNumber = Number(chapter);
@@ -112,6 +112,15 @@ export default async function ReadChapterPage({
   const books = getAvailableBooks();
   const maxChapter = getMaxChapter(decodedBook);
   const translationLabel = getTranslationLabel(activeTranslation);
+
+  const studyMode = study === "true";
+
+const baseHref = `/read/${encodeURIComponent(decodedBook)}/${chapterNumber}?translation=${activeTranslation}${
+  highlightedVerse ? `&verse=${highlightedVerse}` : ""
+}`;
+
+const readModeHref = baseHref;
+const studyModeHref = `${baseHref}&study=true`;
 
   const previousChapterHref =
     chapterNumber > 1
@@ -158,6 +167,28 @@ export default async function ReadChapterPage({
           />
         </CollapsibleReaderHeader>
 
+        <div className="mb-4 flex justify-center">
+  <div className="rounded-full border border-neutral-800 bg-neutral-900 p-1 text-sm">
+    <Link
+      href={readModeHref}
+      className={`inline-block rounded-full px-4 py-2 ${
+        !studyMode ? "bg-white text-black" : "text-neutral-400"
+      }`}
+    >
+      Read
+    </Link>
+
+    <Link
+      href={studyModeHref}
+      className={`inline-block rounded-full px-4 py-2 ${
+        studyMode ? "bg-white text-black" : "text-neutral-400"
+      }`}
+    >
+      Study
+    </Link>
+  </div>
+</div>
+
         <ChapterSwipe
           previousChapterHref={previousChapterHref}
           nextChapterHref={nextChapterHref}
@@ -182,7 +213,7 @@ export default async function ReadChapterPage({
                   <Link
                     id={`verse-${v.verse}`}
                     key={`${v.id}-${activeTranslation}`}
-                    href={`/verse/${v.id}`}
+                    href={`/verse/${encodeURIComponent(v.reference)}`}
                     className={`group block rounded-xl px-3 py-2 transition ${
                       isHighlighted
                         ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
@@ -193,7 +224,7 @@ export default async function ReadChapterPage({
                       {v.verse}
                     </span>
 
-                    <ScriptureText text={selectedText} />
+                    <ScriptureText text={selectedText} studyMode={studyMode} />
                   </Link>
                 );
               })}
