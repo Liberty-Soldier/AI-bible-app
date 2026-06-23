@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { findGreekWordStudy } from "@/app/data/lexicon/findGreekWordStudy";
 
 type WordStudySheetProps = {
@@ -12,8 +13,9 @@ export default function WordStudySheet({
   onClose,
 }: WordStudySheetProps) {
   if (!word) return null;
+
   const greekStudy = findGreekWordStudy(word);
-const firstOccurrences = greekStudy?.occurrences.slice(0, 8) || [];
+  const firstOccurrences = greekStudy?.occurrences.slice(0, 8) || [];
 
   return (
     <div className="fixed inset-0 z-50 flex items-end bg-black/60">
@@ -32,9 +34,7 @@ const firstOccurrences = greekStudy?.occurrences.slice(0, 8) || [];
               Word Study
             </p>
 
-            <h2 className="mt-2 text-3xl font-bold">
-              {word}
-            </h2>
+            <h2 className="mt-2 text-3xl font-bold">{word}</h2>
           </div>
 
           <button
@@ -51,46 +51,52 @@ const firstOccurrences = greekStudy?.occurrences.slice(0, 8) || [];
             <p className="mt-1 text-xl text-white">{word}</p>
           </div>
 
-{greekStudy ? (
-  <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-    <p className="text-sm text-neutral-500">Greek Word Study</p>
+          {greekStudy ? (
+            <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
+              <p className="text-sm text-neutral-500">Greek Word Study</p>
 
-    <p className="mt-2 text-xl text-white">
-      {greekStudy.words?.[0]}
-    </p>
+              <p className="mt-2 text-xl text-white">
+                {greekStudy.words?.[0]}
+              </p>
 
-    <p className="mt-1 text-sm text-neutral-400">
-      Strong&apos;s: {greekStudy.strong}
-    </p>
+              <p className="mt-1 text-sm text-neutral-400">
+                Strong&apos;s: {greekStudy.strong}
+              </p>
 
-    <p className="mt-1 text-sm text-neutral-400">
-      Meaning: {greekStudy.gloss}
-    </p>
+              <p className="mt-1 text-sm text-neutral-400">
+                Meaning: {greekStudy.gloss}
+              </p>
 
-    <p className="mt-3 text-sm text-neutral-400">
-      Occurrences: {greekStudy.occurrences.length}
-    </p>
+              <p className="mt-3 text-sm text-neutral-400">
+                Occurrences: {greekStudy.occurrences.length}
+              </p>
 
-    <div className="mt-4 space-y-2">
-      {firstOccurrences.map((occurrence) => (
-        <a
-          key={`${occurrence.reference}-${occurrence.word}`}
-          href={`/verse/${encodeURIComponent(occurrence.reference)}`}
-          className="block rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300 hover:border-neutral-600 hover:text-white"
-        >
-          {occurrence.reference} — {occurrence.word}
-        </a>
-      ))}
-    </div>
-  </div>
-) : (
-  <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-    <p className="text-sm text-neutral-500">No Greek match yet</p>
-    <p className="mt-1">
-      Hebrew and stronger English-to-original matching will be added next.
-    </p>
-  </div>
-)}
+              <div className="mt-4 space-y-2">
+                {firstOccurrences.map((occurrence) => (
+                  <Link
+                    key={`${occurrence.reference}-${occurrence.word}`}
+                    href={`/read/${encodeURIComponent(
+                      occurrence.book
+                    )}/${occurrence.chapter}?translation=web&verse=${
+                      occurrence.verse
+                    }&study=true`}
+                    onClick={onClose}
+                    className="block rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300 hover:border-neutral-600 hover:text-white"
+                  >
+                    {occurrence.reference} — {occurrence.word}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
+              <p className="text-sm text-neutral-500">No Greek match yet</p>
+              <p className="mt-1">
+                Hebrew and stronger English-to-original matching will be added
+                next.
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </div>

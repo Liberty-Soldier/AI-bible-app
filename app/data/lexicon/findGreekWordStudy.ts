@@ -4,10 +4,17 @@ type GreekOccurrenceEntry = {
   strong: string;
   gloss: string;
   words: string[];
-  occurrences: {
-    reference: string;
-    word: string;
-  }[];
+occurrences: {
+  book: string;
+  chapter: number;
+  verse: number;
+  reference: string;
+  word: string;
+  gloss?: string;
+  morph?: string;
+  morphEnglish?: string;
+  sort?: string;
+}[];
 };
 
 const greekOccurrences = occurrences as Record<
