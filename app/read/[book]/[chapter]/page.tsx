@@ -140,7 +140,7 @@ export default async function ReadChapterPage({
       : null;
 
   return (
-    <main className="min-h-screen bg-neutral-950 px-6 py-8 pb-28 text-white">
+    <main className="min-h-screen bg-neutral-950 px-3 py-3 pb-24 text-white sm:px-6 sm:py-8">
 <section className="mx-auto max-w-3xl">
   <VerseScroller verse={highlightedVerse} />
 
@@ -150,8 +150,7 @@ export default async function ReadChapterPage({
           translation={activeTranslation}
         />
 
-<div className="sticky top-0 z-40 mb-4 border-b border-neutral-800 bg-neutral-950/95 py-3 backdrop-blur">
-  <div className="flex flex-wrap items-center justify-between gap-3">
+<div className="sticky top-0 z-40 mb-3 border-b border-neutral-800 bg-neutral-950/95 py-2 backdrop-blur">  <div className="flex flex-wrap items-center justify-between gap-3">
     <div className="min-w-[220px] flex-1">
       <CollapsibleReaderHeader
         title={`${activeTranslation.toUpperCase()} • ${decodedBook} ${chapterNumber}`}
@@ -198,18 +197,18 @@ export default async function ReadChapterPage({
           previousChapterHref={previousChapterHref}
           nextChapterHref={nextChapterHref}
         >
-          <article className="rounded-3xl border border-neutral-800 bg-neutral-950/60 px-5 py-8 shadow-2xl shadow-black/20 sm:px-10 sm:py-12">
+        <article className="rounded-2xl border border-neutral-800 bg-neutral-950/60 px-4 py-6 shadow-2xl shadow-black/20 sm:rounded-3xl sm:px-10 sm:py-12">
             <div className="mb-10 text-center">
               <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
                 {translationLabel}
               </p>
 
-              <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
                 {decodedBook} {chapterNumber}
               </h2>
             </div>
 
-            <div className="space-y-5 text-[1.12rem] leading-9 text-neutral-200 sm:text-xl sm:leading-10">
+            <div className="space-y-4 text-lg leading-8 text-neutral-200 sm:space-y-5 sm:text-xl sm:leading-10">
               {chapterVerses.map((v) => {
                 const isHighlighted = highlightedVerse === v.verse;
                 const selectedText = v.sources[0]?.text || "";
