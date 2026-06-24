@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { renderSacredNames } from "../data/renderSacredNames";
 import { useSacredNames } from "../data/useSacredNames";
 import WordStudySheet from "./WordStudySheet";
@@ -14,6 +14,7 @@ export default function ScriptureText({
 }) {
   const { sacredNames } = useSacredNames();
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
+  const scrollYRef = useRef(0);
 
   const renderedText = sacredNames ? renderSacredNames(text) : text;
 
@@ -22,6 +23,17 @@ export default function ScriptureText({
   }
 
   const parts = renderedText.split(/(\s+)/);
+
+  function closeWordStudy() {
+    setSelectedWord(null);
+
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: scrollYRef.current,
+        behavior: "instant",
+      });
+    });
+  }
 
   return (
     <>
@@ -41,6 +53,8 @@ export default function ScriptureText({
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();
+
+              scrollYRef.current = window.scrollY;
               setSelectedWord(cleanWord);
             }}
             className="rounded px-0.5 underline decoration-neutral-700 decoration-dotted underline-offset-4 hover:text-amber-200"
@@ -50,10 +64,7 @@ export default function ScriptureText({
         );
       })}
 
-      <WordStudySheet
-        word={selectedWord}
-        onClose={() => setSelectedWord(null)}
-      />
+      <WordStudySheet word={selectedWord} onClose={closeWordStudy} />
     </>
   );
 }

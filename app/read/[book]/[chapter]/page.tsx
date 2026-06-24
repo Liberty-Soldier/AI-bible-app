@@ -209,24 +209,44 @@ const studyModeHref = `${baseHref}&study=true`;
                 const isHighlighted = highlightedVerse === v.verse;
                 const selectedText = v.sources[0]?.text || "";
 
-                return (
-                  <Link
-                    id={`verse-${v.verse}`}
-                    key={`${v.id}-${activeTranslation}`}
-                    href={`/verse/${encodeURIComponent(v.reference)}`}
-                    className={`group block rounded-xl px-3 py-2 transition ${
-                      isHighlighted
-                        ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
-                        : "hover:bg-neutral-900"
-                    }`}
-                  >
-                    <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
-                      {v.verse}
-                    </span>
+const verseClassName = `group block rounded-xl px-3 py-2 transition ${
+  isHighlighted
+    ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
+    : "hover:bg-neutral-900"
+}`;
 
-                    <ScriptureText text={selectedText} studyMode={studyMode} />
-                  </Link>
-                );
+const verseContent = (
+  <>
+    <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
+      {v.verse}
+    </span>
+
+    <ScriptureText text={selectedText} studyMode={studyMode} />
+  </>
+);
+
+if (studyMode) {
+  return (
+    <div
+      id={`verse-${v.verse}`}
+      key={`${v.id}-${activeTranslation}`}
+      className={verseClassName}
+    >
+      {verseContent}
+    </div>
+  );
+}
+
+return (
+  <Link
+    id={`verse-${v.verse}`}
+    key={`${v.id}-${activeTranslation}`}
+    href={`/verse/${encodeURIComponent(v.reference)}`}
+    className={verseClassName}
+  >
+    {verseContent}
+  </Link>
+);
               })}
             </div>
           </article>
