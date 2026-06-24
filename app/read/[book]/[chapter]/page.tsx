@@ -150,11 +150,14 @@ export default async function ReadChapterPage({
           translation={activeTranslation}
         />
 
-<div className="sticky top-0 z-40 mb-3 border-b border-neutral-800 bg-neutral-950/95 py-2 backdrop-blur">  <div className="flex flex-wrap items-center justify-between gap-3">
-    <div className="min-w-[220px] flex-1">
+<div className="sticky top-0 z-40 mb-3 border-b border-neutral-800 bg-neutral-950/95 py-2 backdrop-blur">  <div className="flex items-center justify-between gap-2">
+    <div className="min-w-0 flex-1">
       <CollapsibleReaderHeader
         title={`${activeTranslation.toUpperCase()} • ${decodedBook} ${chapterNumber}`}
       >
+          <div className="mb-4">
+    <SacredNameToggle />
+  </div>
         <ReaderSelector
           books={books}
           currentBook={decodedBook}
@@ -165,10 +168,6 @@ export default async function ReadChapterPage({
           maxVerse={chapterVerses.length}
         />
       </CollapsibleReaderHeader>
-    </div>
-
-    <div className="shrink-0 text-sm">
-      <SacredNameToggle />
     </div>
 
     <div className="shrink-0 rounded-full border border-neutral-800 bg-neutral-900 p-1 text-sm">
