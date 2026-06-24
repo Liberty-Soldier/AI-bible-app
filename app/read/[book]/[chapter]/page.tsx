@@ -141,10 +141,8 @@ export default async function ReadChapterPage({
 
   return (
     <main className="min-h-screen bg-neutral-950 px-6 py-8 pb-28 text-white">
-      <section className="mx-auto max-w-3xl">
-        <AppNav />
-
-        <VerseScroller verse={highlightedVerse} />
+<section className="mx-auto max-w-3xl">
+  <VerseScroller verse={highlightedVerse} />
 
         <SaveReadingPosition
           book={decodedBook}
@@ -152,44 +150,48 @@ export default async function ReadChapterPage({
           translation={activeTranslation}
         />
 
-        <div className="mb-6">
-          <SacredNameToggle />
-        </div>
+<div className="sticky top-0 z-40 mb-4 border-b border-neutral-800 bg-neutral-950/95 py-3 backdrop-blur">
+  <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="min-w-[220px] flex-1">
+      <CollapsibleReaderHeader
+        title={`${activeTranslation.toUpperCase()} • ${decodedBook} ${chapterNumber}`}
+      >
+        <ReaderSelector
+          books={books}
+          currentBook={decodedBook}
+          currentChapter={chapterNumber}
+          maxChapter={maxChapter}
+          currentTranslation={activeTranslation}
+          currentVerse={highlightedVerse}
+          maxVerse={chapterVerses.length}
+        />
+      </CollapsibleReaderHeader>
+    </div>
 
-        <CollapsibleReaderHeader
-          title={`${activeTranslation.toUpperCase()} • ${decodedBook} ${chapterNumber}`}
-        >
-          <ReaderSelector
-            books={books}
-            currentBook={decodedBook}
-            currentChapter={chapterNumber}
-            maxChapter={maxChapter}
-            currentTranslation={activeTranslation}
-            currentVerse={highlightedVerse}
-            maxVerse={chapterVerses.length}
-          />
-        </CollapsibleReaderHeader>
+    <div className="shrink-0 text-sm">
+      <SacredNameToggle />
+    </div>
 
-        <div className="sticky top-16 z-30 mb-4 flex justify-center bg-neutral-950/90 py-2 backdrop-blur">
-          <div className="rounded-full border border-neutral-800 bg-neutral-900 p-1 text-sm">
-            <Link
-              href={readModeHref}
-              className={`inline-block rounded-full px-4 py-2 ${
-                !studyMode ? "bg-white text-black" : "text-neutral-400"
-              }`}
-            >
-              Read
-            </Link>
+    <div className="shrink-0 rounded-full border border-neutral-800 bg-neutral-900 p-1 text-sm">
+      <Link
+        href={readModeHref}
+        className={`inline-block rounded-full px-4 py-2 ${
+          !studyMode ? "bg-white text-black" : "text-neutral-400"
+        }`}
+      >
+        Read
+      </Link>
 
-            <Link
-              href={studyModeHref}
-              className={`inline-block rounded-full px-4 py-2 ${
-                studyMode ? "bg-white text-black" : "text-neutral-400"
-              }`}
-            >
-              Study
-            </Link>
-          </div>
+      <Link
+        href={studyModeHref}
+        className={`inline-block rounded-full px-4 py-2 ${
+          studyMode ? "bg-white text-black" : "text-neutral-400"
+        }`}
+      >
+        Study
+      </Link>
+    </div>
+    </div>
         </div>
 
         <ChapterSwipe
