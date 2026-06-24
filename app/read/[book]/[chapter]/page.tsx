@@ -231,28 +231,28 @@ export default async function ReadChapterPage({
                   </>
                 );
 
-                if (studyMode) {
-                  return (
-                    <div
-                      id={`verse-${v.verse}`}
-                      key={`${v.id}-${activeTranslation}`}
-                      className={verseClassName}
-                    >
-                      {verseContent}
-                    </div>
-                  );
-                }
+if (studyMode) {
+  return (
+    <div
+      id={`verse-${v.verse}`}
+      key={`${v.id}-${activeTranslation}`}
+      className={verseClassName}
+    >
+      {verseContent}
+    </div>
+  );
+}
 
-                return (
-                  <Link
-                    id={`verse-${v.verse}`}
-                    key={`${v.id}-${activeTranslation}`}
-                    href={`/verse/${encodeURIComponent(v.reference)}`}
-                    className={verseClassName}
-                  >
-                    {verseContent}
-                  </Link>
-                );
+return (
+  <Link
+    id={`verse-${v.verse}`}
+    key={`${v.id}-${activeTranslation}`}
+    href={`/verse/${encodeURIComponent(v.reference)}`}
+    className={verseClassName}
+  >
+    {verseContent}
+  </Link>
+);
               })}
             </div>
           </article>

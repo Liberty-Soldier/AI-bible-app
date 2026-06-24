@@ -6,21 +6,24 @@ import { sourceConcepts } from "@/app/data/lexicon/sourceConcepts";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const cache: Record<string, any[]> = {};
+const cache: Record<string, any> = {};
 
 function loadJson(name: string) {
   if (cache[name]) return cache[name];
 
-  const filePath = path.join(
-    process.cwd(),
-    "app",
-    "data",
-    "lexicon",
-    name
-  );
+  const filePath = path.join(process.cwd(), "app", "data", "lexicon", name);
 
   cache[name] = JSON.parse(fs.readFileSync(filePath, "utf8"));
   return cache[name];
+}
+
+function normalizeText(value: string) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .toLowerCase()
+    .trim();
 }
 
 function normalizeStrong(value: string) {
@@ -43,7 +46,7 @@ function findByStrong(strong: string) {
   if (normalized.startsWith("H")) {
     results.push(
       ...loadJson("generatedHebrewLexiconV12.json").filter(
-        (e) => e.strong === normalized
+        (e: any) => e.strong === normalized
       )
     );
   }
@@ -51,13 +54,13 @@ function findByStrong(strong: string) {
   if (normalized.startsWith("G")) {
     results.push(
       ...loadJson("generatedNTGreekLexiconV12.json").filter(
-        (e) => e.strong === normalized
+        (e: any) => e.strong === normalized
       )
     );
 
     results.push(
       ...loadJson("generatedLXXGreekLexiconV12.json").filter(
-        (e) => e.strong === normalized || e.strongs?.includes(normalized)
+        (e: any) => e.strong === normalized || e.strongs?.includes(normalized)
       )
     );
   }
@@ -65,17 +68,27 @@ function findByStrong(strong: string) {
   return results;
 }
 
+function findByEnglishGloss(query: string) {
+  const index = loadJson("generatedEnglishGlossIndex.json");
+  const key = normalizeText(query);
+
+  if (!key) return [];
+
+  return (index[key] || []).slice(0, 12);
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q") || "";
+  const cleanQuery = query.trim();
 
-  if (!query.trim()) {
+  if (!cleanQuery) {
     return NextResponse.json({ query, matches: [] });
   }
 
   const concept = sourceConcepts.find((item) =>
     item.aliases.some(
-      (alias) => alias.toLowerCase() === query.toLowerCase().trim()
+      (alias) => alias.toLowerCase() === cleanQuery.toLowerCase()
     )
   );
 
@@ -84,13 +97,22 @@ export async function GET(request: Request) {
         ...concept.hebrewLemmas.map((h) => `H${h}`),
         ...concept.greekLemmas,
       ]
-    : [query];
+    : [cleanQuery];
 
-  const matches = strongs.flatMap(findByStrong).slice(0, 20);
+  let matches = strongs.flatMap(findByStrong).slice(0, 20);
+  let source: "concept" | "strong" | "english-gloss" = concept
+    ? "concept"
+    : "strong";
+
+  if (!matches.length) {
+    matches = findByEnglishGloss(cleanQuery);
+    source = "english-gloss";
+  }
 
   return NextResponse.json({
     query,
     concept: concept?.label || null,
+    source,
     strongs,
     matches,
   });

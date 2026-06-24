@@ -17,6 +17,7 @@ type BibleIQMatch = {
   gloss?: string;
   shortDefinition?: string;
   occurrenceCount?: number;
+  weight?: number;
   forms?: unknown[];
   occurrences?: {
     book?: string;
@@ -175,11 +176,11 @@ export default function WordStudySheet({
                 </p>
               ) : null}
 
-              {typeof firstMatch.occurrenceCount === "number" ? (
-                <p className="mt-3 text-sm text-neutral-400">
-                  Occurrences: {firstMatch.occurrenceCount}
-                </p>
-              ) : null}
+{firstMatch.occurrenceCount && firstMatch.occurrenceCount > 0 ? (
+  <p className="mt-3 text-sm text-neutral-400">
+    Occurrences: {firstMatch.occurrenceCount}
+  </p>
+) : null}
             </div>
           ) : (
             <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
@@ -195,7 +196,11 @@ export default function WordStudySheet({
               <p className="text-sm text-neutral-500">Related Matches</p>
 
               <div className="mt-3 space-y-2">
-                {matches.slice(1, 6).map((match, index) => (
+                {matches
+  .slice(1)
+  .filter((match) => !("weight" in match) || Number(match.weight) >= 1000)
+  .slice(0, 6)
+  .map((match, index) => (
                   <div
                     key={`${match.strong || match.lemma || index}-${index}`}
                     className="rounded-xl border border-neutral-800 px-3 py-2"
