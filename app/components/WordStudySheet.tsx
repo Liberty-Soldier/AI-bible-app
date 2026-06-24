@@ -41,6 +41,11 @@ export default function WordStudySheet({
 }: WordStudySheetProps) {
   const [data, setData] = useState<BibleIQResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [visibleOccurrenceCount, setVisibleOccurrenceCount] = useState(8);
+
+  useEffect(() => {
+    setVisibleOccurrenceCount(8);
+  }, [word]);
 
   useEffect(() => {
     if (!word) return;
@@ -86,7 +91,12 @@ export default function WordStudySheet({
 
   const matches = data?.matches || [];
   const firstMatch = matches[0];
-  const firstOccurrences = firstMatch?.occurrences?.slice(0, 8) || [];
+
+  const firstOccurrences =
+    firstMatch?.occurrences?.slice(0, visibleOccurrenceCount) || [];
+
+  const totalOccurrences = firstMatch?.occurrences?.length || 0;
+  const hasMoreOccurrences = visibleOccurrenceCount < totalOccurrences;
 
   return (
     <div className="fixed inset-0 z-50 flex items-end bg-black/60">
@@ -192,7 +202,9 @@ export default function WordStudySheet({
                   >
                     <p className="text-sm text-white">
                       {match.lemma || "Unknown"}{" "}
-                      {match.transliteration ? `• ${match.transliteration}` : ""}
+                      {match.transliteration
+                        ? `• ${match.transliteration}`
+                        : ""}
                     </p>
                     <p className="mt-1 text-xs text-neutral-500">
                       {match.strong} • {match.language} • {match.corpus}
@@ -209,35 +221,51 @@ export default function WordStudySheet({
 
               <div className="mt-4 space-y-2">
                 {firstOccurrences.map((occurrence, index) => {
+                  const label = `${occurrence.reference || "Reference"} — ${
+                    occurrence.word || occurrence.surface || ""
+                  }`;
+
                   if (!occurrence.book || !occurrence.chapter) {
                     return (
                       <div
                         key={`${occurrence.reference || index}-${index}`}
                         className="rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300"
                       >
-                        {occurrence.reference || "Reference unavailable"} —{" "}
-                        {occurrence.word || occurrence.surface || ""}
+                        {label}
                       </div>
                     );
                   }
 
+                  const href = `/read/${encodeURIComponent(
+                    occurrence.book
+                  )}/${occurrence.chapter}?translation=web${
+                    occurrence.verse ? `&verse=${occurrence.verse}` : ""
+                  }&study=true`;
+
                   return (
                     <Link
                       key={`${occurrence.reference || index}-${index}`}
-                      href={`/read/${encodeURIComponent(
-                        occurrence.book
-                      )}/${occurrence.chapter}?translation=web&verse=${
-                        occurrence.verse || ""
-                      }&study=true`}
+                      href={href}
                       onClick={onClose}
                       className="block rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300 hover:border-neutral-600 hover:text-white"
                     >
-                      {occurrence.reference} —{" "}
-                      {occurrence.word || occurrence.surface || ""}
+                      {label}
                     </Link>
                   );
                 })}
               </div>
+
+              {hasMoreOccurrences ? (
+                <button
+                  type="button"
+                  onClick={() =>
+                    setVisibleOccurrenceCount((count) => count + 8)
+                  }
+                  className="mt-4 w-full rounded-xl border border-neutral-700 px-4 py-2 text-sm text-neutral-300 hover:border-neutral-500 hover:text-white"
+                >
+                  Load More Occurrences
+                </button>
+              ) : null}
             </div>
           ) : null}
         </div>

@@ -114,26 +114,29 @@ export default async function ReadChapterPage({
   const translationLabel = getTranslationLabel(activeTranslation);
 
   const studyMode = study === "true";
+  const studyParam = studyMode ? "&study=true" : "";
 
-const baseHref = `/read/${encodeURIComponent(decodedBook)}/${chapterNumber}?translation=${activeTranslation}${
-  highlightedVerse ? `&verse=${highlightedVerse}` : ""
-}`;
+  const baseHref = `/read/${encodeURIComponent(
+    decodedBook
+  )}/${chapterNumber}?translation=${activeTranslation}${
+    highlightedVerse ? `&verse=${highlightedVerse}` : ""
+  }`;
 
-const readModeHref = baseHref;
-const studyModeHref = `${baseHref}&study=true`;
+  const readModeHref = baseHref;
+  const studyModeHref = `${baseHref}&study=true`;
 
   const previousChapterHref =
     chapterNumber > 1
       ? `/read/${encodeURIComponent(decodedBook)}/${
           chapterNumber - 1
-        }?translation=${activeTranslation}`
+        }?translation=${activeTranslation}${studyParam}`
       : null;
 
   const nextChapterHref =
     chapterNumber < maxChapter
       ? `/read/${encodeURIComponent(decodedBook)}/${
           chapterNumber + 1
-        }?translation=${activeTranslation}`
+        }?translation=${activeTranslation}${studyParam}`
       : null;
 
   return (
@@ -167,27 +170,27 @@ const studyModeHref = `${baseHref}&study=true`;
           />
         </CollapsibleReaderHeader>
 
-        <div className="mb-4 flex justify-center">
-  <div className="rounded-full border border-neutral-800 bg-neutral-900 p-1 text-sm">
-    <Link
-      href={readModeHref}
-      className={`inline-block rounded-full px-4 py-2 ${
-        !studyMode ? "bg-white text-black" : "text-neutral-400"
-      }`}
-    >
-      Read
-    </Link>
+        <div className="sticky top-16 z-30 mb-4 flex justify-center bg-neutral-950/90 py-2 backdrop-blur">
+          <div className="rounded-full border border-neutral-800 bg-neutral-900 p-1 text-sm">
+            <Link
+              href={readModeHref}
+              className={`inline-block rounded-full px-4 py-2 ${
+                !studyMode ? "bg-white text-black" : "text-neutral-400"
+              }`}
+            >
+              Read
+            </Link>
 
-    <Link
-      href={studyModeHref}
-      className={`inline-block rounded-full px-4 py-2 ${
-        studyMode ? "bg-white text-black" : "text-neutral-400"
-      }`}
-    >
-      Study
-    </Link>
-  </div>
-</div>
+            <Link
+              href={studyModeHref}
+              className={`inline-block rounded-full px-4 py-2 ${
+                studyMode ? "bg-white text-black" : "text-neutral-400"
+              }`}
+            >
+              Study
+            </Link>
+          </div>
+        </div>
 
         <ChapterSwipe
           previousChapterHref={previousChapterHref}
@@ -209,44 +212,47 @@ const studyModeHref = `${baseHref}&study=true`;
                 const isHighlighted = highlightedVerse === v.verse;
                 const selectedText = v.sources[0]?.text || "";
 
-const verseClassName = `group block rounded-xl px-3 py-2 transition ${
-  isHighlighted
-    ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
-    : "hover:bg-neutral-900"
-}`;
+                const verseClassName = `group block rounded-xl px-3 py-2 transition ${
+                  isHighlighted
+                    ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
+                    : "hover:bg-neutral-900"
+                }`;
 
-const verseContent = (
-  <>
-    <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
-      {v.verse}
-    </span>
+                const verseContent = (
+                  <>
+                    <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
+                      {v.verse}
+                    </span>
 
-    <ScriptureText text={selectedText} studyMode={studyMode} />
-  </>
-);
+                    <ScriptureText
+                      text={selectedText}
+                      studyMode={studyMode}
+                    />
+                  </>
+                );
 
-if (studyMode) {
-  return (
-    <div
-      id={`verse-${v.verse}`}
-      key={`${v.id}-${activeTranslation}`}
-      className={verseClassName}
-    >
-      {verseContent}
-    </div>
-  );
-}
+                if (studyMode) {
+                  return (
+                    <div
+                      id={`verse-${v.verse}`}
+                      key={`${v.id}-${activeTranslation}`}
+                      className={verseClassName}
+                    >
+                      {verseContent}
+                    </div>
+                  );
+                }
 
-return (
-  <Link
-    id={`verse-${v.verse}`}
-    key={`${v.id}-${activeTranslation}`}
-    href={`/verse/${encodeURIComponent(v.reference)}`}
-    className={verseClassName}
-  >
-    {verseContent}
-  </Link>
-);
+                return (
+                  <Link
+                    id={`verse-${v.verse}`}
+                    key={`${v.id}-${activeTranslation}`}
+                    href={`/verse/${encodeURIComponent(v.reference)}`}
+                    className={verseClassName}
+                  >
+                    {verseContent}
+                  </Link>
+                );
               })}
             </div>
           </article>
