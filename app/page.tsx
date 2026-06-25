@@ -36,8 +36,8 @@ function HomePage() {
     }
   }, []);
 
-  function goToAsk(query?: string) {
-    const finalQuery = (query || search).trim();
+  function goToAsk() {
+    const finalQuery = search.trim();
 
     if (!finalQuery) {
       router.push("/ask");
@@ -47,118 +47,66 @@ function HomePage() {
     router.push(`/ask?q=${encodeURIComponent(finalQuery)}`);
   }
 
-  const suggestions = [
-    "What is sin?",
-    "What is the Sabbath?",
-    "Genesis 1:1",
-    "Kingdom of God",
-  ];
-
   return (
-    <main className="min-h-screen bg-neutral-950 px-4 pb-24 pt-8 text-white sm:px-6">
-      <section className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-xl flex-col justify-center">
-        <div className="mb-8 text-center">
-          <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
-            Scripture Search
-          </p>
-
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Read.
-            <br />
-            Ask.
-            <br />
-            Study.
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-neutral-400">
-            A Scripture-first Bible reader powered by BibleIQ.
+    <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-16 text-[var(--foreground)]">
+      <section className="mx-auto flex min-h-[calc(100vh-10rem)] max-w-xl flex-col justify-center">
+        <div className="mb-10 text-center">
+          <h1 className="text-4xl font-semibold tracking-tight">BibleIQ</h1>
+          <p className="mt-3 text-base text-[var(--muted)]">
+            Search the Scriptures.
           </p>
         </div>
 
-        {lastReading ? (
-          <Link
-            href={`/read/${encodeURIComponent(lastReading.book)}/${
-              lastReading.chapter
-            }?translation=${lastReading.translation}`}
-            className="mb-4 rounded-3xl border border-amber-500/25 bg-amber-500/10 p-4 transition hover:border-amber-400/50"
-          >
-            <p className="mb-2 text-xs uppercase tracking-[0.25em] text-amber-300/80">
-              Continue Reading
-            </p>
+        <div className="mx-auto w-full max-w-md">
+          <div className="flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)]/60 px-5 py-3">
+            <input
+              type="text"
+              placeholder="Ask Scripture..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") goToAsk();
+              }}
+              className="min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-neutral-600"
+            />
 
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <h2 className="text-xl font-bold">
-                  {lastReading.book} {lastReading.chapter}
-                </h2>
-                <p className="mt-1 text-xs text-neutral-300">
-                  {getTranslationLabel(lastReading.translation)}
-                </p>
-              </div>
-
-              <span className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black">
-                Resume
-              </span>
-            </div>
-          </Link>
-        ) : null}
-
-        <section className="rounded-[2rem] border border-neutral-800 bg-neutral-900/70 p-4 shadow-2xl shadow-black/30">
-          <input
-            type="text"
-            placeholder="Ask Scripture or enter a reference..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") goToAsk();
-            }}
-            className="w-full rounded-2xl border border-neutral-700 bg-neutral-950 px-4 py-4 text-base text-white outline-none transition placeholder:text-neutral-600 focus:border-neutral-400"
-          />
-
-          <button
-            type="button"
-            onClick={() => goToAsk()}
-            className="mt-3 w-full rounded-2xl bg-white px-5 py-3 font-bold text-black transition hover:bg-neutral-200"
-          >
-            Ask Scripture
-          </button>
-
-          <div className="mt-4 flex flex-wrap justify-center gap-2">
-            {suggestions.map((suggestion) => (
-              <button
-                key={suggestion}
-                type="button"
-                onClick={() => goToAsk(suggestion)}
-                className="rounded-full border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 transition hover:border-neutral-500 hover:text-white"
-              >
-                {suggestion}
-              </button>
-            ))}
+            <button
+              type="button"
+              onClick={goToAsk}
+              className="ml-3 rounded-full bg-white px-4 py-2 text-sm font-semibold text-black"
+            >
+              Ask
+            </button>
           </div>
-        </section>
 
-        <section className="mt-4 grid grid-cols-3 gap-3">
-          <Link
-            href="/read"
-            className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4 text-center transition hover:border-neutral-600"
-          >
-            <p className="font-bold">Read</p>
-          </Link>
+          {lastReading ? (
+            <Link
+              href={`/read/${encodeURIComponent(lastReading.book)}/${
+                lastReading.chapter
+              }?translation=${lastReading.translation}`}
+              className="mt-8 block border-t border-neutral-900 pt-5"
+            >
+              <p className="text-xs uppercase tracking-[0.25em] text-neutral-600">
+                Continue Reading
+              </p>
 
-          <Link
-            href="/ask"
-            className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4 text-center transition hover:border-neutral-600"
-          >
-            <p className="font-bold">Ask</p>
-          </Link>
+              <div className="mt-3 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-lg font-semibold">
+                    {lastReading.book} {lastReading.chapter}
+                  </p>
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    {getTranslationLabel(lastReading.translation)}
+                  </p>
+                </div>
 
-          <Link
-            href="/study"
-            className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4 text-center transition hover:border-neutral-600"
-          >
-            <p className="font-bold">Study</p>
-          </Link>
-        </section>
+                <span className="text-sm font-medium text-neutral-300">
+                  Resume →
+                </span>
+              </div>
+            </Link>
+          ) : null}
+        </div>
       </section>
 
       <MobileBottomNav />

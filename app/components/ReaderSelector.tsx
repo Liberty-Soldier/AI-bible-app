@@ -47,28 +47,43 @@ export default function ReaderSelector({
   }
 
 return (
-  <div>
-    <div className="grid grid-cols-1 gap-2 sm:grid-cols-4">
-        <select
-          aria-label="Translation"
-          value={currentTranslation}
-          onChange={(e) =>
-            goTo(currentBook, currentChapter, e.target.value as Translation)
-          }
-          className="rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white"
-        >
-          {translations.map((translation) => (
-            <option key={translation.value} value={translation.value}>
-              {translation.label}
-            </option>
-          ))}
-        </select>
+  <div className="space-y-4">
+    <div>
+      <p className="mb-2 text-xs uppercase tracking-[0.25em] text-neutral-600">
+        Translation
+      </p>
+
+      <div className="grid grid-cols-3 gap-2">
+        {translations.map((translation) => (
+          <button
+            key={translation.value}
+            type="button"
+            onClick={() =>
+              goTo(currentBook, currentChapter, translation.value)
+            }
+            className={`rounded-full px-3 py-2 text-sm transition ${
+              currentTranslation === translation.value
+                ? "bg-white text-black"
+                : "bg-neutral-900 text-neutral-400 hover:bg-neutral-800"
+            }`}
+          >
+            {translation.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div className="grid grid-cols-2 gap-3">
+      <label>
+        <span className="mb-2 block text-xs uppercase tracking-[0.25em] text-neutral-600">
+          Book
+        </span>
 
         <select
           aria-label="Book"
           value={currentBook}
           onChange={(e) => goTo(e.target.value, 1, currentTranslation)}
-          className="rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white"
+          className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-sm text-white"
         >
           {books.map((book) => (
             <option key={book} value={book}>
@@ -76,6 +91,12 @@ return (
             </option>
           ))}
         </select>
+      </label>
+
+      <label>
+        <span className="mb-2 block text-xs uppercase tracking-[0.25em] text-neutral-600">
+          Chapter
+        </span>
 
         <select
           aria-label="Chapter"
@@ -83,38 +104,46 @@ return (
           onChange={(e) =>
             goTo(currentBook, Number(e.target.value), currentTranslation)
           }
-          className="rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white"
+          className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-sm text-white"
         >
           {Array.from({ length: maxChapter }, (_, i) => i + 1).map(
             (chapter) => (
               <option key={chapter} value={chapter}>
-                Ch. {chapter}
+                {chapter}
               </option>
             )
           )}
         </select>
-
-        <select
-          aria-label="Verse"
-          value={currentVerse || ""}
-          onChange={(e) =>
-            goTo(
-              currentBook,
-              currentChapter,
-              currentTranslation,
-              e.target.value ? Number(e.target.value) : null
-            )
-          }
-          className="rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white"
-        >
-          <option value="">Verse</option>
-          {Array.from({ length: maxVerse }, (_, i) => i + 1).map((verse) => (
-            <option key={verse} value={verse}>
-              Verse {verse}
-            </option>
-          ))}
-        </select>
-      </div>
+      </label>
     </div>
-  );
+
+    <label>
+      <span className="mb-2 block text-xs uppercase tracking-[0.25em] text-neutral-600">
+        Verse
+      </span>
+
+      <select
+        aria-label="Verse"
+        value={currentVerse || ""}
+        onChange={(e) =>
+          goTo(
+            currentBook,
+            currentChapter,
+            currentTranslation,
+            e.target.value ? Number(e.target.value) : null
+          )
+        }
+        className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-sm text-white"
+      >
+        <option value="">Start of Chapter</option>
+
+        {Array.from({ length: maxVerse }, (_, i) => i + 1).map((verse) => (
+          <option key={verse} value={verse}>
+            Verse {verse}
+          </option>
+        ))}
+      </select>
+    </label>
+  </div>
+);
 }

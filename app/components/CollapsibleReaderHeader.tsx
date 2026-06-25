@@ -14,24 +14,34 @@ export default function CollapsibleReaderHeader({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-neutral-800 bg-neutral-950/95">
-      <div className="px-2 py-2 sm:px-4 sm:py-3">
+    <div>
+      <div className="flex items-center justify-between py-2">
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="flex w-full items-center justify-between"
+          className="flex items-center gap-2 text-left"
         >
-          <span className="truncate text-base font-semibold sm:text-lg">{title}</span>
+          <span className="text-xl font-semibold tracking-tight">
+            {title}
+          </span>
 
-          <span className={`transition-transform ${open ? "rotate-180" : ""}`}>
+          <span
+            className={`text-sm text-neutral-500 transition-transform ${
+              open ? "rotate-180" : ""
+            }`}
+          >
             ▼
           </span>
         </button>
 
-        {modeToggle ? <div className="mt-3">{modeToggle}</div> : null}
+        {modeToggle}
       </div>
 
-      {open && <div className="border-t border-neutral-800 p-3">{children}</div>}
+      {open && (
+        <div className="mt-4 border-t border-neutral-900 pt-4">
+          {children}
+        </div>
+      )}
     </div>
   );
 }
