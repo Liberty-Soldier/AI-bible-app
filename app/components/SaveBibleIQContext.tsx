@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 type BibleIQContext = {
-  type: "reader";
+  type?: "reader";
   book: string;
   chapter: number;
   verse?: number | null;
