@@ -11,6 +11,7 @@ import VerseScroller from "@/app/components/VerseScroller";
 import ChapterSwipe from "@/app/components/ChapterSwipe";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
+import SaveBibleIQContext from "@/app/components/SaveBibleIQContext";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -142,6 +143,13 @@ export default async function ReadChapterPage({
     <main className="min-h-screen bg-neutral-950 px-4 pb-24 text-white sm:px-6">
       <section className="mx-auto max-w-2xl">
         <VerseScroller verse={highlightedVerse} />
+        <SaveBibleIQContext
+  book={decodedBook}
+  chapter={chapterNumber}
+  verse={highlightedVerse}
+  translation={activeTranslation}
+  studyMode={studyMode}
+/>
 
         <SaveReadingPosition
           book={decodedBook}
