@@ -5,7 +5,6 @@ import generatedBrenton from "@/app/data/scripture/generatedBrenton.json";
 import ScriptureText from "@/app/components/ScriptureText";
 import SacredNameToggle from "@/app/components/SacredNameToggle";
 import { notFound } from "next/navigation";
-import AppNav from "@/app/components/AppNav";
 import ReaderSelector from "@/app/components/ReaderSelector";
 import SaveReadingPosition from "@/app/components/SaveReadingPosition";
 import VerseScroller from "@/app/components/VerseScroller";
@@ -140,9 +139,9 @@ export default async function ReadChapterPage({
       : null;
 
   return (
-    <main className="min-h-screen bg-neutral-950 px-3 py-3 pb-24 text-white sm:px-6 sm:py-8">
-<section className="mx-auto max-w-3xl">
-  <VerseScroller verse={highlightedVerse} />
+    <main className="min-h-screen bg-neutral-950 px-4 pb-24 text-white sm:px-6">
+      <section className="mx-auto max-w-2xl">
+        <VerseScroller verse={highlightedVerse} />
 
         <SaveReadingPosition
           book={decodedBook}
@@ -150,121 +149,120 @@ export default async function ReadChapterPage({
           translation={activeTranslation}
         />
 
-<div className="sticky top-0 z-40 mb-3 border-b border-neutral-800 bg-neutral-950/95 py-2 backdrop-blur">  <div className="flex items-center justify-between gap-2">
-    <div className="min-w-0 flex-1">
-      <CollapsibleReaderHeader
-        title={`${activeTranslation.toUpperCase()} • ${decodedBook} ${chapterNumber}`}
-      >
-          <div className="mb-4">
-    <SacredNameToggle />
-  </div>
-        <ReaderSelector
-          books={books}
-          currentBook={decodedBook}
-          currentChapter={chapterNumber}
-          maxChapter={maxChapter}
-          currentTranslation={activeTranslation}
-          currentVerse={highlightedVerse}
-          maxVerse={chapterVerses.length}
-        />
-      </CollapsibleReaderHeader>
-    </div>
+        <header className="sticky top-0 z-40 -mx-4 border-b border-neutral-900 bg-neutral-950/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6">
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <CollapsibleReaderHeader
+                title={`${decodedBook} ${chapterNumber}`}
+              >
+                <div className="space-y-4 pt-3">
+                  <SacredNameToggle />
 
-    <div className="shrink-0 rounded-full border border-neutral-800 bg-neutral-900 p-1 text-sm">
-      <Link
-        href={readModeHref}
-        className={`inline-block rounded-full px-4 py-2 ${
-          !studyMode ? "bg-white text-black" : "text-neutral-400"
-        }`}
-      >
-        Read
-      </Link>
+                  <ReaderSelector
+                    books={books}
+                    currentBook={decodedBook}
+                    currentChapter={chapterNumber}
+                    maxChapter={maxChapter}
+                    currentTranslation={activeTranslation}
+                    currentVerse={highlightedVerse}
+                    maxVerse={chapterVerses.length}
+                  />
+                </div>
+              </CollapsibleReaderHeader>
+            </div>
 
-      <Link
-        href={studyModeHref}
-        className={`inline-block rounded-full px-4 py-2 ${
-          studyMode ? "bg-white text-black" : "text-neutral-400"
-        }`}
-      >
-        Study
-      </Link>
-    </div>
-    </div>
-        </div>
+            <div className="shrink-0 rounded-full bg-neutral-900 p-1 text-xs">
+              <Link
+                href={readModeHref}
+                className={`inline-block rounded-full px-3 py-1.5 ${
+                  !studyMode ? "bg-white text-black" : "text-neutral-400"
+                }`}
+              >
+                Read
+              </Link>
+
+              <Link
+                href={studyModeHref}
+                className={`inline-block rounded-full px-3 py-1.5 ${
+                  studyMode ? "bg-white text-black" : "text-neutral-400"
+                }`}
+              >
+                Study
+              </Link>
+            </div>
+          </div>
+        </header>
 
         <ChapterSwipe
           previousChapterHref={previousChapterHref}
           nextChapterHref={nextChapterHref}
         >
-        <article className="rounded-2xl border border-neutral-800 bg-neutral-950/60 px-4 py-6 shadow-2xl shadow-black/20 sm:rounded-3xl sm:px-10 sm:py-12">
-            <div className="mb-10 text-center">
-              <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
+          <article className="pt-8">
+            <div className="mb-10">
+              <p className="mb-2 text-xs uppercase tracking-[0.28em] text-neutral-600">
                 {translationLabel}
               </p>
 
-              <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
+              <h1 className="text-4xl font-semibold tracking-tight text-white">
                 {decodedBook} {chapterNumber}
-              </h2>
+              </h1>
             </div>
 
-            <div className="space-y-4 text-lg leading-8 text-neutral-200 sm:space-y-5 sm:text-xl sm:leading-10">
+            <div className="space-y-5 text-[1.18rem] leading-9 text-neutral-200 sm:text-xl sm:leading-10">
               {chapterVerses.map((v) => {
                 const isHighlighted = highlightedVerse === v.verse;
                 const selectedText = v.sources[0]?.text || "";
 
-                const verseClassName = `group block rounded-xl px-3 py-2 transition ${
+                const verseClassName = `group block rounded-xl py-1 transition ${
                   isHighlighted
-                    ? "bg-amber-500/15 text-white ring-1 ring-amber-400/30"
-                    : "hover:bg-neutral-900"
+                    ? "bg-amber-500/10 px-3 text-white ring-1 ring-amber-400/20"
+                    : "hover:text-white"
                 }`;
 
                 const verseContent = (
                   <>
-                    <span className="mr-3 align-super text-xs font-semibold text-neutral-500 group-hover:text-neutral-300">
+                    <span className="mr-3 align-super text-xs font-semibold text-neutral-600 group-hover:text-neutral-400">
                       {v.verse}
                     </span>
 
-                    <ScriptureText
-                      text={selectedText}
-                      studyMode={studyMode}
-                    />
+                    <ScriptureText text={selectedText} studyMode={studyMode} />
                   </>
                 );
 
-if (studyMode) {
-  return (
-    <div
-      id={`verse-${v.verse}`}
-      key={`${v.id}-${activeTranslation}`}
-      className={verseClassName}
-    >
-      {verseContent}
-    </div>
-  );
-}
+                if (studyMode) {
+                  return (
+                    <div
+                      id={`verse-${v.verse}`}
+                      key={`${v.id}-${activeTranslation}`}
+                      className={verseClassName}
+                    >
+                      {verseContent}
+                    </div>
+                  );
+                }
 
-return (
-  <Link
-    id={`verse-${v.verse}`}
-    key={`${v.id}-${activeTranslation}`}
-    href={`/verse/${encodeURIComponent(v.reference)}`}
-    className={verseClassName}
-  >
-    {verseContent}
-  </Link>
-);
+                return (
+                  <Link
+                    id={`verse-${v.verse}`}
+                    key={`${v.id}-${activeTranslation}`}
+                    href={`/verse/${encodeURIComponent(v.reference)}`}
+                    className={verseClassName}
+                  >
+                    {verseContent}
+                  </Link>
+                );
               })}
             </div>
           </article>
         </ChapterSwipe>
 
-        <div className="mt-8 flex items-center justify-between">
+        <div className="mt-12 flex items-center justify-between gap-4 border-t border-neutral-900 pt-6">
           {previousChapterHref ? (
             <Link
               href={previousChapterHref}
-              className="rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 hover:border-neutral-600"
+              className="text-sm text-neutral-500 hover:text-white"
             >
-              ← Previous Chapter
+              ← Previous
             </Link>
           ) : (
             <span />
@@ -273,9 +271,9 @@ return (
           {nextChapterHref ? (
             <Link
               href={nextChapterHref}
-              className="rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 hover:border-neutral-600"
+              className="text-sm text-neutral-500 hover:text-white"
             >
-              Next Chapter →
+              Next →
             </Link>
           ) : (
             <span />

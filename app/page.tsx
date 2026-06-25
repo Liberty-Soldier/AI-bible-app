@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSacredNames } from "./data/useSacredNames";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 
 type LastReadingPosition = {
@@ -25,17 +24,15 @@ function HomePage() {
   const [lastReading, setLastReading] =
     useState<LastReadingPosition | null>(null);
 
-  const { sacredNames, setSacredNames } = useSacredNames();
-
   useEffect(() => {
     const saved = localStorage.getItem("lastReadingPosition");
 
-    if (saved) {
-      try {
-        setLastReading(JSON.parse(saved));
-      } catch {
-        setLastReading(null);
-      }
+    if (!saved) return;
+
+    try {
+      setLastReading(JSON.parse(saved));
+    } catch {
+      setLastReading(null);
     }
   }, []);
 
@@ -58,27 +55,33 @@ function HomePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-neutral-950 px-4 pb-24 pt-8 text-white sm:px-6 sm:pt-12">
-      <section className="mx-auto max-w-2xl">
-        <div className="mb-7">
+    <main className="min-h-screen bg-neutral-950 px-4 pb-24 pt-8 text-white sm:px-6">
+      <section className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-xl flex-col justify-center">
+        <div className="mb-8 text-center">
           <p className="mb-3 text-xs uppercase tracking-[0.35em] text-neutral-500">
             Scripture Search
           </p>
 
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Ask Scripture.
+            Read.
             <br />
-            Study the source.
+            Ask.
+            <br />
+            Study.
           </h1>
 
-          <p className="mt-3 text-sm leading-relaxed text-neutral-400">
-            Powered by BibleIQ — Hebrew, Septuagint, Greek, lexicons, and
-            Scripture evidence.
+          <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-neutral-400">
+            A Scripture-first Bible reader powered by BibleIQ.
           </p>
         </div>
 
         {lastReading ? (
-          <section className="mb-4 rounded-3xl border border-amber-500/30 bg-amber-500/10 p-4">
+          <Link
+            href={`/read/${encodeURIComponent(lastReading.book)}/${
+              lastReading.chapter
+            }?translation=${lastReading.translation}`}
+            className="mb-4 rounded-3xl border border-amber-500/25 bg-amber-500/10 p-4 transition hover:border-amber-400/50"
+          >
             <p className="mb-2 text-xs uppercase tracking-[0.25em] text-amber-300/80">
               Continue Reading
             </p>
@@ -93,22 +96,17 @@ function HomePage() {
                 </p>
               </div>
 
-              <Link
-                href={`/read/${encodeURIComponent(lastReading.book)}/${
-                  lastReading.chapter
-                }?translation=${lastReading.translation}`}
-                className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black hover:bg-neutral-200"
-              >
+              <span className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-black">
                 Resume
-              </Link>
+              </span>
             </div>
-          </section>
+          </Link>
         ) : null}
 
-        <section className="rounded-[1.75rem] border border-neutral-800 bg-neutral-900/70 p-4 shadow-2xl shadow-black/30">
+        <section className="rounded-[2rem] border border-neutral-800 bg-neutral-900/70 p-4 shadow-2xl shadow-black/30">
           <input
             type="text"
-            placeholder="Ask, search, or enter a reference..."
+            placeholder="Ask Scripture or enter a reference..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => {
@@ -125,7 +123,7 @@ function HomePage() {
             Ask Scripture
           </button>
 
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
             {suggestions.map((suggestion) => (
               <button
                 key={suggestion}
@@ -145,7 +143,6 @@ function HomePage() {
             className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4 text-center transition hover:border-neutral-600"
           >
             <p className="font-bold">Read</p>
-            <p className="mt-1 text-xs text-neutral-500">Scripture</p>
           </Link>
 
           <Link
@@ -153,7 +150,6 @@ function HomePage() {
             className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4 text-center transition hover:border-neutral-600"
           >
             <p className="font-bold">Ask</p>
-            <p className="mt-1 text-xs text-neutral-500">Evidence</p>
           </Link>
 
           <Link
@@ -161,38 +157,7 @@ function HomePage() {
             className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4 text-center transition hover:border-neutral-600"
           >
             <p className="font-bold">Study</p>
-            <p className="mt-1 text-xs text-neutral-500">BibleIQ</p>
           </Link>
-        </section>
-
-        <section className="mt-4 rounded-3xl border border-neutral-800 bg-neutral-900/40 p-4">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-neutral-500">
-                Sacred Names
-              </p>
-              <p className="mt-1 text-sm text-neutral-400">
-                Render LORD / God as sacred names where supported.
-              </p>
-            </div>
-
-            <input
-              type="checkbox"
-              checked={sacredNames}
-              onChange={(e) => setSacredNames(e.target.checked)}
-              className="h-5 w-5"
-            />
-          </div>
-        </section>
-
-        <section className="mt-4 rounded-3xl border border-neutral-800 bg-neutral-900/40 p-4">
-          <p className="text-xs uppercase tracking-[0.25em] text-neutral-500">
-            Evidence Order
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-neutral-300">
-            Source texts → translation witnesses → cross references →
-            explanation.
-          </p>
         </section>
       </section>
 
