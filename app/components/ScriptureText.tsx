@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { renderSacredNames } from "../data/renderSacredNames";
 import { useSacredNames } from "../data/useSacredNames";
-import WordStudySheet from "./WordStudySheet";
 
 export default function ScriptureText({
   text,
@@ -12,10 +11,11 @@ export default function ScriptureText({
   text: string;
   studyMode?: boolean;
 }) {
-  const { sacredNames } = useSacredNames();
-  const [selectedWord, setSelectedWord] = useState<string | null>(null);
-  const scrollYRef = useRef(0);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
+  const { sacredNames } = useSacredNames();
   const renderedText = sacredNames ? renderSacredNames(text) : text;
 
   if (!studyMode) {
@@ -24,14 +24,18 @@ export default function ScriptureText({
 
   const parts = renderedText.split(/(\s+)/);
 
-  function closeWordStudy() {
-    setSelectedWord(null);
+  function openWordStudy(word: string) {
+    const cleanWord = word.replace(/[.,;:!?()[\]{}"“”‘’]/g, "");
 
-    requestAnimationFrame(() => {
-      window.scrollTo({
-        top: scrollYRef.current,
-        behavior: "instant",
-      });
+    if (!cleanWord) return;
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("study", "true");
+    params.set("word", cleanWord);
+
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: false,
     });
   }
 
@@ -53,9 +57,7 @@ export default function ScriptureText({
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();
-
-              scrollYRef.current = window.scrollY;
-              setSelectedWord(cleanWord);
+              openWordStudy(cleanWord);
             }}
             className="rounded px-0.5 underline decoration-neutral-700 decoration-dotted underline-offset-4 hover:text-amber-200"
           >
@@ -63,8 +65,6 @@ export default function ScriptureText({
           </button>
         );
       })}
-
-      <WordStudySheet word={selectedWord} onClose={closeWordStudy} />
     </>
   );
 }

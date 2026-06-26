@@ -12,6 +12,15 @@ import { getConceptEvidence } from "@/app/data/lexicon/getConceptEvidence";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import BibleIQLoader from "@/app/components/BibleIQLoader";
 
+type BibleIQContext = {
+  type?: "reader";
+  book?: string;
+  chapter?: number;
+  verse?: number | null;
+  translation?: string;
+  studyMode?: boolean;
+};
+
 function formatReference(reference: string) {
   return reference.replace(/\./g, " ");
 }
@@ -33,11 +42,25 @@ export default function AskPanel() {
   const [search, setSearch] = useState(initialQuery);
   const [submittedSearch, setSubmittedSearch] = useState(initialQuery);
   const [thinking, setThinking] = useState(false);
+  const [context, setContext] = useState<BibleIQContext | null>(null);
+const [useContext, setUseContext] = useState(true);
 
   useEffect(() => {
     setSearch(initialQuery);
     setSubmittedSearch(initialQuery);
   }, [initialQuery]);
+
+  useEffect(() => {
+  const savedContext = localStorage.getItem("bibleiq-current-context");
+
+  if (!savedContext) return;
+
+  try {
+    setContext(JSON.parse(savedContext));
+  } catch {
+    setContext(null);
+  }
+}, []);
 
 function submitSearch(value?: string) {
   const finalQuery = (value || search).trim();
@@ -52,6 +75,11 @@ function submitSearch(value?: string) {
     setThinking(false);
   }, 800);
 }
+
+const contextLabel =
+  context?.book && context?.chapter
+    ? `${context.book} ${context.chapter}${context.verse ? `:${context.verse}` : ""}`
+    : null;
 
   const hasSearch = submittedSearch.trim().length > 0;
   const conceptEvidence = hasSearch ? getConceptEvidence(submittedSearch) : null;
@@ -124,6 +152,18 @@ function submitSearch(value?: string) {
           >
             Ask Scripture
           </button>
+
+          {contextLabel && useContext ? (
+  <div className="mt-3 flex flex-wrap gap-2">
+    <button
+      type="button"
+      onClick={() => setUseContext(false)}
+      className="rounded-full border border-neutral-700 px-3 py-1.5 text-xs text-neutral-300"
+    >
+      📖 {contextLabel} ×
+    </button>
+  </div>
+) : null}
 
           {!hasSearch ? (
             <div className="mt-4 flex flex-wrap gap-2">

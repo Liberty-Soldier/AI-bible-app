@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { normalizeBookName } from "@/app/data/bookAliases";
+import { usePathname, useSearchParams } from "next/navigation";
 
 type WordStudySheetProps = {
   word: string | null;
@@ -36,6 +38,53 @@ type BibleIQResponse = {
   matches: BibleIQMatch[];
 };
 
+function parseOccurrenceReference(occurrence: {
+  book?: string;
+  chapter?: number;
+  verse?: number;
+  reference?: string;
+}) {
+  if (occurrence.book && occurrence.chapter) {
+    return {
+      book: occurrence.book,
+      chapter: occurrence.chapter,
+      verse: occurrence.verse || null,
+    };
+  }
+
+  if (!occurrence.reference) return null;
+
+  const parts = occurrence.reference.split(".");
+
+  if (parts.length < 3) return null;
+
+  const book = occurrence.book || parts[0];
+  const chapter = Number(parts[1]);
+  const verse = Number(parts[2]);
+
+  if (!book || !chapter) return null;
+
+  return {
+    book,
+    chapter,
+    verse: Number.isFinite(verse) ? verse : null,
+  };
+}
+
+function getOccurrenceTranslation(book: string) {
+  const brentonOnlyBooks = [
+    "Tobit",
+    "Judith",
+    "Wisdom",
+    "Sirach",
+    "Baruch",
+    "1 Maccabees",
+    "2 Maccabees",
+  ];
+
+  return brentonOnlyBooks.includes(book) ? "brenton" : "web";
+}
+
 export default function WordStudySheet({
   word,
   onClose,
@@ -43,6 +92,11 @@ export default function WordStudySheet({
   const [data, setData] = useState<BibleIQResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [visibleOccurrenceCount, setVisibleOccurrenceCount] = useState(8);
+
+  const pathname = usePathname();
+const searchParams = useSearchParams();
+
+const returnTo = `${pathname}?${searchParams.toString()}`;
 
   useEffect(() => {
     setVisibleOccurrenceCount(8);
@@ -95,6 +149,10 @@ export default function WordStudySheet({
 
   const firstOccurrences =
     firstMatch?.occurrences?.slice(0, visibleOccurrenceCount) || [];
+
+    const occurrenceMatches = matches
+  .filter((match) => match.occurrences && match.occurrences.length > 0)
+  .slice(0, 3);
 
   const totalOccurrences = firstMatch?.occurrences?.length || 0;
   const hasMoreOccurrences = visibleOccurrenceCount < totalOccurrences;
@@ -220,59 +278,75 @@ export default function WordStudySheet({
             </div>
           ) : null}
 
-          {firstOccurrences.length > 0 ? (
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-              <p className="text-sm text-neutral-500">First Occurrences</p>
+{occurrenceMatches.length > 0 ? (
+  <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
+    <p className="text-sm text-neutral-500">First Occurrences</p>
 
-              <div className="mt-4 space-y-2">
-                {firstOccurrences.map((occurrence, index) => {
-                  const label = `${occurrence.reference || "Reference"} — ${
-                    occurrence.word || occurrence.surface || ""
-                  }`;
+    <div className="mt-4 space-y-5">
+      {occurrenceMatches.map((match, matchIndex) => (
+        <div key={`${match.strong || match.lemma || matchIndex}`}>
+          <p className="mb-2 text-sm font-semibold text-white">
+            {match.lemma || "Source word"}{" "}
+            {match.transliteration ? `• ${match.transliteration}` : ""}
+          </p>
 
-                  if (!occurrence.book || !occurrence.chapter) {
-                    return (
-                      <div
-                        key={`${occurrence.reference || index}-${index}`}
-                        className="rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300"
-                      >
-                        {label}
-                      </div>
-                    );
-                  }
+          <div className="space-y-2">
+            {(match.occurrences || [])
+              .slice(0, visibleOccurrenceCount)
+              .map((occurrence, index) => {
+                const label = `${occurrence.reference || "Reference"} — ${
+                  occurrence.word || occurrence.surface || ""
+                }`;
 
-                  const href = `/read/${encodeURIComponent(
-                    occurrence.book
-                  )}/${occurrence.chapter}?translation=web${
-                    occurrence.verse ? `&verse=${occurrence.verse}` : ""
-                  }&study=true`;
+                const parsedOccurrence = parseOccurrenceReference(occurrence);
 
+                if (!parsedOccurrence) {
                   return (
-                    <Link
+                    <div
                       key={`${occurrence.reference || index}-${index}`}
-                      href={href}
-                      onClick={onClose}
-                      className="block rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300 hover:border-neutral-600 hover:text-white"
+                      className="rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300"
                     >
                       {label}
-                    </Link>
+                    </div>
                   );
-                })}
-              </div>
+                }
 
-              {hasMoreOccurrences ? (
-                <button
-                  type="button"
-                  onClick={() =>
-                    setVisibleOccurrenceCount((count) => count + 8)
-                  }
-                  className="mt-4 w-full rounded-xl border border-neutral-700 px-4 py-2 text-sm text-neutral-300 hover:border-neutral-500 hover:text-white"
-                >
-                  Load More Occurrences
-                </button>
-              ) : null}
-            </div>
-          ) : null}
+                const normalizedBook = normalizeBookName(parsedOccurrence.book);
+                const occurrenceTranslation =
+                  getOccurrenceTranslation(normalizedBook);
+
+const href = `/read/${encodeURIComponent(
+  normalizedBook
+)}/${parsedOccurrence.chapter}?translation=${occurrenceTranslation}${
+  parsedOccurrence.verse ? `&verse=${parsedOccurrence.verse}` : ""
+}&study=true&returnTo=${encodeURIComponent(returnTo)}`;
+
+                return (
+                  <Link
+                    key={`${occurrence.reference || index}-${index}`}
+                    href={href}
+                    className="block rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300 hover:border-neutral-600 hover:text-white"
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {hasMoreOccurrences ? (
+      <button
+        type="button"
+        onClick={() => setVisibleOccurrenceCount((count) => count + 8)}
+        className="mt-4 w-full rounded-xl border border-neutral-700 px-4 py-2 text-sm text-neutral-300 hover:border-neutral-500 hover:text-white"
+      >
+        Load More Occurrences
+      </button>
+    ) : null}
+  </div>
+) : null}
         </div>
       </section>
     </div>

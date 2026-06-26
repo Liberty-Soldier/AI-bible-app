@@ -40,13 +40,12 @@ function normalizeStrong(value: string) {
 
 function findByStrong(strong: string) {
   const normalized = normalizeStrong(strong);
-
-  const results = [];
+  const results: any[] = [];
 
   if (normalized.startsWith("H")) {
     results.push(
       ...loadJson("generatedHebrewLexiconV12.json").filter(
-        (e: any) => e.strong === normalized
+        (entry: any) => entry.strong === normalized
       )
     );
   }
@@ -54,13 +53,14 @@ function findByStrong(strong: string) {
   if (normalized.startsWith("G")) {
     results.push(
       ...loadJson("generatedNTGreekLexiconV12.json").filter(
-        (e: any) => e.strong === normalized
+        (entry: any) => entry.strong === normalized
       )
     );
 
     results.push(
       ...loadJson("generatedLXXGreekLexiconV12.json").filter(
-        (e: any) => e.strong === normalized || e.strongs?.includes(normalized)
+        (entry: any) =>
+          entry.strong === normalized || entry.strongs?.includes(normalized)
       )
     );
   }
@@ -69,12 +69,83 @@ function findByStrong(strong: string) {
 }
 
 function findByEnglishGloss(query: string) {
-  const index = loadJson("generatedEnglishGlossIndex.json");
   const key = normalizeText(query);
 
   if (!key) return [];
 
-  return (index[key] || []).slice(0, 12);
+  try {
+    const index = loadJson("generatedEnglishGlossIndex.json");
+    return (index[key] || []).slice(0, 20);
+  } catch {
+    return [];
+  }
+}
+
+function enrichMatches(matches: any[]) {
+  return matches.map((match) => {
+    const fullMatches = findByStrong(match.strong || "");
+
+    const fullMatch =
+      fullMatches.find((item: any) => item.corpus === match.corpus) ||
+      fullMatches[0];
+
+    return fullMatch
+      ? {
+          ...match,
+          ...fullMatch,
+          weight: match.weight,
+        }
+      : match;
+  });
+}
+
+function dedupeMatches(matches: any[]) {
+  const seen = new Set<string>();
+
+  return matches.filter((match) => {
+    const key = `${match.strong || ""}|${match.lemma || ""}|${
+      match.corpus || ""
+    }`;
+
+    if (seen.has(key)) return false;
+
+    seen.add(key);
+    return true;
+  });
+}
+
+function scoreMatch(match: any) {
+  const hasOccurrences = Array.isArray(match.occurrences)
+    ? match.occurrences.length > 0
+    : false;
+
+  const occurrenceLength = Array.isArray(match.occurrences)
+    ? match.occurrences.length
+    : 0;
+
+  const occurrenceCount = Number(match.occurrenceCount || occurrenceLength || 0);
+  const weight = Number(match.weight || 0);
+
+  let score = 0;
+
+  if (hasOccurrences) score += 1_000_000;
+  if (occurrenceCount > 0) score += Math.min(occurrenceCount, 100_000);
+  if (weight > 0) score += weight;
+
+  if (match.language === "Hebrew") score += 75;
+  if (match.language === "Greek") score += 50;
+
+  if (match.corpus === "Hebrew Bible") score += 40;
+  if (match.corpus === "Greek New Testament") score += 35;
+  if (match.corpus === "Septuagint") score += 25;
+
+  return score;
+}
+
+function rankMatches(matches: any[]) {
+  return dedupeMatches(matches)
+    .sort((a, b) => scoreMatch(b) - scoreMatch(a))
+    .slice(0, 20);
 }
 
 export async function GET(request: Request) {
@@ -94,18 +165,19 @@ export async function GET(request: Request) {
 
   const strongs = concept
     ? [
-        ...concept.hebrewLemmas.map((h) => `H${h}`),
+        ...concept.hebrewLemmas.map((lemma) => `H${lemma}`),
         ...concept.greekLemmas,
       ]
     : [cleanQuery];
 
-  let matches = strongs.flatMap(findByStrong).slice(0, 20);
   let source: "concept" | "strong" | "english-gloss" = concept
     ? "concept"
     : "strong";
 
+  let matches = rankMatches(strongs.flatMap(findByStrong));
+
   if (!matches.length) {
-    matches = findByEnglishGloss(cleanQuery);
+    matches = rankMatches(enrichMatches(findByEnglishGloss(cleanQuery)));
     source = "english-gloss";
   }
 

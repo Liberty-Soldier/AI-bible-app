@@ -12,6 +12,7 @@ import ChapterSwipe from "@/app/components/ChapterSwipe";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
 import SaveBibleIQContext from "@/app/components/SaveBibleIQContext";
+import ReaderWordStudyController from "@/app/components/ReaderWordStudyController";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -79,10 +80,15 @@ export default async function ReadChapterPage({
   searchParams,
 }: {
   params: Promise<{ book: string; chapter: string }>;
-  searchParams: Promise<{ verse?: string; translation?: string; study?: string }>;
+  searchParams: Promise<{
+  verse?: string;
+  translation?: string;
+  study?: string;
+  returnTo?: string;
+}>;
 }) {
   const { book, chapter } = await params;
-  const { verse, translation, study } = await searchParams;
+  const { verse, translation, study, returnTo } = await searchParams;
 
   const decodedBook = decodeURIComponent(book);
   const chapterNumber = Number(chapter);
@@ -143,6 +149,9 @@ export default async function ReadChapterPage({
     <main className="min-h-screen bg-neutral-950 px-4 pb-24 text-white sm:px-6">
       <section className="mx-auto max-w-2xl">
         <VerseScroller verse={highlightedVerse} />
+
+        <ReaderWordStudyController />
+
         <SaveBibleIQContext
   book={decodedBook}
   chapter={chapterNumber}
@@ -206,6 +215,14 @@ export default async function ReadChapterPage({
           nextChapterHref={nextChapterHref}
         >
           <article className="pt-8">
+            {returnTo ? (
+  <Link
+    href={returnTo}
+    className="mb-6 inline-flex rounded-full border border-neutral-800 px-4 py-2 text-sm text-neutral-300 hover:border-neutral-600 hover:text-white"
+  >
+    ← Back to Word Study
+  </Link>
+) : null}
             <div className="mb-10">
               <p className="mb-2 text-xs uppercase tracking-[0.28em] text-neutral-600">
                 {translationLabel}

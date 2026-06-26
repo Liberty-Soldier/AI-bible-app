@@ -11,13 +11,13 @@ export default function GlobalAskButton() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-24 right-5 z-50 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black shadow-lg md:hidden"
+        className="fixed bottom-24 right-5 z-50 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black shadow-lg"
       >
         Ask
       </button>
 
       {open ? (
-        <div className="fixed inset-0 z-[60] bg-black/50 md:hidden">
+        <div className="fixed inset-0 z-[60] bg-black/50">
           <button
             type="button"
             aria-label="Close Ask Scripture"

@@ -67,17 +67,17 @@ function add(index, key, entry, weight) {
     return;
   }
 
-  index[clean].push({
-    strong: entry.strong || "",
-    lemma: entry.lemma || "",
-    transliteration: entry.transliteration || "",
-    gloss: entry.gloss || "",
-    definition: entry.shortDefinition || entry.fullDefinition || "",
-    occurrenceCount: entry.occurrenceCount || 0,
-    language: entry.language || "",
-    corpus: entry.corpus || "",
-    weight,
-  });
+index[clean].push({
+  strong: entry.strong || "",
+  lemma: entry.lemma || "",
+  transliteration: entry.transliteration || "",
+  gloss: entry.gloss || "",
+  shortDefinition: entry.shortDefinition || entry.fullDefinition || "",
+  occurrenceCount: entry.occurrenceCount || 0,
+  language: entry.language || "",
+  corpus: entry.corpus || "",
+  weight,
+});
 }
 
 const index = {};
@@ -90,18 +90,31 @@ for (const file of files) {
 
     if (!gloss) continue;
 
-    // exact full gloss phrase
-    add(index, gloss, entry, 1000);
+// exact full gloss phrase
+add(index, gloss, entry, 1000);
 
-    // individual gloss words only, not full definitions
-    for (const word of gloss.split(/\s+/)) {
-      add(index, word, entry, 500);
-    }
+// individual gloss words
+for (const word of gloss.split(/\s+/)) {
+  add(index, word, entry, 900);
+}
 
-    // transliteration exact
-    if (entry.transliteration) {
-      add(index, entry.transliteration, entry, 700);
-    }
+// short definition exact + words
+const shortDefinition = normalize(
+  entry.shortDefinition || entry.fullDefinition || ""
+);
+
+if (shortDefinition) {
+  add(index, shortDefinition, entry, 650);
+
+  for (const word of shortDefinition.split(/\s+/)) {
+    add(index, word, entry, 250);
+  }
+}
+
+// transliteration exact
+if (entry.transliteration) {
+  add(index, entry.transliteration, entry, 700);
+}
   }
 }
 
