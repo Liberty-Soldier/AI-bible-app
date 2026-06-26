@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import AskPanel from "@/app/components/AskPanel";
+import AskView from "@/app/components/ask/AskView";
 
 export default function GlobalAskButton() {
   const [open, setOpen] = useState(false);
