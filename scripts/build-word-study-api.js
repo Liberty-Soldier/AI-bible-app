@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const lexiconDir = path.join(process.cwd(), "app", "data", "lexicon");
-const outputDir = path.join(process.cwd(), "app", "api", "word-study", "data");
+const outputDir = path.join(process.cwd(), "data", "word-study");
 const outputPath = path.join(outputDir, "generatedWordStudyApi.json");
 
 const lexiconFiles = [

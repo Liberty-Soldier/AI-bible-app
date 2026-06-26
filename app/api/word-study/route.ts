@@ -1,56 +1,10 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import { sourceConcepts } from "@/app/data/lexicon/sourceConcepts";
+import { sourceConcepts } from "../../../data/word-study/sourceConcepts";
+import wordStudyApi from "../../../data/word-study/generatedWordStudyApi.json";
 
-export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type LexiconFile =
-  | "generatedHebrewLexiconV12.json"
-  | "generatedNTGreekLexiconV12.json"
-  | "generatedLXXGreekLexiconV12.json"
-  | "generatedEnglishGlossIndex.json";
-
-const lexiconFiles: Record<LexiconFile, string> = {
-  "generatedHebrewLexiconV12.json": path.join(
-    process.cwd(),
-    "app",
-    "data",
-    "lexicon",
-    "generatedHebrewLexiconV12.json"
-  ),
-  "generatedNTGreekLexiconV12.json": path.join(
-    process.cwd(),
-    "app",
-    "data",
-    "lexicon",
-    "generatedNTGreekLexiconV12.json"
-  ),
-  "generatedLXXGreekLexiconV12.json": path.join(
-    process.cwd(),
-    "app",
-    "data",
-    "lexicon",
-    "generatedLXXGreekLexiconV12.json"
-  ),
-  "generatedEnglishGlossIndex.json": path.join(
-    process.cwd(),
-    "app",
-    "data",
-    "lexicon",
-    "generatedEnglishGlossIndex.json"
-  ),
-};
-
-const cache: Partial<Record<LexiconFile, any>> = {};
-
-function loadJson(name: LexiconFile) {
-  if (cache[name]) return cache[name];
-
-  cache[name] = JSON.parse(fs.readFileSync(lexiconFiles[name], "utf8"));
-  return cache[name];
-}
+const apiData = wordStudyApi as any;
 
 function normalizeText(value: string) {
   return String(value || "")
@@ -75,62 +29,24 @@ function normalizeStrong(value: string) {
 
 function findByStrong(strong: string) {
   const normalized = normalizeStrong(strong);
-  const results: any[] = [];
-
-  if (normalized.startsWith("H")) {
-    results.push(
-      ...loadJson("generatedHebrewLexiconV12.json").filter(
-        (entry: any) => entry.strong === normalized
-      )
-    );
-  }
-
-  if (normalized.startsWith("G")) {
-    results.push(
-      ...loadJson("generatedNTGreekLexiconV12.json").filter(
-        (entry: any) => entry.strong === normalized
-      )
-    );
-
-    results.push(
-      ...loadJson("generatedLXXGreekLexiconV12.json").filter(
-        (entry: any) =>
-          entry.strong === normalized || entry.strongs?.includes(normalized)
-      )
-    );
-  }
-
-  return results;
+  return apiData.byStrong?.[normalized] || [];
 }
 
 function findByEnglishGloss(query: string) {
   const key = normalizeText(query);
-
   if (!key) return [];
 
-  try {
-    const index = loadJson("generatedEnglishGlossIndex.json");
-    return (index[key] || []).slice(0, 20);
-  } catch {
-    return [];
-  }
-}
+  const refs = apiData.englishIndex?.[key] || [];
 
-function enrichMatches(matches: any[]) {
-  return matches.map((match) => {
-    const fullMatches = findByStrong(match.strong || "");
+  return refs.flatMap((ref: any) => {
+    const matches = findByStrong(ref.strong);
 
-    const fullMatch =
-      fullMatches.find((item: any) => item.corpus === match.corpus) ||
-      fullMatches[0];
-
-    return fullMatch
-      ? {
-          ...match,
-          ...fullMatch,
-          weight: match.weight,
-        }
-      : match;
+    return matches
+      .filter((match: any) => !ref.corpus || match.corpus === ref.corpus)
+      .map((match: any) => ({
+        ...match,
+        weight: ref.weight,
+      }));
   });
 }
 
@@ -150,25 +66,17 @@ function dedupeMatches(matches: any[]) {
 }
 
 function scoreMatch(match: any) {
-  const hasOccurrences = Array.isArray(match.occurrences)
-    ? match.occurrences.length > 0
-    : false;
+  const hasOccurrences =
+    Array.isArray(match.occurrences) && match.occurrences.length > 0;
 
-  const occurrenceLength = Array.isArray(match.occurrences)
-    ? match.occurrences.length
-    : 0;
-
-  const occurrenceCount = Number(match.occurrenceCount || occurrenceLength || 0);
+  const occurrenceCount = Number(match.occurrenceCount || 0);
   const weight = Number(match.weight || 0);
 
   let score = 0;
 
   if (hasOccurrences) score += 1_000_000;
-  if (occurrenceCount > 0) score += Math.min(occurrenceCount, 100_000);
-  if (weight > 0) score += weight;
-
-  if (match.language === "Hebrew") score += 75;
-  if (match.language === "Greek") score += 50;
+  score += Math.min(occurrenceCount, 100_000);
+  score += weight;
 
   if (match.corpus === "Hebrew Bible") score += 40;
   if (match.corpus === "Greek New Testament") score += 35;
@@ -212,7 +120,7 @@ export async function GET(request: Request) {
   let matches = rankMatches(strongs.flatMap(findByStrong));
 
   if (!matches.length) {
-    matches = rankMatches(enrichMatches(findByEnglishGloss(cleanQuery)));
+    matches = rankMatches(findByEnglishGloss(cleanQuery));
     source = "english-gloss";
   }
 
