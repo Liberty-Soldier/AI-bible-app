@@ -6,14 +6,49 @@ import { sourceConcepts } from "@/app/data/lexicon/sourceConcepts";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const cache: Record<string, any> = {};
+type LexiconFile =
+  | "generatedHebrewLexiconV12.json"
+  | "generatedNTGreekLexiconV12.json"
+  | "generatedLXXGreekLexiconV12.json"
+  | "generatedEnglishGlossIndex.json";
 
-function loadJson(name: string) {
+const lexiconFiles: Record<LexiconFile, string> = {
+  "generatedHebrewLexiconV12.json": path.join(
+    process.cwd(),
+    "app",
+    "data",
+    "lexicon",
+    "generatedHebrewLexiconV12.json"
+  ),
+  "generatedNTGreekLexiconV12.json": path.join(
+    process.cwd(),
+    "app",
+    "data",
+    "lexicon",
+    "generatedNTGreekLexiconV12.json"
+  ),
+  "generatedLXXGreekLexiconV12.json": path.join(
+    process.cwd(),
+    "app",
+    "data",
+    "lexicon",
+    "generatedLXXGreekLexiconV12.json"
+  ),
+  "generatedEnglishGlossIndex.json": path.join(
+    process.cwd(),
+    "app",
+    "data",
+    "lexicon",
+    "generatedEnglishGlossIndex.json"
+  ),
+};
+
+const cache: Partial<Record<LexiconFile, any>> = {};
+
+function loadJson(name: LexiconFile) {
   if (cache[name]) return cache[name];
 
-  const filePath = path.join(process.cwd(), "app", "data", "lexicon", name);
-
-  cache[name] = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  cache[name] = JSON.parse(fs.readFileSync(lexiconFiles[name], "utf8"));
   return cache[name];
 }
 
