@@ -49,7 +49,7 @@ export default function GlobalAskButton() {
 
             <div className="px-4 pb-8">
               <Suspense fallback={null}>
-                <AskPanel />
+                <AskView compact />
               </Suspense>
             </div>
           </div>
