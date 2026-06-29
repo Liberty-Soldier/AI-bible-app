@@ -242,6 +242,9 @@ export default function ReadPage() {
   const [chapter, setChapter] = useState(1);
   const [quickJump, setQuickJump] = useState("");
 
+  const [pickerStep, setPickerStep] = useState<"section" | "book" | "chapter">(
+  "section"
+);
   const sectionBooks = books.filter((item) => getSection(item.book) === section);
   const selectedBook = books.find((item) => item.book === book);
 
@@ -253,14 +256,14 @@ export default function ReadPage() {
     }
   }, []);
 
-  useEffect(() => {
-    const firstBook = sectionBooks[0];
+useEffect(() => {
+  const firstBook = sectionBooks[0];
 
-    if (firstBook) {
-      setBook(firstBook.book);
-      setChapter(1);
-    }
-  }, [section, sectionBooks]);
+  if (firstBook) {
+    setBook(firstBook.book);
+    setChapter(1);
+  }
+}, [section]);
 
   function openChapter() {
     if (!book) return;
