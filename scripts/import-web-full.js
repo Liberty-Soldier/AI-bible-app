@@ -88,13 +88,29 @@ const bookMap = {
 
 function stripHtml(html) {
   return html
-    .replace(/<sup[^>]*>.*?<\/sup>/g, "")
-    .replace(/<span class="verse" id="V\d+">/g, "")
+    // remove WEB footnote/cross-reference blocks before removing tags
+    .replace(/<div class="footnotes">[\s\S]*?<\/div>/gi, "")
+    .replace(/<aside[\s\S]*?<\/aside>/gi, "")
+    .replace(/<sup[^>]*>[\s\S]*?<\/sup>/gi, "")
+    .replace(/<span class="footnote"[\s\S]*?<\/span>/gi, "")
+
+    // remove verse marker
+    .replace(/<span class="verse" id="V\d+">/gi, "")
+
+    // remove remaining html
     .replace(/<[^>]+>/g, "")
+
+    // decode common entities
     .replace(/&nbsp;/g, " ")
     .replace(/&quot;/g, '"')
     .replace(/&amp;/g, "&")
     .replace(/&#39;/g, "'")
+
+    // remove leftover footnote text that got captured inline
+    .replace(/\*\s*The Hebrew word rendered[^.]+?\./gi, "")
+    .replace(/\*\s*"Yahweh"[^.]+?\./gi, "")
+    .replace(/\*\s*or,?\s*[^.]+?\./gi, "")
+
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -128,27 +144,29 @@ const verseRegex =
 
     if (!text) continue;
 
-    const reference = `${book} ${chapter}:${verse}`;
-    const id = `${book.toLowerCase().replace(/\s+/g, "-")}-${chapter}-${verse}`;
+ const reference = `${book} ${chapter}:${verse}`;
+const id = `${book.toLowerCase().replace(/\s+/g, "-")}-${chapter}-${verse}`;
 
-    verses.push({
-      id,
-      book,
-      chapter,
-      verse,
-      reference,
-      sources: [
-        {
-          tradition: Object.keys(bookMap).indexOf(rawBook) >= Object.keys(bookMap).indexOf("MAT")
-  ? "new-testament"
-  : "masoretic",
-          label: rawBook >= "MAT" ? "New Testament" : "Masoretic / WEB",
-          sourceName: "World English Bible",
-          language: "english",
-          text,
-        },
-      ],
-    });
+const isNewTestament =
+  Object.keys(bookMap).indexOf(rawBook) >=
+  Object.keys(bookMap).indexOf("MAT");
+
+verses.push({
+  id,
+  book,
+  chapter,
+  verse,
+  reference,
+  sources: [
+    {
+      tradition: isNewTestament ? "new-testament" : "masoretic",
+      label: isNewTestament ? "New Testament" : "Masoretic / WEB",
+      sourceName: "World English Bible",
+      language: "english",
+      text,
+    },
+  ],
+});
   }
 }
 

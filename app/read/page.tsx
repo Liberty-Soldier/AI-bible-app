@@ -274,7 +274,7 @@ export default function ReadPage() {
     const value = quickJump.trim();
     if (!value) return;
 
-    const match = value.match(/^(.+?)\s*(\d+)(?::(\d+))?$/);
+    const match = value.match(/^(.+?)\s+(\d+)(?:(?::|\s+)(\d+))?$/);
 
     if (!match) return;
 
@@ -298,137 +298,153 @@ const found = books.find(
     );
   }
 
-  return (
-    <main className="min-h-screen bg-neutral-950 px-4 py-6 pb-24 text-white sm:px-6 sm:py-10">
-      <section className="mx-auto max-w-2xl">
-        <div className="mb-8">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-neutral-500">
-            Read
-          </p>
+ return (
+  <main className="min-h-screen bg-neutral-950 px-4 py-6 pb-24 text-white">
+    <section className="mx-auto max-w-2xl">
+      <div className="mb-6">
+        <p className="mb-3 text-sm uppercase tracking-[0.3em] text-neutral-500">
+          Read
+        </p>
+        <h1 className="text-4xl font-bold">Open Scripture</h1>
+        <p className="mt-3 text-neutral-400">
+          Jump straight to a passage or browse by section.
+        </p>
+      </div>
 
-          <h1 className="text-4xl font-bold sm:text-5xl">Open Scripture</h1>
+      {/* Quick Jump */}
+      <div className="mb-6 rounded-3xl border border-neutral-800 bg-neutral-900/70 p-4">
+        <label className="mb-2 block text-sm font-medium text-neutral-300">
+          Go to Scripture
+        </label>
 
-          <p className="mt-3 text-neutral-400">
-            Jump directly or choose a section, book, and chapter.
-          </p>
-        </div>
-
-        <div className="space-y-5 rounded-3xl border border-neutral-800 bg-neutral-950/60 p-5">
-          <div>
-            <label className="mb-2 block text-sm text-neutral-400">
-              Quick Jump
-            </label>
-
-            <div className="flex gap-2">
-              <input
-                value={quickJump}
-                onChange={(event) => setQuickJump(event.target.value)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") handleQuickJump();
-                }}
-                placeholder="Genesis 1, Isaiah 53, John 3:16, Tobit 4"
-                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-white outline-none"
-              />
-
-              <button
-                type="button"
-                onClick={handleQuickJump}
-                className="rounded-xl bg-white px-4 py-3 font-medium text-black"
-              >
-                Go
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm text-neutral-400">
-              Translation
-            </label>
-
-            <select
-              value={translation}
-              onChange={(event) => {
-                const next = event.target.value as Translation;
-                setTranslation(next);
-                localStorage.setItem("preferredTranslation", next);
-              }}
-              className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-white"
-            >
-              <option value="web">World English Bible</option>
-              <option value="kjv">King James Version</option>
-              <option value="brenton">Brenton Septuagint</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm text-neutral-400">
-              Section
-            </label>
-
-            <select
-              value={section}
-              onChange={(event) => setSection(event.target.value as Section)}
-              className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-white"
-            >
-              <option value="torah">Law (Torah)</option>
-              <option value="history">History</option>
-              <option value="wisdom">Wisdom</option>
-              <option value="prophets">Prophets</option>
-              <option value="septuagint">Septuagint Books</option>
-              <option value="new">New Testament</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm text-neutral-400">Book</label>
-
-            <select
-              value={book}
-              onChange={(event) => {
-                setBook(event.target.value);
-                setChapter(1);
-              }}
-              className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-white"
-            >
-              {sectionBooks.map((item) => (
-                <option key={item.book} value={item.book}>
-                  {item.book}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm text-neutral-400">
-              Chapter
-            </label>
-
-            <select
-              value={chapter}
-              onChange={(event) => setChapter(Number(event.target.value))}
-              className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-white"
-            >
-              {Array.from({ length: selectedBook?.chapters || 1 }).map(
-                (_, index) => (
-                  <option key={index + 1} value={index + 1}>
-                    {index + 1}
-                  </option>
-                )
-              )}
-            </select>
-          </div>
+        <div className="flex gap-2">
+          <input
+            value={quickJump}
+            onChange={(event) => setQuickJump(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") handleQuickJump();
+            }}
+            placeholder="John 3:16 or John 3 16"
+            className="w-full rounded-2xl border border-neutral-800 bg-neutral-950 px-4 py-3 text-white outline-none"
+          />
 
           <button
             type="button"
-            onClick={openChapter}
-            className="w-full rounded-xl bg-white px-4 py-3 font-semibold text-black"
+            onClick={handleQuickJump}
+            className="rounded-2xl bg-white px-5 py-3 font-semibold text-black"
           >
-            Open Chapter
+            Go
           </button>
         </div>
-      </section>
+      </div>
 
-      <MobileBottomNav />
-    </main>
-  );
+      {/* Translation */}
+      <div className="mb-6 flex gap-2 overflow-x-auto">
+        {[
+          ["web", "WEB"],
+          ["kjv", "KJV"],
+          ["brenton", "Brenton"],
+        ].map(([value, label]) => (
+          <button
+            key={value}
+            type="button"
+            onClick={() => {
+              const next = value as Translation;
+              setTranslation(next);
+              localStorage.setItem("preferredTranslation", next);
+            }}
+            className={`rounded-full px-4 py-2 text-sm font-medium ${
+              translation === value
+                ? "bg-white text-black"
+                : "bg-neutral-900 text-neutral-300"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {/* Sections */}
+      <div className="mb-5 grid grid-cols-2 gap-3">
+        {[
+          ["torah", "Torah"],
+          ["history", "History"],
+          ["wisdom", "Wisdom"],
+          ["prophets", "Prophets"],
+          ["septuagint", "Septuagint"],
+          ["new", "New Testament"],
+        ].map(([value, label]) => (
+          <button
+            key={value}
+            type="button"
+            onClick={() => setSection(value as Section)}
+            className={`rounded-2xl border p-4 text-left ${
+              section === value
+                ? "border-white bg-white text-black"
+                : "border-neutral-800 bg-neutral-900 text-white"
+            }`}
+          >
+            <span className="font-semibold">{label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Books */}
+      <div className="mb-6 grid grid-cols-2 gap-3">
+        {sectionBooks.map((item) => (
+          <button
+            key={item.book}
+            type="button"
+            onClick={() => {
+              setBook(item.book);
+              setChapter(1);
+            }}
+            className={`rounded-2xl border p-4 text-left ${
+              book === item.book
+                ? "border-amber-300 bg-amber-300 text-black"
+                : "border-neutral-800 bg-neutral-900 text-white"
+            }`}
+          >
+            <span className="font-semibold">{item.book}</span>
+            <span className="mt-1 block text-sm opacity-70">
+              {item.chapters} chapters
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* Chapters */}
+      <div className="mb-6">
+        <p className="mb-3 text-sm font-medium text-neutral-300">
+          Choose Chapter
+        </p>
+
+        <div className="grid grid-cols-6 gap-2">
+          {Array.from({ length: selectedBook?.chapters || 1 }).map(
+            (_, index) => {
+              const chapterNumber = index + 1;
+
+              return (
+                <button
+                  key={chapterNumber}
+                  type="button"
+                  onClick={() => {
+                    router.push(
+                      `/read/${encodeURIComponent(book)}/${chapterNumber}?translation=${translation}`
+                    );
+                  }}
+                  className="rounded-xl bg-neutral-900 py-3 text-sm font-semibold text-white"
+                >
+                  {chapterNumber}
+                </button>
+              );
+            }
+          )}
+        </div>
+      </div>
+    </section>
+
+    <MobileBottomNav />
+  </main>
+);
 }
