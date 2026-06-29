@@ -13,6 +13,7 @@ import MobileBottomNav from "@/app/components/MobileBottomNav";
 import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
 import SaveBibleIQContext from "@/app/components/SaveBibleIQContext";
 import ReaderWordStudyController from "@/app/components/ReaderWordStudyController";
+import ImmersiveReaderShell from "@/app/components/ImmersiveReaderShell";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -146,7 +147,7 @@ export default async function ReadChapterPage({
       : null;
 
   return (
-    <main className="min-h-screen bg-neutral-950 px-4 pb-24 text-white sm:px-6">
+    <main className="min-h-screen bg-[var(--background)] px-4 pb-20 text-[var(--foreground)] sm:px-6">
       <section className="mx-auto max-w-2xl">
         <VerseScroller verse={highlightedVerse} />
 
@@ -166,7 +167,7 @@ export default async function ReadChapterPage({
           translation={activeTranslation}
         />
 
-        <header className="sticky top-0 z-40 -mx-4 border-b border-neutral-900 bg-neutral-950/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6">
+        <header className="sticky top-0 z-40 -mx-4 border-b border-[var(--border)] bg-[var(--background)]/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0 flex-1">
               <CollapsibleReaderHeader
@@ -188,11 +189,11 @@ export default async function ReadChapterPage({
               </CollapsibleReaderHeader>
             </div>
 
-            <div className="shrink-0 rounded-full bg-neutral-900 p-1 text-xs">
+            <div className="shrink-0 rounded-full bg-[var(--surface)] p-1 text-xs">
               <Link
                 href={readModeHref}
                 className={`inline-block rounded-full px-3 py-1.5 ${
-                  !studyMode ? "bg-white text-black" : "text-neutral-400"
+                  !studyMode ? "bg-[var(--foreground)] text-[var(--background)]" : "text-[var(--muted)]"
                 }`}
               >
                 Read
@@ -201,7 +202,7 @@ export default async function ReadChapterPage({
               <Link
                 href={studyModeHref}
                 className={`inline-block rounded-full px-3 py-1.5 ${
-                  studyMode ? "bg-white text-black" : "text-neutral-400"
+                  studyMode ? "bg-[var(--foreground)] text-[var(--background)]" : "text-[var(--muted)]"
                 }`}
               >
                 Study
@@ -224,31 +225,31 @@ export default async function ReadChapterPage({
   </Link>
 ) : null}
             <div className="mb-10">
-              <p className="mb-2 text-xs uppercase tracking-[0.28em] text-neutral-600">
+              <p className="mb-2 text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
                 {translationLabel}
               </p>
 
-              <h1 className="text-4xl font-semibold tracking-tight text-white">
+              <h1 className="text-4xl font-semibold tracking-tight text-[var(--foreground)]">
                 {decodedBook} {chapterNumber}
               </h1>
             </div>
 
-            <div className="space-y-5 text-[1.18rem] leading-9 text-neutral-200 sm:text-xl sm:leading-10">
+            <div className="space-y-5 text-[1.18rem] leading-9 text-[var(--foreground)] sm:text-xl sm:leading-10">
               {chapterVerses.map((v) => {
                 const isHighlighted = highlightedVerse === v.verse;
                 const selectedText = v.sources[0]?.text || "";
 
                 const verseClassName = `group block rounded-xl py-1 transition ${
                   isHighlighted
-                    ? "bg-amber-500/10 px-3 text-white ring-1 ring-amber-400/20"
-                    : "hover:text-white"
+                  ? "bg-amber-500/10 px-3 text-[var(--foreground)] ring-1 ring-amber-400/20"
+: "hover:bg-[var(--surface)]"
                 }`;
 
                 const verseContent = (
                   <>
-                    <span className="mr-3 align-super text-xs font-semibold text-neutral-600 group-hover:text-neutral-400">
-                      {v.verse}
-                    </span>
+                    <span className="mr-3 align-super text-xs font-semibold text-[var(--muted)]">
+  {v.verse}
+</span>
 
                     <ScriptureText text={selectedText} studyMode={studyMode} />
                   </>
@@ -281,11 +282,11 @@ export default async function ReadChapterPage({
           </article>
         </ChapterSwipe>
 
-        <div className="mt-12 flex items-center justify-between gap-4 border-t border-neutral-900 pt-6">
+        <div className="mt-12 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-6">
           {previousChapterHref ? (
             <Link
               href={previousChapterHref}
-              className="text-sm text-neutral-500 hover:text-white"
+              className="text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
             >
               ← Previous
             </Link>
@@ -296,7 +297,7 @@ export default async function ReadChapterPage({
           {nextChapterHref ? (
             <Link
               href={nextChapterHref}
-              className="text-sm text-neutral-500 hover:text-white"
+              className="text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
             >
               Next →
             </Link>

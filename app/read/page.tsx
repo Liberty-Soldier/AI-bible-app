@@ -207,6 +207,36 @@ const septuagintBooks = new Set([
   "Daniel Greek",
 ]);
 
+const newTestamentBooks = new Set([
+  "Matthew",
+  "Mark",
+  "Luke",
+  "John",
+  "Acts",
+  "Romans",
+  "1 Corinthians",
+  "2 Corinthians",
+  "Galatians",
+  "Ephesians",
+  "Philippians",
+  "Colossians",
+  "1 Thessalonians",
+  "2 Thessalonians",
+  "1 Timothy",
+  "2 Timothy",
+  "Titus",
+  "Philemon",
+  "Hebrews",
+  "James",
+  "1 Peter",
+  "2 Peter",
+  "1 John",
+  "2 John",
+  "3 John",
+  "Jude",
+  "Revelation",
+]);
+
 function getBooksFromScripture(): BookInfo[] {
   const bookMap = new Map<string, number>();
 
@@ -227,8 +257,9 @@ function getSection(book: string): Section {
   if (wisdomBooks.has(book)) return "wisdom";
   if (prophetsBooks.has(book)) return "prophets";
   if (septuagintBooks.has(book)) return "septuagint";
+  if (newTestamentBooks.has(book)) return "new";
 
-  return "new";
+  return "septuagint";
 }
 
 export default function ReadPage() {
@@ -301,35 +332,34 @@ const found = books.find(
     );
   }
 
- return (
-  <main className="min-h-screen bg-neutral-950 px-4 py-6 pb-24 text-white">
+return (
+  <main className="min-h-screen bg-[var(--background)] px-4 py-6 pb-24 text-[var(--foreground)]">
     <section className="mx-auto max-w-2xl">
       <div className="mb-6">
-        <p className="mb-3 text-sm uppercase tracking-[0.3em] text-neutral-500">
+        <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[var(--muted)]">
           Read
         </p>
         <h1 className="text-4xl font-bold">Open Scripture</h1>
-        <p className="mt-3 text-neutral-400">
-          Jump straight to a passage or browse by section.
+        <p className="mt-3 text-[var(--muted)]">
+          Jump straight to a passage or tap through Scripture.
         </p>
       </div>
 
-      {/* Quick Jump */}
-      <div className="mb-6 rounded-3xl border border-neutral-800 bg-neutral-900/70 p-4">
-        <label className="mb-2 block text-sm font-medium text-neutral-300">
+      <div className="mb-6 rounded-3xl border border-[var(--border)] bg-[var(--surface)]/70 p-4">
+        <label className="mb-2 block text-sm font-medium text-[var(--muted)]">
           Go to Scripture
         </label>
 
         <div className="flex gap-2">
-          <input
-            value={quickJump}
-            onChange={(event) => setQuickJump(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") handleQuickJump();
-            }}
-            placeholder="John 3:16 or John 3 16"
-            className="w-full rounded-2xl border border-neutral-800 bg-neutral-950 px-4 py-3 text-white outline-none"
-          />
+<input
+  value={quickJump}
+  onChange={(event) => setQuickJump(event.target.value)}
+  onKeyDown={(event) => {
+    if (event.key === "Enter") handleQuickJump();
+  }}
+  placeholder="John 3:16 or John 3 16"
+  className="w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-[var(--foreground)] outline-none"
+/>
 
           <button
             type="button"
@@ -341,8 +371,7 @@ const found = books.find(
         </div>
       </div>
 
-      {/* Translation */}
-      <div className="mb-6 flex gap-2 overflow-x-auto">
+      <div className="mb-5 flex gap-2 overflow-x-auto">
         {[
           ["web", "WEB"],
           ["kjv", "KJV"],
@@ -358,8 +387,8 @@ const found = books.find(
             }}
             className={`rounded-full px-4 py-2 text-sm font-medium ${
               translation === value
-                ? "bg-white text-black"
-                : "bg-neutral-900 text-neutral-300"
+                ? "bg-[var(--foreground)] text-[var(--background)]"
+                : "bg-[var(--surface)] text-[var(--muted)]"
             }`}
           >
             {label}
@@ -367,83 +396,107 @@ const found = books.find(
         ))}
       </div>
 
-      {/* Sections */}
-      <div className="mb-5 grid grid-cols-2 gap-3">
-        {[
-          ["torah", "Torah"],
-          ["history", "History"],
-          ["wisdom", "Wisdom"],
-          ["prophets", "Prophets"],
-          ["septuagint", "Septuagint"],
-          ["new", "New Testament"],
-        ].map(([value, label]) => (
-          <button
-            key={value}
-            type="button"
-            onClick={() => setSection(value as Section)}
-            className={`rounded-2xl border p-4 text-left ${
-              section === value
-                ? "border-white bg-white text-black"
-                : "border-neutral-800 bg-neutral-900 text-white"
-            }`}
-          >
-            <span className="font-semibold">{label}</span>
-          </button>
-        ))}
-      </div>
+      <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4">
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <p className="text-sm text-[var(--muted)]">Choose passage</p>
+            <h2 className="text-xl font-bold">
+              {pickerStep === "section" && "Section"}
+              {pickerStep === "book" && "Book"}
+              {pickerStep === "chapter" && book}
+            </h2>
+          </div>
 
-      {/* Books */}
-      <div className="mb-6 grid grid-cols-2 gap-3">
-        {sectionBooks.map((item) => (
-          <button
-            key={item.book}
-            type="button"
-            onClick={() => {
-              setBook(item.book);
-              setChapter(1);
-            }}
-            className={`rounded-2xl border p-4 text-left ${
-              book === item.book
-                ? "border-amber-300 bg-amber-300 text-black"
-                : "border-neutral-800 bg-neutral-900 text-white"
-            }`}
-          >
-            <span className="font-semibold">{item.book}</span>
-            <span className="mt-1 block text-sm opacity-70">
-              {item.chapters} chapters
-            </span>
-          </button>
-        ))}
-      </div>
-
-      {/* Chapters */}
-      <div className="mb-6">
-        <p className="mb-3 text-sm font-medium text-neutral-300">
-          Choose Chapter
-        </p>
-
-        <div className="grid grid-cols-6 gap-2">
-          {Array.from({ length: selectedBook?.chapters || 1 }).map(
-            (_, index) => {
-              const chapterNumber = index + 1;
-
-              return (
-                <button
-                  key={chapterNumber}
-                  type="button"
-                  onClick={() => {
-                    router.push(
-                      `/read/${encodeURIComponent(book)}/${chapterNumber}?translation=${translation}`
-                    );
-                  }}
-                  className="rounded-xl bg-neutral-900 py-3 text-sm font-semibold text-white"
-                >
-                  {chapterNumber}
-                </button>
-              );
-            }
+          {pickerStep !== "section" && (
+            <button
+              type="button"
+              onClick={() => {
+                if (pickerStep === "chapter") setPickerStep("book");
+                else setPickerStep("section");
+              }}
+              className="rounded-full bg-[var(--surface)] px-4 py-2 text-sm text-[var(--muted)]"
+            >
+              Back
+            </button>
           )}
         </div>
+
+        {pickerStep === "section" && (
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              ["torah", "Torah", "Genesis–Deuteronomy"],
+              ["history", "History", "Joshua–Nehemiah"],
+              ["wisdom", "Wisdom", "Job–Song"],
+              ["prophets", "Prophets", "Isaiah–Malachi"],
+              ["septuagint", "Septuagint", "Greek books"],
+              ["new", "New Testament", "Matthew–Revelation"],
+            ].map(([value, label, helper]) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => {
+                  setSection(value as Section);
+                  setPickerStep("book");
+                }}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-left"
+              >
+                <span className="block font-semibold">{label}</span>
+                <span className="mt-1 block text-sm text-[var(--muted)]">
+                  {helper}
+                </span>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {pickerStep === "book" && (
+          <div className="grid grid-cols-2 gap-3">
+            {sectionBooks.map((item) => (
+              <button
+                key={item.book}
+                type="button"
+                onClick={() => {
+                  setBook(item.book);
+                  setChapter(1);
+                  setPickerStep("chapter");
+                }}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-left"
+              >
+                <span className="block font-semibold">{item.book}</span>
+                <span className="mt-1 block text-sm text-[var(--muted)]">
+                  {item.chapters} chapters
+                </span>
+              </button>
+            ))}
+          </div>
+        )}
+
+        {pickerStep === "chapter" && (
+          <div className="grid grid-cols-6 gap-2">
+            {Array.from({ length: selectedBook?.chapters || 1 }).map(
+              (_, index) => {
+                const chapterNumber = index + 1;
+
+                return (
+                  <button
+                    key={chapterNumber}
+                    type="button"
+                    onClick={() => {
+                      router.push(
+                        `/read/${encodeURIComponent(
+                          book
+                        )}/${chapterNumber}?translation=${translation}`
+                      );
+                    }}
+                    className="rounded-xl border border-[var(--border)] bg-[var(--surface-soft)] py-3 text-sm font-semibold text-[var(--foreground)]"
+                  >
+                    {chapterNumber}
+                  </button>
+                );
+              }
+            )}
+          </div>
+        )}
       </div>
     </section>
 
