@@ -169,56 +169,57 @@ export default async function ReadChapterPage({
           translation={activeTranslation}
         />
 
-        <header className="sticky top-0 z-40 -mx-4 border-b border-[var(--border)] bg-[var(--background)]/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6">
-          <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0 flex-1">
-             <CollapsibleReaderHeader
-  title={`${decodedBook} ${chapterNumber}`}
-  autoHide
->
-                <div className="space-y-4 pt-3">
-                  <SacredNameToggle />
+<ReaderStickyHeader>
+  <div className="flex items-center gap-3">
+    <div className="min-w-0 flex-1">
+      <CollapsibleReaderHeader title={`${decodedBook} ${chapterNumber}`}>
+        <div className="space-y-4 pt-3">
+          <SacredNameToggle />
 
-                  <ReaderSelector
-                    books={books}
-                    currentBook={decodedBook}
-                    currentChapter={chapterNumber}
-                    maxChapter={maxChapter}
-                    currentTranslation={activeTranslation}
-                    currentVerse={highlightedVerse}
-                    maxVerse={chapterVerses.length}
-                  />
-                </div>
-              </CollapsibleReaderHeader>
-            </div>
+          <ReaderSelector
+            books={books}
+            currentBook={decodedBook}
+            currentChapter={chapterNumber}
+            maxChapter={maxChapter}
+            currentTranslation={activeTranslation}
+            currentVerse={highlightedVerse}
+            maxVerse={chapterVerses.length}
+          />
+        </div>
+      </CollapsibleReaderHeader>
+    </div>
 
-            <div className="shrink-0 rounded-full bg-[var(--surface)] p-1 text-xs">
-              <Link
-                href={readModeHref}
-                className={`inline-block rounded-full px-3 py-1.5 ${
-                  !studyMode ? "bg-[var(--foreground)] text-[var(--background)]" : "text-[var(--muted)]"
-                }`}
-              >
-                Read
-              </Link>
+    <div className="shrink-0 rounded-full bg-[var(--surface)] p-1 text-xs font-semibold">
+      <Link
+        href={readModeHref}
+        className={`inline-block rounded-full px-3 py-1.5 ${
+          !studyMode
+            ? "bg-[var(--foreground)] text-[var(--background)]"
+            : "text-[var(--muted)]"
+        }`}
+      >
+        Read
+      </Link>
 
-              <Link
-                href={studyModeHref}
-                className={`inline-block rounded-full px-3 py-1.5 ${
-                  studyMode ? "bg-[var(--foreground)] text-[var(--background)]" : "text-[var(--muted)]"
-                }`}
-              >
-                Study
-              </Link>
-            </div>
-          </div>
-        </header>
+      <Link
+        href={studyModeHref}
+        className={`inline-block rounded-full px-3 py-1.5 ${
+          studyMode
+            ? "bg-[var(--foreground)] text-[var(--background)]"
+            : "text-[var(--muted)]"
+        }`}
+      >
+        Study
+      </Link>
+    </div>
+  </div>
+</ReaderStickyHeader>
 
         <ChapterSwipe
           previousChapterHref={previousChapterHref}
           nextChapterHref={nextChapterHref}
         >
-          <article className="pt-8">
+          <article className="pt-24">
             {returnTo ? (
   <Link
     href={returnTo}

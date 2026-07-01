@@ -168,7 +168,11 @@ useEffect(() => {
                 {v.verse}
               </span>
 
-              <ScriptureText text={selectedText} studyMode={studyMode} />
+             <ScriptureText
+  text={selectedText}
+  reference={v.reference}
+  studyMode={studyMode}
+/>
 
 {(isBookmarked || hasNote) && (
   <span className="ml-2 inline-flex align-middle text-xs text-[var(--muted)]">

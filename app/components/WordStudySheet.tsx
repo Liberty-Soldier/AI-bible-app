@@ -20,21 +20,34 @@ type BibleIQMatch = {
   shortDefinition?: string;
   occurrenceCount?: number;
   weight?: number;
-  occurrences?: {
-    book?: string;
-    chapter?: number;
-    verse?: number;
-    reference?: string;
-    word?: string;
-    surface?: string;
-  }[];
+  occurrences?: BibleIQOccurrence[];
+};
+
+type BibleIQOccurrence = {
+  book?: string;
+  chapter?: number;
+  verse?: number;
+  reference?: string;
+  word?: string;
+  surface?: string;
+};
+
+type BibleIQEntry = BibleIQMatch & {
+  displayWord?: string;
+  meaning?: string;
+  firstOccurrence?: BibleIQOccurrence | null;
+  relatedWords?: string[];
+  relatedConcepts?: string[];
+  evidence?: string[];
+  sources?: string[];
 };
 
 type BibleIQResponse = {
   query: string;
   concept?: string | null;
   strongs?: string[];
-  matches: BibleIQMatch[];
+  matches?: BibleIQMatch[];
+  entries?: BibleIQEntry[];
 };
 
 function parseOccurrenceReference(occurrence: {
@@ -81,6 +94,34 @@ function getOccurrenceTranslation(book: string) {
   ];
 
   return brentonOnlyBooks.includes(book) ? "brenton" : "web";
+}
+
+function buildOccurrenceHref(
+  occurrence: BibleIQOccurrence | null | undefined,
+  returnTo: string
+) {
+  if (!occurrence) return null;
+
+  const parsedOccurrence = parseOccurrenceReference(occurrence);
+  if (!parsedOccurrence) return null;
+
+  const rawBook = parsedOccurrence.book || "";
+  const normalizedBook = normalizeBookName(rawBook) || rawBook;
+
+  if (!normalizedBook) return null;
+
+  const occurrenceTranslation = getOccurrenceTranslation(normalizedBook);
+
+  const safeVerse =
+    parsedOccurrence.verse !== null && parsedOccurrence.verse !== undefined
+      ? parsedOccurrence.verse
+      : null;
+
+  return `/read/${encodeURIComponent(normalizedBook)}/${
+    parsedOccurrence.chapter
+  }?translation=${occurrenceTranslation}${
+    safeVerse ? `&verse=${safeVerse}` : ""
+  }&study=true&returnTo=${encodeURIComponent(returnTo)}`;
 }
 
 export default function WordStudySheet({ word, onClose }: WordStudySheetProps) {
@@ -145,8 +186,9 @@ export default function WordStudySheet({ word, onClose }: WordStudySheetProps) {
 
   if (!word) return null;
 
-  const matches = data?.matches || [];
-  const firstMatch = matches[0];
+const matches: BibleIQEntry[] =
+  data?.entries || (data?.matches as BibleIQEntry[]) || [];
+const firstMatch = matches[0];
 
   const relatedMatches = matches
     .slice(1)
@@ -159,6 +201,10 @@ export default function WordStudySheet({ word, onClose }: WordStudySheetProps) {
 
   const totalOccurrences = firstMatch?.occurrences?.length || 0;
   const hasMoreOccurrences = visibleOccurrenceCount < totalOccurrences;
+  const firstOccurrenceHref = buildOccurrenceHref(
+  firstMatch?.firstOccurrence,
+  returnTo
+);
 
   return (
     <div className="fixed inset-0 z-[70]">
@@ -183,9 +229,9 @@ export default function WordStudySheet({ word, onClose }: WordStudySheetProps) {
 
           <div className="mb-5 flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">
-                Word Study
-              </p>
+<p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--muted)]">
+  BibleIQ
+</p>
 
               <h2 className="mt-2 text-3xl font-bold">{word}</h2>
 
@@ -206,60 +252,93 @@ export default function WordStudySheet({ word, onClose }: WordStudySheetProps) {
           </div>
 
           <div className="space-y-4">
-            {loading ? (
-              <Card>
-                <p className="text-sm text-[var(--muted)]">
-                  Loading word study...
-                </p>
-              </Card>
-            ) : firstMatch ? (
-              <Card>
-                <p className="text-sm text-[var(--muted)]">Primary Match</p>
+{loading ? (
+  <Card>
+    <p className="text-sm text-[var(--muted)]">
+      Loading word study...
+    </p>
+  </Card>
+) : firstMatch ? (
+  <>
+    <Card>
+      <div className="space-y-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--muted)]">
+            Meaning
+          </p>
 
-                <p className="mt-2 text-2xl font-semibold">
-                  {firstMatch.lemma || word}
-                </p>
+          <h3 className="mt-3 text-2xl font-semibold">
+            {firstMatch.displayWord || firstMatch.lemma || word}
+          </h3>
 
-                {firstMatch.transliteration ? (
-                  <p className="mt-1 text-sm text-[var(--muted)]">
-                    {firstMatch.transliteration}
-                  </p>
-                ) : null}
+          {firstMatch.transliteration ? (
+            <p className="mt-1 text-base text-[var(--muted)]">
+              {firstMatch.transliteration}
+            </p>
+          ) : null}
+        </div>
 
-                <p className="mt-3 text-sm text-[var(--muted)]">
-                  {[firstMatch.language, firstMatch.corpus]
-                    .filter(Boolean)
-                    .join(" • ")}
-                </p>
+        <p className="text-base leading-7">
+          {firstMatch.meaning ||
+            firstMatch.shortDefinition ||
+            firstMatch.gloss ||
+            "No meaning available yet."}
+        </p>
 
-                {firstMatch.strong ? (
-                  <p className="mt-1 text-sm text-[var(--muted)]">
-                    Strong&apos;s: {firstMatch.strong}
-                  </p>
-                ) : null}
+        <div className="grid grid-cols-2 gap-3">
+          <InfoCard label="Strong's" value={firstMatch.strong || "—"} />
+          <InfoCard label="Language" value={firstMatch.language || "—"} />
+          <InfoCard label="Corpus" value={firstMatch.corpus || "—"} />
+          <InfoCard
+            label="Occurrences"
+            value={String(firstMatch.occurrenceCount || 0)}
+          />
+        </div>
+      </div>
+    </Card>
 
-                {firstMatch.shortDefinition || firstMatch.gloss ? (
-                  <p className="mt-3 text-sm leading-6">
-                    {firstMatch.shortDefinition || firstMatch.gloss}
-                  </p>
-                ) : null}
+    {firstMatch.firstOccurrence ? (
+      <Card>
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--muted)]">
+              First Occurrence
+            </p>
 
-                {firstMatch.occurrenceCount && firstMatch.occurrenceCount > 0 ? (
-                  <p className="mt-3 text-sm text-[var(--muted)]">
-                    Occurrences: {firstMatch.occurrenceCount}
-                  </p>
-                ) : null}
-              </Card>
-            ) : (
-              <Card>
-                <p className="text-sm text-[var(--muted)]">
-                  No word study match yet
-                </p>
-                <p className="mt-1 text-sm">
-                  This word may need direct lemma mapping or a concept alias.
-                </p>
-              </Card>
-            )}
+            <p className="mt-3 text-lg font-semibold">
+              {firstMatch.firstOccurrence.reference || "Reference"}
+            </p>
+
+            <p className="mt-1 text-sm text-[var(--muted)]">
+              {firstMatch.firstOccurrence.word ||
+                firstMatch.firstOccurrence.surface ||
+                firstMatch.displayWord ||
+                word}
+            </p>
+          </div>
+
+          {firstOccurrenceHref ? (
+            <Link
+              href={firstOccurrenceHref}
+              className="shrink-0 rounded-full border border-[var(--border)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
+            >
+              Open →
+            </Link>
+          ) : null}
+        </div>
+      </Card>
+    ) : null}
+  </>
+) : (
+  <Card>
+    <p className="text-sm text-[var(--muted)]">
+      No word study match yet
+    </p>
+    <p className="mt-1 text-sm">
+      This word may need direct lemma mapping or a concept alias.
+    </p>
+  </Card>
+)}
 
             {relatedMatches.length > 0 && expanded ? (
               <Card>
@@ -409,6 +488,25 @@ function Card({ children }: { children: React.ReactNode }) {
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
       {children}
+    </div>
+  );
+}
+function InfoCard({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="rounded-xl border border-[var(--border)] bg-[var(--background)] p-3">
+      <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+        {label}
+      </p>
+
+      <p className="mt-2 text-sm font-semibold">
+        {value}
+      </p>
     </div>
   );
 }

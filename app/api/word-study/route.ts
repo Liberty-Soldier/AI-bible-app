@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { sourceConcepts } from "../../../data/word-study/sourceConcepts";
 import wordStudyApi from "../../../data/word-study/generatedWordStudyApi.json";
+import {
+  normalizeBibleIQResult,
+} from "@/app/data/lexicon/BibleIQEngine";
 
 export const dynamic = "force-dynamic";
 
@@ -124,11 +127,20 @@ export async function GET(request: Request) {
     source = "english-gloss";
   }
 
-  return NextResponse.json({
-    query,
-    concept: concept?.label || null,
-    source,
-    strongs,
-    matches,
-  });
+const legacyResult = {
+  query,
+  concept: concept?.label || null,
+  source,
+  strongs,
+  matches,
+};
+
+const bibleIQResult = normalizeBibleIQResult(legacyResult);
+
+return NextResponse.json({
+  ...legacyResult,
+
+  // New BibleIQ engine shape.
+  entries: bibleIQResult.entries,
+});
 }

@@ -4,11 +4,21 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { renderSacredNames } from "../data/renderSacredNames";
 import { useSacredNames } from "../data/useSacredNames";
 
+function cleanVerseDisplayText(text: string) {
+  return text
+    .replace(/\bYahweh\*\s+[“"][^”"]+[”"]\s+is\s+[^.]+\.\s*/gi, "Yahweh ")
+    .replace(/\*/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export default function ScriptureText({
   text,
+  reference,
   studyMode = false,
 }: {
   text: string;
+  reference?: string;
   studyMode?: boolean;
 }) {
   const router = useRouter();
@@ -16,7 +26,11 @@ export default function ScriptureText({
   const searchParams = useSearchParams();
 
   const { sacredNames } = useSacredNames();
-  const renderedText = sacredNames ? renderSacredNames(text) : text;
+
+  const cleanedText = cleanVerseDisplayText(text);
+  const renderedText = sacredNames
+    ? renderSacredNames(cleanedText, reference)
+    : cleanedText;
 
   if (!studyMode) {
     return <>{renderedText}</>;
@@ -48,15 +62,11 @@ export default function ScriptureText({
       {parts.map((part, index) => {
         const isSpace = /^\s+$/.test(part);
 
-        if (isSpace) {
-          return part;
-        }
+        if (isSpace) return part;
 
         const cleanWord = cleanStudyWord(part);
 
-        if (!cleanWord) {
-          return part;
-        }
+        if (!cleanWord) return part;
 
         return (
           <button

@@ -11,11 +11,11 @@ export default function ReaderStickyHeader({
 
   return (
     <header
-      className={`sticky top-0 z-40 -mx-4 border-b border-[var(--border)] bg-[var(--background)]/95 px-4 py-2 backdrop-blur transition-transform duration-200 sm:-mx-6 sm:px-6 ${
+      className={`fixed left-0 right-0 top-0 z-40 border-b border-[var(--border)] bg-[var(--background)]/95 px-4 py-2 text-[var(--foreground)] backdrop-blur transition-transform duration-200 sm:px-6 ${
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      {children}
+      <div className="mx-auto max-w-2xl">{children}</div>
     </header>
   );
 }
