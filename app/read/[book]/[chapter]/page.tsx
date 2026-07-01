@@ -153,7 +153,11 @@ export default async function ReadChapterPage({
       <section className="mx-auto max-w-2xl">
         <VerseScroller verse={highlightedVerse} />
 
-        <ReaderWordStudyController />
+        <ReaderWordStudyController
+  book={decodedBook}
+  chapter={chapterNumber}
+  translation={activeTranslation}
+/>
 
         <SaveBibleIQContext
   book={decodedBook}

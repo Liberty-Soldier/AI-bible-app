@@ -7,6 +7,9 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 type WordStudySheetProps = {
   word: string | null;
+  book?: string;
+  chapter?: number;
+  translation?: string;
   onClose: () => void;
 };
 
@@ -124,7 +127,13 @@ function buildOccurrenceHref(
   }&study=true&returnTo=${encodeURIComponent(returnTo)}`;
 }
 
-export default function WordStudySheet({ word, onClose }: WordStudySheetProps) {
+export default function WordStudySheet({
+  word,
+  book,
+  chapter,
+  translation,
+  onClose,
+}: WordStudySheetProps) {
   const [data, setData] = useState<BibleIQResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -214,12 +223,12 @@ const firstMatch = matches[0];
         onClick={onClose}
       />
 
-      <section
-        className={`absolute bottom-0 left-0 right-0 rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
-          expanded ? "max-h-[88vh]" : "max-h-[62vh]"
-        }`}
-      >
-        <div className="mx-auto max-w-xl overflow-y-auto p-5">
+<section
+  className={`absolute bottom-0 left-0 right-0 rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
+    expanded ? "h-[88dvh]" : "h-[62dvh]"
+  }`}
+>
+  <div className="mx-auto h-full max-w-xl overflow-y-auto overscroll-contain p-5 pb-10">
           <button
             type="button"
             aria-label={expanded ? "Collapse word study" : "Expand word study"}

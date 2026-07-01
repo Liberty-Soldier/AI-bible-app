@@ -3,7 +3,15 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import WordStudySheet from "@/app/components/WordStudySheet";
 
-export default function ReaderWordStudyController() {
+export default function ReaderWordStudyController({
+  book,
+  chapter,
+  translation,
+}: {
+  book: string;
+  chapter: number;
+  translation: string;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -21,5 +29,13 @@ export default function ReaderWordStudyController() {
     });
   }
 
-  return <WordStudySheet word={selectedWord} onClose={closeWordStudy} />;
+  return (
+    <WordStudySheet
+      word={selectedWord}
+      book={book}
+      chapter={chapter}
+      translation={translation}
+      onClose={closeWordStudy}
+    />
+  );
 }
