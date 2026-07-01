@@ -133,9 +133,9 @@ function HomePage() {
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            <LibraryStat label="Bookmarks" value={memory.bookmarks.length} />
-            <LibraryStat label="Highlights" value={memory.highlights.length} />
-            <LibraryStat label="Notes" value={memory.notes.length} />
+<LibraryStat href="/library" label="Bookmarks" value={memory.bookmarks.length} />
+<LibraryStat href="/library" label="Highlights" value={memory.highlights.length} />
+<LibraryStat href="/library" label="Notes" value={memory.notes.length} />
           </div>
 
           {recentBookmarks.length > 0 ? (
@@ -209,12 +209,23 @@ function HomePage() {
   );
 }
 
-function LibraryStat({ label, value }: { label: string; value: number }) {
+function LibraryStat({
+  label,
+  value,
+  href,
+}: {
+  label: string;
+  value: number;
+  href: string;
+}) {
   return (
-    <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-center">
+    <Link
+      href={href}
+      className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-center"
+    >
       <p className="text-2xl font-semibold">{value}</p>
       <p className="mt-1 text-xs text-[var(--muted)]">{label}</p>
-    </div>
+    </Link>
   );
 }
 

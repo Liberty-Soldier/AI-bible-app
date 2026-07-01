@@ -15,6 +15,7 @@ import SaveBibleIQContext from "@/app/components/SaveBibleIQContext";
 import ReaderWordStudyController from "@/app/components/ReaderWordStudyController";
 import ImmersiveReaderShell from "@/app/components/ImmersiveReaderShell";
 import VerseActionController from "@/app/components/VerseActionController";
+import ReaderStickyHeader from "@/app/components/ReaderStickyHeader";
 
 type Translation = "web" | "kjv" | "brenton";
 
