@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { normalizeBookName } from "@/app/data/bookAliases";
 import { usePathname, useSearchParams } from "next/navigation";
 
@@ -20,7 +20,6 @@ type BibleIQMatch = {
   shortDefinition?: string;
   occurrenceCount?: number;
   weight?: number;
-  forms?: unknown[];
   occurrences?: {
     book?: string;
     chapter?: number;
@@ -55,14 +54,13 @@ function parseOccurrenceReference(occurrence: {
   if (!occurrence.reference) return null;
 
   const parts = occurrence.reference.split(".");
-
   if (parts.length < 3) return null;
 
   const book = occurrence.book || parts[0];
   const chapter = Number(parts[1]);
   const verse = Number(parts[2]);
 
-  if (!book || !chapter) return null;
+  if (!book || !Number.isFinite(chapter)) return null;
 
   return {
     book,
@@ -85,25 +83,28 @@ function getOccurrenceTranslation(book: string) {
   return brentonOnlyBooks.includes(book) ? "brenton" : "web";
 }
 
-export default function WordStudySheet({
-  word,
-  onClose,
-}: WordStudySheetProps) {
+export default function WordStudySheet({ word, onClose }: WordStudySheetProps) {
   const [data, setData] = useState<BibleIQResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [visibleOccurrenceCount, setVisibleOccurrenceCount] = useState(8);
 
   const pathname = usePathname();
-const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
 
-const returnTo = `${pathname}?${searchParams.toString()}`;
+  const returnTo = useMemo(() => {
+    const query = searchParams.toString();
+    return query ? `${pathname}?${query}` : pathname;
+  }, [pathname, searchParams]);
 
   useEffect(() => {
     setVisibleOccurrenceCount(8);
+    setExpanded(false);
   }, [word]);
 
   useEffect(() => {
     if (!word) return;
+    const activeWord = word;
 
     let cancelled = false;
 
@@ -113,7 +114,7 @@ const returnTo = `${pathname}?${searchParams.toString()}`;
 
       try {
         const response = await fetch(
-          `/api/word-study?q=${encodeURIComponent(word || "")}`
+          `/api/word-study?q=${encodeURIComponent(activeWord)}`
         );
 
         const json = (await response.json()) as BibleIQResponse;
@@ -124,7 +125,7 @@ const returnTo = `${pathname}?${searchParams.toString()}`;
       } catch {
         if (!cancelled) {
           setData({
-            query: word || "",
+            query: activeWord,
             matches: [],
           });
         }
@@ -147,208 +148,267 @@ const returnTo = `${pathname}?${searchParams.toString()}`;
   const matches = data?.matches || [];
   const firstMatch = matches[0];
 
-  const firstOccurrences =
-    firstMatch?.occurrences?.slice(0, visibleOccurrenceCount) || [];
+  const relatedMatches = matches
+    .slice(1)
+    .filter((match) => !("weight" in match) || Number(match.weight) >= 1000)
+    .slice(0, 6);
 
-    const occurrenceMatches = matches
-  .filter((match) => match.occurrences && match.occurrences.length > 0)
-  .slice(0, 3);
+  const occurrenceMatches = matches
+    .filter((match) => match.occurrences && match.occurrences.length > 0)
+    .slice(0, expanded ? 3 : 1);
 
   const totalOccurrences = firstMatch?.occurrences?.length || 0;
   const hasMoreOccurrences = visibleOccurrenceCount < totalOccurrences;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end bg-black/60">
+    <div className="fixed inset-0 z-[70]">
       <button
         aria-label="Close word study"
-        className="absolute inset-0"
+        className="absolute inset-0 bg-black/50"
         onClick={onClose}
       />
 
-      <section className="relative max-h-[85vh] w-full overflow-y-auto rounded-t-3xl border border-neutral-800 bg-neutral-950 p-6 text-white shadow-2xl">
-        <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-neutral-700" />
-
-        <div className="mb-5 flex items-start justify-between gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
-              BibleIQ Word Study
-            </p>
-
-            <h2 className="mt-2 text-3xl font-bold">{word}</h2>
-
-            {data?.concept ? (
-              <p className="mt-1 text-sm text-neutral-400">
-                Concept: {data.concept}
-              </p>
-            ) : null}
-          </div>
-
+      <section
+        className={`absolute bottom-0 left-0 right-0 rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
+          expanded ? "max-h-[88vh]" : "max-h-[62vh]"
+        }`}
+      >
+        <div className="mx-auto max-w-xl overflow-y-auto p-5">
           <button
             type="button"
-            onClick={onClose}
-            className="rounded-full border border-neutral-700 px-3 py-1 text-sm text-neutral-300"
-          >
-            Close
-          </button>
-        </div>
+            aria-label={expanded ? "Collapse word study" : "Expand word study"}
+            onClick={() => setExpanded((value) => !value)}
+            className="mx-auto mb-4 block h-1.5 w-12 rounded-full bg-[var(--border)]"
+          />
 
-        <div className="space-y-4 text-neutral-300">
-          <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-            <p className="text-sm text-neutral-500">Selected Word</p>
-            <p className="mt-1 text-xl text-white">{word}</p>
+          <div className="mb-5 flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-[var(--muted)]">
+                Word Study
+              </p>
+
+              <h2 className="mt-2 text-3xl font-bold">{word}</h2>
+
+              {data?.concept ? (
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  Concept: {data.concept}
+                </p>
+              ) : null}
+            </div>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-full border border-[var(--border)] px-3 py-1 text-sm text-[var(--muted)]"
+            >
+              Close
+            </button>
           </div>
 
-          {loading ? (
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-              <p className="text-sm text-neutral-400">
-                Loading BibleIQ study...
-              </p>
-            </div>
-          ) : firstMatch ? (
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-              <p className="text-sm text-neutral-500">Primary Match</p>
-
-              <p className="mt-2 text-2xl text-white">
-                {firstMatch.lemma || word}
-              </p>
-
-              {firstMatch.transliteration ? (
-                <p className="mt-1 text-sm text-neutral-400">
-                  {firstMatch.transliteration}
+          <div className="space-y-4">
+            {loading ? (
+              <Card>
+                <p className="text-sm text-[var(--muted)]">
+                  Loading word study...
                 </p>
-              ) : null}
+              </Card>
+            ) : firstMatch ? (
+              <Card>
+                <p className="text-sm text-[var(--muted)]">Primary Match</p>
 
-              <p className="mt-3 text-sm text-neutral-400">
-                {firstMatch.language} • {firstMatch.corpus}
-              </p>
-
-              {firstMatch.strong ? (
-                <p className="mt-1 text-sm text-neutral-400">
-                  Strong&apos;s: {firstMatch.strong}
+                <p className="mt-2 text-2xl font-semibold">
+                  {firstMatch.lemma || word}
                 </p>
-              ) : null}
 
-              {firstMatch.shortDefinition || firstMatch.gloss ? (
-                <p className="mt-3 text-sm leading-6 text-neutral-300">
-                  {firstMatch.shortDefinition || firstMatch.gloss}
+                {firstMatch.transliteration ? (
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    {firstMatch.transliteration}
+                  </p>
+                ) : null}
+
+                <p className="mt-3 text-sm text-[var(--muted)]">
+                  {[firstMatch.language, firstMatch.corpus]
+                    .filter(Boolean)
+                    .join(" • ")}
                 </p>
-              ) : null}
 
-{firstMatch.occurrenceCount && firstMatch.occurrenceCount > 0 ? (
-  <p className="mt-3 text-sm text-neutral-400">
-    Occurrences: {firstMatch.occurrenceCount}
-  </p>
-) : null}
-            </div>
-          ) : (
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-              <p className="text-sm text-neutral-500">No BibleIQ match yet</p>
-              <p className="mt-1">
-                This word may need direct lemma mapping or a concept alias.
-              </p>
-            </div>
-          )}
+                {firstMatch.strong ? (
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    Strong&apos;s: {firstMatch.strong}
+                  </p>
+                ) : null}
 
-          {matches.length > 1 ? (
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-              <p className="text-sm text-neutral-500">Related Matches</p>
+                {firstMatch.shortDefinition || firstMatch.gloss ? (
+                  <p className="mt-3 text-sm leading-6">
+                    {firstMatch.shortDefinition || firstMatch.gloss}
+                  </p>
+                ) : null}
 
-              <div className="mt-3 space-y-2">
-                {matches
-  .slice(1)
-  .filter((match) => !("weight" in match) || Number(match.weight) >= 1000)
-  .slice(0, 6)
-  .map((match, index) => (
-                  <div
-                    key={`${match.strong || match.lemma || index}-${index}`}
-                    className="rounded-xl border border-neutral-800 px-3 py-2"
-                  >
-                    <p className="text-sm text-white">
-                      {match.lemma || "Unknown"}{" "}
-                      {match.transliteration
-                        ? `• ${match.transliteration}`
-                        : ""}
-                    </p>
-                    <p className="mt-1 text-xs text-neutral-500">
-                      {match.strong} • {match.language} • {match.corpus}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : null}
+                {firstMatch.occurrenceCount && firstMatch.occurrenceCount > 0 ? (
+                  <p className="mt-3 text-sm text-[var(--muted)]">
+                    Occurrences: {firstMatch.occurrenceCount}
+                  </p>
+                ) : null}
+              </Card>
+            ) : (
+              <Card>
+                <p className="text-sm text-[var(--muted)]">
+                  No word study match yet
+                </p>
+                <p className="mt-1 text-sm">
+                  This word may need direct lemma mapping or a concept alias.
+                </p>
+              </Card>
+            )}
 
-{occurrenceMatches.length > 0 ? (
-  <div className="rounded-2xl border border-neutral-800 bg-neutral-900 p-4">
-    <p className="text-sm text-neutral-500">First Occurrences</p>
+            {relatedMatches.length > 0 && expanded ? (
+              <Card>
+                <p className="text-sm text-[var(--muted)]">Related Matches</p>
 
-    <div className="mt-4 space-y-5">
-      {occurrenceMatches.map((match, matchIndex) => (
-        <div key={`${match.strong || match.lemma || matchIndex}`}>
-          <p className="mb-2 text-sm font-semibold text-white">
-            {match.lemma || "Source word"}{" "}
-            {match.transliteration ? `• ${match.transliteration}` : ""}
-          </p>
-
-          <div className="space-y-2">
-            {(match.occurrences || [])
-              .slice(0, visibleOccurrenceCount)
-              .map((occurrence, index) => {
-                const label = `${occurrence.reference || "Reference"} — ${
-                  occurrence.word || occurrence.surface || ""
-                }`;
-
-                const parsedOccurrence = parseOccurrenceReference(occurrence);
-
-                if (!parsedOccurrence) {
-                  return (
+                <div className="mt-3 space-y-2">
+                  {relatedMatches.map((match, index) => (
                     <div
-                      key={`${occurrence.reference || index}-${index}`}
-                      className="rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300"
+                      key={`${match.strong || match.lemma || index}-${index}`}
+                      className="rounded-xl border border-[var(--border)] px-3 py-2"
                     >
-                      {label}
+                      <p className="text-sm font-semibold">
+                        {match.lemma || "Unknown"}{" "}
+                        {match.transliteration
+                          ? `• ${match.transliteration}`
+                          : ""}
+                      </p>
+
+                      <p className="mt-1 text-xs text-[var(--muted)]">
+                        {[match.strong, match.language, match.corpus]
+                          .filter(Boolean)
+                          .join(" • ")}
+                      </p>
                     </div>
-                  );
-                }
+                  ))}
+                </div>
+              </Card>
+            ) : null}
 
-                const normalizedBook = normalizeBookName(parsedOccurrence.book);
-                const occurrenceTranslation =
-                  getOccurrenceTranslation(normalizedBook);
+            {occurrenceMatches.length > 0 ? (
+              <Card>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm text-[var(--muted)]">
+                    First Occurrences
+                  </p>
 
-const href = `/read/${encodeURIComponent(
-  normalizedBook
-)}/${parsedOccurrence.chapter}?translation=${occurrenceTranslation}${
-  parsedOccurrence.verse ? `&verse=${parsedOccurrence.verse}` : ""
+                  {!expanded ? (
+                    <button
+                      type="button"
+                      onClick={() => setExpanded(true)}
+                      className="text-sm font-semibold text-[var(--foreground)]"
+                    >
+                      More
+                    </button>
+                  ) : null}
+                </div>
+
+                <div className="mt-4 space-y-5">
+                  {occurrenceMatches.map((match, matchIndex) => (
+                    <div key={`${match.strong || match.lemma || matchIndex}`}>
+                      {expanded ? (
+                        <p className="mb-2 text-sm font-semibold">
+                          {match.lemma || "Source word"}{" "}
+                          {match.transliteration
+                            ? `• ${match.transliteration}`
+                            : ""}
+                        </p>
+                      ) : null}
+
+                      <div className="space-y-2">
+                        {(match.occurrences || [])
+                          .slice(0, visibleOccurrenceCount)
+                          .map((occurrence, index) => {
+                            const label = `${
+                              occurrence.reference || "Reference"
+                            } — ${occurrence.word || occurrence.surface || ""}`;
+
+                            const parsedOccurrence =
+                              parseOccurrenceReference(occurrence);
+
+                            if (!parsedOccurrence) {
+                              return (
+                                <div
+                                  key={`${occurrence.reference || index}-${index}`}
+                                  className="rounded-xl border border-[var(--border)] px-3 py-2 text-sm"
+                                >
+                                  {label}
+                                </div>
+                              );
+                            }
+
+const rawBook = parsedOccurrence.book || "";
+
+const normalizedBook = normalizeBookName(rawBook) || rawBook;
+
+if (!normalizedBook) return null;
+
+const occurrenceTranslation = getOccurrenceTranslation(normalizedBook);
+
+const safeVerse =
+  parsedOccurrence.verse !== null && parsedOccurrence.verse !== undefined
+    ? parsedOccurrence.verse
+    : null;
+
+const href = `/read/${encodeURIComponent(normalizedBook)}/${
+  parsedOccurrence.chapter
+}?translation=${occurrenceTranslation}${
+  safeVerse ? `&verse=${safeVerse}` : ""
 }&study=true&returnTo=${encodeURIComponent(returnTo)}`;
 
-                return (
-                  <Link
-                    key={`${occurrence.reference || index}-${index}`}
-                    href={href}
-                    className="block rounded-xl border border-neutral-800 px-3 py-2 text-sm text-neutral-300 hover:border-neutral-600 hover:text-white"
+                            return (
+                              <Link
+                                key={`${occurrence.reference || index}-${index}`}
+                                href={href}
+                                className="block rounded-xl border border-[var(--border)] px-3 py-2 text-sm text-[var(--foreground)] hover:bg-[var(--surface)]"
+                              >
+                                {label}
+                              </Link>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {expanded && hasMoreOccurrences ? (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setVisibleOccurrenceCount((count) => count + 8)
+                    }
+                    className="mt-4 w-full rounded-xl border border-[var(--border)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
                   >
-                    {label}
-                  </Link>
-                );
-              })}
+                    Load More Occurrences
+                  </button>
+                ) : null}
+              </Card>
+            ) : null}
+
+            {!expanded ? (
+              <button
+                type="button"
+                onClick={() => setExpanded(true)}
+                className="w-full rounded-full border border-[var(--border)] py-3 text-sm font-semibold text-[var(--muted)]"
+              >
+                Swipe up / tap for deeper study
+              </button>
+            ) : null}
           </div>
         </div>
-      ))}
-    </div>
-
-    {hasMoreOccurrences ? (
-      <button
-        type="button"
-        onClick={() => setVisibleOccurrenceCount((count) => count + 8)}
-        className="mt-4 w-full rounded-xl border border-neutral-700 px-4 py-2 text-sm text-neutral-300 hover:border-neutral-500 hover:text-white"
-      >
-        Load More Occurrences
-      </button>
-    ) : null}
-  </div>
-) : null}
-        </div>
       </section>
+    </div>
+  );
+}
+
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+      {children}
     </div>
   );
 }

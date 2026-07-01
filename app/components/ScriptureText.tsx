@@ -24,8 +24,12 @@ export default function ScriptureText({
 
   const parts = renderedText.split(/(\s+)/);
 
+  function cleanStudyWord(word: string) {
+    return word.replace(/[.,;:!?()[\]{}"“”‘’]/g, "").trim();
+  }
+
   function openWordStudy(word: string) {
-    const cleanWord = word.replace(/[.,;:!?()[\]{}"“”‘’]/g, "");
+    const cleanWord = cleanStudyWord(word);
 
     if (!cleanWord) return;
 
@@ -34,7 +38,7 @@ export default function ScriptureText({
     params.set("study", "true");
     params.set("word", cleanWord);
 
-    router.push(`${pathname}?${params.toString()}`, {
+    router.replace(`${pathname}?${params.toString()}`, {
       scroll: false,
     });
   }
@@ -48,7 +52,11 @@ export default function ScriptureText({
           return part;
         }
 
-        const cleanWord = part.replace(/[.,;:!?()[\]{}"“”‘’]/g, "");
+        const cleanWord = cleanStudyWord(part);
+
+        if (!cleanWord) {
+          return part;
+        }
 
         return (
           <button
@@ -57,9 +65,9 @@ export default function ScriptureText({
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();
-              openWordStudy(cleanWord);
+              openWordStudy(part);
             }}
-            className="rounded px-0.5 underline decoration-neutral-700 decoration-dotted underline-offset-4 hover:text-amber-200"
+            className="rounded px-0.5 underline decoration-[var(--muted)] decoration-dotted underline-offset-4 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
           >
             {part}
           </button>

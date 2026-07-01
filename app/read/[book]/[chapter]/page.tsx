@@ -14,6 +14,7 @@ import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
 import SaveBibleIQContext from "@/app/components/SaveBibleIQContext";
 import ReaderWordStudyController from "@/app/components/ReaderWordStudyController";
 import ImmersiveReaderShell from "@/app/components/ImmersiveReaderShell";
+import VerseActionController from "@/app/components/VerseActionController";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -234,51 +235,12 @@ export default async function ReadChapterPage({
               </h1>
             </div>
 
-            <div className="space-y-5 text-[1.18rem] leading-9 text-[var(--foreground)] sm:text-xl sm:leading-10">
-              {chapterVerses.map((v) => {
-                const isHighlighted = highlightedVerse === v.verse;
-                const selectedText = v.sources[0]?.text || "";
-
-                const verseClassName = `group block rounded-xl py-1 transition ${
-                  isHighlighted
-                  ? "bg-amber-500/10 px-3 text-[var(--foreground)] ring-1 ring-amber-400/20"
-: "hover:bg-[var(--surface)]"
-                }`;
-
-                const verseContent = (
-                  <>
-                    <span className="mr-3 align-super text-xs font-semibold text-[var(--muted)]">
-  {v.verse}
-</span>
-
-                    <ScriptureText text={selectedText} studyMode={studyMode} />
-                  </>
-                );
-
-                if (studyMode) {
-                  return (
-                    <div
-                      id={`verse-${v.verse}`}
-                      key={`${v.id}-${activeTranslation}`}
-                      className={verseClassName}
-                    >
-                      {verseContent}
-                    </div>
-                  );
-                }
-
-                return (
-                  <Link
-                    id={`verse-${v.verse}`}
-                    key={`${v.id}-${activeTranslation}`}
-                    href={`/verse/${encodeURIComponent(v.reference)}`}
-                    className={verseClassName}
-                  >
-                    {verseContent}
-                  </Link>
-                );
-              })}
-            </div>
+<VerseActionController
+  verses={chapterVerses}
+  studyMode={studyMode}
+  activeTranslation={activeTranslation}
+  highlightedVerse={highlightedVerse}
+/>
           </article>
         </ChapterSwipe>
 
