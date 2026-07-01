@@ -38,9 +38,10 @@ export default function VerseActionSheet({
     return `${firstVerse.book} ${firstVerse.chapter}:${firstVerse.verse}-${lastVerse.verse}`;
   }, [firstVerse, lastVerse, verses.length]);
 
-  const selectedText = useMemo(() => {
-    return verses.map((v) => `${v.verse} ${v.text}`).join("\n");
-  }, [verses]);
+  const selectedText = useMemo(
+    () => verses.map((v) => `${v.verse} ${v.text}`).join("\n"),
+    [verses]
+  );
 
   const verseUrl =
     typeof window !== "undefined" && firstVerse
@@ -74,10 +75,7 @@ export default function VerseActionSheet({
 
   function showMessage(text: string) {
     setMessage(text);
-
-    window.setTimeout(() => {
-      setMessage("");
-    }, 1200);
+    window.setTimeout(() => setMessage(""), 1200);
   }
 
   async function copySelection() {
@@ -97,7 +95,6 @@ export default function VerseActionSheet({
           text: `${referenceLabel}\n\n${selectedText}`,
           url: verseUrl,
         });
-
         showMessage("Share opened");
         return;
       }
@@ -109,14 +106,7 @@ export default function VerseActionSheet({
     }
   }
 
-  function bookmarkSelection() {
-    const saved = toggleBookmarks(verses);
-    setBookmarked(saved);
-    emitMemoryChange();
-    showMessage(saved ? "Bookmark saved" : "Bookmark removed");
-  }
-
-  function highlightSelection(color: ReaderHighlight["color"] = "yellow") {
+  function highlightSelection(color: ReaderHighlight["color"]) {
     highlightVerses(verses, color);
     emitMemoryChange();
     showMessage("Highlighted");
@@ -126,6 +116,18 @@ export default function VerseActionSheet({
     removeHighlights(verses);
     emitMemoryChange();
     showMessage("Highlight removed");
+  }
+
+  function bookmarkSelection() {
+    const saved = toggleBookmarks(verses);
+    setBookmarked(saved);
+    emitMemoryChange();
+    showMessage(saved ? "Bookmark saved" : "Bookmark removed");
+  }
+
+  function openNoteEditor() {
+    setExpanded(true);
+    setNoteOpen(true);
   }
 
   function submitNote() {
@@ -157,8 +159,8 @@ export default function VerseActionSheet({
     const endY = event.changedTouches[0]?.clientY ?? touchStartY.current;
     const delta = touchStartY.current - endY;
 
-    if (delta > 24) setExpanded(true);
-    if (delta < -24) setExpanded(false);
+    if (delta > 20) setExpanded(true);
+    if (delta < -20) setExpanded(false);
 
     touchStartY.current = null;
   }
@@ -182,7 +184,7 @@ export default function VerseActionSheet({
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
         className={`pointer-events-auto absolute bottom-0 left-0 right-0 rounded-t-[1.75rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl transition-all duration-200 ${
-          expanded ? "h-[82vh]" : "h-[132px]"
+          expanded ? "h-[78dvh]" : "h-[178px]"
         }`}
       >
         <div className="flex h-full flex-col">
@@ -190,7 +192,7 @@ export default function VerseActionSheet({
             type="button"
             aria-label={expanded ? "Collapse actions" : "Expand actions"}
             onClick={() => setExpanded((value) => !value)}
-            className="mx-auto mt-3 h-2 w-16 rounded-full bg-[var(--border)]"
+            className="mx-auto mt-3 h-2 w-20 rounded-full bg-[var(--border)]"
           />
 
           <div className="mx-auto flex w-full max-w-xl flex-1 flex-col overflow-hidden px-4 pb-4 pt-2">
@@ -202,7 +204,7 @@ export default function VerseActionSheet({
                     : `${verses.length} verses selected`}
                 </p>
 
-                <h2 className="mt-0.5 truncate text-sm font-semibold">
+                <h2 className="truncate text-sm font-semibold">
                   {referenceLabel}
                 </h2>
               </div>
@@ -223,22 +225,76 @@ export default function VerseActionSheet({
             ) : null}
 
             {!expanded ? (
-              <div className="mt-2 grid grid-cols-5 gap-2">
-                <CompactButton onClick={() => highlightSelection("yellow")}>
-                  Yellow
-                </CompactButton>
-                <CompactButton onClick={copySelection}>Copy</CompactButton>
-                <CompactButton onClick={shareSelection}>Share</CompactButton>
-                <CompactButton onClick={() => setExpanded(true)}>
-                  Note
-                </CompactButton>
-                <CompactButton onClick={() => setExpanded(true)}>
-                  More
-                </CompactButton>
-              </div>
+              <>
+                <div className="mt-2 grid grid-cols-6 gap-2">
+                  <ColorButton
+                    label="Yellow"
+                    onClick={() => highlightSelection("yellow")}
+                    className="bg-amber-300"
+                  />
+                  <ColorButton
+                    label="Green"
+                    onClick={() => highlightSelection("green")}
+                    className="bg-emerald-300"
+                  />
+                  <ColorButton
+                    label="Blue"
+                    onClick={() => highlightSelection("blue")}
+                    className="bg-sky-300"
+                  />
+                  <ColorButton
+                    label="Pink"
+                    onClick={() => highlightSelection("pink")}
+                    className="bg-pink-300"
+                  />
+                  <ColorButton
+                    label="Purple"
+                    onClick={() => highlightSelection("purple")}
+                    className="bg-purple-300"
+                  />
+                  <button
+                    type="button"
+                    onClick={clearHighlightSelection}
+                    className="min-h-9 rounded-xl border border-[var(--border)] text-[0.65rem] font-semibold text-[var(--muted)]"
+                  >
+                    Clear
+                  </button>
+                </div>
+
+                <div className="mt-2 grid grid-cols-5 gap-2">
+                  <CompactButton onClick={copySelection}>Copy</CompactButton>
+                  <CompactButton onClick={shareSelection}>Share</CompactButton>
+                  <CompactButton onClick={bookmarkSelection}>
+                    {bookmarked ? "Unmark" : "Mark"}
+                  </CompactButton>
+                  <CompactButton onClick={openNoteEditor}>Note</CompactButton>
+                  <CompactButton onClick={() => setExpanded(true)}>
+                    More
+                  </CompactButton>
+                </div>
+              </>
             ) : (
               <div className="mt-3 flex-1 overflow-y-auto overscroll-contain pb-6">
-                <div className="rounded-2xl bg-[var(--surface)] p-3 text-xs leading-5">
+                {noteOpen ? (
+                  <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3">
+                    <textarea
+                      value={noteText}
+                      onChange={(event) => setNoteText(event.target.value)}
+                      placeholder="Write a note..."
+                      className="min-h-28 w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--background)] p-3 text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={submitNote}
+                      className="mt-3 w-full rounded-full bg-[var(--foreground)] py-3 text-sm font-semibold text-[var(--background)]"
+                    >
+                      Save Note
+                    </button>
+                  </div>
+                ) : null}
+
+                <div className="mt-3 rounded-2xl bg-[var(--surface)] p-3 text-xs leading-5">
                   {selectedText}
                 </div>
 
@@ -286,42 +342,19 @@ export default function VerseActionSheet({
                 <div className="mt-4 grid grid-cols-2 gap-2">
                   <ActionButton onClick={copySelection}>Copy</ActionButton>
                   <ActionButton onClick={shareSelection}>Share</ActionButton>
-
                   <ActionButton onClick={bookmarkSelection}>
                     {bookmarked ? "Remove Bookmark" : "Bookmark"}
                   </ActionButton>
-
-                  <ActionButton onClick={() => setNoteOpen((value) => !value)}>
+                  <ActionButton onClick={() => setNoteOpen((v) => !v)}>
                     Note
                   </ActionButton>
-
                   <ActionButton onClick={() => placeholder("Ask Scripture")}>
                     Ask Scripture
                   </ActionButton>
-
                   <ActionButton onClick={() => placeholder("Compare")}>
                     Compare
                   </ActionButton>
                 </div>
-
-                {noteOpen ? (
-                  <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3">
-                    <textarea
-                      value={noteText}
-                      onChange={(event) => setNoteText(event.target.value)}
-                      placeholder="Write a note..."
-                      className="min-h-24 w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--background)] p-3 text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
-                    />
-
-                    <button
-                      type="button"
-                      onClick={submitNote}
-                      className="mt-3 w-full rounded-full bg-[var(--foreground)] py-3 text-sm font-semibold text-[var(--background)]"
-                    >
-                      Save Note
-                    </button>
-                  </div>
-                ) : null}
               </div>
             )}
           </div>
@@ -382,7 +415,7 @@ function ColorButton({
       aria-label={label}
       title={label}
       onClick={onClick}
-      className={`min-h-10 rounded-xl border border-black/10 ${className}`}
+      className={`min-h-9 rounded-xl border border-black/10 ${className}`}
     />
   );
 }

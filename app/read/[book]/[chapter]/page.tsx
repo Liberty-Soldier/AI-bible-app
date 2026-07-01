@@ -171,9 +171,10 @@ export default async function ReadChapterPage({
         <header className="sticky top-0 z-40 -mx-4 border-b border-[var(--border)] bg-[var(--background)]/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <CollapsibleReaderHeader
-                title={`${decodedBook} ${chapterNumber}`}
-              >
+             <CollapsibleReaderHeader
+  title={`${decodedBook} ${chapterNumber}`}
+  autoHide
+>
                 <div className="space-y-4 pt-3">
                   <SacredNameToggle />
 
@@ -269,7 +270,7 @@ export default async function ReadChapterPage({
         </div>
       </section>
 
-      <MobileBottomNav />
+      <MobileBottomNav autoHide />
     </main>
   );
 }
