@@ -157,137 +157,195 @@ export default function VerseActionSheet({
     const endY = event.changedTouches[0]?.clientY ?? touchStartY.current;
     const delta = touchStartY.current - endY;
 
-    if (delta > 35) setExpanded(true);
-    if (delta < -35) setExpanded(false);
+    if (delta > 24) setExpanded(true);
+    if (delta < -24) setExpanded(false);
 
     touchStartY.current = null;
   }
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[80]">
+    <div
+      className={`fixed inset-0 z-[80] ${
+        expanded ? "pointer-events-auto" : "pointer-events-none"
+      }`}
+    >
+      {expanded ? (
+        <button
+          type="button"
+          aria-label="Dismiss verse actions"
+          onClick={onClose}
+          className="absolute inset-0 bg-black/35"
+        />
+      ) : null}
+
       <section
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
-        className={`pointer-events-auto absolute bottom-0 left-0 right-0 rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl transition-all duration-200 ${
-          expanded ? "max-h-[88vh]" : "max-h-[145px]"
+        className={`pointer-events-auto absolute bottom-0 left-0 right-0 rounded-t-[1.75rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl transition-all duration-200 ${
+          expanded ? "h-[82vh]" : "h-[132px]"
         }`}
       >
-        <div className="mx-auto max-w-xl overflow-y-auto p-4">
+        <div className="flex h-full flex-col">
           <button
             type="button"
             aria-label={expanded ? "Collapse actions" : "Expand actions"}
             onClick={() => setExpanded((value) => !value)}
-            className="mx-auto mb-3 block h-1.5 w-12 rounded-full bg-[var(--border)]"
+            className="mx-auto mt-3 h-2 w-16 rounded-full bg-[var(--border)]"
           />
 
-          <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">
-                {verses.length === 1
-                  ? "1 verse selected"
-                  : `${verses.length} verses selected`}
-              </p>
-
-              <h2 className="mt-0.5 truncate text-sm font-semibold">
-                {referenceLabel}
-              </h2>
-            </div>
-
-            <button
-              type="button"
-              onClick={onClose}
-              className="shrink-0 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold text-[var(--muted)]"
-            >
-              Clear
-            </button>
-          </div>
-
-          {message ? (
-            <div className="mt-3 rounded-full bg-[var(--surface)] px-4 py-2 text-center text-sm font-semibold">
-              {message}
-            </div>
-          ) : null}
-
-          <div className="mt-3 grid grid-cols-4 gap-2">
-            <ActionButton onClick={() => highlightSelection("yellow")}>
-              Highlight
-            </ActionButton>
-
-            <ActionButton onClick={copySelection}>Copy</ActionButton>
-
-            <ActionButton onClick={shareSelection}>Share</ActionButton>
-
-            <ActionButton onClick={() => setExpanded(true)}>More</ActionButton>
-          </div>
-
-          {expanded ? (
-            <div className="pb-3">
-              <div className="mt-5 max-h-40 overflow-y-auto rounded-2xl bg-[var(--surface)] p-4 text-sm leading-6">
-                {selectedText}
-              </div>
-
-              <div className="mt-4">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">
-                  Highlight Color
+          <div className="mx-auto flex w-full max-w-xl flex-1 flex-col overflow-hidden px-4 pb-4 pt-2">
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+                  {verses.length === 1
+                    ? "1 verse selected"
+                    : `${verses.length} verses selected`}
                 </p>
 
-                <div className="grid grid-cols-6 gap-2">
-                  <ColorButton label="Yellow" onClick={() => highlightSelection("yellow")} className="bg-amber-300" />
-                  <ColorButton label="Green" onClick={() => highlightSelection("green")} className="bg-emerald-300" />
-                  <ColorButton label="Blue" onClick={() => highlightSelection("blue")} className="bg-sky-300" />
-                  <ColorButton label="Pink" onClick={() => highlightSelection("pink")} className="bg-pink-300" />
-                  <ColorButton label="Purple" onClick={() => highlightSelection("purple")} className="bg-purple-300" />
-                  <button
-                    type="button"
-                    onClick={clearHighlightSelection}
-                    className="min-h-10 rounded-xl border border-[var(--border)] text-xs font-semibold text-[var(--muted)]"
-                  >
-                    Clear
-                  </button>
-                </div>
+                <h2 className="mt-0.5 truncate text-sm font-semibold">
+                  {referenceLabel}
+                </h2>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <ActionButton onClick={() => setNoteOpen((value) => !value)}>
-                  Add Note
-                </ActionButton>
-
-                <ActionButton onClick={bookmarkSelection}>
-                  {bookmarked ? "Remove Bookmark" : "Bookmark"}
-                </ActionButton>
-
-                <ActionButton onClick={() => placeholder("Ask Scripture")}>
-                  Ask Scripture
-                </ActionButton>
-
-                <ActionButton onClick={() => placeholder("Compare")}>
-                  Compare
-                </ActionButton>
-              </div>
-
-              {noteOpen ? (
-                <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3">
-                  <textarea
-                    value={noteText}
-                    onChange={(event) => setNoteText(event.target.value)}
-                    placeholder="Write a note..."
-                    className="min-h-28 w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--background)] p-3 text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={submitNote}
-                    className="mt-3 w-full rounded-full bg-[var(--foreground)] py-3 text-sm font-semibold text-[var(--background)]"
-                  >
-                    Save Note
-                  </button>
-                </div>
-              ) : null}
+              <button
+                type="button"
+                onClick={onClose}
+                className="shrink-0 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold text-[var(--muted)]"
+              >
+                Clear
+              </button>
             </div>
-          ) : null}
+
+            {message ? (
+              <div className="mt-2 rounded-full bg-[var(--surface)] px-3 py-1.5 text-center text-xs font-semibold">
+                {message}
+              </div>
+            ) : null}
+
+            {!expanded ? (
+              <div className="mt-2 grid grid-cols-5 gap-2">
+                <CompactButton onClick={() => highlightSelection("yellow")}>
+                  Yellow
+                </CompactButton>
+                <CompactButton onClick={copySelection}>Copy</CompactButton>
+                <CompactButton onClick={shareSelection}>Share</CompactButton>
+                <CompactButton onClick={() => setExpanded(true)}>
+                  Note
+                </CompactButton>
+                <CompactButton onClick={() => setExpanded(true)}>
+                  More
+                </CompactButton>
+              </div>
+            ) : (
+              <div className="mt-3 flex-1 overflow-y-auto overscroll-contain pb-6">
+                <div className="rounded-2xl bg-[var(--surface)] p-3 text-xs leading-5">
+                  {selectedText}
+                </div>
+
+                <div className="mt-4">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+                    Highlight
+                  </p>
+
+                  <div className="grid grid-cols-6 gap-2">
+                    <ColorButton
+                      label="Yellow"
+                      onClick={() => highlightSelection("yellow")}
+                      className="bg-amber-300"
+                    />
+                    <ColorButton
+                      label="Green"
+                      onClick={() => highlightSelection("green")}
+                      className="bg-emerald-300"
+                    />
+                    <ColorButton
+                      label="Blue"
+                      onClick={() => highlightSelection("blue")}
+                      className="bg-sky-300"
+                    />
+                    <ColorButton
+                      label="Pink"
+                      onClick={() => highlightSelection("pink")}
+                      className="bg-pink-300"
+                    />
+                    <ColorButton
+                      label="Purple"
+                      onClick={() => highlightSelection("purple")}
+                      className="bg-purple-300"
+                    />
+                    <button
+                      type="button"
+                      onClick={clearHighlightSelection}
+                      className="min-h-10 rounded-xl border border-[var(--border)] text-xs font-semibold text-[var(--muted)]"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  <ActionButton onClick={copySelection}>Copy</ActionButton>
+                  <ActionButton onClick={shareSelection}>Share</ActionButton>
+
+                  <ActionButton onClick={bookmarkSelection}>
+                    {bookmarked ? "Remove Bookmark" : "Bookmark"}
+                  </ActionButton>
+
+                  <ActionButton onClick={() => setNoteOpen((value) => !value)}>
+                    Note
+                  </ActionButton>
+
+                  <ActionButton onClick={() => placeholder("Ask Scripture")}>
+                    Ask Scripture
+                  </ActionButton>
+
+                  <ActionButton onClick={() => placeholder("Compare")}>
+                    Compare
+                  </ActionButton>
+                </div>
+
+                {noteOpen ? (
+                  <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3">
+                    <textarea
+                      value={noteText}
+                      onChange={(event) => setNoteText(event.target.value)}
+                      placeholder="Write a note..."
+                      className="min-h-24 w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--background)] p-3 text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={submitNote}
+                      className="mt-3 w-full rounded-full bg-[var(--foreground)] py-3 text-sm font-semibold text-[var(--background)]"
+                    >
+                      Save Note
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </div>
+  );
+}
+
+function CompactButton({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="min-h-9 rounded-xl bg-[var(--surface)] px-2 text-center text-[0.7rem] font-semibold text-[var(--foreground)] active:scale-[0.98]"
+    >
+      {children}
+    </button>
   );
 }
 
