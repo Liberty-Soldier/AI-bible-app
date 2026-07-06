@@ -2,12 +2,13 @@
   "name": "ai-bible-app",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
+"scripts": {
+  "prebuild": "node scripts/split-scripture-runtime.js",
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "eslint"
+},
   "dependencies": {
     "fast-xml-parser": "^5.9.2",
     "next": "16.2.7",
