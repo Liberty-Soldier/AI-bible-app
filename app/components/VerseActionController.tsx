@@ -143,12 +143,11 @@ useEffect(() => {
           const hasNote = (noteByVerseId.get(v.id) || []).length > 0;
 
           return (
-            <button
-              id={`verse-${v.verse}`}
-              key={`${v.id}-${activeTranslation}`}
-              type="button"
-              onClick={() => toggleVerse(v)}
-              className={`group block w-full rounded-xl px-2 py-1 text-left transition ${
+<div
+  id={`verse-${v.verse}`}
+  key={`${v.id}-${activeTranslation}`}
+  onClick={() => toggleVerse(v)}
+  className={`group block w-full rounded-xl px-2 py-1 text-left transition cursor-pointer ${
                 isSelected
                   ? "bg-[var(--foreground)]/10 ring-1 ring-[var(--foreground)]/20"
                   : isHighlightedFromUrl
@@ -180,7 +179,7 @@ useEffect(() => {
     {hasNote ? " 📝" : ""}
   </span>
 )}
-            </button>
+            </div>
           );
         })}
       </div>

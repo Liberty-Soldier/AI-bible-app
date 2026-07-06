@@ -12,6 +12,23 @@ function cleanVerseDisplayText(text: string) {
     .trim();
 }
 
+function cleanStudyWord(word: string) {
+  return word.replace(/[.,;:!?()[\]{}"“”‘’]/g, "").trim();
+}
+
+function parseReference(reference?: string) {
+  if (!reference) return null;
+
+  const match = reference.match(/^(.+?)\s+(\d+):(\d+)$/);
+  if (!match) return null;
+
+  return {
+    book: match[1],
+    chapter: Number(match[2]),
+    verse: Number(match[3]),
+  };
+}
+
 export default function ScriptureText({
   text,
   reference,
@@ -32,17 +49,16 @@ export default function ScriptureText({
     ? renderSacredNames(cleanedText, reference)
     : cleanedText;
 
+  const parsedReference = parseReference(reference);
+
   if (!studyMode) {
     return <>{renderedText}</>;
   }
 
   const parts = renderedText.split(/(\s+)/);
+  let displayTokenIndex = 0;
 
-  function cleanStudyWord(word: string) {
-    return word.replace(/[.,;:!?()[\]{}"“”‘’]/g, "").trim();
-  }
-
-  function openWordStudy(word: string) {
+  function openWordStudy(word: string, tokenIndex: number) {
     const cleanWord = cleanStudyWord(word);
 
     if (!cleanWord) return;
@@ -51,6 +67,14 @@ export default function ScriptureText({
 
     params.set("study", "true");
     params.set("word", cleanWord);
+    params.set("displayTokenIndex", String(tokenIndex));
+    params.set("selectedText", cleanWord);
+    params.set("verseText", renderedText);
+    params.delete("verse");
+
+    if (parsedReference?.verse) {
+      params.set("verse", String(parsedReference.verse));
+    }
 
     router.replace(`${pathname}?${params.toString()}`, {
       scroll: false,
@@ -68,6 +92,9 @@ export default function ScriptureText({
 
         if (!cleanWord) return part;
 
+        const tokenIndex = displayTokenIndex;
+        displayTokenIndex += 1;
+
         return (
           <button
             key={`${part}-${index}`}
@@ -75,7 +102,7 @@ export default function ScriptureText({
             onClick={(event) => {
               event.preventDefault();
               event.stopPropagation();
-              openWordStudy(part);
+              openWordStudy(part, tokenIndex);
             }}
             className="rounded px-0.5 underline decoration-[var(--muted)] decoration-dotted underline-offset-4 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
           >

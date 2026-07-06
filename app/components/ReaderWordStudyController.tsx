@@ -17,10 +17,22 @@ export default function ReaderWordStudyController({
   const searchParams = useSearchParams();
 
   const selectedWord = searchParams.get("word");
+  const selectedVerse = searchParams.get("verse");
+  const selectedText = searchParams.get("selectedText");
+  const originalWord = searchParams.get("originalWord");
+  const displayTokenIndex = searchParams.get("displayTokenIndex");
+  const verseText = searchParams.get("verseText");
 
   function closeWordStudy() {
     const params = new URLSearchParams(searchParams.toString());
+
     params.delete("word");
+    params.delete("verse");
+    params.delete("selectedText");
+    params.delete("originalWord");
+    params.delete("displayTokenIndex");
+    params.delete("verseText");
+    params.delete("wordOccurrence");
 
     const query = params.toString();
 
@@ -34,7 +46,14 @@ export default function ReaderWordStudyController({
       word={selectedWord}
       book={book}
       chapter={chapter}
+      verse={selectedVerse ? Number(selectedVerse) : undefined}
       translation={translation}
+      displayTokenIndex={
+        displayTokenIndex !== null ? Number(displayTokenIndex) : undefined
+      }
+      selectedText={selectedText || undefined}
+      originalWord={originalWord || undefined}
+      verseText={verseText || undefined}
       onClose={closeWordStudy}
     />
   );

@@ -1,5 +1,3 @@
-import hebrewLemmaIndexJson from "./generatedHebrewLemmaIndex.json";
-
 export type HebrewLemmaEntry = {
   testament: string;
   language: string;
@@ -15,8 +13,15 @@ export type HebrewLemmaEntry = {
   }[];
 };
 
-const hebrewLemmaIndex = hebrewLemmaIndexJson as HebrewLemmaEntry[];
-
-export function findHebrewLemma(lemma: string) {
-  return hebrewLemmaIndex.find((entry) => entry.lemma === lemma) || null;
+/**
+ * Retired.
+ *
+ * Hebrew lemma lookup now comes from the BibleIQ
+ * canonical evidence pipeline rather than loading a
+ * massive runtime JSON index.
+ */
+export function findHebrewLemma(
+  _lemma: string
+): HebrewLemmaEntry | null {
+  return null;
 }

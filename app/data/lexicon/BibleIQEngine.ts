@@ -1,92 +1,216 @@
-export type BibleIQOccurrence = {
-  book?: string;
-  chapter?: number;
-  verse?: number;
-  reference?: string;
-  word?: string;
-  surface?: string;
-};
+import {
+  findCanonicalHit,
+  loadEntityFromCanonicalHit,
+} from "@/app/data/scripture/CanonicalVerseStore";
 
-export type BibleIQEntry = {
-  strong?: string;
-  lemma?: string;
-  transliteration?: string;
-  pronunciation?: string;
-  language?: string;
-  corpus?: string;
-  gloss?: string;
-  definition?: string;
-  shortDefinition?: string;
-  occurrenceCount?: number;
-  weight?: number;
-  occurrences?: BibleIQOccurrence[];
+import type {
+  BibleIQEntity,
+  BibleIQRequest,
+  BibleIQResponse,
+  BibleIQSource,
+} from "./BibleIQTypes";
 
-  displayWord: string;
-  meaning: string;
-  firstOccurrence?: BibleIQOccurrence | null;
-  relatedWords: string[];
-  relatedConcepts: string[];
-  evidence: string[];
-  sources: string[];
-};
+function normalize(value: string) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .toLowerCase()
+    .trim();
+}
 
-export type BibleIQResult = {
-  query: string;
-  concept?: string | null;
-  source?: "concept" | "strong" | "english-gloss";
-  strongs?: string[];
-  entries: BibleIQEntry[];
-};
+function isNewTestament(book: string) {
+  const ntBooks = new Set([
+    "Matthew",
+    "Mark",
+    "Luke",
+    "John",
+    "Acts",
+    "Romans",
+    "1 Corinthians",
+    "2 Corinthians",
+    "Galatians",
+    "Ephesians",
+    "Philippians",
+    "Colossians",
+    "1 Thessalonians",
+    "2 Thessalonians",
+    "1 Timothy",
+    "2 Timothy",
+    "Titus",
+    "Philemon",
+    "Hebrews",
+    "James",
+    "1 Peter",
+    "2 Peter",
+    "1 John",
+    "2 John",
+    "3 John",
+    "Jude",
+    "Revelation",
+  ]);
 
-export function normalizeBibleIQEntry(match: any, query: string): BibleIQEntry {
-  const occurrences = Array.isArray(match.occurrences)
-    ? match.occurrences
-    : [];
+  return ntBooks.has(book);
+}
 
-  const meaning =
-    match.shortDefinition ||
-    match.definition ||
-    match.gloss ||
-    "No short meaning is available yet.";
+function determinePreferredSource(input: BibleIQRequest): BibleIQSource {
+  const translation = normalize(input.translation);
 
+  if (isNewTestament(input.book)) return "greek-nt";
+
+  if (
+    translation.includes("brenton") ||
+    translation.includes("septuagint") ||
+    translation.includes("lxx")
+  ) {
+    return "lxx";
+  }
+
+  return "hebrew";
+}
+
+function unresolved(
+  input: BibleIQRequest,
+  preferredSource: BibleIQSource
+): BibleIQResponse {
   return {
-    ...match,
-    displayWord: match.lemma || query,
-    meaning,
-    firstOccurrence: occurrences[0] || null,
-    relatedWords: [],
-    relatedConcepts: [],
-    evidence: buildEvidence(match),
-    sources: match.sources || [],
-    occurrences,
+    resolved: false,
+    resolutionType: "unresolved",
+    preferredSource,
+    query: input.displayWord,
+    message: "BibleIQ could not resolve this word from canonical verse context yet.",
   };
 }
 
-export function normalizeBibleIQResult(apiResult: any): BibleIQResult {
-  const query = String(apiResult?.query || "");
+function buildPlaceholderEntity(
+  input: BibleIQRequest,
+  preferredSource: BibleIQSource
+): BibleIQEntity {
+  const title = input.displayWord.trim();
 
   return {
-    query,
-    concept: apiResult?.concept || null,
-    source: apiResult?.source,
-    strongs: apiResult?.strongs || [],
-    entries: Array.isArray(apiResult?.matches)
-      ? apiResult.matches.map((match: any) =>
-          normalizeBibleIQEntry(match, query)
-        )
-      : [],
+    id: `${preferredSource}:${input.book}:${input.chapter}:${input.verse}:${normalize(
+      title
+    )}`,
+    type: "word",
+    title,
+    subtitle: "BibleIQ Evidence",
+
+    simple: {
+      meaning: undefined,
+      inThisVerse: input.verseText
+        ? `This word appears in ${input.book} ${input.chapter}:${input.verse}.`
+        : "This word appears in the selected verse.",
+      whyItMatters:
+        "BibleIQ is preparing the source-language evidence for this word.",
+      summary:
+        "This word has not been connected to the canonical source-language verse model yet.",
+    },
+
+    evidence: {
+      originalLanguage: input.originalWord
+        ? {
+            source: preferredSource,
+            word: input.originalWord,
+          }
+        : undefined,
+
+      firstMention: undefined,
+      keyReferences: [`${input.book} ${input.chapter}:${input.verse}`],
+
+      related: {
+        people: [],
+        places: [],
+        concepts: [],
+        events: [],
+      },
+
+      occurrences: [
+        {
+          reference: `${input.book} ${input.chapter}:${input.verse}`,
+          book: input.book,
+          chapter: input.chapter,
+          verse: input.verse,
+          englishText: input.verseText || "",
+          sourceWord: input.originalWord,
+          source: preferredSource,
+        },
+      ],
+    },
   };
 }
 
-function buildEvidence(match: any) {
-  const evidence: string[] = [];
+export function resolveBibleIQ(input: BibleIQRequest): BibleIQResponse {
+  console.log("BibleIQ Request", {
+    book: input.book,
+    chapter: input.chapter,
+    verse: input.verse,
+    displayWord: input.displayWord,
+    displayTokenIndex: input.displayTokenIndex,
+    selectedText: input.selectedText,
+    originalWord: input.originalWord,
+    translation: input.translation,
+  });
 
-  if (match.strong) evidence.push(`Strong's ${match.strong}`);
-  if (match.language) evidence.push(match.language);
-  if (match.corpus) evidence.push(match.corpus);
+  const preferredSource = determinePreferredSource(input);
 
-  const count = Number(match.occurrenceCount || 0);
-  if (count > 0) evidence.push(`${count} occurrences`);
+  if (!input.displayWord?.trim()) {
+    return unresolved(input, preferredSource);
+  }
 
-  return evidence;
+  const hit = findCanonicalHit({
+    translation: input.translation,
+    book: input.book,
+    chapter: input.chapter,
+    verse: input.verse,
+    displayTokenIndex: input.displayTokenIndex,
+  });
+
+  if (hit) {
+    const entity = loadEntityFromCanonicalHit(hit);
+
+    if (entity) {
+      return {
+        resolved: true,
+        resolutionType: "verse-context",
+        preferredSource,
+        query: input.displayWord,
+        entity: {
+          ...entity,
+          simple: {
+            ...entity.simple,
+            inThisVerse: input.verseText
+              ? `${entity.title || input.displayWord} is the source-aligned word behind "${input.displayWord}" in ${input.book} ${input.chapter}:${input.verse}.`
+              : entity.simple.inThisVerse,
+          },
+          evidence: {
+            ...entity.evidence,
+            originalLanguage: entity.evidence.originalLanguage
+              ? {
+                  ...entity.evidence.originalLanguage,
+                  word:
+                    hit.sourceWord ||
+                    entity.evidence.originalLanguage.word,
+                  strong: entity.evidence.originalLanguage.strong,
+                }
+              : undefined,
+          },
+        },
+      };
+    }
+  }
+
+  const entity = buildPlaceholderEntity(input, preferredSource);
+
+  return {
+    resolved: true,
+    resolutionType: "unresolved",
+    preferredSource,
+    query: input.displayWord,
+    entity,
+  };
 }
+
+export const BibleIQEngine = {
+  resolve: resolveBibleIQ,
+};

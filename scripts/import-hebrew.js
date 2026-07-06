@@ -153,3 +153,18 @@ fs.writeFileSync(outputFile, output, "utf8");
 console.log(
   `Generated ${allVerses.length} Hebrew verses at ${outputFile}`
 );
+const jsonOutputFile = path.join(
+  process.cwd(),
+  "app",
+  "data",
+  "scripture",
+  "generatedHebrew.json"
+);
+
+fs.writeFileSync(
+  jsonOutputFile,
+  JSON.stringify(allVerses, null, 2),
+  "utf8"
+);
+
+console.log(`Generated Hebrew JSON at ${jsonOutputFile}`);

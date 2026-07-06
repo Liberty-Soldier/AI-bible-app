@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { allScripture } from "@/app/data/scripture/allScripture";
+import { bookCatalog } from "@/app/data/scripture/bookCatalog";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 
 type Translation = "web" | "kjv" | "brenton";
@@ -238,17 +238,7 @@ const newTestamentBooks = new Set([
 ]);
 
 function getBooksFromScripture(): BookInfo[] {
-  const bookMap = new Map<string, number>();
-
-  for (const verse of allScripture) {
-    const currentMax = bookMap.get(verse.book) || 0;
-    bookMap.set(verse.book, Math.max(currentMax, verse.chapter));
-  }
-
-  return Array.from(bookMap.entries()).map(([book, chapters]) => ({
-    book,
-    chapters,
-  }));
+  return bookCatalog;
 }
 
 function getSection(book: string): Section {

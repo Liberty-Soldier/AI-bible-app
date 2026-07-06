@@ -1,5 +1,3 @@
-import greekNTLemmaIndexJson from "./generatedGreekNTLemmaIndex.json";
-
 export type GreekNTLemmaEntry = {
   testament: string;
   language: string;
@@ -15,8 +13,15 @@ export type GreekNTLemmaEntry = {
   }[];
 };
 
-const greekNTLemmaIndex = greekNTLemmaIndexJson as GreekNTLemmaEntry[];
-
-export function findGreekNTLemma(strongs: string) {
-  return greekNTLemmaIndex.find((entry) => entry.strongs === strongs) || null;
+/**
+ * Retired.
+ *
+ * NT lemma lookup now comes from the BibleIQ
+ * canonical evidence pipeline rather than loading
+ * a massive runtime JSON index.
+ */
+export function findGreekNTLemma(
+  _strongs: string
+): GreekNTLemmaEntry | null {
+  return null;
 }
