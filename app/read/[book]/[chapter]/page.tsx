@@ -12,6 +12,8 @@ import ReaderWordStudyController from "@/app/components/ReaderWordStudyControlle
 import VerseActionController from "@/app/components/VerseActionController";
 import ReaderStickyHeader from "@/app/components/ReaderStickyHeader";
 import { bookCatalog } from "../../../data/scripture/bookCatalog";
+import fs from "fs";
+import path from "path";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -39,27 +41,19 @@ async function loadChapter(
   book: string,
   chapter: number
 ): Promise<ReaderVerse[]> {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
+  const filePath = path.join(
+    process.cwd(),
+    "public",
+    "scripture",
+    "runtime",
+    translation,
+    safeBook(book),
+    `${chapter}.json`
+  );
 
-  const url = `${baseUrl}/scripture/runtime/${translation}/${safeBook(
-    book
-  )}/${chapter}.json`;
+  if (!fs.existsSync(filePath)) return [];
 
-  try {
-    const response = await fetch(url, {
-      cache: "force-cache",
-    });
-
-    if (!response.ok) return [];
-
-    return (await response.json()) as ReaderVerse[];
-  } catch {
-    return [];
-  }
+  return JSON.parse(fs.readFileSync(filePath, "utf8")) as ReaderVerse[];
 }
 
 function getTranslationLabel(translation: Translation) {
