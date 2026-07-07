@@ -35,6 +35,13 @@ function copyCorpus(corpus) {
 }
 
 function main() {
+  if (!fs.existsSync(inputRoot)) {
+    console.log(
+      "No .private canonical source found. Keeping committed canonical runtime."
+    );
+    return;
+  }
+
   cleanDir(outputRoot);
 
   const hebrewCount = copyCorpus("hebrew");
