@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
 "scripts": {
-  "prebuild": "node scripts/split-scripture-runtime.js && node scripts/export-bibleiq-runtime-entities.js"
+  "prebuild": "node scripts/split-scripture-runtime.js && node scripts/export-bibleiq-runtime-entities.js",
   "dev": "next dev",
   "build": "next build",
   "start": "next start",
