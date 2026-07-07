@@ -1,6 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 
+const {
+  cleanText,
+  stripStrongPrefix,
+  toStrong,
+  unique,
+} = require("./bibleiq/text-utils");
+const { buildOccurrences } = require("./bibleiq/build-occurrences");
+const { buildSimple, isProperName } = require("./bibleiq/build-simple");
+const { buildContextConnections } = require("./bibleiq/build-context");
+
 const root = process.cwd();
 
 const hebrewLexiconPath = path.join(
@@ -27,6 +37,14 @@ const outputPath = path.join(
   "generatedBibleIQEntities.json"
 );
 
+const runtimeEntityRoot = path.join(
+  root,
+  "app",
+  "data",
+  "bibleiq",
+  "entities"
+);
+
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing required build-time file: ${filePath}`);
@@ -35,72 +53,40 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
-function cleanDefinition(value) {
-  return String(value || "")
-    .replace(/\s+/g, " ")
-    .trim();
+function safePathPart(value) {
+  return String(value || "").replace(/[^A-Za-z0-9_-]/g, "");
 }
 
-function stripStrongPrefix(value) {
-  return String(value || "").replace(/^H/i, "").trim();
+function writeJson(filePath, value) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, JSON.stringify(value, null, 2));
 }
 
-function toStrong(value) {
-  const num = stripStrongPrefix(value);
-  return num ? `H${num}` : "";
-}
+function writeRuntimeEntity(entity) {
+  const cleanId = entity.id.startsWith("word:")
+    ? entity.id.replace(/^word:/, "")
+    : entity.id;
 
-function formatReference(ref) {
-  return String(ref || "").replaceAll(".", " ");
-}
+  const [source, strong] = cleanId.split(":");
 
-function parseReference(ref) {
-  const [book = "", chapter = "0", verse = "0"] = String(ref || "").split(".");
+  if (!source || !strong) return false;
 
-  return {
-    book,
-    chapter: Number(chapter || 0),
-    verse: Number(verse || 0),
-  };
-}
-
-function firstSentence(value) {
-  const text = cleanDefinition(value);
-  if (!text) return "";
-
-  const match = text.match(/^(.{20,220}?[.!?])\s/);
-  return match ? match[1].trim() : text.slice(0, 220).trim();
-}
-
-function buildMeaning(lex) {
-  return (
-    cleanDefinition(lex.shortDefinition) ||
-    cleanDefinition(lex.usage) ||
-    firstSentence(lex.fullDefinition) ||
-    cleanDefinition(lex.gloss) ||
-    "Meaning pending."
+  const filePath = path.join(
+    runtimeEntityRoot,
+    safePathPart(source),
+    `${safePathPart(strong)}.json`
   );
+
+  writeJson(filePath, entity);
+  return true;
 }
 
-function buildOccurrences(lemmaEntry) {
-  const occurrences = Array.isArray(lemmaEntry?.occurrences)
-    ? lemmaEntry.occurrences
-    : [];
+function clearRuntimeEntities() {
+  const hebrewDir = path.join(runtimeEntityRoot, "hebrew");
 
-  return occurrences.slice(0, 100).map((occurrence) => {
-    const parsed = parseReference(occurrence.reference);
-
-    return {
-      reference: formatReference(occurrence.reference),
-      book: parsed.book || occurrence.book || "",
-      chapter: parsed.chapter,
-      verse: parsed.verse,
-      englishText: "",
-      sourceWord: occurrence.surface || "",
-      source: "hebrew",
-      morph: occurrence.morph || undefined,
-    };
-  });
+  if (fs.existsSync(hebrewDir)) {
+    fs.rmSync(hebrewDir, { recursive: true, force: true });
+  }
 }
 
 function buildEntity(lex, lemmaEntry) {
@@ -111,32 +97,34 @@ function buildEntity(lex, lemmaEntry) {
 
   const occurrences = buildOccurrences(lemmaEntry);
   const firstOccurrence = occurrences[0]?.reference;
+  const properName = isProperName(lex, lemmaEntry);
 
-  const meaning = buildMeaning(lex);
-  const partOfSpeech = lex.partOfSpeech ? ` Part of speech: ${lex.partOfSpeech}.` : "";
   const forms = Array.isArray(lex.forms)
-    ? lex.forms.slice(0, 5).map(([form]) => form).filter(Boolean)
+    ? lex.forms.slice(0, 8).map(([form]) => form).filter(Boolean)
     : [];
+
+  const simple = buildSimple({
+    lex,
+    lemma,
+    strong,
+    occurrenceCount,
+    occurrences,
+    properName,
+  });
 
   return {
     id: `word:hebrew:${strong}`,
     type: "word",
     title: lemma,
-    subtitle: `${strong} • Hebrew word`,
+    subtitle: `${strong} • Hebrew ${properName ? "name" : "word"}`,
 
-    simple: {
-      meaning,
-      inThisVerse:
-        `The selected word is tied to ${lemma} (${strong}) in the Hebrew source text.${partOfSpeech}`,
-      whyItMatters:
-        occurrenceCount > 1
-          ? `This word appears ${occurrenceCount} times in the Hebrew Bible, so BibleIQ can compare how Scripture uses it across multiple passages.`
-          : "This word is connected to the original Hebrew source text, so BibleIQ can explain it from the underlying word rather than only the English translation.",
-      summary:
-        `${lemma}${lex.transliteration ? ` (${lex.transliteration})` : ""} means ${meaning}${
-          firstOccurrence ? ` First listed occurrence: ${firstOccurrence}.` : ""
-        }`,
-    },
+    simple,
+
+    contextConnections: buildContextConnections({
+      lemma,
+      properName,
+      occurrences,
+    }),
 
     evidence: {
       originalLanguage: {
@@ -152,15 +140,18 @@ function buildEntity(lex, lemmaEntry) {
       },
 
       definitions: {
-        short: cleanDefinition(lex.shortDefinition),
-        usage: cleanDefinition(lex.usage),
-        full: cleanDefinition(lex.fullDefinition),
-        rootNote: cleanDefinition(lex.sourceRootNote),
+        short: cleanText(lex.shortDefinition),
+        usage: cleanText(lex.usage),
+        full: cleanText(lex.fullDefinition),
+        rootNote: cleanText(lex.sourceRootNote),
         sources: Array.isArray(lex.sources) ? lex.sources : [],
       },
 
       firstMention: firstOccurrence,
-      keyReferences: occurrences.slice(0, 8).map((item) => item.reference),
+      keyReferences: unique(occurrences.map((item) => item.reference)).slice(
+        0,
+        8
+      ),
 
       related: {
         people: [],
@@ -188,34 +179,49 @@ function main() {
 
   const entities = {};
 
-  for (const lex of Object.values(hebrewLexicon || {})) {
-    const strong = toStrong(lex.strong || lex.normalizedLemma);
-    const lemmaNumber = stripStrongPrefix(strong);
+clearRuntimeEntities();
 
-    if (!strong || !lemmaNumber) continue;
+for (const lex of Object.values(hebrewLexicon || {})) {
+  const strong = toStrong(lex.strong || lex.normalizedLemma);
+  const lemmaNumber = stripStrongPrefix(strong);
 
-    const lemmaEntry = lemmaByNumber.get(lemmaNumber);
-    const entity = buildEntity(lex, lemmaEntry);
+  if (!strong || !lemmaNumber) continue;
 
-    entities[entity.id] = entity;
+  const lemmaEntry = lemmaByNumber.get(lemmaNumber);
+  const entity = buildEntity(lex, lemmaEntry);
+
+  entities[entity.id] = entity;
+}
+
+let runtimeEntityCount = 0;
+
+for (const entity of Object.values(entities)) {
+  if (writeRuntimeEntity(entity)) {
+    runtimeEntityCount++;
   }
+}
 
   const output = {
-    version: 2,
+    version: 5,
     generatedAt: new Date().toISOString(),
     sourceFiles: [
       "generatedHebrewLexiconV12.json",
       "generatedHebrewLemmaIndex.json",
+      "generatedWEB.json",
+      "generatedKJV.json",
     ],
     entityCount: Object.keys(entities).length,
+    runtimeEntityCount,
+    runtimeEntityRoot: "app/data/bibleiq/entities",
     entities,
   };
 
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
+  writeJson(outputPath, output);
 
-  console.log(`Generated ${output.entityCount} rich BibleIQ entities`);
+  console.log(`Generated ${output.entityCount} BibleIQ entities`);
+  console.log(`Wrote ${runtimeEntityCount} runtime split entities`);
   console.log(outputPath);
+  console.log(runtimeEntityRoot);
 }
 
 main();

@@ -32,6 +32,15 @@ export type BibleIQOccurrence = {
   source: BibleIQSource;
 };
 
+export type BibleIQContextConnections = {
+  people: string[];
+  places: string[];
+  events: string[];
+  concepts: string[];
+  themes: string[];
+  laterReferences: string[];
+};
+
 export type BibleIQEntity = {
   id: string;
   type: BibleIQEntityType;
@@ -40,18 +49,33 @@ export type BibleIQEntity = {
 
   simple: {
     meaning?: string;
+    biblicalBackground?: string;
     inThisVerse: string;
     whyItMatters: string;
     summary: string;
   };
+
+  contextConnections?: BibleIQContextConnections;
 
   evidence: {
     originalLanguage?: {
       source: BibleIQSource;
       word: string;
       transliteration?: string;
+      pronunciation?: string;
       strong?: string;
       lemmaId?: string;
+      partOfSpeech?: string;
+      forms?: string[];
+      morphs?: [string, number][];
+    };
+
+    definitions?: {
+      short?: string;
+      usage?: string;
+      full?: string;
+      rootNote?: string;
+      sources?: string[];
     };
 
     firstMention?: string;
@@ -64,6 +88,7 @@ export type BibleIQEntity = {
       events: string[];
     };
 
+    occurrenceCount?: number;
     occurrences: BibleIQOccurrence[];
   };
 };
