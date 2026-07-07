@@ -1,7 +1,4 @@
-import {
-  findCanonicalHit,
-  loadEntityFromCanonicalHit,
-} from "@/app/data/scripture/CanonicalVerseStore";
+import { findCanonicalHit } from "@/app/data/scripture/CanonicalVerseStore";
 
 import type {
   BibleIQEntity,
@@ -19,8 +16,39 @@ function normalize(value: string) {
     .trim();
 }
 
+function safeEntityIdPart(value: string) {
+  return String(value || "").replace(/[^A-Za-z0-9_-]/g, "");
+}
+
+function entityPublicPath(entityId: string) {
+  const cleanId = entityId.startsWith("word:")
+    ? entityId.replace(/^word:/, "")
+    : entityId;
+
+  const [source, strong] = cleanId.split(":");
+
+  if (!source || !strong) return null;
+
+  return `/data/bibleiq/entities/${safeEntityIdPart(source)}/${safeEntityIdPart(
+    strong
+  )}.json`;
+}
+
+async function loadEntity(entityId: string, origin: string) {
+  const publicPath = entityPublicPath(entityId);
+  if (!publicPath) return null;
+
+  const response = await fetch(`${origin}${publicPath}`, {
+    cache: "force-cache",
+  });
+
+  if (!response.ok) return null;
+
+  return (await response.json()) as BibleIQEntity;
+}
+
 function isNewTestament(book: string) {
-  const ntBooks = new Set([
+  return new Set([
     "Matthew",
     "Mark",
     "Luke",
@@ -48,9 +76,7 @@ function isNewTestament(book: string) {
     "3 John",
     "Jude",
     "Revelation",
-  ]);
-
-  return ntBooks.has(book);
+  ]).has(book);
 }
 
 function determinePreferredSource(input: BibleIQRequest): BibleIQSource {
@@ -140,18 +166,10 @@ function buildPlaceholderEntity(
   };
 }
 
-export function resolveBibleIQ(input: BibleIQRequest): BibleIQResponse {
-  console.log("BibleIQ Request", {
-    book: input.book,
-    chapter: input.chapter,
-    verse: input.verse,
-    displayWord: input.displayWord,
-    displayTokenIndex: input.displayTokenIndex,
-    selectedText: input.selectedText,
-    originalWord: input.originalWord,
-    translation: input.translation,
-  });
-
+export async function resolveBibleIQ(
+  input: BibleIQRequest,
+  origin: string
+): Promise<BibleIQResponse> {
   const preferredSource = determinePreferredSource(input);
 
   if (!input.displayWord?.trim()) {
@@ -167,7 +185,7 @@ export function resolveBibleIQ(input: BibleIQRequest): BibleIQResponse {
   });
 
   if (hit) {
-    const entity = loadEntityFromCanonicalHit(hit);
+    const entity = await loadEntity(hit.entityId, origin);
 
     if (entity) {
       return {
@@ -177,20 +195,12 @@ export function resolveBibleIQ(input: BibleIQRequest): BibleIQResponse {
         query: input.displayWord,
         entity: {
           ...entity,
-          simple: {
-            ...entity.simple,
-            inThisVerse: input.verseText
-              ? `${entity.title || input.displayWord} is the source-aligned word behind "${input.displayWord}" in ${input.book} ${input.chapter}:${input.verse}.`
-              : entity.simple.inThisVerse,
-          },
           evidence: {
             ...entity.evidence,
             originalLanguage: entity.evidence.originalLanguage
               ? {
                   ...entity.evidence.originalLanguage,
-                  word:
-                    hit.sourceWord ||
-                    entity.evidence.originalLanguage.word,
+                  word: hit.sourceWord || entity.evidence.originalLanguage.word,
                   strong: entity.evidence.originalLanguage.strong,
                 }
               : undefined,

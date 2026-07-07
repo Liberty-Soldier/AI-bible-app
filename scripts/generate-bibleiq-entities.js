@@ -39,6 +39,14 @@ const outputPath = path.join(
 
 const runtimeEntityRoot = path.join(
   root,
+  "public",
+  "data",
+  "bibleiq",
+  "entities"
+);
+
+const legacyRuntimeEntityRoot = path.join(
+  root,
   "app",
   "data",
   "bibleiq",
@@ -82,10 +90,12 @@ function writeRuntimeEntity(entity) {
 }
 
 function clearRuntimeEntities() {
-  const hebrewDir = path.join(runtimeEntityRoot, "hebrew");
+  for (const targetRoot of [runtimeEntityRoot, legacyRuntimeEntityRoot]) {
+    const hebrewDir = path.join(targetRoot, "hebrew");
 
-  if (fs.existsSync(hebrewDir)) {
-    fs.rmSync(hebrewDir, { recursive: true, force: true });
+    if (fs.existsSync(hebrewDir)) {
+      fs.rmSync(hebrewDir, { recursive: true, force: true });
+    }
   }
 }
 
@@ -212,7 +222,7 @@ for (const entity of Object.values(entities)) {
     ],
     entityCount: Object.keys(entities).length,
     runtimeEntityCount,
-    runtimeEntityRoot: "app/data/bibleiq/entities",
+    runtimeEntityRoot: "public/data/bibleiq/entities",
     entities,
   };
 

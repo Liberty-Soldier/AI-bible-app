@@ -1,10 +1,7 @@
 import "server-only";
 import fs from "fs";
 import path from "path";
-import type {
-  BibleIQEntity,
-  BibleIQSource,
-} from "@/app/data/lexicon/BibleIQTypes";
+import type { BibleIQSource } from "@/app/data/lexicon/BibleIQTypes";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
 
 type CanonicalSourceToken = {
@@ -43,7 +40,7 @@ type CanonicalVerse = {
   >;
 };
 
-type CanonicalHit = {
+export type CanonicalHit = {
   entityId: string;
   sourceWord?: string;
   sourceToken?: CanonicalSourceToken;
@@ -57,18 +54,6 @@ const CANONICAL_ROOT = path.join(
   "bibleiq",
   "canonical"
 );
-
-const RUNTIME_ENTITY_ROOT = path.join(
-  process.cwd(),
-  "app",
-  "data",
-  "bibleiq",
-  "entities"
-);
-
-function safeEntityIdPart(value: string) {
-  return String(value || "").replace(/[^A-Za-z0-9_-]/g, "");
-}
 
 function safeBook(book: string) {
   const evidenceBook = toEvidenceBook(book);
@@ -96,11 +81,7 @@ function preferredCorpusForTranslation(translation: string): BibleIQSource {
 }
 
 function loadCanonicalBook(corpus: BibleIQSource, book: string) {
-  const filePath = path.join(
-    CANONICAL_ROOT,
-    corpus,
-    `${safeBook(book)}.json`
-  );
+  const filePath = path.join(CANONICAL_ROOT, corpus, `${safeBook(book)}.json`);
 
   if (!fs.existsSync(filePath)) return {};
 
@@ -108,21 +89,6 @@ function loadCanonicalBook(corpus: BibleIQSource, book: string) {
     string,
     CanonicalVerse
   >;
-}
-function entityPathFromId(entityId: string) {
-  const cleanId = entityId.startsWith("word:")
-    ? entityId.replace(/^word:/, "")
-    : entityId;
-
-  const [source, strong] = cleanId.split(":");
-
-  if (!source || !strong) return null;
-
-  return path.join(
-    RUNTIME_ENTITY_ROOT,
-    safeEntityIdPart(source),
-    `${safeEntityIdPart(strong)}.json`
-  );
 }
 
 export function findCanonicalHit({
@@ -169,13 +135,4 @@ export function findCanonicalHit({
     sourceToken,
     displayToken,
   };
-}
-export function loadEntityFromCanonicalHit(
-  hit: CanonicalHit
-): BibleIQEntity | null {
-  const filePath = entityPathFromId(hit.entityId);
-
-  if (!filePath || !fs.existsSync(filePath)) return null;
-
-  return JSON.parse(fs.readFileSync(filePath, "utf8")) as BibleIQEntity;
 }
