@@ -52,8 +52,9 @@ type CanonicalHit = {
 
 const CANONICAL_ROOT = path.join(
   process.cwd(),
-  ".private",
-  "scripture",
+  "app",
+  "data",
+  "bibleiq",
   "canonical"
 );
 
