@@ -4,7 +4,8 @@
   "private": true,
 "scripts": {
 
-  "prebuild": "node scripts/split-scripture-runtime.js && node scripts/generate-bibleiq-entities.js && node scripts/export-bibleiq-runtime-entities.js",
+
+"prebuild": "node scripts/split-scripture-runtime.js && node scripts/generate-bibleiq-entities.js && node scripts/export-bibleiq-runtime-entities.js && node   scripts/generate-bibleiq-entity-index.js",
   "dev": "next dev",
   "build": "next build",
   "start": "next start",

@@ -6,6 +6,7 @@ import type {
   BibleIQSource,
 } from "@/app/data/lexicon/BibleIQTypes";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
+import generatedBibleIQEntities from "@/app/data/lexicon/generatedBibleIQEntities.json";
 
 type CanonicalSourceToken = {
   id: string;
@@ -57,14 +58,6 @@ const CANONICAL_ROOT = path.join(
   "canonical"
 );
 
-const RUNTIME_ENTITY_ROOT = path.join(
-  process.cwd(),
-  "app",
-  "data",
-  "bibleiq",
-  "entities"
-);
-
 function safeBook(book: string) {
   const evidenceBook = toEvidenceBook(book);
   return String(evidenceBook || "").replace(/[^1-3A-Za-z]/g, "");
@@ -88,20 +81,6 @@ function preferredCorpusForTranslation(translation: string): BibleIQSource {
   }
 
   return "hebrew";
-}
-
-function safeEntityIdPart(value: string) {
-  return String(value || "").replace(/[^A-Za-z0-9_-]/g, "");
-}
-
-function entityPathFromId(entityId: string) {
-  const [source, strong] = entityId.split(":");
-
-  return path.join(
-    RUNTIME_ENTITY_ROOT,
-    safeEntityIdPart(source),
-    `${safeEntityIdPart(strong)}.json`
-  );
 }
 
 function loadCanonicalBook(corpus: BibleIQSource, book: string) {
@@ -168,9 +147,9 @@ export function findCanonicalHit({
 export function loadEntityFromCanonicalHit(
   hit: CanonicalHit
 ): BibleIQEntity | null {
-  const filePath = entityPathFromId(hit.entityId);
+  const raw = generatedBibleIQEntities as {
+    entities?: Record<string, BibleIQEntity>;
+  };
 
-  if (!fs.existsSync(filePath)) return null;
-
-  return JSON.parse(fs.readFileSync(filePath, "utf8")) as BibleIQEntity;
+  return raw.entities?.[hit.entityId] || null;
 }

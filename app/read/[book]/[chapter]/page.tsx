@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import SacredNameToggle from "@/app/components/SacredNameToggle";
 import ReaderSelector from "@/app/components/ReaderSelector";
@@ -12,8 +13,8 @@ import ReaderWordStudyController from "@/app/components/ReaderWordStudyControlle
 import VerseActionController from "@/app/components/VerseActionController";
 import ReaderStickyHeader from "@/app/components/ReaderStickyHeader";
 import { bookCatalog } from "../../../data/scripture/bookCatalog";
-import fs from "fs";
-import path from "path";
+
+export const dynamic = "force-dynamic";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -36,24 +37,44 @@ function safeBook(book: string) {
     .replace(/\s+/g, "_");
 }
 
+async function getBaseUrl() {
+  const h = await headers();
+  const host = h.get("host");
+
+  if (!host) {
+    return process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+  }
+
+  const proto =
+    h.get("x-forwarded-proto") ||
+    (host.includes("localhost") ? "http" : "https");
+
+  return `${proto}://${host}`;
+}
+
 async function loadChapter(
   translation: Translation,
   book: string,
   chapter: number
 ): Promise<ReaderVerse[]> {
-  const filePath = path.join(
-    process.cwd(),
-    "public",
-    "scripture",
-    "runtime",
-    translation,
-    safeBook(book),
-    `${chapter}.json`
-  );
+  const baseUrl = await getBaseUrl();
+  const fileUrl = `${baseUrl}/scripture/runtime/${translation}/${safeBook(
+    book
+  )}/${chapter}.json`;
 
-  if (!fs.existsSync(filePath)) return [];
+  try {
+    const res = await fetch(fileUrl, {
+      cache: "force-cache",
+    });
 
-  return JSON.parse(fs.readFileSync(filePath, "utf8")) as ReaderVerse[];
+    if (!res.ok) return [];
+
+    return (await res.json()) as ReaderVerse[];
+  } catch {
+    return [];
+  }
 }
 
 function getTranslationLabel(translation: Translation) {
