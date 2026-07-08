@@ -25,6 +25,78 @@
       "1 Chronicles 4:12"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H850",
+    "source": "hebrew",
+    "strong": "H850",
+    "lemma": "אֶשְׁתּוֹן",
+    "transliteration": "ʼEshtôwn",
+    "definition": "Eshton , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 4:11",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Chelub the brother of Shuhah became the father of Mehir, who was the father of Eshton."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 4:11",
+      "1 Chronicles 4:12"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 4:11",
+        "phase": "Occurrence",
+        "evidenceText": "Chelub the brother of Shuhah became the father of Mehir, who was the father of Eshton."
+      },
+      {
+        "reference": "1 Chronicles 4:12",
+        "phase": "Occurrence",
+        "evidenceText": "Eshton became the father of Beth Rapha, Paseah, and Tehinnah the father of Ir Nahash. These are the men of Recah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 4:11 and continues through 1 Chronicles 4:12.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 4:11",
+        "book": "1 Chronicles",
+        "englishText": "Chelub the brother of Shuhah became the father of Mehir, who was the father of Eshton."
+      },
+      {
+        "reference": "1 Chronicles 4:12",
+        "book": "1 Chronicles",
+        "englishText": "Eshton became the father of Beth Rapha, Paseah, and Tehinnah the father of Ir Nahash. These are the men of Recah."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

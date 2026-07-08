@@ -26,6 +26,91 @@
       "Psalms 129:7"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6014",
+    "source": "hebrew",
+    "strong": "H6014",
+    "lemma": "עָמַר",
+    "transliteration": "ʻâmar",
+    "definition": "properly, apparently to heap ; figuratively, to chastise (as if piling blows); to gather grain",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 21:14",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "It shall be, if you have no delight in her, then you shall let her go where she desires; but you shall not sell her at all for money. You shall not deal with her as a slave, because you have humbled her."
+    },
+    "books": [
+      "Deuteronomy",
+      "Psalms"
+    ],
+    "references": [
+      "Deuteronomy 21:14",
+      "Deuteronomy 24:7",
+      "Psalms 129:7"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "defilement",
+        "label": "Defilement",
+        "reference": "Deuteronomy 21:14",
+        "evidenceText": "It shall be, if you have no delight in her, then you shall let her go where she desires; but you shall not sell her at all for money. You shall not deal with her as a slave, because you have humbled her."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 21:14",
+        "phase": "Defilement",
+        "evidenceText": "It shall be, if you have no delight in her, then you shall let her go where she desires; but you shall not sell her at all for money. You shall not deal with her as a slave, because you have humbled her."
+      },
+      {
+        "reference": "Deuteronomy 24:7",
+        "phase": "Occurrence",
+        "evidenceText": "If a man is found stealing any of his brothers of the children of Israel, and he deals with him as a slave, or sells him, then that thief shall die. So you shall remove the evil from among you."
+      },
+      {
+        "reference": "Psalms 129:7",
+        "phase": "Occurrence",
+        "evidenceText": "with which the reaper doesn’t fill his hand,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 21:14 and continues through Psalms 129:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 21:14",
+        "book": "Deuteronomy",
+        "englishText": "It shall be, if you have no delight in her, then you shall let her go where she desires; but you shall not sell her at all for money. You shall not deal with her as a slave, because you have humbled her."
+      },
+      {
+        "reference": "Deuteronomy 24:7",
+        "book": "Deuteronomy",
+        "englishText": "If a man is found stealing any of his brothers of the children of Israel, and he deals with him as a slave, or sells him, then that thief shall die. So you shall remove the evil from among you."
+      },
+      {
+        "reference": "Psalms 129:7",
+        "book": "Psalms",
+        "englishText": "with which the reaper doesn’t fill his hand,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

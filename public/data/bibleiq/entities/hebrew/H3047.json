@@ -4,7 +4,7 @@
   "title": "יָדָע",
   "subtitle": "H3047 • Hebrew name",
   "simple": {
-    "meaning": "יָדָע (Yâdâʻ) appears 2 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "יָדָע (Yâdâʻ) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 2:28. BibleIQ detects the main surrounding context as family, family line, death.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יָדָע (H3047) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יָדָע through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,92 @@
     ],
     "laterReferences": [
       "1 Chronicles 2:32"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3047",
+    "source": "hebrew",
+    "strong": "H3047",
+    "lemma": "יָדָע",
+    "transliteration": "Yâdâʻ",
+    "definition": "Jada , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:28",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:28",
+      "1 Chronicles 2:32"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:28",
+        "evidenceText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:32",
+        "evidenceText": "The sons of Jada the brother of Shammai: Jether and Jonathan; and Jether died without children."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:28",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      },
+      {
+        "reference": "1 Chronicles 2:32",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Jada the brother of Shammai: Jether and Jonathan; and Jether died without children."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:28 and continues through 1 Chronicles 2:32.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:28",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      },
+      {
+        "reference": "1 Chronicles 2:32",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Jada the brother of Shammai: Jether and Jonathan; and Jether died without children."
+      }
     ]
   },
   "evidence": {

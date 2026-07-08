@@ -27,6 +27,105 @@
       "Isaiah 48:5"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6090",
+    "source": "hebrew",
+    "strong": "H6090",
+    "lemma": "עֹצֶב",
+    "transliteration": "ʻôtseb",
+    "definition": "an idol (as fashioned); also pain (bodily or mental)",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 4:9",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Jabez was more honorable than his brothers. His mother named him Jabez,* “Jabez” sounds similar to the Hebrew word for “pain”. saying, “Because I bore him with sorrow.”"
+    },
+    "books": [
+      "1 Chronicles",
+      "Psalms",
+      "Isaiah"
+    ],
+    "references": [
+      "1 Chronicles 4:9",
+      "Psalms 139:24",
+      "Isaiah 14:3",
+      "Isaiah 48:5"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "naming",
+        "label": "Naming",
+        "reference": "1 Chronicles 4:9",
+        "evidenceText": "Jabez was more honorable than his brothers. His mother named him Jabez,* “Jabez” sounds similar to the Hebrew word for “pain”. saying, “Because I bore him with sorrow.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 4:9",
+        "phase": "Naming",
+        "evidenceText": "Jabez was more honorable than his brothers. His mother named him Jabez,* “Jabez” sounds similar to the Hebrew word for “pain”. saying, “Because I bore him with sorrow.”"
+      },
+      {
+        "reference": "Psalms 139:24",
+        "phase": "Occurrence",
+        "evidenceText": "See if there is any wicked way in me,"
+      },
+      {
+        "reference": "Isaiah 14:3",
+        "phase": "Occurrence",
+        "evidenceText": "It will happen in the day that Yahweh will give you rest from your sorrow, from your trouble, and from the hard service in which you were made to serve,"
+      },
+      {
+        "reference": "Isaiah 48:5",
+        "phase": "Occurrence",
+        "evidenceText": "therefore I have declared it to you from of old;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 4:9 and continues through Isaiah 48:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 4:9",
+        "book": "1 Chronicles",
+        "englishText": "Jabez was more honorable than his brothers. His mother named him Jabez,* “Jabez” sounds similar to the Hebrew word for “pain”. saying, “Because I bore him with sorrow.”"
+      },
+      {
+        "reference": "Psalms 139:24",
+        "book": "Psalms",
+        "englishText": "See if there is any wicked way in me,"
+      },
+      {
+        "reference": "Isaiah 14:3",
+        "book": "Isaiah",
+        "englishText": "It will happen in the day that Yahweh will give you rest from your sorrow, from your trouble, and from the hard service in which you were made to serve,"
+      },
+      {
+        "reference": "Isaiah 48:5",
+        "book": "Isaiah",
+        "englishText": "therefore I have declared it to you from of old;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -27,6 +27,96 @@
       "Micah 1:14"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H392",
+    "source": "hebrew",
+    "strong": "H392",
+    "lemma": "אַכְזִיב",
+    "transliteration": "ʼAkzîyb",
+    "definition": "Akzib , the name of two places in Palestine",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 15:44",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "Keilah, Achzib, and Mareshah; nine cities with their villages."
+    },
+    "books": [
+      "Joshua",
+      "Judges",
+      "Micah"
+    ],
+    "references": [
+      "Joshua 15:44",
+      "Joshua 19:29",
+      "Judges 1:31",
+      "Micah 1:14"
+    ],
+    "themes": [
+      "city"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 19:29",
+        "evidenceText": "The border turned to Ramah, to the fortified city of Tyre; and the border turned to Hosah. It ended at the sea by the region of Achzib;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 15:44",
+        "phase": "Occurrence",
+        "evidenceText": "Keilah, Achzib, and Mareshah; nine cities with their villages."
+      },
+      {
+        "reference": "Joshua 19:29",
+        "phase": "Movement or place",
+        "evidenceText": "The border turned to Ramah, to the fortified city of Tyre; and the border turned to Hosah. It ended at the sea by the region of Achzib;"
+      },
+      {
+        "reference": "Judges 1:31",
+        "phase": "Occurrence",
+        "evidenceText": "Asher didn’t drive out the inhabitants of Acco, nor the inhabitants of Sidon, nor of Ahlab, nor of Achzib, nor of Helbah, nor of Aphik, nor of Rehob;"
+      },
+      {
+        "reference": "Micah 1:14",
+        "phase": "Occurrence",
+        "evidenceText": "Therefore you will give a parting gift to Moresheth Gath."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 15:44 and continues through Micah 1:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 15:44",
+        "book": "Joshua",
+        "englishText": "Keilah, Achzib, and Mareshah; nine cities with their villages."
+      },
+      {
+        "reference": "Joshua 19:29",
+        "book": "Joshua",
+        "englishText": "The border turned to Ramah, to the fortified city of Tyre; and the border turned to Hosah. It ended at the sea by the region of Achzib;"
+      },
+      {
+        "reference": "Judges 1:31",
+        "book": "Judges",
+        "englishText": "Asher didn’t drive out the inhabitants of Acco, nor the inhabitants of Sidon, nor of Ahlab, nor of Achzib, nor of Helbah, nor of Aphik, nor of Rehob;"
+      },
+      {
+        "reference": "Micah 1:14",
+        "book": "Micah",
+        "englishText": "Therefore you will give a parting gift to Moresheth Gath."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

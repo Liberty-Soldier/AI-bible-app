@@ -4,7 +4,7 @@
   "title": "אֲבִישׁוּעַ",
   "subtitle": "H50 • Hebrew name",
   "simple": {
-    "meaning": "אֲבִישׁוּעַ (ʼĂbîyshûwaʻ) appears 5 times in the Hebrew Scriptures and is introduced in connection with priesthood.",
+    "meaning": "אֲבִישׁוּעַ (ʼĂbîyshûwaʻ) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with priesthood.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Ezra, beginning at 1 Chronicles 5:30. BibleIQ detects the main surrounding context as family line, priesthood.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֲבִישׁוּעַ (H50) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֲבִישׁוּעַ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,108 @@
       "1 Chronicles 6:35",
       "1 Chronicles 8:4",
       "Ezra 7:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H50",
+    "source": "hebrew",
+    "strong": "H50",
+    "lemma": "אֲבִישׁוּעַ",
+    "transliteration": "ʼĂbîyshûwaʻ",
+    "definition": "Abishua , the name of two Israelites",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 5:30",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": ""
+    },
+    "books": [
+      "1 Chronicles",
+      "Ezra"
+    ],
+    "references": [
+      "1 Chronicles 5:30",
+      "1 Chronicles 5:31",
+      "1 Chronicles 6:35",
+      "1 Chronicles 8:4",
+      "Ezra 7:5"
+    ],
+    "themes": [
+      "family line",
+      "priesthood"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 5:30",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "1 Chronicles 5:31",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "1 Chronicles 6:35",
+        "phase": "Occurrence",
+        "evidenceText": "the son of Zuph, the son of Elkanah, the son of Mahath, the son of Amasai,"
+      },
+      {
+        "reference": "1 Chronicles 8:4",
+        "phase": "Occurrence",
+        "evidenceText": "Abishua, Naaman, Ahoah,"
+      },
+      {
+        "reference": "Ezra 7:5",
+        "phase": "Occurrence",
+        "evidenceText": "the son of Abishua, the son of Phinehas, the son of Eleazar, the son of Aaron the chief priest—"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 5:30 and continues through Ezra 7:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 5:30",
+        "book": "1 Chronicles",
+        "englishText": ""
+      },
+      {
+        "reference": "1 Chronicles 5:31",
+        "book": "1 Chronicles",
+        "englishText": ""
+      },
+      {
+        "reference": "1 Chronicles 6:35",
+        "book": "1 Chronicles",
+        "englishText": "the son of Zuph, the son of Elkanah, the son of Mahath, the son of Amasai,"
+      },
+      {
+        "reference": "1 Chronicles 8:4",
+        "book": "1 Chronicles",
+        "englishText": "Abishua, Naaman, Ahoah,"
+      },
+      {
+        "reference": "Ezra 7:5",
+        "book": "Ezra",
+        "englishText": "the son of Abishua, the son of Phinehas, the son of Eleazar, the son of Aaron the chief priest—"
+      }
     ]
   },
   "evidence": {

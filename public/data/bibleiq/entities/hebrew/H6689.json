@@ -4,7 +4,7 @@
   "title": "צוּף",
   "subtitle": "H6689 • Hebrew name",
   "simple": {
-    "meaning": "צוּף (Tsûwph) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "צוּף (Tsûwph) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Samuel, 1 Chronicles, beginning at 1 Samuel 1:1. BibleIQ detects the main surrounding context as family, family line, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to צוּף (H6689) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows צוּף through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,120 @@
       "1 Samuel 9:5",
       "1 Chronicles 6:11",
       "1 Chronicles 6:20"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6689",
+    "source": "hebrew",
+    "strong": "H6689",
+    "lemma": "צוּף",
+    "transliteration": "Tsûwph",
+    "definition": "Tsuph or Tsophai or Tsiph , the name of an Israelite and of a place in Palestine",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 1:1",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "Now there was a certain man of Ramathaim Zophim, of the hill country of Ephraim, and his name was Elkanah, the son of Jeroham, the son of Elihu, the son of Tohu, the son of Zuph, an Ephraimite."
+    },
+    "books": [
+      "1 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Samuel 1:1",
+      "1 Samuel 9:5",
+      "1 Chronicles 6:11",
+      "1 Chronicles 6:20"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "1 Samuel 9:5",
+        "evidenceText": "When they had come to the land of Zuph, Saul said to his servant who was with him, “Come! Let’s return, lest my father stop caring about the donkeys, and be anxious for us.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Samuel 1:1",
+        "phase": "Occurrence",
+        "evidenceText": "Now there was a certain man of Ramathaim Zophim, of the hill country of Ephraim, and his name was Elkanah, the son of Jeroham, the son of Elihu, the son of Tohu, the son of Zuph, an Ephraimite."
+      },
+      {
+        "reference": "1 Samuel 9:5",
+        "phase": "Movement or place",
+        "evidenceText": "When they had come to the land of Zuph, Saul said to his servant who was with him, “Come! Let’s return, lest my father stop caring about the donkeys, and be anxious for us.”"
+      },
+      {
+        "reference": "1 Chronicles 6:11",
+        "phase": "Occurrence",
+        "evidenceText": "Azariah became the father of Amariah. Amariah became the father of Ahitub."
+      },
+      {
+        "reference": "1 Chronicles 6:20",
+        "phase": "Occurrence",
+        "evidenceText": "Of Gershom: Libni his son, Jahath his son, Zimmah his son,"
+      },
+      {
+        "reference": "1 Chronicles 6:20",
+        "phase": "Occurrence",
+        "evidenceText": "Of Gershom: Libni his son, Jahath his son, Zimmah his son,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 1:1 and continues through 1 Chronicles 6:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 1:1",
+        "book": "1 Samuel",
+        "englishText": "Now there was a certain man of Ramathaim Zophim, of the hill country of Ephraim, and his name was Elkanah, the son of Jeroham, the son of Elihu, the son of Tohu, the son of Zuph, an Ephraimite."
+      },
+      {
+        "reference": "1 Samuel 9:5",
+        "book": "1 Samuel",
+        "englishText": "When they had come to the land of Zuph, Saul said to his servant who was with him, “Come! Let’s return, lest my father stop caring about the donkeys, and be anxious for us.”"
+      },
+      {
+        "reference": "1 Chronicles 6:11",
+        "book": "1 Chronicles",
+        "englishText": "Azariah became the father of Amariah. Amariah became the father of Ahitub."
+      },
+      {
+        "reference": "1 Chronicles 6:20",
+        "book": "1 Chronicles",
+        "englishText": "Of Gershom: Libni his son, Jahath his son, Zimmah his son,"
+      },
+      {
+        "reference": "1 Chronicles 6:20",
+        "book": "1 Chronicles",
+        "englishText": "Of Gershom: Libni his son, Jahath his son, Zimmah his son,"
+      }
     ]
   },
   "evidence": {

@@ -28,6 +28,112 @@
       "Ecclesiastes 8:2"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1700",
+    "source": "hebrew",
+    "strong": "H1700",
+    "lemma": "דִּבְרָה",
+    "transliteration": "dibrâh",
+    "definition": "a reason , suit or style",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 5:8",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "“But as for me, I would seek God."
+    },
+    "books": [
+      "Job",
+      "Psalms",
+      "Ecclesiastes"
+    ],
+    "references": [
+      "Job 5:8",
+      "Psalms 110:4",
+      "Ecclesiastes 3:18",
+      "Ecclesiastes 7:14",
+      "Ecclesiastes 8:2"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ecclesiastes 3:18",
+        "evidenceText": "I said in my heart, “As for the sons of men, God tests them, so that they may see that they themselves are like animals."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Job 5:8",
+        "phase": "Occurrence",
+        "evidenceText": "“But as for me, I would seek God."
+      },
+      {
+        "reference": "Psalms 110:4",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh has sworn, and will not change his mind:"
+      },
+      {
+        "reference": "Ecclesiastes 3:18",
+        "phase": "Genealogy",
+        "evidenceText": "I said in my heart, “As for the sons of men, God tests them, so that they may see that they themselves are like animals."
+      },
+      {
+        "reference": "Ecclesiastes 7:14",
+        "phase": "Occurrence",
+        "evidenceText": "In the day of prosperity be joyful, and in the day of adversity consider; yes, God has made the one side by side with the other, to the end that man should not find out anything after him."
+      },
+      {
+        "reference": "Ecclesiastes 8:2",
+        "phase": "Occurrence",
+        "evidenceText": "I say, “Keep the king’s command!” because of the oath to God."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 5:8 and continues through Ecclesiastes 8:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 5:8",
+        "book": "Job",
+        "englishText": "“But as for me, I would seek God."
+      },
+      {
+        "reference": "Psalms 110:4",
+        "book": "Psalms",
+        "englishText": "Yahweh has sworn, and will not change his mind:"
+      },
+      {
+        "reference": "Ecclesiastes 3:18",
+        "book": "Ecclesiastes",
+        "englishText": "I said in my heart, “As for the sons of men, God tests them, so that they may see that they themselves are like animals."
+      },
+      {
+        "reference": "Ecclesiastes 7:14",
+        "book": "Ecclesiastes",
+        "englishText": "In the day of prosperity be joyful, and in the day of adversity consider; yes, God has made the one side by side with the other, to the end that man should not find out anything after him."
+      },
+      {
+        "reference": "Ecclesiastes 8:2",
+        "book": "Ecclesiastes",
+        "englishText": "I say, “Keep the king’s command!” because of the oath to God."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

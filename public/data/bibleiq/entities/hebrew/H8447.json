@@ -27,6 +27,100 @@
       "Song of Songs 1:11"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8447",
+    "source": "hebrew",
+    "strong": "H8447",
+    "lemma": "תּוֹר",
+    "transliteration": "tôwr",
+    "definition": "a succession , i.e. a string or (abstractly) order",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Esther 2:12",
+      "book": "Esther",
+      "bookName": "Esther",
+      "englishText": "Each young woman’s turn came to go in to King Ahasuerus after her purification for twelve months (for so were the days of their purification accomplished, six months with oil of myrrh, and six months with sweet fragrances and with preparations for beautifying women)."
+    },
+    "books": [
+      "Esther",
+      "Song of Solomon"
+    ],
+    "references": [
+      "Esther 2:12",
+      "Esther 2:15",
+      "Song of Songs 1:10",
+      "Song of Songs 1:11"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Esther 2:15",
+        "evidenceText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Esther 2:12",
+        "phase": "Occurrence",
+        "evidenceText": "Each young woman’s turn came to go in to King Ahasuerus after her purification for twelve months (for so were the days of their purification accomplished, six months with oil of myrrh, and six months with sweet fragrances and with preparations for beautifying women)."
+      },
+      {
+        "reference": "Esther 2:15",
+        "phase": "Genealogy",
+        "evidenceText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      },
+      {
+        "reference": "Song of Songs 1:10",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "Song of Songs 1:11",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Esther 2:12 and continues through Song of Songs 1:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "Esther 2:12",
+        "book": "Esther",
+        "englishText": "Each young woman’s turn came to go in to King Ahasuerus after her purification for twelve months (for so were the days of their purification accomplished, six months with oil of myrrh, and six months with sweet fragrances and with preparations for beautifying women)."
+      },
+      {
+        "reference": "Esther 2:15",
+        "book": "Esther",
+        "englishText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      },
+      {
+        "reference": "Song of Songs 1:10",
+        "book": "Song of Solomon",
+        "englishText": ""
+      },
+      {
+        "reference": "Song of Songs 1:11",
+        "book": "Song of Solomon",
+        "englishText": ""
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

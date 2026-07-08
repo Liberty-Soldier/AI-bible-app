@@ -4,7 +4,7 @@
   "title": "בְּאֵרִי",
   "subtitle": "H882 • Hebrew name",
   "simple": {
-    "meaning": "בְּאֵרִי (Bᵉʼêrîy) appears 2 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "בְּאֵרִי (Bᵉʼêrîy) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Genesis, Hosea, beginning at Genesis 26:34. BibleIQ detects the main surrounding context as family line, kingship, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to בְּאֵרִי (H882) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows בְּאֵרִי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,92 @@
     ],
     "laterReferences": [
       "Hosea 1:1"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H882",
+    "source": "hebrew",
+    "strong": "H882",
+    "lemma": "בְּאֵרִי",
+    "transliteration": "Bᵉʼêrîy",
+    "definition": "Beeri , the name of a Hittite and of an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 26:34",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "When Esau was forty years old, he took as wife Judith, the daughter of Beeri the Hittite, and Basemath, the daughter of Elon the Hittite."
+    },
+    "books": [
+      "Genesis",
+      "Hosea"
+    ],
+    "references": [
+      "Genesis 26:34",
+      "Hosea 1:1"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 26:34",
+        "evidenceText": "When Esau was forty years old, he took as wife Judith, the daughter of Beeri the Hittite, and Basemath, the daughter of Elon the Hittite."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 26:34",
+        "phase": "Genealogy",
+        "evidenceText": "When Esau was forty years old, he took as wife Judith, the daughter of Beeri the Hittite, and Basemath, the daughter of Elon the Hittite."
+      },
+      {
+        "reference": "Hosea 1:1",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh’s* “Yahweh” is God’s proper Name, sometimes rendered “LORD” (all caps) in other translations. word that came to Hosea the son of Beeri, in the days of Uzziah, Jotham, Ahaz, and Hezekiah, kings of Judah, and in the days of Jeroboam the son of Joash, king of Israel."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 26:34 and continues through Hosea 1:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 26:34",
+        "book": "Genesis",
+        "englishText": "When Esau was forty years old, he took as wife Judith, the daughter of Beeri the Hittite, and Basemath, the daughter of Elon the Hittite."
+      },
+      {
+        "reference": "Hosea 1:1",
+        "book": "Hosea",
+        "englishText": "Yahweh’s* “Yahweh” is God’s proper Name, sometimes rendered “LORD” (all caps) in other translations. word that came to Hosea the son of Beeri, in the days of Uzziah, Jotham, Ahaz, and Hezekiah, kings of Judah, and in the days of Jeroboam the son of Joash, king of Israel."
+      }
     ]
   },
   "evidence": {

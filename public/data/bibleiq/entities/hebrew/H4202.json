@@ -25,6 +25,85 @@
       "2 Chronicles 11:23"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4202",
+    "source": "hebrew",
+    "strong": "H4202",
+    "lemma": "מָזוֹן",
+    "transliteration": "mâzôwn",
+    "definition": "food",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 45:23",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "He sent the following to his father: ten donkeys loaded with the good things of Egypt, and ten female donkeys loaded with grain and bread and provision for his father by the way."
+    },
+    "books": [
+      "Genesis",
+      "2 Chronicles"
+    ],
+    "references": [
+      "Genesis 45:23",
+      "2 Chronicles 11:23"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "city",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "2 Chronicles 11:23",
+        "evidenceText": "He dealt wisely, and dispersed of all his sons throughout all the lands of Judah and Benjamin, to every fortified city. He gave them food in abundance and he sought many wives for them."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 45:23",
+        "phase": "Occurrence",
+        "evidenceText": "He sent the following to his father: ten donkeys loaded with the good things of Egypt, and ten female donkeys loaded with grain and bread and provision for his father by the way."
+      },
+      {
+        "reference": "2 Chronicles 11:23",
+        "phase": "Movement or place",
+        "evidenceText": "He dealt wisely, and dispersed of all his sons throughout all the lands of Judah and Benjamin, to every fortified city. He gave them food in abundance and he sought many wives for them."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 45:23 and continues through 2 Chronicles 11:23.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 45:23",
+        "book": "Genesis",
+        "englishText": "He sent the following to his father: ten donkeys loaded with the good things of Egypt, and ten female donkeys loaded with grain and bread and provision for his father by the way."
+      },
+      {
+        "reference": "2 Chronicles 11:23",
+        "book": "2 Chronicles",
+        "englishText": "He dealt wisely, and dispersed of all his sons throughout all the lands of Judah and Benjamin, to every fortified city. He gave them food in abundance and he sought many wives for them."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "שָׁמִיר",
   "subtitle": "H8069 • Hebrew name",
   "simple": {
-    "meaning": "שָׁמִיר (Shâmîyr) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "שָׁמִיר (Shâmîyr) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Joshua, Judges, 1 Chronicles, beginning at Joshua 15:48. BibleIQ detects the main surrounding context as family line, death, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שָׁמִיר (H8069) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שָׁמִיר through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,104 @@
       "Judges 10:1",
       "Judges 10:2",
       "1 Chronicles 24:24"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8069",
+    "source": "hebrew",
+    "strong": "H8069",
+    "lemma": "שָׁמִיר",
+    "transliteration": "Shâmîyr",
+    "definition": "Shamir , the name of two places in Palestine",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 15:48",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "In the hill country, Shamir, Jattir, Socoh,"
+    },
+    "books": [
+      "Joshua",
+      "Judges",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Joshua 15:48",
+      "Judges 10:1",
+      "Judges 10:2",
+      "1 Chronicles 24:24"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 24:24",
+        "evidenceText": "The sons of Uzziel: Micah; of the sons of Micah, Shamir."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 15:48",
+        "phase": "Occurrence",
+        "evidenceText": "In the hill country, Shamir, Jattir, Socoh,"
+      },
+      {
+        "reference": "Judges 10:1",
+        "phase": "Occurrence",
+        "evidenceText": "After Abimelech, Tola the son of Puah, the son of Dodo, a man of Issachar, arose to save Israel. He lived in Shamir in the hill country of Ephraim."
+      },
+      {
+        "reference": "Judges 10:2",
+        "phase": "Occurrence",
+        "evidenceText": "He judged Israel twenty-three years, and died, and was buried in Shamir."
+      },
+      {
+        "reference": "1 Chronicles 24:24",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Uzziel: Micah; of the sons of Micah, Shamir."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 15:48 and continues through 1 Chronicles 24:24.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 15:48",
+        "book": "Joshua",
+        "englishText": "In the hill country, Shamir, Jattir, Socoh,"
+      },
+      {
+        "reference": "Judges 10:1",
+        "book": "Judges",
+        "englishText": "After Abimelech, Tola the son of Puah, the son of Dodo, a man of Issachar, arose to save Israel. He lived in Shamir in the hill country of Ephraim."
+      },
+      {
+        "reference": "Judges 10:2",
+        "book": "Judges",
+        "englishText": "He judged Israel twenty-three years, and died, and was buried in Shamir."
+      },
+      {
+        "reference": "1 Chronicles 24:24",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Uzziel: Micah; of the sons of Micah, Shamir."
+      }
     ]
   },
   "evidence": {

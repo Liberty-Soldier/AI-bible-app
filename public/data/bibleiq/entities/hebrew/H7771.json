@@ -4,7 +4,7 @@
   "title": "שׁוֹעַ",
   "subtitle": "H7771 • Hebrew word",
   "simple": {
-    "meaning": "שׁוֹעַ (shôwaʻ) appears 3 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "שׁוֹעַ (shôwaʻ) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Job, Isaiah, beginning at Job 34:19. BibleIQ detects the main surrounding context as family line, kingship, mountain.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שׁוֹעַ (H7771) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שׁוֹעַ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,98 @@
     "laterReferences": [
       "Isaiah 22:5",
       "Isaiah 32:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7771",
+    "source": "hebrew",
+    "strong": "H7771",
+    "lemma": "שׁוֹעַ",
+    "transliteration": "shôwaʻ",
+    "definition": "a noble , i.e. liberal , opulent ; also (as noun in the derived sense) a halloo",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Job 34:19",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "He doesn’t respect the persons of princes,"
+    },
+    "books": [
+      "Job",
+      "Isaiah"
+    ],
+    "references": [
+      "Job 34:19",
+      "Isaiah 22:5",
+      "Isaiah 32:5"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Job 34:19",
+        "evidenceText": "He doesn’t respect the persons of princes,"
+      },
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Isaiah 22:5",
+        "evidenceText": "For it is a day of confusion, and of treading down, and of perplexity, from the Lord, Yahweh of Armies, in the valley of vision, a breaking down of the walls, and a crying to the mountains.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Job 34:19",
+        "phase": "Genealogy",
+        "evidenceText": "He doesn’t respect the persons of princes,"
+      },
+      {
+        "reference": "Isaiah 22:5",
+        "phase": "Blood witness",
+        "evidenceText": "For it is a day of confusion, and of treading down, and of perplexity, from the Lord, Yahweh of Armies, in the valley of vision, a breaking down of the walls, and a crying to the mountains.”"
+      },
+      {
+        "reference": "Isaiah 32:5",
+        "phase": "Occurrence",
+        "evidenceText": "The fool will no longer be called noble,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 34:19 and continues through Isaiah 32:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 34:19",
+        "book": "Job",
+        "englishText": "He doesn’t respect the persons of princes,"
+      },
+      {
+        "reference": "Isaiah 22:5",
+        "book": "Isaiah",
+        "englishText": "For it is a day of confusion, and of treading down, and of perplexity, from the Lord, Yahweh of Armies, in the valley of vision, a breaking down of the walls, and a crying to the mountains.”"
+      },
+      {
+        "reference": "Isaiah 32:5",
+        "book": "Isaiah",
+        "englishText": "The fool will no longer be called noble,"
+      }
     ]
   },
   "evidence": {

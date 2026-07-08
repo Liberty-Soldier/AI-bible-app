@@ -4,7 +4,7 @@
   "title": "פַּלְטִי",
   "subtitle": "H6406 • Hebrew name",
   "simple": {
-    "meaning": "פַּלְטִי (Palṭîy) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "פַּלְטִי (Palṭîy) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, 1 Samuel, beginning at Numbers 13:9. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to פַּלְטִי (H6406) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows פַּלְטִי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,84 @@
     ],
     "laterReferences": [
       "1 Samuel 25:44"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6406",
+    "source": "hebrew",
+    "strong": "H6406",
+    "lemma": "פַּלְטִי",
+    "transliteration": "Palṭîy",
+    "definition": "Palti , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 13:9",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Of the tribe of Benjamin, Palti the son of Raphu."
+    },
+    "books": [
+      "Numbers",
+      "1 Samuel"
+    ],
+    "references": [
+      "Numbers 13:9",
+      "1 Samuel 25:44"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Numbers 13:9",
+        "phase": "Occurrence",
+        "evidenceText": "Of the tribe of Benjamin, Palti the son of Raphu."
+      },
+      {
+        "reference": "1 Samuel 25:44",
+        "phase": "Occurrence",
+        "evidenceText": "Now Saul had given Michal his daughter, David’s wife, to Palti the son of Laish, who was of Gallim."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 13:9 and continues through 1 Samuel 25:44.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 13:9",
+        "book": "Numbers",
+        "englishText": "Of the tribe of Benjamin, Palti the son of Raphu."
+      },
+      {
+        "reference": "1 Samuel 25:44",
+        "book": "1 Samuel",
+        "englishText": "Now Saul had given Michal his daughter, David’s wife, to Palti the son of Laish, who was of Gallim."
+      }
     ]
   },
   "evidence": {

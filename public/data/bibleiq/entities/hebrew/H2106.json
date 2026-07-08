@@ -25,6 +25,70 @@
       "Zechariah 9:15"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2106",
+    "source": "hebrew",
+    "strong": "H2106",
+    "lemma": "זָוִית",
+    "transliteration": "zâvîyth",
+    "definition": "an angle (as projecting), i.e. (by implication) a corner-column (or anta)",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Psalms 144:12",
+      "book": "Psalms",
+      "bookName": "Psalms",
+      "englishText": "Then our sons will be like well-nurtured plants,"
+    },
+    "books": [
+      "Psalms",
+      "Zechariah"
+    ],
+    "references": [
+      "Psalms 144:12",
+      "Zechariah 9:15"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Psalms 144:12",
+        "phase": "Occurrence",
+        "evidenceText": "Then our sons will be like well-nurtured plants,"
+      },
+      {
+        "reference": "Zechariah 9:15",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh of Armies will defend them;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Psalms 144:12 and continues through Zechariah 9:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Psalms 144:12",
+        "book": "Psalms",
+        "englishText": "Then our sons will be like well-nurtured plants,"
+      },
+      {
+        "reference": "Zechariah 9:15",
+        "book": "Zechariah",
+        "englishText": "Yahweh of Armies will defend them;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

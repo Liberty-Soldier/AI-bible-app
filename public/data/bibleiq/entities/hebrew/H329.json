@@ -28,6 +28,127 @@
       "Psalms 58:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H329",
+    "source": "hebrew",
+    "strong": "H329",
+    "lemma": "אָטָד",
+    "transliteration": "ʼâṭâd",
+    "definition": "a thorn-tree (especially the buckthorn)",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 50:10",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "They came to the threshing floor of Atad, which is beyond the Jordan, and there they lamented with a very great and severe lamentation. He mourned for his father seven days."
+    },
+    "books": [
+      "Genesis",
+      "Judges",
+      "Psalms"
+    ],
+    "references": [
+      "Genesis 50:10",
+      "Genesis 50:11",
+      "Judges 9:14",
+      "Judges 9:15",
+      "Psalms 58:10"
+    ],
+    "themes": [
+      "family",
+      "kingship",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 50:11",
+        "evidenceText": "When the inhabitants of the land, the Canaanites, saw the mourning in the floor of Atad, they said, “This is a grievous mourning by the Egyptians.” Therefore its name was called Abel Mizraim, which is beyond the Jordan."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 50:10",
+        "phase": "Occurrence",
+        "evidenceText": "They came to the threshing floor of Atad, which is beyond the Jordan, and there they lamented with a very great and severe lamentation. He mourned for his father seven days."
+      },
+      {
+        "reference": "Genesis 50:11",
+        "phase": "Movement or place",
+        "evidenceText": "When the inhabitants of the land, the Canaanites, saw the mourning in the floor of Atad, they said, “This is a grievous mourning by the Egyptians.” Therefore its name was called Abel Mizraim, which is beyond the Jordan."
+      },
+      {
+        "reference": "Judges 9:14",
+        "phase": "Occurrence",
+        "evidenceText": "“Then all the trees said to the bramble, ‘Come and reign over us.’"
+      },
+      {
+        "reference": "Judges 9:15",
+        "phase": "Occurrence",
+        "evidenceText": "“The bramble said to the trees, ‘If in truth you anoint me king over you, then come and take refuge in my shade; and if not, let fire come out of the bramble, and devour the cedars of Lebanon.’"
+      },
+      {
+        "reference": "Judges 9:15",
+        "phase": "Occurrence",
+        "evidenceText": "“The bramble said to the trees, ‘If in truth you anoint me king over you, then come and take refuge in my shade; and if not, let fire come out of the bramble, and devour the cedars of Lebanon.’"
+      },
+      {
+        "reference": "Psalms 58:10",
+        "phase": "Occurrence",
+        "evidenceText": "The righteous shall rejoice when he sees the vengeance."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 50:10 and continues through Psalms 58:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 50:10",
+        "book": "Genesis",
+        "englishText": "They came to the threshing floor of Atad, which is beyond the Jordan, and there they lamented with a very great and severe lamentation. He mourned for his father seven days."
+      },
+      {
+        "reference": "Genesis 50:11",
+        "book": "Genesis",
+        "englishText": "When the inhabitants of the land, the Canaanites, saw the mourning in the floor of Atad, they said, “This is a grievous mourning by the Egyptians.” Therefore its name was called Abel Mizraim, which is beyond the Jordan."
+      },
+      {
+        "reference": "Judges 9:14",
+        "book": "Judges",
+        "englishText": "“Then all the trees said to the bramble, ‘Come and reign over us.’"
+      },
+      {
+        "reference": "Judges 9:15",
+        "book": "Judges",
+        "englishText": "“The bramble said to the trees, ‘If in truth you anoint me king over you, then come and take refuge in my shade; and if not, let fire come out of the bramble, and devour the cedars of Lebanon.’"
+      },
+      {
+        "reference": "Judges 9:15",
+        "book": "Judges",
+        "englishText": "“The bramble said to the trees, ‘If in truth you anoint me king over you, then come and take refuge in my shade; and if not, let fire come out of the bramble, and devour the cedars of Lebanon.’"
+      },
+      {
+        "reference": "Psalms 58:10",
+        "book": "Psalms",
+        "englishText": "The righteous shall rejoice when he sees the vengeance."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

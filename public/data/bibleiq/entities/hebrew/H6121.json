@@ -26,6 +26,83 @@
       "Hosea 6:8"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6121",
+    "source": "hebrew",
+    "strong": "H6121",
+    "lemma": "עָקֹב",
+    "transliteration": "ʻâqôb",
+    "definition": "(transitive) fraudulent or (intransitive) tracked",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Isaiah 40:4",
+      "book": "Isaiah",
+      "bookName": "Isaiah",
+      "englishText": "Every valley shall be exalted,"
+    },
+    "books": [
+      "Isaiah",
+      "Jeremiah",
+      "Hosea"
+    ],
+    "references": [
+      "Isaiah 40:4",
+      "Jeremiah 17:9",
+      "Hosea 6:8"
+    ],
+    "themes": [
+      "city"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Hosea 6:8",
+        "evidenceText": "Gilead is a city of those who work iniquity;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Isaiah 40:4",
+        "phase": "Occurrence",
+        "evidenceText": "Every valley shall be exalted,"
+      },
+      {
+        "reference": "Jeremiah 17:9",
+        "phase": "Occurrence",
+        "evidenceText": "The heart is deceitful above all things"
+      },
+      {
+        "reference": "Hosea 6:8",
+        "phase": "Movement or place",
+        "evidenceText": "Gilead is a city of those who work iniquity;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Isaiah 40:4 and continues through Hosea 6:8.",
+    "occurrenceTrail": [
+      {
+        "reference": "Isaiah 40:4",
+        "book": "Isaiah",
+        "englishText": "Every valley shall be exalted,"
+      },
+      {
+        "reference": "Jeremiah 17:9",
+        "book": "Jeremiah",
+        "englishText": "The heart is deceitful above all things"
+      },
+      {
+        "reference": "Hosea 6:8",
+        "book": "Hosea",
+        "englishText": "Gilead is a city of those who work iniquity;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

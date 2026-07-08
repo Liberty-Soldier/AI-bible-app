@@ -26,6 +26,96 @@
       "Leviticus 20:20"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1733",
+    "source": "hebrew",
+    "strong": "H1733",
+    "lemma": "דּוֹדָה",
+    "transliteration": "dôwdâh",
+    "definition": "an aunt",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 6:20",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Amram took Jochebed his father’s sister to himself as wife; and she bore him Aaron and Moses. The years of the life of Amram were one hundred thirty-seven years."
+    },
+    "books": [
+      "Exodus",
+      "Leviticus"
+    ],
+    "references": [
+      "Exodus 6:20",
+      "Leviticus 18:14",
+      "Leviticus 20:20"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Exodus 6:20",
+        "phase": "Occurrence",
+        "evidenceText": "Amram took Jochebed his father’s sister to himself as wife; and she bore him Aaron and Moses. The years of the life of Amram were one hundred thirty-seven years."
+      },
+      {
+        "reference": "Leviticus 18:14",
+        "phase": "Occurrence",
+        "evidenceText": "“ ‘You shall not uncover the nakedness of your father’s brother. You shall not approach his wife. She is your aunt."
+      },
+      {
+        "reference": "Leviticus 20:20",
+        "phase": "Occurrence",
+        "evidenceText": "If a man lies with his uncle’s wife, he has uncovered his uncle’s nakedness. They shall bear their sin. They shall die childless."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 6:20 and continues through Leviticus 20:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 6:20",
+        "book": "Exodus",
+        "englishText": "Amram took Jochebed his father’s sister to himself as wife; and she bore him Aaron and Moses. The years of the life of Amram were one hundred thirty-seven years."
+      },
+      {
+        "reference": "Leviticus 18:14",
+        "book": "Leviticus",
+        "englishText": "“ ‘You shall not uncover the nakedness of your father’s brother. You shall not approach his wife. She is your aunt."
+      },
+      {
+        "reference": "Leviticus 20:20",
+        "book": "Leviticus",
+        "englishText": "If a man lies with his uncle’s wife, he has uncovered his uncle’s nakedness. They shall bear their sin. They shall die childless."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

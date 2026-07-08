@@ -25,6 +25,79 @@
       "1 Chronicles 1:31"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6929",
+    "source": "hebrew",
+    "strong": "H6929",
+    "lemma": "קֵדְמָה",
+    "transliteration": "Qêdᵉmâh",
+    "definition": "Kedemah , a son of Ishmael",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:15",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Hadad, Tema, Jetur, Naphish, and Kedemah."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 25:15",
+      "1 Chronicles 1:31"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:31",
+        "evidenceText": "Jetur, Naphish, and Kedemah. These are the sons of Ishmael."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:15",
+        "phase": "Occurrence",
+        "evidenceText": "Hadad, Tema, Jetur, Naphish, and Kedemah."
+      },
+      {
+        "reference": "1 Chronicles 1:31",
+        "phase": "Genealogy",
+        "evidenceText": "Jetur, Naphish, and Kedemah. These are the sons of Ishmael."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:15 and continues through 1 Chronicles 1:31.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:15",
+        "book": "Genesis",
+        "englishText": "Hadad, Tema, Jetur, Naphish, and Kedemah."
+      },
+      {
+        "reference": "1 Chronicles 1:31",
+        "book": "1 Chronicles",
+        "englishText": "Jetur, Naphish, and Kedemah. These are the sons of Ishmael."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

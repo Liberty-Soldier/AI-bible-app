@@ -27,6 +27,94 @@
       "Ecclesiastes 3:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2165",
+    "source": "hebrew",
+    "strong": "H2165",
+    "lemma": "זְמָן",
+    "transliteration": "zᵉmân",
+    "definition": "an appointed occasion",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Nehemiah 2:6",
+      "book": "Nehemiah",
+      "bookName": "Nehemiah",
+      "englishText": "The king said to me (the queen was also sitting by him), “How long will your journey be? When will you return?”"
+    },
+    "books": [
+      "Nehemiah",
+      "Esther",
+      "Ecclesiastes"
+    ],
+    "references": [
+      "Nehemiah 2:6",
+      "Esther 9:27",
+      "Esther 9:31",
+      "Ecclesiastes 3:1"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Nehemiah 2:6",
+        "phase": "Occurrence",
+        "evidenceText": "The king said to me (the queen was also sitting by him), “How long will your journey be? When will you return?”"
+      },
+      {
+        "reference": "Esther 9:27",
+        "phase": "Occurrence",
+        "evidenceText": "the Jews established and imposed on themselves, and on their descendants, and on all those who joined themselves to them, so that it should not fail that they would keep these two days according to what was written, and according to its appointed time, every year;"
+      },
+      {
+        "reference": "Esther 9:31",
+        "phase": "Occurrence",
+        "evidenceText": "to confirm these days of Purim in their appointed times, as Mordecai the Jew and Esther the queen had decreed, and as they had imposed upon themselves and their descendants, in the matter of the fastings and their cry."
+      },
+      {
+        "reference": "Ecclesiastes 3:1",
+        "phase": "Occurrence",
+        "evidenceText": "For everything there is a season, and a time for every purpose under heaven:"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Nehemiah 2:6 and continues through Ecclesiastes 3:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Nehemiah 2:6",
+        "book": "Nehemiah",
+        "englishText": "The king said to me (the queen was also sitting by him), “How long will your journey be? When will you return?”"
+      },
+      {
+        "reference": "Esther 9:27",
+        "book": "Esther",
+        "englishText": "the Jews established and imposed on themselves, and on their descendants, and on all those who joined themselves to them, so that it should not fail that they would keep these two days according to what was written, and according to its appointed time, every year;"
+      },
+      {
+        "reference": "Esther 9:31",
+        "book": "Esther",
+        "englishText": "to confirm these days of Purim in their appointed times, as Mordecai the Jew and Esther the queen had decreed, and as they had imposed upon themselves and their descendants, in the matter of the fastings and their cry."
+      },
+      {
+        "reference": "Ecclesiastes 3:1",
+        "book": "Ecclesiastes",
+        "englishText": "For everything there is a season, and a time for every purpose under heaven:"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

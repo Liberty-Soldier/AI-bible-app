@@ -4,7 +4,7 @@
   "title": "צֶלֶק",
   "subtitle": "H6768 • Hebrew name",
   "simple": {
-    "meaning": "צֶלֶק (Tseleq) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "צֶלֶק (Tseleq) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 2 Samuel, 1 Chronicles, beginning at 2 Samuel 23:37. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to צֶלֶק (H6768) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows צֶלֶק through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,74 @@
     ],
     "laterReferences": [
       "1 Chronicles 11:39"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6768",
+    "source": "hebrew",
+    "strong": "H6768",
+    "lemma": "צֶלֶק",
+    "transliteration": "Tseleq",
+    "definition": "Tselek , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 23:37",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "Zelek the Ammonite, Naharai the Beerothite, armor bearers to Joab the son of Zeruiah,"
+    },
+    "books": [
+      "2 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "2 Samuel 23:37",
+      "1 Chronicles 11:39"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "2 Samuel 23:37",
+        "phase": "Occurrence",
+        "evidenceText": "Zelek the Ammonite, Naharai the Beerothite, armor bearers to Joab the son of Zeruiah,"
+      },
+      {
+        "reference": "1 Chronicles 11:39",
+        "phase": "Occurrence",
+        "evidenceText": "Zelek the Ammonite, Naharai the Berothite, the armor bearer of Joab the son of Zeruiah,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 23:37 and continues through 1 Chronicles 11:39.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 23:37",
+        "book": "2 Samuel",
+        "englishText": "Zelek the Ammonite, Naharai the Beerothite, armor bearers to Joab the son of Zeruiah,"
+      },
+      {
+        "reference": "1 Chronicles 11:39",
+        "book": "1 Chronicles",
+        "englishText": "Zelek the Ammonite, Naharai the Berothite, the armor bearer of Joab the son of Zeruiah,"
+      }
     ]
   },
   "evidence": {

@@ -25,6 +25,74 @@
       "1 Chronicles 1:11"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5320",
+    "source": "hebrew",
+    "strong": "H5320",
+    "lemma": "נַפְתֻּחִים",
+    "transliteration": "Naphtuchîym",
+    "definition": "Naphtuchim , an Egyptian tribe",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:13",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Mizraim became the father of Ludim, Anamim, Lehabim, Naphtuhim,"
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 10:13",
+      "1 Chronicles 1:11"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 10:13",
+        "phase": "Occurrence",
+        "evidenceText": "Mizraim became the father of Ludim, Anamim, Lehabim, Naphtuhim,"
+      },
+      {
+        "reference": "1 Chronicles 1:11",
+        "phase": "Occurrence",
+        "evidenceText": "Mizraim became the father of Ludim, Anamim, Lehabim, Naphtuhim,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:13 and continues through 1 Chronicles 1:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:13",
+        "book": "Genesis",
+        "englishText": "Mizraim became the father of Ludim, Anamim, Lehabim, Naphtuhim,"
+      },
+      {
+        "reference": "1 Chronicles 1:11",
+        "book": "1 Chronicles",
+        "englishText": "Mizraim became the father of Ludim, Anamim, Lehabim, Naphtuhim,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

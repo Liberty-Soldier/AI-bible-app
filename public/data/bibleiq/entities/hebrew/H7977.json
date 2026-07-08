@@ -4,7 +4,7 @@
   "title": "שִׁלְחִי",
   "subtitle": "H7977 • Hebrew name",
   "simple": {
-    "meaning": "שִׁלְחִי (Shilchîy) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "שִׁלְחִי (Shilchîy) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in 1 Kings, 2 Chronicles, beginning at 1 Kings 22:42. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שִׁלְחִי (H7977) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שִׁלְחִי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,93 @@
     ],
     "laterReferences": [
       "2 Chronicles 20:31"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7977",
+    "source": "hebrew",
+    "strong": "H7977",
+    "lemma": "שִׁלְחִי",
+    "transliteration": "Shilchîy",
+    "definition": "Shilchi , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Kings 22:42",
+      "book": "1 Kings",
+      "bookName": "1 Kings",
+      "englishText": "Jehoshaphat was thirty-five years old when he began to reign; and he reigned twenty-five years in Jerusalem. His mother’s name was Azubah the daughter of Shilhi."
+    },
+    "books": [
+      "1 Kings",
+      "2 Chronicles"
+    ],
+    "references": [
+      "1 Kings 22:42",
+      "2 Chronicles 20:31"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Kings 22:42",
+        "evidenceText": "Jehoshaphat was thirty-five years old when he began to reign; and he reigned twenty-five years in Jerusalem. His mother’s name was Azubah the daughter of Shilhi."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Chronicles 20:31",
+        "evidenceText": "Jehoshaphat reigned over Judah. He was thirty-five years old when he began to reign; and he reigned twenty-five years in Jerusalem. His mother’s name was Azubah the daughter of Shilhi."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Kings 22:42",
+        "phase": "Genealogy",
+        "evidenceText": "Jehoshaphat was thirty-five years old when he began to reign; and he reigned twenty-five years in Jerusalem. His mother’s name was Azubah the daughter of Shilhi."
+      },
+      {
+        "reference": "2 Chronicles 20:31",
+        "phase": "Genealogy",
+        "evidenceText": "Jehoshaphat reigned over Judah. He was thirty-five years old when he began to reign; and he reigned twenty-five years in Jerusalem. His mother’s name was Azubah the daughter of Shilhi."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Kings 22:42 and continues through 2 Chronicles 20:31.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Kings 22:42",
+        "book": "1 Kings",
+        "englishText": "Jehoshaphat was thirty-five years old when he began to reign; and he reigned twenty-five years in Jerusalem. His mother’s name was Azubah the daughter of Shilhi."
+      },
+      {
+        "reference": "2 Chronicles 20:31",
+        "book": "2 Chronicles",
+        "englishText": "Jehoshaphat reigned over Judah. He was thirty-five years old when he began to reign; and he reigned twenty-five years in Jerusalem. His mother’s name was Azubah the daughter of Shilhi."
+      }
     ]
   },
   "evidence": {

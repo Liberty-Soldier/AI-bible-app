@@ -25,6 +25,76 @@
       "Numbers 26:21"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2697",
+    "source": "hebrew",
+    "strong": "H2697",
+    "lemma": "חֶצְרוֹנִי",
+    "transliteration": "Chetsrôwnîy",
+    "definition": "a Chetsronite or (collectively) descendants of Chetsron",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 26:6",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "of Hezron, the family of the Hezronites; of Carmi, the family of the Carmites."
+    },
+    "books": [
+      "Numbers"
+    ],
+    "references": [
+      "Numbers 26:6",
+      "Numbers 26:21"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 26:21",
+        "evidenceText": "The sons of Perez were: of Hezron, the family of the Hezronites; of Hamul, the family of the Hamulites."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 26:6",
+        "phase": "Occurrence",
+        "evidenceText": "of Hezron, the family of the Hezronites; of Carmi, the family of the Carmites."
+      },
+      {
+        "reference": "Numbers 26:21",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Perez were: of Hezron, the family of the Hezronites; of Hamul, the family of the Hamulites."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 26:6 and continues through Numbers 26:21.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 26:6",
+        "book": "Numbers",
+        "englishText": "of Hezron, the family of the Hezronites; of Carmi, the family of the Carmites."
+      },
+      {
+        "reference": "Numbers 26:21",
+        "book": "Numbers",
+        "englishText": "The sons of Perez were: of Hezron, the family of the Hezronites; of Hamul, the family of the Hamulites."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

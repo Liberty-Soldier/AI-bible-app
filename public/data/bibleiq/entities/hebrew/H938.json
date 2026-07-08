@@ -4,7 +4,7 @@
   "title": "בּוּז",
   "subtitle": "H938 • Hebrew name",
   "simple": {
-    "meaning": "בּוּז (Bûwz) appears 3 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "בּוּז (Bûwz) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, Jeremiah, beginning at Genesis 22:21. BibleIQ detects the main surrounding context as birth, family, family line, firstborn.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to בּוּז (H938) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows בּוּז through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,110 @@
     "laterReferences": [
       "1 Chronicles 5:14",
       "Jeremiah 25:23"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H938",
+    "source": "hebrew",
+    "strong": "H938",
+    "lemma": "בּוּז",
+    "transliteration": "Bûwz",
+    "definition": "Buz , the name of a son of Nahor, and of an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 22:21",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Uz his firstborn, Buz his brother, Kemuel the father of Aram,"
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles",
+      "Jeremiah"
+    ],
+    "references": [
+      "Genesis 22:21",
+      "1 Chronicles 5:14",
+      "Jeremiah 25:23"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 22:21",
+        "evidenceText": "Uz his firstborn, Buz his brother, Kemuel the father of Aram,"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 5:14",
+        "evidenceText": "These were the sons of Abihail, the son of Huri, the son of Jaroah, the son of Gilead, the son of Michael, the son of Jeshishai, the son of Jahdo, the son of Buz;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 22:21",
+        "phase": "Birth or introduction",
+        "evidenceText": "Uz his firstborn, Buz his brother, Kemuel the father of Aram,"
+      },
+      {
+        "reference": "1 Chronicles 5:14",
+        "phase": "Genealogy",
+        "evidenceText": "These were the sons of Abihail, the son of Huri, the son of Jaroah, the son of Gilead, the son of Michael, the son of Jeshishai, the son of Jahdo, the son of Buz;"
+      },
+      {
+        "reference": "Jeremiah 25:23",
+        "phase": "Occurrence",
+        "evidenceText": "Dedan, Tema, Buz, and all who have the corners of their beard cut off;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 22:21 and continues through Jeremiah 25:23.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 22:21",
+        "book": "Genesis",
+        "englishText": "Uz his firstborn, Buz his brother, Kemuel the father of Aram,"
+      },
+      {
+        "reference": "1 Chronicles 5:14",
+        "book": "1 Chronicles",
+        "englishText": "These were the sons of Abihail, the son of Huri, the son of Jaroah, the son of Gilead, the son of Michael, the son of Jeshishai, the son of Jahdo, the son of Buz;"
+      },
+      {
+        "reference": "Jeremiah 25:23",
+        "book": "Jeremiah",
+        "englishText": "Dedan, Tema, Buz, and all who have the corners of their beard cut off;"
+      }
     ]
   },
   "evidence": {

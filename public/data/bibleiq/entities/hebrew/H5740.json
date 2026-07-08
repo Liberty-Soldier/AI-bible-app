@@ -4,7 +4,7 @@
   "title": "עֵדֶר",
   "subtitle": "H5740 • Hebrew name",
   "simple": {
-    "meaning": "עֵדֶר (ʻÊder) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "עֵדֶר (ʻÊder) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Joshua, 1 Chronicles, beginning at Joshua 15:21. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עֵדֶר (H5740) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עֵדֶר through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,104 @@
     "laterReferences": [
       "1 Chronicles 23:23",
       "1 Chronicles 24:30"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5740",
+    "source": "hebrew",
+    "strong": "H5740",
+    "lemma": "עֵדֶר",
+    "transliteration": "ʻÊder",
+    "definition": "Eder , the name of an Israelite and of two places in Palestine",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 15:21",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "The farthest cities of the tribe of the children of Judah toward the border of Edom in the South were Kabzeel, Eder, Jagur,"
+    },
+    "books": [
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Joshua 15:21",
+      "1 Chronicles 23:23",
+      "1 Chronicles 24:30"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 23:23",
+        "evidenceText": "The sons of Mushi: Mahli, Eder, and Jeremoth, three."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 24:30",
+        "evidenceText": "The sons of Mushi: Mahli, Eder, and Jerimoth. These were the sons of the Levites after their fathers’ houses."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 15:21",
+        "phase": "Occurrence",
+        "evidenceText": "The farthest cities of the tribe of the children of Judah toward the border of Edom in the South were Kabzeel, Eder, Jagur,"
+      },
+      {
+        "reference": "1 Chronicles 23:23",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Mushi: Mahli, Eder, and Jeremoth, three."
+      },
+      {
+        "reference": "1 Chronicles 24:30",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Mushi: Mahli, Eder, and Jerimoth. These were the sons of the Levites after their fathers’ houses."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 15:21 and continues through 1 Chronicles 24:30.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 15:21",
+        "book": "Joshua",
+        "englishText": "The farthest cities of the tribe of the children of Judah toward the border of Edom in the South were Kabzeel, Eder, Jagur,"
+      },
+      {
+        "reference": "1 Chronicles 23:23",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Mushi: Mahli, Eder, and Jeremoth, three."
+      },
+      {
+        "reference": "1 Chronicles 24:30",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Mushi: Mahli, Eder, and Jerimoth. These were the sons of the Levites after their fathers’ houses."
+      }
     ]
   },
   "evidence": {

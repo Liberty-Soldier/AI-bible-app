@@ -4,7 +4,7 @@
   "title": "מַעַזְיָה",
   "subtitle": "H4590 • Hebrew name",
   "simple": {
-    "meaning": "מַעַזְיָה (Maʻazyâh) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מַעַזְיָה (Maʻazyâh) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Nehemiah, beginning at 1 Chronicles 24:18. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מַעַזְיָה (H4590) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מַעַזְיָה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,81 @@
     ],
     "laterReferences": [
       "Nehemiah 10:9"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4590",
+    "source": "hebrew",
+    "strong": "H4590",
+    "lemma": "מַעַזְיָה",
+    "transliteration": "Maʻazyâh",
+    "definition": "Maazjah , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 24:18",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "the twenty-third to Delaiah, and the twenty-fourth to Maaziah."
+    },
+    "books": [
+      "1 Chronicles",
+      "Nehemiah"
+    ],
+    "references": [
+      "1 Chronicles 24:18",
+      "Nehemiah 10:9"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Nehemiah 10:9",
+        "evidenceText": "The Levites: namely, Jeshua the son of Azaniah, Binnui of the sons of Henadad, Kadmiel;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 24:18",
+        "phase": "Occurrence",
+        "evidenceText": "the twenty-third to Delaiah, and the twenty-fourth to Maaziah."
+      },
+      {
+        "reference": "Nehemiah 10:9",
+        "phase": "Genealogy",
+        "evidenceText": "The Levites: namely, Jeshua the son of Azaniah, Binnui of the sons of Henadad, Kadmiel;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 24:18 and continues through Nehemiah 10:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 24:18",
+        "book": "1 Chronicles",
+        "englishText": "the twenty-third to Delaiah, and the twenty-fourth to Maaziah."
+      },
+      {
+        "reference": "Nehemiah 10:9",
+        "book": "Nehemiah",
+        "englishText": "The Levites: namely, Jeshua the son of Azaniah, Binnui of the sons of Henadad, Kadmiel;"
+      }
     ]
   },
   "evidence": {

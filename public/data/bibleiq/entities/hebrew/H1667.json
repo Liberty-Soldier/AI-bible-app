@@ -27,6 +27,114 @@
       "1 Chronicles 6:54"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1667",
+    "source": "hebrew",
+    "strong": "H1667",
+    "lemma": "גַּת־רִמּוֹן",
+    "transliteration": "Gath-Rimmôwn",
+    "definition": "Gath-Rimmon , a place in Palestine",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 19:45",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "Jehud, Bene Berak, Gath Rimmon,"
+    },
+    "books": [
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Joshua 19:45",
+      "Joshua 21:24",
+      "Joshua 21:25",
+      "1 Chronicles 6:54"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 21:24",
+        "evidenceText": "Aijalon with its pasture lands, Gath Rimmon with its pasture lands: four cities."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 21:25",
+        "evidenceText": "Out of the half-tribe of Manasseh, Taanach with its pasture lands, and Gath Rimmon with its pasture lands: two cities."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 6:54",
+        "evidenceText": "Now these are their dwelling places according to their encampments in their borders: to the sons of Aaron, of the families of the Kohathites (for theirs was the first lot),"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 19:45",
+        "phase": "Occurrence",
+        "evidenceText": "Jehud, Bene Berak, Gath Rimmon,"
+      },
+      {
+        "reference": "Joshua 21:24",
+        "phase": "Movement or place",
+        "evidenceText": "Aijalon with its pasture lands, Gath Rimmon with its pasture lands: four cities."
+      },
+      {
+        "reference": "Joshua 21:25",
+        "phase": "Movement or place",
+        "evidenceText": "Out of the half-tribe of Manasseh, Taanach with its pasture lands, and Gath Rimmon with its pasture lands: two cities."
+      },
+      {
+        "reference": "1 Chronicles 6:54",
+        "phase": "Genealogy",
+        "evidenceText": "Now these are their dwelling places according to their encampments in their borders: to the sons of Aaron, of the families of the Kohathites (for theirs was the first lot),"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 19:45 and continues through 1 Chronicles 6:54.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 19:45",
+        "book": "Joshua",
+        "englishText": "Jehud, Bene Berak, Gath Rimmon,"
+      },
+      {
+        "reference": "Joshua 21:24",
+        "book": "Joshua",
+        "englishText": "Aijalon with its pasture lands, Gath Rimmon with its pasture lands: four cities."
+      },
+      {
+        "reference": "Joshua 21:25",
+        "book": "Joshua",
+        "englishText": "Out of the half-tribe of Manasseh, Taanach with its pasture lands, and Gath Rimmon with its pasture lands: two cities."
+      },
+      {
+        "reference": "1 Chronicles 6:54",
+        "book": "1 Chronicles",
+        "englishText": "Now these are their dwelling places according to their encampments in their borders: to the sons of Aaron, of the families of the Kohathites (for theirs was the first lot),"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

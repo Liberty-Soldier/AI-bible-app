@@ -25,6 +25,78 @@
       "Ezekiel 3:9"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6864",
+    "source": "hebrew",
+    "strong": "H6864",
+    "lemma": "צֹר",
+    "transliteration": "tsôr",
+    "definition": "a stone (as if pressed hard or to a point); (by implication, of use) a knife",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 4:25",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Then Zipporah took a flint, and cut off the foreskin of her son, and cast it at his feet; and she said, “Surely you are a bridegroom of blood to me.”"
+    },
+    "books": [
+      "Exodus",
+      "Ezekiel"
+    ],
+    "references": [
+      "Exodus 4:25",
+      "Ezekiel 3:9"
+    ],
+    "themes": [
+      "family line",
+      "blood"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Exodus 4:25",
+        "evidenceText": "Then Zipporah took a flint, and cut off the foreskin of her son, and cast it at his feet; and she said, “Surely you are a bridegroom of blood to me.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 4:25",
+        "phase": "Blood witness",
+        "evidenceText": "Then Zipporah took a flint, and cut off the foreskin of her son, and cast it at his feet; and she said, “Surely you are a bridegroom of blood to me.”"
+      },
+      {
+        "reference": "Ezekiel 3:9",
+        "phase": "Occurrence",
+        "evidenceText": "I have made your forehead as a diamond, harder than flint. Don’t be afraid of them, neither be dismayed at their looks, though they are a rebellious house.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 4:25 and continues through Ezekiel 3:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 4:25",
+        "book": "Exodus",
+        "englishText": "Then Zipporah took a flint, and cut off the foreskin of her son, and cast it at his feet; and she said, “Surely you are a bridegroom of blood to me.”"
+      },
+      {
+        "reference": "Ezekiel 3:9",
+        "book": "Ezekiel",
+        "englishText": "I have made your forehead as a diamond, harder than flint. Don’t be afraid of them, neither be dismayed at their looks, though they are a rebellious house.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

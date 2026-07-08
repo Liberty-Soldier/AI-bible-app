@@ -26,6 +26,82 @@
       "Isaiah 66:2"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5223",
+    "source": "hebrew",
+    "strong": "H5223",
+    "lemma": "נָכֶה",
+    "transliteration": "nâkeh",
+    "definition": "smitten , i.e. (literally) maimed, or (figuratively) dejected",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 4:4",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "Now Jonathan, Saul’s son, had a son who was lame in his feet. He was five years old when the news came about Saul and Jonathan out of Jezreel; and his nurse picked him up and fled. As she hurried to flee, he fell and became lame. His name was Mephibosheth."
+    },
+    "books": [
+      "2 Samuel",
+      "Isaiah"
+    ],
+    "references": [
+      "2 Samuel 4:4",
+      "2 Samuel 9:3",
+      "Isaiah 66:2"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "2 Samuel 4:4",
+        "phase": "Occurrence",
+        "evidenceText": "Now Jonathan, Saul’s son, had a son who was lame in his feet. He was five years old when the news came about Saul and Jonathan out of Jezreel; and his nurse picked him up and fled. As she hurried to flee, he fell and became lame. His name was Mephibosheth."
+      },
+      {
+        "reference": "2 Samuel 9:3",
+        "phase": "Occurrence",
+        "evidenceText": "The king said, “Is there not yet any of Saul’s house, that I may show the kindness of God to him?”"
+      },
+      {
+        "reference": "Isaiah 66:2",
+        "phase": "Occurrence",
+        "evidenceText": "For my hand has made all these things,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 4:4 and continues through Isaiah 66:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 4:4",
+        "book": "2 Samuel",
+        "englishText": "Now Jonathan, Saul’s son, had a son who was lame in his feet. He was five years old when the news came about Saul and Jonathan out of Jezreel; and his nurse picked him up and fled. As she hurried to flee, he fell and became lame. His name was Mephibosheth."
+      },
+      {
+        "reference": "2 Samuel 9:3",
+        "book": "2 Samuel",
+        "englishText": "The king said, “Is there not yet any of Saul’s house, that I may show the kindness of God to him?”"
+      },
+      {
+        "reference": "Isaiah 66:2",
+        "book": "Isaiah",
+        "englishText": "For my hand has made all these things,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

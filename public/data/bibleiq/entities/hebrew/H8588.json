@@ -28,6 +28,113 @@
       "Micah 2:9"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8588",
+    "source": "hebrew",
+    "strong": "H8588",
+    "lemma": "תַּעֲנוּג",
+    "transliteration": "taʻănûwg",
+    "definition": "luxury",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Proverbs 19:10",
+      "book": "Proverbs",
+      "bookName": "Proverbs",
+      "englishText": "Delicate living is not appropriate for a fool,"
+    },
+    "books": [
+      "Proverbs",
+      "Ecclesiastes",
+      "Song of Solomon",
+      "Micah"
+    ],
+    "references": [
+      "Proverbs 19:10",
+      "Ecclesiastes 2:8",
+      "Song of Songs 7:7",
+      "Micah 1:16",
+      "Micah 2:9"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ecclesiastes 2:8",
+        "evidenceText": "I also gathered silver and gold for myself, and the treasure of kings and of the provinces. I got myself male and female singers, and the delights of the sons of men: musical instruments, and that of all sorts."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Proverbs 19:10",
+        "phase": "Occurrence",
+        "evidenceText": "Delicate living is not appropriate for a fool,"
+      },
+      {
+        "reference": "Ecclesiastes 2:8",
+        "phase": "Genealogy",
+        "evidenceText": "I also gathered silver and gold for myself, and the treasure of kings and of the provinces. I got myself male and female singers, and the delights of the sons of men: musical instruments, and that of all sorts."
+      },
+      {
+        "reference": "Song of Songs 7:7",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "Micah 1:16",
+        "phase": "Occurrence",
+        "evidenceText": "Shave your heads,"
+      },
+      {
+        "reference": "Micah 2:9",
+        "phase": "Occurrence",
+        "evidenceText": "You drive the women of my people out from their pleasant houses;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Proverbs 19:10 and continues through Micah 2:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "Proverbs 19:10",
+        "book": "Proverbs",
+        "englishText": "Delicate living is not appropriate for a fool,"
+      },
+      {
+        "reference": "Ecclesiastes 2:8",
+        "book": "Ecclesiastes",
+        "englishText": "I also gathered silver and gold for myself, and the treasure of kings and of the provinces. I got myself male and female singers, and the delights of the sons of men: musical instruments, and that of all sorts."
+      },
+      {
+        "reference": "Song of Songs 7:7",
+        "book": "Song of Solomon",
+        "englishText": ""
+      },
+      {
+        "reference": "Micah 1:16",
+        "book": "Micah",
+        "englishText": "Shave your heads,"
+      },
+      {
+        "reference": "Micah 2:9",
+        "book": "Micah",
+        "englishText": "You drive the women of my people out from their pleasant houses;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

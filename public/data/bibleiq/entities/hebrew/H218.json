@@ -4,7 +4,7 @@
   "title": "אוּר",
   "subtitle": "H218 • Hebrew name",
   "simple": {
-    "meaning": "אוּר (ʼÛwr) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אוּר (ʼÛwr) appears 5 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, Nehemiah, beginning at Genesis 11:28. BibleIQ detects the main surrounding context as family, family line, death, Torah, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אוּר (H218) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אוּר through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,145 @@
       "Genesis 15:7",
       "1 Chronicles 11:35",
       "Nehemiah 9:7"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H218",
+    "source": "hebrew",
+    "strong": "H218",
+    "lemma": "אוּר",
+    "transliteration": "ʼÛwr",
+    "definition": "Ur , a place in Chaldaea; also an Israelite",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 11:28",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Haran died in the land of his birth, in Ur of the Chaldees, while his father Terah was still alive."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles",
+      "Nehemiah"
+    ],
+    "references": [
+      "Genesis 11:28",
+      "Genesis 11:31",
+      "Genesis 15:7",
+      "1 Chronicles 11:35",
+      "Nehemiah 9:7"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "land",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 11:28",
+        "evidenceText": "Haran died in the land of his birth, in Ur of the Chaldees, while his father Terah was still alive."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 11:31",
+        "evidenceText": "Terah took Abram his son, Lot the son of Haran, his son’s son, and Sarai his daughter-in-law, his son Abram’s wife. They went from Ur of the Chaldees, to go into the land of Canaan. They came to Haran and lived there."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 15:7",
+        "evidenceText": "He said to Abram, “I am Yahweh who brought you out of Ur of the Chaldees, to give you this land to inherit it.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 11:28",
+        "phase": "Movement or place",
+        "evidenceText": "Haran died in the land of his birth, in Ur of the Chaldees, while his father Terah was still alive."
+      },
+      {
+        "reference": "Genesis 11:31",
+        "phase": "Movement or place",
+        "evidenceText": "Terah took Abram his son, Lot the son of Haran, his son’s son, and Sarai his daughter-in-law, his son Abram’s wife. They went from Ur of the Chaldees, to go into the land of Canaan. They came to Haran and lived there."
+      },
+      {
+        "reference": "Genesis 15:7",
+        "phase": "Movement or place",
+        "evidenceText": "He said to Abram, “I am Yahweh who brought you out of Ur of the Chaldees, to give you this land to inherit it.”"
+      },
+      {
+        "reference": "1 Chronicles 11:35",
+        "phase": "Occurrence",
+        "evidenceText": "Ahiam the son of Sacar the Hararite, Eliphal the son of Ur,"
+      },
+      {
+        "reference": "Nehemiah 9:7",
+        "phase": "Occurrence",
+        "evidenceText": "You are Yahweh, the God who chose Abram, brought him out of Ur of the Chaldees, gave him the name of Abraham,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 11:28 and continues through Nehemiah 9:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 11:28",
+        "book": "Genesis",
+        "englishText": "Haran died in the land of his birth, in Ur of the Chaldees, while his father Terah was still alive."
+      },
+      {
+        "reference": "Genesis 11:31",
+        "book": "Genesis",
+        "englishText": "Terah took Abram his son, Lot the son of Haran, his son’s son, and Sarai his daughter-in-law, his son Abram’s wife. They went from Ur of the Chaldees, to go into the land of Canaan. They came to Haran and lived there."
+      },
+      {
+        "reference": "Genesis 15:7",
+        "book": "Genesis",
+        "englishText": "He said to Abram, “I am Yahweh who brought you out of Ur of the Chaldees, to give you this land to inherit it.”"
+      },
+      {
+        "reference": "1 Chronicles 11:35",
+        "book": "1 Chronicles",
+        "englishText": "Ahiam the son of Sacar the Hararite, Eliphal the son of Ur,"
+      },
+      {
+        "reference": "Nehemiah 9:7",
+        "book": "Nehemiah",
+        "englishText": "You are Yahweh, the God who chose Abram, brought him out of Ur of the Chaldees, gave him the name of Abraham,"
+      }
     ]
   },
   "evidence": {

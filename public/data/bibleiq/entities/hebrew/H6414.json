@@ -26,6 +26,80 @@
       "Job 31:11"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6414",
+    "source": "hebrew",
+    "strong": "H6414",
+    "lemma": "פָּלִיל",
+    "transliteration": "pâlîyl",
+    "definition": "a magistrate",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 21:22",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "“If men fight and hurt a pregnant woman so that she gives birth prematurely, and yet no harm follows, he shall be surely fined as much as the woman’s husband demands and the judges allow."
+    },
+    "books": [
+      "Exodus",
+      "Deuteronomy",
+      "Job"
+    ],
+    "references": [
+      "Exodus 21:22",
+      "Deuteronomy 32:31",
+      "Job 31:11"
+    ],
+    "themes": [],
+    "relationships": [
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Exodus 21:22",
+        "phase": "Occurrence",
+        "evidenceText": "“If men fight and hurt a pregnant woman so that she gives birth prematurely, and yet no harm follows, he shall be surely fined as much as the woman’s husband demands and the judges allow."
+      },
+      {
+        "reference": "Deuteronomy 32:31",
+        "phase": "Occurrence",
+        "evidenceText": "For their rock is not as our Rock,"
+      },
+      {
+        "reference": "Job 31:11",
+        "phase": "Occurrence",
+        "evidenceText": "For that would be a heinous crime."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 21:22 and continues through Job 31:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 21:22",
+        "book": "Exodus",
+        "englishText": "“If men fight and hurt a pregnant woman so that she gives birth prematurely, and yet no harm follows, he shall be surely fined as much as the woman’s husband demands and the judges allow."
+      },
+      {
+        "reference": "Deuteronomy 32:31",
+        "book": "Deuteronomy",
+        "englishText": "For their rock is not as our Rock,"
+      },
+      {
+        "reference": "Job 31:11",
+        "book": "Job",
+        "englishText": "For that would be a heinous crime."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "שַׁמּוּעַ",
   "subtitle": "H8051 • Hebrew name",
   "simple": {
-    "meaning": "שַׁמּוּעַ (Shammûwaʻ) appears 5 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "שַׁמּוּעַ (Shammûwaʻ) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, 2 Samuel, 1 Chronicles, Nehemiah, beginning at Numbers 13:4. BibleIQ detects the main surrounding context as birth, family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שַׁמּוּעַ (H8051) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שַׁמּוּעַ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,122 @@
       "1 Chronicles 14:4",
       "Nehemiah 11:17",
       "Nehemiah 12:18"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8051",
+    "source": "hebrew",
+    "strong": "H8051",
+    "lemma": "שַׁמּוּעַ",
+    "transliteration": "Shammûwaʻ",
+    "definition": "Shammua , the name of four Israelites",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 13:4",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "These were their names:"
+    },
+    "books": [
+      "Numbers",
+      "2 Samuel",
+      "1 Chronicles",
+      "Nehemiah"
+    ],
+    "references": [
+      "Numbers 13:4",
+      "2 Samuel 5:14",
+      "1 Chronicles 14:4",
+      "Nehemiah 11:17",
+      "Nehemiah 12:18"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "2 Samuel 5:14",
+        "evidenceText": "These are the names of those who were born to him in Jerusalem: Shammua, Shobab, Nathan, Solomon,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 13:4",
+        "phase": "Occurrence",
+        "evidenceText": "These were their names:"
+      },
+      {
+        "reference": "2 Samuel 5:14",
+        "phase": "Birth or introduction",
+        "evidenceText": "These are the names of those who were born to him in Jerusalem: Shammua, Shobab, Nathan, Solomon,"
+      },
+      {
+        "reference": "1 Chronicles 14:4",
+        "phase": "Occurrence",
+        "evidenceText": "These are the names of the children whom he had in Jerusalem: Shammua, Shobab, Nathan, Solomon,"
+      },
+      {
+        "reference": "Nehemiah 11:17",
+        "phase": "Occurrence",
+        "evidenceText": "and Mattaniah the son of Mica, the son of Zabdi, the son of Asaph, who was the chief to begin the thanksgiving in prayer, and Bakbukiah, the second among his brothers; and Abda the son of Shammua, the son of Galal, the son of Jeduthun."
+      },
+      {
+        "reference": "Nehemiah 12:18",
+        "phase": "Occurrence",
+        "evidenceText": "of Bilgah, Shammua; of Shemaiah, Jehonathan;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 13:4 and continues through Nehemiah 12:18.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 13:4",
+        "book": "Numbers",
+        "englishText": "These were their names:"
+      },
+      {
+        "reference": "2 Samuel 5:14",
+        "book": "2 Samuel",
+        "englishText": "These are the names of those who were born to him in Jerusalem: Shammua, Shobab, Nathan, Solomon,"
+      },
+      {
+        "reference": "1 Chronicles 14:4",
+        "book": "1 Chronicles",
+        "englishText": "These are the names of the children whom he had in Jerusalem: Shammua, Shobab, Nathan, Solomon,"
+      },
+      {
+        "reference": "Nehemiah 11:17",
+        "book": "Nehemiah",
+        "englishText": "and Mattaniah the son of Mica, the son of Zabdi, the son of Asaph, who was the chief to begin the thanksgiving in prayer, and Bakbukiah, the second among his brothers; and Abda the son of Shammua, the son of Galal, the son of Jeduthun."
+      },
+      {
+        "reference": "Nehemiah 12:18",
+        "book": "Nehemiah",
+        "englishText": "of Bilgah, Shammua; of Shemaiah, Jehonathan;"
+      }
     ]
   },
   "evidence": {

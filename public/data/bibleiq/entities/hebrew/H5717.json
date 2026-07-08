@@ -4,7 +4,7 @@
   "title": "עֲדִיאֵל",
   "subtitle": "H5717 • Hebrew name",
   "simple": {
-    "meaning": "עֲדִיאֵל (ʻĂdîyʼêl) appears 3 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "עֲדִיאֵל (ʻĂdîyʼêl) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 4:36. BibleIQ detects the main surrounding context as family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עֲדִיאֵל (H5717) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עֲדִיאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,85 @@
     "laterReferences": [
       "1 Chronicles 9:12",
       "1 Chronicles 27:25"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5717",
+    "source": "hebrew",
+    "strong": "H5717",
+    "lemma": "עֲדִיאֵל",
+    "transliteration": "ʻĂdîyʼêl",
+    "definition": "Adiel , the name of three Israelites",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 4:36",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Elioenai, Jaakobah, Jeshohaiah, Asaiah, Adiel, Jesimiel, Benaiah,"
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 4:36",
+      "1 Chronicles 9:12",
+      "1 Chronicles 27:25"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 4:36",
+        "phase": "Occurrence",
+        "evidenceText": "Elioenai, Jaakobah, Jeshohaiah, Asaiah, Adiel, Jesimiel, Benaiah,"
+      },
+      {
+        "reference": "1 Chronicles 9:12",
+        "phase": "Occurrence",
+        "evidenceText": "and Adaiah the son of Jeroham, the son of Pashhur, the son of Malchijah, and Maasai the son of Adiel, the son of Jahzerah, the son of Meshullam, the son of Meshillemith, the son of Immer;"
+      },
+      {
+        "reference": "1 Chronicles 27:25",
+        "phase": "Occurrence",
+        "evidenceText": "Over the king’s treasures was Azmaveth the son of Adiel: and over the treasures in the fields, in the cities, and in the villages, and in the towers, was Jonathan the son of Uzziah;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 4:36 and continues through 1 Chronicles 27:25.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 4:36",
+        "book": "1 Chronicles",
+        "englishText": "Elioenai, Jaakobah, Jeshohaiah, Asaiah, Adiel, Jesimiel, Benaiah,"
+      },
+      {
+        "reference": "1 Chronicles 9:12",
+        "book": "1 Chronicles",
+        "englishText": "and Adaiah the son of Jeroham, the son of Pashhur, the son of Malchijah, and Maasai the son of Adiel, the son of Jahzerah, the son of Meshullam, the son of Meshillemith, the son of Immer;"
+      },
+      {
+        "reference": "1 Chronicles 27:25",
+        "book": "1 Chronicles",
+        "englishText": "Over the king’s treasures was Azmaveth the son of Adiel: and over the treasures in the fields, in the cities, and in the villages, and in the towers, was Jonathan the son of Uzziah;"
+      }
     ]
   },
   "evidence": {

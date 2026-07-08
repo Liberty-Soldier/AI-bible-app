@@ -29,6 +29,132 @@
       "Isaiah 51:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5365",
+    "source": "hebrew",
+    "strong": "H5365",
+    "lemma": "נָקַר",
+    "transliteration": "nâqar",
+    "definition": "to bore ( penetrate , quarry )",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 16:14",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Moreover you haven’t brought us into a land flowing with milk and honey, nor given us inheritance of fields and vineyards. Will you put out the eyes of these men? We won’t come up.”"
+    },
+    "books": [
+      "Numbers",
+      "Judges",
+      "1 Samuel",
+      "Job",
+      "Proverbs",
+      "Isaiah"
+    ],
+    "references": [
+      "Numbers 16:14",
+      "Judges 16:21",
+      "1 Samuel 11:2",
+      "Job 30:17",
+      "Proverbs 30:17",
+      "Isaiah 51:1"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Numbers 16:14",
+        "evidenceText": "Moreover you haven’t brought us into a land flowing with milk and honey, nor given us inheritance of fields and vineyards. Will you put out the eyes of these men? We won’t come up.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 16:14",
+        "phase": "Movement or place",
+        "evidenceText": "Moreover you haven’t brought us into a land flowing with milk and honey, nor given us inheritance of fields and vineyards. Will you put out the eyes of these men? We won’t come up.”"
+      },
+      {
+        "reference": "Judges 16:21",
+        "phase": "Occurrence",
+        "evidenceText": "The Philistines laid hold on him and put out his eyes; and they brought him down to Gaza and bound him with fetters of bronze; and he ground at the mill in the prison."
+      },
+      {
+        "reference": "1 Samuel 11:2",
+        "phase": "Occurrence",
+        "evidenceText": "Nahash the Ammonite said to them, “On this condition I will make it with you, that all your right eyes be gouged out. I will make this dishonor all Israel.”"
+      },
+      {
+        "reference": "Job 30:17",
+        "phase": "Occurrence",
+        "evidenceText": "In the night season my bones are pierced in me,"
+      },
+      {
+        "reference": "Proverbs 30:17",
+        "phase": "Occurrence",
+        "evidenceText": "“The eye that mocks at his father,"
+      },
+      {
+        "reference": "Isaiah 51:1",
+        "phase": "Occurrence",
+        "evidenceText": "“Listen to me, you who follow after righteousness,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 16:14 and continues through Isaiah 51:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 16:14",
+        "book": "Numbers",
+        "englishText": "Moreover you haven’t brought us into a land flowing with milk and honey, nor given us inheritance of fields and vineyards. Will you put out the eyes of these men? We won’t come up.”"
+      },
+      {
+        "reference": "Judges 16:21",
+        "book": "Judges",
+        "englishText": "The Philistines laid hold on him and put out his eyes; and they brought him down to Gaza and bound him with fetters of bronze; and he ground at the mill in the prison."
+      },
+      {
+        "reference": "1 Samuel 11:2",
+        "book": "1 Samuel",
+        "englishText": "Nahash the Ammonite said to them, “On this condition I will make it with you, that all your right eyes be gouged out. I will make this dishonor all Israel.”"
+      },
+      {
+        "reference": "Job 30:17",
+        "book": "Job",
+        "englishText": "In the night season my bones are pierced in me,"
+      },
+      {
+        "reference": "Proverbs 30:17",
+        "book": "Proverbs",
+        "englishText": "“The eye that mocks at his father,"
+      },
+      {
+        "reference": "Isaiah 51:1",
+        "book": "Isaiah",
+        "englishText": "“Listen to me, you who follow after righteousness,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

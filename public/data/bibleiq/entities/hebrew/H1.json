@@ -4,7 +4,7 @@
   "title": "אָב",
   "subtitle": "H1 • Hebrew name",
   "simple": {
-    "meaning": "אָב (ʼâb) appears 1213 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "אָב (ʼâb) appears 1213 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
     "biblicalBackground": "The first appearances are in Genesis, beginning at Genesis 2:24. BibleIQ detects the main surrounding context as birth, family, family line, death, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אָב (H1) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אָב through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,385 @@
       "Genesis 9:18",
       "Genesis 9:22",
       "Genesis 9:23"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1",
+    "source": "hebrew",
+    "strong": "H1",
+    "lemma": "אָב",
+    "transliteration": "ʼâb",
+    "definition": "father , in a literal and immediate, or figurative and remote application",
+    "occurrenceCount": 1213,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 2:24",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Therefore a man will leave his father and his mother, and will join with his wife, and they will be one flesh."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 2:24",
+      "Genesis 4:20",
+      "Genesis 4:21",
+      "Genesis 9:18",
+      "Genesis 9:22",
+      "Genesis 9:23",
+      "Genesis 10:21",
+      "Genesis 11:28"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "land",
+      "covenant"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 4:20",
+        "evidenceText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 9:18",
+        "evidenceText": "The sons of Noah who went out from the ship were Shem, Ham, and Japheth. Ham is the father of Canaan."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 10:21",
+        "evidenceText": "Children were also born to Shem (the elder brother of Japheth), the father of all the children of Eber."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 11:28",
+        "evidenceText": "Haran died in the land of his birth, in Ur of the Chaldees, while his father Terah was still alive."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 11:29",
+        "evidenceText": "Abram and Nahor married wives. The name of Abram’s wife was Sarai, and the name of Nahor’s wife was Milcah, the daughter of Haran, who was also the father of Iscah."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 12:1",
+        "evidenceText": "Now Yahweh said to Abram, “Leave your country, and your relatives, and your father’s house, and go to the land that I will show you."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 19:31",
+        "evidenceText": "The firstborn said to the younger, “Our father is old, and there is not a man in the earth to come in to us in the way of all the earth."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 19:33",
+        "evidenceText": "They made their father drink wine that night: and the firstborn went in, and lay with her father. He didn’t know when she lay down, nor when she arose."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 19:34",
+        "evidenceText": "It came to pass on the next day, that the firstborn said to the younger, “Behold, I lay last night with my father. Let’s make him drink wine again tonight. You go in, and lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 19:37",
+        "evidenceText": "The firstborn bore a son, and named him Moab. He is the father of the Moabites to this day."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 19:38",
+        "evidenceText": "The younger also bore a son, and called his name Ben Ammi. He is the father of the children of Ammon to this day."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 20:12",
+        "evidenceText": "Besides, she is indeed my sister, the daughter of my father, but not the daughter of my mother; and she became my wife."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 2:24",
+        "phase": "Occurrence",
+        "evidenceText": "Therefore a man will leave his father and his mother, and will join with his wife, and they will be one flesh."
+      },
+      {
+        "reference": "Genesis 4:20",
+        "phase": "Birth or introduction",
+        "evidenceText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      },
+      {
+        "reference": "Genesis 4:21",
+        "phase": "Occurrence",
+        "evidenceText": "His brother’s name was Jubal, who was the father of all who handle the harp and pipe."
+      },
+      {
+        "reference": "Genesis 9:18",
+        "phase": "Movement or place",
+        "evidenceText": "The sons of Noah who went out from the ship were Shem, Ham, and Japheth. Ham is the father of Canaan."
+      },
+      {
+        "reference": "Genesis 9:22",
+        "phase": "Occurrence",
+        "evidenceText": "Ham, the father of Canaan, saw the nakedness of his father, and told his two brothers outside."
+      },
+      {
+        "reference": "Genesis 9:22",
+        "phase": "Occurrence",
+        "evidenceText": "Ham, the father of Canaan, saw the nakedness of his father, and told his two brothers outside."
+      },
+      {
+        "reference": "Genesis 9:23",
+        "phase": "Occurrence",
+        "evidenceText": "Shem and Japheth took a garment, and laid it on both their shoulders, went in backwards, and covered the nakedness of their father. Their faces were backwards, and they didn’t see their father’s nakedness."
+      },
+      {
+        "reference": "Genesis 9:23",
+        "phase": "Occurrence",
+        "evidenceText": "Shem and Japheth took a garment, and laid it on both their shoulders, went in backwards, and covered the nakedness of their father. Their faces were backwards, and they didn’t see their father’s nakedness."
+      },
+      {
+        "reference": "Genesis 10:21",
+        "phase": "Birth or introduction",
+        "evidenceText": "Children were also born to Shem (the elder brother of Japheth), the father of all the children of Eber."
+      },
+      {
+        "reference": "Genesis 11:28",
+        "phase": "Movement or place",
+        "evidenceText": "Haran died in the land of his birth, in Ur of the Chaldees, while his father Terah was still alive."
+      },
+      {
+        "reference": "Genesis 11:29",
+        "phase": "Genealogy",
+        "evidenceText": "Abram and Nahor married wives. The name of Abram’s wife was Sarai, and the name of Nahor’s wife was Milcah, the daughter of Haran, who was also the father of Iscah."
+      },
+      {
+        "reference": "Genesis 11:29",
+        "phase": "Genealogy",
+        "evidenceText": "Abram and Nahor married wives. The name of Abram’s wife was Sarai, and the name of Nahor’s wife was Milcah, the daughter of Haran, who was also the father of Iscah."
+      },
+      {
+        "reference": "Genesis 12:1",
+        "phase": "Movement or place",
+        "evidenceText": "Now Yahweh said to Abram, “Leave your country, and your relatives, and your father’s house, and go to the land that I will show you."
+      },
+      {
+        "reference": "Genesis 15:15",
+        "phase": "Occurrence",
+        "evidenceText": "but you will go to your fathers in peace. You will be buried at a good old age."
+      },
+      {
+        "reference": "Genesis 17:4",
+        "phase": "Occurrence",
+        "evidenceText": "“As for me, behold, my covenant is with you. You will be the father of a multitude of nations."
+      },
+      {
+        "reference": "Genesis 17:5",
+        "phase": "Occurrence",
+        "evidenceText": "Your name will no more be called Abram, but your name will be Abraham; for I have made you the father of a multitude of nations."
+      },
+      {
+        "reference": "Genesis 19:31",
+        "phase": "Birth or introduction",
+        "evidenceText": "The firstborn said to the younger, “Our father is old, and there is not a man in the earth to come in to us in the way of all the earth."
+      },
+      {
+        "reference": "Genesis 19:32",
+        "phase": "Occurrence",
+        "evidenceText": "Come, let’s make our father drink wine, and we will lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "reference": "Genesis 19:32",
+        "phase": "Occurrence",
+        "evidenceText": "Come, let’s make our father drink wine, and we will lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "reference": "Genesis 19:33",
+        "phase": "Birth or introduction",
+        "evidenceText": "They made their father drink wine that night: and the firstborn went in, and lay with her father. He didn’t know when she lay down, nor when she arose."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 2:24 and continues through Genesis 34:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 2:24",
+        "book": "Genesis",
+        "englishText": "Therefore a man will leave his father and his mother, and will join with his wife, and they will be one flesh."
+      },
+      {
+        "reference": "Genesis 4:20",
+        "book": "Genesis",
+        "englishText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      },
+      {
+        "reference": "Genesis 4:21",
+        "book": "Genesis",
+        "englishText": "His brother’s name was Jubal, who was the father of all who handle the harp and pipe."
+      },
+      {
+        "reference": "Genesis 9:18",
+        "book": "Genesis",
+        "englishText": "The sons of Noah who went out from the ship were Shem, Ham, and Japheth. Ham is the father of Canaan."
+      },
+      {
+        "reference": "Genesis 9:22",
+        "book": "Genesis",
+        "englishText": "Ham, the father of Canaan, saw the nakedness of his father, and told his two brothers outside."
+      },
+      {
+        "reference": "Genesis 9:22",
+        "book": "Genesis",
+        "englishText": "Ham, the father of Canaan, saw the nakedness of his father, and told his two brothers outside."
+      },
+      {
+        "reference": "Genesis 9:23",
+        "book": "Genesis",
+        "englishText": "Shem and Japheth took a garment, and laid it on both their shoulders, went in backwards, and covered the nakedness of their father. Their faces were backwards, and they didn’t see their father’s nakedness."
+      },
+      {
+        "reference": "Genesis 9:23",
+        "book": "Genesis",
+        "englishText": "Shem and Japheth took a garment, and laid it on both their shoulders, went in backwards, and covered the nakedness of their father. Their faces were backwards, and they didn’t see their father’s nakedness."
+      },
+      {
+        "reference": "Genesis 10:21",
+        "book": "Genesis",
+        "englishText": "Children were also born to Shem (the elder brother of Japheth), the father of all the children of Eber."
+      },
+      {
+        "reference": "Genesis 11:28",
+        "book": "Genesis",
+        "englishText": "Haran died in the land of his birth, in Ur of the Chaldees, while his father Terah was still alive."
+      },
+      {
+        "reference": "Genesis 11:29",
+        "book": "Genesis",
+        "englishText": "Abram and Nahor married wives. The name of Abram’s wife was Sarai, and the name of Nahor’s wife was Milcah, the daughter of Haran, who was also the father of Iscah."
+      },
+      {
+        "reference": "Genesis 11:29",
+        "book": "Genesis",
+        "englishText": "Abram and Nahor married wives. The name of Abram’s wife was Sarai, and the name of Nahor’s wife was Milcah, the daughter of Haran, who was also the father of Iscah."
+      },
+      {
+        "reference": "Genesis 12:1",
+        "book": "Genesis",
+        "englishText": "Now Yahweh said to Abram, “Leave your country, and your relatives, and your father’s house, and go to the land that I will show you."
+      },
+      {
+        "reference": "Genesis 15:15",
+        "book": "Genesis",
+        "englishText": "but you will go to your fathers in peace. You will be buried at a good old age."
+      },
+      {
+        "reference": "Genesis 17:4",
+        "book": "Genesis",
+        "englishText": "“As for me, behold, my covenant is with you. You will be the father of a multitude of nations."
+      },
+      {
+        "reference": "Genesis 17:5",
+        "book": "Genesis",
+        "englishText": "Your name will no more be called Abram, but your name will be Abraham; for I have made you the father of a multitude of nations."
+      },
+      {
+        "reference": "Genesis 19:31",
+        "book": "Genesis",
+        "englishText": "The firstborn said to the younger, “Our father is old, and there is not a man in the earth to come in to us in the way of all the earth."
+      },
+      {
+        "reference": "Genesis 19:32",
+        "book": "Genesis",
+        "englishText": "Come, let’s make our father drink wine, and we will lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "reference": "Genesis 19:32",
+        "book": "Genesis",
+        "englishText": "Come, let’s make our father drink wine, and we will lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "reference": "Genesis 19:33",
+        "book": "Genesis",
+        "englishText": "They made their father drink wine that night: and the firstborn went in, and lay with her father. He didn’t know when she lay down, nor when she arose."
+      },
+      {
+        "reference": "Genesis 19:33",
+        "book": "Genesis",
+        "englishText": "They made their father drink wine that night: and the firstborn went in, and lay with her father. He didn’t know when she lay down, nor when she arose."
+      },
+      {
+        "reference": "Genesis 19:34",
+        "book": "Genesis",
+        "englishText": "It came to pass on the next day, that the firstborn said to the younger, “Behold, I lay last night with my father. Let’s make him drink wine again tonight. You go in, and lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "reference": "Genesis 19:34",
+        "book": "Genesis",
+        "englishText": "It came to pass on the next day, that the firstborn said to the younger, “Behold, I lay last night with my father. Let’s make him drink wine again tonight. You go in, and lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "reference": "Genesis 19:35",
+        "book": "Genesis",
+        "englishText": "They made their father drink wine that night also. The younger went and lay with him. He didn’t know when she lay down, nor when she got up."
+      },
+      {
+        "reference": "Genesis 19:36",
+        "book": "Genesis",
+        "englishText": "Thus both of Lot’s daughters were with child by their father."
+      }
     ]
   },
   "evidence": {

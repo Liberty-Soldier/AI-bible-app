@@ -25,6 +25,85 @@
       "1 Chronicles 1:7"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1721",
+    "source": "hebrew",
+    "strong": "H1721",
+    "lemma": "דֹּדָנִים",
+    "transliteration": "Dôdânîym",
+    "definition": "Dodanites , or descendants of a son of Javan",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:4",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Javan were: Elishah, Tarshish, Kittim, and Dodanim."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 10:4",
+      "1 Chronicles 1:7"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 10:4",
+        "evidenceText": "The sons of Javan were: Elishah, Tarshish, Kittim, and Dodanim."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:7",
+        "evidenceText": "The sons of Javan: Elishah, Tarshish, Kittim, and Rodanim."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 10:4",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Javan were: Elishah, Tarshish, Kittim, and Dodanim."
+      },
+      {
+        "reference": "1 Chronicles 1:7",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Javan: Elishah, Tarshish, Kittim, and Rodanim."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:4 and continues through 1 Chronicles 1:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:4",
+        "book": "Genesis",
+        "englishText": "The sons of Javan were: Elishah, Tarshish, Kittim, and Dodanim."
+      },
+      {
+        "reference": "1 Chronicles 1:7",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Javan: Elishah, Tarshish, Kittim, and Rodanim."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

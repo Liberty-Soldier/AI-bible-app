@@ -27,6 +27,105 @@
       "Micah 5:5"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5248",
+    "source": "hebrew",
+    "strong": "H5248",
+    "lemma": "נִמְרוֹד",
+    "transliteration": "Nimrôwd",
+    "definition": "Nimrod , a son of Cush",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:8",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Cush became the father of Nimrod. He began to be a mighty one in the earth."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles",
+      "Micah"
+    ],
+    "references": [
+      "Genesis 10:8",
+      "Genesis 10:9",
+      "1 Chronicles 1:10",
+      "Micah 5:5"
+    ],
+    "themes": [
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Micah 5:5",
+        "evidenceText": "He will be our peace when Assyria invades our land,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 10:8",
+        "phase": "Occurrence",
+        "evidenceText": "Cush became the father of Nimrod. He began to be a mighty one in the earth."
+      },
+      {
+        "reference": "Genesis 10:9",
+        "phase": "Occurrence",
+        "evidenceText": "He was a mighty hunter before Yahweh. Therefore it is said, “like Nimrod, a mighty hunter before Yahweh”."
+      },
+      {
+        "reference": "1 Chronicles 1:10",
+        "phase": "Occurrence",
+        "evidenceText": "Cush became the father of Nimrod. He began to be a mighty one in the earth."
+      },
+      {
+        "reference": "Micah 5:5",
+        "phase": "Movement or place",
+        "evidenceText": "He will be our peace when Assyria invades our land,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:8 and continues through Micah 5:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:8",
+        "book": "Genesis",
+        "englishText": "Cush became the father of Nimrod. He began to be a mighty one in the earth."
+      },
+      {
+        "reference": "Genesis 10:9",
+        "book": "Genesis",
+        "englishText": "He was a mighty hunter before Yahweh. Therefore it is said, “like Nimrod, a mighty hunter before Yahweh”."
+      },
+      {
+        "reference": "1 Chronicles 1:10",
+        "book": "1 Chronicles",
+        "englishText": "Cush became the father of Nimrod. He began to be a mighty one in the earth."
+      },
+      {
+        "reference": "Micah 5:5",
+        "book": "Micah",
+        "englishText": "He will be our peace when Assyria invades our land,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

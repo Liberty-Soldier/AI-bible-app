@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0",
+  "profile": "default",
+  "indexes": {
+    "evidence": "indexes/evidence.json",
+    "relationships": "indexes/relationships.json",
+    "events": "indexes/events.json",
+    "themes": "indexes/themes.json"
+  },
+  "lite": {
+    "evidence": "lite/evidence-lite.json",
+    "relationships": "lite/relationship-counts.json",
+    "events": "lite/event-counts.json",
+    "themes": "lite/theme-counts.json"
+  }
+}

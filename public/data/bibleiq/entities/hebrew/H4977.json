@@ -4,7 +4,7 @@
   "title": "מַתָּן",
   "subtitle": "H4977 • Hebrew name",
   "simple": {
-    "meaning": "מַתָּן (Mattân) appears 3 times in the Hebrew Scriptures and is introduced in connection with priesthood. The surrounding account also brings the name into death.",
+    "meaning": "מַתָּן (Mattân) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with priesthood. The surrounding account also brings the name into death.",
     "biblicalBackground": "The first appearances are in 2 Kings, 2 Chronicles, Jeremiah, beginning at 2 Kings 11:18. BibleIQ detects the main surrounding context as family line, altar, death, priesthood, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מַתָּן (H4977) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מַתָּן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,102 @@
     "laterReferences": [
       "2 Chronicles 23:17",
       "Jeremiah 38:1"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4977",
+    "source": "hebrew",
+    "strong": "H4977",
+    "lemma": "מַתָּן",
+    "transliteration": "Mattân",
+    "definition": "Mattan , the name of a priest of Baal, and of an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Kings 11:18",
+      "book": "2 Kings",
+      "bookName": "2 Kings",
+      "englishText": "All the people of the land went to the house of Baal, and broke it down. They broke his altars and his images in pieces thoroughly, and killed Mattan the priest of Baal before the altars. The priest appointed officers over Yahweh’s house."
+    },
+    "books": [
+      "2 Kings",
+      "2 Chronicles",
+      "Jeremiah"
+    ],
+    "references": [
+      "2 Kings 11:18",
+      "2 Chronicles 23:17",
+      "Jeremiah 38:1"
+    ],
+    "themes": [
+      "family line",
+      "priesthood",
+      "death",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "2 Kings 11:18",
+        "evidenceText": "All the people of the land went to the house of Baal, and broke it down. They broke his altars and his images in pieces thoroughly, and killed Mattan the priest of Baal before the altars. The priest appointed officers over Yahweh’s house."
+      },
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "2 Chronicles 23:17",
+        "evidenceText": "All the people went to the house of Baal, broke it down, broke his altars and his images in pieces, and killed Mattan the priest of Baal before the altars."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Kings 11:18",
+        "phase": "Death",
+        "evidenceText": "All the people of the land went to the house of Baal, and broke it down. They broke his altars and his images in pieces thoroughly, and killed Mattan the priest of Baal before the altars. The priest appointed officers over Yahweh’s house."
+      },
+      {
+        "reference": "2 Chronicles 23:17",
+        "phase": "Death",
+        "evidenceText": "All the people went to the house of Baal, broke it down, broke his altars and his images in pieces, and killed Mattan the priest of Baal before the altars."
+      },
+      {
+        "reference": "Jeremiah 38:1",
+        "phase": "Occurrence",
+        "evidenceText": "Shephatiah the son of Mattan, and Gedaliah the son of Pashhur, and Jucal the son of Shelemiah, and Pashhur the son of Malchijah, heard the words that Jeremiah spoke to all the people, saying,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Kings 11:18 and continues through Jeremiah 38:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Kings 11:18",
+        "book": "2 Kings",
+        "englishText": "All the people of the land went to the house of Baal, and broke it down. They broke his altars and his images in pieces thoroughly, and killed Mattan the priest of Baal before the altars. The priest appointed officers over Yahweh’s house."
+      },
+      {
+        "reference": "2 Chronicles 23:17",
+        "book": "2 Chronicles",
+        "englishText": "All the people went to the house of Baal, broke it down, broke his altars and his images in pieces, and killed Mattan the priest of Baal before the altars."
+      },
+      {
+        "reference": "Jeremiah 38:1",
+        "book": "Jeremiah",
+        "englishText": "Shephatiah the son of Mattan, and Gedaliah the son of Pashhur, and Jucal the son of Shelemiah, and Pashhur the son of Malchijah, heard the words that Jeremiah spoke to all the people, saying,"
+      }
     ]
   },
   "evidence": {

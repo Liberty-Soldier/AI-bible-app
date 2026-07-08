@@ -4,7 +4,7 @@
   "title": "יְרִיָּה",
   "subtitle": "H3404 • Hebrew name",
   "simple": {
-    "meaning": "יְרִיָּה (Yᵉrîyâh) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "יְרִיָּה (Yᵉrîyâh) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 23:19. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יְרִיָּה (H3404) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יְרִיָּה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,109 @@
     "laterReferences": [
       "1 Chronicles 24:23",
       "1 Chronicles 26:31"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3404",
+    "source": "hebrew",
+    "strong": "H3404",
+    "lemma": "יְרִיָּה",
+    "transliteration": "Yᵉrîyâh",
+    "definition": "Jerijah , an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 23:19",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Hebron: Jeriah the chief, Amariah the second, Jahaziel the third, and Jekameam the fourth."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 23:19",
+      "1 Chronicles 24:23",
+      "1 Chronicles 26:31"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 23:19",
+        "evidenceText": "The sons of Hebron: Jeriah the chief, Amariah the second, Jahaziel the third, and Jekameam the fourth."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 24:23",
+        "evidenceText": "The sons of Hebron: Jeriah, Amariah the second, Jahaziel the third, and Jekameam the fourth."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 26:31",
+        "evidenceText": "Of the Hebronites, Jerijah was the chief, even of the Hebronites, according to their generations by fathers’ households. They were sought for in the fortieth year of the reign of David, and mighty men of valor were found among them at Jazer of Gilead."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 23:19",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Hebron: Jeriah the chief, Amariah the second, Jahaziel the third, and Jekameam the fourth."
+      },
+      {
+        "reference": "1 Chronicles 24:23",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Hebron: Jeriah, Amariah the second, Jahaziel the third, and Jekameam the fourth."
+      },
+      {
+        "reference": "1 Chronicles 26:31",
+        "phase": "Genealogy",
+        "evidenceText": "Of the Hebronites, Jerijah was the chief, even of the Hebronites, according to their generations by fathers’ households. They were sought for in the fortieth year of the reign of David, and mighty men of valor were found among them at Jazer of Gilead."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 23:19 and continues through 1 Chronicles 26:31.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 23:19",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Hebron: Jeriah the chief, Amariah the second, Jahaziel the third, and Jekameam the fourth."
+      },
+      {
+        "reference": "1 Chronicles 24:23",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Hebron: Jeriah, Amariah the second, Jahaziel the third, and Jekameam the fourth."
+      },
+      {
+        "reference": "1 Chronicles 26:31",
+        "book": "1 Chronicles",
+        "englishText": "Of the Hebronites, Jerijah was the chief, even of the Hebronites, according to their generations by fathers’ households. They were sought for in the fortieth year of the reign of David, and mighty men of valor were found among them at Jazer of Gilead."
+      }
     ]
   },
   "evidence": {

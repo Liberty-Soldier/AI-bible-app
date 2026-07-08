@@ -4,7 +4,7 @@
   "title": "מַחֲלַת",
   "subtitle": "H4258 • Hebrew name",
   "simple": {
-    "meaning": "מַחֲלַת (Machălath) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מַחֲלַת (Machălath) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 2 Chronicles, beginning at Genesis 28:9. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מַחֲלַת (H4258) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מַחֲלַת through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,103 @@
     ],
     "laterReferences": [
       "2 Chronicles 11:18"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4258",
+    "source": "hebrew",
+    "strong": "H4258",
+    "lemma": "מַחֲלַת",
+    "transliteration": "Machălath",
+    "definition": "Machalath , the name of an Ishmaelitess and of an Israelitess",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 28:9",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Esau went to Ishmael, and took, in addition to the wives that he had, Mahalath the daughter of Ishmael, Abraham’s son, the sister of Nebaioth, to be his wife."
+    },
+    "books": [
+      "Genesis",
+      "2 Chronicles"
+    ],
+    "references": [
+      "Genesis 28:9",
+      "2 Chronicles 11:18"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 28:9",
+        "evidenceText": "Esau went to Ishmael, and took, in addition to the wives that he had, Mahalath the daughter of Ishmael, Abraham’s son, the sister of Nebaioth, to be his wife."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Chronicles 11:18",
+        "evidenceText": "Rehoboam took a wife for himself, Mahalath the daughter of Jerimoth the son of David and of Abihail the daughter of Eliab the son of Jesse."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 28:9",
+        "phase": "Genealogy",
+        "evidenceText": "Esau went to Ishmael, and took, in addition to the wives that he had, Mahalath the daughter of Ishmael, Abraham’s son, the sister of Nebaioth, to be his wife."
+      },
+      {
+        "reference": "2 Chronicles 11:18",
+        "phase": "Genealogy",
+        "evidenceText": "Rehoboam took a wife for himself, Mahalath the daughter of Jerimoth the son of David and of Abihail the daughter of Eliab the son of Jesse."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 28:9 and continues through 2 Chronicles 11:18.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 28:9",
+        "book": "Genesis",
+        "englishText": "Esau went to Ishmael, and took, in addition to the wives that he had, Mahalath the daughter of Ishmael, Abraham’s son, the sister of Nebaioth, to be his wife."
+      },
+      {
+        "reference": "2 Chronicles 11:18",
+        "book": "2 Chronicles",
+        "englishText": "Rehoboam took a wife for himself, Mahalath the daughter of Jerimoth the son of David and of Abihail the daughter of Eliab the son of Jesse."
+      }
     ]
   },
   "evidence": {

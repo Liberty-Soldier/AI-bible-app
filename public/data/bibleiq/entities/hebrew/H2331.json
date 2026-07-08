@@ -4,7 +4,7 @@
   "title": "חָוָה",
   "subtitle": "H2331 • Hebrew word",
   "simple": {
-    "meaning": "חָוָה (châvâh) appears 6 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "חָוָה (châvâh) appears 6 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Job, Psalms, beginning at Job 15:17. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חָוָה (H2331) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חָוָה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,117 @@
       "Job 32:17",
       "Job 36:2",
       "Psalms 19:3"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2331",
+    "source": "hebrew",
+    "strong": "H2331",
+    "lemma": "חָוָה",
+    "transliteration": "châvâh",
+    "definition": "properly, to live ; by implication (intensively) to declare or show",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Job 15:17",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "“I will show you, listen to me;"
+    },
+    "books": [
+      "Job",
+      "Psalms"
+    ],
+    "references": [
+      "Job 15:17",
+      "Job 32:6",
+      "Job 32:10",
+      "Job 32:17",
+      "Job 36:2",
+      "Psalms 19:3"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Job 15:17",
+        "phase": "Occurrence",
+        "evidenceText": "“I will show you, listen to me;"
+      },
+      {
+        "reference": "Job 32:6",
+        "phase": "Occurrence",
+        "evidenceText": "Elihu the son of Barachel the Buzite answered,"
+      },
+      {
+        "reference": "Job 32:10",
+        "phase": "Occurrence",
+        "evidenceText": "Therefore I said, ‘Listen to me;"
+      },
+      {
+        "reference": "Job 32:17",
+        "phase": "Occurrence",
+        "evidenceText": "I also will answer my part,"
+      },
+      {
+        "reference": "Job 36:2",
+        "phase": "Occurrence",
+        "evidenceText": "“Bear with me a little, and I will show you;"
+      },
+      {
+        "reference": "Psalms 19:3",
+        "phase": "Occurrence",
+        "evidenceText": "There is no speech nor language,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 15:17 and continues through Psalms 19:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 15:17",
+        "book": "Job",
+        "englishText": "“I will show you, listen to me;"
+      },
+      {
+        "reference": "Job 32:6",
+        "book": "Job",
+        "englishText": "Elihu the son of Barachel the Buzite answered,"
+      },
+      {
+        "reference": "Job 32:10",
+        "book": "Job",
+        "englishText": "Therefore I said, ‘Listen to me;"
+      },
+      {
+        "reference": "Job 32:17",
+        "book": "Job",
+        "englishText": "I also will answer my part,"
+      },
+      {
+        "reference": "Job 36:2",
+        "book": "Job",
+        "englishText": "“Bear with me a little, and I will show you;"
+      },
+      {
+        "reference": "Psalms 19:3",
+        "book": "Psalms",
+        "englishText": "There is no speech nor language,"
+      }
     ]
   },
   "evidence": {

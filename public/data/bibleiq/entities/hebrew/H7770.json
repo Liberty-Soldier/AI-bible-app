@@ -4,7 +4,7 @@
   "title": "שׁוּעַ",
   "subtitle": "H7770 • Hebrew name",
   "simple": {
-    "meaning": "שׁוּעַ (Shûwaʻ) appears 2 times in the Hebrew Scriptures and is introduced in connection with flocks.",
+    "meaning": "שׁוּעַ (Shûwaʻ) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with flocks.",
     "biblicalBackground": "The first appearances are in Genesis, beginning at Genesis 38:2. BibleIQ detects the main surrounding context as family line, death.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שׁוּעַ (H7770) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שׁוּעַ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,85 @@
     ],
     "laterReferences": [
       "Genesis 38:12"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7770",
+    "source": "hebrew",
+    "strong": "H7770",
+    "lemma": "שׁוּעַ",
+    "transliteration": "Shûwaʻ",
+    "definition": "Shua , a Canaanite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 38:2",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "There, Judah saw the daughter of a certain Canaanite man named Shua. He took her, and went in to her."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 38:2",
+      "Genesis 38:12"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 38:2",
+        "evidenceText": "There, Judah saw the daughter of a certain Canaanite man named Shua. He took her, and went in to her."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 38:2",
+        "phase": "Genealogy",
+        "evidenceText": "There, Judah saw the daughter of a certain Canaanite man named Shua. He took her, and went in to her."
+      },
+      {
+        "reference": "Genesis 38:12",
+        "phase": "Occurrence",
+        "evidenceText": "After many days, Shua’s daughter, the wife of Judah, died. Judah was comforted, and went up to his sheep shearers to Timnah, he and his friend Hirah, the Adullamite."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 38:2 and continues through Genesis 38:12.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 38:2",
+        "book": "Genesis",
+        "englishText": "There, Judah saw the daughter of a certain Canaanite man named Shua. He took her, and went in to her."
+      },
+      {
+        "reference": "Genesis 38:12",
+        "book": "Genesis",
+        "englishText": "After many days, Shua’s daughter, the wife of Judah, died. Judah was comforted, and went up to his sheep shearers to Timnah, he and his friend Hirah, the Adullamite."
+      }
     ]
   },
   "evidence": {

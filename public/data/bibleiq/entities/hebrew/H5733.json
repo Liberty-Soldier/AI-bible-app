@@ -25,6 +25,79 @@
       "Nehemiah 12:15"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5733",
+    "source": "hebrew",
+    "strong": "H5733",
+    "lemma": "עַדְנָא",
+    "transliteration": "ʻAdnâʼ",
+    "definition": "Adna , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 10:30",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "Of the sons of Pahathmoab: Adna, and Chelal, Benaiah, Maaseiah, Mattaniah, Bezalel, and Binnui, and Manasseh."
+    },
+    "books": [
+      "Ezra",
+      "Nehemiah"
+    ],
+    "references": [
+      "Ezra 10:30",
+      "Nehemiah 12:15"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ezra 10:30",
+        "evidenceText": "Of the sons of Pahathmoab: Adna, and Chelal, Benaiah, Maaseiah, Mattaniah, Bezalel, and Binnui, and Manasseh."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 10:30",
+        "phase": "Genealogy",
+        "evidenceText": "Of the sons of Pahathmoab: Adna, and Chelal, Benaiah, Maaseiah, Mattaniah, Bezalel, and Binnui, and Manasseh."
+      },
+      {
+        "reference": "Nehemiah 12:15",
+        "phase": "Occurrence",
+        "evidenceText": "of Harim, Adna; of Meraioth, Helkai;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ezra 10:30 and continues through Nehemiah 12:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 10:30",
+        "book": "Ezra",
+        "englishText": "Of the sons of Pahathmoab: Adna, and Chelal, Benaiah, Maaseiah, Mattaniah, Bezalel, and Binnui, and Manasseh."
+      },
+      {
+        "reference": "Nehemiah 12:15",
+        "book": "Nehemiah",
+        "englishText": "of Harim, Adna; of Meraioth, Helkai;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

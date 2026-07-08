@@ -27,6 +27,120 @@
       "1 Chronicles 2:28"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H208",
+    "source": "hebrew",
+    "strong": "H208",
+    "lemma": "אוֹנָם",
+    "transliteration": "ʼÔwnâm",
+    "definition": "Onam , the name of an Edomite and of an Israelite",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:23",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "These are the children of Shobal: Alvan, Manahath, Ebal, Shepho, and Onam."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:23",
+      "1 Chronicles 1:40",
+      "1 Chronicles 2:26",
+      "1 Chronicles 2:28"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:40",
+        "evidenceText": "The sons of Shobal: Alian, Manahath, Ebal, Shephi, and Onam. The sons of Zibeon: Aiah and Anah."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:28",
+        "evidenceText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:23",
+        "phase": "Occurrence",
+        "evidenceText": "These are the children of Shobal: Alvan, Manahath, Ebal, Shepho, and Onam."
+      },
+      {
+        "reference": "1 Chronicles 1:40",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Shobal: Alian, Manahath, Ebal, Shephi, and Onam. The sons of Zibeon: Aiah and Anah."
+      },
+      {
+        "reference": "1 Chronicles 2:26",
+        "phase": "Occurrence",
+        "evidenceText": "Jerahmeel had another wife, whose name was Atarah. She was the mother of Onam."
+      },
+      {
+        "reference": "1 Chronicles 2:28",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:23 and continues through 1 Chronicles 2:28.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:23",
+        "book": "Genesis",
+        "englishText": "These are the children of Shobal: Alvan, Manahath, Ebal, Shepho, and Onam."
+      },
+      {
+        "reference": "1 Chronicles 1:40",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Shobal: Alian, Manahath, Ebal, Shephi, and Onam. The sons of Zibeon: Aiah and Anah."
+      },
+      {
+        "reference": "1 Chronicles 2:26",
+        "book": "1 Chronicles",
+        "englishText": "Jerahmeel had another wife, whose name was Atarah. She was the mother of Onam."
+      },
+      {
+        "reference": "1 Chronicles 2:28",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

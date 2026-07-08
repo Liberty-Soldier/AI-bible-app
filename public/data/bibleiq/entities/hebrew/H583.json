@@ -4,7 +4,7 @@
   "title": "אֱנוֹשׁ",
   "subtitle": "H583 • Hebrew name",
   "simple": {
-    "meaning": "אֱנוֹשׁ (ʼĔnôwsh) appears 7 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אֱנוֹשׁ (ʼĔnôwsh) appears 7 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 4:26. BibleIQ detects the main surrounding context as birth, family, family line, death.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֱנוֹשׁ (H583) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֱנוֹשׁ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,147 @@
       "Genesis 5:9",
       "Genesis 5:10",
       "Genesis 5:11"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H583",
+    "source": "hebrew",
+    "strong": "H583",
+    "lemma": "אֱנוֹשׁ",
+    "transliteration": "ʼĔnôwsh",
+    "definition": "Enosh , a son of Seth",
+    "occurrenceCount": 7,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 4:26",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "A son was also born to Seth, and he named him Enosh. At that time men began to call on Yahweh’s name."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 4:26",
+      "Genesis 5:6",
+      "Genesis 5:7",
+      "Genesis 5:9",
+      "Genesis 5:10",
+      "Genesis 5:11",
+      "1 Chronicles 1:1"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 4:26",
+        "evidenceText": "A son was also born to Seth, and he named him Enosh. At that time men began to call on Yahweh’s name."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 4:26",
+        "phase": "Birth or introduction",
+        "evidenceText": "A son was also born to Seth, and he named him Enosh. At that time men began to call on Yahweh’s name."
+      },
+      {
+        "reference": "Genesis 5:6",
+        "phase": "Occurrence",
+        "evidenceText": "Seth lived one hundred five years, then became the father of Enosh."
+      },
+      {
+        "reference": "Genesis 5:7",
+        "phase": "Occurrence",
+        "evidenceText": "Seth lived after he became the father of Enosh eight hundred seven years, and became the father of other sons and daughters."
+      },
+      {
+        "reference": "Genesis 5:9",
+        "phase": "Occurrence",
+        "evidenceText": "Enosh lived ninety years, and became the father of Kenan."
+      },
+      {
+        "reference": "Genesis 5:10",
+        "phase": "Occurrence",
+        "evidenceText": "Enosh lived after he became the father of Kenan eight hundred fifteen years, and became the father of other sons and daughters."
+      },
+      {
+        "reference": "Genesis 5:11",
+        "phase": "Occurrence",
+        "evidenceText": "All of the days of Enosh were nine hundred five years, then he died."
+      },
+      {
+        "reference": "1 Chronicles 1:1",
+        "phase": "Occurrence",
+        "evidenceText": "Adam, Seth, Enosh,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 4:26 and continues through 1 Chronicles 1:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 4:26",
+        "book": "Genesis",
+        "englishText": "A son was also born to Seth, and he named him Enosh. At that time men began to call on Yahweh’s name."
+      },
+      {
+        "reference": "Genesis 5:6",
+        "book": "Genesis",
+        "englishText": "Seth lived one hundred five years, then became the father of Enosh."
+      },
+      {
+        "reference": "Genesis 5:7",
+        "book": "Genesis",
+        "englishText": "Seth lived after he became the father of Enosh eight hundred seven years, and became the father of other sons and daughters."
+      },
+      {
+        "reference": "Genesis 5:9",
+        "book": "Genesis",
+        "englishText": "Enosh lived ninety years, and became the father of Kenan."
+      },
+      {
+        "reference": "Genesis 5:10",
+        "book": "Genesis",
+        "englishText": "Enosh lived after he became the father of Kenan eight hundred fifteen years, and became the father of other sons and daughters."
+      },
+      {
+        "reference": "Genesis 5:11",
+        "book": "Genesis",
+        "englishText": "All of the days of Enosh were nine hundred five years, then he died."
+      },
+      {
+        "reference": "1 Chronicles 1:1",
+        "book": "1 Chronicles",
+        "englishText": "Adam, Seth, Enosh,"
+      }
     ]
   },
   "evidence": {

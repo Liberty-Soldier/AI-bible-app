@@ -29,6 +29,153 @@
       "Psalms 119:166"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7663",
+    "source": "hebrew",
+    "strong": "H7663",
+    "lemma": "שָׂבַר",
+    "transliteration": "sâbar",
+    "definition": "to scrutinize ; by implication (of watching) to expect (with hope and patience)",
+    "occurrenceCount": 8,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Ruth 1:13",
+      "book": "Ruth",
+      "bookName": "Ruth",
+      "englishText": "would you then wait until they were grown? Would you then refrain from having husbands? No, my daughters, for it grieves me seriously for your sakes, for Yahweh’s hand has gone out against me.”"
+    },
+    "books": [
+      "Ruth",
+      "Nehemiah",
+      "Esther",
+      "Psalms",
+      "Isaiah"
+    ],
+    "references": [
+      "Ruth 1:13",
+      "Nehemiah 2:13",
+      "Nehemiah 2:15",
+      "Esther 9:1",
+      "Psalms 104:27",
+      "Psalms 119:166",
+      "Psalms 145:15",
+      "Isaiah 38:18"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "commandment"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Nehemiah 2:13",
+        "evidenceText": "I went out by night by the valley gate, even toward the jackal’s well, then to the dung gate, and inspected the walls of Jerusalem, which were broken down, and its gates were consumed with fire."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ruth 1:13",
+        "phase": "Occurrence",
+        "evidenceText": "would you then wait until they were grown? Would you then refrain from having husbands? No, my daughters, for it grieves me seriously for your sakes, for Yahweh’s hand has gone out against me.”"
+      },
+      {
+        "reference": "Nehemiah 2:13",
+        "phase": "Movement or place",
+        "evidenceText": "I went out by night by the valley gate, even toward the jackal’s well, then to the dung gate, and inspected the walls of Jerusalem, which were broken down, and its gates were consumed with fire."
+      },
+      {
+        "reference": "Nehemiah 2:15",
+        "phase": "Occurrence",
+        "evidenceText": "Then I went up in the night by the brook, and inspected the wall; and I turned back, and entered by the valley gate, and so returned."
+      },
+      {
+        "reference": "Esther 9:1",
+        "phase": "Occurrence",
+        "evidenceText": "Now in the twelfth month, which is the month Adar, on the thirteenth day of the month, when the king’s commandment and his decree came near to be put in execution, on the day that the enemies of the Jews hoped to conquer them, (but it was turned out the opposite happened, that the Jews conquered those who hated them),"
+      },
+      {
+        "reference": "Psalms 104:27",
+        "phase": "Occurrence",
+        "evidenceText": "These all wait for you,"
+      },
+      {
+        "reference": "Psalms 119:166",
+        "phase": "Occurrence",
+        "evidenceText": "I have hoped for your salvation, Yahweh."
+      },
+      {
+        "reference": "Psalms 145:15",
+        "phase": "Occurrence",
+        "evidenceText": "The eyes of all wait for you."
+      },
+      {
+        "reference": "Isaiah 38:18",
+        "phase": "Occurrence",
+        "evidenceText": "For Sheol† Sheol is the place of the dead. can’t praise you."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ruth 1:13 and continues through Isaiah 38:18.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ruth 1:13",
+        "book": "Ruth",
+        "englishText": "would you then wait until they were grown? Would you then refrain from having husbands? No, my daughters, for it grieves me seriously for your sakes, for Yahweh’s hand has gone out against me.”"
+      },
+      {
+        "reference": "Nehemiah 2:13",
+        "book": "Nehemiah",
+        "englishText": "I went out by night by the valley gate, even toward the jackal’s well, then to the dung gate, and inspected the walls of Jerusalem, which were broken down, and its gates were consumed with fire."
+      },
+      {
+        "reference": "Nehemiah 2:15",
+        "book": "Nehemiah",
+        "englishText": "Then I went up in the night by the brook, and inspected the wall; and I turned back, and entered by the valley gate, and so returned."
+      },
+      {
+        "reference": "Esther 9:1",
+        "book": "Esther",
+        "englishText": "Now in the twelfth month, which is the month Adar, on the thirteenth day of the month, when the king’s commandment and his decree came near to be put in execution, on the day that the enemies of the Jews hoped to conquer them, (but it was turned out the opposite happened, that the Jews conquered those who hated them),"
+      },
+      {
+        "reference": "Psalms 104:27",
+        "book": "Psalms",
+        "englishText": "These all wait for you,"
+      },
+      {
+        "reference": "Psalms 119:166",
+        "book": "Psalms",
+        "englishText": "I have hoped for your salvation, Yahweh."
+      },
+      {
+        "reference": "Psalms 145:15",
+        "book": "Psalms",
+        "englishText": "The eyes of all wait for you."
+      },
+      {
+        "reference": "Isaiah 38:18",
+        "book": "Isaiah",
+        "englishText": "For Sheol† Sheol is the place of the dead. can’t praise you."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

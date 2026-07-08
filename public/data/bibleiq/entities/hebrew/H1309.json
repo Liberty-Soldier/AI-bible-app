@@ -29,6 +29,123 @@
       "2 Kings 7:9"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1309",
+    "source": "hebrew",
+    "strong": "H1309",
+    "lemma": "בְּשׂוֹרָה",
+    "transliteration": "bᵉsôwrâh",
+    "definition": "glad tidings ; by implication, reward for good news",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 4:10",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "when someone told me, ‘Behold, Saul is dead,’ thinking that he brought good news, I seized him and killed him in Ziklag, which was the reward I gave him for his news."
+    },
+    "books": [
+      "2 Samuel",
+      "2 Kings"
+    ],
+    "references": [
+      "2 Samuel 4:10",
+      "2 Samuel 18:20",
+      "2 Samuel 18:22",
+      "2 Samuel 18:25",
+      "2 Samuel 18:27",
+      "2 Kings 7:9"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "death"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "2 Samuel 4:10",
+        "evidenceText": "when someone told me, ‘Behold, Saul is dead,’ thinking that he brought good news, I seized him and killed him in Ziklag, which was the reward I gave him for his news."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Samuel 4:10",
+        "phase": "Death",
+        "evidenceText": "when someone told me, ‘Behold, Saul is dead,’ thinking that he brought good news, I seized him and killed him in Ziklag, which was the reward I gave him for his news."
+      },
+      {
+        "reference": "2 Samuel 18:20",
+        "phase": "Occurrence",
+        "evidenceText": "Joab said to him, “You must not be the bearer of news today, but you must carry news another day. But today you must carry no news, because the king’s son is dead.”"
+      },
+      {
+        "reference": "2 Samuel 18:22",
+        "phase": "Occurrence",
+        "evidenceText": "Then Ahimaaz the son of Zadok said yet again to Joab, “But come what may, please let me also run after the Cushite.”"
+      },
+      {
+        "reference": "2 Samuel 18:25",
+        "phase": "Occurrence",
+        "evidenceText": "The watchman cried, and told the king. The king said, “If he is alone, there is news in his mouth.” He came closer and closer."
+      },
+      {
+        "reference": "2 Samuel 18:27",
+        "phase": "Occurrence",
+        "evidenceText": "The watchman said, “I think the running of the first one is like the running of Ahimaaz the son of Zadok.”"
+      },
+      {
+        "reference": "2 Kings 7:9",
+        "phase": "Occurrence",
+        "evidenceText": "Then they said to one another, “We aren’t doing right. Today is a day of good news, and we keep silent. If we wait until the morning light, punishment will overtake us. Now therefore come, let’s go and tell the king’s household.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 4:10 and continues through 2 Kings 7:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 4:10",
+        "book": "2 Samuel",
+        "englishText": "when someone told me, ‘Behold, Saul is dead,’ thinking that he brought good news, I seized him and killed him in Ziklag, which was the reward I gave him for his news."
+      },
+      {
+        "reference": "2 Samuel 18:20",
+        "book": "2 Samuel",
+        "englishText": "Joab said to him, “You must not be the bearer of news today, but you must carry news another day. But today you must carry no news, because the king’s son is dead.”"
+      },
+      {
+        "reference": "2 Samuel 18:22",
+        "book": "2 Samuel",
+        "englishText": "Then Ahimaaz the son of Zadok said yet again to Joab, “But come what may, please let me also run after the Cushite.”"
+      },
+      {
+        "reference": "2 Samuel 18:25",
+        "book": "2 Samuel",
+        "englishText": "The watchman cried, and told the king. The king said, “If he is alone, there is news in his mouth.” He came closer and closer."
+      },
+      {
+        "reference": "2 Samuel 18:27",
+        "book": "2 Samuel",
+        "englishText": "The watchman said, “I think the running of the first one is like the running of Ahimaaz the son of Zadok.”"
+      },
+      {
+        "reference": "2 Kings 7:9",
+        "book": "2 Kings",
+        "englishText": "Then they said to one another, “We aren’t doing right. Today is a day of good news, and we keep silent. If we wait until the morning light, punishment will overtake us. Now therefore come, let’s go and tell the king’s household.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

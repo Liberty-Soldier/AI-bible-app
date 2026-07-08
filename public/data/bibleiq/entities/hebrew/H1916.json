@@ -4,7 +4,7 @@
   "title": "הֲדֹם",
   "subtitle": "H1916 • Hebrew word",
   "simple": {
-    "meaning": "הֲדֹם (hădôm) appears 6 times in the Hebrew Scriptures and is introduced as a brother in the family line and in connection with kingship.",
+    "meaning": "הֲדֹם (hădôm) appears 6 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Psalms, Isaiah, Lamentations, beginning at 1 Chronicles 28:2. BibleIQ detects the main surrounding context as family, family line, covenant, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to הֲדֹם (H1916) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows הֲדֹם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,134 @@
       "Psalms 132:7",
       "Isaiah 66:1",
       "Lamentations 2:1"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1916",
+    "source": "hebrew",
+    "strong": "H1916",
+    "lemma": "הֲדֹם",
+    "transliteration": "hădôm",
+    "definition": "a footstool",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 28:2",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Then David the king stood up on his feet, and said, “Hear me, my brothers, and my people! As for me, it was in my heart to build a house of rest for the ark of Yahweh’s covenant, and for the footstool of our God; and I had prepared for the building."
+    },
+    "books": [
+      "1 Chronicles",
+      "Psalms",
+      "Isaiah",
+      "Lamentations"
+    ],
+    "references": [
+      "1 Chronicles 28:2",
+      "Psalms 99:5",
+      "Psalms 110:1",
+      "Psalms 132:7",
+      "Isaiah 66:1",
+      "Lamentations 2:1"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship",
+      "covenant"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Lamentations 2:1",
+        "evidenceText": "How has the Lord covered the daughter of Zion with a cloud in his anger!"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 28:2",
+        "phase": "Occurrence",
+        "evidenceText": "Then David the king stood up on his feet, and said, “Hear me, my brothers, and my people! As for me, it was in my heart to build a house of rest for the ark of Yahweh’s covenant, and for the footstool of our God; and I had prepared for the building."
+      },
+      {
+        "reference": "Psalms 99:5",
+        "phase": "Occurrence",
+        "evidenceText": "Exalt Yahweh our God."
+      },
+      {
+        "reference": "Psalms 110:1",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh says to my Lord, “Sit at my right hand,"
+      },
+      {
+        "reference": "Psalms 132:7",
+        "phase": "Occurrence",
+        "evidenceText": "“We will go into his dwelling place."
+      },
+      {
+        "reference": "Isaiah 66:1",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh says,"
+      },
+      {
+        "reference": "Lamentations 2:1",
+        "phase": "Genealogy",
+        "evidenceText": "How has the Lord covered the daughter of Zion with a cloud in his anger!"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 28:2 and continues through Lamentations 2:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 28:2",
+        "book": "1 Chronicles",
+        "englishText": "Then David the king stood up on his feet, and said, “Hear me, my brothers, and my people! As for me, it was in my heart to build a house of rest for the ark of Yahweh’s covenant, and for the footstool of our God; and I had prepared for the building."
+      },
+      {
+        "reference": "Psalms 99:5",
+        "book": "Psalms",
+        "englishText": "Exalt Yahweh our God."
+      },
+      {
+        "reference": "Psalms 110:1",
+        "book": "Psalms",
+        "englishText": "Yahweh says to my Lord, “Sit at my right hand,"
+      },
+      {
+        "reference": "Psalms 132:7",
+        "book": "Psalms",
+        "englishText": "“We will go into his dwelling place."
+      },
+      {
+        "reference": "Isaiah 66:1",
+        "book": "Isaiah",
+        "englishText": "Yahweh says,"
+      },
+      {
+        "reference": "Lamentations 2:1",
+        "book": "Lamentations",
+        "englishText": "How has the Lord covered the daughter of Zion with a cloud in his anger!"
+      }
     ]
   },
   "evidence": {

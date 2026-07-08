@@ -4,7 +4,7 @@
   "title": "אֱלִישֶׁבַע",
   "subtitle": "H472 • Hebrew name",
   "simple": {
-    "meaning": "אֱלִישֶׁבַע (ʼĔlîyshebaʻ) appears once in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אֱלִישֶׁבַע (ʼĔlîyshebaʻ) appears once in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Exodus, beginning at Exodus 6:23. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֱלִישֶׁבַע (H472) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֱלִישֶׁבַע through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -22,6 +22,80 @@
       "Narrative context"
     ],
     "laterReferences": []
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H472",
+    "source": "hebrew",
+    "strong": "H472",
+    "lemma": "אֱלִישֶׁבַע",
+    "transliteration": "ʼĔlîyshebaʻ",
+    "definition": "Elisheba , the wife of Aaron",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 6:23",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Aaron took Elisheba, the daughter of Amminadab, the sister of Nahshon, as his wife; and she bore him Nadab and Abihu, Eleazar and Ithamar."
+    },
+    "books": [
+      "Exodus"
+    ],
+    "references": [
+      "Exodus 6:23"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Exodus 6:23",
+        "evidenceText": "Aaron took Elisheba, the daughter of Amminadab, the sister of Nahshon, as his wife; and she bore him Nadab and Abihu, Eleazar and Ithamar."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 6:23",
+        "phase": "Genealogy",
+        "evidenceText": "Aaron took Elisheba, the daughter of Amminadab, the sister of Nahshon, as his wife; and she bore him Nadab and Abihu, Eleazar and Ithamar."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Exodus 6:23.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 6:23",
+        "book": "Exodus",
+        "englishText": "Aaron took Elisheba, the daughter of Amminadab, the sister of Nahshon, as his wife; and she bore him Nadab and Abihu, Eleazar and Ithamar."
+      }
+    ]
   },
   "evidence": {
     "originalLanguage": {

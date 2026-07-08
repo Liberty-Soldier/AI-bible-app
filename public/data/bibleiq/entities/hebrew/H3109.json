@@ -4,7 +4,7 @@
   "title": "יוֹחָא",
   "subtitle": "H3109 • Hebrew name",
   "simple": {
-    "meaning": "יוֹחָא (Yôwchâʼ) appears 2 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "יוֹחָא (Yôwchâʼ) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 8:16. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יוֹחָא (H3109) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יוֹחָא through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,86 @@
     ],
     "laterReferences": [
       "1 Chronicles 11:45"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3109",
+    "source": "hebrew",
+    "strong": "H3109",
+    "lemma": "יוֹחָא",
+    "transliteration": "Yôwchâʼ",
+    "definition": "Jocha , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 8:16",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Michael, Ishpah, Joha, the sons of Beriah,"
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 8:16",
+      "1 Chronicles 11:45"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 8:16",
+        "evidenceText": "Michael, Ishpah, Joha, the sons of Beriah,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 8:16",
+        "phase": "Genealogy",
+        "evidenceText": "Michael, Ishpah, Joha, the sons of Beriah,"
+      },
+      {
+        "reference": "1 Chronicles 11:45",
+        "phase": "Occurrence",
+        "evidenceText": "Jediael the son of Shimri, and Joha his brother, the Tizite,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 8:16 and continues through 1 Chronicles 11:45.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 8:16",
+        "book": "1 Chronicles",
+        "englishText": "Michael, Ishpah, Joha, the sons of Beriah,"
+      },
+      {
+        "reference": "1 Chronicles 11:45",
+        "book": "1 Chronicles",
+        "englishText": "Jediael the son of Shimri, and Joha his brother, the Tizite,"
+      }
     ]
   },
   "evidence": {

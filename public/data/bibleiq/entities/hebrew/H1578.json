@@ -26,6 +26,96 @@
       "Jeremiah 51:56"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1578",
+    "source": "hebrew",
+    "strong": "H1578",
+    "lemma": "גְּמוּלָה",
+    "transliteration": "gᵉmûwlâh",
+    "definition": "meaning the same",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 19:37",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "Please let your servant turn back again, that I may die in my own city, by the grave of my father and my mother. But behold, your servant Chimham; let him go over with my lord the king; and do to him what shall seem good to you.”"
+    },
+    "books": [
+      "2 Samuel",
+      "Isaiah",
+      "Jeremiah"
+    ],
+    "references": [
+      "2 Samuel 19:37",
+      "Isaiah 59:18",
+      "Jeremiah 51:56"
+    ],
+    "themes": [
+      "family",
+      "kingship",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "2 Samuel 19:37",
+        "evidenceText": "Please let your servant turn back again, that I may die in my own city, by the grave of my father and my mother. But behold, your servant Chimham; let him go over with my lord the king; and do to him what shall seem good to you.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Samuel 19:37",
+        "phase": "Movement or place",
+        "evidenceText": "Please let your servant turn back again, that I may die in my own city, by the grave of my father and my mother. But behold, your servant Chimham; let him go over with my lord the king; and do to him what shall seem good to you.”"
+      },
+      {
+        "reference": "Isaiah 59:18",
+        "phase": "Occurrence",
+        "evidenceText": "According to their deeds,"
+      },
+      {
+        "reference": "Jeremiah 51:56",
+        "phase": "Occurrence",
+        "evidenceText": "For the destroyer has come on her,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 19:37 and continues through Jeremiah 51:56.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 19:37",
+        "book": "2 Samuel",
+        "englishText": "Please let your servant turn back again, that I may die in my own city, by the grave of my father and my mother. But behold, your servant Chimham; let him go over with my lord the king; and do to him what shall seem good to you.”"
+      },
+      {
+        "reference": "Isaiah 59:18",
+        "book": "Isaiah",
+        "englishText": "According to their deeds,"
+      },
+      {
+        "reference": "Jeremiah 51:56",
+        "book": "Jeremiah",
+        "englishText": "For the destroyer has come on her,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

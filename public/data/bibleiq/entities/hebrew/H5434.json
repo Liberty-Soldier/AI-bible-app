@@ -4,7 +4,7 @@
   "title": "סְבָא",
   "subtitle": "H5434 • Hebrew name",
   "simple": {
-    "meaning": "סְבָא (Çᵉbâʼ) appears 4 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "סְבָא (Çᵉbâʼ) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, Psalms, Isaiah, beginning at Genesis 10:7. BibleIQ detects the main surrounding context as family line, kingship, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to סְבָא (H5434) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows סְבָא through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,119 @@
       "1 Chronicles 1:9",
       "Psalms 72:10",
       "Isaiah 43:3"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5434",
+    "source": "hebrew",
+    "strong": "H5434",
+    "lemma": "סְבָא",
+    "transliteration": "Çᵉbâʼ",
+    "definition": "Seba , a son of Cush, and the country settled by him",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:7",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Cush were: Seba, Havilah, Sabtah, Raamah, and Sabteca. The sons of Raamah were: Sheba and Dedan."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles",
+      "Psalms",
+      "Isaiah"
+    ],
+    "references": [
+      "Genesis 10:7",
+      "1 Chronicles 1:9",
+      "Psalms 72:10",
+      "Isaiah 43:3"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 10:7",
+        "evidenceText": "The sons of Cush were: Seba, Havilah, Sabtah, Raamah, and Sabteca. The sons of Raamah were: Sheba and Dedan."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:9",
+        "evidenceText": "The sons of Cush: Seba, Havilah, Sabta, Raama, Sabteca. The sons of Raamah: Sheba and Dedan."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Psalms 72:10",
+        "evidenceText": "The kings of Tarshish and of the islands will bring tribute."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 10:7",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Cush were: Seba, Havilah, Sabtah, Raamah, and Sabteca. The sons of Raamah were: Sheba and Dedan."
+      },
+      {
+        "reference": "1 Chronicles 1:9",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Cush: Seba, Havilah, Sabta, Raama, Sabteca. The sons of Raamah: Sheba and Dedan."
+      },
+      {
+        "reference": "Psalms 72:10",
+        "phase": "Movement or place",
+        "evidenceText": "The kings of Tarshish and of the islands will bring tribute."
+      },
+      {
+        "reference": "Isaiah 43:3",
+        "phase": "Occurrence",
+        "evidenceText": "For I am Yahweh your God,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:7 and continues through Isaiah 43:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:7",
+        "book": "Genesis",
+        "englishText": "The sons of Cush were: Seba, Havilah, Sabtah, Raamah, and Sabteca. The sons of Raamah were: Sheba and Dedan."
+      },
+      {
+        "reference": "1 Chronicles 1:9",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Cush: Seba, Havilah, Sabta, Raama, Sabteca. The sons of Raamah: Sheba and Dedan."
+      },
+      {
+        "reference": "Psalms 72:10",
+        "book": "Psalms",
+        "englishText": "The kings of Tarshish and of the islands will bring tribute."
+      },
+      {
+        "reference": "Isaiah 43:3",
+        "book": "Isaiah",
+        "englishText": "For I am Yahweh your God,"
+      }
     ]
   },
   "evidence": {

@@ -25,6 +25,83 @@
       "Isaiah 63:9"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2551",
+    "source": "hebrew",
+    "strong": "H2551",
+    "lemma": "חֶמְלָה",
+    "transliteration": "chemlâh",
+    "definition": "commiseration",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 19:16",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "But he lingered; and the men grabbed his hand, his wife’s hand, and his two daughters’ hands, Yahweh being merciful to him; and they took him out, and set him outside of the city."
+    },
+    "books": [
+      "Genesis",
+      "Isaiah"
+    ],
+    "references": [
+      "Genesis 19:16",
+      "Isaiah 63:9"
+    ],
+    "themes": [
+      "family line",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 19:16",
+        "evidenceText": "But he lingered; and the men grabbed his hand, his wife’s hand, and his two daughters’ hands, Yahweh being merciful to him; and they took him out, and set him outside of the city."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 19:16",
+        "phase": "Movement or place",
+        "evidenceText": "But he lingered; and the men grabbed his hand, his wife’s hand, and his two daughters’ hands, Yahweh being merciful to him; and they took him out, and set him outside of the city."
+      },
+      {
+        "reference": "Isaiah 63:9",
+        "phase": "Occurrence",
+        "evidenceText": "In all their affliction he was afflicted,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 19:16 and continues through Isaiah 63:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 19:16",
+        "book": "Genesis",
+        "englishText": "But he lingered; and the men grabbed his hand, his wife’s hand, and his two daughters’ hands, Yahweh being merciful to him; and they took him out, and set him outside of the city."
+      },
+      {
+        "reference": "Isaiah 63:9",
+        "book": "Isaiah",
+        "englishText": "In all their affliction he was afflicted,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -26,6 +26,85 @@
       "1 Chronicles 20:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2757",
+    "source": "hebrew",
+    "strong": "H2757",
+    "lemma": "חָרִיץ",
+    "transliteration": "chârîyts",
+    "definition": "properly, incisure or (passively) incised ; hence, a threshing-sledge (with sharp teeth); also a slice (as cut)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 17:18",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "and bring these ten cheeses to the captain of their thousand, and see how your brothers are doing, and bring back news.”"
+    },
+    "books": [
+      "1 Samuel",
+      "2 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Samuel 17:18",
+      "2 Samuel 12:31",
+      "1 Chronicles 20:3"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Samuel 17:18",
+        "phase": "Occurrence",
+        "evidenceText": "and bring these ten cheeses to the captain of their thousand, and see how your brothers are doing, and bring back news.”"
+      },
+      {
+        "reference": "2 Samuel 12:31",
+        "phase": "Occurrence",
+        "evidenceText": "He brought out the people who were in it, and put them under saws, under iron picks, under axes of iron, and made them pass through the brick kiln; and he did so to all the cities of the children of Ammon. Then David and all the people returned to Jerusalem."
+      },
+      {
+        "reference": "1 Chronicles 20:3",
+        "phase": "Occurrence",
+        "evidenceText": "He brought out the people who were in it, and had them cut with saws, with iron picks, and with axes. David did so to all the cities of the children of Ammon. Then David and all the people returned to Jerusalem."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 17:18 and continues through 1 Chronicles 20:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 17:18",
+        "book": "1 Samuel",
+        "englishText": "and bring these ten cheeses to the captain of their thousand, and see how your brothers are doing, and bring back news.”"
+      },
+      {
+        "reference": "2 Samuel 12:31",
+        "book": "2 Samuel",
+        "englishText": "He brought out the people who were in it, and put them under saws, under iron picks, under axes of iron, and made them pass through the brick kiln; and he did so to all the cities of the children of Ammon. Then David and all the people returned to Jerusalem."
+      },
+      {
+        "reference": "1 Chronicles 20:3",
+        "book": "1 Chronicles",
+        "englishText": "He brought out the people who were in it, and had them cut with saws, with iron picks, and with axes. David did so to all the cities of the children of Ammon. Then David and all the people returned to Jerusalem."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

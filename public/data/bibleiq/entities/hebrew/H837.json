@@ -23,6 +23,65 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H837",
+    "source": "hebrew",
+    "strong": "H837",
+    "lemma": "אֹשֶׁר",
+    "transliteration": "ʼôsher",
+    "definition": "happiness",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 30:13",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Leah said, “Happy am I, for the daughters will call me happy.” She named him Asher."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 30:13"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "naming",
+        "label": "Naming",
+        "reference": "Genesis 30:13",
+        "evidenceText": "Leah said, “Happy am I, for the daughters will call me happy.” She named him Asher."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 30:13",
+        "phase": "Naming",
+        "evidenceText": "Leah said, “Happy am I, for the daughters will call me happy.” She named him Asher."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Genesis 30:13.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 30:13",
+        "book": "Genesis",
+        "englishText": "Leah said, “Happy am I, for the daughters will call me happy.” She named him Asher."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

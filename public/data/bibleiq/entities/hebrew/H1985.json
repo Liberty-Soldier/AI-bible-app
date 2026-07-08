@@ -4,7 +4,7 @@
   "title": "הִלֵּל",
   "subtitle": "H1985 • Hebrew name",
   "simple": {
-    "meaning": "הִלֵּל (Hillêl) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "הִלֵּל (Hillêl) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Judges, beginning at Judges 12:13. BibleIQ detects the main surrounding context as family line, death, land, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to הִלֵּל (H1985) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows הִלֵּל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,81 @@
     ],
     "laterReferences": [
       "Judges 12:15"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1985",
+    "source": "hebrew",
+    "strong": "H1985",
+    "lemma": "הִלֵּל",
+    "transliteration": "Hillêl",
+    "definition": "Hillel , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Judges 12:13",
+      "book": "Judges",
+      "bookName": "Judges",
+      "englishText": "After him, Abdon the son of Hillel the Pirathonite judged Israel."
+    },
+    "books": [
+      "Judges"
+    ],
+    "references": [
+      "Judges 12:13",
+      "Judges 12:15"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Judges 12:15",
+        "evidenceText": "Abdon the son of Hillel the Pirathonite died, and was buried in Pirathon in the land of Ephraim, in the hill country of the Amalekites."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Judges 12:13",
+        "phase": "Occurrence",
+        "evidenceText": "After him, Abdon the son of Hillel the Pirathonite judged Israel."
+      },
+      {
+        "reference": "Judges 12:15",
+        "phase": "Movement or place",
+        "evidenceText": "Abdon the son of Hillel the Pirathonite died, and was buried in Pirathon in the land of Ephraim, in the hill country of the Amalekites."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Judges 12:13 and continues through Judges 12:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Judges 12:13",
+        "book": "Judges",
+        "englishText": "After him, Abdon the son of Hillel the Pirathonite judged Israel."
+      },
+      {
+        "reference": "Judges 12:15",
+        "book": "Judges",
+        "englishText": "Abdon the son of Hillel the Pirathonite died, and was buried in Pirathon in the land of Ephraim, in the hill country of the Amalekites."
+      }
     ]
   },
   "evidence": {

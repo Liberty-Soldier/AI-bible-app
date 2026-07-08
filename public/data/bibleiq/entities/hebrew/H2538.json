@@ -4,7 +4,7 @@
   "title": "חָמוּל",
   "subtitle": "H2538 • Hebrew name",
   "simple": {
-    "meaning": "חָמוּל (Châmûwl) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "חָמוּל (Châmûwl) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, Numbers, 1 Chronicles, beginning at Genesis 46:12. BibleIQ detects the main surrounding context as family line, death, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חָמוּל (H2538) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חָמוּל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,106 @@
     "laterReferences": [
       "Numbers 26:21",
       "1 Chronicles 2:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2538",
+    "source": "hebrew",
+    "strong": "H2538",
+    "lemma": "חָמוּל",
+    "transliteration": "Châmûwl",
+    "definition": "Chamul , an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:12",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Judah: Er, Onan, Shelah, Perez, and Zerah; but Er and Onan died in the land of Canaan. The sons of Perez were Hezron and Hamul."
+    },
+    "books": [
+      "Genesis",
+      "Numbers",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 46:12",
+      "Numbers 26:21",
+      "1 Chronicles 2:5"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 46:12",
+        "evidenceText": "The sons of Judah: Er, Onan, Shelah, Perez, and Zerah; but Er and Onan died in the land of Canaan. The sons of Perez were Hezron and Hamul."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 26:21",
+        "evidenceText": "The sons of Perez were: of Hezron, the family of the Hezronites; of Hamul, the family of the Hamulites."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:5",
+        "evidenceText": "The sons of Perez: Hezron and Hamul."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:12",
+        "phase": "Movement or place",
+        "evidenceText": "The sons of Judah: Er, Onan, Shelah, Perez, and Zerah; but Er and Onan died in the land of Canaan. The sons of Perez were Hezron and Hamul."
+      },
+      {
+        "reference": "Numbers 26:21",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Perez were: of Hezron, the family of the Hezronites; of Hamul, the family of the Hamulites."
+      },
+      {
+        "reference": "1 Chronicles 2:5",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Perez: Hezron and Hamul."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:12 and continues through 1 Chronicles 2:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:12",
+        "book": "Genesis",
+        "englishText": "The sons of Judah: Er, Onan, Shelah, Perez, and Zerah; but Er and Onan died in the land of Canaan. The sons of Perez were Hezron and Hamul."
+      },
+      {
+        "reference": "Numbers 26:21",
+        "book": "Numbers",
+        "englishText": "The sons of Perez were: of Hezron, the family of the Hezronites; of Hamul, the family of the Hamulites."
+      },
+      {
+        "reference": "1 Chronicles 2:5",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Perez: Hezron and Hamul."
+      }
     ]
   },
   "evidence": {

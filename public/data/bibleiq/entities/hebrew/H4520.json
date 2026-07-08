@@ -27,6 +27,107 @@
       "1 Chronicles 26:32"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4520",
+    "source": "hebrew",
+    "strong": "H4520",
+    "lemma": "מְנַשִּׁי",
+    "transliteration": "Mᵉnashshîy",
+    "definition": "a Menashshite or descendant of Menashsheh",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 4:43",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "Bezer in the wilderness, in the plain country, for the Reubenites; and Ramoth in Gilead for the Gadites; and Golan in Bashan for the Manassites."
+    },
+    "books": [
+      "Deuteronomy",
+      "2 Kings",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Deuteronomy 4:43",
+      "Deuteronomy 29:7",
+      "2 Kings 10:33",
+      "1 Chronicles 26:32"
+    ],
+    "themes": [
+      "family",
+      "kingship",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "2 Kings 10:33",
+        "evidenceText": "from the Jordan eastward, all the land of Gilead, the Gadites, and the Reubenites, and the Manassites, from Aroer, which is by the valley of the Arnon, even Gilead and Bashan."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 4:43",
+        "phase": "Occurrence",
+        "evidenceText": "Bezer in the wilderness, in the plain country, for the Reubenites; and Ramoth in Gilead for the Gadites; and Golan in Bashan for the Manassites."
+      },
+      {
+        "reference": "Deuteronomy 29:7",
+        "phase": "Occurrence",
+        "evidenceText": "When you came to this place, Sihon the king of Heshbon and Og the king of Bashan came out against us to battle, and we struck them."
+      },
+      {
+        "reference": "2 Kings 10:33",
+        "phase": "Movement or place",
+        "evidenceText": "from the Jordan eastward, all the land of Gilead, the Gadites, and the Reubenites, and the Manassites, from Aroer, which is by the valley of the Arnon, even Gilead and Bashan."
+      },
+      {
+        "reference": "1 Chronicles 26:32",
+        "phase": "Occurrence",
+        "evidenceText": "His brothers, men of valor, were two thousand seven hundred, heads of fathers’ households, whom king David made overseers over the Reubenites, the Gadites, and the half-tribe of the Manassites, for every matter pertaining to God, and for the affairs of the king."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 4:43 and continues through 1 Chronicles 26:32.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 4:43",
+        "book": "Deuteronomy",
+        "englishText": "Bezer in the wilderness, in the plain country, for the Reubenites; and Ramoth in Gilead for the Gadites; and Golan in Bashan for the Manassites."
+      },
+      {
+        "reference": "Deuteronomy 29:7",
+        "book": "Deuteronomy",
+        "englishText": "When you came to this place, Sihon the king of Heshbon and Og the king of Bashan came out against us to battle, and we struck them."
+      },
+      {
+        "reference": "2 Kings 10:33",
+        "book": "2 Kings",
+        "englishText": "from the Jordan eastward, all the land of Gilead, the Gadites, and the Reubenites, and the Manassites, from Aroer, which is by the valley of the Arnon, even Gilead and Bashan."
+      },
+      {
+        "reference": "1 Chronicles 26:32",
+        "book": "1 Chronicles",
+        "englishText": "His brothers, men of valor, were two thousand seven hundred, heads of fathers’ households, whom king David made overseers over the Reubenites, the Gadites, and the half-tribe of the Manassites, for every matter pertaining to God, and for the affairs of the king."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "רְעוּ",
   "subtitle": "H7466 • Hebrew name",
   "simple": {
-    "meaning": "רְעוּ (Rᵉʻûw) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "רְעוּ (Rᵉʻûw) appears 5 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 11:18. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to רְעוּ (H7466) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows רְעוּ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,118 @@
       "Genesis 11:20",
       "Genesis 11:21",
       "1 Chronicles 1:25"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7466",
+    "source": "hebrew",
+    "strong": "H7466",
+    "lemma": "רְעוּ",
+    "transliteration": "Rᵉʻûw",
+    "definition": "Reu , a postdiluvian patriarch",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 11:18",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Peleg lived thirty years, and became the father of Reu."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 11:18",
+      "Genesis 11:19",
+      "Genesis 11:20",
+      "Genesis 11:21",
+      "1 Chronicles 1:25"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 11:18",
+        "phase": "Occurrence",
+        "evidenceText": "Peleg lived thirty years, and became the father of Reu."
+      },
+      {
+        "reference": "Genesis 11:19",
+        "phase": "Occurrence",
+        "evidenceText": "Peleg lived two hundred nine years after he became the father of Reu, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "Genesis 11:20",
+        "phase": "Occurrence",
+        "evidenceText": "Reu lived thirty-two years, and became the father of Serug."
+      },
+      {
+        "reference": "Genesis 11:21",
+        "phase": "Occurrence",
+        "evidenceText": "Reu lived two hundred seven years after he became the father of Serug, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "1 Chronicles 1:25",
+        "phase": "Occurrence",
+        "evidenceText": "Eber, Peleg, Reu,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 11:18 and continues through 1 Chronicles 1:25.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 11:18",
+        "book": "Genesis",
+        "englishText": "Peleg lived thirty years, and became the father of Reu."
+      },
+      {
+        "reference": "Genesis 11:19",
+        "book": "Genesis",
+        "englishText": "Peleg lived two hundred nine years after he became the father of Reu, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "Genesis 11:20",
+        "book": "Genesis",
+        "englishText": "Reu lived thirty-two years, and became the father of Serug."
+      },
+      {
+        "reference": "Genesis 11:21",
+        "book": "Genesis",
+        "englishText": "Reu lived two hundred seven years after he became the father of Serug, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "1 Chronicles 1:25",
+        "book": "1 Chronicles",
+        "englishText": "Eber, Peleg, Reu,"
+      }
     ]
   },
   "evidence": {

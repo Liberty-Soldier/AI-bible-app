@@ -4,7 +4,7 @@
   "title": "מָלַח",
   "subtitle": "H4414 • Hebrew name",
   "simple": {
-    "meaning": "מָלַח (mâlach) appears 5 times in the Hebrew Scriptures and is introduced in connection with kingship. The occurrence trail connects the name with an offering.",
+    "meaning": "מָלַח (mâlach) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship. The occurrence trail connects the name with an offering.",
     "biblicalBackground": "The first appearances are in Exodus, Leviticus, Isaiah, Ezekiel, beginning at Exodus 30:35. BibleIQ detects the main surrounding context as birth, family line, offering, covenant, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מָלַח (H4414) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מָלַח through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,124 @@
       "Leviticus 2:13",
       "Isaiah 51:6",
       "Ezekiel 16:4"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4414",
+    "source": "hebrew",
+    "strong": "H4414",
+    "lemma": "מָלַח",
+    "transliteration": "mâlach",
+    "definition": "properly, to rub to pieces or pulverize; intransitively, to disappear as dust; also to salt whether internally (to season with salt) or externally (to rub with salt)",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 30:35",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "You shall make incense of it, a perfume after the art of the perfumer, seasoned with salt, pure and holy."
+    },
+    "books": [
+      "Exodus",
+      "Leviticus",
+      "Isaiah",
+      "Ezekiel"
+    ],
+    "references": [
+      "Exodus 30:35",
+      "Leviticus 2:13",
+      "Isaiah 51:6",
+      "Ezekiel 16:4"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "offering",
+      "covenant"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Leviticus 2:13",
+        "evidenceText": "Every offering of your meal offering you shall season with salt. You shall not allow the salt of the covenant of your God to be lacking from your meal offering. With all your offerings you shall offer salt."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Ezekiel 16:4",
+        "evidenceText": "As for your birth, in the day you were born your navel was not cut. You weren’t washed in water to cleanse you. You weren’t salted at all, nor wrapped in blankets at all."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 30:35",
+        "phase": "Occurrence",
+        "evidenceText": "You shall make incense of it, a perfume after the art of the perfumer, seasoned with salt, pure and holy."
+      },
+      {
+        "reference": "Leviticus 2:13",
+        "phase": "Offering",
+        "evidenceText": "Every offering of your meal offering you shall season with salt. You shall not allow the salt of the covenant of your God to be lacking from your meal offering. With all your offerings you shall offer salt."
+      },
+      {
+        "reference": "Isaiah 51:6",
+        "phase": "Occurrence",
+        "evidenceText": "Lift up your eyes to the heavens,"
+      },
+      {
+        "reference": "Ezekiel 16:4",
+        "phase": "Birth or introduction",
+        "evidenceText": "As for your birth, in the day you were born your navel was not cut. You weren’t washed in water to cleanse you. You weren’t salted at all, nor wrapped in blankets at all."
+      },
+      {
+        "reference": "Ezekiel 16:4",
+        "phase": "Birth or introduction",
+        "evidenceText": "As for your birth, in the day you were born your navel was not cut. You weren’t washed in water to cleanse you. You weren’t salted at all, nor wrapped in blankets at all."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 30:35 and continues through Ezekiel 16:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 30:35",
+        "book": "Exodus",
+        "englishText": "You shall make incense of it, a perfume after the art of the perfumer, seasoned with salt, pure and holy."
+      },
+      {
+        "reference": "Leviticus 2:13",
+        "book": "Leviticus",
+        "englishText": "Every offering of your meal offering you shall season with salt. You shall not allow the salt of the covenant of your God to be lacking from your meal offering. With all your offerings you shall offer salt."
+      },
+      {
+        "reference": "Isaiah 51:6",
+        "book": "Isaiah",
+        "englishText": "Lift up your eyes to the heavens,"
+      },
+      {
+        "reference": "Ezekiel 16:4",
+        "book": "Ezekiel",
+        "englishText": "As for your birth, in the day you were born your navel was not cut. You weren’t washed in water to cleanse you. You weren’t salted at all, nor wrapped in blankets at all."
+      },
+      {
+        "reference": "Ezekiel 16:4",
+        "book": "Ezekiel",
+        "englishText": "As for your birth, in the day you were born your navel was not cut. You weren’t washed in water to cleanse you. You weren’t salted at all, nor wrapped in blankets at all."
+      }
     ]
   },
   "evidence": {

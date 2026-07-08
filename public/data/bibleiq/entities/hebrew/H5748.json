@@ -27,6 +27,98 @@
       "Psalms 150:4"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5748",
+    "source": "hebrew",
+    "strong": "H5748",
+    "lemma": "עוּגָב",
+    "transliteration": "ʻûwgâb",
+    "definition": "a reed-instrument of music",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 4:21",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "His brother’s name was Jubal, who was the father of all who handle the harp and pipe."
+    },
+    "books": [
+      "Genesis",
+      "Job",
+      "Psalms"
+    ],
+    "references": [
+      "Genesis 4:21",
+      "Job 21:12",
+      "Job 30:31",
+      "Psalms 150:4"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 4:21",
+        "phase": "Occurrence",
+        "evidenceText": "His brother’s name was Jubal, who was the father of all who handle the harp and pipe."
+      },
+      {
+        "reference": "Job 21:12",
+        "phase": "Occurrence",
+        "evidenceText": "They sing to the tambourine and harp,"
+      },
+      {
+        "reference": "Job 30:31",
+        "phase": "Occurrence",
+        "evidenceText": "Therefore my harp has turned to mourning,"
+      },
+      {
+        "reference": "Psalms 150:4",
+        "phase": "Occurrence",
+        "evidenceText": "Praise him with tambourine and dancing!"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 4:21 and continues through Psalms 150:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 4:21",
+        "book": "Genesis",
+        "englishText": "His brother’s name was Jubal, who was the father of all who handle the harp and pipe."
+      },
+      {
+        "reference": "Job 21:12",
+        "book": "Job",
+        "englishText": "They sing to the tambourine and harp,"
+      },
+      {
+        "reference": "Job 30:31",
+        "book": "Job",
+        "englishText": "Therefore my harp has turned to mourning,"
+      },
+      {
+        "reference": "Psalms 150:4",
+        "book": "Psalms",
+        "englishText": "Praise him with tambourine and dancing!"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

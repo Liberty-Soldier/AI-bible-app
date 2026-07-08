@@ -4,7 +4,7 @@
   "title": "מֹנֶה",
   "subtitle": "H4489 • Hebrew word",
   "simple": {
-    "meaning": "מֹנֶה (môneh) appears 2 times in the Hebrew Scriptures and is introduced in connection with flocks.",
+    "meaning": "מֹנֶה (môneh) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with flocks.",
     "biblicalBackground": "The first appearances are in Genesis, beginning at Genesis 31:7. BibleIQ detects the main surrounding context as family, family line, flock.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מֹנֶה (H4489) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מֹנֶה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,78 @@
     ],
     "laterReferences": [
       "Genesis 31:41"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4489",
+    "source": "hebrew",
+    "strong": "H4489",
+    "lemma": "מֹנֶה",
+    "transliteration": "môneh",
+    "definition": "properly, something weighed out , i.e. (figuratively) a portion of time, i.e. an instance",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 31:7",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Your father has deceived me, and changed my wages ten times, but God didn’t allow him to hurt me."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 31:7",
+      "Genesis 31:41"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 31:7",
+        "phase": "Occurrence",
+        "evidenceText": "Your father has deceived me, and changed my wages ten times, but God didn’t allow him to hurt me."
+      },
+      {
+        "reference": "Genesis 31:41",
+        "phase": "Occurrence",
+        "evidenceText": "These twenty years I have been in your house. I served you fourteen years for your two daughters, and six years for your flock, and you have changed my wages ten times."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 31:7 and continues through Genesis 31:41.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 31:7",
+        "book": "Genesis",
+        "englishText": "Your father has deceived me, and changed my wages ten times, but God didn’t allow him to hurt me."
+      },
+      {
+        "reference": "Genesis 31:41",
+        "book": "Genesis",
+        "englishText": "These twenty years I have been in your house. I served you fourteen years for your two daughters, and six years for your flock, and you have changed my wages ten times."
+      }
     ]
   },
   "evidence": {

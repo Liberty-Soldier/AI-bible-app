@@ -26,6 +26,82 @@
       "Psalms 44:22"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8587",
+    "source": "hebrew",
+    "strong": "H8587",
+    "lemma": "תַּעֲלֻמָּה",
+    "transliteration": "taʻălummâh",
+    "definition": "a secret",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 11:6",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "that he would show you the secrets of wisdom!"
+    },
+    "books": [
+      "Job",
+      "Psalms"
+    ],
+    "references": [
+      "Job 11:6",
+      "Job 28:11",
+      "Psalms 44:22"
+    ],
+    "themes": [
+      "death"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "Psalms 44:22",
+        "evidenceText": "Yes, for your sake we are killed all day long."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Job 11:6",
+        "phase": "Occurrence",
+        "evidenceText": "that he would show you the secrets of wisdom!"
+      },
+      {
+        "reference": "Job 28:11",
+        "phase": "Occurrence",
+        "evidenceText": "He binds the streams that they don’t trickle."
+      },
+      {
+        "reference": "Psalms 44:22",
+        "phase": "Death",
+        "evidenceText": "Yes, for your sake we are killed all day long."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 11:6 and continues through Psalms 44:22.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 11:6",
+        "book": "Job",
+        "englishText": "that he would show you the secrets of wisdom!"
+      },
+      {
+        "reference": "Job 28:11",
+        "book": "Job",
+        "englishText": "He binds the streams that they don’t trickle."
+      },
+      {
+        "reference": "Psalms 44:22",
+        "book": "Psalms",
+        "englishText": "Yes, for your sake we are killed all day long."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

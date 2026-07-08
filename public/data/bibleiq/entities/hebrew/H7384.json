@@ -25,6 +25,85 @@
       "1 Chronicles 1:6"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7384",
+    "source": "hebrew",
+    "strong": "H7384",
+    "lemma": "רִיפַת",
+    "transliteration": "Rîyphath",
+    "definition": "Riphath , a grandson of Japheth and his descendants",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:3",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Gomer were: Ashkenaz, Riphath, and Togarmah."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 10:3",
+      "1 Chronicles 1:6"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 10:3",
+        "evidenceText": "The sons of Gomer were: Ashkenaz, Riphath, and Togarmah."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:6",
+        "evidenceText": "The sons of Gomer: Ashkenaz, Diphath, and Togarmah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 10:3",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Gomer were: Ashkenaz, Riphath, and Togarmah."
+      },
+      {
+        "reference": "1 Chronicles 1:6",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Gomer: Ashkenaz, Diphath, and Togarmah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:3 and continues through 1 Chronicles 1:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:3",
+        "book": "Genesis",
+        "englishText": "The sons of Gomer were: Ashkenaz, Riphath, and Togarmah."
+      },
+      {
+        "reference": "1 Chronicles 1:6",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Gomer: Ashkenaz, Diphath, and Togarmah."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

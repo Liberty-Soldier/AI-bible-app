@@ -4,7 +4,7 @@
   "title": "אִיתִיאֵל",
   "subtitle": "H384 • Hebrew name",
   "simple": {
-    "meaning": "אִיתִיאֵל (ʼÎythîyʼêl) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אִיתִיאֵל (ʼÎythîyʼêl) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Nehemiah, Proverbs, beginning at Nehemiah 11:7. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אִיתִיאֵל (H384) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אִיתִיאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,91 @@
     ],
     "laterReferences": [
       "Proverbs 30:1"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H384",
+    "source": "hebrew",
+    "strong": "H384",
+    "lemma": "אִיתִיאֵל",
+    "transliteration": "ʼÎythîyʼêl",
+    "definition": "Ithiel , the name of an Israelite, also of a symbolical person",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Nehemiah 11:7",
+      "book": "Nehemiah",
+      "bookName": "Nehemiah",
+      "englishText": "These are the sons of Benjamin: Sallu the son of Meshullam, the son of Joed, the son of Pedaiah, the son of Kolaiah, the son of Maaseiah, the son of Ithiel, the son of Jeshaiah."
+    },
+    "books": [
+      "Nehemiah",
+      "Proverbs"
+    ],
+    "references": [
+      "Nehemiah 11:7",
+      "Proverbs 30:1"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Nehemiah 11:7",
+        "evidenceText": "These are the sons of Benjamin: Sallu the son of Meshullam, the son of Joed, the son of Pedaiah, the son of Kolaiah, the son of Maaseiah, the son of Ithiel, the son of Jeshaiah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Nehemiah 11:7",
+        "phase": "Genealogy",
+        "evidenceText": "These are the sons of Benjamin: Sallu the son of Meshullam, the son of Joed, the son of Pedaiah, the son of Kolaiah, the son of Maaseiah, the son of Ithiel, the son of Jeshaiah."
+      },
+      {
+        "reference": "Proverbs 30:1",
+        "phase": "Occurrence",
+        "evidenceText": "The words of Agur the son of Jakeh; the revelation:"
+      },
+      {
+        "reference": "Proverbs 30:1",
+        "phase": "Occurrence",
+        "evidenceText": "The words of Agur the son of Jakeh; the revelation:"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Nehemiah 11:7 and continues through Proverbs 30:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Nehemiah 11:7",
+        "book": "Nehemiah",
+        "englishText": "These are the sons of Benjamin: Sallu the son of Meshullam, the son of Joed, the son of Pedaiah, the son of Kolaiah, the son of Maaseiah, the son of Ithiel, the son of Jeshaiah."
+      },
+      {
+        "reference": "Proverbs 30:1",
+        "book": "Proverbs",
+        "englishText": "The words of Agur the son of Jakeh; the revelation:"
+      },
+      {
+        "reference": "Proverbs 30:1",
+        "book": "Proverbs",
+        "englishText": "The words of Agur the son of Jakeh; the revelation:"
+      }
     ]
   },
   "evidence": {

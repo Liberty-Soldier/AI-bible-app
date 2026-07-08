@@ -4,7 +4,7 @@
   "title": "בָּרַכְאֵל",
   "subtitle": "H1292 • Hebrew name",
   "simple": {
-    "meaning": "בָּרַכְאֵל (Bârakʼêl) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "בָּרַכְאֵל (Bârakʼêl) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Job, beginning at Job 32:2. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to בָּרַכְאֵל (H1292) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows בָּרַכְאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,73 @@
     ],
     "laterReferences": [
       "Job 32:6"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1292",
+    "source": "hebrew",
+    "strong": "H1292",
+    "lemma": "בָּרַכְאֵל",
+    "transliteration": "Bârakʼêl",
+    "definition": "Barakel , the father of one of Job's friends",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Job 32:2",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "Then the wrath of Elihu the son of Barachel, the Buzite, of the family of Ram, was kindled against Job. His wrath was kindled because he justified himself rather than God."
+    },
+    "books": [
+      "Job"
+    ],
+    "references": [
+      "Job 32:2",
+      "Job 32:6"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Job 32:2",
+        "phase": "Occurrence",
+        "evidenceText": "Then the wrath of Elihu the son of Barachel, the Buzite, of the family of Ram, was kindled against Job. His wrath was kindled because he justified himself rather than God."
+      },
+      {
+        "reference": "Job 32:6",
+        "phase": "Occurrence",
+        "evidenceText": "Elihu the son of Barachel the Buzite answered,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 32:2 and continues through Job 32:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 32:2",
+        "book": "Job",
+        "englishText": "Then the wrath of Elihu the son of Barachel, the Buzite, of the family of Ram, was kindled against Job. His wrath was kindled because he justified himself rather than God."
+      },
+      {
+        "reference": "Job 32:6",
+        "book": "Job",
+        "englishText": "Elihu the son of Barachel the Buzite answered,"
+      }
     ]
   },
   "evidence": {

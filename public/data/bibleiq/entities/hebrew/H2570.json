@@ -27,6 +27,105 @@
       "2 Samuel 20:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2570",
+    "source": "hebrew",
+    "strong": "H2570",
+    "lemma": "חֹמֶשׁ",
+    "transliteration": "chômesh",
+    "definition": "the abdomen (as obese)",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "animal",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 2:23",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "However he refused to turn away. Therefore Abner with the back end of the spear struck him in the body, so that the spear came out behind him; and he fell down there, and died in the same place. As many as came to the place where Asahel fell down and died stood still."
+    },
+    "books": [
+      "2 Samuel"
+    ],
+    "references": [
+      "2 Samuel 2:23",
+      "2 Samuel 3:27",
+      "2 Samuel 4:6",
+      "2 Samuel 20:10"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "blood"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "2 Samuel 3:27",
+        "evidenceText": "When Abner was returned to Hebron, Joab took him aside into the middle of the gate to speak with him quietly, and struck him there in the body, so that he died, for the blood of Asahel his brother."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Samuel 2:23",
+        "phase": "Occurrence",
+        "evidenceText": "However he refused to turn away. Therefore Abner with the back end of the spear struck him in the body, so that the spear came out behind him; and he fell down there, and died in the same place. As many as came to the place where Asahel fell down and died stood still."
+      },
+      {
+        "reference": "2 Samuel 3:27",
+        "phase": "Blood witness",
+        "evidenceText": "When Abner was returned to Hebron, Joab took him aside into the middle of the gate to speak with him quietly, and struck him there in the body, so that he died, for the blood of Asahel his brother."
+      },
+      {
+        "reference": "2 Samuel 4:6",
+        "phase": "Occurrence",
+        "evidenceText": "They came there into the middle of the house, as though they would have fetched wheat; and they struck him in the body: and Rechab and Baanah his brother escaped."
+      },
+      {
+        "reference": "2 Samuel 20:10",
+        "phase": "Occurrence",
+        "evidenceText": "But Amasa took no heed to the sword that was in Joab’s hand. So he struck him with it in the body, and shed out his bowels to the ground, and didn’t strike him again; and he died. Joab and Abishai his brother pursued Sheba the son of Bichri."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 2:23 and continues through 2 Samuel 20:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 2:23",
+        "book": "2 Samuel",
+        "englishText": "However he refused to turn away. Therefore Abner with the back end of the spear struck him in the body, so that the spear came out behind him; and he fell down there, and died in the same place. As many as came to the place where Asahel fell down and died stood still."
+      },
+      {
+        "reference": "2 Samuel 3:27",
+        "book": "2 Samuel",
+        "englishText": "When Abner was returned to Hebron, Joab took him aside into the middle of the gate to speak with him quietly, and struck him there in the body, so that he died, for the blood of Asahel his brother."
+      },
+      {
+        "reference": "2 Samuel 4:6",
+        "book": "2 Samuel",
+        "englishText": "They came there into the middle of the house, as though they would have fetched wheat; and they struck him in the body: and Rechab and Baanah his brother escaped."
+      },
+      {
+        "reference": "2 Samuel 20:10",
+        "book": "2 Samuel",
+        "englishText": "But Amasa took no heed to the sword that was in Joab’s hand. So he struck him with it in the body, and shed out his bowels to the ground, and didn’t strike him again; and he died. Joab and Abishai his brother pursued Sheba the son of Bichri."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

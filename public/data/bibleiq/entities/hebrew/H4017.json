@@ -4,7 +4,7 @@
   "title": "מִבְשָׂם",
   "subtitle": "H4017 • Hebrew name",
   "simple": {
-    "meaning": "מִבְשָׂם (Mibsâm) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מִבְשָׂם (Mibsâm) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 25:13. BibleIQ detects the main surrounding context as birth, family line, firstborn.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מִבְשָׂם (H4017) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מִבְשָׂם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,98 @@
     "laterReferences": [
       "1 Chronicles 1:29",
       "1 Chronicles 4:25"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4017",
+    "source": "hebrew",
+    "strong": "H4017",
+    "lemma": "מִבְשָׂם",
+    "transliteration": "Mibsâm",
+    "definition": "Mibsam , the name of an Ishmaelite and of an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:13",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "These are the names of the sons of Ishmael, by their names, according to the order of their birth: the firstborn of Ishmael, Nebaioth, then Kedar, Adbeel, Mibsam,"
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 25:13",
+      "1 Chronicles 1:29",
+      "1 Chronicles 4:25"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 25:13",
+        "evidenceText": "These are the names of the sons of Ishmael, by their names, according to the order of their birth: the firstborn of Ishmael, Nebaioth, then Kedar, Adbeel, Mibsam,"
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Chronicles 1:29",
+        "evidenceText": "These are their generations: the firstborn of Ishmael, Nebaioth; then Kedar, Adbeel, Mibsam,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:13",
+        "phase": "Birth or introduction",
+        "evidenceText": "These are the names of the sons of Ishmael, by their names, according to the order of their birth: the firstborn of Ishmael, Nebaioth, then Kedar, Adbeel, Mibsam,"
+      },
+      {
+        "reference": "1 Chronicles 1:29",
+        "phase": "Birth or introduction",
+        "evidenceText": "These are their generations: the firstborn of Ishmael, Nebaioth; then Kedar, Adbeel, Mibsam,"
+      },
+      {
+        "reference": "1 Chronicles 4:25",
+        "phase": "Occurrence",
+        "evidenceText": "Shallum his son, Mibsam his son, and Mishma his son."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:13 and continues through 1 Chronicles 4:25.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:13",
+        "book": "Genesis",
+        "englishText": "These are the names of the sons of Ishmael, by their names, according to the order of their birth: the firstborn of Ishmael, Nebaioth, then Kedar, Adbeel, Mibsam,"
+      },
+      {
+        "reference": "1 Chronicles 1:29",
+        "book": "1 Chronicles",
+        "englishText": "These are their generations: the firstborn of Ishmael, Nebaioth; then Kedar, Adbeel, Mibsam,"
+      },
+      {
+        "reference": "1 Chronicles 4:25",
+        "book": "1 Chronicles",
+        "englishText": "Shallum his son, Mibsam his son, and Mishma his son."
+      }
     ]
   },
   "evidence": {

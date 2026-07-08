@@ -23,6 +23,67 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4243",
+    "source": "hebrew",
+    "strong": "H4243",
+    "lemma": "מְחִיר",
+    "transliteration": "Mᵉchîyr",
+    "definition": "Mechir , an Israelite",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 4:11",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Chelub the brother of Shuhah became the father of Mehir, who was the father of Eshton."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 4:11"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 4:11",
+        "phase": "Occurrence",
+        "evidenceText": "Chelub the brother of Shuhah became the father of Mehir, who was the father of Eshton."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: 1 Chronicles 4:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 4:11",
+        "book": "1 Chronicles",
+        "englishText": "Chelub the brother of Shuhah became the father of Mehir, who was the father of Eshton."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -25,6 +25,85 @@
       "1 Chronicles 1:33"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H420",
+    "source": "hebrew",
+    "strong": "H420",
+    "lemma": "אֶלְדָּעָה",
+    "transliteration": "ʼEldâʻâh",
+    "definition": "Eldaah , a son of Midian",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:4",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 25:4",
+      "1 Chronicles 1:33"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 25:4",
+        "evidenceText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:33",
+        "evidenceText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:4",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "reference": "1 Chronicles 1:33",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:4 and continues through 1 Chronicles 1:33.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:4",
+        "book": "Genesis",
+        "englishText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "reference": "1 Chronicles 1:33",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

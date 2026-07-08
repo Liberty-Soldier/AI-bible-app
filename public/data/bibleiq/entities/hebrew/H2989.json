@@ -23,6 +23,69 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2989",
+    "source": "hebrew",
+    "strong": "H2989",
+    "lemma": "יָבָל",
+    "transliteration": "Yâbâl",
+    "definition": "Jabal , an antediluvian",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 4:20",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 4:20"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 4:20",
+        "evidenceText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 4:20",
+        "phase": "Birth or introduction",
+        "evidenceText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Genesis 4:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 4:20",
+        "book": "Genesis",
+        "englishText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

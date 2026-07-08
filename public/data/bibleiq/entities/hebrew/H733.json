@@ -4,7 +4,7 @@
   "title": "אָרַח",
   "subtitle": "H733 • Hebrew name",
   "simple": {
-    "meaning": "אָרַח (ʼÂrach) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אָרַח (ʼÂrach) appears 4 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Ezra, Nehemiah, beginning at 1 Chronicles 7:39. BibleIQ detects the main surrounding context as family line, Torah.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אָרַח (H733) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אָרַח through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,121 @@
       "Ezra 2:5",
       "Nehemiah 6:18",
       "Nehemiah 7:10"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H733",
+    "source": "hebrew",
+    "strong": "H733",
+    "lemma": "אָרַח",
+    "transliteration": "ʼÂrach",
+    "definition": "Arach , the name of three Israelites",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 7:39",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Ulla: Arah, Hanniel, and Rizia."
+    },
+    "books": [
+      "1 Chronicles",
+      "Ezra",
+      "Nehemiah"
+    ],
+    "references": [
+      "1 Chronicles 7:39",
+      "Ezra 2:5",
+      "Nehemiah 6:18",
+      "Nehemiah 7:10"
+    ],
+    "themes": [
+      "family line",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:39",
+        "evidenceText": "The sons of Ulla: Arah, Hanniel, and Rizia."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Nehemiah 6:18",
+        "evidenceText": "For there were many in Judah sworn to him, because he was the son-in-law of Shecaniah the son of Arah; and his son Jehohanan had taken the daughter of Meshullam the son of Berechiah as wife."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 7:39",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Ulla: Arah, Hanniel, and Rizia."
+      },
+      {
+        "reference": "Ezra 2:5",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Arah, seven hundred seventy-five."
+      },
+      {
+        "reference": "Nehemiah 6:18",
+        "phase": "Genealogy",
+        "evidenceText": "For there were many in Judah sworn to him, because he was the son-in-law of Shecaniah the son of Arah; and his son Jehohanan had taken the daughter of Meshullam the son of Berechiah as wife."
+      },
+      {
+        "reference": "Nehemiah 7:10",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Arah: six hundred fifty-two."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 7:39 and continues through Nehemiah 7:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 7:39",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Ulla: Arah, Hanniel, and Rizia."
+      },
+      {
+        "reference": "Ezra 2:5",
+        "book": "Ezra",
+        "englishText": "The children of Arah, seven hundred seventy-five."
+      },
+      {
+        "reference": "Nehemiah 6:18",
+        "book": "Nehemiah",
+        "englishText": "For there were many in Judah sworn to him, because he was the son-in-law of Shecaniah the son of Arah; and his son Jehohanan had taken the daughter of Meshullam the son of Berechiah as wife."
+      },
+      {
+        "reference": "Nehemiah 7:10",
+        "book": "Nehemiah",
+        "englishText": "The children of Arah: six hundred fifty-two."
+      }
     ]
   },
   "evidence": {

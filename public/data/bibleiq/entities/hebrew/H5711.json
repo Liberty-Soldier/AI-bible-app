@@ -4,7 +4,7 @@
   "title": "עָדָה",
   "subtitle": "H5711 • Hebrew name",
   "simple": {
-    "meaning": "עָדָה (ʻÂdâh) appears 8 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "עָדָה (ʻÂdâh) appears 8 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, beginning at Genesis 4:19. BibleIQ detects the main surrounding context as birth, family, family line, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עָדָה (H5711) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עָדָה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,175 @@
       "Genesis 36:2",
       "Genesis 36:4",
       "Genesis 36:10"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5711",
+    "source": "hebrew",
+    "strong": "H5711",
+    "lemma": "עָדָה",
+    "transliteration": "ʻÂdâh",
+    "definition": "Adah , the name of two women",
+    "occurrenceCount": 8,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 4:19",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Lamech took two wives: the name of the first one was Adah, and the name of the second one was Zillah."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 4:19",
+      "Genesis 4:20",
+      "Genesis 4:23",
+      "Genesis 36:2",
+      "Genesis 36:4",
+      "Genesis 36:10",
+      "Genesis 36:12",
+      "Genesis 36:16"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 4:20",
+        "evidenceText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 36:2",
+        "evidenceText": "Esau took his wives from the daughters of Canaan: Adah the daughter of Elon, the Hittite; and Oholibamah the daughter of Anah, the daughter of Zibeon, the Hivite;"
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 36:16",
+        "evidenceText": "chief Korah, chief Gatam, chief Amalek. These are the chiefs who came of Eliphaz in the land of Edom. These are the sons of Adah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 4:19",
+        "phase": "Occurrence",
+        "evidenceText": "Lamech took two wives: the name of the first one was Adah, and the name of the second one was Zillah."
+      },
+      {
+        "reference": "Genesis 4:20",
+        "phase": "Birth or introduction",
+        "evidenceText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      },
+      {
+        "reference": "Genesis 4:23",
+        "phase": "Occurrence",
+        "evidenceText": "Lamech said to his wives,"
+      },
+      {
+        "reference": "Genesis 36:2",
+        "phase": "Genealogy",
+        "evidenceText": "Esau took his wives from the daughters of Canaan: Adah the daughter of Elon, the Hittite; and Oholibamah the daughter of Anah, the daughter of Zibeon, the Hivite;"
+      },
+      {
+        "reference": "Genesis 36:4",
+        "phase": "Occurrence",
+        "evidenceText": "Adah bore to Esau Eliphaz. Basemath bore Reuel."
+      },
+      {
+        "reference": "Genesis 36:10",
+        "phase": "Occurrence",
+        "evidenceText": "these are the names of Esau’s sons: Eliphaz, the son of Adah, the wife of Esau; and Reuel, the son of Basemath, the wife of Esau."
+      },
+      {
+        "reference": "Genesis 36:12",
+        "phase": "Occurrence",
+        "evidenceText": "Timna was concubine to Eliphaz, Esau’s son; and she bore to Eliphaz Amalek. These are the descendants of Adah, Esau’s wife."
+      },
+      {
+        "reference": "Genesis 36:16",
+        "phase": "Movement or place",
+        "evidenceText": "chief Korah, chief Gatam, chief Amalek. These are the chiefs who came of Eliphaz in the land of Edom. These are the sons of Adah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 4:19 and continues through Genesis 36:16.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 4:19",
+        "book": "Genesis",
+        "englishText": "Lamech took two wives: the name of the first one was Adah, and the name of the second one was Zillah."
+      },
+      {
+        "reference": "Genesis 4:20",
+        "book": "Genesis",
+        "englishText": "Adah gave birth to Jabal, who was the father of those who dwell in tents and have livestock."
+      },
+      {
+        "reference": "Genesis 4:23",
+        "book": "Genesis",
+        "englishText": "Lamech said to his wives,"
+      },
+      {
+        "reference": "Genesis 36:2",
+        "book": "Genesis",
+        "englishText": "Esau took his wives from the daughters of Canaan: Adah the daughter of Elon, the Hittite; and Oholibamah the daughter of Anah, the daughter of Zibeon, the Hivite;"
+      },
+      {
+        "reference": "Genesis 36:4",
+        "book": "Genesis",
+        "englishText": "Adah bore to Esau Eliphaz. Basemath bore Reuel."
+      },
+      {
+        "reference": "Genesis 36:10",
+        "book": "Genesis",
+        "englishText": "these are the names of Esau’s sons: Eliphaz, the son of Adah, the wife of Esau; and Reuel, the son of Basemath, the wife of Esau."
+      },
+      {
+        "reference": "Genesis 36:12",
+        "book": "Genesis",
+        "englishText": "Timna was concubine to Eliphaz, Esau’s son; and she bore to Eliphaz Amalek. These are the descendants of Adah, Esau’s wife."
+      },
+      {
+        "reference": "Genesis 36:16",
+        "book": "Genesis",
+        "englishText": "chief Korah, chief Gatam, chief Amalek. These are the chiefs who came of Eliphaz in the land of Edom. These are the sons of Adah."
+      }
     ]
   },
   "evidence": {

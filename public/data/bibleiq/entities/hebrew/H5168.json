@@ -28,6 +28,113 @@
       "Lamentations 3:42"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5168",
+    "source": "hebrew",
+    "strong": "H5168",
+    "lemma": "נַחְנוּ",
+    "transliteration": "nachnûw",
+    "definition": "we",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 42:11",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "We are all one man’s sons; we are honest men. Your servants are not spies.”"
+    },
+    "books": [
+      "Genesis",
+      "Exodus",
+      "Numbers",
+      "Lamentations"
+    ],
+    "references": [
+      "Genesis 42:11",
+      "Exodus 16:7",
+      "Exodus 16:8",
+      "Numbers 32:32",
+      "Lamentations 3:42"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Numbers 32:32",
+        "evidenceText": "We will pass over armed before Yahweh into the land of Canaan, and the possession of our inheritance shall remain with us beyond the Jordan.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 42:11",
+        "phase": "Occurrence",
+        "evidenceText": "We are all one man’s sons; we are honest men. Your servants are not spies.”"
+      },
+      {
+        "reference": "Exodus 16:7",
+        "phase": "Occurrence",
+        "evidenceText": "In the morning, you shall see Yahweh’s glory; because he hears your murmurings against Yahweh. Who are we, that you murmur against us?”"
+      },
+      {
+        "reference": "Exodus 16:8",
+        "phase": "Occurrence",
+        "evidenceText": "Moses said, “Now Yahweh will give you meat to eat in the evening, and in the morning bread to satisfy you, because Yahweh hears your murmurings which you murmur against him. And who are we? Your murmurings are not against us, but against Yahweh.”"
+      },
+      {
+        "reference": "Numbers 32:32",
+        "phase": "Movement or place",
+        "evidenceText": "We will pass over armed before Yahweh into the land of Canaan, and the possession of our inheritance shall remain with us beyond the Jordan.”"
+      },
+      {
+        "reference": "Lamentations 3:42",
+        "phase": "Occurrence",
+        "evidenceText": "“We have transgressed and have rebelled."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 42:11 and continues through Lamentations 3:42.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 42:11",
+        "book": "Genesis",
+        "englishText": "We are all one man’s sons; we are honest men. Your servants are not spies.”"
+      },
+      {
+        "reference": "Exodus 16:7",
+        "book": "Exodus",
+        "englishText": "In the morning, you shall see Yahweh’s glory; because he hears your murmurings against Yahweh. Who are we, that you murmur against us?”"
+      },
+      {
+        "reference": "Exodus 16:8",
+        "book": "Exodus",
+        "englishText": "Moses said, “Now Yahweh will give you meat to eat in the evening, and in the morning bread to satisfy you, because Yahweh hears your murmurings which you murmur against him. And who are we? Your murmurings are not against us, but against Yahweh.”"
+      },
+      {
+        "reference": "Numbers 32:32",
+        "book": "Numbers",
+        "englishText": "We will pass over armed before Yahweh into the land of Canaan, and the possession of our inheritance shall remain with us beyond the Jordan.”"
+      },
+      {
+        "reference": "Lamentations 3:42",
+        "book": "Lamentations",
+        "englishText": "“We have transgressed and have rebelled."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

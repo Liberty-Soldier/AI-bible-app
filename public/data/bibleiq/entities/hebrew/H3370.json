@@ -4,7 +4,7 @@
   "title": "יׇקְשָׁן",
   "subtitle": "H3370 • Hebrew name",
   "simple": {
-    "meaning": "יׇקְשָׁן (Yoqshân) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "יׇקְשָׁן (Yoqshân) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 25:2. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יׇקְשָׁן (H3370) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יׇקְשָׁן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,114 @@
     "laterReferences": [
       "Genesis 25:3",
       "1 Chronicles 1:32"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3370",
+    "source": "hebrew",
+    "strong": "H3370",
+    "lemma": "יׇקְשָׁן",
+    "transliteration": "Yoqshân",
+    "definition": "Jokshan , an Arabian patriarch",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:2",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "She bore him Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 25:2",
+      "Genesis 25:3",
+      "1 Chronicles 1:32"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 25:3",
+        "evidenceText": "Jokshan became the father of Sheba, and Dedan. The sons of Dedan were Asshurim, Letushim, and Leummim."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:32",
+        "evidenceText": "The sons of Keturah, Abraham’s concubine: she bore Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah. The sons of Jokshan: Sheba and Dedan."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:2",
+        "phase": "Occurrence",
+        "evidenceText": "She bore him Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah."
+      },
+      {
+        "reference": "Genesis 25:3",
+        "phase": "Genealogy",
+        "evidenceText": "Jokshan became the father of Sheba, and Dedan. The sons of Dedan were Asshurim, Letushim, and Leummim."
+      },
+      {
+        "reference": "1 Chronicles 1:32",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Keturah, Abraham’s concubine: she bore Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah. The sons of Jokshan: Sheba and Dedan."
+      },
+      {
+        "reference": "1 Chronicles 1:32",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Keturah, Abraham’s concubine: she bore Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah. The sons of Jokshan: Sheba and Dedan."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:2 and continues through 1 Chronicles 1:32.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:2",
+        "book": "Genesis",
+        "englishText": "She bore him Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah."
+      },
+      {
+        "reference": "Genesis 25:3",
+        "book": "Genesis",
+        "englishText": "Jokshan became the father of Sheba, and Dedan. The sons of Dedan were Asshurim, Letushim, and Leummim."
+      },
+      {
+        "reference": "1 Chronicles 1:32",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Keturah, Abraham’s concubine: she bore Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah. The sons of Jokshan: Sheba and Dedan."
+      },
+      {
+        "reference": "1 Chronicles 1:32",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Keturah, Abraham’s concubine: she bore Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah. The sons of Jokshan: Sheba and Dedan."
+      }
     ]
   },
   "evidence": {

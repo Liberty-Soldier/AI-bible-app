@@ -27,6 +27,101 @@
       "Jeremiah 17:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5842",
+    "source": "hebrew",
+    "strong": "H5842",
+    "lemma": "עֵט",
+    "transliteration": "ʻêṭ",
+    "definition": "a stylus or marking stick",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 19:24",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "That with an iron pen and lead"
+    },
+    "books": [
+      "Job",
+      "Psalms",
+      "Jeremiah"
+    ],
+    "references": [
+      "Job 19:24",
+      "Psalms 45:2",
+      "Jeremiah 8:8",
+      "Jeremiah 17:1"
+    ],
+    "themes": [
+      "family line",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Psalms 45:2",
+        "evidenceText": "You are the most excellent of the sons of men."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Job 19:24",
+        "phase": "Occurrence",
+        "evidenceText": "That with an iron pen and lead"
+      },
+      {
+        "reference": "Psalms 45:2",
+        "phase": "Genealogy",
+        "evidenceText": "You are the most excellent of the sons of men."
+      },
+      {
+        "reference": "Jeremiah 8:8",
+        "phase": "Occurrence",
+        "evidenceText": "“ ‘How do you say, “We are wise, and Yahweh’s law is with us?”"
+      },
+      {
+        "reference": "Jeremiah 17:1",
+        "phase": "Occurrence",
+        "evidenceText": "“The sin of Judah is written with a pen of iron,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 19:24 and continues through Jeremiah 17:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 19:24",
+        "book": "Job",
+        "englishText": "That with an iron pen and lead"
+      },
+      {
+        "reference": "Psalms 45:2",
+        "book": "Psalms",
+        "englishText": "You are the most excellent of the sons of men."
+      },
+      {
+        "reference": "Jeremiah 8:8",
+        "book": "Jeremiah",
+        "englishText": "“ ‘How do you say, “We are wise, and Yahweh’s law is with us?”"
+      },
+      {
+        "reference": "Jeremiah 17:1",
+        "book": "Jeremiah",
+        "englishText": "“The sin of Judah is written with a pen of iron,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

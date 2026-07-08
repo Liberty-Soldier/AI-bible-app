@@ -4,7 +4,7 @@
   "title": "אוֹן",
   "subtitle": "H203 • Hebrew name",
   "simple": {
-    "meaning": "אוֹן (ʼÔwn) appears once in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אוֹן (ʼÔwn) appears once in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, beginning at Numbers 16:1. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אוֹן (H203) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אוֹן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -22,6 +22,69 @@
       "Narrative context"
     ],
     "laterReferences": []
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H203",
+    "source": "hebrew",
+    "strong": "H203",
+    "lemma": "אוֹן",
+    "transliteration": "ʼÔwn",
+    "definition": "On , an Israelite",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 16:1",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Now Korah, the son of Izhar, the son of Kohath, the son of Levi, with Dathan and Abiram, the sons of Eliab, and On, the son of Peleth, sons of Reuben, took some men."
+    },
+    "books": [
+      "Numbers"
+    ],
+    "references": [
+      "Numbers 16:1"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 16:1",
+        "evidenceText": "Now Korah, the son of Izhar, the son of Kohath, the son of Levi, with Dathan and Abiram, the sons of Eliab, and On, the son of Peleth, sons of Reuben, took some men."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 16:1",
+        "phase": "Genealogy",
+        "evidenceText": "Now Korah, the son of Izhar, the son of Kohath, the son of Levi, with Dathan and Abiram, the sons of Eliab, and On, the son of Peleth, sons of Reuben, took some men."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Numbers 16:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 16:1",
+        "book": "Numbers",
+        "englishText": "Now Korah, the son of Izhar, the son of Kohath, the son of Levi, with Dathan and Abiram, the sons of Eliab, and On, the son of Peleth, sons of Reuben, took some men."
+      }
+    ]
   },
   "evidence": {
     "originalLanguage": {

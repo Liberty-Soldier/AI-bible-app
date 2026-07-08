@@ -25,6 +25,75 @@
       "Daniel 9:21"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1403",
+    "source": "hebrew",
+    "strong": "H1403",
+    "lemma": "גַּבְרִיאֵל",
+    "transliteration": "Gabrîyʼêl",
+    "definition": "Gabriel , an archangel",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Daniel 8:16",
+      "book": "Daniel",
+      "bookName": "Daniel",
+      "englishText": "I heard a man’s voice between the banks of the Ulai, which called, and said, “Gabriel, make this man understand the vision.”"
+    },
+    "books": [
+      "Daniel"
+    ],
+    "references": [
+      "Daniel 8:16",
+      "Daniel 9:21"
+    ],
+    "themes": [
+      "kingship",
+      "offering"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Daniel 9:21",
+        "evidenceText": "yes, while I was speaking in prayer, the man Gabriel, whom I had seen in the vision at the beginning, being caused to fly swiftly, touched me about the time of the evening offering."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Daniel 8:16",
+        "phase": "Occurrence",
+        "evidenceText": "I heard a man’s voice between the banks of the Ulai, which called, and said, “Gabriel, make this man understand the vision.”"
+      },
+      {
+        "reference": "Daniel 9:21",
+        "phase": "Offering",
+        "evidenceText": "yes, while I was speaking in prayer, the man Gabriel, whom I had seen in the vision at the beginning, being caused to fly swiftly, touched me about the time of the evening offering."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Daniel 8:16 and continues through Daniel 9:21.",
+    "occurrenceTrail": [
+      {
+        "reference": "Daniel 8:16",
+        "book": "Daniel",
+        "englishText": "I heard a man’s voice between the banks of the Ulai, which called, and said, “Gabriel, make this man understand the vision.”"
+      },
+      {
+        "reference": "Daniel 9:21",
+        "book": "Daniel",
+        "englishText": "yes, while I was speaking in prayer, the man Gabriel, whom I had seen in the vision at the beginning, being caused to fly swiftly, touched me about the time of the evening offering."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

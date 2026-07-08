@@ -25,6 +25,75 @@
       "Proverbs 7:4"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4129",
+    "source": "hebrew",
+    "strong": "H4129",
+    "lemma": "מוֹדַע",
+    "transliteration": "môwdaʻ",
+    "definition": "an acquaintance",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Ruth 2:1",
+      "book": "Ruth",
+      "bookName": "Ruth",
+      "englishText": "Naomi had a relative of her husband’s, a mighty man of wealth, of the family of Elimelech, and his name was Boaz."
+    },
+    "books": [
+      "Ruth",
+      "Proverbs"
+    ],
+    "references": [
+      "Ruth 2:1",
+      "Proverbs 7:4"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Ruth 2:1",
+        "phase": "Occurrence",
+        "evidenceText": "Naomi had a relative of her husband’s, a mighty man of wealth, of the family of Elimelech, and his name was Boaz."
+      },
+      {
+        "reference": "Proverbs 7:4",
+        "phase": "Occurrence",
+        "evidenceText": "Tell wisdom, “You are my sister.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ruth 2:1 and continues through Proverbs 7:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ruth 2:1",
+        "book": "Ruth",
+        "englishText": "Naomi had a relative of her husband’s, a mighty man of wealth, of the family of Elimelech, and his name was Boaz."
+      },
+      {
+        "reference": "Proverbs 7:4",
+        "book": "Proverbs",
+        "englishText": "Tell wisdom, “You are my sister.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

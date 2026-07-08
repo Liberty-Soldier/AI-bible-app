@@ -4,7 +4,7 @@
   "title": "עֵיפָה",
   "subtitle": "H5891 • Hebrew name",
   "simple": {
-    "meaning": "עֵיפָה (ʻÊyphâh) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "עֵיפָה (ʻÊyphâh) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, Isaiah, beginning at Genesis 25:4. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עֵיפָה (H5891) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עֵיפָה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,133 @@
       "1 Chronicles 2:46",
       "1 Chronicles 2:47",
       "Isaiah 60:6"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5891",
+    "source": "hebrew",
+    "strong": "H5891",
+    "lemma": "עֵיפָה",
+    "transliteration": "ʻÊyphâh",
+    "definition": "Ephah , the name of a son of Midian, and of the region settled by him; also of an Israelite and of an Israelitess",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:4",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles",
+      "Isaiah"
+    ],
+    "references": [
+      "Genesis 25:4",
+      "1 Chronicles 1:33",
+      "1 Chronicles 2:46",
+      "1 Chronicles 2:47",
+      "Isaiah 60:6"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 25:4",
+        "evidenceText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:33",
+        "evidenceText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:47",
+        "evidenceText": "The sons of Jahdai: Regem, Jothan, Geshan, Pelet, Ephah, and Shaaph."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:4",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "reference": "1 Chronicles 1:33",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      },
+      {
+        "reference": "1 Chronicles 2:46",
+        "phase": "Occurrence",
+        "evidenceText": "Ephah, Caleb’s concubine, bore Haran, Moza, and Gazez; and Haran became the father of Gazez."
+      },
+      {
+        "reference": "1 Chronicles 2:47",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Jahdai: Regem, Jothan, Geshan, Pelet, Ephah, and Shaaph."
+      },
+      {
+        "reference": "Isaiah 60:6",
+        "phase": "Occurrence",
+        "evidenceText": "A multitude of camels will cover you,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:4 and continues through Isaiah 60:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:4",
+        "book": "Genesis",
+        "englishText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "reference": "1 Chronicles 1:33",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      },
+      {
+        "reference": "1 Chronicles 2:46",
+        "book": "1 Chronicles",
+        "englishText": "Ephah, Caleb’s concubine, bore Haran, Moza, and Gazez; and Haran became the father of Gazez."
+      },
+      {
+        "reference": "1 Chronicles 2:47",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Jahdai: Regem, Jothan, Geshan, Pelet, Ephah, and Shaaph."
+      },
+      {
+        "reference": "Isaiah 60:6",
+        "book": "Isaiah",
+        "englishText": "A multitude of camels will cover you,"
+      }
     ]
   },
   "evidence": {

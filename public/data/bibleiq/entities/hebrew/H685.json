@@ -25,6 +25,81 @@
       "2 Samuel 1:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H685",
+    "source": "hebrew",
+    "strong": "H685",
+    "lemma": "אֶצְעָדָה",
+    "transliteration": "ʼetsʻâdâh",
+    "definition": "properly, a step-chain ; by analogy, a bracelet",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 31:50",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "We have brought Yahweh’s offering, what every man found: gold ornaments, armlets, bracelets, signet rings, earrings, and necklaces, to make atonement for our souls before Yahweh.”"
+    },
+    "books": [
+      "Numbers",
+      "2 Samuel"
+    ],
+    "references": [
+      "Numbers 31:50",
+      "2 Samuel 1:10"
+    ],
+    "themes": [
+      "offering",
+      "death"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Numbers 31:50",
+        "evidenceText": "We have brought Yahweh’s offering, what every man found: gold ornaments, armlets, bracelets, signet rings, earrings, and necklaces, to make atonement for our souls before Yahweh.”"
+      },
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "2 Samuel 1:10",
+        "evidenceText": "So I stood beside him and killed him, because I was sure that he could not live after he had fallen. I took the crown that was on his head and the bracelet that was on his arm, and have brought them here to my lord.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 31:50",
+        "phase": "Offering",
+        "evidenceText": "We have brought Yahweh’s offering, what every man found: gold ornaments, armlets, bracelets, signet rings, earrings, and necklaces, to make atonement for our souls before Yahweh.”"
+      },
+      {
+        "reference": "2 Samuel 1:10",
+        "phase": "Death",
+        "evidenceText": "So I stood beside him and killed him, because I was sure that he could not live after he had fallen. I took the crown that was on his head and the bracelet that was on his arm, and have brought them here to my lord.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 31:50 and continues through 2 Samuel 1:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 31:50",
+        "book": "Numbers",
+        "englishText": "We have brought Yahweh’s offering, what every man found: gold ornaments, armlets, bracelets, signet rings, earrings, and necklaces, to make atonement for our souls before Yahweh.”"
+      },
+      {
+        "reference": "2 Samuel 1:10",
+        "book": "2 Samuel",
+        "englishText": "So I stood beside him and killed him, because I was sure that he could not live after he had fallen. I took the crown that was on his head and the bracelet that was on his arm, and have brought them here to my lord.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

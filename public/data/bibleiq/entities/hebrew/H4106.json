@@ -27,6 +27,116 @@
       "Isaiah 16:5"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4106",
+    "source": "hebrew",
+    "strong": "H4106",
+    "lemma": "מָהִיר",
+    "transliteration": "mâhîyr",
+    "definition": "quick ; hence, skilful",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 7:6",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "this Ezra went up from Babylon. He was a skilled scribe in the law of Moses, which Yahweh, the God of Israel, had given; and the king granted him all his request, according to Yahweh his God’s hand on him."
+    },
+    "books": [
+      "Ezra",
+      "Psalms",
+      "Proverbs",
+      "Isaiah"
+    ],
+    "references": [
+      "Ezra 7:6",
+      "Psalms 45:2",
+      "Proverbs 22:29",
+      "Isaiah 16:5"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "death",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "Ezra 7:6",
+        "evidenceText": "this Ezra went up from Babylon. He was a skilled scribe in the law of Moses, which Yahweh, the God of Israel, had given; and the king granted him all his request, according to Yahweh his God’s hand on him."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Psalms 45:2",
+        "evidenceText": "You are the most excellent of the sons of men."
+      },
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "Proverbs 22:29",
+        "evidenceText": "Do you see a man skilled in his work?"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 7:6",
+        "phase": "Death",
+        "evidenceText": "this Ezra went up from Babylon. He was a skilled scribe in the law of Moses, which Yahweh, the God of Israel, had given; and the king granted him all his request, according to Yahweh his God’s hand on him."
+      },
+      {
+        "reference": "Psalms 45:2",
+        "phase": "Genealogy",
+        "evidenceText": "You are the most excellent of the sons of men."
+      },
+      {
+        "reference": "Proverbs 22:29",
+        "phase": "Death",
+        "evidenceText": "Do you see a man skilled in his work?"
+      },
+      {
+        "reference": "Isaiah 16:5",
+        "phase": "Occurrence",
+        "evidenceText": "A throne will be established in loving kindness. One will sit on it in truth, in the tent of David, judging, seeking justice, and swift to do righteousness."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ezra 7:6 and continues through Isaiah 16:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 7:6",
+        "book": "Ezra",
+        "englishText": "this Ezra went up from Babylon. He was a skilled scribe in the law of Moses, which Yahweh, the God of Israel, had given; and the king granted him all his request, according to Yahweh his God’s hand on him."
+      },
+      {
+        "reference": "Psalms 45:2",
+        "book": "Psalms",
+        "englishText": "You are the most excellent of the sons of men."
+      },
+      {
+        "reference": "Proverbs 22:29",
+        "book": "Proverbs",
+        "englishText": "Do you see a man skilled in his work?"
+      },
+      {
+        "reference": "Isaiah 16:5",
+        "book": "Isaiah",
+        "englishText": "A throne will be established in loving kindness. One will sit on it in truth, in the tent of David, judging, seeking justice, and swift to do righteousness."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

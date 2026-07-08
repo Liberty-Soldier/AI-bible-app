@@ -4,7 +4,7 @@
   "title": "אֲחִימַן",
   "subtitle": "H289 • Hebrew name",
   "simple": {
-    "meaning": "אֲחִימַן (ʼĂchîyman) appears 4 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "אֲחִימַן (ʼĂchîyman) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, Joshua, Judges, 1 Chronicles, beginning at Numbers 13:22. BibleIQ detects the main surrounding context as family, family line, Egypt.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֲחִימַן (H289) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֲחִימַן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,111 @@
       "Joshua 15:14",
       "Judges 1:10",
       "1 Chronicles 9:17"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H289",
+    "source": "hebrew",
+    "strong": "H289",
+    "lemma": "אֲחִימַן",
+    "transliteration": "ʼĂchîyman",
+    "definition": "Achiman , the name of an Anakite and of an Israelite",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 13:22",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "They went up by the South, and came to Hebron; and Ahiman, Sheshai, and Talmai, the children of Anak, were there. (Now Hebron was built seven years before Zoan in Egypt.)"
+    },
+    "books": [
+      "Numbers",
+      "Joshua",
+      "Judges",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 13:22",
+      "Joshua 15:14",
+      "Judges 1:10",
+      "1 Chronicles 9:17"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Joshua 15:14",
+        "evidenceText": "Caleb drove out the three sons of Anak: Sheshai, and Ahiman, and Talmai, the children of Anak."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 13:22",
+        "phase": "Occurrence",
+        "evidenceText": "They went up by the South, and came to Hebron; and Ahiman, Sheshai, and Talmai, the children of Anak, were there. (Now Hebron was built seven years before Zoan in Egypt.)"
+      },
+      {
+        "reference": "Joshua 15:14",
+        "phase": "Genealogy",
+        "evidenceText": "Caleb drove out the three sons of Anak: Sheshai, and Ahiman, and Talmai, the children of Anak."
+      },
+      {
+        "reference": "Judges 1:10",
+        "phase": "Occurrence",
+        "evidenceText": "Judah went against the Canaanites who lived in Hebron. (The name of Hebron before that was Kiriath Arba.) They struck Sheshai, Ahiman, and Talmai."
+      },
+      {
+        "reference": "1 Chronicles 9:17",
+        "phase": "Occurrence",
+        "evidenceText": "The gatekeepers: Shallum, Akkub, Talmon, Ahiman, and their brothers (Shallum was the chief),"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 13:22 and continues through 1 Chronicles 9:17.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 13:22",
+        "book": "Numbers",
+        "englishText": "They went up by the South, and came to Hebron; and Ahiman, Sheshai, and Talmai, the children of Anak, were there. (Now Hebron was built seven years before Zoan in Egypt.)"
+      },
+      {
+        "reference": "Joshua 15:14",
+        "book": "Joshua",
+        "englishText": "Caleb drove out the three sons of Anak: Sheshai, and Ahiman, and Talmai, the children of Anak."
+      },
+      {
+        "reference": "Judges 1:10",
+        "book": "Judges",
+        "englishText": "Judah went against the Canaanites who lived in Hebron. (The name of Hebron before that was Kiriath Arba.) They struck Sheshai, Ahiman, and Talmai."
+      },
+      {
+        "reference": "1 Chronicles 9:17",
+        "book": "1 Chronicles",
+        "englishText": "The gatekeepers: Shallum, Akkub, Talmon, Ahiman, and their brothers (Shallum was the chief),"
+      }
     ]
   },
   "evidence": {

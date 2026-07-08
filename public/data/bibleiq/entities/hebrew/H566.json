@@ -4,7 +4,7 @@
   "title": "אִמְרִי",
   "subtitle": "H566 • Hebrew name",
   "simple": {
-    "meaning": "אִמְרִי (ʼImrîy) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אִמְרִי (ʼImrîy) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Nehemiah, beginning at 1 Chronicles 9:4. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אִמְרִי (H566) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אִמְרִי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,74 @@
     ],
     "laterReferences": [
       "Nehemiah 3:2"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H566",
+    "source": "hebrew",
+    "strong": "H566",
+    "lemma": "אִמְרִי",
+    "transliteration": "ʼImrîy",
+    "definition": "Imri , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 9:4",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Uthai the son of Ammihud, the son of Omri, the son of Imri, the son of Bani, of the children of Perez the son of Judah."
+    },
+    "books": [
+      "1 Chronicles",
+      "Nehemiah"
+    ],
+    "references": [
+      "1 Chronicles 9:4",
+      "Nehemiah 3:2"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 9:4",
+        "phase": "Occurrence",
+        "evidenceText": "Uthai the son of Ammihud, the son of Omri, the son of Imri, the son of Bani, of the children of Perez the son of Judah."
+      },
+      {
+        "reference": "Nehemiah 3:2",
+        "phase": "Occurrence",
+        "evidenceText": "Next to him the men of Jericho built. Next to them Zaccur the son of Imri built."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 9:4 and continues through Nehemiah 3:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 9:4",
+        "book": "1 Chronicles",
+        "englishText": "Uthai the son of Ammihud, the son of Omri, the son of Imri, the son of Bani, of the children of Perez the son of Judah."
+      },
+      {
+        "reference": "Nehemiah 3:2",
+        "book": "Nehemiah",
+        "englishText": "Next to him the men of Jericho built. Next to them Zaccur the son of Imri built."
+      }
     ]
   },
   "evidence": {

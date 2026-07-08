@@ -28,6 +28,133 @@
       "1 Samuel 15:15"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4315",
+    "source": "hebrew",
+    "strong": "H4315",
+    "lemma": "מֵיטָב",
+    "transliteration": "mêyṭâb",
+    "definition": "the best part",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "animal",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 47:6",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The land of Egypt is before you. Make your father and your brothers dwell in the best of the land. Let them dwell in the land of Goshen. If you know any able men among them, then put them in charge of my livestock.”"
+    },
+    "books": [
+      "Genesis",
+      "Exodus",
+      "1 Samuel"
+    ],
+    "references": [
+      "Genesis 47:6",
+      "Genesis 47:11",
+      "Exodus 22:4",
+      "1 Samuel 15:9",
+      "1 Samuel 15:15"
+    ],
+    "themes": [
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 47:6",
+        "evidenceText": "The land of Egypt is before you. Make your father and your brothers dwell in the best of the land. Let them dwell in the land of Goshen. If you know any able men among them, then put them in charge of my livestock.”"
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 47:11",
+        "evidenceText": "Joseph placed his father and his brothers, and gave them a possession in the land of Egypt, in the best of the land, in the land of Rameses, as Pharaoh had commanded."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 47:6",
+        "phase": "Movement or place",
+        "evidenceText": "The land of Egypt is before you. Make your father and your brothers dwell in the best of the land. Let them dwell in the land of Goshen. If you know any able men among them, then put them in charge of my livestock.”"
+      },
+      {
+        "reference": "Genesis 47:11",
+        "phase": "Movement or place",
+        "evidenceText": "Joseph placed his father and his brothers, and gave them a possession in the land of Egypt, in the best of the land, in the land of Rameses, as Pharaoh had commanded."
+      },
+      {
+        "reference": "Exodus 22:4",
+        "phase": "Occurrence",
+        "evidenceText": "If the stolen property is found in his hand alive, whether it is ox, donkey, or sheep, he shall pay double."
+      },
+      {
+        "reference": "Exodus 22:4",
+        "phase": "Occurrence",
+        "evidenceText": "If the stolen property is found in his hand alive, whether it is ox, donkey, or sheep, he shall pay double."
+      },
+      {
+        "reference": "1 Samuel 15:9",
+        "phase": "Occurrence",
+        "evidenceText": "But Saul and the people spared Agag, and the best of the sheep, of the cattle, and of the fat calves, and the lambs, and all that was good, and were not willing to utterly destroy them; but everything that was vile and refuse, that they destroyed utterly."
+      },
+      {
+        "reference": "1 Samuel 15:15",
+        "phase": "Occurrence",
+        "evidenceText": "Saul said, “They have brought them from the Amalekites; for the people spared the best of the sheep and of the cattle, to sacrifice to Yahweh your God. We have utterly destroyed the rest.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 47:6 and continues through 1 Samuel 15:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 47:6",
+        "book": "Genesis",
+        "englishText": "The land of Egypt is before you. Make your father and your brothers dwell in the best of the land. Let them dwell in the land of Goshen. If you know any able men among them, then put them in charge of my livestock.”"
+      },
+      {
+        "reference": "Genesis 47:11",
+        "book": "Genesis",
+        "englishText": "Joseph placed his father and his brothers, and gave them a possession in the land of Egypt, in the best of the land, in the land of Rameses, as Pharaoh had commanded."
+      },
+      {
+        "reference": "Exodus 22:4",
+        "book": "Exodus",
+        "englishText": "If the stolen property is found in his hand alive, whether it is ox, donkey, or sheep, he shall pay double."
+      },
+      {
+        "reference": "Exodus 22:4",
+        "book": "Exodus",
+        "englishText": "If the stolen property is found in his hand alive, whether it is ox, donkey, or sheep, he shall pay double."
+      },
+      {
+        "reference": "1 Samuel 15:9",
+        "book": "1 Samuel",
+        "englishText": "But Saul and the people spared Agag, and the best of the sheep, of the cattle, and of the fat calves, and the lambs, and all that was good, and were not willing to utterly destroy them; but everything that was vile and refuse, that they destroyed utterly."
+      },
+      {
+        "reference": "1 Samuel 15:15",
+        "book": "1 Samuel",
+        "englishText": "Saul said, “They have brought them from the Amalekites; for the people spared the best of the sheep and of the cattle, to sacrifice to Yahweh your God. We have utterly destroyed the rest.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

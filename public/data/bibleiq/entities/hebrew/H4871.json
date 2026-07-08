@@ -26,6 +26,94 @@
       "Psalms 18:17"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4871",
+    "source": "hebrew",
+    "strong": "H4871",
+    "lemma": "מָשָׁה",
+    "transliteration": "mâshâh",
+    "definition": "to pull out (literally or figuratively)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 2:10",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "The child grew, and she brought him to Pharaoh’s daughter, and he became her son. She named him Moses,* “Moses” sounds like the Hebrew for “draw out”. and said, “Because I drew him out of the water.”"
+    },
+    "books": [
+      "Exodus",
+      "2 Samuel",
+      "Psalms"
+    ],
+    "references": [
+      "Exodus 2:10",
+      "2 Samuel 22:17",
+      "Psalms 18:17"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "naming",
+        "label": "Naming",
+        "reference": "Exodus 2:10",
+        "evidenceText": "The child grew, and she brought him to Pharaoh’s daughter, and he became her son. She named him Moses,* “Moses” sounds like the Hebrew for “draw out”. and said, “Because I drew him out of the water.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 2:10",
+        "phase": "Naming",
+        "evidenceText": "The child grew, and she brought him to Pharaoh’s daughter, and he became her son. She named him Moses,* “Moses” sounds like the Hebrew for “draw out”. and said, “Because I drew him out of the water.”"
+      },
+      {
+        "reference": "2 Samuel 22:17",
+        "phase": "Occurrence",
+        "evidenceText": "He sent from on high and he took me."
+      },
+      {
+        "reference": "Psalms 18:17",
+        "phase": "Occurrence",
+        "evidenceText": "He delivered me from my strong enemy,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 2:10 and continues through Psalms 18:17.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 2:10",
+        "book": "Exodus",
+        "englishText": "The child grew, and she brought him to Pharaoh’s daughter, and he became her son. She named him Moses,* “Moses” sounds like the Hebrew for “draw out”. and said, “Because I drew him out of the water.”"
+      },
+      {
+        "reference": "2 Samuel 22:17",
+        "book": "2 Samuel",
+        "englishText": "He sent from on high and he took me."
+      },
+      {
+        "reference": "Psalms 18:17",
+        "book": "Psalms",
+        "englishText": "He delivered me from my strong enemy,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -25,6 +25,70 @@
       "Psalms 108:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7366",
+    "source": "hebrew",
+    "strong": "H7366",
+    "lemma": "רַחַץ",
+    "transliteration": "rachats",
+    "definition": "a bath",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Psalms 60:10",
+      "book": "Psalms",
+      "bookName": "Psalms",
+      "englishText": "Haven’t you, God, rejected us?"
+    },
+    "books": [
+      "Psalms"
+    ],
+    "references": [
+      "Psalms 60:10",
+      "Psalms 108:10"
+    ],
+    "themes": [
+      "city"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Psalms 108:10",
+        "evidenceText": "Who will bring me into the fortified city?"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Psalms 60:10",
+        "phase": "Occurrence",
+        "evidenceText": "Haven’t you, God, rejected us?"
+      },
+      {
+        "reference": "Psalms 108:10",
+        "phase": "Movement or place",
+        "evidenceText": "Who will bring me into the fortified city?"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Psalms 60:10 and continues through Psalms 108:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Psalms 60:10",
+        "book": "Psalms",
+        "englishText": "Haven’t you, God, rejected us?"
+      },
+      {
+        "reference": "Psalms 108:10",
+        "book": "Psalms",
+        "englishText": "Who will bring me into the fortified city?"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

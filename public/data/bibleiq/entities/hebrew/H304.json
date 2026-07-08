@@ -4,7 +4,7 @@
   "title": "אַחְלַי",
   "subtitle": "H304 • Hebrew name",
   "simple": {
-    "meaning": "אַחְלַי (ʼAchlay) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אַחְלַי (ʼAchlay) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 2:31. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אַחְלַי (H304) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אַחְלַי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,73 @@
     ],
     "laterReferences": [
       "1 Chronicles 11:41"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H304",
+    "source": "hebrew",
+    "strong": "H304",
+    "lemma": "אַחְלַי",
+    "transliteration": "ʼAchlay",
+    "definition": "Achlai , the name of an Israelitess and of an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:31",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The son of Appaim: Ishi. The son of Ishi: Sheshan. The son of Sheshan: Ahlai."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:31",
+      "1 Chronicles 11:41"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:31",
+        "phase": "Occurrence",
+        "evidenceText": "The son of Appaim: Ishi. The son of Ishi: Sheshan. The son of Sheshan: Ahlai."
+      },
+      {
+        "reference": "1 Chronicles 11:41",
+        "phase": "Occurrence",
+        "evidenceText": "Uriah the Hittite, Zabad the son of Ahlai,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:31 and continues through 1 Chronicles 11:41.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:31",
+        "book": "1 Chronicles",
+        "englishText": "The son of Appaim: Ishi. The son of Ishi: Sheshan. The son of Sheshan: Ahlai."
+      },
+      {
+        "reference": "1 Chronicles 11:41",
+        "book": "1 Chronicles",
+        "englishText": "Uriah the Hittite, Zabad the son of Ahlai,"
+      }
     ]
   },
   "evidence": {

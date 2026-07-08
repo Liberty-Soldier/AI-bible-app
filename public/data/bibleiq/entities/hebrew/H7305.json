@@ -25,6 +25,76 @@
       "Esther 4:14"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7305",
+    "source": "hebrew",
+    "strong": "H7305",
+    "lemma": "רֶוַח",
+    "transliteration": "revach",
+    "definition": "room , literally (an interval) or figuratively (deliverance)",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 32:17",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "He commanded the foremost, saying, “When Esau, my brother, meets you, and asks you, saying, ‘Whose are you? Where are you going? Whose are these before you?’"
+    },
+    "books": [
+      "Genesis",
+      "Esther"
+    ],
+    "references": [
+      "Genesis 32:17",
+      "Esther 4:14"
+    ],
+    "themes": [
+      "family",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 32:17",
+        "phase": "Occurrence",
+        "evidenceText": "He commanded the foremost, saying, “When Esau, my brother, meets you, and asks you, saying, ‘Whose are you? Where are you going? Whose are these before you?’"
+      },
+      {
+        "reference": "Esther 4:14",
+        "phase": "Occurrence",
+        "evidenceText": "For if you remain silent now, then relief and deliverance will come to the Jews from another place, but you and your father’s house will perish. Who knows if you haven’t come to the kingdom for such a time as this?”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 32:17 and continues through Esther 4:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 32:17",
+        "book": "Genesis",
+        "englishText": "He commanded the foremost, saying, “When Esau, my brother, meets you, and asks you, saying, ‘Whose are you? Where are you going? Whose are these before you?’"
+      },
+      {
+        "reference": "Esther 4:14",
+        "book": "Esther",
+        "englishText": "For if you remain silent now, then relief and deliverance will come to the Jews from another place, but you and your father’s house will perish. Who knows if you haven’t come to the kingdom for such a time as this?”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -25,6 +25,87 @@
       "Exodus 6:15"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3223",
+    "source": "hebrew",
+    "strong": "H3223",
+    "lemma": "יְמוּאֵל",
+    "transliteration": "Yᵉmûwʼêl",
+    "definition": "Jemuel , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:10",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Simeon: Jemuel, Jamin, Ohad, Jachin, Zohar, and Shaul the son of a Canaanite woman."
+    },
+    "books": [
+      "Genesis",
+      "Exodus"
+    ],
+    "references": [
+      "Genesis 46:10",
+      "Exodus 6:15"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 46:10",
+        "evidenceText": "The sons of Simeon: Jemuel, Jamin, Ohad, Jachin, Zohar, and Shaul the son of a Canaanite woman."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Exodus 6:15",
+        "evidenceText": "The sons of Simeon: Jemuel, and Jamin, and Ohad, and Jachin, and Zohar, and Shaul the son of a Canaanite woman; these are the families of Simeon."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:10",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Simeon: Jemuel, Jamin, Ohad, Jachin, Zohar, and Shaul the son of a Canaanite woman."
+      },
+      {
+        "reference": "Exodus 6:15",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Simeon: Jemuel, and Jamin, and Ohad, and Jachin, and Zohar, and Shaul the son of a Canaanite woman; these are the families of Simeon."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:10 and continues through Exodus 6:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:10",
+        "book": "Genesis",
+        "englishText": "The sons of Simeon: Jemuel, Jamin, Ohad, Jachin, Zohar, and Shaul the son of a Canaanite woman."
+      },
+      {
+        "reference": "Exodus 6:15",
+        "book": "Exodus",
+        "englishText": "The sons of Simeon: Jemuel, and Jamin, and Ohad, and Jachin, and Zohar, and Shaul the son of a Canaanite woman; these are the families of Simeon."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -26,6 +26,94 @@
       "Ruth 4:9"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3630",
+    "source": "hebrew",
+    "strong": "H3630",
+    "lemma": "כִּלְיוֹן",
+    "transliteration": "Kilyôwn",
+    "definition": "Kiljon , an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ruth 1:2",
+      "book": "Ruth",
+      "bookName": "Ruth",
+      "englishText": "The name of the man was Elimelech, and the name of his wife Naomi. The names of his two sons were Mahlon and Chilion, Ephrathites of Bethlehem Judah. They came into the country of Moab and lived there."
+    },
+    "books": [
+      "Ruth"
+    ],
+    "references": [
+      "Ruth 1:2",
+      "Ruth 1:5",
+      "Ruth 4:9"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Ruth 1:2",
+        "phase": "Occurrence",
+        "evidenceText": "The name of the man was Elimelech, and the name of his wife Naomi. The names of his two sons were Mahlon and Chilion, Ephrathites of Bethlehem Judah. They came into the country of Moab and lived there."
+      },
+      {
+        "reference": "Ruth 1:5",
+        "phase": "Occurrence",
+        "evidenceText": "Mahlon and Chilion both died, and the woman was bereaved of her two children and of her husband."
+      },
+      {
+        "reference": "Ruth 4:9",
+        "phase": "Occurrence",
+        "evidenceText": "Boaz said to the elders and to all the people, “You are witnesses today, that I have bought all that was Elimelech’s, and all that was Chilion’s and Mahlon’s, from the hand of Naomi."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ruth 1:2 and continues through Ruth 4:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ruth 1:2",
+        "book": "Ruth",
+        "englishText": "The name of the man was Elimelech, and the name of his wife Naomi. The names of his two sons were Mahlon and Chilion, Ephrathites of Bethlehem Judah. They came into the country of Moab and lived there."
+      },
+      {
+        "reference": "Ruth 1:5",
+        "book": "Ruth",
+        "englishText": "Mahlon and Chilion both died, and the woman was bereaved of her two children and of her husband."
+      },
+      {
+        "reference": "Ruth 4:9",
+        "book": "Ruth",
+        "englishText": "Boaz said to the elders and to all the people, “You are witnesses today, that I have bought all that was Elimelech’s, and all that was Chilion’s and Mahlon’s, from the hand of Naomi."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

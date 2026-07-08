@@ -26,6 +26,96 @@
       "1 Chronicles 23:29"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7246",
+    "source": "hebrew",
+    "strong": "H7246",
+    "lemma": "רָבַךְ",
+    "transliteration": "râbak",
+    "definition": "to soak (bread in oil)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Leviticus 6:14",
+      "book": "Leviticus",
+      "bookName": "Leviticus",
+      "englishText": "“ ‘This is the law of the meal offering: the sons of Aaron shall offer it before Yahweh, before the altar."
+    },
+    "books": [
+      "Leviticus",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Leviticus 6:14",
+      "Leviticus 7:12",
+      "1 Chronicles 23:29"
+    ],
+    "themes": [
+      "family line",
+      "offering",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Leviticus 6:14",
+        "evidenceText": "“ ‘This is the law of the meal offering: the sons of Aaron shall offer it before Yahweh, before the altar."
+      },
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "1 Chronicles 23:29",
+        "evidenceText": "for the show bread also, and for the fine flour for a meal offering, whether of unleavened wafers, or of that which is baked in the pan, or of that which is soaked, and for all measurements of quantity and size;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Leviticus 6:14",
+        "phase": "Offering",
+        "evidenceText": "“ ‘This is the law of the meal offering: the sons of Aaron shall offer it before Yahweh, before the altar."
+      },
+      {
+        "reference": "Leviticus 7:12",
+        "phase": "Occurrence",
+        "evidenceText": "If he offers it for a thanksgiving, then he shall offer with the sacrifice of thanksgiving unleavened cakes mixed with oil, and unleavened wafers anointed with oil, and cakes mixed with oil."
+      },
+      {
+        "reference": "1 Chronicles 23:29",
+        "phase": "Offering",
+        "evidenceText": "for the show bread also, and for the fine flour for a meal offering, whether of unleavened wafers, or of that which is baked in the pan, or of that which is soaked, and for all measurements of quantity and size;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Leviticus 6:14 and continues through 1 Chronicles 23:29.",
+    "occurrenceTrail": [
+      {
+        "reference": "Leviticus 6:14",
+        "book": "Leviticus",
+        "englishText": "“ ‘This is the law of the meal offering: the sons of Aaron shall offer it before Yahweh, before the altar."
+      },
+      {
+        "reference": "Leviticus 7:12",
+        "book": "Leviticus",
+        "englishText": "If he offers it for a thanksgiving, then he shall offer with the sacrifice of thanksgiving unleavened cakes mixed with oil, and unleavened wafers anointed with oil, and cakes mixed with oil."
+      },
+      {
+        "reference": "1 Chronicles 23:29",
+        "book": "1 Chronicles",
+        "englishText": "for the show bread also, and for the fine flour for a meal offering, whether of unleavened wafers, or of that which is baked in the pan, or of that which is soaked, and for all measurements of quantity and size;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

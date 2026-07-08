@@ -25,6 +25,77 @@
       "2 Samuel 20:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3228",
+    "source": "hebrew",
+    "strong": "H3228",
+    "lemma": "יְמִינִי",
+    "transliteration": "Yᵉmîynîy",
+    "definition": "a Jeminite (collectively) or descendants of Jamin",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 26:12",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "The sons of Simeon after their families: of Nemuel, the family of the Nemuelites; of Jamin, the family of the Jaminites; of Jachin, the family of the Jachinites;"
+    },
+    "books": [
+      "Numbers",
+      "2 Samuel"
+    ],
+    "references": [
+      "Numbers 26:12",
+      "2 Samuel 20:1"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 26:12",
+        "evidenceText": "The sons of Simeon after their families: of Nemuel, the family of the Nemuelites; of Jamin, the family of the Jaminites; of Jachin, the family of the Jachinites;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 26:12",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Simeon after their families: of Nemuel, the family of the Nemuelites; of Jamin, the family of the Jaminites; of Jachin, the family of the Jachinites;"
+      },
+      {
+        "reference": "2 Samuel 20:1",
+        "phase": "Occurrence",
+        "evidenceText": "There happened to be there a wicked fellow, whose name was Sheba, the son of Bichri, a Benjamite; and he blew the trumpet, and said, “We have no portion in David, neither have we inheritance in the son of Jesse. Every man to his tents, Israel!”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 26:12 and continues through 2 Samuel 20:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 26:12",
+        "book": "Numbers",
+        "englishText": "The sons of Simeon after their families: of Nemuel, the family of the Nemuelites; of Jamin, the family of the Jaminites; of Jachin, the family of the Jachinites;"
+      },
+      {
+        "reference": "2 Samuel 20:1",
+        "book": "2 Samuel",
+        "englishText": "There happened to be there a wicked fellow, whose name was Sheba, the son of Bichri, a Benjamite; and he blew the trumpet, and said, “We have no portion in David, neither have we inheritance in the son of Jesse. Every man to his tents, Israel!”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

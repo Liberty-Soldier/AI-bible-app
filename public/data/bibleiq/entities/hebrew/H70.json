@@ -4,7 +4,7 @@
   "title": "אֹבֶן",
   "subtitle": "H70 • Hebrew word",
   "simple": {
-    "meaning": "אֹבֶן (ʼôben) appears 2 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "אֹבֶן (ʼôben) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Exodus, Jeremiah, beginning at Exodus 1:16. BibleIQ detects the main surrounding context as family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֹבֶן (H70) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֹבֶן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,84 @@
     ],
     "laterReferences": [
       "Jeremiah 18:3"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H70",
+    "source": "hebrew",
+    "strong": "H70",
+    "lemma": "אֹבֶן",
+    "transliteration": "ʼôben",
+    "definition": "a pair of stones (only dual); a potter's wheel or a midwife's stool (consisting alike of two horizontal disks with a support between)",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 1:16",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "and he said, “When you perform the duty of a midwife to the Hebrew women, and see them on the birth stool, if it is a son, then you shall kill him; but if it is a daughter, then she shall live.”"
+    },
+    "books": [
+      "Exodus",
+      "Jeremiah"
+    ],
+    "references": [
+      "Exodus 1:16",
+      "Jeremiah 18:3"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Exodus 1:16",
+        "phase": "Occurrence",
+        "evidenceText": "and he said, “When you perform the duty of a midwife to the Hebrew women, and see them on the birth stool, if it is a son, then you shall kill him; but if it is a daughter, then she shall live.”"
+      },
+      {
+        "reference": "Jeremiah 18:3",
+        "phase": "Occurrence",
+        "evidenceText": "Then I went down to the potter’s house, and behold, he was making something on the wheels."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 1:16 and continues through Jeremiah 18:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 1:16",
+        "book": "Exodus",
+        "englishText": "and he said, “When you perform the duty of a midwife to the Hebrew women, and see them on the birth stool, if it is a son, then you shall kill him; but if it is a daughter, then she shall live.”"
+      },
+      {
+        "reference": "Jeremiah 18:3",
+        "book": "Jeremiah",
+        "englishText": "Then I went down to the potter’s house, and behold, he was making something on the wheels."
+      }
     ]
   },
   "evidence": {

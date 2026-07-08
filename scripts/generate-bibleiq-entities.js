@@ -10,6 +10,7 @@ const {
 const { buildOccurrences } = require("./bibleiq/build-occurrences");
 const { buildSimple, isProperName } = require("./bibleiq/build-simple");
 const { buildContextConnections } = require("./bibleiq/build-context");
+const { buildEvidenceModel } = require("./bibleiq/build-evidence-model");
 
 const root = process.cwd();
 
@@ -113,14 +114,24 @@ function buildEntity(lex, lemmaEntry) {
     ? lex.forms.slice(0, 8).map(([form]) => form).filter(Boolean)
     : [];
 
-  const simple = buildSimple({
-    lex,
-    lemma,
-    strong,
-    occurrenceCount,
-    occurrences,
-    properName,
-  });
+const evidenceModel = buildEvidenceModel({
+  lex,
+  lemma,
+  strong,
+  occurrenceCount,
+  occurrences,
+  properName,
+});
+
+const simple = buildSimple({
+  lex,
+  lemma,
+  strong,
+  occurrenceCount,
+  occurrences,
+  properName,
+  evidenceModel,
+});
 
   return {
     id: `word:hebrew:${strong}`,
@@ -130,13 +141,15 @@ function buildEntity(lex, lemmaEntry) {
 
     simple,
 
-    contextConnections: buildContextConnections({
-      lemma,
-      properName,
-      occurrences,
-    }),
+contextConnections: buildContextConnections({
+  lemma,
+  properName,
+  occurrences,
+}),
 
-    evidence: {
+structuredEvidence: evidenceModel,
+
+evidence: {
       originalLanguage: {
         source: "hebrew",
         word: lemma,

@@ -4,7 +4,7 @@
   "title": "חֵלֹן",
   "subtitle": "H2497 • Hebrew name",
   "simple": {
-    "meaning": "חֵלֹן (Chêlôn) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text. The occurrence trail connects the name with an offering.",
+    "meaning": "חֵלֹן (Chêlôn) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line. The occurrence trail connects the name with an offering.",
     "biblicalBackground": "The first appearances are in Numbers, beginning at Numbers 1:9. BibleIQ detects the main surrounding context as family line, offering, sacrifice.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חֵלֹן (H2497) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חֵלֹן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,114 @@
       "Numbers 7:24",
       "Numbers 7:29",
       "Numbers 10:16"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2497",
+    "source": "hebrew",
+    "strong": "H2497",
+    "lemma": "חֵלֹן",
+    "transliteration": "Chêlôn",
+    "definition": "Chelon , an Israelite",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 1:9",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Of Zebulun: Eliab the son of Helon."
+    },
+    "books": [
+      "Numbers"
+    ],
+    "references": [
+      "Numbers 1:9",
+      "Numbers 2:7",
+      "Numbers 7:24",
+      "Numbers 7:29",
+      "Numbers 10:16"
+    ],
+    "themes": [
+      "family line",
+      "offering"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Numbers 7:29",
+        "evidenceText": "and for the sacrifice of peace offerings, two head of cattle, five rams, five male goats, and five male lambs a year old. This was the offering of Eliab the son of Helon."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 1:9",
+        "phase": "Occurrence",
+        "evidenceText": "Of Zebulun: Eliab the son of Helon."
+      },
+      {
+        "reference": "Numbers 2:7",
+        "phase": "Occurrence",
+        "evidenceText": "The tribe of Zebulun: the prince of the children of Zebulun shall be Eliab the son of Helon."
+      },
+      {
+        "reference": "Numbers 7:24",
+        "phase": "Occurrence",
+        "evidenceText": "On the third day Eliab the son of Helon, prince of the children of Zebulun,"
+      },
+      {
+        "reference": "Numbers 7:29",
+        "phase": "Offering",
+        "evidenceText": "and for the sacrifice of peace offerings, two head of cattle, five rams, five male goats, and five male lambs a year old. This was the offering of Eliab the son of Helon."
+      },
+      {
+        "reference": "Numbers 10:16",
+        "phase": "Occurrence",
+        "evidenceText": "Eliab the son of Helon was over the army of the tribe of the children of Zebulun."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 1:9 and continues through Numbers 10:16.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 1:9",
+        "book": "Numbers",
+        "englishText": "Of Zebulun: Eliab the son of Helon."
+      },
+      {
+        "reference": "Numbers 2:7",
+        "book": "Numbers",
+        "englishText": "The tribe of Zebulun: the prince of the children of Zebulun shall be Eliab the son of Helon."
+      },
+      {
+        "reference": "Numbers 7:24",
+        "book": "Numbers",
+        "englishText": "On the third day Eliab the son of Helon, prince of the children of Zebulun,"
+      },
+      {
+        "reference": "Numbers 7:29",
+        "book": "Numbers",
+        "englishText": "and for the sacrifice of peace offerings, two head of cattle, five rams, five male goats, and five male lambs a year old. This was the offering of Eliab the son of Helon."
+      },
+      {
+        "reference": "Numbers 10:16",
+        "book": "Numbers",
+        "englishText": "Eliab the son of Helon was over the army of the tribe of the children of Zebulun."
+      }
     ]
   },
   "evidence": {

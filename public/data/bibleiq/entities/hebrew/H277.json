@@ -4,7 +4,7 @@
   "title": "אֲחִי",
   "subtitle": "H277 • Hebrew name",
   "simple": {
-    "meaning": "אֲחִי (ʼĂchîy) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אֲחִי (ʼĂchîy) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 5:15. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֲחִי (H277) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֲחִי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,86 @@
     ],
     "laterReferences": [
       "1 Chronicles 7:34"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H277",
+    "source": "hebrew",
+    "strong": "H277",
+    "lemma": "אֲחִי",
+    "transliteration": "ʼĂchîy",
+    "definition": "Achi , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 5:15",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Ahi the son of Abdiel, the son of Guni, chief of their fathers’ houses."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 5:15",
+      "1 Chronicles 7:34"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:34",
+        "evidenceText": "The sons of Shemer: Ahi, Rohgah, Jehubbah, and Aram."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 5:15",
+        "phase": "Occurrence",
+        "evidenceText": "Ahi the son of Abdiel, the son of Guni, chief of their fathers’ houses."
+      },
+      {
+        "reference": "1 Chronicles 7:34",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Shemer: Ahi, Rohgah, Jehubbah, and Aram."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 5:15 and continues through 1 Chronicles 7:34.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 5:15",
+        "book": "1 Chronicles",
+        "englishText": "Ahi the son of Abdiel, the son of Guni, chief of their fathers’ houses."
+      },
+      {
+        "reference": "1 Chronicles 7:34",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Shemer: Ahi, Rohgah, Jehubbah, and Aram."
+      }
     ]
   },
   "evidence": {

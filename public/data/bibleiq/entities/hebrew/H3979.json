@@ -27,6 +27,101 @@
       "Proverbs 30:14"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3979",
+    "source": "hebrew",
+    "strong": "H3979",
+    "lemma": "מַאֲכֶלֶת",
+    "transliteration": "maʼăkeleth",
+    "definition": "something to eat with, i.e. a knife",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 22:6",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Abraham took the wood of the burnt offering and laid it on Isaac his son. He took in his hand the fire and the knife. They both went together."
+    },
+    "books": [
+      "Genesis",
+      "Judges",
+      "Proverbs"
+    ],
+    "references": [
+      "Genesis 22:6",
+      "Genesis 22:10",
+      "Judges 19:29",
+      "Proverbs 30:14"
+    ],
+    "themes": [
+      "family line",
+      "offering"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Genesis 22:6",
+        "evidenceText": "Abraham took the wood of the burnt offering and laid it on Isaac his son. He took in his hand the fire and the knife. They both went together."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 22:6",
+        "phase": "Offering",
+        "evidenceText": "Abraham took the wood of the burnt offering and laid it on Isaac his son. He took in his hand the fire and the knife. They both went together."
+      },
+      {
+        "reference": "Genesis 22:10",
+        "phase": "Occurrence",
+        "evidenceText": "Abraham stretched out his hand, and took the knife to kill his son."
+      },
+      {
+        "reference": "Judges 19:29",
+        "phase": "Occurrence",
+        "evidenceText": "When he had come into his house, he took a knife and cut up his concubine, and divided her, limb by limb, into twelve pieces, and sent her throughout all the borders of Israel."
+      },
+      {
+        "reference": "Proverbs 30:14",
+        "phase": "Occurrence",
+        "evidenceText": "There is a generation whose teeth are like swords,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 22:6 and continues through Proverbs 30:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 22:6",
+        "book": "Genesis",
+        "englishText": "Abraham took the wood of the burnt offering and laid it on Isaac his son. He took in his hand the fire and the knife. They both went together."
+      },
+      {
+        "reference": "Genesis 22:10",
+        "book": "Genesis",
+        "englishText": "Abraham stretched out his hand, and took the knife to kill his son."
+      },
+      {
+        "reference": "Judges 19:29",
+        "book": "Judges",
+        "englishText": "When he had come into his house, he took a knife and cut up his concubine, and divided her, limb by limb, into twelve pieces, and sent her throughout all the borders of Israel."
+      },
+      {
+        "reference": "Proverbs 30:14",
+        "book": "Proverbs",
+        "englishText": "There is a generation whose teeth are like swords,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

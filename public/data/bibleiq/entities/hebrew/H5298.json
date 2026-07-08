@@ -27,6 +27,102 @@
       "1 Chronicles 14:6"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5298",
+    "source": "hebrew",
+    "strong": "H5298",
+    "lemma": "נֶפֶג",
+    "transliteration": "Nepheg",
+    "definition": "Nepheg , the name of two Israelites",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 6:21",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "The sons of Izhar: Korah, and Nepheg, and Zichri."
+    },
+    "books": [
+      "Exodus",
+      "2 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Exodus 6:21",
+      "2 Samuel 5:15",
+      "1 Chronicles 3:7",
+      "1 Chronicles 14:6"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Exodus 6:21",
+        "evidenceText": "The sons of Izhar: Korah, and Nepheg, and Zichri."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 6:21",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Izhar: Korah, and Nepheg, and Zichri."
+      },
+      {
+        "reference": "2 Samuel 5:15",
+        "phase": "Occurrence",
+        "evidenceText": "Ibhar, Elishua, Nepheg, Japhia,"
+      },
+      {
+        "reference": "1 Chronicles 3:7",
+        "phase": "Occurrence",
+        "evidenceText": "Nogah, Nepheg, Japhia,"
+      },
+      {
+        "reference": "1 Chronicles 14:6",
+        "phase": "Occurrence",
+        "evidenceText": "Nogah, Nepheg, Japhia,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 6:21 and continues through 1 Chronicles 14:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 6:21",
+        "book": "Exodus",
+        "englishText": "The sons of Izhar: Korah, and Nepheg, and Zichri."
+      },
+      {
+        "reference": "2 Samuel 5:15",
+        "book": "2 Samuel",
+        "englishText": "Ibhar, Elishua, Nepheg, Japhia,"
+      },
+      {
+        "reference": "1 Chronicles 3:7",
+        "book": "1 Chronicles",
+        "englishText": "Nogah, Nepheg, Japhia,"
+      },
+      {
+        "reference": "1 Chronicles 14:6",
+        "book": "1 Chronicles",
+        "englishText": "Nogah, Nepheg, Japhia,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

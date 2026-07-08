@@ -26,6 +26,90 @@
       "Nehemiah 7:38"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5570",
+    "source": "hebrew",
+    "strong": "H5570",
+    "lemma": "סְנָאָה",
+    "transliteration": "Çᵉnâʼâh",
+    "definition": "Senaah , a place in Palestine",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 2:35",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "The children of Senaah, three thousand six hundred thirty."
+    },
+    "books": [
+      "Ezra",
+      "Nehemiah"
+    ],
+    "references": [
+      "Ezra 2:35",
+      "Nehemiah 3:3",
+      "Nehemiah 7:38"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Nehemiah 3:3",
+        "evidenceText": "The sons of Hassenaah built the fish gate. They laid its beams, and set up its doors, its bolts, and its bars."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 2:35",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Senaah, three thousand six hundred thirty."
+      },
+      {
+        "reference": "Nehemiah 3:3",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Hassenaah built the fish gate. They laid its beams, and set up its doors, its bolts, and its bars."
+      },
+      {
+        "reference": "Nehemiah 7:38",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Senaah: three thousand nine hundred thirty."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ezra 2:35 and continues through Nehemiah 7:38.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 2:35",
+        "book": "Ezra",
+        "englishText": "The children of Senaah, three thousand six hundred thirty."
+      },
+      {
+        "reference": "Nehemiah 3:3",
+        "book": "Nehemiah",
+        "englishText": "The sons of Hassenaah built the fish gate. They laid its beams, and set up its doors, its bolts, and its bars."
+      },
+      {
+        "reference": "Nehemiah 7:38",
+        "book": "Nehemiah",
+        "englishText": "The children of Senaah: three thousand nine hundred thirty."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

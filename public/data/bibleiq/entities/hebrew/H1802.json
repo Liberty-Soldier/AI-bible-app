@@ -4,7 +4,7 @@
   "title": "דָּלָה",
   "subtitle": "H1802 • Hebrew word",
   "simple": {
-    "meaning": "דָּלָה (dâlâh) appears 5 times in the Hebrew Scriptures and is introduced in connection with flocks and in connection with priesthood.",
+    "meaning": "דָּלָה (dâlâh) appears 5 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with flocks and in connection with priesthood.",
     "biblicalBackground": "The first appearances are in Exodus, Psalms, Proverbs, beginning at Exodus 2:16. BibleIQ detects the main surrounding context as family, family line, flock, priesthood, Egypt.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to דָּלָה (H1802) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows דָּלָה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,113 @@
       "Exodus 2:19",
       "Psalms 30:2",
       "Proverbs 20:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1802",
+    "source": "hebrew",
+    "strong": "H1802",
+    "lemma": "דָּלָה",
+    "transliteration": "dâlâh",
+    "definition": "properly, to dangle , i.e. to let down a bucket (for drawing out water); figuratively, to deliver",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 2:16",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Now the priest of Midian had seven daughters. They came and drew water, and filled the troughs to water their father’s flock."
+    },
+    "books": [
+      "Exodus",
+      "Psalms",
+      "Proverbs"
+    ],
+    "references": [
+      "Exodus 2:16",
+      "Exodus 2:19",
+      "Psalms 30:2",
+      "Proverbs 20:5"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "priesthood"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Exodus 2:16",
+        "phase": "Occurrence",
+        "evidenceText": "Now the priest of Midian had seven daughters. They came and drew water, and filled the troughs to water their father’s flock."
+      },
+      {
+        "reference": "Exodus 2:19",
+        "phase": "Occurrence",
+        "evidenceText": "They said, “An Egyptian delivered us out of the hand of the shepherds, and moreover he drew water for us, and watered the flock.”"
+      },
+      {
+        "reference": "Exodus 2:19",
+        "phase": "Occurrence",
+        "evidenceText": "They said, “An Egyptian delivered us out of the hand of the shepherds, and moreover he drew water for us, and watered the flock.”"
+      },
+      {
+        "reference": "Psalms 30:2",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh my God, I cried to you,"
+      },
+      {
+        "reference": "Proverbs 20:5",
+        "phase": "Occurrence",
+        "evidenceText": "Counsel in the heart of man is like deep water,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 2:16 and continues through Proverbs 20:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 2:16",
+        "book": "Exodus",
+        "englishText": "Now the priest of Midian had seven daughters. They came and drew water, and filled the troughs to water their father’s flock."
+      },
+      {
+        "reference": "Exodus 2:19",
+        "book": "Exodus",
+        "englishText": "They said, “An Egyptian delivered us out of the hand of the shepherds, and moreover he drew water for us, and watered the flock.”"
+      },
+      {
+        "reference": "Exodus 2:19",
+        "book": "Exodus",
+        "englishText": "They said, “An Egyptian delivered us out of the hand of the shepherds, and moreover he drew water for us, and watered the flock.”"
+      },
+      {
+        "reference": "Psalms 30:2",
+        "book": "Psalms",
+        "englishText": "Yahweh my God, I cried to you,"
+      },
+      {
+        "reference": "Proverbs 20:5",
+        "book": "Proverbs",
+        "englishText": "Counsel in the heart of man is like deep water,"
+      }
     ]
   },
   "evidence": {

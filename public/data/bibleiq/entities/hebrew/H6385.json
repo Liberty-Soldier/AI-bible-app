@@ -4,7 +4,7 @@
   "title": "פָּלַג",
   "subtitle": "H6385 • Hebrew name",
   "simple": {
-    "meaning": "פָּלַג (pâlag) appears 4 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "פָּלַג (pâlag) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, Job, Psalms, beginning at Genesis 10:25. BibleIQ detects the main surrounding context as birth, family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to פָּלַג (H6385) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows פָּלַג through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,117 @@
       "1 Chronicles 1:19",
       "Job 38:25",
       "Psalms 55:10"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6385",
+    "source": "hebrew",
+    "strong": "H6385",
+    "lemma": "פָּלַג",
+    "transliteration": "pâlag",
+    "definition": "to split (literally or figuratively)",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:25",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "To Eber were born two sons. The name of the one was Peleg, for in his days the earth was divided. His brother’s name was Joktan."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles",
+      "Job",
+      "Psalms"
+    ],
+    "references": [
+      "Genesis 10:25",
+      "1 Chronicles 1:19",
+      "Job 38:25",
+      "Psalms 55:10"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 10:25",
+        "evidenceText": "To Eber were born two sons. The name of the one was Peleg, for in his days the earth was divided. His brother’s name was Joktan."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Chronicles 1:19",
+        "evidenceText": "To Eber were born two sons: the name of the one was Peleg, for in his days the earth was divided; and his brother’s name was Joktan."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 10:25",
+        "phase": "Birth or introduction",
+        "evidenceText": "To Eber were born two sons. The name of the one was Peleg, for in his days the earth was divided. His brother’s name was Joktan."
+      },
+      {
+        "reference": "1 Chronicles 1:19",
+        "phase": "Birth or introduction",
+        "evidenceText": "To Eber were born two sons: the name of the one was Peleg, for in his days the earth was divided; and his brother’s name was Joktan."
+      },
+      {
+        "reference": "Job 38:25",
+        "phase": "Occurrence",
+        "evidenceText": "Who has cut a channel for the flood water,"
+      },
+      {
+        "reference": "Psalms 55:10",
+        "phase": "Occurrence",
+        "evidenceText": "Day and night they prowl around on its walls."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:25 and continues through Psalms 55:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:25",
+        "book": "Genesis",
+        "englishText": "To Eber were born two sons. The name of the one was Peleg, for in his days the earth was divided. His brother’s name was Joktan."
+      },
+      {
+        "reference": "1 Chronicles 1:19",
+        "book": "1 Chronicles",
+        "englishText": "To Eber were born two sons: the name of the one was Peleg, for in his days the earth was divided; and his brother’s name was Joktan."
+      },
+      {
+        "reference": "Job 38:25",
+        "book": "Job",
+        "englishText": "Who has cut a channel for the flood water,"
+      },
+      {
+        "reference": "Psalms 55:10",
+        "book": "Psalms",
+        "englishText": "Day and night they prowl around on its walls."
+      }
     ]
   },
   "evidence": {

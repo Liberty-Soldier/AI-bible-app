@@ -29,6 +29,175 @@
       "1 Kings 18:27"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2048",
+    "source": "hebrew",
+    "strong": "H2048",
+    "lemma": "הָתַל",
+    "transliteration": "hâthal",
+    "definition": "to deride ; by implication, to cheat",
+    "occurrenceCount": 10,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 31:7",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Your father has deceived me, and changed my wages ten times, but God didn’t allow him to hurt me."
+    },
+    "books": [
+      "Genesis",
+      "Exodus",
+      "Judges",
+      "1 Kings",
+      "Job",
+      "Isaiah",
+      "Jeremiah"
+    ],
+    "references": [
+      "Genesis 31:7",
+      "Exodus 8:25",
+      "Judges 16:10",
+      "Judges 16:13",
+      "Judges 16:15",
+      "1 Kings 18:27",
+      "Job 13:9",
+      "Isaiah 44:20"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Exodus 8:25",
+        "evidenceText": "Pharaoh called for Moses and for Aaron, and said, “Go, sacrifice to your God in the land!”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 31:7",
+        "phase": "Occurrence",
+        "evidenceText": "Your father has deceived me, and changed my wages ten times, but God didn’t allow him to hurt me."
+      },
+      {
+        "reference": "Exodus 8:25",
+        "phase": "Movement or place",
+        "evidenceText": "Pharaoh called for Moses and for Aaron, and said, “Go, sacrifice to your God in the land!”"
+      },
+      {
+        "reference": "Judges 16:10",
+        "phase": "Occurrence",
+        "evidenceText": "Delilah said to Samson, “Behold, you have mocked me, and told me lies. Now please tell me how you might be bound.”"
+      },
+      {
+        "reference": "Judges 16:13",
+        "phase": "Occurrence",
+        "evidenceText": "Delilah said to Samson, “Until now, you have mocked me and told me lies. Tell me with what you might be bound.”"
+      },
+      {
+        "reference": "Judges 16:15",
+        "phase": "Occurrence",
+        "evidenceText": "She said to him, “How can you say, ‘I love you,’ when your heart is not with me? You have mocked me these three times, and have not told me where your great strength lies.”"
+      },
+      {
+        "reference": "1 Kings 18:27",
+        "phase": "Occurrence",
+        "evidenceText": "At noon, Elijah mocked them, and said, “Cry aloud; for he is a god. Either he is deep in thought, or he has gone somewhere, or he is on a journey, or perhaps he sleeps and must be awakened.”"
+      },
+      {
+        "reference": "Job 13:9",
+        "phase": "Occurrence",
+        "evidenceText": "Is it good that he should search you out?"
+      },
+      {
+        "reference": "Job 13:9",
+        "phase": "Occurrence",
+        "evidenceText": "Is it good that he should search you out?"
+      },
+      {
+        "reference": "Isaiah 44:20",
+        "phase": "Occurrence",
+        "evidenceText": "He feeds on ashes."
+      },
+      {
+        "reference": "Jeremiah 9:4",
+        "phase": "Occurrence",
+        "evidenceText": "“Everyone beware of his neighbor,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 31:7 and continues through Jeremiah 9:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 31:7",
+        "book": "Genesis",
+        "englishText": "Your father has deceived me, and changed my wages ten times, but God didn’t allow him to hurt me."
+      },
+      {
+        "reference": "Exodus 8:25",
+        "book": "Exodus",
+        "englishText": "Pharaoh called for Moses and for Aaron, and said, “Go, sacrifice to your God in the land!”"
+      },
+      {
+        "reference": "Judges 16:10",
+        "book": "Judges",
+        "englishText": "Delilah said to Samson, “Behold, you have mocked me, and told me lies. Now please tell me how you might be bound.”"
+      },
+      {
+        "reference": "Judges 16:13",
+        "book": "Judges",
+        "englishText": "Delilah said to Samson, “Until now, you have mocked me and told me lies. Tell me with what you might be bound.”"
+      },
+      {
+        "reference": "Judges 16:15",
+        "book": "Judges",
+        "englishText": "She said to him, “How can you say, ‘I love you,’ when your heart is not with me? You have mocked me these three times, and have not told me where your great strength lies.”"
+      },
+      {
+        "reference": "1 Kings 18:27",
+        "book": "1 Kings",
+        "englishText": "At noon, Elijah mocked them, and said, “Cry aloud; for he is a god. Either he is deep in thought, or he has gone somewhere, or he is on a journey, or perhaps he sleeps and must be awakened.”"
+      },
+      {
+        "reference": "Job 13:9",
+        "book": "Job",
+        "englishText": "Is it good that he should search you out?"
+      },
+      {
+        "reference": "Job 13:9",
+        "book": "Job",
+        "englishText": "Is it good that he should search you out?"
+      },
+      {
+        "reference": "Isaiah 44:20",
+        "book": "Isaiah",
+        "englishText": "He feeds on ashes."
+      },
+      {
+        "reference": "Jeremiah 9:4",
+        "book": "Jeremiah",
+        "englishText": "“Everyone beware of his neighbor,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

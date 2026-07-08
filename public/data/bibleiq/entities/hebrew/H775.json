@@ -4,7 +4,7 @@
   "title": "אַרְפַּכְשַׁד",
   "subtitle": "H775 • Hebrew name",
   "simple": {
-    "meaning": "אַרְפַּכְשַׁד (ʼArpakshad) appears 9 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אַרְפַּכְשַׁד (ʼArpakshad) appears 9 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 10:22. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אַרְפַּכְשַׁד (H775) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אַרְפַּכְשַׁד through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,180 @@
       "Genesis 11:11",
       "Genesis 11:12",
       "Genesis 11:13"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H775",
+    "source": "hebrew",
+    "strong": "H775",
+    "lemma": "אַרְפַּכְשַׁד",
+    "transliteration": "ʼArpakshad",
+    "definition": "Arpakshad , a son of Noah; also the region settled by him",
+    "occurrenceCount": 9,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:22",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Shem were: Elam, Asshur, Arpachshad, Lud, and Aram."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 10:22",
+      "Genesis 10:24",
+      "Genesis 11:10",
+      "Genesis 11:11",
+      "Genesis 11:12",
+      "Genesis 11:13",
+      "1 Chronicles 1:17",
+      "1 Chronicles 1:18"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 10:22",
+        "evidenceText": "The sons of Shem were: Elam, Asshur, Arpachshad, Lud, and Aram."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 11:10",
+        "evidenceText": "This is the history of the generations of Shem: Shem was one hundred years old when he became the father of Arpachshad two years after the flood."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:17",
+        "evidenceText": "The sons of Shem: Elam, Asshur, Arpachshad, Lud, Aram, Uz, Hul, Gether, and Meshech."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 10:22",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Shem were: Elam, Asshur, Arpachshad, Lud, and Aram."
+      },
+      {
+        "reference": "Genesis 10:24",
+        "phase": "Occurrence",
+        "evidenceText": "Arpachshad became the father of Shelah. Shelah became the father of Eber."
+      },
+      {
+        "reference": "Genesis 11:10",
+        "phase": "Genealogy",
+        "evidenceText": "This is the history of the generations of Shem: Shem was one hundred years old when he became the father of Arpachshad two years after the flood."
+      },
+      {
+        "reference": "Genesis 11:11",
+        "phase": "Occurrence",
+        "evidenceText": "Shem lived five hundred years after he became the father of Arpachshad, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "Genesis 11:12",
+        "phase": "Occurrence",
+        "evidenceText": "Arpachshad lived thirty-five years and became the father of Shelah."
+      },
+      {
+        "reference": "Genesis 11:13",
+        "phase": "Occurrence",
+        "evidenceText": "Arpachshad lived four hundred three years after he became the father of Shelah, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "1 Chronicles 1:17",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Shem: Elam, Asshur, Arpachshad, Lud, Aram, Uz, Hul, Gether, and Meshech."
+      },
+      {
+        "reference": "1 Chronicles 1:18",
+        "phase": "Occurrence",
+        "evidenceText": "Arpachshad became the father of Shelah, and Shelah became the father of Eber."
+      },
+      {
+        "reference": "1 Chronicles 1:24",
+        "phase": "Occurrence",
+        "evidenceText": "Shem, Arpachshad, Shelah,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:22 and continues through 1 Chronicles 1:24.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:22",
+        "book": "Genesis",
+        "englishText": "The sons of Shem were: Elam, Asshur, Arpachshad, Lud, and Aram."
+      },
+      {
+        "reference": "Genesis 10:24",
+        "book": "Genesis",
+        "englishText": "Arpachshad became the father of Shelah. Shelah became the father of Eber."
+      },
+      {
+        "reference": "Genesis 11:10",
+        "book": "Genesis",
+        "englishText": "This is the history of the generations of Shem: Shem was one hundred years old when he became the father of Arpachshad two years after the flood."
+      },
+      {
+        "reference": "Genesis 11:11",
+        "book": "Genesis",
+        "englishText": "Shem lived five hundred years after he became the father of Arpachshad, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "Genesis 11:12",
+        "book": "Genesis",
+        "englishText": "Arpachshad lived thirty-five years and became the father of Shelah."
+      },
+      {
+        "reference": "Genesis 11:13",
+        "book": "Genesis",
+        "englishText": "Arpachshad lived four hundred three years after he became the father of Shelah, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "1 Chronicles 1:17",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Shem: Elam, Asshur, Arpachshad, Lud, Aram, Uz, Hul, Gether, and Meshech."
+      },
+      {
+        "reference": "1 Chronicles 1:18",
+        "book": "1 Chronicles",
+        "englishText": "Arpachshad became the father of Shelah, and Shelah became the father of Eber."
+      },
+      {
+        "reference": "1 Chronicles 1:24",
+        "book": "1 Chronicles",
+        "englishText": "Shem, Arpachshad, Shelah,"
+      }
     ]
   },
   "evidence": {

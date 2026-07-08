@@ -25,6 +25,98 @@
       "Joshua 7:20"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H546",
+    "source": "hebrew",
+    "strong": "H546",
+    "lemma": "אׇמְנָה",
+    "transliteration": "ʼomnâh",
+    "definition": "adverb, surely",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 20:12",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Besides, she is indeed my sister, the daughter of my father, but not the daughter of my mother; and she became my wife."
+    },
+    "books": [
+      "Genesis",
+      "Joshua"
+    ],
+    "references": [
+      "Genesis 20:12",
+      "Joshua 7:20"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 20:12",
+        "evidenceText": "Besides, she is indeed my sister, the daughter of my father, but not the daughter of my mother; and she became my wife."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 20:12",
+        "phase": "Genealogy",
+        "evidenceText": "Besides, she is indeed my sister, the daughter of my father, but not the daughter of my mother; and she became my wife."
+      },
+      {
+        "reference": "Joshua 7:20",
+        "phase": "Occurrence",
+        "evidenceText": "Achan answered Joshua, and said, “I have truly sinned against Yahweh, the God of Israel, and this is what I have done."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 20:12 and continues through Joshua 7:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 20:12",
+        "book": "Genesis",
+        "englishText": "Besides, she is indeed my sister, the daughter of my father, but not the daughter of my mother; and she became my wife."
+      },
+      {
+        "reference": "Joshua 7:20",
+        "book": "Joshua",
+        "englishText": "Achan answered Joshua, and said, “I have truly sinned against Yahweh, the God of Israel, and this is what I have done."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -26,6 +26,103 @@
       "1 Chronicles 1:36"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1609",
+    "source": "hebrew",
+    "strong": "H1609",
+    "lemma": "גַּעְתָּם",
+    "transliteration": "Gaʻtâm",
+    "definition": "Gatam , an Edomite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:11",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Eliphaz were Teman, Omar, Zepho, and Gatam, and Kenaz."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:11",
+      "Genesis 36:16",
+      "1 Chronicles 1:36"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 36:11",
+        "evidenceText": "The sons of Eliphaz were Teman, Omar, Zepho, and Gatam, and Kenaz."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 36:16",
+        "evidenceText": "chief Korah, chief Gatam, chief Amalek. These are the chiefs who came of Eliphaz in the land of Edom. These are the sons of Adah."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:36",
+        "evidenceText": "The sons of Eliphaz: Teman, Omar, Zephi, Gatam, Kenaz, Timna, and Amalek."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:11",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Eliphaz were Teman, Omar, Zepho, and Gatam, and Kenaz."
+      },
+      {
+        "reference": "Genesis 36:16",
+        "phase": "Movement or place",
+        "evidenceText": "chief Korah, chief Gatam, chief Amalek. These are the chiefs who came of Eliphaz in the land of Edom. These are the sons of Adah."
+      },
+      {
+        "reference": "1 Chronicles 1:36",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Eliphaz: Teman, Omar, Zephi, Gatam, Kenaz, Timna, and Amalek."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:11 and continues through 1 Chronicles 1:36.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:11",
+        "book": "Genesis",
+        "englishText": "The sons of Eliphaz were Teman, Omar, Zepho, and Gatam, and Kenaz."
+      },
+      {
+        "reference": "Genesis 36:16",
+        "book": "Genesis",
+        "englishText": "chief Korah, chief Gatam, chief Amalek. These are the chiefs who came of Eliphaz in the land of Edom. These are the sons of Adah."
+      },
+      {
+        "reference": "1 Chronicles 1:36",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Eliphaz: Teman, Omar, Zephi, Gatam, Kenaz, Timna, and Amalek."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

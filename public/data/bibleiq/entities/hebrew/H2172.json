@@ -27,6 +27,93 @@
       "Amos 5:23"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2172",
+    "source": "hebrew",
+    "strong": "H2172",
+    "lemma": "זִמְרָה",
+    "transliteration": "zimrâh",
+    "definition": "a musical piece or song to be accompanied by an instrument",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Psalms 81:3",
+      "book": "Psalms",
+      "bookName": "Psalms",
+      "englishText": "Blow the trumpet at the New Moon,"
+    },
+    "books": [
+      "Psalms",
+      "Isaiah",
+      "Amos"
+    ],
+    "references": [
+      "Psalms 81:3",
+      "Psalms 98:5",
+      "Isaiah 51:3",
+      "Amos 5:23"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Psalms 81:3",
+        "phase": "Occurrence",
+        "evidenceText": "Blow the trumpet at the New Moon,"
+      },
+      {
+        "reference": "Psalms 98:5",
+        "phase": "Occurrence",
+        "evidenceText": "Sing praises to Yahweh with the harp,"
+      },
+      {
+        "reference": "Isaiah 51:3",
+        "phase": "Occurrence",
+        "evidenceText": "For Yahweh has comforted Zion."
+      },
+      {
+        "reference": "Amos 5:23",
+        "phase": "Occurrence",
+        "evidenceText": "Take away from me the noise of your songs!"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Psalms 81:3 and continues through Amos 5:23.",
+    "occurrenceTrail": [
+      {
+        "reference": "Psalms 81:3",
+        "book": "Psalms",
+        "englishText": "Blow the trumpet at the New Moon,"
+      },
+      {
+        "reference": "Psalms 98:5",
+        "book": "Psalms",
+        "englishText": "Sing praises to Yahweh with the harp,"
+      },
+      {
+        "reference": "Isaiah 51:3",
+        "book": "Isaiah",
+        "englishText": "For Yahweh has comforted Zion."
+      },
+      {
+        "reference": "Amos 5:23",
+        "book": "Amos",
+        "englishText": "Take away from me the noise of your songs!"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

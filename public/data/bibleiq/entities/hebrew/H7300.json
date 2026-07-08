@@ -27,6 +27,94 @@
       "Hosea 12:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7300",
+    "source": "hebrew",
+    "strong": "H7300",
+    "lemma": "רוּד",
+    "transliteration": "rûwd",
+    "definition": "to tramp about , i.e. ramble (free or disconsolate)",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 27:40",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "You will live by your sword, and you will serve your brother."
+    },
+    "books": [
+      "Genesis",
+      "Psalms",
+      "Jeremiah",
+      "Hosea"
+    ],
+    "references": [
+      "Genesis 27:40",
+      "Psalms 55:3",
+      "Jeremiah 2:31",
+      "Hosea 12:1"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 27:40",
+        "phase": "Occurrence",
+        "evidenceText": "You will live by your sword, and you will serve your brother."
+      },
+      {
+        "reference": "Psalms 55:3",
+        "phase": "Occurrence",
+        "evidenceText": "because of the voice of the enemy,"
+      },
+      {
+        "reference": "Jeremiah 2:31",
+        "phase": "Occurrence",
+        "evidenceText": "Generation, consider Yahweh’s word."
+      },
+      {
+        "reference": "Hosea 12:1",
+        "phase": "Occurrence",
+        "evidenceText": "Ephraim feeds on wind,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 27:40 and continues through Hosea 12:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 27:40",
+        "book": "Genesis",
+        "englishText": "You will live by your sword, and you will serve your brother."
+      },
+      {
+        "reference": "Psalms 55:3",
+        "book": "Psalms",
+        "englishText": "because of the voice of the enemy,"
+      },
+      {
+        "reference": "Jeremiah 2:31",
+        "book": "Jeremiah",
+        "englishText": "Generation, consider Yahweh’s word."
+      },
+      {
+        "reference": "Hosea 12:1",
+        "book": "Hosea",
+        "englishText": "Ephraim feeds on wind,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

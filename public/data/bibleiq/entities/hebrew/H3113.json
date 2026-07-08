@@ -4,7 +4,7 @@
   "title": "יוֹיָקִים",
   "subtitle": "H3113 • Hebrew name",
   "simple": {
-    "meaning": "יוֹיָקִים (Yôwyâqîym) appears 4 times in the Hebrew Scriptures and is introduced in connection with priesthood.",
+    "meaning": "יוֹיָקִים (Yôwyâqîym) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with priesthood.",
     "biblicalBackground": "The first appearances are in Nehemiah, beginning at Nehemiah 12:10. BibleIQ detects the main surrounding context as family, family line, priesthood.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יוֹיָקִים (H3113) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יוֹיָקִים through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,101 @@
     "laterReferences": [
       "Nehemiah 12:12",
       "Nehemiah 12:26"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3113",
+    "source": "hebrew",
+    "strong": "H3113",
+    "lemma": "יוֹיָקִים",
+    "transliteration": "Yôwyâqîym",
+    "definition": "Jojakim , an Israelite",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Nehemiah 12:10",
+      "book": "Nehemiah",
+      "bookName": "Nehemiah",
+      "englishText": "Jeshua became the father of Joiakim, and Joiakim became the father of Eliashib, and Eliashib became the father of Joiada,"
+    },
+    "books": [
+      "Nehemiah"
+    ],
+    "references": [
+      "Nehemiah 12:10",
+      "Nehemiah 12:12",
+      "Nehemiah 12:26"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "priesthood"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Nehemiah 12:10",
+        "phase": "Occurrence",
+        "evidenceText": "Jeshua became the father of Joiakim, and Joiakim became the father of Eliashib, and Eliashib became the father of Joiada,"
+      },
+      {
+        "reference": "Nehemiah 12:10",
+        "phase": "Occurrence",
+        "evidenceText": "Jeshua became the father of Joiakim, and Joiakim became the father of Eliashib, and Eliashib became the father of Joiada,"
+      },
+      {
+        "reference": "Nehemiah 12:12",
+        "phase": "Occurrence",
+        "evidenceText": "In the days of Joiakim were priests, heads of fathers’ households: of Seraiah, Meraiah; of Jeremiah, Hananiah;"
+      },
+      {
+        "reference": "Nehemiah 12:26",
+        "phase": "Occurrence",
+        "evidenceText": "These were in the days of Joiakim the son of Jeshua, the son of Jozadak, and in the days of Nehemiah the governor, and of Ezra the priest and scribe."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Nehemiah 12:10 and continues through Nehemiah 12:26.",
+    "occurrenceTrail": [
+      {
+        "reference": "Nehemiah 12:10",
+        "book": "Nehemiah",
+        "englishText": "Jeshua became the father of Joiakim, and Joiakim became the father of Eliashib, and Eliashib became the father of Joiada,"
+      },
+      {
+        "reference": "Nehemiah 12:10",
+        "book": "Nehemiah",
+        "englishText": "Jeshua became the father of Joiakim, and Joiakim became the father of Eliashib, and Eliashib became the father of Joiada,"
+      },
+      {
+        "reference": "Nehemiah 12:12",
+        "book": "Nehemiah",
+        "englishText": "In the days of Joiakim were priests, heads of fathers’ households: of Seraiah, Meraiah; of Jeremiah, Hananiah;"
+      },
+      {
+        "reference": "Nehemiah 12:26",
+        "book": "Nehemiah",
+        "englishText": "These were in the days of Joiakim the son of Jeshua, the son of Jozadak, and in the days of Nehemiah the governor, and of Ezra the priest and scribe."
+      }
     ]
   },
   "evidence": {

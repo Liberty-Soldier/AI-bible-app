@@ -4,7 +4,7 @@
   "title": "אַשְׂרִיאֵל",
   "subtitle": "H844 • Hebrew name",
   "simple": {
-    "meaning": "אַשְׂרִיאֵל (ʼAsrîyʼêl) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אַשְׂרִיאֵל (ʼAsrîyʼêl) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, Joshua, 1 Chronicles, beginning at Numbers 26:31. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אַשְׂרִיאֵל (H844) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אַשְׂרִיאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,99 @@
     "laterReferences": [
       "Joshua 17:2",
       "1 Chronicles 7:14"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H844",
+    "source": "hebrew",
+    "strong": "H844",
+    "lemma": "אַשְׂרִיאֵל",
+    "transliteration": "ʼAsrîyʼêl",
+    "definition": "Asriel , the name of two Israelites",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 26:31",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "and Asriel, the family of the Asrielites; and Shechem, the family of the Shechemites;"
+    },
+    "books": [
+      "Numbers",
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 26:31",
+      "Joshua 17:2",
+      "1 Chronicles 7:14"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:14",
+        "evidenceText": "The sons of Manasseh: Asriel, whom his concubine the Aramitess bore. She bore Machir the father of Gilead."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 26:31",
+        "phase": "Occurrence",
+        "evidenceText": "and Asriel, the family of the Asrielites; and Shechem, the family of the Shechemites;"
+      },
+      {
+        "reference": "Joshua 17:2",
+        "phase": "Occurrence",
+        "evidenceText": "So this was for the rest of the children of Manasseh according to their families: for the children of Abiezer, for the children of Helek, for the children of Asriel, for the children of Shechem, for the children of Hepher, and for the children of Shemida. These were the male children of Manasseh the son of Joseph according to their families."
+      },
+      {
+        "reference": "1 Chronicles 7:14",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Manasseh: Asriel, whom his concubine the Aramitess bore. She bore Machir the father of Gilead."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 26:31 and continues through 1 Chronicles 7:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 26:31",
+        "book": "Numbers",
+        "englishText": "and Asriel, the family of the Asrielites; and Shechem, the family of the Shechemites;"
+      },
+      {
+        "reference": "Joshua 17:2",
+        "book": "Joshua",
+        "englishText": "So this was for the rest of the children of Manasseh according to their families: for the children of Abiezer, for the children of Helek, for the children of Asriel, for the children of Shechem, for the children of Hepher, and for the children of Shemida. These were the male children of Manasseh the son of Joseph according to their families."
+      },
+      {
+        "reference": "1 Chronicles 7:14",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Manasseh: Asriel, whom his concubine the Aramitess bore. She bore Machir the father of Gilead."
+      }
     ]
   },
   "evidence": {

@@ -26,6 +26,103 @@
       "1 Chronicles 6:57"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1705",
+    "source": "hebrew",
+    "strong": "H1705",
+    "lemma": "דֲּבְרַת",
+    "transliteration": "Dăbrath",
+    "definition": "Daberath , a place in Palestine",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 19:12",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "It turned from Sarid eastward toward the sunrise to the border of Chisloth Tabor. It went out to Daberath, and went up to Japhia."
+    },
+    "books": [
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Joshua 19:12",
+      "Joshua 21:28",
+      "1 Chronicles 6:57"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 19:12",
+        "evidenceText": "It turned from Sarid eastward toward the sunrise to the border of Chisloth Tabor. It went out to Daberath, and went up to Japhia."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 21:28",
+        "evidenceText": "Out of the tribe of Issachar, Kishion with its pasture lands, Daberath with its pasture lands,"
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "1 Chronicles 6:57",
+        "evidenceText": "To the sons of Aaron they gave the cities of refuge, Hebron; Libnah also with its pasture lands, Jattir, Eshtemoa with its pasture lands,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 19:12",
+        "phase": "Movement or place",
+        "evidenceText": "It turned from Sarid eastward toward the sunrise to the border of Chisloth Tabor. It went out to Daberath, and went up to Japhia."
+      },
+      {
+        "reference": "Joshua 21:28",
+        "phase": "Movement or place",
+        "evidenceText": "Out of the tribe of Issachar, Kishion with its pasture lands, Daberath with its pasture lands,"
+      },
+      {
+        "reference": "1 Chronicles 6:57",
+        "phase": "Movement or place",
+        "evidenceText": "To the sons of Aaron they gave the cities of refuge, Hebron; Libnah also with its pasture lands, Jattir, Eshtemoa with its pasture lands,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 19:12 and continues through 1 Chronicles 6:57.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 19:12",
+        "book": "Joshua",
+        "englishText": "It turned from Sarid eastward toward the sunrise to the border of Chisloth Tabor. It went out to Daberath, and went up to Japhia."
+      },
+      {
+        "reference": "Joshua 21:28",
+        "book": "Joshua",
+        "englishText": "Out of the tribe of Issachar, Kishion with its pasture lands, Daberath with its pasture lands,"
+      },
+      {
+        "reference": "1 Chronicles 6:57",
+        "book": "1 Chronicles",
+        "englishText": "To the sons of Aaron they gave the cities of refuge, Hebron; Libnah also with its pasture lands, Jattir, Eshtemoa with its pasture lands,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

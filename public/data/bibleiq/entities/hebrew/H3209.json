@@ -27,6 +27,123 @@
       "2 Samuel 12:14"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3209",
+    "source": "hebrew",
+    "strong": "H3209",
+    "lemma": "יִלּוֹד",
+    "transliteration": "yillôwd",
+    "definition": "born",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 1:22",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Pharaoh commanded all his people, saying, “You shall cast every son who is born into the river, and every daughter you shall save alive.”"
+    },
+    "books": [
+      "Exodus",
+      "Joshua",
+      "2 Samuel"
+    ],
+    "references": [
+      "Exodus 1:22",
+      "Joshua 5:5",
+      "2 Samuel 5:14",
+      "2 Samuel 12:14"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Exodus 1:22",
+        "evidenceText": "Pharaoh commanded all his people, saying, “You shall cast every son who is born into the river, and every daughter you shall save alive.”"
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Joshua 5:5",
+        "evidenceText": "For all the people who came out were circumcised; but all the people who were born in the wilderness along the way as they came out of Egypt had not been circumcised."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "2 Samuel 5:14",
+        "evidenceText": "These are the names of those who were born to him in Jerusalem: Shammua, Shobab, Nathan, Solomon,"
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "2 Samuel 12:14",
+        "evidenceText": "However, because by this deed you have given great occasion to Yahweh’s enemies to blaspheme, the child also who is born to you will surely die.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 1:22",
+        "phase": "Birth or introduction",
+        "evidenceText": "Pharaoh commanded all his people, saying, “You shall cast every son who is born into the river, and every daughter you shall save alive.”"
+      },
+      {
+        "reference": "Joshua 5:5",
+        "phase": "Birth or introduction",
+        "evidenceText": "For all the people who came out were circumcised; but all the people who were born in the wilderness along the way as they came out of Egypt had not been circumcised."
+      },
+      {
+        "reference": "2 Samuel 5:14",
+        "phase": "Birth or introduction",
+        "evidenceText": "These are the names of those who were born to him in Jerusalem: Shammua, Shobab, Nathan, Solomon,"
+      },
+      {
+        "reference": "2 Samuel 12:14",
+        "phase": "Birth or introduction",
+        "evidenceText": "However, because by this deed you have given great occasion to Yahweh’s enemies to blaspheme, the child also who is born to you will surely die.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 1:22 and continues through 2 Samuel 12:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 1:22",
+        "book": "Exodus",
+        "englishText": "Pharaoh commanded all his people, saying, “You shall cast every son who is born into the river, and every daughter you shall save alive.”"
+      },
+      {
+        "reference": "Joshua 5:5",
+        "book": "Joshua",
+        "englishText": "For all the people who came out were circumcised; but all the people who were born in the wilderness along the way as they came out of Egypt had not been circumcised."
+      },
+      {
+        "reference": "2 Samuel 5:14",
+        "book": "2 Samuel",
+        "englishText": "These are the names of those who were born to him in Jerusalem: Shammua, Shobab, Nathan, Solomon,"
+      },
+      {
+        "reference": "2 Samuel 12:14",
+        "book": "2 Samuel",
+        "englishText": "However, because by this deed you have given great occasion to Yahweh’s enemies to blaspheme, the child also who is born to you will surely die.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

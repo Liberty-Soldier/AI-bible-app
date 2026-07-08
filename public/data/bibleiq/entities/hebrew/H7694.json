@@ -4,7 +4,7 @@
   "title": "שֵׁגָל",
   "subtitle": "H7694 • Hebrew word",
   "simple": {
-    "meaning": "שֵׁגָל (shêgâl) appears 2 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "שֵׁגָל (shêgâl) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Nehemiah, Psalms, beginning at Nehemiah 2:6. BibleIQ detects the main surrounding context as family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שֵׁגָל (H7694) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שֵׁגָל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,74 @@
     ],
     "laterReferences": [
       "Psalms 45:10"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7694",
+    "source": "hebrew",
+    "strong": "H7694",
+    "lemma": "שֵׁגָל",
+    "transliteration": "shêgâl",
+    "definition": "a queen (from cohabitation)",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Nehemiah 2:6",
+      "book": "Nehemiah",
+      "bookName": "Nehemiah",
+      "englishText": "The king said to me (the queen was also sitting by him), “How long will your journey be? When will you return?”"
+    },
+    "books": [
+      "Nehemiah",
+      "Psalms"
+    ],
+    "references": [
+      "Nehemiah 2:6",
+      "Psalms 45:10"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Nehemiah 2:6",
+        "phase": "Occurrence",
+        "evidenceText": "The king said to me (the queen was also sitting by him), “How long will your journey be? When will you return?”"
+      },
+      {
+        "reference": "Psalms 45:10",
+        "phase": "Occurrence",
+        "evidenceText": "Listen, daughter, consider, and turn your ear."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Nehemiah 2:6 and continues through Psalms 45:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Nehemiah 2:6",
+        "book": "Nehemiah",
+        "englishText": "The king said to me (the queen was also sitting by him), “How long will your journey be? When will you return?”"
+      },
+      {
+        "reference": "Psalms 45:10",
+        "book": "Psalms",
+        "englishText": "Listen, daughter, consider, and turn your ear."
+      }
     ]
   },
   "evidence": {

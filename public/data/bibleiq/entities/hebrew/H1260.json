@@ -25,6 +25,79 @@
       "1 Chronicles 7:20"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1260",
+    "source": "hebrew",
+    "strong": "H1260",
+    "lemma": "בֶּרֶד",
+    "transliteration": "Bered",
+    "definition": "Bered , the name of a place south of Palestine, also of an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 16:14",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Therefore the well was called Beer Lahai Roi.* Beer Lahai Roi means “well of the one who lives and sees me”. Behold, it is between Kadesh and Bered."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 16:14",
+      "1 Chronicles 7:20"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:20",
+        "evidenceText": "The sons of Ephraim: Shuthelah, Bered his son, Tahath his son, Eleadah his son, Tahath his son,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 16:14",
+        "phase": "Occurrence",
+        "evidenceText": "Therefore the well was called Beer Lahai Roi.* Beer Lahai Roi means “well of the one who lives and sees me”. Behold, it is between Kadesh and Bered."
+      },
+      {
+        "reference": "1 Chronicles 7:20",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Ephraim: Shuthelah, Bered his son, Tahath his son, Eleadah his son, Tahath his son,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 16:14 and continues through 1 Chronicles 7:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 16:14",
+        "book": "Genesis",
+        "englishText": "Therefore the well was called Beer Lahai Roi.* Beer Lahai Roi means “well of the one who lives and sees me”. Behold, it is between Kadesh and Bered."
+      },
+      {
+        "reference": "1 Chronicles 7:20",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Ephraim: Shuthelah, Bered his son, Tahath his son, Eleadah his son, Tahath his son,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

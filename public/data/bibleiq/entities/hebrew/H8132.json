@@ -26,6 +26,82 @@
       "Lamentations 4:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8132",
+    "source": "hebrew",
+    "strong": "H8132",
+    "lemma": "שָׁנָא",
+    "transliteration": "shânâʼ",
+    "definition": "to alter",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Kings 25:29",
+      "book": "2 Kings",
+      "bookName": "2 Kings",
+      "englishText": "and changed his prison garments. Jehoiachin ate bread before him continually all the days of his life;"
+    },
+    "books": [
+      "2 Kings",
+      "Ecclesiastes",
+      "Lamentations"
+    ],
+    "references": [
+      "2 Kings 25:29",
+      "Ecclesiastes 8:1",
+      "Lamentations 4:1"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "2 Kings 25:29",
+        "phase": "Occurrence",
+        "evidenceText": "and changed his prison garments. Jehoiachin ate bread before him continually all the days of his life;"
+      },
+      {
+        "reference": "Ecclesiastes 8:1",
+        "phase": "Occurrence",
+        "evidenceText": "Who is like the wise man? And who knows the interpretation of a thing? A man’s wisdom makes his face shine, and the hardness of his face is changed."
+      },
+      {
+        "reference": "Lamentations 4:1",
+        "phase": "Occurrence",
+        "evidenceText": "How the gold has become dim!"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Kings 25:29 and continues through Lamentations 4:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Kings 25:29",
+        "book": "2 Kings",
+        "englishText": "and changed his prison garments. Jehoiachin ate bread before him continually all the days of his life;"
+      },
+      {
+        "reference": "Ecclesiastes 8:1",
+        "book": "Ecclesiastes",
+        "englishText": "Who is like the wise man? And who knows the interpretation of a thing? A man’s wisdom makes his face shine, and the hardness of his face is changed."
+      },
+      {
+        "reference": "Lamentations 4:1",
+        "book": "Lamentations",
+        "englishText": "How the gold has become dim!"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

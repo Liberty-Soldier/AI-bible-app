@@ -26,6 +26,90 @@
       "Isaiah 22:24"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H101",
+    "source": "hebrew",
+    "strong": "H101",
+    "lemma": "אַגָּן",
+    "transliteration": "ʼaggân",
+    "definition": "a bowl (as pounded out hollow)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 24:6",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Moses took half of the blood and put it in basins, and half of the blood he sprinkled on the altar."
+    },
+    "books": [
+      "Exodus",
+      "Song of Solomon",
+      "Isaiah"
+    ],
+    "references": [
+      "Exodus 24:6",
+      "Song of Songs 7:3",
+      "Isaiah 22:24"
+    ],
+    "themes": [
+      "family",
+      "blood"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Exodus 24:6",
+        "evidenceText": "Moses took half of the blood and put it in basins, and half of the blood he sprinkled on the altar."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 24:6",
+        "phase": "Blood witness",
+        "evidenceText": "Moses took half of the blood and put it in basins, and half of the blood he sprinkled on the altar."
+      },
+      {
+        "reference": "Song of Songs 7:3",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "Isaiah 22:24",
+        "phase": "Occurrence",
+        "evidenceText": "They will hang on him all the glory of his father’s house, the offspring and the issue, every small vessel, from the cups even to all the pitchers."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 24:6 and continues through Isaiah 22:24.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 24:6",
+        "book": "Exodus",
+        "englishText": "Moses took half of the blood and put it in basins, and half of the blood he sprinkled on the altar."
+      },
+      {
+        "reference": "Song of Songs 7:3",
+        "book": "Song of Solomon",
+        "englishText": ""
+      },
+      {
+        "reference": "Isaiah 22:24",
+        "book": "Isaiah",
+        "englishText": "They will hang on him all the glory of his father’s house, the offspring and the issue, every small vessel, from the cups even to all the pitchers."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

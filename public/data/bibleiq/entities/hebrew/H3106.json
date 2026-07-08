@@ -23,6 +23,67 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3106",
+    "source": "hebrew",
+    "strong": "H3106",
+    "lemma": "יוּבַל",
+    "transliteration": "Yûwbal",
+    "definition": "Jubal , an antediluvian",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 4:21",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "His brother’s name was Jubal, who was the father of all who handle the harp and pipe."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 4:21"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 4:21",
+        "phase": "Occurrence",
+        "evidenceText": "His brother’s name was Jubal, who was the father of all who handle the harp and pipe."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Genesis 4:21.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 4:21",
+        "book": "Genesis",
+        "englishText": "His brother’s name was Jubal, who was the father of all who handle the harp and pipe."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

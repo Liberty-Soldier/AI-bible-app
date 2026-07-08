@@ -28,6 +28,124 @@
       "Job 30:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H570",
+    "source": "hebrew",
+    "strong": "H570",
+    "lemma": "אֶמֶשׁ",
+    "transliteration": "ʼemesh",
+    "definition": "yesterday or last night",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 19:34",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "It came to pass on the next day, that the firstborn said to the younger, “Behold, I lay last night with my father. Let’s make him drink wine again tonight. You go in, and lie with him, that we may preserve our father’s family line.”"
+    },
+    "books": [
+      "Genesis",
+      "2 Kings",
+      "Job"
+    ],
+    "references": [
+      "Genesis 19:34",
+      "Genesis 31:29",
+      "Genesis 31:42",
+      "2 Kings 9:26",
+      "Job 30:3"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "blood"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 19:34",
+        "evidenceText": "It came to pass on the next day, that the firstborn said to the younger, “Behold, I lay last night with my father. Let’s make him drink wine again tonight. You go in, and lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "2 Kings 9:26",
+        "evidenceText": "‘Surely I have seen yesterday the blood of Naboth, and the blood of his sons,’ says Yahweh; ‘and I will repay you in this plot of ground,’ says Yahweh. Now therefore take and cast him onto the plot of ground, according to Yahweh’s word.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 19:34",
+        "phase": "Birth or introduction",
+        "evidenceText": "It came to pass on the next day, that the firstborn said to the younger, “Behold, I lay last night with my father. Let’s make him drink wine again tonight. You go in, and lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "reference": "Genesis 31:29",
+        "phase": "Occurrence",
+        "evidenceText": "It is in the power of my hand to hurt you, but the God of your father spoke to me last night, saying, ‘Be careful that you don’t speak to Jacob either good or bad.’"
+      },
+      {
+        "reference": "Genesis 31:42",
+        "phase": "Occurrence",
+        "evidenceText": "Unless the God of my father, the God of Abraham, and the fear of Isaac, had been with me, surely now you would have sent me away empty. God has seen my affliction and the labor of my hands, and rebuked you last night.”"
+      },
+      {
+        "reference": "2 Kings 9:26",
+        "phase": "Blood witness",
+        "evidenceText": "‘Surely I have seen yesterday the blood of Naboth, and the blood of his sons,’ says Yahweh; ‘and I will repay you in this plot of ground,’ says Yahweh. Now therefore take and cast him onto the plot of ground, according to Yahweh’s word.”"
+      },
+      {
+        "reference": "Job 30:3",
+        "phase": "Occurrence",
+        "evidenceText": "They are gaunt from lack and famine."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 19:34 and continues through Job 30:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 19:34",
+        "book": "Genesis",
+        "englishText": "It came to pass on the next day, that the firstborn said to the younger, “Behold, I lay last night with my father. Let’s make him drink wine again tonight. You go in, and lie with him, that we may preserve our father’s family line.”"
+      },
+      {
+        "reference": "Genesis 31:29",
+        "book": "Genesis",
+        "englishText": "It is in the power of my hand to hurt you, but the God of your father spoke to me last night, saying, ‘Be careful that you don’t speak to Jacob either good or bad.’"
+      },
+      {
+        "reference": "Genesis 31:42",
+        "book": "Genesis",
+        "englishText": "Unless the God of my father, the God of Abraham, and the fear of Isaac, had been with me, surely now you would have sent me away empty. God has seen my affliction and the labor of my hands, and rebuked you last night.”"
+      },
+      {
+        "reference": "2 Kings 9:26",
+        "book": "2 Kings",
+        "englishText": "‘Surely I have seen yesterday the blood of Naboth, and the blood of his sons,’ says Yahweh; ‘and I will repay you in this plot of ground,’ says Yahweh. Now therefore take and cast him onto the plot of ground, according to Yahweh’s word.”"
+      },
+      {
+        "reference": "Job 30:3",
+        "book": "Job",
+        "englishText": "They are gaunt from lack and famine."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

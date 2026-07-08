@@ -4,7 +4,7 @@
   "title": "אֶצְבּוֹן",
   "subtitle": "H675 • Hebrew name",
   "simple": {
-    "meaning": "אֶצְבּוֹן (ʼEtsbôwn) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אֶצְבּוֹן (ʼEtsbôwn) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 46:16. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֶצְבּוֹן (H675) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֶצְבּוֹן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,93 @@
     ],
     "laterReferences": [
       "1 Chronicles 7:7"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H675",
+    "source": "hebrew",
+    "strong": "H675",
+    "lemma": "אֶצְבּוֹן",
+    "transliteration": "ʼEtsbôwn",
+    "definition": "Etsbon , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:16",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Gad: Ziphion, Haggi, Shuni, Ezbon, Eri, Arodi, and Areli."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 46:16",
+      "1 Chronicles 7:7"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 46:16",
+        "evidenceText": "The sons of Gad: Ziphion, Haggi, Shuni, Ezbon, Eri, Arodi, and Areli."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:7",
+        "evidenceText": "The sons of Bela: Ezbon, Uzzi, Uzziel, Jerimoth, and Iri, five; heads of fathers’ houses, mighty men of valor; and they were listed by genealogy twenty-two thousand thirty-four."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:16",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Gad: Ziphion, Haggi, Shuni, Ezbon, Eri, Arodi, and Areli."
+      },
+      {
+        "reference": "1 Chronicles 7:7",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Bela: Ezbon, Uzzi, Uzziel, Jerimoth, and Iri, five; heads of fathers’ houses, mighty men of valor; and they were listed by genealogy twenty-two thousand thirty-four."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:16 and continues through 1 Chronicles 7:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:16",
+        "book": "Genesis",
+        "englishText": "The sons of Gad: Ziphion, Haggi, Shuni, Ezbon, Eri, Arodi, and Areli."
+      },
+      {
+        "reference": "1 Chronicles 7:7",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Bela: Ezbon, Uzzi, Uzziel, Jerimoth, and Iri, five; heads of fathers’ houses, mighty men of valor; and they were listed by genealogy twenty-two thousand thirty-four."
+      }
     ]
   },
   "evidence": {

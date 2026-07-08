@@ -4,7 +4,7 @@
   "title": "צִלָּה",
   "subtitle": "H6741 • Hebrew name",
   "simple": {
-    "meaning": "צִלָּה (Tsillâh) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "צִלָּה (Tsillâh) appears 3 times in the Hebrew Scriptures and is introduced as a sister in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, beginning at Genesis 4:19. BibleIQ detects the main surrounding context as birth, family.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to צִלָּה (H6741) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows צִלָּה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,91 @@
     "laterReferences": [
       "Genesis 4:22",
       "Genesis 4:23"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6741",
+    "source": "hebrew",
+    "strong": "H6741",
+    "lemma": "צִלָּה",
+    "transliteration": "Tsillâh",
+    "definition": "Tsillah , an antediluvian woman",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 4:19",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Lamech took two wives: the name of the first one was Adah, and the name of the second one was Zillah."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 4:19",
+      "Genesis 4:22",
+      "Genesis 4:23"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 4:22",
+        "evidenceText": "Zillah also gave birth to Tubal Cain, the forger of every cutting instrument of bronze and iron. Tubal Cain’s sister was Naamah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 4:19",
+        "phase": "Occurrence",
+        "evidenceText": "Lamech took two wives: the name of the first one was Adah, and the name of the second one was Zillah."
+      },
+      {
+        "reference": "Genesis 4:22",
+        "phase": "Birth or introduction",
+        "evidenceText": "Zillah also gave birth to Tubal Cain, the forger of every cutting instrument of bronze and iron. Tubal Cain’s sister was Naamah."
+      },
+      {
+        "reference": "Genesis 4:23",
+        "phase": "Occurrence",
+        "evidenceText": "Lamech said to his wives,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 4:19 and continues through Genesis 4:23.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 4:19",
+        "book": "Genesis",
+        "englishText": "Lamech took two wives: the name of the first one was Adah, and the name of the second one was Zillah."
+      },
+      {
+        "reference": "Genesis 4:22",
+        "book": "Genesis",
+        "englishText": "Zillah also gave birth to Tubal Cain, the forger of every cutting instrument of bronze and iron. Tubal Cain’s sister was Naamah."
+      },
+      {
+        "reference": "Genesis 4:23",
+        "book": "Genesis",
+        "englishText": "Lamech said to his wives,"
+      }
     ]
   },
   "evidence": {

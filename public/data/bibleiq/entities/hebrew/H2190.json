@@ -25,6 +25,79 @@
       "1 Chronicles 1:42"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2190",
+    "source": "hebrew",
+    "strong": "H2190",
+    "lemma": "זַעֲוָן",
+    "transliteration": "Zaʻăvân",
+    "definition": "Zaavan , an Idumaean",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:27",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "These are the children of Ezer: Bilhan, Zaavan, and Akan."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:27",
+      "1 Chronicles 1:42"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:42",
+        "evidenceText": "The sons of Ezer: Bilhan, Zaavan, and Jaakan. The sons of Dishan: Uz and Aran."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:27",
+        "phase": "Occurrence",
+        "evidenceText": "These are the children of Ezer: Bilhan, Zaavan, and Akan."
+      },
+      {
+        "reference": "1 Chronicles 1:42",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Ezer: Bilhan, Zaavan, and Jaakan. The sons of Dishan: Uz and Aran."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:27 and continues through 1 Chronicles 1:42.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:27",
+        "book": "Genesis",
+        "englishText": "These are the children of Ezer: Bilhan, Zaavan, and Akan."
+      },
+      {
+        "reference": "1 Chronicles 1:42",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Ezer: Bilhan, Zaavan, and Jaakan. The sons of Dishan: Uz and Aran."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

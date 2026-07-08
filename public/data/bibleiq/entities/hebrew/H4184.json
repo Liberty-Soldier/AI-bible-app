@@ -26,6 +26,82 @@
       "Psalms 115:7"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4184",
+    "source": "hebrew",
+    "strong": "H4184",
+    "lemma": "מוּשׁ",
+    "transliteration": "mûwsh",
+    "definition": "to touch",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 27:21",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Isaac said to Jacob, “Please come near, that I may feel you, my son, whether you are really my son Esau or not.”"
+    },
+    "books": [
+      "Genesis",
+      "Judges",
+      "Psalms"
+    ],
+    "references": [
+      "Genesis 27:21",
+      "Judges 16:26",
+      "Psalms 115:7"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 27:21",
+        "phase": "Occurrence",
+        "evidenceText": "Isaac said to Jacob, “Please come near, that I may feel you, my son, whether you are really my son Esau or not.”"
+      },
+      {
+        "reference": "Judges 16:26",
+        "phase": "Occurrence",
+        "evidenceText": "and Samson said to the boy who held him by the hand, “Allow me to feel the pillars on which the house rests, that I may lean on them.”"
+      },
+      {
+        "reference": "Psalms 115:7",
+        "phase": "Occurrence",
+        "evidenceText": "They have hands, but they don’t feel."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 27:21 and continues through Psalms 115:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 27:21",
+        "book": "Genesis",
+        "englishText": "Isaac said to Jacob, “Please come near, that I may feel you, my son, whether you are really my son Esau or not.”"
+      },
+      {
+        "reference": "Judges 16:26",
+        "book": "Judges",
+        "englishText": "and Samson said to the boy who held him by the hand, “Allow me to feel the pillars on which the house rests, that I may lean on them.”"
+      },
+      {
+        "reference": "Psalms 115:7",
+        "book": "Psalms",
+        "englishText": "They have hands, but they don’t feel."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

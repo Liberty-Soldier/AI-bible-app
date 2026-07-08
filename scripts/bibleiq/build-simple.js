@@ -111,6 +111,7 @@ function buildPersonSimple({
   transliteration,
   occurrenceCount,
   occurrences,
+  evidenceModel,
 }) {
   const refs = getReferences(occurrences, 4);
   const texts = getVerseTexts(occurrences, 8);
@@ -127,9 +128,19 @@ function buildPersonSimple({
 
   const introDetails = [];
 
-  if (lower.includes("brother")) {
+if (evidenceModel?.classification?.gender === "female") {
+  if (lower.includes("daughter")) {
+    introDetails.push("as a daughter in the family line");
+  } else if (lower.includes("sister")) {
+    introDetails.push("as a sister in the family line");
+  }
+} else if (evidenceModel?.classification?.gender === "male") {
+  if (lower.includes("son")) {
+    introDetails.push("as a son in the family line");
+  } else if (lower.includes("brother")) {
     introDetails.push("as a brother in the family line");
   }
+}
 
   if (lower.includes("keeper of sheep")) {
     introDetails.push("as a keeper of sheep");
@@ -430,6 +441,7 @@ function buildSimple({
   occurrenceCount,
   occurrences,
   properName,
+  evidenceModel,
 }) {
   const definition = baseDefinition(lex);
   const transliteration = lex.transliteration
@@ -444,17 +456,18 @@ function buildSimple({
     occurrences,
   });
 
-  if (entityType === "person") {
-    return buildPersonSimple({
-      lemma,
-      strong,
-      transliteration,
-      occurrenceCount,
-      occurrences,
-    });
-  }
+if (entityType === "person") {
+  return buildPersonSimple({
+    lemma,
+    strong,
+    transliteration,
+    occurrenceCount,
+    occurrences,
+    evidenceModel,
+  });
+}
 
-  if (entityType === "place") {
+if (entityType === "place") {
     return buildPlaceSimple({
       lemma,
       strong,

@@ -26,6 +26,104 @@
       "Micah 1:14"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7964",
+    "source": "hebrew",
+    "strong": "H7964",
+    "lemma": "שִׁלּוּחַ",
+    "transliteration": "shillûwach",
+    "definition": "(only in plural) a dismissal , i.e. (of a wife) divorce (especially the document); also (of a daughter) dower",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 18:2",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Jethro, Moses’ father-in-law, received Zipporah, Moses’ wife, after he had sent her away,"
+    },
+    "books": [
+      "Exodus",
+      "1 Kings",
+      "Micah"
+    ],
+    "references": [
+      "Exodus 18:2",
+      "1 Kings 9:16",
+      "Micah 1:14"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship",
+      "death",
+      "city",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "1 Kings 9:16",
+        "evidenceText": "Pharaoh king of Egypt had gone up, taken Gezer, burned it with fire, killed the Canaanites who lived in the city, and given it for a wedding gift to his daughter, Solomon’s wife."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 18:2",
+        "phase": "Occurrence",
+        "evidenceText": "Jethro, Moses’ father-in-law, received Zipporah, Moses’ wife, after he had sent her away,"
+      },
+      {
+        "reference": "1 Kings 9:16",
+        "phase": "Death",
+        "evidenceText": "Pharaoh king of Egypt had gone up, taken Gezer, burned it with fire, killed the Canaanites who lived in the city, and given it for a wedding gift to his daughter, Solomon’s wife."
+      },
+      {
+        "reference": "Micah 1:14",
+        "phase": "Occurrence",
+        "evidenceText": "Therefore you will give a parting gift to Moresheth Gath."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 18:2 and continues through Micah 1:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 18:2",
+        "book": "Exodus",
+        "englishText": "Jethro, Moses’ father-in-law, received Zipporah, Moses’ wife, after he had sent her away,"
+      },
+      {
+        "reference": "1 Kings 9:16",
+        "book": "1 Kings",
+        "englishText": "Pharaoh king of Egypt had gone up, taken Gezer, burned it with fire, killed the Canaanites who lived in the city, and given it for a wedding gift to his daughter, Solomon’s wife."
+      },
+      {
+        "reference": "Micah 1:14",
+        "book": "Micah",
+        "englishText": "Therefore you will give a parting gift to Moresheth Gath."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

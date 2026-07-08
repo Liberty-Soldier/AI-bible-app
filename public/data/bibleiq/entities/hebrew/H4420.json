@@ -26,6 +26,83 @@
       "Jeremiah 17:6"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4420",
+    "source": "hebrew",
+    "strong": "H4420",
+    "lemma": "מְלֵחָה",
+    "transliteration": "mᵉlêchâh",
+    "definition": "properly, salted (i.e. land), i.e. a desert",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "place",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 39:6",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "whose home I have made the wilderness,"
+    },
+    "books": [
+      "Job",
+      "Psalms",
+      "Jeremiah"
+    ],
+    "references": [
+      "Job 39:6",
+      "Psalms 107:34",
+      "Jeremiah 17:6"
+    ],
+    "themes": [
+      "land"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Psalms 107:34",
+        "evidenceText": "and a fruitful land into a salt waste,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Job 39:6",
+        "phase": "Occurrence",
+        "evidenceText": "whose home I have made the wilderness,"
+      },
+      {
+        "reference": "Psalms 107:34",
+        "phase": "Movement or place",
+        "evidenceText": "and a fruitful land into a salt waste,"
+      },
+      {
+        "reference": "Jeremiah 17:6",
+        "phase": "Occurrence",
+        "evidenceText": "For he will be like a bush in the desert,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 39:6 and continues through Jeremiah 17:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 39:6",
+        "book": "Job",
+        "englishText": "whose home I have made the wilderness,"
+      },
+      {
+        "reference": "Psalms 107:34",
+        "book": "Psalms",
+        "englishText": "and a fruitful land into a salt waste,"
+      },
+      {
+        "reference": "Jeremiah 17:6",
+        "book": "Jeremiah",
+        "englishText": "For he will be like a bush in the desert,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

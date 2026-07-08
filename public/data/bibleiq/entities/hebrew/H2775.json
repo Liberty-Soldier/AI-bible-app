@@ -4,7 +4,7 @@
   "title": "חֶרֶס",
   "subtitle": "H2775 • Hebrew name",
   "simple": {
-    "meaning": "חֶרֶס (chereç) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "חֶרֶס (chereç) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Deuteronomy, Judges, Job, beginning at Deuteronomy 28:27. BibleIQ detects the main surrounding context as family line, city, Egypt.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חֶרֶס (H2775) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חֶרֶס through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,105 @@
       "Judges 8:13",
       "Judges 14:18",
       "Job 9:7"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2775",
+    "source": "hebrew",
+    "strong": "H2775",
+    "lemma": "חֶרֶס",
+    "transliteration": "chereç",
+    "definition": "the sun",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 28:27",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "Yahweh will strike you with the boils of Egypt, with the tumors, with the scurvy, and with the itch, of which you can not be healed."
+    },
+    "books": [
+      "Deuteronomy",
+      "Judges",
+      "Job"
+    ],
+    "references": [
+      "Deuteronomy 28:27",
+      "Judges 8:13",
+      "Judges 14:18",
+      "Job 9:7"
+    ],
+    "themes": [
+      "family line",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Judges 14:18",
+        "evidenceText": "The men of the city said to him on the seventh day before the sun went down, “What is sweeter than honey? What is stronger than a lion?”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 28:27",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh will strike you with the boils of Egypt, with the tumors, with the scurvy, and with the itch, of which you can not be healed."
+      },
+      {
+        "reference": "Judges 8:13",
+        "phase": "Occurrence",
+        "evidenceText": "Gideon the son of Joash returned from the battle from the ascent of Heres."
+      },
+      {
+        "reference": "Judges 14:18",
+        "phase": "Movement or place",
+        "evidenceText": "The men of the city said to him on the seventh day before the sun went down, “What is sweeter than honey? What is stronger than a lion?”"
+      },
+      {
+        "reference": "Job 9:7",
+        "phase": "Occurrence",
+        "evidenceText": "He commands the sun and it doesn’t rise,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 28:27 and continues through Job 9:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 28:27",
+        "book": "Deuteronomy",
+        "englishText": "Yahweh will strike you with the boils of Egypt, with the tumors, with the scurvy, and with the itch, of which you can not be healed."
+      },
+      {
+        "reference": "Judges 8:13",
+        "book": "Judges",
+        "englishText": "Gideon the son of Joash returned from the battle from the ascent of Heres."
+      },
+      {
+        "reference": "Judges 14:18",
+        "book": "Judges",
+        "englishText": "The men of the city said to him on the seventh day before the sun went down, “What is sweeter than honey? What is stronger than a lion?”"
+      },
+      {
+        "reference": "Job 9:7",
+        "book": "Job",
+        "englishText": "He commands the sun and it doesn’t rise,"
+      }
     ]
   },
   "evidence": {

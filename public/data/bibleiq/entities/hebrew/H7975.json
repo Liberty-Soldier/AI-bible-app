@@ -4,7 +4,7 @@
   "title": "שִׁלֹחַ",
   "subtitle": "H7975 • Hebrew name",
   "simple": {
-    "meaning": "שִׁלֹחַ (Shilôach) appears 2 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "שִׁלֹחַ (Shilôach) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Nehemiah, Isaiah, beginning at Nehemiah 3:15. BibleIQ detects the main surrounding context as family line, kingship, city.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שִׁלֹחַ (H7975) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שִׁלֹחַ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,83 @@
     ],
     "laterReferences": [
       "Isaiah 8:6"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7975",
+    "source": "hebrew",
+    "strong": "H7975",
+    "lemma": "שִׁלֹחַ",
+    "transliteration": "Shilôach",
+    "definition": "Shiloach , a fountain of Jerusalem",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Nehemiah 3:15",
+      "book": "Nehemiah",
+      "bookName": "Nehemiah",
+      "englishText": "Shallun the son of Colhozeh, the ruler of the district of Mizpah repaired the spring gate. He built it, and covered it, and set up its doors, its bolts, and its bars, and the wall of the pool of Shelah by the king’s garden, even to the stairs that go down from David’s city."
+    },
+    "books": [
+      "Nehemiah",
+      "Isaiah"
+    ],
+    "references": [
+      "Nehemiah 3:15",
+      "Isaiah 8:6"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Nehemiah 3:15",
+        "evidenceText": "Shallun the son of Colhozeh, the ruler of the district of Mizpah repaired the spring gate. He built it, and covered it, and set up its doors, its bolts, and its bars, and the wall of the pool of Shelah by the king’s garden, even to the stairs that go down from David’s city."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Nehemiah 3:15",
+        "phase": "Movement or place",
+        "evidenceText": "Shallun the son of Colhozeh, the ruler of the district of Mizpah repaired the spring gate. He built it, and covered it, and set up its doors, its bolts, and its bars, and the wall of the pool of Shelah by the king’s garden, even to the stairs that go down from David’s city."
+      },
+      {
+        "reference": "Isaiah 8:6",
+        "phase": "Occurrence",
+        "evidenceText": "“Because this people has refused the waters of Shiloah that go softly, and rejoice in Rezin and Remaliah’s son;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Nehemiah 3:15 and continues through Isaiah 8:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "Nehemiah 3:15",
+        "book": "Nehemiah",
+        "englishText": "Shallun the son of Colhozeh, the ruler of the district of Mizpah repaired the spring gate. He built it, and covered it, and set up its doors, its bolts, and its bars, and the wall of the pool of Shelah by the king’s garden, even to the stairs that go down from David’s city."
+      },
+      {
+        "reference": "Isaiah 8:6",
+        "book": "Isaiah",
+        "englishText": "“Because this people has refused the waters of Shiloah that go softly, and rejoice in Rezin and Remaliah’s son;"
+      }
     ]
   },
   "evidence": {

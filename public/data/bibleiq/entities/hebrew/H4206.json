@@ -26,6 +26,90 @@
       "Isaiah 23:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4206",
+    "source": "hebrew",
+    "strong": "H4206",
+    "lemma": "מָזִיחַ",
+    "transliteration": "mâzîyach",
+    "definition": "a belt (as movable)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 12:21",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "He pours contempt on princes,"
+    },
+    "books": [
+      "Job",
+      "Psalms",
+      "Isaiah"
+    ],
+    "references": [
+      "Job 12:21",
+      "Psalms 109:19",
+      "Isaiah 23:10"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Isaiah 23:10",
+        "evidenceText": "Pass through your land like the Nile, daughter of Tarshish. There is no restraint any more."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Job 12:21",
+        "phase": "Occurrence",
+        "evidenceText": "He pours contempt on princes,"
+      },
+      {
+        "reference": "Psalms 109:19",
+        "phase": "Occurrence",
+        "evidenceText": "Let it be to him as the clothing with which he covers himself,"
+      },
+      {
+        "reference": "Isaiah 23:10",
+        "phase": "Movement or place",
+        "evidenceText": "Pass through your land like the Nile, daughter of Tarshish. There is no restraint any more."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 12:21 and continues through Isaiah 23:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 12:21",
+        "book": "Job",
+        "englishText": "He pours contempt on princes,"
+      },
+      {
+        "reference": "Psalms 109:19",
+        "book": "Psalms",
+        "englishText": "Let it be to him as the clothing with which he covers himself,"
+      },
+      {
+        "reference": "Isaiah 23:10",
+        "book": "Isaiah",
+        "englishText": "Pass through your land like the Nile, daughter of Tarshish. There is no restraint any more."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

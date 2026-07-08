@@ -26,6 +26,93 @@
       "1 Chronicles 4:2"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6882",
+    "source": "hebrew",
+    "strong": "H6882",
+    "lemma": "צׇרְעִי",
+    "transliteration": "Tsorʻîy",
+    "definition": "a Tsorite or Tsorathite , i.e. inhabitants of Tsorah",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:53",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The families of Kiriath Jearim: the Ithrites, the Puthites, the Shumathites, and the Mishraites; from them came the Zorathites and the Eshtaolites."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:53",
+      "1 Chronicles 2:54",
+      "1 Chronicles 4:2"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:54",
+        "evidenceText": "The sons of Salma: Bethlehem, the Netophathites, Atroth Beth Joab, and half of the Manahathites, the Zorites."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:53",
+        "phase": "Occurrence",
+        "evidenceText": "The families of Kiriath Jearim: the Ithrites, the Puthites, the Shumathites, and the Mishraites; from them came the Zorathites and the Eshtaolites."
+      },
+      {
+        "reference": "1 Chronicles 2:54",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Salma: Bethlehem, the Netophathites, Atroth Beth Joab, and half of the Manahathites, the Zorites."
+      },
+      {
+        "reference": "1 Chronicles 4:2",
+        "phase": "Occurrence",
+        "evidenceText": "Reaiah the son of Shobal became the father of Jahath; and Jahath became the father of Ahumai and Lahad. These are the families of the Zorathites."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:53 and continues through 1 Chronicles 4:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:53",
+        "book": "1 Chronicles",
+        "englishText": "The families of Kiriath Jearim: the Ithrites, the Puthites, the Shumathites, and the Mishraites; from them came the Zorathites and the Eshtaolites."
+      },
+      {
+        "reference": "1 Chronicles 2:54",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Salma: Bethlehem, the Netophathites, Atroth Beth Joab, and half of the Manahathites, the Zorites."
+      },
+      {
+        "reference": "1 Chronicles 4:2",
+        "book": "1 Chronicles",
+        "englishText": "Reaiah the son of Shobal became the father of Jahath; and Jahath became the father of Ahumai and Lahad. These are the families of the Zorathites."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

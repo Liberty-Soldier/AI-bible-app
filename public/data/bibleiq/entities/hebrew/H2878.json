@@ -26,6 +26,83 @@
       "Jeremiah 12:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2878",
+    "source": "hebrew",
+    "strong": "H2878",
+    "lemma": "טִבְחָה",
+    "transliteration": "ṭibchâh",
+    "definition": "flesh, slaughter",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 25:11",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "Shall I then take my bread, my water, and my meat that I have killed for my shearers, and give it to men who I don’t know where they come from?”"
+    },
+    "books": [
+      "1 Samuel",
+      "Psalms",
+      "Jeremiah"
+    ],
+    "references": [
+      "1 Samuel 25:11",
+      "Psalms 44:23",
+      "Jeremiah 12:3"
+    ],
+    "themes": [
+      "death"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "1 Samuel 25:11",
+        "evidenceText": "Shall I then take my bread, my water, and my meat that I have killed for my shearers, and give it to men who I don’t know where they come from?”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Samuel 25:11",
+        "phase": "Death",
+        "evidenceText": "Shall I then take my bread, my water, and my meat that I have killed for my shearers, and give it to men who I don’t know where they come from?”"
+      },
+      {
+        "reference": "Psalms 44:23",
+        "phase": "Occurrence",
+        "evidenceText": "Wake up!"
+      },
+      {
+        "reference": "Jeremiah 12:3",
+        "phase": "Occurrence",
+        "evidenceText": "But you, Yahweh, know me."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 25:11 and continues through Jeremiah 12:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 25:11",
+        "book": "1 Samuel",
+        "englishText": "Shall I then take my bread, my water, and my meat that I have killed for my shearers, and give it to men who I don’t know where they come from?”"
+      },
+      {
+        "reference": "Psalms 44:23",
+        "book": "Psalms",
+        "englishText": "Wake up!"
+      },
+      {
+        "reference": "Jeremiah 12:3",
+        "book": "Jeremiah",
+        "englishText": "But you, Yahweh, know me."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

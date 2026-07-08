@@ -25,6 +25,85 @@
       "Genesis 4:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2332",
+    "source": "hebrew",
+    "strong": "H2332",
+    "lemma": "חַוָּה",
+    "transliteration": "Chavvâh",
+    "definition": "Chavvah (or Eve ), the first woman",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 3:20",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The man called his wife Eve because she would be the mother of all the living."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 3:20",
+      "Genesis 4:1"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 4:1",
+        "evidenceText": "The man knew She conceived,† or, became pregnant and gave birth to Cain, and said, “I have gotten a man with Yahweh’s help.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 3:20",
+        "phase": "Occurrence",
+        "evidenceText": "The man called his wife Eve because she would be the mother of all the living."
+      },
+      {
+        "reference": "Genesis 4:1",
+        "phase": "Birth or introduction",
+        "evidenceText": "The man knew She conceived,† or, became pregnant and gave birth to Cain, and said, “I have gotten a man with Yahweh’s help.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 3:20 and continues through Genesis 4:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 3:20",
+        "book": "Genesis",
+        "englishText": "The man called his wife Eve because she would be the mother of all the living."
+      },
+      {
+        "reference": "Genesis 4:1",
+        "book": "Genesis",
+        "englishText": "The man knew She conceived,† or, became pregnant and gave birth to Cain, and said, “I have gotten a man with Yahweh’s help.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

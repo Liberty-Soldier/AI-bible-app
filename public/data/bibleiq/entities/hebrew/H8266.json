@@ -29,6 +29,126 @@
       "Isaiah 63:8"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8266",
+    "source": "hebrew",
+    "strong": "H8266",
+    "lemma": "שָׁקַר",
+    "transliteration": "shâqar",
+    "definition": "to cheat , i.e. be untrue (usually in words)",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "place",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 21:23",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Now, therefore, swear to me here by God that you will not deal falsely with me, nor with my son, nor with my son’s son. But according to the kindness that I have done to you, you shall do to me, and to the land in which you have lived as a foreigner.”"
+    },
+    "books": [
+      "Genesis",
+      "Leviticus",
+      "1 Samuel",
+      "Psalms",
+      "Isaiah"
+    ],
+    "references": [
+      "Genesis 21:23",
+      "Leviticus 19:11",
+      "1 Samuel 15:29",
+      "Psalms 44:18",
+      "Psalms 89:34",
+      "Isaiah 63:8"
+    ],
+    "themes": [
+      "family line",
+      "land",
+      "covenant"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 21:23",
+        "evidenceText": "Now, therefore, swear to me here by God that you will not deal falsely with me, nor with my son, nor with my son’s son. But according to the kindness that I have done to you, you shall do to me, and to the land in which you have lived as a foreigner.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 21:23",
+        "phase": "Movement or place",
+        "evidenceText": "Now, therefore, swear to me here by God that you will not deal falsely with me, nor with my son, nor with my son’s son. But according to the kindness that I have done to you, you shall do to me, and to the land in which you have lived as a foreigner.”"
+      },
+      {
+        "reference": "Leviticus 19:11",
+        "phase": "Occurrence",
+        "evidenceText": "“ ‘You shall not steal."
+      },
+      {
+        "reference": "1 Samuel 15:29",
+        "phase": "Occurrence",
+        "evidenceText": "Also the Strength of Israel will not lie nor repent; for he is not a man, that he should repent.”"
+      },
+      {
+        "reference": "Psalms 44:18",
+        "phase": "Occurrence",
+        "evidenceText": "Our heart has not turned back,"
+      },
+      {
+        "reference": "Psalms 89:34",
+        "phase": "Occurrence",
+        "evidenceText": "I will not break my covenant,"
+      },
+      {
+        "reference": "Isaiah 63:8",
+        "phase": "Occurrence",
+        "evidenceText": "For he said, “Surely, they are my people,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 21:23 and continues through Isaiah 63:8.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 21:23",
+        "book": "Genesis",
+        "englishText": "Now, therefore, swear to me here by God that you will not deal falsely with me, nor with my son, nor with my son’s son. But according to the kindness that I have done to you, you shall do to me, and to the land in which you have lived as a foreigner.”"
+      },
+      {
+        "reference": "Leviticus 19:11",
+        "book": "Leviticus",
+        "englishText": "“ ‘You shall not steal."
+      },
+      {
+        "reference": "1 Samuel 15:29",
+        "book": "1 Samuel",
+        "englishText": "Also the Strength of Israel will not lie nor repent; for he is not a man, that he should repent.”"
+      },
+      {
+        "reference": "Psalms 44:18",
+        "book": "Psalms",
+        "englishText": "Our heart has not turned back,"
+      },
+      {
+        "reference": "Psalms 89:34",
+        "book": "Psalms",
+        "englishText": "I will not break my covenant,"
+      },
+      {
+        "reference": "Isaiah 63:8",
+        "book": "Isaiah",
+        "englishText": "For he said, “Surely, they are my people,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

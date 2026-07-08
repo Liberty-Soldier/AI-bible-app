@@ -27,6 +27,93 @@
       "Lamentations 4:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H393",
+    "source": "hebrew",
+    "strong": "H393",
+    "lemma": "אַכְזָר",
+    "transliteration": "ʼakzâr",
+    "definition": "violent ; by implication deadly ; also (in a good sense) brave",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 32:33",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "Their wine is the poison of serpents,"
+    },
+    "books": [
+      "Deuteronomy",
+      "Job",
+      "Lamentations"
+    ],
+    "references": [
+      "Deuteronomy 32:33",
+      "Job 30:21",
+      "Job 41:2",
+      "Lamentations 4:3"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 32:33",
+        "phase": "Occurrence",
+        "evidenceText": "Their wine is the poison of serpents,"
+      },
+      {
+        "reference": "Job 30:21",
+        "phase": "Occurrence",
+        "evidenceText": "You have turned to be cruel to me."
+      },
+      {
+        "reference": "Job 41:2",
+        "phase": "Occurrence",
+        "evidenceText": "Can you put a rope into his nose,"
+      },
+      {
+        "reference": "Lamentations 4:3",
+        "phase": "Occurrence",
+        "evidenceText": "Even the jackals offer their breast."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 32:33 and continues through Lamentations 4:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 32:33",
+        "book": "Deuteronomy",
+        "englishText": "Their wine is the poison of serpents,"
+      },
+      {
+        "reference": "Job 30:21",
+        "book": "Job",
+        "englishText": "You have turned to be cruel to me."
+      },
+      {
+        "reference": "Job 41:2",
+        "book": "Job",
+        "englishText": "Can you put a rope into his nose,"
+      },
+      {
+        "reference": "Lamentations 4:3",
+        "book": "Lamentations",
+        "englishText": "Even the jackals offer their breast."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "לוֹחֵשׁ",
   "subtitle": "H3873 • Hebrew name",
   "simple": {
-    "meaning": "לוֹחֵשׁ (Lôwchêsh) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "לוֹחֵשׁ (Lôwchêsh) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Nehemiah, beginning at Nehemiah 3:12. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to לוֹחֵשׁ (H3873) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows לוֹחֵשׁ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,78 @@
     ],
     "laterReferences": [
       "Nehemiah 10:25"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3873",
+    "source": "hebrew",
+    "strong": "H3873",
+    "lemma": "לוֹחֵשׁ",
+    "transliteration": "Lôwchêsh",
+    "definition": "Lochesh , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Nehemiah 3:12",
+      "book": "Nehemiah",
+      "bookName": "Nehemiah",
+      "englishText": "Next to him, Shallum the son of Hallohesh, the ruler of half the district of Jerusalem, he and his daughters, made repairs."
+    },
+    "books": [
+      "Nehemiah"
+    ],
+    "references": [
+      "Nehemiah 3:12",
+      "Nehemiah 10:25"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Nehemiah 3:12",
+        "phase": "Occurrence",
+        "evidenceText": "Next to him, Shallum the son of Hallohesh, the ruler of half the district of Jerusalem, he and his daughters, made repairs."
+      },
+      {
+        "reference": "Nehemiah 10:25",
+        "phase": "Occurrence",
+        "evidenceText": "Rehum, Hashabnah, Maaseiah,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Nehemiah 3:12 and continues through Nehemiah 10:25.",
+    "occurrenceTrail": [
+      {
+        "reference": "Nehemiah 3:12",
+        "book": "Nehemiah",
+        "englishText": "Next to him, Shallum the son of Hallohesh, the ruler of half the district of Jerusalem, he and his daughters, made repairs."
+      },
+      {
+        "reference": "Nehemiah 10:25",
+        "book": "Nehemiah",
+        "englishText": "Rehum, Hashabnah, Maaseiah,"
+      }
     ]
   },
   "evidence": {

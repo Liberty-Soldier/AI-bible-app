@@ -25,6 +25,79 @@
       "1 Chronicles 3:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H37",
+    "source": "hebrew",
+    "strong": "H37",
+    "lemma": "אֲבִיטָל",
+    "transliteration": "ʼĂbîyṭâl",
+    "definition": "Abital , a wife of King David",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 3:4",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "and the fourth, Adonijah the son of Haggith; and the fifth, Shephatiah the son of Abital;"
+    },
+    "books": [
+      "2 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "2 Samuel 3:4",
+      "1 Chronicles 3:3"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "2 Samuel 3:4",
+        "phase": "Occurrence",
+        "evidenceText": "and the fourth, Adonijah the son of Haggith; and the fifth, Shephatiah the son of Abital;"
+      },
+      {
+        "reference": "1 Chronicles 3:3",
+        "phase": "Occurrence",
+        "evidenceText": "the fifth, Shephatiah of Abital; the sixth, Ithream by Eglah his wife:"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 3:4 and continues through 1 Chronicles 3:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 3:4",
+        "book": "2 Samuel",
+        "englishText": "and the fourth, Adonijah the son of Haggith; and the fifth, Shephatiah the son of Abital;"
+      },
+      {
+        "reference": "1 Chronicles 3:3",
+        "book": "1 Chronicles",
+        "englishText": "the fifth, Shephatiah of Abital; the sixth, Ithream by Eglah his wife:"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

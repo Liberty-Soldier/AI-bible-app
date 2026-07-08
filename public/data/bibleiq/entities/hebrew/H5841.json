@@ -25,6 +25,80 @@
       "Judges 16:2"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5841",
+    "source": "hebrew",
+    "strong": "H5841",
+    "lemma": "עַזָּתִי",
+    "transliteration": "ʻAzzâthîy",
+    "definition": "an Azzathite or inhabitant of Azzah",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 13:3",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "from the Shihor, which is before Egypt, even to the border of Ekron northward, which is counted as Canaanite; the five lords of the Philistines; the Gazites, and the Ashdodites, the Ashkelonites, the Gittites, and the Ekronites; also the Avvim,"
+    },
+    "books": [
+      "Joshua",
+      "Judges"
+    ],
+    "references": [
+      "Joshua 13:3",
+      "Judges 16:2"
+    ],
+    "themes": [
+      "family line",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Judges 16:2",
+        "evidenceText": "The Gazites were told, “Samson is here!” They surrounded him and laid wait for him all night in the gate of the city, and were quiet all the night, saying, “Wait until morning light; then we will kill him.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 13:3",
+        "phase": "Occurrence",
+        "evidenceText": "from the Shihor, which is before Egypt, even to the border of Ekron northward, which is counted as Canaanite; the five lords of the Philistines; the Gazites, and the Ashdodites, the Ashkelonites, the Gittites, and the Ekronites; also the Avvim,"
+      },
+      {
+        "reference": "Judges 16:2",
+        "phase": "Movement or place",
+        "evidenceText": "The Gazites were told, “Samson is here!” They surrounded him and laid wait for him all night in the gate of the city, and were quiet all the night, saying, “Wait until morning light; then we will kill him.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 13:3 and continues through Judges 16:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 13:3",
+        "book": "Joshua",
+        "englishText": "from the Shihor, which is before Egypt, even to the border of Ekron northward, which is counted as Canaanite; the five lords of the Philistines; the Gazites, and the Ashdodites, the Ashkelonites, the Gittites, and the Ekronites; also the Avvim,"
+      },
+      {
+        "reference": "Judges 16:2",
+        "book": "Judges",
+        "englishText": "The Gazites were told, “Samson is here!” They surrounded him and laid wait for him all night in the gate of the city, and were quiet all the night, saying, “Wait until morning light; then we will kill him.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

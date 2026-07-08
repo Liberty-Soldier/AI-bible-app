@@ -4,7 +4,7 @@
   "title": "קְנָת",
   "subtitle": "H7079 • Hebrew name",
   "simple": {
-    "meaning": "קְנָת (Qᵉnâth) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "קְנָת (Qᵉnâth) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, 1 Chronicles, beginning at Numbers 32:42. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to קְנָת (H7079) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows קְנָת through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,87 @@
     ],
     "laterReferences": [
       "1 Chronicles 2:23"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7079",
+    "source": "hebrew",
+    "strong": "H7079",
+    "lemma": "קְנָת",
+    "transliteration": "Qᵉnâth",
+    "definition": "Kenath , a place East of the Jordan",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 32:42",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Nobah went and took Kenath and its villages, and called it Nobah, after his own name."
+    },
+    "books": [
+      "Numbers",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 32:42",
+      "1 Chronicles 2:23"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:23",
+        "evidenceText": "Geshur and Aram took the towns of Jair from them, with Kenath, and its villages, even sixty cities. All these were the sons of Machir the father of Gilead."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 32:42",
+        "phase": "Occurrence",
+        "evidenceText": "Nobah went and took Kenath and its villages, and called it Nobah, after his own name."
+      },
+      {
+        "reference": "1 Chronicles 2:23",
+        "phase": "Genealogy",
+        "evidenceText": "Geshur and Aram took the towns of Jair from them, with Kenath, and its villages, even sixty cities. All these were the sons of Machir the father of Gilead."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 32:42 and continues through 1 Chronicles 2:23.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 32:42",
+        "book": "Numbers",
+        "englishText": "Nobah went and took Kenath and its villages, and called it Nobah, after his own name."
+      },
+      {
+        "reference": "1 Chronicles 2:23",
+        "book": "1 Chronicles",
+        "englishText": "Geshur and Aram took the towns of Jair from them, with Kenath, and its villages, even sixty cities. All these were the sons of Machir the father of Gilead."
+      }
     ]
   },
   "evidence": {

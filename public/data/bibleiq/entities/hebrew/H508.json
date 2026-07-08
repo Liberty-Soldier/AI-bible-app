@@ -4,7 +4,7 @@
   "title": "אֶלְפַּעַל",
   "subtitle": "H508 • Hebrew name",
   "simple": {
-    "meaning": "אֶלְפַּעַל (ʼElpaʻal) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אֶלְפַּעַל (ʼElpaʻal) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 8:11. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֶלְפַּעַל (H508) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֶלְפַּעַל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,103 @@
     "laterReferences": [
       "1 Chronicles 8:12",
       "1 Chronicles 8:18"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H508",
+    "source": "hebrew",
+    "strong": "H508",
+    "lemma": "אֶלְפַּעַל",
+    "transliteration": "ʼElpaʻal",
+    "definition": "Elpaal , an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 8:11",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "By Hushim, he became the father of Abitub and Elpaal."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 8:11",
+      "1 Chronicles 8:12",
+      "1 Chronicles 8:18"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 8:12",
+        "evidenceText": "The sons of Elpaal: Eber, Misham, and Shemed, who built Ono and Lod, with its towns;"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 8:18",
+        "evidenceText": "Ishmerai, Izliah, Jobab, the sons of Elpaal,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 8:11",
+        "phase": "Occurrence",
+        "evidenceText": "By Hushim, he became the father of Abitub and Elpaal."
+      },
+      {
+        "reference": "1 Chronicles 8:12",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Elpaal: Eber, Misham, and Shemed, who built Ono and Lod, with its towns;"
+      },
+      {
+        "reference": "1 Chronicles 8:18",
+        "phase": "Genealogy",
+        "evidenceText": "Ishmerai, Izliah, Jobab, the sons of Elpaal,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 8:11 and continues through 1 Chronicles 8:18.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 8:11",
+        "book": "1 Chronicles",
+        "englishText": "By Hushim, he became the father of Abitub and Elpaal."
+      },
+      {
+        "reference": "1 Chronicles 8:12",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Elpaal: Eber, Misham, and Shemed, who built Ono and Lod, with its towns;"
+      },
+      {
+        "reference": "1 Chronicles 8:18",
+        "book": "1 Chronicles",
+        "englishText": "Ishmerai, Izliah, Jobab, the sons of Elpaal,"
+      }
     ]
   },
   "evidence": {

@@ -26,6 +26,93 @@
       "1 Chronicles 6:55"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6063",
+    "source": "hebrew",
+    "strong": "H6063",
+    "lemma": "עָנֵר",
+    "transliteration": "ʻÂnêr",
+    "definition": "Aner , a Amorite, also a place in Palestine",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 14:13",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "One who had escaped came and told Abram, the Hebrew. At that time, he lived by the oaks of Mamre, the Amorite, brother of Eshcol and brother of Aner. They were allies of Abram."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 14:13",
+      "Genesis 14:24",
+      "1 Chronicles 6:55"
+    ],
+    "themes": [
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "1 Chronicles 6:55",
+        "evidenceText": "to them they gave Hebron in the land of Judah, and its pasture lands around it;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 14:13",
+        "phase": "Occurrence",
+        "evidenceText": "One who had escaped came and told Abram, the Hebrew. At that time, he lived by the oaks of Mamre, the Amorite, brother of Eshcol and brother of Aner. They were allies of Abram."
+      },
+      {
+        "reference": "Genesis 14:24",
+        "phase": "Occurrence",
+        "evidenceText": "I will accept nothing from you except that which the young men have eaten, and the portion of the men who went with me: Aner, Eshcol, and Mamre. Let them take their portion.”"
+      },
+      {
+        "reference": "1 Chronicles 6:55",
+        "phase": "Movement or place",
+        "evidenceText": "to them they gave Hebron in the land of Judah, and its pasture lands around it;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 14:13 and continues through 1 Chronicles 6:55.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 14:13",
+        "book": "Genesis",
+        "englishText": "One who had escaped came and told Abram, the Hebrew. At that time, he lived by the oaks of Mamre, the Amorite, brother of Eshcol and brother of Aner. They were allies of Abram."
+      },
+      {
+        "reference": "Genesis 14:24",
+        "book": "Genesis",
+        "englishText": "I will accept nothing from you except that which the young men have eaten, and the portion of the men who went with me: Aner, Eshcol, and Mamre. Let them take their portion.”"
+      },
+      {
+        "reference": "1 Chronicles 6:55",
+        "book": "1 Chronicles",
+        "englishText": "to them they gave Hebron in the land of Judah, and its pasture lands around it;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

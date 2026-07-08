@@ -27,6 +27,108 @@
       "Proverbs 27:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7463",
+    "source": "hebrew",
+    "strong": "H7463",
+    "lemma": "רֵעֶה",
+    "transliteration": "rêʻeh",
+    "definition": "a (male) companion",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 15:37",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "So Hushai, David’s friend, came into the city; and Absalom came into Jerusalem."
+    },
+    "books": [
+      "2 Samuel",
+      "1 Kings",
+      "Proverbs"
+    ],
+    "references": [
+      "2 Samuel 15:37",
+      "2 Samuel 16:16",
+      "1 Kings 4:5",
+      "Proverbs 27:10"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "2 Samuel 15:37",
+        "evidenceText": "So Hushai, David’s friend, came into the city; and Absalom came into Jerusalem."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Samuel 15:37",
+        "phase": "Movement or place",
+        "evidenceText": "So Hushai, David’s friend, came into the city; and Absalom came into Jerusalem."
+      },
+      {
+        "reference": "2 Samuel 16:16",
+        "phase": "Occurrence",
+        "evidenceText": "When Hushai the Archite, David’s friend, had come to Absalom, Hushai said to Absalom, “Long live the king! Long live the king!”"
+      },
+      {
+        "reference": "1 Kings 4:5",
+        "phase": "Occurrence",
+        "evidenceText": "Azariah the son of Nathan was over the officers; Zabud the son of Nathan was chief minister, the king’s friend;"
+      },
+      {
+        "reference": "Proverbs 27:10",
+        "phase": "Occurrence",
+        "evidenceText": "Don’t forsake your friend and your father’s friend."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 15:37 and continues through Proverbs 27:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 15:37",
+        "book": "2 Samuel",
+        "englishText": "So Hushai, David’s friend, came into the city; and Absalom came into Jerusalem."
+      },
+      {
+        "reference": "2 Samuel 16:16",
+        "book": "2 Samuel",
+        "englishText": "When Hushai the Archite, David’s friend, had come to Absalom, Hushai said to Absalom, “Long live the king! Long live the king!”"
+      },
+      {
+        "reference": "1 Kings 4:5",
+        "book": "1 Kings",
+        "englishText": "Azariah the son of Nathan was over the officers; Zabud the son of Nathan was chief minister, the king’s friend;"
+      },
+      {
+        "reference": "Proverbs 27:10",
+        "book": "Proverbs",
+        "englishText": "Don’t forsake your friend and your father’s friend."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

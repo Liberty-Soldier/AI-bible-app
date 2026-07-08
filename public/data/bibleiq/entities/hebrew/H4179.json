@@ -4,7 +4,7 @@
   "title": "מוֹרִיָּה",
   "subtitle": "H4179 • Hebrew name",
   "simple": {
-    "meaning": "מוֹרִיָּה (Môwrîyâh) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text. The occurrence trail connects the name with an offering.",
+    "meaning": "מוֹרִיָּה (Môwrîyâh) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line. The occurrence trail connects the name with an offering.",
     "biblicalBackground": "The first appearances are in Genesis, 2 Chronicles, beginning at Genesis 22:2. BibleIQ detects the main surrounding context as family, family line, offering, land, mountain.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מוֹרִיָּה (H4179) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מוֹרִיָּה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,89 @@
     ],
     "laterReferences": [
       "2 Chronicles 3:1"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4179",
+    "source": "hebrew",
+    "strong": "H4179",
+    "lemma": "מוֹרִיָּה",
+    "transliteration": "Môwrîyâh",
+    "definition": "Morijah , a hill in Palestine",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 22:2",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "He said, “Now take your son, your only son, Isaac, whom you love, and go into the land of Moriah. Offer him there as a burnt offering on one of the mountains which I will tell you of.”"
+    },
+    "books": [
+      "Genesis",
+      "2 Chronicles"
+    ],
+    "references": [
+      "Genesis 22:2",
+      "2 Chronicles 3:1"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "offering",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Genesis 22:2",
+        "evidenceText": "He said, “Now take your son, your only son, Isaac, whom you love, and go into the land of Moriah. Offer him there as a burnt offering on one of the mountains which I will tell you of.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 22:2",
+        "phase": "Offering",
+        "evidenceText": "He said, “Now take your son, your only son, Isaac, whom you love, and go into the land of Moriah. Offer him there as a burnt offering on one of the mountains which I will tell you of.”"
+      },
+      {
+        "reference": "2 Chronicles 3:1",
+        "phase": "Occurrence",
+        "evidenceText": "Then Solomon began to build Yahweh’s house at Jerusalem on Mount Moriah, where Yahweh appeared to David his father, which he prepared in the place that David had appointed, on the threshing floor of Ornan the Jebusite."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 22:2 and continues through 2 Chronicles 3:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 22:2",
+        "book": "Genesis",
+        "englishText": "He said, “Now take your son, your only son, Isaac, whom you love, and go into the land of Moriah. Offer him there as a burnt offering on one of the mountains which I will tell you of.”"
+      },
+      {
+        "reference": "2 Chronicles 3:1",
+        "book": "2 Chronicles",
+        "englishText": "Then Solomon began to build Yahweh’s house at Jerusalem on Mount Moriah, where Yahweh appeared to David his father, which he prepared in the place that David had appointed, on the threshing floor of Ornan the Jebusite."
+      }
     ]
   },
   "evidence": {

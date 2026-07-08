@@ -23,6 +23,62 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8009",
+    "source": "hebrew",
+    "strong": "H8009",
+    "lemma": "שַׂלְמָה",
+    "transliteration": "Salmâh",
+    "definition": "Salmah , an Israelite",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ruth 4:20",
+      "book": "Ruth",
+      "bookName": "Ruth",
+      "englishText": "and Amminadab became the father of Nahshon, and Nahshon became the father of Salmon,"
+    },
+    "books": [
+      "Ruth"
+    ],
+    "references": [
+      "Ruth 4:20"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Ruth 4:20",
+        "phase": "Occurrence",
+        "evidenceText": "and Amminadab became the father of Nahshon, and Nahshon became the father of Salmon,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Ruth 4:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ruth 4:20",
+        "book": "Ruth",
+        "englishText": "and Amminadab became the father of Nahshon, and Nahshon became the father of Salmon,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

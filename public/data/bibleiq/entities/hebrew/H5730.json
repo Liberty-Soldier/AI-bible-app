@@ -4,7 +4,7 @@
   "title": "עֵדֶן",
   "subtitle": "H5730 • Hebrew name",
   "simple": {
-    "meaning": "עֵדֶן (ʻêden) appears 5 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "עֵדֶן (ʻêden) appears 5 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Genesis, 2 Samuel, Psalms, Jeremiah, Amos, beginning at Genesis 18:12. BibleIQ detects the main surrounding context as family line, kingship, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עֵדֶן (H5730) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עֵדֶן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,111 @@
       "Psalms 36:9",
       "Jeremiah 51:34",
       "Amos 1:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5730",
+    "source": "hebrew",
+    "strong": "H5730",
+    "lemma": "עֵדֶן",
+    "transliteration": "ʻêden",
+    "definition": "pleasure",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 18:12",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Sarah laughed within herself, saying, “After I have grown old will I have pleasure, my lord being old also?”"
+    },
+    "books": [
+      "Genesis",
+      "2 Samuel",
+      "Psalms",
+      "Jeremiah",
+      "Amos"
+    ],
+    "references": [
+      "Genesis 18:12",
+      "2 Samuel 1:24",
+      "Psalms 36:9",
+      "Jeremiah 51:34",
+      "Amos 1:5"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 18:12",
+        "phase": "Occurrence",
+        "evidenceText": "Sarah laughed within herself, saying, “After I have grown old will I have pleasure, my lord being old also?”"
+      },
+      {
+        "reference": "2 Samuel 1:24",
+        "phase": "Occurrence",
+        "evidenceText": "You daughters of Israel, weep over Saul,"
+      },
+      {
+        "reference": "Psalms 36:9",
+        "phase": "Occurrence",
+        "evidenceText": "For with you is the spring of life."
+      },
+      {
+        "reference": "Jeremiah 51:34",
+        "phase": "Occurrence",
+        "evidenceText": "“Nebuchadnezzar the king of Babylon has devoured me."
+      },
+      {
+        "reference": "Amos 1:5",
+        "phase": "Occurrence",
+        "evidenceText": "I will break the bar of Damascus,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 18:12 and continues through Amos 1:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 18:12",
+        "book": "Genesis",
+        "englishText": "Sarah laughed within herself, saying, “After I have grown old will I have pleasure, my lord being old also?”"
+      },
+      {
+        "reference": "2 Samuel 1:24",
+        "book": "2 Samuel",
+        "englishText": "You daughters of Israel, weep over Saul,"
+      },
+      {
+        "reference": "Psalms 36:9",
+        "book": "Psalms",
+        "englishText": "For with you is the spring of life."
+      },
+      {
+        "reference": "Jeremiah 51:34",
+        "book": "Jeremiah",
+        "englishText": "“Nebuchadnezzar the king of Babylon has devoured me."
+      },
+      {
+        "reference": "Amos 1:5",
+        "book": "Amos",
+        "englishText": "I will break the bar of Damascus,"
+      }
     ]
   },
   "evidence": {

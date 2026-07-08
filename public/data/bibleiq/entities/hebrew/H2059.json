@@ -23,6 +23,62 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2059",
+    "source": "hebrew",
+    "strong": "H2059",
+    "lemma": "וַשְׁנִי",
+    "transliteration": "Vashnîy",
+    "definition": "Vashni , an Israelite",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 6:13",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Shallum became the father of Hilkiah. Hilkiah became the father of Azariah."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 6:13"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 6:13",
+        "phase": "Occurrence",
+        "evidenceText": "Shallum became the father of Hilkiah. Hilkiah became the father of Azariah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: 1 Chronicles 6:13.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 6:13",
+        "book": "1 Chronicles",
+        "englishText": "Shallum became the father of Hilkiah. Hilkiah became the father of Azariah."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

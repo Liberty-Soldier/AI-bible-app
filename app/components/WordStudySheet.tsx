@@ -10,8 +10,8 @@ import {
   useRef,
   useState,
 } from "react";
-import { normalizeBookName } from "@/app/data/bookAliases";
 import { usePathname, useSearchParams } from "next/navigation";
+import { normalizeBookName } from "@/app/data/bookAliases";
 import type {
   BibleIQOccurrence,
   BibleIQResponse,
@@ -114,7 +114,6 @@ export default function WordStudySheet({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const expanded = snap === "expanded";
   const sheetKey = `${word || ""}-${data?.entity?.id || "loading"}`;
 
   const returnTo = useMemo(() => {
@@ -150,9 +149,7 @@ export default function WordStudySheet({
     setSnap("compact");
 
     const node = scrollRef.current;
-    if (node) {
-      node.scrollTop = 0;
-    }
+    if (node) node.scrollTop = 0;
   }, [word, data?.entity?.id]);
 
   useEffect(() => {
@@ -217,9 +214,11 @@ export default function WordStudySheet({
 
   const entity = data?.entity;
   const original = entity?.evidence.originalLanguage;
-  const definitions = entity?.evidence.definitions;
   const context = entity?.contextConnections;
   const occurrences = entity?.evidence.occurrences || [];
+  const see = entity?.see;
+  const alignment = entity?.alignment;
+  const emet = entity?.emet;
 
   const uniqueOccurrences = occurrences.filter(
     (occurrence, index, list) =>
@@ -237,22 +236,6 @@ export default function WordStudySheet({
     hasAny(context?.concepts) ||
     hasAny(context?.themes) ||
     hasAny(context?.laterReferences);
-
-  const hasOriginalLanguage =
-    original?.source ||
-    original?.word ||
-    original?.transliteration ||
-    original?.pronunciation ||
-    original?.strong ||
-    original?.partOfSpeech ||
-    original?.forms?.length;
-
-  const hasEvidence =
-    entity?.evidence.firstMention ||
-    entity?.evidence.keyReferences?.length ||
-    definitions?.short ||
-    definitions?.usage ||
-    definitions?.sources?.length;
 
   function handlePointerDown(event: PointerEvent<HTMLButtonElement>) {
     dragStartYRef.current = event.clientY;
@@ -282,220 +265,162 @@ export default function WordStudySheet({
     setSnap((value) => (value === "expanded" ? "compact" : "expanded"));
   }
 
-return (
-  <div className="fixed inset-0 z-[70] overflow-hidden">
-    <button
-      aria-label="Close BibleIQ"
-      className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
-      onClick={onClose}
-    />
+  return (
+    <div className="fixed inset-0 z-[70] overflow-hidden">
+      <button
+        aria-label="Close BibleIQ"
+        className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
+        onClick={onClose}
+      />
 
-    <section className="absolute bottom-0 left-1/2 flex h-[88dvh] w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl">
-      <div className="shrink-0 border-b border-[var(--border)] bg-[var(--background)] px-5 py-4">
-        <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[var(--border)]" />
-
-        <div className="flex items-center justify-between gap-4">
-          <p className="text-[0.68rem] font-bold uppercase tracking-[0.34em] text-[var(--muted)]">
-            BibleIQ
-          </p>
-
+      <section
+        className={`absolute bottom-0 left-1/2 flex w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
+          snap === "expanded" ? "h-[88dvh]" : "h-[72dvh]"
+        }`}
+      >
+        <div className="shrink-0 border-b border-[var(--border)] bg-[var(--background)] px-5 py-4">
           <button
             type="button"
-            onClick={onClose}
-            className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-sm font-semibold text-[var(--muted)]"
-          >
-            Close
-          </button>
-        </div>
-      </div>
+            aria-label="Resize BibleIQ panel"
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            className="mx-auto mb-4 block h-1.5 w-12 rounded-full bg-[var(--border)]"
+          />
 
-      <div
-        key={sheetKey}
-        ref={scrollRef}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-6 pb-24"
-      >
-        <header className="mb-7">
-          <h2 className="break-words text-[2.35rem] font-bold leading-[1.02] tracking-[-0.045em]">
-            {entity?.title || word}
-          </h2>
-
-          {entity?.subtitle ? (
-            <p className="mt-3 max-w-[32ch] text-[0.95rem] leading-6 text-[var(--muted)]">
-              {entity.subtitle}
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.34em] text-[var(--muted)]">
+              BibleIQ
             </p>
-          ) : null}
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            <MetaPill>
-              {book} {chapter}
-              {verse ? `:${verse}` : ""}
-            </MetaPill>
-            <MetaPill>{getTranslationLabel(translation)}</MetaPill>
-            {original?.source ? <MetaPill>{original.source}</MetaPill> : null}
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-sm font-semibold text-[var(--muted)]"
+            >
+              Close
+            </button>
           </div>
-        </header>
+        </div>
 
-        <main className="space-y-5">
-          {loading ? (
-            <Panel>
-              <p className="text-sm font-semibold text-[var(--muted)]">
-                Loading BibleIQ...
-              </p>
-            </Panel>
-          ) : entity ? (
-            <>
+        <div
+          key={sheetKey}
+          ref={scrollRef}
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-6 pb-24"
+        >
+          <header className="mb-7">
+            <h2 className="break-words text-[2.35rem] font-bold leading-[1.02] tracking-[-0.045em]">
+              {entity?.title || word}
+            </h2>
+
+            <p className="mt-3 max-w-[34ch] text-[0.95rem] leading-6 text-[var(--muted)]">
+              {entity?.subtitle || "Scripture evidence"}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              <MetaPill>
+                {book} {chapter}
+                {verse ? `:${verse}` : ""}
+              </MetaPill>
+              <MetaPill>{getTranslationLabel(translation)}</MetaPill>
+              {alignment?.source ? <MetaPill>{alignment.source}</MetaPill> : null}
+              {alignment?.strong ? <MetaPill>{alignment.strong}</MetaPill> : null}
+            </div>
+          </header>
+
+          <main className="space-y-5">
+            {loading ? (
               <Panel>
-                <div className="space-y-7">
-                  <SectionText
-                    label="Simple Meaning"
-                    text={entity.simple.meaning || entity.title}
-                    prominent
-                  />
-
-                  <SectionText
-                    label="Biblical Background"
-                    text={entity.simple.biblicalBackground}
-                  />
-
-                  <SectionText
-                    label="In This Verse"
-                    text={entity.simple.inThisVerse}
-                  />
-
-                  <SectionText
-                    label="Why It Matters"
-                    text={entity.simple.whyItMatters}
-                  />
-
-                  <SectionText
-                    label="Summary"
-                    text={entity.simple.summary}
-                    muted
-                  />
-                </div>
+                <p className="text-sm font-semibold text-[var(--muted)]">
+                  Loading BibleIQ...
+                </p>
               </Panel>
+            ) : entity ? (
+              <>
+                <EmetPanel
+                  status={emet?.status}
+                  explanation={emet?.explanation}
+                  citations={emet?.citations}
+                />
 
-              {hasContextConnections ? (
-                <Panel>
-                  <SectionHeading
-                    eyebrow="Context Connections"
-                    title="Where this word connects"
-                  />
+                {see ? <SeeEvidencePanel see={see} /> : null}
 
-                  <div className="mt-5 space-y-5">
-                    <ConnectionGroup label="People" values={context?.people} />
-                    <ConnectionGroup label="Places" values={context?.places} />
-                    <ConnectionGroup label="Events" values={context?.events} />
-                    <ConnectionGroup label="Concepts" values={context?.concepts} />
-                    <ConnectionGroup label="Themes" values={context?.themes} />
-                    <ConnectionGroup
-                      label="Later References"
-                      values={context?.laterReferences}
+                {alignment ? (
+                  <SourceAlignmentPanel alignment={alignment} original={original} />
+                ) : null}
+
+                {hasContextConnections ? (
+                  <Panel>
+                    <SectionHeading
+                      eyebrow="Context Connections"
+                      title="Where this word connects"
                     />
-                  </div>
-                </Panel>
-              ) : null}
 
-              {hasOriginalLanguage ? (
-                <OriginalLanguagePanel original={original} />
-              ) : null}
-
-              {hasEvidence ? (
-                <Panel>
-                  <SectionHeading
-                    eyebrow="Evidence"
-                    title="Source-level support"
-                  />
-
-                  <div className="mt-5 space-y-4">
-                    {entity.evidence.firstMention ? (
-                      <EvidenceTimelineItem
-                        label="First Mention"
-                        value={entity.evidence.firstMention}
+                    <div className="mt-5 space-y-5">
+                      <ConnectionGroup label="People" values={context?.people} />
+                      <ConnectionGroup label="Places" values={context?.places} />
+                      <ConnectionGroup label="Events" values={context?.events} />
+                      <ConnectionGroup
+                        label="Concepts"
+                        values={context?.concepts}
                       />
+                      <ConnectionGroup label="Themes" values={context?.themes} />
+                      <ConnectionGroup
+                        label="Later References"
+                        values={context?.laterReferences}
+                      />
+                    </div>
+                  </Panel>
+                ) : null}
+
+                {uniqueOccurrences.length ? (
+                  <Panel>
+                    <SectionHeading
+                      eyebrow="Occurrences"
+                      title={`${uniqueOccurrences.length} listed occurrence${
+                        uniqueOccurrences.length === 1 ? "" : "s"
+                      }`}
+                    />
+
+                    <div className="mt-5 space-y-3">
+                      {visibleOccurrences.map((occurrence, index) => (
+                        <OccurrenceCard
+                          key={`${occurrence.reference}-${index}`}
+                          occurrence={occurrence}
+                          returnTo={returnTo}
+                        />
+                      ))}
+                    </div>
+
+                    {hasMoreOccurrences ? (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setVisibleOccurrenceCount(
+                            (count) => count + OCCURRENCE_INCREMENT
+                          )
+                        }
+                        className="mt-5 w-full rounded-2xl border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-sm font-bold text-[var(--muted)]"
+                      >
+                        Load More Occurrences
+                      </button>
                     ) : null}
-
-                    {entity.evidence.keyReferences?.length ? (
-                      <EvidenceTimelineItem
-                        label="Key References"
-                        value={entity.evidence.keyReferences.join(", ")}
-                      />
-                    ) : null}
-
-                    {definitions?.short ? (
-                      <EvidenceTimelineItem
-                        label="Short Definition"
-                        value={definitions.short}
-                      />
-                    ) : null}
-
-                    {definitions?.usage ? (
-                      <EvidenceTimelineItem
-                        label="Usage"
-                        value={definitions.usage}
-                      />
-                    ) : null}
-
-                    {definitions?.sources?.length ? (
-                      <EvidenceTimelineItem
-                        label="Sources"
-                        value={definitions.sources.join(", ")}
-                        last
-                      />
-                    ) : null}
-                  </div>
-                </Panel>
-              ) : null}
-
-              {uniqueOccurrences.length ? (
-                <Panel>
-                  <SectionHeading
-                    eyebrow="Occurrences"
-                    title={`${uniqueOccurrences.length} listed occurrence${
-                      uniqueOccurrences.length === 1 ? "" : "s"
-                    }`}
-                  />
-
-                  <div className="mt-5 space-y-3">
-                    {visibleOccurrences.map((occurrence, index) => (
-                      <OccurrenceCard
-                        key={`${occurrence.reference}-${index}`}
-                        occurrence={occurrence}
-                        returnTo={returnTo}
-                      />
-                    ))}
-                  </div>
-
-                  {hasMoreOccurrences ? (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setVisibleOccurrenceCount(
-                          (count) => count + OCCURRENCE_INCREMENT
-                        )
-                      }
-                      className="mt-5 w-full rounded-2xl border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-sm font-bold text-[var(--muted)]"
-                    >
-                      Load More Occurrences
-                    </button>
-                  ) : null}
-                </Panel>
-              ) : null}
-            </>
-          ) : (
-            <Panel>
-              <SectionHeading eyebrow="BibleIQ" title="No explanation loaded yet" />
-              <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-                {data?.message ||
-                  "This word still needs source-level evidence mapping."}
-              </p>
-            </Panel>
-          )}
-        </main>
-      </div>
-    </section>
-  </div>
-);
+                  </Panel>
+                ) : null}
+              </>
+            ) : (
+              <Panel>
+                <SectionHeading eyebrow="BibleIQ" title="No explanation loaded yet" />
+                <p className="mt-4 text-base leading-7 text-[var(--muted)]">
+                  {data?.message ||
+                    "This word still needs source-level evidence mapping."}
+                </p>
+              </Panel>
+            )}
+          </main>
+        </div>
+      </section>
+    </div>
+  );
 }
 
 function Panel({ children }: { children: ReactNode }) {
@@ -535,37 +460,171 @@ function SectionHeading({
   );
 }
 
-function SectionText({
-  label,
-  text,
-  prominent,
-  muted,
+function EmetPanel({
+  status,
+  explanation,
+  citations,
 }: {
-  label: string;
-  text?: string;
-  prominent?: boolean;
-  muted?: boolean;
+  status?: string;
+  explanation?: string;
+  citations?: string[];
 }) {
-  if (!text) return null;
+  const ready = status === "complete" && explanation;
 
   return (
-    <section>
-      <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-[var(--muted)]">
+    <Panel>
+      <SectionHeading
+        eyebrow="EMET"
+        title={ready ? "Explanation" : "Evidence-ready explanation"}
+      />
+
+      {ready ? (
+        <p className="mt-5 text-[1.05rem] leading-8 text-[var(--foreground)]">
+          {explanation}
+        </p>
+      ) : (
+        <div className="mt-5 space-y-4">
+          <p className="text-[1.05rem] leading-8 text-[var(--foreground)]">
+            EMET will explain this word from the SEE evidence packet. The AI
+            will not create evidence; it will only interpret the structured
+            evidence already compiled from Scripture.
+          </p>
+
+          <p className="rounded-2xl border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-sm font-semibold leading-6 text-[var(--muted)]">
+            Status: {status || "pending"}
+          </p>
+        </div>
+      )}
+
+      {citations?.length ? (
+        <div className="mt-5">
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+            Evidence References
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {citations.map((citation) => (
+              <span
+                key={citation}
+                className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3.5 py-2 text-sm font-semibold"
+              >
+                {citation}
+              </span>
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </Panel>
+  );
+}
+
+function SeeEvidencePanel({
+  see,
+}: {
+  see: {
+    evidenceId: string;
+    countId: string;
+    occurrenceCount: number;
+    firstOccurrence?: string;
+    lastOccurrence?: string;
+    relationshipCount: number;
+    eventCount: number;
+    themeCount: number;
+  };
+}) {
+  return (
+    <Panel>
+      <SectionHeading eyebrow="SEE Evidence" title="Structured Scripture data" />
+
+      <div className="mt-5 grid grid-cols-2 gap-3">
+        <EvidenceStat label="Occurrences" value={see.occurrenceCount} />
+        <EvidenceStat label="Relationships" value={see.relationshipCount} />
+        <EvidenceStat label="Events" value={see.eventCount} />
+        <EvidenceStat label="Themes" value={see.themeCount} />
+      </div>
+
+      <div className="mt-5 space-y-3">
+        <InfoRow label="First Occurrence" value={see.firstOccurrence} />
+        <InfoRow label="Last Occurrence" value={see.lastOccurrence} />
+        <InfoRow label="SEE ID" value={see.evidenceId} />
+        <InfoRow label="Count ID" value={see.countId} />
+      </div>
+    </Panel>
+  );
+}
+
+function EvidenceStat({
+  label,
+  value,
+}: {
+  label: string;
+  value?: number;
+}) {
+  return (
+    <div className="rounded-[1.15rem] border border-[var(--border)] bg-[var(--background)] p-4">
+      <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
         {label}
       </p>
-
-      <p
-        className={`mt-2 leading-8 ${
-          prominent
-            ? "text-[1.32rem] font-bold tracking-[-0.025em] text-[var(--foreground)]"
-            : muted
-            ? "text-[1rem] text-[var(--muted)]"
-            : "text-[1.03rem] text-[var(--foreground)]"
-        }`}
-      >
-        {text}
+      <p className="mt-2 text-2xl font-bold tracking-[-0.04em]">
+        {(value ?? 0).toLocaleString()}
       </p>
-    </section>
+    </div>
+  );
+}
+
+function SourceAlignmentPanel({
+  alignment,
+  original,
+}: {
+  alignment: {
+    selectedEnglish?: string;
+    sourceWord?: string;
+    source?: string;
+    strong?: string;
+    lemma?: string;
+    morph?: string;
+    entityId?: string;
+    seeEvidenceId?: string;
+  };
+  original:
+    | {
+        word?: string;
+      }
+    | undefined;
+}) {
+  return (
+    <Panel>
+      <SectionHeading eyebrow="Source Alignment" title="English to source text" />
+
+      <div className="mt-5 rounded-[1.35rem] border border-[var(--border)] bg-[var(--background)] p-5">
+        <div className="grid grid-cols-1 gap-3">
+          <InfoRow label="Selected English" value={alignment.selectedEnglish} />
+          <InfoRow
+            label="Source Word"
+            value={alignment.sourceWord || original?.word}
+          />
+          <InfoRow label="Lemma" value={alignment.lemma} />
+          <InfoRow label="Strong" value={alignment.strong} />
+          <InfoRow label="Morphology" value={alignment.morph} />
+          <InfoRow label="Source" value={alignment.source} />
+          <InfoRow label="Entity ID" value={alignment.entityId} />
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
+function InfoRow({ label, value }: { label: string; value?: string }) {
+  if (!value) return null;
+
+  return (
+    <div className="flex items-start justify-between gap-5 border-t border-[var(--border)] pt-3 first:border-t-0 first:pt-0">
+      <p className="shrink-0 text-xs font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+        {label}
+      </p>
+      <p className="min-w-0 break-words text-right text-sm font-bold leading-6">
+        {value}
+      </p>
+    </div>
   );
 }
 
@@ -596,133 +655,6 @@ function ConnectionGroup({
         ))}
       </div>
     </section>
-  );
-}
-
-function OriginalLanguagePanel({
-  original,
-}: {
-  original:
-    | {
-        source?: string;
-        word?: string;
-        transliteration?: string;
-        pronunciation?: string;
-        strong?: string;
-        partOfSpeech?: string;
-        forms?: string[];
-      }
-    | undefined;
-}) {
-  return (
-    <Panel>
-      <SectionHeading eyebrow="Original Language" title="Source word panel" />
-
-      <div className="mt-5 rounded-[1.35rem] border border-[var(--border)] bg-[var(--background)] p-5">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <p className="text-[0.68rem] font-bold uppercase tracking-[0.24em] text-[var(--muted)]">
-              Word
-            </p>
-            <p className="mt-2 break-words text-[2.1rem] font-bold leading-none tracking-[-0.04em]">
-              {original?.word || "—"}
-            </p>
-          </div>
-
-          {original?.strong ? (
-            <span className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-bold text-[var(--muted)]">
-              {original.strong}
-            </span>
-          ) : null}
-        </div>
-
-        <div className="mt-6 grid grid-cols-1 gap-3">
-          <LanguageInfoRow label="Source" value={original?.source} />
-          <LanguageInfoRow
-            label="Transliteration"
-            value={original?.transliteration}
-          />
-          <LanguageInfoRow
-            label="Pronunciation"
-            value={original?.pronunciation}
-          />
-          <LanguageInfoRow
-            label="Part of Speech"
-            value={original?.partOfSpeech}
-          />
-        </div>
-
-        {original?.forms?.length ? (
-          <div className="mt-6">
-            <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-              Common Forms
-            </p>
-
-            <div className="mt-3 flex flex-wrap gap-2">
-              {original.forms.slice(0, 10).map((form) => (
-                <span
-                  key={form}
-                  className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-sm font-semibold"
-                >
-                  {form}
-                </span>
-              ))}
-            </div>
-          </div>
-        ) : null}
-      </div>
-    </Panel>
-  );
-}
-
-function LanguageInfoRow({
-  label,
-  value,
-}: {
-  label: string;
-  value?: string;
-}) {
-  if (!value) return null;
-
-  return (
-    <div className="flex items-start justify-between gap-5 border-t border-[var(--border)] pt-3 first:border-t-0 first:pt-0">
-      <p className="shrink-0 text-xs font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-        {label}
-      </p>
-      <p className="min-w-0 break-words text-right text-sm font-bold leading-6">
-        {value}
-      </p>
-    </div>
-  );
-}
-
-function EvidenceTimelineItem({
-  label,
-  value,
-  last,
-}: {
-  label: string;
-  value: string;
-  last?: boolean;
-}) {
-  return (
-    <div className="relative grid grid-cols-[1.1rem_1fr] gap-3">
-      <div className="relative flex justify-center">
-        <span className="mt-1.5 h-2.5 w-2.5 rounded-full bg-[var(--foreground)]" />
-        {!last ? (
-          <span className="absolute top-5 h-[calc(100%+0.65rem)] w-px bg-[var(--border)]" />
-        ) : null}
-      </div>
-
-      <div className="pb-1">
-        <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-          {label}
-        </p>
-        <p className="mt-1 break-words text-[0.98rem] font-semibold leading-7 text-[var(--foreground)]">
-          {value}
-        </p>
-      </div>
-    </div>
   );
 }
 

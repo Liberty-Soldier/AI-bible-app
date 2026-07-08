@@ -26,6 +26,90 @@
       "Nehemiah 7:18"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H140",
+    "source": "hebrew",
+    "strong": "H140",
+    "lemma": "אֲדֹנִיקָם",
+    "transliteration": "ʼĂdônîyqâm",
+    "definition": "Adonikam , the name of one or two Israelites",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 2:13",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "The children of Adonikam, six hundred sixty-six."
+    },
+    "books": [
+      "Ezra",
+      "Nehemiah"
+    ],
+    "references": [
+      "Ezra 2:13",
+      "Ezra 8:13",
+      "Nehemiah 7:18"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ezra 8:13",
+        "evidenceText": "Of the sons of Adonikam, who were the last; and these are their names: Eliphelet, Jeuel, and Shemaiah; and with them sixty males."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 2:13",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Adonikam, six hundred sixty-six."
+      },
+      {
+        "reference": "Ezra 8:13",
+        "phase": "Genealogy",
+        "evidenceText": "Of the sons of Adonikam, who were the last; and these are their names: Eliphelet, Jeuel, and Shemaiah; and with them sixty males."
+      },
+      {
+        "reference": "Nehemiah 7:18",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Adonikam: six hundred sixty-seven."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ezra 2:13 and continues through Nehemiah 7:18.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 2:13",
+        "book": "Ezra",
+        "englishText": "The children of Adonikam, six hundred sixty-six."
+      },
+      {
+        "reference": "Ezra 8:13",
+        "book": "Ezra",
+        "englishText": "Of the sons of Adonikam, who were the last; and these are their names: Eliphelet, Jeuel, and Shemaiah; and with them sixty males."
+      },
+      {
+        "reference": "Nehemiah 7:18",
+        "book": "Nehemiah",
+        "englishText": "The children of Adonikam: six hundred sixty-seven."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -23,6 +23,67 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6644",
+    "source": "hebrew",
+    "strong": "H6644",
+    "lemma": "צִבְיָא",
+    "transliteration": "Tsibyâʼ",
+    "definition": "Tsibja , an Israelite",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 8:9",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "By Hodesh his wife, he became the father of Jobab, Zibia, Mesha, Malcam,"
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 8:9"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 8:9",
+        "phase": "Occurrence",
+        "evidenceText": "By Hodesh his wife, he became the father of Jobab, Zibia, Mesha, Malcam,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: 1 Chronicles 8:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 8:9",
+        "book": "1 Chronicles",
+        "englishText": "By Hodesh his wife, he became the father of Jobab, Zibia, Mesha, Malcam,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

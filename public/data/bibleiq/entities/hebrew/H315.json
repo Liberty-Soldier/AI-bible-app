@@ -23,6 +23,69 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H315",
+    "source": "hebrew",
+    "strong": "H315",
+    "lemma": "אַחְרַח",
+    "transliteration": "ʼAchrach",
+    "definition": "Achrach , an Israelite",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 8:1",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Benjamin became the father of Bela his firstborn, Ashbel the second, Aharah the third,"
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 8:1"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Chronicles 8:1",
+        "evidenceText": "Benjamin became the father of Bela his firstborn, Ashbel the second, Aharah the third,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 8:1",
+        "phase": "Birth or introduction",
+        "evidenceText": "Benjamin became the father of Bela his firstborn, Ashbel the second, Aharah the third,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: 1 Chronicles 8:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 8:1",
+        "book": "1 Chronicles",
+        "englishText": "Benjamin became the father of Bela his firstborn, Ashbel the second, Aharah the third,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

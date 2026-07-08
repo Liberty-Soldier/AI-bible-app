@@ -26,6 +26,83 @@
       "Isaiah 52:12"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2649",
+    "source": "hebrew",
+    "strong": "H2649",
+    "lemma": "חִפָּזוֹן",
+    "transliteration": "chippâzôwn",
+    "definition": "hasty flight",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 12:11",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "This is how you shall eat it: with your belt on your waist, your sandals on your feet, and your staff in your hand; and you shall eat it in haste: it is Yahweh’s Passover."
+    },
+    "books": [
+      "Exodus",
+      "Deuteronomy",
+      "Isaiah"
+    ],
+    "references": [
+      "Exodus 12:11",
+      "Deuteronomy 16:3",
+      "Isaiah 52:12"
+    ],
+    "themes": [
+      "land"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Deuteronomy 16:3",
+        "evidenceText": "You shall eat no leavened bread with it. You shall eat unleavened bread with it seven days, even the bread of affliction (for you came out of the land of Egypt in haste) that you may remember the day when you came out of the land of Egypt all the days of your life."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 12:11",
+        "phase": "Occurrence",
+        "evidenceText": "This is how you shall eat it: with your belt on your waist, your sandals on your feet, and your staff in your hand; and you shall eat it in haste: it is Yahweh’s Passover."
+      },
+      {
+        "reference": "Deuteronomy 16:3",
+        "phase": "Movement or place",
+        "evidenceText": "You shall eat no leavened bread with it. You shall eat unleavened bread with it seven days, even the bread of affliction (for you came out of the land of Egypt in haste) that you may remember the day when you came out of the land of Egypt all the days of your life."
+      },
+      {
+        "reference": "Isaiah 52:12",
+        "phase": "Occurrence",
+        "evidenceText": "For you shall not go out in haste,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 12:11 and continues through Isaiah 52:12.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 12:11",
+        "book": "Exodus",
+        "englishText": "This is how you shall eat it: with your belt on your waist, your sandals on your feet, and your staff in your hand; and you shall eat it in haste: it is Yahweh’s Passover."
+      },
+      {
+        "reference": "Deuteronomy 16:3",
+        "book": "Deuteronomy",
+        "englishText": "You shall eat no leavened bread with it. You shall eat unleavened bread with it seven days, even the bread of affliction (for you came out of the land of Egypt in haste) that you may remember the day when you came out of the land of Egypt all the days of your life."
+      },
+      {
+        "reference": "Isaiah 52:12",
+        "book": "Isaiah",
+        "englishText": "For you shall not go out in haste,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

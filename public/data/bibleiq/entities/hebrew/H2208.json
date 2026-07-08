@@ -27,6 +27,114 @@
       "Genesis 44:20"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2208",
+    "source": "hebrew",
+    "strong": "H2208",
+    "lemma": "זָקֻן",
+    "transliteration": "zâqun",
+    "definition": "old age",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 21:2",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Sarah conceived, and bore Abraham a son in his old age, at the set time of which God had spoken to him."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 21:2",
+      "Genesis 21:7",
+      "Genesis 37:3",
+      "Genesis 44:20"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 21:7",
+        "evidenceText": "She said, “Who would have said to Abraham that Sarah would nurse children? For I have borne him a son in his old age.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 21:2",
+        "phase": "Occurrence",
+        "evidenceText": "Sarah conceived, and bore Abraham a son in his old age, at the set time of which God had spoken to him."
+      },
+      {
+        "reference": "Genesis 21:7",
+        "phase": "Birth or introduction",
+        "evidenceText": "She said, “Who would have said to Abraham that Sarah would nurse children? For I have borne him a son in his old age.”"
+      },
+      {
+        "reference": "Genesis 37:3",
+        "phase": "Occurrence",
+        "evidenceText": "Now Israel loved Joseph more than all his children, because he was the son of his old age, and he made him a tunic of many colors."
+      },
+      {
+        "reference": "Genesis 44:20",
+        "phase": "Occurrence",
+        "evidenceText": "We said to my lord, ‘We have a father, an old man, and a child of his old age, a little one; and his brother is dead, and he alone is left of his mother; and his father loves him.’"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 21:2 and continues through Genesis 44:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 21:2",
+        "book": "Genesis",
+        "englishText": "Sarah conceived, and bore Abraham a son in his old age, at the set time of which God had spoken to him."
+      },
+      {
+        "reference": "Genesis 21:7",
+        "book": "Genesis",
+        "englishText": "She said, “Who would have said to Abraham that Sarah would nurse children? For I have borne him a son in his old age.”"
+      },
+      {
+        "reference": "Genesis 37:3",
+        "book": "Genesis",
+        "englishText": "Now Israel loved Joseph more than all his children, because he was the son of his old age, and he made him a tunic of many colors."
+      },
+      {
+        "reference": "Genesis 44:20",
+        "book": "Genesis",
+        "englishText": "We said to my lord, ‘We have a father, an old man, and a child of his old age, a little one; and his brother is dead, and he alone is left of his mother; and his father loves him.’"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

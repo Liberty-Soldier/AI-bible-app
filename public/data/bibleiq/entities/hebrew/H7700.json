@@ -25,6 +25,75 @@
       "Psalms 106:37"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7700",
+    "source": "hebrew",
+    "strong": "H7700",
+    "lemma": "שֵׁד",
+    "transliteration": "shêd",
+    "definition": "a dæmon (as malignant )",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 32:17",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "They sacrificed to demons, not God,"
+    },
+    "books": [
+      "Deuteronomy",
+      "Psalms"
+    ],
+    "references": [
+      "Deuteronomy 32:17",
+      "Psalms 106:37"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 32:17",
+        "phase": "Occurrence",
+        "evidenceText": "They sacrificed to demons, not God,"
+      },
+      {
+        "reference": "Psalms 106:37",
+        "phase": "Occurrence",
+        "evidenceText": "Yes, they sacrificed their sons and their daughters to demons."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 32:17 and continues through Psalms 106:37.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 32:17",
+        "book": "Deuteronomy",
+        "englishText": "They sacrificed to demons, not God,"
+      },
+      {
+        "reference": "Psalms 106:37",
+        "book": "Psalms",
+        "englishText": "Yes, they sacrificed their sons and their daughters to demons."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

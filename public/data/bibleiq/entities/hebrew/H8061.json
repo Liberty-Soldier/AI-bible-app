@@ -4,7 +4,7 @@
   "title": "שְׁמִידָע",
   "subtitle": "H8061 • Hebrew name",
   "simple": {
-    "meaning": "שְׁמִידָע (Shᵉmîydâʻ) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "שְׁמִידָע (Shᵉmîydâʻ) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, Joshua, 1 Chronicles, beginning at Numbers 26:32. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שְׁמִידָע (H8061) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שְׁמִידָע through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,93 @@
     "laterReferences": [
       "Joshua 17:2",
       "1 Chronicles 7:19"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8061",
+    "source": "hebrew",
+    "strong": "H8061",
+    "lemma": "שְׁמִידָע",
+    "transliteration": "Shᵉmîydâʻ",
+    "definition": "Shemida , an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 26:32",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "and Shemida, the family of the Shemidaites; and Hepher, the family of the Hepherites."
+    },
+    "books": [
+      "Numbers",
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 26:32",
+      "Joshua 17:2",
+      "1 Chronicles 7:19"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:19",
+        "evidenceText": "The sons of Shemida were Ahian, Shechem, Likhi, and Aniam."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 26:32",
+        "phase": "Occurrence",
+        "evidenceText": "and Shemida, the family of the Shemidaites; and Hepher, the family of the Hepherites."
+      },
+      {
+        "reference": "Joshua 17:2",
+        "phase": "Occurrence",
+        "evidenceText": "So this was for the rest of the children of Manasseh according to their families: for the children of Abiezer, for the children of Helek, for the children of Asriel, for the children of Shechem, for the children of Hepher, and for the children of Shemida. These were the male children of Manasseh the son of Joseph according to their families."
+      },
+      {
+        "reference": "1 Chronicles 7:19",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Shemida were Ahian, Shechem, Likhi, and Aniam."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 26:32 and continues through 1 Chronicles 7:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 26:32",
+        "book": "Numbers",
+        "englishText": "and Shemida, the family of the Shemidaites; and Hepher, the family of the Hepherites."
+      },
+      {
+        "reference": "Joshua 17:2",
+        "book": "Joshua",
+        "englishText": "So this was for the rest of the children of Manasseh according to their families: for the children of Abiezer, for the children of Helek, for the children of Asriel, for the children of Shechem, for the children of Hepher, and for the children of Shemida. These were the male children of Manasseh the son of Joseph according to their families."
+      },
+      {
+        "reference": "1 Chronicles 7:19",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Shemida were Ahian, Shechem, Likhi, and Aniam."
+      }
     ]
   },
   "evidence": {

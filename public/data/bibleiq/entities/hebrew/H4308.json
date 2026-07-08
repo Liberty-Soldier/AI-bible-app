@@ -4,7 +4,7 @@
   "title": "מַטְרֵד",
   "subtitle": "H4308 • Hebrew name",
   "simple": {
-    "meaning": "מַטְרֵד (Maṭrêd) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מַטְרֵד (Maṭrêd) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 36:39. BibleIQ detects the main surrounding context as family line, death, city.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מַטְרֵד (H4308) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מַטְרֵד through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,98 @@
     ],
     "laterReferences": [
       "1 Chronicles 1:50"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4308",
+    "source": "hebrew",
+    "strong": "H4308",
+    "lemma": "מַטְרֵד",
+    "transliteration": "Maṭrêd",
+    "definition": "Matred , an Edomitess",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:39",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Baal Hanan the son of Achbor died, and Hadar reigned in his place. The name of his city was Pau. His wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:39",
+      "1 Chronicles 1:50"
+    ],
+    "themes": [
+      "family line",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 36:39",
+        "evidenceText": "Baal Hanan the son of Achbor died, and Hadar reigned in his place. The name of his city was Pau. His wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "1 Chronicles 1:50",
+        "evidenceText": "Baal Hanan died, and Hadad reigned in his place; and the name of his city was Pai: and his wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:39",
+        "phase": "Movement or place",
+        "evidenceText": "Baal Hanan the son of Achbor died, and Hadar reigned in his place. The name of his city was Pau. His wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "reference": "1 Chronicles 1:50",
+        "phase": "Movement or place",
+        "evidenceText": "Baal Hanan died, and Hadad reigned in his place; and the name of his city was Pai: and his wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:39 and continues through 1 Chronicles 1:50.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:39",
+        "book": "Genesis",
+        "englishText": "Baal Hanan the son of Achbor died, and Hadar reigned in his place. The name of his city was Pau. His wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "reference": "1 Chronicles 1:50",
+        "book": "1 Chronicles",
+        "englishText": "Baal Hanan died, and Hadad reigned in his place; and the name of his city was Pai: and his wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      }
     ]
   },
   "evidence": {

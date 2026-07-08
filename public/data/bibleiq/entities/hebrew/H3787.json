@@ -4,7 +4,7 @@
   "title": "כָּשֵׁר",
   "subtitle": "H3787 • Hebrew word",
   "simple": {
-    "meaning": "כָּשֵׁר (kâshêr) appears 4 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "כָּשֵׁר (kâshêr) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Esther, Ecclesiastes, beginning at Esther 8:5. BibleIQ detects the main surrounding context as family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to כָּשֵׁר (H3787) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows כָּשֵׁר through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,95 @@
     "laterReferences": [
       "Ecclesiastes 10:10",
       "Ecclesiastes 11:6"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3787",
+    "source": "hebrew",
+    "strong": "H3787",
+    "lemma": "כָּשֵׁר",
+    "transliteration": "kâshêr",
+    "definition": "by implication, to be acceptable ; also to succeed or prosper",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Esther 8:5",
+      "book": "Esther",
+      "bookName": "Esther",
+      "englishText": "She said, “If it pleases the king, and if I have found favor in his sight, and the thing seem right to the king, and I am pleasing in his eyes, let it be written to reverse the letters devised by Haman, the son of Hammedatha the Agagite, which he wrote to destroy the Jews who are in all the king’s provinces."
+    },
+    "books": [
+      "Esther",
+      "Ecclesiastes"
+    ],
+    "references": [
+      "Esther 8:5",
+      "Ecclesiastes 10:10",
+      "Ecclesiastes 11:6"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Esther 8:5",
+        "phase": "Occurrence",
+        "evidenceText": "She said, “If it pleases the king, and if I have found favor in his sight, and the thing seem right to the king, and I am pleasing in his eyes, let it be written to reverse the letters devised by Haman, the son of Hammedatha the Agagite, which he wrote to destroy the Jews who are in all the king’s provinces."
+      },
+      {
+        "reference": "Ecclesiastes 10:10",
+        "phase": "Occurrence",
+        "evidenceText": "If the ax is blunt, and one doesn’t sharpen the edge, then he must use more strength; but skill brings success."
+      },
+      {
+        "reference": "Ecclesiastes 10:10",
+        "phase": "Occurrence",
+        "evidenceText": "If the ax is blunt, and one doesn’t sharpen the edge, then he must use more strength; but skill brings success."
+      },
+      {
+        "reference": "Ecclesiastes 11:6",
+        "phase": "Occurrence",
+        "evidenceText": "In the morning sow your seed,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Esther 8:5 and continues through Ecclesiastes 11:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "Esther 8:5",
+        "book": "Esther",
+        "englishText": "She said, “If it pleases the king, and if I have found favor in his sight, and the thing seem right to the king, and I am pleasing in his eyes, let it be written to reverse the letters devised by Haman, the son of Hammedatha the Agagite, which he wrote to destroy the Jews who are in all the king’s provinces."
+      },
+      {
+        "reference": "Ecclesiastes 10:10",
+        "book": "Ecclesiastes",
+        "englishText": "If the ax is blunt, and one doesn’t sharpen the edge, then he must use more strength; but skill brings success."
+      },
+      {
+        "reference": "Ecclesiastes 10:10",
+        "book": "Ecclesiastes",
+        "englishText": "If the ax is blunt, and one doesn’t sharpen the edge, then he must use more strength; but skill brings success."
+      },
+      {
+        "reference": "Ecclesiastes 11:6",
+        "book": "Ecclesiastes",
+        "englishText": "In the morning sow your seed,"
+      }
     ]
   },
   "evidence": {

@@ -4,7 +4,7 @@
   "title": "שָׂכָר",
   "subtitle": "H7940 • Hebrew name",
   "simple": {
-    "meaning": "שָׂכָר (Sâkâr) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "שָׂכָר (Sâkâr) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 11:35. BibleIQ detects the main surrounding context as birth, family line, firstborn.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שָׂכָר (H7940) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שָׂכָר through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,80 @@
     ],
     "laterReferences": [
       "1 Chronicles 26:4"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7940",
+    "source": "hebrew",
+    "strong": "H7940",
+    "lemma": "שָׂכָר",
+    "transliteration": "Sâkâr",
+    "definition": "Sakar , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 11:35",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Ahiam the son of Sacar the Hararite, Eliphal the son of Ur,"
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 11:35",
+      "1 Chronicles 26:4"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Chronicles 26:4",
+        "evidenceText": "Obed-Edom had sons: Shemaiah the firstborn, Jehozabad the second, Joah the third, Sacar the fourth, Nethanel the fifth,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 11:35",
+        "phase": "Occurrence",
+        "evidenceText": "Ahiam the son of Sacar the Hararite, Eliphal the son of Ur,"
+      },
+      {
+        "reference": "1 Chronicles 26:4",
+        "phase": "Birth or introduction",
+        "evidenceText": "Obed-Edom had sons: Shemaiah the firstborn, Jehozabad the second, Joah the third, Sacar the fourth, Nethanel the fifth,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 11:35 and continues through 1 Chronicles 26:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 11:35",
+        "book": "1 Chronicles",
+        "englishText": "Ahiam the son of Sacar the Hararite, Eliphal the son of Ur,"
+      },
+      {
+        "reference": "1 Chronicles 26:4",
+        "book": "1 Chronicles",
+        "englishText": "Obed-Edom had sons: Shemaiah the firstborn, Jehozabad the second, Joah the third, Sacar the fourth, Nethanel the fifth,"
+      }
     ]
   },
   "evidence": {

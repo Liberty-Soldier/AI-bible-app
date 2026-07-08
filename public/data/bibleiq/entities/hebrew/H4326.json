@@ -4,7 +4,7 @@
   "title": "מִיָּמִן",
   "subtitle": "H4326 • Hebrew name",
   "simple": {
-    "meaning": "מִיָּמִן (Mîyâmin) appears 4 times in the Hebrew Scriptures and is introduced in connection with priesthood.",
+    "meaning": "מִיָּמִן (Mîyâmin) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with priesthood.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Ezra, Nehemiah, beginning at 1 Chronicles 24:9. BibleIQ detects the main surrounding context as family line, priesthood, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מִיָּמִן (H4326) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מִיָּמִן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,105 @@
       "Ezra 10:25",
       "Nehemiah 10:8",
       "Nehemiah 12:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4326",
+    "source": "hebrew",
+    "strong": "H4326",
+    "lemma": "מִיָּמִן",
+    "transliteration": "Mîyâmin",
+    "definition": "Mijamin , the name of three Israelites",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 24:9",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "the fifth to Malchijah, the sixth to Mijamin,"
+    },
+    "books": [
+      "1 Chronicles",
+      "Ezra",
+      "Nehemiah"
+    ],
+    "references": [
+      "1 Chronicles 24:9",
+      "Ezra 10:25",
+      "Nehemiah 10:8",
+      "Nehemiah 12:5"
+    ],
+    "themes": [
+      "family line",
+      "priesthood"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ezra 10:25",
+        "evidenceText": "Of Israel: Of the sons of Parosh: Ramiah, and Izziah, and Malchijah, and Mijamin, and Eleazar, and Malchijah, and Benaiah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 24:9",
+        "phase": "Occurrence",
+        "evidenceText": "the fifth to Malchijah, the sixth to Mijamin,"
+      },
+      {
+        "reference": "Ezra 10:25",
+        "phase": "Genealogy",
+        "evidenceText": "Of Israel: Of the sons of Parosh: Ramiah, and Izziah, and Malchijah, and Mijamin, and Eleazar, and Malchijah, and Benaiah."
+      },
+      {
+        "reference": "Nehemiah 10:8",
+        "phase": "Occurrence",
+        "evidenceText": "Maaziah, Bilgai, and Shemaiah. These were the priests."
+      },
+      {
+        "reference": "Nehemiah 12:5",
+        "phase": "Occurrence",
+        "evidenceText": "Mijamin, Maadiah, Bilgah,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 24:9 and continues through Nehemiah 12:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 24:9",
+        "book": "1 Chronicles",
+        "englishText": "the fifth to Malchijah, the sixth to Mijamin,"
+      },
+      {
+        "reference": "Ezra 10:25",
+        "book": "Ezra",
+        "englishText": "Of Israel: Of the sons of Parosh: Ramiah, and Izziah, and Malchijah, and Mijamin, and Eleazar, and Malchijah, and Benaiah."
+      },
+      {
+        "reference": "Nehemiah 10:8",
+        "book": "Nehemiah",
+        "englishText": "Maaziah, Bilgai, and Shemaiah. These were the priests."
+      },
+      {
+        "reference": "Nehemiah 12:5",
+        "book": "Nehemiah",
+        "englishText": "Mijamin, Maadiah, Bilgah,"
+      }
     ]
   },
   "evidence": {

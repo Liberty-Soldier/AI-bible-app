@@ -26,6 +26,84 @@
       "Jeremiah 48:21"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2473",
+    "source": "hebrew",
+    "strong": "H2473",
+    "lemma": "חֹלוֹן",
+    "transliteration": "Chôlôwn",
+    "definition": "Cholon , the name of two places in Palestine",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 15:51",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "Goshen, Holon, and Giloh; eleven cities with their villages."
+    },
+    "books": [
+      "Joshua",
+      "Jeremiah"
+    ],
+    "references": [
+      "Joshua 15:51",
+      "Joshua 21:15",
+      "Jeremiah 48:21"
+    ],
+    "themes": [
+      "land"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 21:15",
+        "evidenceText": "Holon with its pasture lands, Debir with its pasture lands,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 15:51",
+        "phase": "Occurrence",
+        "evidenceText": "Goshen, Holon, and Giloh; eleven cities with their villages."
+      },
+      {
+        "reference": "Joshua 21:15",
+        "phase": "Movement or place",
+        "evidenceText": "Holon with its pasture lands, Debir with its pasture lands,"
+      },
+      {
+        "reference": "Jeremiah 48:21",
+        "phase": "Occurrence",
+        "evidenceText": "Judgment has come on the plain country,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 15:51 and continues through Jeremiah 48:21.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 15:51",
+        "book": "Joshua",
+        "englishText": "Goshen, Holon, and Giloh; eleven cities with their villages."
+      },
+      {
+        "reference": "Joshua 21:15",
+        "book": "Joshua",
+        "englishText": "Holon with its pasture lands, Debir with its pasture lands,"
+      },
+      {
+        "reference": "Jeremiah 48:21",
+        "book": "Jeremiah",
+        "englishText": "Judgment has come on the plain country,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

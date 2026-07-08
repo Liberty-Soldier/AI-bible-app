@@ -25,6 +25,84 @@
       "1 Chronicles 12:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6404",
+    "source": "hebrew",
+    "strong": "H6404",
+    "lemma": "פֶּלֶט",
+    "transliteration": "Peleṭ",
+    "definition": "Pelet , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:47",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Jahdai: Regem, Jothan, Geshan, Pelet, Ephah, and Shaaph."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:47",
+      "1 Chronicles 12:3"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:47",
+        "evidenceText": "The sons of Jahdai: Regem, Jothan, Geshan, Pelet, Ephah, and Shaaph."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 12:3",
+        "evidenceText": "The chief was Ahiezer, then Joash, the sons of Shemaah the Gibeathite; Jeziel and Pelet, the sons of Azmaveth; Beracah; Jehu the Anathothite;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:47",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Jahdai: Regem, Jothan, Geshan, Pelet, Ephah, and Shaaph."
+      },
+      {
+        "reference": "1 Chronicles 12:3",
+        "phase": "Genealogy",
+        "evidenceText": "The chief was Ahiezer, then Joash, the sons of Shemaah the Gibeathite; Jeziel and Pelet, the sons of Azmaveth; Beracah; Jehu the Anathothite;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:47 and continues through 1 Chronicles 12:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:47",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Jahdai: Regem, Jothan, Geshan, Pelet, Ephah, and Shaaph."
+      },
+      {
+        "reference": "1 Chronicles 12:3",
+        "book": "1 Chronicles",
+        "englishText": "The chief was Ahiezer, then Joash, the sons of Shemaah the Gibeathite; Jeziel and Pelet, the sons of Azmaveth; Beracah; Jehu the Anathothite;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -26,6 +26,91 @@
       "Isaiah 24:11"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6150",
+    "source": "hebrew",
+    "strong": "H6150",
+    "lemma": "עָרַב",
+    "transliteration": "ʻârab",
+    "definition": "to grow dusky at sundown",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Judges 19:9",
+      "book": "Judges",
+      "bookName": "Judges",
+      "englishText": "When the man rose up to depart, he, and his concubine, and his servant, his father-in-law, the young lady’s father, said to him, “Behold, now the day draws toward evening, please stay all night. Behold, the day is ending. Stay here, that your heart may be merry; and tomorrow go on your way early, that you may go home.”"
+    },
+    "books": [
+      "Judges",
+      "1 Samuel",
+      "Isaiah"
+    ],
+    "references": [
+      "Judges 19:9",
+      "1 Samuel 17:16",
+      "Isaiah 24:11"
+    ],
+    "themes": [
+      "family",
+      "land",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Isaiah 24:11",
+        "evidenceText": "There is a crying in the streets because of the wine. All joy is darkened. The mirth of the land is gone."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Judges 19:9",
+        "phase": "Occurrence",
+        "evidenceText": "When the man rose up to depart, he, and his concubine, and his servant, his father-in-law, the young lady’s father, said to him, “Behold, now the day draws toward evening, please stay all night. Behold, the day is ending. Stay here, that your heart may be merry; and tomorrow go on your way early, that you may go home.”"
+      },
+      {
+        "reference": "1 Samuel 17:16",
+        "phase": "Occurrence",
+        "evidenceText": "The Philistine came near morning and evening, and presented himself forty days."
+      },
+      {
+        "reference": "Isaiah 24:11",
+        "phase": "Blood witness",
+        "evidenceText": "There is a crying in the streets because of the wine. All joy is darkened. The mirth of the land is gone."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Judges 19:9 and continues through Isaiah 24:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "Judges 19:9",
+        "book": "Judges",
+        "englishText": "When the man rose up to depart, he, and his concubine, and his servant, his father-in-law, the young lady’s father, said to him, “Behold, now the day draws toward evening, please stay all night. Behold, the day is ending. Stay here, that your heart may be merry; and tomorrow go on your way early, that you may go home.”"
+      },
+      {
+        "reference": "1 Samuel 17:16",
+        "book": "1 Samuel",
+        "englishText": "The Philistine came near morning and evening, and presented himself forty days."
+      },
+      {
+        "reference": "Isaiah 24:11",
+        "book": "Isaiah",
+        "englishText": "There is a crying in the streets because of the wine. All joy is darkened. The mirth of the land is gone."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

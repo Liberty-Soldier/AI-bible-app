@@ -27,6 +27,107 @@
       "2 Samuel 21:19"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1022",
+    "source": "hebrew",
+    "strong": "H1022",
+    "lemma": "בֵּית הַלַּחְמִי",
+    "transliteration": "Bêyth hal-Lachmîy",
+    "definition": "a Beth-lechemite , or native of Bethlechem",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 16:1",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "Yahweh said to Samuel, “How long will you mourn for Saul, since I have rejected him from being king over Israel? Fill your horn with oil, and go. I will send you to Jesse the Bethlehemite; for I have provided a king for myself among his sons.”"
+    },
+    "books": [
+      "1 Samuel",
+      "2 Samuel"
+    ],
+    "references": [
+      "1 Samuel 16:1",
+      "1 Samuel 16:18",
+      "1 Samuel 17:58",
+      "2 Samuel 21:19"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship",
+      "death"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "2 Samuel 21:19",
+        "evidenceText": "There was again war with the Philistines at Gob; and Elhanan the son of Jaare-Oregim the Bethlehemite killed Goliath the Gittite’s brother, the staff of whose spear was like a weaver’s beam."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Samuel 16:1",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh said to Samuel, “How long will you mourn for Saul, since I have rejected him from being king over Israel? Fill your horn with oil, and go. I will send you to Jesse the Bethlehemite; for I have provided a king for myself among his sons.”"
+      },
+      {
+        "reference": "1 Samuel 16:18",
+        "phase": "Occurrence",
+        "evidenceText": "Then one of the young men answered, and said, “Behold, I have seen a son of Jesse the Bethlehemite who is skillful in playing, a mighty man of valor, a man of war, prudent in speech, and a handsome person; and Yahweh is with him.”"
+      },
+      {
+        "reference": "1 Samuel 17:58",
+        "phase": "Occurrence",
+        "evidenceText": "Saul said to him, “Whose son are you, you young man?”"
+      },
+      {
+        "reference": "2 Samuel 21:19",
+        "phase": "Death",
+        "evidenceText": "There was again war with the Philistines at Gob; and Elhanan the son of Jaare-Oregim the Bethlehemite killed Goliath the Gittite’s brother, the staff of whose spear was like a weaver’s beam."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 16:1 and continues through 2 Samuel 21:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 16:1",
+        "book": "1 Samuel",
+        "englishText": "Yahweh said to Samuel, “How long will you mourn for Saul, since I have rejected him from being king over Israel? Fill your horn with oil, and go. I will send you to Jesse the Bethlehemite; for I have provided a king for myself among his sons.”"
+      },
+      {
+        "reference": "1 Samuel 16:18",
+        "book": "1 Samuel",
+        "englishText": "Then one of the young men answered, and said, “Behold, I have seen a son of Jesse the Bethlehemite who is skillful in playing, a mighty man of valor, a man of war, prudent in speech, and a handsome person; and Yahweh is with him.”"
+      },
+      {
+        "reference": "1 Samuel 17:58",
+        "book": "1 Samuel",
+        "englishText": "Saul said to him, “Whose son are you, you young man?”"
+      },
+      {
+        "reference": "2 Samuel 21:19",
+        "book": "2 Samuel",
+        "englishText": "There was again war with the Philistines at Gob; and Elhanan the son of Jaare-Oregim the Bethlehemite killed Goliath the Gittite’s brother, the staff of whose spear was like a weaver’s beam."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

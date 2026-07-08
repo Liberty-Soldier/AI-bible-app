@@ -25,6 +25,79 @@
       "1 Chronicles 1:40"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8195",
+    "source": "hebrew",
+    "strong": "H8195",
+    "lemma": "שְׁפוֹ",
+    "transliteration": "Shᵉphôw",
+    "definition": "Shepho or Shephi , an Idumaean",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:23",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "These are the children of Shobal: Alvan, Manahath, Ebal, Shepho, and Onam."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:23",
+      "1 Chronicles 1:40"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:40",
+        "evidenceText": "The sons of Shobal: Alian, Manahath, Ebal, Shephi, and Onam. The sons of Zibeon: Aiah and Anah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:23",
+        "phase": "Occurrence",
+        "evidenceText": "These are the children of Shobal: Alvan, Manahath, Ebal, Shepho, and Onam."
+      },
+      {
+        "reference": "1 Chronicles 1:40",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Shobal: Alian, Manahath, Ebal, Shephi, and Onam. The sons of Zibeon: Aiah and Anah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:23 and continues through 1 Chronicles 1:40.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:23",
+        "book": "Genesis",
+        "englishText": "These are the children of Shobal: Alvan, Manahath, Ebal, Shepho, and Onam."
+      },
+      {
+        "reference": "1 Chronicles 1:40",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Shobal: Alian, Manahath, Ebal, Shephi, and Onam. The sons of Zibeon: Aiah and Anah."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "שִׁטִּים",
   "subtitle": "H7851 • Hebrew name",
   "simple": {
-    "meaning": "שִׁטִּים (Shiṭṭîym) appears 5 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "שִׁטִּים (Shiṭṭîym) appears 5 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Numbers, Joshua, Joel, Micah, beginning at Numbers 25:1. BibleIQ detects the main surrounding context as family line, kingship, land, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שִׁטִּים (H7851) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שִׁטִּים through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,123 @@
       "Joshua 3:1",
       "Joel 4:18",
       "Micah 6:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7851",
+    "source": "hebrew",
+    "strong": "H7851",
+    "lemma": "שִׁטִּים",
+    "transliteration": "Shiṭṭîym",
+    "definition": "Shittim , a place East of the Jordan",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 25:1",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Israel stayed in Shittim; and the people began to play the prostitute with the daughters of Moab;"
+    },
+    "books": [
+      "Numbers",
+      "Joshua",
+      "Joel",
+      "Micah"
+    ],
+    "references": [
+      "Numbers 25:1",
+      "Joshua 2:1",
+      "Joshua 3:1",
+      "Joel 4:18",
+      "Micah 6:5"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 2:1",
+        "evidenceText": "Joshua the son of Nun secretly sent two men out of Shittim as spies, saying, “Go, view the land, including Jericho.” They went and came into the house of a prostitute whose name was Rahab, and slept there."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 25:1",
+        "phase": "Occurrence",
+        "evidenceText": "Israel stayed in Shittim; and the people began to play the prostitute with the daughters of Moab;"
+      },
+      {
+        "reference": "Joshua 2:1",
+        "phase": "Movement or place",
+        "evidenceText": "Joshua the son of Nun secretly sent two men out of Shittim as spies, saying, “Go, view the land, including Jericho.” They went and came into the house of a prostitute whose name was Rahab, and slept there."
+      },
+      {
+        "reference": "Joshua 3:1",
+        "phase": "Occurrence",
+        "evidenceText": "Joshua got up early in the morning; and they moved from Shittim and came to the Jordan, he and all the children of Israel. They camped there before they crossed over."
+      },
+      {
+        "reference": "Joel 4:18",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "Micah 6:5",
+        "phase": "Occurrence",
+        "evidenceText": "My people, remember now what Balak king of Moab devised,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 25:1 and continues through Micah 6:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 25:1",
+        "book": "Numbers",
+        "englishText": "Israel stayed in Shittim; and the people began to play the prostitute with the daughters of Moab;"
+      },
+      {
+        "reference": "Joshua 2:1",
+        "book": "Joshua",
+        "englishText": "Joshua the son of Nun secretly sent two men out of Shittim as spies, saying, “Go, view the land, including Jericho.” They went and came into the house of a prostitute whose name was Rahab, and slept there."
+      },
+      {
+        "reference": "Joshua 3:1",
+        "book": "Joshua",
+        "englishText": "Joshua got up early in the morning; and they moved from Shittim and came to the Jordan, he and all the children of Israel. They camped there before they crossed over."
+      },
+      {
+        "reference": "Joel 4:18",
+        "book": "Joel",
+        "englishText": ""
+      },
+      {
+        "reference": "Micah 6:5",
+        "book": "Micah",
+        "englishText": "My people, remember now what Balak king of Moab devised,"
+      }
     ]
   },
   "evidence": {

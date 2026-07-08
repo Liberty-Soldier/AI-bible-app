@@ -26,6 +26,81 @@
       "Ecclesiastes 12:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H979",
+    "source": "hebrew",
+    "strong": "H979",
+    "lemma": "בְּחֻרוֹת",
+    "transliteration": "bᵉchurôwth",
+    "definition": "youth (collectively and abstractly)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 11:28",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Joshua the son of Nun, the servant of Moses, one of his chosen men, answered, “My lord Moses, forbid them!”"
+    },
+    "books": [
+      "Numbers",
+      "Ecclesiastes"
+    ],
+    "references": [
+      "Numbers 11:28",
+      "Ecclesiastes 11:9",
+      "Ecclesiastes 12:1"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Numbers 11:28",
+        "phase": "Occurrence",
+        "evidenceText": "Joshua the son of Nun, the servant of Moses, one of his chosen men, answered, “My lord Moses, forbid them!”"
+      },
+      {
+        "reference": "Ecclesiastes 11:9",
+        "phase": "Occurrence",
+        "evidenceText": "Rejoice, young man, in your youth,"
+      },
+      {
+        "reference": "Ecclesiastes 12:1",
+        "phase": "Occurrence",
+        "evidenceText": "Remember also your Creator in the days of your youth,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 11:28 and continues through Ecclesiastes 12:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 11:28",
+        "book": "Numbers",
+        "englishText": "Joshua the son of Nun, the servant of Moses, one of his chosen men, answered, “My lord Moses, forbid them!”"
+      },
+      {
+        "reference": "Ecclesiastes 11:9",
+        "book": "Ecclesiastes",
+        "englishText": "Rejoice, young man, in your youth,"
+      },
+      {
+        "reference": "Ecclesiastes 12:1",
+        "book": "Ecclesiastes",
+        "englishText": "Remember also your Creator in the days of your youth,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

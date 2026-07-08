@@ -26,6 +26,90 @@
       "Genesis 25:11"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H883",
+    "source": "hebrew",
+    "strong": "H883",
+    "lemma": "בְּאֵר לַחַי רֹאִי",
+    "transliteration": "Bᵉʼêr la-Chay Rôʼîy",
+    "definition": "Beer-Lachai-Roi , a place in the Desert",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 16:14",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Therefore the well was called Beer Lahai Roi.* Beer Lahai Roi means “well of the one who lives and sees me”. Behold, it is between Kadesh and Bered."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 16:14",
+      "Genesis 24:62",
+      "Genesis 25:11"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 24:62",
+        "evidenceText": "Isaac came from the way of Beer Lahai Roi, for he lived in the land of the South."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 16:14",
+        "phase": "Occurrence",
+        "evidenceText": "Therefore the well was called Beer Lahai Roi.* Beer Lahai Roi means “well of the one who lives and sees me”. Behold, it is between Kadesh and Bered."
+      },
+      {
+        "reference": "Genesis 24:62",
+        "phase": "Movement or place",
+        "evidenceText": "Isaac came from the way of Beer Lahai Roi, for he lived in the land of the South."
+      },
+      {
+        "reference": "Genesis 25:11",
+        "phase": "Occurrence",
+        "evidenceText": "After the death of Abraham, God blessed Isaac, his son. Isaac lived by Beer Lahai Roi."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 16:14 and continues through Genesis 25:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 16:14",
+        "book": "Genesis",
+        "englishText": "Therefore the well was called Beer Lahai Roi.* Beer Lahai Roi means “well of the one who lives and sees me”. Behold, it is between Kadesh and Bered."
+      },
+      {
+        "reference": "Genesis 24:62",
+        "book": "Genesis",
+        "englishText": "Isaac came from the way of Beer Lahai Roi, for he lived in the land of the South."
+      },
+      {
+        "reference": "Genesis 25:11",
+        "book": "Genesis",
+        "englishText": "After the death of Abraham, God blessed Isaac, his son. Isaac lived by Beer Lahai Roi."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

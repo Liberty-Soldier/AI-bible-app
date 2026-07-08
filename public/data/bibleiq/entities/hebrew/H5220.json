@@ -26,6 +26,90 @@
       "Isaiah 14:22"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5220",
+    "source": "hebrew",
+    "strong": "H5220",
+    "lemma": "נֶכֶד",
+    "transliteration": "neked",
+    "definition": "offspring",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 21:23",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Now, therefore, swear to me here by God that you will not deal falsely with me, nor with my son, nor with my son’s son. But according to the kindness that I have done to you, you shall do to me, and to the land in which you have lived as a foreigner.”"
+    },
+    "books": [
+      "Genesis",
+      "Job",
+      "Isaiah"
+    ],
+    "references": [
+      "Genesis 21:23",
+      "Job 18:19",
+      "Isaiah 14:22"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 21:23",
+        "evidenceText": "Now, therefore, swear to me here by God that you will not deal falsely with me, nor with my son, nor with my son’s son. But according to the kindness that I have done to you, you shall do to me, and to the land in which you have lived as a foreigner.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 21:23",
+        "phase": "Movement or place",
+        "evidenceText": "Now, therefore, swear to me here by God that you will not deal falsely with me, nor with my son, nor with my son’s son. But according to the kindness that I have done to you, you shall do to me, and to the land in which you have lived as a foreigner.”"
+      },
+      {
+        "reference": "Job 18:19",
+        "phase": "Occurrence",
+        "evidenceText": "He will have neither son nor grandson among his people,"
+      },
+      {
+        "reference": "Isaiah 14:22",
+        "phase": "Occurrence",
+        "evidenceText": "“I will rise up against them,” says Yahweh of Armies, “and cut off from Babylon name and remnant, and son and son’s son,” says Yahweh."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 21:23 and continues through Isaiah 14:22.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 21:23",
+        "book": "Genesis",
+        "englishText": "Now, therefore, swear to me here by God that you will not deal falsely with me, nor with my son, nor with my son’s son. But according to the kindness that I have done to you, you shall do to me, and to the land in which you have lived as a foreigner.”"
+      },
+      {
+        "reference": "Job 18:19",
+        "book": "Job",
+        "englishText": "He will have neither son nor grandson among his people,"
+      },
+      {
+        "reference": "Isaiah 14:22",
+        "book": "Isaiah",
+        "englishText": "“I will rise up against them,” says Yahweh of Armies, “and cut off from Babylon name and remnant, and son and son’s son,” says Yahweh."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -26,6 +26,90 @@
       "2 Kings 9:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6378",
+    "source": "hebrew",
+    "strong": "H6378",
+    "lemma": "פַּךְ",
+    "transliteration": "pak",
+    "definition": "a flask (from which a liquid may flow)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "animal",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 10:1",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "Then Samuel took the vial of oil, and poured it on his head, and kissed him, and said, “Hasn’t Yahweh anointed you to be prince over his inheritance?"
+    },
+    "books": [
+      "1 Samuel",
+      "2 Kings"
+    ],
+    "references": [
+      "1 Samuel 10:1",
+      "2 Kings 9:1",
+      "2 Kings 9:3"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "prophetic witness"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Kings 9:1",
+        "evidenceText": "Elisha the prophet called one of the sons of the prophets, and said to him, “Put your belt on your waist, take this vial of oil in your hand, and go to Ramoth Gilead."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Samuel 10:1",
+        "phase": "Occurrence",
+        "evidenceText": "Then Samuel took the vial of oil, and poured it on his head, and kissed him, and said, “Hasn’t Yahweh anointed you to be prince over his inheritance?"
+      },
+      {
+        "reference": "2 Kings 9:1",
+        "phase": "Genealogy",
+        "evidenceText": "Elisha the prophet called one of the sons of the prophets, and said to him, “Put your belt on your waist, take this vial of oil in your hand, and go to Ramoth Gilead."
+      },
+      {
+        "reference": "2 Kings 9:3",
+        "phase": "Occurrence",
+        "evidenceText": "Then take the vial of oil, and pour it on his head, and say, ‘Yahweh says, “I have anointed you king over Israel.” ’ Then open the door, flee, and don’t wait.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 10:1 and continues through 2 Kings 9:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 10:1",
+        "book": "1 Samuel",
+        "englishText": "Then Samuel took the vial of oil, and poured it on his head, and kissed him, and said, “Hasn’t Yahweh anointed you to be prince over his inheritance?"
+      },
+      {
+        "reference": "2 Kings 9:1",
+        "book": "2 Kings",
+        "englishText": "Elisha the prophet called one of the sons of the prophets, and said to him, “Put your belt on your waist, take this vial of oil in your hand, and go to Ramoth Gilead."
+      },
+      {
+        "reference": "2 Kings 9:3",
+        "book": "2 Kings",
+        "englishText": "Then take the vial of oil, and pour it on his head, and say, ‘Yahweh says, “I have anointed you king over Israel.” ’ Then open the door, flee, and don’t wait.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

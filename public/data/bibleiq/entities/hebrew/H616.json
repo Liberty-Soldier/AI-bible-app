@@ -27,6 +27,92 @@
       "Isaiah 42:7"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H616",
+    "source": "hebrew",
+    "strong": "H616",
+    "lemma": "אַסִּיר",
+    "transliteration": "ʼaççîyr",
+    "definition": "prisoner",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "name",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Psalms 79:11",
+      "book": "Psalms",
+      "bookName": "Psalms",
+      "englishText": "Let the sighing of the prisoner come before you."
+    },
+    "books": [
+      "Psalms",
+      "Isaiah"
+    ],
+    "references": [
+      "Psalms 79:11",
+      "Isaiah 10:4",
+      "Isaiah 24:22",
+      "Isaiah 42:7"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Psalms 79:11",
+        "phase": "Occurrence",
+        "evidenceText": "Let the sighing of the prisoner come before you."
+      },
+      {
+        "reference": "Isaiah 10:4",
+        "phase": "Occurrence",
+        "evidenceText": "They will only bow down under the prisoners,"
+      },
+      {
+        "reference": "Isaiah 24:22",
+        "phase": "Occurrence",
+        "evidenceText": "They will be gathered together, as prisoners are gathered in the pit, and will be shut up in the prison; and after many days they will be visited."
+      },
+      {
+        "reference": "Isaiah 42:7",
+        "phase": "Occurrence",
+        "evidenceText": "to open the blind eyes,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Psalms 79:11 and continues through Isaiah 42:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Psalms 79:11",
+        "book": "Psalms",
+        "englishText": "Let the sighing of the prisoner come before you."
+      },
+      {
+        "reference": "Isaiah 10:4",
+        "book": "Isaiah",
+        "englishText": "They will only bow down under the prisoners,"
+      },
+      {
+        "reference": "Isaiah 24:22",
+        "book": "Isaiah",
+        "englishText": "They will be gathered together, as prisoners are gathered in the pit, and will be shut up in the prison; and after many days they will be visited."
+      },
+      {
+        "reference": "Isaiah 42:7",
+        "book": "Isaiah",
+        "englishText": "to open the blind eyes,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

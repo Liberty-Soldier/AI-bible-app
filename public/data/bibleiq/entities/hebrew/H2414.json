@@ -25,6 +25,93 @@
       "Psalms 10:9"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2414",
+    "source": "hebrew",
+    "strong": "H2414",
+    "lemma": "חָטַף",
+    "transliteration": "châṭaph",
+    "definition": "to clutch ; hence, to seize as a prisoner",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Judges 21:21",
+      "book": "Judges",
+      "bookName": "Judges",
+      "englishText": "and see, and behold, if the daughters of Shiloh come out to dance in the dances, then come out of the vineyards, and each man catch his wife of the daughters of Shiloh, and go to the land of Benjamin."
+    },
+    "books": [
+      "Judges",
+      "Psalms"
+    ],
+    "references": [
+      "Judges 21:21",
+      "Psalms 10:9"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Judges 21:21",
+        "evidenceText": "and see, and behold, if the daughters of Shiloh come out to dance in the dances, then come out of the vineyards, and each man catch his wife of the daughters of Shiloh, and go to the land of Benjamin."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Judges 21:21",
+        "phase": "Movement or place",
+        "evidenceText": "and see, and behold, if the daughters of Shiloh come out to dance in the dances, then come out of the vineyards, and each man catch his wife of the daughters of Shiloh, and go to the land of Benjamin."
+      },
+      {
+        "reference": "Psalms 10:9",
+        "phase": "Occurrence",
+        "evidenceText": "He lurks in secret as a lion in his ambush."
+      },
+      {
+        "reference": "Psalms 10:9",
+        "phase": "Occurrence",
+        "evidenceText": "He lurks in secret as a lion in his ambush."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Judges 21:21 and continues through Psalms 10:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "Judges 21:21",
+        "book": "Judges",
+        "englishText": "and see, and behold, if the daughters of Shiloh come out to dance in the dances, then come out of the vineyards, and each man catch his wife of the daughters of Shiloh, and go to the land of Benjamin."
+      },
+      {
+        "reference": "Psalms 10:9",
+        "book": "Psalms",
+        "englishText": "He lurks in secret as a lion in his ambush."
+      },
+      {
+        "reference": "Psalms 10:9",
+        "book": "Psalms",
+        "englishText": "He lurks in secret as a lion in his ambush."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -26,6 +26,81 @@
       "Proverbs 10:5"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H103",
+    "source": "hebrew",
+    "strong": "H103",
+    "lemma": "אָגַר",
+    "transliteration": "ʼâgar",
+    "definition": "to harvest",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 28:39",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "You will plant vineyards and dress them, but you will neither drink of the wine, nor harvest, because worms will eat them."
+    },
+    "books": [
+      "Deuteronomy",
+      "Proverbs"
+    ],
+    "references": [
+      "Deuteronomy 28:39",
+      "Proverbs 6:8",
+      "Proverbs 10:5"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 28:39",
+        "phase": "Occurrence",
+        "evidenceText": "You will plant vineyards and dress them, but you will neither drink of the wine, nor harvest, because worms will eat them."
+      },
+      {
+        "reference": "Proverbs 6:8",
+        "phase": "Occurrence",
+        "evidenceText": "provides her bread in the summer,"
+      },
+      {
+        "reference": "Proverbs 10:5",
+        "phase": "Occurrence",
+        "evidenceText": "He who gathers in summer is a wise son,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 28:39 and continues through Proverbs 10:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 28:39",
+        "book": "Deuteronomy",
+        "englishText": "You will plant vineyards and dress them, but you will neither drink of the wine, nor harvest, because worms will eat them."
+      },
+      {
+        "reference": "Proverbs 6:8",
+        "book": "Proverbs",
+        "englishText": "provides her bread in the summer,"
+      },
+      {
+        "reference": "Proverbs 10:5",
+        "book": "Proverbs",
+        "englishText": "He who gathers in summer is a wise son,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

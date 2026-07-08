@@ -23,6 +23,70 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2065",
+    "source": "hebrew",
+    "strong": "H2065",
+    "lemma": "זֶבֶד",
+    "transliteration": "zebed",
+    "definition": "a gift",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 30:20",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Leah said, “God has endowed me with a good dowry. Now my husband will live with me, because I have borne him six sons.” She named him Zebulun."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 30:20"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 30:20",
+        "evidenceText": "Leah said, “God has endowed me with a good dowry. Now my husband will live with me, because I have borne him six sons.” She named him Zebulun."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 30:20",
+        "phase": "Birth or introduction",
+        "evidenceText": "Leah said, “God has endowed me with a good dowry. Now my husband will live with me, because I have borne him six sons.” She named him Zebulun."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Genesis 30:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 30:20",
+        "book": "Genesis",
+        "englishText": "Leah said, “God has endowed me with a good dowry. Now my husband will live with me, because I have borne him six sons.” She named him Zebulun."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -25,6 +25,74 @@
       "1 Chronicles 1:20"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8026",
+    "source": "hebrew",
+    "strong": "H8026",
+    "lemma": "שֶׁלֶף",
+    "transliteration": "sheleph",
+    "definition": "Sheleph , a son of Jokthan",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:26",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Joktan became the father of Almodad, Sheleph, Hazarmaveth, Jerah,"
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 10:26",
+      "1 Chronicles 1:20"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 10:26",
+        "phase": "Occurrence",
+        "evidenceText": "Joktan became the father of Almodad, Sheleph, Hazarmaveth, Jerah,"
+      },
+      {
+        "reference": "1 Chronicles 1:20",
+        "phase": "Occurrence",
+        "evidenceText": "Joktan became the father of Almodad, Sheleph, Hazarmaveth, Jerah,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:26 and continues through 1 Chronicles 1:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:26",
+        "book": "Genesis",
+        "englishText": "Joktan became the father of Almodad, Sheleph, Hazarmaveth, Jerah,"
+      },
+      {
+        "reference": "1 Chronicles 1:20",
+        "book": "1 Chronicles",
+        "englishText": "Joktan became the father of Almodad, Sheleph, Hazarmaveth, Jerah,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "מַלְכִּיאֵל",
   "subtitle": "H4439 • Hebrew name",
   "simple": {
-    "meaning": "מַלְכִּיאֵל (Malkîyʼêl) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מַלְכִּיאֵל (Malkîyʼêl) appears 3 times in the Hebrew Scriptures and is introduced as a sister in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, Numbers, 1 Chronicles, beginning at Genesis 46:17. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מַלְכִּיאֵל (H4439) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מַלְכִּיאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,116 @@
     "laterReferences": [
       "Numbers 26:45",
       "1 Chronicles 7:31"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4439",
+    "source": "hebrew",
+    "strong": "H4439",
+    "lemma": "מַלְכִּיאֵל",
+    "transliteration": "Malkîyʼêl",
+    "definition": "Malkiel , an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:17",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Asher: Imnah, Ishvah, Ishvi, Beriah, and Serah their sister. The sons of Beriah: Heber and Malchiel."
+    },
+    "books": [
+      "Genesis",
+      "Numbers",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 46:17",
+      "Numbers 26:45",
+      "1 Chronicles 7:31"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 46:17",
+        "evidenceText": "The sons of Asher: Imnah, Ishvah, Ishvi, Beriah, and Serah their sister. The sons of Beriah: Heber and Malchiel."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 26:45",
+        "evidenceText": "Of the sons of Beriah: of Heber, the family of the Heberites; of Malchiel, the family of the Malchielites."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:31",
+        "evidenceText": "The sons of Beriah: Heber and Malchiel, who was the father of Birzaith."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:17",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Asher: Imnah, Ishvah, Ishvi, Beriah, and Serah their sister. The sons of Beriah: Heber and Malchiel."
+      },
+      {
+        "reference": "Numbers 26:45",
+        "phase": "Genealogy",
+        "evidenceText": "Of the sons of Beriah: of Heber, the family of the Heberites; of Malchiel, the family of the Malchielites."
+      },
+      {
+        "reference": "1 Chronicles 7:31",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Beriah: Heber and Malchiel, who was the father of Birzaith."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:17 and continues through 1 Chronicles 7:31.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:17",
+        "book": "Genesis",
+        "englishText": "The sons of Asher: Imnah, Ishvah, Ishvi, Beriah, and Serah their sister. The sons of Beriah: Heber and Malchiel."
+      },
+      {
+        "reference": "Numbers 26:45",
+        "book": "Numbers",
+        "englishText": "Of the sons of Beriah: of Heber, the family of the Heberites; of Malchiel, the family of the Malchielites."
+      },
+      {
+        "reference": "1 Chronicles 7:31",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Beriah: Heber and Malchiel, who was the father of Birzaith."
+      }
     ]
   },
   "evidence": {

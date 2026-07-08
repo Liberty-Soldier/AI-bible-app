@@ -4,7 +4,7 @@
   "title": "מָלַל",
   "subtitle": "H4448 • Hebrew word",
   "simple": {
-    "meaning": "מָלַל (mâlal) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מָלַל (mâlal) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, Job, Psalms, Proverbs, beginning at Genesis 21:7. BibleIQ detects the main surrounding context as birth, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מָלַל (H4448) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מָלַל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,115 @@
       "Job 33:3",
       "Psalms 106:2",
       "Proverbs 6:13"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4448",
+    "source": "hebrew",
+    "strong": "H4448",
+    "lemma": "מָלַל",
+    "transliteration": "mâlal",
+    "definition": "to speak (mostly poetical) or say",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 21:7",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "She said, “Who would have said to Abraham that Sarah would nurse children? For I have borne him a son in his old age.”"
+    },
+    "books": [
+      "Genesis",
+      "Job",
+      "Psalms",
+      "Proverbs"
+    ],
+    "references": [
+      "Genesis 21:7",
+      "Job 8:2",
+      "Job 33:3",
+      "Psalms 106:2",
+      "Proverbs 6:13"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 21:7",
+        "evidenceText": "She said, “Who would have said to Abraham that Sarah would nurse children? For I have borne him a son in his old age.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 21:7",
+        "phase": "Birth or introduction",
+        "evidenceText": "She said, “Who would have said to Abraham that Sarah would nurse children? For I have borne him a son in his old age.”"
+      },
+      {
+        "reference": "Job 8:2",
+        "phase": "Occurrence",
+        "evidenceText": "“How long will you speak these things?"
+      },
+      {
+        "reference": "Job 33:3",
+        "phase": "Occurrence",
+        "evidenceText": "My words will utter the uprightness of my heart."
+      },
+      {
+        "reference": "Psalms 106:2",
+        "phase": "Occurrence",
+        "evidenceText": "Who can utter the mighty acts of Yahweh,"
+      },
+      {
+        "reference": "Proverbs 6:13",
+        "phase": "Occurrence",
+        "evidenceText": "who winks with his eyes, who signals with his feet,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 21:7 and continues through Proverbs 6:13.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 21:7",
+        "book": "Genesis",
+        "englishText": "She said, “Who would have said to Abraham that Sarah would nurse children? For I have borne him a son in his old age.”"
+      },
+      {
+        "reference": "Job 8:2",
+        "book": "Job",
+        "englishText": "“How long will you speak these things?"
+      },
+      {
+        "reference": "Job 33:3",
+        "book": "Job",
+        "englishText": "My words will utter the uprightness of my heart."
+      },
+      {
+        "reference": "Psalms 106:2",
+        "book": "Psalms",
+        "englishText": "Who can utter the mighty acts of Yahweh,"
+      },
+      {
+        "reference": "Proverbs 6:13",
+        "book": "Proverbs",
+        "englishText": "who winks with his eyes, who signals with his feet,"
+      }
     ]
   },
   "evidence": {

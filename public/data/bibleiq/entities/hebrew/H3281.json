@@ -4,7 +4,7 @@
   "title": "יַעְלָם",
   "subtitle": "H3281 • Hebrew name",
   "simple": {
-    "meaning": "יַעְלָם (Yaʻlâm) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "יַעְלָם (Yaʻlâm) appears 4 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 36:5. BibleIQ detects the main surrounding context as birth, family line, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יַעְלָם (H3281) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יַעְלָם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,132 @@
       "Genesis 36:14",
       "Genesis 36:18",
       "1 Chronicles 1:35"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3281",
+    "source": "hebrew",
+    "strong": "H3281",
+    "lemma": "יַעְלָם",
+    "transliteration": "Yaʻlâm",
+    "definition": "Jalam , an Edomite",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:5",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Oholibamah bore Jeush, Jalam, and Korah. These are the sons of Esau, who were born to him in the land of Canaan."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:5",
+      "Genesis 36:14",
+      "Genesis 36:18",
+      "1 Chronicles 1:35"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 36:5",
+        "evidenceText": "Oholibamah bore Jeush, Jalam, and Korah. These are the sons of Esau, who were born to him in the land of Canaan."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 36:14",
+        "evidenceText": "These were the sons of Oholibamah, the daughter of Anah, the daughter of Zibeon, Esau’s wife: she bore to Esau Jeush, Jalam, and Korah."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 36:18",
+        "evidenceText": "These are the sons of Oholibamah, Esau’s wife: chief Jeush, chief Jalam, chief Korah. These are the chiefs who came of Oholibamah the daughter of Anah, Esau’s wife."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:35",
+        "evidenceText": "The sons of Esau: Eliphaz, Reuel, Jeush, Jalam, and Korah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:5",
+        "phase": "Birth or introduction",
+        "evidenceText": "Oholibamah bore Jeush, Jalam, and Korah. These are the sons of Esau, who were born to him in the land of Canaan."
+      },
+      {
+        "reference": "Genesis 36:14",
+        "phase": "Genealogy",
+        "evidenceText": "These were the sons of Oholibamah, the daughter of Anah, the daughter of Zibeon, Esau’s wife: she bore to Esau Jeush, Jalam, and Korah."
+      },
+      {
+        "reference": "Genesis 36:18",
+        "phase": "Genealogy",
+        "evidenceText": "These are the sons of Oholibamah, Esau’s wife: chief Jeush, chief Jalam, chief Korah. These are the chiefs who came of Oholibamah the daughter of Anah, Esau’s wife."
+      },
+      {
+        "reference": "1 Chronicles 1:35",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Esau: Eliphaz, Reuel, Jeush, Jalam, and Korah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:5 and continues through 1 Chronicles 1:35.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:5",
+        "book": "Genesis",
+        "englishText": "Oholibamah bore Jeush, Jalam, and Korah. These are the sons of Esau, who were born to him in the land of Canaan."
+      },
+      {
+        "reference": "Genesis 36:14",
+        "book": "Genesis",
+        "englishText": "These were the sons of Oholibamah, the daughter of Anah, the daughter of Zibeon, Esau’s wife: she bore to Esau Jeush, Jalam, and Korah."
+      },
+      {
+        "reference": "Genesis 36:18",
+        "book": "Genesis",
+        "englishText": "These are the sons of Oholibamah, Esau’s wife: chief Jeush, chief Jalam, chief Korah. These are the chiefs who came of Oholibamah the daughter of Anah, Esau’s wife."
+      },
+      {
+        "reference": "1 Chronicles 1:35",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Esau: Eliphaz, Reuel, Jeush, Jalam, and Korah."
+      }
     ]
   },
   "evidence": {

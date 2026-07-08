@@ -4,7 +4,7 @@
   "title": "אֶשְׁבָּן",
   "subtitle": "H790 • Hebrew name",
   "simple": {
-    "meaning": "אֶשְׁבָּן (ʼEshbân) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אֶשְׁבָּן (ʼEshbân) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 36:26. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֶשְׁבָּן (H790) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֶשְׁבָּן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,81 @@
     ],
     "laterReferences": [
       "1 Chronicles 1:41"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H790",
+    "source": "hebrew",
+    "strong": "H790",
+    "lemma": "אֶשְׁבָּן",
+    "transliteration": "ʼEshbân",
+    "definition": "Eshban , an Idumaean",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:26",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "These are the children of Dishon: Hemdan, Eshban, Ithran, and Cheran."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:26",
+      "1 Chronicles 1:41"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:41",
+        "evidenceText": "The son of Anah: Dishon. The sons of Dishon: Hamran, Eshban, Ithran, and Cheran."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:26",
+        "phase": "Occurrence",
+        "evidenceText": "These are the children of Dishon: Hemdan, Eshban, Ithran, and Cheran."
+      },
+      {
+        "reference": "1 Chronicles 1:41",
+        "phase": "Genealogy",
+        "evidenceText": "The son of Anah: Dishon. The sons of Dishon: Hamran, Eshban, Ithran, and Cheran."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:26 and continues through 1 Chronicles 1:41.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:26",
+        "book": "Genesis",
+        "englishText": "These are the children of Dishon: Hemdan, Eshban, Ithran, and Cheran."
+      },
+      {
+        "reference": "1 Chronicles 1:41",
+        "book": "1 Chronicles",
+        "englishText": "The son of Anah: Dishon. The sons of Dishon: Hamran, Eshban, Ithran, and Cheran."
+      }
     ]
   },
   "evidence": {

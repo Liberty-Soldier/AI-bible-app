@@ -26,6 +26,96 @@
       "Joel 1:18"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H943",
+    "source": "hebrew",
+    "strong": "H943",
+    "lemma": "בּוּךְ",
+    "transliteration": "bûwk",
+    "definition": "to involve (literally or figuratively)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 14:3",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Pharaoh will say of the children of Israel, ‘They are entangled in the land. The wilderness has shut them in.’"
+    },
+    "books": [
+      "Exodus",
+      "Esther",
+      "Joel"
+    ],
+    "references": [
+      "Exodus 14:3",
+      "Esther 3:15",
+      "Joel 1:18"
+    ],
+    "themes": [
+      "kingship",
+      "city",
+      "land",
+      "commandment"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Exodus 14:3",
+        "evidenceText": "Pharaoh will say of the children of Israel, ‘They are entangled in the land. The wilderness has shut them in.’"
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Esther 3:15",
+        "evidenceText": "The couriers went out in haste by the king’s commandment, and the decree was given out in the citadel of Susa. The king and Haman sat down to drink; but the city of Susa was perplexed."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 14:3",
+        "phase": "Movement or place",
+        "evidenceText": "Pharaoh will say of the children of Israel, ‘They are entangled in the land. The wilderness has shut them in.’"
+      },
+      {
+        "reference": "Esther 3:15",
+        "phase": "Movement or place",
+        "evidenceText": "The couriers went out in haste by the king’s commandment, and the decree was given out in the citadel of Susa. The king and Haman sat down to drink; but the city of Susa was perplexed."
+      },
+      {
+        "reference": "Joel 1:18",
+        "phase": "Occurrence",
+        "evidenceText": "How the animals groan!"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 14:3 and continues through Joel 1:18.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 14:3",
+        "book": "Exodus",
+        "englishText": "Pharaoh will say of the children of Israel, ‘They are entangled in the land. The wilderness has shut them in.’"
+      },
+      {
+        "reference": "Esther 3:15",
+        "book": "Esther",
+        "englishText": "The couriers went out in haste by the king’s commandment, and the decree was given out in the citadel of Susa. The king and Haman sat down to drink; but the city of Susa was perplexed."
+      },
+      {
+        "reference": "Joel 1:18",
+        "book": "Joel",
+        "englishText": "How the animals groan!"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

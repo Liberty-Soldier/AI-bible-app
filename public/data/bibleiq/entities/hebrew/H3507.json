@@ -25,6 +25,79 @@
       "1 Chronicles 3:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3507",
+    "source": "hebrew",
+    "strong": "H3507",
+    "lemma": "יִתְרְעָם",
+    "transliteration": "Yithrᵉʻâm",
+    "definition": "Jithream , a son of David",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 3:5",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "and the sixth, Ithream, of Eglah, David’s wife. These were born to David in Hebron."
+    },
+    "books": [
+      "2 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "2 Samuel 3:5",
+      "1 Chronicles 3:3"
+    ],
+    "themes": [],
+    "relationships": [
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "2 Samuel 3:5",
+        "evidenceText": "and the sixth, Ithream, of Eglah, David’s wife. These were born to David in Hebron."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Samuel 3:5",
+        "phase": "Birth or introduction",
+        "evidenceText": "and the sixth, Ithream, of Eglah, David’s wife. These were born to David in Hebron."
+      },
+      {
+        "reference": "1 Chronicles 3:3",
+        "phase": "Occurrence",
+        "evidenceText": "the fifth, Shephatiah of Abital; the sixth, Ithream by Eglah his wife:"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 3:5 and continues through 1 Chronicles 3:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 3:5",
+        "book": "2 Samuel",
+        "englishText": "and the sixth, Ithream, of Eglah, David’s wife. These were born to David in Hebron."
+      },
+      {
+        "reference": "1 Chronicles 3:3",
+        "book": "1 Chronicles",
+        "englishText": "the fifth, Shephatiah of Abital; the sixth, Ithream by Eglah his wife:"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

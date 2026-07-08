@@ -27,6 +27,107 @@
       "Ecclesiastes 10:5"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7989",
+    "source": "hebrew",
+    "strong": "H7989",
+    "lemma": "שַׁלִּיט",
+    "transliteration": "shallîyṭ",
+    "definition": "potent ; concretely, a prince or warrior",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 42:6",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Joseph was the governor over the land. It was he who sold to all the people of the land. Joseph’s brothers came, and bowed themselves down to him with their faces to the earth."
+    },
+    "books": [
+      "Genesis",
+      "Ecclesiastes"
+    ],
+    "references": [
+      "Genesis 42:6",
+      "Ecclesiastes 7:19",
+      "Ecclesiastes 8:8",
+      "Ecclesiastes 10:5"
+    ],
+    "themes": [
+      "family",
+      "city",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 42:6",
+        "evidenceText": "Joseph was the governor over the land. It was he who sold to all the people of the land. Joseph’s brothers came, and bowed themselves down to him with their faces to the earth."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Ecclesiastes 7:19",
+        "evidenceText": "Wisdom is a strength to the wise man more than ten rulers who are in a city."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 42:6",
+        "phase": "Movement or place",
+        "evidenceText": "Joseph was the governor over the land. It was he who sold to all the people of the land. Joseph’s brothers came, and bowed themselves down to him with their faces to the earth."
+      },
+      {
+        "reference": "Ecclesiastes 7:19",
+        "phase": "Movement or place",
+        "evidenceText": "Wisdom is a strength to the wise man more than ten rulers who are in a city."
+      },
+      {
+        "reference": "Ecclesiastes 8:8",
+        "phase": "Occurrence",
+        "evidenceText": "There is no man who has power over the spirit to contain the spirit; neither does he have power over the day of death. There is no discharge in war; neither shall wickedness deliver those who practice it."
+      },
+      {
+        "reference": "Ecclesiastes 10:5",
+        "phase": "Occurrence",
+        "evidenceText": "There is an evil which I have seen under the sun, the sort of error which proceeds from the ruler."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 42:6 and continues through Ecclesiastes 10:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 42:6",
+        "book": "Genesis",
+        "englishText": "Joseph was the governor over the land. It was he who sold to all the people of the land. Joseph’s brothers came, and bowed themselves down to him with their faces to the earth."
+      },
+      {
+        "reference": "Ecclesiastes 7:19",
+        "book": "Ecclesiastes",
+        "englishText": "Wisdom is a strength to the wise man more than ten rulers who are in a city."
+      },
+      {
+        "reference": "Ecclesiastes 8:8",
+        "book": "Ecclesiastes",
+        "englishText": "There is no man who has power over the spirit to contain the spirit; neither does he have power over the day of death. There is no discharge in war; neither shall wickedness deliver those who practice it."
+      },
+      {
+        "reference": "Ecclesiastes 10:5",
+        "book": "Ecclesiastes",
+        "englishText": "There is an evil which I have seen under the sun, the sort of error which proceeds from the ruler."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

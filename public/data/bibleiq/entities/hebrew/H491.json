@@ -27,6 +27,100 @@
       "Isaiah 54:4"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H491",
+    "source": "hebrew",
+    "strong": "H491",
+    "lemma": "אַלְמָנוּת",
+    "transliteration": "ʼalmânûwth",
+    "definition": "concrete, a widow ; abstract, widowhood",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 38:14",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "She took off the garments of her widowhood, and covered herself with her veil, and wrapped herself, and sat in the gate of Enaim, which is on the way to Timnah; for she saw that Shelah was grown up, and she wasn’t given to him as a wife."
+    },
+    "books": [
+      "Genesis",
+      "2 Samuel",
+      "Isaiah"
+    ],
+    "references": [
+      "Genesis 38:14",
+      "Genesis 38:19",
+      "2 Samuel 20:3",
+      "Isaiah 54:4"
+    ],
+    "themes": [
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "removal_or_rescue",
+        "label": "Removal or rescue",
+        "reference": "Genesis 38:19",
+        "evidenceText": "She arose, and went away, and put off her veil from her, and put on the garments of her widowhood."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 38:14",
+        "phase": "Occurrence",
+        "evidenceText": "She took off the garments of her widowhood, and covered herself with her veil, and wrapped herself, and sat in the gate of Enaim, which is on the way to Timnah; for she saw that Shelah was grown up, and she wasn’t given to him as a wife."
+      },
+      {
+        "reference": "Genesis 38:19",
+        "phase": "Removal or rescue",
+        "evidenceText": "She arose, and went away, and put off her veil from her, and put on the garments of her widowhood."
+      },
+      {
+        "reference": "2 Samuel 20:3",
+        "phase": "Occurrence",
+        "evidenceText": "David came to his house at Jerusalem; and the king took the ten women his concubines, whom he had left to keep the house, and put them in custody, and provided them with sustenance, but didn’t go in to them. So they were shut up to the day of their death, living in widowhood."
+      },
+      {
+        "reference": "Isaiah 54:4",
+        "phase": "Occurrence",
+        "evidenceText": "“Don’t be afraid, for you will not be ashamed."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 38:14 and continues through Isaiah 54:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 38:14",
+        "book": "Genesis",
+        "englishText": "She took off the garments of her widowhood, and covered herself with her veil, and wrapped herself, and sat in the gate of Enaim, which is on the way to Timnah; for she saw that Shelah was grown up, and she wasn’t given to him as a wife."
+      },
+      {
+        "reference": "Genesis 38:19",
+        "book": "Genesis",
+        "englishText": "She arose, and went away, and put off her veil from her, and put on the garments of her widowhood."
+      },
+      {
+        "reference": "2 Samuel 20:3",
+        "book": "2 Samuel",
+        "englishText": "David came to his house at Jerusalem; and the king took the ten women his concubines, whom he had left to keep the house, and put them in custody, and provided them with sustenance, but didn’t go in to them. So they were shut up to the day of their death, living in widowhood."
+      },
+      {
+        "reference": "Isaiah 54:4",
+        "book": "Isaiah",
+        "englishText": "“Don’t be afraid, for you will not be ashamed."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

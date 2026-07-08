@@ -4,7 +4,7 @@
   "title": "אוּרִיאֵל",
   "subtitle": "H222 • Hebrew name",
   "simple": {
-    "meaning": "אוּרִיאֵל (ʼÛwrîyʼêl) appears 4 times in the Hebrew Scriptures and is introduced as a brother in the family line and in connection with priesthood.",
+    "meaning": "אוּרִיאֵל (ʼÛwrîyʼêl) appears 4 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with priesthood.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, 2 Chronicles, beginning at 1 Chronicles 6:9. BibleIQ detects the main surrounding context as family, family line, priesthood.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אוּרִיאֵל (H222) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אוּרִיאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,131 @@
       "1 Chronicles 15:5",
       "1 Chronicles 15:11",
       "2 Chronicles 13:2"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H222",
+    "source": "hebrew",
+    "strong": "H222",
+    "lemma": "אוּרִיאֵל",
+    "transliteration": "ʼÛwrîyʼêl",
+    "definition": "Uriel , the name of two Israelites",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 6:9",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Ahimaaz became the father of Azariah. Azariah became the father of Johanan."
+    },
+    "books": [
+      "1 Chronicles",
+      "2 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 6:9",
+      "1 Chronicles 15:5",
+      "1 Chronicles 15:11",
+      "2 Chronicles 13:2"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "priesthood"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 15:5",
+        "evidenceText": "of the sons of Kohath, Uriel the chief, and his brothers one hundred twenty;"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Chronicles 13:2",
+        "evidenceText": "He reigned three years in Jerusalem. His mother’s name was Micaiah the daughter of Uriel of Gibeah. There was war between Abijah and Jeroboam."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 6:9",
+        "phase": "Occurrence",
+        "evidenceText": "Ahimaaz became the father of Azariah. Azariah became the father of Johanan."
+      },
+      {
+        "reference": "1 Chronicles 15:5",
+        "phase": "Genealogy",
+        "evidenceText": "of the sons of Kohath, Uriel the chief, and his brothers one hundred twenty;"
+      },
+      {
+        "reference": "1 Chronicles 15:11",
+        "phase": "Occurrence",
+        "evidenceText": "David called for Zadok and Abiathar the priests, and for the Levites, for Uriel, Asaiah, Joel, Shemaiah, Eliel, and Amminadab,"
+      },
+      {
+        "reference": "2 Chronicles 13:2",
+        "phase": "Genealogy",
+        "evidenceText": "He reigned three years in Jerusalem. His mother’s name was Micaiah the daughter of Uriel of Gibeah. There was war between Abijah and Jeroboam."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 6:9 and continues through 2 Chronicles 13:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 6:9",
+        "book": "1 Chronicles",
+        "englishText": "Ahimaaz became the father of Azariah. Azariah became the father of Johanan."
+      },
+      {
+        "reference": "1 Chronicles 15:5",
+        "book": "1 Chronicles",
+        "englishText": "of the sons of Kohath, Uriel the chief, and his brothers one hundred twenty;"
+      },
+      {
+        "reference": "1 Chronicles 15:11",
+        "book": "1 Chronicles",
+        "englishText": "David called for Zadok and Abiathar the priests, and for the Levites, for Uriel, Asaiah, Joel, Shemaiah, Eliel, and Amminadab,"
+      },
+      {
+        "reference": "2 Chronicles 13:2",
+        "book": "2 Chronicles",
+        "englishText": "He reigned three years in Jerusalem. His mother’s name was Micaiah the daughter of Uriel of Gibeah. There was war between Abijah and Jeroboam."
+      }
     ]
   },
   "evidence": {

@@ -4,7 +4,7 @@
   "title": "הֵגֵא",
   "subtitle": "H1896 • Hebrew name",
   "simple": {
-    "meaning": "הֵגֵא (Hêgêʼ) appears 4 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "הֵגֵא (Hêgêʼ) appears 4 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Esther, beginning at Esther 2:3. BibleIQ detects the main surrounding context as family line, commandment, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to הֵגֵא (H1896) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows הֵגֵא through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,103 @@
     "laterReferences": [
       "Esther 2:8",
       "Esther 2:15"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1896",
+    "source": "hebrew",
+    "strong": "H1896",
+    "lemma": "הֵגֵא",
+    "transliteration": "Hêgêʼ",
+    "definition": "Hege or Hegai , a eunuch of Xerxes",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Esther 2:3",
+      "book": "Esther",
+      "bookName": "Esther",
+      "englishText": "Let the king appoint officers in all the provinces of his kingdom, that they may gather together all the beautiful young virgins to the citadel of Susa, to the women’s house, to the custody of Hegai the king’s eunuch, keeper of the women. Let cosmetics be given them;"
+    },
+    "books": [
+      "Esther"
+    ],
+    "references": [
+      "Esther 2:3",
+      "Esther 2:8",
+      "Esther 2:15"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "commandment"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Esther 2:15",
+        "evidenceText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Esther 2:3",
+        "phase": "Occurrence",
+        "evidenceText": "Let the king appoint officers in all the provinces of his kingdom, that they may gather together all the beautiful young virgins to the citadel of Susa, to the women’s house, to the custody of Hegai the king’s eunuch, keeper of the women. Let cosmetics be given them;"
+      },
+      {
+        "reference": "Esther 2:8",
+        "phase": "Occurrence",
+        "evidenceText": "So, when the king’s commandment and his decree was heard, and when many maidens were gathered together to the citadel of Susa, to the custody of Hegai, Esther was taken into the king’s house, to the custody of Hegai, keeper of the women."
+      },
+      {
+        "reference": "Esther 2:8",
+        "phase": "Occurrence",
+        "evidenceText": "So, when the king’s commandment and his decree was heard, and when many maidens were gathered together to the citadel of Susa, to the custody of Hegai, Esther was taken into the king’s house, to the custody of Hegai, keeper of the women."
+      },
+      {
+        "reference": "Esther 2:15",
+        "phase": "Genealogy",
+        "evidenceText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Esther 2:3 and continues through Esther 2:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Esther 2:3",
+        "book": "Esther",
+        "englishText": "Let the king appoint officers in all the provinces of his kingdom, that they may gather together all the beautiful young virgins to the citadel of Susa, to the women’s house, to the custody of Hegai the king’s eunuch, keeper of the women. Let cosmetics be given them;"
+      },
+      {
+        "reference": "Esther 2:8",
+        "book": "Esther",
+        "englishText": "So, when the king’s commandment and his decree was heard, and when many maidens were gathered together to the citadel of Susa, to the custody of Hegai, Esther was taken into the king’s house, to the custody of Hegai, keeper of the women."
+      },
+      {
+        "reference": "Esther 2:8",
+        "book": "Esther",
+        "englishText": "So, when the king’s commandment and his decree was heard, and when many maidens were gathered together to the citadel of Susa, to the custody of Hegai, Esther was taken into the king’s house, to the custody of Hegai, keeper of the women."
+      },
+      {
+        "reference": "Esther 2:15",
+        "book": "Esther",
+        "englishText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      }
     ]
   },
   "evidence": {

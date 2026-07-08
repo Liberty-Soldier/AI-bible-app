@@ -4,7 +4,7 @@
   "title": "אֱלִימֶלֶךְ",
   "subtitle": "H458 • Hebrew name",
   "simple": {
-    "meaning": "אֱלִימֶלֶךְ (ʼĔlîymelek) appears 6 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "אֱלִימֶלֶךְ (ʼĔlîymelek) appears 6 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
     "biblicalBackground": "The first appearances are in Ruth, beginning at Ruth 1:2. BibleIQ detects the main surrounding context as family, family line, death, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֱלִימֶלֶךְ (H458) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֱלִימֶלֶךְ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,141 @@
       "Ruth 2:3",
       "Ruth 4:3",
       "Ruth 4:9"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H458",
+    "source": "hebrew",
+    "strong": "H458",
+    "lemma": "אֱלִימֶלֶךְ",
+    "transliteration": "ʼĔlîymelek",
+    "definition": "Elimelek , an Israelite",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ruth 1:2",
+      "book": "Ruth",
+      "bookName": "Ruth",
+      "englishText": "The name of the man was Elimelech, and the name of his wife Naomi. The names of his two sons were Mahlon and Chilion, Ephrathites of Bethlehem Judah. They came into the country of Moab and lived there."
+    },
+    "books": [
+      "Ruth"
+    ],
+    "references": [
+      "Ruth 1:2",
+      "Ruth 1:3",
+      "Ruth 2:1",
+      "Ruth 2:3",
+      "Ruth 4:3",
+      "Ruth 4:9"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Ruth 4:3",
+        "evidenceText": "He said to the near kinsman, “Naomi, who has come back out of the country of Moab, is selling the parcel of land, which was our brother Elimelech’s."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ruth 1:2",
+        "phase": "Occurrence",
+        "evidenceText": "The name of the man was Elimelech, and the name of his wife Naomi. The names of his two sons were Mahlon and Chilion, Ephrathites of Bethlehem Judah. They came into the country of Moab and lived there."
+      },
+      {
+        "reference": "Ruth 1:3",
+        "phase": "Occurrence",
+        "evidenceText": "Elimelech, Naomi’s husband, died; and she was left with her two sons."
+      },
+      {
+        "reference": "Ruth 2:1",
+        "phase": "Occurrence",
+        "evidenceText": "Naomi had a relative of her husband’s, a mighty man of wealth, of the family of Elimelech, and his name was Boaz."
+      },
+      {
+        "reference": "Ruth 2:3",
+        "phase": "Occurrence",
+        "evidenceText": "She went, and came and gleaned in the field after the reapers; and she happened to come to the portion of the field belonging to Boaz, who was of the family of Elimelech."
+      },
+      {
+        "reference": "Ruth 4:3",
+        "phase": "Movement or place",
+        "evidenceText": "He said to the near kinsman, “Naomi, who has come back out of the country of Moab, is selling the parcel of land, which was our brother Elimelech’s."
+      },
+      {
+        "reference": "Ruth 4:9",
+        "phase": "Occurrence",
+        "evidenceText": "Boaz said to the elders and to all the people, “You are witnesses today, that I have bought all that was Elimelech’s, and all that was Chilion’s and Mahlon’s, from the hand of Naomi."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ruth 1:2 and continues through Ruth 4:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ruth 1:2",
+        "book": "Ruth",
+        "englishText": "The name of the man was Elimelech, and the name of his wife Naomi. The names of his two sons were Mahlon and Chilion, Ephrathites of Bethlehem Judah. They came into the country of Moab and lived there."
+      },
+      {
+        "reference": "Ruth 1:3",
+        "book": "Ruth",
+        "englishText": "Elimelech, Naomi’s husband, died; and she was left with her two sons."
+      },
+      {
+        "reference": "Ruth 2:1",
+        "book": "Ruth",
+        "englishText": "Naomi had a relative of her husband’s, a mighty man of wealth, of the family of Elimelech, and his name was Boaz."
+      },
+      {
+        "reference": "Ruth 2:3",
+        "book": "Ruth",
+        "englishText": "She went, and came and gleaned in the field after the reapers; and she happened to come to the portion of the field belonging to Boaz, who was of the family of Elimelech."
+      },
+      {
+        "reference": "Ruth 4:3",
+        "book": "Ruth",
+        "englishText": "He said to the near kinsman, “Naomi, who has come back out of the country of Moab, is selling the parcel of land, which was our brother Elimelech’s."
+      },
+      {
+        "reference": "Ruth 4:9",
+        "book": "Ruth",
+        "englishText": "Boaz said to the elders and to all the people, “You are witnesses today, that I have bought all that was Elimelech’s, and all that was Chilion’s and Mahlon’s, from the hand of Naomi."
+      }
     ]
   },
   "evidence": {

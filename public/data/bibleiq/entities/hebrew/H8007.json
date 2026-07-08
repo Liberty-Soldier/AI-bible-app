@@ -4,7 +4,7 @@
   "title": "שַׂלְמָא",
   "subtitle": "H8007 • Hebrew name",
   "simple": {
-    "meaning": "שַׂלְמָא (Salmâʼ) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "שַׂלְמָא (Salmâʼ) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 2:11. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שַׂלְמָא (H8007) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שַׂלְמָא through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,107 @@
     "laterReferences": [
       "1 Chronicles 2:51",
       "1 Chronicles 2:54"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8007",
+    "source": "hebrew",
+    "strong": "H8007",
+    "lemma": "שַׂלְמָא",
+    "transliteration": "Salmâʼ",
+    "definition": "Salma , the name of two Israelites",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:11",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "and Nahshon became the father of Salma, and Salma became the father of Boaz,"
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:11",
+      "1 Chronicles 2:51",
+      "1 Chronicles 2:54"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:54",
+        "evidenceText": "The sons of Salma: Bethlehem, the Netophathites, Atroth Beth Joab, and half of the Manahathites, the Zorites."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:11",
+        "phase": "Occurrence",
+        "evidenceText": "and Nahshon became the father of Salma, and Salma became the father of Boaz,"
+      },
+      {
+        "reference": "1 Chronicles 2:11",
+        "phase": "Occurrence",
+        "evidenceText": "and Nahshon became the father of Salma, and Salma became the father of Boaz,"
+      },
+      {
+        "reference": "1 Chronicles 2:51",
+        "phase": "Occurrence",
+        "evidenceText": "Salma the father of Bethlehem, and Hareph the father of Beth Gader."
+      },
+      {
+        "reference": "1 Chronicles 2:54",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Salma: Bethlehem, the Netophathites, Atroth Beth Joab, and half of the Manahathites, the Zorites."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:11 and continues through 1 Chronicles 2:54.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:11",
+        "book": "1 Chronicles",
+        "englishText": "and Nahshon became the father of Salma, and Salma became the father of Boaz,"
+      },
+      {
+        "reference": "1 Chronicles 2:11",
+        "book": "1 Chronicles",
+        "englishText": "and Nahshon became the father of Salma, and Salma became the father of Boaz,"
+      },
+      {
+        "reference": "1 Chronicles 2:51",
+        "book": "1 Chronicles",
+        "englishText": "Salma the father of Bethlehem, and Hareph the father of Beth Gader."
+      },
+      {
+        "reference": "1 Chronicles 2:54",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Salma: Bethlehem, the Netophathites, Atroth Beth Joab, and half of the Manahathites, the Zorites."
+      }
     ]
   },
   "evidence": {

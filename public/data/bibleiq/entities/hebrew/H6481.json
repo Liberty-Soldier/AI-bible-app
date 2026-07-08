@@ -26,6 +26,89 @@
       "Song of Songs 5:7"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6481",
+    "source": "hebrew",
+    "strong": "H6481",
+    "lemma": "פָּצַע",
+    "transliteration": "pâtsaʻ",
+    "definition": "to split , i.e. wound",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 23:2",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "A person born of a forbidden union shall not enter into Yahweh’s assembly; even to the tenth generation shall no one of his enter into Yahweh’s assembly."
+    },
+    "books": [
+      "Deuteronomy",
+      "1 Kings",
+      "Song of Solomon"
+    ],
+    "references": [
+      "Deuteronomy 23:2",
+      "1 Kings 20:37",
+      "Song of Songs 5:7"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Deuteronomy 23:2",
+        "evidenceText": "A person born of a forbidden union shall not enter into Yahweh’s assembly; even to the tenth generation shall no one of his enter into Yahweh’s assembly."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 23:2",
+        "phase": "Birth or introduction",
+        "evidenceText": "A person born of a forbidden union shall not enter into Yahweh’s assembly; even to the tenth generation shall no one of his enter into Yahweh’s assembly."
+      },
+      {
+        "reference": "1 Kings 20:37",
+        "phase": "Occurrence",
+        "evidenceText": "Then he found another man, and said, “Please strike me.”"
+      },
+      {
+        "reference": "Song of Songs 5:7",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 23:2 and continues through Song of Songs 5:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 23:2",
+        "book": "Deuteronomy",
+        "englishText": "A person born of a forbidden union shall not enter into Yahweh’s assembly; even to the tenth generation shall no one of his enter into Yahweh’s assembly."
+      },
+      {
+        "reference": "1 Kings 20:37",
+        "book": "1 Kings",
+        "englishText": "Then he found another man, and said, “Please strike me.”"
+      },
+      {
+        "reference": "Song of Songs 5:7",
+        "book": "Song of Solomon",
+        "englishText": ""
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

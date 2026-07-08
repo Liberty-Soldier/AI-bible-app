@@ -4,7 +4,7 @@
   "title": "אֶלְזָבָד",
   "subtitle": "H443 • Hebrew name",
   "simple": {
-    "meaning": "אֶלְזָבָד (ʼElzâbâd) appears 2 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "אֶלְזָבָד (ʼElzâbâd) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 12:13. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֶלְזָבָד (H443) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֶלְזָבָד through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,86 @@
     ],
     "laterReferences": [
       "1 Chronicles 26:7"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H443",
+    "source": "hebrew",
+    "strong": "H443",
+    "lemma": "אֶלְזָבָד",
+    "transliteration": "ʼElzâbâd",
+    "definition": "Elzabad , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 12:13",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Jeremiah the tenth, and Machbannai the eleventh."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 12:13",
+      "1 Chronicles 26:7"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 26:7",
+        "evidenceText": "The sons of Shemaiah: Othni, Rephael, Obed, and Elzabad, whose brothers were valiant men, Elihu, and Semachiah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 12:13",
+        "phase": "Occurrence",
+        "evidenceText": "Jeremiah the tenth, and Machbannai the eleventh."
+      },
+      {
+        "reference": "1 Chronicles 26:7",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Shemaiah: Othni, Rephael, Obed, and Elzabad, whose brothers were valiant men, Elihu, and Semachiah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 12:13 and continues through 1 Chronicles 26:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 12:13",
+        "book": "1 Chronicles",
+        "englishText": "Jeremiah the tenth, and Machbannai the eleventh."
+      },
+      {
+        "reference": "1 Chronicles 26:7",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Shemaiah: Othni, Rephael, Obed, and Elzabad, whose brothers were valiant men, Elihu, and Semachiah."
+      }
     ]
   },
   "evidence": {

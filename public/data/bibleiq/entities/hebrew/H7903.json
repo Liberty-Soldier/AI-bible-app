@@ -27,6 +27,102 @@
       "Numbers 5:20"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7903",
+    "source": "hebrew",
+    "strong": "H7903",
+    "lemma": "שְׁכֹבֶת",
+    "transliteration": "shᵉkôbeth",
+    "definition": "a (sexual) lying with",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Leviticus 18:20",
+      "book": "Leviticus",
+      "bookName": "Leviticus",
+      "englishText": "“ ‘You shall not lie carnally with your neighbor’s wife, and defile yourself with her."
+    },
+    "books": [
+      "Leviticus",
+      "Numbers"
+    ],
+    "references": [
+      "Leviticus 18:20",
+      "Leviticus 18:23",
+      "Leviticus 20:15",
+      "Numbers 5:20"
+    ],
+    "themes": [],
+    "relationships": [
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "defilement",
+        "label": "Defilement",
+        "reference": "Numbers 5:20",
+        "evidenceText": "But if you have gone astray, being under your husband’s authority, and if you are defiled, and some man has lain with you besides your husband—”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Leviticus 18:20",
+        "phase": "Occurrence",
+        "evidenceText": "“ ‘You shall not lie carnally with your neighbor’s wife, and defile yourself with her."
+      },
+      {
+        "reference": "Leviticus 18:23",
+        "phase": "Occurrence",
+        "evidenceText": "“ ‘You shall not lie with any animal to defile yourself with it. No woman may give herself to an animal, to lie down with it: it is a perversion."
+      },
+      {
+        "reference": "Leviticus 20:15",
+        "phase": "Occurrence",
+        "evidenceText": "“ ‘If a man lies with an animal, he shall surely be put to death; and you shall kill the animal."
+      },
+      {
+        "reference": "Numbers 5:20",
+        "phase": "Defilement",
+        "evidenceText": "But if you have gone astray, being under your husband’s authority, and if you are defiled, and some man has lain with you besides your husband—”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Leviticus 18:20 and continues through Numbers 5:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Leviticus 18:20",
+        "book": "Leviticus",
+        "englishText": "“ ‘You shall not lie carnally with your neighbor’s wife, and defile yourself with her."
+      },
+      {
+        "reference": "Leviticus 18:23",
+        "book": "Leviticus",
+        "englishText": "“ ‘You shall not lie with any animal to defile yourself with it. No woman may give herself to an animal, to lie down with it: it is a perversion."
+      },
+      {
+        "reference": "Leviticus 20:15",
+        "book": "Leviticus",
+        "englishText": "“ ‘If a man lies with an animal, he shall surely be put to death; and you shall kill the animal."
+      },
+      {
+        "reference": "Numbers 5:20",
+        "book": "Numbers",
+        "englishText": "But if you have gone astray, being under your husband’s authority, and if you are defiled, and some man has lain with you besides your husband—”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -25,6 +25,85 @@
       "Numbers 26:48"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3183",
+    "source": "hebrew",
+    "strong": "H3183",
+    "lemma": "יַחְצְאֵל",
+    "transliteration": "Yachtsᵉʼêl",
+    "definition": "Jachtseel , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:24",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Naphtali: Jahzeel, Guni, Jezer, and Shillem."
+    },
+    "books": [
+      "Genesis",
+      "Numbers"
+    ],
+    "references": [
+      "Genesis 46:24",
+      "Numbers 26:48"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 46:24",
+        "evidenceText": "The sons of Naphtali: Jahzeel, Guni, Jezer, and Shillem."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 26:48",
+        "evidenceText": "The sons of Naphtali after their families: of Jahzeel, the family of the Jahzeelites; of Guni, the family of the Gunites;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:24",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Naphtali: Jahzeel, Guni, Jezer, and Shillem."
+      },
+      {
+        "reference": "Numbers 26:48",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Naphtali after their families: of Jahzeel, the family of the Jahzeelites; of Guni, the family of the Gunites;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:24 and continues through Numbers 26:48.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:24",
+        "book": "Genesis",
+        "englishText": "The sons of Naphtali: Jahzeel, Guni, Jezer, and Shillem."
+      },
+      {
+        "reference": "Numbers 26:48",
+        "book": "Numbers",
+        "englishText": "The sons of Naphtali after their families: of Jahzeel, the family of the Jahzeelites; of Guni, the family of the Gunites;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

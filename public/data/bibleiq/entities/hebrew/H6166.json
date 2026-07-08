@@ -28,6 +28,126 @@
       "1 Chronicles 8:15"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6166",
+    "source": "hebrew",
+    "strong": "H6166",
+    "lemma": "עֲרָד",
+    "transliteration": "ʻĂrâd",
+    "definition": "Arad , the name of a place near Palestine, also of a Canaanite and an Israelite",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 21:1",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "The Canaanite, the king of Arad, who lived in the South, heard that Israel came by the way of Atharim. He fought against Israel, and took some of them captive."
+    },
+    "books": [
+      "Numbers",
+      "Joshua",
+      "Judges",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 21:1",
+      "Numbers 33:40",
+      "Joshua 12:14",
+      "Judges 1:16",
+      "1 Chronicles 8:15"
+    ],
+    "themes": [
+      "family",
+      "kingship",
+      "city",
+      "land",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Numbers 33:40",
+        "evidenceText": "The Canaanite king of Arad, who lived in the South in the land of Canaan, heard of the coming of the children of Israel."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Judges 1:16",
+        "evidenceText": "The children of the Kenite, Moses’ brother-in-law, went up out of the city of palm trees with the children of Judah into the wilderness of Judah, which is in the south of Arad; and they went and lived with the people."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 21:1",
+        "phase": "Occurrence",
+        "evidenceText": "The Canaanite, the king of Arad, who lived in the South, heard that Israel came by the way of Atharim. He fought against Israel, and took some of them captive."
+      },
+      {
+        "reference": "Numbers 33:40",
+        "phase": "Movement or place",
+        "evidenceText": "The Canaanite king of Arad, who lived in the South in the land of Canaan, heard of the coming of the children of Israel."
+      },
+      {
+        "reference": "Joshua 12:14",
+        "phase": "Occurrence",
+        "evidenceText": "the king of Hormah, one;"
+      },
+      {
+        "reference": "Judges 1:16",
+        "phase": "Movement or place",
+        "evidenceText": "The children of the Kenite, Moses’ brother-in-law, went up out of the city of palm trees with the children of Judah into the wilderness of Judah, which is in the south of Arad; and they went and lived with the people."
+      },
+      {
+        "reference": "1 Chronicles 8:15",
+        "phase": "Occurrence",
+        "evidenceText": "Zebadiah, Arad, Eder,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 21:1 and continues through 1 Chronicles 8:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 21:1",
+        "book": "Numbers",
+        "englishText": "The Canaanite, the king of Arad, who lived in the South, heard that Israel came by the way of Atharim. He fought against Israel, and took some of them captive."
+      },
+      {
+        "reference": "Numbers 33:40",
+        "book": "Numbers",
+        "englishText": "The Canaanite king of Arad, who lived in the South in the land of Canaan, heard of the coming of the children of Israel."
+      },
+      {
+        "reference": "Joshua 12:14",
+        "book": "Joshua",
+        "englishText": "the king of Hormah, one;"
+      },
+      {
+        "reference": "Judges 1:16",
+        "book": "Judges",
+        "englishText": "The children of the Kenite, Moses’ brother-in-law, went up out of the city of palm trees with the children of Judah into the wilderness of Judah, which is in the south of Arad; and they went and lived with the people."
+      },
+      {
+        "reference": "1 Chronicles 8:15",
+        "book": "1 Chronicles",
+        "englishText": "Zebadiah, Arad, Eder,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

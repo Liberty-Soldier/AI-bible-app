@@ -26,6 +26,90 @@
       "1 Chronicles 5:19"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3195",
+    "source": "hebrew",
+    "strong": "H3195",
+    "lemma": "יְטוּר",
+    "transliteration": "Yᵉṭûwr",
+    "definition": "Jetur , a son of Ishmael",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:15",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Hadad, Tema, Jetur, Naphish, and Kedemah."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 25:15",
+      "1 Chronicles 1:31",
+      "1 Chronicles 5:19"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:31",
+        "evidenceText": "Jetur, Naphish, and Kedemah. These are the sons of Ishmael."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:15",
+        "phase": "Occurrence",
+        "evidenceText": "Hadad, Tema, Jetur, Naphish, and Kedemah."
+      },
+      {
+        "reference": "1 Chronicles 1:31",
+        "phase": "Genealogy",
+        "evidenceText": "Jetur, Naphish, and Kedemah. These are the sons of Ishmael."
+      },
+      {
+        "reference": "1 Chronicles 5:19",
+        "phase": "Occurrence",
+        "evidenceText": "They made war with the Hagrites, with Jetur, and Naphish, and Nodab."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:15 and continues through 1 Chronicles 5:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:15",
+        "book": "Genesis",
+        "englishText": "Hadad, Tema, Jetur, Naphish, and Kedemah."
+      },
+      {
+        "reference": "1 Chronicles 1:31",
+        "book": "1 Chronicles",
+        "englishText": "Jetur, Naphish, and Kedemah. These are the sons of Ishmael."
+      },
+      {
+        "reference": "1 Chronicles 5:19",
+        "book": "1 Chronicles",
+        "englishText": "They made war with the Hagrites, with Jetur, and Naphish, and Nodab."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

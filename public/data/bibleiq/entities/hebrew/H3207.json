@@ -26,6 +26,95 @@
       "Zechariah 8:5"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3207",
+    "source": "hebrew",
+    "strong": "H3207",
+    "lemma": "יַלְדָּה",
+    "transliteration": "yaldâh",
+    "definition": "a lass",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 34:4",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Shechem spoke to his father, Hamor, saying, “Get me this young lady as a wife.”"
+    },
+    "books": [
+      "Genesis",
+      "Joel",
+      "Zechariah"
+    ],
+    "references": [
+      "Genesis 34:4",
+      "Joel 4:3",
+      "Zechariah 8:5"
+    ],
+    "themes": [
+      "family",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Zechariah 8:5",
+        "evidenceText": "The streets of the city will be full of boys and girls playing in its streets.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 34:4",
+        "phase": "Occurrence",
+        "evidenceText": "Shechem spoke to his father, Hamor, saying, “Get me this young lady as a wife.”"
+      },
+      {
+        "reference": "Joel 4:3",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "Zechariah 8:5",
+        "phase": "Movement or place",
+        "evidenceText": "The streets of the city will be full of boys and girls playing in its streets.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 34:4 and continues through Zechariah 8:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 34:4",
+        "book": "Genesis",
+        "englishText": "Shechem spoke to his father, Hamor, saying, “Get me this young lady as a wife.”"
+      },
+      {
+        "reference": "Joel 4:3",
+        "book": "Joel",
+        "englishText": ""
+      },
+      {
+        "reference": "Zechariah 8:5",
+        "book": "Zechariah",
+        "englishText": "The streets of the city will be full of boys and girls playing in its streets.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

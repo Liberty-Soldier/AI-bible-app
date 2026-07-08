@@ -4,7 +4,7 @@
   "title": "כַּרְכְּמִישׁ",
   "subtitle": "H3751 • Hebrew name",
   "simple": {
-    "meaning": "כַּרְכְּמִישׁ (Karkᵉmîysh) appears 3 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "כַּרְכְּמִישׁ (Karkᵉmîysh) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in 2 Chronicles, Isaiah, Jeremiah, beginning at 2 Chronicles 35:20. BibleIQ detects the main surrounding context as family line, kingship, Egypt.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to כַּרְכְּמִישׁ (H3751) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows כַּרְכְּמִישׁ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,94 @@
     "laterReferences": [
       "Isaiah 10:9",
       "Jeremiah 46:2"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3751",
+    "source": "hebrew",
+    "strong": "H3751",
+    "lemma": "כַּרְכְּמִישׁ",
+    "transliteration": "Karkᵉmîysh",
+    "definition": "Karkemish , a place in Syria",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Chronicles 35:20",
+      "book": "2 Chronicles",
+      "bookName": "2 Chronicles",
+      "englishText": "After all this, when Josiah had prepared the temple, Neco king of Egypt went up to fight against Carchemish by the Euphrates, and Josiah went out against him."
+    },
+    "books": [
+      "2 Chronicles",
+      "Isaiah",
+      "Jeremiah"
+    ],
+    "references": [
+      "2 Chronicles 35:20",
+      "Isaiah 10:9",
+      "Jeremiah 46:2"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "2 Chronicles 35:20",
+        "evidenceText": "After all this, when Josiah had prepared the temple, Neco king of Egypt went up to fight against Carchemish by the Euphrates, and Josiah went out against him."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Chronicles 35:20",
+        "phase": "Movement or place",
+        "evidenceText": "After all this, when Josiah had prepared the temple, Neco king of Egypt went up to fight against Carchemish by the Euphrates, and Josiah went out against him."
+      },
+      {
+        "reference": "Isaiah 10:9",
+        "phase": "Occurrence",
+        "evidenceText": "Isn’t Calno like Carchemish? Isn’t Hamath like Arpad? Isn’t Samaria like Damascus?”"
+      },
+      {
+        "reference": "Jeremiah 46:2",
+        "phase": "Occurrence",
+        "evidenceText": "Of Egypt: concerning the army of Pharaoh Necoh king of Egypt, which was by the river Euphrates in Carchemish, which Nebuchadnezzar king of Babylon struck in the fourth year of Jehoiakim the son of Josiah, king of Judah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Chronicles 35:20 and continues through Jeremiah 46:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Chronicles 35:20",
+        "book": "2 Chronicles",
+        "englishText": "After all this, when Josiah had prepared the temple, Neco king of Egypt went up to fight against Carchemish by the Euphrates, and Josiah went out against him."
+      },
+      {
+        "reference": "Isaiah 10:9",
+        "book": "Isaiah",
+        "englishText": "Isn’t Calno like Carchemish? Isn’t Hamath like Arpad? Isn’t Samaria like Damascus?”"
+      },
+      {
+        "reference": "Jeremiah 46:2",
+        "book": "Jeremiah",
+        "englishText": "Of Egypt: concerning the army of Pharaoh Necoh king of Egypt, which was by the river Euphrates in Carchemish, which Nebuchadnezzar king of Babylon struck in the fourth year of Jehoiakim the son of Josiah, king of Judah."
+      }
     ]
   },
   "evidence": {

@@ -4,7 +4,7 @@
   "title": "שָׁרוֹן",
   "subtitle": "H8289 • Hebrew name",
   "simple": {
-    "meaning": "שָׁרוֹן (Shârôwn) appears 7 times in the Hebrew Scriptures and is introduced in connection with flocks and in connection with kingship.",
+    "meaning": "שָׁרוֹן (Shârôwn) appears 7 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with flocks and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Joshua, 1 Chronicles, Song of Solomon, Isaiah, beginning at Joshua 12:18. BibleIQ detects the main surrounding context as family line, flock, kingship, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שָׁרוֹן (H8289) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שָׁרוֹן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,146 @@
       "Song of Songs 2:1",
       "Isaiah 33:9",
       "Isaiah 35:2"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8289",
+    "source": "hebrew",
+    "strong": "H8289",
+    "lemma": "שָׁרוֹן",
+    "transliteration": "Shârôwn",
+    "definition": "Sharon , the name of a place in Palestine",
+    "occurrenceCount": 7,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 12:18",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "the king of Aphek, one;"
+    },
+    "books": [
+      "Joshua",
+      "1 Chronicles",
+      "Song of Solomon",
+      "Isaiah"
+    ],
+    "references": [
+      "Joshua 12:18",
+      "1 Chronicles 5:16",
+      "1 Chronicles 27:29",
+      "Song of Songs 2:1",
+      "Isaiah 33:9",
+      "Isaiah 35:2",
+      "Isaiah 65:10"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "1 Chronicles 5:16",
+        "evidenceText": "They lived in Gilead in Bashan, and in its towns, and in all the pasture lands of Sharon, as far as their borders."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Isaiah 33:9",
+        "evidenceText": "The land mourns and languishes."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 12:18",
+        "phase": "Occurrence",
+        "evidenceText": "the king of Aphek, one;"
+      },
+      {
+        "reference": "1 Chronicles 5:16",
+        "phase": "Movement or place",
+        "evidenceText": "They lived in Gilead in Bashan, and in its towns, and in all the pasture lands of Sharon, as far as their borders."
+      },
+      {
+        "reference": "1 Chronicles 27:29",
+        "phase": "Occurrence",
+        "evidenceText": "and over the herds that fed in Sharon was Shitrai the Sharonite; and over the herds that were in the valleys was Shaphat the son of Adlai;"
+      },
+      {
+        "reference": "Song of Songs 2:1",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "Isaiah 33:9",
+        "phase": "Movement or place",
+        "evidenceText": "The land mourns and languishes."
+      },
+      {
+        "reference": "Isaiah 35:2",
+        "phase": "Occurrence",
+        "evidenceText": "It will blossom abundantly,"
+      },
+      {
+        "reference": "Isaiah 65:10",
+        "phase": "Occurrence",
+        "evidenceText": "Sharon will be a fold of flocks,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 12:18 and continues through Isaiah 65:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 12:18",
+        "book": "Joshua",
+        "englishText": "the king of Aphek, one;"
+      },
+      {
+        "reference": "1 Chronicles 5:16",
+        "book": "1 Chronicles",
+        "englishText": "They lived in Gilead in Bashan, and in its towns, and in all the pasture lands of Sharon, as far as their borders."
+      },
+      {
+        "reference": "1 Chronicles 27:29",
+        "book": "1 Chronicles",
+        "englishText": "and over the herds that fed in Sharon was Shitrai the Sharonite; and over the herds that were in the valleys was Shaphat the son of Adlai;"
+      },
+      {
+        "reference": "Song of Songs 2:1",
+        "book": "Song of Solomon",
+        "englishText": ""
+      },
+      {
+        "reference": "Isaiah 33:9",
+        "book": "Isaiah",
+        "englishText": "The land mourns and languishes."
+      },
+      {
+        "reference": "Isaiah 35:2",
+        "book": "Isaiah",
+        "englishText": "It will blossom abundantly,"
+      },
+      {
+        "reference": "Isaiah 65:10",
+        "book": "Isaiah",
+        "englishText": "Sharon will be a fold of flocks,"
+      }
     ]
   },
   "evidence": {

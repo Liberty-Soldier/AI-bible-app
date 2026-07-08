@@ -4,7 +4,7 @@
   "title": "עֵזֶר",
   "subtitle": "H5829 • Hebrew name",
   "simple": {
-    "meaning": "עֵזֶר (ʻÊzer) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "עֵזֶר (ʻÊzer) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Nehemiah, beginning at 1 Chronicles 4:4. BibleIQ detects the main surrounding context as birth, family, family line, firstborn.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עֵזֶר (H5829) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עֵזֶר through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,109 @@
       "1 Chronicles 12:10",
       "Nehemiah 3:19",
       "Nehemiah 12:42"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5829",
+    "source": "hebrew",
+    "strong": "H5829",
+    "lemma": "עֵזֶר",
+    "transliteration": "ʻÊzer",
+    "definition": "Ezer , the name of four Israelites",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 4:4",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Penuel was the father of Gedor and Ezer the father of Hushah. These are the sons of Hur, the firstborn of Ephrathah, the father of Bethlehem."
+    },
+    "books": [
+      "1 Chronicles",
+      "Nehemiah"
+    ],
+    "references": [
+      "1 Chronicles 4:4",
+      "1 Chronicles 12:10",
+      "Nehemiah 3:19",
+      "Nehemiah 12:42"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Chronicles 4:4",
+        "evidenceText": "Penuel was the father of Gedor and Ezer the father of Hushah. These are the sons of Hur, the firstborn of Ephrathah, the father of Bethlehem."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 4:4",
+        "phase": "Birth or introduction",
+        "evidenceText": "Penuel was the father of Gedor and Ezer the father of Hushah. These are the sons of Hur, the firstborn of Ephrathah, the father of Bethlehem."
+      },
+      {
+        "reference": "1 Chronicles 12:10",
+        "phase": "Occurrence",
+        "evidenceText": "Mishmannah the fourth, Jeremiah the fifth,"
+      },
+      {
+        "reference": "Nehemiah 3:19",
+        "phase": "Occurrence",
+        "evidenceText": "Next to him, Ezer the son of Jeshua, the ruler of Mizpah, repaired another portion, across from the ascent to the armory at the turning of the wall."
+      },
+      {
+        "reference": "Nehemiah 12:42",
+        "phase": "Occurrence",
+        "evidenceText": "and Maaseiah, Shemaiah, Eleazar, Uzzi, Jehohanan, Malchijah, Elam, and Ezer. The singers sang loud, with Jezrahiah their overseer."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 4:4 and continues through Nehemiah 12:42.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 4:4",
+        "book": "1 Chronicles",
+        "englishText": "Penuel was the father of Gedor and Ezer the father of Hushah. These are the sons of Hur, the firstborn of Ephrathah, the father of Bethlehem."
+      },
+      {
+        "reference": "1 Chronicles 12:10",
+        "book": "1 Chronicles",
+        "englishText": "Mishmannah the fourth, Jeremiah the fifth,"
+      },
+      {
+        "reference": "Nehemiah 3:19",
+        "book": "Nehemiah",
+        "englishText": "Next to him, Ezer the son of Jeshua, the ruler of Mizpah, repaired another portion, across from the ascent to the armory at the turning of the wall."
+      },
+      {
+        "reference": "Nehemiah 12:42",
+        "book": "Nehemiah",
+        "englishText": "and Maaseiah, Shemaiah, Eleazar, Uzzi, Jehohanan, Malchijah, Elam, and Ezer. The singers sang loud, with Jezrahiah their overseer."
+      }
     ]
   },
   "evidence": {

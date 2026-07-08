@@ -25,6 +25,89 @@
       "Hosea 1:8"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3819",
+    "source": "hebrew",
+    "strong": "H3819",
+    "lemma": "לֹא רֻחָמָה",
+    "transliteration": "Lôʼ Ruchâmâh",
+    "definition": "Lo-Ruchamah , the symbolic name of a son of Hosea",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Hosea 1:6",
+      "book": "Hosea",
+      "bookName": "Hosea",
+      "englishText": "She conceived again, and bore a daughter."
+    },
+    "books": [
+      "Hosea"
+    ],
+    "references": [
+      "Hosea 1:6",
+      "Hosea 1:8"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Hosea 1:6",
+        "evidenceText": "She conceived again, and bore a daughter."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Hosea 1:8",
+        "evidenceText": "Now when she had weaned Lo-Ruhamah, she conceived, and bore a son."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Hosea 1:6",
+        "phase": "Birth or introduction",
+        "evidenceText": "She conceived again, and bore a daughter."
+      },
+      {
+        "reference": "Hosea 1:8",
+        "phase": "Birth or introduction",
+        "evidenceText": "Now when she had weaned Lo-Ruhamah, she conceived, and bore a son."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Hosea 1:6 and continues through Hosea 1:8.",
+    "occurrenceTrail": [
+      {
+        "reference": "Hosea 1:6",
+        "book": "Hosea",
+        "englishText": "She conceived again, and bore a daughter."
+      },
+      {
+        "reference": "Hosea 1:8",
+        "book": "Hosea",
+        "englishText": "Now when she had weaned Lo-Ruhamah, she conceived, and bore a son."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

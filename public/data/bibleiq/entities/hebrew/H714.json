@@ -25,6 +25,85 @@
       "Numbers 26:40"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H714",
+    "source": "hebrew",
+    "strong": "H714",
+    "lemma": "אַרְדְּ",
+    "transliteration": "ʼArd",
+    "definition": "Ard , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:21",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Benjamin: Bela, Becher, Ashbel, Gera, Naaman, Ehi, Rosh, Muppim, Huppim, and Ard."
+    },
+    "books": [
+      "Genesis",
+      "Numbers"
+    ],
+    "references": [
+      "Genesis 46:21",
+      "Numbers 26:40"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 46:21",
+        "evidenceText": "The sons of Benjamin: Bela, Becher, Ashbel, Gera, Naaman, Ehi, Rosh, Muppim, Huppim, and Ard."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 26:40",
+        "evidenceText": "The sons of Bela were Ard and Naaman: the family of the Ardites; and of Naaman, the family of the Naamites."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:21",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Benjamin: Bela, Becher, Ashbel, Gera, Naaman, Ehi, Rosh, Muppim, Huppim, and Ard."
+      },
+      {
+        "reference": "Numbers 26:40",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Bela were Ard and Naaman: the family of the Ardites; and of Naaman, the family of the Naamites."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:21 and continues through Numbers 26:40.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:21",
+        "book": "Genesis",
+        "englishText": "The sons of Benjamin: Bela, Becher, Ashbel, Gera, Naaman, Ehi, Rosh, Muppim, Huppim, and Ard."
+      },
+      {
+        "reference": "Numbers 26:40",
+        "book": "Numbers",
+        "englishText": "The sons of Bela were Ard and Naaman: the family of the Ardites; and of Naaman, the family of the Naamites."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

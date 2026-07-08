@@ -4,7 +4,7 @@
   "title": "יַרְחָע",
   "subtitle": "H3398 • Hebrew name",
   "simple": {
-    "meaning": "יַרְחָע (Yarchâʻ) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "יַרְחָע (Yarchâʻ) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 2:34. BibleIQ detects the main surrounding context as family line, Egypt.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יַרְחָע (H3398) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יַרְחָע through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,83 @@
     ],
     "laterReferences": [
       "1 Chronicles 2:35"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3398",
+    "source": "hebrew",
+    "strong": "H3398",
+    "lemma": "יַרְחָע",
+    "transliteration": "Yarchâʻ",
+    "definition": "Jarcha , an Egyptian",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:34",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Now Sheshan had no sons, but daughters. Sheshan had a servant, an Egyptian, whose name was Jarha."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:34",
+      "1 Chronicles 2:35"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:34",
+        "phase": "Occurrence",
+        "evidenceText": "Now Sheshan had no sons, but daughters. Sheshan had a servant, an Egyptian, whose name was Jarha."
+      },
+      {
+        "reference": "1 Chronicles 2:35",
+        "phase": "Occurrence",
+        "evidenceText": "Sheshan gave his daughter to Jarha his servant as wife; and she bore him Attai."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:34 and continues through 1 Chronicles 2:35.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:34",
+        "book": "1 Chronicles",
+        "englishText": "Now Sheshan had no sons, but daughters. Sheshan had a servant, an Egyptian, whose name was Jarha."
+      },
+      {
+        "reference": "1 Chronicles 2:35",
+        "book": "1 Chronicles",
+        "englishText": "Sheshan gave his daughter to Jarha his servant as wife; and she bore him Attai."
+      }
     ]
   },
   "evidence": {

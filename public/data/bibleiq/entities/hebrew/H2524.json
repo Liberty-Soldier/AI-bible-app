@@ -27,6 +27,116 @@
       "1 Samuel 4:21"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2524",
+    "source": "hebrew",
+    "strong": "H2524",
+    "lemma": "חָם",
+    "transliteration": "châm",
+    "definition": "a father-in-law (as in affinity)",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 38:13",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Tamar was told, “Behold, your father-in-law is going up to Timnah to shear his sheep.”"
+    },
+    "books": [
+      "Genesis",
+      "1 Samuel"
+    ],
+    "references": [
+      "Genesis 38:13",
+      "Genesis 38:25",
+      "1 Samuel 4:19",
+      "1 Samuel 4:21"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Samuel 4:19",
+        "evidenceText": "His daughter-in-law, Phinehas’ wife, was with child, near to giving birth. When she heard the news that God’s ark was taken and that her father-in-law and her husband were dead, she bowed herself and gave birth; for her pains came on her."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 38:13",
+        "phase": "Occurrence",
+        "evidenceText": "Tamar was told, “Behold, your father-in-law is going up to Timnah to shear his sheep.”"
+      },
+      {
+        "reference": "Genesis 38:25",
+        "phase": "Occurrence",
+        "evidenceText": "When she was brought out, she sent to her father-in-law, saying, “I am with child by the man who owns these.” She also said, “Please discern whose these are—the signet, and the cords, and the staff.”"
+      },
+      {
+        "reference": "1 Samuel 4:19",
+        "phase": "Birth or introduction",
+        "evidenceText": "His daughter-in-law, Phinehas’ wife, was with child, near to giving birth. When she heard the news that God’s ark was taken and that her father-in-law and her husband were dead, she bowed herself and gave birth; for her pains came on her."
+      },
+      {
+        "reference": "1 Samuel 4:21",
+        "phase": "Occurrence",
+        "evidenceText": "She named the child Ichabod,* “Ichabod” means “no glory”. saying, “The glory has departed from Israel!” because God’s ark was taken, and because of her father-in-law and her husband."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 38:13 and continues through 1 Samuel 4:21.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 38:13",
+        "book": "Genesis",
+        "englishText": "Tamar was told, “Behold, your father-in-law is going up to Timnah to shear his sheep.”"
+      },
+      {
+        "reference": "Genesis 38:25",
+        "book": "Genesis",
+        "englishText": "When she was brought out, she sent to her father-in-law, saying, “I am with child by the man who owns these.” She also said, “Please discern whose these are—the signet, and the cords, and the staff.”"
+      },
+      {
+        "reference": "1 Samuel 4:19",
+        "book": "1 Samuel",
+        "englishText": "His daughter-in-law, Phinehas’ wife, was with child, near to giving birth. When she heard the news that God’s ark was taken and that her father-in-law and her husband were dead, she bowed herself and gave birth; for her pains came on her."
+      },
+      {
+        "reference": "1 Samuel 4:21",
+        "book": "1 Samuel",
+        "englishText": "She named the child Ichabod,* “Ichabod” means “no glory”. saying, “The glory has departed from Israel!” because God’s ark was taken, and because of her father-in-law and her husband."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

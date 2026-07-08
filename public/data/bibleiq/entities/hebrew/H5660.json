@@ -4,7 +4,7 @@
   "title": "עַבְדִּי",
   "subtitle": "H5660 • Hebrew name",
   "simple": {
-    "meaning": "עַבְדִּי (ʻAbdîy) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "עַבְדִּי (ʻAbdîy) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, 2 Chronicles, Ezra, beginning at 1 Chronicles 6:29. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עַבְדִּי (H5660) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עַבְדִּי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,105 @@
     "laterReferences": [
       "2 Chronicles 29:12",
       "Ezra 10:26"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5660",
+    "source": "hebrew",
+    "strong": "H5660",
+    "lemma": "עַבְדִּי",
+    "transliteration": "ʻAbdîy",
+    "definition": "Abdi , the name of two Israelites",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 6:29",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Merari: Mahli, Libni his son, Shimei his son, Uzzah his son,"
+    },
+    "books": [
+      "1 Chronicles",
+      "2 Chronicles",
+      "Ezra"
+    ],
+    "references": [
+      "1 Chronicles 6:29",
+      "2 Chronicles 29:12",
+      "Ezra 10:26"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 6:29",
+        "evidenceText": "The sons of Merari: Mahli, Libni his son, Shimei his son, Uzzah his son,"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Chronicles 29:12",
+        "evidenceText": "Then the Levites arose, Mahath, the son of Amasai, and Joel the son of Azariah, of the sons of the Kohathites; and of the sons of Merari, Kish the son of Abdi, and Azariah the son of Jehallelel; and of the Gershonites, Joah the son of Zimmah, and Eden the son of Joah;"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ezra 10:26",
+        "evidenceText": "Of the sons of Elam: Mattaniah, Zechariah, and Jehiel, and Abdi, and Jeremoth, and Elijah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 6:29",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Merari: Mahli, Libni his son, Shimei his son, Uzzah his son,"
+      },
+      {
+        "reference": "2 Chronicles 29:12",
+        "phase": "Genealogy",
+        "evidenceText": "Then the Levites arose, Mahath, the son of Amasai, and Joel the son of Azariah, of the sons of the Kohathites; and of the sons of Merari, Kish the son of Abdi, and Azariah the son of Jehallelel; and of the Gershonites, Joah the son of Zimmah, and Eden the son of Joah;"
+      },
+      {
+        "reference": "Ezra 10:26",
+        "phase": "Genealogy",
+        "evidenceText": "Of the sons of Elam: Mattaniah, Zechariah, and Jehiel, and Abdi, and Jeremoth, and Elijah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 6:29 and continues through Ezra 10:26.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 6:29",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Merari: Mahli, Libni his son, Shimei his son, Uzzah his son,"
+      },
+      {
+        "reference": "2 Chronicles 29:12",
+        "book": "2 Chronicles",
+        "englishText": "Then the Levites arose, Mahath, the son of Amasai, and Joel the son of Azariah, of the sons of the Kohathites; and of the sons of Merari, Kish the son of Abdi, and Azariah the son of Jehallelel; and of the Gershonites, Joah the son of Zimmah, and Eden the son of Joah;"
+      },
+      {
+        "reference": "Ezra 10:26",
+        "book": "Ezra",
+        "englishText": "Of the sons of Elam: Mattaniah, Zechariah, and Jehiel, and Abdi, and Jeremoth, and Elijah."
+      }
     ]
   },
   "evidence": {

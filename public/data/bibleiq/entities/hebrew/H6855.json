@@ -4,7 +4,7 @@
   "title": "צִפֹּרָה",
   "subtitle": "H6855 • Hebrew name",
   "simple": {
-    "meaning": "צִפֹּרָה (Tsippôrâh) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text. The surrounding account also brings the name into blood crying from the ground.",
+    "meaning": "צִפֹּרָה (Tsippôrâh) appears 3 times in the Hebrew Scriptures and is introduced as a daughter in the family line. The surrounding account also brings the name into blood crying from the ground.",
     "biblicalBackground": "The first appearances are in Exodus, beginning at Exodus 2:21. BibleIQ detects the main surrounding context as family, family line, blood, Torah.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to צִפֹּרָה (H6855) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows צִפֹּרָה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,109 @@
     "laterReferences": [
       "Exodus 4:25",
       "Exodus 18:2"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6855",
+    "source": "hebrew",
+    "strong": "H6855",
+    "lemma": "צִפֹּרָה",
+    "transliteration": "Tsippôrâh",
+    "definition": "Tsipporah , Moses’ wife",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 2:21",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Moses was content to dwell with the man. He gave Moses Zipporah, his daughter."
+    },
+    "books": [
+      "Exodus"
+    ],
+    "references": [
+      "Exodus 2:21",
+      "Exodus 4:25",
+      "Exodus 18:2"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "blood",
+      "Torah"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Exodus 4:25",
+        "evidenceText": "Then Zipporah took a flint, and cut off the foreskin of her son, and cast it at his feet; and she said, “Surely you are a bridegroom of blood to me.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 2:21",
+        "phase": "Occurrence",
+        "evidenceText": "Moses was content to dwell with the man. He gave Moses Zipporah, his daughter."
+      },
+      {
+        "reference": "Exodus 4:25",
+        "phase": "Blood witness",
+        "evidenceText": "Then Zipporah took a flint, and cut off the foreskin of her son, and cast it at his feet; and she said, “Surely you are a bridegroom of blood to me.”"
+      },
+      {
+        "reference": "Exodus 18:2",
+        "phase": "Occurrence",
+        "evidenceText": "Jethro, Moses’ father-in-law, received Zipporah, Moses’ wife, after he had sent her away,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 2:21 and continues through Exodus 18:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 2:21",
+        "book": "Exodus",
+        "englishText": "Moses was content to dwell with the man. He gave Moses Zipporah, his daughter."
+      },
+      {
+        "reference": "Exodus 4:25",
+        "book": "Exodus",
+        "englishText": "Then Zipporah took a flint, and cut off the foreskin of her son, and cast it at his feet; and she said, “Surely you are a bridegroom of blood to me.”"
+      },
+      {
+        "reference": "Exodus 18:2",
+        "book": "Exodus",
+        "englishText": "Jethro, Moses’ father-in-law, received Zipporah, Moses’ wife, after he had sent her away,"
+      }
     ]
   },
   "evidence": {

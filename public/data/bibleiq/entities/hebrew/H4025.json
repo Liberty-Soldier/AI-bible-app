@@ -25,6 +25,82 @@
       "1 Chronicles 1:54"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4025",
+    "source": "hebrew",
+    "strong": "H4025",
+    "lemma": "מַגְדִּיאֵל",
+    "transliteration": "Magdîyʼêl",
+    "definition": "Magdiel , an Idumaean",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:43",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "chief Magdiel, and chief Iram. These are the chiefs of Edom, according to their habitations in the land of their possession. This is Esau, the father of the Edomites."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:43",
+      "1 Chronicles 1:54"
+    ],
+    "themes": [
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 36:43",
+        "evidenceText": "chief Magdiel, and chief Iram. These are the chiefs of Edom, according to their habitations in the land of their possession. This is Esau, the father of the Edomites."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:43",
+        "phase": "Movement or place",
+        "evidenceText": "chief Magdiel, and chief Iram. These are the chiefs of Edom, according to their habitations in the land of their possession. This is Esau, the father of the Edomites."
+      },
+      {
+        "reference": "1 Chronicles 1:54",
+        "phase": "Occurrence",
+        "evidenceText": "chief Magdiel, and chief Iram. These are the chiefs of Edom."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:43 and continues through 1 Chronicles 1:54.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:43",
+        "book": "Genesis",
+        "englishText": "chief Magdiel, and chief Iram. These are the chiefs of Edom, according to their habitations in the land of their possession. This is Esau, the father of the Edomites."
+      },
+      {
+        "reference": "1 Chronicles 1:54",
+        "book": "1 Chronicles",
+        "englishText": "chief Magdiel, and chief Iram. These are the chiefs of Edom."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -26,6 +26,93 @@
       "Hosea 12:15"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8563",
+    "source": "hebrew",
+    "strong": "H8563",
+    "lemma": "תַּמְרוּר",
+    "transliteration": "tamrûwr",
+    "definition": "bitterness (plural as collective)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Jeremiah 6:26",
+      "book": "Jeremiah",
+      "bookName": "Jeremiah",
+      "englishText": "Daughter of my people, clothe yourself with sackcloth, and wallow in ashes! Mourn, as for an only son, most bitter lamentation, for the destroyer will suddenly come on us."
+    },
+    "books": [
+      "Jeremiah",
+      "Hosea"
+    ],
+    "references": [
+      "Jeremiah 6:26",
+      "Jeremiah 31:15",
+      "Hosea 12:15"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Jeremiah 6:26",
+        "evidenceText": "Daughter of my people, clothe yourself with sackcloth, and wallow in ashes! Mourn, as for an only son, most bitter lamentation, for the destroyer will suddenly come on us."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Jeremiah 6:26",
+        "phase": "Genealogy",
+        "evidenceText": "Daughter of my people, clothe yourself with sackcloth, and wallow in ashes! Mourn, as for an only son, most bitter lamentation, for the destroyer will suddenly come on us."
+      },
+      {
+        "reference": "Jeremiah 31:15",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh says:"
+      },
+      {
+        "reference": "Hosea 12:15",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Jeremiah 6:26 and continues through Hosea 12:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Jeremiah 6:26",
+        "book": "Jeremiah",
+        "englishText": "Daughter of my people, clothe yourself with sackcloth, and wallow in ashes! Mourn, as for an only son, most bitter lamentation, for the destroyer will suddenly come on us."
+      },
+      {
+        "reference": "Jeremiah 31:15",
+        "book": "Jeremiah",
+        "englishText": "Yahweh says:"
+      },
+      {
+        "reference": "Hosea 12:15",
+        "book": "Hosea",
+        "englishText": ""
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

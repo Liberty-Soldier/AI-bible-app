@@ -4,7 +4,7 @@
   "title": "חַגִּית",
   "subtitle": "H2294 • Hebrew name",
   "simple": {
-    "meaning": "חַגִּית (Chaggîyth) appears 5 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "חַגִּית (Chaggîyth) appears 5 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in 2 Samuel, 1 Kings, 1 Chronicles, beginning at 2 Samuel 3:4. BibleIQ detects the main surrounding context as family, family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חַגִּית (H2294) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חַגִּית through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,127 @@
       "1 Kings 1:11",
       "1 Kings 2:13",
       "1 Chronicles 3:2"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2294",
+    "source": "hebrew",
+    "strong": "H2294",
+    "lemma": "חַגִּית",
+    "transliteration": "Chaggîyth",
+    "definition": "Chaggith , a wife of David",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 3:4",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "and the fourth, Adonijah the son of Haggith; and the fifth, Shephatiah the son of Abital;"
+    },
+    "books": [
+      "2 Samuel",
+      "1 Kings",
+      "1 Chronicles"
+    ],
+    "references": [
+      "2 Samuel 3:4",
+      "1 Kings 1:5",
+      "1 Kings 1:11",
+      "1 Kings 2:13",
+      "1 Chronicles 3:2"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 3:2",
+        "evidenceText": "the third, Absalom the son of Maacah the daughter of Talmai king of Geshur; the fourth, Adonijah the son of Haggith;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Samuel 3:4",
+        "phase": "Occurrence",
+        "evidenceText": "and the fourth, Adonijah the son of Haggith; and the fifth, Shephatiah the son of Abital;"
+      },
+      {
+        "reference": "1 Kings 1:5",
+        "phase": "Occurrence",
+        "evidenceText": "Then Adonijah the son of Haggith exalted himself, saying, “I will be king.” Then he prepared him chariots and horsemen, and fifty men to run before him."
+      },
+      {
+        "reference": "1 Kings 1:11",
+        "phase": "Occurrence",
+        "evidenceText": "Then Nathan spoke to Bathsheba the mother of Solomon, saying, “Haven’t you heard that Adonijah the son of Haggith reigns, and David our lord doesn’t know it?"
+      },
+      {
+        "reference": "1 Kings 2:13",
+        "phase": "Occurrence",
+        "evidenceText": "Then Adonijah the son of Haggith came to Bathsheba the mother of Solomon. She said, “Do you come peaceably?”"
+      },
+      {
+        "reference": "1 Chronicles 3:2",
+        "phase": "Genealogy",
+        "evidenceText": "the third, Absalom the son of Maacah the daughter of Talmai king of Geshur; the fourth, Adonijah the son of Haggith;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 3:4 and continues through 1 Chronicles 3:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 3:4",
+        "book": "2 Samuel",
+        "englishText": "and the fourth, Adonijah the son of Haggith; and the fifth, Shephatiah the son of Abital;"
+      },
+      {
+        "reference": "1 Kings 1:5",
+        "book": "1 Kings",
+        "englishText": "Then Adonijah the son of Haggith exalted himself, saying, “I will be king.” Then he prepared him chariots and horsemen, and fifty men to run before him."
+      },
+      {
+        "reference": "1 Kings 1:11",
+        "book": "1 Kings",
+        "englishText": "Then Nathan spoke to Bathsheba the mother of Solomon, saying, “Haven’t you heard that Adonijah the son of Haggith reigns, and David our lord doesn’t know it?"
+      },
+      {
+        "reference": "1 Kings 2:13",
+        "book": "1 Kings",
+        "englishText": "Then Adonijah the son of Haggith came to Bathsheba the mother of Solomon. She said, “Do you come peaceably?”"
+      },
+      {
+        "reference": "1 Chronicles 3:2",
+        "book": "1 Chronicles",
+        "englishText": "the third, Absalom the son of Maacah the daughter of Talmai king of Geshur; the fourth, Adonijah the son of Haggith;"
+      }
     ]
   },
   "evidence": {

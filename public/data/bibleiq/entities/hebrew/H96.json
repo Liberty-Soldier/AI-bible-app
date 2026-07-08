@@ -23,6 +23,58 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H96",
+    "source": "hebrew",
+    "strong": "H96",
+    "lemma": "אֶגֶל",
+    "transliteration": "ʼegel",
+    "definition": "a reservoir",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 38:28",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "Does the rain have a father?"
+    },
+    "books": [
+      "Job"
+    ],
+    "references": [
+      "Job 38:28"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Job 38:28",
+        "phase": "Occurrence",
+        "evidenceText": "Does the rain have a father?"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Job 38:28.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 38:28",
+        "book": "Job",
+        "englishText": "Does the rain have a father?"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

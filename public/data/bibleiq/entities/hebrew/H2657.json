@@ -25,6 +25,74 @@
       "Isaiah 62:4"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2657",
+    "source": "hebrew",
+    "strong": "H2657",
+    "lemma": "חֶפְצִי בָּהּ",
+    "transliteration": "Chephtsîy bâhh",
+    "definition": "Cheptsi-bah , a fanciful name for Palestine",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Kings 21:1",
+      "book": "2 Kings",
+      "bookName": "2 Kings",
+      "englishText": "Manasseh was twelve years old when he began to reign, and he reigned fifty-five years in Jerusalem. His mother’s name was Hephzibah."
+    },
+    "books": [
+      "2 Kings",
+      "Isaiah"
+    ],
+    "references": [
+      "2 Kings 21:1",
+      "Isaiah 62:4"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "2 Kings 21:1",
+        "phase": "Occurrence",
+        "evidenceText": "Manasseh was twelve years old when he began to reign, and he reigned fifty-five years in Jerusalem. His mother’s name was Hephzibah."
+      },
+      {
+        "reference": "Isaiah 62:4",
+        "phase": "Occurrence",
+        "evidenceText": "You will not be called Forsaken any more,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Kings 21:1 and continues through Isaiah 62:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Kings 21:1",
+        "book": "2 Kings",
+        "englishText": "Manasseh was twelve years old when he began to reign, and he reigned fifty-five years in Jerusalem. His mother’s name was Hephzibah."
+      },
+      {
+        "reference": "Isaiah 62:4",
+        "book": "Isaiah",
+        "englishText": "You will not be called Forsaken any more,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -27,6 +27,115 @@
       "Micah 1:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6428",
+    "source": "hebrew",
+    "strong": "H6428",
+    "lemma": "פָּלַשׁ",
+    "transliteration": "pâlash",
+    "definition": "to roll (in dust)",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Jeremiah 6:26",
+      "book": "Jeremiah",
+      "bookName": "Jeremiah",
+      "englishText": "Daughter of my people, clothe yourself with sackcloth, and wallow in ashes! Mourn, as for an only son, most bitter lamentation, for the destroyer will suddenly come on us."
+    },
+    "books": [
+      "Jeremiah",
+      "Ezekiel",
+      "Micah"
+    ],
+    "references": [
+      "Jeremiah 6:26",
+      "Jeremiah 25:34",
+      "Ezekiel 27:30",
+      "Micah 1:10"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Jeremiah 6:26",
+        "evidenceText": "Daughter of my people, clothe yourself with sackcloth, and wallow in ashes! Mourn, as for an only son, most bitter lamentation, for the destroyer will suddenly come on us."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Jeremiah 6:26",
+        "phase": "Genealogy",
+        "evidenceText": "Daughter of my people, clothe yourself with sackcloth, and wallow in ashes! Mourn, as for an only son, most bitter lamentation, for the destroyer will suddenly come on us."
+      },
+      {
+        "reference": "Jeremiah 25:34",
+        "phase": "Occurrence",
+        "evidenceText": "Wail, you shepherds, and cry."
+      },
+      {
+        "reference": "Ezekiel 27:30",
+        "phase": "Occurrence",
+        "evidenceText": "and will cause their voice to be heard over you,"
+      },
+      {
+        "reference": "Micah 1:10",
+        "phase": "Occurrence",
+        "evidenceText": "Don’t tell it in Gath."
+      },
+      {
+        "reference": "Micah 1:10",
+        "phase": "Occurrence",
+        "evidenceText": "Don’t tell it in Gath."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Jeremiah 6:26 and continues through Micah 1:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Jeremiah 6:26",
+        "book": "Jeremiah",
+        "englishText": "Daughter of my people, clothe yourself with sackcloth, and wallow in ashes! Mourn, as for an only son, most bitter lamentation, for the destroyer will suddenly come on us."
+      },
+      {
+        "reference": "Jeremiah 25:34",
+        "book": "Jeremiah",
+        "englishText": "Wail, you shepherds, and cry."
+      },
+      {
+        "reference": "Ezekiel 27:30",
+        "book": "Ezekiel",
+        "englishText": "and will cause their voice to be heard over you,"
+      },
+      {
+        "reference": "Micah 1:10",
+        "book": "Micah",
+        "englishText": "Don’t tell it in Gath."
+      },
+      {
+        "reference": "Micah 1:10",
+        "book": "Micah",
+        "englishText": "Don’t tell it in Gath."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

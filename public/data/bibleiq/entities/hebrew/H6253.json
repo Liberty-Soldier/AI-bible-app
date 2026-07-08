@@ -26,6 +26,93 @@
       "2 Kings 23:13"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6253",
+    "source": "hebrew",
+    "strong": "H6253",
+    "lemma": "עַשְׁתֹּרֶת",
+    "transliteration": "ʻAshtôreth",
+    "definition": "Ashtoreth , the Phoenician goddess of love (and increase)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Kings 11:5",
+      "book": "1 Kings",
+      "bookName": "1 Kings",
+      "englishText": "For Solomon went after Ashtoreth the goddess of the Sidonians, and after Milcom the abomination of the Ammonites."
+    },
+    "books": [
+      "1 Kings",
+      "2 Kings"
+    ],
+    "references": [
+      "1 Kings 11:5",
+      "1 Kings 11:33",
+      "2 Kings 23:13"
+    ],
+    "themes": [
+      "family",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "defilement",
+        "label": "Defilement",
+        "reference": "2 Kings 23:13",
+        "evidenceText": "The king defiled the high places that were before Jerusalem, which were on the right hand of the mountain of corruption, which Solomon the king of Israel had built for Ashtoreth the abomination of the Sidonians, and for Chemosh the abomination of Moab, and for Milcom the abomination of the children of Ammon."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Kings 11:5",
+        "phase": "Occurrence",
+        "evidenceText": "For Solomon went after Ashtoreth the goddess of the Sidonians, and after Milcom the abomination of the Ammonites."
+      },
+      {
+        "reference": "1 Kings 11:33",
+        "phase": "Occurrence",
+        "evidenceText": "because that they have forsaken me, and have worshiped Ashtoreth the goddess of the Sidonians, Chemosh the god of Moab, and Milcom the god of the children of Ammon. They have not walked in my ways, to do that which is right in my eyes, and to keep my statutes and my ordinances, as David his father did."
+      },
+      {
+        "reference": "2 Kings 23:13",
+        "phase": "Defilement",
+        "evidenceText": "The king defiled the high places that were before Jerusalem, which were on the right hand of the mountain of corruption, which Solomon the king of Israel had built for Ashtoreth the abomination of the Sidonians, and for Chemosh the abomination of Moab, and for Milcom the abomination of the children of Ammon."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Kings 11:5 and continues through 2 Kings 23:13.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Kings 11:5",
+        "book": "1 Kings",
+        "englishText": "For Solomon went after Ashtoreth the goddess of the Sidonians, and after Milcom the abomination of the Ammonites."
+      },
+      {
+        "reference": "1 Kings 11:33",
+        "book": "1 Kings",
+        "englishText": "because that they have forsaken me, and have worshiped Ashtoreth the goddess of the Sidonians, Chemosh the god of Moab, and Milcom the god of the children of Ammon. They have not walked in my ways, to do that which is right in my eyes, and to keep my statutes and my ordinances, as David his father did."
+      },
+      {
+        "reference": "2 Kings 23:13",
+        "book": "2 Kings",
+        "englishText": "The king defiled the high places that were before Jerusalem, which were on the right hand of the mountain of corruption, which Solomon the king of Israel had built for Ashtoreth the abomination of the Sidonians, and for Chemosh the abomination of Moab, and for Milcom the abomination of the children of Ammon."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

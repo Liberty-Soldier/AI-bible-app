@@ -4,7 +4,7 @@
   "title": "חוּשִׁים",
   "subtitle": "H2366 • Hebrew name",
   "simple": {
-    "meaning": "חוּשִׁים (Chûwshîym) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "חוּשִׁים (Chûwshîym) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 46:23. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חוּשִׁים (H2366) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חוּשִׁים through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,109 @@
       "1 Chronicles 7:12",
       "1 Chronicles 8:8",
       "1 Chronicles 8:11"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2366",
+    "source": "hebrew",
+    "strong": "H2366",
+    "lemma": "חוּשִׁים",
+    "transliteration": "Chûwshîym",
+    "definition": "Chushim , the name of three Israelites",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:23",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The son of Dan: Hushim."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 46:23",
+      "1 Chronicles 7:12",
+      "1 Chronicles 8:8",
+      "1 Chronicles 8:11"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:12",
+        "evidenceText": "So were Shuppim, Huppim, the sons of Ir, Hushim, and the sons of Aher."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:23",
+        "phase": "Occurrence",
+        "evidenceText": "The son of Dan: Hushim."
+      },
+      {
+        "reference": "1 Chronicles 7:12",
+        "phase": "Genealogy",
+        "evidenceText": "So were Shuppim, Huppim, the sons of Ir, Hushim, and the sons of Aher."
+      },
+      {
+        "reference": "1 Chronicles 8:8",
+        "phase": "Occurrence",
+        "evidenceText": "Shaharaim became the father of children in the field of Moab, after he had sent them away. Hushim and Baara were his wives."
+      },
+      {
+        "reference": "1 Chronicles 8:11",
+        "phase": "Occurrence",
+        "evidenceText": "By Hushim, he became the father of Abitub and Elpaal."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:23 and continues through 1 Chronicles 8:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:23",
+        "book": "Genesis",
+        "englishText": "The son of Dan: Hushim."
+      },
+      {
+        "reference": "1 Chronicles 7:12",
+        "book": "1 Chronicles",
+        "englishText": "So were Shuppim, Huppim, the sons of Ir, Hushim, and the sons of Aher."
+      },
+      {
+        "reference": "1 Chronicles 8:8",
+        "book": "1 Chronicles",
+        "englishText": "Shaharaim became the father of children in the field of Moab, after he had sent them away. Hushim and Baara were his wives."
+      },
+      {
+        "reference": "1 Chronicles 8:11",
+        "book": "1 Chronicles",
+        "englishText": "By Hushim, he became the father of Abitub and Elpaal."
+      }
     ]
   },
   "evidence": {

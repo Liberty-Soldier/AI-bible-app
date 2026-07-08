@@ -25,6 +25,78 @@
       "1 Chronicles 8:25"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8349",
+    "source": "hebrew",
+    "strong": "H8349",
+    "lemma": "שָׁשַׁק",
+    "transliteration": "Shâshaq",
+    "definition": "Shashak , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 8:14",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "and Ahio, Shashak, Jeremoth,"
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 8:14",
+      "1 Chronicles 8:25"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 8:25",
+        "evidenceText": "Iphdeiah, Penuel, the sons of Shashak,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 8:14",
+        "phase": "Occurrence",
+        "evidenceText": "and Ahio, Shashak, Jeremoth,"
+      },
+      {
+        "reference": "1 Chronicles 8:25",
+        "phase": "Genealogy",
+        "evidenceText": "Iphdeiah, Penuel, the sons of Shashak,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 8:14 and continues through 1 Chronicles 8:25.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 8:14",
+        "book": "1 Chronicles",
+        "englishText": "and Ahio, Shashak, Jeremoth,"
+      },
+      {
+        "reference": "1 Chronicles 8:25",
+        "book": "1 Chronicles",
+        "englishText": "Iphdeiah, Penuel, the sons of Shashak,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

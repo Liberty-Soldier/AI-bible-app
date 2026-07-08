@@ -27,6 +27,101 @@
       "Nehemiah 10:15"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2240",
+    "source": "hebrew",
+    "strong": "H2240",
+    "lemma": "זַתּוּא",
+    "transliteration": "Zattûwʼ",
+    "definition": "Zattu , an Israelite",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 2:8",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "The children of Zattu, nine hundred forty-five."
+    },
+    "books": [
+      "Ezra",
+      "Nehemiah"
+    ],
+    "references": [
+      "Ezra 2:8",
+      "Ezra 10:27",
+      "Nehemiah 7:13",
+      "Nehemiah 10:15"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ezra 10:27",
+        "evidenceText": "Of the sons of Zattu: Elioenai, Eliashib, Mattaniah, and Jeremoth, and Zabad, and Aziza."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 2:8",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Zattu, nine hundred forty-five."
+      },
+      {
+        "reference": "Ezra 10:27",
+        "phase": "Genealogy",
+        "evidenceText": "Of the sons of Zattu: Elioenai, Eliashib, Mattaniah, and Jeremoth, and Zabad, and Aziza."
+      },
+      {
+        "reference": "Nehemiah 7:13",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Zattu: eight hundred forty-five."
+      },
+      {
+        "reference": "Nehemiah 10:15",
+        "phase": "Occurrence",
+        "evidenceText": "Bunni, Azgad, Bebai,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ezra 2:8 and continues through Nehemiah 10:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 2:8",
+        "book": "Ezra",
+        "englishText": "The children of Zattu, nine hundred forty-five."
+      },
+      {
+        "reference": "Ezra 10:27",
+        "book": "Ezra",
+        "englishText": "Of the sons of Zattu: Elioenai, Eliashib, Mattaniah, and Jeremoth, and Zabad, and Aziza."
+      },
+      {
+        "reference": "Nehemiah 7:13",
+        "book": "Nehemiah",
+        "englishText": "The children of Zattu: eight hundred forty-five."
+      },
+      {
+        "reference": "Nehemiah 10:15",
+        "book": "Nehemiah",
+        "englishText": "Bunni, Azgad, Bebai,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "אַסִּיר",
   "subtitle": "H617 • Hebrew name",
   "simple": {
-    "meaning": "אַסִּיר (ʼAççîyr) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אַסִּיר (ʼAççîyr) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Exodus, 1 Chronicles, beginning at Exodus 6:24. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אַסִּיר (H617) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אַסִּיר through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,132 @@
       "1 Chronicles 6:7",
       "1 Chronicles 6:8",
       "1 Chronicles 6:22"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H617",
+    "source": "hebrew",
+    "strong": "H617",
+    "lemma": "אַסִּיר",
+    "transliteration": "ʼAççîyr",
+    "definition": "Assir , the name of two Israelites",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 6:24",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "The sons of Korah: Assir, and Elkanah, and Abiasaph; these are the families of the Korahites."
+    },
+    "books": [
+      "Exodus",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Exodus 6:24",
+      "1 Chronicles 3:17",
+      "1 Chronicles 6:7",
+      "1 Chronicles 6:8",
+      "1 Chronicles 6:22"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Exodus 6:24",
+        "evidenceText": "The sons of Korah: Assir, and Elkanah, and Abiasaph; these are the families of the Korahites."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 3:17",
+        "evidenceText": "The sons of Jeconiah, the captive: Shealtiel his son,"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 6:22",
+        "evidenceText": "The sons of Kohath: Amminadab his son, Korah his son, Assir his son,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 6:24",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Korah: Assir, and Elkanah, and Abiasaph; these are the families of the Korahites."
+      },
+      {
+        "reference": "1 Chronicles 3:17",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Jeconiah, the captive: Shealtiel his son,"
+      },
+      {
+        "reference": "1 Chronicles 6:7",
+        "phase": "Occurrence",
+        "evidenceText": "Meraioth became the father of Amariah. Amariah became the father of Ahitub."
+      },
+      {
+        "reference": "1 Chronicles 6:8",
+        "phase": "Occurrence",
+        "evidenceText": "Ahitub became the father of Zadok. Zadok became the father of Ahimaaz."
+      },
+      {
+        "reference": "1 Chronicles 6:22",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Kohath: Amminadab his son, Korah his son, Assir his son,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 6:24 and continues through 1 Chronicles 6:22.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 6:24",
+        "book": "Exodus",
+        "englishText": "The sons of Korah: Assir, and Elkanah, and Abiasaph; these are the families of the Korahites."
+      },
+      {
+        "reference": "1 Chronicles 3:17",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Jeconiah, the captive: Shealtiel his son,"
+      },
+      {
+        "reference": "1 Chronicles 6:7",
+        "book": "1 Chronicles",
+        "englishText": "Meraioth became the father of Amariah. Amariah became the father of Ahitub."
+      },
+      {
+        "reference": "1 Chronicles 6:8",
+        "book": "1 Chronicles",
+        "englishText": "Ahitub became the father of Zadok. Zadok became the father of Ahimaaz."
+      },
+      {
+        "reference": "1 Chronicles 6:22",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Kohath: Amminadab his son, Korah his son, Assir his son,"
+      }
     ]
   },
   "evidence": {

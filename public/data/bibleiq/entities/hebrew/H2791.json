@@ -4,7 +4,7 @@
   "title": "חֶרֶשׁ",
   "subtitle": "H2791 • Hebrew name",
   "simple": {
-    "meaning": "חֶרֶשׁ (cheresh) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "חֶרֶשׁ (cheresh) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Joshua, Nehemiah, Isaiah, beginning at Joshua 2:1. BibleIQ detects the main surrounding context as family line, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חֶרֶשׁ (H2791) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חֶרֶשׁ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,94 @@
     "laterReferences": [
       "Nehemiah 11:35",
       "Isaiah 3:3"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2791",
+    "source": "hebrew",
+    "strong": "H2791",
+    "lemma": "חֶרֶשׁ",
+    "transliteration": "cheresh",
+    "definition": "magical craft ; also silence",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 2:1",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "Joshua the son of Nun secretly sent two men out of Shittim as spies, saying, “Go, view the land, including Jericho.” They went and came into the house of a prostitute whose name was Rahab, and slept there."
+    },
+    "books": [
+      "Joshua",
+      "Nehemiah",
+      "Isaiah"
+    ],
+    "references": [
+      "Joshua 2:1",
+      "Nehemiah 11:35",
+      "Isaiah 3:3"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 2:1",
+        "evidenceText": "Joshua the son of Nun secretly sent two men out of Shittim as spies, saying, “Go, view the land, including Jericho.” They went and came into the house of a prostitute whose name was Rahab, and slept there."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 2:1",
+        "phase": "Movement or place",
+        "evidenceText": "Joshua the son of Nun secretly sent two men out of Shittim as spies, saying, “Go, view the land, including Jericho.” They went and came into the house of a prostitute whose name was Rahab, and slept there."
+      },
+      {
+        "reference": "Nehemiah 11:35",
+        "phase": "Occurrence",
+        "evidenceText": "Lod, and Ono, the valley of craftsmen."
+      },
+      {
+        "reference": "Isaiah 3:3",
+        "phase": "Occurrence",
+        "evidenceText": "the captain of fifty,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 2:1 and continues through Isaiah 3:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 2:1",
+        "book": "Joshua",
+        "englishText": "Joshua the son of Nun secretly sent two men out of Shittim as spies, saying, “Go, view the land, including Jericho.” They went and came into the house of a prostitute whose name was Rahab, and slept there."
+      },
+      {
+        "reference": "Nehemiah 11:35",
+        "book": "Nehemiah",
+        "englishText": "Lod, and Ono, the valley of craftsmen."
+      },
+      {
+        "reference": "Isaiah 3:3",
+        "book": "Isaiah",
+        "englishText": "the captain of fifty,"
+      }
     ]
   },
   "evidence": {

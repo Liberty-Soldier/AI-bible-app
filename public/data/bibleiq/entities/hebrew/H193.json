@@ -25,6 +25,79 @@
       "Psalms 73:4"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H193",
+    "source": "hebrew",
+    "strong": "H193",
+    "lemma": "אוּל",
+    "transliteration": "ʼûwl",
+    "definition": "the body (as being rolled together); also powerful",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Kings 24:15",
+      "book": "2 Kings",
+      "bookName": "2 Kings",
+      "englishText": "He carried away Jehoiachin to Babylon, with the king’s mother, the king’s wives, his officers, and the chief men of the land. He carried them into captivity from Jerusalem to Babylon."
+    },
+    "books": [
+      "2 Kings",
+      "Psalms"
+    ],
+    "references": [
+      "2 Kings 24:15",
+      "Psalms 73:4"
+    ],
+    "themes": [
+      "family",
+      "kingship",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "2 Kings 24:15",
+        "evidenceText": "He carried away Jehoiachin to Babylon, with the king’s mother, the king’s wives, his officers, and the chief men of the land. He carried them into captivity from Jerusalem to Babylon."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Kings 24:15",
+        "phase": "Movement or place",
+        "evidenceText": "He carried away Jehoiachin to Babylon, with the king’s mother, the king’s wives, his officers, and the chief men of the land. He carried them into captivity from Jerusalem to Babylon."
+      },
+      {
+        "reference": "Psalms 73:4",
+        "phase": "Occurrence",
+        "evidenceText": "For there are no struggles in their death,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Kings 24:15 and continues through Psalms 73:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Kings 24:15",
+        "book": "2 Kings",
+        "englishText": "He carried away Jehoiachin to Babylon, with the king’s mother, the king’s wives, his officers, and the chief men of the land. He carried them into captivity from Jerusalem to Babylon."
+      },
+      {
+        "reference": "Psalms 73:4",
+        "book": "Psalms",
+        "englishText": "For there are no struggles in their death,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

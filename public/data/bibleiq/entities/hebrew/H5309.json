@@ -26,6 +26,89 @@
       "Ecclesiastes 6:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5309",
+    "source": "hebrew",
+    "strong": "H5309",
+    "lemma": "נֶפֶל",
+    "transliteration": "nephel",
+    "definition": "something fallen , i.e. an abortion",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 3:16",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "or as a hidden untimely birth I had not been,"
+    },
+    "books": [
+      "Job",
+      "Psalms",
+      "Ecclesiastes"
+    ],
+    "references": [
+      "Job 3:16",
+      "Psalms 58:9",
+      "Ecclesiastes 6:3"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Ecclesiastes 6:3",
+        "evidenceText": "If a man fathers a hundred children, and lives many years, so that the days of his years are many, but his soul is not filled with good, and moreover he has no burial; I say, that a stillborn child is better than he:"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Job 3:16",
+        "phase": "Occurrence",
+        "evidenceText": "or as a hidden untimely birth I had not been,"
+      },
+      {
+        "reference": "Psalms 58:9",
+        "phase": "Occurrence",
+        "evidenceText": "Before your pots can feel the heat of the thorns,"
+      },
+      {
+        "reference": "Ecclesiastes 6:3",
+        "phase": "Birth or introduction",
+        "evidenceText": "If a man fathers a hundred children, and lives many years, so that the days of his years are many, but his soul is not filled with good, and moreover he has no burial; I say, that a stillborn child is better than he:"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 3:16 and continues through Ecclesiastes 6:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 3:16",
+        "book": "Job",
+        "englishText": "or as a hidden untimely birth I had not been,"
+      },
+      {
+        "reference": "Psalms 58:9",
+        "book": "Psalms",
+        "englishText": "Before your pots can feel the heat of the thorns,"
+      },
+      {
+        "reference": "Ecclesiastes 6:3",
+        "book": "Ecclesiastes",
+        "englishText": "If a man fathers a hundred children, and lives many years, so that the days of his years are many, but his soul is not filled with good, and moreover he has no burial; I say, that a stillborn child is better than he:"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

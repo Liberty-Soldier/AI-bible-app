@@ -4,7 +4,7 @@
   "title": "אַפַּיִם",
   "subtitle": "H649 • Hebrew name",
   "simple": {
-    "meaning": "אַפַּיִם (ʼAppayim) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אַפַּיִם (ʼAppayim) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 2:30. BibleIQ detects the main surrounding context as family line, death.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אַפַּיִם (H649) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אַפַּיִם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,80 @@
     ],
     "laterReferences": [
       "1 Chronicles 2:31"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H649",
+    "source": "hebrew",
+    "strong": "H649",
+    "lemma": "אַפַּיִם",
+    "transliteration": "ʼAppayim",
+    "definition": "Appajim , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:30",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Nadab: Seled and Appaim; but Seled died without children."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:30",
+      "1 Chronicles 2:31"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:30",
+        "evidenceText": "The sons of Nadab: Seled and Appaim; but Seled died without children."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:30",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Nadab: Seled and Appaim; but Seled died without children."
+      },
+      {
+        "reference": "1 Chronicles 2:31",
+        "phase": "Occurrence",
+        "evidenceText": "The son of Appaim: Ishi. The son of Ishi: Sheshan. The son of Sheshan: Ahlai."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:30 and continues through 1 Chronicles 2:31.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:30",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Nadab: Seled and Appaim; but Seled died without children."
+      },
+      {
+        "reference": "1 Chronicles 2:31",
+        "book": "1 Chronicles",
+        "englishText": "The son of Appaim: Ishi. The son of Ishi: Sheshan. The son of Sheshan: Ahlai."
+      }
     ]
   },
   "evidence": {

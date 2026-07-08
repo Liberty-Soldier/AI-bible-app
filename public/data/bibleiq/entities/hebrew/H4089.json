@@ -4,7 +4,7 @@
   "title": "מַדְמַנָּה",
   "subtitle": "H4089 • Hebrew name",
   "simple": {
-    "meaning": "מַדְמַנָּה (Madmannâh) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מַדְמַנָּה (Madmannâh) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Joshua, 1 Chronicles, beginning at Joshua 15:31. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מַדְמַנָּה (H4089) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מַדְמַנָּה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,87 @@
     ],
     "laterReferences": [
       "1 Chronicles 2:49"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4089",
+    "source": "hebrew",
+    "strong": "H4089",
+    "lemma": "מַדְמַנָּה",
+    "transliteration": "Madmannâh",
+    "definition": "Madmannah , a place in Palestine",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 15:31",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "Ziklag, Madmannah, Sansannah,"
+    },
+    "books": [
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Joshua 15:31",
+      "1 Chronicles 2:49"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:49",
+        "evidenceText": "She bore also Shaaph the father of Madmannah, Sheva the father of Machbena, and the father of Gibea; and the daughter of Caleb was Achsah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 15:31",
+        "phase": "Occurrence",
+        "evidenceText": "Ziklag, Madmannah, Sansannah,"
+      },
+      {
+        "reference": "1 Chronicles 2:49",
+        "phase": "Genealogy",
+        "evidenceText": "She bore also Shaaph the father of Madmannah, Sheva the father of Machbena, and the father of Gibea; and the daughter of Caleb was Achsah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 15:31 and continues through 1 Chronicles 2:49.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 15:31",
+        "book": "Joshua",
+        "englishText": "Ziklag, Madmannah, Sansannah,"
+      },
+      {
+        "reference": "1 Chronicles 2:49",
+        "book": "1 Chronicles",
+        "englishText": "She bore also Shaaph the father of Madmannah, Sheva the father of Machbena, and the father of Gibea; and the daughter of Caleb was Achsah."
+      }
     ]
   },
   "evidence": {

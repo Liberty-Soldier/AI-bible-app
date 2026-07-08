@@ -4,7 +4,7 @@
   "title": "הוֹדִיָּה",
   "subtitle": "H1940 • Hebrew name",
   "simple": {
-    "meaning": "הוֹדִיָּה (Hôwdîyâh) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "הוֹדִיָּה (Hôwdîyâh) appears 4 times in the Hebrew Scriptures and is introduced as a sister in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Nehemiah, beginning at 1 Chronicles 4:19. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to הוֹדִיָּה (H1940) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows הוֹדִיָּה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,119 @@
       "Nehemiah 10:11",
       "Nehemiah 10:14",
       "Nehemiah 10:19"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1940",
+    "source": "hebrew",
+    "strong": "H1940",
+    "lemma": "הוֹדִיָּה",
+    "transliteration": "Hôwdîyâh",
+    "definition": "a Jewess",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 4:19",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of the wife of Hodiah, the sister of Naham, were the father of Keilah the Garmite, and Eshtemoa the Maacathite."
+    },
+    "books": [
+      "1 Chronicles",
+      "Nehemiah"
+    ],
+    "references": [
+      "1 Chronicles 4:19",
+      "Nehemiah 10:11",
+      "Nehemiah 10:14",
+      "Nehemiah 10:19"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 4:19",
+        "evidenceText": "The sons of the wife of Hodiah, the sister of Naham, were the father of Keilah the Garmite, and Eshtemoa the Maacathite."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 4:19",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of the wife of Hodiah, the sister of Naham, were the father of Keilah the Garmite, and Eshtemoa the Maacathite."
+      },
+      {
+        "reference": "Nehemiah 10:11",
+        "phase": "Occurrence",
+        "evidenceText": "Mica, Rehob, Hashabiah,"
+      },
+      {
+        "reference": "Nehemiah 10:14",
+        "phase": "Occurrence",
+        "evidenceText": "The chiefs of the people: Parosh, Pahathmoab, Elam, Zattu, Bani,"
+      },
+      {
+        "reference": "Nehemiah 10:19",
+        "phase": "Occurrence",
+        "evidenceText": "Hariph, Anathoth, Nobai,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 4:19 and continues through Nehemiah 10:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 4:19",
+        "book": "1 Chronicles",
+        "englishText": "The sons of the wife of Hodiah, the sister of Naham, were the father of Keilah the Garmite, and Eshtemoa the Maacathite."
+      },
+      {
+        "reference": "Nehemiah 10:11",
+        "book": "Nehemiah",
+        "englishText": "Mica, Rehob, Hashabiah,"
+      },
+      {
+        "reference": "Nehemiah 10:14",
+        "book": "Nehemiah",
+        "englishText": "The chiefs of the people: Parosh, Pahathmoab, Elam, Zattu, Bani,"
+      },
+      {
+        "reference": "Nehemiah 10:19",
+        "book": "Nehemiah",
+        "englishText": "Hariph, Anathoth, Nobai,"
+      }
     ]
   },
   "evidence": {

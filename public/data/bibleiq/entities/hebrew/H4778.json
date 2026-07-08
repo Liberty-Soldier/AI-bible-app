@@ -4,7 +4,7 @@
   "title": "מֶרֶד",
   "subtitle": "H4778 • Hebrew name",
   "simple": {
-    "meaning": "מֶרֶד (Mered) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מֶרֶד (Mered) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 4:17. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מֶרֶד (H4778) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מֶרֶד through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,102 @@
     ],
     "laterReferences": [
       "1 Chronicles 4:18"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4778",
+    "source": "hebrew",
+    "strong": "H4778",
+    "lemma": "מֶרֶד",
+    "transliteration": "Mered",
+    "definition": "Mered , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 4:17",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Ezrah: Jether, Mered, Epher, and Jalon; and she bore Miriam, Shammai, and Ishbah the father of Eshtemoa."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 4:17",
+      "1 Chronicles 4:18"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 4:17",
+        "evidenceText": "The sons of Ezrah: Jether, Mered, Epher, and Jalon; and she bore Miriam, Shammai, and Ishbah the father of Eshtemoa."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 4:18",
+        "evidenceText": "His wife the Jewess bore Jered the father of Gedor, Heber the father of Soco, and Jekuthiel the father of Zanoah. These are the sons of Bithiah the daughter of Pharaoh, whom Mered took."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 4:17",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Ezrah: Jether, Mered, Epher, and Jalon; and she bore Miriam, Shammai, and Ishbah the father of Eshtemoa."
+      },
+      {
+        "reference": "1 Chronicles 4:18",
+        "phase": "Genealogy",
+        "evidenceText": "His wife the Jewess bore Jered the father of Gedor, Heber the father of Soco, and Jekuthiel the father of Zanoah. These are the sons of Bithiah the daughter of Pharaoh, whom Mered took."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 4:17 and continues through 1 Chronicles 4:18.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 4:17",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Ezrah: Jether, Mered, Epher, and Jalon; and she bore Miriam, Shammai, and Ishbah the father of Eshtemoa."
+      },
+      {
+        "reference": "1 Chronicles 4:18",
+        "book": "1 Chronicles",
+        "englishText": "His wife the Jewess bore Jered the father of Gedor, Heber the father of Soco, and Jekuthiel the father of Zanoah. These are the sons of Bithiah the daughter of Pharaoh, whom Mered took."
+      }
     ]
   },
   "evidence": {

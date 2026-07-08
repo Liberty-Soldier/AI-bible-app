@@ -25,6 +25,75 @@
       "Daniel 3:22"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2685",
+    "source": "hebrew",
+    "strong": "H2685",
+    "lemma": "חֲצַף",
+    "transliteration": "chătsaph",
+    "definition": "properly, to shear or cut close ; figuratively, to be severe",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Daniel 2:15",
+      "book": "Daniel",
+      "bookName": "Daniel",
+      "englishText": "He answered Arioch the king’s captain, “Why is the decree so urgent from the king?” Then Arioch made the thing known to Daniel."
+    },
+    "books": [
+      "Daniel"
+    ],
+    "references": [
+      "Daniel 2:15",
+      "Daniel 3:22"
+    ],
+    "themes": [
+      "kingship",
+      "death",
+      "commandment"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "Daniel 3:22",
+        "evidenceText": "Therefore because the king’s commandment was urgent, and the furnace exceedingly hot, the flame of the fire killed those men who took up Shadrach, Meshach, and Abednego."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Daniel 2:15",
+        "phase": "Occurrence",
+        "evidenceText": "He answered Arioch the king’s captain, “Why is the decree so urgent from the king?” Then Arioch made the thing known to Daniel."
+      },
+      {
+        "reference": "Daniel 3:22",
+        "phase": "Death",
+        "evidenceText": "Therefore because the king’s commandment was urgent, and the furnace exceedingly hot, the flame of the fire killed those men who took up Shadrach, Meshach, and Abednego."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Daniel 2:15 and continues through Daniel 3:22.",
+    "occurrenceTrail": [
+      {
+        "reference": "Daniel 2:15",
+        "book": "Daniel",
+        "englishText": "He answered Arioch the king’s captain, “Why is the decree so urgent from the king?” Then Arioch made the thing known to Daniel."
+      },
+      {
+        "reference": "Daniel 3:22",
+        "book": "Daniel",
+        "englishText": "Therefore because the king’s commandment was urgent, and the furnace exceedingly hot, the flame of the fire killed those men who took up Shadrach, Meshach, and Abednego."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

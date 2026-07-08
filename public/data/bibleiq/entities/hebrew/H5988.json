@@ -4,7 +4,7 @@
   "title": "עַמִּיאֵל",
   "subtitle": "H5988 • Hebrew name",
   "simple": {
-    "meaning": "עַמִּיאֵל (ʻAmmîyʼêl) appears 6 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "עַמִּיאֵל (ʻAmmîyʼêl) appears 6 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Numbers, 2 Samuel, 1 Chronicles, beginning at Numbers 13:12. BibleIQ detects the main surrounding context as birth, family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עַמִּיאֵל (H5988) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עַמִּיאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,132 @@
       "2 Samuel 17:27",
       "1 Chronicles 3:5",
       "1 Chronicles 26:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5988",
+    "source": "hebrew",
+    "strong": "H5988",
+    "lemma": "עַמִּיאֵל",
+    "transliteration": "ʻAmmîyʼêl",
+    "definition": "Ammiel , the name of three or four Israelites",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 13:12",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Of the tribe of Dan, Ammiel the son of Gemalli."
+    },
+    "books": [
+      "Numbers",
+      "2 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 13:12",
+      "2 Samuel 9:4",
+      "2 Samuel 9:5",
+      "2 Samuel 17:27",
+      "1 Chronicles 3:5",
+      "1 Chronicles 26:5"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Chronicles 3:5",
+        "evidenceText": "and these were born to him in Jerusalem: Shimea, Shobab, Nathan, and Solomon, four, of Bathshua the daughter of Ammiel;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 13:12",
+        "phase": "Occurrence",
+        "evidenceText": "Of the tribe of Dan, Ammiel the son of Gemalli."
+      },
+      {
+        "reference": "2 Samuel 9:4",
+        "phase": "Occurrence",
+        "evidenceText": "The king said to him, “Where is he?”"
+      },
+      {
+        "reference": "2 Samuel 9:5",
+        "phase": "Occurrence",
+        "evidenceText": "Then king David sent, and brought him out of the house of Machir the son of Ammiel, from Lo Debar."
+      },
+      {
+        "reference": "2 Samuel 17:27",
+        "phase": "Occurrence",
+        "evidenceText": "When David had come to Mahanaim, Shobi the son of Nahash of Rabbah of the children of Ammon, and Machir the son of Ammiel of Lodebar, and Barzillai the Gileadite of Rogelim,"
+      },
+      {
+        "reference": "1 Chronicles 3:5",
+        "phase": "Birth or introduction",
+        "evidenceText": "and these were born to him in Jerusalem: Shimea, Shobab, Nathan, and Solomon, four, of Bathshua the daughter of Ammiel;"
+      },
+      {
+        "reference": "1 Chronicles 26:5",
+        "phase": "Occurrence",
+        "evidenceText": "Ammiel the sixth, Issachar the seventh, and Peullethai the eighth; for God blessed him."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 13:12 and continues through 1 Chronicles 26:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 13:12",
+        "book": "Numbers",
+        "englishText": "Of the tribe of Dan, Ammiel the son of Gemalli."
+      },
+      {
+        "reference": "2 Samuel 9:4",
+        "book": "2 Samuel",
+        "englishText": "The king said to him, “Where is he?”"
+      },
+      {
+        "reference": "2 Samuel 9:5",
+        "book": "2 Samuel",
+        "englishText": "Then king David sent, and brought him out of the house of Machir the son of Ammiel, from Lo Debar."
+      },
+      {
+        "reference": "2 Samuel 17:27",
+        "book": "2 Samuel",
+        "englishText": "When David had come to Mahanaim, Shobi the son of Nahash of Rabbah of the children of Ammon, and Machir the son of Ammiel of Lodebar, and Barzillai the Gileadite of Rogelim,"
+      },
+      {
+        "reference": "1 Chronicles 3:5",
+        "book": "1 Chronicles",
+        "englishText": "and these were born to him in Jerusalem: Shimea, Shobab, Nathan, and Solomon, four, of Bathshua the daughter of Ammiel;"
+      },
+      {
+        "reference": "1 Chronicles 26:5",
+        "book": "1 Chronicles",
+        "englishText": "Ammiel the sixth, Issachar the seventh, and Peullethai the eighth; for God blessed him."
+      }
     ]
   },
   "evidence": {

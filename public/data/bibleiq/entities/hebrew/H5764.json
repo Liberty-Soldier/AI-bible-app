@@ -26,6 +26,81 @@
       "Isaiah 65:20"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5764",
+    "source": "hebrew",
+    "strong": "H5764",
+    "lemma": "עוּל",
+    "transliteration": "ʻûwl",
+    "definition": "a babe",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 24:9",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "There are those who pluck the fatherless from the breast,"
+    },
+    "books": [
+      "Job",
+      "Isaiah"
+    ],
+    "references": [
+      "Job 24:9",
+      "Isaiah 49:15",
+      "Isaiah 65:20"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Job 24:9",
+        "phase": "Occurrence",
+        "evidenceText": "There are those who pluck the fatherless from the breast,"
+      },
+      {
+        "reference": "Isaiah 49:15",
+        "phase": "Occurrence",
+        "evidenceText": "“Can a woman forget her nursing child,"
+      },
+      {
+        "reference": "Isaiah 65:20",
+        "phase": "Occurrence",
+        "evidenceText": "“No more will there be an infant who only lives a few days,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 24:9 and continues through Isaiah 65:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 24:9",
+        "book": "Job",
+        "englishText": "There are those who pluck the fatherless from the breast,"
+      },
+      {
+        "reference": "Isaiah 49:15",
+        "book": "Isaiah",
+        "englishText": "“Can a woman forget her nursing child,"
+      },
+      {
+        "reference": "Isaiah 65:20",
+        "book": "Isaiah",
+        "englishText": "“No more will there be an infant who only lives a few days,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

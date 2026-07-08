@@ -29,6 +29,123 @@
       "Psalms 55:4"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7852",
+    "source": "hebrew",
+    "strong": "H7852",
+    "lemma": "שָׂטַם",
+    "transliteration": "sâṭam",
+    "definition": "properly, to lurk for , i.e. persecute",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 27:41",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Esau hated Jacob because of the blessing with which his father blessed him. Esau said in his heart, “The days of mourning for my father are at hand. Then I will kill my brother Jacob.”"
+    },
+    "books": [
+      "Genesis",
+      "Job",
+      "Psalms"
+    ],
+    "references": [
+      "Genesis 27:41",
+      "Genesis 49:23",
+      "Genesis 50:15",
+      "Job 16:9",
+      "Job 30:21",
+      "Psalms 55:4"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 27:41",
+        "phase": "Occurrence",
+        "evidenceText": "Esau hated Jacob because of the blessing with which his father blessed him. Esau said in his heart, “The days of mourning for my father are at hand. Then I will kill my brother Jacob.”"
+      },
+      {
+        "reference": "Genesis 49:23",
+        "phase": "Occurrence",
+        "evidenceText": "The archers have severely grieved him,"
+      },
+      {
+        "reference": "Genesis 50:15",
+        "phase": "Occurrence",
+        "evidenceText": "When Joseph’s brothers saw that their father was dead, they said, “It may be that Joseph will hate us, and will fully pay us back for all the evil which we did to him.”"
+      },
+      {
+        "reference": "Job 16:9",
+        "phase": "Occurrence",
+        "evidenceText": "He has torn me in his wrath and persecuted me."
+      },
+      {
+        "reference": "Job 30:21",
+        "phase": "Occurrence",
+        "evidenceText": "You have turned to be cruel to me."
+      },
+      {
+        "reference": "Psalms 55:4",
+        "phase": "Occurrence",
+        "evidenceText": "My heart is severely pained within me."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 27:41 and continues through Psalms 55:4.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 27:41",
+        "book": "Genesis",
+        "englishText": "Esau hated Jacob because of the blessing with which his father blessed him. Esau said in his heart, “The days of mourning for my father are at hand. Then I will kill my brother Jacob.”"
+      },
+      {
+        "reference": "Genesis 49:23",
+        "book": "Genesis",
+        "englishText": "The archers have severely grieved him,"
+      },
+      {
+        "reference": "Genesis 50:15",
+        "book": "Genesis",
+        "englishText": "When Joseph’s brothers saw that their father was dead, they said, “It may be that Joseph will hate us, and will fully pay us back for all the evil which we did to him.”"
+      },
+      {
+        "reference": "Job 16:9",
+        "book": "Job",
+        "englishText": "He has torn me in his wrath and persecuted me."
+      },
+      {
+        "reference": "Job 30:21",
+        "book": "Job",
+        "englishText": "You have turned to be cruel to me."
+      },
+      {
+        "reference": "Psalms 55:4",
+        "book": "Psalms",
+        "englishText": "My heart is severely pained within me."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

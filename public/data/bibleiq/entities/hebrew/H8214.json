@@ -27,6 +27,100 @@
       "Daniel 7:24"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8214",
+    "source": "hebrew",
+    "strong": "H8214",
+    "lemma": "שְׁפַל",
+    "transliteration": "shᵉphal",
+    "definition": "abase, humble, put down, subdue",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Daniel 4:34",
+      "book": "Daniel",
+      "bookName": "Daniel",
+      "englishText": "At the end of the days I, Nebuchadnezzar, lifted up my eyes to heaven, and my understanding returned to me, and I blessed the Most High, and I praised and honored him who lives forever;"
+    },
+    "books": [
+      "Daniel"
+    ],
+    "references": [
+      "Daniel 4:34",
+      "Daniel 5:19",
+      "Daniel 5:22",
+      "Daniel 7:24"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "death"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "Daniel 5:19",
+        "evidenceText": "Because of the greatness that he gave him, all the peoples, nations, and languages trembled and feared before him. He killed whom he wanted to, and he kept alive whom he wanted to. He raised up whom he wanted to, and he put down whom he wanted to."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Daniel 4:34",
+        "phase": "Occurrence",
+        "evidenceText": "At the end of the days I, Nebuchadnezzar, lifted up my eyes to heaven, and my understanding returned to me, and I blessed the Most High, and I praised and honored him who lives forever;"
+      },
+      {
+        "reference": "Daniel 5:19",
+        "phase": "Death",
+        "evidenceText": "Because of the greatness that he gave him, all the peoples, nations, and languages trembled and feared before him. He killed whom he wanted to, and he kept alive whom he wanted to. He raised up whom he wanted to, and he put down whom he wanted to."
+      },
+      {
+        "reference": "Daniel 5:22",
+        "phase": "Occurrence",
+        "evidenceText": "“You, his son, Belshazzar, have not humbled your heart, though you knew all this,"
+      },
+      {
+        "reference": "Daniel 7:24",
+        "phase": "Occurrence",
+        "evidenceText": "As for the ten horns, ten kings will arise out of this kingdom. Another will arise after them; and he will be different from the former, and he will put down three kings."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Daniel 4:34 and continues through Daniel 7:24.",
+    "occurrenceTrail": [
+      {
+        "reference": "Daniel 4:34",
+        "book": "Daniel",
+        "englishText": "At the end of the days I, Nebuchadnezzar, lifted up my eyes to heaven, and my understanding returned to me, and I blessed the Most High, and I praised and honored him who lives forever;"
+      },
+      {
+        "reference": "Daniel 5:19",
+        "book": "Daniel",
+        "englishText": "Because of the greatness that he gave him, all the peoples, nations, and languages trembled and feared before him. He killed whom he wanted to, and he kept alive whom he wanted to. He raised up whom he wanted to, and he put down whom he wanted to."
+      },
+      {
+        "reference": "Daniel 5:22",
+        "book": "Daniel",
+        "englishText": "“You, his son, Belshazzar, have not humbled your heart, though you knew all this,"
+      },
+      {
+        "reference": "Daniel 7:24",
+        "book": "Daniel",
+        "englishText": "As for the ten horns, ten kings will arise out of this kingdom. Another will arise after them; and he will be different from the former, and he will put down three kings."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

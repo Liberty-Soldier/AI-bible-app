@@ -4,7 +4,7 @@
   "title": "אֲצַלְיָהוּ",
   "subtitle": "H683 • Hebrew name",
   "simple": {
-    "meaning": "אֲצַלְיָהוּ (ʼĂtsalyâhûw) appears 2 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "אֲצַלְיָהוּ (ʼĂtsalyâhûw) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in 2 Kings, 2 Chronicles, beginning at 2 Kings 22:3. BibleIQ detects the main surrounding context as family line, kingship, city, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֲצַלְיָהוּ (H683) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֲצַלְיָהוּ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,84 @@
     ],
     "laterReferences": [
       "2 Chronicles 34:8"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H683",
+    "source": "hebrew",
+    "strong": "H683",
+    "lemma": "אֲצַלְיָהוּ",
+    "transliteration": "ʼĂtsalyâhûw",
+    "definition": "Atsaljah , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Kings 22:3",
+      "book": "2 Kings",
+      "bookName": "2 Kings",
+      "englishText": "In the eighteenth year of king Josiah, the king sent Shaphan, the son of Azaliah the son of Meshullam, the scribe, to Yahweh’s house, saying,"
+    },
+    "books": [
+      "2 Kings",
+      "2 Chronicles"
+    ],
+    "references": [
+      "2 Kings 22:3",
+      "2 Chronicles 34:8"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "city",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "2 Chronicles 34:8",
+        "evidenceText": "Now in the eighteenth year of his reign, when he had purged the land and the house, he sent Shaphan the son of Azaliah, and Maaseiah the governor of the city, and Joah the son of Joahaz the recorder, to repair Yahweh his God’s house."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Kings 22:3",
+        "phase": "Occurrence",
+        "evidenceText": "In the eighteenth year of king Josiah, the king sent Shaphan, the son of Azaliah the son of Meshullam, the scribe, to Yahweh’s house, saying,"
+      },
+      {
+        "reference": "2 Chronicles 34:8",
+        "phase": "Movement or place",
+        "evidenceText": "Now in the eighteenth year of his reign, when he had purged the land and the house, he sent Shaphan the son of Azaliah, and Maaseiah the governor of the city, and Joah the son of Joahaz the recorder, to repair Yahweh his God’s house."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Kings 22:3 and continues through 2 Chronicles 34:8.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Kings 22:3",
+        "book": "2 Kings",
+        "englishText": "In the eighteenth year of king Josiah, the king sent Shaphan, the son of Azaliah the son of Meshullam, the scribe, to Yahweh’s house, saying,"
+      },
+      {
+        "reference": "2 Chronicles 34:8",
+        "book": "2 Chronicles",
+        "englishText": "Now in the eighteenth year of his reign, when he had purged the land and the house, he sent Shaphan the son of Azaliah, and Maaseiah the governor of the city, and Joah the son of Joahaz the recorder, to repair Yahweh his God’s house."
+      }
     ]
   },
   "evidence": {

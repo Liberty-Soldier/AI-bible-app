@@ -4,7 +4,7 @@
   "title": "סֶמֶל",
   "subtitle": "H5566 • Hebrew word",
   "simple": {
-    "meaning": "סֶמֶל (çemel) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "סֶמֶל (çemel) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Deuteronomy, 2 Chronicles, Ezekiel, beginning at Deuteronomy 4:16. BibleIQ detects the main surrounding context as family line, altar, city, mountain, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to סֶמֶל (H5566) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows סֶמֶל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,115 @@
       "2 Chronicles 33:15",
       "Ezekiel 8:3",
       "Ezekiel 8:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5566",
+    "source": "hebrew",
+    "strong": "H5566",
+    "lemma": "סֶמֶל",
+    "transliteration": "çemel",
+    "definition": "a likeness",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 4:16",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "lest you corrupt yourselves, and make yourself a carved image in the form of any figure, the likeness of male or female,"
+    },
+    "books": [
+      "Deuteronomy",
+      "2 Chronicles",
+      "Ezekiel"
+    ],
+    "references": [
+      "Deuteronomy 4:16",
+      "2 Chronicles 33:7",
+      "2 Chronicles 33:15",
+      "Ezekiel 8:3",
+      "Ezekiel 8:5"
+    ],
+    "themes": [
+      "family line",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "2 Chronicles 33:15",
+        "evidenceText": "He took away the foreign gods, and the idol out of Yahweh’s house, and all the altars that he had built in the mountain of Yahweh’s house, and in Jerusalem, and cast them out of the city."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 4:16",
+        "phase": "Occurrence",
+        "evidenceText": "lest you corrupt yourselves, and make yourself a carved image in the form of any figure, the likeness of male or female,"
+      },
+      {
+        "reference": "2 Chronicles 33:7",
+        "phase": "Occurrence",
+        "evidenceText": "He set the engraved image of the idol, which he had made, in God’s house, of which God said to David and to Solomon his son, “In this house, and in Jerusalem, which I have chosen out of all the tribes of Israel, I will put my name forever."
+      },
+      {
+        "reference": "2 Chronicles 33:15",
+        "phase": "Movement or place",
+        "evidenceText": "He took away the foreign gods, and the idol out of Yahweh’s house, and all the altars that he had built in the mountain of Yahweh’s house, and in Jerusalem, and cast them out of the city."
+      },
+      {
+        "reference": "Ezekiel 8:3",
+        "phase": "Occurrence",
+        "evidenceText": "He stretched out the form of a hand, and took me by a lock of my head; and the Spirit lifted me up between earth and the sky, and brought me in the visions of God to Jerusalem, to the door of the gate of the inner court that looks toward the north; where there was the seat of the image of jealousy, which provokes to jealousy."
+      },
+      {
+        "reference": "Ezekiel 8:5",
+        "phase": "Occurrence",
+        "evidenceText": "Then he said to me, “Son of man, lift up your eyes now the way toward the north.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 4:16 and continues through Ezekiel 8:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 4:16",
+        "book": "Deuteronomy",
+        "englishText": "lest you corrupt yourselves, and make yourself a carved image in the form of any figure, the likeness of male or female,"
+      },
+      {
+        "reference": "2 Chronicles 33:7",
+        "book": "2 Chronicles",
+        "englishText": "He set the engraved image of the idol, which he had made, in God’s house, of which God said to David and to Solomon his son, “In this house, and in Jerusalem, which I have chosen out of all the tribes of Israel, I will put my name forever."
+      },
+      {
+        "reference": "2 Chronicles 33:15",
+        "book": "2 Chronicles",
+        "englishText": "He took away the foreign gods, and the idol out of Yahweh’s house, and all the altars that he had built in the mountain of Yahweh’s house, and in Jerusalem, and cast them out of the city."
+      },
+      {
+        "reference": "Ezekiel 8:3",
+        "book": "Ezekiel",
+        "englishText": "He stretched out the form of a hand, and took me by a lock of my head; and the Spirit lifted me up between earth and the sky, and brought me in the visions of God to Jerusalem, to the door of the gate of the inner court that looks toward the north; where there was the seat of the image of jealousy, which provokes to jealousy."
+      },
+      {
+        "reference": "Ezekiel 8:5",
+        "book": "Ezekiel",
+        "englishText": "Then he said to me, “Son of man, lift up your eyes now the way toward the north.”"
+      }
     ]
   },
   "evidence": {

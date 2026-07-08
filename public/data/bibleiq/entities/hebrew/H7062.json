@@ -27,6 +27,107 @@
       "Leviticus 6:8"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7062",
+    "source": "hebrew",
+    "strong": "H7062",
+    "lemma": "קֹמֶץ",
+    "transliteration": "qômets",
+    "definition": "a grasp , i.e. handful",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 41:47",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "In the seven plenteous years the earth produced abundantly."
+    },
+    "books": [
+      "Genesis",
+      "Leviticus"
+    ],
+    "references": [
+      "Genesis 41:47",
+      "Leviticus 2:2",
+      "Leviticus 5:12",
+      "Leviticus 6:8"
+    ],
+    "themes": [
+      "family line",
+      "priesthood",
+      "offering"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Leviticus 2:2",
+        "evidenceText": "He shall bring it to Aaron’s sons, the priests. He shall take his handful of its fine flour, and of its oil, with all its frankincense, and the priest shall burn its memorial on the altar, an offering made by fire, of a pleasant aroma to Yahweh."
+      },
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Leviticus 5:12",
+        "evidenceText": "He shall bring it to the priest, and the priest shall take his handful of it as the memorial portion, and burn it on the altar, on the offerings of Yahweh made by fire. It is a sin offering."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 41:47",
+        "phase": "Occurrence",
+        "evidenceText": "In the seven plenteous years the earth produced abundantly."
+      },
+      {
+        "reference": "Leviticus 2:2",
+        "phase": "Offering",
+        "evidenceText": "He shall bring it to Aaron’s sons, the priests. He shall take his handful of its fine flour, and of its oil, with all its frankincense, and the priest shall burn its memorial on the altar, an offering made by fire, of a pleasant aroma to Yahweh."
+      },
+      {
+        "reference": "Leviticus 5:12",
+        "phase": "Offering",
+        "evidenceText": "He shall bring it to the priest, and the priest shall take his handful of it as the memorial portion, and burn it on the altar, on the offerings of Yahweh made by fire. It is a sin offering."
+      },
+      {
+        "reference": "Leviticus 6:8",
+        "phase": "Occurrence",
+        "evidenceText": "Yahweh spoke to Moses, saying,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 41:47 and continues through Leviticus 6:8.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 41:47",
+        "book": "Genesis",
+        "englishText": "In the seven plenteous years the earth produced abundantly."
+      },
+      {
+        "reference": "Leviticus 2:2",
+        "book": "Leviticus",
+        "englishText": "He shall bring it to Aaron’s sons, the priests. He shall take his handful of its fine flour, and of its oil, with all its frankincense, and the priest shall burn its memorial on the altar, an offering made by fire, of a pleasant aroma to Yahweh."
+      },
+      {
+        "reference": "Leviticus 5:12",
+        "book": "Leviticus",
+        "englishText": "He shall bring it to the priest, and the priest shall take his handful of it as the memorial portion, and burn it on the altar, on the offerings of Yahweh made by fire. It is a sin offering."
+      },
+      {
+        "reference": "Leviticus 6:8",
+        "book": "Leviticus",
+        "englishText": "Yahweh spoke to Moses, saying,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

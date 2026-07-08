@@ -4,7 +4,7 @@
   "title": "מֶלֶךְ",
   "subtitle": "H4429 • Hebrew name",
   "simple": {
-    "meaning": "מֶלֶךְ (Melek) appears 4 times in the Hebrew Scriptures and is introduced in connection with kingship and in connection with prophetic witness.",
+    "meaning": "מֶלֶךְ (Melek) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship and in connection with prophetic witness.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Jeremiah, beginning at 1 Chronicles 8:35. BibleIQ detects the main surrounding context as family line, kingship, prophetic witness.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מֶלֶךְ (H4429) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מֶלֶךְ through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,111 @@
       "1 Chronicles 9:41",
       "Jeremiah 36:26",
       "Jeremiah 38:6"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4429",
+    "source": "hebrew",
+    "strong": "H4429",
+    "lemma": "מֶלֶךְ",
+    "transliteration": "Melek",
+    "definition": "Melek , the name of two Israelites",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 8:35",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Micah: Pithon, Melech, Tarea, and Ahaz."
+    },
+    "books": [
+      "1 Chronicles",
+      "Jeremiah"
+    ],
+    "references": [
+      "1 Chronicles 8:35",
+      "1 Chronicles 9:41",
+      "Jeremiah 36:26",
+      "Jeremiah 38:6"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "prophetic witness"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 8:35",
+        "evidenceText": "The sons of Micah: Pithon, Melech, Tarea, and Ahaz."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 9:41",
+        "evidenceText": "The sons of Micah: Pithon, Melech, Tahrea, and Ahaz."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 8:35",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Micah: Pithon, Melech, Tarea, and Ahaz."
+      },
+      {
+        "reference": "1 Chronicles 9:41",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Micah: Pithon, Melech, Tahrea, and Ahaz."
+      },
+      {
+        "reference": "Jeremiah 36:26",
+        "phase": "Occurrence",
+        "evidenceText": "The king commanded Jerahmeel the king’s son, and Seraiah the son of Azriel, and Shelemiah the son of Abdeel, to arrest Baruch the scribe and Jeremiah the prophet; but Yahweh hid them."
+      },
+      {
+        "reference": "Jeremiah 38:6",
+        "phase": "Occurrence",
+        "evidenceText": "Then they took Jeremiah and threw him into the dungeon of Malchijah the king’s son, that was in the court of the guard. They let down Jeremiah with cords. In the dungeon there was no water, but mire; and Jeremiah sank in the mire."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 8:35 and continues through Jeremiah 38:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 8:35",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Micah: Pithon, Melech, Tarea, and Ahaz."
+      },
+      {
+        "reference": "1 Chronicles 9:41",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Micah: Pithon, Melech, Tahrea, and Ahaz."
+      },
+      {
+        "reference": "Jeremiah 36:26",
+        "book": "Jeremiah",
+        "englishText": "The king commanded Jerahmeel the king’s son, and Seraiah the son of Azriel, and Shelemiah the son of Abdeel, to arrest Baruch the scribe and Jeremiah the prophet; but Yahweh hid them."
+      },
+      {
+        "reference": "Jeremiah 38:6",
+        "book": "Jeremiah",
+        "englishText": "Then they took Jeremiah and threw him into the dungeon of Malchijah the king’s son, that was in the court of the guard. They let down Jeremiah with cords. In the dungeon there was no water, but mire; and Jeremiah sank in the mire."
+      }
     ]
   },
   "evidence": {

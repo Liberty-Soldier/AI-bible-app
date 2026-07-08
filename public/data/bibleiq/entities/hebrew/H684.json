@@ -4,7 +4,7 @@
   "title": "אֹצֶם",
   "subtitle": "H684 • Hebrew name",
   "simple": {
-    "meaning": "אֹצֶם (ʼÔtsem) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אֹצֶם (ʼÔtsem) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 2:15. BibleIQ detects the main surrounding context as birth, family line, firstborn.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֹצֶם (H684) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֹצֶם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,80 @@
     ],
     "laterReferences": [
       "1 Chronicles 2:25"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H684",
+    "source": "hebrew",
+    "strong": "H684",
+    "lemma": "אֹצֶם",
+    "transliteration": "ʼÔtsem",
+    "definition": "Otsem , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:15",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Ozem the sixth, David the seventh;"
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:15",
+      "1 Chronicles 2:25"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Chronicles 2:25",
+        "evidenceText": "The sons of Jerahmeel the firstborn of Hezron were Ram the firstborn, Bunah, Oren, Ozem, and Ahijah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:15",
+        "phase": "Occurrence",
+        "evidenceText": "Ozem the sixth, David the seventh;"
+      },
+      {
+        "reference": "1 Chronicles 2:25",
+        "phase": "Birth or introduction",
+        "evidenceText": "The sons of Jerahmeel the firstborn of Hezron were Ram the firstborn, Bunah, Oren, Ozem, and Ahijah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:15 and continues through 1 Chronicles 2:25.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:15",
+        "book": "1 Chronicles",
+        "englishText": "Ozem the sixth, David the seventh;"
+      },
+      {
+        "reference": "1 Chronicles 2:25",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Jerahmeel the firstborn of Hezron were Ram the firstborn, Bunah, Oren, Ozem, and Ahijah."
+      }
     ]
   },
   "evidence": {

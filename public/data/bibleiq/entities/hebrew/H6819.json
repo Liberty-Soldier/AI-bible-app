@@ -26,6 +26,82 @@
       "Zechariah 13:7"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6819",
+    "source": "hebrew",
+    "strong": "H6819",
+    "lemma": "צָעַר",
+    "transliteration": "tsâʻar",
+    "definition": "to be small , i.e. (figuratively) ignoble",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Job 14:21",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "His sons come to honor, and he doesn’t know it."
+    },
+    "books": [
+      "Job",
+      "Jeremiah",
+      "Zechariah"
+    ],
+    "references": [
+      "Job 14:21",
+      "Jeremiah 30:19",
+      "Zechariah 13:7"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Job 14:21",
+        "phase": "Occurrence",
+        "evidenceText": "His sons come to honor, and he doesn’t know it."
+      },
+      {
+        "reference": "Jeremiah 30:19",
+        "phase": "Occurrence",
+        "evidenceText": "Thanksgiving will proceed out of them"
+      },
+      {
+        "reference": "Zechariah 13:7",
+        "phase": "Occurrence",
+        "evidenceText": "“Awake, sword, against my shepherd,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 14:21 and continues through Zechariah 13:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 14:21",
+        "book": "Job",
+        "englishText": "His sons come to honor, and he doesn’t know it."
+      },
+      {
+        "reference": "Jeremiah 30:19",
+        "book": "Jeremiah",
+        "englishText": "Thanksgiving will proceed out of them"
+      },
+      {
+        "reference": "Zechariah 13:7",
+        "book": "Zechariah",
+        "englishText": "“Awake, sword, against my shepherd,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

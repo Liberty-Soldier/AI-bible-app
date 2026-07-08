@@ -23,6 +23,62 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8012",
+    "source": "hebrew",
+    "strong": "H8012",
+    "lemma": "שַׂלְמוֹן",
+    "transliteration": "Salmôwn",
+    "definition": "Salmon , an Israelite",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ruth 4:21",
+      "book": "Ruth",
+      "bookName": "Ruth",
+      "englishText": "and Salmon became the father of Boaz, and Boaz became the father of Obed,"
+    },
+    "books": [
+      "Ruth"
+    ],
+    "references": [
+      "Ruth 4:21"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Ruth 4:21",
+        "phase": "Occurrence",
+        "evidenceText": "and Salmon became the father of Boaz, and Boaz became the father of Obed,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Ruth 4:21.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ruth 4:21",
+        "book": "Ruth",
+        "englishText": "and Salmon became the father of Boaz, and Boaz became the father of Obed,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

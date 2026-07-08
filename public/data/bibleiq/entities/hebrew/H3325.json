@@ -27,6 +27,99 @@
       "1 Chronicles 26:29"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3325",
+    "source": "hebrew",
+    "strong": "H3325",
+    "lemma": "יִצְהָרִי",
+    "transliteration": "Yitshârîy",
+    "definition": "a Jitsharite or descendant of Jitshar",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 3:27",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Of Kohath was the family of the Amramites, the family of the Izharites, the family of the Hebronites, and the family of the Uzzielites. These are the families of the Kohathites."
+    },
+    "books": [
+      "Numbers",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 3:27",
+      "1 Chronicles 24:22",
+      "1 Chronicles 26:23",
+      "1 Chronicles 26:29"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 24:22",
+        "evidenceText": "Of the Izharites, Shelomoth; of the sons of Shelomoth, Jahath."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 3:27",
+        "phase": "Occurrence",
+        "evidenceText": "Of Kohath was the family of the Amramites, the family of the Izharites, the family of the Hebronites, and the family of the Uzzielites. These are the families of the Kohathites."
+      },
+      {
+        "reference": "1 Chronicles 24:22",
+        "phase": "Genealogy",
+        "evidenceText": "Of the Izharites, Shelomoth; of the sons of Shelomoth, Jahath."
+      },
+      {
+        "reference": "1 Chronicles 26:23",
+        "phase": "Occurrence",
+        "evidenceText": "Of the Amramites, of the Izharites, of the Hebronites, of the Uzzielites:"
+      },
+      {
+        "reference": "1 Chronicles 26:29",
+        "phase": "Occurrence",
+        "evidenceText": "Of the Izharites, Chenaniah and his sons were for the outward business over Israel, for officers and judges."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 3:27 and continues through 1 Chronicles 26:29.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 3:27",
+        "book": "Numbers",
+        "englishText": "Of Kohath was the family of the Amramites, the family of the Izharites, the family of the Hebronites, and the family of the Uzzielites. These are the families of the Kohathites."
+      },
+      {
+        "reference": "1 Chronicles 24:22",
+        "book": "1 Chronicles",
+        "englishText": "Of the Izharites, Shelomoth; of the sons of Shelomoth, Jahath."
+      },
+      {
+        "reference": "1 Chronicles 26:23",
+        "book": "1 Chronicles",
+        "englishText": "Of the Amramites, of the Izharites, of the Hebronites, of the Uzzielites:"
+      },
+      {
+        "reference": "1 Chronicles 26:29",
+        "book": "1 Chronicles",
+        "englishText": "Of the Izharites, Chenaniah and his sons were for the outward business over Israel, for officers and judges."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

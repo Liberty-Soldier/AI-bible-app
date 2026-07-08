@@ -26,6 +26,101 @@
       "Proverbs 9:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1610",
+    "source": "hebrew",
+    "strong": "H1610",
+    "lemma": "גַּף",
+    "transliteration": "gaph",
+    "definition": "the back ; by extension the body or self",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 21:3",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "If he comes in by himself, he shall go out by himself. If he is married, then his wife shall go out with him."
+    },
+    "books": [
+      "Exodus",
+      "Proverbs"
+    ],
+    "references": [
+      "Exodus 21:3",
+      "Exodus 21:4",
+      "Proverbs 9:3"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Exodus 21:3",
+        "phase": "Occurrence",
+        "evidenceText": "If he comes in by himself, he shall go out by himself. If he is married, then his wife shall go out with him."
+      },
+      {
+        "reference": "Exodus 21:3",
+        "phase": "Occurrence",
+        "evidenceText": "If he comes in by himself, he shall go out by himself. If he is married, then his wife shall go out with him."
+      },
+      {
+        "reference": "Exodus 21:4",
+        "phase": "Occurrence",
+        "evidenceText": "If his master gives him a wife and she bears him sons or daughters, the wife and her children shall be her master’s, and he shall go out by himself."
+      },
+      {
+        "reference": "Proverbs 9:3",
+        "phase": "Occurrence",
+        "evidenceText": "She has sent out her maidens."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 21:3 and continues through Proverbs 9:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 21:3",
+        "book": "Exodus",
+        "englishText": "If he comes in by himself, he shall go out by himself. If he is married, then his wife shall go out with him."
+      },
+      {
+        "reference": "Exodus 21:3",
+        "book": "Exodus",
+        "englishText": "If he comes in by himself, he shall go out by himself. If he is married, then his wife shall go out with him."
+      },
+      {
+        "reference": "Exodus 21:4",
+        "book": "Exodus",
+        "englishText": "If his master gives him a wife and she bears him sons or daughters, the wife and her children shall be her master’s, and he shall go out by himself."
+      },
+      {
+        "reference": "Proverbs 9:3",
+        "book": "Proverbs",
+        "englishText": "She has sent out her maidens."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

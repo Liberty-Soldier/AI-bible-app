@@ -4,7 +4,7 @@
   "title": "חֶלְאָה",
   "subtitle": "H2458 • Hebrew name",
   "simple": {
-    "meaning": "חֶלְאָה (Chelʼâh) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "חֶלְאָה (Chelʼâh) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 4:5. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חֶלְאָה (H2458) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חֶלְאָה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,86 @@
     ],
     "laterReferences": [
       "1 Chronicles 4:7"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2458",
+    "source": "hebrew",
+    "strong": "H2458",
+    "lemma": "חֶלְאָה",
+    "transliteration": "Chelʼâh",
+    "definition": "Chelah , an Israelitess",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 4:5",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Ashhur the father of Tekoa had two wives, Helah and Naarah."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 4:5",
+      "1 Chronicles 4:7"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 4:7",
+        "evidenceText": "The sons of Helah were Zereth, Izhar, and Ethnan."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 4:5",
+        "phase": "Occurrence",
+        "evidenceText": "Ashhur the father of Tekoa had two wives, Helah and Naarah."
+      },
+      {
+        "reference": "1 Chronicles 4:7",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Helah were Zereth, Izhar, and Ethnan."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 4:5 and continues through 1 Chronicles 4:7.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 4:5",
+        "book": "1 Chronicles",
+        "englishText": "Ashhur the father of Tekoa had two wives, Helah and Naarah."
+      },
+      {
+        "reference": "1 Chronicles 4:7",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Helah were Zereth, Izhar, and Ethnan."
+      }
     ]
   },
   "evidence": {

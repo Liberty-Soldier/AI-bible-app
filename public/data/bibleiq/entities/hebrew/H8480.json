@@ -4,7 +4,7 @@
   "title": "תַּחַת",
   "subtitle": "H8480 • Hebrew name",
   "simple": {
-    "meaning": "תַּחַת (Tachath) appears 6 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "תַּחַת (Tachath) appears 6 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, 1 Chronicles, beginning at Numbers 33:26. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to תַּחַת (H8480) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows תַּחַת through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,136 @@
       "1 Chronicles 6:9",
       "1 Chronicles 6:22",
       "1 Chronicles 7:20"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8480",
+    "source": "hebrew",
+    "strong": "H8480",
+    "lemma": "תַּחַת",
+    "transliteration": "Tachath",
+    "definition": "Tachath , the name of a place in the Desert, also of three Israelites",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 33:26",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "They traveled from Makheloth, and encamped in Tahath."
+    },
+    "books": [
+      "Numbers",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 33:26",
+      "Numbers 33:27",
+      "1 Chronicles 6:9",
+      "1 Chronicles 6:22",
+      "1 Chronicles 7:20"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 6:22",
+        "evidenceText": "The sons of Kohath: Amminadab his son, Korah his son, Assir his son,"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:20",
+        "evidenceText": "The sons of Ephraim: Shuthelah, Bered his son, Tahath his son, Eleadah his son, Tahath his son,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 33:26",
+        "phase": "Occurrence",
+        "evidenceText": "They traveled from Makheloth, and encamped in Tahath."
+      },
+      {
+        "reference": "Numbers 33:27",
+        "phase": "Occurrence",
+        "evidenceText": "They traveled from Tahath, and encamped in Terah."
+      },
+      {
+        "reference": "1 Chronicles 6:9",
+        "phase": "Occurrence",
+        "evidenceText": "Ahimaaz became the father of Azariah. Azariah became the father of Johanan."
+      },
+      {
+        "reference": "1 Chronicles 6:22",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Kohath: Amminadab his son, Korah his son, Assir his son,"
+      },
+      {
+        "reference": "1 Chronicles 7:20",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Ephraim: Shuthelah, Bered his son, Tahath his son, Eleadah his son, Tahath his son,"
+      },
+      {
+        "reference": "1 Chronicles 7:20",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Ephraim: Shuthelah, Bered his son, Tahath his son, Eleadah his son, Tahath his son,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 33:26 and continues through 1 Chronicles 7:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 33:26",
+        "book": "Numbers",
+        "englishText": "They traveled from Makheloth, and encamped in Tahath."
+      },
+      {
+        "reference": "Numbers 33:27",
+        "book": "Numbers",
+        "englishText": "They traveled from Tahath, and encamped in Terah."
+      },
+      {
+        "reference": "1 Chronicles 6:9",
+        "book": "1 Chronicles",
+        "englishText": "Ahimaaz became the father of Azariah. Azariah became the father of Johanan."
+      },
+      {
+        "reference": "1 Chronicles 6:22",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Kohath: Amminadab his son, Korah his son, Assir his son,"
+      },
+      {
+        "reference": "1 Chronicles 7:20",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Ephraim: Shuthelah, Bered his son, Tahath his son, Eleadah his son, Tahath his son,"
+      },
+      {
+        "reference": "1 Chronicles 7:20",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Ephraim: Shuthelah, Bered his son, Tahath his son, Eleadah his son, Tahath his son,"
+      }
     ]
   },
   "evidence": {

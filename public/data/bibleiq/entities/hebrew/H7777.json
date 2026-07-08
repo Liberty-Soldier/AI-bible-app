@@ -25,6 +25,86 @@
       "1 Chronicles 7:36"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7777",
+    "source": "hebrew",
+    "strong": "H7777",
+    "lemma": "שׁוּעָל",
+    "transliteration": "Shûwʻâl",
+    "definition": "Shual , the name of an Israelite and of a place in Palestine",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 13:17",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "The raiders came out of the camp of the Philistines in three companies: one company turned to the way that leads to Ophrah, to the land of Shual;"
+    },
+    "books": [
+      "1 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Samuel 13:17",
+      "1 Chronicles 7:36"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "1 Samuel 13:17",
+        "evidenceText": "The raiders came out of the camp of the Philistines in three companies: one company turned to the way that leads to Ophrah, to the land of Shual;"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:36",
+        "evidenceText": "The sons of Zophah: Suah, Harnepher, Shual, Beri, Imrah,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Samuel 13:17",
+        "phase": "Movement or place",
+        "evidenceText": "The raiders came out of the camp of the Philistines in three companies: one company turned to the way that leads to Ophrah, to the land of Shual;"
+      },
+      {
+        "reference": "1 Chronicles 7:36",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Zophah: Suah, Harnepher, Shual, Beri, Imrah,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 13:17 and continues through 1 Chronicles 7:36.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 13:17",
+        "book": "1 Samuel",
+        "englishText": "The raiders came out of the camp of the Philistines in three companies: one company turned to the way that leads to Ophrah, to the land of Shual;"
+      },
+      {
+        "reference": "1 Chronicles 7:36",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Zophah: Suah, Harnepher, Shual, Beri, Imrah,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

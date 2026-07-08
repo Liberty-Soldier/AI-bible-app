@@ -26,6 +26,83 @@
       "2 Kings 5:19"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3530",
+    "source": "hebrew",
+    "strong": "H3530",
+    "lemma": "כִּבְרָה",
+    "transliteration": "kibrâh",
+    "definition": "properly, length , i.e. a measure (of uncertain dimension)",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "unknown",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 35:16",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "They traveled from Bethel. There was still some distance to come to Ephrath, and Rachel travailed. She had hard labor."
+    },
+    "books": [
+      "Genesis",
+      "2 Kings"
+    ],
+    "references": [
+      "Genesis 35:16",
+      "Genesis 48:7",
+      "2 Kings 5:19"
+    ],
+    "themes": [
+      "land"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 48:7",
+        "evidenceText": "As for me, when I came from Paddan, Rachel died beside me in the land of Canaan on the way, when there was still some distance to come to Ephrath, and I buried her there on the way to Ephrath (also called Bethlehem).”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 35:16",
+        "phase": "Occurrence",
+        "evidenceText": "They traveled from Bethel. There was still some distance to come to Ephrath, and Rachel travailed. She had hard labor."
+      },
+      {
+        "reference": "Genesis 48:7",
+        "phase": "Movement or place",
+        "evidenceText": "As for me, when I came from Paddan, Rachel died beside me in the land of Canaan on the way, when there was still some distance to come to Ephrath, and I buried her there on the way to Ephrath (also called Bethlehem).”"
+      },
+      {
+        "reference": "2 Kings 5:19",
+        "phase": "Occurrence",
+        "evidenceText": "He said to him, “Go in peace.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 35:16 and continues through 2 Kings 5:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 35:16",
+        "book": "Genesis",
+        "englishText": "They traveled from Bethel. There was still some distance to come to Ephrath, and Rachel travailed. She had hard labor."
+      },
+      {
+        "reference": "Genesis 48:7",
+        "book": "Genesis",
+        "englishText": "As for me, when I came from Paddan, Rachel died beside me in the land of Canaan on the way, when there was still some distance to come to Ephrath, and I buried her there on the way to Ephrath (also called Bethlehem).”"
+      },
+      {
+        "reference": "2 Kings 5:19",
+        "book": "2 Kings",
+        "englishText": "He said to him, “Go in peace.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

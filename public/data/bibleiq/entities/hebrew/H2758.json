@@ -26,6 +26,83 @@
       "1 Samuel 8:12"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2758",
+    "source": "hebrew",
+    "strong": "H2758",
+    "lemma": "חָרִישׁ",
+    "transliteration": "chârîysh",
+    "definition": "ploughing or its season",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 45:6",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "For these two years the famine has been in the land, and there are yet five years, in which there will be no plowing and no harvest."
+    },
+    "books": [
+      "Genesis",
+      "Exodus",
+      "1 Samuel"
+    ],
+    "references": [
+      "Genesis 45:6",
+      "Exodus 34:21",
+      "1 Samuel 8:12"
+    ],
+    "themes": [
+      "land"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 45:6",
+        "evidenceText": "For these two years the famine has been in the land, and there are yet five years, in which there will be no plowing and no harvest."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 45:6",
+        "phase": "Movement or place",
+        "evidenceText": "For these two years the famine has been in the land, and there are yet five years, in which there will be no plowing and no harvest."
+      },
+      {
+        "reference": "Exodus 34:21",
+        "phase": "Occurrence",
+        "evidenceText": "“Six days you shall work, but on the seventh day you shall rest: in plowing time and in harvest you shall rest."
+      },
+      {
+        "reference": "1 Samuel 8:12",
+        "phase": "Occurrence",
+        "evidenceText": "He will appoint them to him for captains of thousands, and captains of fifties; and he will assign some to plow his ground, and to reap his harvest, and to make his instruments of war, and the instruments of his chariots."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 45:6 and continues through 1 Samuel 8:12.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 45:6",
+        "book": "Genesis",
+        "englishText": "For these two years the famine has been in the land, and there are yet five years, in which there will be no plowing and no harvest."
+      },
+      {
+        "reference": "Exodus 34:21",
+        "book": "Exodus",
+        "englishText": "“Six days you shall work, but on the seventh day you shall rest: in plowing time and in harvest you shall rest."
+      },
+      {
+        "reference": "1 Samuel 8:12",
+        "book": "1 Samuel",
+        "englishText": "He will appoint them to him for captains of thousands, and captains of fifties; and he will assign some to plow his ground, and to reap his harvest, and to make his instruments of war, and the instruments of his chariots."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

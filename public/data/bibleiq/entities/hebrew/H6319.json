@@ -4,7 +4,7 @@
   "title": "פּוֹטִי פֶרַע",
   "subtitle": "H6319 • Hebrew name",
   "simple": {
-    "meaning": "פּוֹטִי פֶרַע (Pôwṭîy Pheraʻ) appears 3 times in the Hebrew Scriptures and is introduced in connection with priesthood.",
+    "meaning": "פּוֹטִי פֶרַע (Pôwṭîy Pheraʻ) appears 3 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with priesthood.",
     "biblicalBackground": "The first appearances are in Genesis, beginning at Genesis 41:45. BibleIQ detects the main surrounding context as birth, family line, priesthood, land, Egypt.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to פּוֹטִי פֶרַע (H6319) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows פּוֹטִי פֶרַע through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,115 @@
     "laterReferences": [
       "Genesis 41:50",
       "Genesis 46:20"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6319",
+    "source": "hebrew",
+    "strong": "H6319",
+    "lemma": "פּוֹטִי פֶרַע",
+    "transliteration": "Pôwṭîy Pheraʻ",
+    "definition": "Poti-Phera , an Egyptian",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 41:45",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Pharaoh called Joseph’s name Zaphenath-Paneah. He gave him Asenath, the daughter of Potiphera priest of On as a wife. Joseph went out over the land of Egypt."
+    },
+    "books": [
+      "Genesis"
+    ],
+    "references": [
+      "Genesis 41:45",
+      "Genesis 41:50",
+      "Genesis 46:20"
+    ],
+    "themes": [
+      "family line",
+      "priesthood",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 41:45",
+        "evidenceText": "Pharaoh called Joseph’s name Zaphenath-Paneah. He gave him Asenath, the daughter of Potiphera priest of On as a wife. Joseph went out over the land of Egypt."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 41:50",
+        "evidenceText": "To Joseph were born two sons before the year of famine came, whom Asenath, the daughter of Potiphera priest of On, bore to him."
+      },
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 46:20",
+        "evidenceText": "To Joseph in the land of Egypt were born Manasseh and Ephraim, whom Asenath, the daughter of Potiphera, priest of On, bore to him."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 41:45",
+        "phase": "Movement or place",
+        "evidenceText": "Pharaoh called Joseph’s name Zaphenath-Paneah. He gave him Asenath, the daughter of Potiphera priest of On as a wife. Joseph went out over the land of Egypt."
+      },
+      {
+        "reference": "Genesis 41:50",
+        "phase": "Birth or introduction",
+        "evidenceText": "To Joseph were born two sons before the year of famine came, whom Asenath, the daughter of Potiphera priest of On, bore to him."
+      },
+      {
+        "reference": "Genesis 46:20",
+        "phase": "Birth or introduction",
+        "evidenceText": "To Joseph in the land of Egypt were born Manasseh and Ephraim, whom Asenath, the daughter of Potiphera, priest of On, bore to him."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 41:45 and continues through Genesis 46:20.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 41:45",
+        "book": "Genesis",
+        "englishText": "Pharaoh called Joseph’s name Zaphenath-Paneah. He gave him Asenath, the daughter of Potiphera priest of On as a wife. Joseph went out over the land of Egypt."
+      },
+      {
+        "reference": "Genesis 41:50",
+        "book": "Genesis",
+        "englishText": "To Joseph were born two sons before the year of famine came, whom Asenath, the daughter of Potiphera priest of On, bore to him."
+      },
+      {
+        "reference": "Genesis 46:20",
+        "book": "Genesis",
+        "englishText": "To Joseph in the land of Egypt were born Manasseh and Ephraim, whom Asenath, the daughter of Potiphera, priest of On, bore to him."
+      }
     ]
   },
   "evidence": {

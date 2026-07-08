@@ -26,6 +26,101 @@
       "Ezekiel 28:8"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4463",
+    "source": "hebrew",
+    "strong": "H4463",
+    "lemma": "מָמוֹת",
+    "transliteration": "mâmôwth",
+    "definition": "a mortal disease ; concretely, a corpse",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Kings 11:2",
+      "book": "2 Kings",
+      "bookName": "2 Kings",
+      "englishText": "But Jehosheba, the daughter of king Joram, sister of Ahaziah, took Joash the son of Ahaziah, and stole him away from among the king’s sons who were slain, even him and his nurse, and put them in the bedroom; and they hid him from Athaliah, so that he was not slain."
+    },
+    "books": [
+      "2 Kings",
+      "Jeremiah",
+      "Ezekiel"
+    ],
+    "references": [
+      "2 Kings 11:2",
+      "Jeremiah 16:4",
+      "Ezekiel 28:8"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Kings 11:2",
+        "evidenceText": "But Jehosheba, the daughter of king Joram, sister of Ahaziah, took Joash the son of Ahaziah, and stole him away from among the king’s sons who were slain, even him and his nurse, and put them in the bedroom; and they hid him from Athaliah, so that he was not slain."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Kings 11:2",
+        "phase": "Genealogy",
+        "evidenceText": "But Jehosheba, the daughter of king Joram, sister of Ahaziah, took Joash the son of Ahaziah, and stole him away from among the king’s sons who were slain, even him and his nurse, and put them in the bedroom; and they hid him from Athaliah, so that he was not slain."
+      },
+      {
+        "reference": "Jeremiah 16:4",
+        "phase": "Occurrence",
+        "evidenceText": "“They will die grievous deaths. They will not be lamented, neither will they be buried. They will be as dung on the surface of the ground. They will be consumed by the sword and by famine. Their dead bodies will be food for the birds of the sky and for the animals of the earth.”"
+      },
+      {
+        "reference": "Ezekiel 28:8",
+        "phase": "Occurrence",
+        "evidenceText": "They will bring you down to the pit."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Kings 11:2 and continues through Ezekiel 28:8.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Kings 11:2",
+        "book": "2 Kings",
+        "englishText": "But Jehosheba, the daughter of king Joram, sister of Ahaziah, took Joash the son of Ahaziah, and stole him away from among the king’s sons who were slain, even him and his nurse, and put them in the bedroom; and they hid him from Athaliah, so that he was not slain."
+      },
+      {
+        "reference": "Jeremiah 16:4",
+        "book": "Jeremiah",
+        "englishText": "“They will die grievous deaths. They will not be lamented, neither will they be buried. They will be as dung on the surface of the ground. They will be consumed by the sword and by famine. Their dead bodies will be food for the birds of the sky and for the animals of the earth.”"
+      },
+      {
+        "reference": "Ezekiel 28:8",
+        "book": "Ezekiel",
+        "englishText": "They will bring you down to the pit."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

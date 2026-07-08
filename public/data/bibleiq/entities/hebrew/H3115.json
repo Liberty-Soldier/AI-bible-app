@@ -4,7 +4,7 @@
   "title": "יוֹכֶבֶד",
   "subtitle": "H3115 • Hebrew name",
   "simple": {
-    "meaning": "יוֹכֶבֶד (Yôwkebed) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "יוֹכֶבֶד (Yôwkebed) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Exodus, Numbers, beginning at Exodus 6:20. BibleIQ detects the main surrounding context as birth, family, family line, Egypt.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יוֹכֶבֶד (H3115) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יוֹכֶבֶד through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,97 @@
     ],
     "laterReferences": [
       "Numbers 26:59"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3115",
+    "source": "hebrew",
+    "strong": "H3115",
+    "lemma": "יוֹכֶבֶד",
+    "transliteration": "Yôwkebed",
+    "definition": "Jokebed , the mother of Moses",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 6:20",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "Amram took Jochebed his father’s sister to himself as wife; and she bore him Aaron and Moses. The years of the life of Amram were one hundred thirty-seven years."
+    },
+    "books": [
+      "Exodus",
+      "Numbers"
+    ],
+    "references": [
+      "Exodus 6:20",
+      "Numbers 26:59"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Numbers 26:59",
+        "evidenceText": "The name of Amram’s wife was Jochebed, the daughter of Levi, who was born to Levi in Egypt. She bore to Amram Aaron and Moses, and Miriam their sister."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 6:20",
+        "phase": "Occurrence",
+        "evidenceText": "Amram took Jochebed his father’s sister to himself as wife; and she bore him Aaron and Moses. The years of the life of Amram were one hundred thirty-seven years."
+      },
+      {
+        "reference": "Numbers 26:59",
+        "phase": "Birth or introduction",
+        "evidenceText": "The name of Amram’s wife was Jochebed, the daughter of Levi, who was born to Levi in Egypt. She bore to Amram Aaron and Moses, and Miriam their sister."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 6:20 and continues through Numbers 26:59.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 6:20",
+        "book": "Exodus",
+        "englishText": "Amram took Jochebed his father’s sister to himself as wife; and she bore him Aaron and Moses. The years of the life of Amram were one hundred thirty-seven years."
+      },
+      {
+        "reference": "Numbers 26:59",
+        "book": "Numbers",
+        "englishText": "The name of Amram’s wife was Jochebed, the daughter of Levi, who was born to Levi in Egypt. She bore to Amram Aaron and Moses, and Miriam their sister."
+      }
     ]
   },
   "evidence": {

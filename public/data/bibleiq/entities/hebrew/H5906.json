@@ -25,6 +25,71 @@
       "Job 38:32"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5906",
+    "source": "hebrew",
+    "strong": "H5906",
+    "lemma": "עַיִשׁ",
+    "transliteration": "ʻAyish",
+    "definition": "the constellation of the Great Bear (perhaps from its migration through the heavens)",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Job 9:9",
+      "book": "Job",
+      "bookName": "Job",
+      "englishText": "He makes the Bear, Orion, and the Pleiades,"
+    },
+    "books": [
+      "Job"
+    ],
+    "references": [
+      "Job 9:9",
+      "Job 38:32"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Job 9:9",
+        "phase": "Occurrence",
+        "evidenceText": "He makes the Bear, Orion, and the Pleiades,"
+      },
+      {
+        "reference": "Job 38:32",
+        "phase": "Occurrence",
+        "evidenceText": "Can you lead the constellations out in their season?"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Job 9:9 and continues through Job 38:32.",
+    "occurrenceTrail": [
+      {
+        "reference": "Job 9:9",
+        "book": "Job",
+        "englishText": "He makes the Bear, Orion, and the Pleiades,"
+      },
+      {
+        "reference": "Job 38:32",
+        "book": "Job",
+        "englishText": "Can you lead the constellations out in their season?"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "עוּתַי",
   "subtitle": "H5793 • Hebrew name",
   "simple": {
-    "meaning": "עוּתַי (ʻÛwthay) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "עוּתַי (ʻÛwthay) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, Ezra, beginning at 1 Chronicles 9:4. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עוּתַי (H5793) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עוּתַי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,81 @@
     ],
     "laterReferences": [
       "Ezra 8:14"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5793",
+    "source": "hebrew",
+    "strong": "H5793",
+    "lemma": "עוּתַי",
+    "transliteration": "ʻÛwthay",
+    "definition": "Uthai , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 9:4",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Uthai the son of Ammihud, the son of Omri, the son of Imri, the son of Bani, of the children of Perez the son of Judah."
+    },
+    "books": [
+      "1 Chronicles",
+      "Ezra"
+    ],
+    "references": [
+      "1 Chronicles 9:4",
+      "Ezra 8:14"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ezra 8:14",
+        "evidenceText": "Of the sons of Bigvai, Uthai and Zabbud; and with them seventy males."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 9:4",
+        "phase": "Occurrence",
+        "evidenceText": "Uthai the son of Ammihud, the son of Omri, the son of Imri, the son of Bani, of the children of Perez the son of Judah."
+      },
+      {
+        "reference": "Ezra 8:14",
+        "phase": "Genealogy",
+        "evidenceText": "Of the sons of Bigvai, Uthai and Zabbud; and with them seventy males."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 9:4 and continues through Ezra 8:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 9:4",
+        "book": "1 Chronicles",
+        "englishText": "Uthai the son of Ammihud, the son of Omri, the son of Imri, the son of Bani, of the children of Perez the son of Judah."
+      },
+      {
+        "reference": "Ezra 8:14",
+        "book": "Ezra",
+        "englishText": "Of the sons of Bigvai, Uthai and Zabbud; and with them seventy males."
+      }
     ]
   },
   "evidence": {

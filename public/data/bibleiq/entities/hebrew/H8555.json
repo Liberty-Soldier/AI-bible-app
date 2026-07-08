@@ -4,7 +4,7 @@
   "title": "תִּמְנָע",
   "subtitle": "H8555 • Hebrew name",
   "simple": {
-    "meaning": "תִּמְנָע (Timnâʻ) appears 6 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "תִּמְנָע (Timnâʻ) appears 6 times in the Hebrew Scriptures and is introduced as a sister in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 36:12. BibleIQ detects the main surrounding context as family, family line, death.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to תִּמְנָע (H8555) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows תִּמְנָע through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,142 @@
       "1 Chronicles 1:36",
       "1 Chronicles 1:39",
       "1 Chronicles 1:51"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8555",
+    "source": "hebrew",
+    "strong": "H8555",
+    "lemma": "תִּמְנָע",
+    "transliteration": "Timnâʻ",
+    "definition": "Timna , the name of two Edomites",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:12",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Timna was concubine to Eliphaz, Esau’s son; and she bore to Eliphaz Amalek. These are the descendants of Adah, Esau’s wife."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:12",
+      "Genesis 36:22",
+      "Genesis 36:40",
+      "1 Chronicles 1:36",
+      "1 Chronicles 1:39",
+      "1 Chronicles 1:51"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:36",
+        "evidenceText": "The sons of Eliphaz: Teman, Omar, Zephi, Gatam, Kenaz, Timna, and Amalek."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:39",
+        "evidenceText": "The sons of Lotan: Hori and Homam; and Timna was Lotan’s sister."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:12",
+        "phase": "Occurrence",
+        "evidenceText": "Timna was concubine to Eliphaz, Esau’s son; and she bore to Eliphaz Amalek. These are the descendants of Adah, Esau’s wife."
+      },
+      {
+        "reference": "Genesis 36:22",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Lotan were Hori and Heman. Lotan’s sister was Timna."
+      },
+      {
+        "reference": "Genesis 36:40",
+        "phase": "Occurrence",
+        "evidenceText": "These are the names of the chiefs who came from Esau, according to their families, after their places, and by their names: chief Timna, chief Alvah, chief Jetheth,"
+      },
+      {
+        "reference": "1 Chronicles 1:36",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Eliphaz: Teman, Omar, Zephi, Gatam, Kenaz, Timna, and Amalek."
+      },
+      {
+        "reference": "1 Chronicles 1:39",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Lotan: Hori and Homam; and Timna was Lotan’s sister."
+      },
+      {
+        "reference": "1 Chronicles 1:51",
+        "phase": "Occurrence",
+        "evidenceText": "Then Hadad died. The chiefs of Edom were: chief Timna, chief Aliah, chief Jetheth,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:12 and continues through 1 Chronicles 1:51.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:12",
+        "book": "Genesis",
+        "englishText": "Timna was concubine to Eliphaz, Esau’s son; and she bore to Eliphaz Amalek. These are the descendants of Adah, Esau’s wife."
+      },
+      {
+        "reference": "Genesis 36:22",
+        "book": "Genesis",
+        "englishText": "The children of Lotan were Hori and Heman. Lotan’s sister was Timna."
+      },
+      {
+        "reference": "Genesis 36:40",
+        "book": "Genesis",
+        "englishText": "These are the names of the chiefs who came from Esau, according to their families, after their places, and by their names: chief Timna, chief Alvah, chief Jetheth,"
+      },
+      {
+        "reference": "1 Chronicles 1:36",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Eliphaz: Teman, Omar, Zephi, Gatam, Kenaz, Timna, and Amalek."
+      },
+      {
+        "reference": "1 Chronicles 1:39",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Lotan: Hori and Homam; and Timna was Lotan’s sister."
+      },
+      {
+        "reference": "1 Chronicles 1:51",
+        "book": "1 Chronicles",
+        "englishText": "Then Hadad died. The chiefs of Edom were: chief Timna, chief Aliah, chief Jetheth,"
+      }
     ]
   },
   "evidence": {

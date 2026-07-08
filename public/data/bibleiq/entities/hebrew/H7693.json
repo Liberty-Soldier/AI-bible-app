@@ -27,6 +27,108 @@
       "Zechariah 14:2"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7693",
+    "source": "hebrew",
+    "strong": "H7693",
+    "lemma": "שָׁגַל",
+    "transliteration": "shâgal",
+    "definition": "to copulate with",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 28:30",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "You will betroth a wife, and another man shall lie with her. You will build a house, and you won’t dwell in it. You will plant a vineyard, and not use its fruit."
+    },
+    "books": [
+      "Deuteronomy",
+      "Isaiah",
+      "Jeremiah",
+      "Zechariah"
+    ],
+    "references": [
+      "Deuteronomy 28:30",
+      "Isaiah 13:16",
+      "Jeremiah 3:2",
+      "Zechariah 14:2"
+    ],
+    "themes": [
+      "city",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Jeremiah 3:2",
+        "evidenceText": "“Lift up your eyes to the bare heights, and see! Where have you not been lain with? You have sat waiting for them by the road, as an Arabian in the wilderness. You have polluted the land with your prostitution and with your wickedness."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Zechariah 14:2",
+        "evidenceText": "For I will gather all nations against Jerusalem to battle; and the city will be taken, the houses rifled, and the women ravished. Half of the city will go out into captivity, and the rest of the people will not be cut off from the city."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 28:30",
+        "phase": "Occurrence",
+        "evidenceText": "You will betroth a wife, and another man shall lie with her. You will build a house, and you won’t dwell in it. You will plant a vineyard, and not use its fruit."
+      },
+      {
+        "reference": "Isaiah 13:16",
+        "phase": "Occurrence",
+        "evidenceText": "Their infants also will be dashed in pieces before their eyes. Their houses will be ransacked, and their wives raped."
+      },
+      {
+        "reference": "Jeremiah 3:2",
+        "phase": "Movement or place",
+        "evidenceText": "“Lift up your eyes to the bare heights, and see! Where have you not been lain with? You have sat waiting for them by the road, as an Arabian in the wilderness. You have polluted the land with your prostitution and with your wickedness."
+      },
+      {
+        "reference": "Zechariah 14:2",
+        "phase": "Movement or place",
+        "evidenceText": "For I will gather all nations against Jerusalem to battle; and the city will be taken, the houses rifled, and the women ravished. Half of the city will go out into captivity, and the rest of the people will not be cut off from the city."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 28:30 and continues through Zechariah 14:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 28:30",
+        "book": "Deuteronomy",
+        "englishText": "You will betroth a wife, and another man shall lie with her. You will build a house, and you won’t dwell in it. You will plant a vineyard, and not use its fruit."
+      },
+      {
+        "reference": "Isaiah 13:16",
+        "book": "Isaiah",
+        "englishText": "Their infants also will be dashed in pieces before their eyes. Their houses will be ransacked, and their wives raped."
+      },
+      {
+        "reference": "Jeremiah 3:2",
+        "book": "Jeremiah",
+        "englishText": "“Lift up your eyes to the bare heights, and see! Where have you not been lain with? You have sat waiting for them by the road, as an Arabian in the wilderness. You have polluted the land with your prostitution and with your wickedness."
+      },
+      {
+        "reference": "Zechariah 14:2",
+        "book": "Zechariah",
+        "englishText": "For I will gather all nations against Jerusalem to battle; and the city will be taken, the houses rifled, and the women ravished. Half of the city will go out into captivity, and the rest of the people will not be cut off from the city."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

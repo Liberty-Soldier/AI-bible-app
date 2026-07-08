@@ -4,7 +4,7 @@
   "title": "בַּחֻרִים",
   "subtitle": "H980 • Hebrew name",
   "simple": {
-    "meaning": "בַּחֻרִים (Bachurîym) appears 5 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "בַּחֻרִים (Bachurîym) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in 2 Samuel, 1 Kings, beginning at 2 Samuel 3:16. BibleIQ detects the main surrounding context as family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to בַּחֻרִים (H980) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows בַּחֻרִים through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,120 @@
       "2 Samuel 17:18",
       "2 Samuel 19:17",
       "1 Kings 2:8"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H980",
+    "source": "hebrew",
+    "strong": "H980",
+    "lemma": "בַּחֻרִים",
+    "transliteration": "Bachurîym",
+    "definition": "Bachurim , a place in Palestine",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 3:16",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "Her husband went with her, weeping as he went, and followed her to Bahurim. Then Abner said to him, “Go! Return!” and he returned."
+    },
+    "books": [
+      "2 Samuel",
+      "1 Kings"
+    ],
+    "references": [
+      "2 Samuel 3:16",
+      "2 Samuel 16:5",
+      "2 Samuel 17:18",
+      "2 Samuel 19:17",
+      "1 Kings 2:8"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "removal_or_rescue",
+        "label": "Removal or rescue",
+        "reference": "2 Samuel 17:18",
+        "evidenceText": "But a boy saw them, and told Absalom. Then they both went away quickly, and came to the house of a man in Bahurim, who had a well in his court; and they went down there."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Samuel 3:16",
+        "phase": "Occurrence",
+        "evidenceText": "Her husband went with her, weeping as he went, and followed her to Bahurim. Then Abner said to him, “Go! Return!” and he returned."
+      },
+      {
+        "reference": "2 Samuel 16:5",
+        "phase": "Occurrence",
+        "evidenceText": "When king David came to Bahurim, behold, a man of the family of Saul’s house came out, whose name was Shimei, the son of Gera. He came out and cursed as he came."
+      },
+      {
+        "reference": "2 Samuel 17:18",
+        "phase": "Removal or rescue",
+        "evidenceText": "But a boy saw them, and told Absalom. Then they both went away quickly, and came to the house of a man in Bahurim, who had a well in his court; and they went down there."
+      },
+      {
+        "reference": "2 Samuel 19:17",
+        "phase": "Occurrence",
+        "evidenceText": "There were a thousand men of Benjamin with him, and Ziba the servant of Saul’s house, and his fifteen sons and his twenty servants with him; and they went through the Jordan in the presence of the king."
+      },
+      {
+        "reference": "1 Kings 2:8",
+        "phase": "Occurrence",
+        "evidenceText": "“Behold, there is with you Shimei the son of Gera, the Benjamite, of Bahurim, who cursed me with a grievous curse in the day when I went to Mahanaim; but he came down to meet me at the Jordan, and I swore to him by Yahweh, saying, ‘I will not put you to death with the sword.’"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 3:16 and continues through 1 Kings 2:8.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 3:16",
+        "book": "2 Samuel",
+        "englishText": "Her husband went with her, weeping as he went, and followed her to Bahurim. Then Abner said to him, “Go! Return!” and he returned."
+      },
+      {
+        "reference": "2 Samuel 16:5",
+        "book": "2 Samuel",
+        "englishText": "When king David came to Bahurim, behold, a man of the family of Saul’s house came out, whose name was Shimei, the son of Gera. He came out and cursed as he came."
+      },
+      {
+        "reference": "2 Samuel 17:18",
+        "book": "2 Samuel",
+        "englishText": "But a boy saw them, and told Absalom. Then they both went away quickly, and came to the house of a man in Bahurim, who had a well in his court; and they went down there."
+      },
+      {
+        "reference": "2 Samuel 19:17",
+        "book": "2 Samuel",
+        "englishText": "There were a thousand men of Benjamin with him, and Ziba the servant of Saul’s house, and his fifteen sons and his twenty servants with him; and they went through the Jordan in the presence of the king."
+      },
+      {
+        "reference": "1 Kings 2:8",
+        "book": "1 Kings",
+        "englishText": "“Behold, there is with you Shimei the son of Gera, the Benjamite, of Bahurim, who cursed me with a grievous curse in the day when I went to Mahanaim; but he came down to meet me at the Jordan, and I swore to him by Yahweh, saying, ‘I will not put you to death with the sword.’"
+      }
     ]
   },
   "evidence": {

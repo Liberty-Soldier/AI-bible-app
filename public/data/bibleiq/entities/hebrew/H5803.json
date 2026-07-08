@@ -4,7 +4,7 @@
   "title": "עַזְגָּד",
   "subtitle": "H5803 • Hebrew name",
   "simple": {
-    "meaning": "עַזְגָּד (ʻAzgâd) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "עַזְגָּד (ʻAzgâd) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Ezra, Nehemiah, beginning at Ezra 2:12. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עַזְגָּד (H5803) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עַזְגָּד through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,103 @@
       "Ezra 8:12",
       "Nehemiah 7:17",
       "Nehemiah 10:16"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5803",
+    "source": "hebrew",
+    "strong": "H5803",
+    "lemma": "עַזְגָּד",
+    "transliteration": "ʻAzgâd",
+    "definition": "Azgad , an Israelite",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 2:12",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "The children of Azgad, one thousand two hundred twenty-two."
+    },
+    "books": [
+      "Ezra",
+      "Nehemiah"
+    ],
+    "references": [
+      "Ezra 2:12",
+      "Ezra 8:12",
+      "Nehemiah 7:17",
+      "Nehemiah 10:16"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ezra 8:12",
+        "evidenceText": "Of the sons of Azgad, Johanan the son of Hakkatan; and with him one hundred ten males."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 2:12",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Azgad, one thousand two hundred twenty-two."
+      },
+      {
+        "reference": "Ezra 8:12",
+        "phase": "Genealogy",
+        "evidenceText": "Of the sons of Azgad, Johanan the son of Hakkatan; and with him one hundred ten males."
+      },
+      {
+        "reference": "Nehemiah 7:17",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Azgad: two thousand three hundred twenty-two."
+      },
+      {
+        "reference": "Nehemiah 10:16",
+        "phase": "Occurrence",
+        "evidenceText": "Adonijah, Bigvai, Adin,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ezra 2:12 and continues through Nehemiah 10:16.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 2:12",
+        "book": "Ezra",
+        "englishText": "The children of Azgad, one thousand two hundred twenty-two."
+      },
+      {
+        "reference": "Ezra 8:12",
+        "book": "Ezra",
+        "englishText": "Of the sons of Azgad, Johanan the son of Hakkatan; and with him one hundred ten males."
+      },
+      {
+        "reference": "Nehemiah 7:17",
+        "book": "Nehemiah",
+        "englishText": "The children of Azgad: two thousand three hundred twenty-two."
+      },
+      {
+        "reference": "Nehemiah 10:16",
+        "book": "Nehemiah",
+        "englishText": "Adonijah, Bigvai, Adin,"
+      }
     ]
   },
   "evidence": {

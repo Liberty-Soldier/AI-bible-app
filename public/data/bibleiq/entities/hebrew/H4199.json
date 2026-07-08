@@ -26,6 +26,110 @@
       "1 Chronicles 1:37"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4199",
+    "source": "hebrew",
+    "strong": "H4199",
+    "lemma": "מִזָּה",
+    "transliteration": "Mizzâh",
+    "definition": "Mizzah , an Edomite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:13",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "These are the sons of Reuel: Nahath, Zerah, Shammah, and Mizzah. These were the descendants of Basemath, Esau’s wife."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:13",
+      "Genesis 36:17",
+      "1 Chronicles 1:37"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 36:13",
+        "evidenceText": "These are the sons of Reuel: Nahath, Zerah, Shammah, and Mizzah. These were the descendants of Basemath, Esau’s wife."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 36:17",
+        "evidenceText": "These are the sons of Reuel, Esau’s son: chief Nahath, chief Zerah, chief Shammah, chief Mizzah. These are the chiefs who came of Reuel in the land of Edom. These are the sons of Basemath, Esau’s wife."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:37",
+        "evidenceText": "The sons of Reuel: Nahath, Zerah, Shammah, and Mizzah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:13",
+        "phase": "Genealogy",
+        "evidenceText": "These are the sons of Reuel: Nahath, Zerah, Shammah, and Mizzah. These were the descendants of Basemath, Esau’s wife."
+      },
+      {
+        "reference": "Genesis 36:17",
+        "phase": "Movement or place",
+        "evidenceText": "These are the sons of Reuel, Esau’s son: chief Nahath, chief Zerah, chief Shammah, chief Mizzah. These are the chiefs who came of Reuel in the land of Edom. These are the sons of Basemath, Esau’s wife."
+      },
+      {
+        "reference": "1 Chronicles 1:37",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Reuel: Nahath, Zerah, Shammah, and Mizzah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:13 and continues through 1 Chronicles 1:37.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:13",
+        "book": "Genesis",
+        "englishText": "These are the sons of Reuel: Nahath, Zerah, Shammah, and Mizzah. These were the descendants of Basemath, Esau’s wife."
+      },
+      {
+        "reference": "Genesis 36:17",
+        "book": "Genesis",
+        "englishText": "These are the sons of Reuel, Esau’s son: chief Nahath, chief Zerah, chief Shammah, chief Mizzah. These are the chiefs who came of Reuel in the land of Edom. These are the sons of Basemath, Esau’s wife."
+      },
+      {
+        "reference": "1 Chronicles 1:37",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Reuel: Nahath, Zerah, Shammah, and Mizzah."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -29,6 +29,136 @@
       "Song of Songs 2:8"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7092",
+    "source": "hebrew",
+    "strong": "H7092",
+    "lemma": "קָפַץ",
+    "transliteration": "qâphats",
+    "definition": "to draw together, i.e. close; by implication, to leap (by contracting the limbs); specifically, to die (from gathering up the feet)",
+    "occurrenceCount": 7,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 15:7",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "If a poor man, one of your brothers, is with you within any of your gates in your land which Yahweh your God gives you, you shall not harden your heart, nor shut your hand from your poor brother;"
+    },
+    "books": [
+      "Deuteronomy",
+      "Job",
+      "Psalms",
+      "Song of Solomon",
+      "Isaiah"
+    ],
+    "references": [
+      "Deuteronomy 15:7",
+      "Job 5:16",
+      "Job 24:24",
+      "Psalms 77:10",
+      "Psalms 107:42",
+      "Song of Songs 2:8",
+      "Isaiah 52:15"
+    ],
+    "themes": [
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Deuteronomy 15:7",
+        "evidenceText": "If a poor man, one of your brothers, is with you within any of your gates in your land which Yahweh your God gives you, you shall not harden your heart, nor shut your hand from your poor brother;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 15:7",
+        "phase": "Movement or place",
+        "evidenceText": "If a poor man, one of your brothers, is with you within any of your gates in your land which Yahweh your God gives you, you shall not harden your heart, nor shut your hand from your poor brother;"
+      },
+      {
+        "reference": "Job 5:16",
+        "phase": "Occurrence",
+        "evidenceText": "So the poor has hope,"
+      },
+      {
+        "reference": "Job 24:24",
+        "phase": "Occurrence",
+        "evidenceText": "They are exalted; yet a little while, and they are gone."
+      },
+      {
+        "reference": "Psalms 77:10",
+        "phase": "Occurrence",
+        "evidenceText": "Then I thought, “I will appeal to this:"
+      },
+      {
+        "reference": "Psalms 107:42",
+        "phase": "Occurrence",
+        "evidenceText": "The upright will see it, and be glad."
+      },
+      {
+        "reference": "Song of Songs 2:8",
+        "phase": "Occurrence",
+        "evidenceText": ""
+      },
+      {
+        "reference": "Isaiah 52:15",
+        "phase": "Occurrence",
+        "evidenceText": "so he will cleanse"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 15:7 and continues through Isaiah 52:15.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 15:7",
+        "book": "Deuteronomy",
+        "englishText": "If a poor man, one of your brothers, is with you within any of your gates in your land which Yahweh your God gives you, you shall not harden your heart, nor shut your hand from your poor brother;"
+      },
+      {
+        "reference": "Job 5:16",
+        "book": "Job",
+        "englishText": "So the poor has hope,"
+      },
+      {
+        "reference": "Job 24:24",
+        "book": "Job",
+        "englishText": "They are exalted; yet a little while, and they are gone."
+      },
+      {
+        "reference": "Psalms 77:10",
+        "book": "Psalms",
+        "englishText": "Then I thought, “I will appeal to this:"
+      },
+      {
+        "reference": "Psalms 107:42",
+        "book": "Psalms",
+        "englishText": "The upright will see it, and be glad."
+      },
+      {
+        "reference": "Song of Songs 2:8",
+        "book": "Song of Solomon",
+        "englishText": ""
+      },
+      {
+        "reference": "Isaiah 52:15",
+        "book": "Isaiah",
+        "englishText": "so he will cleanse"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -23,6 +23,67 @@
     ],
     "laterReferences": []
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3413",
+    "source": "hebrew",
+    "strong": "H3413",
+    "lemma": "יְרֵמַי",
+    "transliteration": "Yᵉrêmay",
+    "definition": "Jeremai , an Israelite",
+    "occurrenceCount": 1,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 10:33",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "Of the sons of Hashum: Mattenai, Mattattah, Zabad, Eliphelet, Jeremai, Manasseh, Shimei."
+    },
+    "books": [
+      "Ezra"
+    ],
+    "references": [
+      "Ezra 10:33"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ezra 10:33",
+        "evidenceText": "Of the sons of Hashum: Mattenai, Mattattah, Zabad, Eliphelet, Jeremai, Manasseh, Shimei."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 10:33",
+        "phase": "Genealogy",
+        "evidenceText": "Of the sons of Hashum: Mattenai, Mattattah, Zabad, Eliphelet, Jeremai, Manasseh, Shimei."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail contains one reference: Ezra 10:33.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 10:33",
+        "book": "Ezra",
+        "englishText": "Of the sons of Hashum: Mattenai, Mattattah, Zabad, Eliphelet, Jeremai, Manasseh, Shimei."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

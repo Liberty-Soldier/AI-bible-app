@@ -26,6 +26,97 @@
       "1 Chronicles 7:13"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3337",
+    "source": "hebrew",
+    "strong": "H3337",
+    "lemma": "יֵצֶר",
+    "transliteration": "Yêtser",
+    "definition": "Jetser , an Israelite",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:24",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Naphtali: Jahzeel, Guni, Jezer, and Shillem."
+    },
+    "books": [
+      "Genesis",
+      "Numbers",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 46:24",
+      "Numbers 26:49",
+      "1 Chronicles 7:13"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 46:24",
+        "evidenceText": "The sons of Naphtali: Jahzeel, Guni, Jezer, and Shillem."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:13",
+        "evidenceText": "The sons of Naphtali: Jahziel, Guni, Jezer, Shallum, and the sons of Bilhah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:24",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Naphtali: Jahzeel, Guni, Jezer, and Shillem."
+      },
+      {
+        "reference": "Numbers 26:49",
+        "phase": "Occurrence",
+        "evidenceText": "of Jezer, the family of the Jezerites; of Shillem, the family of the Shillemites."
+      },
+      {
+        "reference": "1 Chronicles 7:13",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Naphtali: Jahziel, Guni, Jezer, Shallum, and the sons of Bilhah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:24 and continues through 1 Chronicles 7:13.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:24",
+        "book": "Genesis",
+        "englishText": "The sons of Naphtali: Jahzeel, Guni, Jezer, and Shillem."
+      },
+      {
+        "reference": "Numbers 26:49",
+        "book": "Numbers",
+        "englishText": "of Jezer, the family of the Jezerites; of Shillem, the family of the Shillemites."
+      },
+      {
+        "reference": "1 Chronicles 7:13",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Naphtali: Jahziel, Guni, Jezer, Shallum, and the sons of Bilhah."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

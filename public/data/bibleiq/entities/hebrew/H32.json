@@ -4,7 +4,7 @@
   "title": "אֲבִיהַיִל",
   "subtitle": "H32 • Hebrew name",
   "simple": {
-    "meaning": "אֲבִיהַיִל (ʼĂbîyhayil) appears 6 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "אֲבִיהַיִל (ʼĂbîyhayil) appears 6 times in the Hebrew Scriptures and is introduced as a daughter in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Numbers, 1 Chronicles, 2 Chronicles, Esther, beginning at Numbers 3:35. BibleIQ detects the main surrounding context as family, family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֲבִיהַיִל (H32) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֲבִיהַיִל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -27,6 +27,162 @@
       "2 Chronicles 11:18",
       "Esther 2:15",
       "Esther 9:29"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H32",
+    "source": "hebrew",
+    "strong": "H32",
+    "lemma": "אֲבִיהַיִל",
+    "transliteration": "ʼĂbîyhayil",
+    "definition": "Abihail or Abichail , the name of three Israelites and two Israelitesses",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 3:35",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "The prince of the fathers’ house of the families of Merari was Zuriel the son of Abihail. They shall encamp on the north side of the tabernacle."
+    },
+    "books": [
+      "Numbers",
+      "1 Chronicles",
+      "2 Chronicles",
+      "Esther"
+    ],
+    "references": [
+      "Numbers 3:35",
+      "1 Chronicles 2:29",
+      "1 Chronicles 5:14",
+      "2 Chronicles 11:18",
+      "Esther 2:15",
+      "Esther 9:29"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 5:14",
+        "evidenceText": "These were the sons of Abihail, the son of Huri, the son of Jaroah, the son of Gilead, the son of Michael, the son of Jeshishai, the son of Jahdo, the son of Buz;"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Chronicles 11:18",
+        "evidenceText": "Rehoboam took a wife for himself, Mahalath the daughter of Jerimoth the son of David and of Abihail the daughter of Eliab the son of Jesse."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Esther 2:15",
+        "evidenceText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Esther 9:29",
+        "evidenceText": "Then Esther the queen, the daughter of Abihail, and Mordecai the Jew, wrote with all authority to confirm this second letter of Purim."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 3:35",
+        "phase": "Occurrence",
+        "evidenceText": "The prince of the fathers’ house of the families of Merari was Zuriel the son of Abihail. They shall encamp on the north side of the tabernacle."
+      },
+      {
+        "reference": "1 Chronicles 2:29",
+        "phase": "Occurrence",
+        "evidenceText": "The name of the wife of Abishur was Abihail; and she bore him Ahban and Molid."
+      },
+      {
+        "reference": "1 Chronicles 5:14",
+        "phase": "Genealogy",
+        "evidenceText": "These were the sons of Abihail, the son of Huri, the son of Jaroah, the son of Gilead, the son of Michael, the son of Jeshishai, the son of Jahdo, the son of Buz;"
+      },
+      {
+        "reference": "2 Chronicles 11:18",
+        "phase": "Genealogy",
+        "evidenceText": "Rehoboam took a wife for himself, Mahalath the daughter of Jerimoth the son of David and of Abihail the daughter of Eliab the son of Jesse."
+      },
+      {
+        "reference": "Esther 2:15",
+        "phase": "Genealogy",
+        "evidenceText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      },
+      {
+        "reference": "Esther 9:29",
+        "phase": "Genealogy",
+        "evidenceText": "Then Esther the queen, the daughter of Abihail, and Mordecai the Jew, wrote with all authority to confirm this second letter of Purim."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 3:35 and continues through Esther 9:29.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 3:35",
+        "book": "Numbers",
+        "englishText": "The prince of the fathers’ house of the families of Merari was Zuriel the son of Abihail. They shall encamp on the north side of the tabernacle."
+      },
+      {
+        "reference": "1 Chronicles 2:29",
+        "book": "1 Chronicles",
+        "englishText": "The name of the wife of Abishur was Abihail; and she bore him Ahban and Molid."
+      },
+      {
+        "reference": "1 Chronicles 5:14",
+        "book": "1 Chronicles",
+        "englishText": "These were the sons of Abihail, the son of Huri, the son of Jaroah, the son of Gilead, the son of Michael, the son of Jeshishai, the son of Jahdo, the son of Buz;"
+      },
+      {
+        "reference": "2 Chronicles 11:18",
+        "book": "2 Chronicles",
+        "englishText": "Rehoboam took a wife for himself, Mahalath the daughter of Jerimoth the son of David and of Abihail the daughter of Eliab the son of Jesse."
+      },
+      {
+        "reference": "Esther 2:15",
+        "book": "Esther",
+        "englishText": "Now when the turn of Esther, the daughter of Abihail the uncle of Mordecai, who had taken her for his daughter, came to go in to the king, she required nothing but what Hegai the king’s eunuch, the keeper of the women, advised. Esther obtained favor in the sight of all those who looked at her."
+      },
+      {
+        "reference": "Esther 9:29",
+        "book": "Esther",
+        "englishText": "Then Esther the queen, the daughter of Abihail, and Mordecai the Jew, wrote with all authority to confirm this second letter of Purim."
+      }
     ]
   },
   "evidence": {

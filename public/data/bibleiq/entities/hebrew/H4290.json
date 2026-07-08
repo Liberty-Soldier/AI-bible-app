@@ -25,6 +25,71 @@
       "Jeremiah 2:34"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4290",
+    "source": "hebrew",
+    "strong": "H4290",
+    "lemma": "מַחְתֶּרֶת",
+    "transliteration": "machtereth",
+    "definition": "a burglary ; figuratively, unexpected examination",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 22:1",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "“If a man steals an ox or a sheep, and kills it or sells it, he shall pay five oxen for an ox, and four sheep for a sheep."
+    },
+    "books": [
+      "Exodus",
+      "Jeremiah"
+    ],
+    "references": [
+      "Exodus 22:1",
+      "Jeremiah 2:34"
+    ],
+    "themes": [
+      "blood"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Jeremiah 2:34",
+        "evidenceText": "Also the blood of the souls of the innocent poor is found in your skirts."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 22:1",
+        "phase": "Occurrence",
+        "evidenceText": "“If a man steals an ox or a sheep, and kills it or sells it, he shall pay five oxen for an ox, and four sheep for a sheep."
+      },
+      {
+        "reference": "Jeremiah 2:34",
+        "phase": "Blood witness",
+        "evidenceText": "Also the blood of the souls of the innocent poor is found in your skirts."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 22:1 and continues through Jeremiah 2:34.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 22:1",
+        "book": "Exodus",
+        "englishText": "“If a man steals an ox or a sheep, and kills it or sells it, he shall pay five oxen for an ox, and four sheep for a sheep."
+      },
+      {
+        "reference": "Jeremiah 2:34",
+        "book": "Jeremiah",
+        "englishText": "Also the blood of the souls of the innocent poor is found in your skirts."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

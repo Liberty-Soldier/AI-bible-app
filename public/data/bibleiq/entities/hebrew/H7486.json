@@ -28,6 +28,127 @@
       "Numbers 33:5"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7486",
+    "source": "hebrew",
+    "strong": "H7486",
+    "lemma": "רַעְמְסֵס",
+    "transliteration": "Raʻmᵉçêç",
+    "definition": "Rameses or Raamses , a place in Egypt",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 47:11",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Joseph placed his father and his brothers, and gave them a possession in the land of Egypt, in the best of the land, in the land of Rameses, as Pharaoh had commanded."
+    },
+    "books": [
+      "Genesis",
+      "Exodus",
+      "Numbers"
+    ],
+    "references": [
+      "Genesis 47:11",
+      "Exodus 1:11",
+      "Exodus 12:37",
+      "Numbers 33:3",
+      "Numbers 33:5"
+    ],
+    "themes": [
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 47:11",
+        "evidenceText": "Joseph placed his father and his brothers, and gave them a possession in the land of Egypt, in the best of the land, in the land of Rameses, as Pharaoh had commanded."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Numbers 33:3",
+        "evidenceText": "They traveled from Rameses in the first month, on the fifteenth day of the first month; on the next day after the Passover, the children of Israel went out with a high hand in the sight of all the Egyptians,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 47:11",
+        "phase": "Movement or place",
+        "evidenceText": "Joseph placed his father and his brothers, and gave them a possession in the land of Egypt, in the best of the land, in the land of Rameses, as Pharaoh had commanded."
+      },
+      {
+        "reference": "Exodus 1:11",
+        "phase": "Occurrence",
+        "evidenceText": "Therefore they set taskmasters over them to afflict them with their burdens. They built storage cities for Pharaoh: Pithom and Raamses."
+      },
+      {
+        "reference": "Exodus 12:37",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Israel traveled from Rameses to Succoth, about six hundred thousand on foot who were men, in addition to children."
+      },
+      {
+        "reference": "Numbers 33:3",
+        "phase": "Movement or place",
+        "evidenceText": "They traveled from Rameses in the first month, on the fifteenth day of the first month; on the next day after the Passover, the children of Israel went out with a high hand in the sight of all the Egyptians,"
+      },
+      {
+        "reference": "Numbers 33:5",
+        "phase": "Occurrence",
+        "evidenceText": "The children of Israel traveled from Rameses, and encamped in Succoth."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 47:11 and continues through Numbers 33:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 47:11",
+        "book": "Genesis",
+        "englishText": "Joseph placed his father and his brothers, and gave them a possession in the land of Egypt, in the best of the land, in the land of Rameses, as Pharaoh had commanded."
+      },
+      {
+        "reference": "Exodus 1:11",
+        "book": "Exodus",
+        "englishText": "Therefore they set taskmasters over them to afflict them with their burdens. They built storage cities for Pharaoh: Pithom and Raamses."
+      },
+      {
+        "reference": "Exodus 12:37",
+        "book": "Exodus",
+        "englishText": "The children of Israel traveled from Rameses to Succoth, about six hundred thousand on foot who were men, in addition to children."
+      },
+      {
+        "reference": "Numbers 33:3",
+        "book": "Numbers",
+        "englishText": "They traveled from Rameses in the first month, on the fifteenth day of the first month; on the next day after the Passover, the children of Israel went out with a high hand in the sight of all the Egyptians,"
+      },
+      {
+        "reference": "Numbers 33:5",
+        "book": "Numbers",
+        "englishText": "The children of Israel traveled from Rameses, and encamped in Succoth."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

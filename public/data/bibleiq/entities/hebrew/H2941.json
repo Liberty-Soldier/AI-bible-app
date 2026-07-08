@@ -4,7 +4,7 @@
   "title": "טַעַם",
   "subtitle": "H2941 • Hebrew word",
   "simple": {
-    "meaning": "טַעַם (ṭaʻam) appears 5 times in the Hebrew Scriptures and is introduced in connection with kingship and in connection with prophetic witness.",
+    "meaning": "טַעַם (ṭaʻam) appears 5 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship and in connection with prophetic witness.",
     "biblicalBackground": "The first appearances are in Ezra, Daniel, beginning at Ezra 4:21. BibleIQ detects the main surrounding context as family line, commandment, kingship, prophetic witness, city, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to טַעַם (H2941) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows טַעַם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,117 @@
       "Ezra 6:14",
       "Ezra 7:23",
       "Daniel 6:3"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2941",
+    "source": "hebrew",
+    "strong": "H2941",
+    "lemma": "טַעַם",
+    "transliteration": "ṭaʻam",
+    "definition": "properly, a taste , i.e. a judicial sentence",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 4:21",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "Make a decree now to cause these men to cease, and that this city not be built, until a decree is made by me."
+    },
+    "books": [
+      "Ezra",
+      "Daniel"
+    ],
+    "references": [
+      "Ezra 4:21",
+      "Ezra 5:5",
+      "Ezra 6:14",
+      "Ezra 7:23",
+      "Daniel 6:3"
+    ],
+    "themes": [
+      "family line",
+      "kingship",
+      "prophetic witness",
+      "city",
+      "commandment"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Ezra 4:21",
+        "evidenceText": "Make a decree now to cause these men to cease, and that this city not be built, until a decree is made by me."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 4:21",
+        "phase": "Movement or place",
+        "evidenceText": "Make a decree now to cause these men to cease, and that this city not be built, until a decree is made by me."
+      },
+      {
+        "reference": "Ezra 5:5",
+        "phase": "Occurrence",
+        "evidenceText": "But the eye of their God was on the elders of the Jews, and they didn’t make them cease, until the matter should come to Darius, and an answer should be returned by letter concerning it."
+      },
+      {
+        "reference": "Ezra 6:14",
+        "phase": "Occurrence",
+        "evidenceText": "The elders of the Jews built and prospered, through the prophesying of Haggai the prophet and Zechariah the son of Iddo. They built and finished it, according to the commandment of the God of Israel, and according to the decree of Cyrus, Darius, and Artaxerxes king of Persia."
+      },
+      {
+        "reference": "Ezra 7:23",
+        "phase": "Occurrence",
+        "evidenceText": "Whatever is commanded by the God of heaven, let it be done exactly for the house of the God of heaven; for why should there be wrath against the realm of the king and his sons?"
+      },
+      {
+        "reference": "Daniel 6:3",
+        "phase": "Occurrence",
+        "evidenceText": "Then this Daniel was distinguished above the presidents and the local governors, because an excellent spirit was in him; and the king thought to set him over the whole realm."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ezra 4:21 and continues through Daniel 6:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 4:21",
+        "book": "Ezra",
+        "englishText": "Make a decree now to cause these men to cease, and that this city not be built, until a decree is made by me."
+      },
+      {
+        "reference": "Ezra 5:5",
+        "book": "Ezra",
+        "englishText": "But the eye of their God was on the elders of the Jews, and they didn’t make them cease, until the matter should come to Darius, and an answer should be returned by letter concerning it."
+      },
+      {
+        "reference": "Ezra 6:14",
+        "book": "Ezra",
+        "englishText": "The elders of the Jews built and prospered, through the prophesying of Haggai the prophet and Zechariah the son of Iddo. They built and finished it, according to the commandment of the God of Israel, and according to the decree of Cyrus, Darius, and Artaxerxes king of Persia."
+      },
+      {
+        "reference": "Ezra 7:23",
+        "book": "Ezra",
+        "englishText": "Whatever is commanded by the God of heaven, let it be done exactly for the house of the God of heaven; for why should there be wrath against the realm of the king and his sons?"
+      },
+      {
+        "reference": "Daniel 6:3",
+        "book": "Daniel",
+        "englishText": "Then this Daniel was distinguished above the presidents and the local governors, because an excellent spirit was in him; and the king thought to set him over the whole realm."
+      }
     ]
   },
   "evidence": {

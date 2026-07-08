@@ -25,6 +25,76 @@
       "Psalms 69:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3121",
+    "source": "hebrew",
+    "strong": "H3121",
+    "lemma": "יָוֵן",
+    "transliteration": "yâvên",
+    "definition": "properly, dregs (as effervescing); hence, mud",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Psalms 40:3",
+      "book": "Psalms",
+      "bookName": "Psalms",
+      "englishText": "He has put a new song in my mouth, even praise to our God."
+    },
+    "books": [
+      "Psalms"
+    ],
+    "references": [
+      "Psalms 40:3",
+      "Psalms 69:3"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Psalms 69:3",
+        "evidenceText": "I am weary with my crying."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Psalms 40:3",
+        "phase": "Occurrence",
+        "evidenceText": "He has put a new song in my mouth, even praise to our God."
+      },
+      {
+        "reference": "Psalms 69:3",
+        "phase": "Blood witness",
+        "evidenceText": "I am weary with my crying."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Psalms 40:3 and continues through Psalms 69:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Psalms 40:3",
+        "book": "Psalms",
+        "englishText": "He has put a new song in my mouth, even praise to our God."
+      },
+      {
+        "reference": "Psalms 69:3",
+        "book": "Psalms",
+        "englishText": "I am weary with my crying."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

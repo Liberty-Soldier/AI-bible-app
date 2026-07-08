@@ -27,6 +27,98 @@
       "Ezekiel 12:24"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2509",
+    "source": "hebrew",
+    "strong": "H2509",
+    "lemma": "חָלָק",
+    "transliteration": "châlâq",
+    "definition": "smooth (especially of tongue)",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 27:11",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Jacob said to Rebekah his mother, “Behold, Esau my brother is a hairy man, and I am a smooth man."
+    },
+    "books": [
+      "Genesis",
+      "Proverbs",
+      "Ezekiel"
+    ],
+    "references": [
+      "Genesis 27:11",
+      "Proverbs 5:3",
+      "Proverbs 26:28",
+      "Ezekiel 12:24"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 27:11",
+        "phase": "Occurrence",
+        "evidenceText": "Jacob said to Rebekah his mother, “Behold, Esau my brother is a hairy man, and I am a smooth man."
+      },
+      {
+        "reference": "Proverbs 5:3",
+        "phase": "Occurrence",
+        "evidenceText": "For the lips of an adulteress drip honey."
+      },
+      {
+        "reference": "Proverbs 26:28",
+        "phase": "Occurrence",
+        "evidenceText": "A lying tongue hates those it hurts;"
+      },
+      {
+        "reference": "Ezekiel 12:24",
+        "phase": "Occurrence",
+        "evidenceText": "For there will be no more any false vision nor flattering divination within the house of Israel."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 27:11 and continues through Ezekiel 12:24.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 27:11",
+        "book": "Genesis",
+        "englishText": "Jacob said to Rebekah his mother, “Behold, Esau my brother is a hairy man, and I am a smooth man."
+      },
+      {
+        "reference": "Proverbs 5:3",
+        "book": "Proverbs",
+        "englishText": "For the lips of an adulteress drip honey."
+      },
+      {
+        "reference": "Proverbs 26:28",
+        "book": "Proverbs",
+        "englishText": "A lying tongue hates those it hurts;"
+      },
+      {
+        "reference": "Ezekiel 12:24",
+        "book": "Ezekiel",
+        "englishText": "For there will be no more any false vision nor flattering divination within the house of Israel."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

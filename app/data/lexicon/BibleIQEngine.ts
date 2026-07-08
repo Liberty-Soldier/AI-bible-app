@@ -1,10 +1,18 @@
 import { findCanonicalHit } from "@/app/data/scripture/CanonicalVerseStore";
+import SeeStore, {
+  toSeeCountId,
+  toSeeEvidenceId,
+} from "@/app/lib/see/SeeStore";
+import { buildEmetEvidencePacket } from "@/app/lib/emet/EmetEvidencePacket";
+import { interpretEmetPacket } from "@/app/lib/emet/EmetInterpreter";
 
 import type {
   BibleIQEntity,
   BibleIQRequest,
   BibleIQResponse,
+  BibleIQSeeEvidence,
   BibleIQSource,
+  BibleIQSourceAlignment,
 } from "./BibleIQTypes";
 
 function normalize(value: string) {
@@ -14,37 +22,6 @@ function normalize(value: string) {
     .replace(/[^a-zA-Z0-9]+/g, " ")
     .toLowerCase()
     .trim();
-}
-
-function safeEntityIdPart(value: string) {
-  return String(value || "").replace(/[^A-Za-z0-9_-]/g, "");
-}
-
-function entityPublicPath(entityId: string) {
-  const cleanId = entityId.startsWith("word:")
-    ? entityId.replace(/^word:/, "")
-    : entityId;
-
-  const [source, strong] = cleanId.split(":");
-
-  if (!source || !strong) return null;
-
-  return `/data/bibleiq/entities/${safeEntityIdPart(source)}/${safeEntityIdPart(
-    strong
-  )}.json`;
-}
-
-async function loadEntity(entityId: string, origin: string) {
-  const publicPath = entityPublicPath(entityId);
-  if (!publicPath) return null;
-
-  const response = await fetch(`${origin}${publicPath}`, {
-    cache: "force-cache",
-  });
-
-  if (!response.ok) return null;
-
-  return (await response.json()) as BibleIQEntity;
 }
 
 function isNewTestament(book: string) {
@@ -108,6 +85,186 @@ function unresolved(
   };
 }
 
+function cleanCanonRef(value?: string) {
+  return String(value || "").replace(/^canon:/, "");
+}
+
+function normalizeReference(value: string) {
+  return String(value || "")
+    .replace(/^canon:/, "")
+    .replace(/^Gen:/, "Genesis ")
+    .replace(/^Exod:/, "Exodus ")
+    .replace(/^Lev:/, "Leviticus ")
+    .replace(/^Num:/, "Numbers ")
+    .replace(/^Deut:/, "Deuteronomy ")
+    .trim();
+}
+
+function uniqueReferences(values: string[]) {
+  const seen = new Set<string>();
+  const result: string[] = [];
+
+  for (const value of values) {
+    const normalized = normalizeReference(value);
+    const key = normalized.replace(/\s+/g, "").toLowerCase();
+
+    if (!normalized || seen.has(key)) continue;
+
+    seen.add(key);
+    result.push(normalized);
+  }
+
+  return result;
+}
+
+function buildSeeEntity({
+  input,
+  preferredSource,
+  entityId,
+  sourceWord,
+  strong,
+  lemma,
+  morph,
+}: {
+  input: BibleIQRequest;
+  preferredSource: BibleIQSource;
+  entityId: string;
+  sourceWord?: string;
+  strong?: string;
+  lemma?: string;
+  morph?: string;
+}): BibleIQEntity | null {
+  const seeEvidenceRaw = SeeStore.get(entityId);
+  if (!seeEvidenceRaw) return null;
+
+  const seeEvidenceId = toSeeEvidenceId(entityId);
+  const countId = toSeeCountId(entityId);
+
+  const firstReference = cleanCanonRef(seeEvidenceRaw.firstOccurrence);
+  const lastReference = cleanCanonRef(seeEvidenceRaw.lastOccurrence);
+
+  const occurrenceCount = seeEvidenceRaw.occurrenceCount ?? 0;
+  const relationshipCount = SeeStore.relationshipCount(entityId);
+  const eventCount = SeeStore.eventCount(entityId);
+  const themeCount = SeeStore.themeCount(entityId);
+
+  const title = lemma || sourceWord || input.displayWord.trim();
+
+  const see: BibleIQSeeEvidence = {
+    evidenceId: seeEvidenceId,
+    countId,
+    occurrenceCount,
+    firstOccurrence: firstReference
+      ? normalizeReference(firstReference)
+      : undefined,
+    lastOccurrence: lastReference ? normalizeReference(lastReference) : undefined,
+    relationshipCount,
+    eventCount,
+    themeCount,
+  };
+
+  const alignment: BibleIQSourceAlignment = {
+    selectedEnglish: input.displayWord,
+    sourceWord,
+    source: preferredSource,
+    strong,
+    lemma,
+    morph,
+    entityId,
+    seeEvidenceId,
+  };
+
+  const emetPacket = buildEmetEvidencePacket({
+    entityId,
+    book: input.book,
+    chapter: input.chapter,
+    verse: input.verse,
+    translation: input.translation,
+    displayWord: input.displayWord,
+    verseText: input.verseText,
+    sourceWord,
+    strong,
+    lemma,
+    morph,
+  });
+
+  const emetResult = interpretEmetPacket(emetPacket);
+
+  return {
+    id: entityId,
+    type: "word",
+    title,
+    subtitle: "SEE Evidence",
+
+emet: {
+  status: emetResult.status,
+  packet: emetPacket,
+  explanation: emetResult.explanation,
+  citations: emetResult.citations,
+},
+
+    see,
+    alignment,
+
+    // Legacy fields kept only so current UI does not break.
+    simple: {
+      meaning: title,
+      inThisVerse: sourceWord
+        ? `The selected English word is aligned to ${sourceWord}.`
+        : `This word appears in ${input.book} ${input.chapter}:${input.verse}.`,
+      whyItMatters:
+        "SEE has structured evidence for this source-language lemma. EMET will explain this evidence without creating it.",
+      summary:
+        "This entry is now backed by SEE runtime evidence instead of the legacy BibleIQ entity generator.",
+    },
+
+    evidence: {
+      originalLanguage: {
+        source: preferredSource,
+        word: sourceWord || title,
+        strong,
+        lemma,
+        morph,
+        seeEvidenceId,
+      },
+
+      firstMention: see.firstOccurrence,
+
+      keyReferences: uniqueReferences([
+        `${input.book} ${input.chapter}:${input.verse}`,
+        ...(see.firstOccurrence ? [see.firstOccurrence] : []),
+        ...(see.lastOccurrence ? [see.lastOccurrence] : []),
+      ]),
+
+      related: {
+        people: [],
+        places: [],
+        concepts: [
+          `Occurrences: ${occurrenceCount}`,
+          `Relationships: ${relationshipCount}`,
+          `Events: ${eventCount}`,
+          `Themes: ${themeCount}`,
+        ],
+        events: [],
+      },
+
+      occurrenceCount,
+
+      occurrences: [
+        {
+          reference: `${input.book} ${input.chapter}:${input.verse}`,
+          book: input.book,
+          chapter: input.chapter,
+          verse: input.verse,
+          englishText: input.verseText || "",
+          sourceWord,
+          source: preferredSource,
+        },
+      ],
+    },
+  };
+}
+
 function buildPlaceholderEntity(
   input: BibleIQRequest,
   preferredSource: BibleIQSource
@@ -122,6 +279,13 @@ function buildPlaceholderEntity(
     title,
     subtitle: "BibleIQ Evidence",
 
+    emet: {
+      status: "insufficient-evidence",
+      packet: null,
+      explanation: undefined,
+      citations: [`${input.book} ${input.chapter}:${input.verse}`],
+    },
+
     simple: {
       meaning: undefined,
       inThisVerse: input.verseText
@@ -129,8 +293,7 @@ function buildPlaceholderEntity(
         : "This word appears in the selected verse.",
       whyItMatters:
         "BibleIQ is preparing the source-language evidence for this word.",
-      summary:
-        "This word has not been connected to the canonical source-language verse model yet.",
+      summary: "This word has not been connected to SEE evidence yet.",
     },
 
     evidence: {
@@ -168,7 +331,7 @@ function buildPlaceholderEntity(
 
 export async function resolveBibleIQ(
   input: BibleIQRequest,
-  origin: string
+  _origin: string
 ): Promise<BibleIQResponse> {
   const preferredSource = determinePreferredSource(input);
 
@@ -185,7 +348,15 @@ export async function resolveBibleIQ(
   });
 
   if (hit) {
-    const entity = await loadEntity(hit.entityId, origin);
+    const entity = buildSeeEntity({
+      input,
+      preferredSource,
+      entityId: hit.entityId,
+      sourceWord: hit.sourceWord,
+      strong: hit.sourceToken?.strong,
+      lemma: hit.sourceToken?.lemma,
+      morph: hit.sourceToken?.morph,
+    });
 
     if (entity) {
       return {
@@ -193,19 +364,7 @@ export async function resolveBibleIQ(
         resolutionType: "verse-context",
         preferredSource,
         query: input.displayWord,
-        entity: {
-          ...entity,
-          evidence: {
-            ...entity.evidence,
-            originalLanguage: entity.evidence.originalLanguage
-              ? {
-                  ...entity.evidence.originalLanguage,
-                  word: hit.sourceWord || entity.evidence.originalLanguage.word,
-                  strong: entity.evidence.originalLanguage.strong,
-                }
-              : undefined,
-          },
-        },
+        entity,
       };
     }
   }

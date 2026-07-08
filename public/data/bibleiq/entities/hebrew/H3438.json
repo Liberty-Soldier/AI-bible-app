@@ -4,7 +4,7 @@
   "title": "יִשְׁוָה",
   "subtitle": "H3438 • Hebrew name",
   "simple": {
-    "meaning": "יִשְׁוָה (Yishvâh) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "יִשְׁוָה (Yishvâh) appears 2 times in the Hebrew Scriptures and is introduced as a sister in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 46:17. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יִשְׁוָה (H3438) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יִשְׁוָה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,93 @@
     ],
     "laterReferences": [
       "1 Chronicles 7:30"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3438",
+    "source": "hebrew",
+    "strong": "H3438",
+    "lemma": "יִשְׁוָה",
+    "transliteration": "Yishvâh",
+    "definition": "Jishvah , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 46:17",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Asher: Imnah, Ishvah, Ishvi, Beriah, and Serah their sister. The sons of Beriah: Heber and Malchiel."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 46:17",
+      "1 Chronicles 7:30"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 46:17",
+        "evidenceText": "The sons of Asher: Imnah, Ishvah, Ishvi, Beriah, and Serah their sister. The sons of Beriah: Heber and Malchiel."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:30",
+        "evidenceText": "The sons of Asher: Imnah, Ishvah, Ishvi, and Beriah. Serah was their sister."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 46:17",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Asher: Imnah, Ishvah, Ishvi, Beriah, and Serah their sister. The sons of Beriah: Heber and Malchiel."
+      },
+      {
+        "reference": "1 Chronicles 7:30",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Asher: Imnah, Ishvah, Ishvi, and Beriah. Serah was their sister."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 46:17 and continues through 1 Chronicles 7:30.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 46:17",
+        "book": "Genesis",
+        "englishText": "The sons of Asher: Imnah, Ishvah, Ishvi, Beriah, and Serah their sister. The sons of Beriah: Heber and Malchiel."
+      },
+      {
+        "reference": "1 Chronicles 7:30",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Asher: Imnah, Ishvah, Ishvi, and Beriah. Serah was their sister."
+      }
     ]
   },
   "evidence": {

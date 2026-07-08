@@ -4,7 +4,7 @@
   "title": "עָשָׁן",
   "subtitle": "H6228 • Hebrew name",
   "simple": {
-    "meaning": "עָשָׁן (ʻÂshân) appears 4 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "עָשָׁן (ʻÂshân) appears 4 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Joshua, 1 Chronicles, beginning at Joshua 15:42. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עָשָׁן (H6228) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עָשָׁן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,109 @@
       "Joshua 19:7",
       "1 Chronicles 4:32",
       "1 Chronicles 6:44"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6228",
+    "source": "hebrew",
+    "strong": "H6228",
+    "lemma": "עָשָׁן",
+    "transliteration": "ʻÂshân",
+    "definition": "Ashan , a place in Palestine",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 15:42",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "Libnah, Ether, Ashan,"
+    },
+    "books": [
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Joshua 15:42",
+      "Joshua 19:7",
+      "1 Chronicles 4:32",
+      "1 Chronicles 6:44"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 6:44",
+        "evidenceText": "On the left hand their brothers the sons of Merari: Ethan the son of Kishi, the son of Abdi, the son of Malluch,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 15:42",
+        "phase": "Occurrence",
+        "evidenceText": "Libnah, Ether, Ashan,"
+      },
+      {
+        "reference": "Joshua 19:7",
+        "phase": "Occurrence",
+        "evidenceText": "Ain, Rimmon, Ether, and Ashan; four cities with their villages;"
+      },
+      {
+        "reference": "1 Chronicles 4:32",
+        "phase": "Occurrence",
+        "evidenceText": "Their villages were Etam, Ain, Rimmon, Tochen, and Ashan, five cities;"
+      },
+      {
+        "reference": "1 Chronicles 6:44",
+        "phase": "Genealogy",
+        "evidenceText": "On the left hand their brothers the sons of Merari: Ethan the son of Kishi, the son of Abdi, the son of Malluch,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 15:42 and continues through 1 Chronicles 6:44.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 15:42",
+        "book": "Joshua",
+        "englishText": "Libnah, Ether, Ashan,"
+      },
+      {
+        "reference": "Joshua 19:7",
+        "book": "Joshua",
+        "englishText": "Ain, Rimmon, Ether, and Ashan; four cities with their villages;"
+      },
+      {
+        "reference": "1 Chronicles 4:32",
+        "book": "1 Chronicles",
+        "englishText": "Their villages were Etam, Ain, Rimmon, Tochen, and Ashan, five cities;"
+      },
+      {
+        "reference": "1 Chronicles 6:44",
+        "book": "1 Chronicles",
+        "englishText": "On the left hand their brothers the sons of Merari: Ethan the son of Kishi, the son of Abdi, the son of Malluch,"
+      }
     ]
   },
   "evidence": {

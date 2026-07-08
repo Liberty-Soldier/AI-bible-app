@@ -4,7 +4,7 @@
   "title": "שְׂרוּג",
   "subtitle": "H8286 • Hebrew name",
   "simple": {
-    "meaning": "שְׂרוּג (Sᵉrûwg) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "שְׂרוּג (Sᵉrûwg) appears 5 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 11:20. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to שְׂרוּג (H8286) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows שְׂרוּג through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,118 @@
       "Genesis 11:22",
       "Genesis 11:23",
       "1 Chronicles 1:26"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8286",
+    "source": "hebrew",
+    "strong": "H8286",
+    "lemma": "שְׂרוּג",
+    "transliteration": "Sᵉrûwg",
+    "definition": "Serug , a postdiluvian patriarch",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 11:20",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Reu lived thirty-two years, and became the father of Serug."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 11:20",
+      "Genesis 11:21",
+      "Genesis 11:22",
+      "Genesis 11:23",
+      "1 Chronicles 1:26"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Genesis 11:20",
+        "phase": "Occurrence",
+        "evidenceText": "Reu lived thirty-two years, and became the father of Serug."
+      },
+      {
+        "reference": "Genesis 11:21",
+        "phase": "Occurrence",
+        "evidenceText": "Reu lived two hundred seven years after he became the father of Serug, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "Genesis 11:22",
+        "phase": "Occurrence",
+        "evidenceText": "Serug lived thirty years, and became the father of Nahor."
+      },
+      {
+        "reference": "Genesis 11:23",
+        "phase": "Occurrence",
+        "evidenceText": "Serug lived two hundred years after he became the father of Nahor, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "1 Chronicles 1:26",
+        "phase": "Occurrence",
+        "evidenceText": "Serug, Nahor, Terah,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 11:20 and continues through 1 Chronicles 1:26.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 11:20",
+        "book": "Genesis",
+        "englishText": "Reu lived thirty-two years, and became the father of Serug."
+      },
+      {
+        "reference": "Genesis 11:21",
+        "book": "Genesis",
+        "englishText": "Reu lived two hundred seven years after he became the father of Serug, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "Genesis 11:22",
+        "book": "Genesis",
+        "englishText": "Serug lived thirty years, and became the father of Nahor."
+      },
+      {
+        "reference": "Genesis 11:23",
+        "book": "Genesis",
+        "englishText": "Serug lived two hundred years after he became the father of Nahor, and became the father of more sons and daughters."
+      },
+      {
+        "reference": "1 Chronicles 1:26",
+        "book": "1 Chronicles",
+        "englishText": "Serug, Nahor, Terah,"
+      }
     ]
   },
   "evidence": {

@@ -27,6 +27,120 @@
       "1 Chronicles 1:33"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6989",
+    "source": "hebrew",
+    "strong": "H6989",
+    "lemma": "קְטוּרָה",
+    "transliteration": "Qᵉṭûwrâh",
+    "definition": "Keturah , a wife of Abraham",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:1",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Abraham took another wife, and her name was Keturah."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 25:1",
+      "Genesis 25:4",
+      "1 Chronicles 1:32",
+      "1 Chronicles 1:33"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 25:4",
+        "evidenceText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:32",
+        "evidenceText": "The sons of Keturah, Abraham’s concubine: she bore Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah. The sons of Jokshan: Sheba and Dedan."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:33",
+        "evidenceText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:1",
+        "phase": "Occurrence",
+        "evidenceText": "Abraham took another wife, and her name was Keturah."
+      },
+      {
+        "reference": "Genesis 25:4",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "reference": "1 Chronicles 1:32",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Keturah, Abraham’s concubine: she bore Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah. The sons of Jokshan: Sheba and Dedan."
+      },
+      {
+        "reference": "1 Chronicles 1:33",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:1 and continues through 1 Chronicles 1:33.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:1",
+        "book": "Genesis",
+        "englishText": "Abraham took another wife, and her name was Keturah."
+      },
+      {
+        "reference": "Genesis 25:4",
+        "book": "Genesis",
+        "englishText": "The sons of Midian were Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the children of Keturah."
+      },
+      {
+        "reference": "1 Chronicles 1:32",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Keturah, Abraham’s concubine: she bore Zimran, Jokshan, Medan, Midian, Ishbak, and Shuah. The sons of Jokshan: Sheba and Dedan."
+      },
+      {
+        "reference": "1 Chronicles 1:33",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Midian: Ephah, Epher, Hanoch, Abida, and Eldaah. All these were the sons of Keturah."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

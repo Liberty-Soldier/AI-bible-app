@@ -4,7 +4,7 @@
   "title": "בַּעַל חָנָן",
   "subtitle": "H1177 • Hebrew name",
   "simple": {
-    "meaning": "בַּעַל חָנָן (Baʻal Chânân) appears 5 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "בַּעַל חָנָן (Baʻal Chânân) appears 5 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, 1 Chronicles, beginning at Genesis 36:38. BibleIQ detects the main surrounding context as family line, death, city, land.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to בַּעַל חָנָן (H1177) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows בַּעַל חָנָן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -26,6 +26,138 @@
       "1 Chronicles 1:49",
       "1 Chronicles 1:50",
       "1 Chronicles 27:28"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1177",
+    "source": "hebrew",
+    "strong": "H1177",
+    "lemma": "בַּעַל חָנָן",
+    "transliteration": "Baʻal Chânân",
+    "definition": "Baal-Chanan , the name of an Edomite, also of an Israelite",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 36:38",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Shaul died, and Baal Hanan the son of Achbor reigned in his place."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 36:38",
+      "Genesis 36:39",
+      "1 Chronicles 1:49",
+      "1 Chronicles 1:50",
+      "1 Chronicles 27:28"
+    ],
+    "themes": [
+      "family line",
+      "city",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 36:39",
+        "evidenceText": "Baal Hanan the son of Achbor died, and Hadar reigned in his place. The name of his city was Pau. His wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "1 Chronicles 1:50",
+        "evidenceText": "Baal Hanan died, and Hadad reigned in his place; and the name of his city was Pai: and his wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "1 Chronicles 27:28",
+        "evidenceText": "and over the olive trees and the sycamore trees that were in the lowland was Baal Hanan the Gederite; and over the cellars of oil was Joash;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 36:38",
+        "phase": "Occurrence",
+        "evidenceText": "Shaul died, and Baal Hanan the son of Achbor reigned in his place."
+      },
+      {
+        "reference": "Genesis 36:39",
+        "phase": "Movement or place",
+        "evidenceText": "Baal Hanan the son of Achbor died, and Hadar reigned in his place. The name of his city was Pau. His wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "reference": "1 Chronicles 1:49",
+        "phase": "Occurrence",
+        "evidenceText": "Shaul died, and Baal Hanan the son of Achbor reigned in his place."
+      },
+      {
+        "reference": "1 Chronicles 1:50",
+        "phase": "Movement or place",
+        "evidenceText": "Baal Hanan died, and Hadad reigned in his place; and the name of his city was Pai: and his wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "reference": "1 Chronicles 27:28",
+        "phase": "Movement or place",
+        "evidenceText": "and over the olive trees and the sycamore trees that were in the lowland was Baal Hanan the Gederite; and over the cellars of oil was Joash;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 36:38 and continues through 1 Chronicles 27:28.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 36:38",
+        "book": "Genesis",
+        "englishText": "Shaul died, and Baal Hanan the son of Achbor reigned in his place."
+      },
+      {
+        "reference": "Genesis 36:39",
+        "book": "Genesis",
+        "englishText": "Baal Hanan the son of Achbor died, and Hadar reigned in his place. The name of his city was Pau. His wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "reference": "1 Chronicles 1:49",
+        "book": "1 Chronicles",
+        "englishText": "Shaul died, and Baal Hanan the son of Achbor reigned in his place."
+      },
+      {
+        "reference": "1 Chronicles 1:50",
+        "book": "1 Chronicles",
+        "englishText": "Baal Hanan died, and Hadad reigned in his place; and the name of his city was Pai: and his wife’s name was Mehetabel, the daughter of Matred, the daughter of Mezahab."
+      },
+      {
+        "reference": "1 Chronicles 27:28",
+        "book": "1 Chronicles",
+        "englishText": "and over the olive trees and the sycamore trees that were in the lowland was Baal Hanan the Gederite; and over the cellars of oil was Joash;"
+      }
     ]
   },
   "evidence": {

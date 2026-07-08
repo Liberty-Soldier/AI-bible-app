@@ -25,6 +25,85 @@
       "1 Chronicles 2:29"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H51",
+    "source": "hebrew",
+    "strong": "H51",
+    "lemma": "אֲבִישׁוּר",
+    "transliteration": "ʼĂbîyshûwr",
+    "definition": "Abishur , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 2:28",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 2:28",
+      "1 Chronicles 2:29"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 2:28",
+        "evidenceText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 2:28",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      },
+      {
+        "reference": "1 Chronicles 2:29",
+        "phase": "Occurrence",
+        "evidenceText": "The name of the wife of Abishur was Abihail; and she bore him Ahban and Molid."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 2:28 and continues through 1 Chronicles 2:29.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 2:28",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Onam were Shammai and Jada. The sons of Shammai: Nadab and Abishur."
+      },
+      {
+        "reference": "1 Chronicles 2:29",
+        "book": "1 Chronicles",
+        "englishText": "The name of the wife of Abishur was Abihail; and she bore him Ahban and Molid."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

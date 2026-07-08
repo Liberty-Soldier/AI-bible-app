@@ -25,6 +25,79 @@
       "1 Chronicles 6:61"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2540",
+    "source": "hebrew",
+    "strong": "H2540",
+    "lemma": "חַמּוֹן",
+    "transliteration": "Chammôwn",
+    "definition": "Chammon , the name of two places in Palestine",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 19:28",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "and Ebron, Rehob, Hammon, and Kanah, even to great Sidon."
+    },
+    "books": [
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Joshua 19:28",
+      "1 Chronicles 6:61"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 6:61",
+        "evidenceText": "To the rest of the sons of Kohath were given by lot, out of the family of the tribe, out of the half-tribe, the half of Manasseh, ten cities."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 19:28",
+        "phase": "Occurrence",
+        "evidenceText": "and Ebron, Rehob, Hammon, and Kanah, even to great Sidon."
+      },
+      {
+        "reference": "1 Chronicles 6:61",
+        "phase": "Genealogy",
+        "evidenceText": "To the rest of the sons of Kohath were given by lot, out of the family of the tribe, out of the half-tribe, the half of Manasseh, ten cities."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 19:28 and continues through 1 Chronicles 6:61.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 19:28",
+        "book": "Joshua",
+        "englishText": "and Ebron, Rehob, Hammon, and Kanah, even to great Sidon."
+      },
+      {
+        "reference": "1 Chronicles 6:61",
+        "book": "1 Chronicles",
+        "englishText": "To the rest of the sons of Kohath were given by lot, out of the family of the tribe, out of the half-tribe, the half of Manasseh, ten cities."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

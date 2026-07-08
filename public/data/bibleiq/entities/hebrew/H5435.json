@@ -27,6 +27,102 @@
       "Nahum 1:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5435",
+    "source": "hebrew",
+    "strong": "H5435",
+    "lemma": "סֹבֶא",
+    "transliteration": "çôbeʼ",
+    "definition": "potation , concretely ( wine ), or abstractly ( carousal )",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 21:20",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "They shall tell the elders of his city, “This our son is stubborn and rebellious. He will not obey our voice. He is a glutton and a drunkard.”"
+    },
+    "books": [
+      "Deuteronomy",
+      "Isaiah",
+      "Hosea",
+      "Nahum"
+    ],
+    "references": [
+      "Deuteronomy 21:20",
+      "Isaiah 1:22",
+      "Hosea 4:18",
+      "Nahum 1:10"
+    ],
+    "themes": [
+      "family line",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Deuteronomy 21:20",
+        "evidenceText": "They shall tell the elders of his city, “This our son is stubborn and rebellious. He will not obey our voice. He is a glutton and a drunkard.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 21:20",
+        "phase": "Birth or introduction",
+        "evidenceText": "They shall tell the elders of his city, “This our son is stubborn and rebellious. He will not obey our voice. He is a glutton and a drunkard.”"
+      },
+      {
+        "reference": "Isaiah 1:22",
+        "phase": "Occurrence",
+        "evidenceText": "Your silver has become dross,"
+      },
+      {
+        "reference": "Hosea 4:18",
+        "phase": "Occurrence",
+        "evidenceText": "Their drink has become sour."
+      },
+      {
+        "reference": "Nahum 1:10",
+        "phase": "Occurrence",
+        "evidenceText": "For entangled like thorns, and drunken as with their drink, they are consumed utterly like dry stubble."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 21:20 and continues through Nahum 1:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 21:20",
+        "book": "Deuteronomy",
+        "englishText": "They shall tell the elders of his city, “This our son is stubborn and rebellious. He will not obey our voice. He is a glutton and a drunkard.”"
+      },
+      {
+        "reference": "Isaiah 1:22",
+        "book": "Isaiah",
+        "englishText": "Your silver has become dross,"
+      },
+      {
+        "reference": "Hosea 4:18",
+        "book": "Hosea",
+        "englishText": "Their drink has become sour."
+      },
+      {
+        "reference": "Nahum 1:10",
+        "book": "Nahum",
+        "englishText": "For entangled like thorns, and drunken as with their drink, they are consumed utterly like dry stubble."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

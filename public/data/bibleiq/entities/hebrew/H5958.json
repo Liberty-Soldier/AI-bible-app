@@ -4,7 +4,7 @@
   "title": "עֶלֶם",
   "subtitle": "H5958 • Hebrew word",
   "simple": {
-    "meaning": "עֶלֶם (ʻelem) appears 2 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "עֶלֶם (ʻelem) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in 1 Samuel, beginning at 1 Samuel 17:56. BibleIQ detects the main surrounding context as family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to עֶלֶם (H5958) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows עֶלֶם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,73 @@
     ],
     "laterReferences": [
       "1 Samuel 20:22"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5958",
+    "source": "hebrew",
+    "strong": "H5958",
+    "lemma": "עֶלֶם",
+    "transliteration": "ʻelem",
+    "definition": "properly, something kept out of sight , i.e. a lad",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 17:56",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "The king said, “Inquire whose son the young man is!”"
+    },
+    "books": [
+      "1 Samuel"
+    ],
+    "references": [
+      "1 Samuel 17:56",
+      "1 Samuel 20:22"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Samuel 17:56",
+        "phase": "Occurrence",
+        "evidenceText": "The king said, “Inquire whose son the young man is!”"
+      },
+      {
+        "reference": "1 Samuel 20:22",
+        "phase": "Occurrence",
+        "evidenceText": "But if I say this to the boy, ‘Behold, the arrows are beyond you;’ then go your way; for Yahweh has sent you away."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 17:56 and continues through 1 Samuel 20:22.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 17:56",
+        "book": "1 Samuel",
+        "englishText": "The king said, “Inquire whose son the young man is!”"
+      },
+      {
+        "reference": "1 Samuel 20:22",
+        "book": "1 Samuel",
+        "englishText": "But if I say this to the boy, ‘Behold, the arrows are beyond you;’ then go your way; for Yahweh has sent you away."
+      }
     ]
   },
   "evidence": {

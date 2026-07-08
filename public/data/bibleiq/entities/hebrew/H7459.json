@@ -26,6 +26,95 @@
       "Psalms 37:19"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7459",
+    "source": "hebrew",
+    "strong": "H7459",
+    "lemma": "רְעָבוֹן",
+    "transliteration": "rᵉʻâbôwn",
+    "definition": "famine",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 42:19",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "If you are honest men, then let one of your brothers be bound in your prison; but you go, carry grain for the famine of your houses."
+    },
+    "books": [
+      "Genesis",
+      "Psalms"
+    ],
+    "references": [
+      "Genesis 42:19",
+      "Genesis 42:33",
+      "Psalms 37:19"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Genesis 42:33",
+        "evidenceText": "The man, the lord of the land, said to us, ‘By this I will know that you are honest men: leave one of your brothers with me, and take grain for the famine of your houses, and go your way."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 42:19",
+        "phase": "Occurrence",
+        "evidenceText": "If you are honest men, then let one of your brothers be bound in your prison; but you go, carry grain for the famine of your houses."
+      },
+      {
+        "reference": "Genesis 42:33",
+        "phase": "Movement or place",
+        "evidenceText": "The man, the lord of the land, said to us, ‘By this I will know that you are honest men: leave one of your brothers with me, and take grain for the famine of your houses, and go your way."
+      },
+      {
+        "reference": "Psalms 37:19",
+        "phase": "Occurrence",
+        "evidenceText": "They shall not be disappointed in the time of evil."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 42:19 and continues through Psalms 37:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 42:19",
+        "book": "Genesis",
+        "englishText": "If you are honest men, then let one of your brothers be bound in your prison; but you go, carry grain for the famine of your houses."
+      },
+      {
+        "reference": "Genesis 42:33",
+        "book": "Genesis",
+        "englishText": "The man, the lord of the land, said to us, ‘By this I will know that you are honest men: leave one of your brothers with me, and take grain for the famine of your houses, and go your way."
+      },
+      {
+        "reference": "Psalms 37:19",
+        "book": "Psalms",
+        "englishText": "They shall not be disappointed in the time of evil."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

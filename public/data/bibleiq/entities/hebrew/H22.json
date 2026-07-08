@@ -4,7 +4,7 @@
   "title": "אֲבִיאֵל",
   "subtitle": "H22 • Hebrew name",
   "simple": {
-    "meaning": "אֲבִיאֵל (ʼĂbîyʼêl) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "אֲבִיאֵל (ʼĂbîyʼêl) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in 1 Samuel, 1 Chronicles, beginning at 1 Samuel 9:1. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֲבִיאֵל (H22) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֲבִיאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,91 @@
     "laterReferences": [
       "1 Samuel 14:51",
       "1 Chronicles 11:32"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H22",
+    "source": "hebrew",
+    "strong": "H22",
+    "lemma": "אֲבִיאֵל",
+    "transliteration": "ʼĂbîyʼêl",
+    "definition": "Abiel , the name of two Israelites",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 9:1",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "Now there was a man of Benjamin, whose name was Kish, the son of Abiel, the son of Zeror, the son of Becorath, the son of Aphiah, the son of a Benjamite, a mighty man of valor."
+    },
+    "books": [
+      "1 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Samuel 9:1",
+      "1 Samuel 14:51",
+      "1 Chronicles 11:32"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "1 Samuel 9:1",
+        "phase": "Occurrence",
+        "evidenceText": "Now there was a man of Benjamin, whose name was Kish, the son of Abiel, the son of Zeror, the son of Becorath, the son of Aphiah, the son of a Benjamite, a mighty man of valor."
+      },
+      {
+        "reference": "1 Samuel 14:51",
+        "phase": "Occurrence",
+        "evidenceText": "Kish was the father of Saul; and Ner the father of Abner was the son of Abiel."
+      },
+      {
+        "reference": "1 Chronicles 11:32",
+        "phase": "Occurrence",
+        "evidenceText": "Hurai of the brooks of Gaash, Abiel the Arbathite,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 9:1 and continues through 1 Chronicles 11:32.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 9:1",
+        "book": "1 Samuel",
+        "englishText": "Now there was a man of Benjamin, whose name was Kish, the son of Abiel, the son of Zeror, the son of Becorath, the son of Aphiah, the son of a Benjamite, a mighty man of valor."
+      },
+      {
+        "reference": "1 Samuel 14:51",
+        "book": "1 Samuel",
+        "englishText": "Kish was the father of Saul; and Ner the father of Abner was the son of Abiel."
+      },
+      {
+        "reference": "1 Chronicles 11:32",
+        "book": "1 Chronicles",
+        "englishText": "Hurai of the brooks of Gaash, Abiel the Arbathite,"
+      }
     ]
   },
   "evidence": {

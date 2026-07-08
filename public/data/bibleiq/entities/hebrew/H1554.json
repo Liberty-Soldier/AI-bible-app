@@ -4,7 +4,7 @@
   "title": "גַּלִּים",
   "subtitle": "H1554 • Hebrew name",
   "simple": {
-    "meaning": "גַּלִּים (Gallîym) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "גַּלִּים (Gallîym) appears 2 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in 1 Samuel, Isaiah, beginning at 1 Samuel 25:44. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to גַּלִּים (H1554) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows גַּלִּים through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,91 @@
     ],
     "laterReferences": [
       "Isaiah 10:30"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1554",
+    "source": "hebrew",
+    "strong": "H1554",
+    "lemma": "גַּלִּים",
+    "transliteration": "Gallîym",
+    "definition": "Gallim , a place in Palestine",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 25:44",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "Now Saul had given Michal his daughter, David’s wife, to Palti the son of Laish, who was of Gallim."
+    },
+    "books": [
+      "1 Samuel",
+      "Isaiah"
+    ],
+    "references": [
+      "1 Samuel 25:44",
+      "Isaiah 10:30"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Isaiah 10:30",
+        "evidenceText": "Cry aloud with your voice, daughter of Gallim! Listen, Laishah! You poor Anathoth!"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Samuel 25:44",
+        "phase": "Occurrence",
+        "evidenceText": "Now Saul had given Michal his daughter, David’s wife, to Palti the son of Laish, who was of Gallim."
+      },
+      {
+        "reference": "Isaiah 10:30",
+        "phase": "Genealogy",
+        "evidenceText": "Cry aloud with your voice, daughter of Gallim! Listen, Laishah! You poor Anathoth!"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 25:44 and continues through Isaiah 10:30.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 25:44",
+        "book": "1 Samuel",
+        "englishText": "Now Saul had given Michal his daughter, David’s wife, to Palti the son of Laish, who was of Gallim."
+      },
+      {
+        "reference": "Isaiah 10:30",
+        "book": "Isaiah",
+        "englishText": "Cry aloud with your voice, daughter of Gallim! Listen, Laishah! You poor Anathoth!"
+      }
     ]
   },
   "evidence": {

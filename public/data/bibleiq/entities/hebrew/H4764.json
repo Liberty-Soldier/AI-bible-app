@@ -4,7 +4,7 @@
   "title": "מֵרָב",
   "subtitle": "H4764 • Hebrew name",
   "simple": {
-    "meaning": "מֵרָב (Mêrâb) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מֵרָב (Mêrâb) appears 3 times in the Hebrew Scriptures and is introduced as a daughter in the family line.",
     "biblicalBackground": "The first appearances are in 1 Samuel, beginning at 1 Samuel 14:49. BibleIQ detects the main surrounding context as birth, family line, firstborn.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מֵרָב (H4764) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מֵרָב through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,101 @@
     "laterReferences": [
       "1 Samuel 18:17",
       "1 Samuel 18:19"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4764",
+    "source": "hebrew",
+    "strong": "H4764",
+    "lemma": "מֵרָב",
+    "transliteration": "Mêrâb",
+    "definition": "Merab , a daughter of Saul",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Samuel 14:49",
+      "book": "1 Samuel",
+      "bookName": "1 Samuel",
+      "englishText": "Now the sons of Saul were Jonathan, Ishvi, and Malchishua; and the names of his two daughters were these: the name of the firstborn Merab, and the name of the younger Michal."
+    },
+    "books": [
+      "1 Samuel"
+    ],
+    "references": [
+      "1 Samuel 14:49",
+      "1 Samuel 18:17",
+      "1 Samuel 18:19"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "1 Samuel 14:49",
+        "evidenceText": "Now the sons of Saul were Jonathan, Ishvi, and Malchishua; and the names of his two daughters were these: the name of the firstborn Merab, and the name of the younger Michal."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Samuel 14:49",
+        "phase": "Birth or introduction",
+        "evidenceText": "Now the sons of Saul were Jonathan, Ishvi, and Malchishua; and the names of his two daughters were these: the name of the firstborn Merab, and the name of the younger Michal."
+      },
+      {
+        "reference": "1 Samuel 18:17",
+        "phase": "Occurrence",
+        "evidenceText": "Saul said to David, “Behold, my elder daughter Merab, I will give her to you as wife. Only be valiant for me, and fight Yahweh’s battles.” For Saul said, “Don’t let my hand be on him, but let the hand of the Philistines be on him.”"
+      },
+      {
+        "reference": "1 Samuel 18:19",
+        "phase": "Occurrence",
+        "evidenceText": "But at the time when Merab, Saul’s daughter, should have been given to David, she was given to Adriel the Meholathite as wife."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Samuel 14:49 and continues through 1 Samuel 18:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Samuel 14:49",
+        "book": "1 Samuel",
+        "englishText": "Now the sons of Saul were Jonathan, Ishvi, and Malchishua; and the names of his two daughters were these: the name of the firstborn Merab, and the name of the younger Michal."
+      },
+      {
+        "reference": "1 Samuel 18:17",
+        "book": "1 Samuel",
+        "englishText": "Saul said to David, “Behold, my elder daughter Merab, I will give her to you as wife. Only be valiant for me, and fight Yahweh’s battles.” For Saul said, “Don’t let my hand be on him, but let the hand of the Philistines be on him.”"
+      },
+      {
+        "reference": "1 Samuel 18:19",
+        "book": "1 Samuel",
+        "englishText": "But at the time when Merab, Saul’s daughter, should have been given to David, she was given to Adriel the Meholathite as wife."
+      }
     ]
   },
   "evidence": {

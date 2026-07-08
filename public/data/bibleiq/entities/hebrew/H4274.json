@@ -4,7 +4,7 @@
   "title": "מַחְצֵב",
   "subtitle": "H4274 • Hebrew word",
   "simple": {
-    "meaning": "מַחְצֵב (machtsêb) appears 3 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "מַחְצֵב (machtsêb) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in 2 Kings, 2 Chronicles, beginning at 2 Kings 12:13. BibleIQ detects the main surrounding context as family line, kingship.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מַחְצֵב (H4274) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מַחְצֵב through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,85 @@
     "laterReferences": [
       "2 Kings 22:6",
       "2 Chronicles 34:11"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4274",
+    "source": "hebrew",
+    "strong": "H4274",
+    "lemma": "מַחְצֵב",
+    "transliteration": "machtsêb",
+    "definition": "properly, a hewing ; concretely, a quarry",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Kings 12:13",
+      "book": "2 Kings",
+      "bookName": "2 Kings",
+      "englishText": "But there were not made for Yahweh’s house cups of silver, snuffers, basins, trumpets, any vessels of gold, or vessels of silver, of the money that was brought into Yahweh’s house;"
+    },
+    "books": [
+      "2 Kings",
+      "2 Chronicles"
+    ],
+    "references": [
+      "2 Kings 12:13",
+      "2 Kings 22:6",
+      "2 Chronicles 34:11"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "2 Kings 12:13",
+        "phase": "Occurrence",
+        "evidenceText": "But there were not made for Yahweh’s house cups of silver, snuffers, basins, trumpets, any vessels of gold, or vessels of silver, of the money that was brought into Yahweh’s house;"
+      },
+      {
+        "reference": "2 Kings 22:6",
+        "phase": "Occurrence",
+        "evidenceText": "to the carpenters, and to the builders, and to the masons, and for buying timber and cut stone to repair the house."
+      },
+      {
+        "reference": "2 Chronicles 34:11",
+        "phase": "Occurrence",
+        "evidenceText": "They gave it to the carpenters and to the builders, to buy cut stone and timber for couplings, and to make beams for the houses which the kings of Judah had destroyed."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Kings 12:13 and continues through 2 Chronicles 34:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Kings 12:13",
+        "book": "2 Kings",
+        "englishText": "But there were not made for Yahweh’s house cups of silver, snuffers, basins, trumpets, any vessels of gold, or vessels of silver, of the money that was brought into Yahweh’s house;"
+      },
+      {
+        "reference": "2 Kings 22:6",
+        "book": "2 Kings",
+        "englishText": "to the carpenters, and to the builders, and to the masons, and for buying timber and cut stone to repair the house."
+      },
+      {
+        "reference": "2 Chronicles 34:11",
+        "book": "2 Chronicles",
+        "englishText": "They gave it to the carpenters and to the builders, to buy cut stone and timber for couplings, and to make beams for the houses which the kings of Judah had destroyed."
+      }
     ]
   },
   "evidence": {

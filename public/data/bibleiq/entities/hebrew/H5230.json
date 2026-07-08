@@ -27,6 +27,108 @@
       "Malachi 1:14"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5230",
+    "source": "hebrew",
+    "strong": "H5230",
+    "lemma": "נָכַל",
+    "transliteration": "nâkal",
+    "definition": "to defraud , i.e. act treacherously",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 37:18",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "They saw him afar off, and before he came near to them, they conspired against him to kill him."
+    },
+    "books": [
+      "Genesis",
+      "Numbers",
+      "Psalms",
+      "Malachi"
+    ],
+    "references": [
+      "Genesis 37:18",
+      "Numbers 25:18",
+      "Psalms 105:25",
+      "Malachi 1:14"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 25:18",
+        "evidenceText": "for they harassed you with their wiles, wherein they have deceived you in the matter of Peor, and in the incident regarding Cozbi, the daughter of the prince of Midian, their sister, who was slain on the day of the plague in the matter of Peor.”"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 37:18",
+        "phase": "Occurrence",
+        "evidenceText": "They saw him afar off, and before he came near to them, they conspired against him to kill him."
+      },
+      {
+        "reference": "Numbers 25:18",
+        "phase": "Genealogy",
+        "evidenceText": "for they harassed you with their wiles, wherein they have deceived you in the matter of Peor, and in the incident regarding Cozbi, the daughter of the prince of Midian, their sister, who was slain on the day of the plague in the matter of Peor.”"
+      },
+      {
+        "reference": "Psalms 105:25",
+        "phase": "Occurrence",
+        "evidenceText": "He turned their heart to hate his people,"
+      },
+      {
+        "reference": "Malachi 1:14",
+        "phase": "Occurrence",
+        "evidenceText": "“But the deceiver is cursed, who has in his flock a male, and vows, and sacrifices to the Lord§ The word translated “Lord” is “Adonai.” a defective thing; for I am a great King,” says Yahweh of Armies, “and my name is awesome among the nations.”"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 37:18 and continues through Malachi 1:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 37:18",
+        "book": "Genesis",
+        "englishText": "They saw him afar off, and before he came near to them, they conspired against him to kill him."
+      },
+      {
+        "reference": "Numbers 25:18",
+        "book": "Numbers",
+        "englishText": "for they harassed you with their wiles, wherein they have deceived you in the matter of Peor, and in the incident regarding Cozbi, the daughter of the prince of Midian, their sister, who was slain on the day of the plague in the matter of Peor.”"
+      },
+      {
+        "reference": "Psalms 105:25",
+        "book": "Psalms",
+        "englishText": "He turned their heart to hate his people,"
+      },
+      {
+        "reference": "Malachi 1:14",
+        "book": "Malachi",
+        "englishText": "“But the deceiver is cursed, who has in his flock a male, and vows, and sacrifices to the Lord§ The word translated “Lord” is “Adonai.” a defective thing; for I am a great King,” says Yahweh of Armies, “and my name is awesome among the nations.”"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -25,6 +25,77 @@
       "Exodus 22:3"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1591",
+    "source": "hebrew",
+    "strong": "H1591",
+    "lemma": "גְּנֵבָה",
+    "transliteration": "gᵉnêbâh",
+    "definition": "stealing , i.e. (concretely) something stolen",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Exodus 22:2",
+      "book": "Exodus",
+      "bookName": "Exodus",
+      "englishText": "If the thief is found breaking in, and is struck so that he dies, there shall be no guilt of bloodshed for him."
+    },
+    "books": [
+      "Exodus"
+    ],
+    "references": [
+      "Exodus 22:2",
+      "Exodus 22:3"
+    ],
+    "themes": [
+      "kingship",
+      "blood"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Exodus 22:2",
+        "evidenceText": "If the thief is found breaking in, and is struck so that he dies, there shall be no guilt of bloodshed for him."
+      },
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Exodus 22:3",
+        "evidenceText": "If the sun has risen on him, he is guilty of bloodshed. He shall make restitution. If he has nothing, then he shall be sold for his theft."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Exodus 22:2",
+        "phase": "Blood witness",
+        "evidenceText": "If the thief is found breaking in, and is struck so that he dies, there shall be no guilt of bloodshed for him."
+      },
+      {
+        "reference": "Exodus 22:3",
+        "phase": "Blood witness",
+        "evidenceText": "If the sun has risen on him, he is guilty of bloodshed. He shall make restitution. If he has nothing, then he shall be sold for his theft."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Exodus 22:2 and continues through Exodus 22:3.",
+    "occurrenceTrail": [
+      {
+        "reference": "Exodus 22:2",
+        "book": "Exodus",
+        "englishText": "If the thief is found breaking in, and is struck so that he dies, there shall be no guilt of bloodshed for him."
+      },
+      {
+        "reference": "Exodus 22:3",
+        "book": "Exodus",
+        "englishText": "If the sun has risen on him, he is guilty of bloodshed. He shall make restitution. If he has nothing, then he shall be sold for his theft."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

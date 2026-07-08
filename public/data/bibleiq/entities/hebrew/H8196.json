@@ -25,6 +25,83 @@
       "Ezekiel 23:10"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8196",
+    "source": "hebrew",
+    "strong": "H8196",
+    "lemma": "שְׁפוֹט",
+    "transliteration": "shᵉphôwṭ",
+    "definition": "a judicial sentence , i.e. punishment",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "2 Chronicles 20:9",
+      "book": "2 Chronicles",
+      "bookName": "2 Chronicles",
+      "englishText": "‘If evil comes on us—the sword, judgment, pestilence, or famine—we will stand before this house, and before you (for your name is in this house), and cry to you in our affliction, and you will hear and save.’"
+    },
+    "books": [
+      "2 Chronicles",
+      "Ezekiel"
+    ],
+    "references": [
+      "2 Chronicles 20:9",
+      "Ezekiel 23:10"
+    ],
+    "themes": [
+      "family line",
+      "death"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "Ezekiel 23:10",
+        "evidenceText": "These uncovered her nakedness. They took her sons and her daughters; and they killed her with the sword. She became a byword among women; for they executed judgments on her."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Chronicles 20:9",
+        "phase": "Occurrence",
+        "evidenceText": "‘If evil comes on us—the sword, judgment, pestilence, or famine—we will stand before this house, and before you (for your name is in this house), and cry to you in our affliction, and you will hear and save.’"
+      },
+      {
+        "reference": "Ezekiel 23:10",
+        "phase": "Death",
+        "evidenceText": "These uncovered her nakedness. They took her sons and her daughters; and they killed her with the sword. She became a byword among women; for they executed judgments on her."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Chronicles 20:9 and continues through Ezekiel 23:10.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Chronicles 20:9",
+        "book": "2 Chronicles",
+        "englishText": "‘If evil comes on us—the sword, judgment, pestilence, or famine—we will stand before this house, and before you (for your name is in this house), and cry to you in our affliction, and you will hear and save.’"
+      },
+      {
+        "reference": "Ezekiel 23:10",
+        "book": "Ezekiel",
+        "englishText": "These uncovered her nakedness. They took her sons and her daughters; and they killed her with the sword. She became a byword among women; for they executed judgments on her."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

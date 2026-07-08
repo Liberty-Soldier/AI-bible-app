@@ -26,6 +26,90 @@
       "Ezra 10:19"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H818",
+    "source": "hebrew",
+    "strong": "H818",
+    "lemma": "אָשֵׁם",
+    "transliteration": "ʼâshêm",
+    "definition": "guilty ; hence, presenting a sin-offering",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 42:21",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "They said to one another, “We are certainly guilty concerning our brother, in that we saw the distress of his soul, when he begged us, and we wouldn’t listen. Therefore this distress has come upon us.”"
+    },
+    "books": [
+      "Genesis",
+      "2 Samuel",
+      "Ezra"
+    ],
+    "references": [
+      "Genesis 42:21",
+      "2 Samuel 14:13",
+      "Ezra 10:19"
+    ],
+    "themes": [
+      "family",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Ezra 10:19",
+        "evidenceText": "They gave their hand that they would put away their wives; and being guilty, they offered a ram of the flock for their guilt."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 42:21",
+        "phase": "Occurrence",
+        "evidenceText": "They said to one another, “We are certainly guilty concerning our brother, in that we saw the distress of his soul, when he begged us, and we wouldn’t listen. Therefore this distress has come upon us.”"
+      },
+      {
+        "reference": "2 Samuel 14:13",
+        "phase": "Occurrence",
+        "evidenceText": "The woman said, “Why then have you devised such a thing against the people of God? For in speaking this word the king is as one who is guilty, in that the king does not bring home again his banished one."
+      },
+      {
+        "reference": "Ezra 10:19",
+        "phase": "Offering",
+        "evidenceText": "They gave their hand that they would put away their wives; and being guilty, they offered a ram of the flock for their guilt."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 42:21 and continues through Ezra 10:19.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 42:21",
+        "book": "Genesis",
+        "englishText": "They said to one another, “We are certainly guilty concerning our brother, in that we saw the distress of his soul, when he begged us, and we wouldn’t listen. Therefore this distress has come upon us.”"
+      },
+      {
+        "reference": "2 Samuel 14:13",
+        "book": "2 Samuel",
+        "englishText": "The woman said, “Why then have you devised such a thing against the people of God? For in speaking this word the king is as one who is guilty, in that the king does not bring home again his banished one."
+      },
+      {
+        "reference": "Ezra 10:19",
+        "book": "Ezra",
+        "englishText": "They gave their hand that they would put away their wives; and being guilty, they offered a ram of the flock for their guilt."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

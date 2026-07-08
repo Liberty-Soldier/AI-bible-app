@@ -25,6 +25,83 @@
       "Ecclesiastes 8:11"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6599",
+    "source": "hebrew",
+    "strong": "H6599",
+    "lemma": "פִּתְגָּם",
+    "transliteration": "pithgâm",
+    "definition": "a (judicial) sentence",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Esther 1:20",
+      "book": "Esther",
+      "bookName": "Esther",
+      "englishText": "When the king’s decree which he shall make is published throughout all his kingdom (for it is great), all the wives will give their husbands honor, both great and small.”"
+    },
+    "books": [
+      "Esther",
+      "Ecclesiastes"
+    ],
+    "references": [
+      "Esther 1:20",
+      "Ecclesiastes 8:11"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "husband",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"husband\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Ecclesiastes 8:11",
+        "evidenceText": "Because sentence against an evil work is not executed speedily, therefore the heart of the sons of men is fully set in them to do evil."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Esther 1:20",
+        "phase": "Occurrence",
+        "evidenceText": "When the king’s decree which he shall make is published throughout all his kingdom (for it is great), all the wives will give their husbands honor, both great and small.”"
+      },
+      {
+        "reference": "Ecclesiastes 8:11",
+        "phase": "Genealogy",
+        "evidenceText": "Because sentence against an evil work is not executed speedily, therefore the heart of the sons of men is fully set in them to do evil."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Esther 1:20 and continues through Ecclesiastes 8:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "Esther 1:20",
+        "book": "Esther",
+        "englishText": "When the king’s decree which he shall make is published throughout all his kingdom (for it is great), all the wives will give their husbands honor, both great and small.”"
+      },
+      {
+        "reference": "Ecclesiastes 8:11",
+        "book": "Ecclesiastes",
+        "englishText": "Because sentence against an evil work is not executed speedily, therefore the heart of the sons of men is fully set in them to do evil."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

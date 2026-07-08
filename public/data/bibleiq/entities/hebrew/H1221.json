@@ -28,6 +28,120 @@
       "1 Chronicles 7:37"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1221",
+    "source": "hebrew",
+    "strong": "H1221",
+    "lemma": "בֶּצֶר",
+    "transliteration": "Betser",
+    "definition": "Betser , a place in Palestine; also an Israelite",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "place",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 4:43",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "Bezer in the wilderness, in the plain country, for the Reubenites; and Ramoth in Gilead for the Gadites; and Golan in Bashan for the Manassites."
+    },
+    "books": [
+      "Deuteronomy",
+      "Joshua",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Deuteronomy 4:43",
+      "Joshua 20:8",
+      "Joshua 21:36",
+      "1 Chronicles 6:63",
+      "1 Chronicles 7:37"
+    ],
+    "themes": [
+      "family line",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 21:36",
+        "evidenceText": "Out of the tribe of Reuben, Bezer with its pasture lands, Jahaz with its pasture lands,"
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 6:63",
+        "evidenceText": "To the sons of Merari were given by lot, according to their families, out of the tribe of Reuben, and out of the tribe of Gad, and out of the tribe of Zebulun, twelve cities."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 4:43",
+        "phase": "Occurrence",
+        "evidenceText": "Bezer in the wilderness, in the plain country, for the Reubenites; and Ramoth in Gilead for the Gadites; and Golan in Bashan for the Manassites."
+      },
+      {
+        "reference": "Joshua 20:8",
+        "phase": "Occurrence",
+        "evidenceText": "Beyond the Jordan at Jericho eastward, they assigned Bezer in the wilderness in the plain out of the tribe of Reuben, Ramoth in Gilead out of the tribe of Gad, and Golan in Bashan out of the tribe of Manasseh."
+      },
+      {
+        "reference": "Joshua 21:36",
+        "phase": "Movement or place",
+        "evidenceText": "Out of the tribe of Reuben, Bezer with its pasture lands, Jahaz with its pasture lands,"
+      },
+      {
+        "reference": "1 Chronicles 6:63",
+        "phase": "Genealogy",
+        "evidenceText": "To the sons of Merari were given by lot, according to their families, out of the tribe of Reuben, and out of the tribe of Gad, and out of the tribe of Zebulun, twelve cities."
+      },
+      {
+        "reference": "1 Chronicles 7:37",
+        "phase": "Occurrence",
+        "evidenceText": "Bezer, Hod, Shamma, Shilshah, Ithran, and Beera."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 4:43 and continues through 1 Chronicles 7:37.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 4:43",
+        "book": "Deuteronomy",
+        "englishText": "Bezer in the wilderness, in the plain country, for the Reubenites; and Ramoth in Gilead for the Gadites; and Golan in Bashan for the Manassites."
+      },
+      {
+        "reference": "Joshua 20:8",
+        "book": "Joshua",
+        "englishText": "Beyond the Jordan at Jericho eastward, they assigned Bezer in the wilderness in the plain out of the tribe of Reuben, Ramoth in Gilead out of the tribe of Gad, and Golan in Bashan out of the tribe of Manasseh."
+      },
+      {
+        "reference": "Joshua 21:36",
+        "book": "Joshua",
+        "englishText": "Out of the tribe of Reuben, Bezer with its pasture lands, Jahaz with its pasture lands,"
+      },
+      {
+        "reference": "1 Chronicles 6:63",
+        "book": "1 Chronicles",
+        "englishText": "To the sons of Merari were given by lot, according to their families, out of the tribe of Reuben, and out of the tribe of Gad, and out of the tribe of Zebulun, twelve cities."
+      },
+      {
+        "reference": "1 Chronicles 7:37",
+        "book": "1 Chronicles",
+        "englishText": "Bezer, Hod, Shamma, Shilshah, Ithran, and Beera."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

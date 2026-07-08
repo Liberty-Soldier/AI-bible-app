@@ -4,7 +4,7 @@
   "title": "יְקוּם",
   "subtitle": "H3351 • Hebrew word",
   "simple": {
-    "meaning": "יְקוּם (yᵉqûwm) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "יְקוּם (yᵉqûwm) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Genesis, Deuteronomy, beginning at Genesis 7:4. BibleIQ detects the main surrounding context as family line, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to יְקוּם (H3351) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows יְקוּם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,91 @@
     "laterReferences": [
       "Genesis 7:23",
       "Deuteronomy 11:6"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3351",
+    "source": "hebrew",
+    "strong": "H3351",
+    "lemma": "יְקוּם",
+    "transliteration": "yᵉqûwm",
+    "definition": "properly, standing (extant), i.e. by implication, a living thing",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 7:4",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "In seven days, I will cause it to rain on the earth for forty days and forty nights. I will destroy every living thing that I have made from the surface of the ground.”"
+    },
+    "books": [
+      "Genesis",
+      "Deuteronomy"
+    ],
+    "references": [
+      "Genesis 7:4",
+      "Genesis 7:23",
+      "Deuteronomy 11:6"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Deuteronomy 11:6",
+        "evidenceText": "and what he did to Dathan and Abiram, the sons of Eliab, the son of Reuben—how the earth opened its mouth and swallowed them up, with their households, their tents, and every living thing that followed them, in the middle of all Israel;"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 7:4",
+        "phase": "Occurrence",
+        "evidenceText": "In seven days, I will cause it to rain on the earth for forty days and forty nights. I will destroy every living thing that I have made from the surface of the ground.”"
+      },
+      {
+        "reference": "Genesis 7:23",
+        "phase": "Occurrence",
+        "evidenceText": "Every living thing was destroyed that was on the surface of the ground, including man, livestock, creeping things, and birds of the sky. They were destroyed from the earth. Only Noah was left, and those who were with him in the ship."
+      },
+      {
+        "reference": "Deuteronomy 11:6",
+        "phase": "Genealogy",
+        "evidenceText": "and what he did to Dathan and Abiram, the sons of Eliab, the son of Reuben—how the earth opened its mouth and swallowed them up, with their households, their tents, and every living thing that followed them, in the middle of all Israel;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 7:4 and continues through Deuteronomy 11:6.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 7:4",
+        "book": "Genesis",
+        "englishText": "In seven days, I will cause it to rain on the earth for forty days and forty nights. I will destroy every living thing that I have made from the surface of the ground.”"
+      },
+      {
+        "reference": "Genesis 7:23",
+        "book": "Genesis",
+        "englishText": "Every living thing was destroyed that was on the surface of the ground, including man, livestock, creeping things, and birds of the sky. They were destroyed from the earth. Only Noah was left, and those who were with him in the ship."
+      },
+      {
+        "reference": "Deuteronomy 11:6",
+        "book": "Deuteronomy",
+        "englishText": "and what he did to Dathan and Abiram, the sons of Eliab, the son of Reuben—how the earth opened its mouth and swallowed them up, with their households, their tents, and every living thing that followed them, in the middle of all Israel;"
+      }
     ]
   },
   "evidence": {

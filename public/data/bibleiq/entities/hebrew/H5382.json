@@ -29,6 +29,131 @@
       "Lamentations 3:17"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5382",
+    "source": "hebrew",
+    "strong": "H5382",
+    "lemma": "נָשָׁה",
+    "transliteration": "nâshâh",
+    "definition": "to forget ; figuratively, to neglect ; causatively, to remit , remove",
+    "occurrenceCount": 6,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 41:51",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Joseph called the name of the firstborn Manasseh,* “Manasseh” sounds like the Hebrew for “forget”. “For”, he said, “God has made me forget all my toil, and all my father’s house.”"
+    },
+    "books": [
+      "Genesis",
+      "Job",
+      "Isaiah",
+      "Jeremiah",
+      "Lamentations"
+    ],
+    "references": [
+      "Genesis 41:51",
+      "Job 11:6",
+      "Job 39:17",
+      "Isaiah 44:21",
+      "Jeremiah 23:39",
+      "Lamentations 3:17"
+    ],
+    "themes": [
+      "family",
+      "city"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Genesis 41:51",
+        "evidenceText": "Joseph called the name of the firstborn Manasseh,* “Manasseh” sounds like the Hebrew for “forget”. “For”, he said, “God has made me forget all my toil, and all my father’s house.”"
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Jeremiah 23:39",
+        "evidenceText": "therefore, behold, I will utterly forget you, and I will cast you off, and the city that I gave to you and to your fathers, away from my presence."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 41:51",
+        "phase": "Birth or introduction",
+        "evidenceText": "Joseph called the name of the firstborn Manasseh,* “Manasseh” sounds like the Hebrew for “forget”. “For”, he said, “God has made me forget all my toil, and all my father’s house.”"
+      },
+      {
+        "reference": "Job 11:6",
+        "phase": "Occurrence",
+        "evidenceText": "that he would show you the secrets of wisdom!"
+      },
+      {
+        "reference": "Job 39:17",
+        "phase": "Occurrence",
+        "evidenceText": "because God has deprived her of wisdom,"
+      },
+      {
+        "reference": "Isaiah 44:21",
+        "phase": "Occurrence",
+        "evidenceText": "Remember these things, Jacob and Israel;"
+      },
+      {
+        "reference": "Jeremiah 23:39",
+        "phase": "Movement or place",
+        "evidenceText": "therefore, behold, I will utterly forget you, and I will cast you off, and the city that I gave to you and to your fathers, away from my presence."
+      },
+      {
+        "reference": "Lamentations 3:17",
+        "phase": "Occurrence",
+        "evidenceText": "You have removed my soul far away from peace."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 41:51 and continues through Lamentations 3:17.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 41:51",
+        "book": "Genesis",
+        "englishText": "Joseph called the name of the firstborn Manasseh,* “Manasseh” sounds like the Hebrew for “forget”. “For”, he said, “God has made me forget all my toil, and all my father’s house.”"
+      },
+      {
+        "reference": "Job 11:6",
+        "book": "Job",
+        "englishText": "that he would show you the secrets of wisdom!"
+      },
+      {
+        "reference": "Job 39:17",
+        "book": "Job",
+        "englishText": "because God has deprived her of wisdom,"
+      },
+      {
+        "reference": "Isaiah 44:21",
+        "book": "Isaiah",
+        "englishText": "Remember these things, Jacob and Israel;"
+      },
+      {
+        "reference": "Jeremiah 23:39",
+        "book": "Jeremiah",
+        "englishText": "therefore, behold, I will utterly forget you, and I will cast you off, and the city that I gave to you and to your fathers, away from my presence."
+      },
+      {
+        "reference": "Lamentations 3:17",
+        "book": "Lamentations",
+        "englishText": "You have removed my soul far away from peace."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

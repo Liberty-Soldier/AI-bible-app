@@ -1,0 +1,86 @@
+{
+  "compiler": {
+    "name": "Scripture Evidence Engine",
+    "shortName": "SEE",
+    "version": "0.1.0"
+  },
+  "passes": [
+    {
+      "id": "P01",
+      "name": "Produce Canonical Universe",
+      "consumes": "SourceUniverse",
+      "produces": "CR0",
+      "status": "implemented"
+    },
+    {
+      "id": "P02",
+      "name": "Produce Witness Graph",
+      "consumes": "CR0 + SourceUniverse",
+      "produces": "CR1",
+      "status": "implemented"
+    },
+    {
+      "id": "P03",
+      "name": "Produce Source Token Graph",
+      "consumes": "SourceUniverse",
+      "produces": "CR2",
+      "status": "implemented"
+    },
+    {
+      "id": "P04",
+      "name": "Produce Source Token Index",
+      "consumes": "SourceUniverse",
+      "produces": "CR3",
+      "status": "implemented"
+    },
+    {
+      "id": "P05",
+      "name": "Produce Occurrence Graph",
+      "consumes": "SourceUniverse",
+      "produces": "CR4",
+      "status": "implemented"
+    },
+    {
+      "id": "P06",
+      "name": "Produce Evidence Graph",
+      "consumes": "CR4",
+      "produces": "CR5",
+      "status": "planned"
+    },
+    {
+      "id": "P07",
+      "name": "Produce Entity Graph",
+      "consumes": "CR5",
+      "produces": "CR6",
+      "status": "planned"
+    },
+    {
+      "id": "P08",
+      "name": "Produce Relationship Graph",
+      "consumes": "CR6",
+      "produces": "CR7",
+      "status": "planned"
+    },
+    {
+      "id": "P09",
+      "name": "Produce Event Graph",
+      "consumes": "CR7",
+      "produces": "CR8",
+      "status": "planned"
+    },
+    {
+      "id": "P10",
+      "name": "Produce Theme Graph",
+      "consumes": "CR8",
+      "produces": "CR9",
+      "status": "planned"
+    },
+    {
+      "id": "P11",
+      "name": "Produce Runtime Artifacts",
+      "consumes": "CR0-CR9",
+      "produces": "Runtime",
+      "status": "planned"
+    }
+  ]
+}

@@ -25,6 +25,85 @@
       "1 Chronicles 1:17"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2343",
+    "source": "hebrew",
+    "strong": "H2343",
+    "lemma": "חוּל",
+    "transliteration": "Chûwl",
+    "definition": "Chul , a son of Aram; also the region settled by him",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:23",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Aram were: Uz, Hul, Gether, and Mash."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 10:23",
+      "1 Chronicles 1:17"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 10:23",
+        "evidenceText": "The sons of Aram were: Uz, Hul, Gether, and Mash."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:17",
+        "evidenceText": "The sons of Shem: Elam, Asshur, Arpachshad, Lud, Aram, Uz, Hul, Gether, and Meshech."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 10:23",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Aram were: Uz, Hul, Gether, and Mash."
+      },
+      {
+        "reference": "1 Chronicles 1:17",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Shem: Elam, Asshur, Arpachshad, Lud, Aram, Uz, Hul, Gether, and Meshech."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:23 and continues through 1 Chronicles 1:17.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:23",
+        "book": "Genesis",
+        "englishText": "The sons of Aram were: Uz, Hul, Gether, and Mash."
+      },
+      {
+        "reference": "1 Chronicles 1:17",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Shem: Elam, Asshur, Arpachshad, Lud, Aram, Uz, Hul, Gether, and Meshech."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

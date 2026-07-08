@@ -28,6 +28,122 @@
       "Proverbs 21:14"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4976",
+    "source": "hebrew",
+    "strong": "H4976",
+    "lemma": "מַתָּן",
+    "transliteration": "mattân",
+    "definition": "a present",
+    "occurrenceCount": 5,
+    "classification": {
+      "primary": "concept",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 34:12",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Ask me a great amount for a dowry, and I will give whatever you ask of me, but give me the young lady as a wife.”"
+    },
+    "books": [
+      "Genesis",
+      "Numbers",
+      "Proverbs"
+    ],
+    "references": [
+      "Genesis 34:12",
+      "Numbers 18:11",
+      "Proverbs 18:16",
+      "Proverbs 19:6",
+      "Proverbs 21:14"
+    ],
+    "themes": [
+      "family line",
+      "offering"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Numbers 18:11",
+        "evidenceText": "“This is yours, too: the wave offering of their gift, even all the wave offerings of the children of Israel. I have given them to you, and to your sons and to your daughters with you, as a portion forever. Everyone who is clean in your house shall eat of it."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 34:12",
+        "phase": "Occurrence",
+        "evidenceText": "Ask me a great amount for a dowry, and I will give whatever you ask of me, but give me the young lady as a wife.”"
+      },
+      {
+        "reference": "Numbers 18:11",
+        "phase": "Offering",
+        "evidenceText": "“This is yours, too: the wave offering of their gift, even all the wave offerings of the children of Israel. I have given them to you, and to your sons and to your daughters with you, as a portion forever. Everyone who is clean in your house shall eat of it."
+      },
+      {
+        "reference": "Proverbs 18:16",
+        "phase": "Occurrence",
+        "evidenceText": "A man’s gift makes room for him,"
+      },
+      {
+        "reference": "Proverbs 19:6",
+        "phase": "Occurrence",
+        "evidenceText": "Many will entreat the favor of a ruler,"
+      },
+      {
+        "reference": "Proverbs 21:14",
+        "phase": "Occurrence",
+        "evidenceText": "A gift in secret pacifies anger,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 34:12 and continues through Proverbs 21:14.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 34:12",
+        "book": "Genesis",
+        "englishText": "Ask me a great amount for a dowry, and I will give whatever you ask of me, but give me the young lady as a wife.”"
+      },
+      {
+        "reference": "Numbers 18:11",
+        "book": "Numbers",
+        "englishText": "“This is yours, too: the wave offering of their gift, even all the wave offerings of the children of Israel. I have given them to you, and to your sons and to your daughters with you, as a portion forever. Everyone who is clean in your house shall eat of it."
+      },
+      {
+        "reference": "Proverbs 18:16",
+        "book": "Proverbs",
+        "englishText": "A man’s gift makes room for him,"
+      },
+      {
+        "reference": "Proverbs 19:6",
+        "book": "Proverbs",
+        "englishText": "Many will entreat the favor of a ruler,"
+      },
+      {
+        "reference": "Proverbs 21:14",
+        "book": "Proverbs",
+        "englishText": "A gift in secret pacifies anger,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -4,7 +4,7 @@
   "title": "קָטֹן",
   "subtitle": "H6994 • Hebrew word",
   "simple": {
-    "meaning": "קָטֹן (qâṭôn) appears 4 times in the Hebrew Scriptures and is introduced as a brother in the family line.",
+    "meaning": "קָטֹן (qâṭôn) appears 4 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
     "biblicalBackground": "The first appearances are in Genesis, 2 Samuel, 1 Chronicles, Amos, beginning at Genesis 32:11. BibleIQ detects the main surrounding context as family.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to קָטֹן (H6994) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows קָטֹן through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -25,6 +25,109 @@
       "2 Samuel 7:19",
       "1 Chronicles 17:17",
       "Amos 8:5"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6994",
+    "source": "hebrew",
+    "strong": "H6994",
+    "lemma": "קָטֹן",
+    "transliteration": "qâṭôn",
+    "definition": "to diminish , i.e. be (causatively, make ) diminutive or (figuratively) of no account",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 32:11",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Please deliver me from the hand of my brother, from the hand of Esau; for I fear him, lest he come and strike me and the mothers with the children."
+    },
+    "books": [
+      "Genesis",
+      "2 Samuel",
+      "1 Chronicles",
+      "Amos"
+    ],
+    "references": [
+      "Genesis 32:11",
+      "2 Samuel 7:19",
+      "1 Chronicles 17:17",
+      "Amos 8:5"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "divine_acceptance",
+        "label": "Divine acceptance",
+        "reference": "1 Chronicles 17:17",
+        "evidenceText": "This was a small thing in your eyes, God; but you have spoken of your servant’s house for a great while to come, and have respected me according to the standard of a man of high degree, Yahweh God."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 32:11",
+        "phase": "Occurrence",
+        "evidenceText": "Please deliver me from the hand of my brother, from the hand of Esau; for I fear him, lest he come and strike me and the mothers with the children."
+      },
+      {
+        "reference": "2 Samuel 7:19",
+        "phase": "Occurrence",
+        "evidenceText": "This was yet a small thing in your eyes, Lord Yahweh; but you have spoken also of your servant’s house for a great while to come; and this among men, Lord Yahweh!"
+      },
+      {
+        "reference": "1 Chronicles 17:17",
+        "phase": "Divine acceptance",
+        "evidenceText": "This was a small thing in your eyes, God; but you have spoken of your servant’s house for a great while to come, and have respected me according to the standard of a man of high degree, Yahweh God."
+      },
+      {
+        "reference": "Amos 8:5",
+        "phase": "Occurrence",
+        "evidenceText": "Saying, ‘When will the new moon be gone, that we may sell grain?"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 32:11 and continues through Amos 8:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 32:11",
+        "book": "Genesis",
+        "englishText": "Please deliver me from the hand of my brother, from the hand of Esau; for I fear him, lest he come and strike me and the mothers with the children."
+      },
+      {
+        "reference": "2 Samuel 7:19",
+        "book": "2 Samuel",
+        "englishText": "This was yet a small thing in your eyes, Lord Yahweh; but you have spoken also of your servant’s house for a great while to come; and this among men, Lord Yahweh!"
+      },
+      {
+        "reference": "1 Chronicles 17:17",
+        "book": "1 Chronicles",
+        "englishText": "This was a small thing in your eyes, God; but you have spoken of your servant’s house for a great while to come, and have respected me according to the standard of a man of high degree, Yahweh God."
+      },
+      {
+        "reference": "Amos 8:5",
+        "book": "Amos",
+        "englishText": "Saying, ‘When will the new moon be gone, that we may sell grain?"
+      }
     ]
   },
   "evidence": {

@@ -26,6 +26,94 @@
       "Ezekiel 30:21"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H7499",
+    "source": "hebrew",
+    "strong": "H7499",
+    "lemma": "רְפֻאָה",
+    "transliteration": "rᵉphuʼâh",
+    "definition": "a medicament",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Jeremiah 30:13",
+      "book": "Jeremiah",
+      "bookName": "Jeremiah",
+      "englishText": "There is no one to plead your cause,"
+    },
+    "books": [
+      "Jeremiah",
+      "Ezekiel"
+    ],
+    "references": [
+      "Jeremiah 30:13",
+      "Jeremiah 46:11",
+      "Ezekiel 30:21"
+    ],
+    "themes": [
+      "family line",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Jeremiah 46:11",
+        "evidenceText": "Go up into Gilead, and take balm, virgin daughter of Egypt."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Jeremiah 30:13",
+        "phase": "Occurrence",
+        "evidenceText": "There is no one to plead your cause,"
+      },
+      {
+        "reference": "Jeremiah 46:11",
+        "phase": "Genealogy",
+        "evidenceText": "Go up into Gilead, and take balm, virgin daughter of Egypt."
+      },
+      {
+        "reference": "Ezekiel 30:21",
+        "phase": "Occurrence",
+        "evidenceText": "“Son of man, I have broken the arm of Pharaoh king of Egypt. Behold, it has not been bound up, to apply medicines, to put a bandage to bind it, that it become strong to hold the sword."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Jeremiah 30:13 and continues through Ezekiel 30:21.",
+    "occurrenceTrail": [
+      {
+        "reference": "Jeremiah 30:13",
+        "book": "Jeremiah",
+        "englishText": "There is no one to plead your cause,"
+      },
+      {
+        "reference": "Jeremiah 46:11",
+        "book": "Jeremiah",
+        "englishText": "Go up into Gilead, and take balm, virgin daughter of Egypt."
+      },
+      {
+        "reference": "Ezekiel 30:21",
+        "book": "Ezekiel",
+        "englishText": "“Son of man, I have broken the arm of Pharaoh king of Egypt. Behold, it has not been bound up, to apply medicines, to put a bandage to bind it, that it become strong to hold the sword."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

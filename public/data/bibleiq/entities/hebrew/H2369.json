@@ -4,7 +4,7 @@
   "title": "חוֹתָם",
   "subtitle": "H2369 • Hebrew name",
   "simple": {
-    "meaning": "חוֹתָם (Chôwthâm) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "חוֹתָם (Chôwthâm) appears 2 times in the Hebrew Scriptures and is introduced as a sister in the family line.",
     "biblicalBackground": "The first appearances are in 1 Chronicles, beginning at 1 Chronicles 7:32. BibleIQ detects the main surrounding context as family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חוֹתָם (H2369) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חוֹתָם through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,91 @@
     ],
     "laterReferences": [
       "1 Chronicles 11:44"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2369",
+    "source": "hebrew",
+    "strong": "H2369",
+    "lemma": "חוֹתָם",
+    "transliteration": "Chôwthâm",
+    "definition": "Chotham , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "1 Chronicles 7:32",
+      "book": "1 Chronicles",
+      "bookName": "1 Chronicles",
+      "englishText": "Heber became the father of Japhlet, Shomer, Hotham, and Shua their sister."
+    },
+    "books": [
+      "1 Chronicles"
+    ],
+    "references": [
+      "1 Chronicles 7:32",
+      "1 Chronicles 11:44"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 11:44",
+        "evidenceText": "Uzzia the Ashterathite, Shama and Jeiel the sons of Hotham the Aroerite,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "1 Chronicles 7:32",
+        "phase": "Occurrence",
+        "evidenceText": "Heber became the father of Japhlet, Shomer, Hotham, and Shua their sister."
+      },
+      {
+        "reference": "1 Chronicles 11:44",
+        "phase": "Genealogy",
+        "evidenceText": "Uzzia the Ashterathite, Shama and Jeiel the sons of Hotham the Aroerite,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 1 Chronicles 7:32 and continues through 1 Chronicles 11:44.",
+    "occurrenceTrail": [
+      {
+        "reference": "1 Chronicles 7:32",
+        "book": "1 Chronicles",
+        "englishText": "Heber became the father of Japhlet, Shomer, Hotham, and Shua their sister."
+      },
+      {
+        "reference": "1 Chronicles 11:44",
+        "book": "1 Chronicles",
+        "englishText": "Uzzia the Ashterathite, Shama and Jeiel the sons of Hotham the Aroerite,"
+      }
     ]
   },
   "evidence": {

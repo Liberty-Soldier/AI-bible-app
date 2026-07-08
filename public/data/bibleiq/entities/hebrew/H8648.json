@@ -27,6 +27,97 @@
       "Daniel 6:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8648",
+    "source": "hebrew",
+    "strong": "H8648",
+    "lemma": "תְּרֵין",
+    "transliteration": "tᵉrêyn",
+    "definition": "two",
+    "occurrenceCount": 4,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Ezra 4:24",
+      "book": "Ezra",
+      "bookName": "Ezra",
+      "englishText": "Then work stopped on God’s house which is at Jerusalem. It stopped until the second year of the reign of Darius king of Persia."
+    },
+    "books": [
+      "Ezra",
+      "Daniel"
+    ],
+    "references": [
+      "Ezra 4:24",
+      "Ezra 6:17",
+      "Daniel 4:26",
+      "Daniel 6:1"
+    ],
+    "themes": [
+      "kingship",
+      "offering"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "Ezra 6:17",
+        "evidenceText": "They offered at the dedication of this house of God one hundred bulls, two hundred rams, four hundred lambs; and for a sin offering for all Israel, twelve male goats, according to the number of the tribes of Israel."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Ezra 4:24",
+        "phase": "Occurrence",
+        "evidenceText": "Then work stopped on God’s house which is at Jerusalem. It stopped until the second year of the reign of Darius king of Persia."
+      },
+      {
+        "reference": "Ezra 6:17",
+        "phase": "Offering",
+        "evidenceText": "They offered at the dedication of this house of God one hundred bulls, two hundred rams, four hundred lambs; and for a sin offering for all Israel, twelve male goats, according to the number of the tribes of Israel."
+      },
+      {
+        "reference": "Daniel 4:26",
+        "phase": "Occurrence",
+        "evidenceText": "Whereas they commanded to leave the stump of the roots of the tree; your kingdom shall be sure to you, after that you will have known that the heavens do rule."
+      },
+      {
+        "reference": "Daniel 6:1",
+        "phase": "Occurrence",
+        "evidenceText": "It pleased Darius to set over the kingdom one hundred twenty local governors, who should be throughout the whole kingdom;"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Ezra 4:24 and continues through Daniel 6:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Ezra 4:24",
+        "book": "Ezra",
+        "englishText": "Then work stopped on God’s house which is at Jerusalem. It stopped until the second year of the reign of Darius king of Persia."
+      },
+      {
+        "reference": "Ezra 6:17",
+        "book": "Ezra",
+        "englishText": "They offered at the dedication of this house of God one hundred bulls, two hundred rams, four hundred lambs; and for a sin offering for all Israel, twelve male goats, according to the number of the tribes of Israel."
+      },
+      {
+        "reference": "Daniel 4:26",
+        "book": "Daniel",
+        "englishText": "Whereas they commanded to leave the stump of the roots of the tree; your kingdom shall be sure to you, after that you will have known that the heavens do rule."
+      },
+      {
+        "reference": "Daniel 6:1",
+        "book": "Daniel",
+        "englishText": "It pleased Darius to set over the kingdom one hundred twenty local governors, who should be throughout the whole kingdom;"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

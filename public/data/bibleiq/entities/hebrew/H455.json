@@ -25,6 +25,79 @@
       "1 Chronicles 11:33"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H455",
+    "source": "hebrew",
+    "strong": "H455",
+    "lemma": "אֶלְיַחְבָּא",
+    "transliteration": "ʼElyachbâʼ",
+    "definition": "Eljachba , an Israelite",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Samuel 23:32",
+      "book": "2 Samuel",
+      "bookName": "2 Samuel",
+      "englishText": "Eliahba the Shaalbonite, the sons of Jashen, Jonathan,"
+    },
+    "books": [
+      "2 Samuel",
+      "1 Chronicles"
+    ],
+    "references": [
+      "2 Samuel 23:32",
+      "1 Chronicles 11:33"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Samuel 23:32",
+        "evidenceText": "Eliahba the Shaalbonite, the sons of Jashen, Jonathan,"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Samuel 23:32",
+        "phase": "Genealogy",
+        "evidenceText": "Eliahba the Shaalbonite, the sons of Jashen, Jonathan,"
+      },
+      {
+        "reference": "1 Chronicles 11:33",
+        "phase": "Occurrence",
+        "evidenceText": "Azmaveth the Baharumite, Eliahba the Shaalbonite,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Samuel 23:32 and continues through 1 Chronicles 11:33.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Samuel 23:32",
+        "book": "2 Samuel",
+        "englishText": "Eliahba the Shaalbonite, the sons of Jashen, Jonathan,"
+      },
+      {
+        "reference": "1 Chronicles 11:33",
+        "book": "1 Chronicles",
+        "englishText": "Azmaveth the Baharumite, Eliahba the Shaalbonite,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

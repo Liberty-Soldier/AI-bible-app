@@ -4,7 +4,7 @@
   "title": "מַרְבֶה",
   "subtitle": "H4766 • Hebrew word",
   "simple": {
-    "meaning": "מַרְבֶה (marbeh) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "מַרְבֶה (marbeh) appears 3 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Isaiah, beginning at Isaiah 9:6. BibleIQ detects the main surrounding context as birth, family, family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to מַרְבֶה (H4766) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows מַרְבֶה through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,95 @@
     ],
     "laterReferences": [
       "Isaiah 33:23"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H4766",
+    "source": "hebrew",
+    "strong": "H4766",
+    "lemma": "מַרְבֶה",
+    "transliteration": "marbeh",
+    "definition": "properly, increasing ; as noun, greatness , or (adverbially) greatly",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "medium",
+      "evidence": [
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Isaiah 9:6",
+      "book": "Isaiah",
+      "bookName": "Isaiah",
+      "englishText": "For a child is born to us. A son is given to us; and the government will be on his shoulders. His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."
+    },
+    "books": [
+      "Isaiah"
+    ],
+    "references": [
+      "Isaiah 9:6",
+      "Isaiah 33:23"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Isaiah 9:6",
+        "evidenceText": "For a child is born to us. A son is given to us; and the government will be on his shoulders. His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Isaiah 9:6",
+        "phase": "Birth or introduction",
+        "evidenceText": "For a child is born to us. A son is given to us; and the government will be on his shoulders. His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."
+      },
+      {
+        "reference": "Isaiah 9:6",
+        "phase": "Birth or introduction",
+        "evidenceText": "For a child is born to us. A son is given to us; and the government will be on his shoulders. His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."
+      },
+      {
+        "reference": "Isaiah 33:23",
+        "phase": "Occurrence",
+        "evidenceText": "Your rigging is untied."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Isaiah 9:6 and continues through Isaiah 33:23.",
+    "occurrenceTrail": [
+      {
+        "reference": "Isaiah 9:6",
+        "book": "Isaiah",
+        "englishText": "For a child is born to us. A son is given to us; and the government will be on his shoulders. His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."
+      },
+      {
+        "reference": "Isaiah 9:6",
+        "book": "Isaiah",
+        "englishText": "For a child is born to us. A son is given to us; and the government will be on his shoulders. His name will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace."
+      },
+      {
+        "reference": "Isaiah 33:23",
+        "book": "Isaiah",
+        "englishText": "Your rigging is untied."
+      }
     ]
   },
   "evidence": {

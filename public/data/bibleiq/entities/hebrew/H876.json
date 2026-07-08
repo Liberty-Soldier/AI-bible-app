@@ -25,6 +25,74 @@
       "Judges 9:21"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H876",
+    "source": "hebrew",
+    "strong": "H876",
+    "lemma": "בְּאֵר",
+    "transliteration": "Bᵉʼêr",
+    "definition": "Beer , a place in the Desert, also one in Palestine",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 21:16",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "From there they traveled to Beer; that is the well of which Yahweh said to Moses, “Gather the people together, and I will give them water.”"
+    },
+    "books": [
+      "Numbers",
+      "Judges"
+    ],
+    "references": [
+      "Numbers 21:16",
+      "Judges 9:21"
+    ],
+    "themes": [
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "brother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"brother\""
+      }
+    ],
+    "majorEvents": [],
+    "timeline": [
+      {
+        "reference": "Numbers 21:16",
+        "phase": "Occurrence",
+        "evidenceText": "From there they traveled to Beer; that is the well of which Yahweh said to Moses, “Gather the people together, and I will give them water.”"
+      },
+      {
+        "reference": "Judges 9:21",
+        "phase": "Occurrence",
+        "evidenceText": "Jotham ran away and fled, and went to Beer* “Beer” is Hebrew for “well”, i.e., a village named for its well. and lived there, for fear of Abimelech his brother."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 21:16 and continues through Judges 9:21.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 21:16",
+        "book": "Numbers",
+        "englishText": "From there they traveled to Beer; that is the well of which Yahweh said to Moses, “Gather the people together, and I will give them water.”"
+      },
+      {
+        "reference": "Judges 9:21",
+        "book": "Judges",
+        "englishText": "Jotham ran away and fled, and went to Beer* “Beer” is Hebrew for “well”, i.e., a village named for its well. and lived there, for fear of Abimelech his brother."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

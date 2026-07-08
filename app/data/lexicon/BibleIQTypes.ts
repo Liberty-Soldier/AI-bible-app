@@ -1,3 +1,5 @@
+import type { EmetEvidencePacket } from "@/app/lib/emet/EmetEvidencePacket";
+
 export type BibleIQEntityType =
   | "person"
   | "place"
@@ -41,11 +43,44 @@ export type BibleIQContextConnections = {
   laterReferences: string[];
 };
 
+export type BibleIQSeeEvidence = {
+  evidenceId: string;
+  countId: string;
+  occurrenceCount: number;
+  firstOccurrence?: string;
+  lastOccurrence?: string;
+  relationshipCount: number;
+  eventCount: number;
+  themeCount: number;
+};
+
+export type BibleIQSourceAlignment = {
+  selectedEnglish?: string;
+  sourceWord?: string;
+  source: BibleIQSource;
+  strong?: string;
+  lemma?: string;
+  morph?: string;
+  entityId: string;
+  seeEvidenceId?: string;
+};
+
+export type BibleIQEmet = {
+  status: "not-ready" | "pending" | "complete" | "insufficient-evidence";
+  packet?: EmetEvidencePacket | null;
+  explanation?: string;
+  citations: string[];
+};
+
 export type BibleIQEntity = {
   id: string;
   type: BibleIQEntityType;
   title: string;
   subtitle?: string;
+
+  emet?: BibleIQEmet;
+  see?: BibleIQSeeEvidence;
+  alignment?: BibleIQSourceAlignment;
 
   simple: {
     meaning?: string;
@@ -64,10 +99,13 @@ export type BibleIQEntity = {
       transliteration?: string;
       pronunciation?: string;
       strong?: string;
+      lemma?: string;
       lemmaId?: string;
       partOfSpeech?: string;
       forms?: string[];
+      morph?: string;
       morphs?: [string, number][];
+      seeEvidenceId?: string;
     };
 
     definitions?: {

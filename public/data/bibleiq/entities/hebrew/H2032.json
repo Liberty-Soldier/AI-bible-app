@@ -26,6 +26,94 @@
       "Hosea 9:11"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2032",
+    "source": "hebrew",
+    "strong": "H2032",
+    "lemma": "הֵרוֹן",
+    "transliteration": "hêrôwn",
+    "definition": "pregnancy",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 3:16",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "To the woman he said,"
+    },
+    "books": [
+      "Genesis",
+      "Ruth",
+      "Hosea"
+    ],
+    "references": [
+      "Genesis 3:16",
+      "Ruth 4:13",
+      "Hosea 9:11"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "wife",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"wife\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "birth",
+        "label": "Birth or introduction",
+        "reference": "Ruth 4:13",
+        "evidenceText": "So Boaz took Ruth and she became his wife; and he went in to her, and Yahweh enabled her to conceive, and she bore a son."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 3:16",
+        "phase": "Occurrence",
+        "evidenceText": "To the woman he said,"
+      },
+      {
+        "reference": "Ruth 4:13",
+        "phase": "Birth or introduction",
+        "evidenceText": "So Boaz took Ruth and she became his wife; and he went in to her, and Yahweh enabled her to conceive, and she bore a son."
+      },
+      {
+        "reference": "Hosea 9:11",
+        "phase": "Occurrence",
+        "evidenceText": "As for Ephraim, their glory will fly away like a bird."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 3:16 and continues through Hosea 9:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 3:16",
+        "book": "Genesis",
+        "englishText": "To the woman he said,"
+      },
+      {
+        "reference": "Ruth 4:13",
+        "book": "Ruth",
+        "englishText": "So Boaz took Ruth and she became his wife; and he went in to her, and Yahweh enabled her to conceive, and she bore a son."
+      },
+      {
+        "reference": "Hosea 9:11",
+        "book": "Hosea",
+        "englishText": "As for Ephraim, their glory will fly away like a bird."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -26,6 +26,106 @@
       "Psalms 117:1"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H523",
+    "source": "hebrew",
+    "strong": "H523",
+    "lemma": "אֻמַּה",
+    "transliteration": "ʼummah",
+    "definition": "a collection , i.e. community of persons",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:16",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "These are the sons of Ishmael, and these are their names, by their villages, and by their encampments: twelve princes, according to their nations."
+    },
+    "books": [
+      "Genesis",
+      "Numbers",
+      "Psalms"
+    ],
+    "references": [
+      "Genesis 25:16",
+      "Numbers 25:15",
+      "Psalms 117:1"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 25:16",
+        "evidenceText": "These are the sons of Ishmael, and these are their names, by their villages, and by their encampments: twelve princes, according to their nations."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Numbers 25:15",
+        "evidenceText": "The name of the Midianite woman who was slain was Cozbi, the daughter of Zur. He was head of the people of a fathers’ house in Midian."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:16",
+        "phase": "Genealogy",
+        "evidenceText": "These are the sons of Ishmael, and these are their names, by their villages, and by their encampments: twelve princes, according to their nations."
+      },
+      {
+        "reference": "Numbers 25:15",
+        "phase": "Genealogy",
+        "evidenceText": "The name of the Midianite woman who was slain was Cozbi, the daughter of Zur. He was head of the people of a fathers’ house in Midian."
+      },
+      {
+        "reference": "Psalms 117:1",
+        "phase": "Occurrence",
+        "evidenceText": "Praise Yahweh, all you nations!"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:16 and continues through Psalms 117:1.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:16",
+        "book": "Genesis",
+        "englishText": "These are the sons of Ishmael, and these are their names, by their villages, and by their encampments: twelve princes, according to their nations."
+      },
+      {
+        "reference": "Numbers 25:15",
+        "book": "Numbers",
+        "englishText": "The name of the Midianite woman who was slain was Cozbi, the daughter of Zur. He was head of the people of a fathers’ house in Midian."
+      },
+      {
+        "reference": "Psalms 117:1",
+        "book": "Psalms",
+        "englishText": "Praise Yahweh, all you nations!"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

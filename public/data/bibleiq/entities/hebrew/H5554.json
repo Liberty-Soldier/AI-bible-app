@@ -4,7 +4,7 @@
   "title": "סֶלַע",
   "subtitle": "H5554 • Hebrew name",
   "simple": {
-    "meaning": "סֶלַע (Çelaʻ) appears 3 times in the Hebrew Scriptures as a person-name in the Hebrew text. The surrounding account also brings the name into death.",
+    "meaning": "סֶלַע (Çelaʻ) appears 3 times in the Hebrew Scriptures and is introduced as a daughter in the family line. The surrounding account also brings the name into death.",
     "biblicalBackground": "The first appearances are in 2 Kings, Isaiah, beginning at 2 Kings 14:7. BibleIQ detects the main surrounding context as family line, death, land, mountain, wilderness.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to סֶלַע (H5554) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows סֶלַע through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -24,6 +24,100 @@
     "laterReferences": [
       "Isaiah 16:1",
       "Isaiah 42:11"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H5554",
+    "source": "hebrew",
+    "strong": "H5554",
+    "lemma": "סֶלַע",
+    "transliteration": "Çelaʻ",
+    "definition": "Sela , the rock-city of Idumaea",
+    "occurrenceCount": 3,
+    "classification": {
+      "primary": "person",
+      "gender": "female",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains female relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "2 Kings 14:7",
+      "book": "2 Kings",
+      "bookName": "2 Kings",
+      "englishText": "He killed ten thousand Edomites in the Valley of Salt, and took Sela by war, and called its name Joktheel, to this day."
+    },
+    "books": [
+      "2 Kings",
+      "Isaiah"
+    ],
+    "references": [
+      "2 Kings 14:7",
+      "Isaiah 16:1",
+      "Isaiah 42:11"
+    ],
+    "themes": [
+      "family line",
+      "death",
+      "land"
+    ],
+    "relationships": [
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "death",
+        "label": "Death",
+        "reference": "2 Kings 14:7",
+        "evidenceText": "He killed ten thousand Edomites in the Valley of Salt, and took Sela by war, and called its name Joktheel, to this day."
+      },
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Isaiah 16:1",
+        "evidenceText": "Send the lambs for the ruler of the land from Selah to the wilderness, to the mountain of the daughter of Zion."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "2 Kings 14:7",
+        "phase": "Death",
+        "evidenceText": "He killed ten thousand Edomites in the Valley of Salt, and took Sela by war, and called its name Joktheel, to this day."
+      },
+      {
+        "reference": "Isaiah 16:1",
+        "phase": "Movement or place",
+        "evidenceText": "Send the lambs for the ruler of the land from Selah to the wilderness, to the mountain of the daughter of Zion."
+      },
+      {
+        "reference": "Isaiah 42:11",
+        "phase": "Occurrence",
+        "evidenceText": "Let the wilderness and its cities raise their voices,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at 2 Kings 14:7 and continues through Isaiah 42:11.",
+    "occurrenceTrail": [
+      {
+        "reference": "2 Kings 14:7",
+        "book": "2 Kings",
+        "englishText": "He killed ten thousand Edomites in the Valley of Salt, and took Sela by war, and called its name Joktheel, to this day."
+      },
+      {
+        "reference": "Isaiah 16:1",
+        "book": "Isaiah",
+        "englishText": "Send the lambs for the ruler of the land from Selah to the wilderness, to the mountain of the daughter of Zion."
+      },
+      {
+        "reference": "Isaiah 42:11",
+        "book": "Isaiah",
+        "englishText": "Let the wilderness and its cities raise their voices,"
+      }
     ]
   },
   "evidence": {

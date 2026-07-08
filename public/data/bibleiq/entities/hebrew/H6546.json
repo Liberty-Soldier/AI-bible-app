@@ -25,6 +25,71 @@
       "Judges 5:2"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H6546",
+    "source": "hebrew",
+    "strong": "H6546",
+    "lemma": "פַּרְעָה",
+    "transliteration": "parʻâh",
+    "definition": "leadership (plural concretely, leaders)",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 32:42",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "I will make my arrows drunk with blood."
+    },
+    "books": [
+      "Deuteronomy",
+      "Judges"
+    ],
+    "references": [
+      "Deuteronomy 32:42",
+      "Judges 5:2"
+    ],
+    "themes": [
+      "blood"
+    ],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "blood_witness",
+        "label": "Blood witness",
+        "reference": "Deuteronomy 32:42",
+        "evidenceText": "I will make my arrows drunk with blood."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 32:42",
+        "phase": "Blood witness",
+        "evidenceText": "I will make my arrows drunk with blood."
+      },
+      {
+        "reference": "Judges 5:2",
+        "phase": "Occurrence",
+        "evidenceText": "“Because the leaders took the lead in Israel,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 32:42 and continues through Judges 5:2.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 32:42",
+        "book": "Deuteronomy",
+        "englishText": "I will make my arrows drunk with blood."
+      },
+      {
+        "reference": "Judges 5:2",
+        "book": "Judges",
+        "englishText": "“Because the leaders took the lead in Israel,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

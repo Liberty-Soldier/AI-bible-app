@@ -25,6 +25,78 @@
       "1 Samuel 2:29"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H1163",
+    "source": "hebrew",
+    "strong": "H1163",
+    "lemma": "בָּעַט",
+    "transliteration": "bâʻaṭ",
+    "definition": "to trample down, i.e. (figuratively) despise",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "action",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Deuteronomy 32:15",
+      "book": "Deuteronomy",
+      "bookName": "Deuteronomy",
+      "englishText": "But Jeshurun grew fat, and kicked."
+    },
+    "books": [
+      "Deuteronomy",
+      "1 Samuel"
+    ],
+    "references": [
+      "Deuteronomy 32:15",
+      "1 Samuel 2:29"
+    ],
+    "themes": [
+      "family line",
+      "offering"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "offering",
+        "label": "Offering",
+        "reference": "1 Samuel 2:29",
+        "evidenceText": "Why do you kick at my sacrifice and at my offering, which I have commanded in my habitation, and honor your sons above me, to make yourselves fat with the best of all the offerings of Israel my people?’"
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Deuteronomy 32:15",
+        "phase": "Occurrence",
+        "evidenceText": "But Jeshurun grew fat, and kicked."
+      },
+      {
+        "reference": "1 Samuel 2:29",
+        "phase": "Offering",
+        "evidenceText": "Why do you kick at my sacrifice and at my offering, which I have commanded in my habitation, and honor your sons above me, to make yourselves fat with the best of all the offerings of Israel my people?’"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Deuteronomy 32:15 and continues through 1 Samuel 2:29.",
+    "occurrenceTrail": [
+      {
+        "reference": "Deuteronomy 32:15",
+        "book": "Deuteronomy",
+        "englishText": "But Jeshurun grew fat, and kicked."
+      },
+      {
+        "reference": "1 Samuel 2:29",
+        "book": "1 Samuel",
+        "englishText": "Why do you kick at my sacrifice and at my offering, which I have commanded in my habitation, and honor your sons above me, to make yourselves fat with the best of all the offerings of Israel my people?’"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

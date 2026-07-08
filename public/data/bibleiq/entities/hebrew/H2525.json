@@ -25,6 +25,69 @@
       "Job 37:17"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2525",
+    "source": "hebrew",
+    "strong": "H2525",
+    "lemma": "חָם",
+    "transliteration": "châm",
+    "definition": "hot",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "object",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Joshua 9:12",
+      "book": "Joshua",
+      "bookName": "Joshua",
+      "englishText": "This our bread we took hot for our supplies out of our houses on the day we went out to go to you; but now, behold, it is dry, and has become moldy."
+    },
+    "books": [
+      "Joshua",
+      "Job"
+    ],
+    "references": [
+      "Joshua 9:12",
+      "Job 37:17"
+    ],
+    "themes": [],
+    "relationships": [],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Joshua 9:12",
+        "evidenceText": "This our bread we took hot for our supplies out of our houses on the day we went out to go to you; but now, behold, it is dry, and has become moldy."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Joshua 9:12",
+        "phase": "Movement or place",
+        "evidenceText": "This our bread we took hot for our supplies out of our houses on the day we went out to go to you; but now, behold, it is dry, and has become moldy."
+      },
+      {
+        "reference": "Job 37:17",
+        "phase": "Occurrence",
+        "evidenceText": "You whose clothing is warm,"
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Joshua 9:12 and continues through Job 37:17.",
+    "occurrenceTrail": [
+      {
+        "reference": "Joshua 9:12",
+        "book": "Joshua",
+        "englishText": "This our bread we took hot for our supplies out of our houses on the day we went out to go to you; but now, behold, it is dry, and has become moldy."
+      },
+      {
+        "reference": "Job 37:17",
+        "book": "Job",
+        "englishText": "You whose clothing is warm,"
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

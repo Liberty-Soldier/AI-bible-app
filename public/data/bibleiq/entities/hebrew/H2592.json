@@ -4,7 +4,7 @@
   "title": "חַנִּיאֵל",
   "subtitle": "H2592 • Hebrew name",
   "simple": {
-    "meaning": "חַנִּיאֵל (Channîyʼêl) appears 2 times in the Hebrew Scriptures as a person-name in the Hebrew text.",
+    "meaning": "חַנִּיאֵל (Channîyʼêl) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line.",
     "biblicalBackground": "The first appearances are in Numbers, 1 Chronicles, beginning at Numbers 34:23. BibleIQ detects the main surrounding context as family line.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to חַנִּיאֵל (H2592) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows חַנִּיאֵל through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,81 @@
     ],
     "laterReferences": [
       "1 Chronicles 7:39"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H2592",
+    "source": "hebrew",
+    "strong": "H2592",
+    "lemma": "חַנִּיאֵל",
+    "transliteration": "Channîyʼêl",
+    "definition": "Channiel , the name of two Israelites",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Numbers 34:23",
+      "book": "Numbers",
+      "bookName": "Numbers",
+      "englishText": "Of the children of Joseph: of the tribe of the children of Manasseh a prince, Hanniel the son of Ephod."
+    },
+    "books": [
+      "Numbers",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Numbers 34:23",
+      "1 Chronicles 7:39"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 7:39",
+        "evidenceText": "The sons of Ulla: Arah, Hanniel, and Rizia."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Numbers 34:23",
+        "phase": "Occurrence",
+        "evidenceText": "Of the children of Joseph: of the tribe of the children of Manasseh a prince, Hanniel the son of Ephod."
+      },
+      {
+        "reference": "1 Chronicles 7:39",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Ulla: Arah, Hanniel, and Rizia."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Numbers 34:23 and continues through 1 Chronicles 7:39.",
+    "occurrenceTrail": [
+      {
+        "reference": "Numbers 34:23",
+        "book": "Numbers",
+        "englishText": "Of the children of Joseph: of the tribe of the children of Manasseh a prince, Hanniel the son of Ephod."
+      },
+      {
+        "reference": "1 Chronicles 7:39",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Ulla: Arah, Hanniel, and Rizia."
+      }
     ]
   },
   "evidence": {

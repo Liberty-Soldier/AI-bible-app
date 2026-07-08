@@ -4,7 +4,7 @@
   "title": "אֲשׁוּרִי",
   "subtitle": "H805 • Hebrew name",
   "simple": {
-    "meaning": "אֲשׁוּרִי (ʼĂshûwrîy) appears 2 times in the Hebrew Scriptures and is introduced in connection with kingship.",
+    "meaning": "אֲשׁוּרִי (ʼĂshûwrîy) appears 2 times in the Hebrew Scriptures and is introduced as a son in the family line and in connection with kingship.",
     "biblicalBackground": "The first appearances are in Genesis, 2 Samuel, beginning at Genesis 25:3. BibleIQ detects the main surrounding context as family, family line, kingship, Israel.",
     "inThisVerse": "In this verse, the tapped English word is source-aligned to אֲשׁוּרִי (H805) in the Hebrew text.",
     "whyItMatters": "People in Scripture are understood by their place in the story. BibleIQ follows אֲשׁוּרִי through the actual verses so the reader sees the person in context instead of as an isolated dictionary entry.",
@@ -23,6 +23,88 @@
     ],
     "laterReferences": [
       "2 Samuel 2:9"
+    ]
+  },
+  "structuredEvidence": {
+    "id": "word:hebrew:H805",
+    "source": "hebrew",
+    "strong": "H805",
+    "lemma": "אֲשׁוּרִי",
+    "transliteration": "ʼĂshûwrîy",
+    "definition": "an Ashurite (collectively) or inhabitant of Ashur, a district in Palestine",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "person",
+      "gender": "male",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name",
+        "Occurrence trail contains male relationship language"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 25:3",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "Jokshan became the father of Sheba, and Dedan. The sons of Dedan were Asshurim, Letushim, and Leummim."
+    },
+    "books": [
+      "Genesis",
+      "2 Samuel"
+    ],
+    "references": [
+      "Genesis 25:3",
+      "2 Samuel 2:9"
+    ],
+    "themes": [
+      "family line",
+      "family",
+      "kingship"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 25:3",
+        "evidenceText": "Jokshan became the father of Sheba, and Dedan. The sons of Dedan were Asshurim, Letushim, and Leummim."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 25:3",
+        "phase": "Genealogy",
+        "evidenceText": "Jokshan became the father of Sheba, and Dedan. The sons of Dedan were Asshurim, Letushim, and Leummim."
+      },
+      {
+        "reference": "2 Samuel 2:9",
+        "phase": "Occurrence",
+        "evidenceText": "and he made him king over Gilead, and over the Ashurites, and over Jezreel, and over Ephraim, and over Benjamin, and over all Israel."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 25:3 and continues through 2 Samuel 2:9.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 25:3",
+        "book": "Genesis",
+        "englishText": "Jokshan became the father of Sheba, and Dedan. The sons of Dedan were Asshurim, Letushim, and Leummim."
+      },
+      {
+        "reference": "2 Samuel 2:9",
+        "book": "2 Samuel",
+        "englishText": "and he made him king over Gilead, and over the Ashurites, and over Jezreel, and over Ephraim, and over Benjamin, and over all Israel."
+      }
     ]
   },
   "evidence": {

@@ -25,6 +25,104 @@
       "2 Samuel 17:25"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H3481",
+    "source": "hebrew",
+    "strong": "H3481",
+    "lemma": "יִשְׂרְאֵלִי",
+    "transliteration": "Yisrᵉʼêlîy",
+    "definition": "a Jisreelite or descendant of Jisrael",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "word",
+      "confidence": "medium",
+      "evidence": []
+    },
+    "firstOccurrence": {
+      "reference": "Leviticus 24:10",
+      "book": "Leviticus",
+      "bookName": "Leviticus",
+      "englishText": "The son of an Israelite woman, whose father was an Egyptian, went out among the children of Israel; and the son of the Israelite woman and a man of Israel strove together in the camp."
+    },
+    "books": [
+      "Leviticus",
+      "2 Samuel"
+    ],
+    "references": [
+      "Leviticus 24:10",
+      "2 Samuel 17:25"
+    ],
+    "themes": [
+      "family line",
+      "family"
+    ],
+    "relationships": [
+      {
+        "type": "father",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"father\""
+      },
+      {
+        "type": "mother",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"mother\""
+      },
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      },
+      {
+        "type": "daughter",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"daughter\""
+      },
+      {
+        "type": "sister",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"sister\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "movement_or_place",
+        "label": "Movement or place",
+        "reference": "Leviticus 24:10",
+        "evidenceText": "The son of an Israelite woman, whose father was an Egyptian, went out among the children of Israel; and the son of the Israelite woman and a man of Israel strove together in the camp."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "2 Samuel 17:25",
+        "evidenceText": "Absalom set Amasa over the army instead of Joab. Now Amasa was the son of a man whose name was Ithra the Israelite, who went in to Abigail the daughter of Nahash, sister to Zeruiah, Joab’s mother."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Leviticus 24:10",
+        "phase": "Movement or place",
+        "evidenceText": "The son of an Israelite woman, whose father was an Egyptian, went out among the children of Israel; and the son of the Israelite woman and a man of Israel strove together in the camp."
+      },
+      {
+        "reference": "2 Samuel 17:25",
+        "phase": "Genealogy",
+        "evidenceText": "Absalom set Amasa over the army instead of Joab. Now Amasa was the son of a man whose name was Ithra the Israelite, who went in to Abigail the daughter of Nahash, sister to Zeruiah, Joab’s mother."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Leviticus 24:10 and continues through 2 Samuel 17:25.",
+    "occurrenceTrail": [
+      {
+        "reference": "Leviticus 24:10",
+        "book": "Leviticus",
+        "englishText": "The son of an Israelite woman, whose father was an Egyptian, went out among the children of Israel; and the son of the Israelite woman and a man of Israel strove together in the camp."
+      },
+      {
+        "reference": "2 Samuel 17:25",
+        "book": "2 Samuel",
+        "englishText": "Absalom set Amasa over the army instead of Joab. Now Amasa was the son of a man whose name was Ithra the Israelite, who went in to Abigail the daughter of Nahash, sister to Zeruiah, Joab’s mother."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",

@@ -25,6 +25,85 @@
       "1 Chronicles 1:5"
     ]
   },
+  "structuredEvidence": {
+    "id": "word:hebrew:H8494",
+    "source": "hebrew",
+    "strong": "H8494",
+    "lemma": "תִּירָס",
+    "transliteration": "Tîyrâç",
+    "definition": "Tiras , a son of Japheth",
+    "occurrenceCount": 2,
+    "classification": {
+      "primary": "name",
+      "confidence": "high",
+      "evidence": [
+        "Lexicon or morphology identifies this as a proper name"
+      ]
+    },
+    "firstOccurrence": {
+      "reference": "Genesis 10:2",
+      "book": "Genesis",
+      "bookName": "Genesis",
+      "englishText": "The sons of Japheth were: Gomer, Magog, Madai, Javan, Tubal, Meshech, and Tiras."
+    },
+    "books": [
+      "Genesis",
+      "1 Chronicles"
+    ],
+    "references": [
+      "Genesis 10:2",
+      "1 Chronicles 1:5"
+    ],
+    "themes": [
+      "family line"
+    ],
+    "relationships": [
+      {
+        "type": "son",
+        "confidence": "medium",
+        "evidenceText": "Occurrence trail contains \"son\""
+      }
+    ],
+    "majorEvents": [
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "Genesis 10:2",
+        "evidenceText": "The sons of Japheth were: Gomer, Magog, Madai, Javan, Tubal, Meshech, and Tiras."
+      },
+      {
+        "type": "genealogy",
+        "label": "Genealogy",
+        "reference": "1 Chronicles 1:5",
+        "evidenceText": "The sons of Japheth: Gomer, Magog, Madai, Javan, Tubal, Meshech, and Tiras."
+      }
+    ],
+    "timeline": [
+      {
+        "reference": "Genesis 10:2",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Japheth were: Gomer, Magog, Madai, Javan, Tubal, Meshech, and Tiras."
+      },
+      {
+        "reference": "1 Chronicles 1:5",
+        "phase": "Genealogy",
+        "evidenceText": "The sons of Japheth: Gomer, Magog, Madai, Javan, Tubal, Meshech, and Tiras."
+      }
+    ],
+    "canonicalTrailSummary": "The occurrence trail begins at Genesis 10:2 and continues through 1 Chronicles 1:5.",
+    "occurrenceTrail": [
+      {
+        "reference": "Genesis 10:2",
+        "book": "Genesis",
+        "englishText": "The sons of Japheth were: Gomer, Magog, Madai, Javan, Tubal, Meshech, and Tiras."
+      },
+      {
+        "reference": "1 Chronicles 1:5",
+        "book": "1 Chronicles",
+        "englishText": "The sons of Japheth: Gomer, Magog, Madai, Javan, Tubal, Meshech, and Tiras."
+      }
+    ]
+  },
   "evidence": {
     "originalLanguage": {
       "source": "hebrew",
