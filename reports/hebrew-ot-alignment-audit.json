@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09T19:13:17.570Z",
+  "generatedAt": "2026-07-09T19:30:35.682Z",
   "canonicalRoot": "C:\\Users\\CreatorStudio\\ai-bible-app\\app\\data\\bibleiq\\canonical\\hebrew",
   "seePath": "C:\\Users\\CreatorStudio\\ai-bible-app\\public\\data\\see\\lite\\evidence-lite.json",
   "stats": {
@@ -9,21 +9,21 @@
     "sourceTokens": 300439,
     "sourceTokensMissingSee": 0,
     "translationTokens": 1097249,
-    "alignedTranslationTokens": 482514,
-    "unalignedTranslationTokens": 614735,
-    "actionableUnalignedTokens": 160256,
+    "alignedTranslationTokens": 483360,
+    "unalignedTranslationTokens": 613889,
+    "actionableUnalignedTokens": 159409,
     "highValueTokens": 36106,
     "highValueAlignedTokens": 35752,
     "highValueUnalignedTokens": 354,
     "weakOrLowConfidenceTokens": 151,
-    "mediumConfidenceTokens": 416210,
+    "mediumConfidenceTokens": 417056,
     "alignedToMissingSourceToken": 0,
     "alignedToSourceTokenMissingSee": 0
   },
   "rates": {
-    "alignedTranslationTokenRate": 0.4397,
-    "unalignedTranslationTokenRate": 0.5603,
-    "actionableUnalignedRate": 0.1461,
+    "alignedTranslationTokenRate": 0.4405,
+    "unalignedTranslationTokenRate": 0.5595,
+    "actionableUnalignedRate": 0.1453,
     "highValueUnalignedRate": 0.0098
   },
   "topUnalignedWords": [
@@ -201,7 +201,7 @@
     },
     {
       "key": "have",
-      "count": 2556
+      "count": 2561
     },
     {
       "key": "when",
@@ -221,7 +221,7 @@
     },
     {
       "key": "that",
-      "count": 2106
+      "count": 2107
     },
     {
       "key": "ye",
@@ -267,7 +267,7 @@
     },
     {
       "key": "have",
-      "count": 2556
+      "count": 2561
     },
     {
       "key": "when",
@@ -1496,23 +1496,9 @@
       {
         "file": "1Chr.json",
         "reference": "1Chr:1:46",
-        "translation": "kjv",
-        "tokenIndex": 11,
-        "text": "smote"
-      },
-      {
-        "file": "1Chr.json",
-        "reference": "1Chr:1:46",
         "translation": "web",
         "tokenIndex": 8,
         "text": "who"
-      },
-      {
-        "file": "1Chr.json",
-        "reference": "1Chr:1:46",
-        "translation": "web",
-        "tokenIndex": 9,
-        "text": "struck"
       },
       {
         "file": "1Chr.json",
@@ -1968,6 +1954,20 @@
         "translation": "kjv",
         "tokenIndex": 2,
         "text": "begat"
+      },
+      {
+        "file": "1Chr.json",
+        "reference": "1Chr:2:36",
+        "translation": "kjv",
+        "tokenIndex": 6,
+        "text": "begat"
+      },
+      {
+        "file": "1Chr.json",
+        "reference": "1Chr:2:36",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "became"
       }
     ],
     "weakOrLowConfidenceTokens": [
@@ -3945,6 +3945,18 @@
         "file": "1Chr.json",
         "reference": "1Chr:1:46",
         "translation": "kjv",
+        "tokenIndex": 11,
+        "text": "smote",
+        "confidence": "medium",
+        "method": "expanded-exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:6"
+        ]
+      },
+      {
+        "file": "1Chr.json",
+        "reference": "1Chr:1:46",
+        "translation": "kjv",
         "tokenIndex": 15,
         "text": "field",
         "confidence": "medium",
@@ -4023,6 +4035,18 @@
         "method": "expanded-exact-lexical-match",
         "alignedSourceTokenIds": [
           "hebrew:1Chr:1:46:1"
+        ]
+      },
+      {
+        "file": "1Chr.json",
+        "reference": "1Chr:1:46",
+        "translation": "web",
+        "tokenIndex": 9,
+        "text": "struck",
+        "confidence": "medium",
+        "method": "expanded-exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:6"
         ]
       },
       {
@@ -4347,30 +4371,6 @@
         "method": "expanded-exact-lexical-match",
         "alignedSourceTokenIds": [
           "hebrew:1Chr:2:10:4"
-        ]
-      },
-      {
-        "file": "1Chr.json",
-        "reference": "1Chr:2:12",
-        "translation": "web",
-        "tokenIndex": 4,
-        "text": "father",
-        "confidence": "medium",
-        "method": "expanded-exact-lexical-match",
-        "alignedSourceTokenIds": [
-          "hebrew:1Chr:2:12:4"
-        ]
-      },
-      {
-        "file": "1Chr.json",
-        "reference": "1Chr:2:12",
-        "translation": "web",
-        "tokenIndex": 11,
-        "text": "father",
-        "confidence": "medium",
-        "method": "morphology-alignment-index-match",
-        "alignedSourceTokenIds": [
-          "hebrew:1Chr:2:12:4"
         ]
       }
     ],

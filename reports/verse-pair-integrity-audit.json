@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-07-09T19:13:18.499Z",
+  "generatedAt": "2026-07-09T19:30:36.573Z",
   "canonicalRoot": "C:\\Users\\CreatorStudio\\ai-bible-app\\app\\data\\bibleiq\\canonical\\hebrew",
   "stats": {
     "files": 39,
     "verses": 23145,
     "translationsChecked": 46246,
-    "suspiciousVerses": 89,
-    "suspiciousTranslations": 107,
+    "suspiciousVerses": 88,
+    "suspiciousTranslations": 105,
     "sacredNoSourceTranslations": 71,
     "sacredUnalignedDespiteSourceTranslations": 0,
-    "veryLowAlignmentTranslations": 39,
+    "veryLowAlignmentTranslations": 37,
     "highValueUnalignedTranslations": 1
   },
   "topBooks": [
@@ -99,10 +99,6 @@
     },
     {
       "key": "Deut",
-      "count": 1
-    },
-    {
-      "key": "Ezek",
       "count": 1
     },
     {
@@ -225,10 +221,6 @@
     },
     {
       "key": "Exod:17",
-      "count": 1
-    },
-    {
-      "key": "Ezek:16",
       "count": 1
     },
     {
@@ -395,7 +387,7 @@
     },
     {
       "key": "very-low-alignment-rate",
-      "count": 39
+      "count": 37
     },
     {
       "key": "many-high-value-unaligned-tokens",
@@ -5458,8 +5450,8 @@
             "translation": "kjv",
             "text": "For he is gone down this day, and hath slain oxen and fat cattle and sheep in abundance, and hath called all the king’s sons, and the captains of the host, and Abiathar the priest; and, behold, they eat and drink before him, and say, God save king Adonijah.",
             "tokenCount": 49,
-            "alignedCount": 23,
-            "alignedRate": 0.4694,
+            "alignedCount": 24,
+            "alignedRate": 0.4898,
             "sacredTokens": [
               {
                 "index": 45,
@@ -5485,8 +5477,8 @@
             "translation": "web",
             "text": "For he has gone down today, and has slain cattle, fatlings, and sheep in abundance, and has called all the king’s sons, the captains of the army, and Abiathar the priest. Behold, they are eating and drinking before him, and saying, ‘Long live king Adonijah!’",
             "tokenCount": 45,
-            "alignedCount": 21,
-            "alignedRate": 0.4667,
+            "alignedCount": 22,
+            "alignedRate": 0.4889,
             "sacredTokens": [],
             "unalignedSacredTokens": [],
             "unalignedHighValueTokens": [],
@@ -14027,130 +14019,6 @@
             "tokenCount": 35,
             "alignedCount": 1,
             "alignedRate": 0.0286,
-            "sacredTokens": [],
-            "unalignedSacredTokens": [],
-            "unalignedHighValueTokens": [],
-            "flags": {
-              "sacredNoSource": false,
-              "sacredUnalignedDespiteSource": false,
-              "veryLowAlignment": true
-            },
-            "score": 6
-          }
-        ]
-      }
-    },
-    {
-      "key": "Ezek:16",
-      "book": "Ezek",
-      "chapter": 16,
-      "startVerse": 21,
-      "endVerse": 21,
-      "count": 1,
-      "score": 12,
-      "references": [
-        "Ezek:16:21"
-      ],
-      "reasons": [
-        "very-low-alignment-rate"
-      ],
-      "sample": {
-        "file": "Ezek.json",
-        "reference": "Ezek:16:21",
-        "book": "Ezek",
-        "chapter": 16,
-        "verse": 21,
-        "score": 12,
-        "reasons": [
-          "very-low-alignment-rate"
-        ],
-        "sourceTokenCount": 6,
-        "divineSourceTokens": [],
-        "sourceProfileSample": [
-          {
-            "id": "hebrew:Ezek:16:21:0",
-            "surface": "אֶת",
-            "lemma": "אֵת",
-            "strong": "H853",
-            "entityId": "hebrew:H853",
-            "sourceReference": "Ezek:16:21",
-            "canonicalReference": "Ezek:16:21",
-            "versificationRuleId": null
-          },
-          {
-            "id": "hebrew:Ezek:16:21:1",
-            "surface": "אוֹתָ֖/ם",
-            "lemma": "אֵת",
-            "strong": "H853",
-            "entityId": "hebrew:H853",
-            "sourceReference": "Ezek:16:21",
-            "canonicalReference": "Ezek:16:21",
-            "versificationRuleId": null
-          },
-          {
-            "id": "hebrew:Ezek:16:21:2",
-            "surface": "בָּנָ֑/י",
-            "lemma": "בֵּן",
-            "strong": "H1121",
-            "entityId": "hebrew:H1121",
-            "sourceReference": "Ezek:16:21",
-            "canonicalReference": "Ezek:16:21",
-            "versificationRuleId": null
-          },
-          {
-            "id": "hebrew:Ezek:16:21:3",
-            "surface": "וַֽ/תִּתְּנִ֔י/ם",
-            "lemma": "נָתַן",
-            "strong": "H5414",
-            "entityId": "hebrew:H5414",
-            "sourceReference": "Ezek:16:21",
-            "canonicalReference": "Ezek:16:21",
-            "versificationRuleId": null
-          },
-          {
-            "id": "hebrew:Ezek:16:21:4",
-            "surface": "בְּ/הַעֲבִ֥יר",
-            "lemma": "עָבַר",
-            "strong": "H5674",
-            "entityId": "hebrew:H5674",
-            "sourceReference": "Ezek:16:21",
-            "canonicalReference": "Ezek:16:21",
-            "versificationRuleId": null
-          },
-          {
-            "id": "hebrew:Ezek:16:21:5",
-            "surface": "וַֽ/תִּשְׁחֲטִ֖י",
-            "lemma": "שָׁחַט",
-            "strong": "H7819",
-            "entityId": "hebrew:H7819",
-            "sourceReference": "Ezek:16:21",
-            "canonicalReference": "Ezek:16:21",
-            "versificationRuleId": null
-          }
-        ],
-        "translations": [
-          {
-            "translation": "kjv",
-            "text": "That thou hast slain my children, and delivered them to cause them to pass through the fire for them?",
-            "tokenCount": 19,
-            "alignedCount": 2,
-            "alignedRate": 0.1053,
-            "sacredTokens": [],
-            "unalignedSacredTokens": [],
-            "unalignedHighValueTokens": [],
-            "flags": {
-              "sacredNoSource": false,
-              "sacredUnalignedDespiteSource": false,
-              "veryLowAlignment": true
-            },
-            "score": 6
-          },
-          {
-            "translation": "web",
-            "text": "that you have slain my children, and delivered them up, in causing them to pass through the fire to them?",
-            "tokenCount": 20,
-            "alignedCount": 2,
-            "alignedRate": 0.1,
             "sacredTokens": [],
             "unalignedSacredTokens": [],
             "unalignedHighValueTokens": [],
@@ -23313,8 +23181,8 @@
           "translation": "kjv",
           "text": "For he is gone down this day, and hath slain oxen and fat cattle and sheep in abundance, and hath called all the king’s sons, and the captains of the host, and Abiathar the priest; and, behold, they eat and drink before him, and say, God save king Adonijah.",
           "tokenCount": 49,
-          "alignedCount": 23,
-          "alignedRate": 0.4694,
+          "alignedCount": 24,
+          "alignedRate": 0.4898,
           "sacredTokens": [
             {
               "index": 45,
@@ -23340,8 +23208,8 @@
           "translation": "web",
           "text": "For he has gone down today, and has slain cattle, fatlings, and sheep in abundance, and has called all the king’s sons, the captains of the army, and Abiathar the priest. Behold, they are eating and drinking before him, and saying, ‘Long live king Adonijah!’",
           "tokenCount": 45,
-          "alignedCount": 21,
-          "alignedRate": 0.4667,
+          "alignedCount": 22,
+          "alignedRate": 0.4889,
           "sacredTokens": [],
           "unalignedSacredTokens": [],
           "unalignedHighValueTokens": [],
@@ -30803,115 +30671,6 @@
           "tokenCount": 35,
           "alignedCount": 1,
           "alignedRate": 0.0286,
-          "sacredTokens": [],
-          "unalignedSacredTokens": [],
-          "unalignedHighValueTokens": [],
-          "flags": {
-            "sacredNoSource": false,
-            "sacredUnalignedDespiteSource": false,
-            "veryLowAlignment": true
-          },
-          "score": 6
-        }
-      ]
-    },
-    {
-      "file": "Ezek.json",
-      "reference": "Ezek:16:21",
-      "book": "Ezek",
-      "chapter": 16,
-      "verse": 21,
-      "score": 12,
-      "reasons": [
-        "very-low-alignment-rate"
-      ],
-      "sourceTokenCount": 6,
-      "divineSourceTokens": [],
-      "sourceProfileSample": [
-        {
-          "id": "hebrew:Ezek:16:21:0",
-          "surface": "אֶת",
-          "lemma": "אֵת",
-          "strong": "H853",
-          "entityId": "hebrew:H853",
-          "sourceReference": "Ezek:16:21",
-          "canonicalReference": "Ezek:16:21",
-          "versificationRuleId": null
-        },
-        {
-          "id": "hebrew:Ezek:16:21:1",
-          "surface": "אוֹתָ֖/ם",
-          "lemma": "אֵת",
-          "strong": "H853",
-          "entityId": "hebrew:H853",
-          "sourceReference": "Ezek:16:21",
-          "canonicalReference": "Ezek:16:21",
-          "versificationRuleId": null
-        },
-        {
-          "id": "hebrew:Ezek:16:21:2",
-          "surface": "בָּנָ֑/י",
-          "lemma": "בֵּן",
-          "strong": "H1121",
-          "entityId": "hebrew:H1121",
-          "sourceReference": "Ezek:16:21",
-          "canonicalReference": "Ezek:16:21",
-          "versificationRuleId": null
-        },
-        {
-          "id": "hebrew:Ezek:16:21:3",
-          "surface": "וַֽ/תִּתְּנִ֔י/ם",
-          "lemma": "נָתַן",
-          "strong": "H5414",
-          "entityId": "hebrew:H5414",
-          "sourceReference": "Ezek:16:21",
-          "canonicalReference": "Ezek:16:21",
-          "versificationRuleId": null
-        },
-        {
-          "id": "hebrew:Ezek:16:21:4",
-          "surface": "בְּ/הַעֲבִ֥יר",
-          "lemma": "עָבַר",
-          "strong": "H5674",
-          "entityId": "hebrew:H5674",
-          "sourceReference": "Ezek:16:21",
-          "canonicalReference": "Ezek:16:21",
-          "versificationRuleId": null
-        },
-        {
-          "id": "hebrew:Ezek:16:21:5",
-          "surface": "וַֽ/תִּשְׁחֲטִ֖י",
-          "lemma": "שָׁחַט",
-          "strong": "H7819",
-          "entityId": "hebrew:H7819",
-          "sourceReference": "Ezek:16:21",
-          "canonicalReference": "Ezek:16:21",
-          "versificationRuleId": null
-        }
-      ],
-      "translations": [
-        {
-          "translation": "kjv",
-          "text": "That thou hast slain my children, and delivered them to cause them to pass through the fire for them?",
-          "tokenCount": 19,
-          "alignedCount": 2,
-          "alignedRate": 0.1053,
-          "sacredTokens": [],
-          "unalignedSacredTokens": [],
-          "unalignedHighValueTokens": [],
-          "flags": {
-            "sacredNoSource": false,
-            "sacredUnalignedDespiteSource": false,
-            "veryLowAlignment": true
-          },
-          "score": 6
-        },
-        {
-          "translation": "web",
-          "text": "that you have slain my children, and delivered them up, in causing them to pass through the fire to them?",
-          "tokenCount": 20,
-          "alignedCount": 2,
-          "alignedRate": 0.1,
           "sacredTokens": [],
           "unalignedSacredTokens": [],
           "unalignedHighValueTokens": [],

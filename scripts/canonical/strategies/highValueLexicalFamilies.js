@@ -59,6 +59,11 @@ const HIGH_VALUE_FAMILIES = {
   H1964: ["temple", "palace"],
   H168: ["tent", "tabernacle"],
   H4908: ["tabernacle", "dwelling"],
+  
+  // kill / slay / smite
+H2026: ["kill", "killed", "slay", "slays", "slew", "slain"],
+H5221: ["strike", "struck", "smite", "smote", "smitten", "kill", "killed", "slay", "slew", "slain"],
+H4191: ["death", "die", "died", "dead", "kill", "killed", "slay", "slew", "slain"],
 
   // light / darkness / heaven / earth / seed
   H216: ["light"],

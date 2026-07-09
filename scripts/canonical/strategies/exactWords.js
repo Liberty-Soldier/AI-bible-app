@@ -151,6 +151,23 @@ function addExpandedForms(candidates, word) {
     commandment: ["commandments"],
     commandments: ["commandment"],
 
+    kill: ["kills", "killed", "killing", "slay", "slays", "slain", "slew"],
+kills: ["kill", "killed", "slay", "slew"],
+killed: ["kill", "kills", "slay", "slain", "slew"],
+killing: ["kill", "kills", "killed"],
+slay: ["slays", "slaying", "slain", "slew", "kill", "killed"],
+slays: ["slay", "slew", "slain", "kill", "killed"],
+slaying: ["slay", "kill", "killing"],
+slain: ["slay", "slew", "kill", "killed"],
+slew: ["slay", "slain", "kill", "killed"],
+
+smite: ["smites", "smote", "smitten", "strike", "struck", "kill", "slew"],
+smites: ["smite", "smote", "smitten"],
+smote: ["smite", "smitten", "strike", "struck", "slew"],
+smitten: ["smite", "smote", "struck"],
+strike: ["strikes", "struck", "smite", "smote", "smitten"],
+struck: ["strike", "smite", "smote", "smitten"],
+
     statute: ["statutes"],
     statutes: ["statute"],
     judgment: ["judgments"],
