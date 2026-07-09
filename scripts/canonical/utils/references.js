@@ -1,5 +1,11 @@
+const {
+  mapSourceReferenceToCanonicalReference,
+} = require("./versification");
+
 function parseSourceReference(reference) {
-  const match = String(reference || "").match(/^([1-3]?[A-Za-z]+)\.(\d+)\.(\d+)$/);
+  const match = String(reference || "").match(
+    /^([1-3]?[A-Za-z]+)\.(\d+)\.(\d+)$/
+  );
   if (!match) return null;
 
   return {
@@ -63,4 +69,5 @@ module.exports = {
   parseSourceReference,
   toVerseKey,
   getEvidenceBook,
+  mapSourceReferenceToCanonicalReference,
 };

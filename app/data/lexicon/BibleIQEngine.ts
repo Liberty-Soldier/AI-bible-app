@@ -4,7 +4,7 @@ import SeeStore, {
   toSeeEvidenceId,
 } from "@/app/lib/see/SeeStore";
 import { buildEmetEvidencePacket } from "@/app/lib/emet/EmetEvidencePacket";
-import { interpretEmetPacket } from "@/app/lib/emet/EmetInterpreter";
+import { EmetService } from "@/app/lib/emet/EmetService";
 
 import type {
   BibleIQEntity,
@@ -117,7 +117,14 @@ function uniqueReferences(values: string[]) {
   return result;
 }
 
-function buildSeeEntity({
+function emetStatusFromConfidence(
+  confidence: "high" | "medium" | "low"
+): "complete" | "insufficient-evidence" {
+  if (confidence === "low") return "insufficient-evidence";
+  return "complete";
+}
+
+async function buildSeeEntity({
   input,
   preferredSource,
   entityId,
@@ -133,7 +140,7 @@ function buildSeeEntity({
   strong?: string;
   lemma?: string;
   morph?: string;
-}): BibleIQEntity | null {
+}): Promise<BibleIQEntity | null> {
   const seeEvidenceRaw = SeeStore.get(entityId);
   if (!seeEvidenceRaw) return null;
 
@@ -174,37 +181,47 @@ function buildSeeEntity({
     seeEvidenceId,
   };
 
-  const emetPacket = buildEmetEvidencePacket({
-    entityId,
-    book: input.book,
-    chapter: input.chapter,
-    verse: input.verse,
-    translation: input.translation,
-    displayWord: input.displayWord,
-    verseText: input.verseText,
-    sourceWord,
-    strong,
-    lemma,
-    morph,
-  });
+const emetPacket = buildEmetEvidencePacket({
+  entityId,
+  book: input.book,
+  chapter: input.chapter,
+  verse: input.verse,
+  translation: input.translation,
+  displayWord: input.displayWord,
+  verseText: input.verseText,
+  sourceWord,
+  strong,
+  lemma,
+  morph,
+});
 
-  const emetResult = interpretEmetPacket(emetPacket);
+const emetResult = emetPacket
+  ? await EmetService.explain(emetPacket)
+  : null;
 
-  return {
-    id: entityId,
-    type: "word",
-    title,
-    subtitle: "SEE Evidence",
+const citations = uniqueReferences([
+  `${input.book} ${input.chapter}:${input.verse}`,
+  ...(see.firstOccurrence ? [see.firstOccurrence] : []),
+  ...(see.lastOccurrence ? [see.lastOccurrence] : []),
+]);
 
-emet: {
-  status: emetResult.status,
-  packet: emetPacket,
-  explanation: emetResult.explanation,
-  citations: emetResult.citations,
-},
+return {
+  id: entityId,
+  type: "word",
+  title,
+  subtitle: "SEE Evidence",
 
-    see,
-    alignment,
+  emet: {
+    status: emetResult
+      ? emetStatusFromConfidence(emetResult.confidence)
+      : "insufficient-evidence",
+    packet: emetPacket,
+    explanation: emetResult?.explanation,
+    citations,
+  },
+
+  see,
+  alignment,
 
     // Legacy fields kept only so current UI does not break.
     simple: {
@@ -213,9 +230,9 @@ emet: {
         ? `The selected English word is aligned to ${sourceWord}.`
         : `This word appears in ${input.book} ${input.chapter}:${input.verse}.`,
       whyItMatters:
-        "SEE has structured evidence for this source-language lemma. EMET will explain this evidence without creating it.",
+        "SEE has structured evidence for this source-language lemma. EMET explains this evidence without creating it.",
       summary:
-        "This entry is now backed by SEE runtime evidence instead of the legacy BibleIQ entity generator.",
+        "This entry is backed by SEE runtime evidence and explained through the EMET service layer.",
     },
 
     evidence: {
@@ -230,11 +247,7 @@ emet: {
 
       firstMention: see.firstOccurrence,
 
-      keyReferences: uniqueReferences([
-        `${input.book} ${input.chapter}:${input.verse}`,
-        ...(see.firstOccurrence ? [see.firstOccurrence] : []),
-        ...(see.lastOccurrence ? [see.lastOccurrence] : []),
-      ]),
+      keyReferences: citations,
 
       related: {
         people: [],
@@ -348,7 +361,7 @@ export async function resolveBibleIQ(
   });
 
   if (hit) {
-    const entity = buildSeeEntity({
+    const entity = await buildSeeEntity({
       input,
       preferredSource,
       entityId: hit.entityId,

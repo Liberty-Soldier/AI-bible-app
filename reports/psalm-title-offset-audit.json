@@ -1,0 +1,208 @@
+{
+  "generatedAt": "2026-07-09T17:55:53.294Z",
+  "summary": {
+    "chaptersChecked": 150,
+    "multiTitleChapters": 4,
+    "proposedRules": 8
+  },
+  "rows": [
+    {
+      "chapter": 51,
+      "sourceMax": 21,
+      "englishMax": 19,
+      "titleVerseCount": 2,
+      "sourceStart": 3,
+      "proposedRules": [
+        {
+          "id": "ps-51-1-2-multi-title-skip",
+          "sourceBook": "Ps",
+          "sourceChapter": 51,
+          "sourceVerseStart": 1,
+          "sourceVerseEnd": 2,
+          "action": "skip",
+          "reason": "Hebrew Psalm 51:1-2 appears to be a multi-verse superscription/title and should not be aligned to English verses."
+        },
+        {
+          "id": "ps-51-3-21-to-ps-51-1-19",
+          "sourceBook": "Ps",
+          "sourceChapter": 51,
+          "sourceVerseStart": 3,
+          "sourceVerseEnd": 21,
+          "targetBook": "Ps",
+          "targetChapter": 51,
+          "targetVerseOffset": -2,
+          "reason": "Hebrew Psalm 51:3-21 appears to map to English Psalm 51:1-19; Hebrew 2 title verse(s) are skipped."
+        }
+      ]
+    },
+    {
+      "chapter": 52,
+      "sourceMax": 11,
+      "englishMax": 9,
+      "titleVerseCount": 2,
+      "sourceStart": 3,
+      "proposedRules": [
+        {
+          "id": "ps-52-1-2-multi-title-skip",
+          "sourceBook": "Ps",
+          "sourceChapter": 52,
+          "sourceVerseStart": 1,
+          "sourceVerseEnd": 2,
+          "action": "skip",
+          "reason": "Hebrew Psalm 52:1-2 appears to be a multi-verse superscription/title and should not be aligned to English verses."
+        },
+        {
+          "id": "ps-52-3-11-to-ps-52-1-9",
+          "sourceBook": "Ps",
+          "sourceChapter": 52,
+          "sourceVerseStart": 3,
+          "sourceVerseEnd": 11,
+          "targetBook": "Ps",
+          "targetChapter": 52,
+          "targetVerseOffset": -2,
+          "reason": "Hebrew Psalm 52:3-11 appears to map to English Psalm 52:1-9; Hebrew 2 title verse(s) are skipped."
+        }
+      ]
+    },
+    {
+      "chapter": 54,
+      "sourceMax": 9,
+      "englishMax": 7,
+      "titleVerseCount": 2,
+      "sourceStart": 3,
+      "proposedRules": [
+        {
+          "id": "ps-54-1-2-multi-title-skip",
+          "sourceBook": "Ps",
+          "sourceChapter": 54,
+          "sourceVerseStart": 1,
+          "sourceVerseEnd": 2,
+          "action": "skip",
+          "reason": "Hebrew Psalm 54:1-2 appears to be a multi-verse superscription/title and should not be aligned to English verses."
+        },
+        {
+          "id": "ps-54-3-9-to-ps-54-1-7",
+          "sourceBook": "Ps",
+          "sourceChapter": 54,
+          "sourceVerseStart": 3,
+          "sourceVerseEnd": 9,
+          "targetBook": "Ps",
+          "targetChapter": 54,
+          "targetVerseOffset": -2,
+          "reason": "Hebrew Psalm 54:3-9 appears to map to English Psalm 54:1-7; Hebrew 2 title verse(s) are skipped."
+        }
+      ]
+    },
+    {
+      "chapter": 60,
+      "sourceMax": 14,
+      "englishMax": 12,
+      "titleVerseCount": 2,
+      "sourceStart": 3,
+      "proposedRules": [
+        {
+          "id": "ps-60-1-2-multi-title-skip",
+          "sourceBook": "Ps",
+          "sourceChapter": 60,
+          "sourceVerseStart": 1,
+          "sourceVerseEnd": 2,
+          "action": "skip",
+          "reason": "Hebrew Psalm 60:1-2 appears to be a multi-verse superscription/title and should not be aligned to English verses."
+        },
+        {
+          "id": "ps-60-3-14-to-ps-60-1-12",
+          "sourceBook": "Ps",
+          "sourceChapter": 60,
+          "sourceVerseStart": 3,
+          "sourceVerseEnd": 14,
+          "targetBook": "Ps",
+          "targetChapter": 60,
+          "targetVerseOffset": -2,
+          "reason": "Hebrew Psalm 60:3-14 appears to map to English Psalm 60:1-12; Hebrew 2 title verse(s) are skipped."
+        }
+      ]
+    }
+  ],
+  "proposedRules": [
+    {
+      "id": "ps-51-1-2-multi-title-skip",
+      "sourceBook": "Ps",
+      "sourceChapter": 51,
+      "sourceVerseStart": 1,
+      "sourceVerseEnd": 2,
+      "action": "skip",
+      "reason": "Hebrew Psalm 51:1-2 appears to be a multi-verse superscription/title and should not be aligned to English verses."
+    },
+    {
+      "id": "ps-51-3-21-to-ps-51-1-19",
+      "sourceBook": "Ps",
+      "sourceChapter": 51,
+      "sourceVerseStart": 3,
+      "sourceVerseEnd": 21,
+      "targetBook": "Ps",
+      "targetChapter": 51,
+      "targetVerseOffset": -2,
+      "reason": "Hebrew Psalm 51:3-21 appears to map to English Psalm 51:1-19; Hebrew 2 title verse(s) are skipped."
+    },
+    {
+      "id": "ps-52-1-2-multi-title-skip",
+      "sourceBook": "Ps",
+      "sourceChapter": 52,
+      "sourceVerseStart": 1,
+      "sourceVerseEnd": 2,
+      "action": "skip",
+      "reason": "Hebrew Psalm 52:1-2 appears to be a multi-verse superscription/title and should not be aligned to English verses."
+    },
+    {
+      "id": "ps-52-3-11-to-ps-52-1-9",
+      "sourceBook": "Ps",
+      "sourceChapter": 52,
+      "sourceVerseStart": 3,
+      "sourceVerseEnd": 11,
+      "targetBook": "Ps",
+      "targetChapter": 52,
+      "targetVerseOffset": -2,
+      "reason": "Hebrew Psalm 52:3-11 appears to map to English Psalm 52:1-9; Hebrew 2 title verse(s) are skipped."
+    },
+    {
+      "id": "ps-54-1-2-multi-title-skip",
+      "sourceBook": "Ps",
+      "sourceChapter": 54,
+      "sourceVerseStart": 1,
+      "sourceVerseEnd": 2,
+      "action": "skip",
+      "reason": "Hebrew Psalm 54:1-2 appears to be a multi-verse superscription/title and should not be aligned to English verses."
+    },
+    {
+      "id": "ps-54-3-9-to-ps-54-1-7",
+      "sourceBook": "Ps",
+      "sourceChapter": 54,
+      "sourceVerseStart": 3,
+      "sourceVerseEnd": 9,
+      "targetBook": "Ps",
+      "targetChapter": 54,
+      "targetVerseOffset": -2,
+      "reason": "Hebrew Psalm 54:3-9 appears to map to English Psalm 54:1-7; Hebrew 2 title verse(s) are skipped."
+    },
+    {
+      "id": "ps-60-1-2-multi-title-skip",
+      "sourceBook": "Ps",
+      "sourceChapter": 60,
+      "sourceVerseStart": 1,
+      "sourceVerseEnd": 2,
+      "action": "skip",
+      "reason": "Hebrew Psalm 60:1-2 appears to be a multi-verse superscription/title and should not be aligned to English verses."
+    },
+    {
+      "id": "ps-60-3-14-to-ps-60-1-12",
+      "sourceBook": "Ps",
+      "sourceChapter": 60,
+      "sourceVerseStart": 3,
+      "sourceVerseEnd": 14,
+      "targetBook": "Ps",
+      "targetChapter": 60,
+      "targetVerseOffset": -2,
+      "reason": "Hebrew Psalm 60:3-14 appears to map to English Psalm 60:1-12; Hebrew 2 title verse(s) are skipped."
+    }
+  ]
+}

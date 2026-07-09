@@ -1,0 +1,2855 @@
+{
+  "generatedAt": "2026-07-09T11:31:34.416Z",
+  "canonicalRoot": "C:\\Users\\CreatorStudio\\ai-bible-app\\app\\data\\bibleiq\\canonical\\hebrew",
+  "seePath": "C:\\Users\\CreatorStudio\\ai-bible-app\\public\\data\\see\\lite\\evidence-lite.json",
+  "stats": {
+    "canonicalBookFiles": 66,
+    "seeRecordCount": 8640,
+    "verses": 31307,
+    "sourceTokens": 300808,
+    "sourceTokensMissingEntityId": 0,
+    "sourceTokensMissingSee": 0,
+    "translationTokens": 1452311,
+    "alignedTranslationTokens": 471614,
+    "unalignedTranslationTokens": 980697,
+    "alignedToMissingSourceToken": 0,
+    "alignedToSourceTokenMissingSee": 0,
+    "highValueTokens": 37859,
+    "highValueUnalignedTokens": 10704,
+    "weakOrLowConfidenceTokens": 275,
+    "mediumConfidenceTokens": 409958
+  },
+  "rates": {
+    "alignedTranslationTokenRate": 0.3247,
+    "unalignedTranslationTokenRate": 0.6753,
+    "highValueUnalignedRate": 0.2827
+  },
+  "topUnalignedWords": [
+    {
+      "key": "the",
+      "count": 89700
+    },
+    {
+      "key": "of",
+      "count": 61063
+    },
+    {
+      "key": "and",
+      "count": 60934
+    },
+    {
+      "key": "to",
+      "count": 32855
+    },
+    {
+      "key": "in",
+      "count": 22330
+    },
+    {
+      "key": "he",
+      "count": 16770
+    },
+    {
+      "key": "i",
+      "count": 15988
+    },
+    {
+      "key": "a",
+      "count": 15721
+    },
+    {
+      "key": "shall",
+      "count": 13961
+    },
+    {
+      "key": "his",
+      "count": 13811
+    },
+    {
+      "key": "you",
+      "count": 12522
+    },
+    {
+      "key": "they",
+      "count": 11860
+    },
+    {
+      "key": "that",
+      "count": 11184
+    },
+    {
+      "key": "them",
+      "count": 10509
+    },
+    {
+      "key": "is",
+      "count": 10479
+    },
+    {
+      "key": "him",
+      "count": 10130
+    },
+    {
+      "key": "will",
+      "count": 9934
+    },
+    {
+      "key": "it",
+      "count": 9916
+    },
+    {
+      "key": "for",
+      "count": 8862
+    },
+    {
+      "key": "be",
+      "count": 8730
+    },
+    {
+      "key": "my",
+      "count": 7991
+    },
+    {
+      "key": "your",
+      "count": 7425
+    },
+    {
+      "key": "me",
+      "count": 7278
+    },
+    {
+      "key": "unto",
+      "count": 7041
+    },
+    {
+      "key": "their",
+      "count": 6934
+    },
+    {
+      "key": "was",
+      "count": 6527
+    },
+    {
+      "key": "as",
+      "count": 5954
+    },
+    {
+      "key": "with",
+      "count": 5951
+    },
+    {
+      "key": "on",
+      "count": 5592
+    },
+    {
+      "key": "have",
+      "count": 5456
+    },
+    {
+      "key": "but",
+      "count": 5417
+    },
+    {
+      "key": "are",
+      "count": 4682
+    },
+    {
+      "key": "thy",
+      "count": 4523
+    },
+    {
+      "key": "by",
+      "count": 4342
+    },
+    {
+      "key": "who",
+      "count": 4311
+    },
+    {
+      "key": "thou",
+      "count": 4308
+    },
+    {
+      "key": "were",
+      "count": 4195
+    },
+    {
+      "key": "all",
+      "count": 4122
+    },
+    {
+      "key": "from",
+      "count": 4098
+    },
+    {
+      "key": "had",
+      "count": 4081
+    }
+  ],
+  "topMissingSeeEntities": [],
+  "topHighValueUnalignedWords": [
+    {
+      "key": "god",
+      "count": 2924
+    },
+    {
+      "key": "lord",
+      "count": 1871
+    },
+    {
+      "key": "spirit",
+      "count": 649
+    },
+    {
+      "key": "yahweh",
+      "count": 578
+    },
+    {
+      "key": "life",
+      "count": 536
+    },
+    {
+      "key": "law",
+      "count": 516
+    },
+    {
+      "key": "holy",
+      "count": 489
+    },
+    {
+      "key": "kingdom",
+      "count": 388
+    },
+    {
+      "key": "death",
+      "count": 335
+    },
+    {
+      "key": "sin",
+      "count": 306
+    },
+    {
+      "key": "king",
+      "count": 302
+    },
+    {
+      "key": "commandments",
+      "count": 300
+    },
+    {
+      "key": "commandment",
+      "count": 271
+    },
+    {
+      "key": "blood",
+      "count": 239
+    },
+    {
+      "key": "light",
+      "count": 215
+    },
+    {
+      "key": "priest",
+      "count": 169
+    },
+    {
+      "key": "darkness",
+      "count": 125
+    },
+    {
+      "key": "sabbath",
+      "count": 124
+    },
+    {
+      "key": "covenant",
+      "count": 111
+    },
+    {
+      "key": "seed",
+      "count": 100
+    },
+    {
+      "key": "altar",
+      "count": 78
+    },
+    {
+      "key": "void",
+      "count": 29
+    },
+    {
+      "key": "empty",
+      "count": 26
+    },
+    {
+      "key": "elohim",
+      "count": 22
+    },
+    {
+      "key": "formless",
+      "count": 1
+    }
+  ],
+  "samples": {
+    "unalignedTokens": [
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 0,
+        "text": "Paul"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "called"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "to"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "be"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 4,
+        "text": "an"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "apostle"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 6,
+        "text": "of"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "Jesus"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 8,
+        "text": "Christ"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 9,
+        "text": "through"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 10,
+        "text": "the"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 11,
+        "text": "will"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 12,
+        "text": "of"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 13,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "and"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 15,
+        "text": "Sosthenes"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 16,
+        "text": "our"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "brother"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "Paul"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "called"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "to"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 3,
+        "text": "be"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "an"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 5,
+        "text": "apostle"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "of"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 7,
+        "text": "Jesus"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 8,
+        "text": "Christ"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 9,
+        "text": "through"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 10,
+        "text": "the"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "will"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 12,
+        "text": "of"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 13,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 14,
+        "text": "and"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "our"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 16,
+        "text": "brother"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 17,
+        "text": "Sosthenes"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 0,
+        "text": "Unto"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "the"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "church"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "of"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 4,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "which"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 6,
+        "text": "is"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "at"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 8,
+        "text": "Corinth"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 9,
+        "text": "to"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 10,
+        "text": "them"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 11,
+        "text": "that"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 12,
+        "text": "are"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 13,
+        "text": "sanctified"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "in"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 15,
+        "text": "Christ"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 16,
+        "text": "Jesus"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "called"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 18,
+        "text": "to"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 19,
+        "text": "be"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 20,
+        "text": "saints"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 21,
+        "text": "with"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 22,
+        "text": "all"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 23,
+        "text": "that"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 24,
+        "text": "in"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 25,
+        "text": "every"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 26,
+        "text": "place"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 27,
+        "text": "call"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 28,
+        "text": "upon"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 29,
+        "text": "the"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 30,
+        "text": "name"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 31,
+        "text": "of"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 32,
+        "text": "Jesus"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 33,
+        "text": "Christ"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 34,
+        "text": "our"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 35,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 36,
+        "text": "both"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 37,
+        "text": "theirs"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 38,
+        "text": "and"
+      }
+    ],
+    "highValueUnalignedTokens": [
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "kjv",
+        "tokenIndex": 13,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:1",
+        "translation": "web",
+        "tokenIndex": 13,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 4,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "kjv",
+        "tokenIndex": 35,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:2",
+        "translation": "web",
+        "tokenIndex": 26,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:3",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:3",
+        "translation": "kjv",
+        "tokenIndex": 13,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:3",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:3",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:4",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:4",
+        "translation": "kjv",
+        "tokenIndex": 12,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:4",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:4",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:7",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:7",
+        "translation": "web",
+        "tokenIndex": 14,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:8",
+        "translation": "kjv",
+        "tokenIndex": 18,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:8",
+        "translation": "web",
+        "tokenIndex": 14,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:9",
+        "translation": "kjv",
+        "tokenIndex": 0,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:9",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:9",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:9",
+        "translation": "web",
+        "tokenIndex": 17,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:10",
+        "translation": "kjv",
+        "tokenIndex": 10,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:10",
+        "translation": "web",
+        "tokenIndex": 29,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:14",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:14",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:17",
+        "translation": "web",
+        "tokenIndex": 26,
+        "text": "void"
+      },
+      {
+        "reference": "1 Corinthians:1:18",
+        "translation": "kjv",
+        "tokenIndex": 23,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:18",
+        "translation": "web",
+        "tokenIndex": 25,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:20",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:20",
+        "translation": "web",
+        "tokenIndex": 16,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:21",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:21",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:21",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:21",
+        "translation": "web",
+        "tokenIndex": 7,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:21",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:24",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:24",
+        "translation": "kjv",
+        "tokenIndex": 19,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:24",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:24",
+        "translation": "web",
+        "tokenIndex": 20,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:25",
+        "translation": "kjv",
+        "tokenIndex": 4,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:25",
+        "translation": "kjv",
+        "tokenIndex": 13,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:25",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:25",
+        "translation": "web",
+        "tokenIndex": 13,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:27",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:27",
+        "translation": "kjv",
+        "tokenIndex": 15,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:27",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:27",
+        "translation": "web",
+        "tokenIndex": 19,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:28",
+        "translation": "kjv",
+        "tokenIndex": 12,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:28",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:29",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:30",
+        "translation": "kjv",
+        "tokenIndex": 10,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:30",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:1:31",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:1:31",
+        "translation": "web",
+        "tokenIndex": 13,
+        "text": "Lord✡"
+      },
+      {
+        "reference": "1 Corinthians:2:1",
+        "translation": "kjv",
+        "tokenIndex": 23,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:1",
+        "translation": "web",
+        "tokenIndex": 22,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:4",
+        "translation": "kjv",
+        "tokenIndex": 19,
+        "text": "Spirit"
+      },
+      {
+        "reference": "1 Corinthians:2:4",
+        "translation": "web",
+        "tokenIndex": 18,
+        "text": "Spirit"
+      },
+      {
+        "reference": "1 Corinthians:2:5",
+        "translation": "kjv",
+        "tokenIndex": 16,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:5",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:7",
+        "translation": "kjv",
+        "tokenIndex": 6,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:7",
+        "translation": "kjv",
+        "tokenIndex": 15,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:7",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:8",
+        "translation": "kjv",
+        "tokenIndex": 20,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:2:8",
+        "translation": "web",
+        "tokenIndex": 20,
+        "text": "Lord"
+      },
+      {
+        "reference": "1 Corinthians:2:9",
+        "translation": "kjv",
+        "tokenIndex": 23,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:10",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:10",
+        "translation": "kjv",
+        "tokenIndex": 9,
+        "text": "Spirit"
+      },
+      {
+        "reference": "1 Corinthians:2:10",
+        "translation": "kjv",
+        "tokenIndex": 12,
+        "text": "Spirit"
+      },
+      {
+        "reference": "1 Corinthians:2:10",
+        "translation": "kjv",
+        "tokenIndex": 21,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:10",
+        "translation": "web",
+        "tokenIndex": 3,
+        "text": "God"
+      },
+      {
+        "reference": "1 Corinthians:2:10",
+        "translation": "web",
+        "tokenIndex": 8,
+        "text": "Spirit"
+      },
+      {
+        "reference": "1 Corinthians:2:10",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "Spirit"
+      },
+      {
+        "reference": "1 Corinthians:2:10",
+        "translation": "web",
+        "tokenIndex": 20,
+        "text": "God"
+      }
+    ],
+    "sourceTokensMissingSee": [],
+    "alignedToMissingSourceToken": [],
+    "alignedToSourceTokenMissingSee": [],
+    "weakOrLowConfidenceTokens": [
+      {
+        "reference": "1Chr:17:11",
+        "translation": "web",
+        "tokenIndex": 23,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:17:11:14"
+        ]
+      },
+      {
+        "reference": "1Chr:27:23",
+        "translation": "kjv",
+        "tokenIndex": 29,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:27:23:10"
+        ]
+      },
+      {
+        "reference": "1Chr:16:26",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:16:26:6"
+        ]
+      },
+      {
+        "reference": "1Chr:16:31",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:16:31:4"
+        ]
+      },
+      {
+        "reference": "1Chr:16:31",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:16:31:4"
+        ]
+      },
+      {
+        "reference": "1Chr:16:40",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:16:40:15"
+        ]
+      },
+      {
+        "reference": "1Chr:16:40",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:16:40:15"
+        ]
+      },
+      {
+        "reference": "1Chr:23:30",
+        "translation": "web",
+        "tokenIndex": 14,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:23:30:6"
+        ]
+      },
+      {
+        "reference": "1Chr:29:11",
+        "translation": "web",
+        "tokenIndex": 20,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:29:11:7"
+        ]
+      },
+      {
+        "reference": "1Chr:16:13",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "offspring*",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:16:13:4"
+        ]
+      },
+      {
+        "reference": "1Kgs:11:14",
+        "translation": "web",
+        "tokenIndex": 16,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Kgs:11:14:6"
+        ]
+      },
+      {
+        "reference": "1Kgs:11:39",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Kgs:11:39:7"
+        ]
+      },
+      {
+        "reference": "1Kgs:22:35",
+        "translation": "web",
+        "tokenIndex": 19,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Kgs:22:35:10"
+        ]
+      },
+      {
+        "reference": "1Kgs:17:6",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Kgs:17:6:9"
+        ]
+      },
+      {
+        "reference": "1Kgs:17:6",
+        "translation": "web",
+        "tokenIndex": 16,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Kgs:17:6:9"
+        ]
+      },
+      {
+        "reference": "1Sam:2:20",
+        "translation": "web",
+        "tokenIndex": 12,
+        "text": "offspring†",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Sam:2:20:15"
+        ]
+      },
+      {
+        "reference": "2Chr:6:33",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Chr:6:33:26"
+        ]
+      },
+      {
+        "reference": "2Chr:6:35",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Chr:6:35:6"
+        ]
+      },
+      {
+        "reference": "2Chr:6:39",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Chr:6:39:9"
+        ]
+      },
+      {
+        "reference": "2Chr:20:7",
+        "translation": "web",
+        "tokenIndex": 20,
+        "text": "offspring*",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Chr:20:7:13"
+        ]
+      },
+      {
+        "reference": "2Chr:22:10",
+        "translation": "web",
+        "tokenIndex": 20,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Chr:22:10:10"
+        ]
+      },
+      {
+        "reference": "2Chr:31:3",
+        "translation": "kjv",
+        "tokenIndex": 19,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Chr:31:3:11"
+        ]
+      },
+      {
+        "reference": "2Chr:31:3",
+        "translation": "web",
+        "tokenIndex": 17,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Chr:31:3:11"
+        ]
+      },
+      {
+        "reference": "2Chr:6:25",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Chr:6:25:10"
+        ]
+      },
+      {
+        "reference": "2Kgs:11:1",
+        "translation": "web",
+        "tokenIndex": 20,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Kgs:11:1:8"
+        ]
+      },
+      {
+        "reference": "2Kgs:25:25",
+        "translation": "web",
+        "tokenIndex": 17,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Kgs:25:25:15"
+        ]
+      },
+      {
+        "reference": "2Kgs:17:20",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Kgs:17:20:8"
+        ]
+      },
+      {
+        "reference": "2Kgs:5:27",
+        "translation": "web",
+        "tokenIndex": 12,
+        "text": "offspring‡",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Kgs:5:27:3"
+        ]
+      },
+      {
+        "reference": "2Sam:4:8",
+        "translation": "web",
+        "tokenIndex": 43,
+        "text": "offspring*",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Sam:4:8:23"
+        ]
+      },
+      {
+        "reference": "2Sam:7:12",
+        "translation": "web",
+        "tokenIndex": 16,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Sam:7:12:11"
+        ]
+      },
+      {
+        "reference": "2Sam:11:13",
+        "translation": "web",
+        "tokenIndex": 17,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Sam:11:13:14"
+        ]
+      },
+      {
+        "reference": "2Sam:22:10",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Sam:22:10:1"
+        ]
+      },
+      {
+        "reference": "2Sam:22:10",
+        "translation": "web",
+        "tokenIndex": 3,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:2Sam:22:10:1"
+        ]
+      },
+      {
+        "reference": "Amos:9:6",
+        "translation": "web",
+        "tokenIndex": 9,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Amos:9:6:9"
+        ]
+      },
+      {
+        "reference": "Dan:9:1",
+        "translation": "web",
+        "tokenIndex": 12,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Dan:9:1:6"
+        ]
+      },
+      {
+        "reference": "Dan:9:21",
+        "translation": "kjv",
+        "tokenIndex": 33,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Dan:9:21:10"
+        ]
+      },
+      {
+        "reference": "Dan:9:21",
+        "translation": "web",
+        "tokenIndex": 32,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Dan:9:21:10"
+        ]
+      },
+      {
+        "reference": "Dan:8:26",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Dan:8:26:8"
+        ]
+      },
+      {
+        "reference": "Dan:1:3",
+        "translation": "web",
+        "tokenIndex": 25,
+        "text": "offspring‡",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Dan:1:3:7"
+        ]
+      },
+      {
+        "reference": "Deut:1:8",
+        "translation": "web",
+        "tokenIndex": 51,
+        "text": "offspring§",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:1:8:15"
+        ]
+      },
+      {
+        "reference": "Deut:4:37",
+        "translation": "web",
+        "tokenIndex": 9,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:4:37:9"
+        ]
+      },
+      {
+        "reference": "Deut:10:15",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:10:15:8"
+        ]
+      },
+      {
+        "reference": "Deut:28:59",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:28:59:5"
+        ]
+      },
+      {
+        "reference": "Deut:30:6",
+        "translation": "web",
+        "tokenIndex": 12,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:30:6:15"
+        ]
+      },
+      {
+        "reference": "Deut:30:19",
+        "translation": "web",
+        "tokenIndex": 34,
+        "text": "descendants",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:30:19:12"
+        ]
+      },
+      {
+        "reference": "Deut:31:21",
+        "translation": "web",
+        "tokenIndex": 34,
+        "text": "descendants",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:31:21:23"
+        ]
+      },
+      {
+        "reference": "Deut:11:9",
+        "translation": "web",
+        "tokenIndex": 23,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:11:9:8"
+        ]
+      },
+      {
+        "reference": "Deut:11:21",
+        "translation": "web",
+        "tokenIndex": 27,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:11:21:11"
+        ]
+      },
+      {
+        "reference": "Deut:30:4",
+        "translation": "web",
+        "tokenIndex": 10,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:30:4:7"
+        ]
+      },
+      {
+        "reference": "Deut:34:4",
+        "translation": "web",
+        "tokenIndex": 25,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:34:4:14"
+        ]
+      },
+      {
+        "reference": "Deut:33:28",
+        "translation": "kjv",
+        "tokenIndex": 22,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:33:28:4"
+        ]
+      },
+      {
+        "reference": "Deut:16:4",
+        "translation": "web",
+        "tokenIndex": 26,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:16:4:14"
+        ]
+      },
+      {
+        "reference": "Deut:28:46",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:28:46:3"
+        ]
+      },
+      {
+        "reference": "Deut:32:1",
+        "translation": "kjv",
+        "tokenIndex": 4,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:32:1:4"
+        ]
+      },
+      {
+        "reference": "Deut:32:1",
+        "translation": "web",
+        "tokenIndex": 3,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Deut:32:1:4"
+        ]
+      },
+      {
+        "reference": "Esth:2:14",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Esth:2:14:23"
+        ]
+      },
+      {
+        "reference": "Esth:2:14",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Esth:2:14:23"
+        ]
+      },
+      {
+        "reference": "Esth:9:28",
+        "translation": "web",
+        "tokenIndex": 38,
+        "text": "offspring†",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Esth:9:28:15"
+        ]
+      },
+      {
+        "reference": "Exod:9:23",
+        "translation": "web",
+        "tokenIndex": 7,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Exod:9:23:12"
+        ]
+      },
+      {
+        "reference": "Exod:33:1",
+        "translation": "web",
+        "tokenIndex": 45,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Exod:33:1:19"
+        ]
+      },
+      {
+        "reference": "Exod:28:43",
+        "translation": "web",
+        "tokenIndex": 50,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Exod:28:43:18"
+        ]
+      },
+      {
+        "reference": "Exod:20:4",
+        "translation": "web",
+        "tokenIndex": 17,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Exod:20:4:11"
+        ]
+      },
+      {
+        "reference": "Exod:30:21",
+        "translation": "web",
+        "tokenIndex": 27,
+        "text": "descendants",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Exod:30:21:6"
+        ]
+      },
+      {
+        "reference": "Ezek:17:13",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:17:13:9"
+        ]
+      },
+      {
+        "reference": "Ezek:32:7",
+        "translation": "web",
+        "tokenIndex": 8,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:32:7:2"
+        ]
+      },
+      {
+        "reference": "Ezek:20:5",
+        "translation": "web",
+        "tokenIndex": 17,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:20:5:21"
+        ]
+      },
+      {
+        "reference": "Ezek:1:1",
+        "translation": "kjv",
+        "tokenIndex": 33,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:1:1:6"
+        ]
+      },
+      {
+        "reference": "Ezek:1:1",
+        "translation": "web",
+        "tokenIndex": 27,
+        "text": "heavens",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:1:1:6"
+        ]
+      },
+      {
+        "reference": "Ezek:12:7",
+        "translation": "web",
+        "tokenIndex": 21,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:12:7:12"
+        ]
+      },
+      {
+        "reference": "Ezek:24:18",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:24:18:10"
+        ]
+      },
+      {
+        "reference": "Ezek:43:19",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:43:19:12"
+        ]
+      },
+      {
+        "reference": "Ezek:44:22",
+        "translation": "web",
+        "tokenIndex": 22,
+        "text": "offspring",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:44:22:11"
+        ]
+      },
+      {
+        "reference": "Ezek:12:4",
+        "translation": "web",
+        "tokenIndex": 21,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezek:12:4:7"
+        ]
+      },
+      {
+        "reference": "Ezra:3:3",
+        "translation": "kjv",
+        "tokenIndex": 34,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezra:3:3:14"
+        ]
+      },
+      {
+        "reference": "Ezra:3:3",
+        "translation": "web",
+        "tokenIndex": 34,
+        "text": "evening",
+        "confidence": "low",
+        "method": "synonym-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:Ezra:3:3:14"
+        ]
+      }
+    ],
+    "mediumConfidenceTokens": [
+      {
+        "reference": "1Chr:1:10",
+        "translation": "kjv",
+        "tokenIndex": 4,
+        "text": "he",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:10",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "be",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:1"
+        ]
+      },
+      {
+        "reference": "1Chr:1:10",
+        "translation": "kjv",
+        "tokenIndex": 8,
+        "text": "mighty",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:10",
+        "translation": "kjv",
+        "tokenIndex": 11,
+        "text": "earth",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:2"
+        ]
+      },
+      {
+        "reference": "1Chr:1:10",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "He",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:10",
+        "translation": "web",
+        "tokenIndex": 9,
+        "text": "be",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:1"
+        ]
+      },
+      {
+        "reference": "1Chr:1:10",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "mighty",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:10",
+        "translation": "web",
+        "tokenIndex": 12,
+        "text": "one",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:1"
+        ]
+      },
+      {
+        "reference": "1Chr:1:10",
+        "translation": "web",
+        "tokenIndex": 15,
+        "text": "earth",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:10:2"
+        ]
+      },
+      {
+        "reference": "1Chr:1:11",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "Ludim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:11:6"
+        ]
+      },
+      {
+        "reference": "1Chr:1:11",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "Anamim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:11:8"
+        ]
+      },
+      {
+        "reference": "1Chr:1:11",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "Lehabim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:11:9"
+        ]
+      },
+      {
+        "reference": "1Chr:1:11",
+        "translation": "web",
+        "tokenIndex": 5,
+        "text": "Ludim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:11:6"
+        ]
+      },
+      {
+        "reference": "1Chr:1:11",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "Anamim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:11:8"
+        ]
+      },
+      {
+        "reference": "1Chr:1:11",
+        "translation": "web",
+        "tokenIndex": 7,
+        "text": "Lehabim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:11:9"
+        ]
+      },
+      {
+        "reference": "1Chr:1:12",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "Pathrusim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:12:8"
+        ]
+      },
+      {
+        "reference": "1Chr:1:12",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "Casluhim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:12:9"
+        ]
+      },
+      {
+        "reference": "1Chr:1:12",
+        "translation": "kjv",
+        "tokenIndex": 10,
+        "text": "Caphthorim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:12:7"
+        ]
+      },
+      {
+        "reference": "1Chr:1:12",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "Pathrusim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:12:8"
+        ]
+      },
+      {
+        "reference": "1Chr:1:12",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "Casluhim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:12:9"
+        ]
+      },
+      {
+        "reference": "1Chr:1:12",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "where",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:12:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:12",
+        "translation": "web",
+        "tokenIndex": 8,
+        "text": "Caphtorim",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:12:7"
+        ]
+      },
+      {
+        "reference": "1Chr:1:13",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "firstborn",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:13:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:13",
+        "translation": "web",
+        "tokenIndex": 7,
+        "text": "firstborn",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:13:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:14",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "Jebusite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:14:4"
+        ]
+      },
+      {
+        "reference": "1Chr:1:14",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "Amorite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:14:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:14",
+        "translation": "kjv",
+        "tokenIndex": 8,
+        "text": "Girgashite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:14:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:14",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "Jebusite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:14:4"
+        ]
+      },
+      {
+        "reference": "1Chr:1:14",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "Amorite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:14:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:14",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "Girgashite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:14:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:15",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "Hivite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:15:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:15",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "Arkite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:15:4"
+        ]
+      },
+      {
+        "reference": "1Chr:1:15",
+        "translation": "kjv",
+        "tokenIndex": 8,
+        "text": "Sinite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:15:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:15",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "Hivite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:15:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:15",
+        "translation": "web",
+        "tokenIndex": 3,
+        "text": "Arkite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:15:4"
+        ]
+      },
+      {
+        "reference": "1Chr:1:15",
+        "translation": "web",
+        "tokenIndex": 5,
+        "text": "Sinite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:15:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:16",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "Arvadite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:16:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:16",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "Zemarite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:16:4"
+        ]
+      },
+      {
+        "reference": "1Chr:1:16",
+        "translation": "kjv",
+        "tokenIndex": 8,
+        "text": "Hamathite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:16:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:16",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "Arvadite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:16:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:16",
+        "translation": "web",
+        "tokenIndex": 3,
+        "text": "Zemarite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:16:4"
+        ]
+      },
+      {
+        "reference": "1Chr:1:16",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "Hamathite",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:16:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:23",
+        "translation": "kjv",
+        "tokenIndex": 6,
+        "text": "All",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:23:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:23",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "these",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:23:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:23",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "All",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:23:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:23",
+        "translation": "web",
+        "tokenIndex": 5,
+        "text": "these",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:23:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:32",
+        "translation": "kjv",
+        "tokenIndex": 6,
+        "text": "concubine",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:32:6"
+        ]
+      },
+      {
+        "reference": "1Chr:1:32",
+        "translation": "kjv",
+        "tokenIndex": 8,
+        "text": "bare",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:32:3"
+        ]
+      },
+      {
+        "reference": "1Chr:1:32",
+        "translation": "web",
+        "tokenIndex": 5,
+        "text": "concubine",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:32:6"
+        ]
+      },
+      {
+        "reference": "1Chr:1:34",
+        "translation": "web",
+        "tokenIndex": 3,
+        "text": "father",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:34:1"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "when",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "kjv",
+        "tokenIndex": 4,
+        "text": "dead",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:4"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "son",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:1"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "kjv",
+        "tokenIndex": 15,
+        "text": "field",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:8"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "kjv",
+        "tokenIndex": 18,
+        "text": "reigned",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:7"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "kjv",
+        "tokenIndex": 27,
+        "text": "city",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:2"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "web",
+        "tokenIndex": 5,
+        "text": "son",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:1"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "web",
+        "tokenIndex": 13,
+        "text": "field",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:8"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "web",
+        "tokenIndex": 16,
+        "text": "reigned",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:7"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "web",
+        "tokenIndex": 19,
+        "text": "place",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:5"
+        ]
+      },
+      {
+        "reference": "1Chr:1:46",
+        "translation": "web",
+        "tokenIndex": 25,
+        "text": "city",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:1:46:2"
+        ]
+      },
+      {
+        "reference": "1Chr:2:4",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "daughter",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:4:3"
+        ]
+      },
+      {
+        "reference": "1Chr:2:4",
+        "translation": "kjv",
+        "tokenIndex": 11,
+        "text": "All",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:4:2"
+        ]
+      },
+      {
+        "reference": "1Chr:2:4",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "five",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:4:6"
+        ]
+      },
+      {
+        "reference": "1Chr:2:4",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "daughter-in-law",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:4:7"
+        ]
+      },
+      {
+        "reference": "1Chr:2:4",
+        "translation": "web",
+        "tokenIndex": 8,
+        "text": "All",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:4:2"
+        ]
+      },
+      {
+        "reference": "1Chr:2:4",
+        "translation": "web",
+        "tokenIndex": 14,
+        "text": "five",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:4:6"
+        ]
+      },
+      {
+        "reference": "1Chr:2:9",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "sons",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:9:4"
+        ]
+      },
+      {
+        "reference": "1Chr:2:9",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "also",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:9:3"
+        ]
+      },
+      {
+        "reference": "1Chr:2:9",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "that",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:9:3"
+        ]
+      },
+      {
+        "reference": "1Chr:2:9",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "born",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:9:5"
+        ]
+      },
+      {
+        "reference": "1Chr:2:9",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "sons",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:9:4"
+        ]
+      },
+      {
+        "reference": "1Chr:2:9",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "also",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:9:3"
+        ]
+      },
+      {
+        "reference": "1Chr:2:9",
+        "translation": "web",
+        "tokenIndex": 5,
+        "text": "who",
+        "confidence": "medium",
+        "method": "morphology-alignment-index-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:9:3"
+        ]
+      },
+      {
+        "reference": "1Chr:2:9",
+        "translation": "web",
+        "tokenIndex": 7,
+        "text": "born",
+        "confidence": "medium",
+        "method": "exact-lexical-match",
+        "alignedSourceTokenIds": [
+          "hebrew:1Chr:2:9:5"
+        ]
+      }
+    ]
+  }
+}

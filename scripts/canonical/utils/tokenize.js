@@ -1,4 +1,11 @@
-const { normalize } = require("./normalize");
+const { normalize, normalizeTextEncoding } = require("./normalize");
+
+function cleanDisplayToken(value) {
+  return normalizeTextEncoding(value)
+    .replace(/^[\s.,;:!?()[\]{}"“”]+/g, "")
+    .replace(/[\s.,;:!?()[\]{}"“”]+$/g, "")
+    .trim();
+}
 
 function tokenizeDisplayText(text) {
   const parts = String(text || "").split(/(\s+)/);
@@ -7,7 +14,7 @@ function tokenizeDisplayText(text) {
   for (const part of parts) {
     if (!part || /^\s+$/.test(part)) continue;
 
-    const clean = part.replace(/[.,;:!?()[\]{}"“”‘’]/g, "").trim();
+    const clean = cleanDisplayToken(part);
     const normalized = normalize(clean);
 
     if (!clean || !normalized) continue;

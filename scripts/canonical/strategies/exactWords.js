@@ -1,18 +1,227 @@
 const { normalize } = require("../utils/normalize");
 
+const STOPWORDS = new Set([
+  "the",
+  "of",
+  "and",
+  "to",
+  "in",
+  "a",
+  "an",
+  "for",
+  "with",
+  "by",
+  "from",
+  "as",
+  "at",
+  "on",
+  "unto",
+  "into",
+  "upon",
+  "under",
+  "over",
+  "through",
+  "than",
+  "then",
+  "there",
+  "therefore",
+  "so",
+  "but",
+  "or",
+  "if",
+  "when",
+  "who",
+  "whom",
+  "which",
+  "what",
+  "where",
+  "why",
+  "how",
+  "he",
+  "she",
+  "it",
+  "they",
+  "them",
+  "him",
+  "her",
+  "his",
+  "their",
+  "my",
+  "your",
+  "our",
+  "me",
+  "you",
+  "i",
+  "we",
+  "us",
+  "thy",
+  "thou",
+  "thee",
+  "ye",
+  "hath",
+  "hast",
+  "shalt",
+  "thine",
+  "is",
+  "are",
+  "was",
+  "were",
+  "be",
+  "been",
+  "being",
+  "shall",
+  "will",
+  "would",
+  "should",
+  "could",
+  "may",
+  "might",
+  "must",
+  "do",
+  "does",
+  "did",
+  "not",
+  "no",
+  "nor",
+  "very",
+  "greatly",
+]);
+
+function addCandidate(candidates, value) {
+  const normalized = normalize(value);
+
+  if (!normalized) return;
+
+  for (const part of normalized.split(/\s+/)) {
+    if (part.length > 2 && !STOPWORDS.has(part)) {
+      candidates.add(part);
+      addExpandedForms(candidates, part);
+    }
+  }
+
+  if (!normalized.includes(" ") && normalized.length > 2 && !STOPWORDS.has(normalized)) {
+    candidates.add(normalized);
+    addExpandedForms(candidates, normalized);
+  }
+}
+
+function addExpandedForms(candidates, word) {
+  const value = normalize(word);
+
+  if (!value || value.length <= 2 || STOPWORDS.has(value)) return;
+
+  const forms = new Set();
+
+  // Simple plural forms.
+  if (!value.endsWith("s")) {
+    forms.add(`${value}s`);
+  }
+
+  if (
+    value.endsWith("ch") ||
+    value.endsWith("sh") ||
+    value.endsWith("x") ||
+    value.endsWith("z")
+  ) {
+    forms.add(`${value}es`);
+  }
+
+  if (value.endsWith("y") && value.length > 3) {
+    forms.add(`${value.slice(0, -1)}ies`);
+  }
+
+  // Simple past forms.
+  if (value.endsWith("e")) {
+    forms.add(`${value}d`);
+  } else {
+    forms.add(`${value}ed`);
+  }
+
+  // High-value biblical form families.
+  const families = {
+    righteous: ["righteousness"],
+    righteousness: ["righteous"],
+    wicked: ["wickedness"],
+    wickedness: ["wicked"],
+    holy: ["holiness"],
+    holiness: ["holy"],
+
+    command: ["commands", "commanded", "commanding", "commandment", "commandments"],
+    commanded: ["command", "commands"],
+    commandment: ["commandments"],
+    commandments: ["commandment"],
+
+    statute: ["statutes"],
+    statutes: ["statute"],
+    judgment: ["judgments"],
+    judgments: ["judgment"],
+
+    sin: ["sins", "sinned", "sinning"],
+    sins: ["sin", "sinned"],
+    sinned: ["sin", "sins"],
+    sinner: ["sinners"],
+    sinners: ["sinner"],
+
+    priest: ["priests"],
+    priests: ["priest"],
+    offering: ["offerings"],
+    offerings: ["offering"],
+    sacrifice: ["sacrifices"],
+    sacrifices: ["sacrifice"],
+
+    covenant: ["covenants"],
+    covenants: ["covenant"],
+    law: ["laws"],
+    laws: ["law"],
+
+    heaven: ["heavens"],
+    heavens: ["heaven"],
+    nation: ["nations"],
+    nations: ["nation"],
+    people: ["peoples"],
+    peoples: ["people"],
+
+    altar: ["altars"],
+    altars: ["altar"],
+    temple: ["temples"],
+    temples: ["temple"],
+    tabernacle: ["tabernacles"],
+    tabernacles: ["tabernacle"],
+  };
+
+  for (const form of families[value] || []) {
+    forms.add(form);
+  }
+
+  for (const form of forms) {
+    const normalizedForm = normalize(form);
+
+    if (
+      normalizedForm &&
+      normalizedForm.length > 2 &&
+      !STOPWORDS.has(normalizedForm)
+    ) {
+      candidates.add(normalizedForm);
+    }
+  }
+}
+
 function getEnglishCandidates(entry) {
   const candidates = new Set();
 
-  const fields = [entry.gloss, entry.shortDefinition, entry.usage];
+  const fields = [
+    entry.gloss,
+    entry.shortDefinition,
+    entry.usage,
+    entry.transliteration,
+  ];
 
   for (const field of fields) {
     String(field || "")
-      .split(/[;,./()]/)
+      .split(/[;,./()|[\]{}"'“”‘’:-]+/)
       .map(normalize)
       .filter(Boolean)
-      .forEach((value) => {
-        if (value.length > 2) candidates.add(value);
-      });
+      .forEach((value) => addCandidate(candidates, value));
   }
 
   return candidates;
@@ -48,7 +257,7 @@ function applyExactWordsStrategy(canonicalByVerse, lexicon) {
 
         displayToken.alignedSourceTokenIds = [sourceToken.id];
         displayToken.confidence = "medium";
-        displayToken.method = "exact-lexical-match";
+        displayToken.method = "expanded-exact-lexical-match";
       }
     }
   }

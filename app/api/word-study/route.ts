@@ -10,21 +10,41 @@ function toNumber(value: string | null, fallback = 0) {
 }
 
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url);
+  try {
+    const { searchParams, origin } = new URL(request.url);
 
-  const input: BibleIQRequest = {
-    book: searchParams.get("book") || "",
-    chapter: toNumber(searchParams.get("chapter")),
-    verse: toNumber(searchParams.get("verse")),
-    translation: searchParams.get("translation") || "",
-    displayWord: searchParams.get("displayWord") || searchParams.get("q") || "",
-    displayTokenIndex: toNumber(searchParams.get("displayTokenIndex"), -1),
-    originalWord: searchParams.get("originalWord") || undefined,
-    selectedText: searchParams.get("selectedText") || undefined,
-    verseText: searchParams.get("verseText") || undefined,
-  };
+    const input: BibleIQRequest = {
+      book: searchParams.get("book") || "",
+      chapter: toNumber(searchParams.get("chapter")),
+      verse: toNumber(searchParams.get("verse")),
+      translation: searchParams.get("translation") || "",
+      displayWord:
+        searchParams.get("displayWord") || searchParams.get("q") || "",
+      displayTokenIndex: toNumber(
+        searchParams.get("displayTokenIndex"),
+        -1
+      ),
+      originalWord: searchParams.get("originalWord") || undefined,
+      selectedText: searchParams.get("selectedText") || undefined,
+      verseText: searchParams.get("verseText") || undefined,
+    };
 
-  const result = await BibleIQEngine.resolve(input, origin);
+    const result = await BibleIQEngine.resolve(input, origin);
 
-  return NextResponse.json(result);
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error("BibleIQ word-study route failed:", error);
+
+    return NextResponse.json(
+      {
+        resolved: false,
+        resolutionType: "error",
+        preferredSource: "hebrew",
+        query: "",
+        message:
+          "BibleIQ could not complete this word study request.",
+      },
+      { status: 500 }
+    );
+  }
 }

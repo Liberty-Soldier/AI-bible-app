@@ -1,0 +1,5364 @@
+{
+  "generatedAt": "2026-07-09T18:58:21.397Z",
+  "stats": {
+    "files": 39,
+    "sacredTokens": 19542,
+    "sacredAligned": 19482,
+    "sacredUnaligned": 60,
+    "unalignedButVerseHasDivineSource": 0,
+    "unalignedAndVerseHasNoDivineSource": 60,
+    "alignedToNonDivineSource": 32
+  },
+  "topSacredWords": [
+    {
+      "key": "lord",
+      "count": 7877
+    },
+    {
+      "key": "yahweh",
+      "count": 6111
+    },
+    {
+      "key": "god",
+      "count": 5499
+    },
+    {
+      "key": "yah",
+      "count": 27
+    },
+    {
+      "key": "elohim",
+      "count": 23
+    },
+    {
+      "key": "jehovah",
+      "count": 4
+    },
+    {
+      "key": "jah",
+      "count": 1
+    }
+  ],
+  "topBooks": [
+    {
+      "key": "Ps",
+      "count": 2059
+    },
+    {
+      "key": "Deut",
+      "count": 1805
+    },
+    {
+      "key": "Jer",
+      "count": 1564
+    },
+    {
+      "key": "Ezek",
+      "count": 1359
+    },
+    {
+      "key": "2Chr",
+      "count": 1151
+    },
+    {
+      "key": "Exod",
+      "count": 1060
+    },
+    {
+      "key": "Isa",
+      "count": 1034
+    },
+    {
+      "key": "Gen",
+      "count": 882
+    },
+    {
+      "key": "Num",
+      "count": 875
+    },
+    {
+      "key": "1Sam",
+      "count": 869
+    },
+    {
+      "key": "1Kgs",
+      "count": 774
+    },
+    {
+      "key": "2Kgs",
+      "count": 744
+    },
+    {
+      "key": "Lev",
+      "count": 729
+    },
+    {
+      "key": "Josh",
+      "count": 604
+    },
+    {
+      "key": "1Chr",
+      "count": 579
+    },
+    {
+      "key": "2Sam",
+      "count": 511
+    },
+    {
+      "key": "Judg",
+      "count": 473
+    },
+    {
+      "key": "Zech",
+      "count": 292
+    },
+    {
+      "key": "Ezra",
+      "count": 274
+    },
+    {
+      "key": "Job",
+      "count": 260
+    },
+    {
+      "key": "Amos",
+      "count": 198
+    },
+    {
+      "key": "Neh",
+      "count": 189
+    },
+    {
+      "key": "Dan",
+      "count": 188
+    },
+    {
+      "key": "Prov",
+      "count": 154
+    },
+    {
+      "key": "Hos",
+      "count": 121
+    },
+    {
+      "key": "Mal",
+      "count": 121
+    },
+    {
+      "key": "Jonah",
+      "count": 85
+    },
+    {
+      "key": "Zeph",
+      "count": 82
+    },
+    {
+      "key": "Eccl",
+      "count": 81
+    },
+    {
+      "key": "Hag",
+      "count": 81
+    },
+    {
+      "key": "Mic",
+      "count": 77
+    },
+    {
+      "key": "Lam",
+      "count": 75
+    },
+    {
+      "key": "Joel",
+      "count": 50
+    },
+    {
+      "key": "Ruth",
+      "count": 48
+    },
+    {
+      "key": "Hab",
+      "count": 41
+    },
+    {
+      "key": "Nah",
+      "count": 33
+    },
+    {
+      "key": "Obad",
+      "count": 20
+    }
+  ],
+  "topMissingSourceProfiles": [
+    {
+      "key": "none",
+      "count": 60
+    }
+  ],
+  "samples": {
+    "unalignedButVerseHasDivineSource": [],
+    "unalignedAndVerseHasNoDivineSource": [
+      {
+        "file": "1Kgs.json",
+        "reference": "1Kgs:22:52",
+        "translation": "kjv",
+        "tokenIndex": 9,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "And he did evil in the sight of the LORD, and walked in the way of his father, and in the way of his mother, and in the way of Jeroboam the son of Nebat, who made Israel to sin:",
+        "sourceStrongList": [
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "בֶן",
+            "strong": "H1121",
+            "entityId": "hebrew:H1121"
+          },
+          {
+            "surface": "מֶ֣לֶךְ",
+            "strong": "H4428",
+            "entityId": "hebrew:H4428"
+          },
+          {
+            "surface": "יִשְׂרָאֵל֙",
+            "strong": "H3478",
+            "entityId": "hebrew:H3478"
+          },
+          {
+            "surface": "יִשְׂרָאֵ֖ל",
+            "strong": "H3478",
+            "entityId": "hebrew:H3478"
+          },
+          {
+            "surface": "בִּ/שְׁנַת֙",
+            "strong": "H8141",
+            "entityId": "hebrew:H8141"
+          },
+          {
+            "surface": "שְׁנָתָֽיִם",
+            "strong": "H8141",
+            "entityId": "hebrew:H8141"
+          },
+          {
+            "surface": "יְהוּדָ֑ה",
+            "strong": "H3063",
+            "entityId": "hebrew:H3063"
+          },
+          {
+            "surface": "שְׁבַ֣ע",
+            "strong": "H7651",
+            "entityId": "hebrew:H7651"
+          },
+          {
+            "surface": "מָלַ֤ךְ",
+            "strong": "H4427",
+            "entityId": "hebrew:H4427"
+          },
+          {
+            "surface": "וַ/יִּמְלֹ֥ךְ",
+            "strong": "H4427",
+            "entityId": "hebrew:H4427"
+          },
+          {
+            "surface": "עֶשְׂרֵ֔ה",
+            "strong": "H6240",
+            "entityId": "hebrew:H6240"
+          },
+          {
+            "surface": "בְּ/שֹׁ֣מְר֔וֹן",
+            "strong": "H8111",
+            "entityId": "hebrew:H8111"
+          },
+          {
+            "surface": "אַחְאָ֗ב",
+            "strong": "H256",
+            "entityId": "hebrew:H256"
+          },
+          {
+            "surface": "לִ/יהוֹשָׁפָ֖ט",
+            "strong": "H3092",
+            "entityId": "hebrew:H3092"
+          },
+          {
+            "surface": "אֲחַזְיָ֣הוּ",
+            "strong": "H274",
+            "entityId": "hebrew:H274"
+          }
+        ]
+      },
+      {
+        "file": "1Kgs.json",
+        "reference": "1Kgs:22:52",
+        "translation": "web",
+        "tokenIndex": 7,
+        "text": "Yahweh's",
+        "normalized": "yahweh",
+        "translationText": "He did that which was evil in Yahweh’s sight, and walked in the way of his father, and in the way of his mother, and in the way of Jeroboam the son of Nebat, in which he made Israel to sin.",
+        "sourceStrongList": [
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "בֶן",
+            "strong": "H1121",
+            "entityId": "hebrew:H1121"
+          },
+          {
+            "surface": "מֶ֣לֶךְ",
+            "strong": "H4428",
+            "entityId": "hebrew:H4428"
+          },
+          {
+            "surface": "יִשְׂרָאֵל֙",
+            "strong": "H3478",
+            "entityId": "hebrew:H3478"
+          },
+          {
+            "surface": "יִשְׂרָאֵ֖ל",
+            "strong": "H3478",
+            "entityId": "hebrew:H3478"
+          },
+          {
+            "surface": "בִּ/שְׁנַת֙",
+            "strong": "H8141",
+            "entityId": "hebrew:H8141"
+          },
+          {
+            "surface": "שְׁנָתָֽיִם",
+            "strong": "H8141",
+            "entityId": "hebrew:H8141"
+          },
+          {
+            "surface": "יְהוּדָ֑ה",
+            "strong": "H3063",
+            "entityId": "hebrew:H3063"
+          },
+          {
+            "surface": "שְׁבַ֣ע",
+            "strong": "H7651",
+            "entityId": "hebrew:H7651"
+          },
+          {
+            "surface": "מָלַ֤ךְ",
+            "strong": "H4427",
+            "entityId": "hebrew:H4427"
+          },
+          {
+            "surface": "וַ/יִּמְלֹ֥ךְ",
+            "strong": "H4427",
+            "entityId": "hebrew:H4427"
+          },
+          {
+            "surface": "עֶשְׂרֵ֔ה",
+            "strong": "H6240",
+            "entityId": "hebrew:H6240"
+          },
+          {
+            "surface": "בְּ/שֹׁ֣מְר֔וֹן",
+            "strong": "H8111",
+            "entityId": "hebrew:H8111"
+          },
+          {
+            "surface": "אַחְאָ֗ב",
+            "strong": "H256",
+            "entityId": "hebrew:H256"
+          },
+          {
+            "surface": "לִ/יהוֹשָׁפָ֖ט",
+            "strong": "H3092",
+            "entityId": "hebrew:H3092"
+          },
+          {
+            "surface": "אֲחַזְיָ֣הוּ",
+            "strong": "H274",
+            "entityId": "hebrew:H274"
+          }
+        ]
+      },
+      {
+        "file": "1Kgs.json",
+        "reference": "1Kgs:13:22",
+        "translation": "kjv",
+        "tokenIndex": 17,
+        "text": "Lord",
+        "normalized": "lord",
+        "translationText": "But camest back, and hast eaten bread and drunk water in the place, of the which the Lord did say to thee, Eat no bread, and drink no water; thy carcase shall not come unto the sepulchre of thy fathers.",
+        "sourceStrongList": [
+          {
+            "surface": "אֵלֶ֔י/ךָ",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "אֶל",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "אֲשֶׁ֣ר",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "לֹֽא",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "תָב֥וֹא",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "אֲבֹתֶֽי/ךָ",
+            "strong": "H1",
+            "entityId": "hebrew:H1"
+          },
+          {
+            "surface": "דִּבֶּ֣ר",
+            "strong": "H1696",
+            "entityId": "hebrew:H1696"
+          },
+          {
+            "surface": "וַ/תָּ֗שָׁב",
+            "strong": "H7725",
+            "entityId": "hebrew:H7725"
+          },
+          {
+            "surface": "וַ/תֹּ֤אכַל",
+            "strong": "H398",
+            "entityId": "hebrew:H398"
+          },
+          {
+            "surface": "תֹּ֥אכַל",
+            "strong": "H398",
+            "entityId": "hebrew:H398"
+          },
+          {
+            "surface": "אַל",
+            "strong": "H408",
+            "entityId": "hebrew:H408"
+          },
+          {
+            "surface": "וְ/אַל",
+            "strong": "H408",
+            "entityId": "hebrew:H408"
+          },
+          {
+            "surface": "מַ֔יִם",
+            "strong": "H4325",
+            "entityId": "hebrew:H4325"
+          },
+          {
+            "surface": "מָ֑יִם",
+            "strong": "H4325",
+            "entityId": "hebrew:H4325"
+          },
+          {
+            "surface": "בַּ/מָּקוֹם֙",
+            "strong": "H4725",
+            "entityId": "hebrew:H4725"
+          },
+          {
+            "surface": "לֶ֨חֶם֙",
+            "strong": "H3899",
+            "entityId": "hebrew:H3899"
+          },
+          {
+            "surface": "לֶ֖חֶם",
+            "strong": "H3899",
+            "entityId": "hebrew:H3899"
+          },
+          {
+            "surface": "וַ/תֵּ֣שְׁתְּ",
+            "strong": "H8354",
+            "entityId": "hebrew:H8354"
+          },
+          {
+            "surface": "תֵּ֣שְׁתְּ",
+            "strong": "H8354",
+            "entityId": "hebrew:H8354"
+          },
+          {
+            "surface": "קֶ֥בֶר",
+            "strong": "H6913",
+            "entityId": "hebrew:H6913"
+          },
+          {
+            "surface": "נִבְלָתְ/ךָ֖",
+            "strong": "H5038",
+            "entityId": "hebrew:H5038"
+          }
+        ]
+      },
+      {
+        "file": "1Kgs.json",
+        "reference": "1Kgs:22:22",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "And the LORD said unto him, Wherewith? And he said, I will go forth, and I will be a lying spirit in the mouth of all his prophets. And he said, Thou shalt persuade him, and prevail also: go forth, and do so.",
+        "sourceStrongList": [
+          {
+            "surface": "כָּל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "וַ/יֹּ֗אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וַ/יֹּ֗אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וְ/הָיִ֨יתִי֙",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "וַ/עֲשֵׂה",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "אֵצֵא֙",
+            "strong": "H3318",
+            "entityId": "hebrew:H3318"
+          },
+          {
+            "surface": "צֵ֖א",
+            "strong": "H3318",
+            "entityId": "hebrew:H3318"
+          },
+          {
+            "surface": "כֵֽן",
+            "strong": "H3651",
+            "entityId": "hebrew:H3651"
+          },
+          {
+            "surface": "וְ/גַם",
+            "strong": "H1571",
+            "entityId": "hebrew:H1571"
+          },
+          {
+            "surface": "בְּ/פִ֖י",
+            "strong": "H6310",
+            "entityId": "hebrew:H6310"
+          },
+          {
+            "surface": "ר֣וּחַ",
+            "strong": "H7307",
+            "entityId": "hebrew:H7307"
+          },
+          {
+            "surface": "נְבִיאָ֑י/ו",
+            "strong": "H5030",
+            "entityId": "hebrew:H5030"
+          },
+          {
+            "surface": "תּוּכָ֔ל",
+            "strong": "H3201",
+            "entityId": "hebrew:H3201"
+          },
+          {
+            "surface": "שֶׁ֔קֶר",
+            "strong": "H8267",
+            "entityId": "hebrew:H8267"
+          },
+          {
+            "surface": "תְּפַתֶּה֙",
+            "strong": "H6601",
+            "entityId": "hebrew:H6601"
+          }
+        ]
+      },
+      {
+        "file": "1Kgs.json",
+        "reference": "1Kgs:22:22",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "Yahweh said to him, ‘How?’",
+        "sourceStrongList": [
+          {
+            "surface": "כָּל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "וַ/יֹּ֗אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וַ/יֹּ֗אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וְ/הָיִ֨יתִי֙",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "וַ/עֲשֵׂה",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "אֵצֵא֙",
+            "strong": "H3318",
+            "entityId": "hebrew:H3318"
+          },
+          {
+            "surface": "צֵ֖א",
+            "strong": "H3318",
+            "entityId": "hebrew:H3318"
+          },
+          {
+            "surface": "כֵֽן",
+            "strong": "H3651",
+            "entityId": "hebrew:H3651"
+          },
+          {
+            "surface": "וְ/גַם",
+            "strong": "H1571",
+            "entityId": "hebrew:H1571"
+          },
+          {
+            "surface": "בְּ/פִ֖י",
+            "strong": "H6310",
+            "entityId": "hebrew:H6310"
+          },
+          {
+            "surface": "ר֣וּחַ",
+            "strong": "H7307",
+            "entityId": "hebrew:H7307"
+          },
+          {
+            "surface": "נְבִיאָ֑י/ו",
+            "strong": "H5030",
+            "entityId": "hebrew:H5030"
+          },
+          {
+            "surface": "תּוּכָ֔ל",
+            "strong": "H3201",
+            "entityId": "hebrew:H3201"
+          },
+          {
+            "surface": "שֶׁ֔קֶר",
+            "strong": "H8267",
+            "entityId": "hebrew:H8267"
+          },
+          {
+            "surface": "תְּפַתֶּה֙",
+            "strong": "H6601",
+            "entityId": "hebrew:H6601"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:15",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "lord",
+        "normalized": "lord",
+        "translationText": "Now therefore the wheat, and the barley, the oil, and the wine, which my lord hath spoken of, let him send unto his servants:",
+        "sourceStrongList": [
+          {
+            "surface": "אֹתָ֖/ם",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "כְּ/כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "וּ/נְבִיאֵ֥/ם",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "מִן",
+            "strong": "H4480",
+            "entityId": "hebrew:H4480"
+          },
+          {
+            "surface": "וְ/אַתָּ֛ה",
+            "strong": "H859",
+            "entityId": "hebrew:H859"
+          },
+          {
+            "surface": "תַּעֲלֶ֥ה",
+            "strong": "H5927",
+            "entityId": "hebrew:H5927"
+          },
+          {
+            "surface": "יְרוּשָׁלִָֽם",
+            "strong": "H3389",
+            "entityId": "hebrew:H3389"
+          },
+          {
+            "surface": "יָ֣ם",
+            "strong": "H3220",
+            "entityId": "hebrew:H3220"
+          },
+          {
+            "surface": "עֵצִ֤ים",
+            "strong": "H6086",
+            "entityId": "hebrew:H6086"
+          },
+          {
+            "surface": "נִכְרֹ֨ת",
+            "strong": "H3772",
+            "entityId": "hebrew:H3772"
+          },
+          {
+            "surface": "וַ֠/אֲנַחְנוּ",
+            "strong": "H587",
+            "entityId": "hebrew:H587"
+          },
+          {
+            "surface": "הַ/לְּבָנוֹן֙",
+            "strong": "H3844",
+            "entityId": "hebrew:H3844"
+          },
+          {
+            "surface": "יָפ֑וֹ",
+            "strong": "H3305",
+            "entityId": "hebrew:H3305"
+          },
+          {
+            "surface": "צָרְכֶּ֔/ךָ",
+            "strong": "H6878",
+            "entityId": "hebrew:H6878"
+          },
+          {
+            "surface": "רַפְסֹד֖וֹת",
+            "strong": "H7513",
+            "entityId": "hebrew:H7513"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:15",
+        "translation": "web",
+        "tokenIndex": 13,
+        "text": "lord",
+        "normalized": "lord",
+        "translationText": "“Now therefore the wheat, the barley, the oil, and the wine, which my lord has spoken of, let him send to his servants;",
+        "sourceStrongList": [
+          {
+            "surface": "אֹתָ֖/ם",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "כְּ/כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "וּ/נְבִיאֵ֥/ם",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "מִן",
+            "strong": "H4480",
+            "entityId": "hebrew:H4480"
+          },
+          {
+            "surface": "וְ/אַתָּ֛ה",
+            "strong": "H859",
+            "entityId": "hebrew:H859"
+          },
+          {
+            "surface": "תַּעֲלֶ֥ה",
+            "strong": "H5927",
+            "entityId": "hebrew:H5927"
+          },
+          {
+            "surface": "יְרוּשָׁלִָֽם",
+            "strong": "H3389",
+            "entityId": "hebrew:H3389"
+          },
+          {
+            "surface": "יָ֣ם",
+            "strong": "H3220",
+            "entityId": "hebrew:H3220"
+          },
+          {
+            "surface": "עֵצִ֤ים",
+            "strong": "H6086",
+            "entityId": "hebrew:H6086"
+          },
+          {
+            "surface": "נִכְרֹ֨ת",
+            "strong": "H3772",
+            "entityId": "hebrew:H3772"
+          },
+          {
+            "surface": "וַ֠/אֲנַחְנוּ",
+            "strong": "H587",
+            "entityId": "hebrew:H587"
+          },
+          {
+            "surface": "הַ/לְּבָנוֹן֙",
+            "strong": "H3844",
+            "entityId": "hebrew:H3844"
+          },
+          {
+            "surface": "יָפ֑וֹ",
+            "strong": "H3305",
+            "entityId": "hebrew:H3305"
+          },
+          {
+            "surface": "צָרְכֶּ֔/ךָ",
+            "strong": "H6878",
+            "entityId": "hebrew:H6878"
+          },
+          {
+            "surface": "רַפְסֹד֖וֹת",
+            "strong": "H7513",
+            "entityId": "hebrew:H7513"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:1",
+        "translation": "kjv",
+        "tokenIndex": 12,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "And Solomon determined to build an house for the name of the LORD, and an house for his kingdom.",
+        "sourceStrongList": [
+          {
+            "surface": "עֲלֵי/הֶ֔ם",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "אִ֣ישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "אִ֖ישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "מֵאֽוֹת",
+            "strong": "H3967",
+            "entityId": "hebrew:H3967"
+          },
+          {
+            "surface": "בָּ/הָ֑ר",
+            "strong": "H2022",
+            "entityId": "hebrew:H2022"
+          },
+          {
+            "surface": "אֶ֨לֶף֙",
+            "strong": "H505",
+            "entityId": "hebrew:H505"
+          },
+          {
+            "surface": "אֶ֛לֶף",
+            "strong": "H505",
+            "entityId": "hebrew:H505"
+          },
+          {
+            "surface": "אֲלָפִ֖ים",
+            "strong": "H505",
+            "entityId": "hebrew:H505"
+          },
+          {
+            "surface": "שְׁלֹ֥שֶׁת",
+            "strong": "H7969",
+            "entityId": "hebrew:H7969"
+          },
+          {
+            "surface": "שְׁלֹמֹ֜ה",
+            "strong": "H8010",
+            "entityId": "hebrew:H8010"
+          },
+          {
+            "surface": "וְ/שֵׁ֥שׁ",
+            "strong": "H8337",
+            "entityId": "hebrew:H8337"
+          },
+          {
+            "surface": "וַ/יִּסְפֹּ֨ר",
+            "strong": "H5608",
+            "entityId": "hebrew:H5608"
+          },
+          {
+            "surface": "שִׁבְעִ֥ים",
+            "strong": "H7657",
+            "entityId": "hebrew:H7657"
+          },
+          {
+            "surface": "וּ/מְנַצְּחִ֣ים",
+            "strong": "H5329",
+            "entityId": "hebrew:H5329"
+          },
+          {
+            "surface": "וּ/שְׁמוֹנִ֥ים",
+            "strong": "H8084",
+            "entityId": "hebrew:H8084"
+          },
+          {
+            "surface": "חֹצֵ֣ב",
+            "strong": "H2672",
+            "entityId": "hebrew:H2672"
+          },
+          {
+            "surface": "סַבָּ֔ל",
+            "strong": "H5449",
+            "entityId": "hebrew:H5449"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:1",
+        "translation": "web",
+        "tokenIndex": 8,
+        "text": "Yahweh's",
+        "normalized": "yahweh",
+        "translationText": "Now Solomon decided to build a house for Yahweh’s name, and a house for his kingdom.",
+        "sourceStrongList": [
+          {
+            "surface": "עֲלֵי/הֶ֔ם",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "אִ֣ישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "אִ֖ישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "מֵאֽוֹת",
+            "strong": "H3967",
+            "entityId": "hebrew:H3967"
+          },
+          {
+            "surface": "בָּ/הָ֑ר",
+            "strong": "H2022",
+            "entityId": "hebrew:H2022"
+          },
+          {
+            "surface": "אֶ֨לֶף֙",
+            "strong": "H505",
+            "entityId": "hebrew:H505"
+          },
+          {
+            "surface": "אֶ֛לֶף",
+            "strong": "H505",
+            "entityId": "hebrew:H505"
+          },
+          {
+            "surface": "אֲלָפִ֖ים",
+            "strong": "H505",
+            "entityId": "hebrew:H505"
+          },
+          {
+            "surface": "שְׁלֹ֥שֶׁת",
+            "strong": "H7969",
+            "entityId": "hebrew:H7969"
+          },
+          {
+            "surface": "שְׁלֹמֹ֜ה",
+            "strong": "H8010",
+            "entityId": "hebrew:H8010"
+          },
+          {
+            "surface": "וְ/שֵׁ֥שׁ",
+            "strong": "H8337",
+            "entityId": "hebrew:H8337"
+          },
+          {
+            "surface": "וַ/יִּסְפֹּ֨ר",
+            "strong": "H5608",
+            "entityId": "hebrew:H5608"
+          },
+          {
+            "surface": "שִׁבְעִ֥ים",
+            "strong": "H7657",
+            "entityId": "hebrew:H7657"
+          },
+          {
+            "surface": "וּ/מְנַצְּחִ֣ים",
+            "strong": "H5329",
+            "entityId": "hebrew:H5329"
+          },
+          {
+            "surface": "וּ/שְׁמוֹנִ֥ים",
+            "strong": "H8084",
+            "entityId": "hebrew:H8084"
+          },
+          {
+            "surface": "חֹצֵ֣ב",
+            "strong": "H2672",
+            "entityId": "hebrew:H2672"
+          },
+          {
+            "surface": "סַבָּ֔ל",
+            "strong": "H5449",
+            "entityId": "hebrew:H5449"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:33:19",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "His prayer also, and how God was intreated of him, and all his sins, and his trespass, and the places wherein he built high places, and set up groves and graven images, before he was humbled: behold, they are written among the sayings of the seers.",
+        "sourceStrongList": [
+          {
+            "surface": "עַ֖ל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "אֲשֶׁר֩",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "וְ/כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "לִ/פְנֵ֖י",
+            "strong": "H6440",
+            "entityId": "hebrew:H6440"
+          },
+          {
+            "surface": "דִּבְרֵ֥י",
+            "strong": "H1697",
+            "entityId": "hebrew:H1697"
+          },
+          {
+            "surface": "וְ/הֶעֱמִיד֙",
+            "strong": "H5975",
+            "entityId": "hebrew:H5975"
+          },
+          {
+            "surface": "וְ/הַ/מְּקֹמ֗וֹת",
+            "strong": "H4725",
+            "entityId": "hebrew:H4725"
+          },
+          {
+            "surface": "בָּנָ֨ה",
+            "strong": "H1129",
+            "entityId": "hebrew:H1129"
+          },
+          {
+            "surface": "הִנָּ֣/ם",
+            "strong": "H2005",
+            "entityId": "hebrew:H2005"
+          },
+          {
+            "surface": "חַטָּאת֣/וֹ",
+            "strong": "H2403",
+            "entityId": "hebrew:H2403"
+          },
+          {
+            "surface": "כְּתוּבִ֔ים",
+            "strong": "H3789",
+            "entityId": "hebrew:H3789"
+          },
+          {
+            "surface": "בָּמוֹת֙",
+            "strong": "H1116",
+            "entityId": "hebrew:H1116"
+          },
+          {
+            "surface": "וּ/תְפִלָּת֣/וֹ",
+            "strong": "H8605",
+            "entityId": "hebrew:H8605"
+          },
+          {
+            "surface": "הָ/אֲשֵׁרִ֣ים",
+            "strong": "H842",
+            "entityId": "hebrew:H842"
+          },
+          {
+            "surface": "הִכָּנְע֑/וֹ",
+            "strong": "H3665",
+            "entityId": "hebrew:H3665"
+          },
+          {
+            "surface": "וּ/מַעְל/וֹ֒",
+            "strong": "H4604",
+            "entityId": "hebrew:H4604"
+          },
+          {
+            "surface": "וְ/הַ/פְּסִלִ֔ים",
+            "strong": "H6456",
+            "entityId": "hebrew:H6456"
+          },
+          {
+            "surface": "וְ/הֵֽעָתֶר",
+            "strong": "H6279",
+            "entityId": "hebrew:H6279"
+          },
+          {
+            "surface": "חוֹזָֽי",
+            "strong": "H2335",
+            "entityId": "hebrew:H2335"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:33:19",
+        "translation": "web",
+        "tokenIndex": 5,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "His prayer also, and how God was entreated of him, and all his sin and his trespass, and the places in which he built high places, and set up the Asherah poles and the engraved images, before he humbled himself: behold, they are written in the history of Hozai.* or, the seers",
+        "sourceStrongList": [
+          {
+            "surface": "עַ֖ל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "אֲשֶׁר֩",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "וְ/כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "לִ/פְנֵ֖י",
+            "strong": "H6440",
+            "entityId": "hebrew:H6440"
+          },
+          {
+            "surface": "דִּבְרֵ֥י",
+            "strong": "H1697",
+            "entityId": "hebrew:H1697"
+          },
+          {
+            "surface": "וְ/הֶעֱמִיד֙",
+            "strong": "H5975",
+            "entityId": "hebrew:H5975"
+          },
+          {
+            "surface": "וְ/הַ/מְּקֹמ֗וֹת",
+            "strong": "H4725",
+            "entityId": "hebrew:H4725"
+          },
+          {
+            "surface": "בָּנָ֨ה",
+            "strong": "H1129",
+            "entityId": "hebrew:H1129"
+          },
+          {
+            "surface": "הִנָּ֣/ם",
+            "strong": "H2005",
+            "entityId": "hebrew:H2005"
+          },
+          {
+            "surface": "חַטָּאת֣/וֹ",
+            "strong": "H2403",
+            "entityId": "hebrew:H2403"
+          },
+          {
+            "surface": "כְּתוּבִ֔ים",
+            "strong": "H3789",
+            "entityId": "hebrew:H3789"
+          },
+          {
+            "surface": "בָּמוֹת֙",
+            "strong": "H1116",
+            "entityId": "hebrew:H1116"
+          },
+          {
+            "surface": "וּ/תְפִלָּת֣/וֹ",
+            "strong": "H8605",
+            "entityId": "hebrew:H8605"
+          },
+          {
+            "surface": "הָ/אֲשֵׁרִ֣ים",
+            "strong": "H842",
+            "entityId": "hebrew:H842"
+          },
+          {
+            "surface": "הִכָּנְע֑/וֹ",
+            "strong": "H3665",
+            "entityId": "hebrew:H3665"
+          },
+          {
+            "surface": "וּ/מַעְל/וֹ֒",
+            "strong": "H4604",
+            "entityId": "hebrew:H4604"
+          },
+          {
+            "surface": "וְ/הַ/פְּסִלִ֔ים",
+            "strong": "H6456",
+            "entityId": "hebrew:H6456"
+          },
+          {
+            "surface": "וְ/הֵֽעָתֶר",
+            "strong": "H6279",
+            "entityId": "hebrew:H6279"
+          },
+          {
+            "surface": "חוֹזָֽי",
+            "strong": "H2335",
+            "entityId": "hebrew:H2335"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:18:21",
+        "translation": "kjv",
+        "tokenIndex": 21,
+        "text": "Lord",
+        "normalized": "lord",
+        "translationText": "And he said, I will go out, and be a lying spirit in the mouth of all his prophets. And the Lord said, Thou shalt entice him, and thou shalt also prevail: go out, and do even so.",
+        "sourceStrongList": [
+          {
+            "surface": "כָּל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "וַ/יֹּ֗אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וַ/יֹּ֗אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וְ/הָיִ֨יתִי֙",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "וַ/עֲשֵׂה",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "אֵצֵא֙",
+            "strong": "H3318",
+            "entityId": "hebrew:H3318"
+          },
+          {
+            "surface": "צֵ֖א",
+            "strong": "H3318",
+            "entityId": "hebrew:H3318"
+          },
+          {
+            "surface": "כֵֽן",
+            "strong": "H3651",
+            "entityId": "hebrew:H3651"
+          },
+          {
+            "surface": "וְ/גַם",
+            "strong": "H1571",
+            "entityId": "hebrew:H1571"
+          },
+          {
+            "surface": "בְּ/פִ֖י",
+            "strong": "H6310",
+            "entityId": "hebrew:H6310"
+          },
+          {
+            "surface": "לְ/ר֣וּחַ",
+            "strong": "H7307",
+            "entityId": "hebrew:H7307"
+          },
+          {
+            "surface": "נְבִיאָ֑י/ו",
+            "strong": "H5030",
+            "entityId": "hebrew:H5030"
+          },
+          {
+            "surface": "תּוּכָ֔ל",
+            "strong": "H3201",
+            "entityId": "hebrew:H3201"
+          },
+          {
+            "surface": "שֶׁ֔קֶר",
+            "strong": "H8267",
+            "entityId": "hebrew:H8267"
+          },
+          {
+            "surface": "תְּפַתֶּה֙",
+            "strong": "H6601",
+            "entityId": "hebrew:H6601"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:12",
+        "translation": "kjv",
+        "tokenIndex": 6,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "Huram said moreover, Blessed be the LORD God of Israel, that made heaven and earth, who hath given to David the king a wise son, endued with prudence and understanding, that might build an house for the LORD, and an house for his kingdom.",
+        "sourceStrongList": [
+          {
+            "surface": "אִישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "אָבִֽי",
+            "strong": "H1",
+            "entityId": "hebrew:H1"
+          },
+          {
+            "surface": "יוֹדֵ֥עַ",
+            "strong": "H3045",
+            "entityId": "hebrew:H3045"
+          },
+          {
+            "surface": "שָׁלַ֧חְתִּי",
+            "strong": "H7971",
+            "entityId": "hebrew:H7971"
+          },
+          {
+            "surface": "וְ/עַתָּ֗ה",
+            "strong": "H6258",
+            "entityId": "hebrew:H6258"
+          },
+          {
+            "surface": "חָכָ֛ם",
+            "strong": "H2450",
+            "entityId": "hebrew:H2450"
+          },
+          {
+            "surface": "בִּינָ֖ה",
+            "strong": "H998",
+            "entityId": "hebrew:H998"
+          },
+          {
+            "surface": "לְ/חוּרָ֥ם",
+            "strong": "H2361",
+            "entityId": "hebrew:H2361"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:12",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Huram said moreover, Blessed be the LORD God of Israel, that made heaven and earth, who hath given to David the king a wise son, endued with prudence and understanding, that might build an house for the LORD, and an house for his kingdom.",
+        "sourceStrongList": [
+          {
+            "surface": "אִישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "אָבִֽי",
+            "strong": "H1",
+            "entityId": "hebrew:H1"
+          },
+          {
+            "surface": "יוֹדֵ֥עַ",
+            "strong": "H3045",
+            "entityId": "hebrew:H3045"
+          },
+          {
+            "surface": "שָׁלַ֧חְתִּי",
+            "strong": "H7971",
+            "entityId": "hebrew:H7971"
+          },
+          {
+            "surface": "וְ/עַתָּ֗ה",
+            "strong": "H6258",
+            "entityId": "hebrew:H6258"
+          },
+          {
+            "surface": "חָכָ֛ם",
+            "strong": "H2450",
+            "entityId": "hebrew:H2450"
+          },
+          {
+            "surface": "בִּינָ֖ה",
+            "strong": "H998",
+            "entityId": "hebrew:H998"
+          },
+          {
+            "surface": "לְ/חוּרָ֥ם",
+            "strong": "H2361",
+            "entityId": "hebrew:H2361"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:12",
+        "translation": "kjv",
+        "tokenIndex": 37,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "Huram said moreover, Blessed be the LORD God of Israel, that made heaven and earth, who hath given to David the king a wise son, endued with prudence and understanding, that might build an house for the LORD, and an house for his kingdom.",
+        "sourceStrongList": [
+          {
+            "surface": "אִישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "אָבִֽי",
+            "strong": "H1",
+            "entityId": "hebrew:H1"
+          },
+          {
+            "surface": "יוֹדֵ֥עַ",
+            "strong": "H3045",
+            "entityId": "hebrew:H3045"
+          },
+          {
+            "surface": "שָׁלַ֧חְתִּי",
+            "strong": "H7971",
+            "entityId": "hebrew:H7971"
+          },
+          {
+            "surface": "וְ/עַתָּ֗ה",
+            "strong": "H6258",
+            "entityId": "hebrew:H6258"
+          },
+          {
+            "surface": "חָכָ֛ם",
+            "strong": "H2450",
+            "entityId": "hebrew:H2450"
+          },
+          {
+            "surface": "בִּינָ֖ה",
+            "strong": "H998",
+            "entityId": "hebrew:H998"
+          },
+          {
+            "surface": "לְ/חוּרָ֥ם",
+            "strong": "H2361",
+            "entityId": "hebrew:H2361"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:12",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "Huram continued, “Blessed be Yahweh, the God of Israel, who made heaven and earth, who has given to David the king a wise son, endowed with discretion and understanding, who would build a house for Yahweh, and a house for his kingdom.",
+        "sourceStrongList": [
+          {
+            "surface": "אִישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "אָבִֽי",
+            "strong": "H1",
+            "entityId": "hebrew:H1"
+          },
+          {
+            "surface": "יוֹדֵ֥עַ",
+            "strong": "H3045",
+            "entityId": "hebrew:H3045"
+          },
+          {
+            "surface": "שָׁלַ֧חְתִּי",
+            "strong": "H7971",
+            "entityId": "hebrew:H7971"
+          },
+          {
+            "surface": "וְ/עַתָּ֗ה",
+            "strong": "H6258",
+            "entityId": "hebrew:H6258"
+          },
+          {
+            "surface": "חָכָ֛ם",
+            "strong": "H2450",
+            "entityId": "hebrew:H2450"
+          },
+          {
+            "surface": "בִּינָ֖ה",
+            "strong": "H998",
+            "entityId": "hebrew:H998"
+          },
+          {
+            "surface": "לְ/חוּרָ֥ם",
+            "strong": "H2361",
+            "entityId": "hebrew:H2361"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:12",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Huram continued, “Blessed be Yahweh, the God of Israel, who made heaven and earth, who has given to David the king a wise son, endowed with discretion and understanding, who would build a house for Yahweh, and a house for his kingdom.",
+        "sourceStrongList": [
+          {
+            "surface": "אִישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "אָבִֽי",
+            "strong": "H1",
+            "entityId": "hebrew:H1"
+          },
+          {
+            "surface": "יוֹדֵ֥עַ",
+            "strong": "H3045",
+            "entityId": "hebrew:H3045"
+          },
+          {
+            "surface": "שָׁלַ֧חְתִּי",
+            "strong": "H7971",
+            "entityId": "hebrew:H7971"
+          },
+          {
+            "surface": "וְ/עַתָּ֗ה",
+            "strong": "H6258",
+            "entityId": "hebrew:H6258"
+          },
+          {
+            "surface": "חָכָ֛ם",
+            "strong": "H2450",
+            "entityId": "hebrew:H2450"
+          },
+          {
+            "surface": "בִּינָ֖ה",
+            "strong": "H998",
+            "entityId": "hebrew:H998"
+          },
+          {
+            "surface": "לְ/חוּרָ֥ם",
+            "strong": "H2361",
+            "entityId": "hebrew:H2361"
+          }
+        ]
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:12",
+        "translation": "web",
+        "tokenIndex": 35,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "Huram continued, “Blessed be Yahweh, the God of Israel, who made heaven and earth, who has given to David the king a wise son, endowed with discretion and understanding, who would build a house for Yahweh, and a house for his kingdom.",
+        "sourceStrongList": [
+          {
+            "surface": "אִישׁ",
+            "strong": "H376",
+            "entityId": "hebrew:H376"
+          },
+          {
+            "surface": "אָבִֽי",
+            "strong": "H1",
+            "entityId": "hebrew:H1"
+          },
+          {
+            "surface": "יוֹדֵ֥עַ",
+            "strong": "H3045",
+            "entityId": "hebrew:H3045"
+          },
+          {
+            "surface": "שָׁלַ֧חְתִּי",
+            "strong": "H7971",
+            "entityId": "hebrew:H7971"
+          },
+          {
+            "surface": "וְ/עַתָּ֗ה",
+            "strong": "H6258",
+            "entityId": "hebrew:H6258"
+          },
+          {
+            "surface": "חָכָ֛ם",
+            "strong": "H2450",
+            "entityId": "hebrew:H2450"
+          },
+          {
+            "surface": "בִּינָ֖ה",
+            "strong": "H998",
+            "entityId": "hebrew:H998"
+          },
+          {
+            "surface": "לְ/חוּרָ֥ם",
+            "strong": "H2361",
+            "entityId": "hebrew:H2361"
+          }
+        ]
+      },
+      {
+        "file": "2Kgs.json",
+        "reference": "2Kgs:23:19",
+        "translation": "kjv",
+        "tokenIndex": 26,
+        "text": "Lord",
+        "normalized": "lord",
+        "translationText": "And all the houses also of the high places that were in the cities of Samaria, which the kings of Israel had made to provoke the Lord to anger, Josiah took away, and did to them according to all the acts that he had done in Bethel.",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֲשֶׁ֣ר",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "אֲשֶׁ֨ר",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "אֲשֶׁ֥ר",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "כָּל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "כְּ/כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "עָשׂ֜וּ",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "וַ/יַּ֣עַשׂ",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "עָשָׂ֖ה",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "מַלְכֵ֤י",
+            "strong": "H4428",
+            "entityId": "hebrew:H4428"
+          },
+          {
+            "surface": "יִשְׂרָאֵל֙",
+            "strong": "H3478",
+            "entityId": "hebrew:H3478"
+          },
+          {
+            "surface": "בָּתֵּ֨י",
+            "strong": "H1004",
+            "entityId": "hebrew:H1004"
+          },
+          {
+            "surface": "בְּ/עָרֵ֣י",
+            "strong": "H5892",
+            "entityId": "hebrew:H5892"
+          },
+          {
+            "surface": "וְ/גַם֩",
+            "strong": "H1571",
+            "entityId": "hebrew:H1571"
+          },
+          {
+            "surface": "הֵסִ֖יר",
+            "strong": "H5493",
+            "entityId": "hebrew:H5493"
+          },
+          {
+            "surface": "הַֽ/מַּעֲשִׂ֔ים",
+            "strong": "H4639",
+            "entityId": "hebrew:H4639"
+          },
+          {
+            "surface": "שֹׁמְר֗וֹן",
+            "strong": "H8111",
+            "entityId": "hebrew:H8111"
+          },
+          {
+            "surface": "הַ/בָּמ֜וֹת",
+            "strong": "H1116",
+            "entityId": "hebrew:H1116"
+          },
+          {
+            "surface": "בְּ/בֵֽית",
+            "strong": "H1008",
+            "entityId": "hebrew:H1008"
+          },
+          {
+            "surface": "אֵֽל",
+            "strong": "H1008",
+            "entityId": "hebrew:H1008"
+          },
+          {
+            "surface": "לְ/הַכְעִ֔יס",
+            "strong": "H3707",
+            "entityId": "hebrew:H3707"
+          },
+          {
+            "surface": "יֹֽאשִׁיָּ֑הוּ",
+            "strong": "H2977",
+            "entityId": "hebrew:H2977"
+          }
+        ]
+      },
+      {
+        "file": "2Kgs.json",
+        "reference": "2Kgs:23:19",
+        "translation": "web",
+        "tokenIndex": 24,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "All the houses also of the high places that were in the cities of Samaria, which the kings of Israel had made to provoke Yahweh to anger, Josiah took away, and did to them according to all the acts that he had done in Bethel.",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֲשֶׁ֣ר",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "אֲשֶׁ֨ר",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "אֲשֶׁ֥ר",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "כָּל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "כְּ/כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "עָשׂ֜וּ",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "וַ/יַּ֣עַשׂ",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "עָשָׂ֖ה",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "מַלְכֵ֤י",
+            "strong": "H4428",
+            "entityId": "hebrew:H4428"
+          },
+          {
+            "surface": "יִשְׂרָאֵל֙",
+            "strong": "H3478",
+            "entityId": "hebrew:H3478"
+          },
+          {
+            "surface": "בָּתֵּ֨י",
+            "strong": "H1004",
+            "entityId": "hebrew:H1004"
+          },
+          {
+            "surface": "בְּ/עָרֵ֣י",
+            "strong": "H5892",
+            "entityId": "hebrew:H5892"
+          },
+          {
+            "surface": "וְ/גַם֩",
+            "strong": "H1571",
+            "entityId": "hebrew:H1571"
+          },
+          {
+            "surface": "הֵסִ֖יר",
+            "strong": "H5493",
+            "entityId": "hebrew:H5493"
+          },
+          {
+            "surface": "הַֽ/מַּעֲשִׂ֔ים",
+            "strong": "H4639",
+            "entityId": "hebrew:H4639"
+          },
+          {
+            "surface": "שֹׁמְר֗וֹן",
+            "strong": "H8111",
+            "entityId": "hebrew:H8111"
+          },
+          {
+            "surface": "הַ/בָּמ֜וֹת",
+            "strong": "H1116",
+            "entityId": "hebrew:H1116"
+          },
+          {
+            "surface": "בְּ/בֵֽית",
+            "strong": "H1008",
+            "entityId": "hebrew:H1008"
+          },
+          {
+            "surface": "אֵֽל",
+            "strong": "H1008",
+            "entityId": "hebrew:H1008"
+          },
+          {
+            "surface": "לְ/הַכְעִ֔יס",
+            "strong": "H3707",
+            "entityId": "hebrew:H3707"
+          },
+          {
+            "surface": "יֹֽאשִׁיָּ֑הוּ",
+            "strong": "H2977",
+            "entityId": "hebrew:H2977"
+          }
+        ]
+      },
+      {
+        "file": "2Sam.json",
+        "reference": "2Sam:16:16",
+        "translation": "kjv",
+        "tokenIndex": 24,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "And it came to pass, when Hushai the Archite, David’s friend, was come unto Absalom, that Hushai said unto Absalom, God save the king, God save the king.",
+        "sourceStrongList": [
+          {
+            "surface": "אֶל",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "אֶל",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "כַּֽ/אֲשֶׁר",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "וַ/יֹּ֤אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וַ/יְהִ֗י",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "בָּ֞א",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "הַ/מֶּ֖לֶךְ",
+            "strong": "H4428",
+            "entityId": "hebrew:H4428"
+          },
+          {
+            "surface": "הַ/מֶּֽלֶךְ",
+            "strong": "H4428",
+            "entityId": "hebrew:H4428"
+          },
+          {
+            "surface": "דָוִ֖ד",
+            "strong": "H1732",
+            "entityId": "hebrew:H1732"
+          },
+          {
+            "surface": "יְחִ֥י",
+            "strong": "H2421",
+            "entityId": "hebrew:H2421"
+          },
+          {
+            "surface": "יְחִ֥י",
+            "strong": "H2421",
+            "entityId": "hebrew:H2421"
+          },
+          {
+            "surface": "אַבְשָׁל֑וֹם",
+            "strong": "H53",
+            "entityId": "hebrew:H53"
+          },
+          {
+            "surface": "אַבְשָׁלֹ֔ם",
+            "strong": "H53",
+            "entityId": "hebrew:H53"
+          },
+          {
+            "surface": "חוּשַׁ֧י",
+            "strong": "H2365",
+            "entityId": "hebrew:H2365"
+          },
+          {
+            "surface": "חוּשַׁי֙",
+            "strong": "H2365",
+            "entityId": "hebrew:H2365"
+          },
+          {
+            "surface": "הָ/אַרְכִּ֛י",
+            "strong": "H757",
+            "entityId": "hebrew:H757"
+          },
+          {
+            "surface": "רֵעֶ֥ה",
+            "strong": "H7463",
+            "entityId": "hebrew:H7463"
+          }
+        ]
+      },
+      {
+        "file": "Exod.json",
+        "reference": "Exod:33:9",
+        "translation": "kjv",
+        "tokenIndex": 25,
+        "text": "Lord",
+        "normalized": "lord",
+        "translationText": "And it came to pass, as Moses entered into the tabernacle, the cloudy pillar descended, and stood at the door of the tabernacle, and the Lord talked with Moses.",
+        "sourceStrongList": [
+          {
+            "surface": "וְ/הָיָ֗ה",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "כְּ/בֹ֤א",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "וְ/דִבֶּ֖ר",
+            "strong": "H1696",
+            "entityId": "hebrew:H1696"
+          },
+          {
+            "surface": "עִם",
+            "strong": "H5973",
+            "entityId": "hebrew:H5973"
+          },
+          {
+            "surface": "מֹשֶׁה֙",
+            "strong": "H4872",
+            "entityId": "hebrew:H4872"
+          },
+          {
+            "surface": "מֹשֶֽׁה",
+            "strong": "H4872",
+            "entityId": "hebrew:H4872"
+          },
+          {
+            "surface": "וְ/עָמַ֖ד",
+            "strong": "H5975",
+            "entityId": "hebrew:H5975"
+          },
+          {
+            "surface": "יֵרֵד֙",
+            "strong": "H3381",
+            "entityId": "hebrew:H3381"
+          },
+          {
+            "surface": "הָ/אֹ֔הֱלָ/ה",
+            "strong": "H168",
+            "entityId": "hebrew:H168"
+          },
+          {
+            "surface": "הָ/אֹ֑הֶל",
+            "strong": "H168",
+            "entityId": "hebrew:H168"
+          },
+          {
+            "surface": "פֶּ֣תַח",
+            "strong": "H6607",
+            "entityId": "hebrew:H6607"
+          },
+          {
+            "surface": "עַמּ֣וּד",
+            "strong": "H5982",
+            "entityId": "hebrew:H5982"
+          },
+          {
+            "surface": "הֶֽ/עָנָ֔ן",
+            "strong": "H6051",
+            "entityId": "hebrew:H6051"
+          }
+        ]
+      },
+      {
+        "file": "Exod.json",
+        "reference": "Exod:33:9",
+        "translation": "web",
+        "tokenIndex": 19,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "When Moses entered into the Tent, the pillar of cloud descended, stood at the door of the Tent, and Yahweh spoke with Moses.",
+        "sourceStrongList": [
+          {
+            "surface": "וְ/הָיָ֗ה",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "כְּ/בֹ֤א",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "וְ/דִבֶּ֖ר",
+            "strong": "H1696",
+            "entityId": "hebrew:H1696"
+          },
+          {
+            "surface": "עִם",
+            "strong": "H5973",
+            "entityId": "hebrew:H5973"
+          },
+          {
+            "surface": "מֹשֶׁה֙",
+            "strong": "H4872",
+            "entityId": "hebrew:H4872"
+          },
+          {
+            "surface": "מֹשֶֽׁה",
+            "strong": "H4872",
+            "entityId": "hebrew:H4872"
+          },
+          {
+            "surface": "וְ/עָמַ֖ד",
+            "strong": "H5975",
+            "entityId": "hebrew:H5975"
+          },
+          {
+            "surface": "יֵרֵד֙",
+            "strong": "H3381",
+            "entityId": "hebrew:H3381"
+          },
+          {
+            "surface": "הָ/אֹ֔הֱלָ/ה",
+            "strong": "H168",
+            "entityId": "hebrew:H168"
+          },
+          {
+            "surface": "הָ/אֹ֑הֶל",
+            "strong": "H168",
+            "entityId": "hebrew:H168"
+          },
+          {
+            "surface": "פֶּ֣תַח",
+            "strong": "H6607",
+            "entityId": "hebrew:H6607"
+          },
+          {
+            "surface": "עַמּ֣וּד",
+            "strong": "H5982",
+            "entityId": "hebrew:H5982"
+          },
+          {
+            "surface": "הֶֽ/עָנָ֔ן",
+            "strong": "H6051",
+            "entityId": "hebrew:H6051"
+          }
+        ]
+      },
+      {
+        "file": "Exod.json",
+        "reference": "Exod:17:15",
+        "translation": "web",
+        "tokenIndex": 8,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "Moses built an altar, and called its name “Yahweh our Banner”.‡ Hebrew, Yahweh Nissi",
+        "sourceStrongList": [
+          {
+            "surface": "שְׁמ֖/וֹ",
+            "strong": "H8034",
+            "entityId": "hebrew:H8034"
+          },
+          {
+            "surface": "מֹשֶׁ֖ה",
+            "strong": "H4872",
+            "entityId": "hebrew:H4872"
+          },
+          {
+            "surface": "וַ/יִּקְרָ֥א",
+            "strong": "H7121",
+            "entityId": "hebrew:H7121"
+          },
+          {
+            "surface": "מִזְבֵּ֑חַ",
+            "strong": "H4196",
+            "entityId": "hebrew:H4196"
+          },
+          {
+            "surface": "וַ/יִּ֥בֶן",
+            "strong": "H1129",
+            "entityId": "hebrew:H1129"
+          },
+          {
+            "surface": "יְהוָ֥ה",
+            "strong": "H3071",
+            "entityId": "hebrew:H3071"
+          },
+          {
+            "surface": "נִסִּֽ/י",
+            "strong": "H3071",
+            "entityId": "hebrew:H3071"
+          }
+        ]
+      },
+      {
+        "file": "Exod.json",
+        "reference": "Exod:17:15",
+        "translation": "web",
+        "tokenIndex": 12,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "Moses built an altar, and called its name “Yahweh our Banner”.‡ Hebrew, Yahweh Nissi",
+        "sourceStrongList": [
+          {
+            "surface": "שְׁמ֖/וֹ",
+            "strong": "H8034",
+            "entityId": "hebrew:H8034"
+          },
+          {
+            "surface": "מֹשֶׁ֖ה",
+            "strong": "H4872",
+            "entityId": "hebrew:H4872"
+          },
+          {
+            "surface": "וַ/יִּקְרָ֥א",
+            "strong": "H7121",
+            "entityId": "hebrew:H7121"
+          },
+          {
+            "surface": "מִזְבֵּ֑חַ",
+            "strong": "H4196",
+            "entityId": "hebrew:H4196"
+          },
+          {
+            "surface": "וַ/יִּ֥בֶן",
+            "strong": "H1129",
+            "entityId": "hebrew:H1129"
+          },
+          {
+            "surface": "יְהוָ֥ה",
+            "strong": "H3071",
+            "entityId": "hebrew:H3071"
+          },
+          {
+            "surface": "נִסִּֽ/י",
+            "strong": "H3071",
+            "entityId": "hebrew:H3071"
+          }
+        ]
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:3:24",
+        "translation": "web",
+        "tokenIndex": 17,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "So he drove out the man; and he placed cherubim* cherubim are powerful angelic creatures, messengers of God with wings. See Ezekiel 10. at the east of the garden of Eden, and a flaming sword which turned every way, to guard the way to the tree of life.",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "וְ/אֵ֨ת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "דֶּ֖רֶךְ",
+            "strong": "H1870",
+            "entityId": "hebrew:H1870"
+          },
+          {
+            "surface": "הָֽ/אָדָ֑ם",
+            "strong": "H120",
+            "entityId": "hebrew:H120"
+          },
+          {
+            "surface": "הַֽ/חַיִּֽים",
+            "strong": "H2416",
+            "entityId": "hebrew:H2416"
+          },
+          {
+            "surface": "לִ/שְׁמֹ֕ר",
+            "strong": "H8104",
+            "entityId": "hebrew:H8104"
+          },
+          {
+            "surface": "הַ/חֶ֨רֶב֙",
+            "strong": "H2719",
+            "entityId": "hebrew:H2719"
+          },
+          {
+            "surface": "עֵ֥ץ",
+            "strong": "H6086",
+            "entityId": "hebrew:H6086"
+          },
+          {
+            "surface": "וַ/יַּשְׁכֵּן֩",
+            "strong": "H7931",
+            "entityId": "hebrew:H7931"
+          },
+          {
+            "surface": "הַ/מִּתְהַפֶּ֔כֶת",
+            "strong": "H2015",
+            "entityId": "hebrew:H2015"
+          },
+          {
+            "surface": "הַ/כְּרֻבִ֗ים",
+            "strong": "H3742",
+            "entityId": "hebrew:H3742"
+          },
+          {
+            "surface": "מִ/קֶּ֨דֶם",
+            "strong": "H6924",
+            "entityId": "hebrew:H6924"
+          },
+          {
+            "surface": "וַ/יְגָ֖רֶשׁ",
+            "strong": "H1644",
+            "entityId": "hebrew:H1644"
+          },
+          {
+            "surface": "לְ/גַן",
+            "strong": "H1588",
+            "entityId": "hebrew:H1588"
+          },
+          {
+            "surface": "עֵ֜דֶן",
+            "strong": "H5731",
+            "entityId": "hebrew:H5731"
+          },
+          {
+            "surface": "לַ֤הַט",
+            "strong": "H3858",
+            "entityId": "hebrew:H3858"
+          }
+        ]
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:15:5",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "Yahweh brought him outside, and said, “Look now toward the sky, and count the stars, if you are able to count them.” He said to Abram, “So your offspring will be.”",
+        "sourceStrongList": [
+          {
+            "surface": "אֹת֜/וֹ",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֹתָ֑/ם",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "וַ/יֹּ֨אמֶר֙",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וַ/יֹּ֣אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "יִהְיֶ֖ה",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "וַ/יּוֹצֵ֨א",
+            "strong": "H3318",
+            "entityId": "hebrew:H3318"
+          },
+          {
+            "surface": "אִם",
+            "strong": "H518",
+            "entityId": "hebrew:H518"
+          },
+          {
+            "surface": "כֹּ֥ה",
+            "strong": "H3541",
+            "entityId": "hebrew:H3541"
+          },
+          {
+            "surface": "הַ/שָּׁמַ֗יְמָ/ה",
+            "strong": "H8064",
+            "entityId": "hebrew:H8064"
+          },
+          {
+            "surface": "נָ֣א",
+            "strong": "H4994",
+            "entityId": "hebrew:H4994"
+          },
+          {
+            "surface": "זַרְעֶֽ/ךָ",
+            "strong": "H2233",
+            "entityId": "hebrew:H2233"
+          },
+          {
+            "surface": "תּוּכַ֖ל",
+            "strong": "H3201",
+            "entityId": "hebrew:H3201"
+          },
+          {
+            "surface": "הַ/ח֗וּצָ/ה",
+            "strong": "H2351",
+            "entityId": "hebrew:H2351"
+          },
+          {
+            "surface": "וּ/סְפֹר֙",
+            "strong": "H5608",
+            "entityId": "hebrew:H5608"
+          },
+          {
+            "surface": "לִ/סְפֹּ֣ר",
+            "strong": "H5608",
+            "entityId": "hebrew:H5608"
+          },
+          {
+            "surface": "הַבֶּט",
+            "strong": "H5027",
+            "entityId": "hebrew:H5027"
+          },
+          {
+            "surface": "הַ/כּ֣וֹכָבִ֔ים",
+            "strong": "H3556",
+            "entityId": "hebrew:H3556"
+          }
+        ]
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:4:10",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "Yahweh said, “What have you done? The voice of your brother’s blood cries to me from the ground.",
+        "sourceStrongList": [
+          {
+            "surface": "אֵלַ֖/י",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "וַ/יֹּ֖אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "עָשִׂ֑יתָ",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "מִן",
+            "strong": "H4480",
+            "entityId": "hebrew:H4480"
+          },
+          {
+            "surface": "מֶ֣ה",
+            "strong": "H4100",
+            "entityId": "hebrew:H4100"
+          },
+          {
+            "surface": "אָחִ֔י/ךָ",
+            "strong": "H251",
+            "entityId": "hebrew:H251"
+          },
+          {
+            "surface": "ק֚וֹל",
+            "strong": "H6963",
+            "entityId": "hebrew:H6963"
+          },
+          {
+            "surface": "דְּמֵ֣י",
+            "strong": "H1818",
+            "entityId": "hebrew:H1818"
+          },
+          {
+            "surface": "הָֽ/אֲדָמָֽה",
+            "strong": "H127",
+            "entityId": "hebrew:H127"
+          },
+          {
+            "surface": "צֹעֲקִ֥ים",
+            "strong": "H6817",
+            "entityId": "hebrew:H6817"
+          }
+        ]
+      },
+      {
+        "file": "Hos.json",
+        "reference": "Hos:1:9",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Then said God, Call his name Loammi: for ye are not my people, and I will not be your God.",
+        "sourceStrongList": [
+          {
+            "surface": "וַ/יֹּ֕אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "לֹ֣א",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "לֹֽא",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "כִּ֤י",
+            "strong": "H3588",
+            "entityId": "hebrew:H3588"
+          },
+          {
+            "surface": "אֶהְיֶ֥ה",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "עַמִּ֔/י",
+            "strong": "H5971",
+            "entityId": "hebrew:H5971"
+          },
+          {
+            "surface": "אַתֶּם֙",
+            "strong": "H859",
+            "entityId": "hebrew:H859"
+          },
+          {
+            "surface": "שְׁמ֖/וֹ",
+            "strong": "H8034",
+            "entityId": "hebrew:H8034"
+          },
+          {
+            "surface": "קְרָ֥א",
+            "strong": "H7121",
+            "entityId": "hebrew:H7121"
+          },
+          {
+            "surface": "וְ/אָנֹכִ֖י",
+            "strong": "H595",
+            "entityId": "hebrew:H595"
+          },
+          {
+            "surface": "לֹ֣א",
+            "strong": "H3818",
+            "entityId": "hebrew:H3818"
+          },
+          {
+            "surface": "עַמִּ֑י",
+            "strong": "H3818",
+            "entityId": "hebrew:H3818"
+          }
+        ]
+      },
+      {
+        "file": "Hos.json",
+        "reference": "Hos:1:9",
+        "translation": "kjv",
+        "tokenIndex": 19,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Then said God, Call his name Loammi: for ye are not my people, and I will not be your God.",
+        "sourceStrongList": [
+          {
+            "surface": "וַ/יֹּ֕אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "לֹ֣א",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "לֹֽא",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "כִּ֤י",
+            "strong": "H3588",
+            "entityId": "hebrew:H3588"
+          },
+          {
+            "surface": "אֶהְיֶ֥ה",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "עַמִּ֔/י",
+            "strong": "H5971",
+            "entityId": "hebrew:H5971"
+          },
+          {
+            "surface": "אַתֶּם֙",
+            "strong": "H859",
+            "entityId": "hebrew:H859"
+          },
+          {
+            "surface": "שְׁמ֖/וֹ",
+            "strong": "H8034",
+            "entityId": "hebrew:H8034"
+          },
+          {
+            "surface": "קְרָ֥א",
+            "strong": "H7121",
+            "entityId": "hebrew:H7121"
+          },
+          {
+            "surface": "וְ/אָנֹכִ֖י",
+            "strong": "H595",
+            "entityId": "hebrew:H595"
+          },
+          {
+            "surface": "לֹ֣א",
+            "strong": "H3818",
+            "entityId": "hebrew:H3818"
+          },
+          {
+            "surface": "עַמִּ֑י",
+            "strong": "H3818",
+            "entityId": "hebrew:H3818"
+          }
+        ]
+      },
+      {
+        "file": "Hos.json",
+        "reference": "Hos:14:9",
+        "translation": "kjv",
+        "tokenIndex": 20,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "Who is wise, and he shall understand these things? prudent, and he shall know them? for the ways of the LORD are right, and the just shall walk in them: but the transgressors shall fall therein.",
+        "sourceStrongList": [
+          {
+            "surface": "מִמֶּ֖/נִּי",
+            "strong": "H4480",
+            "entityId": "hebrew:H4480"
+          },
+          {
+            "surface": "אֲנִ֧י",
+            "strong": "H589",
+            "entityId": "hebrew:H589"
+          },
+          {
+            "surface": "אֲנִי֙",
+            "strong": "H589",
+            "entityId": "hebrew:H589"
+          },
+          {
+            "surface": "מַה",
+            "strong": "H4100",
+            "entityId": "hebrew:H4100"
+          },
+          {
+            "surface": "ע֖וֹד",
+            "strong": "H5750",
+            "entityId": "hebrew:H5750"
+          },
+          {
+            "surface": "נִמְצָֽא",
+            "strong": "H4672",
+            "entityId": "hebrew:H4672"
+          },
+          {
+            "surface": "עָנִ֣יתִי",
+            "strong": "H6030",
+            "entityId": "hebrew:H6030"
+          },
+          {
+            "surface": "אֶפְרַ֕יִם",
+            "strong": "H669",
+            "entityId": "hebrew:H669"
+          },
+          {
+            "surface": "פֶּרְיְ/ךָ֥",
+            "strong": "H6529",
+            "entityId": "hebrew:H6529"
+          },
+          {
+            "surface": "כִּ/בְר֣וֹשׁ",
+            "strong": "H1265",
+            "entityId": "hebrew:H1265"
+          },
+          {
+            "surface": "רַֽעֲנָ֔ן",
+            "strong": "H7488",
+            "entityId": "hebrew:H7488"
+          },
+          {
+            "surface": "לָֽ/עֲצַבִּ֑ים",
+            "strong": "H6091",
+            "entityId": "hebrew:H6091"
+          },
+          {
+            "surface": "וַ/אֲשׁוּרֶ֗/נּוּ",
+            "strong": "H7789",
+            "entityId": "hebrew:H7789"
+          }
+        ]
+      },
+      {
+        "file": "Isa.json",
+        "reference": "Isa:26:1",
+        "translation": "kjv",
+        "tokenIndex": 20,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "In that day shall this song be sung in the land of Judah; We have a strong city; salvation will God appoint for walls and bulwarks.",
+        "sourceStrongList": [
+          {
+            "surface": "בְּ/אֶ֣רֶץ",
+            "strong": "H776",
+            "entityId": "hebrew:H776"
+          },
+          {
+            "surface": "בַּ/יּ֣וֹם",
+            "strong": "H3117",
+            "entityId": "hebrew:H3117"
+          },
+          {
+            "surface": "הַ/ה֔וּא",
+            "strong": "H1931",
+            "entityId": "hebrew:H1931"
+          },
+          {
+            "surface": "הַ/זֶּ֖ה",
+            "strong": "H2088",
+            "entityId": "hebrew:H2088"
+          },
+          {
+            "surface": "עִ֣יר",
+            "strong": "H5892",
+            "entityId": "hebrew:H5892"
+          },
+          {
+            "surface": "יְהוּדָ֑ה",
+            "strong": "H3063",
+            "entityId": "hebrew:H3063"
+          },
+          {
+            "surface": "חוֹמ֥וֹת",
+            "strong": "H2346",
+            "entityId": "hebrew:H2346"
+          },
+          {
+            "surface": "הַ/שִּׁיר",
+            "strong": "H7892",
+            "entityId": "hebrew:H7892"
+          },
+          {
+            "surface": "יוּשַׁ֥ר",
+            "strong": "H7891",
+            "entityId": "hebrew:H7891"
+          },
+          {
+            "surface": "יָשִׁ֖ית",
+            "strong": "H7896",
+            "entityId": "hebrew:H7896"
+          },
+          {
+            "surface": "יְשׁוּעָ֥ה",
+            "strong": "H3444",
+            "entityId": "hebrew:H3444"
+          },
+          {
+            "surface": "עָז",
+            "strong": "H5794",
+            "entityId": "hebrew:H5794"
+          },
+          {
+            "surface": "וָ/חֵֽל",
+            "strong": "H2426",
+            "entityId": "hebrew:H2426"
+          }
+        ]
+      },
+      {
+        "file": "Isa.json",
+        "reference": "Isa:17:13",
+        "translation": "kjv",
+        "tokenIndex": 11,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "The nations shall rush like the rushing of many waters: but God shall rebuke them, and they shall flee far off, and shall be chased as the chaff of the mountains before the wind, and like a rolling thing before the whirlwind.",
+        "sourceStrongList": [
+          {
+            "surface": "לִ/פְנֵי",
+            "strong": "H6440",
+            "entityId": "hebrew:H6440"
+          },
+          {
+            "surface": "לִ/פְנֵ֥י",
+            "strong": "H6440",
+            "entityId": "hebrew:H6440"
+          },
+          {
+            "surface": "מַ֤יִם",
+            "strong": "H4325",
+            "entityId": "hebrew:H4325"
+          },
+          {
+            "surface": "הָרִים֙",
+            "strong": "H2022",
+            "entityId": "hebrew:H2022"
+          },
+          {
+            "surface": "רַבִּים֙",
+            "strong": "H7227",
+            "entityId": "hebrew:H7227"
+          },
+          {
+            "surface": "ר֔וּחַ",
+            "strong": "H7307",
+            "entityId": "hebrew:H7307"
+          },
+          {
+            "surface": "וְ/נָ֣ס",
+            "strong": "H5127",
+            "entityId": "hebrew:H5127"
+          },
+          {
+            "surface": "וְ/רֻדַּ֗ף",
+            "strong": "H7291",
+            "entityId": "hebrew:H7291"
+          },
+          {
+            "surface": "לְאֻמִּ֗ים",
+            "strong": "H3816",
+            "entityId": "hebrew:H3816"
+          },
+          {
+            "surface": "כִּ/שְׁא֞וֹן",
+            "strong": "H7588",
+            "entityId": "hebrew:H7588"
+          },
+          {
+            "surface": "מִ/מֶּרְחָ֑ק",
+            "strong": "H4801",
+            "entityId": "hebrew:H4801"
+          },
+          {
+            "surface": "סוּפָֽה",
+            "strong": "H5492",
+            "entityId": "hebrew:H5492"
+          },
+          {
+            "surface": "וְ/גָ֥עַר",
+            "strong": "H1605",
+            "entityId": "hebrew:H1605"
+          },
+          {
+            "surface": "וּ/כְ/גַלְגַּ֖ל",
+            "strong": "H1534",
+            "entityId": "hebrew:H1534"
+          },
+          {
+            "surface": "כְּ/מֹ֤ץ",
+            "strong": "H4671",
+            "entityId": "hebrew:H4671"
+          },
+          {
+            "surface": "יִשָּׁא֔וּ/ן",
+            "strong": "H7582",
+            "entityId": "hebrew:H7582"
+          }
+        ]
+      },
+      {
+        "file": "Jer.json",
+        "reference": "Jer:10:12",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "God has made the earth by his power.",
+        "sourceStrongList": [
+          {
+            "surface": "עֹשֵׂ֥ה",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "אֶ֨רֶץ֙",
+            "strong": "H776",
+            "entityId": "hebrew:H776"
+          },
+          {
+            "surface": "שָׁמָֽיִם",
+            "strong": "H8064",
+            "entityId": "hebrew:H8064"
+          },
+          {
+            "surface": "מֵכִ֥ין",
+            "strong": "H3559",
+            "entityId": "hebrew:H3559"
+          },
+          {
+            "surface": "נָטָ֥ה",
+            "strong": "H5186",
+            "entityId": "hebrew:H5186"
+          },
+          {
+            "surface": "בְּ/חָכְמָת֑/וֹ",
+            "strong": "H2451",
+            "entityId": "hebrew:H2451"
+          },
+          {
+            "surface": "בְּ/כֹח֔/וֹ",
+            "strong": "H3581",
+            "entityId": "hebrew:H3581"
+          },
+          {
+            "surface": "וּ/בִ/תְבוּנָת֖/וֹ",
+            "strong": "H8394",
+            "entityId": "hebrew:H8394"
+          },
+          {
+            "surface": "תֵּבֵ֖ל",
+            "strong": "H8398",
+            "entityId": "hebrew:H8398"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:20:23",
+        "translation": "kjv",
+        "tokenIndex": 8,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "When he is about to fill his belly, God shall cast the fury of his wrath upon him, and shall rain it upon him while he is eating.",
+        "sourceStrongList": [
+          {
+            "surface": "עָ֝לֵ֗י/מוֹ",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "יְהִ֤י",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "יְֽשַׁלַּח",
+            "strong": "H7971",
+            "entityId": "hebrew:H7971"
+          },
+          {
+            "surface": "אַפּ֑/וֹ",
+            "strong": "H639",
+            "entityId": "hebrew:H639"
+          },
+          {
+            "surface": "לְ/מַלֵּ֬א",
+            "strong": "H4390",
+            "entityId": "hebrew:H4390"
+          },
+          {
+            "surface": "בִטְנ֗/וֹ",
+            "strong": "H990",
+            "entityId": "hebrew:H990"
+          },
+          {
+            "surface": "חֲר֣וֹן",
+            "strong": "H2740",
+            "entityId": "hebrew:H2740"
+          },
+          {
+            "surface": "וְ/יַמְטֵ֥ר",
+            "strong": "H4305",
+            "entityId": "hebrew:H4305"
+          },
+          {
+            "surface": "בִּ/לְחוּמֽ/וֹ",
+            "strong": "H3894",
+            "entityId": "hebrew:H3894"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:20:23",
+        "translation": "web",
+        "tokenIndex": 8,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "When he is about to fill his belly, God will cast the fierceness of his wrath on him.",
+        "sourceStrongList": [
+          {
+            "surface": "עָ֝לֵ֗י/מוֹ",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "יְהִ֤י",
+            "strong": "H1961",
+            "entityId": "hebrew:H1961"
+          },
+          {
+            "surface": "יְֽשַׁלַּח",
+            "strong": "H7971",
+            "entityId": "hebrew:H7971"
+          },
+          {
+            "surface": "אַפּ֑/וֹ",
+            "strong": "H639",
+            "entityId": "hebrew:H639"
+          },
+          {
+            "surface": "לְ/מַלֵּ֬א",
+            "strong": "H4390",
+            "entityId": "hebrew:H4390"
+          },
+          {
+            "surface": "בִטְנ֗/וֹ",
+            "strong": "H990",
+            "entityId": "hebrew:H990"
+          },
+          {
+            "surface": "חֲר֣וֹן",
+            "strong": "H2740",
+            "entityId": "hebrew:H2740"
+          },
+          {
+            "surface": "וְ/יַמְטֵ֥ר",
+            "strong": "H4305",
+            "entityId": "hebrew:H4305"
+          },
+          {
+            "surface": "בִּ/לְחוּמֽ/וֹ",
+            "strong": "H3894",
+            "entityId": "hebrew:H3894"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:21:17",
+        "translation": "kjv",
+        "tokenIndex": 18,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "How oft is the candle of the wicked put out! and how oft cometh their destruction upon them! God distributeth sorrows in his anger.",
+        "sourceStrongList": [
+          {
+            "surface": "עָלֵ֣י/מוֹ",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "וְ/יָבֹ֣א",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "כַּ/מָּ֤ה",
+            "strong": "H4100",
+            "entityId": "hebrew:H4100"
+          },
+          {
+            "surface": "בְּ/אַפּֽ/וֹ",
+            "strong": "H639",
+            "entityId": "hebrew:H639"
+          },
+          {
+            "surface": "רְשָׁ֘עִ֤ים",
+            "strong": "H7563",
+            "entityId": "hebrew:H7563"
+          },
+          {
+            "surface": "יְחַלֵּ֥ק",
+            "strong": "H2505",
+            "entityId": "hebrew:H2505"
+          },
+          {
+            "surface": "חֲ֝בָלִ֗ים",
+            "strong": "H2256",
+            "entityId": "hebrew:H2256"
+          },
+          {
+            "surface": "נֵר",
+            "strong": "H5216",
+            "entityId": "hebrew:H5216"
+          },
+          {
+            "surface": "אֵידָ֑/ם",
+            "strong": "H343",
+            "entityId": "hebrew:H343"
+          },
+          {
+            "surface": "יִדְעָ֗ךְ",
+            "strong": "H1846",
+            "entityId": "hebrew:H1846"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:27:22",
+        "translation": "kjv",
+        "tokenIndex": 1,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "For God shall cast upon him, and not spare: he would fain flee out of his hand.",
+        "sourceStrongList": [
+          {
+            "surface": "עָ֭לָי/ו",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "וְ/לֹ֣א",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "מִ֝/יָּד֗/וֹ",
+            "strong": "H3027",
+            "entityId": "hebrew:H3027"
+          },
+          {
+            "surface": "וְ/יַשְׁלֵ֣ךְ",
+            "strong": "H7993",
+            "entityId": "hebrew:H7993"
+          },
+          {
+            "surface": "בָּר֥וֹחַ",
+            "strong": "H1272",
+            "entityId": "hebrew:H1272"
+          },
+          {
+            "surface": "יִבְרָֽח",
+            "strong": "H1272",
+            "entityId": "hebrew:H1272"
+          },
+          {
+            "surface": "יַחְמֹ֑ל",
+            "strong": "H2550",
+            "entityId": "hebrew:H2550"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:16:7",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "But now, God, you have surely worn me out.",
+        "sourceStrongList": [
+          {
+            "surface": "כָּל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "עַתָּ֥ה",
+            "strong": "H6258",
+            "entityId": "hebrew:H6258"
+          },
+          {
+            "surface": "אַךְ",
+            "strong": "H389",
+            "entityId": "hebrew:H389"
+          },
+          {
+            "surface": "עֲדָתִֽ/י",
+            "strong": "H5712",
+            "entityId": "hebrew:H5712"
+          },
+          {
+            "surface": "הֲ֝שִׁמּ֗וֹתָ",
+            "strong": "H8074",
+            "entityId": "hebrew:H8074"
+          },
+          {
+            "surface": "הֶלְאָ֑/נִי",
+            "strong": "H3811",
+            "entityId": "hebrew:H3811"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:33:24",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "then God is gracious to him, and says,",
+        "sourceStrongList": [
+          {
+            "surface": "וַ/יֹּ֗אמֶר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "מָצָ֥אתִי",
+            "strong": "H4672",
+            "entityId": "hebrew:H4672"
+          },
+          {
+            "surface": "מֵ/רֶ֥דֶת",
+            "strong": "H3381",
+            "entityId": "hebrew:H3381"
+          },
+          {
+            "surface": "וַ/יְחֻנֶּ֗/נּוּ",
+            "strong": "H2603",
+            "entityId": "hebrew:H2603"
+          },
+          {
+            "surface": "שָׁ֗חַת",
+            "strong": "H7845",
+            "entityId": "hebrew:H7845"
+          },
+          {
+            "surface": "כֹֽפֶר",
+            "strong": "H3724",
+            "entityId": "hebrew:H3724"
+          },
+          {
+            "surface": "פְּ֭דָעֵ/הוּ",
+            "strong": "H6308",
+            "entityId": "hebrew:H6308"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:24:22",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Yet God preserves the mighty by his power.",
+        "sourceStrongList": [
+          {
+            "surface": "וְֽ/לֹא",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "יָ֝ק֗וּם",
+            "strong": "H6965",
+            "entityId": "hebrew:H6965"
+          },
+          {
+            "surface": "בַּֽ/חַיִּֽין",
+            "strong": "H2416",
+            "entityId": "hebrew:H2416"
+          },
+          {
+            "surface": "בְּ/כֹח֑/וֹ",
+            "strong": "H3581",
+            "entityId": "hebrew:H3581"
+          },
+          {
+            "surface": "יַאֲמִ֥ין",
+            "strong": "H539",
+            "entityId": "hebrew:H539"
+          },
+          {
+            "surface": "וּ/מָשַׁ֣ךְ",
+            "strong": "H4900",
+            "entityId": "hebrew:H4900"
+          },
+          {
+            "surface": "אַבִּירִ֣ים",
+            "strong": "H47",
+            "entityId": "hebrew:H47"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:12:13",
+        "translation": "web",
+        "tokenIndex": 1,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "“With God is wisdom and might.",
+        "sourceStrongList": [
+          {
+            "surface": "עִ֭מּ/וֹ",
+            "strong": "H5973",
+            "entityId": "hebrew:H5973"
+          },
+          {
+            "surface": "חָכְמָ֣ה",
+            "strong": "H2451",
+            "entityId": "hebrew:H2451"
+          },
+          {
+            "surface": "עֵצָ֥ה",
+            "strong": "H6098",
+            "entityId": "hebrew:H6098"
+          },
+          {
+            "surface": "וּ/גְבוּרָ֑ה",
+            "strong": "H1369",
+            "entityId": "hebrew:H1369"
+          },
+          {
+            "surface": "וּ/תְבוּנָֽה",
+            "strong": "H8394",
+            "entityId": "hebrew:H8394"
+          }
+        ]
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:26:6",
+        "translation": "web",
+        "tokenIndex": 12,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Sheol* Sheol is the lower world or the grave. is naked before God,",
+        "sourceStrongList": [
+          {
+            "surface": "וְ/אֵ֥ין",
+            "strong": "H369",
+            "entityId": "hebrew:H369"
+          },
+          {
+            "surface": "נֶגְדּ֑/וֹ",
+            "strong": "H5048",
+            "entityId": "hebrew:H5048"
+          },
+          {
+            "surface": "שְׁא֣וֹל",
+            "strong": "H7585",
+            "entityId": "hebrew:H7585"
+          },
+          {
+            "surface": "עָר֣וֹם",
+            "strong": "H6174",
+            "entityId": "hebrew:H6174"
+          },
+          {
+            "surface": "כְּ֝ס֗וּת",
+            "strong": "H3682",
+            "entityId": "hebrew:H3682"
+          },
+          {
+            "surface": "לָֽ/אֲבַדּֽוֹן",
+            "strong": "H11",
+            "entityId": "hebrew:H11"
+          }
+        ]
+      },
+      {
+        "file": "Lev.json",
+        "reference": "Lev:24:11",
+        "translation": "kjv",
+        "tokenIndex": 10,
+        "text": "Lord",
+        "normalized": "lord",
+        "translationText": "And the Israelitish woman’s son blasphemed the name of the Lord, and cursed. And they brought him unto Moses: (and his mother’s name was Shelomith, the daughter of Dibri, of the tribe of Dan:)",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֹת֖/וֹ",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֶל",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "בֶּן",
+            "strong": "H1121",
+            "entityId": "hebrew:H1121"
+          },
+          {
+            "surface": "וַ/יָּבִ֥יאוּ",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "הַ/שֵּׁם֙",
+            "strong": "H8034",
+            "entityId": "hebrew:H8034"
+          },
+          {
+            "surface": "וְ/שֵׁ֥ם",
+            "strong": "H8034",
+            "entityId": "hebrew:H8034"
+          },
+          {
+            "surface": "הָֽ/אִשָּׁ֨ה",
+            "strong": "H802",
+            "entityId": "hebrew:H802"
+          },
+          {
+            "surface": "מֹשֶׁ֑ה",
+            "strong": "H4872",
+            "entityId": "hebrew:H4872"
+          },
+          {
+            "surface": "בַּת",
+            "strong": "H1323",
+            "entityId": "hebrew:H1323"
+          },
+          {
+            "surface": "לְ/מַטֵּה",
+            "strong": "H4294",
+            "entityId": "hebrew:H4294"
+          },
+          {
+            "surface": "אִמּ֛/וֹ",
+            "strong": "H517",
+            "entityId": "hebrew:H517"
+          },
+          {
+            "surface": "וַ/יְקַלֵּ֔ל",
+            "strong": "H7043",
+            "entityId": "hebrew:H7043"
+          },
+          {
+            "surface": "דָֽן",
+            "strong": "H1835",
+            "entityId": "hebrew:H1835"
+          },
+          {
+            "surface": "וַ֠/יִּקֹּב",
+            "strong": "H5344",
+            "entityId": "hebrew:H5344"
+          },
+          {
+            "surface": "שְׁלֹמִ֥ית",
+            "strong": "H8019",
+            "entityId": "hebrew:H8019"
+          },
+          {
+            "surface": "הַ/יִּשְׂרְאֵלִ֤ית",
+            "strong": "H3482",
+            "entityId": "hebrew:H3482"
+          },
+          {
+            "surface": "דִּבְרִ֖י",
+            "strong": "H1704",
+            "entityId": "hebrew:H1704"
+          }
+        ]
+      },
+      {
+        "file": "Neh.json",
+        "reference": "Neh:6:9",
+        "translation": "kjv",
+        "tokenIndex": 23,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "For they all made us afraid, saying, Their hands shall be weakened from the work, that it be not done. Now therefore, O God, strengthen my hands.",
+        "sourceStrongList": [
+          {
+            "surface": "אוֹתָ֨/נוּ֙",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "כֻלָּ֗/ם",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "לֵ/אמֹ֔ר",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "וְ/לֹ֣א",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "כִּ֣י",
+            "strong": "H3588",
+            "entityId": "hebrew:H3588"
+          },
+          {
+            "surface": "תֵעָשֶׂ֑ה",
+            "strong": "H6213",
+            "entityId": "hebrew:H6213"
+          },
+          {
+            "surface": "יְדֵי/הֶ֛ם",
+            "strong": "H3027",
+            "entityId": "hebrew:H3027"
+          },
+          {
+            "surface": "יָדָֽ/י",
+            "strong": "H3027",
+            "entityId": "hebrew:H3027"
+          },
+          {
+            "surface": "מִן",
+            "strong": "H4480",
+            "entityId": "hebrew:H4480"
+          },
+          {
+            "surface": "וְ/עַתָּ֖ה",
+            "strong": "H6258",
+            "entityId": "hebrew:H6258"
+          },
+          {
+            "surface": "מְיָֽרְאִ֤ים",
+            "strong": "H3372",
+            "entityId": "hebrew:H3372"
+          },
+          {
+            "surface": "חַזֵּ֥ק",
+            "strong": "H2388",
+            "entityId": "hebrew:H2388"
+          },
+          {
+            "surface": "הַ/מְּלָאכָ֖ה",
+            "strong": "H4399",
+            "entityId": "hebrew:H4399"
+          },
+          {
+            "surface": "יִרְפּ֧וּ",
+            "strong": "H7503",
+            "entityId": "hebrew:H7503"
+          }
+        ]
+      },
+      {
+        "file": "Neh.json",
+        "reference": "Neh:10:32",
+        "translation": "kjv",
+        "tokenIndex": 25,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Also we made ordinances for us, to charge ourselves yearly with the third part of a shekel for the service of the house of our God;",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "וְ/כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "לֹא",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "הַֽ/מְבִיאִים֩",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "הָ/אָ֡רֶץ",
+            "strong": "H776",
+            "entityId": "hebrew:H776"
+          },
+          {
+            "surface": "בְּ/י֤וֹם",
+            "strong": "H3117",
+            "entityId": "hebrew:H3117"
+          },
+          {
+            "surface": "וּ/בְ/י֣וֹם",
+            "strong": "H3117",
+            "entityId": "hebrew:H3117"
+          },
+          {
+            "surface": "וְ/עַמֵּ֣י",
+            "strong": "H5971",
+            "entityId": "hebrew:H5971"
+          },
+          {
+            "surface": "יָֽד",
+            "strong": "H3027",
+            "entityId": "hebrew:H3027"
+          },
+          {
+            "surface": "נִקַּ֥ח",
+            "strong": "H3947",
+            "entityId": "hebrew:H3947"
+          },
+          {
+            "surface": "הַ/שָּׁנָ֥ה",
+            "strong": "H8141",
+            "entityId": "hebrew:H8141"
+          },
+          {
+            "surface": "קֹ֑דֶשׁ",
+            "strong": "H6944",
+            "entityId": "hebrew:H6944"
+          },
+          {
+            "surface": "הַ/שַּׁבָּת֙",
+            "strong": "H7676",
+            "entityId": "hebrew:H7676"
+          },
+          {
+            "surface": "בַּ/שַּׁבָּ֖ת",
+            "strong": "H7676",
+            "entityId": "hebrew:H7676"
+          },
+          {
+            "surface": "הַ/שְּׁבִיעִ֖ית",
+            "strong": "H7637",
+            "entityId": "hebrew:H7637"
+          },
+          {
+            "surface": "לִ/מְכּ֔וֹר",
+            "strong": "H4376",
+            "entityId": "hebrew:H4376"
+          },
+          {
+            "surface": "וְ/נִטֹּ֛שׁ",
+            "strong": "H5203",
+            "entityId": "hebrew:H5203"
+          },
+          {
+            "surface": "שֶׁ֜בֶר",
+            "strong": "H7668",
+            "entityId": "hebrew:H7668"
+          },
+          {
+            "surface": "וּ/מַשָּׁ֥א",
+            "strong": "H4855",
+            "entityId": "hebrew:H4855"
+          },
+          {
+            "surface": "הַ/מַּקָּח֨וֹת",
+            "strong": "H4728",
+            "entityId": "hebrew:H4728"
+          }
+        ]
+      },
+      {
+        "file": "Neh.json",
+        "reference": "Neh:10:32",
+        "translation": "web",
+        "tokenIndex": 35,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Also we made ordinances for ourselves, to charge ourselves yearly with the third part of a shekel* A shekel is about 10 grams or about 0.35 ounces. for the service of the house of our God;",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "וְ/כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "כָל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "לֹא",
+            "strong": "H3808",
+            "entityId": "hebrew:H3808"
+          },
+          {
+            "surface": "הַֽ/מְבִיאִים֩",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "הָ/אָ֡רֶץ",
+            "strong": "H776",
+            "entityId": "hebrew:H776"
+          },
+          {
+            "surface": "בְּ/י֤וֹם",
+            "strong": "H3117",
+            "entityId": "hebrew:H3117"
+          },
+          {
+            "surface": "וּ/בְ/י֣וֹם",
+            "strong": "H3117",
+            "entityId": "hebrew:H3117"
+          },
+          {
+            "surface": "וְ/עַמֵּ֣י",
+            "strong": "H5971",
+            "entityId": "hebrew:H5971"
+          },
+          {
+            "surface": "יָֽד",
+            "strong": "H3027",
+            "entityId": "hebrew:H3027"
+          },
+          {
+            "surface": "נִקַּ֥ח",
+            "strong": "H3947",
+            "entityId": "hebrew:H3947"
+          },
+          {
+            "surface": "הַ/שָּׁנָ֥ה",
+            "strong": "H8141",
+            "entityId": "hebrew:H8141"
+          },
+          {
+            "surface": "קֹ֑דֶשׁ",
+            "strong": "H6944",
+            "entityId": "hebrew:H6944"
+          },
+          {
+            "surface": "הַ/שַּׁבָּת֙",
+            "strong": "H7676",
+            "entityId": "hebrew:H7676"
+          },
+          {
+            "surface": "בַּ/שַּׁבָּ֖ת",
+            "strong": "H7676",
+            "entityId": "hebrew:H7676"
+          },
+          {
+            "surface": "הַ/שְּׁבִיעִ֖ית",
+            "strong": "H7637",
+            "entityId": "hebrew:H7637"
+          },
+          {
+            "surface": "לִ/מְכּ֔וֹר",
+            "strong": "H4376",
+            "entityId": "hebrew:H4376"
+          },
+          {
+            "surface": "וְ/נִטֹּ֛שׁ",
+            "strong": "H5203",
+            "entityId": "hebrew:H5203"
+          },
+          {
+            "surface": "שֶׁ֜בֶר",
+            "strong": "H7668",
+            "entityId": "hebrew:H7668"
+          },
+          {
+            "surface": "וּ/מַשָּׁ֥א",
+            "strong": "H4855",
+            "entityId": "hebrew:H4855"
+          },
+          {
+            "surface": "הַ/מַּקָּח֨וֹת",
+            "strong": "H4728",
+            "entityId": "hebrew:H4728"
+          }
+        ]
+      },
+      {
+        "file": "Num.json",
+        "reference": "Num:7:89",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "When Moses went into the Tent of Meeting to speak with Yahweh, he heard his voice speaking to him from above the mercy seat that was on the ark of the Testimony, from between the two cherubim; and he spoke to him.",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "מֵ/עַ֤ל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "אֶל",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "אֵלָ֗י/ו",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "אֵלָֽי/ו",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "אֲשֶׁר֙",
+            "strong": "H834",
+            "entityId": "hebrew:H834"
+          },
+          {
+            "surface": "וּ/בְ/בֹ֨א",
+            "strong": "H935",
+            "entityId": "hebrew:H935"
+          },
+          {
+            "surface": "וַ/יִּשְׁמַ֨ע",
+            "strong": "H8085",
+            "entityId": "hebrew:H8085"
+          },
+          {
+            "surface": "לְ/דַבֵּ֣ר",
+            "strong": "H1696",
+            "entityId": "hebrew:H1696"
+          },
+          {
+            "surface": "מִדַּבֵּ֣ר",
+            "strong": "H1696",
+            "entityId": "hebrew:H1696"
+          },
+          {
+            "surface": "וַ/יְדַבֵּ֖ר",
+            "strong": "H1696",
+            "entityId": "hebrew:H1696"
+          },
+          {
+            "surface": "אִתּ/וֹ֒",
+            "strong": "H854",
+            "entityId": "hebrew:H854"
+          },
+          {
+            "surface": "שְׁנֵ֣י",
+            "strong": "H8147",
+            "entityId": "hebrew:H8147"
+          },
+          {
+            "surface": "מֹשֶׁ֜ה",
+            "strong": "H4872",
+            "entityId": "hebrew:H4872"
+          },
+          {
+            "surface": "הַ/קּ֜וֹל",
+            "strong": "H6963",
+            "entityId": "hebrew:H6963"
+          },
+          {
+            "surface": "מִ/בֵּ֖ין",
+            "strong": "H996",
+            "entityId": "hebrew:H996"
+          },
+          {
+            "surface": "אֹ֣הֶל",
+            "strong": "H168",
+            "entityId": "hebrew:H168"
+          },
+          {
+            "surface": "מוֹעֵד֮",
+            "strong": "H4150",
+            "entityId": "hebrew:H4150"
+          },
+          {
+            "surface": "אֲרֹ֣ן",
+            "strong": "H727",
+            "entityId": "hebrew:H727"
+          },
+          {
+            "surface": "הַ/כְּרֻבִ֑ים",
+            "strong": "H3742",
+            "entityId": "hebrew:H3742"
+          },
+          {
+            "surface": "הָ/עֵדֻ֔ת",
+            "strong": "H5715",
+            "entityId": "hebrew:H5715"
+          },
+          {
+            "surface": "הַ/כַּפֹּ֨רֶת֙",
+            "strong": "H3727",
+            "entityId": "hebrew:H3727"
+          }
+        ]
+      },
+      {
+        "file": "Num.json",
+        "reference": "Num:23:15",
+        "translation": "kjv",
+        "tokenIndex": 15,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "And he said unto Balak, Stand here by thy burnt offering, while I meet the LORD yonder.",
+        "sourceStrongList": [
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "אֶל",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "וַ/יֹּ֨אמֶר֙",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "כֹּ֖ה",
+            "strong": "H3541",
+            "entityId": "hebrew:H3541"
+          },
+          {
+            "surface": "כֹּֽה",
+            "strong": "H3541",
+            "entityId": "hebrew:H3541"
+          },
+          {
+            "surface": "וְ/אָנֹכִ֖י",
+            "strong": "H595",
+            "entityId": "hebrew:H595"
+          },
+          {
+            "surface": "עֹלָתֶ֑/ךָ",
+            "strong": "H5930",
+            "entityId": "hebrew:H5930"
+          },
+          {
+            "surface": "הִתְיַצֵּ֥ב",
+            "strong": "H3320",
+            "entityId": "hebrew:H3320"
+          },
+          {
+            "surface": "בָּלָ֔ק",
+            "strong": "H1111",
+            "entityId": "hebrew:H1111"
+          },
+          {
+            "surface": "אִקָּ֥רֶה",
+            "strong": "H7136",
+            "entityId": "hebrew:H7136"
+          }
+        ]
+      },
+      {
+        "file": "Num.json",
+        "reference": "Num:23:15",
+        "translation": "web",
+        "tokenIndex": 13,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "He said to Balak, “Stand here by your burnt offering, while I meet God over there.”",
+        "sourceStrongList": [
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "אֶל",
+            "strong": "H413",
+            "entityId": "hebrew:H413"
+          },
+          {
+            "surface": "וַ/יֹּ֨אמֶר֙",
+            "strong": "H559",
+            "entityId": "hebrew:H559"
+          },
+          {
+            "surface": "כֹּ֖ה",
+            "strong": "H3541",
+            "entityId": "hebrew:H3541"
+          },
+          {
+            "surface": "כֹּֽה",
+            "strong": "H3541",
+            "entityId": "hebrew:H3541"
+          },
+          {
+            "surface": "וְ/אָנֹכִ֖י",
+            "strong": "H595",
+            "entityId": "hebrew:H595"
+          },
+          {
+            "surface": "עֹלָתֶ֑/ךָ",
+            "strong": "H5930",
+            "entityId": "hebrew:H5930"
+          },
+          {
+            "surface": "הִתְיַצֵּ֥ב",
+            "strong": "H3320",
+            "entityId": "hebrew:H3320"
+          },
+          {
+            "surface": "בָּלָ֔ק",
+            "strong": "H1111",
+            "entityId": "hebrew:H1111"
+          },
+          {
+            "surface": "אִקָּ֥רֶה",
+            "strong": "H7136",
+            "entityId": "hebrew:H7136"
+          }
+        ]
+      },
+      {
+        "file": "Prov.json",
+        "reference": "Prov:26:10",
+        "translation": "kjv",
+        "tokenIndex": 2,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "The great God that formed all things both rewardeth the fool, and rewardeth transgressors.",
+        "sourceStrongList": [
+          {
+            "surface": "כֹּ֑ל",
+            "strong": "H3605",
+            "entityId": "hebrew:H3605"
+          },
+          {
+            "surface": "עֹבְרִֽים",
+            "strong": "H5674",
+            "entityId": "hebrew:H5674"
+          },
+          {
+            "surface": "רַ֥ב",
+            "strong": "H7227",
+            "entityId": "hebrew:H7227"
+          },
+          {
+            "surface": "כְּ֝סִ֗יל",
+            "strong": "H3684",
+            "entityId": "hebrew:H3684"
+          },
+          {
+            "surface": "מְחֽוֹלֵֽל",
+            "strong": "H2342",
+            "entityId": "hebrew:H2342"
+          },
+          {
+            "surface": "וְ/שֹׂכֵ֥ר",
+            "strong": "H7936",
+            "entityId": "hebrew:H7936"
+          },
+          {
+            "surface": "וְ/שֹׂכֵ֥ר",
+            "strong": "H7936",
+            "entityId": "hebrew:H7936"
+          }
+        ]
+      },
+      {
+        "file": "Prov.json",
+        "reference": "Prov:21:12",
+        "translation": "kjv",
+        "tokenIndex": 11,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "The righteous man wisely considereth the house of the wicked: but God overthroweth the wicked for their wickedness.",
+        "sourceStrongList": [
+          {
+            "surface": "לְ/בֵ֣ית",
+            "strong": "H1004",
+            "entityId": "hebrew:H1004"
+          },
+          {
+            "surface": "לָ/רָֽע",
+            "strong": "H7451",
+            "entityId": "hebrew:H7451"
+          },
+          {
+            "surface": "רָשָׁ֑ע",
+            "strong": "H7563",
+            "entityId": "hebrew:H7563"
+          },
+          {
+            "surface": "רְשָׁעִ֣ים",
+            "strong": "H7563",
+            "entityId": "hebrew:H7563"
+          },
+          {
+            "surface": "צַ֭דִּיק",
+            "strong": "H6662",
+            "entityId": "hebrew:H6662"
+          },
+          {
+            "surface": "מַשְׂכִּ֣יל",
+            "strong": "H7919",
+            "entityId": "hebrew:H7919"
+          },
+          {
+            "surface": "מְסַלֵּ֖ף",
+            "strong": "H5557",
+            "entityId": "hebrew:H5557"
+          }
+        ]
+      },
+      {
+        "file": "Ps.json",
+        "reference": "Ps:16:4",
+        "translation": "kjv",
+        "tokenIndex": 9,
+        "text": "god",
+        "normalized": "god",
+        "translationText": "Their sorrows shall be multiplied that hasten after another god: their drink offerings of blood will I not offer, nor take up their names into my lips.",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "שְׁ֝מוֹתָ֗/ם",
+            "strong": "H8034",
+            "entityId": "hebrew:H8034"
+          },
+          {
+            "surface": "אֶשָּׂ֥א",
+            "strong": "H5375",
+            "entityId": "hebrew:H5375"
+          },
+          {
+            "surface": "מִ/דָּ֑ם",
+            "strong": "H1818",
+            "entityId": "hebrew:H1818"
+          },
+          {
+            "surface": "יִרְבּ֥וּ",
+            "strong": "H7235",
+            "entityId": "hebrew:H7235"
+          },
+          {
+            "surface": "שְׂפָתָֽ/י",
+            "strong": "H8193",
+            "entityId": "hebrew:H8193"
+          },
+          {
+            "surface": "אַחֵ֪ר",
+            "strong": "H312",
+            "entityId": "hebrew:H312"
+          },
+          {
+            "surface": "בַּל",
+            "strong": "H1077",
+            "entityId": "hebrew:H1077"
+          },
+          {
+            "surface": "וּֽ/בַל",
+            "strong": "H1077",
+            "entityId": "hebrew:H1077"
+          },
+          {
+            "surface": "מָ֫הָ֥רוּ",
+            "strong": "H4116",
+            "entityId": "hebrew:H4116"
+          },
+          {
+            "surface": "נִסְכֵּי/הֶ֣ם",
+            "strong": "H5262",
+            "entityId": "hebrew:H5262"
+          },
+          {
+            "surface": "אַסִּ֣יךְ",
+            "strong": "H5258",
+            "entityId": "hebrew:H5258"
+          },
+          {
+            "surface": "עַצְּבוֹתָ/ם֮",
+            "strong": "H6094",
+            "entityId": "hebrew:H6094"
+          }
+        ]
+      },
+      {
+        "file": "Ps.json",
+        "reference": "Ps:16:4",
+        "translation": "web",
+        "tokenIndex": 10,
+        "text": "god",
+        "normalized": "god",
+        "translationText": "Their sorrows shall be multiplied who give gifts to another god.",
+        "sourceStrongList": [
+          {
+            "surface": "אֶת",
+            "strong": "H853",
+            "entityId": "hebrew:H853"
+          },
+          {
+            "surface": "עַל",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "שְׁ֝מוֹתָ֗/ם",
+            "strong": "H8034",
+            "entityId": "hebrew:H8034"
+          },
+          {
+            "surface": "אֶשָּׂ֥א",
+            "strong": "H5375",
+            "entityId": "hebrew:H5375"
+          },
+          {
+            "surface": "מִ/דָּ֑ם",
+            "strong": "H1818",
+            "entityId": "hebrew:H1818"
+          },
+          {
+            "surface": "יִרְבּ֥וּ",
+            "strong": "H7235",
+            "entityId": "hebrew:H7235"
+          },
+          {
+            "surface": "שְׂפָתָֽ/י",
+            "strong": "H8193",
+            "entityId": "hebrew:H8193"
+          },
+          {
+            "surface": "אַחֵ֪ר",
+            "strong": "H312",
+            "entityId": "hebrew:H312"
+          },
+          {
+            "surface": "בַּל",
+            "strong": "H1077",
+            "entityId": "hebrew:H1077"
+          },
+          {
+            "surface": "וּֽ/בַל",
+            "strong": "H1077",
+            "entityId": "hebrew:H1077"
+          },
+          {
+            "surface": "מָ֫הָ֥רוּ",
+            "strong": "H4116",
+            "entityId": "hebrew:H4116"
+          },
+          {
+            "surface": "נִסְכֵּי/הֶ֣ם",
+            "strong": "H5262",
+            "entityId": "hebrew:H5262"
+          },
+          {
+            "surface": "אַסִּ֣יךְ",
+            "strong": "H5258",
+            "entityId": "hebrew:H5258"
+          },
+          {
+            "surface": "עַצְּבוֹתָ/ם֮",
+            "strong": "H6094",
+            "entityId": "hebrew:H6094"
+          }
+        ]
+      },
+      {
+        "file": "Ps.json",
+        "reference": "Ps:13:3",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "Consider and hear me, O LORD my God: lighten mine eyes, lest I sleep the sleep of death;",
+        "sourceStrongList": [
+          {
+            "surface": "עָלָֽ/י",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "עַד",
+            "strong": "H5704",
+            "entityId": "hebrew:H5704"
+          },
+          {
+            "surface": "עַד",
+            "strong": "H5704",
+            "entityId": "hebrew:H5704"
+          },
+          {
+            "surface": "בְּ/נַפְשִׁ֗/י",
+            "strong": "H5315",
+            "entityId": "hebrew:H5315"
+          },
+          {
+            "surface": "אֹיְבִ֣/י",
+            "strong": "H341",
+            "entityId": "hebrew:H341"
+          },
+          {
+            "surface": "בִּ/לְבָבִ֣/י",
+            "strong": "H3824",
+            "entityId": "hebrew:H3824"
+          },
+          {
+            "surface": "יָר֖וּם",
+            "strong": "H7311",
+            "entityId": "hebrew:H7311"
+          },
+          {
+            "surface": "עֵצ֡וֹת",
+            "strong": "H6098",
+            "entityId": "hebrew:H6098"
+          },
+          {
+            "surface": "אָשִׁ֪ית",
+            "strong": "H7896",
+            "entityId": "hebrew:H7896"
+          },
+          {
+            "surface": "יוֹמָ֑ם",
+            "strong": "H3119",
+            "entityId": "hebrew:H3119"
+          },
+          {
+            "surface": "אָ֨נָה",
+            "strong": "H575",
+            "entityId": "hebrew:H575"
+          },
+          {
+            "surface": "אָ֓נָה",
+            "strong": "H575",
+            "entityId": "hebrew:H575"
+          },
+          {
+            "surface": "יָג֣וֹן",
+            "strong": "H3015",
+            "entityId": "hebrew:H3015"
+          }
+        ]
+      },
+      {
+        "file": "Ps.json",
+        "reference": "Ps:13:3",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Consider and hear me, O LORD my God: lighten mine eyes, lest I sleep the sleep of death;",
+        "sourceStrongList": [
+          {
+            "surface": "עָלָֽ/י",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "עַד",
+            "strong": "H5704",
+            "entityId": "hebrew:H5704"
+          },
+          {
+            "surface": "עַד",
+            "strong": "H5704",
+            "entityId": "hebrew:H5704"
+          },
+          {
+            "surface": "בְּ/נַפְשִׁ֗/י",
+            "strong": "H5315",
+            "entityId": "hebrew:H5315"
+          },
+          {
+            "surface": "אֹיְבִ֣/י",
+            "strong": "H341",
+            "entityId": "hebrew:H341"
+          },
+          {
+            "surface": "בִּ/לְבָבִ֣/י",
+            "strong": "H3824",
+            "entityId": "hebrew:H3824"
+          },
+          {
+            "surface": "יָר֖וּם",
+            "strong": "H7311",
+            "entityId": "hebrew:H7311"
+          },
+          {
+            "surface": "עֵצ֡וֹת",
+            "strong": "H6098",
+            "entityId": "hebrew:H6098"
+          },
+          {
+            "surface": "אָשִׁ֪ית",
+            "strong": "H7896",
+            "entityId": "hebrew:H7896"
+          },
+          {
+            "surface": "יוֹמָ֑ם",
+            "strong": "H3119",
+            "entityId": "hebrew:H3119"
+          },
+          {
+            "surface": "אָ֨נָה",
+            "strong": "H575",
+            "entityId": "hebrew:H575"
+          },
+          {
+            "surface": "אָ֓נָה",
+            "strong": "H575",
+            "entityId": "hebrew:H575"
+          },
+          {
+            "surface": "יָג֣וֹן",
+            "strong": "H3015",
+            "entityId": "hebrew:H3015"
+          }
+        ]
+      },
+      {
+        "file": "Ps.json",
+        "reference": "Ps:13:3",
+        "translation": "web",
+        "tokenIndex": 4,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "Behold, and answer me, Yahweh, my God.",
+        "sourceStrongList": [
+          {
+            "surface": "עָלָֽ/י",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "עַד",
+            "strong": "H5704",
+            "entityId": "hebrew:H5704"
+          },
+          {
+            "surface": "עַד",
+            "strong": "H5704",
+            "entityId": "hebrew:H5704"
+          },
+          {
+            "surface": "בְּ/נַפְשִׁ֗/י",
+            "strong": "H5315",
+            "entityId": "hebrew:H5315"
+          },
+          {
+            "surface": "אֹיְבִ֣/י",
+            "strong": "H341",
+            "entityId": "hebrew:H341"
+          },
+          {
+            "surface": "בִּ/לְבָבִ֣/י",
+            "strong": "H3824",
+            "entityId": "hebrew:H3824"
+          },
+          {
+            "surface": "יָר֖וּם",
+            "strong": "H7311",
+            "entityId": "hebrew:H7311"
+          },
+          {
+            "surface": "עֵצ֡וֹת",
+            "strong": "H6098",
+            "entityId": "hebrew:H6098"
+          },
+          {
+            "surface": "אָשִׁ֪ית",
+            "strong": "H7896",
+            "entityId": "hebrew:H7896"
+          },
+          {
+            "surface": "יוֹמָ֑ם",
+            "strong": "H3119",
+            "entityId": "hebrew:H3119"
+          },
+          {
+            "surface": "אָ֨נָה",
+            "strong": "H575",
+            "entityId": "hebrew:H575"
+          },
+          {
+            "surface": "אָ֓נָה",
+            "strong": "H575",
+            "entityId": "hebrew:H575"
+          },
+          {
+            "surface": "יָג֣וֹן",
+            "strong": "H3015",
+            "entityId": "hebrew:H3015"
+          }
+        ]
+      },
+      {
+        "file": "Ps.json",
+        "reference": "Ps:13:3",
+        "translation": "web",
+        "tokenIndex": 6,
+        "text": "God",
+        "normalized": "god",
+        "translationText": "Behold, and answer me, Yahweh, my God.",
+        "sourceStrongList": [
+          {
+            "surface": "עָלָֽ/י",
+            "strong": "H5921",
+            "entityId": "hebrew:H5921"
+          },
+          {
+            "surface": "עַד",
+            "strong": "H5704",
+            "entityId": "hebrew:H5704"
+          },
+          {
+            "surface": "עַד",
+            "strong": "H5704",
+            "entityId": "hebrew:H5704"
+          },
+          {
+            "surface": "בְּ/נַפְשִׁ֗/י",
+            "strong": "H5315",
+            "entityId": "hebrew:H5315"
+          },
+          {
+            "surface": "אֹיְבִ֣/י",
+            "strong": "H341",
+            "entityId": "hebrew:H341"
+          },
+          {
+            "surface": "בִּ/לְבָבִ֣/י",
+            "strong": "H3824",
+            "entityId": "hebrew:H3824"
+          },
+          {
+            "surface": "יָר֖וּם",
+            "strong": "H7311",
+            "entityId": "hebrew:H7311"
+          },
+          {
+            "surface": "עֵצ֡וֹת",
+            "strong": "H6098",
+            "entityId": "hebrew:H6098"
+          },
+          {
+            "surface": "אָשִׁ֪ית",
+            "strong": "H7896",
+            "entityId": "hebrew:H7896"
+          },
+          {
+            "surface": "יוֹמָ֑ם",
+            "strong": "H3119",
+            "entityId": "hebrew:H3119"
+          },
+          {
+            "surface": "אָ֨נָה",
+            "strong": "H575",
+            "entityId": "hebrew:H575"
+          },
+          {
+            "surface": "אָ֓נָה",
+            "strong": "H575",
+            "entityId": "hebrew:H575"
+          },
+          {
+            "surface": "יָג֣וֹן",
+            "strong": "H3015",
+            "entityId": "hebrew:H3015"
+          }
+        ]
+      },
+      {
+        "file": "Ps.json",
+        "reference": "Ps:13:1",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "LORD",
+        "normalized": "lord",
+        "translationText": "How long wilt thou forget me, O LORD? for ever? how long wilt thou hide thy face from me?",
+        "sourceStrongList": [
+          {
+            "surface": "לְ/דָוִֽד",
+            "strong": "H1732",
+            "entityId": "hebrew:H1732"
+          },
+          {
+            "surface": "לַ/מְנַצֵּ֗חַ",
+            "strong": "H5329",
+            "entityId": "hebrew:H5329"
+          },
+          {
+            "surface": "מִזְמ֥וֹר",
+            "strong": "H4210",
+            "entityId": "hebrew:H4210"
+          }
+        ]
+      },
+      {
+        "file": "Ps.json",
+        "reference": "Ps:13:1",
+        "translation": "web",
+        "tokenIndex": 2,
+        "text": "Yahweh",
+        "normalized": "yahweh",
+        "translationText": "How long, Yahweh?",
+        "sourceStrongList": [
+          {
+            "surface": "לְ/דָוִֽד",
+            "strong": "H1732",
+            "entityId": "hebrew:H1732"
+          },
+          {
+            "surface": "לַ/מְנַצֵּ֗חַ",
+            "strong": "H5329",
+            "entityId": "hebrew:H5329"
+          },
+          {
+            "surface": "מִזְמ֥וֹר",
+            "strong": "H4210",
+            "entityId": "hebrew:H4210"
+          }
+        ]
+      }
+    ],
+    "alignedToNonDivineSource": [
+      {
+        "file": "1Kgs.json",
+        "reference": "1Kgs:1:34",
+        "translation": "kjv",
+        "tokenIndex": 23,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:1Kgs:1:34:5",
+        "sourceToken": {
+          "id": "hebrew:1Kgs:1:34:5",
+          "index": 5,
+          "source": "hebrew",
+          "surface": "יִשְׂרָאֵ֑ל",
+          "lemma": "יִשְׂרָאֵל",
+          "strong": "H3478",
+          "entityId": "hebrew:H3478",
+          "morph": "HNp",
+          "sourceReference": "1Kgs:1:34",
+          "canonicalReference": "1Kgs:1:34",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "1Kgs.json",
+        "reference": "1Kgs:1:39",
+        "translation": "kjv",
+        "tokenIndex": 26,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:1Kgs:1:39:12",
+        "sourceToken": {
+          "id": "hebrew:1Kgs:1:39:12",
+          "index": 12,
+          "source": "hebrew",
+          "surface": "יְחִ֖י",
+          "lemma": "חָיָה",
+          "strong": "H2421",
+          "entityId": "hebrew:H2421",
+          "morph": "HVqj3ms",
+          "sourceReference": "1Kgs:1:39",
+          "canonicalReference": "1Kgs:1:39",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "1Kgs.json",
+        "reference": "1Kgs:1:25",
+        "translation": "kjv",
+        "tokenIndex": 45,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:1Kgs:1:25:16",
+        "sourceToken": {
+          "id": "hebrew:1Kgs:1:25:16",
+          "index": 16,
+          "source": "hebrew",
+          "surface": "יְחִ֖י",
+          "lemma": "חָיָה",
+          "strong": "H2421",
+          "entityId": "hebrew:H2421",
+          "morph": "HVqj3ms",
+          "sourceReference": "1Kgs:1:25",
+          "canonicalReference": "1Kgs:1:25",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "1Sam.json",
+        "reference": "1Sam:2:32",
+        "translation": "kjv",
+        "tokenIndex": 14,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:1Sam:2:32:6",
+        "sourceToken": {
+          "id": "hebrew:1Sam:2:32:6",
+          "index": 6,
+          "source": "hebrew",
+          "surface": "יִשְׂרָאֵ֑ל",
+          "lemma": "יִשְׂרָאֵל",
+          "strong": "H3478",
+          "entityId": "hebrew:H3478",
+          "morph": "HNp",
+          "sourceReference": "1Sam:2:32",
+          "canonicalReference": "1Sam:2:32",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "1Sam.json",
+        "reference": "1Sam:20:2",
+        "translation": "kjv",
+        "tokenIndex": 5,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:1Sam:20:2:26",
+        "sourceToken": {
+          "id": "hebrew:1Sam:20:2:26",
+          "index": 26,
+          "source": "hebrew",
+          "surface": "חָלִילָ/ה֮",
+          "lemma": "חָלִילָה",
+          "strong": "H2486",
+          "entityId": "hebrew:H2486",
+          "morph": "HTj/Sh",
+          "sourceReference": "1Sam:20:2",
+          "canonicalReference": "1Sam:20:2",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:23:11",
+        "translation": "kjv",
+        "tokenIndex": 31,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:2Chr:23:11:13",
+        "sourceToken": {
+          "id": "hebrew:2Chr:23:11:13",
+          "index": 13,
+          "source": "hebrew",
+          "surface": "יְחִ֥י",
+          "lemma": "חָיָה",
+          "strong": "H2421",
+          "entityId": "hebrew:H2421",
+          "morph": "HVqj3ms",
+          "sourceReference": "2Chr:23:11",
+          "canonicalReference": "2Chr:23:11",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:5",
+        "translation": "kjv",
+        "tokenIndex": 12,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:2Chr:2:5:9",
+        "sourceToken": {
+          "id": "hebrew:2Chr:2:5:9",
+          "index": 9,
+          "source": "hebrew",
+          "surface": "וּ/מִ֤י",
+          "lemma": "מִי",
+          "strong": "H4310",
+          "entityId": "hebrew:H4310",
+          "morph": "HC/Ti",
+          "sourceReference": "2Chr:2:5",
+          "canonicalReference": "2Chr:2:5",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "2Chr.json",
+        "reference": "2Chr:2:5",
+        "translation": "web",
+        "tokenIndex": 11,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:2Chr:2:5:9",
+        "sourceToken": {
+          "id": "hebrew:2Chr:2:5:9",
+          "index": 9,
+          "source": "hebrew",
+          "surface": "וּ/מִ֤י",
+          "lemma": "מִי",
+          "strong": "H4310",
+          "entityId": "hebrew:H4310",
+          "morph": "HC/Ti",
+          "sourceReference": "2Chr:2:5",
+          "canonicalReference": "2Chr:2:5",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "2Kgs.json",
+        "reference": "2Kgs:11:12",
+        "translation": "kjv",
+        "tokenIndex": 33,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:2Kgs:11:12:13",
+        "sourceToken": {
+          "id": "hebrew:2Kgs:11:12:13",
+          "index": 13,
+          "source": "hebrew",
+          "surface": "יְחִ֥י",
+          "lemma": "חָיָה",
+          "strong": "H2421",
+          "entityId": "hebrew:H2421",
+          "morph": "HVqj3ms",
+          "sourceReference": "2Kgs:11:12",
+          "canonicalReference": "2Kgs:11:12",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "2Sam.json",
+        "reference": "2Sam:18:33",
+        "translation": "kjv",
+        "tokenIndex": 34,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:2Sam:18:33:8",
+        "sourceToken": {
+          "id": "hebrew:2Sam:18:33:8",
+          "index": 8,
+          "source": "hebrew",
+          "surface": "יִתֵּ֤ן",
+          "lemma": "נָתַן",
+          "strong": "H5414",
+          "entityId": "hebrew:H5414",
+          "morph": "HVqi3ms",
+          "sourceReference": "2Sam:19:1",
+          "canonicalReference": "2Sam:18:33",
+          "versificationRuleId": "2sam-19-1-to-2sam-18-33"
+        }
+      },
+      {
+        "file": "2Sam.json",
+        "reference": "2Sam:16:16",
+        "translation": "kjv",
+        "tokenIndex": 20,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:2Sam:16:16:9",
+        "sourceToken": {
+          "id": "hebrew:2Sam:16:16:9",
+          "index": 9,
+          "source": "hebrew",
+          "surface": "יְחִ֥י",
+          "lemma": "חָיָה",
+          "strong": "H2421",
+          "entityId": "hebrew:H2421",
+          "morph": "HVqj3ms",
+          "sourceReference": "2Sam:16:16",
+          "canonicalReference": "2Sam:16:16",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Dan.json",
+        "reference": "Dan:2:10",
+        "translation": "kjv",
+        "tokenIndex": 27,
+        "text": "lord",
+        "normalized": "lord",
+        "alignedId": "hebrew:Dan:2:10:20",
+        "sourceToken": {
+          "id": "hebrew:Dan:2:10:20",
+          "index": 20,
+          "source": "hebrew",
+          "surface": "רַ֣ב",
+          "lemma": "רַב",
+          "strong": "H7229",
+          "entityId": "hebrew:H7229",
+          "morph": "AAamsa",
+          "sourceReference": "Dan:2:10",
+          "canonicalReference": "Dan:2:10",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Dan.json",
+        "reference": "Dan:2:10",
+        "translation": "web",
+        "tokenIndex": 25,
+        "text": "lord",
+        "normalized": "lord",
+        "alignedId": "hebrew:Dan:2:10:20",
+        "sourceToken": {
+          "id": "hebrew:Dan:2:10:20",
+          "index": 20,
+          "source": "hebrew",
+          "surface": "רַ֣ב",
+          "lemma": "רַב",
+          "strong": "H7229",
+          "entityId": "hebrew:H7229",
+          "morph": "AAamsa",
+          "sourceReference": "Dan:2:10",
+          "canonicalReference": "Dan:2:10",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Dan.json",
+        "reference": "Dan:4:19",
+        "translation": "kjv",
+        "tokenIndex": 37,
+        "text": "lord",
+        "normalized": "lord",
+        "alignedId": "hebrew:Dan:4:19:20",
+        "sourceToken": {
+          "id": "hebrew:Dan:4:19:20",
+          "index": 20,
+          "source": "hebrew",
+          "surface": "מרא/י",
+          "lemma": "מָרֵא",
+          "strong": "H4756",
+          "entityId": "hebrew:H4756",
+          "morph": "ANcmsc/Sp1cs",
+          "sourceReference": "Dan:4:16",
+          "canonicalReference": "Dan:4:19",
+          "versificationRuleId": "dan-4-1-34-to-dan-4-4-37"
+        }
+      },
+      {
+        "file": "Dan.json",
+        "reference": "Dan:4:24",
+        "translation": "kjv",
+        "tokenIndex": 20,
+        "text": "lord",
+        "normalized": "lord",
+        "alignedId": "hebrew:Dan:4:24:10",
+        "sourceToken": {
+          "id": "hebrew:Dan:4:24:10",
+          "index": 10,
+          "source": "hebrew",
+          "surface": "מרא/י",
+          "lemma": "מָרֵא",
+          "strong": "H4756",
+          "entityId": "hebrew:H4756",
+          "morph": "ANcmsc/Sp1cs",
+          "sourceReference": "Dan:4:21",
+          "canonicalReference": "Dan:4:24",
+          "versificationRuleId": "dan-4-1-34-to-dan-4-4-37"
+        }
+      },
+      {
+        "file": "Dan.json",
+        "reference": "Dan:4:24",
+        "translation": "web",
+        "tokenIndex": 20,
+        "text": "lord",
+        "normalized": "lord",
+        "alignedId": "hebrew:Dan:4:24:10",
+        "sourceToken": {
+          "id": "hebrew:Dan:4:24:10",
+          "index": 10,
+          "source": "hebrew",
+          "surface": "מרא/י",
+          "lemma": "מָרֵא",
+          "strong": "H4756",
+          "entityId": "hebrew:H4756",
+          "morph": "ANcmsc/Sp1cs",
+          "sourceReference": "Dan:4:21",
+          "canonicalReference": "Dan:4:24",
+          "versificationRuleId": "dan-4-1-34-to-dan-4-4-37"
+        }
+      },
+      {
+        "file": "Deut.json",
+        "reference": "Deut:28:67",
+        "translation": "kjv",
+        "tokenIndex": 7,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Deut:28:67:4",
+        "sourceToken": {
+          "id": "hebrew:Deut:28:67:4",
+          "index": 4,
+          "source": "hebrew",
+          "surface": "יִתֵּ֣ן",
+          "lemma": "נָתַן",
+          "strong": "H5414",
+          "entityId": "hebrew:H5414",
+          "morph": "HVqi3ms",
+          "sourceReference": "Deut:28:67",
+          "canonicalReference": "Deut:28:67",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Deut.json",
+        "reference": "Deut:28:67",
+        "translation": "kjv",
+        "tokenIndex": 18,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Deut:28:67:5",
+        "sourceToken": {
+          "id": "hebrew:Deut:28:67:5",
+          "index": 5,
+          "source": "hebrew",
+          "surface": "יִתֵּ֣ן",
+          "lemma": "נָתַן",
+          "strong": "H5414",
+          "entityId": "hebrew:H5414",
+          "morph": "HVqi3ms",
+          "sourceReference": "Deut:28:67",
+          "canonicalReference": "Deut:28:67",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:27:37",
+        "translation": "kjv",
+        "tokenIndex": 13,
+        "text": "lord",
+        "normalized": "lord",
+        "alignedId": "hebrew:Gen:27:37:18",
+        "sourceToken": {
+          "id": "hebrew:Gen:27:37:18",
+          "index": 18,
+          "source": "hebrew",
+          "surface": "גְּבִ֞יר",
+          "lemma": "גְּבִיר",
+          "strong": "H1376",
+          "entityId": "hebrew:H1376",
+          "morph": "HNcmsa",
+          "sourceReference": "Gen:27:37",
+          "canonicalReference": "Gen:27:37",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:27:37",
+        "translation": "web",
+        "tokenIndex": 9,
+        "text": "lord",
+        "normalized": "lord",
+        "alignedId": "hebrew:Gen:27:37:18",
+        "sourceToken": {
+          "id": "hebrew:Gen:27:37:18",
+          "index": 18,
+          "source": "hebrew",
+          "surface": "גְּבִ֞יר",
+          "lemma": "גְּבִיר",
+          "strong": "H1376",
+          "entityId": "hebrew:H1376",
+          "morph": "HNcmsa",
+          "sourceReference": "Gen:27:37",
+          "canonicalReference": "Gen:27:37",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:44:17",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Gen:44:17:15",
+        "sourceToken": {
+          "id": "hebrew:Gen:44:17:15",
+          "index": 15,
+          "source": "hebrew",
+          "surface": "חָלִ֣ילָ/ה",
+          "lemma": "חָלִילָה",
+          "strong": "H2486",
+          "entityId": "hebrew:H2486",
+          "morph": "HTj/Sh",
+          "sourceReference": "Gen:44:17",
+          "canonicalReference": "Gen:44:17",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:3:11",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Gen:3:11:9",
+        "sourceToken": {
+          "id": "hebrew:Gen:3:11:9",
+          "index": 9,
+          "source": "hebrew",
+          "surface": "מִ֚י",
+          "lemma": "מִי",
+          "strong": "H4310",
+          "entityId": "hebrew:H4310",
+          "morph": "HTi",
+          "sourceReference": "Gen:3:11",
+          "canonicalReference": "Gen:3:11",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:27:29",
+        "translation": "kjv",
+        "tokenIndex": 11,
+        "text": "lord",
+        "normalized": "lord",
+        "alignedId": "hebrew:Gen:27:29:14",
+        "sourceToken": {
+          "id": "hebrew:Gen:27:29:14",
+          "index": 14,
+          "source": "hebrew",
+          "surface": "גְבִיר֙",
+          "lemma": "גְּבִיר",
+          "strong": "H1376",
+          "entityId": "hebrew:H1376",
+          "morph": "HNcmsa",
+          "sourceReference": "Gen:27:29",
+          "canonicalReference": "Gen:27:29",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Gen.json",
+        "reference": "Gen:49:24",
+        "translation": "kjv",
+        "tokenIndex": 21,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Gen:49:24:0",
+        "sourceToken": {
+          "id": "hebrew:Gen:49:24:0",
+          "index": 0,
+          "source": "hebrew",
+          "surface": "יִשְׂרָאֵֽל",
+          "lemma": "יִשְׂרָאֵל",
+          "strong": "H3478",
+          "entityId": "hebrew:H3478",
+          "morph": "HNp",
+          "sourceReference": "Gen:49:24",
+          "canonicalReference": "Gen:49:24",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Hos.json",
+        "reference": "Hos:1:6",
+        "translation": "kjv",
+        "tokenIndex": 9,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Hos:1:6:5",
+        "sourceToken": {
+          "id": "hebrew:Hos:1:6:5",
+          "index": 5,
+          "source": "hebrew",
+          "surface": "יִשְׂרָאֵ֔ל",
+          "lemma": "יִשְׂרָאֵל",
+          "strong": "H3478",
+          "entityId": "hebrew:H3478",
+          "morph": "HNp",
+          "sourceReference": "Hos:1:6",
+          "canonicalReference": "Hos:1:6",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:27:5",
+        "translation": "kjv",
+        "tokenIndex": 0,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Job:27:5:8",
+        "sourceToken": {
+          "id": "hebrew:Job:27:5:8",
+          "index": 8,
+          "source": "hebrew",
+          "surface": "חָלִ֣ילָ/ה",
+          "lemma": "חָלִילָה",
+          "strong": "H2486",
+          "entityId": "hebrew:H2486",
+          "morph": "HTj/Sh",
+          "sourceReference": "Job:27:5",
+          "canonicalReference": "Job:27:5",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:24:23",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Job:24:23:1",
+        "sourceToken": {
+          "id": "hebrew:Job:24:23:1",
+          "index": 1,
+          "source": "hebrew",
+          "surface": "יִתֶּן",
+          "lemma": "נָתַן",
+          "strong": "H5414",
+          "entityId": "hebrew:H5414",
+          "morph": "HVqi3ms",
+          "sourceReference": "Job:24:23",
+          "canonicalReference": "Job:24:23",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Job.json",
+        "reference": "Job:9:4",
+        "translation": "web",
+        "tokenIndex": 0,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Job:9:4:1",
+        "sourceToken": {
+          "id": "hebrew:Job:9:4:1",
+          "index": 1,
+          "source": "hebrew",
+          "surface": "מִֽי",
+          "lemma": "מִי",
+          "strong": "H4310",
+          "entityId": "hebrew:H4310",
+          "morph": "HTi",
+          "sourceReference": "Job:9:4",
+          "canonicalReference": "Job:9:4",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Judg.json",
+        "reference": "Judg:9:29",
+        "translation": "kjv",
+        "tokenIndex": 3,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Judg:9:29:3",
+        "sourceToken": {
+          "id": "hebrew:Judg:9:29:3",
+          "index": 3,
+          "source": "hebrew",
+          "surface": "יִתֵּ֜ן",
+          "lemma": "נָתַן",
+          "strong": "H5414",
+          "entityId": "hebrew:H5414",
+          "morph": "HVqi3ms",
+          "sourceReference": "Judg:9:29",
+          "canonicalReference": "Judg:9:29",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Judg.json",
+        "reference": "Judg:20:31",
+        "translation": "kjv",
+        "tokenIndex": 43,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Judg:20:31:2",
+        "sourceToken": {
+          "id": "hebrew:Judg:20:31:2",
+          "index": 2,
+          "source": "hebrew",
+          "surface": "בְּ/יִשְׂרָאֵֽל",
+          "lemma": "יִשְׂרָאֵל",
+          "strong": "H3478",
+          "entityId": "hebrew:H3478",
+          "morph": "HR/Np",
+          "sourceReference": "Judg:20:31",
+          "canonicalReference": "Judg:20:31",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Num.json",
+        "reference": "Num:14:2",
+        "translation": "kjv",
+        "tokenIndex": 20,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Num:14:2:7",
+        "sourceToken": {
+          "id": "hebrew:Num:14:2:7",
+          "index": 7,
+          "source": "hebrew",
+          "surface": "יִשְׂרָאֵ֑ל",
+          "lemma": "יִשְׂרָאֵל",
+          "strong": "H3478",
+          "entityId": "hebrew:H3478",
+          "morph": "HNp",
+          "sourceReference": "Num:14:2",
+          "canonicalReference": "Num:14:2",
+          "versificationRuleId": null
+        }
+      },
+      {
+        "file": "Num.json",
+        "reference": "Num:14:2",
+        "translation": "kjv",
+        "tokenIndex": 32,
+        "text": "God",
+        "normalized": "god",
+        "alignedId": "hebrew:Num:14:2:19",
+        "sourceToken": {
+          "id": "hebrew:Num:14:2:19",
+          "index": 19,
+          "source": "hebrew",
+          "surface": "לוּ",
+          "lemma": "לוּא",
+          "strong": "H3863",
+          "entityId": "hebrew:H3863",
+          "morph": "HC",
+          "sourceReference": "Num:14:2",
+          "canonicalReference": "Num:14:2",
+          "versificationRuleId": null
+        }
+      }
+    ]
+  }
+}
