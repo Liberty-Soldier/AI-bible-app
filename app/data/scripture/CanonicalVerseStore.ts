@@ -1,4 +1,4 @@
-import "server-only";
+﻿import "server-only";
 
 import type { BibleIQSource } from "@/app/data/lexicon/BibleIQTypes";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
@@ -35,15 +35,14 @@ type CompactBook = {
   verses: Record<string, CompactVerse>;
 };
 
+type RuntimeCorpusManifest = {
+  aliases: Record<string, string>;
+  books: Record<string, unknown>;
+};
+
 type RuntimeManifest = {
   version: number;
-  corpora: Record<
-    BibleIQSource,
-    {
-      aliases: Record<string, string>;
-      books: Record<string, unknown>;
-    }
-  >;
+  corpora: Record<BibleIQSource, RuntimeCorpusManifest>;
 };
 
 export type CanonicalHit = {
@@ -94,6 +93,10 @@ function normalizeAlias(value: string) {
     .toLowerCase();
 }
 
+function canonicalBookName(book: string) {
+  return toEvidenceBook(book) || book;
+}
+
 function safeTranslation(translation: string) {
   const value = String(translation || "").toLowerCase();
   if (value.includes("kjv") || value.includes("king james")) return "kjv";
@@ -106,6 +109,12 @@ function preferredCorpusForTranslation(
   translation: string,
   book: string,
 ): BibleIQSource {
+  const canonicalBook = canonicalBookName(book);
+
+  // Source ownership is determined by canon first: every NT translation
+  // resolves to the Greek NT source corpus.
+  if (NEW_TESTAMENT_BOOKS.has(canonicalBook)) return "greek-nt";
+
   const value = String(translation || "").toLowerCase();
   if (
     value.includes("brenton") ||
@@ -114,18 +123,24 @@ function preferredCorpusForTranslation(
   ) {
     return "lxx";
   }
-  if (NEW_TESTAMENT_BOOKS.has(book)) return "greek-nt";
+
   return "hebrew";
 }
 
 function runtimeUrl(origin: string, relativePath: string) {
-  return new URL(`${RUNTIME_ROOT}/${relativePath.replace(/^\/+/, "")}`, origin).toString();
+  return new URL(
+    `${RUNTIME_ROOT}/${relativePath.replace(/^\/+/, "")}`,
+    origin,
+  ).toString();
 }
 
 async function fetchJson<T>(url: string): Promise<T | null> {
   try {
     const response = await fetch(url, { cache: "force-cache" });
-    if (!response.ok) return null;
+    if (!response.ok) {
+      console.error(`BibleIQ runtime returned ${response.status}: ${url}`);
+      return null;
+    }
     return (await response.json()) as T;
   } catch (error) {
     console.error(`BibleIQ runtime fetch failed: ${url}`, error);
@@ -136,10 +151,12 @@ async function fetchJson<T>(url: string): Promise<T | null> {
 function loadManifest(origin: string) {
   const key = new URL(origin).origin;
   let pending = manifestCache.get(key);
+
   if (!pending) {
     pending = fetchJson<RuntimeManifest>(runtimeUrl(key, "manifest.json"));
     manifestCache.set(key, pending);
   }
+
   return pending;
 }
 
@@ -152,19 +169,34 @@ async function loadRuntimeBook(
   const corpusManifest = manifest?.corpora?.[corpus];
   if (!corpusManifest) return null;
 
-  const aliases = [book, toEvidenceBook(book)].map(normalizeAlias).filter(Boolean);
+  const aliases = [book, canonicalBookName(book)]
+    .map(normalizeAlias)
+    .filter(Boolean);
+
   const outputFile = aliases
     .map((alias) => corpusManifest.aliases?.[alias])
     .find(Boolean);
-  if (!outputFile) return null;
+
+  if (!outputFile) {
+    console.error(
+      `BibleIQ runtime has no ${corpus} book alias for ${book} (${aliases.join(
+        ", ",
+      )})`,
+    );
+    return null;
+  }
 
   const originKey = new URL(origin).origin;
   const cacheKey = `${originKey}|${corpus}|${outputFile}`;
   let pending = bookCache.get(cacheKey);
+
   if (!pending) {
-    pending = fetchJson<CompactBook>(runtimeUrl(originKey, `${corpus}/${outputFile}`));
+    pending = fetchJson<CompactBook>(
+      runtimeUrl(originKey, `${corpus}/${outputFile}`),
+    );
     bookCache.set(cacheKey, pending);
   }
+
   return pending;
 }
 
@@ -208,7 +240,9 @@ export async function findCanonicalHit({
   const compactVerse = runtimeBook?.verses?.[`${chapter}:${verse}`];
   if (!compactVerse) return null;
 
-  const sourceIndex = compactVerse.a?.[translationKey]?.[String(displayTokenIndex)];
+  const sourceIndex =
+    compactVerse.a?.[translationKey]?.[String(displayTokenIndex)];
+
   if (
     typeof sourceIndex !== "number" ||
     !Number.isInteger(sourceIndex) ||
