@@ -4378,8 +4378,15 @@
             "index": 13,
             "text": "Gentiles",
             "normalized": "gentiles",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:3_John.1.7:9"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G1482"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "high",
+            "alignmentMethod": "greek-nt-gloss-order"
           }
         ]
       },
@@ -4516,8 +4523,15 @@
             "index": 14,
             "text": "Gentiles",
             "normalized": "gentiles",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:3_John.1.7:9"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G1482"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "high",
+            "alignmentMethod": "greek-nt-gloss-order"
           }
         ]
       }
@@ -5651,8 +5665,15 @@
             "index": 8,
             "text": "loves",
             "normalized": "loves",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:3_John.1.9:6"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G5383"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-gloss-order"
           },
           {
             "index": 9,
@@ -5666,15 +5687,8 @@
             "index": 10,
             "text": "be",
             "normalized": "be",
-            "alignedSourceTokenIds": [
-              "greek-nt:3_John.1.9:6"
-            ],
-            "alignedSourceEntityIds": [
-              "word:greek-nt:G5383"
-            ],
-            "alignmentStatus": "aligned",
-            "alignmentConfidence": "medium",
-            "alignmentMethod": "greek-nt-gloss-order"
+            "alignedSourceTokenIds": [],
+            "alignmentStatus": "unaligned"
           },
           {
             "index": 11,
@@ -9323,7 +9337,8 @@
             "text": "testimony",
             "normalized": "testimony",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "expected-greek-source-present-but-unmatched"
           },
           {
             "index": 21,
@@ -10425,7 +10440,8 @@
             "text": "Peace",
             "normalized": "peace",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 16,
@@ -10513,7 +10529,8 @@
             "text": "name",
             "normalized": "name",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           }
         ]
       },
@@ -10651,7 +10668,8 @@
             "text": "Peace",
             "normalized": "peace",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 15,
@@ -10741,7 +10759,8 @@
             "text": "name",
             "normalized": "name",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           }
         ]
       }

@@ -4,19 +4,19 @@
     "kjv",
     "web"
   ],
-  "generatedAt": "2026-07-13T13:35:22.616Z",
+  "generatedAt": "2026-07-13T14:11:13.902Z",
   "canonicalDir": ".private\\scripture\\canonical\\greek-nt",
   "totals": {
     "books": 27,
     "verses": 7941,
     "sourceTokens": 138013,
-    "alignmentEdges": 106407,
+    "alignmentEdges": 108015,
     "kjv": {
       "versesWithTranslation": 7939,
       "translationTokens": 180089,
-      "alignedTokens": 51274,
+      "alignedTokens": 51991,
       "ignoredTokens": 69591,
-      "unalignedTokens": 59224,
+      "unalignedTokens": 58507,
       "highValueUnaligned": [
         {
           "word": "man",
@@ -123,10 +123,6 @@
           "count": 10
         },
         {
-          "word": "gentiles",
-          "count": 10
-        },
-        {
           "word": "life",
           "count": 10
         },
@@ -148,6 +144,10 @@
         },
         {
           "word": "flesh",
+          "count": 8
+        },
+        {
+          "word": "gentiles",
           "count": 8
         },
         {
@@ -295,15 +295,435 @@
           "count": 1
         }
       ],
-      "alignedRate": 0.2847,
-      "actionableAlignedRate": 0.464
+      "highValueUnalignedSourcePresent": [
+        {
+          "word": "god",
+          "count": 24
+        },
+        {
+          "word": "man",
+          "count": 17
+        },
+        {
+          "word": "lord",
+          "count": 9
+        },
+        {
+          "word": "christ",
+          "count": 8
+        },
+        {
+          "word": "jesus",
+          "count": 5
+        },
+        {
+          "word": "believe",
+          "count": 4
+        },
+        {
+          "word": "holy",
+          "count": 4
+        },
+        {
+          "word": "light",
+          "count": 4
+        },
+        {
+          "word": "law",
+          "count": 3
+        },
+        {
+          "word": "son",
+          "count": 3
+        },
+        {
+          "word": "body",
+          "count": 2
+        },
+        {
+          "word": "death",
+          "count": 2
+        },
+        {
+          "word": "disciples",
+          "count": 2
+        },
+        {
+          "word": "faith",
+          "count": 2
+        },
+        {
+          "word": "father",
+          "count": 2
+        },
+        {
+          "word": "gospel",
+          "count": 2
+        },
+        {
+          "word": "jews",
+          "count": 2
+        },
+        {
+          "word": "king",
+          "count": 2
+        },
+        {
+          "word": "righteousness",
+          "count": 2
+        },
+        {
+          "word": "sins",
+          "count": 2
+        },
+        {
+          "word": "works",
+          "count": 2
+        },
+        {
+          "word": "world",
+          "count": 2
+        },
+        {
+          "word": "blood",
+          "count": 1
+        },
+        {
+          "word": "darkness",
+          "count": 1
+        },
+        {
+          "word": "flesh",
+          "count": 1
+        },
+        {
+          "word": "grace",
+          "count": 1
+        },
+        {
+          "word": "heart",
+          "count": 1
+        },
+        {
+          "word": "heaven",
+          "count": 1
+        },
+        {
+          "word": "love",
+          "count": 1
+        },
+        {
+          "word": "name",
+          "count": 1
+        },
+        {
+          "word": "peace",
+          "count": 1
+        },
+        {
+          "word": "priest",
+          "count": 1
+        },
+        {
+          "word": "righteous",
+          "count": 1
+        },
+        {
+          "word": "saved",
+          "count": 1
+        },
+        {
+          "word": "sin",
+          "count": 1
+        },
+        {
+          "word": "spirit",
+          "count": 1
+        },
+        {
+          "word": "temple",
+          "count": 1
+        }
+      ],
+      "highValueUnalignedSourceAbsent": [
+        {
+          "word": "man",
+          "count": 451
+        },
+        {
+          "word": "son",
+          "count": 116
+        },
+        {
+          "word": "jesus",
+          "count": 81
+        },
+        {
+          "word": "god",
+          "count": 61
+        },
+        {
+          "word": "lord",
+          "count": 48
+        },
+        {
+          "word": "christ",
+          "count": 46
+        },
+        {
+          "word": "world",
+          "count": 41
+        },
+        {
+          "word": "glory",
+          "count": 33
+        },
+        {
+          "word": "devil",
+          "count": 27
+        },
+        {
+          "word": "judgment",
+          "count": 25
+        },
+        {
+          "word": "save",
+          "count": 25
+        },
+        {
+          "word": "law",
+          "count": 23
+        },
+        {
+          "word": "peace",
+          "count": 22
+        },
+        {
+          "word": "gospel",
+          "count": 19
+        },
+        {
+          "word": "death",
+          "count": 17
+        },
+        {
+          "word": "commandment",
+          "count": 16
+        },
+        {
+          "word": "works",
+          "count": 16
+        },
+        {
+          "word": "heaven",
+          "count": 13
+        },
+        {
+          "word": "truth",
+          "count": 13
+        },
+        {
+          "word": "father",
+          "count": 12
+        },
+        {
+          "word": "holy",
+          "count": 11
+        },
+        {
+          "word": "spirit",
+          "count": 11
+        },
+        {
+          "word": "believe",
+          "count": 10
+        },
+        {
+          "word": "bread",
+          "count": 10
+        },
+        {
+          "word": "life",
+          "count": 10
+        },
+        {
+          "word": "power",
+          "count": 10
+        },
+        {
+          "word": "angel",
+          "count": 9
+        },
+        {
+          "word": "disciples",
+          "count": 9
+        },
+        {
+          "word": "light",
+          "count": 9
+        },
+        {
+          "word": "prophet",
+          "count": 9
+        },
+        {
+          "word": "gentiles",
+          "count": 8
+        },
+        {
+          "word": "peter",
+          "count": 8
+        },
+        {
+          "word": "commandments",
+          "count": 7
+        },
+        {
+          "word": "faith",
+          "count": 7
+        },
+        {
+          "word": "flesh",
+          "count": 7
+        },
+        {
+          "word": "israel",
+          "count": 7
+        },
+        {
+          "word": "love",
+          "count": 7
+        },
+        {
+          "word": "prophets",
+          "count": 7
+        },
+        {
+          "word": "water",
+          "count": 7
+        },
+        {
+          "word": "word",
+          "count": 7
+        },
+        {
+          "word": "jews",
+          "count": 6
+        },
+        {
+          "word": "righteousness",
+          "count": 6
+        },
+        {
+          "word": "forgive",
+          "count": 5
+        },
+        {
+          "word": "heart",
+          "count": 5
+        },
+        {
+          "word": "saved",
+          "count": 5
+        },
+        {
+          "word": "sins",
+          "count": 5
+        },
+        {
+          "word": "name",
+          "count": 4
+        },
+        {
+          "word": "testimony",
+          "count": 4
+        },
+        {
+          "word": "blood",
+          "count": 3
+        },
+        {
+          "word": "body",
+          "count": 3
+        },
+        {
+          "word": "covenant",
+          "count": 3
+        },
+        {
+          "word": "eternal",
+          "count": 3
+        },
+        {
+          "word": "john",
+          "count": 3
+        },
+        {
+          "word": "kingdom",
+          "count": 3
+        },
+        {
+          "word": "priest",
+          "count": 3
+        },
+        {
+          "word": "repentance",
+          "count": 3
+        },
+        {
+          "word": "darkness",
+          "count": 2
+        },
+        {
+          "word": "gentile",
+          "count": 2
+        },
+        {
+          "word": "judge",
+          "count": 2
+        },
+        {
+          "word": "sin",
+          "count": 2
+        },
+        {
+          "word": "temple",
+          "count": 2
+        },
+        {
+          "word": "cross",
+          "count": 1
+        },
+        {
+          "word": "grace",
+          "count": 1
+        },
+        {
+          "word": "moses",
+          "count": 1
+        },
+        {
+          "word": "sabbath",
+          "count": 1
+        },
+        {
+          "word": "satan",
+          "count": 1
+        },
+        {
+          "word": "scriptures",
+          "count": 1
+        }
+      ],
+      "alignedRate": 0.2887,
+      "actionableAlignedRate": 0.4705
     },
     "web": {
       "versesWithTranslation": 7937,
       "translationTokens": 173470,
-      "alignedTokens": 55133,
+      "alignedTokens": 56024,
       "ignoredTokens": 68851,
-      "unalignedTokens": 49486,
+      "unalignedTokens": 48595,
       "highValueUnaligned": [
         {
           "word": "man",
@@ -343,7 +763,7 @@
         },
         {
           "word": "life",
-          "count": 20
+          "count": 21
         },
         {
           "word": "judgment",
@@ -366,10 +786,6 @@
           "count": 16
         },
         {
-          "word": "disciples",
-          "count": 14
-        },
-        {
           "word": "testimony",
           "count": 14
         },
@@ -379,6 +795,10 @@
         },
         {
           "word": "bread",
+          "count": 12
+        },
+        {
+          "word": "disciples",
           "count": 12
         },
         {
@@ -442,6 +862,10 @@
           "count": 9
         },
         {
+          "word": "name",
+          "count": 8
+        },
+        {
           "word": "priest",
           "count": 8
         },
@@ -454,10 +878,6 @@
           "count": 7
         },
         {
-          "word": "name",
-          "count": 7
-        },
-        {
           "word": "peace",
           "count": 7
         },
@@ -466,8 +886,8 @@
           "count": 7
         },
         {
-          "word": "gentiles",
-          "count": 6
+          "word": "water",
+          "count": 7
         },
         {
           "word": "judge",
@@ -479,10 +899,6 @@
         },
         {
           "word": "prophets",
-          "count": 6
-        },
-        {
-          "word": "water",
           "count": 6
         },
         {
@@ -523,6 +939,10 @@
         },
         {
           "word": "commandments",
+          "count": 3
+        },
+        {
+          "word": "gentiles",
           "count": 3
         },
         {
@@ -586,8 +1006,456 @@
           "count": 1
         }
       ],
-      "alignedRate": 0.3178,
-      "actionableAlignedRate": 0.527
+      "highValueUnalignedSourcePresent": [
+        {
+          "word": "god",
+          "count": 27
+        },
+        {
+          "word": "christ",
+          "count": 12
+        },
+        {
+          "word": "man",
+          "count": 10
+        },
+        {
+          "word": "lord",
+          "count": 9
+        },
+        {
+          "word": "jesus",
+          "count": 8
+        },
+        {
+          "word": "jews",
+          "count": 5
+        },
+        {
+          "word": "spirit",
+          "count": 5
+        },
+        {
+          "word": "holy",
+          "count": 4
+        },
+        {
+          "word": "sins",
+          "count": 4
+        },
+        {
+          "word": "heaven",
+          "count": 3
+        },
+        {
+          "word": "law",
+          "count": 3
+        },
+        {
+          "word": "life",
+          "count": 3
+        },
+        {
+          "word": "messiah",
+          "count": 3
+        },
+        {
+          "word": "son",
+          "count": 3
+        },
+        {
+          "word": "believe",
+          "count": 2
+        },
+        {
+          "word": "blood",
+          "count": 2
+        },
+        {
+          "word": "body",
+          "count": 2
+        },
+        {
+          "word": "death",
+          "count": 2
+        },
+        {
+          "word": "disciples",
+          "count": 2
+        },
+        {
+          "word": "faith",
+          "count": 2
+        },
+        {
+          "word": "father",
+          "count": 2
+        },
+        {
+          "word": "israel",
+          "count": 2
+        },
+        {
+          "word": "love",
+          "count": 2
+        },
+        {
+          "word": "name",
+          "count": 2
+        },
+        {
+          "word": "saved",
+          "count": 2
+        },
+        {
+          "word": "testimony",
+          "count": 2
+        },
+        {
+          "word": "word",
+          "count": 2
+        },
+        {
+          "word": "works",
+          "count": 2
+        },
+        {
+          "word": "angel",
+          "count": 1
+        },
+        {
+          "word": "commandments",
+          "count": 1
+        },
+        {
+          "word": "darkness",
+          "count": 1
+        },
+        {
+          "word": "disciple",
+          "count": 1
+        },
+        {
+          "word": "flesh",
+          "count": 1
+        },
+        {
+          "word": "grace",
+          "count": 1
+        },
+        {
+          "word": "heart",
+          "count": 1
+        },
+        {
+          "word": "judge",
+          "count": 1
+        },
+        {
+          "word": "king",
+          "count": 1
+        },
+        {
+          "word": "kingdom",
+          "count": 1
+        },
+        {
+          "word": "light",
+          "count": 1
+        },
+        {
+          "word": "peace",
+          "count": 1
+        },
+        {
+          "word": "righteous",
+          "count": 1
+        },
+        {
+          "word": "righteousness",
+          "count": 1
+        },
+        {
+          "word": "sin",
+          "count": 1
+        },
+        {
+          "word": "water",
+          "count": 1
+        },
+        {
+          "word": "world",
+          "count": 1
+        }
+      ],
+      "highValueUnalignedSourceAbsent": [
+        {
+          "word": "man",
+          "count": 195
+        },
+        {
+          "word": "son",
+          "count": 109
+        },
+        {
+          "word": "jesus",
+          "count": 79
+        },
+        {
+          "word": "word",
+          "count": 62
+        },
+        {
+          "word": "lord",
+          "count": 42
+        },
+        {
+          "word": "god",
+          "count": 40
+        },
+        {
+          "word": "christ",
+          "count": 38
+        },
+        {
+          "word": "works",
+          "count": 22
+        },
+        {
+          "word": "death",
+          "count": 20
+        },
+        {
+          "word": "judgment",
+          "count": 19
+        },
+        {
+          "word": "life",
+          "count": 18
+        },
+        {
+          "word": "world",
+          "count": 15
+        },
+        {
+          "word": "law",
+          "count": 14
+        },
+        {
+          "word": "holy",
+          "count": 13
+        },
+        {
+          "word": "bread",
+          "count": 12
+        },
+        {
+          "word": "glory",
+          "count": 12
+        },
+        {
+          "word": "testimony",
+          "count": 12
+        },
+        {
+          "word": "body",
+          "count": 11
+        },
+        {
+          "word": "spirit",
+          "count": 11
+        },
+        {
+          "word": "commandment",
+          "count": 10
+        },
+        {
+          "word": "disciples",
+          "count": 10
+        },
+        {
+          "word": "father",
+          "count": 10
+        },
+        {
+          "word": "heart",
+          "count": 10
+        },
+        {
+          "word": "peter",
+          "count": 10
+        },
+        {
+          "word": "heaven",
+          "count": 9
+        },
+        {
+          "word": "light",
+          "count": 9
+        },
+        {
+          "word": "power",
+          "count": 9
+        },
+        {
+          "word": "prophet",
+          "count": 9
+        },
+        {
+          "word": "truth",
+          "count": 9
+        },
+        {
+          "word": "believe",
+          "count": 8
+        },
+        {
+          "word": "flesh",
+          "count": 8
+        },
+        {
+          "word": "priest",
+          "count": 8
+        },
+        {
+          "word": "faith",
+          "count": 7
+        },
+        {
+          "word": "israel",
+          "count": 7
+        },
+        {
+          "word": "jews",
+          "count": 7
+        },
+        {
+          "word": "john",
+          "count": 7
+        },
+        {
+          "word": "save",
+          "count": 7
+        },
+        {
+          "word": "name",
+          "count": 6
+        },
+        {
+          "word": "peace",
+          "count": 6
+        },
+        {
+          "word": "prophets",
+          "count": 6
+        },
+        {
+          "word": "water",
+          "count": 6
+        },
+        {
+          "word": "covenant",
+          "count": 5
+        },
+        {
+          "word": "eternal",
+          "count": 5
+        },
+        {
+          "word": "judge",
+          "count": 5
+        },
+        {
+          "word": "temple",
+          "count": 5
+        },
+        {
+          "word": "forgive",
+          "count": 4
+        },
+        {
+          "word": "love",
+          "count": 4
+        },
+        {
+          "word": "sins",
+          "count": 4
+        },
+        {
+          "word": "blood",
+          "count": 3
+        },
+        {
+          "word": "gentiles",
+          "count": 3
+        },
+        {
+          "word": "kingdom",
+          "count": 3
+        },
+        {
+          "word": "repentance",
+          "count": 3
+        },
+        {
+          "word": "righteousness",
+          "count": 3
+        },
+        {
+          "word": "angel",
+          "count": 2
+        },
+        {
+          "word": "commandments",
+          "count": 2
+        },
+        {
+          "word": "devil",
+          "count": 2
+        },
+        {
+          "word": "saved",
+          "count": 2
+        },
+        {
+          "word": "sin",
+          "count": 2
+        },
+        {
+          "word": "cross",
+          "count": 1
+        },
+        {
+          "word": "darkness",
+          "count": 1
+        },
+        {
+          "word": "moses",
+          "count": 1
+        },
+        {
+          "word": "righteous",
+          "count": 1
+        },
+        {
+          "word": "sabbath",
+          "count": 1
+        },
+        {
+          "word": "satan",
+          "count": 1
+        },
+        {
+          "word": "scripture",
+          "count": 1
+        },
+        {
+          "word": "scriptures",
+          "count": 1
+        }
+      ],
+      "alignedRate": 0.323,
+      "actionableAlignedRate": 0.5355
     }
   },
   "byBook": {
@@ -597,9 +1465,9 @@
       "kjv": {
         "versesWithTranslation": 1068,
         "translationTokens": 23634,
-        "alignedTokens": 6592,
+        "alignedTokens": 6704,
         "ignoredTokens": 9001,
-        "unalignedTokens": 8041,
+        "unalignedTokens": 7929,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -761,14 +1629,194 @@
             "word": "water",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "man",
+            "count": 3
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "darkness",
+            "count": 1
+          },
+          {
+            "word": "death",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "king",
+            "count": 1
+          },
+          {
+            "word": "righteousness",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 42
+          },
+          {
+            "word": "jesus",
+            "count": 22
+          },
+          {
+            "word": "world",
+            "count": 8
+          },
+          {
+            "word": "works",
+            "count": 7
+          },
+          {
+            "word": "devil",
+            "count": 6
+          },
+          {
+            "word": "son",
+            "count": 6
+          },
+          {
+            "word": "god",
+            "count": 5
+          },
+          {
+            "word": "faith",
+            "count": 4
+          },
+          {
+            "word": "save",
+            "count": 4
+          },
+          {
+            "word": "death",
+            "count": 3
+          },
+          {
+            "word": "heaven",
+            "count": 3
+          },
+          {
+            "word": "law",
+            "count": 3
+          },
+          {
+            "word": "lord",
+            "count": 3
+          },
+          {
+            "word": "prophets",
+            "count": 3
+          },
+          {
+            "word": "word",
+            "count": 3
+          },
+          {
+            "word": "commandment",
+            "count": 2
+          },
+          {
+            "word": "disciples",
+            "count": 2
+          },
+          {
+            "word": "glory",
+            "count": 2
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "kingdom",
+            "count": 2
+          },
+          {
+            "word": "light",
+            "count": 2
+          },
+          {
+            "word": "peace",
+            "count": 2
+          },
+          {
+            "word": "prophet",
+            "count": 2
+          },
+          {
+            "word": "truth",
+            "count": 2
+          },
+          {
+            "word": "blood",
+            "count": 1
+          },
+          {
+            "word": "bread",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "commandments",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "judgment",
+            "count": 1
+          },
+          {
+            "word": "peter",
+            "count": 1
+          },
+          {
+            "word": "power",
+            "count": 1
+          },
+          {
+            "word": "priest",
+            "count": 1
+          },
+          {
+            "word": "repentance",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 1068,
         "translationTokens": 22870,
-        "alignedTokens": 6984,
+        "alignedTokens": 7133,
         "ignoredTokens": 9140,
-        "unalignedTokens": 6746,
+        "unalignedTokens": 6597,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -803,10 +1851,6 @@
             "count": 4
           },
           {
-            "word": "disciples",
-            "count": 3
-          },
-          {
             "word": "glory",
             "count": 3
           },
@@ -828,6 +1872,10 @@
           },
           {
             "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "disciples",
             "count": 2
           },
           {
@@ -887,10 +1935,6 @@
             "count": 1
           },
           {
-            "word": "gentiles",
-            "count": 1
-          },
-          {
             "word": "heart",
             "count": 1
           },
@@ -935,6 +1979,206 @@
             "count": 1
           },
           {
+            "word": "water",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "darkness",
+            "count": 1
+          },
+          {
+            "word": "death",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "messiah",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 26
+          },
+          {
+            "word": "jesus",
+            "count": 19
+          },
+          {
+            "word": "word",
+            "count": 8
+          },
+          {
+            "word": "son",
+            "count": 6
+          },
+          {
+            "word": "works",
+            "count": 6
+          },
+          {
+            "word": "faith",
+            "count": 4
+          },
+          {
+            "word": "god",
+            "count": 4
+          },
+          {
+            "word": "death",
+            "count": 3
+          },
+          {
+            "word": "glory",
+            "count": 3
+          },
+          {
+            "word": "light",
+            "count": 3
+          },
+          {
+            "word": "prophets",
+            "count": 3
+          },
+          {
+            "word": "disciples",
+            "count": 2
+          },
+          {
+            "word": "heaven",
+            "count": 2
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "kingdom",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "peter",
+            "count": 2
+          },
+          {
+            "word": "power",
+            "count": 2
+          },
+          {
+            "word": "prophet",
+            "count": 2
+          },
+          {
+            "word": "repentance",
+            "count": 2
+          },
+          {
+            "word": "temple",
+            "count": 2
+          },
+          {
+            "word": "testimony",
+            "count": 2
+          },
+          {
+            "word": "blood",
+            "count": 1
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "bread",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "devil",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "john",
+            "count": 1
+          },
+          {
+            "word": "judgment",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          },
+          {
+            "word": "priest",
+            "count": 1
+          },
+          {
+            "word": "righteous",
+            "count": 1
+          },
+          {
+            "word": "save",
+            "count": 1
+          },
+          {
+            "word": "scripture",
+            "count": 1
+          },
+          {
+            "word": "sins",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          },
+          {
             "word": "world",
             "count": 1
           }
@@ -947,9 +2191,9 @@
       "kjv": {
         "versesWithTranslation": 673,
         "translationTokens": 15103,
-        "alignedTokens": 3848,
+        "alignedTokens": 3928,
         "ignoredTokens": 6163,
-        "unalignedTokens": 5092,
+        "unalignedTokens": 5012,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -1067,14 +2311,150 @@
             "word": "works",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "man",
+            "count": 3
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "death",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 41
+          },
+          {
+            "word": "jesus",
+            "count": 15
+          },
+          {
+            "word": "peace",
+            "count": 7
+          },
+          {
+            "word": "devil",
+            "count": 6
+          },
+          {
+            "word": "son",
+            "count": 6
+          },
+          {
+            "word": "save",
+            "count": 4
+          },
+          {
+            "word": "bread",
+            "count": 3
+          },
+          {
+            "word": "death",
+            "count": 3
+          },
+          {
+            "word": "lord",
+            "count": 3
+          },
+          {
+            "word": "commandments",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "heart",
+            "count": 2
+          },
+          {
+            "word": "love",
+            "count": 2
+          },
+          {
+            "word": "spirit",
+            "count": 2
+          },
+          {
+            "word": "world",
+            "count": 2
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "cross",
+            "count": 1
+          },
+          {
+            "word": "disciples",
+            "count": 1
+          },
+          {
+            "word": "judgment",
+            "count": 1
+          },
+          {
+            "word": "kingdom",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "prophet",
+            "count": 1
+          },
+          {
+            "word": "prophets",
+            "count": 1
+          },
+          {
+            "word": "repentance",
+            "count": 1
+          },
+          {
+            "word": "sabbath",
+            "count": 1
+          },
+          {
+            "word": "sins",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 673,
         "translationTokens": 14278,
-        "alignedTokens": 4143,
+        "alignedTokens": 4231,
         "ignoredTokens": 5829,
-        "unalignedTokens": 4306,
+        "unalignedTokens": 4218,
         "highValueUnaligned": [
           {
             "word": "jesus",
@@ -1196,6 +2576,142 @@
             "word": "world",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "death",
+            "count": 1
+          },
+          {
+            "word": "testimony",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "jesus",
+            "count": 13
+          },
+          {
+            "word": "man",
+            "count": 13
+          },
+          {
+            "word": "word",
+            "count": 5
+          },
+          {
+            "word": "son",
+            "count": 4
+          },
+          {
+            "word": "bread",
+            "count": 3
+          },
+          {
+            "word": "god",
+            "count": 3
+          },
+          {
+            "word": "death",
+            "count": 2
+          },
+          {
+            "word": "eternal",
+            "count": 2
+          },
+          {
+            "word": "heart",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "peace",
+            "count": 2
+          },
+          {
+            "word": "sins",
+            "count": 2
+          },
+          {
+            "word": "testimony",
+            "count": 2
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "cross",
+            "count": 1
+          },
+          {
+            "word": "john",
+            "count": 1
+          },
+          {
+            "word": "judgment",
+            "count": 1
+          },
+          {
+            "word": "kingdom",
+            "count": 1
+          },
+          {
+            "word": "light",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "peter",
+            "count": 1
+          },
+          {
+            "word": "prophet",
+            "count": 1
+          },
+          {
+            "word": "prophets",
+            "count": 1
+          },
+          {
+            "word": "repentance",
+            "count": 1
+          },
+          {
+            "word": "sabbath",
+            "count": 1
+          },
+          {
+            "word": "save",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
         ]
       }
     },
@@ -1205,9 +2721,9 @@
       "kjv": {
         "versesWithTranslation": 1149,
         "translationTokens": 25911,
-        "alignedTokens": 6895,
+        "alignedTokens": 7015,
         "ignoredTokens": 10228,
-        "unalignedTokens": 8788,
+        "unalignedTokens": 8668,
         "highValueUnaligned": [
           {
             "word": "son",
@@ -1357,14 +2873,190 @@
             "word": "word",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "light",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "disciples",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "man",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "son",
+            "count": 79
+          },
+          {
+            "word": "man",
+            "count": 51
+          },
+          {
+            "word": "jesus",
+            "count": 14
+          },
+          {
+            "word": "devil",
+            "count": 8
+          },
+          {
+            "word": "lord",
+            "count": 6
+          },
+          {
+            "word": "save",
+            "count": 6
+          },
+          {
+            "word": "god",
+            "count": 5
+          },
+          {
+            "word": "light",
+            "count": 5
+          },
+          {
+            "word": "peace",
+            "count": 5
+          },
+          {
+            "word": "world",
+            "count": 5
+          },
+          {
+            "word": "law",
+            "count": 4
+          },
+          {
+            "word": "bread",
+            "count": 3
+          },
+          {
+            "word": "death",
+            "count": 3
+          },
+          {
+            "word": "gospel",
+            "count": 3
+          },
+          {
+            "word": "truth",
+            "count": 3
+          },
+          {
+            "word": "disciples",
+            "count": 2
+          },
+          {
+            "word": "heaven",
+            "count": 2
+          },
+          {
+            "word": "prophet",
+            "count": 2
+          },
+          {
+            "word": "spirit",
+            "count": 2
+          },
+          {
+            "word": "works",
+            "count": 2
+          },
+          {
+            "word": "angel",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "darkness",
+            "count": 1
+          },
+          {
+            "word": "faith",
+            "count": 1
+          },
+          {
+            "word": "forgive",
+            "count": 1
+          },
+          {
+            "word": "john",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "peter",
+            "count": 1
+          },
+          {
+            "word": "power",
+            "count": 1
+          },
+          {
+            "word": "priest",
+            "count": 1
+          },
+          {
+            "word": "prophets",
+            "count": 1
+          },
+          {
+            "word": "satan",
+            "count": 1
+          },
+          {
+            "word": "saved",
+            "count": 1
+          },
+          {
+            "word": "temple",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 1149,
         "translationTokens": 23996,
-        "alignedTokens": 7296,
+        "alignedTokens": 7447,
         "ignoredTokens": 9723,
-        "unalignedTokens": 6977,
+        "unalignedTokens": 6826,
         "highValueUnaligned": [
           {
             "word": "son",
@@ -1498,6 +3190,166 @@
             "word": "water",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "man",
+            "count": 4
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "son",
+            "count": 2
+          },
+          {
+            "word": "disciples",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "messiah",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "son",
+            "count": 81
+          },
+          {
+            "word": "man",
+            "count": 27
+          },
+          {
+            "word": "jesus",
+            "count": 19
+          },
+          {
+            "word": "light",
+            "count": 5
+          },
+          {
+            "word": "lord",
+            "count": 5
+          },
+          {
+            "word": "death",
+            "count": 4
+          },
+          {
+            "word": "bread",
+            "count": 3
+          },
+          {
+            "word": "disciples",
+            "count": 3
+          },
+          {
+            "word": "god",
+            "count": 3
+          },
+          {
+            "word": "word",
+            "count": 3
+          },
+          {
+            "word": "believe",
+            "count": 2
+          },
+          {
+            "word": "prophet",
+            "count": 2
+          },
+          {
+            "word": "save",
+            "count": 2
+          },
+          {
+            "word": "spirit",
+            "count": 2
+          },
+          {
+            "word": "works",
+            "count": 2
+          },
+          {
+            "word": "world",
+            "count": 2
+          },
+          {
+            "word": "angel",
+            "count": 1
+          },
+          {
+            "word": "darkness",
+            "count": 1
+          },
+          {
+            "word": "devil",
+            "count": 1
+          },
+          {
+            "word": "faith",
+            "count": 1
+          },
+          {
+            "word": "glory",
+            "count": 1
+          },
+          {
+            "word": "john",
+            "count": 1
+          },
+          {
+            "word": "law",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "priest",
+            "count": 1
+          },
+          {
+            "word": "righteousness",
+            "count": 1
+          },
+          {
+            "word": "satan",
+            "count": 1
+          },
+          {
+            "word": "testimony",
+            "count": 1
+          },
+          {
+            "word": "truth",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
         ]
       }
     },
@@ -1507,9 +3359,9 @@
       "kjv": {
         "versesWithTranslation": 878,
         "translationTokens": 19059,
-        "alignedTokens": 5468,
+        "alignedTokens": 5496,
         "ignoredTokens": 7507,
-        "unalignedTokens": 6084,
+        "unalignedTokens": 6056,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -1619,14 +3471,146 @@
             "word": "works",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "man",
+            "count": 4
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "disciples",
+            "count": 1
+          },
+          {
+            "word": "heaven",
+            "count": 1
+          },
+          {
+            "word": "light",
+            "count": 1
+          },
+          {
+            "word": "sins",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 72
+          },
+          {
+            "word": "jesus",
+            "count": 12
+          },
+          {
+            "word": "son",
+            "count": 10
+          },
+          {
+            "word": "devil",
+            "count": 7
+          },
+          {
+            "word": "father",
+            "count": 5
+          },
+          {
+            "word": "judgment",
+            "count": 5
+          },
+          {
+            "word": "death",
+            "count": 4
+          },
+          {
+            "word": "save",
+            "count": 3
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "disciples",
+            "count": 2
+          },
+          {
+            "word": "gentiles",
+            "count": 2
+          },
+          {
+            "word": "truth",
+            "count": 2
+          },
+          {
+            "word": "world",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "john",
+            "count": 1
+          },
+          {
+            "word": "law",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "peter",
+            "count": 1
+          },
+          {
+            "word": "sin",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 878,
         "translationTokens": 18311,
-        "alignedTokens": 5831,
+        "alignedTokens": 5940,
         "ignoredTokens": 7630,
-        "unalignedTokens": 4850,
+        "unalignedTokens": 4741,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -1752,6 +3736,166 @@
             "word": "works",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "spirit",
+            "count": 3
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "heaven",
+            "count": 2
+          },
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "disciple",
+            "count": 1
+          },
+          {
+            "word": "disciples",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "jews",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "messiah",
+            "count": 1
+          },
+          {
+            "word": "sins",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 29
+          },
+          {
+            "word": "son",
+            "count": 10
+          },
+          {
+            "word": "jesus",
+            "count": 9
+          },
+          {
+            "word": "word",
+            "count": 5
+          },
+          {
+            "word": "death",
+            "count": 3
+          },
+          {
+            "word": "disciples",
+            "count": 3
+          },
+          {
+            "word": "father",
+            "count": 3
+          },
+          {
+            "word": "john",
+            "count": 3
+          },
+          {
+            "word": "bread",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "life",
+            "count": 2
+          },
+          {
+            "word": "world",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "jews",
+            "count": 1
+          },
+          {
+            "word": "judgment",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "peter",
+            "count": 1
+          },
+          {
+            "word": "save",
+            "count": 1
+          },
+          {
+            "word": "sin",
+            "count": 1
+          },
+          {
+            "word": "temple",
+            "count": 1
+          },
+          {
+            "word": "truth",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
         ]
       }
     },
@@ -1761,9 +3905,9 @@
       "kjv": {
         "versesWithTranslation": 1002,
         "translationTokens": 24165,
-        "alignedTokens": 6533,
+        "alignedTokens": 6657,
         "ignoredTokens": 9504,
-        "unalignedTokens": 8128,
+        "unalignedTokens": 8004,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -1913,14 +4057,174 @@
             "word": "spirit",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 7
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "king",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 40
+          },
+          {
+            "word": "lord",
+            "count": 12
+          },
+          {
+            "word": "god",
+            "count": 10
+          },
+          {
+            "word": "judgment",
+            "count": 7
+          },
+          {
+            "word": "christ",
+            "count": 6
+          },
+          {
+            "word": "israel",
+            "count": 6
+          },
+          {
+            "word": "gospel",
+            "count": 4
+          },
+          {
+            "word": "jews",
+            "count": 4
+          },
+          {
+            "word": "law",
+            "count": 4
+          },
+          {
+            "word": "peace",
+            "count": 4
+          },
+          {
+            "word": "son",
+            "count": 4
+          },
+          {
+            "word": "commandment",
+            "count": 3
+          },
+          {
+            "word": "death",
+            "count": 3
+          },
+          {
+            "word": "jesus",
+            "count": 3
+          },
+          {
+            "word": "bread",
+            "count": 2
+          },
+          {
+            "word": "disciples",
+            "count": 2
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "name",
+            "count": 2
+          },
+          {
+            "word": "peter",
+            "count": 2
+          },
+          {
+            "word": "save",
+            "count": 2
+          },
+          {
+            "word": "testimony",
+            "count": 2
+          },
+          {
+            "word": "works",
+            "count": 2
+          },
+          {
+            "word": "world",
+            "count": 2
+          },
+          {
+            "word": "blood",
+            "count": 1
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "commandments",
+            "count": 1
+          },
+          {
+            "word": "faith",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "flesh",
+            "count": 1
+          },
+          {
+            "word": "gentiles",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "moses",
+            "count": 1
+          },
+          {
+            "word": "priest",
+            "count": 1
+          },
+          {
+            "word": "prophet",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 1002,
         "translationTokens": 23023,
-        "alignedTokens": 7054,
+        "alignedTokens": 7151,
         "ignoredTokens": 9179,
-        "unalignedTokens": 6790,
+        "unalignedTokens": 6693,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -1971,10 +4275,6 @@
             "count": 3
           },
           {
-            "word": "disciples",
-            "count": 3
-          },
-          {
             "word": "peter",
             "count": 3
           },
@@ -1996,6 +4296,10 @@
           },
           {
             "word": "commandment",
+            "count": 2
+          },
+          {
+            "word": "disciples",
             "count": 2
           },
           {
@@ -2082,6 +4386,190 @@
             "word": "testimony",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 6
+          },
+          {
+            "word": "israel",
+            "count": 2
+          },
+          {
+            "word": "jews",
+            "count": 2
+          },
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "word",
+            "count": 2
+          },
+          {
+            "word": "heaven",
+            "count": 1
+          },
+          {
+            "word": "king",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 22
+          },
+          {
+            "word": "lord",
+            "count": 10
+          },
+          {
+            "word": "word",
+            "count": 9
+          },
+          {
+            "word": "god",
+            "count": 8
+          },
+          {
+            "word": "judgment",
+            "count": 7
+          },
+          {
+            "word": "christ",
+            "count": 6
+          },
+          {
+            "word": "israel",
+            "count": 6
+          },
+          {
+            "word": "jesus",
+            "count": 6
+          },
+          {
+            "word": "jews",
+            "count": 4
+          },
+          {
+            "word": "law",
+            "count": 4
+          },
+          {
+            "word": "body",
+            "count": 3
+          },
+          {
+            "word": "death",
+            "count": 3
+          },
+          {
+            "word": "peter",
+            "count": 3
+          },
+          {
+            "word": "son",
+            "count": 3
+          },
+          {
+            "word": "truth",
+            "count": 3
+          },
+          {
+            "word": "works",
+            "count": 3
+          },
+          {
+            "word": "bread",
+            "count": 2
+          },
+          {
+            "word": "commandment",
+            "count": 2
+          },
+          {
+            "word": "disciples",
+            "count": 2
+          },
+          {
+            "word": "father",
+            "count": 2
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "judge",
+            "count": 2
+          },
+          {
+            "word": "priest",
+            "count": 2
+          },
+          {
+            "word": "blood",
+            "count": 1
+          },
+          {
+            "word": "faith",
+            "count": 1
+          },
+          {
+            "word": "flesh",
+            "count": 1
+          },
+          {
+            "word": "gentiles",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "john",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "moses",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          },
+          {
+            "word": "power",
+            "count": 1
+          },
+          {
+            "word": "prophet",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "temple",
+            "count": 1
+          },
+          {
+            "word": "testimony",
+            "count": 1
+          }
         ]
       }
     },
@@ -2091,9 +4579,9 @@
       "kjv": {
         "versesWithTranslation": 432,
         "translationTokens": 9410,
-        "alignedTokens": 3133,
+        "alignedTokens": 3145,
         "ignoredTokens": 3487,
-        "unalignedTokens": 2790,
+        "unalignedTokens": 2778,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2215,14 +4703,170 @@
             "word": "spirit",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 5
+          },
+          {
+            "word": "law",
+            "count": 3
+          },
+          {
+            "word": "faith",
+            "count": 2
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "flesh",
+            "count": 1
+          },
+          {
+            "word": "grace",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "righteousness",
+            "count": 1
+          },
+          {
+            "word": "saved",
+            "count": 1
+          },
+          {
+            "word": "sin",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 19
+          },
+          {
+            "word": "god",
+            "count": 10
+          },
+          {
+            "word": "christ",
+            "count": 4
+          },
+          {
+            "word": "gospel",
+            "count": 4
+          },
+          {
+            "word": "judgment",
+            "count": 4
+          },
+          {
+            "word": "righteousness",
+            "count": 4
+          },
+          {
+            "word": "glory",
+            "count": 3
+          },
+          {
+            "word": "jesus",
+            "count": 3
+          },
+          {
+            "word": "believe",
+            "count": 2
+          },
+          {
+            "word": "flesh",
+            "count": 2
+          },
+          {
+            "word": "gentile",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "power",
+            "count": 2
+          },
+          {
+            "word": "world",
+            "count": 2
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "gentiles",
+            "count": 1
+          },
+          {
+            "word": "israel",
+            "count": 1
+          },
+          {
+            "word": "law",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          },
+          {
+            "word": "prophets",
+            "count": 1
+          },
+          {
+            "word": "repentance",
+            "count": 1
+          },
+          {
+            "word": "saved",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 430,
         "translationTokens": 9156,
-        "alignedTokens": 3330,
+        "alignedTokens": 3348,
         "ignoredTokens": 3480,
-        "unalignedTokens": 2346,
+        "unalignedTokens": 2328,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2352,6 +4996,178 @@
             "word": "world",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 3
+          },
+          {
+            "word": "law",
+            "count": 3
+          },
+          {
+            "word": "faith",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "saved",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "commandments",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "flesh",
+            "count": 1
+          },
+          {
+            "word": "grace",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "judge",
+            "count": 1
+          },
+          {
+            "word": "righteous",
+            "count": 1
+          },
+          {
+            "word": "righteousness",
+            "count": 1
+          },
+          {
+            "word": "sin",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 10
+          },
+          {
+            "word": "word",
+            "count": 6
+          },
+          {
+            "word": "god",
+            "count": 5
+          },
+          {
+            "word": "judgment",
+            "count": 3
+          },
+          {
+            "word": "life",
+            "count": 3
+          },
+          {
+            "word": "works",
+            "count": 3
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "death",
+            "count": 2
+          },
+          {
+            "word": "flesh",
+            "count": 2
+          },
+          {
+            "word": "glory",
+            "count": 2
+          },
+          {
+            "word": "power",
+            "count": 2
+          },
+          {
+            "word": "righteousness",
+            "count": 2
+          },
+          {
+            "word": "spirit",
+            "count": 2
+          },
+          {
+            "word": "covenant",
+            "count": 1
+          },
+          {
+            "word": "faith",
+            "count": 1
+          },
+          {
+            "word": "heaven",
+            "count": 1
+          },
+          {
+            "word": "israel",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "law",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          },
+          {
+            "word": "priest",
+            "count": 1
+          },
+          {
+            "word": "saved",
+            "count": 1
+          },
+          {
+            "word": "testimony",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
         ]
       }
     },
@@ -2361,9 +5177,9 @@
       "kjv": {
         "versesWithTranslation": 437,
         "translationTokens": 9462,
-        "alignedTokens": 2685,
+        "alignedTokens": 2753,
         "ignoredTokens": 3557,
-        "unalignedTokens": 3220,
+        "unalignedTokens": 3152,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2473,14 +5289,150 @@
             "word": "truth",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "believe",
+            "count": 2
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "gospel",
+            "count": 1
+          },
+          {
+            "word": "man",
+            "count": 1
+          },
+          {
+            "word": "temple",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 49
+          },
+          {
+            "word": "law",
+            "count": 7
+          },
+          {
+            "word": "world",
+            "count": 7
+          },
+          {
+            "word": "christ",
+            "count": 6
+          },
+          {
+            "word": "glory",
+            "count": 6
+          },
+          {
+            "word": "judgment",
+            "count": 4
+          },
+          {
+            "word": "gentiles",
+            "count": 3
+          },
+          {
+            "word": "god",
+            "count": 3
+          },
+          {
+            "word": "gospel",
+            "count": 3
+          },
+          {
+            "word": "lord",
+            "count": 3
+          },
+          {
+            "word": "commandment",
+            "count": 2
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "judge",
+            "count": 2
+          },
+          {
+            "word": "save",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "bread",
+            "count": 1
+          },
+          {
+            "word": "flesh",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          },
+          {
+            "word": "righteousness",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "temple",
+            "count": 1
+          },
+          {
+            "word": "testimony",
+            "count": 1
+          },
+          {
+            "word": "truth",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 437,
         "translationTokens": 9395,
-        "alignedTokens": 2926,
+        "alignedTokens": 2965,
         "ignoredTokens": 3630,
-        "unalignedTokens": 2839,
+        "unalignedTokens": 2800,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2566,6 +5518,110 @@
             "word": "testimony",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 23
+          },
+          {
+            "word": "christ",
+            "count": 6
+          },
+          {
+            "word": "law",
+            "count": 6
+          },
+          {
+            "word": "judgment",
+            "count": 4
+          },
+          {
+            "word": "lord",
+            "count": 4
+          },
+          {
+            "word": "world",
+            "count": 4
+          },
+          {
+            "word": "body",
+            "count": 3
+          },
+          {
+            "word": "judge",
+            "count": 3
+          },
+          {
+            "word": "word",
+            "count": 3
+          },
+          {
+            "word": "commandment",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "bread",
+            "count": 1
+          },
+          {
+            "word": "gentiles",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "save",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "temple",
+            "count": 1
+          },
+          {
+            "word": "testimony",
+            "count": 1
+          }
         ]
       }
     },
@@ -2575,9 +5631,9 @@
       "kjv": {
         "versesWithTranslation": 256,
         "translationTokens": 6041,
-        "alignedTokens": 1637,
+        "alignedTokens": 1656,
         "ignoredTokens": 2301,
-        "unalignedTokens": 2103,
+        "unalignedTokens": 2084,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2639,14 +5695,86 @@
             "word": "world",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "man",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 20
+          },
+          {
+            "word": "glory",
+            "count": 14
+          },
+          {
+            "word": "forgive",
+            "count": 4
+          },
+          {
+            "word": "life",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "gospel",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "judgment",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "save",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 256,
         "translationTokens": 6028,
-        "alignedTokens": 1820,
+        "alignedTokens": 1841,
         "ignoredTokens": 2382,
-        "unalignedTokens": 1826,
+        "unalignedTokens": 1805,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2708,6 +5836,78 @@
             "word": "world",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "man",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "forgive",
+            "count": 4
+          },
+          {
+            "word": "man",
+            "count": 4
+          },
+          {
+            "word": "flesh",
+            "count": 2
+          },
+          {
+            "word": "judgment",
+            "count": 2
+          },
+          {
+            "word": "life",
+            "count": 2
+          },
+          {
+            "word": "works",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "glory",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "save",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
         ]
       }
     },
@@ -2717,9 +5917,9 @@
       "kjv": {
         "versesWithTranslation": 149,
         "translationTokens": 3084,
-        "alignedTokens": 933,
+        "alignedTokens": 943,
         "ignoredTokens": 1155,
-        "unalignedTokens": 996,
+        "unalignedTokens": 986,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2762,8 +5962,76 @@
             "count": 2
           },
           {
-            "word": "gentiles",
+            "word": "jesus",
             "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "jews",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "gospel",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 7
+          },
+          {
+            "word": "christ",
+            "count": 3
+          },
+          {
+            "word": "glory",
+            "count": 3
+          },
+          {
+            "word": "peter",
+            "count": 3
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "gospel",
+            "count": 2
+          },
+          {
+            "word": "jews",
+            "count": 2
+          },
+          {
+            "word": "life",
+            "count": 2
+          },
+          {
+            "word": "save",
+            "count": 2
+          },
+          {
+            "word": "truth",
+            "count": 2
           },
           {
             "word": "jesus",
@@ -2782,9 +6050,9 @@
       "web": {
         "versesWithTranslation": 149,
         "translationTokens": 3149,
-        "alignedTokens": 1013,
+        "alignedTokens": 1022,
         "ignoredTokens": 1221,
-        "unalignedTokens": 915,
+        "unalignedTokens": 906,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2815,8 +6083,56 @@
             "count": 2
           },
           {
-            "word": "gentiles",
+            "word": "jesus",
             "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "jews",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 7
+          },
+          {
+            "word": "christ",
+            "count": 3
+          },
+          {
+            "word": "peter",
+            "count": 3
+          },
+          {
+            "word": "jews",
+            "count": 2
+          },
+          {
+            "word": "son",
+            "count": 2
+          },
+          {
+            "word": "truth",
+            "count": 2
+          },
+          {
+            "word": "word",
+            "count": 2
           },
           {
             "word": "jesus",
@@ -2839,9 +6155,9 @@
       "kjv": {
         "versesWithTranslation": 155,
         "translationTokens": 3022,
-        "alignedTokens": 1026,
+        "alignedTokens": 1033,
         "ignoredTokens": 1074,
-        "unalignedTokens": 922,
+        "unalignedTokens": 915,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -2899,14 +6215,74 @@
             "word": "truth",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "light",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 6
+          },
+          {
+            "word": "world",
+            "count": 4
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "flesh",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "sins",
+            "count": 2
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "eternal",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "truth",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 155,
         "translationTokens": 3098,
-        "alignedTokens": 1143,
+        "alignedTokens": 1148,
         "ignoredTokens": 1157,
-        "unalignedTokens": 798,
+        "unalignedTokens": 793,
         "highValueUnaligned": [
           {
             "word": "christ",
@@ -2968,6 +6344,70 @@
             "word": "world",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "light",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "flesh",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "heart",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "eternal",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "truth",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
         ]
       }
     },
@@ -2977,10 +6417,41 @@
       "kjv": {
         "versesWithTranslation": 104,
         "translationTokens": 2183,
-        "alignedTokens": 631,
+        "alignedTokens": 641,
         "ignoredTokens": 800,
-        "unalignedTokens": 752,
+        "unalignedTokens": 742,
         "highValueUnaligned": [
+          {
+            "word": "man",
+            "count": 5
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "gospel",
+            "count": 1
+          },
+          {
+            "word": "heaven",
+            "count": 1
+          },
+          {
+            "word": "judgment",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "man",
             "count": 5
@@ -3014,10 +6485,37 @@
       "web": {
         "versesWithTranslation": 104,
         "translationTokens": 2231,
-        "alignedTokens": 686,
+        "alignedTokens": 695,
         "ignoredTokens": 868,
-        "unalignedTokens": 677,
+        "unalignedTokens": 668,
         "highValueUnaligned": [
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "word",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "heaven",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          },
+          {
+            "word": "man",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "christ",
             "count": 2
@@ -3051,9 +6549,9 @@
       "kjv": {
         "versesWithTranslation": 95,
         "translationTokens": 1979,
-        "alignedTokens": 669,
+        "alignedTokens": 673,
         "ignoredTokens": 697,
-        "unalignedTokens": 613,
+        "unalignedTokens": 609,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -3095,14 +6593,62 @@
             "word": "son",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 6
+          },
+          {
+            "word": "father",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "sins",
+            "count": 2
+          },
+          {
+            "word": "blood",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "commandments",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 95,
         "translationTokens": 2017,
-        "alignedTokens": 729,
+        "alignedTokens": 735,
         "ignoredTokens": 764,
-        "unalignedTokens": 524,
+        "unalignedTokens": 518,
         "highValueUnaligned": [
           {
             "word": "christ",
@@ -3148,6 +6694,58 @@
             "word": "word",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "blood",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "death",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "sins",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
         ]
       }
     },
@@ -3157,9 +6755,9 @@
       "kjv": {
         "versesWithTranslation": 89,
         "translationTokens": 1837,
-        "alignedTokens": 564,
+        "alignedTokens": 568,
         "ignoredTokens": 689,
-        "unalignedTokens": 584,
+        "unalignedTokens": 580,
         "highValueUnaligned": [
           {
             "word": "christ",
@@ -3205,14 +6803,70 @@
             "word": "truth",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "christ",
+            "count": 4
+          },
+          {
+            "word": "man",
+            "count": 3
+          },
+          {
+            "word": "commandments",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          },
+          {
+            "word": "truth",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 89,
         "translationTokens": 1859,
-        "alignedTokens": 627,
+        "alignedTokens": 630,
         "ignoredTokens": 736,
-        "unalignedTokens": 496,
+        "unalignedTokens": 493,
         "highValueUnaligned": [
           {
             "word": "christ",
@@ -3262,6 +6916,66 @@
             "word": "works",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "christ",
+            "count": 3
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "body",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "truth",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          }
         ]
       }
     },
@@ -3271,9 +6985,9 @@
       "kjv": {
         "versesWithTranslation": 47,
         "translationTokens": 1022,
-        "alignedTokens": 335,
+        "alignedTokens": 340,
         "ignoredTokens": 393,
-        "unalignedTokens": 294,
+        "unalignedTokens": 289,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -3299,14 +7013,50 @@
             "word": "sin",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "man",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 3
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "glory",
+            "count": 1
+          },
+          {
+            "word": "power",
+            "count": 1
+          },
+          {
+            "word": "sin",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 47,
         "translationTokens": 1066,
-        "alignedTokens": 375,
+        "alignedTokens": 381,
         "ignoredTokens": 418,
-        "unalignedTokens": 273,
+        "unalignedTokens": 267,
         "highValueUnaligned": [
           {
             "word": "christ",
@@ -3328,6 +7078,34 @@
             "word": "word",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "sin",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
         ]
       }
     },
@@ -3337,13 +7115,69 @@
       "kjv": {
         "versesWithTranslation": 113,
         "translationTokens": 2244,
-        "alignedTokens": 699,
+        "alignedTokens": 707,
         "ignoredTokens": 731,
-        "unalignedTokens": 814,
+        "unalignedTokens": 806,
         "highValueUnaligned": [
           {
             "word": "man",
             "count": 9
+          },
+          {
+            "word": "believe",
+            "count": 2
+          },
+          {
+            "word": "commandment",
+            "count": 2
+          },
+          {
+            "word": "eternal",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "son",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "law",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "man",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 8
           },
           {
             "word": "believe",
@@ -3394,9 +7228,9 @@
       "web": {
         "versesWithTranslation": 113,
         "translationTokens": 2312,
-        "alignedTokens": 791,
+        "alignedTokens": 803,
         "ignoredTokens": 784,
-        "unalignedTokens": 737,
+        "unalignedTokens": 725,
         "highValueUnaligned": [
           {
             "word": "word",
@@ -3423,6 +7257,10 @@
             "count": 2
           },
           {
+            "word": "life",
+            "count": 2
+          },
+          {
             "word": "commandment",
             "count": 1
           },
@@ -3435,7 +7273,63 @@
             "count": 1
           },
           {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "word",
+            "count": 4
+          },
+          {
+            "word": "believe",
+            "count": 3
+          },
+          {
+            "word": "lord",
+            "count": 3
+          },
+          {
+            "word": "man",
+            "count": 3
+          },
+          {
+            "word": "eternal",
+            "count": 2
+          },
+          {
             "word": "life",
+            "count": 2
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "law",
             "count": 1
           },
           {
@@ -3459,10 +7353,57 @@
       "kjv": {
         "versesWithTranslation": 83,
         "translationTokens": 1666,
-        "alignedTokens": 515,
+        "alignedTokens": 517,
         "ignoredTokens": 579,
-        "unalignedTokens": 572,
+        "unalignedTokens": 570,
         "highValueUnaligned": [
+          {
+            "word": "man",
+            "count": 4
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "son",
+            "count": 2
+          },
+          {
+            "word": "world",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "gentiles",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "scriptures",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "man",
             "count": 4
@@ -3512,9 +7453,9 @@
       "web": {
         "versesWithTranslation": 83,
         "translationTokens": 1565,
-        "alignedTokens": 554,
+        "alignedTokens": 560,
         "ignoredTokens": 576,
-        "unalignedTokens": 435,
+        "unalignedTokens": 429,
         "highValueUnaligned": [
           {
             "word": "lord",
@@ -3522,6 +7463,46 @@
           },
           {
             "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "gentiles",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "scriptures",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "lord",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "lord",
             "count": 2
           },
           {
@@ -3557,10 +7538,37 @@
       "kjv": {
         "versesWithTranslation": 46,
         "translationTokens": 896,
-        "alignedTokens": 279,
+        "alignedTokens": 282,
         "ignoredTokens": 287,
-        "unalignedTokens": 330,
+        "unalignedTokens": 327,
         "highValueUnaligned": [
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "world",
+            "count": 2
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "man",
             "count": 2
@@ -3590,10 +7598,29 @@
       "web": {
         "versesWithTranslation": 46,
         "translationTokens": 905,
-        "alignedTokens": 330,
+        "alignedTokens": 332,
         "ignoredTokens": 295,
-        "unalignedTokens": 280,
+        "unalignedTokens": 278,
         "highValueUnaligned": [
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "believe",
             "count": 1
@@ -3635,14 +7662,30 @@
             "word": "son",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "lord",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 25,
         "translationTokens": 445,
-        "alignedTokens": 136,
+        "alignedTokens": 137,
         "ignoredTokens": 197,
-        "unalignedTokens": 112,
+        "unalignedTokens": 111,
         "highValueUnaligned": [
           {
             "word": "heart",
@@ -3660,6 +7703,26 @@
             "word": "lord",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "lord",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "heart",
+            "count": 2
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          }
         ]
       }
     },
@@ -3669,9 +7732,9 @@
       "kjv": {
         "versesWithTranslation": 303,
         "translationTokens": 6897,
-        "alignedTokens": 1909,
+        "alignedTokens": 1935,
         "ignoredTokens": 2620,
-        "unalignedTokens": 2368,
+        "unalignedTokens": 2342,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -3749,14 +7812,98 @@
             "word": "works",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "blood",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "priest",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 15
+          },
+          {
+            "word": "god",
+            "count": 4
+          },
+          {
+            "word": "covenant",
+            "count": 3
+          },
+          {
+            "word": "commandment",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "christ",
+            "count": 1
+          },
+          {
+            "word": "faith",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "heaven",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          },
+          {
+            "word": "testimony",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 303,
         "translationTokens": 6419,
-        "alignedTokens": 1979,
+        "alignedTokens": 2014,
         "ignoredTokens": 2429,
-        "unalignedTokens": 2011,
+        "unalignedTokens": 1976,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -3830,6 +7977,82 @@
             "word": "works",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "blood",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "sins",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 6
+          },
+          {
+            "word": "covenant",
+            "count": 4
+          },
+          {
+            "word": "testimony",
+            "count": 4
+          },
+          {
+            "word": "priest",
+            "count": 3
+          },
+          {
+            "word": "body",
+            "count": 2
+          },
+          {
+            "word": "love",
+            "count": 2
+          },
+          {
+            "word": "son",
+            "count": 2
+          },
+          {
+            "word": "word",
+            "count": 2
+          },
+          {
+            "word": "commandment",
+            "count": 1
+          },
+          {
+            "word": "death",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "law",
+            "count": 1
+          },
+          {
+            "word": "works",
+            "count": 1
+          }
         ]
       }
     },
@@ -3839,9 +8062,9 @@
       "kjv": {
         "versesWithTranslation": 108,
         "translationTokens": 2304,
-        "alignedTokens": 694,
+        "alignedTokens": 705,
         "ignoredTokens": 829,
-        "unalignedTokens": 781,
+        "unalignedTokens": 770,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -3871,14 +8094,54 @@
             "word": "water",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 12
+          },
+          {
+            "word": "glory",
+            "count": 1
+          },
+          {
+            "word": "grace",
+            "count": 1
+          },
+          {
+            "word": "judgment",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 108,
         "translationTokens": 2326,
-        "alignedTokens": 796,
+        "alignedTokens": 817,
         "ignoredTokens": 869,
-        "unalignedTokens": 661,
+        "unalignedTokens": 640,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -3908,6 +8171,50 @@
             "word": "word",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "man",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 9
+          },
+          {
+            "word": "glory",
+            "count": 2
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
         ]
       }
     },
@@ -3917,10 +8224,61 @@
       "kjv": {
         "versesWithTranslation": 105,
         "translationTokens": 2476,
-        "alignedTokens": 695,
+        "alignedTokens": 699,
         "ignoredTokens": 882,
-        "unalignedTokens": 899,
+        "unalignedTokens": 895,
         "highValueUnaligned": [
+          {
+            "word": "man",
+            "count": 9
+          },
+          {
+            "word": "glory",
+            "count": 3
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "jesus",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "death",
+            "count": 1
+          },
+          {
+            "word": "gospel",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "love",
+            "count": 1
+          },
+          {
+            "word": "saved",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "man",
             "count": 9
@@ -3974,9 +8332,9 @@
       "web": {
         "versesWithTranslation": 105,
         "translationTokens": 2322,
-        "alignedTokens": 740,
+        "alignedTokens": 747,
         "ignoredTokens": 866,
-        "unalignedTokens": 716,
+        "unalignedTokens": 709,
         "highValueUnaligned": [
           {
             "word": "glory",
@@ -4018,6 +8376,50 @@
             "word": "word",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "blood",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "glory",
+            "count": 3
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "life",
+            "count": 2
+          },
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "death",
+            "count": 1
+          },
+          {
+            "word": "jesus",
+            "count": 1
+          },
+          {
+            "word": "saved",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
         ]
       }
     },
@@ -4027,9 +8429,9 @@
       "kjv": {
         "versesWithTranslation": 61,
         "translationTokens": 1553,
-        "alignedTokens": 438,
+        "alignedTokens": 443,
         "ignoredTokens": 567,
-        "unalignedTokens": 548,
+        "unalignedTokens": 543,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -4059,14 +8461,46 @@
             "word": "water",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "holy",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 2
+          },
+          {
+            "word": "light",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "saved",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 61,
         "translationTokens": 1556,
-        "alignedTokens": 502,
+        "alignedTokens": 509,
         "ignoredTokens": 584,
-        "unalignedTokens": 470,
+        "unalignedTokens": 463,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -4075,6 +8509,38 @@
           {
             "word": "holy",
             "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "prophets",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "holy",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 2
           },
           {
             "word": "name",
@@ -4105,9 +8571,9 @@
       "kjv": {
         "versesWithTranslation": 105,
         "translationTokens": 2516,
-        "alignedTokens": 851,
+        "alignedTokens": 852,
         "ignoredTokens": 1036,
-        "unalignedTokens": 629,
+        "unalignedTokens": 628,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -4173,14 +8639,90 @@
             "word": "word",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "sins",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 8
+          },
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "law",
+            "count": 2
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "flesh",
+            "count": 1
+          },
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "heaven",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "prophets",
+            "count": 1
+          },
+          {
+            "word": "truth",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 105,
         "translationTokens": 2505,
-        "alignedTokens": 930,
+        "alignedTokens": 950,
         "ignoredTokens": 1046,
-        "unalignedTokens": 529,
+        "unalignedTokens": 509,
         "highValueUnaligned": [
           {
             "word": "god",
@@ -4250,6 +8792,86 @@
             "word": "word",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "sins",
+            "count": 2
+          },
+          {
+            "word": "believe",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "son",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "christ",
+            "count": 2
+          },
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "flesh",
+            "count": 1
+          },
+          {
+            "word": "heart",
+            "count": 1
+          },
+          {
+            "word": "heaven",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "man",
+            "count": 1
+          },
+          {
+            "word": "power",
+            "count": 1
+          },
+          {
+            "word": "prophets",
+            "count": 1
+          },
+          {
+            "word": "spirit",
+            "count": 1
+          },
+          {
+            "word": "word",
+            "count": 1
+          }
         ]
       }
     },
@@ -4259,9 +8881,9 @@
       "kjv": {
         "versesWithTranslation": 13,
         "translationTokens": 298,
-        "alignedTokens": 94,
+        "alignedTokens": 95,
         "ignoredTokens": 121,
-        "unalignedTokens": 83,
+        "unalignedTokens": 82,
         "highValueUnaligned": [
           {
             "word": "god",
@@ -4275,15 +8897,38 @@
             "word": "lord",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "christ",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "god",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 13,
         "translationTokens": 296,
-        "alignedTokens": 99,
+        "alignedTokens": 100,
         "ignoredTokens": 128,
-        "unalignedTokens": 69,
+        "unalignedTokens": 68,
         "highValueUnaligned": [
+          {
+            "word": "lord",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "lord",
             "count": 1
@@ -4297,14 +8942,21 @@
       "kjv": {
         "versesWithTranslation": 14,
         "translationTokens": 294,
-        "alignedTokens": 75,
+        "alignedTokens": 76,
         "ignoredTokens": 101,
-        "unalignedTokens": 118,
+        "unalignedTokens": 117,
         "highValueUnaligned": [
           {
-            "word": "gentiles",
+            "word": "name",
             "count": 1
           },
+          {
+            "word": "peace",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "name",
             "count": 1
@@ -4318,14 +8970,10 @@
       "web": {
         "versesWithTranslation": 14,
         "translationTokens": 293,
-        "alignedTokens": 91,
+        "alignedTokens": 92,
         "ignoredTokens": 114,
-        "unalignedTokens": 88,
+        "unalignedTokens": 87,
         "highValueUnaligned": [
-          {
-            "word": "gentiles",
-            "count": 1
-          },
           {
             "word": "name",
             "count": 1
@@ -4338,6 +8986,22 @@
             "word": "testimony",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "testimony",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "name",
+            "count": 1
+          },
+          {
+            "word": "peace",
+            "count": 1
+          }
         ]
       }
     },
@@ -4347,9 +9011,9 @@
       "kjv": {
         "versesWithTranslation": 25,
         "translationTokens": 608,
-        "alignedTokens": 183,
+        "alignedTokens": 184,
         "ignoredTokens": 205,
-        "unalignedTokens": 220,
+        "unalignedTokens": 219,
         "highValueUnaligned": [
           {
             "word": "lord",
@@ -4363,19 +9027,55 @@
             "word": "water",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 1
+          },
+          {
+            "word": "lord",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 25,
         "translationTokens": 630,
-        "alignedTokens": 200,
+        "alignedTokens": 201,
         "ignoredTokens": 218,
-        "unalignedTokens": 212,
+        "unalignedTokens": 211,
         "highValueUnaligned": [
           {
             "word": "god",
             "count": 1
           },
+          {
+            "word": "lord",
+            "count": 1
+          },
+          {
+            "word": "water",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
           {
             "word": "lord",
             "count": 1
@@ -4393,9 +9093,9 @@
       "kjv": {
         "versesWithTranslation": 404,
         "translationTokens": 11995,
-        "alignedTokens": 3781,
+        "alignedTokens": 3832,
         "ignoredTokens": 4928,
-        "unalignedTokens": 3286,
+        "unalignedTokens": 3235,
         "highValueUnaligned": [
           {
             "word": "man",
@@ -4481,14 +9181,106 @@
             "word": "world",
             "count": 1
           }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "righteous",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "man",
+            "count": 27
+          },
+          {
+            "word": "angel",
+            "count": 8
+          },
+          {
+            "word": "god",
+            "count": 5
+          },
+          {
+            "word": "heaven",
+            "count": 5
+          },
+          {
+            "word": "power",
+            "count": 5
+          },
+          {
+            "word": "christ",
+            "count": 4
+          },
+          {
+            "word": "lord",
+            "count": 3
+          },
+          {
+            "word": "prophet",
+            "count": 3
+          },
+          {
+            "word": "works",
+            "count": 2
+          },
+          {
+            "word": "commandments",
+            "count": 1
+          },
+          {
+            "word": "darkness",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "holy",
+            "count": 1
+          },
+          {
+            "word": "john",
+            "count": 1
+          },
+          {
+            "word": "life",
+            "count": 1
+          },
+          {
+            "word": "light",
+            "count": 1
+          },
+          {
+            "word": "righteousness",
+            "count": 1
+          },
+          {
+            "word": "save",
+            "count": 1
+          },
+          {
+            "word": "saved",
+            "count": 1
+          },
+          {
+            "word": "world",
+            "count": 1
+          }
         ]
       },
       "web": {
         "versesWithTranslation": 404,
         "translationTokens": 11419,
-        "alignedTokens": 4028,
+        "alignedTokens": 4095,
         "ignoredTokens": 4588,
-        "unalignedTokens": 2803,
+        "unalignedTokens": 2736,
         "highValueUnaligned": [
           {
             "word": "god",
@@ -4548,6 +9340,90 @@
           },
           {
             "word": "kingdom",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourcePresent": [
+          {
+            "word": "god",
+            "count": 4
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "angel",
+            "count": 1
+          },
+          {
+            "word": "kingdom",
+            "count": 1
+          },
+          {
+            "word": "name",
+            "count": 1
+          }
+        ],
+        "highValueUnalignedSourceAbsent": [
+          {
+            "word": "god",
+            "count": 4
+          },
+          {
+            "word": "heaven",
+            "count": 4
+          },
+          {
+            "word": "man",
+            "count": 4
+          },
+          {
+            "word": "word",
+            "count": 4
+          },
+          {
+            "word": "christ",
+            "count": 3
+          },
+          {
+            "word": "power",
+            "count": 3
+          },
+          {
+            "word": "prophet",
+            "count": 3
+          },
+          {
+            "word": "commandments",
+            "count": 2
+          },
+          {
+            "word": "holy",
+            "count": 2
+          },
+          {
+            "word": "lord",
+            "count": 2
+          },
+          {
+            "word": "works",
+            "count": 2
+          },
+          {
+            "word": "angel",
+            "count": 1
+          },
+          {
+            "word": "father",
+            "count": 1
+          },
+          {
+            "word": "jesus",
             "count": 1
           }
         ]

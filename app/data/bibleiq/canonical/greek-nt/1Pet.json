@@ -7273,7 +7273,8 @@
             "text": "glory",
             "normalized": "glory",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           }
         ]
       },
@@ -7524,7 +7525,8 @@
             "text": "glory",
             "normalized": "glory",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           }
         ]
       }
@@ -10789,7 +10791,8 @@
             "text": "gospel",
             "normalized": "gospel",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 30,
@@ -14903,15 +14906,8 @@
             "index": 12,
             "text": "judgeth",
             "normalized": "judgeth",
-            "alignedSourceTokenIds": [
-              "greek-nt:1_Peter.1.17:6"
-            ],
-            "alignedSourceEntityIds": [
-              "word:greek-nt:G2919"
-            ],
-            "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
-            "alignmentMethod": "greek-nt-gloss-order"
+            "alignedSourceTokenIds": [],
+            "alignmentStatus": "unaligned"
           },
           {
             "index": 13,
@@ -14939,15 +14935,23 @@
             "index": 15,
             "text": "every",
             "normalized": "every",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.1.17:9"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G1538"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-strong-family-order"
           },
           {
             "index": 16,
             "text": "man's",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 17,
@@ -15228,7 +15232,8 @@
             "text": "man's",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 17,
@@ -16101,7 +16106,8 @@
             "text": "life",
             "normalized": "life",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 19,
@@ -16668,7 +16674,8 @@
             "text": "blood",
             "normalized": "blood",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "expected-greek-source-present-but-unmatched"
           },
           {
             "index": 14,
@@ -18023,7 +18030,8 @@
             "text": "believe",
             "normalized": "believe",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 5,
@@ -19094,7 +19102,8 @@
             "text": "Spirit",
             "normalized": "spirit",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 13,
@@ -19397,7 +19406,8 @@
             "text": "Spirit",
             "normalized": "spirit",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 15,
@@ -20199,8 +20209,15 @@
             "index": 17,
             "text": "lives",
             "normalized": "lives",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.1.23:9"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G2198"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-gloss-order"
           },
           {
             "index": 18,
@@ -20818,7 +20835,8 @@
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 12,
@@ -22788,7 +22806,8 @@
             "text": "word",
             "normalized": "word",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 10,
@@ -22953,7 +22972,8 @@
             "text": "Word",
             "normalized": "word",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 11,
@@ -24484,8 +24504,15 @@
             "index": 4,
             "text": "stones",
             "normalized": "stones",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.2.5:3"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G3037"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "high",
+            "alignmentMethod": "greek-nt-gloss-order"
           },
           {
             "index": 5,
@@ -24748,8 +24775,15 @@
             "index": 4,
             "text": "stones",
             "normalized": "stones",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.2.5:3"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G3037"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "high",
+            "alignmentMethod": "greek-nt-gloss-order"
           },
           {
             "index": 5,
@@ -28196,7 +28230,7 @@
               "word:greek-nt:G4655"
             ],
             "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
+            "alignmentConfidence": "medium",
             "alignmentMethod": "greek-nt-gloss-order"
           },
           {
@@ -28392,7 +28426,8 @@
             "text": "God's",
             "normalized": "god",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 16,
@@ -28545,7 +28580,7 @@
               "word:greek-nt:G4655"
             ],
             "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
+            "alignmentConfidence": "medium",
             "alignmentMethod": "greek-nt-gloss-order"
           },
           {
@@ -31748,7 +31783,8 @@
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 7,
@@ -31929,7 +31965,8 @@
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 8,
@@ -35930,7 +35967,8 @@
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 7,
@@ -36662,7 +36700,8 @@
             "text": "glory",
             "normalized": "glory",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 3,
@@ -36974,7 +37013,8 @@
             "text": "glory",
             "normalized": "glory",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 3,
@@ -39128,15 +39168,8 @@
             "index": 20,
             "text": "judgeth",
             "normalized": "judgeth",
-            "alignedSourceTokenIds": [
-              "greek-nt:1_Peter.2.23:10"
-            ],
-            "alignedSourceEntityIds": [
-              "word:greek-nt:G2919"
-            ],
-            "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
-            "alignmentMethod": "greek-nt-gloss-order"
+            "alignedSourceTokenIds": [],
+            "alignmentStatus": "unaligned"
           },
           {
             "index": 21,
@@ -40167,7 +40200,7 @@
               "word:greek-nt:G1343"
             ],
             "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
+            "alignmentConfidence": "medium",
             "alignmentMethod": "greek-nt-gloss-order"
           },
           {
@@ -40420,7 +40453,7 @@
               "word:greek-nt:G1343"
             ],
             "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
+            "alignmentConfidence": "medium",
             "alignmentMethod": "greek-nt-gloss-order"
           },
           {
@@ -42041,8 +42074,15 @@
             "index": 12,
             "text": "any",
             "normalized": "any",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.3.1:10"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G5100"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-strong-family-order"
           },
           {
             "index": 13,
@@ -42077,7 +42117,7 @@
               "word:greek-nt:G3056"
             ],
             "alignmentStatus": "aligned",
-            "alignmentConfidence": "medium",
+            "alignmentConfidence": "high",
             "alignmentMethod": "greek-nt-gloss-order"
           },
           {
@@ -42360,8 +42400,15 @@
             "index": 16,
             "text": "any",
             "normalized": "any",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.3.1:10"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G5100"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "low",
+            "alignmentMethod": "greek-nt-strong-family-order"
           },
           {
             "index": 17,
@@ -48165,7 +48212,8 @@
             "text": "love",
             "normalized": "love",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 13,
@@ -51044,8 +51092,15 @@
             "index": 2,
             "text": "eyes",
             "normalized": "eyes",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.3.12:1"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G3788"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "high",
+            "alignmentMethod": "greek-nt-gloss-order"
           },
           {
             "index": 3,
@@ -51336,8 +51391,15 @@
             "index": 2,
             "text": "eyes",
             "normalized": "eyes",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.3.12:1"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G3788"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "high",
+            "alignmentMethod": "greek-nt-gloss-order"
           },
           {
             "index": 3,
@@ -53313,7 +53375,8 @@
             "text": "God",
             "normalized": "god",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 5,
@@ -53444,7 +53507,8 @@
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 19,
@@ -53648,7 +53712,8 @@
             "text": "God",
             "normalized": "god",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 5,
@@ -54899,7 +54964,8 @@
             "text": "life",
             "normalized": "life",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 23,
@@ -56384,7 +56450,8 @@
             "text": "death",
             "normalized": "death",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 24,
@@ -56703,7 +56770,8 @@
             "text": "death",
             "normalized": "death",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 23,
@@ -58156,7 +58224,8 @@
             "text": "saved",
             "normalized": "saved",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 30,
@@ -58461,7 +58530,8 @@
             "text": "saved",
             "normalized": "saved",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 28,
@@ -62916,7 +62986,8 @@
             "text": "life",
             "normalized": "life",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 7,
@@ -67575,15 +67646,23 @@
             "index": 1,
             "text": "every",
             "normalized": "every",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.4.10:0"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G1538"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-strong-family-order"
           },
           {
             "index": 2,
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 3,
@@ -68939,15 +69018,23 @@
             "index": 1,
             "text": "any",
             "normalized": "any",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.4.11:1"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G5100"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-strong-family-order"
           },
           {
             "index": 2,
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 3,
@@ -69049,15 +69136,23 @@
             "index": 13,
             "text": "any",
             "normalized": "any",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.4.11:7"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G5100"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-strong-family-order"
           },
           {
             "index": 14,
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 15,
@@ -69394,8 +69489,15 @@
             "index": 1,
             "text": "anyone",
             "normalized": "anyone",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.4.11:1"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G5100"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-strong-family-order"
           },
           {
             "index": 2,
@@ -69526,15 +69628,29 @@
             "index": 15,
             "text": "anyone",
             "normalized": "anyone",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.4.11:7"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G5100"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "low",
+            "alignmentMethod": "greek-nt-strong-family-order"
           },
           {
             "index": 16,
             "text": "serves",
             "normalized": "serves",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.4.11:8"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G1247"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-gloss-order"
           },
           {
             "index": 17,
@@ -73803,7 +73919,8 @@
             "text": "man",
             "normalized": "man",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 4,
@@ -79385,7 +79502,8 @@
             "text": "God's",
             "normalized": "god",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 6,
@@ -80914,15 +81032,8 @@
             "index": 28,
             "text": "giveth",
             "normalized": "giveth",
-            "alignedSourceTokenIds": [
-              "greek-nt:1_Peter.5.5:17"
-            ],
-            "alignedSourceEntityIds": [
-              "word:greek-nt:G1325"
-            ],
-            "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
-            "alignmentMethod": "greek-nt-gloss-order"
+            "alignedSourceTokenIds": [],
+            "alignmentStatus": "unaligned"
           },
           {
             "index": 29,
@@ -81006,8 +81117,15 @@
             "index": 3,
             "text": "ones",
             "normalized": "ones",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Peter.5.5:6"
+            ],
+            "alignedSourceEntityIds": [
+              "word:greek-nt:G0240"
+            ],
+            "alignmentStatus": "aligned",
+            "alignmentConfidence": "medium",
+            "alignmentMethod": "greek-nt-gloss-order"
           },
           {
             "index": 4,
@@ -81027,7 +81145,7 @@
               "word:greek-nt:G5293"
             ],
             "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
+            "alignmentConfidence": "medium",
             "alignmentMethod": "greek-nt-gloss-order"
           },
           {
@@ -81057,7 +81175,7 @@
               "word:greek-nt:G4245"
             ],
             "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
+            "alignmentConfidence": "medium",
             "alignmentMethod": "greek-nt-gloss-order"
           },
           {
@@ -81078,7 +81196,7 @@
               "word:greek-nt:G3956"
             ],
             "alignmentStatus": "aligned",
-            "alignmentConfidence": "high",
+            "alignmentConfidence": "medium",
             "alignmentMethod": "greek-nt-gloss-order"
           },
           {
@@ -81173,15 +81291,8 @@
             "index": 21,
             "text": "one",
             "normalized": "one",
-            "alignedSourceTokenIds": [
-              "greek-nt:1_Peter.5.5:6"
-            ],
-            "alignedSourceEntityIds": [
-              "word:greek-nt:G0240"
-            ],
-            "alignmentStatus": "aligned",
-            "alignmentConfidence": "medium",
-            "alignmentMethod": "greek-nt-gloss-order"
+            "alignedSourceTokenIds": [],
+            "alignmentStatus": "unaligned"
           },
           {
             "index": 22,
@@ -84755,7 +84866,8 @@
             "text": "Jesus",
             "normalized": "jesus",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 17,
@@ -85059,7 +85171,8 @@
             "text": "Jesus",
             "normalized": "jesus",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 17,
@@ -85397,7 +85510,8 @@
             "text": "glory",
             "normalized": "glory",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 4,
@@ -85499,7 +85613,8 @@
             "text": "glory",
             "normalized": "glory",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 5,
@@ -87775,7 +87890,8 @@
             "text": "Jesus",
             "normalized": "jesus",
             "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
           },
           {
             "index": 19,

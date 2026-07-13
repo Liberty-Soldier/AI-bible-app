@@ -230,6 +230,16 @@ const HIGH_VALUE_WORDS = new Set([
 
 const MANUAL_GREEK_NT_GLOSS_FAMILIES = {
       am: ["G1510"],
+        any: ["G5100", "G1538"],
+  anyone: ["G5100", "G1538"],
+  anybody: ["G5100"],
+  someone: ["G5100"],
+  somebody: ["G5100"],
+  certain: ["G5100"],
+  each: ["G1538"],
+  every: ["G1538"],
+  whoever: ["G3748", "G3739"],
+  whosoever: ["G3748", "G3739"],
   are: ["G1510"],
   be: ["G1510"],
   been: ["G1510"],
@@ -341,9 +351,20 @@ function singularize(value) {
 
   if (word.length <= 3) return word;
 
-  if (word.endsWith("ies")) return `${word.slice(0, -3)}y`;
-  if (word.endsWith("es")) return word.slice(0, -2);
-  if (word.endsWith("s")) return word.slice(0, -1);
+  if (word.endsWith("ies")) {
+    return `${word.slice(0, -3)}y`;
+  }
+
+  // Remove "es" only where English normally adds "es":
+  // churches -> church, dishes -> dish, boxes -> box, heroes -> hero.
+  // Do not turn stones -> ston.
+  if (/(ches|shes|xes|zes|sses|oes)$/.test(word)) {
+    return word.slice(0, -2);
+  }
+
+  if (word.endsWith("s") && !word.endsWith("ss")) {
+    return word.slice(0, -1);
+  }
 
   return word;
 }
@@ -627,6 +648,8 @@ function buildBookStats() {
         ignoredTokens: 0,
         unalignedTokens: 0,
         highValueUnaligned: {},
+        highValueUnalignedSourcePresent: {},
+highValueUnalignedSourceAbsent: {},
       },
 
       web: {
@@ -636,6 +659,8 @@ function buildBookStats() {
         ignoredTokens: 0,
         unalignedTokens: 0,
         highValueUnaligned: {},
+        highValueUnalignedSourcePresent: {},
+highValueUnalignedSourceAbsent: {},
       },
     };
   }
@@ -648,7 +673,28 @@ function addUnalignedWord(counter, word) {
   counter[word] = (counter[word] || 0) + 1;
 }
 
-function summarizeTranslationTokens(tokens, translationStats) {
+function getExpectedGreekStrongFamiliesForEnglish(word) {
+  const forms = expandEnglishWord(word);
+  const strongs = new Set();
+
+  for (const form of forms) {
+    for (const strong of MANUAL_GREEK_NT_GLOSS_FAMILIES[form] || []) {
+      strongs.add(strong);
+    }
+  }
+
+  return strongs;
+}
+
+function hasExpectedSourceStrong(sourceTokens, expectedStrongs) {
+  if (!expectedStrongs.size) return false;
+
+  return sourceTokens.some((sourceToken) =>
+    expectedStrongs.has(sourceToken.strong)
+  );
+}
+
+function summarizeTranslationTokens(tokens, translationStats, sourceTokens) {
   for (const token of tokens) {
     if (token.alignmentStatus === "aligned") {
       translationStats.alignedTokens += 1;
@@ -658,7 +704,27 @@ function summarizeTranslationTokens(tokens, translationStats) {
       translationStats.unalignedTokens += 1;
 
       const normalized = normalizeEnglish(token.normalized || token.text);
+
       if (HIGH_VALUE_WORDS.has(normalized)) {
+        const expectedStrongs =
+          getExpectedGreekStrongFamiliesForEnglish(normalized);
+
+        if (hasExpectedSourceStrong(sourceTokens, expectedStrongs)) {
+          addUnalignedWord(
+            translationStats.highValueUnalignedSourcePresent,
+            normalized
+          );
+
+          token.alignmentReason = "expected-greek-source-present-but-unmatched";
+        } else {
+          addUnalignedWord(
+            translationStats.highValueUnalignedSourceAbsent,
+            normalized
+          );
+
+          token.alignmentReason = "no-expected-greek-source-token-in-verse";
+        }
+
         addUnalignedWord(translationStats.highValueUnaligned, normalized);
       }
     }
@@ -728,6 +794,8 @@ function main() {
       ignoredTokens: 0,
       unalignedTokens: 0,
       highValueUnaligned: {},
+      highValueUnalignedSourcePresent: {},
+highValueUnalignedSourceAbsent: {},
     },
 
     web: {
@@ -737,6 +805,8 @@ function main() {
       ignoredTokens: 0,
       unalignedTokens: 0,
       highValueUnaligned: {},
+      highValueUnalignedSourcePresent: {},
+highValueUnalignedSourceAbsent: {},
     },
   };
 
@@ -778,11 +848,19 @@ function main() {
 
         byBook[book][translation.id].versesWithTranslation += 1;
         byBook[book][translation.id].translationTokens += tokens.length;
-        summarizeTranslationTokens(tokens, byBook[book][translation.id]);
+        summarizeTranslationTokens(
+  tokens,
+  byBook[book][translation.id],
+  canonical.sourceTokens
+);
 
         totals[translation.id].versesWithTranslation += 1;
         totals[translation.id].translationTokens += tokens.length;
-        summarizeTranslationTokens(tokens, totals[translation.id]);
+        summarizeTranslationTokens(
+  tokens,
+  totals[translation.id],
+  canonical.sourceTokens
+);
 
         totals.alignmentEdges += edges.length;
 
@@ -797,9 +875,17 @@ function main() {
 
   for (const book of NT_BOOKS) {
     for (const translation of translations) {
-      byBook[book][translation.id].highValueUnaligned = topCounter(
-        byBook[book][translation.id].highValueUnaligned
-      );
+ byBook[book][translation.id].highValueUnaligned = topCounter(
+  byBook[book][translation.id].highValueUnaligned
+);
+
+byBook[book][translation.id].highValueUnalignedSourcePresent = topCounter(
+  byBook[book][translation.id].highValueUnalignedSourcePresent
+);
+
+byBook[book][translation.id].highValueUnalignedSourceAbsent = topCounter(
+  byBook[book][translation.id].highValueUnalignedSourceAbsent
+);
     }
   }
 
@@ -808,6 +894,15 @@ function main() {
       totals[translation.id].highValueUnaligned,
       100
     );
+    totals[translation.id].highValueUnalignedSourcePresent = topCounter(
+  totals[translation.id].highValueUnalignedSourcePresent,
+  100
+);
+
+totals[translation.id].highValueUnalignedSourceAbsent = topCounter(
+  totals[translation.id].highValueUnalignedSourceAbsent,
+  100
+);
 
     totals[translation.id].alignedRate =
       totals[translation.id].translationTokens > 0
