@@ -352,7 +352,8 @@ export async function resolveBibleIQ(
     return unresolved(input, preferredSource);
   }
 
-  const hit = findCanonicalHit({
+  const hit = await findCanonicalHit({
+    origin: _origin,
     translation: input.translation,
     book: input.book,
     chapter: input.chapter,

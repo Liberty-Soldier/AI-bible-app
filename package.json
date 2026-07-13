@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "build:see": "node scripts/see/compiler/build-see.js",
-    "prebuild": "node scripts/split-scripture-runtime.js && node scripts/export-bibleiq-canonical-runtime.js",
+    "prebuild": "node scripts/split-scripture-runtime.js && node scripts/export-bibleiq-canonical-runtime.js && node --max-old-space-size=4096 scripts/build-word-study-runtime.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "build:entity": "node scripts/entity/build-entity-graph.js",
     "build:knowledge": "node --max-old-space-size=4096 scripts/entity/build-knowledge-index.js",
-    "build:entity-platform": "npm run build:entity && npm run build:knowledge"
+    "build:entity-platform": "npm run build:entity && npm run build:knowledge",
+    "build:word-study-runtime": "node --max-old-space-size=4096 scripts/build-word-study-runtime.js"
   },
   "dependencies": {
     "fast-xml-parser": "^5.9.2",
