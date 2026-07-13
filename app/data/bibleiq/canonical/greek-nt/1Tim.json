@@ -370,6 +370,7 @@
     "translations": {
       "kjv": {
         "text": "Paul, an apostle of Jesus Christ by the commandment of God our Saviour, and Lord Jesus Christ, which is our hope;",
+        "alignmentText": "Paul, an apostle of Jesus Christ by the commandment of God our Saviour, and Lord Jesus Christ, which is our hope;",
         "tokens": [
           {
             "index": 0,
@@ -588,6 +589,7 @@
       },
       "web": {
         "text": "Paul, an apostle of Jesus Christ according to the commandment of God our Savior and the Lord Jesus Christ* NU reads Christ Jesus and omits the Lord. our hope;",
+        "alignmentText": "Paul, an apostle of Jesus Christ according to the commandment of God our Savior and the Lord Jesus Christ our hope;",
         "tokens": [
           {
             "index": 0,
@@ -783,7 +785,7 @@
           },
           {
             "index": 18,
-            "text": "Christ*",
+            "text": "Christ",
             "normalized": "christ",
             "alignedSourceTokenIds": [
               "greek-nt:1_Timothy.1.1:10"
@@ -797,67 +799,6 @@
           },
           {
             "index": 19,
-            "text": "NU",
-            "normalized": "nu",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
-          },
-          {
-            "index": 20,
-            "text": "reads",
-            "normalized": "reads",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
-          },
-          {
-            "index": 21,
-            "text": "Christ",
-            "normalized": "christ",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned",
-            "alignmentReason": "expected-greek-source-present-but-unmatched"
-          },
-          {
-            "index": 22,
-            "text": "Jesus",
-            "normalized": "jesus",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned",
-            "alignmentReason": "expected-greek-source-present-but-unmatched"
-          },
-          {
-            "index": 23,
-            "text": "and",
-            "normalized": "and",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "ignored",
-            "alignmentReason": "english-grammar-token"
-          },
-          {
-            "index": 24,
-            "text": "omits",
-            "normalized": "omits",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
-          },
-          {
-            "index": 25,
-            "text": "the",
-            "normalized": "the",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "ignored",
-            "alignmentReason": "english-grammar-token"
-          },
-          {
-            "index": 26,
-            "text": "Lord",
-            "normalized": "lord",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned",
-            "alignmentReason": "no-expected-greek-source-token-in-verse"
-          },
-          {
-            "index": 27,
             "text": "our",
             "normalized": "our",
             "alignedSourceTokenIds": [],
@@ -865,7 +806,7 @@
             "alignmentReason": "english-grammar-token"
           },
           {
-            "index": 28,
+            "index": 20,
             "text": "hope",
             "normalized": "hope",
             "alignedSourceTokenIds": [
@@ -1301,6 +1242,7 @@
     "translations": {
       "kjv": {
         "text": "Unto Timothy, my own son in the faith: Grace, mercy, and peace, from God our Father and Jesus Christ our Lord.",
+        "alignmentText": "Unto Timothy, my own son in the faith: Grace, mercy, and peace, from God our Father and Jesus Christ our Lord.",
         "tokens": [
           {
             "index": 0,
@@ -1538,6 +1480,7 @@
       },
       "web": {
         "text": "to Timothy, my true child in faith: Grace, mercy, and peace, from God our Father and Christ Jesus our Lord.",
+        "alignmentText": "to Timothy, my true child in faith: Grace, mercy, and peace, from God our Father and Christ Jesus our Lord.",
         "tokens": [
           {
             "index": 0,
@@ -2128,6 +2071,7 @@
     "translations": {
       "kjv": {
         "text": "As I besought thee to abide still at Ephesus, when I went into Macedonia, that thou mightest charge some that they teach no other doctrine,",
+        "alignmentText": "As I besought thee to abide still at Ephesus, when I went into Macedonia, that thou mightest charge some that they teach no other doctrine,",
         "tokens": [
           {
             "index": 0,
@@ -2344,6 +2288,7 @@
       },
       "web": {
         "text": "As I urged you when I was going into Macedonia, stay at Ephesus that you might command certain men not to teach a different doctrine,",
+        "alignmentText": "As I urged you when I was going into Macedonia, stay at Ephesus that you might command certain men not to teach a different doctrine,",
         "tokens": [
           {
             "index": 0,
@@ -2970,6 +2915,7 @@
     "translations": {
       "kjv": {
         "text": "Neither give heed to fables and endless genealogies, which minister questions, rather than godly edifying which is in faith: so do.",
+        "alignmentText": "Neither give heed to fables and endless genealogies, which minister questions, rather than godly edifying which is in faith: so do.",
         "tokens": [
           {
             "index": 0,
@@ -3160,6 +3106,7 @@
       },
       "web": {
         "text": "and not to pay attention to myths and endless genealogies, which cause disputes, rather than God’s stewardship, which is in faith—",
+        "alignmentText": "and not to pay attention to myths and endless genealogies, which cause disputes, rather than God’s stewardship, which is in faith—",
         "tokens": [
           {
             "index": 0,
@@ -3767,6 +3714,7 @@
     "translations": {
       "kjv": {
         "text": "Now the end of the commandment is charity out of a pure heart, and of a good conscience, and of faith unfeigned:",
+        "alignmentText": "Now the end of the commandment is charity out of a pure heart, and of a good conscience, and of faith unfeigned:",
         "tokens": [
           {
             "index": 0,
@@ -3979,6 +3927,7 @@
       },
       "web": {
         "text": "but the goal of this command is love, out of a pure heart and a good conscience and sincere faith,",
+        "alignmentText": "but the goal of this command is love, out of a pure heart and a good conscience and sincere faith,",
         "tokens": [
           {
             "index": 0,
@@ -4344,6 +4293,7 @@
     "translations": {
       "kjv": {
         "text": "From which some having swerved have turned aside unto vain jangling;",
+        "alignmentText": "From which some having swerved have turned aside unto vain jangling;",
         "tokens": [
           {
             "index": 0,
@@ -4442,6 +4392,7 @@
       },
       "web": {
         "text": "from which things some, having missed the mark, have turned away to vain talking,",
+        "alignmentText": "from which things some, having missed the mark, have turned away to vain talking,",
         "tokens": [
           {
             "index": 0,
@@ -4876,6 +4827,7 @@
     "translations": {
       "kjv": {
         "text": "Desiring to be teachers of the law; understanding neither what they say, nor whereof they affirm.",
+        "alignmentText": "Desiring to be teachers of the law; understanding neither what they say, nor whereof they affirm.",
         "tokens": [
           {
             "index": 0,
@@ -5048,6 +5000,7 @@
       },
       "web": {
         "text": "desiring to be teachers of the law, though they understand neither what they say, nor about what they strongly affirm.",
+        "alignmentText": "desiring to be teachers of the law, though they understand neither what they say, nor about what they strongly affirm.",
         "tokens": [
           {
             "index": 0,
@@ -5531,6 +5484,7 @@
     "translations": {
       "kjv": {
         "text": "But we know that the law is good, if a man use it lawfully;",
+        "alignmentText": "But we know that the law is good, if a man use it lawfully;",
         "tokens": [
           {
             "index": 0,
@@ -5677,6 +5631,7 @@
       },
       "web": {
         "text": "But we know that the law is good, if a person uses it lawfully,",
+        "alignmentText": "But we know that the law is good, if a person uses it lawfully,",
         "tokens": [
           {
             "index": 0,
@@ -6337,6 +6292,7 @@
     "translations": {
       "kjv": {
         "text": "Knowing this, that the law is not made for a righteous man, but for the lawless and disobedient, for the ungodly and for sinners, for unholy and profane, for murderers of fathers and murderers of mothers, for manslayers,",
+        "alignmentText": "Knowing this, that the law is not made for a righteous man, but for the lawless and disobedient, for the ungodly and for sinners, for unholy and profane, for murderers of fathers and murderers of mothers, for manslayers,",
         "tokens": [
           {
             "index": 0,
@@ -6699,6 +6655,7 @@
       },
       "web": {
         "text": "as knowing this, that law is not made for a righteous person, but for the lawless and insubordinate, for the ungodly and sinners, for the unholy and profane, for murderers of fathers and murderers of mothers, for manslayers,",
+        "alignmentText": "as knowing this, that law is not made for a righteous person, but for the lawless and insubordinate, for the ungodly and sinners, for the unholy and profane, for murderers of fathers and murderers of mothers, for manslayers,",
         "tokens": [
           {
             "index": 0,
@@ -7390,6 +7347,7 @@
     "translations": {
       "kjv": {
         "text": "For whoremongers, for them that defile themselves with mankind, for menstealers, for liars, for perjured persons, and if there be any other thing that is contrary to sound doctrine;",
+        "alignmentText": "For whoremongers, for them that defile themselves with mankind, for menstealers, for liars, for perjured persons, and if there be any other thing that is contrary to sound doctrine;",
         "tokens": [
           {
             "index": 0,
@@ -7652,6 +7610,7 @@
       },
       "web": {
         "text": "for the sexually immoral, for homosexuals, for slave-traders, for liars, for perjurers, and for any other thing contrary to the sound doctrine,",
+        "alignmentText": "for the sexually immoral, for homosexuals, for slave-traders, for liars, for perjurers, and for any other thing contrary to the sound doctrine,",
         "tokens": [
           {
             "index": 0,
@@ -8145,6 +8104,7 @@
     "translations": {
       "kjv": {
         "text": "According to the glorious gospel of the blessed God, which was committed to my trust.",
+        "alignmentText": "According to the glorious gospel of the blessed God, which was committed to my trust.",
         "tokens": [
           {
             "index": 0,
@@ -8303,6 +8263,7 @@
       },
       "web": {
         "text": "according to the Good News of the glory of the blessed God, which was committed to my trust.",
+        "alignmentText": "according to the Good News of the glory of the blessed God, which was committed to my trust.",
         "tokens": [
           {
             "index": 0,
@@ -8903,6 +8864,7 @@
     "translations": {
       "kjv": {
         "text": "And I thank Christ Jesus our Lord, who hath enabled me, for that he counted me faithful, putting me into the ministry;",
+        "alignmentText": "And I thank Christ Jesus our Lord, who hath enabled me, for that he counted me faithful, putting me into the ministry;",
         "tokens": [
           {
             "index": 0,
@@ -9114,6 +9076,7 @@
       },
       "web": {
         "text": "I thank him who enabled me, Christ Jesus our Lord, because he counted me faithful, appointing me to service;",
+        "alignmentText": "I thank him who enabled me, Christ Jesus our Lord, because he counted me faithful, appointing me to service;",
         "tokens": [
           {
             "index": 0,
@@ -9673,6 +9636,7 @@
     "translations": {
       "kjv": {
         "text": "Who was before a blasphemer, and a persecutor, and injurious: but I obtained mercy, because I did it ignorantly in unbelief.",
+        "alignmentText": "Who was before a blasphemer, and a persecutor, and injurious: but I obtained mercy, because I did it ignorantly in unbelief.",
         "tokens": [
           {
             "index": 0,
@@ -9882,6 +9846,7 @@
       },
       "web": {
         "text": "although I used to be a blasphemer, a persecutor, and insolent. However, I obtained mercy, because I did it ignorantly in unbelief.",
+        "alignmentText": "although I used to be a blasphemer, a persecutor, and insolent. However, I obtained mercy, because I did it ignorantly in unbelief.",
         "tokens": [
           {
             "index": 0,
@@ -10462,6 +10427,7 @@
     "translations": {
       "kjv": {
         "text": "And the grace of our Lord was exceeding abundant with faith and love which is in Christ Jesus.",
+        "alignmentText": "And the grace of our Lord was exceeding abundant with faith and love which is in Christ Jesus.",
         "tokens": [
           {
             "index": 0,
@@ -10661,6 +10627,7 @@
       },
       "web": {
         "text": "The grace of our Lord abounded exceedingly with faith and love which is in Christ Jesus.",
+        "alignmentText": "The grace of our Lord abounded exceedingly with faith and love which is in Christ Jesus.",
         "tokens": [
           {
             "index": 0,
@@ -11336,6 +11303,7 @@
     "translations": {
       "kjv": {
         "text": "This is a faithful saying, and worthy of all acceptation, that Christ Jesus came into the world to save sinners; of whom I am chief.",
+        "alignmentText": "This is a faithful saying, and worthy of all acceptation, that Christ Jesus came into the world to save sinners; of whom I am chief.",
         "tokens": [
           {
             "index": 0,
@@ -11581,6 +11549,7 @@
       },
       "web": {
         "text": "The saying is faithful and worthy of all acceptance, that Christ Jesus came into the world to save sinners, of whom I am chief.",
+        "alignmentText": "The saying is faithful and worthy of all acceptance, that Christ Jesus came into the world to save sinners, of whom I am chief.",
         "tokens": [
           {
             "index": 0,
@@ -12412,6 +12381,7 @@
     "translations": {
       "kjv": {
         "text": "Howbeit for this cause I obtained mercy, that in me first Jesus Christ might shew forth all longsuffering, for a pattern to them which should hereafter believe on him to life everlasting.",
+        "alignmentText": "Howbeit for this cause I obtained mercy, that in me first Jesus Christ might shew forth all longsuffering, for a pattern to them which should hereafter believe on him to life everlasting.",
         "tokens": [
           {
             "index": 0,
@@ -12709,6 +12679,7 @@
       },
       "web": {
         "text": "However, for this cause I obtained mercy, that in me first, Jesus Christ might display all his patience for an example of those who were going to believe in him for eternal life.",
+        "alignmentText": "However, for this cause I obtained mercy, that in me first, Jesus Christ might display all his patience for an example of those who were going to believe in him for eternal life.",
         "tokens": [
           {
             "index": 0,
@@ -13492,6 +13463,7 @@
     "translations": {
       "kjv": {
         "text": "Now unto the King eternal, immortal, invisible, the only wise God, be honour and glory for ever and ever. Amen.",
+        "alignmentText": "Now unto the King eternal, immortal, invisible, the only wise God, be honour and glory for ever and ever. Amen.",
         "tokens": [
           {
             "index": 0,
@@ -13685,6 +13657,7 @@
       },
       "web": {
         "text": "Now to the King eternal, immortal, invisible, to God who alone is wise, be honor and glory forever and ever. Amen.",
+        "alignmentText": "Now to the King eternal, immortal, invisible, to God who alone is wise, be honor and glory forever and ever. Amen.",
         "tokens": [
           {
             "index": 0,
@@ -14390,6 +14363,7 @@
     "translations": {
       "kjv": {
         "text": "This charge I commit unto thee, son Timothy, according to the prophecies which went before on thee, that thou by them mightest war a good warfare;",
+        "alignmentText": "This charge I commit unto thee, son Timothy, according to the prophecies which went before on thee, that thou by them mightest war a good warfare;",
         "tokens": [
           {
             "index": 0,
@@ -14629,6 +14603,7 @@
       },
       "web": {
         "text": "I commit this instruction to you, my child Timothy, according to the prophecies which were given to you before, that by them you may wage the good warfare,",
+        "alignmentText": "I commit this instruction to you, my child Timothy, according to the prophecies which were given to you before, that by them you may wage the good warfare,",
         "tokens": [
           {
             "index": 0,
@@ -15192,6 +15167,7 @@
     "translations": {
       "kjv": {
         "text": "Holding faith, and a good conscience; which some having put away concerning faith have made shipwreck:",
+        "alignmentText": "Holding faith, and a good conscience; which some having put away concerning faith have made shipwreck:",
         "tokens": [
           {
             "index": 0,
@@ -15347,6 +15323,7 @@
       },
       "web": {
         "text": "holding faith and a good conscience, which some having thrust away made a shipwreck concerning the faith,",
+        "alignmentText": "holding faith and a good conscience, which some having thrust away made a shipwreck concerning the faith,",
         "tokens": [
           {
             "index": 0,
@@ -15833,6 +15810,7 @@
     "translations": {
       "kjv": {
         "text": "Of whom is Hymenaeus and Alexander; whom I have delivered unto Satan, that they may learn not to blaspheme.",
+        "alignmentText": "Of whom is Hymenaeus and Alexander; whom I have delivered unto Satan, that they may learn not to blaspheme.",
         "tokens": [
           {
             "index": 0,
@@ -16034,6 +16012,7 @@
       },
       "web": {
         "text": "of whom are Hymenaeus and Alexander, whom I delivered to Satan, that they might be taught not to blaspheme.",
+        "alignmentText": "of whom are Hymenaeus and Alexander, whom I delivered to Satan, that they might be taught not to blaspheme.",
         "tokens": [
           {
             "index": 0,
@@ -16534,6 +16513,7 @@
     "translations": {
       "kjv": {
         "text": "I exhort therefore, that, first of all, supplications, prayers, intercessions, and giving of thanks, be made for all men;",
+        "alignmentText": "I exhort therefore, that, first of all, supplications, prayers, intercessions, and giving of thanks, be made for all men;",
         "tokens": [
           {
             "index": 0,
@@ -16727,6 +16707,7 @@
       },
       "web": {
         "text": "I exhort therefore, first of all, that petitions, prayers, intercessions, and givings of thanks be made for all men:",
+        "alignmentText": "I exhort therefore, first of all, that petitions, prayers, intercessions, and givings of thanks be made for all men:",
         "tokens": [
           {
             "index": 0,
@@ -17387,6 +17368,7 @@
     "translations": {
       "kjv": {
         "text": "For kings, and for all that are in authority; that we may lead a quiet and peaceable life in all godliness and honesty.",
+        "alignmentText": "For kings, and for all that are in authority; that we may lead a quiet and peaceable life in all godliness and honesty.",
         "tokens": [
           {
             "index": 0,
@@ -17632,6 +17614,7 @@
       },
       "web": {
         "text": "for kings and all who are in high places, that we may lead a tranquil and quiet life in all godliness and reverence.",
+        "alignmentText": "for kings and all who are in high places, that we may lead a tranquil and quiet life in all godliness and reverence.",
         "tokens": [
           {
             "index": 0,
@@ -18102,6 +18085,7 @@
     "translations": {
       "kjv": {
         "text": "For this is good and acceptable in the sight of God our Saviour;",
+        "alignmentText": "For this is good and acceptable in the sight of God our Saviour;",
         "tokens": [
           {
             "index": 0,
@@ -18218,6 +18202,7 @@
       },
       "web": {
         "text": "For this is good and acceptable in the sight of God our Savior,",
+        "alignmentText": "For this is good and acceptable in the sight of God our Savior,",
         "tokens": [
           {
             "index": 0,
@@ -18592,6 +18577,7 @@
     "translations": {
       "kjv": {
         "text": "Who will have all men to be saved, and to come unto the knowledge of the truth.",
+        "alignmentText": "Who will have all men to be saved, and to come unto the knowledge of the truth.",
         "tokens": [
           {
             "index": 0,
@@ -18772,6 +18758,7 @@
       },
       "web": {
         "text": "who desires all people to be saved and come to full knowledge of the truth.",
+        "alignmentText": "who desires all people to be saved and come to full knowledge of the truth.",
         "tokens": [
           {
             "index": 0,
@@ -19235,6 +19222,7 @@
     "translations": {
       "kjv": {
         "text": "For there is one God, and one mediator between God and men, the man Christ Jesus;",
+        "alignmentText": "For there is one God, and one mediator between God and men, the man Christ Jesus;",
         "tokens": [
           {
             "index": 0,
@@ -19413,6 +19401,7 @@
       },
       "web": {
         "text": "For there is one God, and one mediator between God and men, the man Christ Jesus,",
+        "alignmentText": "For there is one God, and one mediator between God and men, the man Christ Jesus,",
         "tokens": [
           {
             "index": 0,
@@ -19842,6 +19831,7 @@
     "translations": {
       "kjv": {
         "text": "Who gave himself a ransom for all, to be testified in due time.",
+        "alignmentText": "Who gave himself a ransom for all, to be testified in due time.",
         "tokens": [
           {
             "index": 0,
@@ -19976,6 +19966,7 @@
       },
       "web": {
         "text": "who gave himself as a ransom for all, the testimony in its own times,",
+        "alignmentText": "who gave himself as a ransom for all, the testimony in its own times,",
         "tokens": [
           {
             "index": 0,
@@ -20552,6 +20543,7 @@
     "translations": {
       "kjv": {
         "text": "Whereunto I am ordained a preacher, and an apostle, (I speak the truth in Christ, and lie not;) a teacher of the Gentiles in faith and verity.",
+        "alignmentText": "Whereunto I am ordained a preacher, and an apostle, (I speak the truth in Christ, and lie not;) a teacher of the Gentiles in faith and verity.",
         "tokens": [
           {
             "index": 0,
@@ -20821,6 +20813,7 @@
       },
       "web": {
         "text": "to which I was appointed a preacher and an apostle—I am telling the truth in Christ, not lying—a teacher of the Gentiles in faith and truth.",
+        "alignmentText": "to which I was appointed a preacher and an apostle—I am telling the truth in Christ, not lying—a teacher of the Gentiles in faith and truth.",
         "tokens": [
           {
             "index": 0,
@@ -21445,6 +21438,7 @@
     "translations": {
       "kjv": {
         "text": "I will therefore that men pray every where, lifting up holy hands, without wrath and doubting.",
+        "alignmentText": "I will therefore that men pray every where, lifting up holy hands, without wrath and doubting.",
         "tokens": [
           {
             "index": 0,
@@ -21614,6 +21608,7 @@
       },
       "web": {
         "text": "I desire therefore that the men in every place pray, lifting up holy hands without anger and doubting.",
+        "alignmentText": "I desire therefore that the men in every place pray, lifting up holy hands without anger and doubting.",
         "tokens": [
           {
             "index": 0,
@@ -22344,6 +22339,7 @@
     "translations": {
       "kjv": {
         "text": "In like manner also, that women adorn themselves in modest apparel, with shamefacedness and sobriety; not with broided hair, or gold, or pearls, or costly array;",
+        "alignmentText": "In like manner also, that women adorn themselves in modest apparel, with shamefacedness and sobriety; not with broided hair, or gold, or pearls, or costly array;",
         "tokens": [
           {
             "index": 0,
@@ -22585,6 +22581,7 @@
       },
       "web": {
         "text": "In the same way, that women also adorn themselves in decent clothing, with modesty and propriety, not just* The word “just” is inserted here in English to preserve the meaning of the whole original Greek sentence in context. The word for “not” is the negative particle “μη” which denies an expected idea, as opposed to the usual word for “not” (ου) which denies a fact. Thus “μη” in this context is denying an expected idea (that women can be properly dressed without good works). with braided hair, gold, pearls, or expensive clothing,",
+        "alignmentText": "In the same way, that women also adorn themselves in decent clothing, with modesty and propriety, not just The word “just” is inserted here in English to preserve the meaning of the whole original Greek sentence in context. The word for “not” is the negative particle “μη” which denies an expected idea, as opposed to the usual word for “not” (ου) which denies a fact. Thus “μη” in this context is denying an expected idea (that women can be properly dressed without good works). with braided hair, gold, pearls, or expensive clothing,",
         "tokens": [
           {
             "index": 0,
@@ -22766,7 +22763,7 @@
           },
           {
             "index": 17,
-            "text": "just*",
+            "text": "just",
             "normalized": "just",
             "alignedSourceTokenIds": [],
             "alignmentStatus": "unaligned"
@@ -23556,6 +23553,7 @@
     "translations": {
       "kjv": {
         "text": "But (which becometh women professing godliness) with good works.",
+        "alignmentText": "But (which becometh women professing godliness) with good works.",
         "tokens": [
           {
             "index": 0,
@@ -23653,6 +23651,7 @@
       },
       "web": {
         "text": "but with good works, which is appropriate for women professing godliness.",
+        "alignmentText": "but with good works, which is appropriate for women professing godliness.",
         "tokens": [
           {
             "index": 0,
@@ -23944,6 +23943,7 @@
     "translations": {
       "kjv": {
         "text": "Let the woman learn in silence with all subjection.",
+        "alignmentText": "Let the woman learn in silence with all subjection.",
         "tokens": [
           {
             "index": 0,
@@ -24048,6 +24048,7 @@
       },
       "web": {
         "text": "Let a woman learn in quietness with full submission.",
+        "alignmentText": "Let a woman learn in quietness with full submission.",
         "tokens": [
           {
             "index": 0,
@@ -24458,6 +24459,7 @@
     "translations": {
       "kjv": {
         "text": "But I suffer not a woman to teach, nor to usurp authority over the man, but to be in silence.",
+        "alignmentText": "But I suffer not a woman to teach, nor to usurp authority over the man, but to be in silence.",
         "tokens": [
           {
             "index": 0,
@@ -24660,6 +24662,7 @@
       },
       "web": {
         "text": "But I don’t permit a woman to teach, nor to exercise authority over a man, but to be in quietness.",
+        "alignmentText": "But I don’t permit a woman to teach, nor to exercise authority over a man, but to be in quietness.",
         "tokens": [
           {
             "index": 0,
@@ -25024,6 +25027,7 @@
     "translations": {
       "kjv": {
         "text": "For Adam was first formed, then Eve.",
+        "alignmentText": "For Adam was first formed, then Eve.",
         "tokens": [
           {
             "index": 0,
@@ -25108,6 +25112,7 @@
       },
       "web": {
         "text": "For Adam was formed first, then Eve.",
+        "alignmentText": "For Adam was formed first, then Eve.",
         "tokens": [
           {
             "index": 0,
@@ -25467,6 +25472,7 @@
     "translations": {
       "kjv": {
         "text": "And Adam was not deceived, but the woman being deceived was in the transgression.",
+        "alignmentText": "And Adam was not deceived, but the woman being deceived was in the transgression.",
         "tokens": [
           {
             "index": 0,
@@ -25609,6 +25615,7 @@
       },
       "web": {
         "text": "Adam wasn’t deceived, but the woman, being deceived, has fallen into disobedience;",
+        "alignmentText": "Adam wasn’t deceived, but the woman, being deceived, has fallen into disobedience;",
         "tokens": [
           {
             "index": 0,
@@ -26093,6 +26100,7 @@
     "translations": {
       "kjv": {
         "text": "Notwithstanding she shall be saved in childbearing, if they continue in faith and charity and holiness with sobriety.",
+        "alignmentText": "Notwithstanding she shall be saved in childbearing, if they continue in faith and charity and holiness with sobriety.",
         "tokens": [
           {
             "index": 0,
@@ -26271,6 +26279,7 @@
       },
       "web": {
         "text": "but she will be saved through her childbearing, if they continue in faith, love, and sanctification with sobriety.",
+        "alignmentText": "but she will be saved through her childbearing, if they continue in faith, love, and sanctification with sobriety.",
         "tokens": [
           {
             "index": 0,
@@ -26708,6 +26717,7 @@
     "translations": {
       "kjv": {
         "text": "This is a true saying, If a man desire the office of a bishop, he desireth a good work.",
+        "alignmentText": "This is a true saying, If a man desire the office of a bishop, he desireth a good work.",
         "tokens": [
           {
             "index": 0,
@@ -26870,6 +26880,7 @@
       },
       "web": {
         "text": "This is a faithful saying: someone who seeks to be an overseer",
+        "alignmentText": "This is a faithful saying: someone who seeks to be an overseer",
         "tokens": [
           {
             "index": 0,
@@ -27331,6 +27342,7 @@
     "translations": {
       "kjv": {
         "text": "A bishop then must be blameless, the husband of one wife, vigilant, sober, of good behaviour, given to hospitality, apt to teach;",
+        "alignmentText": "A bishop then must be blameless, the husband of one wife, vigilant, sober, of good behaviour, given to hospitality, apt to teach;",
         "tokens": [
           {
             "index": 0,
@@ -27532,6 +27544,7 @@
       },
       "web": {
         "text": "The overseer therefore must be without reproach, the husband of one wife, temperate, sensible, modest, hospitable, good at teaching;",
+        "alignmentText": "The overseer therefore must be without reproach, the husband of one wife, temperate, sensible, modest, hospitable, good at teaching;",
         "tokens": [
           {
             "index": 0,
@@ -27940,6 +27953,7 @@
     "translations": {
       "kjv": {
         "text": "Not given to wine, no striker, not greedy of filthy lucre; but patient, not a brawler, not covetous;",
+        "alignmentText": "Not given to wine, no striker, not greedy of filthy lucre; but patient, not a brawler, not covetous;",
         "tokens": [
           {
             "index": 0,
@@ -28096,6 +28110,7 @@
       },
       "web": {
         "text": "not a drinker, not violent, not greedy for money, but gentle, not quarrelsome, not covetous;",
+        "alignmentText": "not a drinker, not violent, not greedy for money, but gentle, not quarrelsome, not covetous;",
         "tokens": [
           {
             "index": 0,
@@ -28543,6 +28558,7 @@
     "translations": {
       "kjv": {
         "text": "One that ruleth well his own house, having his children in subjection with all gravity;",
+        "alignmentText": "One that ruleth well his own house, having his children in subjection with all gravity;",
         "tokens": [
           {
             "index": 0,
@@ -28698,6 +28714,7 @@
       },
       "web": {
         "text": "one who rules his own house well, having children in subjection with all reverence;",
+        "alignmentText": "one who rules his own house well, having children in subjection with all reverence;",
         "tokens": [
           {
             "index": 0,
@@ -29174,6 +29191,7 @@
     "translations": {
       "kjv": {
         "text": "(For if a man know not how to rule his own house, how shall he take care of the church of God?)",
+        "alignmentText": "(For if a man know not how to rule his own house, how shall he take care of the church of God?)",
         "tokens": [
           {
             "index": 0,
@@ -29392,6 +29410,7 @@
       },
       "web": {
         "text": "(but how could someone who doesn’t know how to rule one’s own house take care of God’s assembly?)",
+        "alignmentText": "(but how could someone who doesn’t know how to rule one’s own house take care of God’s assembly?)",
         "tokens": [
           {
             "index": 0,
@@ -29840,6 +29859,7 @@
     "translations": {
       "kjv": {
         "text": "Not a novice, lest being lifted up with pride he fall into the condemnation of the devil.",
+        "alignmentText": "Not a novice, lest being lifted up with pride he fall into the condemnation of the devil.",
         "tokens": [
           {
             "index": 0,
@@ -29997,6 +30017,7 @@
       },
       "web": {
         "text": "not a new convert, lest being puffed up he fall into the same condemnation as the devil.",
+        "alignmentText": "not a new convert, lest being puffed up he fall into the same condemnation as the devil.",
         "tokens": [
           {
             "index": 0,
@@ -30604,6 +30625,7 @@
     "translations": {
       "kjv": {
         "text": "Moreover he must have a good report of them which are without; lest he fall into reproach and the snare of the devil.",
+        "alignmentText": "Moreover he must have a good report of them which are without; lest he fall into reproach and the snare of the devil.",
         "tokens": [
           {
             "index": 0,
@@ -30815,6 +30837,7 @@
       },
       "web": {
         "text": "Moreover he must have good testimony from those who are outside, to avoid falling into reproach and the snare of the devil.",
+        "alignmentText": "Moreover he must have good testimony from those who are outside, to avoid falling into reproach and the snare of the devil.",
         "tokens": [
           {
             "index": 0,
@@ -31314,6 +31337,7 @@
     "translations": {
       "kjv": {
         "text": "Likewise must the deacons be grave, not doubletongued, not given to much wine, not greedy of filthy lucre;",
+        "alignmentText": "Likewise must the deacons be grave, not doubletongued, not given to much wine, not greedy of filthy lucre;",
         "tokens": [
           {
             "index": 0,
@@ -31497,10 +31521,11 @@
       },
       "web": {
         "text": "Servants,† or, Deacons. in the same way, must be reverent, not double-tongued, not addicted to much wine, not greedy for money,",
+        "alignmentText": "Servants, or, Deacons. in the same way, must be reverent, not double-tongued, not addicted to much wine, not greedy for money,",
         "tokens": [
           {
             "index": 0,
-            "text": "Servants,†",
+            "text": "Servants",
             "normalized": "servants",
             "alignedSourceTokenIds": [
               "greek-nt:1_Timothy.3.8:0"
@@ -31912,6 +31937,7 @@
     "translations": {
       "kjv": {
         "text": "Holding the mystery of the faith in a pure conscience.",
+        "alignmentText": "Holding the mystery of the faith in a pure conscience.",
         "tokens": [
           {
             "index": 0,
@@ -32019,6 +32045,7 @@
       },
       "web": {
         "text": "holding the mystery of the faith in a pure conscience.",
+        "alignmentText": "holding the mystery of the faith in a pure conscience.",
         "tokens": [
           {
             "index": 0,
@@ -32353,6 +32380,7 @@
     "translations": {
       "kjv": {
         "text": "And let these also first be proved; then let them use the office of a deacon, being found blameless.",
+        "alignmentText": "And let these also first be proved; then let them use the office of a deacon, being found blameless.",
         "tokens": [
           {
             "index": 0,
@@ -32526,6 +32554,7 @@
       },
       "web": {
         "text": "Let them also first be tested; then let them serve‡ or, serve as deacons if they are blameless.",
+        "alignmentText": "Let them also first be tested; then let them serve or, serve as deacons if they are blameless.",
         "tokens": [
           {
             "index": 0,
@@ -32623,7 +32652,7 @@
           },
           {
             "index": 9,
-            "text": "serve‡",
+            "text": "serve",
             "normalized": "serve",
             "alignedSourceTokenIds": [
               "greek-nt:1_Timothy.3.10:6"
@@ -32933,6 +32962,7 @@
     "translations": {
       "kjv": {
         "text": "Even so must their wives be grave, not slanderers, sober, faithful in all things.",
+        "alignmentText": "Even so must their wives be grave, not slanderers, sober, faithful in all things.",
         "tokens": [
           {
             "index": 0,
@@ -33073,6 +33103,7 @@
       },
       "web": {
         "text": "Their wives in the same way must be reverent, not slanderers, temperate, and faithful in all things.",
+        "alignmentText": "Their wives in the same way must be reverent, not slanderers, temperate, and faithful in all things.",
         "tokens": [
           {
             "index": 0,
@@ -33541,6 +33572,7 @@
     "translations": {
       "kjv": {
         "text": "Let the deacons be the husbands of one wife, ruling their children and their own houses well.",
+        "alignmentText": "Let the deacons be the husbands of one wife, ruling their children and their own houses well.",
         "tokens": [
           {
             "index": 0,
@@ -33706,6 +33738,7 @@
       },
       "web": {
         "text": "Let servants§ or, deacons be husbands of one wife, ruling their children and their own houses well.",
+        "alignmentText": "Let servants§ or, deacons be husbands of one wife, ruling their children and their own houses well.",
         "tokens": [
           {
             "index": 0,
@@ -34296,6 +34329,7 @@
     "translations": {
       "kjv": {
         "text": "For they that have used the office of a deacon well purchase to themselves a good degree, and great boldness in the faith which is in Christ Jesus.",
+        "alignmentText": "For they that have used the office of a deacon well purchase to themselves a good degree, and great boldness in the faith which is in Christ Jesus.",
         "tokens": [
           {
             "index": 0,
@@ -34571,6 +34605,7 @@
       },
       "web": {
         "text": "For those who have served well",
+        "alignmentText": "For those who have served well",
         "tokens": [
           {
             "index": 0,
@@ -34862,6 +34897,7 @@
     "translations": {
       "kjv": {
         "text": "These things write I unto thee, hoping to come unto thee shortly:",
+        "alignmentText": "These things write I unto thee, hoping to come unto thee shortly:",
         "tokens": [
           {
             "index": 0,
@@ -34968,6 +35004,7 @@
       },
       "web": {
         "text": "These things I write to you, hoping to come to you shortly;",
+        "alignmentText": "These things I write to you, hoping to come to you shortly;",
         "tokens": [
           {
             "index": 0,
@@ -35593,6 +35630,7 @@
     "translations": {
       "kjv": {
         "text": "But if I tarry long, that thou mayest know how thou oughtest to behave thyself in the house of God, which is the church of the living God, the pillar and ground of the truth.",
+        "alignmentText": "But if I tarry long, that thou mayest know how thou oughtest to behave thyself in the house of God, which is the church of the living God, the pillar and ground of the truth.",
         "tokens": [
           {
             "index": 0,
@@ -35934,6 +35972,7 @@
       },
       "web": {
         "text": "but if I wait long, that you may know how men ought to behave themselves in God’s house, which is the assembly of the living God, the pillar and ground of the truth.",
+        "alignmentText": "but if I wait long, that you may know how men ought to behave themselves in God’s house, which is the assembly of the living God, the pillar and ground of the truth.",
         "tokens": [
           {
             "index": 0,
@@ -36895,6 +36934,7 @@
     "translations": {
       "kjv": {
         "text": "And without controversy great is the mystery of godliness: God was manifest in the flesh, justified in the Spirit, seen of angels, preached unto the Gentiles, believed on in the world, received up into glory.",
+        "alignmentText": "And without controversy great is the mystery of godliness: God was manifest in the flesh, justified in the Spirit, seen of angels, preached unto the Gentiles, believed on in the world, received up into glory.",
         "tokens": [
           {
             "index": 0,
@@ -37274,6 +37314,7 @@
       },
       "web": {
         "text": "Without controversy, the mystery of godliness is great:",
+        "alignmentText": "Without controversy, the mystery of godliness is great:",
         "tokens": [
           {
             "index": 0,
@@ -37832,6 +37873,7 @@
     "translations": {
       "kjv": {
         "text": "Now the Spirit speaketh expressly, that in the latter times some shall depart from the faith, giving heed to seducing spirits, and doctrines of devils;",
+        "alignmentText": "Now the Spirit speaketh expressly, that in the latter times some shall depart from the faith, giving heed to seducing spirits, and doctrines of devils;",
         "tokens": [
           {
             "index": 0,
@@ -38069,6 +38111,7 @@
       },
       "web": {
         "text": "But the Spirit says expressly that in later times some will fall away from the faith, paying attention to seducing spirits and doctrines of demons,",
+        "alignmentText": "But the Spirit says expressly that in later times some will fall away from the faith, paying attention to seducing spirits and doctrines of demons,",
         "tokens": [
           {
             "index": 0,
@@ -38499,6 +38542,7 @@
     "translations": {
       "kjv": {
         "text": "Speaking lies in hypocrisy; having their conscience seared with a hot iron;",
+        "alignmentText": "Speaking lies in hypocrisy; having their conscience seared with a hot iron;",
         "tokens": [
           {
             "index": 0,
@@ -38618,6 +38662,7 @@
       },
       "web": {
         "text": "through the hypocrisy of men who speak lies, branded in their own conscience as with a hot iron,",
+        "alignmentText": "through the hypocrisy of men who speak lies, branded in their own conscience as with a hot iron,",
         "tokens": [
           {
             "index": 0,
@@ -39239,6 +39284,7 @@
     "translations": {
       "kjv": {
         "text": "Forbidding to marry, and commanding to abstain from meats, which God hath created to be received with thanksgiving of them which believe and know the truth.",
+        "alignmentText": "Forbidding to marry, and commanding to abstain from meats, which God hath created to be received with thanksgiving of them which believe and know the truth.",
         "tokens": [
           {
             "index": 0,
@@ -39478,6 +39524,7 @@
       },
       "web": {
         "text": "forbidding marriage and commanding to abstain from foods which God created to be received with thanksgiving by those who believe and know the truth.",
+        "alignmentText": "forbidding marriage and commanding to abstain from foods which God created to be received with thanksgiving by those who believe and know the truth.",
         "tokens": [
           {
             "index": 0,
@@ -39984,6 +40031,7 @@
     "translations": {
       "kjv": {
         "text": "For every creature of God is good, and nothing to be refused, if it be received with thanksgiving:",
+        "alignmentText": "For every creature of God is good, and nothing to be refused, if it be received with thanksgiving:",
         "tokens": [
           {
             "index": 0,
@@ -40149,6 +40197,7 @@
       },
       "web": {
         "text": "For every creature of God is good, and nothing is to be rejected, if it is received with thanksgiving.",
+        "alignmentText": "For every creature of God is good, and nothing is to be rejected, if it is received with thanksgiving.",
         "tokens": [
           {
             "index": 0,
@@ -40507,6 +40556,7 @@
     "translations": {
       "kjv": {
         "text": "For it is sanctified by the word of God and prayer.",
+        "alignmentText": "For it is sanctified by the word of God and prayer.",
         "tokens": [
           {
             "index": 0,
@@ -40616,6 +40666,7 @@
       },
       "web": {
         "text": "For it is sanctified through the word of God and prayer.",
+        "alignmentText": "For it is sanctified through the word of God and prayer.",
         "tokens": [
           {
             "index": 0,
@@ -41222,6 +41273,7 @@
     "translations": {
       "kjv": {
         "text": "If thou put the brethren in remembrance of these things, thou shalt be a good minister of Jesus Christ, nourished up in the words of faith and of good doctrine, whereunto thou hast attained.",
+        "alignmentText": "If thou put the brethren in remembrance of these things, thou shalt be a good minister of Jesus Christ, nourished up in the words of faith and of good doctrine, whereunto thou hast attained.",
         "tokens": [
           {
             "index": 0,
@@ -41531,6 +41583,7 @@
       },
       "web": {
         "text": "If you instruct the brothers of these things, you will be a good servant of Christ Jesus, nourished in the words of the faith, and of the good doctrine which you have followed.",
+        "alignmentText": "If you instruct the brothers of these things, you will be a good servant of Christ Jesus, nourished in the words of the faith, and of the good doctrine which you have followed.",
         "tokens": [
           {
             "index": 0,
@@ -42159,6 +42212,7 @@
     "translations": {
       "kjv": {
         "text": "But refuse profane and old wives’ fables, and exercise thyself rather unto godliness.",
+        "alignmentText": "But refuse profane and old wives’ fables, and exercise thyself rather unto godliness.",
         "tokens": [
           {
             "index": 0,
@@ -42286,6 +42340,7 @@
       },
       "web": {
         "text": "But refuse profane and old wives’ fables. Exercise yourself toward godliness.",
+        "alignmentText": "But refuse profane and old wives’ fables. Exercise yourself toward godliness.",
         "tokens": [
           {
             "index": 0,
@@ -42968,6 +43023,7 @@
     "translations": {
       "kjv": {
         "text": "For bodily exercise profiteth little: but godliness is profitable unto all things, having promise of the life that now is, and of that which is to come.",
+        "alignmentText": "For bodily exercise profiteth little: but godliness is profitable unto all things, having promise of the life that now is, and of that which is to come.",
         "tokens": [
           {
             "index": 0,
@@ -43234,6 +43290,7 @@
       },
       "web": {
         "text": "For bodily exercise has some value, but godliness has value in all things, having the promise of the life which is now, and of that which is to come.",
+        "alignmentText": "For bodily exercise has some value, but godliness has value in all things, having the promise of the life which is now, and of that which is to come.",
         "tokens": [
           {
             "index": 0,
@@ -43688,6 +43745,7 @@
     "translations": {
       "kjv": {
         "text": "This is a faithful saying and worthy of all acceptation.",
+        "alignmentText": "This is a faithful saying and worthy of all acceptation.",
         "tokens": [
           {
             "index": 0,
@@ -43788,6 +43846,7 @@
       },
       "web": {
         "text": "This saying is faithful and worthy of all acceptance.",
+        "alignmentText": "This saying is faithful and worthy of all acceptance.",
         "tokens": [
           {
             "index": 0,
@@ -44330,6 +44389,7 @@
     "translations": {
       "kjv": {
         "text": "For therefore we both labour and suffer reproach, because we trust in the living God, who is the Saviour of all men, specially of those that believe.",
+        "alignmentText": "For therefore we both labour and suffer reproach, because we trust in the living God, who is the Saviour of all men, specially of those that believe.",
         "tokens": [
           {
             "index": 0,
@@ -44563,6 +44623,7 @@
       },
       "web": {
         "text": "For to this end we both labor and suffer reproach, because we have set our trust in the living God, who is the Savior of all men, especially of those who believe.",
+        "alignmentText": "For to this end we both labor and suffer reproach, because we have set our trust in the living God, who is the Savior of all men, especially of those who believe.",
         "tokens": [
           {
             "index": 0,
@@ -44962,6 +45023,7 @@
     "translations": {
       "kjv": {
         "text": "These things command and teach.",
+        "alignmentText": "These things command and teach.",
         "tokens": [
           {
             "index": 0,
@@ -45011,6 +45073,7 @@
       },
       "web": {
         "text": "Command and teach these things.",
+        "alignmentText": "Command and teach these things.",
         "tokens": [
           {
             "index": 0,
@@ -45551,6 +45614,7 @@
     "translations": {
       "kjv": {
         "text": "Let no man despise thy youth; but be thou an example of the believers, in word, in conversation, in charity, in spirit, in faith, in purity.",
+        "alignmentText": "Let no man despise thy youth; but be thou an example of the believers, in word, in conversation, in charity, in spirit, in faith, in purity.",
         "tokens": [
           {
             "index": 0,
@@ -45835,6 +45899,7 @@
       },
       "web": {
         "text": "Let no man despise your youth; but be an example to those who believe, in word, in your way of life, in love, in spirit, in faith, and in purity.",
+        "alignmentText": "Let no man despise your youth; but be an example to those who believe, in word, in your way of life, in love, in spirit, in faith, and in purity.",
         "tokens": [
           {
             "index": 0,
@@ -46401,6 +46466,7 @@
     "translations": {
       "kjv": {
         "text": "Till I come, give attendance to reading, to exhortation, to doctrine.",
+        "alignmentText": "Till I come, give attendance to reading, to exhortation, to doctrine.",
         "tokens": [
           {
             "index": 0,
@@ -46501,6 +46567,7 @@
       },
       "web": {
         "text": "Until I come, pay attention to reading, to exhortation, and to teaching.",
+        "alignmentText": "Until I come, pay attention to reading, to exhortation, and to teaching.",
         "tokens": [
           {
             "index": 0,
@@ -47042,6 +47109,7 @@
     "translations": {
       "kjv": {
         "text": "Neglect not the gift that is in thee, which was given thee by prophecy, with the laying on of the hands of the presbytery.",
+        "alignmentText": "Neglect not the gift that is in thee, which was given thee by prophecy, with the laying on of the hands of the presbytery.",
         "tokens": [
           {
             "index": 0,
@@ -47287,6 +47355,7 @@
       },
       "web": {
         "text": "Don’t neglect the gift that is in you, which was given to you by prophecy, with the laying on of the hands of the elders.",
+        "alignmentText": "Don’t neglect the gift that is in you, which was given to you by prophecy, with the laying on of the hands of the elders.",
         "tokens": [
           {
             "index": 0,
@@ -47841,6 +47910,7 @@
     "translations": {
       "kjv": {
         "text": "Meditate upon these things; give thyself wholly to them; that thy profiting may appear to all.",
+        "alignmentText": "Meditate upon these things; give thyself wholly to them; that thy profiting may appear to all.",
         "tokens": [
           {
             "index": 0,
@@ -47977,6 +48047,7 @@
       },
       "web": {
         "text": "Be diligent in these things. Give yourself wholly to them, that your progress may be revealed to all.",
+        "alignmentText": "Be diligent in these things. Give yourself wholly to them, that your progress may be revealed to all.",
         "tokens": [
           {
             "index": 0,
@@ -48568,6 +48639,7 @@
     "translations": {
       "kjv": {
         "text": "Take heed unto thyself, and unto the doctrine; continue in them: for in doing this thou shalt both save thyself, and them that hear thee.",
+        "alignmentText": "Take heed unto thyself, and unto the doctrine; continue in them: for in doing this thou shalt both save thyself, and them that hear thee.",
         "tokens": [
           {
             "index": 0,
@@ -48784,6 +48856,7 @@
       },
       "web": {
         "text": "Pay attention to yourself and to your teaching. Continue in these things, for in doing this you will save both yourself and those who hear you.",
+        "alignmentText": "Pay attention to yourself and to your teaching. Continue in these things, for in doing this you will save both yourself and those who hear you.",
         "tokens": [
           {
             "index": 0,
@@ -49282,6 +49355,7 @@
     "translations": {
       "kjv": {
         "text": "Rebuke not an elder, but intreat him as a father; and the younger men as brethren;",
+        "alignmentText": "Rebuke not an elder, but intreat him as a father; and the younger men as brethren;",
         "tokens": [
           {
             "index": 0,
@@ -49435,6 +49509,7 @@
       },
       "web": {
         "text": "Don’t rebuke an older man, but exhort him as a father; the younger men as brothers;",
+        "alignmentText": "Don’t rebuke an older man, but exhort him as a father; the younger men as brothers;",
         "tokens": [
           {
             "index": 0,
@@ -49815,6 +49890,7 @@
     "translations": {
       "kjv": {
         "text": "The elder women as mothers; the younger as sisters, with all purity.",
+        "alignmentText": "The elder women as mothers; the younger as sisters, with all purity.",
         "tokens": [
           {
             "index": 0,
@@ -49950,6 +50026,7 @@
       },
       "web": {
         "text": "the elder women as mothers; the younger as sisters, in all purity.",
+        "alignmentText": "the elder women as mothers; the younger as sisters, in all purity.",
         "tokens": [
           {
             "index": 0,
@@ -50216,6 +50293,7 @@
     "translations": {
       "kjv": {
         "text": "Honour widows that are widows indeed.",
+        "alignmentText": "Honour widows that are widows indeed.",
         "tokens": [
           {
             "index": 0,
@@ -50278,6 +50356,7 @@
       },
       "web": {
         "text": "Honor widows who are widows indeed.",
+        "alignmentText": "Honor widows who are widows indeed.",
         "tokens": [
           {
             "index": 0,
@@ -50988,6 +51067,7 @@
     "translations": {
       "kjv": {
         "text": "But if any widow have children or nephews, let them learn first to shew piety at home, and to requite their parents: for that is good and acceptable before God.",
+        "alignmentText": "But if any widow have children or nephews, let them learn first to shew piety at home, and to requite their parents: for that is good and acceptable before God.",
         "tokens": [
           {
             "index": 0,
@@ -51279,6 +51359,7 @@
       },
       "web": {
         "text": "But if any widow has children or grandchildren, let them learn first to show piety toward their own family and to repay their parents, for this is * TR adds “good and” acceptable in the sight of God.",
+        "alignmentText": "But if any widow has children or grandchildren, let them learn first to show piety toward their own family and to repay their parents, for this is TR adds “good and” acceptable in the sight of God.",
         "tokens": [
           {
             "index": 0,
@@ -52088,6 +52169,7 @@
     "translations": {
       "kjv": {
         "text": "Now she that is a widow indeed, and desolate, trusteth in God, and continueth in supplications and prayers night and day.",
+        "alignmentText": "Now she that is a widow indeed, and desolate, trusteth in God, and continueth in supplications and prayers night and day.",
         "tokens": [
           {
             "index": 0,
@@ -52282,6 +52364,7 @@
       },
       "web": {
         "text": "Now she who is a widow indeed and desolate, has her hope set on God, and continues in petitions and prayers night and day.",
+        "alignmentText": "Now she who is a widow indeed and desolate, has her hope set on God, and continues in petitions and prayers night and day.",
         "tokens": [
           {
             "index": 0,
@@ -52644,6 +52727,7 @@
     "translations": {
       "kjv": {
         "text": "But she that liveth in pleasure is dead while she liveth.",
+        "alignmentText": "But she that liveth in pleasure is dead while she liveth.",
         "tokens": [
           {
             "index": 0,
@@ -52744,6 +52828,7 @@
       },
       "web": {
         "text": "But she who gives herself to pleasure is dead while she lives.",
+        "alignmentText": "But she who gives herself to pleasure is dead while she lives.",
         "tokens": [
           {
             "index": 0,
@@ -53020,6 +53105,7 @@
     "translations": {
       "kjv": {
         "text": "And these things give in charge, that they may be blameless.",
+        "alignmentText": "And these things give in charge, that they may be blameless.",
         "tokens": [
           {
             "index": 0,
@@ -53120,6 +53206,7 @@
       },
       "web": {
         "text": "Also command these things, that they may be without reproach.",
+        "alignmentText": "Also command these things, that they may be without reproach.",
         "tokens": [
           {
             "index": 0,
@@ -53631,6 +53718,7 @@
     "translations": {
       "kjv": {
         "text": "But if any provide not for his own, and specially for those of his own house, he hath denied the faith, and is worse than an infidel.",
+        "alignmentText": "But if any provide not for his own, and specially for those of his own house, he hath denied the faith, and is worse than an infidel.",
         "tokens": [
           {
             "index": 0,
@@ -53880,6 +53968,7 @@
       },
       "web": {
         "text": "But if anyone doesn’t provide for his own, and especially his own household, he has denied the faith, and is worse than an unbeliever.",
+        "alignmentText": "But if anyone doesn’t provide for his own, and especially his own household, he has denied the faith, and is worse than an unbeliever.",
         "tokens": [
           {
             "index": 0,
@@ -54371,6 +54460,7 @@
     "translations": {
       "kjv": {
         "text": "Let not a widow be taken into the number under threescore years old, having been the wife of one man,",
+        "alignmentText": "Let not a widow be taken into the number under threescore years old, having been the wife of one man,",
         "tokens": [
           {
             "index": 0,
@@ -54562,6 +54652,7 @@
       },
       "web": {
         "text": "Let no one be enrolled as a widow under sixty years old, having been the wife of one man,",
+        "alignmentText": "Let no one be enrolled as a widow under sixty years old, having been the wife of one man,",
         "tokens": [
           {
             "index": 0,
@@ -55244,6 +55335,7 @@
     "translations": {
       "kjv": {
         "text": "Well reported of for good works; if she have brought up children, if she have lodged strangers, if she have washed the saints’ feet, if she have relieved the afflicted, if she have diligently followed every good work.",
+        "alignmentText": "Well reported of for good works; if she have brought up children, if she have lodged strangers, if she have washed the saints’ feet, if she have relieved the afflicted, if she have diligently followed every good work.",
         "tokens": [
           {
             "index": 0,
@@ -55583,6 +55675,7 @@
       },
       "web": {
         "text": "being approved by good works, if she has brought up children, if she has been hospitable to strangers, if she has washed the saints’ feet, if she has relieved the afflicted, and if she has diligently followed every good work.",
+        "alignmentText": "being approved by good works, if she has brought up children, if she has been hospitable to strangers, if she has washed the saints’ feet, if she has relieved the afflicted, and if she has diligently followed every good work.",
         "tokens": [
           {
             "index": 0,
@@ -56212,6 +56305,7 @@
     "translations": {
       "kjv": {
         "text": "But the younger widows refuse: for when they have begun to wax wanton against Christ, they will marry;",
+        "alignmentText": "But the younger widows refuse: for when they have begun to wax wanton against Christ, they will marry;",
         "tokens": [
           {
             "index": 0,
@@ -56392,6 +56486,7 @@
       },
       "web": {
         "text": "But refuse younger widows, for when they have grown wanton against Christ, they desire to marry,",
+        "alignmentText": "But refuse younger widows, for when they have grown wanton against Christ, they desire to marry,",
         "tokens": [
           {
             "index": 0,
@@ -56736,6 +56831,7 @@
     "translations": {
       "kjv": {
         "text": "Having damnation, because they have cast off their first faith.",
+        "alignmentText": "Having damnation, because they have cast off their first faith.",
         "tokens": [
           {
             "index": 0,
@@ -56828,6 +56924,7 @@
       },
       "web": {
         "text": "having condemnation, because they have rejected their first pledge.",
+        "alignmentText": "having condemnation, because they have rejected their first pledge.",
         "tokens": [
           {
             "index": 0,
@@ -57428,6 +57525,7 @@
     "translations": {
       "kjv": {
         "text": "And withal they learn to be idle, wandering about from house to house; and not only idle, but tattlers also and busybodies, speaking things which they ought not.",
+        "alignmentText": "And withal they learn to be idle, wandering about from house to house; and not only idle, but tattlers also and busybodies, speaking things which they ought not.",
         "tokens": [
           {
             "index": 0,
@@ -57701,6 +57799,7 @@
       },
       "web": {
         "text": "Besides, they also learn to be idle, going about from house to house. Not only idle, but also gossips and busybodies, saying things which they ought not.",
+        "alignmentText": "Besides, they also learn to be idle, going about from house to house. Not only idle, but also gossips and busybodies, saying things which they ought not.",
         "tokens": [
           {
             "index": 0,
@@ -58288,6 +58387,7 @@
     "translations": {
       "kjv": {
         "text": "I will therefore that the younger women marry, bear children, guide the house, give none occasion to the adversary to speak reproachfully.",
+        "alignmentText": "I will therefore that the younger women marry, bear children, guide the house, give none occasion to the adversary to speak reproachfully.",
         "tokens": [
           {
             "index": 0,
@@ -58489,6 +58589,7 @@
       },
       "web": {
         "text": "I desire therefore that the younger widows marry, bear children, rule the household, and give no occasion to the adversary for insulting.",
+        "alignmentText": "I desire therefore that the younger widows marry, bear children, rule the household, and give no occasion to the adversary for insulting.",
         "tokens": [
           {
             "index": 0,
@@ -58877,6 +58978,7 @@
     "translations": {
       "kjv": {
         "text": "For some are already turned aside after Satan.",
+        "alignmentText": "For some are already turned aside after Satan.",
         "tokens": [
           {
             "index": 0,
@@ -58967,6 +59069,7 @@
       },
       "web": {
         "text": "For already some have turned away after Satan.",
+        "alignmentText": "For already some have turned away after Satan.",
         "tokens": [
           {
             "index": 0,
@@ -59477,6 +59580,7 @@
     "translations": {
       "kjv": {
         "text": "If any man or woman that believeth have widows, let them relieve them, and let not the church be charged; that it may relieve them that are widows indeed.",
+        "alignmentText": "If any man or woman that believeth have widows, let them relieve them, and let not the church be charged; that it may relieve them that are widows indeed.",
         "tokens": [
           {
             "index": 0,
@@ -59740,6 +59844,7 @@
       },
       "web": {
         "text": "If any man or woman who believes has widows, let them relieve them, and don’t let the assembly be burdened, that it might relieve those who are widows indeed.",
+        "alignmentText": "If any man or woman who believes has widows, let them relieve them, and don’t let the assembly be burdened, that it might relieve those who are widows indeed.",
         "tokens": [
           {
             "index": 0,
@@ -60355,6 +60460,7 @@
     "translations": {
       "kjv": {
         "text": "Let the elders that rule well be counted worthy of double honour, especially they who labour in the word and doctrine.",
+        "alignmentText": "Let the elders that rule well be counted worthy of double honour, especially they who labour in the word and doctrine.",
         "tokens": [
           {
             "index": 0,
@@ -60569,6 +60675,7 @@
       },
       "web": {
         "text": "Let the elders who rule well be counted worthy of double honor, especially those who labor in the word and in teaching.",
+        "alignmentText": "Let the elders who rule well be counted worthy of double honor, especially those who labor in the word and in teaching.",
         "tokens": [
           {
             "index": 0,
@@ -61188,6 +61295,7 @@
     "translations": {
       "kjv": {
         "text": "For the scripture saith, Thou shalt not muzzle the ox that treadeth out the corn. And, The labourer is worthy of his reward.",
+        "alignmentText": "For the scripture saith, Thou shalt not muzzle the ox that treadeth out the corn. And, The labourer is worthy of his reward.",
         "tokens": [
           {
             "index": 0,
@@ -61398,6 +61506,7 @@
       },
       "web": {
         "text": "For the Scripture says, “You shall not muzzle the ox when it treads out the grain.”✡ Deuteronomy 25:4 And, “The laborer is worthy of his wages.”✡ Luke 10:7; Leviticus 19:13",
+        "alignmentText": "For the Scripture says, “You shall not muzzle the ox when it treads out the grain.”✡ Deuteronomy 25:4 And, “The laborer is worthy of his wages.”✡ Luke 10:7; Leviticus 19:13",
         "tokens": [
           {
             "index": 0,
@@ -61995,6 +62104,7 @@
     "translations": {
       "kjv": {
         "text": "Against an elder receive not an accusation, but before two or three witnesses.",
+        "alignmentText": "Against an elder receive not an accusation, but before two or three witnesses.",
         "tokens": [
           {
             "index": 0,
@@ -62151,6 +62261,7 @@
       },
       "web": {
         "text": "Don’t receive an accusation against an elder, except at the word of two or three witnesses.",
+        "alignmentText": "Don’t receive an accusation against an elder, except at the word of two or three witnesses.",
         "tokens": [
           {
             "index": 0,
@@ -62606,6 +62717,7 @@
     "translations": {
       "kjv": {
         "text": "Them that sin rebuke before all, that others also may fear.",
+        "alignmentText": "Them that sin rebuke before all, that others also may fear.",
         "tokens": [
           {
             "index": 0,
@@ -62726,6 +62838,7 @@
       },
       "web": {
         "text": "Those who sin, reprove in the sight of all, that the rest also may be in fear.",
+        "alignmentText": "Those who sin, reprove in the sight of all, that the rest also may be in fear.",
         "tokens": [
           {
             "index": 0,
@@ -63388,6 +63501,7 @@
     "translations": {
       "kjv": {
         "text": "I charge thee before God, and the Lord Jesus Christ, and the elect angels, that thou observe these things without preferring one before another, doing nothing by partiality.",
+        "alignmentText": "I charge thee before God, and the Lord Jesus Christ, and the elect angels, that thou observe these things without preferring one before another, doing nothing by partiality.",
         "tokens": [
           {
             "index": 0,
@@ -63675,6 +63789,7 @@
       },
       "web": {
         "text": "I command you in the sight of God, and the Lord Jesus Christ, and the chosen angels, that you observe these things without prejudice, doing nothing by partiality.",
+        "alignmentText": "I command you in the sight of God, and the Lord Jesus Christ, and the chosen angels, that you observe these things without prejudice, doing nothing by partiality.",
         "tokens": [
           {
             "index": 0,
@@ -64234,6 +64349,7 @@
     "translations": {
       "kjv": {
         "text": "Lay hands suddenly on no man, neither be partaker of other men’s sins: keep thyself pure.",
+        "alignmentText": "Lay hands suddenly on no man, neither be partaker of other men’s sins: keep thyself pure.",
         "tokens": [
           {
             "index": 0,
@@ -64396,6 +64512,7 @@
       },
       "web": {
         "text": "Lay hands hastily on no one. Don’t be a participant in other people’s sins. Keep yourself pure.",
+        "alignmentText": "Lay hands hastily on no one. Don’t be a participant in other people’s sins. Keep yourself pure.",
         "tokens": [
           {
             "index": 0,
@@ -64925,6 +65042,7 @@
     "translations": {
       "kjv": {
         "text": "Drink no longer water, but use a little wine for thy stomach’s sake and thine often infirmities.",
+        "alignmentText": "Drink no longer water, but use a little wine for thy stomach’s sake and thine often infirmities.",
         "tokens": [
           {
             "index": 0,
@@ -65103,6 +65221,7 @@
       },
       "web": {
         "text": "Be no longer a drinker of water only, but use a little wine for your stomach’s sake and your frequent infirmities.",
+        "alignmentText": "Be no longer a drinker of water only, but use a little wine for your stomach’s sake and your frequent infirmities.",
         "tokens": [
           {
             "index": 0,
@@ -65628,6 +65747,7 @@
     "translations": {
       "kjv": {
         "text": "Some men’s sins are open beforehand, going before to judgment; and some men they follow after.",
+        "alignmentText": "Some men’s sins are open beforehand, going before to judgment; and some men they follow after.",
         "tokens": [
           {
             "index": 0,
@@ -65783,6 +65903,7 @@
       },
       "web": {
         "text": "Some men’s sins are evident, preceding them to judgment, and some also follow later.",
+        "alignmentText": "Some men’s sins are evident, preceding them to judgment, and some also follow later.",
         "tokens": [
           {
             "index": 0,
@@ -66264,6 +66385,7 @@
     "translations": {
       "kjv": {
         "text": "Likewise also the good works of some are manifest beforehand; and they that are otherwise cannot be hid.",
+        "alignmentText": "Likewise also the good works of some are manifest beforehand; and they that are otherwise cannot be hid.",
         "tokens": [
           {
             "index": 0,
@@ -66435,6 +66557,7 @@
       },
       "web": {
         "text": "In the same way also there are good works that are obvious, and those that are otherwise can’t be hidden.",
+        "alignmentText": "In the same way also there are good works that are obvious, and those that are otherwise can’t be hidden.",
         "tokens": [
           {
             "index": 0,
@@ -67167,6 +67290,7 @@
     "translations": {
       "kjv": {
         "text": "Let as many servants as are under the yoke count their own masters worthy of all honour, that the name of God and his doctrine be not blasphemed.",
+        "alignmentText": "Let as many servants as are under the yoke count their own masters worthy of all honour, that the name of God and his doctrine be not blasphemed.",
         "tokens": [
           {
             "index": 0,
@@ -67448,6 +67572,7 @@
       },
       "web": {
         "text": "Let as many as are bondservants under the yoke count their own masters worthy of all honor, that the name of God and the doctrine not be blasphemed.",
+        "alignmentText": "Let as many as are bondservants under the yoke count their own masters worthy of all honor, that the name of God and the doctrine not be blasphemed.",
         "tokens": [
           {
             "index": 0,
@@ -68371,6 +68496,7 @@
     "translations": {
       "kjv": {
         "text": "And they that have believing masters, let them not despise them, because they are brethren; but rather do them service, because they are faithful and beloved, partakers of the benefit. These things teach and exhort.",
+        "alignmentText": "And they that have believing masters, let them not despise them, because they are brethren; but rather do them service, because they are faithful and beloved, partakers of the benefit. These things teach and exhort.",
         "tokens": [
           {
             "index": 0,
@@ -68692,6 +68818,7 @@
       },
       "web": {
         "text": "Those who have believing masters, let them not despise them because they are brothers, but rather let them serve them, because those who partake of the benefit are believing and beloved. Teach and exhort these things.",
+        "alignmentText": "Those who have believing masters, let them not despise them because they are brothers, but rather let them serve them, because those who partake of the benefit are believing and beloved. Teach and exhort these things.",
         "tokens": [
           {
             "index": 0,
@@ -69507,6 +69634,7 @@
     "translations": {
       "kjv": {
         "text": "If any man teach otherwise, and consent not to wholesome words, even the words of our Lord Jesus Christ, and to the doctrine which is according to godliness;",
+        "alignmentText": "If any man teach otherwise, and consent not to wholesome words, even the words of our Lord Jesus Christ, and to the doctrine which is according to godliness;",
         "tokens": [
           {
             "index": 0,
@@ -69782,6 +69910,7 @@
       },
       "web": {
         "text": "If anyone teaches a different doctrine, and doesn’t consent to sound words, the words of our Lord Jesus Christ, and to the doctrine which is according to godliness,",
+        "alignmentText": "If anyone teaches a different doctrine, and doesn’t consent to sound words, the words of our Lord Jesus Christ, and to the doctrine which is according to godliness,",
         "tokens": [
           {
             "index": 0,
@@ -70469,6 +70598,7 @@
     "translations": {
       "kjv": {
         "text": "He is proud, knowing nothing, but doting about questions and strifes of words, whereof cometh envy, strife, railings, evil surmisings,",
+        "alignmentText": "He is proud, knowing nothing, but doting about questions and strifes of words, whereof cometh envy, strife, railings, evil surmisings,",
         "tokens": [
           {
             "index": 0,
@@ -70660,6 +70790,7 @@
       },
       "web": {
         "text": "he is conceited, knowing nothing, but obsessed with arguments, disputes, and word battles, from which come envy, strife, insulting, evil suspicions,",
+        "alignmentText": "he is conceited, knowing nothing, but obsessed with arguments, disputes, and word battles, from which come envy, strife, insulting, evil suspicions,",
         "tokens": [
           {
             "index": 0,
@@ -71226,6 +71357,7 @@
     "translations": {
       "kjv": {
         "text": "Perverse disputings of men of corrupt minds, and destitute of the truth, supposing that gain is godliness: from such withdraw thyself.",
+        "alignmentText": "Perverse disputings of men of corrupt minds, and destitute of the truth, supposing that gain is godliness: from such withdraw thyself.",
         "tokens": [
           {
             "index": 0,
@@ -71427,6 +71559,7 @@
       },
       "web": {
         "text": "constant friction of people of corrupt minds and destitute of the truth, who suppose that godliness is a means of gain. Withdraw yourself from such. * NU omits “Withdraw yourself from such.”",
+        "alignmentText": "constant friction of people of corrupt minds and destitute of the truth, who suppose that godliness is a means of gain. Withdraw yourself from such. NU omits “Withdraw yourself from such.”",
         "tokens": [
           {
             "index": 0,
@@ -71918,6 +72051,7 @@
     "translations": {
       "kjv": {
         "text": "But godliness with contentment is great gain.",
+        "alignmentText": "But godliness with contentment is great gain.",
         "tokens": [
           {
             "index": 0,
@@ -72015,6 +72149,7 @@
       },
       "web": {
         "text": "But godliness with contentment is great gain.",
+        "alignmentText": "But godliness with contentment is great gain.",
         "tokens": [
           {
             "index": 0,
@@ -72387,6 +72522,7 @@
     "translations": {
       "kjv": {
         "text": "For we brought nothing into this world, and it is certain we can carry nothing out.",
+        "alignmentText": "For we brought nothing into this world, and it is certain we can carry nothing out.",
         "tokens": [
           {
             "index": 0,
@@ -72531,6 +72667,7 @@
       },
       "web": {
         "text": "For we brought nothing into the world, and we certainly can’t carry anything out.",
+        "alignmentText": "For we brought nothing into the world, and we certainly can’t carry anything out.",
         "tokens": [
           {
             "index": 0,
@@ -72832,6 +72969,7 @@
     "translations": {
       "kjv": {
         "text": "And having food and raiment let us be therewith content.",
+        "alignmentText": "And having food and raiment let us be therewith content.",
         "tokens": [
           {
             "index": 0,
@@ -72923,6 +73061,7 @@
       },
       "web": {
         "text": "But having food and clothing, we will be content with that.",
+        "alignmentText": "But having food and clothing, we will be content with that.",
         "tokens": [
           {
             "index": 0,
@@ -73593,6 +73732,7 @@
     "translations": {
       "kjv": {
         "text": "But they that will be rich fall into temptation and a snare, and into many foolish and hurtful lusts, which drown men in destruction and perdition.",
+        "alignmentText": "But they that will be rich fall into temptation and a snare, and into many foolish and hurtful lusts, which drown men in destruction and perdition.",
         "tokens": [
           {
             "index": 0,
@@ -73837,6 +73977,7 @@
       },
       "web": {
         "text": "But those who are determined to be rich fall into a temptation, a snare, and many foolish and harmful lusts, such as drown men in ruin and destruction.",
+        "alignmentText": "But those who are determined to be rich fall into a temptation, a snare, and many foolish and harmful lusts, such as drown men in ruin and destruction.",
         "tokens": [
           {
             "index": 0,
@@ -74594,6 +74735,7 @@
     "translations": {
       "kjv": {
         "text": "For the love of money is the root of all evil: which while some coveted after, they have erred from the faith, and pierced themselves through with many sorrows.",
+        "alignmentText": "For the love of money is the root of all evil: which while some coveted after, they have erred from the faith, and pierced themselves through with many sorrows.",
         "tokens": [
           {
             "index": 0,
@@ -74875,6 +75017,7 @@
       },
       "web": {
         "text": "For the love of money is a root of all kinds of evil. Some have been led astray from the faith in their greed, and have pierced themselves through with many sorrows.",
+        "alignmentText": "For the love of money is a root of all kinds of evil. Some have been led astray from the faith in their greed, and have pierced themselves through with many sorrows.",
         "tokens": [
           {
             "index": 0,
@@ -75543,6 +75686,7 @@
     "translations": {
       "kjv": {
         "text": "But thou, O man of God, flee these things; and follow after righteousness, godliness, faith, love, patience, meekness.",
+        "alignmentText": "But thou, O man of God, flee these things; and follow after righteousness, godliness, faith, love, patience, meekness.",
         "tokens": [
           {
             "index": 0,
@@ -75728,6 +75872,7 @@
       },
       "web": {
         "text": "But you, man of God, flee these things, and follow after righteousness, godliness, faith, love, perseverance, and gentleness.",
+        "alignmentText": "But you, man of God, flee these things, and follow after righteousness, godliness, faith, love, perseverance, and gentleness.",
         "tokens": [
           {
             "index": 0,
@@ -76443,6 +76588,7 @@
     "translations": {
       "kjv": {
         "text": "Fight the good fight of faith, lay hold on eternal life, whereunto thou art also called, and hast professed a good profession before many witnesses.",
+        "alignmentText": "Fight the good fight of faith, lay hold on eternal life, whereunto thou art also called, and hast professed a good profession before many witnesses.",
         "tokens": [
           {
             "index": 0,
@@ -76719,6 +76865,7 @@
       },
       "web": {
         "text": "Fight the good fight of faith. Take hold of the eternal life to which you were called, and you confessed the good confession in the sight of many witnesses.",
+        "alignmentText": "Fight the good fight of faith. Take hold of the eternal life to which you were called, and you confessed the good confession in the sight of many witnesses.",
         "tokens": [
           {
             "index": 0,
@@ -77527,6 +77674,7 @@
     "translations": {
       "kjv": {
         "text": "I give thee charge in the sight of God, who quickeneth all things, and before Christ Jesus, who before Pontius Pilate witnessed a good confession;",
+        "alignmentText": "I give thee charge in the sight of God, who quickeneth all things, and before Christ Jesus, who before Pontius Pilate witnessed a good confession;",
         "tokens": [
           {
             "index": 0,
@@ -77796,6 +77944,7 @@
       },
       "web": {
         "text": "I command you before God, who gives life to all things, and before Christ Jesus, who before Pontius Pilate testified the good confession,",
+        "alignmentText": "I command you before God, who gives life to all things, and before Christ Jesus, who before Pontius Pilate testified the good confession,",
         "tokens": [
           {
             "index": 0,
@@ -78399,6 +78548,7 @@
     "translations": {
       "kjv": {
         "text": "That thou keep this commandment without spot, unrebukeable, until the appearing of our Lord Jesus Christ:",
+        "alignmentText": "That thou keep this commandment without spot, unrebukeable, until the appearing of our Lord Jesus Christ:",
         "tokens": [
           {
             "index": 0,
@@ -78577,6 +78727,7 @@
       },
       "web": {
         "text": "that you keep the commandment without spot, blameless, until the appearing of our Lord Jesus Christ,",
+        "alignmentText": "that you keep the commandment without spot, blameless, until the appearing of our Lord Jesus Christ,",
         "tokens": [
           {
             "index": 0,
@@ -79175,6 +79326,7 @@
     "translations": {
       "kjv": {
         "text": "Which in his times he shall shew, who is the blessed and only Potentate, the King of kings, and Lord of lords;",
+        "alignmentText": "Which in his times he shall shew, who is the blessed and only Potentate, the King of kings, and Lord of lords;",
         "tokens": [
           {
             "index": 0,
@@ -79405,6 +79557,7 @@
       },
       "web": {
         "text": "which in its own times he will show, who is the blessed and only Ruler, the King of kings, and Lord of lords.",
+        "alignmentText": "which in its own times he will show, who is the blessed and only Ruler, the King of kings, and Lord of lords.",
         "tokens": [
           {
             "index": 0,
@@ -80154,6 +80307,7 @@
     "translations": {
       "kjv": {
         "text": "Who only hath immortality, dwelling in the light which no man can approach unto; whom no man hath seen, nor can see: to whom be honour and power everlasting. Amen.",
+        "alignmentText": "Who only hath immortality, dwelling in the light which no man can approach unto; whom no man hath seen, nor can see: to whom be honour and power everlasting. Amen.",
         "tokens": [
           {
             "index": 0,
@@ -80330,7 +80484,7 @@
             "normalized": "man",
             "alignedSourceTokenIds": [],
             "alignmentStatus": "unaligned",
-            "alignmentReason": "expected-greek-source-present-but-unmatched"
+            "alignmentReason": "expected-greek-source-already-consumed"
           },
           {
             "index": 17,
@@ -80457,6 +80611,7 @@
       },
       "web": {
         "text": "He alone has immortality, dwelling in unapproachable light, whom no man has seen, nor can see: to whom be honor and eternal power. Amen.",
+        "alignmentText": "He alone has immortality, dwelling in unapproachable light, whom no man has seen, nor can see: to whom be honor and eternal power. Amen.",
         "tokens": [
           {
             "index": 0,
@@ -81320,6 +81475,7 @@
     "translations": {
       "kjv": {
         "text": "Charge them that are rich in this world, that they be not highminded, nor trust in uncertain riches, but in the living God, who giveth us richly all things to enjoy;",
+        "alignmentText": "Charge them that are rich in this world, that they be not highminded, nor trust in uncertain riches, but in the living God, who giveth us richly all things to enjoy;",
         "tokens": [
           {
             "index": 0,
@@ -81621,6 +81777,7 @@
       },
       "web": {
         "text": "Charge those who are rich in this present world that they not be arrogant, nor have their hope set on the uncertainty of riches, but on the living God, who richly provides us with everything to enjoy;",
+        "alignmentText": "Charge those who are rich in this present world that they not be arrogant, nor have their hope set on the uncertainty of riches, but on the living God, who richly provides us with everything to enjoy;",
         "tokens": [
           {
             "index": 0,
@@ -82193,6 +82350,7 @@
     "translations": {
       "kjv": {
         "text": "That they do good, that they be rich in good works, ready to distribute, willing to communicate;",
+        "alignmentText": "That they do good, that they be rich in good works, ready to distribute, willing to communicate;",
         "tokens": [
           {
             "index": 0,
@@ -82372,6 +82530,7 @@
       },
       "web": {
         "text": "that they do good, that they be rich in good works, that they be ready to distribute, willing to share;",
+        "alignmentText": "that they do good, that they be rich in good works, that they be ready to distribute, willing to share;",
         "tokens": [
           {
             "index": 0,
@@ -82873,6 +83032,7 @@
     "translations": {
       "kjv": {
         "text": "Laying up in store for themselves a good foundation against the time to come, that they may lay hold on eternal life.",
+        "alignmentText": "Laying up in store for themselves a good foundation against the time to come, that they may lay hold on eternal life.",
         "tokens": [
           {
             "index": 0,
@@ -83089,6 +83249,7 @@
       },
       "web": {
         "text": "laying up in store for themselves a good foundation against the time to come, that they may lay hold of eternal life.",
+        "alignmentText": "laying up in store for themselves a good foundation against the time to come, that they may lay hold of eternal life.",
         "tokens": [
           {
             "index": 0,
@@ -83652,6 +83813,7 @@
     "translations": {
       "kjv": {
         "text": "O Timothy, keep that which is committed to thy trust, avoiding profane and vain babblings, and oppositions of science falsely so called:",
+        "alignmentText": "O Timothy, keep that which is committed to thy trust, avoiding profane and vain babblings, and oppositions of science falsely so called:",
         "tokens": [
           {
             "index": 0,
@@ -83853,6 +84015,7 @@
       },
       "web": {
         "text": "Timothy, guard that which is committed to you, turning away from the empty chatter and oppositions of what is falsely called knowledge,",
+        "alignmentText": "Timothy, guard that which is committed to you, turning away from the empty chatter and oppositions of what is falsely called knowledge,",
         "tokens": [
           {
             "index": 0,
@@ -84343,6 +84506,7 @@
     "translations": {
       "kjv": {
         "text": "Which some professing have erred concerning the faith. Grace be with thee. Amen.",
+        "alignmentText": "Which some professing have erred concerning the faith. Grace be with thee. Amen.",
         "tokens": [
           {
             "index": 0,
@@ -84476,6 +84640,7 @@
       },
       "web": {
         "text": "which some profess, and thus have wandered from the faith.",
+        "alignmentText": "which some profess, and thus have wandered from the faith.",
         "tokens": [
           {
             "index": 0,

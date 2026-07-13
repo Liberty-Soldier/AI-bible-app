@@ -410,6 +410,23 @@ function getVerseText(verse) {
   return verse?.sources?.[0]?.text || "";
 }
 
+function sanitizeTranslationTextForAlignment(text) {
+  let value = String(text || "");
+
+  // Remove common inline WEB note artifacts that should not become alignment tokens.
+  value = value.replace(/\s*[†‡]\s*Literally,\s*Lord of the Flies,\s*or the devil\s*/gi, " ");
+
+  // Remove inline textual-critical notes like:
+  // "* NU reads Christ Jesus and omits the Lord."
+  value = value.replace(/\s*\*\s*(NU|TR|MT|WH)\s+reads\b[^.!?;]*[.!?;]/gi, " ");
+
+  // Remove remaining standalone note symbols.
+  value = value.replace(/[†‡]/g, "");
+  value = value.replace(/\*/g, "");
+
+  return value.replace(/\s+/g, " ").trim();
+}
+
 function loadTranslationVerseMap(translation) {
   const rows = readJson(translation.file);
   const map = new Map();
@@ -648,7 +665,8 @@ function buildBookStats() {
         ignoredTokens: 0,
         unalignedTokens: 0,
         highValueUnaligned: {},
-        highValueUnalignedSourcePresent: {},
+highValueUnalignedSourcePresent: {},
+highValueUnalignedSourceConsumed: {},
 highValueUnalignedSourceAbsent: {},
       },
 
@@ -659,7 +677,8 @@ highValueUnalignedSourceAbsent: {},
         ignoredTokens: 0,
         unalignedTokens: 0,
         highValueUnaligned: {},
-        highValueUnalignedSourcePresent: {},
+highValueUnalignedSourcePresent: {},
+highValueUnalignedSourceConsumed: {},
 highValueUnalignedSourceAbsent: {},
       },
     };
@@ -670,6 +689,13 @@ highValueUnalignedSourceAbsent: {},
 
 function addUnalignedWord(counter, word) {
   if (!word) return;
+
+  if (!counter || Array.isArray(counter)) {
+    throw new Error(
+      `Invalid audit counter for word "${word}". A counter was converted to an array before alignment summarization finished.`
+    );
+  }
+
   counter[word] = (counter[word] || 0) + 1;
 }
 
@@ -686,15 +712,33 @@ function getExpectedGreekStrongFamiliesForEnglish(word) {
   return strongs;
 }
 
-function hasExpectedSourceStrong(sourceTokens, expectedStrongs) {
-  if (!expectedStrongs.size) return false;
+function getExpectedSourceStrongState(sourceTokens, expectedStrongs, usedSourceTokenIds) {
+  if (!expectedStrongs.size) return "unknown";
 
-  return sourceTokens.some((sourceToken) =>
+  const matching = sourceTokens.filter((sourceToken) =>
     expectedStrongs.has(sourceToken.strong)
   );
+
+  if (!matching.length) return "absent";
+
+  const unused = matching.filter(
+    (sourceToken) => !usedSourceTokenIds.has(sourceToken.id)
+  );
+
+  if (unused.length) return "present-unused";
+
+  return "present-already-consumed";
 }
 
 function summarizeTranslationTokens(tokens, translationStats, sourceTokens) {
+  const usedSourceTokenIds = new Set();
+
+  for (const token of tokens) {
+    for (const id of token.alignedSourceTokenIds || []) {
+      usedSourceTokenIds.add(id);
+    }
+  }
+
   for (const token of tokens) {
     if (token.alignmentStatus === "aligned") {
       translationStats.alignedTokens += 1;
@@ -709,13 +753,26 @@ function summarizeTranslationTokens(tokens, translationStats, sourceTokens) {
         const expectedStrongs =
           getExpectedGreekStrongFamiliesForEnglish(normalized);
 
-        if (hasExpectedSourceStrong(sourceTokens, expectedStrongs)) {
+        const sourceState = getExpectedSourceStrongState(
+          sourceTokens,
+          expectedStrongs,
+          usedSourceTokenIds
+        );
+
+        if (sourceState === "present-unused") {
           addUnalignedWord(
             translationStats.highValueUnalignedSourcePresent,
             normalized
           );
 
           token.alignmentReason = "expected-greek-source-present-but-unmatched";
+        } else if (sourceState === "present-already-consumed") {
+          addUnalignedWord(
+            translationStats.highValueUnalignedSourceConsumed,
+            normalized
+          );
+
+          token.alignmentReason = "expected-greek-source-already-consumed";
         } else {
           addUnalignedWord(
             translationStats.highValueUnalignedSourceAbsent,
@@ -732,7 +789,29 @@ function summarizeTranslationTokens(tokens, translationStats, sourceTokens) {
 }
 
 function topCounter(counter, limit = 50) {
+  if (!counter) return [];
+
+  // If this was already converted, normalize it instead of nesting it.
+  if (Array.isArray(counter)) {
+    return counter
+      .filter(
+        (item) =>
+          item &&
+          typeof item.word === "string" &&
+          typeof item.count === "number"
+      )
+      .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word))
+      .slice(0, limit);
+  }
+
   return Object.entries(counter)
+    .filter(
+      ([word, count]) =>
+        typeof word === "string" &&
+        word.length > 0 &&
+        !/^\d+$/.test(word) &&
+        typeof count === "number"
+    )
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
     .slice(0, limit)
     .map(([word, count]) => ({ word, count }));
@@ -793,8 +872,9 @@ function main() {
       alignedTokens: 0,
       ignoredTokens: 0,
       unalignedTokens: 0,
-      highValueUnaligned: {},
-      highValueUnalignedSourcePresent: {},
+     highValueUnaligned: {},
+highValueUnalignedSourcePresent: {},
+highValueUnalignedSourceConsumed: {},
 highValueUnalignedSourceAbsent: {},
     },
 
@@ -805,7 +885,8 @@ highValueUnalignedSourceAbsent: {},
       ignoredTokens: 0,
       unalignedTokens: 0,
       highValueUnaligned: {},
-      highValueUnalignedSourcePresent: {},
+highValueUnalignedSourcePresent: {},
+highValueUnalignedSourceConsumed: {},
 highValueUnalignedSourceAbsent: {},
     },
   };
@@ -832,7 +913,8 @@ highValueUnalignedSourceAbsent: {},
 
         if (!translationVerse?.text) continue;
 
-        const tokens = tokenizeDisplayText(translationVerse.text);
+        const alignmentText = sanitizeTranslationTextForAlignment(translationVerse.text);
+const tokens = tokenizeDisplayText(alignmentText);
 
         const edges = alignTranslationTokens({
           verseKey,
@@ -841,10 +923,11 @@ highValueUnalignedSourceAbsent: {},
           sourceTokens: canonical.sourceTokens,
         });
 
-        canonical.translations[translation.id] = {
-          text: translationVerse.text,
-          tokens,
-        };
+       canonical.translations[translation.id] = {
+  text: translationVerse.text,
+  alignmentText,
+  tokens,
+};
 
         byBook[book][translation.id].versesWithTranslation += 1;
         byBook[book][translation.id].translationTokens += tokens.length;
@@ -872,61 +955,67 @@ highValueUnalignedSourceAbsent: {},
 
     writeJson(bookRecord.filePath, bookData);
   }
-
   for (const book of NT_BOOKS) {
     for (const translation of translations) {
- byBook[book][translation.id].highValueUnaligned = topCounter(
-  byBook[book][translation.id].highValueUnaligned
-);
+      const stats = byBook[book][translation.id];
 
-byBook[book][translation.id].highValueUnalignedSourcePresent = topCounter(
-  byBook[book][translation.id].highValueUnalignedSourcePresent
-);
+      stats.highValueUnaligned = topCounter(
+        stats.highValueUnaligned
+      );
 
-byBook[book][translation.id].highValueUnalignedSourceAbsent = topCounter(
-  byBook[book][translation.id].highValueUnalignedSourceAbsent
-);
+      stats.highValueUnalignedSourcePresent = topCounter(
+        stats.highValueUnalignedSourcePresent
+      );
+
+      stats.highValueUnalignedSourceConsumed = topCounter(
+        stats.highValueUnalignedSourceConsumed
+      );
+
+      stats.highValueUnalignedSourceAbsent = topCounter(
+        stats.highValueUnalignedSourceAbsent
+      );
     }
   }
 
   for (const translation of translations) {
-    totals[translation.id].highValueUnaligned = topCounter(
-      totals[translation.id].highValueUnaligned,
+    const stats = totals[translation.id];
+
+    stats.highValueUnaligned = topCounter(
+      stats.highValueUnaligned,
       100
     );
-    totals[translation.id].highValueUnalignedSourcePresent = topCounter(
-  totals[translation.id].highValueUnalignedSourcePresent,
-  100
-);
 
-totals[translation.id].highValueUnalignedSourceAbsent = topCounter(
-  totals[translation.id].highValueUnalignedSourceAbsent,
-  100
-);
+    stats.highValueUnalignedSourcePresent = topCounter(
+      stats.highValueUnalignedSourcePresent,
+      100
+    );
 
-    totals[translation.id].alignedRate =
-      totals[translation.id].translationTokens > 0
-        ? Number(
-            (
-              totals[translation.id].alignedTokens /
-              totals[translation.id].translationTokens
-            ).toFixed(4)
-          )
+    stats.highValueUnalignedSourceConsumed = topCounter(
+      stats.highValueUnalignedSourceConsumed,
+      100
+    );
+
+    stats.highValueUnalignedSourceAbsent = topCounter(
+      stats.highValueUnalignedSourceAbsent,
+      100
+    );
+
+    stats.alignedRate =
+      stats.translationTokens > 0
+        ? Number((stats.alignedTokens / stats.translationTokens).toFixed(4))
         : 0;
 
-    totals[translation.id].actionableAlignedRate =
-      totals[translation.id].translationTokens -
-        totals[translation.id].ignoredTokens >
-      0
+    stats.actionableAlignedRate =
+      stats.translationTokens - stats.ignoredTokens > 0
         ? Number(
             (
-              totals[translation.id].alignedTokens /
-              (totals[translation.id].translationTokens -
-                totals[translation.id].ignoredTokens)
+              stats.alignedTokens /
+              (stats.translationTokens - stats.ignoredTokens)
             ).toFixed(4)
           )
         : 0;
   }
+
 
   const report = {
     corpus: "greek-nt",
