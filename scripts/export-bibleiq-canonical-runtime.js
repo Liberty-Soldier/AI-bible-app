@@ -97,7 +97,7 @@ function detectBook(inputFilePath, file) {
   return null;
 }
 
-function copyCorpus(corpus, shouldCopyBook) {
+function copyCorpus(corpus, shouldCopyBook, options = {}) {
   const inputDir = path.join(inputRoot, corpus);
   const outputDir = path.join(outputRoot, corpus);
 
@@ -126,10 +126,17 @@ function copyCorpus(corpus, shouldCopyBook) {
     const book = detectBook(inputFilePath, file);
 
     if (!book) {
-      unknown.push(file);
-      skipped += 1;
-      continue;
-    }
+  if (options.copyUnknownBooks) {
+    fs.copyFileSync(inputFilePath, outputFilePath);
+    books.add(path.basename(file, ".json"));
+    copied += 1;
+    continue;
+  }
+
+  unknown.push(file);
+  skipped += 1;
+  continue;
+}
 
     if (!shouldCopyBook(book)) {
       skipped += 1;
@@ -179,7 +186,7 @@ function main() {
   cleanDir(outputRoot);
 
   const hebrew = copyCorpus("hebrew", isOldTestamentBook);
-  const lxx = copyCorpus("lxx", isOldTestamentBook);
+  const lxx = copyCorpus("lxx", () => true, { copyUnknownBooks: true });
   const greekNt = copyCorpus("greek-nt", isNewTestamentBook);
 
   assertExpectedBooks("Hebrew", hebrew, OT_BOOKS);
