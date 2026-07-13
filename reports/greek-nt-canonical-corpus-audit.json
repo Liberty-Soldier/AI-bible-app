@@ -1,0 +1,184 @@
+{
+  "corpus": "greek-nt",
+  "witness": "OpenGNT",
+  "sourceFile": "app\\data\\scripture\\generatedGreekNTWords.json",
+  "generatedAt": "2026-07-13T12:03:19.857Z",
+  "inputRows": 138013,
+  "outputTokens": 138013,
+  "books": {
+    "expected": 27,
+    "actual": 27,
+    "missing": [],
+    "extra": []
+  },
+  "verses": 7941,
+  "quality": {
+    "tokensWithoutStrong": 0,
+    "tokensWithoutSurface": 0,
+    "tokensWithoutGloss": 0
+  },
+  "byBook": {
+    "Matthew": {
+      "tokens": 18346,
+      "verses": 1068,
+      "firstTokenId": "greek-nt:Matthew.1.1:1",
+      "lastTokenId": "greek-nt:Matthew.28.20:21"
+    },
+    "Mark": {
+      "tokens": 11304,
+      "verses": 673,
+      "firstTokenId": "greek-nt:Mark.1.1:1",
+      "lastTokenId": "greek-nt:Mark.16.20:50"
+    },
+    "Luke": {
+      "tokens": 19482,
+      "verses": 1149,
+      "firstTokenId": "greek-nt:Luke.1.1:1",
+      "lastTokenId": "greek-nt:Luke.24.53:10"
+    },
+    "John": {
+      "tokens": 15635,
+      "verses": 878,
+      "firstTokenId": "greek-nt:John.1.1:1",
+      "lastTokenId": "greek-nt:John.21.25:23"
+    },
+    "Acts": {
+      "tokens": 18450,
+      "verses": 1002,
+      "firstTokenId": "greek-nt:Acts.1.1:1",
+      "lastTokenId": "greek-nt:Acts.28.31:17"
+    },
+    "Romans": {
+      "tokens": 7111,
+      "verses": 432,
+      "firstTokenId": "greek-nt:Romans.1.1:1",
+      "lastTokenId": "greek-nt:Romans.16.27:13"
+    },
+    "1 Corinthians": {
+      "tokens": 6830,
+      "verses": 437,
+      "firstTokenId": "greek-nt:1_Corinthians.1.1:1",
+      "lastTokenId": "greek-nt:1_Corinthians.16.24:9"
+    },
+    "2 Corinthians": {
+      "tokens": 4477,
+      "verses": 256,
+      "firstTokenId": "greek-nt:2_Corinthians.1.1:1",
+      "lastTokenId": "greek-nt:2_Corinthians.13.13:20"
+    },
+    "Galatians": {
+      "tokens": 2230,
+      "verses": 149,
+      "firstTokenId": "greek-nt:Galatians.1.1:1",
+      "lastTokenId": "greek-nt:Galatians.6.18:13"
+    },
+    "Ephesians": {
+      "tokens": 2422,
+      "verses": 155,
+      "firstTokenId": "greek-nt:Ephesians.1.1:1",
+      "lastTokenId": "greek-nt:Ephesians.6.24:13"
+    },
+    "Philippians": {
+      "tokens": 1629,
+      "verses": 104,
+      "firstTokenId": "greek-nt:Philippians.1.1:1",
+      "lastTokenId": "greek-nt:Philippians.4.23:10"
+    },
+    "Colossians": {
+      "tokens": 1582,
+      "verses": 95,
+      "firstTokenId": "greek-nt:Colossians.1.1:1",
+      "lastTokenId": "greek-nt:Colossians.4.18:14"
+    },
+    "1 Thessalonians": {
+      "tokens": 1481,
+      "verses": 89,
+      "firstTokenId": "greek-nt:1_Thessalonians.1.1:1",
+      "lastTokenId": "greek-nt:1_Thessalonians.5.28:9"
+    },
+    "2 Thessalonians": {
+      "tokens": 823,
+      "verses": 47,
+      "firstTokenId": "greek-nt:2_Thessalonians.1.1:1",
+      "lastTokenId": "greek-nt:2_Thessalonians.3.18:10"
+    },
+    "1 Timothy": {
+      "tokens": 1591,
+      "verses": 113,
+      "firstTokenId": "greek-nt:1_Timothy.1.1:1",
+      "lastTokenId": "greek-nt:1_Timothy.6.21:11"
+    },
+    "2 Timothy": {
+      "tokens": 1238,
+      "verses": 83,
+      "firstTokenId": "greek-nt:2_Timothy.1.1:1",
+      "lastTokenId": "greek-nt:2_Timothy.4.22:10"
+    },
+    "Titus": {
+      "tokens": 659,
+      "verses": 46,
+      "firstTokenId": "greek-nt:Titus.1.1:1",
+      "lastTokenId": "greek-nt:Titus.3.15:17"
+    },
+    "Philemon": {
+      "tokens": 335,
+      "verses": 25,
+      "firstTokenId": "greek-nt:Philemon.1.1:1",
+      "lastTokenId": "greek-nt:Philemon.1.25:10"
+    },
+    "Hebrews": {
+      "tokens": 4953,
+      "verses": 303,
+      "firstTokenId": "greek-nt:Hebrews.1.1:1",
+      "lastTokenId": "greek-nt:Hebrews.13.25:5"
+    },
+    "James": {
+      "tokens": 1745,
+      "verses": 108,
+      "firstTokenId": "greek-nt:James.1.1:1",
+      "lastTokenId": "greek-nt:James.5.20:18"
+    },
+    "1 Peter": {
+      "tokens": 1679,
+      "verses": 105,
+      "firstTokenId": "greek-nt:1_Peter.1.1:1",
+      "lastTokenId": "greek-nt:1_Peter.5.14:11"
+    },
+    "2 Peter": {
+      "tokens": 1099,
+      "verses": 61,
+      "firstTokenId": "greek-nt:2_Peter.1.1:1",
+      "lastTokenId": "greek-nt:2_Peter.3.18:22"
+    },
+    "1 John": {
+      "tokens": 2140,
+      "verses": 105,
+      "firstTokenId": "greek-nt:1_John.1.1:1",
+      "lastTokenId": "greek-nt:1_John.5.21:6"
+    },
+    "2 John": {
+      "tokens": 245,
+      "verses": 13,
+      "firstTokenId": "greek-nt:2_John.1.1:1",
+      "lastTokenId": "greek-nt:2_John.1.13:9"
+    },
+    "3 John": {
+      "tokens": 218,
+      "verses": 15,
+      "firstTokenId": "greek-nt:3_John.1.1:1",
+      "lastTokenId": "greek-nt:3_John.1.15:11"
+    },
+    "Jude": {
+      "tokens": 458,
+      "verses": 25,
+      "firstTokenId": "greek-nt:Jude.1.1:1",
+      "lastTokenId": "greek-nt:Jude.1.25:27"
+    },
+    "Revelation": {
+      "tokens": 9851,
+      "verses": 405,
+      "firstTokenId": "greek-nt:Revelation.1.1:1",
+      "lastTokenId": "greek-nt:Revelation.22.21:7"
+    }
+  }
+}
