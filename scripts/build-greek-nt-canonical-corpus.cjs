@@ -86,20 +86,23 @@ function normalizeStrong(value) {
   if (!value) return null;
 
   const text = String(value).trim().toUpperCase();
-
   const match = text.match(/^G?0*([0-9]+)$/);
+
   if (!match) return text.startsWith("G") ? text : `G${text}`;
 
   return `G${String(Number(match[1])).padStart(4, "0")}`;
 }
 
-function makeVerseId(book, chapter, verse) {
+function toVerseKey(book, chapter, verse) {
   return `${book}.${chapter}.${verse}`;
 }
 
+function makeSafeBookForTokenId(book) {
+  return book.replace(/\s+/g, "_");
+}
+
 function makeTokenId(book, chapter, verse, tokenIndex) {
-  const safeBook = book.replace(/\s+/g, "_");
-  return `greek-nt:${safeBook}.${chapter}.${verse}:${tokenIndex}`;
+  return `greek-nt:${makeSafeBookForTokenId(book)}.${chapter}.${verse}:${tokenIndex}`;
 }
 
 function makeEntityId(strong) {
@@ -121,10 +124,30 @@ function asPositiveInteger(value, fieldName, rowNumber) {
   return number;
 }
 
-function buildCanonicalTokens(words) {
-  const verseCounters = new Map();
+function getOrCreateVerse(canonicalByVerse, book, chapter, verse) {
+  const verseKey = toVerseKey(book, chapter, verse);
 
-  return words.map((row, index) => {
+  if (!canonicalByVerse[verseKey]) {
+    canonicalByVerse[verseKey] = {
+      reference: verseKey,
+      book,
+      chapter,
+      verse,
+      source: "greek-nt",
+      sourceTokens: [],
+      translations: {},
+    };
+  }
+
+  return canonicalByVerse[verseKey];
+}
+
+function addGreekSourceTokens(words) {
+  const canonicalByVerse = {};
+  const verseTokenCounters = new Map();
+
+  for (let index = 0; index < words.length; index += 1) {
+    const row = words[index];
     const rowNumber = index + 1;
 
     const book = normalizeBookName(row.book);
@@ -137,30 +160,30 @@ function buildCanonicalTokens(words) {
       );
     }
 
-    const verseId = makeVerseId(book, chapter, verse);
-    const nextIndex = (verseCounters.get(verseId) || 0) + 1;
-    verseCounters.set(verseId, nextIndex);
+    const verseKey = toVerseKey(book, chapter, verse);
+    const canonical = getOrCreateVerse(canonicalByVerse, book, chapter, verse);
+
+    const tokenIndex = verseTokenCounters.get(verseKey) || 0;
+    verseTokenCounters.set(verseKey, tokenIndex + 1);
 
     const strong = normalizeStrong(row.strong);
-    const sourceSort = row.sort ? String(row.sort).trim() : null;
+    const tokenId = makeTokenId(book, chapter, verse, tokenIndex);
 
-    return {
+    canonical.sourceTokens.push({
+      id: tokenId,
+      tokenId,
+      index: tokenIndex,
+
+      source: "greek-nt",
       corpus: "greek-nt",
       language: "greek",
       witness: "OpenGNT",
       sourceName: "OpenGNT",
 
-      book,
-      chapter,
-      verse,
-      verseId,
-
-      tokenIndex: nextIndex,
-      tokenId: makeTokenId(book, chapter, verse, nextIndex),
-
       surface: row.word || "",
       normalizedSurface: normalizeGreekText(row.word),
 
+      lemma: "",
       strong,
       entityId: makeEntityId(strong),
 
@@ -171,65 +194,76 @@ function buildCanonicalTokens(words) {
       mounceGloss: row.mounceGloss || "",
       tyndaleGloss: row.tyndaleGloss || "",
 
-      sourceSort,
-    };
-  });
-}
+      sourceSort: row.sort ? String(row.sort).trim() : null,
 
-function groupByBook(tokens) {
-  const grouped = new Map();
-
-  for (const token of tokens) {
-    if (!grouped.has(token.book)) grouped.set(token.book, []);
-    grouped.get(token.book).push(token);
+      sourceReference: verseKey,
+      canonicalReference: verseKey,
+      versificationRuleId: null,
+    });
   }
 
-  return grouped;
+  return canonicalByVerse;
 }
 
-function countVerses(tokens) {
-  const verses = new Set();
+function groupByBook(canonicalByVerse) {
+  const byBook = {};
 
-  for (const token of tokens) {
-    verses.add(token.verseId);
+  for (const [verseKey, canonical] of Object.entries(canonicalByVerse)) {
+    if (!byBook[canonical.book]) byBook[canonical.book] = {};
+    byBook[canonical.book][verseKey] = canonical;
   }
 
-  return verses.size;
+  return byBook;
 }
 
-function buildAudit(words, tokens, grouped) {
-  const actualBooks = [...grouped.keys()];
+function countTokens(canonicalByVerse) {
+  let total = 0;
+
+  for (const canonical of Object.values(canonicalByVerse)) {
+    total += canonical.sourceTokens.length;
+  }
+
+  return total;
+}
+
+function buildAudit(words, canonicalByVerse, byBook) {
+  const actualBooks = Object.keys(byBook);
   const actualBookSet = new Set(actualBooks);
 
   const missingBooks = NT_BOOKS.filter((book) => !actualBookSet.has(book));
   const extraBooks = actualBooks.filter((book) => !NT_BOOKS.includes(book));
 
-  const byBook = {};
+  const byBookAudit = {};
 
   for (const book of NT_BOOKS) {
-    const bookTokens = grouped.get(book) || [];
-    byBook[book] = {
-      tokens: bookTokens.length,
-      verses: countVerses(bookTokens),
-      firstTokenId: bookTokens[0]?.tokenId || null,
-      lastTokenId: bookTokens[bookTokens.length - 1]?.tokenId || null,
+    const bookVerses = byBook[book] || {};
+    const verses = Object.values(bookVerses);
+    const tokens = verses.flatMap((verse) => verse.sourceTokens);
+
+    byBookAudit[book] = {
+      verses: verses.length,
+      tokens: tokens.length,
+      firstVerse: verses[0]?.reference || null,
+      lastVerse: verses[verses.length - 1]?.reference || null,
+      firstTokenId: tokens[0]?.id || null,
+      lastTokenId: tokens[tokens.length - 1]?.id || null,
     };
   }
 
-  const tokensWithoutStrong = tokens.filter((token) => !token.strong);
-  const tokensWithoutSurface = tokens.filter((token) => !token.surface);
-  const tokensWithoutGloss = tokens.filter(
-    (token) => !token.gloss && !token.mounceGloss && !token.tyndaleGloss
+  const allTokens = Object.values(canonicalByVerse).flatMap(
+    (verse) => verse.sourceTokens
   );
 
   return {
     corpus: "greek-nt",
     witness: "OpenGNT",
+    shape: "canonical-verse-map",
     sourceFile: path.relative(root, inputWordsPath),
     generatedAt: new Date().toISOString(),
 
     inputRows: words.length,
-    outputTokens: tokens.length,
+    outputTokens: countTokens(canonicalByVerse),
+    outputVerses: Object.keys(canonicalByVerse).length,
 
     books: {
       expected: NT_BOOKS.length,
@@ -238,15 +272,16 @@ function buildAudit(words, tokens, grouped) {
       extra: extraBooks,
     },
 
-    verses: countVerses(tokens),
-
     quality: {
-      tokensWithoutStrong: tokensWithoutStrong.length,
-      tokensWithoutSurface: tokensWithoutSurface.length,
-      tokensWithoutGloss: tokensWithoutGloss.length,
+      tokensWithoutStrong: allTokens.filter((token) => !token.strong).length,
+      tokensWithoutSurface: allTokens.filter((token) => !token.surface).length,
+      tokensWithoutGloss: allTokens.filter(
+        (token) =>
+          !token.gloss && !token.mounceGloss && !token.tyndaleGloss
+      ).length,
     },
 
-    byBook,
+    byBook: byBookAudit,
   };
 }
 
@@ -276,28 +311,15 @@ function assertAuditPassed(audit) {
   }
 }
 
-function writeBookFiles(grouped) {
+function writeBookFiles(byBook) {
   cleanDir(outputDir);
 
   for (const book of NT_BOOKS) {
-    const tokens = grouped.get(book) || [];
     const fileBase = BOOK_FILE_NAMES[book] || book.replace(/\s+/g, "");
     const filePath = path.join(outputDir, `${fileBase}.json`);
+    const payload = byBook[book] || {};
 
-    const payload = {
-      corpus: "greek-nt",
-      language: "greek",
-      witness: "OpenGNT",
-      sourceName: "OpenGNT",
-      book,
-
-      tokenCount: tokens.length,
-      verseCount: countVerses(tokens),
-
-      tokens,
-    };
-
-    fs.writeFileSync(filePath, JSON.stringify(payload, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(payload, null, 2), "utf8");
   }
 }
 
@@ -316,21 +338,21 @@ function main() {
     );
   }
 
-  const tokens = buildCanonicalTokens(words);
-  const grouped = groupByBook(tokens);
-  const audit = buildAudit(words, tokens, grouped);
+  const canonicalByVerse = addGreekSourceTokens(words);
+  const byBook = groupByBook(canonicalByVerse);
+  const audit = buildAudit(words, canonicalByVerse, byBook);
 
   assertAuditPassed(audit);
+  writeBookFiles(byBook);
 
-  writeBookFiles(grouped);
-
-  fs.writeFileSync(reportPath, JSON.stringify(audit, null, 2));
+  fs.writeFileSync(reportPath, JSON.stringify(audit, null, 2), "utf8");
 
   console.log("Built Greek NT canonical corpus:");
+  console.log(`shape: ${audit.shape}`);
   console.log(`source rows: ${audit.inputRows}`);
   console.log(`tokens: ${audit.outputTokens}`);
   console.log(`books: ${audit.books.actual}`);
-  console.log(`verses: ${audit.verses}`);
+  console.log(`verses: ${audit.outputVerses}`);
   console.log(`output: ${path.relative(root, outputDir)}`);
   console.log(`audit: ${path.relative(root, reportPath)}`);
 }
