@@ -1,4 +1,4 @@
-﻿import { findCanonicalHit } from "@/app/data/scripture/CanonicalVerseStore";
+import { findCanonicalHit } from "@/app/data/scripture/CanonicalVerseStore";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
 import SeeStore, {
   toSeeCountId,
@@ -59,8 +59,17 @@ function canonicalBookName(book: string) {
 }
 
 function determinePreferredSource(input: BibleIQRequest): BibleIQSource {
-  const book = canonicalBookName(input.book);
-  if (NEW_TESTAMENT_BOOKS.has(book)) return "greek-nt";
+  const rawBook = String(input.book || "").trim();
+  const evidenceBook = toEvidenceBook(rawBook);
+
+  if (
+    NEW_TESTAMENT_BOOKS.has(rawBook) ||
+    Array.from(NEW_TESTAMENT_BOOKS).some(
+      (bookName) => toEvidenceBook(bookName) === evidenceBook
+    )
+  ) {
+    return "greek-nt";
+  }
 
   const translation = normalize(input.translation);
   if (

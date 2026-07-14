@@ -1,4 +1,4 @@
-﻿import "server-only";
+import "server-only";
 
 import type { BibleIQSource } from "@/app/data/lexicon/BibleIQTypes";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
@@ -109,11 +109,19 @@ function preferredCorpusForTranslation(
   translation: string,
   book: string,
 ): BibleIQSource {
-  const canonicalBook = canonicalBookName(book);
+  const rawBook = String(book || "").trim();
+  const evidenceBook = toEvidenceBook(rawBook);
 
-  // Source ownership is determined by canon first: every NT translation
-  // resolves to the Greek NT source corpus.
-  if (NEW_TESTAMENT_BOOKS.has(canonicalBook)) return "greek-nt";
+  // Source ownership is determined by canon first. Accept both reader names
+  // ("Revelation") and SEE/evidence abbreviations ("Rev").
+  if (
+    NEW_TESTAMENT_BOOKS.has(rawBook) ||
+    Array.from(NEW_TESTAMENT_BOOKS).some(
+      (bookName) => toEvidenceBook(bookName) === evidenceBook
+    )
+  ) {
+    return "greek-nt";
+  }
 
   const value = String(translation || "").toLowerCase();
   if (
