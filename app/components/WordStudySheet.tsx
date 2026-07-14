@@ -84,7 +84,7 @@ function getTranslationLabel(value?: string) {
   if (normalized === "brenton") return "Brenton LXX";
   if (normalized === "lxx") return "Greek LXX";
   if (normalized === "hebrew") return "Hebrew";
-  if (normalized === "gnt") return "Greek NT";
+  if (normalized === "gnt" || normalized === "greek-nt") return "Greek NT";
 
   return value.toUpperCase();
 }
@@ -164,21 +164,29 @@ export default function WordStudySheet({
 
       try {
         const response = await fetch(
-          `/api/word-study?${new URLSearchParams({
-            displayWord: activeWord,
-            book,
-            chapter: String(chapter),
-            verse: String(verse ?? ""),
-            translation,
-            displayTokenIndex: String(displayTokenIndex ?? -1),
-            selectedText: selectedText ?? "",
-            originalWord: originalWord ?? "",
-            verseText: verseText ?? "",
-          }).toString()}`
-        );
+  `/api/word-study?${new URLSearchParams({
+    displayWord: activeWord,
+    book,
+    chapter: String(chapter),
+    verse: String(verse ?? ""),
+    translation,
+    displayTokenIndex: String(displayTokenIndex ?? -1),
+    selectedText: selectedText ?? "",
+    originalWord: originalWord ?? "",
+    verseText: verseText ?? "",
+  }).toString()}`
+);
 
-        const json = (await response.json()) as BibleIQResponse;
-        if (!cancelled) setData(json);
+if (!response.ok) {
+  throw new Error(`Word study request failed: ${response.status}`);
+}
+
+const json = (await response.json()) as BibleIQResponse;
+
+if (!cancelled) {
+  setData(json);
+}
+
       } catch {
         if (!cancelled) {
           setData({
@@ -212,13 +220,13 @@ export default function WordStudySheet({
 
   if (!word) return null;
 
-  const entity = data?.entity;
-  const original = entity?.evidence.originalLanguage;
-  const context = entity?.contextConnections;
-  const occurrences = entity?.evidence.occurrences || [];
-  const see = entity?.see;
-  const alignment = entity?.alignment;
-  const emet = entity?.emet;
+const entity = data?.entity;
+const original = entity?.evidence?.originalLanguage;
+const context = entity?.contextConnections;
+const occurrences = entity?.evidence?.occurrences || [];
+const see = entity?.see;
+const alignment = entity?.alignment;
+const emet = entity?.emet;
 
   const uniqueOccurrences = occurrences.filter(
     (occurrence, index, list) =>
