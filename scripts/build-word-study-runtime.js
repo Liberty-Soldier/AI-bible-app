@@ -9,11 +9,22 @@ const OUTPUT_ROOT = path.join(ROOT, "public", "data", "bibleiq", "word-study");
 const CORPORA = ["hebrew", "greek-nt", "lxx"];
 const VERSION = 1;
 
-function cleanDirectory(directory) {
-  if (fs.existsSync(directory)) {
-    fs.rmSync(directory, { recursive: true, force: true });
+function prepareOutputRoot() {
+  fs.mkdirSync(OUTPUT_ROOT, { recursive: true });
+
+  // P05 entity shards are committed deployable artifacts generated from the
+  // locked private P03/P04 builds. Rebuilding the 83.76 MB alignment runtime
+  // must never delete those shards.
+  for (const corpus of CORPORA) {
+    fs.rmSync(path.join(OUTPUT_ROOT, corpus), {
+      recursive: true,
+      force: true,
+    });
   }
-  fs.mkdirSync(directory, { recursive: true });
+
+  fs.rmSync(path.join(OUTPUT_ROOT, "manifest.json"), {
+    force: true,
+  });
 }
 
 function readJson(filePath) {
@@ -41,6 +52,25 @@ function safeOutputFileName(fileName) {
   const base = path.basename(fileName, ".json").replace(/[^0-9A-Za-z]+/g, "");
   if (!base) throw new Error(`Cannot derive runtime filename from ${fileName}`);
   return `${base}.json`;
+}
+
+function normalizeRuntimeWordEntityId(entityId, corpus) {
+  const value = String(entityId || "").trim();
+  if (!value) return "";
+
+  const canonical = value.startsWith("word:") ? value : `word:${value}`;
+  const match = canonical.match(/^word:(hebrew|greek-nt|lxx):([^:]+)$/);
+  if (!match || match[1] !== corpus) return "";
+
+  const lexicalId = match[2];
+  const valid =
+    corpus === "hebrew"
+      ? /^H\d+$/.test(lexicalId)
+      : corpus === "greek-nt"
+        ? /^G\d+$/.test(lexicalId)
+        : /^L\d+$/.test(lexicalId);
+
+  return valid ? canonical : "";
 }
 
 function unwrapVerseMap(document) {
@@ -161,6 +191,10 @@ function buildBook(corpus, inputFile, outputFile, aliasMap) {
     const compact = compactVerse(verse, reference);
     if (!compact) continue;
 
+    for (const sourceToken of compact.value.s) {
+      sourceToken[4] = normalizeRuntimeWordEntityId(sourceToken[4], corpus);
+    }
+
     compactVerses[compact.key] = compact.value;
     sourceTokenCount += compact.value.s.length;
     for (const translation of Object.values(compact.value.a)) {
@@ -209,7 +243,7 @@ function main() {
     throw new Error(`Missing canonical runtime: ${INPUT_ROOT}`);
   }
 
-  cleanDirectory(OUTPUT_ROOT);
+  prepareOutputRoot();
 
   const manifest = {
     version: VERSION,

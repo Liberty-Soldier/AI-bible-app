@@ -4,7 +4,7 @@
     "private":  true,
     "scripts":  {
                     "build:see":  "node scripts/see/compiler/build-see.js",
-                    "prebuild":  "node scripts/split-scripture-runtime.js \u0026\u0026 node scripts/export-bibleiq-canonical-runtime.js \u0026\u0026 node --max-old-space-size=4096 scripts/build-word-study-runtime.js",
+                    "prebuild":  "node scripts/split-scripture-runtime.js \u0026\u0026 node scripts/export-bibleiq-canonical-runtime.js \u0026\u0026 node --max-old-space-size=4096 scripts/build-word-study-runtime.js \u0026\u0026 node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js --verify-runtime \u0026\u0026 node scripts/verify-p05-entity-routing.js \u0026\u0026 node scripts/verify-p05-unified-reader.js \u0026\u0026 node scripts/verify-p05-runtime-fix.js",
                     "dev":  "next dev",
                     "build":  "next build",
                     "start":  "next start",
@@ -12,7 +12,7 @@
                     "build:entity":  "node scripts/entity/build-entity-graph.js",
                     "build:knowledge":  "node --max-old-space-size=4096 scripts/entity/build-knowledge-index.js",
                     "build:entity-platform":  "npm run build:entity-data \u0026\u0026 npm run build:cached-emet",
-                    "build:word-study-runtime":  "node --max-old-space-size=4096 scripts/build-word-study-runtime.js",
+                    "build:word-study-runtime":  "node --max-old-space-size=4096 scripts/build-word-study-runtime.js \u0026\u0026 node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js --verify-runtime",
                     "build:evidence-packets":  "node --max-old-space-size=4096 scripts/entity/build-evidence-packets.js",
                     "verify:evidence-packets":  "node scripts/entity/build-evidence-packets.js --verify",
                     "build:cached-emet":  "node --max-old-space-size=4096 scripts/entity/build-cached-emet-explanations.js",
@@ -34,7 +34,16 @@
                     "emet:generate:watch":  "node --max-old-space-size=4096 scripts/entity/schedule-cached-emet-generation.js --run --watch",
                     "emet:generate:reset":  "node --max-old-space-size=4096 scripts/entity/schedule-cached-emet-generation.js --reset",
                     "test:emet-reader":  "node --max-old-space-size=4096 scripts/entity/test-emet-reader-explanation.js",
-                    "repair:cached-emet":  "node --max-old-space-size=4096 scripts/entity/repair-cached-emet-failures.js"
+                    "repair:cached-emet":  "node --max-old-space-size=4096 scripts/entity/repair-cached-emet-failures.js",
+                    "build:word-study-entities":  "node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js",
+                    "verify:word-study-entities":  "node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js --verify-runtime",
+                    "verify:p05-ui":  "node scripts/verify-p05-unified-reader.js",
+                    "verify:p05":  "npm run verify:word-study-entities \u0026\u0026 npm run verify:p05-routing \u0026\u0026 npm run verify:p05-ui \u0026\u0026 npm run verify:p05-fix",
+                    "test:p05-runtime":  "node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js --verify-runtime",
+                    "build:p05":  "npm run build:word-study-entities \u0026\u0026 npm run build",
+                    "verify:p05-routing":  "node scripts/verify-p05-entity-routing.js",
+                    "verify:p05-fix":  "node scripts/verify-p05-runtime-fix.js",
+                    "audit:p04-quality":  "node --max-old-space-size=4096 scripts/audit-p04-quality.js"
                 },
     "dependencies":  {
                          "fast-xml-parser":  "^5.9.2",

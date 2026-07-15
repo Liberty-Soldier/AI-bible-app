@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SelectedVerse } from "@/app/components/VerseActionController";
+import { usePremiumAccess } from "@/app/components/premium/PremiumAccessProvider";
 import {
   areAllBookmarked,
   highlightVerses,
@@ -28,6 +29,7 @@ export default function VerseActionSheet({
   const [noteText, setNoteText] = useState("");
   const [bookmarked, setBookmarked] = useState(false);
   const touchStartY = useRef<number | null>(null);
+  const { requestUpgrade } = usePremiumAccess();
 
   const firstVerse = verses[0];
   const lastVerse = verses[verses.length - 1];
@@ -50,7 +52,7 @@ export default function VerseActionSheet({
         )}/${firstVerse.chapter}?verse=${firstVerse.verse}`
       : "";
 
-  const shareText = `${referenceLabel}\n\n${selectedText}\n\nRead in Scripture Search:\n${verseUrl}`;
+  const shareText = `${referenceLabel}\n\n${selectedText}\n\nRead in EMETSEES:\n${verseUrl}`;
 
   useEffect(() => {
     if (!open || !firstVerse) return;
@@ -143,10 +145,6 @@ export default function VerseActionSheet({
     setNoteOpen(false);
     emitMemoryChange();
     showMessage("Note saved");
-  }
-
-  function placeholder(action: string) {
-    showMessage(`${action} coming soon`);
   }
 
   function onTouchStart(event: React.TouchEvent) {
@@ -348,10 +346,20 @@ export default function VerseActionSheet({
                   <ActionButton onClick={() => setNoteOpen((v) => !v)}>
                     Note
                   </ActionButton>
-                  <ActionButton onClick={() => placeholder("Ask Scripture")}>
-                    Ask Scripture
+                  <ActionButton
+                    locked
+                    onClick={() =>
+                      requestUpgrade("ask-emet", referenceLabel)
+                    }
+                  >
+                    Ask EMET
                   </ActionButton>
-                  <ActionButton onClick={() => placeholder("Compare")}>
+                  <ActionButton
+                    locked
+                    onClick={() =>
+                      requestUpgrade("compare-passages", referenceLabel)
+                    }
+                  >
                     Compare
                   </ActionButton>
                 </div>
@@ -385,9 +393,11 @@ function CompactButton({
 function ActionButton({
   children,
   onClick,
+  locked = false,
 }: {
   children: React.ReactNode;
   onClick: () => void;
+  locked?: boolean;
 }) {
   return (
     <button
@@ -395,7 +405,12 @@ function ActionButton({
       onClick={onClick}
       className="min-h-11 rounded-2xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98]"
     >
-      {children}
+      <span>{children}</span>
+      {locked ? (
+        <span className="ml-1 text-[0.62rem] font-black text-amber-600 dark:text-amber-400">
+          LOCKED
+        </span>
+      ) : null}
     </button>
   );
 }

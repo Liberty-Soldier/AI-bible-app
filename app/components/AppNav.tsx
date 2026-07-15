@@ -1,13 +1,17 @@
 import Link from "next/link";
+import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
 
 export default function AppNav() {
   return (
     <nav className="mb-6 flex items-center justify-between">
-      <Link href="/" className="text-lg font-bold text-white">
-        Scripture
+      <Link href="/" aria-label="EMETSEES home">
+        <EmetseesWordmark compact />
       </Link>
 
-      <Link href="/read" className="text-sm text-neutral-400 hover:text-white">
+      <Link
+        href="/read"
+        className="text-sm font-semibold text-[var(--muted)] hover:text-[var(--foreground)]"
+      >
         Read
       </Link>
     </nav>

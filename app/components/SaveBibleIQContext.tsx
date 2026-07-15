@@ -8,7 +8,6 @@ type BibleIQContext = {
   chapter: number;
   verse?: number | null;
   translation: string;
-  studyMode: boolean;
 };
 
 export default function SaveBibleIQContext({
@@ -16,21 +15,20 @@ export default function SaveBibleIQContext({
   chapter,
   verse,
   translation,
-  studyMode,
 }: BibleIQContext) {
   useEffect(() => {
     localStorage.setItem(
       "bibleiq-current-context",
       JSON.stringify({
         type: "reader",
+        experience: "unified-reader",
         book,
         chapter,
         verse,
         translation,
-        studyMode,
-      })
+      }),
     );
-  }, [book, chapter, verse, translation, studyMode]);
+  }, [book, chapter, verse, translation]);
 
   return null;
 }

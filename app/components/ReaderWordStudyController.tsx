@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import WordStudySheet from "@/app/components/WordStudySheet";
 
@@ -15,6 +16,7 @@ export default function ReaderWordStudyController({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
 
   const selectedWord = searchParams.get("word");
   const selectedVerse = searchParams.get("verse");
@@ -23,9 +25,22 @@ export default function ReaderWordStudyController({
   const displayTokenIndex = searchParams.get("displayTokenIndex");
   const verseText = searchParams.get("verseText");
 
-  function closeWordStudy() {
-    const params = new URLSearchParams(searchParams.toString());
+  useEffect(() => {
+    if (!searchParams.has("study")) return;
 
+    const params = new URLSearchParams(queryString);
+    params.delete("study");
+    const query = params.toString();
+
+    router.replace(query ? `${pathname}?${query}` : pathname, {
+      scroll: false,
+    });
+  }, [pathname, queryString, router, searchParams]);
+
+  function closeWordStudy() {
+    const params = new URLSearchParams(queryString);
+
+    params.delete("study");
     params.delete("word");
     params.delete("verse");
     params.delete("selectedText");
@@ -49,7 +64,9 @@ export default function ReaderWordStudyController({
       verse={selectedVerse ? Number(selectedVerse) : undefined}
       translation={translation}
       displayTokenIndex={
-        displayTokenIndex !== null ? Number(displayTokenIndex) : undefined
+        displayTokenIndex !== null
+          ? Number(displayTokenIndex)
+          : undefined
       }
       selectedText={selectedText || undefined}
       originalWord={originalWord || undefined}

@@ -57,6 +57,24 @@ public/data/see/indexes/
 # SEE generated heavy indexes
 public/data/see/indexes/
 .private/see/build/
-/public/data/bibleiq/word-study/
 
 EMETSEES-P04-COMPLETE-*.zip
+
+# P05 committed entity runtime; alignment runtime remains build-generated
+/public/data/bibleiq/word-study/*
+!/public/data/bibleiq/word-study/entities/
+!/public/data/bibleiq/word-study/entities/**
+
+# Local EMETSEES installers, audits, and diagnostics
+/EMETSEES-P05-RUNTIME-FIX/
+/EMETSEES-P05-UNIFIED/
+/EMETSEES-P041-PREPARATION/
+/EMETSEES-*.zip
+/P04-quality-audit-reports.zip
+/P05-inspection-*.zip
+/inspect-emetsees-*.ps1
+/diagnose-p05-*.ps1
+/fix-p05-*.ps1
+/reports/p04-quality-audit/
+/reports/p05-missing-quick-diagnostic/
+/reports/p05-missing-entity-diagnostic/

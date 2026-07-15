@@ -1,18 +1,29 @@
 import { findCanonicalHit } from "@/app/data/scripture/CanonicalVerseStore";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
-import SeeStore, {
-  toSeeCountId,
-  toSeeEvidenceId,
-} from "@/app/lib/see/SeeStore";
-import { buildEmetEvidencePacket } from "@/app/lib/emet/EmetEvidencePacket";
-import { EmetService } from "@/app/lib/emet/EmetService";
+import {
+  loadWordStudyEntity,
+  normalizeWordEntityId,
+  type WordStudyRuntimeEntity,
+  type WordStudyRuntimeReference,
+} from "./WordStudyEntityStore";
+import {
+  loadApprovedEmetOverride,
+  type ApprovedEmetOverride,
+} from "./EmetApprovedOverrideStore";
 import type {
   BibleIQEntity,
+  BibleIQEntityEvidence,
+  BibleIQKnowledgeExample,
+  BibleIQMeaningInVerse,
+  BibleIQOccurrence,
+  BibleIQReference,
   BibleIQRequest,
   BibleIQResponse,
   BibleIQSeeEvidence,
+  BibleIQSeeKnowledge,
   BibleIQSource,
   BibleIQSourceAlignment,
+  BibleIQTranslation,
 } from "./BibleIQTypes";
 
 const NEW_TESTAMENT_BOOKS = new Set([
@@ -38,9 +49,9 @@ const NEW_TESTAMENT_BOOKS = new Set([
   "James",
   "1 Peter",
   "2 Peter",
+  "3 John",
   "1 John",
   "2 John",
-  "3 John",
   "Jude",
   "Revelation",
 ]);
@@ -54,8 +65,27 @@ function normalize(value: string) {
     .trim();
 }
 
-function canonicalBookName(book: string) {
-  return toEvidenceBook(book) || book;
+function normalizedBookKey(book: string) {
+  const key = String(book || "")
+    .replace(/[^0-9A-Za-z]+/g, "")
+    .toLowerCase();
+
+  if (key === "songofsongs" || key === "songofsolomon") {
+    return "song";
+  }
+
+  return key;
+}
+
+function booksEquivalent(left: string, right: string) {
+  const leftEvidence = toEvidenceBook(left);
+  const rightEvidence = toEvidenceBook(right);
+
+  return (
+    normalizedBookKey(leftEvidence) ===
+      normalizedBookKey(rightEvidence) ||
+    normalizedBookKey(left) === normalizedBookKey(right)
+  );
 }
 
 function determinePreferredSource(input: BibleIQRequest): BibleIQSource {
@@ -65,7 +95,7 @@ function determinePreferredSource(input: BibleIQRequest): BibleIQSource {
   if (
     NEW_TESTAMENT_BOOKS.has(rawBook) ||
     Array.from(NEW_TESTAMENT_BOOKS).some(
-      (bookName) => toEvidenceBook(bookName) === evidenceBook
+      (bookName) => toEvidenceBook(bookName) === evidenceBook,
     )
   ) {
     return "greek-nt";
@@ -92,45 +122,9 @@ function unresolved(
     resolutionType: "unresolved",
     preferredSource,
     query: input.displayWord,
-    message: "BibleIQ could not resolve this word from canonical verse context yet.",
+    message:
+      "SEE could not resolve this word from the aligned source context yet.",
   };
-}
-
-function cleanCanonRef(value?: string) {
-  return String(value || "").replace(/^canon:/, "");
-}
-
-function normalizeReference(value: string) {
-  return String(value || "")
-    .replace(/^canon:/, "")
-    .replace(/^Gen:/, "Genesis ")
-    .replace(/^Exod:/, "Exodus ")
-    .replace(/^Lev:/, "Leviticus ")
-    .replace(/^Num:/, "Numbers ")
-    .replace(/^Deut:/, "Deuteronomy ")
-    .trim();
-}
-
-function uniqueReferences(values: string[]) {
-  const seen = new Set<string>();
-  const result: string[] = [];
-
-  for (const value of values) {
-    const normalized = normalizeReference(value);
-    const key = normalized.replace(/\s+/g, "").toLowerCase();
-    if (!normalized || seen.has(key)) continue;
-    seen.add(key);
-    result.push(normalized);
-  }
-
-  return result;
-}
-
-function emetStatusFromConfidence(
-  confidence: "high" | "medium" | "low",
-): "complete" | "insufficient-evidence" {
-  if (confidence === "low") return "insufficient-evidence";
-  return "complete";
 }
 
 function sourceLabel(source: BibleIQSource) {
@@ -139,143 +133,564 @@ function sourceLabel(source: BibleIQSource) {
   return "Hebrew";
 }
 
-async function buildSeeEntity({
+function translationKey(value?: string): BibleIQTranslation {
+  const normalized = normalize(value || "");
+
+  if (normalized.includes("kjv") || normalized.includes("king james")) {
+    return "kjv";
+  }
+
+  if (
+    normalized.includes("brenton") ||
+    normalized.includes("septuagint") ||
+    normalized.includes("lxx")
+  ) {
+    return "brenton";
+  }
+
+  return "web";
+}
+
+function translationLabel(value: string) {
+  const key = translationKey(value);
+  if (key === "kjv") return "KJV";
+  if (key === "brenton") return "Brenton LXX";
+  return "WEB";
+}
+
+function routeTranslationForSource(
+  source: BibleIQSource,
+  selectedTranslation?: string,
+): BibleIQTranslation {
+  if (source === "lxx") return "brenton";
+
+  const selected = translationKey(selectedTranslation);
+  return selected === "kjv" ? "kjv" : "web";
+}
+
+function referenceLabel(book: string, chapter: number, verse: number) {
+  return `${book} ${chapter}:${verse}`;
+}
+
+function renderingsForTranslation(
+  reference: WordStudyRuntimeReference,
+  routeTranslation: BibleIQTranslation,
+) {
+  const preferred = reference.renderings[routeTranslation];
+  if (preferred?.length) return preferred;
+
+  return Object.values(reference.renderings).flat();
+}
+
+function toPublicReference(
+  reference: WordStudyRuntimeReference,
+  source: BibleIQSource,
+  selectedTranslation?: string,
+): BibleIQReference {
+  const routeTranslation = routeTranslationForSource(
+    source,
+    selectedTranslation,
+  );
+
+  return {
+    reference: referenceLabel(
+      reference.book,
+      reference.chapter,
+      reference.verse,
+    ),
+    book: reference.book,
+    chapter: reference.chapter,
+    verse: reference.verse,
+    source,
+    routeTranslation,
+    renderings: renderingsForTranslation(reference, routeTranslation),
+    occurrenceCount: reference.occurrenceCount,
+    evidenceId: reference.evidenceId,
+  };
+}
+
+function chronologyReference(
+  value:
+    | {
+        book: string;
+        chapter: number;
+        verse: number;
+      }
+    | undefined,
+  source: BibleIQSource,
+  selectedTranslation?: string,
+): BibleIQReference | undefined {
+  if (!value) return undefined;
+
+  return {
+    reference: referenceLabel(value.book, value.chapter, value.verse),
+    book: value.book,
+    chapter: value.chapter,
+    verse: value.verse,
+    source,
+    routeTranslation: routeTranslationForSource(
+      source,
+      selectedTranslation,
+    ),
+  };
+}
+
+function uniqueReferences(values: BibleIQReference[]) {
+  const result: BibleIQReference[] = [];
+  const seen = new Set<string>();
+
+  for (const value of values) {
+    const key = `${value.source}|${value.book}|${value.chapter}|${value.verse}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(value);
+  }
+
+  return result;
+}
+
+function buildKeyReferences(
+  runtime: WordStudyRuntimeEntity,
+  selectedTranslation?: string,
+  approvedExplanation?: ApprovedEmetOverride | null,
+) {
+  const source = runtime.corpus;
+  const routeTranslation = routeTranslationForSource(
+    source,
+    selectedTranslation,
+  );
+
+  const citationReferences = (approvedExplanation?.citations || []).map(
+    (citation): BibleIQReference => ({
+      reference: referenceLabel(
+        citation.book,
+        citation.chapter,
+        citation.verse,
+      ),
+      book: citation.book,
+      chapter: citation.chapter,
+      verse: citation.verse,
+      source,
+      routeTranslation,
+      evidenceId: citation.evidenceId,
+    }),
+  );
+
+  const representative = runtime.occurrences.representativeReferences.map(
+    (reference) =>
+      toPublicReference(reference, source, selectedTranslation),
+  );
+
+  const chronology = [
+    chronologyReference(
+      runtime.occurrences.firstOccurrence,
+      source,
+      selectedTranslation,
+    ),
+    chronologyReference(
+      runtime.occurrences.lastOccurrence,
+      source,
+      selectedTranslation,
+    ),
+  ].filter((value): value is BibleIQReference => Boolean(value));
+
+  return uniqueReferences([
+    ...citationReferences,
+    ...chronology,
+    ...representative,
+  ]);
+}
+
+function buildMeaningInVerse({
   input,
-  preferredSource,
-  entityId,
+  runtime,
   sourceWord,
-  strong,
-  lemma,
   morph,
 }: {
   input: BibleIQRequest;
-  preferredSource: BibleIQSource;
-  entityId: string;
+  runtime: WordStudyRuntimeEntity;
   sourceWord?: string;
-  strong?: string;
-  lemma?: string;
   morph?: string;
-}): Promise<BibleIQEntity | null> {
-  const seeEvidenceRaw = SeeStore.get(entityId);
-  if (!seeEvidenceRaw) return null;
+}): BibleIQMeaningInVerse {
+  const identity = runtime.identity;
+  const source = sourceLabel(runtime.corpus);
+  const reference = referenceLabel(
+    input.book,
+    input.chapter,
+    input.verse,
+  );
+  const selectedEnglish = input.selectedText || input.displayWord;
+  const lemma = identity.lemma || identity.normalizedLemma;
+  const lexicalId = identity.lexicalId;
+  const translation = translationLabel(input.translation);
 
-  const seeEvidenceId = toSeeEvidenceId(entityId);
-  const countId = toSeeCountId(entityId);
-  const firstReference = cleanCanonRef(seeEvidenceRaw.firstOccurrence);
-  const lastReference = cleanCanonRef(seeEvidenceRaw.lastOccurrence);
-  const occurrenceCount = seeEvidenceRaw.occurrenceCount ?? 0;
-  const relationshipCount = SeeStore.relationshipCount(entityId);
-  const eventCount = SeeStore.eventCount(entityId);
-  const themeCount = SeeStore.themeCount(entityId);
-  const title = lemma || sourceWord || input.displayWord.trim();
+  const parts = [
+    `In ${reference}, the selected ${translation} word “${selectedEnglish}” is aligned to the ${source} source form${
+      sourceWord ? ` ${sourceWord}` : ""
+    }.`,
+  ];
+
+  if (lemma && lemma !== sourceWord) {
+    parts.push(`It is a grammatical form of the lemma ${lemma}${lexicalId ? ` (${lexicalId})` : ""}.`);
+  } else if (lexicalId) {
+    parts.push(`SEE identifies the source-word entity as ${lexicalId}.`);
+  }
+
+  return {
+    reference,
+    selectedEnglish,
+    selectedTranslation: translation,
+    verseText: input.verseText,
+    sourceWord,
+    lemma,
+    lexicalId,
+    morph,
+    statement: parts.join(" "),
+  };
+}
+
+function buildSeeKnowledge(
+  runtime: WordStudyRuntimeEntity,
+  selectedTranslation?: string,
+): BibleIQSeeKnowledge {
+  const source = runtime.corpus;
+
+  function mapExample(
+    example: WordStudyRuntimeEntity["seeKnowledge"]["relationships"][number],
+  ): BibleIQKnowledgeExample {
+    return {
+      reference: example.reference
+        ? {
+            reference: referenceLabel(
+              example.reference.book,
+              example.reference.chapter,
+              example.reference.verse,
+            ),
+            book: example.reference.book,
+            chapter: example.reference.chapter,
+            verse: example.reference.verse,
+            source,
+            routeTranslation: routeTranslationForSource(
+              source,
+              selectedTranslation,
+            ),
+          }
+        : undefined,
+      label: example.label,
+      details: example.details,
+      confidence: example.confidence,
+    };
+  }
+
+  return {
+    available: runtime.seeKnowledge.available,
+    relationshipCount: runtime.seeKnowledge.relationshipCount,
+    eventCount: runtime.seeKnowledge.eventCount,
+    themeCount: runtime.seeKnowledge.themeCount,
+    totalReferenceCount: runtime.seeKnowledge.totalReferenceCount,
+    relationships: runtime.seeKnowledge.relationships.map(mapExample),
+    events: runtime.seeKnowledge.events.map(mapExample),
+    themes: runtime.seeKnowledge.themes.map(mapExample),
+  };
+}
+
+function buildEntityEvidence(
+  runtime: WordStudyRuntimeEntity,
+  selectedTranslation?: string,
+): BibleIQEntityEvidence {
+  return {
+    lexical: {
+      ...runtime.identity,
+    },
+    occurrenceSummary: {
+      corpusOccurrenceCount:
+        runtime.occurrences.corpusOccurrenceCount,
+      totalEntityOccurrences:
+        runtime.occurrences.totalEntityOccurrences,
+      uniqueVerseCount: runtime.occurrences.uniqueVerseCount,
+      alignedSourceTokenCount:
+        runtime.occurrences.alignedSourceTokenCount,
+      alignedVerseCount: runtime.occurrences.alignedVerseCount,
+      translationAlignmentCount:
+        runtime.occurrences.translationAlignmentCount,
+    },
+    renderings: {
+      available: runtime.renderings.available,
+      totalAlignedRenderings:
+        runtime.renderings.totalAlignedRenderings,
+      translations: runtime.renderings.byTranslation.map(
+        (translation) => ({
+          translation: translation.translation,
+          count:
+            runtime.renderings.translationCounts.find(
+              (item) =>
+                item.translation === translation.translation,
+            )?.count || 0,
+          forms: translation.forms.map((form) => ({
+            ...form,
+            translation: translation.translation,
+          })),
+        }),
+      ),
+      mostCommon: runtime.renderings.mostCommon,
+    },
+    chronology: {
+      firstOccurrence: chronologyReference(
+        runtime.occurrences.firstOccurrence,
+        runtime.corpus,
+        selectedTranslation,
+      ),
+      lastOccurrence: chronologyReference(
+        runtime.occurrences.lastOccurrence,
+        runtime.corpus,
+        selectedTranslation,
+      ),
+    },
+    representativeReferences:
+      runtime.occurrences.representativeReferences.map(
+        (reference) =>
+          toPublicReference(
+            reference,
+            runtime.corpus,
+            selectedTranslation,
+          ),
+      ),
+    health: {
+      ...runtime.health,
+    },
+  };
+}
+
+function buildOccurrences({
+  input,
+  runtime,
+  sourceWord,
+}: {
+  input: BibleIQRequest;
+  runtime: WordStudyRuntimeEntity;
+  sourceWord?: string;
+}): BibleIQOccurrence[] {
+  return runtime.occurrences.orderedReferences.map((reference) => {
+    const publicReference = toPublicReference(
+      reference,
+      runtime.corpus,
+      input.translation,
+    );
+    const isSelectedOccurrence =
+      booksEquivalent(reference.book, input.book) &&
+      reference.chapter === input.chapter &&
+      reference.verse === input.verse;
+
+    return {
+      ...publicReference,
+      englishText: isSelectedOccurrence
+        ? input.verseText || undefined
+        : undefined,
+      sourceWord: isSelectedOccurrence ? sourceWord : undefined,
+    };
+  });
+}
+
+function buildRuntimeEntity({
+  input,
+  runtime,
+  sourceWord,
+  morph,
+  approvedExplanation,
+}: {
+  input: BibleIQRequest;
+  runtime: WordStudyRuntimeEntity;
+  sourceWord?: string;
+  morph?: string;
+  approvedExplanation?: ApprovedEmetOverride | null;
+}): BibleIQEntity {
+  const identity = runtime.identity;
+  const lemma =
+    identity.lemma ||
+    identity.normalizedLemma ||
+    sourceWord ||
+    identity.lexicalId ||
+    input.displayWord;
+  const firstOccurrence = chronologyReference(
+    runtime.occurrences.firstOccurrence,
+    runtime.corpus,
+    input.translation,
+  );
+  const lastOccurrence = chronologyReference(
+    runtime.occurrences.lastOccurrence,
+    runtime.corpus,
+    input.translation,
+  );
+  const keyReferences = buildKeyReferences(
+    runtime,
+    input.translation,
+    approvedExplanation,
+  );
+  const seeKnowledge = buildSeeKnowledge(
+    runtime,
+    input.translation,
+  );
+  const occurrences = buildOccurrences({
+    input,
+    runtime,
+    sourceWord,
+  });
+  const selectedReference = referenceLabel(
+    input.book,
+    input.chapter,
+    input.verse,
+  );
 
   const see: BibleIQSeeEvidence = {
-    evidenceId: seeEvidenceId,
-    countId,
-    occurrenceCount,
-    firstOccurrence: firstReference
-      ? normalizeReference(firstReference)
-      : undefined,
-    lastOccurrence: lastReference ? normalizeReference(lastReference) : undefined,
-    relationshipCount,
-    eventCount,
-    themeCount,
+    evidenceId: `p03:${runtime.entityId}`,
+    countId: runtime.entityId.replace(/^word:/, ""),
+    occurrenceCount:
+      runtime.occurrences.corpusOccurrenceCount ||
+      runtime.occurrences.totalEntityOccurrences,
+    firstOccurrence: firstOccurrence?.reference,
+    lastOccurrence: lastOccurrence?.reference,
+    relationshipCount: seeKnowledge.relationshipCount,
+    eventCount: seeKnowledge.eventCount,
+    themeCount: seeKnowledge.themeCount,
   };
 
   const alignment: BibleIQSourceAlignment = {
-    selectedEnglish: input.displayWord,
+    selectedEnglish: input.selectedText || input.displayWord,
     sourceWord,
-    source: preferredSource,
-    strong,
+    source: runtime.corpus,
+    strong: runtime.corpus === "lxx" ? undefined : identity.strong,
+    lexicalId: identity.lexicalId,
     lemma,
     morph,
-    entityId,
-    seeEvidenceId,
+    entityId: runtime.entityId,
+    seeEvidenceId: see.evidenceId,
   };
 
-  const emetPacket = buildEmetEvidencePacket({
-    entityId,
-    book: input.book,
-    chapter: input.chapter,
-    verse: input.verse,
-    translation: input.translation,
-    displayWord: input.displayWord,
-    verseText: input.verseText,
-    sourceWord,
-    strong,
-    lemma,
-    morph,
-  });
-
-  const emetResult = emetPacket
-    ? await EmetService.explain(emetPacket)
-    : null;
-
-  const citations = uniqueReferences([
-    `${input.book} ${input.chapter}:${input.verse}`,
-    ...(see.firstOccurrence ? [see.firstOccurrence] : []),
-    ...(see.lastOccurrence ? [see.lastOccurrence] : []),
-  ]);
+  const citationDetails = (approvedExplanation?.citations || []).map(
+    (citation) => ({
+      reference: referenceLabel(
+        citation.book,
+        citation.chapter,
+        citation.verse,
+      ),
+      book: citation.book,
+      chapter: citation.chapter,
+      verse: citation.verse,
+      evidenceId: citation.evidenceId,
+      kind: citation.kind,
+    }),
+  );
 
   return {
-    id: entityId,
+    id: runtime.entityId,
     type: "word",
-    title,
-    subtitle: "SEE Evidence",
-    emet: {
-      status: emetResult
-        ? emetStatusFromConfidence(emetResult.confidence)
-        : "insufficient-evidence",
-      packet: emetPacket,
-      explanation: emetResult?.explanation,
-      citations,
-    },
+    title: input.selectedText || input.displayWord,
+    subtitle: `${lemma} • ${sourceLabel(runtime.corpus)}`,
+    emet: approvedExplanation
+      ? {
+          status: "complete",
+          approval: "approved-p04.1",
+          headline: approvedExplanation.headline,
+          explanation: approvedExplanation.explanation,
+          citations: citationDetails.map(
+            (citation) => citation.reference,
+          ),
+          citationDetails,
+          explanationChecksum:
+            approvedExplanation.explanationChecksum,
+          packetChecksum: approvedExplanation.semanticViewChecksum,
+          packet: null,
+        }
+      : {
+          status: "under-review",
+          approval: "unapproved-p04",
+          explanation: undefined,
+          citations: [],
+          citationDetails: [],
+          packet: null,
+        },
+    meaningInVerse: buildMeaningInVerse({
+      input,
+      runtime,
+      sourceWord,
+      morph,
+    }),
     see,
+    seeKnowledge,
     alignment,
+    entityEvidence: buildEntityEvidence(
+      runtime,
+      input.translation,
+    ),
+    keyReferences,
     simple: {
-      meaning: title,
-      inThisVerse: sourceWord
-        ? `The selected English word is aligned to ${sourceWord}.`
-        : `This word appears in ${input.book} ${input.chapter}:${input.verse}.`,
+      meaning:
+        identity.shortDefinitions[0] ||
+        identity.glosses[0] ||
+        lemma,
+      inThisVerse: `The selected word is aligned to ${
+        sourceWord || lemma
+      } in ${selectedReference}.`,
       whyItMatters:
-        "SEE has structured evidence for this source-language lemma. EMET explains this evidence without creating it.",
+        "This study preserves the aligned source occurrence and the supporting SEE evidence.",
       summary:
-        "This entry is backed by SEE runtime evidence and explained through the EMET service layer.",
+        approvedExplanation?.explanation ||
+        `SEE preserves the source identity, usage, and references for ${lemma}.`,
+    },
+    contextConnections: {
+      people: [],
+      places: [],
+      events: seeKnowledge.events.map((item) => item.label),
+      concepts: seeKnowledge.relationships.map(
+        (item) => item.label,
+      ),
+      themes: seeKnowledge.themes.map((item) => item.label),
+      laterReferences: [],
     },
     evidence: {
       originalLanguage: {
-        source: preferredSource,
-        word: sourceWord || title,
-        strong,
+        source: runtime.corpus,
+        word: sourceWord || lemma,
+        transliteration: identity.transliteration,
+        pronunciation: identity.pronunciation,
+        strong:
+          runtime.corpus === "lxx"
+            ? undefined
+            : identity.strong,
         lemma,
+        lemmaId: identity.lexicalId,
+        partOfSpeech: identity.partsOfSpeech.join(", ") || undefined,
+        forms: identity.sourceForms.map(
+          (form) => form.surface,
+        ),
         morph,
-        seeEvidenceId,
+        seeEvidenceId: see.evidenceId,
       },
-      firstMention: see.firstOccurrence,
-      keyReferences: citations,
+      definitions: {
+        short:
+          identity.shortDefinitions[0] ||
+          identity.glosses[0],
+        usage: identity.glosses.join("; ") || undefined,
+        sources: identity.witnesses,
+      },
+      firstMention: firstOccurrence?.reference,
+      keyReferences: keyReferences.map(
+        (reference) => reference.reference,
+      ),
       related: {
         people: [],
         places: [],
-        concepts: [
-          `Occurrences: ${occurrenceCount}`,
-          `Relationships: ${relationshipCount}`,
-          `Events: ${eventCount}`,
-          `Themes: ${themeCount}`,
-        ],
-        events: [],
+        concepts: seeKnowledge.relationships.map(
+          (item) => item.label,
+        ),
+        events: seeKnowledge.events.map(
+          (item) => item.label,
+        ),
       },
-      occurrenceCount,
-      occurrences: [
-        {
-          reference: `${input.book} ${input.chapter}:${input.verse}`,
-          book: input.book,
-          chapter: input.chapter,
-          verse: input.verse,
-          englishText: input.verseText || "",
-          sourceWord,
-          source: preferredSource,
-        },
-      ],
+      occurrenceCount:
+        runtime.occurrences.corpusOccurrenceCount ||
+        runtime.occurrences.totalEntityOccurrences,
+      occurrences,
     },
   };
 }
@@ -298,14 +713,24 @@ function buildCanonicalAlignmentEntity({
   morph?: string;
 }): BibleIQEntity {
   const title = lemma || sourceWord || input.displayWord.trim();
-  const reference = `${input.book} ${input.chapter}:${input.verse}`;
+  const reference = referenceLabel(
+    input.book,
+    input.chapter,
+    input.verse,
+  );
   const label = sourceLabel(preferredSource);
+  const routeTranslation = routeTranslationForSource(
+    preferredSource,
+    input.translation,
+  );
 
   const alignment: BibleIQSourceAlignment = {
     selectedEnglish: input.displayWord,
     sourceWord,
     source: preferredSource,
-    strong,
+    strong: preferredSource === "lxx" ? undefined : strong,
+    lexicalId:
+      entityId.split(":").at(-1) || undefined,
     lemma,
     morph,
     entityId,
@@ -314,14 +739,27 @@ function buildCanonicalAlignmentEntity({
   return {
     id: entityId,
     type: "word",
-    title,
-    subtitle: `${label} Source Alignment`,
+    title: input.displayWord,
+    subtitle: `${title} • ${label} Source Alignment`,
     alignment,
     emet: {
-      status: "insufficient-evidence",
+      status: "missing",
       packet: null,
       explanation: undefined,
       citations: [reference],
+    },
+    meaningInVerse: {
+      reference,
+      selectedEnglish: input.displayWord,
+      selectedTranslation: translationLabel(input.translation),
+      verseText: input.verseText,
+      sourceWord,
+      lemma,
+      lexicalId: alignment.lexicalId,
+      morph,
+      statement: `The selected word is aligned to ${
+        sourceWord || title
+      } in the ${label} source text. The full cached study is temporarily unavailable.`,
     },
     simple: {
       meaning: title,
@@ -329,27 +767,24 @@ function buildCanonicalAlignmentEntity({
         ? `The selected English word is aligned to ${sourceWord}.`
         : `This word appears in ${reference}.`,
       whyItMatters:
-        `The canonical ${label} alignment is available. SEE relationship, event, and theme evidence for this corpus has not been compiled yet.`,
+        "SEE preserved the source alignment, but the full cached study could not be loaded.",
       summary:
-        `This entry is backed by the canonical ${label} source alignment. Full SEE knowledge will appear after the ${label} SEE graphs are compiled.`,
+        "The source alignment remains available. No live AI was invoked.",
     },
     evidence: {
       originalLanguage: {
         source: preferredSource,
         word: sourceWord || title,
-        strong,
+        strong: preferredSource === "lxx" ? undefined : strong,
         lemma,
+        lemmaId: alignment.lexicalId,
         morph,
       },
-      firstMention: undefined,
       keyReferences: [reference],
       related: {
         people: [],
         places: [],
-        concepts: [
-          "Canonical source alignment available",
-          "SEE corpus knowledge pending",
-        ],
+        concepts: ["Canonical source alignment available"],
         events: [],
       },
       occurrences: [
@@ -358,9 +793,10 @@ function buildCanonicalAlignmentEntity({
           book: input.book,
           chapter: input.chapter,
           verse: input.verse,
-          englishText: input.verseText || "",
+          englishText: input.verseText || undefined,
           sourceWord,
           source: preferredSource,
+          routeTranslation,
         },
       ],
     },
@@ -372,6 +808,11 @@ function buildPlaceholderEntity(
   preferredSource: BibleIQSource,
 ): BibleIQEntity {
   const title = input.displayWord.trim();
+  const reference = referenceLabel(
+    input.book,
+    input.chapter,
+    input.verse,
+  );
 
   return {
     id: `${preferredSource}:${input.book}:${input.chapter}:${input.verse}:${normalize(
@@ -379,21 +820,22 @@ function buildPlaceholderEntity(
     )}`,
     type: "word",
     title,
-    subtitle: "BibleIQ Evidence",
+    subtitle: "SEE Evidence",
     emet: {
       status: "insufficient-evidence",
       packet: null,
       explanation: undefined,
-      citations: [`${input.book} ${input.chapter}:${input.verse}`],
+      citations: [reference],
     },
     simple: {
       meaning: undefined,
       inThisVerse: input.verseText
-        ? `This word appears in ${input.book} ${input.chapter}:${input.verse}.`
+        ? `This word appears in ${reference}.`
         : "This word appears in the selected verse.",
       whyItMatters:
-        "BibleIQ is preparing the source-language evidence for this word.",
-      summary: "This word has not been connected to source evidence yet.",
+        "SEE has not connected this display token to a source entity.",
+      summary:
+        "This word has not been connected to source evidence yet.",
     },
     evidence: {
       originalLanguage: input.originalWord
@@ -402,8 +844,7 @@ function buildPlaceholderEntity(
             word: input.originalWord,
           }
         : undefined,
-      firstMention: undefined,
-      keyReferences: [`${input.book} ${input.chapter}:${input.verse}`],
+      keyReferences: [reference],
       related: {
         people: [],
         places: [],
@@ -412,13 +853,17 @@ function buildPlaceholderEntity(
       },
       occurrences: [
         {
-          reference: `${input.book} ${input.chapter}:${input.verse}`,
+          reference,
           book: input.book,
           chapter: input.chapter,
           verse: input.verse,
-          englishText: input.verseText || "",
+          englishText: input.verseText || undefined,
           sourceWord: input.originalWord,
           source: preferredSource,
+          routeTranslation: routeTranslationForSource(
+            preferredSource,
+            input.translation,
+          ),
         },
       ],
     },
@@ -446,18 +891,33 @@ export async function resolveBibleIQ(
 
   if (hit) {
     const source = hit.sourceToken?.source || preferredSource;
-    const common = {
-      input,
-      preferredSource: source,
-      entityId: hit.entityId,
-      sourceWord: hit.sourceWord,
-      strong: hit.sourceToken?.strong,
-      lemma: hit.sourceToken?.lemma,
-      morph: hit.sourceToken?.morph,
-    };
+    const canonicalEntityId =
+      normalizeWordEntityId(hit.entityId) || hit.entityId;
+    const runtime = await loadWordStudyEntity(
+      origin,
+      canonicalEntityId,
+    );
+    const approvedExplanation = runtime
+      ? await loadApprovedEmetOverride(origin, runtime.entityId)
+      : null;
 
-    const seeEntity = await buildSeeEntity(common);
-    const entity = seeEntity || buildCanonicalAlignmentEntity(common);
+    const entity = runtime
+      ? buildRuntimeEntity({
+          input,
+          runtime,
+          sourceWord: hit.sourceWord,
+          morph: hit.sourceToken?.morph,
+          approvedExplanation,
+        })
+      : buildCanonicalAlignmentEntity({
+          input,
+          preferredSource: source,
+          entityId: canonicalEntityId,
+          sourceWord: hit.sourceWord,
+          strong: hit.sourceToken?.strong,
+          lemma: hit.sourceToken?.lemma,
+          morph: hit.sourceToken?.morph,
+        });
 
     return {
       resolved: true,

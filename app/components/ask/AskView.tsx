@@ -48,7 +48,6 @@ type BibleIQContext = {
   chapter?: number;
   verse?: number | null;
   translation?: string;
-  studyMode?: boolean;
 };
 
 function formatReference(reference: string) {
@@ -80,7 +79,6 @@ function savedReaderContextToChip(
     chapter: context.chapter,
     verse: context.verse,
     translation: context.translation,
-    studyMode: context.studyMode,
   };
 }
 
@@ -294,7 +292,7 @@ export default function AskView({
       {hasSearch && !thinking && conceptEvidence ? (
         <section className="mt-5 rounded-3xl border border-emerald-500/30 bg-emerald-500/10 p-5">
           <p className="text-xs uppercase tracking-[0.3em] text-emerald-300">
-            BibleIQ Evidence Summary
+            SEE Evidence Summary
           </p>
 
           <h2 className="mt-3 text-2xl font-bold">
@@ -302,7 +300,7 @@ export default function AskView({
           </h2>
 
           <p className="mt-4 leading-relaxed text-neutral-200">
-            BibleIQ recognized this topic and gathered source-language evidence.
+            SEE gathered source-language evidence for this topic.
             Review the source words and passages below to examine the evidence
             directly.
           </p>
@@ -386,7 +384,7 @@ export default function AskView({
                             key={`${entry.lemma}-${occurrence.reference}-${occurrence.surface}`}
                             href={`/read/${encodeURIComponent(
                               occurrence.book
-                            )}/${chapter}?verse=${verse}&study=true`}
+                            )}/${chapter}?verse=${verse}`}
                             className="block py-3 transition hover:text-white"
                           >
                             <div className="flex items-center justify-between gap-4">

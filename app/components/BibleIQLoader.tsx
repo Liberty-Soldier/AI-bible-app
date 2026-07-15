@@ -6,7 +6,7 @@ export default function BibleIQLoader({
   return (
     <div className="rounded-3xl border border-amber-500/30 bg-amber-500/10 p-6 text-center">
       <p className="text-xs uppercase tracking-[0.35em] text-amber-300/80">
-        BibleIQ
+        SEE Evidence
       </p>
 
       <div className="mx-auto mt-5 flex max-w-xs items-center justify-center gap-3 text-sm text-neutral-300">

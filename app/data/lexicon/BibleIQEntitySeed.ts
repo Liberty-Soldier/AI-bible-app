@@ -10,9 +10,9 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
     simple: {
       meaning: "Breath / vapor",
       inThisVerse:
-        "Abel is introduced as Cain’s brother and as a keeper of sheep.",
+        "Abel is introduced as Cainâ€™s brother and as a keeper of sheep.",
       whyItMatters:
-        "Abel becomes one of Scripture’s earliest examples of faithful worship and righteous blood being shed.",
+        "Abel becomes one of Scriptureâ€™s earliest examples of faithful worship and righteous blood being shed.",
       summary:
         "Abel was the second son of Adam and Eve. His offering was accepted, and Cain killed him in jealousy.",
     },
@@ -20,7 +20,7 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
     evidence: {
       originalLanguage: {
         source: "hebrew",
-        word: "הֶבֶל",
+        word: "×”Ö¶×‘Ö¶×œ",
         transliteration: "Hevel",
         strong: "H1893",
         lemmaId: "hebrew:H1893",
@@ -45,8 +45,9 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
           verse: 2,
           englishText:
             "And she again bare his brother Abel. And Abel was a keeper of sheep, but Cain was a tiller of the ground.",
-          sourceWord: "הֶבֶל",
+          sourceWord: "×”Ö¶×‘Ö¶×œ",
           source: "hebrew",
+          routeTranslation: "web",
         },
         {
           reference: "Genesis 4:4",
@@ -55,8 +56,9 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
           verse: 4,
           englishText:
             "And Abel, he also brought of the firstlings of his flock and of the fat thereof. And Yahweh had respect unto Abel and to his offering.",
-          sourceWord: "הֶבֶל",
+          sourceWord: "×”Ö¶×‘Ö¶×œ",
           source: "hebrew",
+          routeTranslation: "web",
         },
         {
           reference: "Genesis 4:8",
@@ -65,8 +67,9 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
           verse: 8,
           englishText:
             "And Cain talked with Abel his brother: and it came to pass, when they were in the field, that Cain rose up against Abel his brother, and slew him.",
-          sourceWord: "הֶבֶל",
+          sourceWord: "×”Ö¶×‘Ö¶×œ",
           source: "hebrew",
+          routeTranslation: "web",
         },
       ],
     },
@@ -81,17 +84,17 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
     simple: {
       meaning: "Acquired / possession",
       inThisVerse:
-        "Cain is presented as Abel’s brother and as a tiller of the ground.",
+        "Cain is presented as Abelâ€™s brother and as a tiller of the ground.",
       whyItMatters:
         "Cain shows the danger of jealousy, sin ruling over a person, and violence against the righteous.",
       summary:
-        "Cain was the first son of Adam and Eve. He killed his brother Abel after Yahweh accepted Abel’s offering.",
+        "Cain was the first son of Adam and Eve. He killed his brother Abel after Yahweh accepted Abelâ€™s offering.",
     },
 
     evidence: {
       originalLanguage: {
         source: "hebrew",
-        word: "קַיִן",
+        word: "×§Ö·×™Ö´×Ÿ",
         transliteration: "Qayin",
         strong: "H7014",
         lemmaId: "hebrew:H7014",
@@ -116,8 +119,9 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
           verse: 1,
           englishText:
             "And Adam knew Eve his wife; and she conceived, and bare Cain, and said, I have gotten a man from Yahweh.",
-          sourceWord: "קַיִן",
+          sourceWord: "×§Ö·×™Ö´×Ÿ",
           source: "hebrew",
+          routeTranslation: "web",
         },
         {
           reference: "Genesis 4:2",
@@ -126,8 +130,9 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
           verse: 2,
           englishText:
             "And she again bare his brother Abel. And Abel was a keeper of sheep, but Cain was a tiller of the ground.",
-          sourceWord: "קַיִן",
+          sourceWord: "×§Ö·×™Ö´×Ÿ",
           source: "hebrew",
+          routeTranslation: "web",
         },
         {
           reference: "Genesis 4:8",
@@ -136,8 +141,9 @@ export const bibleIQEntitySeed: Record<string, BibleIQEntity> = {
           verse: 8,
           englishText:
             "And Cain talked with Abel his brother: and it came to pass, when they were in the field, that Cain rose up against Abel his brother, and slew him.",
-          sourceWord: "קַיִן",
+          sourceWord: "×§Ö·×™Ö´×Ÿ",
           source: "hebrew",
+          routeTranslation: "web",
         },
       ],
     },

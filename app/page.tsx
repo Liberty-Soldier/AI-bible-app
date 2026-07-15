@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
+import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
+import { usePremiumAccess } from "@/app/components/premium/PremiumAccessProvider";
 import { getReaderMemory, type ReaderMemory } from "@/app/lib/readerMemory";
 
 type LastReadingPosition = {
@@ -20,7 +21,7 @@ function getTranslationLabel(translation: string) {
 }
 
 function HomePage() {
-  const router = useRouter();
+  const { requestUpgrade } = usePremiumAccess();
   const [search, setSearch] = useState("");
   const [lastReading, setLastReading] =
     useState<LastReadingPosition | null>(null);
@@ -57,28 +58,29 @@ function HomePage() {
   function goToAsk() {
     const finalQuery = search.trim();
 
-    if (!finalQuery) {
-      router.push("/ask");
-      return;
-    }
-
-    router.push(`/ask?q=${encodeURIComponent(finalQuery)}`);
+    requestUpgrade(
+      "ask-emet",
+      finalQuery
+        ? `Question: ${finalQuery}`
+        : "Ask from your current reading context",
+    );
   }
 
   return (
     <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-10 text-[var(--foreground)]">
       <section className="mx-auto max-w-xl">
-        <div className="mb-8 pt-8 text-center">
-          <h1 className="text-4xl font-semibold tracking-tight">BibleIQ</h1>
-          <p className="mt-3 text-base text-[var(--muted)]">
-            Read Scripture. Study words. Ask Scripture.
+        <div className="mb-8 flex flex-col items-center pt-8 text-center">
+          <EmetseesWordmark showDescriptor />
+          <p className="mt-4 max-w-sm text-base leading-7 text-[var(--muted)]">
+            Read Scripture, tap any word, and follow the source evidence
+            without leaving the reader.
           </p>
         </div>
 
         <div className="flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)]/60 px-5 py-3">
           <input
             type="text"
-            placeholder="Ask Scripture..."
+            placeholder="Ask EMET... (paid)"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => {
@@ -92,7 +94,7 @@ function HomePage() {
             onClick={goToAsk}
             className="ml-3 rounded-full bg-[var(--foreground)] px-4 py-2 text-sm font-semibold text-[var(--background)]"
           >
-            Ask
+            Ask EMET
           </button>
         </div>
 

@@ -146,12 +146,12 @@ async function fetchJson<T>(url: string): Promise<T | null> {
   try {
     const response = await fetch(url, { cache: "force-cache" });
     if (!response.ok) {
-      console.error(`BibleIQ runtime returned ${response.status}: ${url}`);
+      console.error(`SEE runtime returned ${response.status}: ${url}`);
       return null;
     }
     return (await response.json()) as T;
   } catch (error) {
-    console.error(`BibleIQ runtime fetch failed: ${url}`, error);
+    console.error(`SEE runtime fetch failed: ${url}`, error);
     return null;
   }
 }
@@ -187,7 +187,7 @@ async function loadRuntimeBook(
 
   if (!outputFile) {
     console.error(
-      `BibleIQ runtime has no ${corpus} book alias for ${book} (${aliases.join(
+      `SEE runtime has no ${corpus} book alias for ${book} (${aliases.join(
         ", ",
       )})`,
     );

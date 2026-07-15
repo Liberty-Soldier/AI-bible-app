@@ -11,13 +11,12 @@ export default function MobileBottomNav({
 }) {
   const pathname = usePathname();
   const visible = useReaderChromeVisibility();
-
   const shouldShow = !autoHide || visible;
 
   const items = [
     { href: "/", label: "Home" },
     { href: "/read", label: "Read" },
-    { href: "/study", label: "Study" },
+    { href: "/library", label: "Library" },
     { href: "/settings", label: "Settings" },
   ];
 
@@ -39,7 +38,9 @@ export default function MobileBottomNav({
               key={item.href}
               href={item.href}
               className={`py-3 text-center text-xs font-medium transition ${
-                active ? "text-[var(--foreground)]" : "text-[var(--muted)]"
+                active
+                  ? "text-[var(--foreground)]"
+                  : "text-[var(--muted)]"
               }`}
             >
               {item.label}

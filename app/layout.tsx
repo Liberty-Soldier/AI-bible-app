@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GlobalAskButton from "@/app/components/GlobalAskButton";
+import PremiumAccessProvider from "@/app/components/premium/PremiumAccessProvider";
 import ThemeProvider from "@/app/components/ThemeProvider";
 
 const geistSans = Geist({
@@ -15,8 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Scripture Search",
-  description: "Read Scripture. Ask Scripture. Study words.",
+  title: {
+    default: "EMETSEES",
+    template: "%s | EMETSEES",
+  },
+  description:
+    "Read Scripture, inspect source-word evidence, and receive Scripture-grounded EMET explanations.",
+  applicationName: "EMETSEES",
 };
 
 export default function RootLayout({
@@ -30,10 +36,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col">
         <ThemeProvider>
-          {children}
-          <GlobalAskButton />
+          <PremiumAccessProvider>
+            {children}
+            <GlobalAskButton />
+          </PremiumAccessProvider>
         </ThemeProvider>
       </body>
     </html>

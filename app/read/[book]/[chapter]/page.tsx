@@ -38,8 +38,8 @@ function safeBook(book: string) {
 }
 
 async function getBaseUrl() {
-  const h = await headers();
-  const host = h.get("host");
+  const requestHeaders = await headers();
+  const host = requestHeaders.get("host");
 
   if (!host) {
     return process.env.VERCEL_URL
@@ -48,7 +48,7 @@ async function getBaseUrl() {
   }
 
   const proto =
-    h.get("x-forwarded-proto") ||
+    requestHeaders.get("x-forwarded-proto") ||
     (host.includes("localhost") ? "http" : "https");
 
   return `${proto}://${host}`;
@@ -57,21 +57,20 @@ async function getBaseUrl() {
 async function loadChapter(
   translation: Translation,
   book: string,
-  chapter: number
+  chapter: number,
 ): Promise<ReaderVerse[]> {
   const baseUrl = await getBaseUrl();
   const fileUrl = `${baseUrl}/scripture/runtime/${translation}/${safeBook(
-    book
+    book,
   )}/${chapter}.json`;
 
   try {
-    const res = await fetch(fileUrl, {
+    const response = await fetch(fileUrl, {
       cache: "force-cache",
     });
 
-    if (!res.ok) return [];
-
-    return (await res.json()) as ReaderVerse[];
+    if (!response.ok) return [];
+    return (await response.json()) as ReaderVerse[];
   } catch {
     return [];
   }
@@ -88,18 +87,24 @@ function getAvailableBooks() {
 }
 
 function getMaxChapter(book: string) {
-  return bookCatalog.find((item) => item.book === book)?.chapters || 1;
+  return (
+    bookCatalog.find((item) => item.book === book)?.chapters || 1
+  );
 }
 
 async function getBestTranslation(
   book: string,
   chapter: number,
-  requested: Translation
+  requested: Translation,
 ): Promise<Translation> {
-  if ((await loadChapter(requested, book, chapter)).length) return requested;
+  if ((await loadChapter(requested, book, chapter)).length) {
+    return requested;
+  }
   if ((await loadChapter("web", book, chapter)).length) return "web";
   if ((await loadChapter("kjv", book, chapter)).length) return "kjv";
-  if ((await loadChapter("brenton", book, chapter)).length) return "brenton";
+  if ((await loadChapter("brenton", book, chapter)).length) {
+    return "brenton";
+  }
   return requested;
 }
 
@@ -111,32 +116,33 @@ export default async function ReadChapterPage({
   searchParams: Promise<{
     verse?: string;
     translation?: string;
-    study?: string;
     returnTo?: string;
   }>;
 }) {
   const { book, chapter } = await params;
-  const { verse, translation, study, returnTo } = await searchParams;
+  const { verse, translation, returnTo } = await searchParams;
 
   const decodedBook = decodeURIComponent(book);
   const chapterNumber = Number(chapter);
   const highlightedVerse = verse ? Number(verse) : null;
 
   const requestedTranslation: Translation =
-    translation === "kjv" || translation === "brenton" || translation === "web"
+    translation === "kjv" ||
+    translation === "brenton" ||
+    translation === "web"
       ? translation
       : "web";
 
   const activeTranslation = await getBestTranslation(
     decodedBook,
     chapterNumber,
-    requestedTranslation
+    requestedTranslation,
   );
 
   const chapterVerses = await loadChapter(
     activeTranslation,
     decodedBook,
-    chapterNumber
+    chapterNumber,
   );
 
   if (!chapterVerses.length) {
@@ -147,30 +153,18 @@ export default async function ReadChapterPage({
   const maxChapter = getMaxChapter(decodedBook);
   const translationLabel = getTranslationLabel(activeTranslation);
 
-  const studyMode = study === "true";
-  const studyParam = studyMode ? "&study=true" : "";
-
-  const baseHref = `/read/${encodeURIComponent(
-    decodedBook
-  )}/${chapterNumber}?translation=${activeTranslation}${
-    highlightedVerse ? `&verse=${highlightedVerse}` : ""
-  }`;
-
-  const readModeHref = baseHref;
-  const studyModeHref = `${baseHref}&study=true`;
-
   const previousChapterHref =
     chapterNumber > 1
       ? `/read/${encodeURIComponent(decodedBook)}/${
           chapterNumber - 1
-        }?translation=${activeTranslation}${studyParam}`
+        }?translation=${activeTranslation}`
       : null;
 
   const nextChapterHref =
     chapterNumber < maxChapter
       ? `/read/${encodeURIComponent(decodedBook)}/${
           chapterNumber + 1
-        }?translation=${activeTranslation}${studyParam}`
+        }?translation=${activeTranslation}`
       : null;
 
   return (
@@ -189,7 +183,6 @@ export default async function ReadChapterPage({
           chapter={chapterNumber}
           verse={highlightedVerse}
           translation={activeTranslation}
-          studyMode={studyMode}
         />
 
         <SaveReadingPosition
@@ -199,49 +192,23 @@ export default async function ReadChapterPage({
         />
 
         <ReaderStickyHeader>
-          <div className="flex items-center gap-3">
-            <div className="min-w-0 flex-1">
-              <CollapsibleReaderHeader title={`${decodedBook} ${chapterNumber}`}>
-                <div className="space-y-4 pt-3">
-                  <SacredNameToggle />
+          <CollapsibleReaderHeader
+            title={`${decodedBook} ${chapterNumber}`}
+          >
+            <div className="space-y-4 pt-3">
+              <SacredNameToggle />
 
-                  <ReaderSelector
-                    books={books}
-                    currentBook={decodedBook}
-                    currentChapter={chapterNumber}
-                    maxChapter={maxChapter}
-                    currentTranslation={activeTranslation}
-                    currentVerse={highlightedVerse}
-                    maxVerse={chapterVerses.length}
-                  />
-                </div>
-              </CollapsibleReaderHeader>
+              <ReaderSelector
+                books={books}
+                currentBook={decodedBook}
+                currentChapter={chapterNumber}
+                maxChapter={maxChapter}
+                currentTranslation={activeTranslation}
+                currentVerse={highlightedVerse}
+                maxVerse={chapterVerses.length}
+              />
             </div>
-
-            <div className="shrink-0 rounded-full bg-[var(--surface)] p-1 text-xs font-semibold">
-              <Link
-                href={readModeHref}
-                className={`inline-block rounded-full px-3 py-1.5 ${
-                  !studyMode
-                    ? "bg-[var(--foreground)] text-[var(--background)]"
-                    : "text-[var(--muted)]"
-                }`}
-              >
-                Read
-              </Link>
-
-              <Link
-                href={studyModeHref}
-                className={`inline-block rounded-full px-3 py-1.5 ${
-                  studyMode
-                    ? "bg-[var(--foreground)] text-[var(--background)]"
-                    : "text-[var(--muted)]"
-                }`}
-              >
-                Study
-              </Link>
-            </div>
-          </div>
+          </CollapsibleReaderHeader>
         </ReaderStickyHeader>
 
         <ChapterSwipe
@@ -252,7 +219,7 @@ export default async function ReadChapterPage({
             {returnTo ? (
               <Link
                 href={returnTo}
-                className="mb-6 inline-flex rounded-full border border-neutral-800 px-4 py-2 text-sm text-neutral-300 hover:border-neutral-600 hover:text-white"
+                className="mb-6 inline-flex rounded-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
               >
                 ← Back to Word Study
               </Link>
@@ -266,11 +233,15 @@ export default async function ReadChapterPage({
               <h1 className="text-4xl font-semibold tracking-tight text-[var(--foreground)]">
                 {decodedBook} {chapterNumber}
               </h1>
+
+              <p className="mt-3 text-sm font-medium text-[var(--muted)]">
+                Tap a word for its source-based explanation. Tap a verse
+                for highlights, notes, bookmarks, copy, and share.
+              </p>
             </div>
 
             <VerseActionController
               verses={chapterVerses}
-              studyMode={studyMode}
               activeTranslation={activeTranslation}
               highlightedVerse={highlightedVerse}
             />

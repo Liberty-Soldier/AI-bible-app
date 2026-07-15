@@ -7,7 +7,6 @@ export type AskContextChip =
       chapter: number;
       verse?: number | null;
       translation?: string;
-      studyMode?: boolean;
     }
   | {
       id: string;

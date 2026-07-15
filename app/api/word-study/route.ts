@@ -3,6 +3,7 @@ import { BibleIQEngine } from "@/app/data/lexicon/BibleIQEngine";
 import type { BibleIQRequest } from "@/app/data/lexicon/BibleIQTypes";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 function toNumber(value: string | null, fallback = 0) {
   const parsed = Number(value);
@@ -19,13 +20,17 @@ export async function GET(request: Request) {
       verse: toNumber(searchParams.get("verse")),
       translation: searchParams.get("translation") || "",
       displayWord:
-        searchParams.get("displayWord") || searchParams.get("q") || "",
+        searchParams.get("displayWord") ||
+        searchParams.get("q") ||
+        "",
       displayTokenIndex: toNumber(
         searchParams.get("displayTokenIndex"),
-        -1
+        -1,
       ),
-      originalWord: searchParams.get("originalWord") || undefined,
-      selectedText: searchParams.get("selectedText") || undefined,
+      originalWord:
+        searchParams.get("originalWord") || undefined,
+      selectedText:
+        searchParams.get("selectedText") || undefined,
       verseText: searchParams.get("verseText") || undefined,
     };
 
@@ -33,7 +38,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error("BibleIQ word-study route failed:", error);
+    console.error("SEE word-study route failed:", error);
 
     return NextResponse.json(
       {
@@ -42,9 +47,9 @@ export async function GET(request: Request) {
         preferredSource: "hebrew",
         query: "",
         message:
-          "BibleIQ could not complete this word study request.",
+          "SEE could not complete this word study request.",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

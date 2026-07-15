@@ -12,7 +12,7 @@ function cleanVerseDisplayText(text: string) {
     .trim();
 }
 
-function cleanStudyWord(word: string) {
+function cleanWord(word: string) {
   return word.replace(/[.,;:!?()[\]{}"“”‘’]/g, "").trim();
 }
 
@@ -32,11 +32,9 @@ function parseReference(reference?: string) {
 export default function ScriptureText({
   text,
   reference,
-  studyMode = false,
 }: {
   text: string;
   reference?: string;
-  studyMode?: boolean;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -50,25 +48,19 @@ export default function ScriptureText({
     : cleanedText;
 
   const parsedReference = parseReference(reference);
-
-  if (!studyMode) {
-    return <>{renderedText}</>;
-  }
-
   const parts = renderedText.split(/(\s+)/);
   let displayTokenIndex = 0;
 
   function openWordStudy(word: string, tokenIndex: number) {
-    const cleanWord = cleanStudyWord(word);
-
-    if (!cleanWord) return;
+    const selectedWord = cleanWord(word);
+    if (!selectedWord) return;
 
     const params = new URLSearchParams(searchParams.toString());
 
-    params.set("study", "true");
-    params.set("word", cleanWord);
+    params.delete("study");
+    params.set("word", selectedWord);
     params.set("displayTokenIndex", String(tokenIndex));
-    params.set("selectedText", cleanWord);
+    params.set("selectedText", selectedWord);
     params.set("verseText", renderedText);
     params.delete("verse");
 
@@ -84,13 +76,10 @@ export default function ScriptureText({
   return (
     <>
       {parts.map((part, index) => {
-        const isSpace = /^\s+$/.test(part);
+        if (/^\s+$/.test(part)) return part;
 
-        if (isSpace) return part;
-
-        const cleanWord = cleanStudyWord(part);
-
-        if (!cleanWord) return part;
+        const selectedWord = cleanWord(part);
+        if (!selectedWord) return part;
 
         const tokenIndex = displayTokenIndex;
         displayTokenIndex += 1;
@@ -99,12 +88,14 @@ export default function ScriptureText({
           <button
             key={`${part}-${index}`}
             type="button"
-            onClick={(event) => {
+            data-word-token="true"
+            aria-label={`Open word study for ${selectedWord}`}
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
               event.preventDefault();
               event.stopPropagation();
               openWordStudy(part, tokenIndex);
             }}
-            className="rounded px-0.5 underline decoration-[var(--muted)] decoration-dotted underline-offset-4 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
+            className="inline rounded-sm px-[0.08em] text-inherit transition hover:bg-[var(--surface)] focus-visible:bg-[var(--surface)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--border)] active:bg-[var(--surface)]"
           >
             {part}
           </button>
