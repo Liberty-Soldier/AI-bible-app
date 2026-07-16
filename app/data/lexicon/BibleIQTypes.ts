@@ -11,6 +11,23 @@ export type BibleIQEntityType =
 export type BibleIQSource = "hebrew" | "greek-nt" | "lxx";
 export type BibleIQTranslation = "web" | "kjv" | "brenton";
 
+export type BibleIQTokenAvailability = {
+  entityId: string;
+  source: BibleIQSource;
+  sourceWord?: string;
+  lexicalId?: string;
+};
+
+export type BibleIQVerseTokenAvailability = Record<
+  string,
+  BibleIQTokenAvailability
+>;
+
+export type BibleIQChapterTokenAvailability = Record<
+  string,
+  BibleIQVerseTokenAvailability
+>;
+
 export type BibleIQRequest = {
   book: string;
   chapter: number;
