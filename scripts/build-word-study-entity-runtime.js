@@ -19,6 +19,38 @@ const P04_PATH = path.join(
   "P04",
   "cached-explanations.json",
 );
+const GENERATED_LEXICON_PATHS = {
+  hebrew: path.join(
+    ROOT,
+    "app",
+    "data",
+    "lexicon",
+    "generatedHebrewLexiconV12.json",
+  ),
+  "greek-nt": path.join(
+    ROOT,
+    "app",
+    "data",
+    "lexicon",
+    "generatedNTGreekLexiconV12.json",
+  ),
+  lxx: path.join(
+    ROOT,
+    "app",
+    "data",
+    "lexicon",
+    "generatedLXXGreekLexiconV12.json",
+  ),
+};
+const HEBREW_STRONG_DICTIONARY_PATH = path.join(
+  ROOT,
+  "sources",
+  "hebrew-lexicon",
+  "HebrewLexicon-master",
+  "sinri",
+  "json",
+  "StrongHebrewDictionary.json",
+);
 const OUTPUT_ROOT = path.join(
   ROOT,
   "public",
@@ -59,6 +91,141 @@ function readJson(filePath) {
 
   const text = fs.readFileSync(filePath, "utf8").replace(/^\uFEFF/, "");
   return JSON.parse(text);
+}
+
+function normalizeLexicalId(value, corpus) {
+  const raw = stringValue(value).toUpperCase();
+  const digits = raw.replace(/[^0-9]/g, "");
+  if (!digits) return "";
+
+  if (corpus === "hebrew") return `H${Number(digits)}`;
+  if (corpus === "greek-nt") return `G${Number(digits)}`;
+  if (corpus === "lxx") return `L${Number(digits)}`;
+  return "";
+}
+
+function generatedLexiconId(entry, corpus) {
+  if (corpus === "lxx") {
+    return normalizeLexicalId(entry?.lxxId || entry?.id, corpus);
+  }
+
+  return normalizeLexicalId(
+    entry?.strong || entry?.lexicalId || entry?.id,
+    corpus,
+  );
+}
+
+function loadGeneratedLexiconIndexes() {
+  const indexes = {};
+
+  for (const corpus of CORPORA) {
+    const filePath = GENERATED_LEXICON_PATHS[corpus];
+    const document = readJson(filePath);
+    const entries = Array.isArray(document)
+      ? document
+      : Array.isArray(document?.entries)
+        ? document.entries
+        : [];
+
+    const index = new Map();
+
+    for (const entry of entries) {
+      const lexicalId = generatedLexiconId(entry, corpus);
+      if (!lexicalId) continue;
+
+      const current = index.get(lexicalId) || {};
+
+      index.set(
+        lexicalId,
+        compactObject({
+          lemma:
+            stringValue(current?.lemma) ||
+            stringValue(entry?.lemma),
+          normalizedLemma:
+            stringValue(current?.normalizedLemma) ||
+            stringValue(entry?.normalizedLemma),
+          transliteration:
+            stringValue(current?.transliteration) ||
+            stringValue(entry?.transliteration),
+          pronunciation:
+            stringValue(current?.pronunciation) ||
+            stringValue(entry?.pronunciation),
+          language:
+            stringValue(current?.language) ||
+            stringValue(entry?.language),
+        }),
+      );
+    }
+
+    indexes[corpus] = index;
+  }
+
+  const strongDocument = readJson(HEBREW_STRONG_DICTIONARY_PATH);
+  const strongEntries =
+    strongDocument?.dict &&
+    typeof strongDocument.dict === "object" &&
+    !Array.isArray(strongDocument.dict)
+      ? Object.entries(strongDocument.dict)
+      : [];
+
+  for (const [rawLexicalId, entry] of strongEntries) {
+    const lexicalId = normalizeLexicalId(rawLexicalId, "hebrew");
+    if (!lexicalId) continue;
+
+    const current = indexes.hebrew.get(lexicalId) || {};
+    const word = entry?.w || {};
+
+    indexes.hebrew.set(
+      lexicalId,
+      compactObject({
+        lemma:
+          stringValue(current?.lemma) ||
+          stringValue(word?.w),
+        normalizedLemma:
+          stringValue(current?.normalizedLemma),
+        transliteration:
+          stringValue(current?.transliteration) ||
+          stringValue(word?.xlit),
+        pronunciation:
+          stringValue(current?.pronunciation) ||
+          stringValue(word?.pron),
+        language:
+          stringValue(current?.language) ||
+          "hebrew",
+      }),
+    );
+  }
+
+  return indexes;
+}
+
+function enrichIdentity(identity, corpus, generatedLexicons) {
+  const lexicalId = normalizeLexicalId(
+    identity?.lexicalId || identity?.strong,
+    corpus,
+  );
+  const fallback = generatedLexicons?.[corpus]?.get(lexicalId) || {};
+
+  return {
+    ...identity,
+    lemma: stringValue(identity?.lemma) || stringValue(fallback?.lemma),
+    normalizedLemma:
+      stringValue(identity?.normalizedLemma) ||
+      stringValue(fallback?.normalizedLemma),
+    lexicalId: stringValue(identity?.lexicalId) || lexicalId,
+    strong:
+      corpus === "lxx"
+        ? undefined
+        : stringValue(identity?.strong) || lexicalId,
+    language:
+      stringValue(identity?.language) || stringValue(fallback?.language),
+    transliteration:
+      stringValue(identity?.transliteration) ||
+      stringValue(fallback?.transliteration),
+    pronunciation:
+      stringValue(identity?.pronunciation) ||
+      stringValue(fallback?.pronunciation),
+  };
 }
 
 function writeJson(filePath, value) {
@@ -514,7 +681,7 @@ function compactExplanation(explanation) {
   });
 }
 
-function compactEntity(packet, explanation) {
+function compactEntity(packet, explanation, generatedLexicons) {
   const entityId = stringValue(packet?.entityId);
   const corpus = entityCorpus(entityId);
 
@@ -538,7 +705,10 @@ function compactEntity(packet, explanation) {
 
   return compactObject({
     c: corpus,
-    i: compactIdentity(packet?.identity, corpus),
+    i: compactIdentity(
+      enrichIdentity(packet?.identity, corpus, generatedLexicons),
+      corpus,
+    ),
     o: compactOccurrences(packet?.occurrences),
     r: compactRenderingStats(packet?.renderings),
     k: compactSeeKnowledge(packet?.seeKnowledge),
@@ -629,6 +799,7 @@ function buildRuntime() {
   const p03 = readJson(P03_PATH);
   const p04 = readJson(P04_PATH);
   const validated = validateSourceDocuments(p03, p04);
+  const generatedLexicons = loadGeneratedLexiconIndexes();
 
   cleanDirectory(OUTPUT_ROOT);
 
@@ -652,7 +823,11 @@ function buildRuntime() {
 
     const corpus = entityCorpus(entityId);
     const shardId = Number.parseInt(shardIdForEntity(entityId), 16);
-    shards.get(corpus)[shardId][entityId] = compactEntity(packet, explanation);
+    shards.get(corpus)[shardId][entityId] = compactEntity(
+      packet,
+      explanation,
+      generatedLexicons,
+    );
     counts[corpus] += 1;
   }
 
