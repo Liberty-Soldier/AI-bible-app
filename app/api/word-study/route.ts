@@ -36,7 +36,14 @@ export async function GET(request: Request) {
 
     const result = await BibleIQEngine.resolve(input, origin);
 
-    return NextResponse.json(result);
+    return NextResponse.json(result, {
+      headers: {
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, max-age=0",
+        "CDN-Cache-Control": "no-store",
+        "Vercel-CDN-Cache-Control": "no-store",
+      },
+    });
   } catch (error) {
     console.error("SEE word-study route failed:", error);
 

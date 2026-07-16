@@ -294,7 +294,7 @@ function runtimeUrl(origin: string, relativePath: string) {
 
 async function fetchJson<T>(url: string): Promise<T | null> {
   try {
-    const response = await fetch(url, { cache: "force-cache" });
+    const response = await fetch(url, { cache: "no-store" });
 
     if (!response.ok) {
       console.error(`P05 runtime returned ${response.status}: ${url}`);
