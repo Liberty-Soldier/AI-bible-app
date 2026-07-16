@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
 
@@ -17,6 +19,8 @@ function assert(condition, message) {
 const store = read("app/data/lexicon/WordStudyEntityStore.ts");
 const engine = read("app/data/lexicon/BibleIQEngine.ts");
 const sheet = read("app/components/WordStudySheet.tsx");
+const scriptureText = read("app/components/ScriptureText.tsx");
+const canonicalStore = read("app/data/scripture/CanonicalVerseStore.ts");
 const route = read("app/api/word-study/route.ts");
 const askView = read("app/components/ask/AskView.tsx");
 const loader = read("app/components/BibleIQLoader.tsx");
@@ -25,24 +29,25 @@ assert(/export function normalizeWordEntityId/.test(store), "Entity normalizatio
 assert(/`word:\$\{corpus\}:\$\{lexicalId\}`/.test(store), "Canonical word entity format is missing.");
 assert(/canonicalEntityId/.test(engine), "Engine does not normalize canonical entity IDs.");
 assert(/loadWordStudyEntity\(\s*origin,\s*canonicalEntityId/.test(engine), "Engine does not load by canonical entity ID.");
-assert(/SEE Evidence/.test(sheet), "Word study sheet is missing SEE Evidence branding.");
+assert(/SEE Evidence is one tap away/.test(sheet), "Word-study overview is missing SEE Evidence disclosure.");
 assert(!/eyebrow="Entity Evidence"/.test(sheet), "Legacy Entity Evidence label remains.");
 assert(!/locked\s+cached P04/i.test(sheet), "Internal P04 language remains visible.");
 assert(!/compact P05 entity record/i.test(engine), "Internal P05 language remains visible.");
 assert(!/Status:\s*\{status/.test(sheet), "Internal cache status remains visible.");
-assert(/alignment\.strong !== alignment\.lexicalId/.test(sheet), "Duplicate Strong/lexical ID guard is missing.");
+assert(!/label="Strong"/.test(sheet), "Duplicate Strong row remains visible.");
 assert(/deriveReaderTransliteration/.test(sheet), "Reader transliteration fallback is missing.");
-assert(sheet.indexOf("<PremiumStudyPanel") > sheet.indexOf('eyebrow="Occurrences"'), "Paid extensions must follow free evidence and occurrences.");
+assert(/SEE Evidence is one tap away[\s\S]*<PremiumStudyPanel/.test(sheet), "Paid extensions must follow the free overview and Explore section.");
 assert(!/BibleIQ could/.test(route + engine), "Legacy BibleIQ user error text remains.");
 assert(/SEE Evidence Summary/.test(askView), "Ask view SEE branding is missing.");
 assert(/SEE Evidence/.test(loader), "Evidence loader SEE branding is missing.");
 assert(!/\/api\/emet\/explain/.test(sheet), "Ordinary word taps still reference live AI.");
+assert(/getCanonicalChapterTokenAvailability/.test(canonicalStore), "Chapter token availability is missing.");
+assert(/if \(!availability\)/.test(scriptureText), "Unaligned translator words are still interactive.");
 
 console.log("P05 runtime-fix source verification passed.");
-console.log("- Legacy Hebrew/LXX entity IDs normalize to canonical P01 IDs");
-console.log("- Cached runtime lookup uses the canonical entity ID");
-console.log("- Duplicate lexical/Strong identifiers are hidden");
-console.log("- Original script and reader transliteration are visible");
-console.log("- SEE Evidence replaces user-facing BibleIQ wording");
-console.log("- Paid extensions follow the complete free evidence");
-console.log("- Ordinary taps still do not invoke live AI");
+console.log("- Canonical entity lookup remains strict");
+console.log("- Hebrew, Greek NT, and LXX corpus ownership is preserved");
+console.log("- Original script and reader transliteration remain visible");
+console.log("- Strong’s is shown once and LXX IDs remain separate");
+console.log("- SEE Evidence uses progressive disclosure");
+console.log("- Ordinary word taps do not invoke live AI");
