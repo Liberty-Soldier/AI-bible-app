@@ -43,7 +43,7 @@ assert(/Across Scripture/.test(sheet), "Approved EMET teaching section is missin
 assert(/SEE Evidence is one tap away/.test(sheet), "Progressive SEE disclosure is missing.");
 assert(/Back to reading at/.test(sheet), "Back-to-reading action is missing.");
 assert(/returnLabel/.test(sheet) && /returnTo/.test(sheet), "Reference return navigation is incomplete.");
-assert(/Strong’s number/.test(sheet), "Clickable Strong’s entry is missing.");
+assert(/Strong's definition and lexicon/.test(wordSheet), "Clickable Strong's entry is missing.");
 assert(/LXX lexical ID/.test(sheet), "LXX lexical identity rule is missing.");
 assert(!/relationshipCount\}/.test(sheet), "Giant connection counts are exposed in the default UI.");
 assert(!/low confidence/i.test(sheet), "Low-confidence graph labels are exposed.");
