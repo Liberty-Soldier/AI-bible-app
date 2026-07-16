@@ -1266,7 +1266,11 @@ function OverviewView({
             disabled={!hasConnections}
           />
           <ExploreButtonRow
-            label="Lexicon and grammar"
+            label={
+              alignment?.source === "lxx"
+                ? "LXX lexicon and grammar"
+                : "Strong's definition and lexicon"
+            }
             summary={
               readableMorphology ||
               (alignment?.lexicalId
@@ -1312,10 +1316,28 @@ function LexiconView({
   onClose: () => void;
 }) {
   const lexical = evidence?.lexical;
-  const definitions = [
-    ...(lexical?.shortDefinitions || []),
-    ...(lexical?.glosses || []),
-  ].filter((value, index, list) => value && list.indexOf(value) === index);
+  const definitions = (() => {
+    const seen = new Set<string>();
+    const result: string[] = [];
+
+    for (const value of [
+      ...(lexical?.shortDefinitions || []),
+      ...(lexical?.glosses || []),
+    ]) {
+      const clean = String(value || "")
+        .replace(/\s+/g, " ")
+        .trim();
+      const key = clean
+        .toLocaleLowerCase()
+        .replace(/[\s.,;:]+$/g, "");
+
+      if (!clean || seen.has(key)) continue;
+      seen.add(key);
+      result.push(clean);
+    }
+
+    return result;
+  })();
   const sourceForms = lexical?.sourceForms.slice(0, SOURCE_FORM_LIMIT) || [];
 
   return (
@@ -1349,7 +1371,7 @@ function LexiconView({
           <InfoRow label="Selected English" value={word} />
           <InfoRow label="Lemma" value={alignment?.lemma} />
           <InfoRow
-            label={alignment?.source === "lxx" ? "LXX lexical ID" : "Strong’s number"}
+            label={alignment?.source === "lxx" ? "LXX lexical ID" : "Strong's number"}
             value={alignment?.lexicalId}
           />
           <InfoRow label="Language" value={lexical?.language} />
@@ -1359,17 +1381,38 @@ function LexiconView({
 
       {definitions.length ? (
         <Panel>
-          <SectionHeading eyebrow="Meaning" title="Lexical definitions" />
-          <div className="mt-4 flex flex-wrap gap-2">
-            {definitions.slice(0, 8).map((definition) => (
-              <span
-                key={definition}
-                className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3.5 py-2 text-sm font-semibold"
-              >
-                {definition}
-              </span>
-            ))}
-          </div>
+          <SectionHeading
+            eyebrow={
+              alignment?.source === "lxx"
+                ? "Lexical meaning"
+                : "Strong's definition"
+            }
+            title={
+              alignment?.source === "lxx"
+                ? "What this entry means"
+                : `${alignment?.lexicalId || "Strong's"} definition`
+            }
+          />
+          <p className="mt-4 text-[1.02rem] leading-7">
+            {definitions[0]}
+          </p>
+          {definitions.length > 1 ? (
+            <div className="mt-4">
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+                Additional glosses and usage
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {definitions.slice(1, 7).map((definition) => (
+                  <span
+                    key={definition}
+                    className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3.5 py-2 text-sm font-semibold"
+                  >
+                    {definition}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </Panel>
       ) : null}
 

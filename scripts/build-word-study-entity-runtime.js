@@ -153,6 +153,24 @@ function loadGeneratedLexiconIndexes() {
           language:
             stringValue(current?.language) ||
             stringValue(entry?.language),
+          glosses: uniqueStrings([
+            ...(Array.isArray(current?.glosses)
+              ? current.glosses
+              : []),
+            ...(Array.isArray(entry?.glosses)
+              ? entry.glosses
+              : []),
+            cleanLexiconText(entry?.gloss),
+          ]),
+          shortDefinitions: uniqueStrings([
+            ...(Array.isArray(current?.shortDefinitions)
+              ? current.shortDefinitions
+              : []),
+            ...(Array.isArray(entry?.shortDefinitions)
+              ? entry.shortDefinitions
+              : []),
+            cleanLexiconText(entry?.shortDefinition),
+          ]),
         }),
       );
     }
@@ -192,6 +210,18 @@ function loadGeneratedLexiconIndexes() {
         language:
           stringValue(current?.language) ||
           "hebrew",
+        glosses: uniqueStrings([
+          ...(Array.isArray(current?.glosses)
+            ? current.glosses
+            : []),
+          cleanLexiconText(entry?.usage),
+        ]),
+        shortDefinitions: uniqueStrings([
+          ...(Array.isArray(current?.shortDefinitions)
+            ? current.shortDefinitions
+            : []),
+          cleanLexiconText(entry?.meaning),
+        ]),
       }),
     );
   }
@@ -225,6 +255,22 @@ function enrichIdentity(identity, corpus, generatedLexicons) {
     pronunciation:
       stringValue(identity?.pronunciation) ||
       stringValue(fallback?.pronunciation),
+    glosses: uniqueStrings([
+      ...(Array.isArray(identity?.glosses)
+        ? identity.glosses
+        : []),
+      ...(Array.isArray(fallback?.glosses)
+        ? fallback.glosses
+        : []),
+    ]),
+    shortDefinitions: uniqueStrings([
+      ...(Array.isArray(identity?.shortDefinitions)
+        ? identity.shortDefinitions
+        : []),
+      ...(Array.isArray(fallback?.shortDefinitions)
+        ? fallback.shortDefinitions
+        : []),
+    ]),
   };
 }
 
@@ -250,6 +296,15 @@ function cleanDirectory(directory) {
 
 function stringValue(value) {
   return value == null ? "" : String(value).trim();
+}
+
+function cleanLexiconText(value) {
+  return stringValue(value)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&times;/gi, "??")
+    .replace(/&amp;/gi, "&")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function numberValue(value, fallback = 0) {

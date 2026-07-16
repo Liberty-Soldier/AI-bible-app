@@ -109,7 +109,7 @@ assertAbsent(
 assertPresent(wordSheet, /PremiumStudyPanel/, "WordStudySheet");
 assertPresent(wordSheet, /SEE Evidence is one tap away/, "WordStudySheet");
 assertPresent(wordSheet, /Back to reading at/, "WordStudySheet");
-assertPresent(wordSheet, /Strong’s number/, "WordStudySheet");
+assertPresent(wordSheet, /Strong's (?:definition|number)/, "WordStudySheet");
 assertPresent(wordSheet, /LXX lexical ID/, "WordStudySheet");
 
 assertPresent(

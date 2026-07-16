@@ -58,6 +58,34 @@ function main() {
   requireText(hebrew?.i?.t, "H430 transliteration");
   requireText(hebrew?.i?.p, "H430 pronunciation");
 
+  const hebrewDefinitions = [
+    ...(Array.isArray(hebrew?.i?.d) ? hebrew.i.d : []),
+    ...(Array.isArray(hebrew?.i?.gl) ? hebrew.i.gl : []),
+  ];
+
+  if (!hebrewDefinitions.some((value) => String(value || "").trim())) {
+    fail("H430 Strong definition is missing");
+  }
+
+  const h430DefinitionText = hebrewDefinitions
+    .map((value) => String(value || "").toLowerCase())
+    .join(" ");
+
+  for (const requiredWord of [
+    "sense",
+    "specifically",
+    "supreme",
+    "magistrates",
+    "sometimes",
+    "superlative",
+  ]) {
+    if (!h430DefinitionText.includes(requiredWord)) {
+      fail(
+        `H430 Strong definition is corrupted; missing "${requiredWord}"`,
+      );
+    }
+  }
+
   const greekNt = loadCompactEntity("word:greek-nt:G2424");
   requireText(greekNt?.i?.t, "G2424 transliteration");
 
@@ -82,6 +110,10 @@ function main() {
 
   if (!sheet.includes("Pronounced:")) {
     fail("WordStudySheet must retain a distinct pronunciation label");
+  }
+
+  if (!sheet.includes("Strong's definition")) {
+    fail("WordStudySheet must expose the Strong definition in the lexicon view");
   }
 
   if (

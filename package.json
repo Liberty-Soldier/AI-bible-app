@@ -45,7 +45,10 @@
     "verify:p05-fix": "node scripts/verify-p05-runtime-fix.js",
     "audit:p04-quality": "node --max-old-space-size=4096 scripts/audit-p04-quality.js",
     "verify:p05-word-study-ux": "node scripts/verify-p05-word-study-ux.js",
-    "verify:p05-language-display": "node scripts/verify-p05-language-display.js"
+    "verify:p05-language-display": "node scripts/verify-p05-language-display.js",
+    "plan:p052-alignments": "node --max-old-space-size=4096 scripts/p052/expand-display-alignments.cjs",
+    "apply:p052-alignments": "node --max-old-space-size=4096 scripts/p052/expand-display-alignments.cjs --apply",
+    "verify:p052-alignments": "node --max-old-space-size=4096 scripts/p052/verify-expanded-runtime.cjs"
   },
   "dependencies": {
     "fast-xml-parser": "^5.9.2",
