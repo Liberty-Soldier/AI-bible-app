@@ -39,15 +39,28 @@ export default function ReaderWordStudyController({
 
   function closeWordStudy() {
     const params = new URLSearchParams(queryString);
+    const verseToFocus = selectedVerse;
+    const tokenToFocus = displayTokenIndex;
 
     params.delete("study");
     params.delete("word");
-    params.delete("verse");
     params.delete("selectedText");
     params.delete("originalWord");
     params.delete("displayTokenIndex");
     params.delete("verseText");
     params.delete("wordOccurrence");
+
+    if (verseToFocus) {
+      params.set("verse", verseToFocus);
+    } else {
+      params.delete("verse");
+    }
+
+    if (tokenToFocus !== null && Number(tokenToFocus) >= 0) {
+      params.set("focusToken", tokenToFocus);
+    } else {
+      params.delete("focusToken");
+    }
 
     const query = params.toString();
 

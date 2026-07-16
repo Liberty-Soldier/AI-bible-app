@@ -1,6 +1,9 @@
 import "server-only";
 
-import type { BibleIQSource } from "@/app/data/lexicon/BibleIQTypes";
+import type {
+  BibleIQChapterTokenAvailability,
+  BibleIQSource,
+} from "@/app/data/lexicon/BibleIQTypes";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
 
 type CanonicalSourceToken = {
@@ -271,3 +274,80 @@ export async function findCanonicalHit({
     sourceToken,
   };
 }
+
+function lexicalIdFromEntityId(entityId: string) {
+  const value = String(entityId || "").trim();
+  const match = value.match(/^word:(?:hebrew|greek-nt|lxx):([^:]+)$/);
+  return match?.[1] || undefined;
+}
+
+export async function getCanonicalChapterTokenAvailability({
+  origin,
+  book,
+  chapter,
+  translation,
+}: {
+  origin: string;
+  book: string;
+  chapter: number;
+  translation: string;
+}): Promise<BibleIQChapterTokenAvailability> {
+  const corpus = preferredCorpusForTranslation(translation, book);
+  const translationKey = safeTranslation(translation);
+  const runtimeBook = await loadRuntimeBook(origin, corpus, book);
+  const result: BibleIQChapterTokenAvailability = {};
+
+  if (!runtimeBook) return result;
+
+  for (const [verseKey, compactVerse] of Object.entries(
+    runtimeBook.verses || {},
+  )) {
+    const [chapterText, verseText] = verseKey.split(":");
+    const verseChapter = Number(chapterText);
+    const verseNumber = Number(verseText);
+
+    if (verseChapter !== chapter || !Number.isInteger(verseNumber)) {
+      continue;
+    }
+
+    const aligned = compactVerse.a?.[translationKey] || {};
+    const available: Record<
+      string,
+      {
+        entityId: string;
+        source: BibleIQSource;
+        sourceWord?: string;
+        lexicalId?: string;
+      }
+    > = {};
+
+    for (const [displayIndex, sourceIndex] of Object.entries(aligned)) {
+      if (!Number.isInteger(sourceIndex) || sourceIndex < 0) continue;
+
+      const compactSource = compactVerse.s?.[sourceIndex];
+      const entityId = String(compactSource?.[4] || "").trim();
+
+      if (
+        !/^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(
+          entityId,
+        )
+      ) {
+        continue;
+      }
+
+      available[displayIndex] = {
+        entityId,
+        source: corpus,
+        sourceWord: compactSource?.[1] || undefined,
+        lexicalId: lexicalIdFromEntityId(entityId),
+      };
+    }
+
+    if (Object.keys(available).length > 0) {
+      result[String(verseNumber)] = available;
+    }
+  }
+
+  return result;
+}
+

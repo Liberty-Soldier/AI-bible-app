@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { type MouseEvent, useEffect, useMemo, useState } from "react";
 import ScriptureText from "@/app/components/ScriptureText";
 import VerseActionSheet from "@/app/components/VerseActionSheet";
+import type { BibleIQChapterTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 import {
   getReaderMemory,
   type ReaderHighlight,
@@ -28,10 +29,14 @@ export default function VerseActionController({
   verses,
   activeTranslation,
   highlightedVerse,
+  focusedTokenIndex,
+  tokenAvailabilityByVerse,
 }: {
   verses: ReaderVerse[];
   activeTranslation: string;
   highlightedVerse?: number | null;
+  focusedTokenIndex?: number | null;
+  tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
 }) {
   const [selectedVerses, setSelectedVerses] = useState<SelectedVerse[]>([]);
   const [memory, setMemory] = useState(() => getReaderMemory());
@@ -133,55 +138,56 @@ export default function VerseActionController({
     <>
       <div className="space-y-5 text-[1.18rem] leading-9 text-[var(--foreground)] sm:text-xl sm:leading-10">
         {verses.map((verse) => {
-          const isHighlightedFromUrl =
-            highlightedVerse === verse.verse;
+          const isHighlightedFromUrl = highlightedVerse === verse.verse;
+          const hasFocusedWord =
+            isHighlightedFromUrl && focusedTokenIndex != null;
           const isSelected = selectedIds.has(verse.id);
           const selectedText = verse.sources[0]?.text || "";
           const storedHighlight = highlightByVerseId.get(verse.id);
           const isBookmarked = bookmarkedIds.has(verse.id);
-          const hasNote =
-            (noteByVerseId.get(verse.id) || []).length > 0;
+          const hasNote = (noteByVerseId.get(verse.id) || []).length > 0;
 
           return (
             <div
               id={`verse-${verse.verse}`}
               key={`${verse.id}-${activeTranslation}`}
-              onClick={(event: React.MouseEvent<HTMLDivElement>) => {
-                const target = event.target as HTMLElement;
-
-                if (target.closest("[data-word-token='true']")) {
-                  return;
-                }
-
-                if (window.getSelection()?.toString().trim()) {
-                  return;
-                }
-
-                toggleVerse(verse);
-              }}
-              className={`group block w-full cursor-pointer rounded-xl px-2 py-1 text-left transition ${
+              className={`group relative block w-full border-l-2 px-2 py-1 text-left transition ${
                 isSelected
-                  ? "bg-[var(--foreground)]/10 ring-1 ring-[var(--foreground)]/20"
-                  : isHighlightedFromUrl
-                    ? "bg-amber-500/10 ring-1 ring-amber-400/20"
+                  ? "border-amber-500/70 bg-amber-500/10"
+                  : isHighlightedFromUrl && !hasFocusedWord
+                    ? "border-amber-400/40 bg-amber-500/10"
                     : storedHighlight
-                      ? getHighlightClass(storedHighlight.color)
-                      : "hover:bg-[var(--surface)]"
+                      ? `border-transparent ${getHighlightClass(storedHighlight.color)}`
+                      : "border-transparent"
               }`}
             >
-              <span
-                className={`mr-3 align-super text-xs font-semibold ${
+              <button
+                type="button"
+                data-verse-selector="true"
+                aria-label={`${isSelected ? "Unselect" : "Select"} ${verse.reference} for highlight, note, copy, or share`}
+                onClick={(event: MouseEvent<HTMLButtonElement>) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  toggleVerse(verse);
+                }}
+                className={`mr-3 inline-flex min-h-7 min-w-7 items-center justify-center rounded-full align-super text-xs font-bold transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/50 ${
                   isSelected
-                    ? "text-[var(--foreground)]"
-                    : "text-[var(--muted)]"
+                    ? "bg-amber-500/20 text-amber-700 dark:text-amber-300"
+                    : "text-[var(--muted)] hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
                 }`}
               >
                 {verse.verse}
-              </span>
+              </button>
 
               <ScriptureText
                 text={selectedText}
                 reference={verse.reference}
+                tokenAvailability={
+                  tokenAvailabilityByVerse?.[String(verse.verse)]
+                }
+                focusedTokenIndex={
+                  hasFocusedWord ? focusedTokenIndex : null
+                }
               />
 
               {isBookmarked || hasNote ? (

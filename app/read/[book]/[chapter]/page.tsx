@@ -13,6 +13,7 @@ import ReaderWordStudyController from "@/app/components/ReaderWordStudyControlle
 import VerseActionController from "@/app/components/VerseActionController";
 import ReaderStickyHeader from "@/app/components/ReaderStickyHeader";
 import { bookCatalog } from "../../../data/scripture/bookCatalog";
+import { getCanonicalChapterTokenAvailability } from "@/app/data/scripture/CanonicalVerseStore";
 
 export const dynamic = "force-dynamic";
 
@@ -117,14 +118,26 @@ export default async function ReadChapterPage({
     verse?: string;
     translation?: string;
     returnTo?: string;
+    returnLabel?: string;
+    focusToken?: string;
   }>;
 }) {
   const { book, chapter } = await params;
-  const { verse, translation, returnTo } = await searchParams;
+  const {
+    verse,
+    translation,
+    returnTo,
+    returnLabel,
+    focusToken,
+  } = await searchParams;
 
   const decodedBook = decodeURIComponent(book);
   const chapterNumber = Number(chapter);
   const highlightedVerse = verse ? Number(verse) : null;
+  const focusedTokenIndex =
+    focusToken !== undefined && Number(focusToken) >= 0
+      ? Number(focusToken)
+      : null;
 
   const requestedTranslation: Translation =
     translation === "kjv" ||
@@ -144,6 +157,14 @@ export default async function ReadChapterPage({
     decodedBook,
     chapterNumber,
   );
+
+  const tokenAvailabilityByVerse =
+    await getCanonicalChapterTokenAvailability({
+      origin: await getBaseUrl(),
+      translation: activeTranslation,
+      book: decodedBook,
+      chapter: chapterNumber,
+    });
 
   if (!chapterVerses.length) {
     notFound();
@@ -221,7 +242,7 @@ export default async function ReadChapterPage({
                 href={returnTo}
                 className="mb-6 inline-flex rounded-full border border-[var(--border)] px-4 py-2 text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
               >
-                ← Back to Word Study
+                ← Back to {returnLabel || "where you were reading"}
               </Link>
             ) : null}
 
@@ -235,8 +256,9 @@ export default async function ReadChapterPage({
               </h1>
 
               <p className="mt-3 text-sm font-medium text-[var(--muted)]">
-                Tap a word for its source-based explanation. Tap a verse
-                for highlights, notes, bookmarks, copy, and share.
+                Tap an underlined word for its source-based explanation.
+                Tap a verse number for highlights, notes, bookmarks,
+                copy, and share.
               </p>
             </div>
 
@@ -244,6 +266,8 @@ export default async function ReadChapterPage({
               verses={chapterVerses}
               activeTranslation={activeTranslation}
               highlightedVerse={highlightedVerse}
+              focusedTokenIndex={focusedTokenIndex}
+              tokenAvailabilityByVerse={tokenAvailabilityByVerse}
             />
           </article>
         </ChapterSwipe>
