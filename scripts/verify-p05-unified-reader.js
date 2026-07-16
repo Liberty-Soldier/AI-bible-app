@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
 
@@ -34,9 +36,8 @@ function assertPresent(text, pattern, label) {
 
 const readerPage = read("app/read/[book]/[chapter]/page.tsx");
 const scriptureText = read("app/components/ScriptureText.tsx");
-const verseController = read(
-  "app/components/VerseActionController.tsx",
-);
+const verseController = read("app/components/VerseActionController.tsx");
+const wordController = read("app/components/ReaderWordStudyController.tsx");
 const wordSheet = read("app/components/WordStudySheet.tsx");
 const wordRoute = read("app/api/word-study/route.ts");
 const mobileNav = read("app/components/MobileBottomNav.tsx");
@@ -45,9 +46,7 @@ const globalAsk = read("app/components/GlobalAskButton.tsx");
 const premiumProvider = read(
   "app/components/premium/PremiumAccessProvider.tsx",
 );
-const entityStore = read(
-  "app/data/lexicon/WordStudyEntityStore.ts",
-);
+const entityStore = read("app/data/lexicon/WordStudyEntityStore.ts");
 const buildEntityRuntime = read(
   "scripts/build-word-study-entity-runtime.js",
 );
@@ -63,76 +62,55 @@ for (const [label, text] of [
   assertAbsent(text, /params\.set\(["']study["']/, label);
 }
 
-assertPresent(
-  scriptureText,
-  /data-word-token=["']true["']/,
-  "ScriptureText",
-);
-assertPresent(
-  scriptureText,
-  /openWordStudy/,
-  "ScriptureText",
-);
+assertPresent(scriptureText, /data-word-token="true"/, "ScriptureText");
+assertPresent(scriptureText, /if \(!availability\)/, "ScriptureText");
+assertPresent(scriptureText, /FUNCTION_WORDS/, "ScriptureText");
+assertPresent(scriptureText, /textDecorationStyle:\s*"dotted"/, "ScriptureText");
 assertPresent(
   verseController,
-  /closest\(\s*["']\[data-word-token='true'\]["']\s*\)/,
+  /data-verse-selector="true"/,
+  "VerseActionController",
+);
+assertAbsent(
+  verseController,
+  /onClick=\{\(event: React\.MouseEvent<HTMLDivElement>/,
   "VerseActionController",
 );
 assertPresent(
   readerPage,
-  /Tap a word for its source-based explanation/,
+  /Tap an underlined word for its source-based explanation/,
   "reader page",
+);
+assertPresent(
+  readerPage,
+  /Tap a verse number for highlights/,
+  "reader page",
+);
+assertPresent(
+  wordController,
+  /params\.set\("focusToken"/,
+  "word-study return focus",
 );
 
 assertPresent(mobileNav, /href:\s*["']\/library["']/, "mobile nav");
 assertAbsent(mobileNav, /href:\s*["']\/study["']/, "mobile nav");
 
-assertPresent(
-  layout,
-  /PremiumAccessProvider/,
-  "root layout",
-);
-assertPresent(
-  globalAsk,
-  /feature=["']ask-emet["']/,
-  "global Ask EMET button",
-);
-assertPresent(
-  premiumProvider,
-  /initialPlan\s*=\s*["']free["']/,
-  "premium provider",
-);
-assertPresent(
-  premiumProvider,
-  /initialPlan\s*===\s*["']paid["']/,
-  "premium provider",
-);
-assertPresent(
-  premiumProvider,
-  /Paid plans are coming in P06/,
-  "premium provider",
-);
+assertPresent(layout, /PremiumAccessProvider/, "root layout");
+assertPresent(globalAsk, /feature=["']ask-emet["']/, "global Ask EMET button");
+assertPresent(premiumProvider, /initialPlan\s*=\s*["']free["']/, "premium provider");
+assertPresent(premiumProvider, /initialPlan\s*===\s*["']paid["']/, "premium provider");
 
-assertAbsent(
-  wordSheet,
-  /\/api\/emet\/explain/,
-  "WordStudySheet",
-);
+assertAbsent(wordSheet, /\/api\/emet\/explain/, "WordStudySheet");
 assertAbsent(
   wordRoute,
   /EmetService|openai|\/api\/emet\/explain/i,
   "word-study API",
 );
-assertPresent(
-  wordSheet,
-  /PremiumStudyPanel/,
-  "WordStudySheet",
-);
-assertPresent(
-  wordSheet,
-  /Cached explanation|EMET/,
-  "WordStudySheet",
-);
+assertPresent(wordSheet, /PremiumStudyPanel/, "WordStudySheet");
+assertPresent(wordSheet, /SEE Evidence is one tap away/, "WordStudySheet");
+assertPresent(wordSheet, /Back to reading at/, "WordStudySheet");
+assertPresent(wordSheet, /Strong’s number/, "WordStudySheet");
+assertPresent(wordSheet, /LXX lexical ID/, "WordStudySheet");
 
 assertPresent(
   entityStore,
@@ -158,8 +136,9 @@ assertPresent(
 
 console.log("P05 unified-reader source verification passed.");
 console.log("- One reader experience");
-console.log("- Free cached word taps");
-console.log("- Verse actions preserved");
-console.log("- Paid features centrally gated");
-console.log("- No live AI on ordinary taps");
-console.log("- Source-owned occurrence routing preserved");
+console.log("- Only source-aligned words are tappable");
+console.log("- Translator-added words remain plain text");
+console.log("- Verse-number actions are preserved");
+console.log("- Paid features remain centrally gated");
+console.log("- No live AI runs on ordinary word taps");
+console.log("- Source-owned occurrence routing is preserved");
