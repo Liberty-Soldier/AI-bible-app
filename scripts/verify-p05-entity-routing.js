@@ -11,6 +11,10 @@ const ALIGNMENT_ROOT = path.join(
   "word-study",
 );
 const ENTITY_ROOT = path.join(ALIGNMENT_ROOT, "entities");
+const COMPOUND_ROUTE_PATH = path.join(
+  ALIGNMENT_ROOT,
+  "compound-routes.json",
+);
 const REPORT_ROOT = path.join(ROOT, "reports");
 const CORPORA = ["hebrew", "greek-nt", "lxx"];
 
@@ -21,6 +25,42 @@ function fail(message) {
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) fail(`Missing file: ${filePath}`);
   return JSON.parse(fs.readFileSync(filePath, "utf8").replace(/^\uFEFF/, ""));
+}
+
+function loadApprovedCompoundRoutes() {
+  const document = readJson(COMPOUND_ROUTE_PATH);
+  const approved = new Map();
+
+  for (const [lexicalId, route] of Object.entries(
+    document?.routes || {},
+  )) {
+    const routeId = String(route?.routeId || "").trim();
+
+    if (
+      !/^compound:greek-nt:G\d+-G\d+$/.test(routeId)
+    ) {
+      fail(
+        `Invalid compound route ${routeId || "(empty)"} for ${lexicalId}.`,
+      );
+    }
+
+    if (approved.has(routeId)) {
+      fail(`Duplicate compound route ID: ${routeId}`);
+    }
+
+    approved.set(routeId, {
+      lexicalId,
+      routeKind: String(route?.routeKind || ""),
+      componentLexicalIds:
+        route?.componentLexicalIds || [],
+    });
+  }
+
+  if (approved.size === 0) {
+    fail("Compound-route sidecar contains no approved routes.");
+  }
+
+  return approved;
 }
 
 function normalizeWordEntityId(entityId) {
@@ -62,6 +102,9 @@ function shardIdForEntity(entityId, shardCount) {
 function main() {
   const alignmentManifest = readJson(path.join(ALIGNMENT_ROOT, "manifest.json"));
   const entityManifest = readJson(path.join(ENTITY_ROOT, "manifest.json"));
+  const approvedCompoundRoutes =
+    loadApprovedCompoundRoutes();
+  const compoundRouteUsage = new Map();
 
   const uniqueByCorpus = Object.fromEntries(
     CORPORA.map((corpus) => [corpus, new Map()]),
@@ -87,11 +130,63 @@ function main() {
 
           const shape = rawEntityId.startsWith("word:")
             ? "canonical-word-prefix"
-            : rawEntityId.split(":").length >= 2
-              ? "legacy-corpus-prefix"
-              : "invalid";
+            : rawEntityId.startsWith("compound:")
+              ? "approved-compound-route"
+              : rawEntityId.split(":").length >= 2
+                ? "legacy-corpus-prefix"
+                : "invalid";
           rawShapeCounts[`${corpus}:${shape}`] =
             (rawShapeCounts[`${corpus}:${shape}`] || 0) + 1;
+
+          if (rawEntityId.startsWith("compound:")) {
+            const approved =
+              approvedCompoundRoutes.get(rawEntityId);
+
+            if (!approved) {
+              if (invalid.length < 100) {
+                invalid.push({
+                  corpus,
+                  rawEntityId,
+                  reason:
+                    "compound-route-not-in-runtime-sidecar",
+                });
+              }
+
+              continue;
+            }
+
+            if (corpus !== "greek-nt") {
+              if (invalid.length < 100) {
+                invalid.push({
+                  corpus,
+                  rawEntityId,
+                  reason:
+                    "compound-route-corpus-mismatch",
+                });
+              }
+
+              continue;
+            }
+
+            const usage =
+              compoundRouteUsage.get(rawEntityId) || {
+                tokenCount: 0,
+                lexicalId: approved.lexicalId,
+                routeKind: approved.routeKind,
+                componentLexicalIds:
+                  approved.componentLexicalIds,
+              };
+
+            usage.tokenCount += 1;
+            compoundRouteUsage.set(
+              rawEntityId,
+              usage,
+            );
+
+            // Compound routes are verified against the locked runtime
+            // sidecar. They are not ordinary P01-P04 entity-shard IDs.
+            continue;
+          }
 
           const canonical = normalizeWordEntityId(rawEntityId);
           if (!canonical) {
@@ -189,6 +284,25 @@ function main() {
     tokensWithEntityId,
     rawShapeCounts,
     byCorpus,
+    compoundRoutes: {
+      sidecarFile:
+        "public/data/bibleiq/word-study/compound-routes.json",
+      approvedRouteCount:
+        approvedCompoundRoutes.size,
+      usedRouteCount:
+        compoundRouteUsage.size,
+      tokenCount: [...compoundRouteUsage.values()]
+        .reduce(
+          (sum, route) => sum + route.tokenCount,
+          0,
+        ),
+      usage: Object.fromEntries(
+        [...compoundRouteUsage.entries()].sort(
+          ([left], [right]) =>
+            left.localeCompare(right),
+        ),
+      ),
+    },
     invalidCount: invalid.length,
     invalid,
     missingCount: missing.length,
@@ -224,6 +338,15 @@ function main() {
     );
   }
   console.log("- Missing runtime entities: 0");
+  console.log(
+    `- Approved compound routes: ${approvedCompoundRoutes.size.toLocaleString()} definitions / ` +
+      `${[...compoundRouteUsage.values()]
+        .reduce(
+          (sum, route) => sum + route.tokenCount,
+          0,
+        )
+        .toLocaleString()} source tokens`,
+  );
   console.log(`- Report: reports/p05-entity-routing-audit.json`);
 }
 

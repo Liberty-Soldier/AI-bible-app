@@ -9,6 +9,37 @@ const OUTPUT_ROOT = path.join(ROOT, "public", "data", "bibleiq", "word-study");
 const CORPORA = ["hebrew", "greek-nt", "lxx"];
 const VERSION = 1;
 
+const GREEK_COMPOUND_ROUTES = Object.freeze({
+  "G4566«G4567": {
+    routeId: "compound:greek-nt:G4566-G4567",
+    label: "Satan",
+    routeKind: "lexical-compound-alias",
+    componentLexicalIds: ["G4566", "G4567"],
+  },
+  "G3535«G3536": {
+    routeId: "compound:greek-nt:G3535-G3536",
+    label: "Ninevites",
+    routeKind: "lexical-compound-alias",
+    componentLexicalIds: ["G3535", "G3536"],
+  },
+  "G1176+G3638": {
+    routeId: "compound:greek-nt:G1176-G3638",
+    label: "eighteen",
+    routeKind: "compositional-number",
+    componentLexicalIds: ["G1176", "G3638"],
+  },
+  "G3379+G4219": {
+    routeId: "compound:greek-nt:G3379-G4219",
+    label: "lest",
+    routeKind: "compositional-function-word",
+    componentLexicalIds: ["G3379", "G4219"],
+  },
+});
+
+function compoundGreekRouteForLexicalId(lexicalId) {
+  return GREEK_COMPOUND_ROUTES[String(lexicalId || "").trim()] || null;
+}
+
 function prepareOutputRoot() {
   fs.mkdirSync(OUTPUT_ROOT, { recursive: true });
 
@@ -23,6 +54,10 @@ function prepareOutputRoot() {
   }
 
   fs.rmSync(path.join(OUTPUT_ROOT, "manifest.json"), {
+    force: true,
+  });
+
+  fs.rmSync(path.join(OUTPUT_ROOT, "compound-routes.json"), {
     force: true,
   });
 }
@@ -54,7 +89,12 @@ function safeOutputFileName(fileName) {
   return `${base}.json`;
 }
 
-function normalizeRuntimeWordEntityId(entityId, corpus) {
+function normalizeRuntimeWordEntityId(entityId, corpus, sourceLexicalId) {
+  if (corpus === "greek-nt") {
+    const compoundRoute = compoundGreekRouteForLexicalId(sourceLexicalId);
+    if (compoundRoute) return compoundRoute.routeId;
+  }
+
   const value = String(entityId || "").trim();
   if (!value) return "";
 
@@ -192,7 +232,7 @@ function buildBook(corpus, inputFile, outputFile, aliasMap) {
     if (!compact) continue;
 
     for (const sourceToken of compact.value.s) {
-      sourceToken[4] = normalizeRuntimeWordEntityId(sourceToken[4], corpus);
+      sourceToken[4] = normalizeRuntimeWordEntityId(sourceToken[4], corpus, sourceToken[3]);
     }
 
     compactVerses[compact.key] = compact.value;
@@ -288,6 +328,24 @@ function main() {
       books: Object.fromEntries(Object.entries(books).sort(([a], [b]) => a.localeCompare(b))),
     };
   }
+
+  const compoundRouteDocument = {
+    version: VERSION,
+    corpus: "greek-nt",
+    routes: GREEK_COMPOUND_ROUTES,
+  };
+  const compoundRouteSerialized = `${JSON.stringify(compoundRouteDocument)}\n`;
+  fs.writeFileSync(
+    path.join(OUTPUT_ROOT, "compound-routes.json"),
+    compoundRouteSerialized,
+    "utf8",
+  );
+  manifest.compoundRoutes = {
+    file: "compound-routes.json",
+    count: Object.keys(GREEK_COMPOUND_ROUTES).length,
+    bytes: Buffer.byteLength(compoundRouteSerialized),
+    checksum: sha256(compoundRouteSerialized),
+  };
 
   const manifestWithoutChecksum = JSON.stringify(manifest);
   manifest.checksum = sha256(manifestWithoutChecksum);

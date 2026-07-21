@@ -11,11 +11,19 @@ export type BibleIQEntityType =
 export type BibleIQSource = "hebrew" | "greek-nt" | "lxx";
 export type BibleIQTranslation = "web" | "kjv" | "brenton";
 
+export type BibleIQCompoundRouteKind =
+  | "lexical-compound-alias"
+  | "compositional-number"
+  | "compositional-function-word";
+
 export type BibleIQTokenAvailability = {
   entityId: string;
   source: BibleIQSource;
   sourceWord?: string;
   lexicalId?: string;
+  isCompoundRoute?: boolean;
+  compoundRouteKind?: BibleIQCompoundRouteKind;
+  componentLexicalIds?: string[];
 };
 
 export type BibleIQVerseTokenAvailability = Record<
@@ -87,6 +95,9 @@ export type BibleIQSourceAlignment = {
   morph?: string;
   entityId: string;
   seeEvidenceId?: string;
+  isCompoundRoute?: boolean;
+  compoundRouteKind?: BibleIQCompoundRouteKind;
+  componentLexicalIds?: string[];
 };
 
 export type BibleIQEmetCitation = {

@@ -1,4 +1,7 @@
-import { findCanonicalHit } from "@/app/data/scripture/CanonicalVerseStore";
+import {
+  findCanonicalHit,
+  type CanonicalCompoundRoute,
+} from "@/app/data/scripture/CanonicalVerseStore";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
 import {
   loadWordStudyEntity,
@@ -703,6 +706,7 @@ function buildCanonicalAlignmentEntity({
   strong,
   lemma,
   morph,
+  compoundRoute,
 }: {
   input: BibleIQRequest;
   preferredSource: BibleIQSource;
@@ -711,6 +715,7 @@ function buildCanonicalAlignmentEntity({
   strong?: string;
   lemma?: string;
   morph?: string;
+  compoundRoute?: CanonicalCompoundRoute;
 }): BibleIQEntity {
   const title = lemma || sourceWord || input.displayWord.trim();
   const reference = referenceLabel(
@@ -730,20 +735,30 @@ function buildCanonicalAlignmentEntity({
     source: preferredSource,
     strong: preferredSource === "lxx" ? undefined : strong,
     lexicalId:
-      entityId.split(":").at(-1) || undefined,
+      compoundRoute?.lexicalId ||
+      entityId.split(":").at(-1) ||
+      undefined,
     lemma,
     morph,
     entityId,
+    isCompoundRoute: Boolean(compoundRoute),
+    compoundRouteKind: compoundRoute?.routeKind,
+    componentLexicalIds:
+      compoundRoute?.componentLexicalIds,
   };
 
   return {
     id: entityId,
     type: "word",
     title: input.displayWord,
-    subtitle: `${title} • ${label} Source Alignment`,
+    subtitle: compoundRoute
+      ? `${title} • ${label} Compound Source Alignment`
+      : `${title} • ${label} Source Alignment`,
     alignment,
     emet: {
-      status: "missing",
+      status: compoundRoute
+        ? "insufficient-evidence"
+        : "missing",
       packet: null,
       explanation: undefined,
       citations: [reference],
@@ -757,19 +772,27 @@ function buildCanonicalAlignmentEntity({
       lemma,
       lexicalId: alignment.lexicalId,
       morph,
-      statement: `The selected word is aligned to ${
-        sourceWord || title
-      } in the ${label} source text. The full cached study is temporarily unavailable.`,
+      statement: compoundRoute
+        ? `The selected word is aligned to the compound Greek source form ${
+            sourceWord || title
+          } (${compoundRoute.componentLexicalIds.join(
+            " + ",
+          )}). The compound route is preserved without forcing it onto only one component.`
+        : `The selected word is aligned to ${
+            sourceWord || title
+          } in the ${label} source text. The full cached study is temporarily unavailable.`,
     },
     simple: {
       meaning: title,
       inThisVerse: sourceWord
         ? `The selected English word is aligned to ${sourceWord}.`
         : `This word appears in ${reference}.`,
-      whyItMatters:
-        "SEE preserved the source alignment, but the full cached study could not be loaded.",
-      summary:
-        "The source alignment remains available. No live AI was invoked.",
+      whyItMatters: compoundRoute
+        ? "SEE preserves both components of this compound Greek source form instead of assigning the English word to an unsupported single component."
+        : "SEE preserved the source alignment, but the full cached study could not be loaded.",
+      summary: compoundRoute
+        ? "This is a transparent compound-source alignment. No synthetic cached EMET explanation was created, and no live AI was invoked."
+        : "The source alignment remains available. No live AI was invoked.",
     },
     evidence: {
       originalLanguage: {
@@ -784,7 +807,12 @@ function buildCanonicalAlignmentEntity({
       related: {
         people: [],
         places: [],
-        concepts: ["Canonical source alignment available"],
+        concepts: compoundRoute
+          ? [
+              "Compound Greek source alignment",
+              ...compoundRoute.componentLexicalIds,
+            ]
+          : ["Canonical source alignment available"],
         events: [],
       },
       occurrences: [
@@ -893,10 +921,12 @@ export async function resolveBibleIQ(
     const source = hit.sourceToken?.source || preferredSource;
     const canonicalEntityId =
       normalizeWordEntityId(hit.entityId) || hit.entityId;
-    const runtime = await loadWordStudyEntity(
-      origin,
-      canonicalEntityId,
-    );
+    const runtime = hit.compoundRoute
+      ? null
+      : await loadWordStudyEntity(
+          origin,
+          canonicalEntityId,
+        );
     const approvedExplanation = runtime
       ? await loadApprovedEmetOverride(origin, runtime.entityId)
       : null;
@@ -917,6 +947,7 @@ export async function resolveBibleIQ(
           strong: hit.sourceToken?.strong,
           lemma: hit.sourceToken?.lemma,
           morph: hit.sourceToken?.morph,
+          compoundRoute: hit.compoundRoute,
         });
 
     return {

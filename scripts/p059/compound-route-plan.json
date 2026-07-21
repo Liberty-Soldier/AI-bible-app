@@ -1,0 +1,206 @@
+{
+  "version": "p059-greek-compound-routing@1",
+  "design": "Add an explicit compound-route sidecar to the compact P05 runtime. CanonicalVerseStore may return a compound route when the aligned source token has a supported compound lexical ID but no ordinary entity ID. BibleIQEngine then renders a source-alignment fallback card without inventing a P03/P04 entity or collapsing the token onto one constituent.",
+  "invariants": [
+    "Do not change the existing 27,206 P01-P04 entities.",
+    "Do not create cached EMET explanations for synthetic compound routes.",
+    "Do not select one constituent for a genuinely compositional token.",
+    "Do not cross corpus boundaries.",
+    "Keep all 78 existing display-to-source-token alignments unchanged.",
+    "Only repair the missing source-token-to-word-study route."
+  ],
+  "plannedSourceChanges": [
+    {
+      "file": "scripts/build-word-study-runtime.js",
+      "action": "Generate public/data/bibleiq/word-study/compound-routes.json from the four locked route definitions and add its checksum/count to the runtime manifest."
+    },
+    {
+      "file": "app/data/scripture/CanonicalVerseStore.ts",
+      "action": "Load compound-routes.json and return a compound canonical hit when an aligned Greek source token has no ordinary entity ID but its lexical ID is in the locked route map."
+    },
+    {
+      "file": "app/data/lexicon/BibleIQEngine.ts",
+      "action": "Build a transparent compound source-alignment fallback entity. Show source form, lemma, compound lexical ID, components, verse context, and no cached EMET explanation."
+    },
+    {
+      "file": "app/data/lexicon/BibleIQTypes.ts",
+      "action": "Add optional compound-route metadata used by the canonical hit and public alignment response."
+    }
+  ],
+  "routeDefinitions": [
+    {
+      "routeId": "compound:greek-nt:G1176-G3638",
+      "label": "eighteen",
+      "routeKind": "compositional-number",
+      "componentLexicalIds": [
+        "G1176",
+        "G3638"
+      ],
+      "treatment": "Preserve both components and expose the source token as a compositional number. Do not select only one component.",
+      "lexicalId": "G1176+G3638",
+      "sourceTokenCount": 1,
+      "displayOccurrenceCount": 2,
+      "sourceTokenIds": [
+        "greek-nt:Luke.13.4:3"
+      ],
+      "references": [
+        "Luke.13.4"
+      ],
+      "sourceForms": [
+        "δεκαοκτὼ"
+      ],
+      "words": [
+        "eighteen"
+      ]
+    },
+    {
+      "routeId": "compound:greek-nt:G3379-G4219",
+      "label": "lest",
+      "routeKind": "compositional-function-word",
+      "componentLexicalIds": [
+        "G3379",
+        "G4219"
+      ],
+      "treatment": "Preserve both components and expose the source token as a compositional grammatical form. Do not select only one component.",
+      "lexicalId": "G3379+G4219",
+      "sourceTokenCount": 2,
+      "displayOccurrenceCount": 2,
+      "sourceTokenIds": [
+        "greek-nt:Acts.28.27:17",
+        "greek-nt:Acts.5.39:9"
+      ],
+      "references": [
+        "Acts.28.27",
+        "Acts.5.39"
+      ],
+      "sourceForms": [
+        "μήποτε"
+      ],
+      "words": [
+        "lest"
+      ]
+    },
+    {
+      "routeId": "compound:greek-nt:G3535-G3536",
+      "label": "Ninevites",
+      "routeKind": "lexical-compound-alias",
+      "componentLexicalIds": [
+        "G3535",
+        "G3536"
+      ],
+      "treatment": "Open an honest source-alignment fallback record for the compound lexical token. Do not collapse it onto an unsupported constituent entity.",
+      "lexicalId": "G3535«G3536",
+      "sourceTokenCount": 1,
+      "displayOccurrenceCount": 2,
+      "sourceTokenIds": [
+        "greek-nt:Luke.11.30:5"
+      ],
+      "references": [
+        "Luke.11.30"
+      ],
+      "sourceForms": [
+        "Νινευίταις"
+      ],
+      "words": [
+        "Ninevites"
+      ]
+    },
+    {
+      "routeId": "compound:greek-nt:G4566-G4567",
+      "label": "Satan",
+      "routeKind": "lexical-compound-alias",
+      "componentLexicalIds": [
+        "G4566",
+        "G4567"
+      ],
+      "treatment": "Open an honest source-alignment fallback record for the compound lexical token. Do not collapse it onto an unsupported constituent entity.",
+      "lexicalId": "G4566«G4567",
+      "sourceTokenCount": 36,
+      "displayOccurrenceCount": 72,
+      "sourceTokenIds": [
+        "greek-nt:1_Corinthians.5.5:4",
+        "greek-nt:1_Corinthians.7.5:25",
+        "greek-nt:1_Thessalonians.2.18:16",
+        "greek-nt:1_Timothy.1.20:8",
+        "greek-nt:1_Timothy.5.15:6",
+        "greek-nt:2_Corinthians.11.14:6",
+        "greek-nt:2_Corinthians.12.7:15",
+        "greek-nt:2_Corinthians.2.11:5",
+        "greek-nt:2_Thessalonians.2.9:7",
+        "greek-nt:Acts.26.18:13",
+        "greek-nt:Acts.5.3:9",
+        "greek-nt:John.13.27:9",
+        "greek-nt:Luke.10.18:5",
+        "greek-nt:Luke.11.18:4",
+        "greek-nt:Luke.13.16:8",
+        "greek-nt:Luke.22.3:2",
+        "greek-nt:Luke.22.31:4",
+        "greek-nt:Mark.1.13:10",
+        "greek-nt:Mark.3.23:9",
+        "greek-nt:Mark.3.23:10",
+        "greek-nt:Mark.3.26:3",
+        "greek-nt:Mark.4.15:17",
+        "greek-nt:Mark.8.33:15",
+        "greek-nt:Matthew.12.26:3",
+        "greek-nt:Matthew.12.26:5",
+        "greek-nt:Matthew.16.23:9",
+        "greek-nt:Matthew.4.10:6",
+        "greek-nt:Revelation.12.9:15",
+        "greek-nt:Revelation.2.13:36",
+        "greek-nt:Revelation.2.13:7",
+        "greek-nt:Revelation.2.24:20",
+        "greek-nt:Revelation.2.9:25",
+        "greek-nt:Revelation.20.2:13",
+        "greek-nt:Revelation.20.7:8",
+        "greek-nt:Revelation.3.9:6",
+        "greek-nt:Romans.16.20:7"
+      ],
+      "references": [
+        "1 Corinthians.5.5",
+        "1 Corinthians.7.5",
+        "1 Thessalonians.2.18",
+        "1 Timothy.1.20",
+        "1 Timothy.5.15",
+        "2 Corinthians.11.14",
+        "2 Corinthians.12.7",
+        "2 Corinthians.2.11",
+        "2 Thessalonians.2.9",
+        "Acts.26.18",
+        "Acts.5.3",
+        "John.13.27",
+        "Luke.10.18",
+        "Luke.11.18",
+        "Luke.13.16",
+        "Luke.22.3",
+        "Luke.22.31",
+        "Mark.1.13",
+        "Mark.3.23",
+        "Mark.3.26",
+        "Mark.4.15",
+        "Mark.8.33",
+        "Matthew.12.26",
+        "Matthew.16.23",
+        "Matthew.4.10",
+        "Revelation.12.9",
+        "Revelation.2.13",
+        "Revelation.2.24",
+        "Revelation.2.9",
+        "Revelation.20.2",
+        "Revelation.20.7",
+        "Revelation.3.9",
+        "Romans.16.20"
+      ],
+      "sourceForms": [
+        "Σατανᾶς",
+        "σατανᾶ",
+        "σατανᾶν",
+        "σατανᾶς",
+        "σατανᾷ"
+      ],
+      "words": [
+        "Satan",
+        "Satan's"
+      ]
+    }
+  ]
+}

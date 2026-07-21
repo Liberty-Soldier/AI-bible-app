@@ -2,6 +2,7 @@ import "server-only";
 
 import type {
   BibleIQChapterTokenAvailability,
+  BibleIQCompoundRouteKind,
   BibleIQSource,
 } from "@/app/data/lexicon/BibleIQTypes";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
@@ -48,15 +49,73 @@ type RuntimeManifest = {
   corpora: Record<BibleIQSource, RuntimeCorpusManifest>;
 };
 
+export type CanonicalCompoundRoute = {
+  routeId: string;
+  lexicalId: string;
+  label: string;
+  routeKind: BibleIQCompoundRouteKind;
+  componentLexicalIds: string[];
+};
+
 export type CanonicalHit = {
   entityId: string;
   sourceWord?: string;
   sourceToken?: CanonicalSourceToken;
+  compoundRoute?: CanonicalCompoundRoute;
 };
 
 const RUNTIME_ROOT = "/data/bibleiq/word-study";
 const manifestCache = new Map<string, Promise<RuntimeManifest | null>>();
 const bookCache = new Map<string, Promise<CompactBook | null>>();
+
+
+const GREEK_COMPOUND_ROUTES: Record<
+  string,
+  Omit<CanonicalCompoundRoute, "lexicalId">
+> = {
+  "G4566«G4567": {
+    routeId: "compound:greek-nt:G4566-G4567",
+    label: "Satan",
+    routeKind: "lexical-compound-alias",
+    componentLexicalIds: ["G4566", "G4567"],
+  },
+  "G3535«G3536": {
+    routeId: "compound:greek-nt:G3535-G3536",
+    label: "Ninevites",
+    routeKind: "lexical-compound-alias",
+    componentLexicalIds: ["G3535", "G3536"],
+  },
+  "G1176+G3638": {
+    routeId: "compound:greek-nt:G1176-G3638",
+    label: "eighteen",
+    routeKind: "compositional-number",
+    componentLexicalIds: ["G1176", "G3638"],
+  },
+  "G3379+G4219": {
+    routeId: "compound:greek-nt:G3379-G4219",
+    label: "lest",
+    routeKind: "compositional-function-word",
+    componentLexicalIds: ["G3379", "G4219"],
+  },
+};
+
+function compoundRouteForSourceToken(
+  sourceToken: CanonicalSourceToken,
+): CanonicalCompoundRoute | undefined {
+  if (sourceToken.source !== "greek-nt" || !sourceToken.strong) {
+    return undefined;
+  }
+
+  const route = GREEK_COMPOUND_ROUTES[sourceToken.strong];
+  if (!route || sourceToken.entityId !== route.routeId) {
+    return undefined;
+  }
+
+  return {
+    ...route,
+    lexicalId: sourceToken.strong,
+  };
+}
 
 const NEW_TESTAMENT_BOOKS = new Set([
   "Matthew",
@@ -272,13 +331,25 @@ export async function findCanonicalHit({
     entityId: sourceToken.entityId,
     sourceWord: sourceToken.surface,
     sourceToken,
+    compoundRoute: compoundRouteForSourceToken(sourceToken),
   };
 }
 
-function lexicalIdFromEntityId(entityId: string) {
+function lexicalIdFromEntityId(entityId: string, strong?: string) {
   const value = String(entityId || "").trim();
-  const match = value.match(/^word:(?:hebrew|greek-nt|lxx):([^:]+)$/);
-  return match?.[1] || undefined;
+  const wordMatch = value.match(
+    /^word:(?:hebrew|greek-nt|lxx):([^:]+)$/,
+  );
+  if (wordMatch?.[1]) return wordMatch[1];
+
+  if (
+    /^compound:greek-nt:G\d+-G\d+$/.test(value) &&
+    strong
+  ) {
+    return strong;
+  }
+
+  return undefined;
 }
 
 export async function getCanonicalChapterTokenAvailability({
@@ -318,6 +389,9 @@ export async function getCanonicalChapterTokenAvailability({
         source: BibleIQSource;
         sourceWord?: string;
         lexicalId?: string;
+        isCompoundRoute?: boolean;
+        compoundRouteKind?: BibleIQCompoundRouteKind;
+        componentLexicalIds?: string[];
       }
     > = {};
 
@@ -327,19 +401,31 @@ export async function getCanonicalChapterTokenAvailability({
       const compactSource = compactVerse.s?.[sourceIndex];
       const entityId = String(compactSource?.[4] || "").trim();
 
-      if (
-        !/^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(
+      const isOrdinaryEntity =
+        /^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(
           entityId,
-        )
-      ) {
+        );
+      const isCompoundRoute =
+        /^compound:greek-nt:G\d+-G\d+$/.test(entityId);
+
+      if (!isOrdinaryEntity && !isCompoundRoute) {
         continue;
       }
+
+      const strong = compactSource?.[3] || undefined;
+      const route =
+        isCompoundRoute && strong
+          ? GREEK_COMPOUND_ROUTES[strong]
+          : undefined;
 
       available[displayIndex] = {
         entityId,
         source: corpus,
         sourceWord: compactSource?.[1] || undefined,
-        lexicalId: lexicalIdFromEntityId(entityId),
+        lexicalId: lexicalIdFromEntityId(entityId, strong),
+        isCompoundRoute,
+        compoundRouteKind: route?.routeKind,
+        componentLexicalIds: route?.componentLexicalIds,
       };
     }
 
