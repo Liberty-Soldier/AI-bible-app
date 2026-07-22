@@ -1,0 +1,2416 @@
+{
+  "version": "p0511-safe-parallel-plan@1",
+  "generatedAt": "2026-07-22T02:51:54.419Z",
+  "sourceValidator": "p0511-safe-parallel-validator@1",
+  "expected": {
+    "routes": 120,
+    "byCorpusTranslation": {
+      "hebrew/kjv": 29,
+      "hebrew/web": 59,
+      "greek-nt/kjv": 14,
+      "greek-nt/web": 18
+    }
+  },
+  "routes": [
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:13:13",
+      "reference": "1Chr:13:13",
+      "tokenIndex": 22,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 16,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:13:13:12"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:13:14",
+      "reference": "1Chr:13:14",
+      "tokenIndex": 10,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 7,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:13:14:15"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:13:14",
+      "reference": "1Chr:13:14",
+      "tokenIndex": 23,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 16,
+      "parallelText": "Obed-Edom's",
+      "sourceTokenIds": [
+        "hebrew:1Chr:13:14:16"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:15:25",
+      "reference": "1Chr:15:25",
+      "tokenIndex": 29,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 25,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:15:25:15"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:22:14",
+      "reference": "1Chr:22:14",
+      "tokenIndex": 19,
+      "expectedText": "talents",
+      "expectedNormalized": "talents",
+      "parallelTokenIndex": 24,
+      "parallelText": "talents",
+      "sourceTokenIds": [
+        "hebrew:1Chr:22:14:22"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3603"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:15:21",
+      "reference": "1Chr:15:21",
+      "tokenIndex": 7,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 4,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:15:21:3"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:26:8",
+      "reference": "1Chr:26:8",
+      "tokenIndex": 6,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 7,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:26:8:12"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:26:8",
+      "reference": "1Chr:26:8",
+      "tokenIndex": 26,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 24,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:26:8:13"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:16:38",
+      "reference": "1Chr:16:38",
+      "tokenIndex": 1,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 1,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:16:38:6"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:16:38",
+      "reference": "1Chr:16:38",
+      "tokenIndex": 8,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 6,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:16:38:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:25:4",
+      "reference": "1Chr:25:4",
+      "tokenIndex": 17,
+      "expectedText": "Romamtiezer",
+      "expectedNormalized": "romamtiezer",
+      "parallelTokenIndex": 15,
+      "parallelText": "Romamti-Ezer",
+      "sourceTokenIds": [
+        "hebrew:1Chr:25:4:12"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H7320"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:25:31",
+      "reference": "1Chr:25:31",
+      "tokenIndex": 5,
+      "expectedText": "Romamtiezer",
+      "expectedNormalized": "romamtiezer",
+      "parallelTokenIndex": 4,
+      "parallelText": "Romamti-Ezer",
+      "sourceTokenIds": [
+        "hebrew:1Chr:25:31:6"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H7320"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:26:4",
+      "reference": "1Chr:26:4",
+      "tokenIndex": 4,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 0,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:26:4:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:26:15",
+      "reference": "1Chr:26:15",
+      "tokenIndex": 1,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 1,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:26:15:3"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:15:24",
+      "reference": "1Chr:15:24",
+      "tokenIndex": 27,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 17,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:15:24:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:29:7",
+      "reference": "1Chr:29:7",
+      "tokenIndex": 22,
+      "expectedText": "talents",
+      "expectedNormalized": "talents",
+      "parallelTokenIndex": 24,
+      "parallelText": "talents",
+      "sourceTokenIds": [
+        "hebrew:1Chr:29:7:17"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3603"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:29:7",
+      "reference": "1Chr:29:7",
+      "tokenIndex": 27,
+      "expectedText": "talents",
+      "expectedNormalized": "talents",
+      "parallelTokenIndex": 30,
+      "parallelText": "talents",
+      "sourceTokenIds": [
+        "hebrew:1Chr:29:7:18"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3603"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:29:7",
+      "reference": "1Chr:29:7",
+      "tokenIndex": 34,
+      "expectedText": "talents",
+      "expectedNormalized": "talents",
+      "parallelTokenIndex": 35,
+      "parallelText": "talents",
+      "sourceTokenIds": [
+        "hebrew:1Chr:29:7:19"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3603"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:29:4",
+      "reference": "1Chr:29:4",
+      "tokenIndex": 14,
+      "expectedText": "talents",
+      "expectedNormalized": "talents",
+      "parallelTokenIndex": 14,
+      "parallelText": "talents",
+      "sourceTokenIds": [
+        "hebrew:1Chr:29:4:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3603"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:16:5",
+      "reference": "1Chr:16:5",
+      "tokenIndex": 20,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 15,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:16:5:11"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Chr.json",
+      "objectKey": "1Chr:15:18",
+      "reference": "1Chr:15:18",
+      "tokenIndex": 31,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 21,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:1Chr:15:18:8"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "1Kgs.json",
+      "objectKey": "1Kgs:7:2",
+      "reference": "1Kgs:7:2",
+      "tokenIndex": 19,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 22,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:1Kgs:7:2:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "1Sam.json",
+      "objectKey": "1Sam:12:2",
+      "reference": "1Sam:12:2",
+      "tokenIndex": 11,
+      "expectedText": "gray-headed",
+      "expectedNormalized": "grayheaded",
+      "parallelTokenIndex": 13,
+      "parallelText": "grayheaded",
+      "sourceTokenIds": [
+        "hebrew:1Sam:12:2:17"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H7867"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Chr.json",
+      "objectKey": "2Chr:3:3",
+      "reference": "2Chr:3:3",
+      "tokenIndex": 24,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 27,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:2Chr:3:3:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "2Chr.json",
+      "objectKey": "2Chr:25:24",
+      "reference": "2Chr:25:24",
+      "tokenIndex": 22,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 18,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:2Chr:25:24:18"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Chr.json",
+      "objectKey": "2Chr:6:13",
+      "reference": "2Chr:6:13",
+      "tokenIndex": 12,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 13,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:2Chr:6:13:16"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Chr.json",
+      "objectKey": "2Chr:6:13",
+      "reference": "2Chr:6:13",
+      "tokenIndex": 16,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 17,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:2Chr:6:13:17"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Chr.json",
+      "objectKey": "2Chr:27:5",
+      "reference": "2Chr:27:5",
+      "tokenIndex": 47,
+      "expectedText": "much",
+      "expectedNormalized": "much",
+      "parallelTokenIndex": 40,
+      "parallelText": "much",
+      "sourceTokenIds": [
+        "hebrew:2Chr:27:5:12"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H2063"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Chr.json",
+      "objectKey": "2Chr:4:1",
+      "reference": "2Chr:4:1",
+      "tokenIndex": 11,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 14,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:2Chr:4:1:5"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Chr.json",
+      "objectKey": "2Chr:4:1",
+      "reference": "2Chr:4:1",
+      "tokenIndex": 15,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 20,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:2Chr:4:1:6"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Kgs.json",
+      "objectKey": "2Kgs:7:1",
+      "reference": "2Kgs:7:1",
+      "tokenIndex": 29,
+      "expectedText": "shekel",
+      "expectedNormalized": "shekel",
+      "parallelTokenIndex": 37,
+      "parallelText": "shekel",
+      "sourceTokenIds": [
+        "hebrew:2Kgs:7:1:11"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H8255"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Kgs.json",
+      "objectKey": "2Kgs:15:19",
+      "reference": "2Kgs:15:19",
+      "tokenIndex": 20,
+      "expectedText": "hand",
+      "expectedNormalized": "hand",
+      "parallelTokenIndex": 21,
+      "parallelText": "hand",
+      "sourceTokenIds": [
+        "hebrew:2Kgs:15:19:6"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3027"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Kgs.json",
+      "objectKey": "2Kgs:15:19",
+      "reference": "2Kgs:15:19",
+      "tokenIndex": 31,
+      "expectedText": "hand",
+      "expectedNormalized": "hand",
+      "parallelTokenIndex": 32,
+      "parallelText": "hand",
+      "sourceTokenIds": [
+        "hebrew:2Kgs:15:19:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3027"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Kgs.json",
+      "objectKey": "2Kgs:25:17",
+      "reference": "2Kgs:25:17",
+      "tokenIndex": 24,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 23,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:2Kgs:25:17:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "2Kgs.json",
+      "objectKey": "2Kgs:7:18",
+      "reference": "2Kgs:7:18",
+      "tokenIndex": 28,
+      "expectedText": "shekel",
+      "expectedNormalized": "shekel",
+      "parallelTokenIndex": 31,
+      "parallelText": "shekel",
+      "sourceTokenIds": [
+        "hebrew:2Kgs:7:18:12"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H8255"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "2Sam.json",
+      "objectKey": "2Sam:6:10",
+      "reference": "2Sam:6:10",
+      "tokenIndex": 26,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 20,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:2Sam:6:10:14"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "2Sam.json",
+      "objectKey": "2Sam:6:11",
+      "reference": "2Sam:6:11",
+      "tokenIndex": 11,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 4,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:2Sam:6:11:12"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "2Sam.json",
+      "objectKey": "2Sam:6:11",
+      "reference": "2Sam:6:11",
+      "tokenIndex": 20,
+      "expectedText": "Obededom",
+      "expectedNormalized": "obededom",
+      "parallelTokenIndex": 13,
+      "parallelText": "Obed-Edom",
+      "sourceTokenIds": [
+        "hebrew:2Sam:6:11:13"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H5654"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "2Sam.json",
+      "objectKey": "2Sam:21:19",
+      "reference": "2Sam:21:19",
+      "tokenIndex": 16,
+      "expectedText": "Jaareoregim",
+      "expectedNormalized": "jaareoregim",
+      "parallelTokenIndex": 14,
+      "parallelText": "Jaare-Oregim",
+      "sourceTokenIds": [
+        "hebrew:2Sam:21:19:18"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3296"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Dan.json",
+      "objectKey": "Dan:2:9",
+      "reference": "Dan:2:9",
+      "tokenIndex": 35,
+      "expectedText": "therefore",
+      "expectedNormalized": "therefore",
+      "parallelTokenIndex": 33,
+      "parallelText": "Therefore",
+      "sourceTokenIds": [
+        "hebrew:Dan:2:9:2"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H1768"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Dan.json",
+      "objectKey": "Dan:3:1",
+      "reference": "Dan:3:1",
+      "tokenIndex": 17,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 18,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Dan:3:1:11"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H521"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Dan.json",
+      "objectKey": "Dan:7:13",
+      "reference": "Dan:7:13",
+      "tokenIndex": 21,
+      "expectedText": "came",
+      "expectedNormalized": "came",
+      "parallelTokenIndex": 24,
+      "parallelText": "came",
+      "sourceTokenIds": [
+        "hebrew:Dan:7:13:13"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H4291"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Deut.json",
+      "objectKey": "Deut:3:11",
+      "reference": "Deut:3:11",
+      "tokenIndex": 37,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 38,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Deut:3:11:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:27:1",
+      "reference": "Exod:27:1",
+      "tokenIndex": 13,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 14,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Exod:27:1:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:27:1",
+      "reference": "Exod:27:1",
+      "tokenIndex": 25,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 28,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Exod:27:1:11"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:37:1",
+      "reference": "Exod:37:1",
+      "tokenIndex": 19,
+      "expectedText": "cubit",
+      "expectedNormalized": "cubit",
+      "parallelTokenIndex": 20,
+      "parallelText": "cubit",
+      "sourceTokenIds": [
+        "hebrew:Exod:37:1:4"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:37:1",
+      "reference": "Exod:37:1",
+      "tokenIndex": 22,
+      "expectedText": "half",
+      "expectedNormalized": "half",
+      "parallelTokenIndex": 23,
+      "parallelText": "half",
+      "sourceTokenIds": [
+        "hebrew:Exod:37:1:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H2677"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:37:1",
+      "reference": "Exod:37:1",
+      "tokenIndex": 25,
+      "expectedText": "cubit",
+      "expectedNormalized": "cubit",
+      "parallelTokenIndex": 30,
+      "parallelText": "cubit",
+      "sourceTokenIds": [
+        "hebrew:Exod:37:1:5"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:38:1",
+      "reference": "Exod:38:1",
+      "tokenIndex": 22,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 19,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Exod:38:1:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:38:1",
+      "reference": "Exod:38:1",
+      "tokenIndex": 28,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 28,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Exod:38:1:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:39:9",
+      "reference": "Exod:39:9",
+      "tokenIndex": 17,
+      "expectedText": "span",
+      "expectedNormalized": "span",
+      "parallelTokenIndex": 16,
+      "parallelText": "span",
+      "sourceTokenIds": [
+        "hebrew:Exod:39:9:8"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H2239"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:26:2",
+      "reference": "Exod:26:2",
+      "tokenIndex": 16,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 18,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Exod:26:2:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:36:9",
+      "reference": "Exod:36:9",
+      "tokenIndex": 15,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 17,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Exod:36:9:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:28:16",
+      "reference": "Exod:28:16",
+      "tokenIndex": 15,
+      "expectedText": "span",
+      "expectedNormalized": "span",
+      "parallelTokenIndex": 15,
+      "parallelText": "span",
+      "sourceTokenIds": [
+        "hebrew:Exod:28:16:5"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H2239"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:30:2",
+      "reference": "Exod:30:2",
+      "tokenIndex": 10,
+      "expectedText": "cubit",
+      "expectedNormalized": "cubit",
+      "parallelTokenIndex": 9,
+      "parallelText": "cubit",
+      "sourceTokenIds": [
+        "hebrew:Exod:30:2:3"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:25:10",
+      "reference": "Exod:25:10",
+      "tokenIndex": 20,
+      "expectedText": "cubit",
+      "expectedNormalized": "cubit",
+      "parallelTokenIndex": 21,
+      "parallelText": "cubit",
+      "sourceTokenIds": [
+        "hebrew:Exod:25:10:3"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:25:10",
+      "reference": "Exod:25:10",
+      "tokenIndex": 23,
+      "expectedText": "half",
+      "expectedNormalized": "half",
+      "parallelTokenIndex": 24,
+      "parallelText": "half",
+      "sourceTokenIds": [
+        "hebrew:Exod:25:10:8"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H2677"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:25:10",
+      "reference": "Exod:25:10",
+      "tokenIndex": 26,
+      "expectedText": "cubit",
+      "expectedNormalized": "cubit",
+      "parallelTokenIndex": 30,
+      "parallelText": "cubit",
+      "sourceTokenIds": [
+        "hebrew:Exod:25:10:4"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Exod.json",
+      "objectKey": "Exod:29:40",
+      "reference": "Exod:29:40",
+      "tokenIndex": 31,
+      "expectedText": "hin",
+      "expectedNormalized": "hin",
+      "parallelTokenIndex": 27,
+      "parallelText": "hin",
+      "sourceTokenIds": [
+        "hebrew:Exod:29:40:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H1969"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezek.json",
+      "objectKey": "Ezek:40:5",
+      "reference": "Ezek:40:5",
+      "tokenIndex": 40,
+      "expectedText": "one",
+      "expectedNormalized": "one",
+      "parallelTokenIndex": 39,
+      "parallelText": "one",
+      "sourceTokenIds": [
+        "hebrew:Ezek:40:5:4"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H259"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezek.json",
+      "objectKey": "Ezek:40:5",
+      "reference": "Ezek:40:5",
+      "tokenIndex": 41,
+      "expectedText": "reed",
+      "expectedNormalized": "reed",
+      "parallelTokenIndex": 40,
+      "parallelText": "reed",
+      "sourceTokenIds": [
+        "hebrew:Ezek:40:5:17"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H7070"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezek.json",
+      "objectKey": "Ezek:43:13",
+      "reference": "Ezek:43:13",
+      "tokenIndex": 13,
+      "expectedText": "cubit",
+      "expectedNormalized": "cubit",
+      "parallelTokenIndex": 15,
+      "parallelText": "cubit",
+      "sourceTokenIds": [
+        "hebrew:Ezek:43:13:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezek.json",
+      "objectKey": "Ezek:43:13",
+      "reference": "Ezek:43:13",
+      "tokenIndex": 23,
+      "expectedText": "cubit",
+      "expectedNormalized": "cubit",
+      "parallelTokenIndex": 26,
+      "parallelText": "cubit",
+      "sourceTokenIds": [
+        "hebrew:Ezek:43:13:11"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezek.json",
+      "objectKey": "Ezek:41:2",
+      "reference": "Ezek:41:2",
+      "tokenIndex": 16,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 17,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Ezek:41:2:6"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezek.json",
+      "objectKey": "Ezek:41:2",
+      "reference": "Ezek:41:2",
+      "tokenIndex": 23,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 24,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Ezek:41:2:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezra.json",
+      "objectKey": "Ezra:8:27",
+      "reference": "Ezra:8:27",
+      "tokenIndex": 17,
+      "expectedText": "gold",
+      "expectedNormalized": "gold",
+      "parallelTokenIndex": 17,
+      "parallelText": "gold",
+      "sourceTokenIds": [
+        "hebrew:Ezra:8:27:4"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H2091"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezra.json",
+      "objectKey": "Ezra:6:3",
+      "reference": "Ezra:6:3",
+      "tokenIndex": 46,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 52,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Ezra:6:3:17"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H521"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Ezra.json",
+      "objectKey": "Ezra:7:22",
+      "reference": "Ezra:7:22",
+      "tokenIndex": 25,
+      "expectedText": "baths",
+      "expectedNormalized": "baths",
+      "parallelTokenIndex": 24,
+      "parallelText": "baths",
+      "sourceTokenIds": [
+        "hebrew:Ezra:7:22:18"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H1325"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Gen.json",
+      "objectKey": "Gen:6:15",
+      "reference": "Gen:6:15",
+      "tokenIndex": 20,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 26,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Gen:6:15:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Gen.json",
+      "objectKey": "Gen:6:15",
+      "reference": "Gen:6:15",
+      "tokenIndex": 25,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 33,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Gen:6:15:8"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Gen.json",
+      "objectKey": "Gen:50:23",
+      "reference": "Gen:50:23",
+      "tokenIndex": 10,
+      "expectedText": "children",
+      "expectedNormalized": "children",
+      "parallelTokenIndex": 9,
+      "parallelText": "children",
+      "sourceTokenIds": [
+        "hebrew:Gen:50:23:3"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H1121"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Gen.json",
+      "objectKey": "Gen:23:4",
+      "reference": "Gen:23:4",
+      "tokenIndex": 15,
+      "expectedText": "buryingplace",
+      "expectedNormalized": "buryingplace",
+      "parallelTokenIndex": 16,
+      "parallelText": "burying-place",
+      "sourceTokenIds": [
+        "hebrew:Gen:23:4:8"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H6913"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Hos.json",
+      "objectKey": "Hos:1:8",
+      "reference": "Hos:1:8",
+      "tokenIndex": 5,
+      "expectedText": "Loruhamah",
+      "expectedNormalized": "loruhamah",
+      "parallelTokenIndex": 5,
+      "parallelText": "Lo-Ruhamah",
+      "sourceTokenIds": [
+        "hebrew:Hos:1:8:5"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3819"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Hos.json",
+      "objectKey": "Hos:1:9",
+      "reference": "Hos:1:9",
+      "tokenIndex": 6,
+      "expectedText": "Loammi",
+      "expectedNormalized": "loammi",
+      "parallelTokenIndex": 5,
+      "parallelText": "Lo-Ammi",
+      "sourceTokenIds": [
+        "hebrew:Hos:1:9:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3818"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Isa.json",
+      "objectKey": "Isa:28:15",
+      "reference": "Isa:28:15",
+      "tokenIndex": 32,
+      "expectedText": "made",
+      "expectedNormalized": "made",
+      "parallelTokenIndex": 34,
+      "parallelText": "made",
+      "sourceTokenIds": [
+        "hebrew:Isa:28:15:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H7760"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Jer.json",
+      "objectKey": "Jer:52:21",
+      "reference": "Jer:52:21",
+      "tokenIndex": 18,
+      "expectedText": "cubits",
+      "expectedNormalized": "cubits",
+      "parallelTokenIndex": 17,
+      "parallelText": "cubits",
+      "sourceTokenIds": [
+        "hebrew:Jer:52:21:6"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H520"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Job.json",
+      "objectKey": "Job:15:10",
+      "reference": "Job:15:10",
+      "tokenIndex": 5,
+      "expectedText": "gray-headed",
+      "expectedNormalized": "grayheaded",
+      "parallelTokenIndex": 5,
+      "parallelText": "grayheaded",
+      "sourceTokenIds": [
+        "hebrew:Job:15:10:6"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H7867"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Josh.json",
+      "objectKey": "Josh:7:21",
+      "reference": "Josh:7:21",
+      "tokenIndex": 22,
+      "expectedText": "shekels",
+      "expectedNormalized": "shekels",
+      "parallelTokenIndex": 23,
+      "parallelText": "shekels",
+      "sourceTokenIds": [
+        "hebrew:Josh:7:21:18"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H8255"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Judg.json",
+      "objectKey": "Judg:1:5",
+      "reference": "Judg:1:5",
+      "tokenIndex": 2,
+      "expectedText": "Adoni-Bezek",
+      "expectedNormalized": "adonibezek",
+      "parallelTokenIndex": 3,
+      "parallelText": "Adonibezek",
+      "sourceTokenIds": [
+        "hebrew:Judg:1:5:9"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H137"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Judg.json",
+      "objectKey": "Judg:1:6",
+      "reference": "Judg:1:6",
+      "tokenIndex": 1,
+      "expectedText": "Adoni-Bezek",
+      "expectedNormalized": "adonibezek",
+      "parallelTokenIndex": 1,
+      "parallelText": "Adonibezek",
+      "sourceTokenIds": [
+        "hebrew:Judg:1:6:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H137"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Judg.json",
+      "objectKey": "Judg:3:15",
+      "reference": "Judg:3:15",
+      "tokenIndex": 26,
+      "expectedText": "lefthanded",
+      "expectedNormalized": "lefthanded",
+      "parallelTokenIndex": 24,
+      "parallelText": "left-handed",
+      "sourceTokenIds": [
+        "hebrew:Judg:3:15:18"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3225"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Judg.json",
+      "objectKey": "Judg:6:32",
+      "reference": "Judg:6:32",
+      "tokenIndex": 7,
+      "expectedText": "Jerub-Baal",
+      "expectedNormalized": "jerubbaal",
+      "parallelTokenIndex": 7,
+      "parallelText": "Jerubbaal",
+      "sourceTokenIds": [
+        "hebrew:Judg:6:32:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H3378"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Judg.json",
+      "objectKey": "Judg:1:7",
+      "reference": "Judg:1:7",
+      "tokenIndex": 0,
+      "expectedText": "Adoni-Bezek",
+      "expectedNormalized": "adonibezek",
+      "parallelTokenIndex": 1,
+      "parallelText": "Adonibezek",
+      "sourceTokenIds": [
+        "hebrew:Judg:1:7:20"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H137"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Lev.json",
+      "objectKey": "Lev:11:3",
+      "reference": "Lev:11:3",
+      "tokenIndex": 6,
+      "expectedText": "cloven-footed",
+      "expectedNormalized": "clovenfooted",
+      "parallelTokenIndex": 6,
+      "parallelText": "clovenfooted",
+      "sourceTokenIds": [
+        "hebrew:Lev:11:3:10"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H8157"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Lev.json",
+      "objectKey": "Lev:11:7",
+      "reference": "Lev:11:7",
+      "tokenIndex": 10,
+      "expectedText": "cloven-footed",
+      "expectedNormalized": "clovenfooted",
+      "parallelTokenIndex": 10,
+      "parallelText": "clovenfooted",
+      "sourceTokenIds": [
+        "hebrew:Lev:11:7:14"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H8157"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Num.json",
+      "objectKey": "Num:10:29",
+      "reference": "Num:10:29",
+      "tokenIndex": 25,
+      "expectedText": "said",
+      "expectedNormalized": "said",
+      "parallelTokenIndex": 21,
+      "parallelText": "said",
+      "sourceTokenIds": [
+        "hebrew:Num:10:29:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H559"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Num.json",
+      "objectKey": "Num:3:47",
+      "reference": "Num:3:47",
+      "tokenIndex": 21,
+      "expectedText": "shekel",
+      "expectedNormalized": "shekel",
+      "parallelTokenIndex": 21,
+      "parallelText": "shekel",
+      "sourceTokenIds": [
+        "hebrew:Num:3:47:8"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H8255"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "hebrew",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Prov.json",
+      "objectKey": "Prov:20:19",
+      "reference": "Prov:20:19",
+      "tokenIndex": 6,
+      "expectedText": "tale-bearer",
+      "expectedNormalized": "talebearer",
+      "parallelTokenIndex": 6,
+      "parallelText": "talebearer",
+      "sourceTokenIds": [
+        "hebrew:Prov:20:19:7"
+      ],
+      "sourceEntityIds": [
+        "hebrew:H7400"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "1Tim.json",
+      "objectKey": "1 Timothy.3.8",
+      "reference": "1 Timothy.3.8",
+      "tokenIndex": 7,
+      "expectedText": "doubletongued",
+      "expectedNormalized": "doubletongued",
+      "parallelTokenIndex": 9,
+      "parallelText": "double-tongued",
+      "sourceTokenIds": [
+        "greek-nt:1_Timothy.3.8:4"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G1351"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "2Pet.json",
+      "objectKey": "2 Peter.2.10",
+      "reference": "2 Peter.2.10",
+      "tokenIndex": 19,
+      "expectedText": "selfwilled",
+      "expectedNormalized": "selfwilled",
+      "parallelTokenIndex": 17,
+      "parallelText": "self-willed",
+      "sourceTokenIds": [
+        "greek-nt:2_Peter.2.10:13"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G0829"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Acts.json",
+      "objectKey": "Acts.5.23",
+      "reference": "Acts.5.23",
+      "tokenIndex": 1,
+      "expectedText": "found",
+      "expectedNormalized": "found",
+      "parallelTokenIndex": 4,
+      "parallelText": "found",
+      "sourceTokenIds": [
+        "greek-nt:Acts.5.23:4"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G2147"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Acts.json",
+      "objectKey": "Acts.5.23",
+      "reference": "Acts.5.23",
+      "tokenIndex": 20,
+      "expectedText": "found",
+      "expectedNormalized": "found",
+      "parallelTokenIndex": 24,
+      "parallelText": "found",
+      "sourceTokenIds": [
+        "greek-nt:Acts.5.23:20"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G2147"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Acts.json",
+      "objectKey": "Acts.7.51",
+      "reference": "Acts.7.51",
+      "tokenIndex": 1,
+      "expectedText": "stiffnecked",
+      "expectedNormalized": "stiffnecked",
+      "parallelTokenIndex": 1,
+      "parallelText": "stiff-necked",
+      "sourceTokenIds": [
+        "greek-nt:Acts.7.51:0"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G4644"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Acts.json",
+      "objectKey": "Acts.10.12",
+      "reference": "Acts.10.12",
+      "tokenIndex": 5,
+      "expectedText": "fourfooted",
+      "expectedNormalized": "fourfooted",
+      "parallelTokenIndex": 6,
+      "parallelText": "four-footed",
+      "sourceTokenIds": [
+        "greek-nt:Acts.10.12:5"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G5074"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Acts.json",
+      "objectKey": "Acts.11.6",
+      "reference": "Acts.11.6",
+      "tokenIndex": 13,
+      "expectedText": "fourfooted",
+      "expectedNormalized": "fourfooted",
+      "parallelTokenIndex": 12,
+      "parallelText": "four-footed",
+      "sourceTokenIds": [
+        "greek-nt:Acts.11.6:7"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G5074"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Acts.json",
+      "objectKey": "Acts.15.22",
+      "reference": "Acts.15.22",
+      "tokenIndex": 16,
+      "expectedText": "men",
+      "expectedNormalized": "men",
+      "parallelTokenIndex": 14,
+      "parallelText": "men",
+      "sourceTokenIds": [
+        "greek-nt:Acts.15.22:12"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G0435"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Acts.json",
+      "objectKey": "Acts.15.22",
+      "reference": "Acts.15.22",
+      "tokenIndex": 36,
+      "expectedText": "men",
+      "expectedNormalized": "men",
+      "parallelTokenIndex": 32,
+      "parallelText": "men",
+      "sourceTokenIds": [
+        "greek-nt:Acts.15.22:29"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G0435"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Acts.json",
+      "objectKey": "Acts.27.28",
+      "reference": "Acts.27.28",
+      "tokenIndex": 18,
+      "expectedText": "fathoms",
+      "expectedNormalized": "fathoms",
+      "parallelTokenIndex": 22,
+      "parallelText": "fathoms",
+      "sourceTokenIds": [
+        "greek-nt:Acts.27.28:12"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G3712"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Heb.json",
+      "objectKey": "Hebrews.4.12",
+      "reference": "Hebrews.4.12",
+      "tokenIndex": 13,
+      "expectedText": "twoedged",
+      "expectedNormalized": "twoedged",
+      "parallelTokenIndex": 13,
+      "parallelText": "two-edged",
+      "sourceTokenIds": [
+        "greek-nt:Hebrews.4.12:13"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G1366"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Jas.json",
+      "objectKey": "James.5.2",
+      "reference": "James.5.2",
+      "tokenIndex": 8,
+      "expectedText": "motheaten",
+      "expectedNormalized": "motheaten",
+      "parallelTokenIndex": 8,
+      "parallelText": "moth-eaten",
+      "sourceTokenIds": [
+        "greek-nt:James.5.2:8"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G4598"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "John.json",
+      "objectKey": "John.4.6",
+      "reference": "John.4.6",
+      "tokenIndex": 1,
+      "expectedText": "well",
+      "expectedNormalized": "well",
+      "parallelTokenIndex": 2,
+      "parallelText": "well",
+      "sourceTokenIds": [
+        "greek-nt:John.4.6:3"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G4077"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "John.json",
+      "objectKey": "John.4.6",
+      "reference": "John.4.6",
+      "tokenIndex": 15,
+      "expectedText": "well",
+      "expectedNormalized": "well",
+      "parallelTokenIndex": 16,
+      "parallelText": "well",
+      "sourceTokenIds": [
+        "greek-nt:John.4.6:17"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G4077"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "John.json",
+      "objectKey": "John.9.16",
+      "reference": "John.9.16",
+      "tokenIndex": 5,
+      "expectedText": "said",
+      "expectedNormalized": "said",
+      "parallelTokenIndex": 1,
+      "parallelText": "said",
+      "sourceTokenIds": [
+        "greek-nt:John.9.16:0"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G3004"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "John.json",
+      "objectKey": "John.9.16",
+      "reference": "John.9.16",
+      "tokenIndex": 19,
+      "expectedText": "said",
+      "expectedNormalized": "said",
+      "parallelTokenIndex": 20,
+      "parallelText": "said",
+      "sourceTokenIds": [
+        "greek-nt:John.9.16:20"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G3004"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "John.json",
+      "objectKey": "John.14.7",
+      "reference": "John.14.7",
+      "tokenIndex": 8,
+      "expectedText": "known",
+      "expectedNormalized": "known",
+      "parallelTokenIndex": 8,
+      "parallelText": "known",
+      "sourceTokenIds": [
+        "greek-nt:John.14.7:1"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G1097"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "John.json",
+      "objectKey": "John.19.21",
+      "reference": "John.19.21",
+      "tokenIndex": 7,
+      "expectedText": "said",
+      "expectedNormalized": "said",
+      "parallelTokenIndex": 1,
+      "parallelText": "said",
+      "sourceTokenIds": [
+        "greek-nt:John.19.21:0"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G3004"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Luke.json",
+      "objectKey": "Luke.9.33",
+      "reference": "Luke.9.33",
+      "tokenIndex": 7,
+      "expectedText": "said",
+      "expectedNormalized": "said",
+      "parallelTokenIndex": 11,
+      "parallelText": "said",
+      "sourceTokenIds": [
+        "greek-nt:Luke.9.33:8"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G2036"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Luke.json",
+      "objectKey": "Luke.17.10",
+      "reference": "Luke.17.10",
+      "tokenIndex": 7,
+      "expectedText": "done",
+      "expectedNormalized": "done",
+      "parallelTokenIndex": 7,
+      "parallelText": "done",
+      "sourceTokenIds": [
+        "greek-nt:Luke.17.10:4"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G4160"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Luke.json",
+      "objectKey": "Luke.17.10",
+      "reference": "Luke.17.10",
+      "tokenIndex": 22,
+      "expectedText": "done",
+      "expectedNormalized": "done",
+      "parallelTokenIndex": 22,
+      "parallelText": "done",
+      "sourceTokenIds": [
+        "greek-nt:Luke.17.10:17"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G4160"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Luke.json",
+      "objectKey": "Luke.23.44",
+      "reference": "Luke.23.44",
+      "tokenIndex": 17,
+      "expectedText": "hour",
+      "expectedNormalized": "hour",
+      "parallelTokenIndex": 19,
+      "parallelText": "hour",
+      "sourceTokenIds": [
+        "greek-nt:Luke.23.44:14"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G5610"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Luke.json",
+      "objectKey": "Luke.23.46",
+      "reference": "Luke.23.46",
+      "tokenIndex": 10,
+      "expectedText": "said",
+      "expectedNormalized": "said",
+      "parallelTokenIndex": 6,
+      "parallelText": "said",
+      "sourceTokenIds": [
+        "greek-nt:Luke.23.46:6"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G2036"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Luke.json",
+      "objectKey": "Luke.23.46",
+      "reference": "Luke.23.46",
+      "tokenIndex": 21,
+      "expectedText": "said",
+      "expectedNormalized": "said",
+      "parallelTokenIndex": 16,
+      "parallelText": "said",
+      "sourceTokenIds": [
+        "greek-nt:Luke.23.46:17"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G2036"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Mark.json",
+      "objectKey": "Mark.8.12",
+      "reference": "Mark.8.12",
+      "tokenIndex": 27,
+      "expectedText": "generation",
+      "expectedNormalized": "generation",
+      "parallelTokenIndex": 30,
+      "parallelText": "generation",
+      "sourceTokenIds": [
+        "greek-nt:Mark.8.12:18"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G1074"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Matt.json",
+      "objectKey": "Matthew.13.11",
+      "reference": "Matthew.13.11",
+      "tokenIndex": 7,
+      "expectedText": "given",
+      "expectedNormalized": "given",
+      "parallelTokenIndex": 9,
+      "parallelText": "given",
+      "sourceTokenIds": [
+        "greek-nt:Matthew.13.11:7"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G1325"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "web",
+      "parallelTranslation": "kjv",
+      "filename": "Matt.json",
+      "objectKey": "Matthew.13.11",
+      "reference": "Matthew.13.11",
+      "tokenIndex": 21,
+      "expectedText": "given",
+      "expectedNormalized": "given",
+      "parallelTokenIndex": 27,
+      "parallelText": "given",
+      "sourceTokenIds": [
+        "greek-nt:Matthew.13.11:18"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G1325"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Phil.json",
+      "objectKey": "Philippians.2.20",
+      "reference": "Philippians.2.20",
+      "tokenIndex": 5,
+      "expectedText": "likeminded",
+      "expectedNormalized": "likeminded",
+      "parallelTokenIndex": 6,
+      "parallelText": "like-minded",
+      "sourceTokenIds": [
+        "greek-nt:Philippians.2.20:3"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G2473"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Phil.json",
+      "objectKey": "Philippians.4.18",
+      "reference": "Philippians.4.18",
+      "tokenIndex": 29,
+      "expectedText": "wellpleasing",
+      "expectedNormalized": "wellpleasing",
+      "parallelTokenIndex": 26,
+      "parallelText": "well-pleasing",
+      "sourceTokenIds": [
+        "greek-nt:Philippians.4.18:16"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G2101"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Rev.json",
+      "objectKey": "Revelation.1.16",
+      "reference": "Revelation.1.16",
+      "tokenIndex": 17,
+      "expectedText": "twoedged",
+      "expectedNormalized": "twoedged",
+      "parallelTokenIndex": 15,
+      "parallelText": "two-edged",
+      "sourceTokenIds": [
+        "greek-nt:Revelation.1.16:15"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G1366"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Rev.json",
+      "objectKey": "Revelation.9.2",
+      "reference": "Revelation.9.2",
+      "tokenIndex": 14,
+      "expectedText": "pit",
+      "expectedNormalized": "pit",
+      "parallelTokenIndex": 14,
+      "parallelText": "pit",
+      "sourceTokenIds": [
+        "greek-nt:Revelation.9.2:11"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G5421"
+      ],
+      "validatorClass": "apply-ready-content"
+    },
+    {
+      "corpus": "greek-nt",
+      "translation": "kjv",
+      "parallelTranslation": "web",
+      "filename": "Rom.json",
+      "objectKey": "Romans.1.23",
+      "reference": "Romans.1.23",
+      "tokenIndex": 20,
+      "expectedText": "fourfooted",
+      "expectedNormalized": "fourfooted",
+      "parallelTokenIndex": 20,
+      "parallelText": "four-footed",
+      "sourceTokenIds": [
+        "greek-nt:Romans.1.23:15"
+      ],
+      "sourceEntityIds": [
+        "word:greek-nt:G5074"
+      ],
+      "validatorClass": "apply-ready-content"
+    }
+  ]
+}
