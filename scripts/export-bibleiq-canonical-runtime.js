@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
+const { verifyP0510CanonicalRoot } = require("./p0510/verify-p0510-canonical-source.cjs");
+
 const {
   OT_BOOKS,
   NT_BOOKS,
@@ -182,6 +184,29 @@ function main() {
     );
     return;
   }
+
+  const p0510Verification = verifyP0510CanonicalRoot({
+    root,
+    canonicalRoot: inputRoot,
+    label: ".private canonical source",
+  });
+
+  if (!p0510Verification.passed) {
+    throw new Error(
+      [
+        "Refusing canonical export: the local .private canonical source is stale or incomplete.",
+        `Clean WEB text mismatches: ${p0510Verification.webTextMismatches.length}`,
+        `WEB token mismatches: ${p0510Verification.webTokenMismatches.length}`,
+        `Approved block mismatches: ${p0510Verification.approvedBlockMismatches.length}`,
+        `Approved route mismatches: ${p0510Verification.approvedRouteMismatches.length}`,
+        "Run the P05.10 canonical source repair before exporting.",
+      ].join("\n")
+    );
+  }
+
+  console.log(
+    `P05.10 canonical source verified: ${p0510Verification.approvedBlocksExact} blocks, ${p0510Verification.approvedRoutesExact} routes.`
+  );
 
   cleanDir(outputRoot);
 

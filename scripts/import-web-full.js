@@ -90,6 +90,9 @@ function stripHtml(html) {
   return html
     // remove WEB footnote/cross-reference blocks before removing tags
     .replace(/<div class="footnotes">[\s\S]*?<\/div>/gi, "")
+    // remove inline WEB note and cross-reference anchors before stripping tags
+    .replace(/<a\b[^>]*class=["'][^"']*\bnotemark\b[^"']*["'][^>]*>[\s\S]*?<\/a>/gi, "")
+    .replace(/<span\b[^>]*class=["'][^"']*\bpopup\b[^"']*["'][^>]*>[\s\S]*?<\/span>/gi, "")
     .replace(/<aside[\s\S]*?<\/aside>/gi, "")
     .replace(/<sup[^>]*>[\s\S]*?<\/sup>/gi, "")
     .replace(/<span class="footnote"[\s\S]*?<\/span>/gi, "")
