@@ -4,7 +4,11 @@ import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
-import { getReaderMemory, type ReaderMemory } from "@/app/lib/readerMemory";
+import {
+  getReaderMemory,
+  getReaderMemoryVerseLabel,
+  type ReaderMemory,
+} from "@/app/lib/readerMemory";
 
 type LibraryTab = "bookmarks" | "highlights" | "notes";
 
@@ -75,7 +79,7 @@ function LibraryPageContent() {
                     text={item.text}
                     href={`/read/${encodeURIComponent(item.book)}/${
                       item.chapter
-                    }?verse=${item.verse}`}
+                    }?verse=${encodeURIComponent(getReaderMemoryVerseLabel(item))}`}
                   />
                 ))}
             </LibrarySection>
@@ -94,7 +98,7 @@ function LibraryPageContent() {
                     color={item.color}
                     href={`/read/${encodeURIComponent(item.book)}/${
                       item.chapter
-                    }?verse=${item.verse}`}
+                    }?verse=${encodeURIComponent(getReaderMemoryVerseLabel(item))}`}
                   />
                 ))}
             </LibrarySection>
@@ -111,7 +115,7 @@ function LibraryPageContent() {
                 const label =
                   note.verses.length === 1
                     ? first.reference
-                    : `${first.book} ${first.chapter}:${first.verse}-${last?.verse}`;
+                    : `${first.book} ${first.chapter}:${getReaderMemoryVerseLabel(first)}-${getReaderMemoryVerseLabel(last || first)}`;
 
                 return (
                   <VerseMemoryCard
@@ -120,7 +124,7 @@ function LibraryPageContent() {
                     text={note.note}
                     href={`/read/${encodeURIComponent(first.book)}/${
                       first.chapter
-                    }?verse=${first.verse}`}
+                    }?verse=${encodeURIComponent(getReaderMemoryVerseLabel(first))}`}
                   />
                 );
               })}

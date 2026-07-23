@@ -6,7 +6,7 @@ type BibleIQContext = {
   type?: "reader";
   book: string;
   chapter: number;
-  verse?: number | null;
+  verse?: string | number | null;
   translation: string;
 };
 

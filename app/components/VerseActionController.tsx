@@ -2,6 +2,15 @@
 
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
 import ScriptureText from "@/app/components/ScriptureText";
+import {
+  buildReaderChapterItems,
+  compareReaderVerses,
+  readerVerseAnchorId,
+  readerVerseQueryValue,
+  readerVerseTokenAvailabilityKey,
+  type ReaderSuperscription,
+  type ReaderVerse,
+} from "@/app/data/scripture/ReaderVerseAdapter";
 import VerseActionSheet from "@/app/components/VerseActionSheet";
 import type { BibleIQChapterTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 import {
@@ -11,30 +20,20 @@ import {
   type ReaderNote,
 } from "@/app/lib/readerMemory";
 
-type ReaderVerse = {
-  id: string;
-  book: string;
-  chapter: number;
-  verse: number;
-  reference: string;
-  sources: {
-    sourceName: string;
-    text: string;
-  }[];
-};
-
 export type SelectedVerse = ReaderMemoryVerse;
 
 export default function VerseActionController({
   verses,
   activeTranslation,
+  superscriptions,
   highlightedVerse,
   focusedTokenIndex,
   tokenAvailabilityByVerse,
 }: {
   verses: ReaderVerse[];
+  superscriptions?: ReaderSuperscription[];
   activeTranslation: string;
-  highlightedVerse?: number | null;
+  highlightedVerse?: string | null;
   focusedTokenIndex?: number | null;
   tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
 }) {
@@ -101,6 +100,7 @@ export default function VerseActionController({
       book: verse.book,
       chapter: verse.chapter,
       verse: verse.verse,
+      verseLabel: verse.verseLabel,
       text: verse.sources[0]?.text || "",
     };
   }
@@ -115,8 +115,11 @@ export default function VerseActionController({
         return current.filter((item) => item.id !== nextVerse.id);
       }
 
-      return [...current, nextVerse].sort(
-        (left, right) => left.verse - right.verse,
+      return [...current, nextVerse].sort((left, right) =>
+        compareReaderVerses(
+          { verseLabel: left.verseLabel || String(left.verse) },
+          { verseLabel: right.verseLabel || String(right.verse) },
+        ),
       );
     });
   }
@@ -134,11 +137,37 @@ export default function VerseActionController({
     return "bg-amber-400/20";
   }
 
+  const chapterItems = useMemo(
+    () => buildReaderChapterItems(verses, superscriptions || []),
+    [superscriptions, verses],
+  );
+
   return (
     <>
       <div className="space-y-5 text-[1.18rem] leading-9 text-[var(--foreground)] sm:text-xl sm:leading-10">
-        {verses.map((verse) => {
-          const isHighlightedFromUrl = highlightedVerse === verse.verse;
+        {chapterItems.map((item) => {
+          if (item.type === "superscription") {
+            return (
+              <div
+                key={item.value.id}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 px-4 py-3"
+              >
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">
+                  Superscription
+                </p>
+                <p className="mt-2 text-base italic leading-7 text-[var(--muted)]">
+                  {item.value.text}
+                </p>
+              </div>
+            );
+          }
+
+          const verse = item.value;
+          const verseLabel = readerVerseQueryValue(verse);
+          const availabilityKey =
+            readerVerseTokenAvailabilityKey(verse);
+          const isHighlightedFromUrl =
+            highlightedVerse === verseLabel;
           const hasFocusedWord =
             isHighlightedFromUrl && focusedTokenIndex != null;
           const isSelected = selectedIds.has(verse.id);
@@ -149,7 +178,7 @@ export default function VerseActionController({
 
           return (
             <div
-              id={`verse-${verse.verse}`}
+              id={readerVerseAnchorId(verseLabel)}
               key={`${verse.id}-${activeTranslation}`}
               className={`group relative block w-full border-l-2 px-2 py-1 text-left transition ${
                 isSelected
@@ -176,14 +205,16 @@ export default function VerseActionController({
                     : "text-[var(--muted)] hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
                 }`}
               >
-                {verse.verse}
+                {verseLabel}
               </button>
 
               <ScriptureText
                 text={selectedText}
                 reference={verse.reference}
                 tokenAvailability={
-                  tokenAvailabilityByVerse?.[String(verse.verse)]
+                  availabilityKey
+                    ? tokenAvailabilityByVerse?.[availabilityKey]
+                    : undefined
                 }
                 focusedTokenIndex={
                   hasFocusedWord ? focusedTokenIndex : null

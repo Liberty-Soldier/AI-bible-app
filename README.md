@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EMETSEES P05.12U — Brenton Display-Alignment Candidate
 
-## Getting Started
+This is the first actual alignment-rebuild stage after the source-faithful V8
+Brenton reader promotion.
 
-First, run the development server:
+The candidate builder:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- verifies the completed 53-book Brenton production state;
+- verifies the committed production file against its integrity manifest;
+- loads the authoritative private Greek LXX canonical corpus;
+- accounts for all 28,548 visible reader verses;
+- resolves all 27,216 verses explicitly eligible for LXX ownership;
+- keeps 1,047 translation-only verses fail-closed;
+- keeps 285 unresolved ownership verses fail-closed;
+- tokenizes the corrected Brenton reader text;
+- transfers reusable prior Brenton token alignments by text and sequence;
+- generates fresh gloss/order alignments only for remaining tokens;
+- requires every aligned entity to be a canonical `word:lxx:L...` entity;
+- builds the complete reader-alignment candidate twice and requires identical
+  fingerprints;
+- stages one alignment chapter file per Brenton reader chapter;
+- leaves production, the canonical LXX source, and current word-study runtime
+  unchanged.
+
+## Run
+
+```powershell
+Expand-Archive "$env:USERPROFILE\Downloads\EMETSEES-P0512U-BRENTON-DISPLAY-ALIGNMENT-CANDIDATE.zip" `
+  -DestinationPath . `
+  -Force
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```powershell
+powershell -ExecutionPolicy Bypass `
+  -File .\scripts\p0512\run-brenton-display-alignment-candidate.ps1
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Upload the generated P05.12U report ZIP. The next step will promote the staged
+reader-alignment runtime transactionally and re-enable taps only for records
+that passed the alignment gates.

@@ -4,6 +4,7 @@ export type ReaderMemoryVerse = {
   book: string;
   chapter: number;
   verse: number;
+  verseLabel?: string;
   text: string;
 };
 
@@ -37,6 +38,12 @@ const defaultMemory: ReaderMemory = {
   highlights: [],
   notes: [],
 };
+
+export function getReaderMemoryVerseLabel(
+  verse: Pick<ReaderMemoryVerse, "verse" | "verseLabel">,
+) {
+  return verse.verseLabel || String(verse.verse);
+}
 
 function isBrowser() {
   return typeof window !== "undefined";

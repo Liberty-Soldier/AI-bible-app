@@ -10,8 +10,8 @@ type Props = {
   currentChapter: number;
   maxChapter: number;
   currentTranslation: Translation;
-  currentVerse?: number | null;
-  maxVerse: number;
+  currentVerse?: string | null;
+  verseOptions: string[];
 };
 
 const translations: { value: Translation; label: string }[] = [
@@ -27,7 +27,7 @@ export default function ReaderSelector({
   maxChapter,
   currentTranslation,
   currentVerse,
-  maxVerse,
+  verseOptions,
 }: Props) {
   const router = useRouter();
 
@@ -35,9 +35,11 @@ export default function ReaderSelector({
     book: string,
     chapter: number,
     translation: Translation,
-    verse?: number | null
+    verse?: string | null
   ) {
-    const verseParam = verse ? `&verse=${verse}` : "";
+    const verseParam = verse
+      ? `&verse=${encodeURIComponent(verse)}`
+      : "";
 
     router.push(
       `/read/${encodeURIComponent(
@@ -130,16 +132,16 @@ return (
             currentBook,
             currentChapter,
             currentTranslation,
-            e.target.value ? Number(e.target.value) : null
+            e.target.value || null
           )
         }
         className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-sm text-white"
       >
         <option value="">Start of Chapter</option>
 
-        {Array.from({ length: maxVerse }, (_, i) => i + 1).map((verse) => (
-          <option key={verse} value={verse}>
-            Verse {verse}
+        {verseOptions.map((verseLabel) => (
+          <option key={verseLabel} value={verseLabel}>
+            Verse {verseLabel}
           </option>
         ))}
       </select>

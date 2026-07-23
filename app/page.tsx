@@ -5,7 +5,11 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
 import { usePremiumAccess } from "@/app/components/premium/PremiumAccessProvider";
-import { getReaderMemory, type ReaderMemory } from "@/app/lib/readerMemory";
+import {
+  getReaderMemory,
+  getReaderMemoryVerseLabel,
+  type ReaderMemory,
+} from "@/app/lib/readerMemory";
 
 type LastReadingPosition = {
   book: string;
@@ -152,7 +156,7 @@ function HomePage() {
                     key={`${bookmark.id}-${bookmark.savedAt}`}
                     href={`/read/${encodeURIComponent(bookmark.book)}/${
                       bookmark.chapter
-                    }?verse=${bookmark.verse}`}
+                    }?verse=${encodeURIComponent(getReaderMemoryVerseLabel(bookmark))}`}
                     className="block rounded-2xl bg-[var(--background)] p-3"
                   >
                     <p className="text-sm font-semibold">
@@ -184,15 +188,13 @@ function HomePage() {
                       key={note.id}
                       href={`/read/${encodeURIComponent(firstVerse.book)}/${
                         firstVerse.chapter
-                      }?verse=${firstVerse.verse}`}
+                      }?verse=${encodeURIComponent(getReaderMemoryVerseLabel(firstVerse))}`}
                       className="block rounded-2xl bg-[var(--background)] p-3"
                     >
                       <p className="text-sm font-semibold">
                         {note.verses.length === 1
                           ? firstVerse.reference
-                          : `${firstVerse.book} ${firstVerse.chapter}:${firstVerse.verse}-${
-                              note.verses[note.verses.length - 1]?.verse
-                            }`}
+                          : `${firstVerse.book} ${firstVerse.chapter}:${getReaderMemoryVerseLabel(firstVerse)}-${getReaderMemoryVerseLabel(note.verses[note.verses.length - 1] || firstVerse)}`}
                       </p>
                       <p className="mt-1 line-clamp-2 text-sm leading-6 text-[var(--muted)]">
                         {note.note}

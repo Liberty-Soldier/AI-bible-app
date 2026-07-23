@@ -3,20 +3,12 @@ import { notFound } from "next/navigation";
 import ScriptureText from "../../components/ScriptureText";
 import SacredNameToggle from "../../components/SacredNameToggle";
 import AppNav from "@/app/components/AppNav";
+import {
+  normalizeReaderChapter,
+  type ReaderVerse,
+} from "@/app/data/scripture/ReaderVerseAdapter";
 
 type Translation = "web" | "kjv" | "brenton";
-
-type RuntimeVerse = {
-  id: string;
-  book: string;
-  chapter: number;
-  verse: number;
-  reference: string;
-  sources: {
-    sourceName: string;
-    text: string;
-  }[];
-};
 
 function safeBook(book: string) {
   return String(book || "")
@@ -26,14 +18,14 @@ function safeBook(book: string) {
 }
 
 function parseReference(reference: string) {
-  const match = reference.match(/^(.+?)\s+(\d+):(\d+)$/);
+  const match = reference.match(/^(.+?)\s+(\d+):([0-9A-Za-z]+)$/);
 
   if (!match) return null;
 
   return {
     book: match[1],
     chapter: Number(match[2]),
-    verse: Number(match[3]),
+    verseLabel: match[3],
   };
 }
 
@@ -53,7 +45,7 @@ async function loadChapter(
   translation: Translation,
   book: string,
   chapter: number
-): Promise<RuntimeVerse[]> {
+): Promise<ReaderVerse[]> {
   const url = `${getBaseUrl()}/scripture/runtime/${translation}/${safeBook(
     book
   )}/${chapter}.json`;
@@ -61,7 +53,7 @@ async function loadChapter(
   try {
     const response = await fetch(url, { cache: "force-cache" });
     if (!response.ok) return [];
-    return (await response.json()) as RuntimeVerse[];
+    return normalizeReaderChapter(await response.json()).verses;
   } catch {
     return [];
   }
@@ -99,7 +91,9 @@ export default async function VersePage({
 
   const verseSources = chapterData
     .map(({ translation, verses }) => {
-      const verse = verses.find((item) => item.verse === parsed.verse);
+      const verse = verses.find(
+        (item) => (item.verseLabel || String(item.verse)) === parsed.verseLabel,
+      );
       if (!verse) return null;
 
       return {
