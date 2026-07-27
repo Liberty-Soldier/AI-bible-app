@@ -59,7 +59,7 @@ async function loadChapter(
 
   try {
     const response = await fetch(fileUrl, {
-      cache: "force-cache",
+      cache: "no-store",
     });
 
     if (!response.ok) return { verses: [], superscriptions: [] };
