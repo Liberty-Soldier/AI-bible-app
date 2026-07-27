@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "web-production-integrity@1",
+  "generatedAtUtc": "2026-07-27T17:17:33.633Z",
+  "sourceCandidateFingerprint": "8be4eee9f896f96e",
+  "production": {
+    "path": "app/data/scripture/generatedWEB.json",
+    "sha256": "d526b8bb50ca8e0f17158b2503c1f4fe4a3d703074bc4afe6b107b6770ef8d27",
+    "verses": 31098,
+    "uniqueCoordinates": 31098,
+    "duplicateCoordinates": 0,
+    "firstReference": "Genesis 1:1",
+    "lastReference": "Revelation 22:21"
+  },
+  "canonicalWeb": {
+    "sha256": "10e4491ed38bdf7cbe8427f6bb0d626f8df0314af3d1695673ff1e14bc5d3188",
+    "files": 93,
+    "records": 39046,
+    "webRecords": 39020,
+    "webTokens": 922052,
+    "alignedWebTokens": 291181
+  },
+  "immutableSource": {
+    "path": ".private/sources/web-usfm/eng-web",
+    "sha256": "a89cd0e1a6e2a1ca4db3eb4d1ccf9f8fd1711be74eedc4616fe810af81ab9507",
+    "files": 87
+  },
+  "candidate": {
+    "path": "C:/Users/CreatorStudio/ai-bible-app/.private/generated/translation-ingestion/web/8be4eee9f896f96e/generatedWEB.candidate.json",
+    "sha256": "d526b8bb50ca8e0f17158b2503c1f4fe4a3d703074bc4afe6b107b6770ef8d27",
+    "byteIdenticalToProduction": true
+  },
+  "alignmentPreservation": {
+    "milestone": "P05.12W",
+    "generatedAtUtc": "2026-07-27T14:50:47.368Z",
+    "stagedTreeSha256AfterRepair": "9b643c11210a959286dc00bbb60f9571d15f4873e236c81a27f0826b7966b891",
+    "totals": {
+      "filesScanned": 93,
+      "recordsScanned": 39046,
+      "changedRecords": 13012,
+      "recordsWithDroppedBefore": 747,
+      "recordsRepaired": 240,
+      "oldAlignedTokens": 291962,
+      "stagedAlignedTokensBefore": 290952,
+      "stagedAlignedTokensAfter": 291181,
+      "droppedSignaturesBefore": 1010,
+      "droppedSignaturesAfter": 809,
+      "recoveredSignatures": 201,
+      "lcsActions": 72,
+      "occurrenceActions": 128,
+      "compoundMergeActions": 89,
+      "unresolvedOldAlignedTokens": 693
+    },
+    "introducedSourceRoutes": [],
+    "gates": {
+      "noNewSourceRoutesIntroduced": true,
+      "droppedSignaturesDidNotIncrease": true,
+      "deterministicPreservationOnly": true,
+      "safeToReviewRepair": true,
+      "safeToPromoteProduction": false
+    }
+  },
+  "gates": {
+    "productionHas31098Verses": true,
+    "productionCoordinatesUnique": true,
+    "productionMatchesApprovedCandidate": true,
+    "canonicalWebRecordsPresent": true,
+    "canonicalWebTextAndTokensPinned": true,
+    "immutableSourceFingerprintRecorded": true
+  }
+}
