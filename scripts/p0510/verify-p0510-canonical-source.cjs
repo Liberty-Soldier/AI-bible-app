@@ -9,7 +9,7 @@ const {
   readPlan,
   ownsCanonicalFile,
   canonicalWebBookAlias
-} = require("./p0510-canonical-utils.cjs");
+} = require("../p0510/p0510-canonical-utils.cjs");
 
 const {
   tokenizeDisplayText
@@ -179,6 +179,9 @@ function verifyP0510CanonicalRoot({
     approvedBlocksExact: 0,
     approvedBlockMismatches: [],
     approvedRoutesExact: 0,
+    approvedRoutesLegacyIndexExact: 0,
+    approvedRoutesRebased: 0,
+    approvedRouteResolutions: [],
     approvedRouteMismatches: []
   };
 
@@ -326,25 +329,100 @@ function verifyP0510CanonicalRoot({
       candidate.reference
     );
 
-    const token =
-      resolved.record.translations?.[candidate.translation]?.tokens?.[
-        candidate.tokenIndex
-      ];
+    const record = resolved.record;
+    const web =
+      record.translations?.[candidate.translation];
+    const kjv = record.translations?.kjv;
+    const webMatches = (web?.tokens ?? [])
+      .map((token, index) => ({ token, index }))
+      .filter(
+        item =>
+          normalizedToken(item.token) ===
+          candidate.expectedNormalized
+      );
+    const kjvMatches = (kjv?.tokens ?? [])
+      .map((token, index) => ({ token, index }))
+      .filter(
+        item =>
+          normalizedToken(item.token) ===
+          candidate.expectedNormalized
+      );
+    const matchingKjvOrdinals = kjvMatches
+      .map((item, ordinal) => ({
+        ordinal,
+        routes: routeIds(item.token)
+      }))
+      .filter(
+        item =>
+          item.routes.length === 1 &&
+          arraysEqual(
+            item.routes,
+            candidate.sourceTokenIds
+          )
+      );
+
+    let resolvedTokenIndex = null;
+    let token = null;
+    let ordinal = null;
+
+    if (
+      webMatches.length === kjvMatches.length &&
+      matchingKjvOrdinals.length === 1
+    ) {
+      ordinal = matchingKjvOrdinals[0].ordinal;
+      const resolvedWeb = webMatches[ordinal];
+
+      if (resolvedWeb) {
+        resolvedTokenIndex = resolvedWeb.index;
+        token = resolvedWeb.token;
+      }
+    }
 
     if (
       token &&
-      normalizedToken(token) === candidate.expectedNormalized &&
-      arraysEqual(routeIds(token), candidate.sourceTokenIds) &&
+      normalizedToken(token) ===
+        candidate.expectedNormalized &&
+      arraysEqual(
+        routeIds(token),
+        candidate.sourceTokenIds
+      ) &&
       token.alignmentStatus === "aligned" &&
       token.alignmentMethod === "p0510-parallel-kjv"
     ) {
       result.approvedRoutesExact += 1;
+
+      if (resolvedTokenIndex === candidate.tokenIndex) {
+        result.approvedRoutesLegacyIndexExact += 1;
+      } else {
+        result.approvedRoutesRebased += 1;
+      }
+
+      result.approvedRouteResolutions.push({
+        corpus: candidate.corpus,
+        filename: candidate.filename,
+        reference: candidate.reference,
+        expectedNormalized:
+          candidate.expectedNormalized,
+        legacyTokenIndex: candidate.tokenIndex,
+        resolvedTokenIndex,
+        occurrenceOrdinal: ordinal,
+        sourceTokenIds: candidate.sourceTokenIds
+      });
     } else {
       result.approvedRouteMismatches.push({
         corpus: candidate.corpus,
         filename: candidate.filename,
         reference: candidate.reference,
-        tokenIndex: candidate.tokenIndex
+        expectedNormalized:
+          candidate.expectedNormalized,
+        legacyTokenIndex: candidate.tokenIndex,
+        resolvedTokenIndex,
+        webOccurrenceIndexes:
+          webMatches.map(item => item.index),
+        kjvOccurrenceIndexes:
+          kjvMatches.map(item => item.index),
+        matchingKjvOrdinals,
+        actualRoutes: token ? routeIds(token) : []
       });
     }
   }
@@ -375,17 +453,18 @@ if (require.main === module) {
       ?.slice("--label=".length) ||
     "canonical root";
 
+  const reportRoot =
+    process.argv.find(value => value.startsWith("--report-root="))
+      ?.slice("--report-root=".length) ||
+    path.join(root, "reports", "p0510-canonical-source-repair");
+
   const result = verifyP0510CanonicalRoot({
     root,
     canonicalRoot,
     label
   });
 
-  const reportDirectory = path.join(
-    root,
-    "reports",
-    "p0510-canonical-source-repair"
-  );
+  const reportDirectory = reportRoot;
 
   fs.mkdirSync(reportDirectory, {
     recursive: true

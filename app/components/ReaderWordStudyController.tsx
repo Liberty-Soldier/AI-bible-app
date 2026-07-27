@@ -69,12 +69,17 @@ export default function ReaderWordStudyController({
     });
   }
 
+  const numericSelectedVerse =
+    selectedVerse && /^\d+$/.test(selectedVerse)
+      ? Number(selectedVerse)
+      : undefined;
+
   return (
     <WordStudySheet
       word={selectedWord}
       book={book}
       chapter={chapter}
-      verse={selectedVerse ? Number(selectedVerse) : undefined}
+      verse={numericSelectedVerse}
       translation={translation}
       displayTokenIndex={
         displayTokenIndex !== null

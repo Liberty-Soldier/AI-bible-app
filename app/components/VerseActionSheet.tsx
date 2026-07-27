@@ -9,6 +9,7 @@ import {
   removeHighlights,
   saveNote,
   toggleBookmarks,
+  getReaderMemoryVerseLabel,
   type ReaderHighlight,
 } from "@/app/lib/readerMemory";
 
@@ -37,11 +38,11 @@ export default function VerseActionSheet({
   const referenceLabel = useMemo(() => {
     if (!firstVerse) return "";
     if (verses.length === 1) return firstVerse.reference;
-    return `${firstVerse.book} ${firstVerse.chapter}:${firstVerse.verse}-${lastVerse.verse}`;
+    return `${firstVerse.book} ${firstVerse.chapter}:${getReaderMemoryVerseLabel(firstVerse)}-${getReaderMemoryVerseLabel(lastVerse)}`;
   }, [firstVerse, lastVerse, verses.length]);
 
   const selectedText = useMemo(
-    () => verses.map((v) => `${v.verse} ${v.text}`).join("\n"),
+    () => verses.map((v) => `${getReaderMemoryVerseLabel(v)} ${v.text}`).join("\n"),
     [verses]
   );
 
@@ -49,7 +50,7 @@ export default function VerseActionSheet({
     typeof window !== "undefined" && firstVerse
       ? `${window.location.origin}/read/${encodeURIComponent(
           firstVerse.book
-        )}/${firstVerse.chapter}?verse=${firstVerse.verse}`
+        )}/${firstVerse.chapter}?verse=${encodeURIComponent(getReaderMemoryVerseLabel(firstVerse))}`
       : "";
 
   const shareText = `${referenceLabel}\n\n${selectedText}\n\nRead in EMETSEES:\n${verseUrl}`;

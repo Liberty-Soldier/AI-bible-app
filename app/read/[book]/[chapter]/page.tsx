@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import SacredNameToggle from "@/app/components/SacredNameToggle";
 import ReaderSelector from "@/app/components/ReaderSelector";
 import SaveReadingPosition from "@/app/components/SaveReadingPosition";
-import VerseScroller from "@/app/components/VerseScroller";
+import ReaderVerseScroller from "@/app/components/ReaderVerseScroller";
 import ChapterSwipe from "@/app/components/ChapterSwipe";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
@@ -14,22 +14,14 @@ import VerseActionController from "@/app/components/VerseActionController";
 import ReaderStickyHeader from "@/app/components/ReaderStickyHeader";
 import { bookCatalog } from "../../../data/scripture/bookCatalog";
 import { getCanonicalChapterTokenAvailability } from "@/app/data/scripture/CanonicalVerseStore";
+import {
+  normalizeReaderChapter,
+  type ReaderChapter,
+} from "@/app/data/scripture/ReaderVerseAdapter";
 
 export const dynamic = "force-dynamic";
 
 type Translation = "web" | "kjv" | "brenton";
-
-type ReaderVerse = {
-  id: string;
-  book: string;
-  chapter: number;
-  verse: number;
-  reference: string;
-  sources: {
-    sourceName: string;
-    text: string;
-  }[];
-};
 
 function safeBook(book: string) {
   return String(book || "")
@@ -59,7 +51,7 @@ async function loadChapter(
   translation: Translation,
   book: string,
   chapter: number,
-): Promise<ReaderVerse[]> {
+): Promise<ReaderChapter> {
   const baseUrl = await getBaseUrl();
   const fileUrl = `${baseUrl}/scripture/runtime/${translation}/${safeBook(
     book,
@@ -70,10 +62,10 @@ async function loadChapter(
       cache: "force-cache",
     });
 
-    if (!response.ok) return [];
-    return (await response.json()) as ReaderVerse[];
+    if (!response.ok) return { verses: [], superscriptions: [] };
+    return normalizeReaderChapter(await response.json());
   } catch {
-    return [];
+    return { verses: [], superscriptions: [] };
   }
 }
 
@@ -98,12 +90,12 @@ async function getBestTranslation(
   chapter: number,
   requested: Translation,
 ): Promise<Translation> {
-  if ((await loadChapter(requested, book, chapter)).length) {
+  if ((await loadChapter(requested, book, chapter)).verses.length) {
     return requested;
   }
-  if ((await loadChapter("web", book, chapter)).length) return "web";
-  if ((await loadChapter("kjv", book, chapter)).length) return "kjv";
-  if ((await loadChapter("brenton", book, chapter)).length) {
+  if ((await loadChapter("web", book, chapter)).verses.length) return "web";
+  if ((await loadChapter("kjv", book, chapter)).verses.length) return "kjv";
+  if ((await loadChapter("brenton", book, chapter)).verses.length) {
     return "brenton";
   }
   return requested;
@@ -133,7 +125,7 @@ export default async function ReadChapterPage({
 
   const decodedBook = decodeURIComponent(book);
   const chapterNumber = Number(chapter);
-  const highlightedVerse = verse ? Number(verse) : null;
+  const highlightedVerse = verse || null;
   const focusedTokenIndex =
     focusToken !== undefined && Number(focusToken) >= 0
       ? Number(focusToken)
@@ -152,11 +144,13 @@ export default async function ReadChapterPage({
     requestedTranslation,
   );
 
-  const chapterVerses = await loadChapter(
+  const chapterData = await loadChapter(
     activeTranslation,
     decodedBook,
     chapterNumber,
   );
+  const chapterVerses = chapterData.verses;
+  const chapterSuperscriptions = chapterData.superscriptions;
 
   const tokenAvailabilityByVerse =
     await getCanonicalChapterTokenAvailability({
@@ -191,7 +185,7 @@ export default async function ReadChapterPage({
   return (
     <main className="min-h-screen bg-[var(--background)] px-4 pb-20 text-[var(--foreground)] sm:px-6">
       <section className="mx-auto max-w-2xl">
-        <VerseScroller verse={highlightedVerse} />
+        <ReaderVerseScroller verseLabel={highlightedVerse} />
 
         <ReaderWordStudyController
           book={decodedBook}
@@ -226,7 +220,7 @@ export default async function ReadChapterPage({
                 maxChapter={maxChapter}
                 currentTranslation={activeTranslation}
                 currentVerse={highlightedVerse}
-                maxVerse={chapterVerses.length}
+                verseOptions={chapterVerses.map((item) => item.verseLabel)}
               />
             </div>
           </CollapsibleReaderHeader>
@@ -264,6 +258,7 @@ export default async function ReadChapterPage({
 
             <VerseActionController
               verses={chapterVerses}
+              superscriptions={chapterSuperscriptions}
               activeTranslation={activeTranslation}
               highlightedVerse={highlightedVerse}
               focusedTokenIndex={focusedTokenIndex}

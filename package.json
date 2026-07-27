@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build:see": "node scripts/see/compiler/build-see.js",
-    "prebuild": "node scripts/split-scripture-runtime.js && node scripts/export-bibleiq-canonical-runtime.js && node --max-old-space-size=4096 scripts/build-word-study-runtime.js && node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js --verify-runtime && node scripts/verify-p05-language-display.js && node scripts/verify-p05-entity-routing.js && node scripts/verify-p05-unified-reader.js && node scripts/verify-p05-runtime-fix.js && node scripts/verify-p05-word-study-ux.js && node scripts/verify-p05-runtime-cache-policy.js",
+    "prebuild": "node scripts/split-scripture-runtime.js && node scripts/translations/verify-brenton-production-integrity.js && node scripts/export-bibleiq-canonical-runtime.js && node scripts/translations/verify-web-production-integrity.js --verify --production app/data/scripture/generatedWEB.json --canonical-root app/data/bibleiq/canonical --manifest app/data/scripture/generatedWEB.integrity.json --candidate .private/generated/translation-ingestion/web/8be4eee9f896f96e/generatedWEB.candidate.json --source-root .private/sources/web-usfm/eng-web && node --max-old-space-size=4096 scripts/build-word-study-runtime.js && node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js --verify-runtime && node scripts/verify-p05-language-display.js && node scripts/verify-p05-entity-routing.js && node scripts/verify-p05-unified-reader.js && node scripts/verify-p05-runtime-fix.js && node scripts/verify-p05-word-study-ux.js && node scripts/verify-p05-runtime-cache-policy.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -48,7 +48,9 @@
     "verify:p05-language-display": "node scripts/verify-p05-language-display.js",
     "plan:p052-alignments": "node --max-old-space-size=4096 scripts/p052/expand-display-alignments.cjs",
     "apply:p052-alignments": "node --max-old-space-size=4096 scripts/p052/expand-display-alignments.cjs --apply",
-    "verify:p052-alignments": "node --max-old-space-size=4096 scripts/p052/verify-expanded-runtime.cjs"
+    "verify:p052-alignments": "node --max-old-space-size=4096 scripts/p052/verify-expanded-runtime.cjs",
+    "verify:brenton-integrity": "node scripts/translations/verify-brenton-production-integrity.js",
+    "verify:web-integrity": "node scripts/translations/verify-web-production-integrity.js --verify --production app/data/scripture/generatedWEB.json --canonical-root app/data/bibleiq/canonical --manifest app/data/scripture/generatedWEB.integrity.json --candidate .private/generated/translation-ingestion/web/8be4eee9f896f96e/generatedWEB.candidate.json --source-root .private/sources/web-usfm/eng-web"
   },
   "dependencies": {
     "fast-xml-parser": "^5.9.2",

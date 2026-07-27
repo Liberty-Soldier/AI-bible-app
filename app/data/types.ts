@@ -19,6 +19,7 @@ export interface Verse {
   book: string;
   chapter: number;
   verse: number;
+  verseLabel?: string;
   reference: string;
   sources: VerseSource[];
 }
