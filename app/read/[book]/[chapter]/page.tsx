@@ -18,6 +18,7 @@ import {
   normalizeReaderChapter,
   type ReaderChapter,
 } from "@/app/data/scripture/ReaderVerseAdapter";
+import ReaderFirstUseTip from "@/app/components/ReaderFirstUseTip";
 
 export const dynamic = "force-dynamic";
 
@@ -240,7 +241,7 @@ export default async function ReadChapterPage({
               </Link>
             ) : null}
 
-            <div className="mb-10">
+            <div className="mb-8">
               <p className="mb-2 text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
                 {translationLabel}
               </p>
@@ -249,11 +250,7 @@ export default async function ReadChapterPage({
                 {decodedBook} {chapterNumber}
               </h1>
 
-              <p className="mt-3 text-sm font-medium text-[var(--muted)]">
-                Tap an underlined word for its source-based explanation.
-                Tap a verse number for highlights, notes, bookmarks,
-                copy, and share.
-              </p>
+              <ReaderFirstUseTip />
             </div>
 
             <VerseActionController

@@ -36,6 +36,10 @@ function assertPresent(text, pattern, label) {
 
 const readerPage = read("app/read/[book]/[chapter]/page.tsx");
 const scriptureText = read("app/components/ScriptureText.tsx");
+const globalStyles = read("app/globals.css");
+const readerFirstUseTip = read("app/components/ReaderFirstUseTip.tsx");
+const readerHeader = read("app/components/CollapsibleReaderHeader.tsx");
+const verseActionSheet = read("app/components/VerseActionSheet.tsx");
 const verseController = read("app/components/VerseActionController.tsx");
 const wordController = read("app/components/ReaderWordStudyController.tsx");
 const wordSheet = read("app/components/WordStudySheet.tsx");
@@ -65,7 +69,31 @@ for (const [label, text] of [
 assertPresent(scriptureText, /data-word-token="true"/, "ScriptureText");
 assertPresent(scriptureText, /if \(!availability\)/, "ScriptureText");
 assertPresent(scriptureText, /FUNCTION_WORDS/, "ScriptureText");
-assertPresent(scriptureText, /textDecorationStyle:\s*"dotted"/, "ScriptureText");
+assertPresent(
+  scriptureText,
+  /data-word-focused=\{focused \? "true" : undefined\}/,
+  "ScriptureText",
+);
+assertPresent(
+  scriptureText,
+  /textDecoration:\s*"none"/,
+  "ScriptureText",
+);
+assertAbsent(
+  scriptureText,
+  /textDecorationStyle:\s*"dotted"/,
+  "ScriptureText",
+);
+assertPresent(
+  globalStyles,
+  /@media\s*\(hover:\s*none\)\s*and\s*\(pointer:\s*coarse\)/,
+  "global styles",
+);
+assertPresent(
+  globalStyles,
+  /MOBILE SOURCE-WORD AFFORDANCE[\s\S]*?text-decoration-style:\s*dotted/,
+  "global styles",
+);
 assertPresent(
   verseController,
   /data-verse-selector="true"/,
@@ -78,13 +106,63 @@ assertAbsent(
 );
 assertPresent(
   readerPage,
-  /Tap an underlined word for its source-based explanation/,
+  /ReaderFirstUseTip/,
   "reader page",
 );
 assertPresent(
-  readerPage,
-  /Tap a verse number for highlights/,
-  "reader page",
+  readerFirstUseTip,
+  /Dotted words open source evidence/,
+  "reader first-use tip",
+);
+assertPresent(
+  readerFirstUseTip,
+  /Verse numbers open tools/,
+  "reader first-use tip",
+);
+assertPresent(
+  readerFirstUseTip,
+  /emetsees-reader-tip-dismissed-v1/,
+  "reader first-use tip",
+);
+assertPresent(
+  readerFirstUseTip,
+  /\[data-word-token="true"\]/,
+  "reader first-use tip",
+);
+assertPresent(
+  readerHeader,
+  /Open reader help/,
+  "reader header",
+);
+assertPresent(
+  readerHeader,
+  /emetsees:open-reader-help/,
+  "reader header",
+);
+assertPresent(
+  readerFirstUseTip,
+  /emetsees:open-reader-help/,
+  "reader first-use tip",
+);
+assertAbsent(
+  readerFirstUseTip,
+  /Reader help/,
+  "reader first-use tip",
+);
+assertPresent(
+  verseActionSheet,
+  />\s*Close\s*</,
+  "verse action sheet",
+);
+assertPresent(
+  verseActionSheet,
+  /document\.execCommand\("copy"\)/,
+  "verse action sheet",
+);
+assertPresent(
+  verseActionSheet,
+  /Verse copied for sharing/,
+  "verse action sheet",
 );
 assertPresent(
   wordController,
@@ -96,6 +174,8 @@ assertPresent(mobileNav, /href:\s*["']\/library["']/, "mobile nav");
 assertAbsent(mobileNav, /href:\s*["']\/study["']/, "mobile nav");
 
 assertPresent(layout, /PremiumAccessProvider/, "root layout");
+assertAbsent(layout, /GlobalAskButton/, "root layout");
+assertPresent(mobileNav, /requestUpgrade\("ask-emet"/, "mobile Ask EMET");
 assertPresent(globalAsk, /feature=["']ask-emet["']/, "global Ask EMET button");
 assertPresent(premiumProvider, /initialPlan\s*=\s*["']free["']/, "premium provider");
 assertPresent(premiumProvider, /initialPlan\s*===\s*["']paid["']/, "premium provider");

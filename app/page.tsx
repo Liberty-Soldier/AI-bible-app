@@ -71,9 +71,9 @@ function HomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-10 text-[var(--foreground)]">
+    <main className="min-h-screen bg-[var(--background)] px-5 pb-28 pt-6 text-[var(--foreground)]">
       <section className="mx-auto max-w-xl">
-        <div className="mb-8 flex flex-col items-center pt-8 text-center">
+        <div className="mb-7 flex flex-col items-center pt-4 text-center">
           <EmetseesWordmark showDescriptor />
           <p className="mt-4 max-w-sm text-base leading-7 text-[var(--muted)]">
             Read Scripture, tap any word, and follow the source evidence
@@ -81,10 +81,10 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)]/60 px-5 py-3">
+        <div className="flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3 shadow-[var(--shadow-sm)]">
           <input
             type="text"
-            placeholder="Ask EMET... (paid)"
+            placeholder="Ask a question about Scripture"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => {
@@ -96,7 +96,7 @@ function HomePage() {
           <button
             type="button"
             onClick={goToAsk}
-            className="ml-3 rounded-full bg-[var(--foreground)] px-4 py-2 text-sm font-semibold text-[var(--background)]"
+            className="ml-3 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-bold text-[var(--accent-text)] transition active:scale-[0.98]"
           >
             Ask EMET
           </button>
@@ -107,7 +107,7 @@ function HomePage() {
             href={`/read/${encodeURIComponent(lastReading.book)}/${
               lastReading.chapter
             }?translation=${lastReading.translation}`}
-            className="mt-8 block rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5"
+            className="mt-8 block rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-sm)] transition active:scale-[0.995]"
           >
             <p className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
               Continue Reading
@@ -225,7 +225,7 @@ function LibraryStat({
   return (
     <Link
       href={href}
-      className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-center"
+      className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-center shadow-[var(--shadow-sm)] transition active:scale-[0.98]"
     >
       <p className="text-2xl font-semibold">{value}</p>
       <p className="mt-1 text-xs text-[var(--muted)]">{label}</p>

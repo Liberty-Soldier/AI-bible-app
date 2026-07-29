@@ -4,6 +4,8 @@ import { useState } from "react";
 import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { useReaderChromeVisibility } from "@/app/components/useReaderChromeVisibility";
 
+const OPEN_HELP_EVENT = "emetsees:open-reader-help";
+
 export default function CollapsibleReaderHeader({
   title,
   children,
@@ -15,27 +17,25 @@ export default function CollapsibleReaderHeader({
 }) {
   const [open, setOpen] = useState(false);
   const visible = useReaderChromeVisibility();
-
   const shouldShow = !autoHide || visible || open;
+
+  function openReaderHelp() {
+    window.dispatchEvent(new Event(OPEN_HELP_EVENT));
+  }
 
   return (
     <div
       className={`transition-all duration-200 ${
-        shouldShow
-          ? "translate-y-0 opacity-100"
-          : "-translate-y-4 opacity-0"
+        shouldShow ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
       }`}
     >
-      <div className="flex items-center py-2">
+      <div className="flex items-center justify-between gap-3 py-2">
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="flex min-w-0 items-center gap-3 text-left"
+          className="flex min-w-0 flex-1 items-center gap-3 text-left"
         >
-          <EmetseesLogo
-            size={30}
-            className="shrink-0 text-amber-500"
-          />
+          <EmetseesLogo size={30} className="shrink-0 text-amber-500" />
 
           <span className="truncate text-xl font-semibold tracking-tight">
             {title}
@@ -48,6 +48,15 @@ export default function CollapsibleReaderHeader({
           >
             ▼
           </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={openReaderHelp}
+          aria-label="Open reader help"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-sm font-bold text-[var(--muted)] transition active:scale-95"
+        >
+          ?
         </button>
       </div>
 

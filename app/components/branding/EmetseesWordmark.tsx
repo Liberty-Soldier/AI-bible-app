@@ -2,36 +2,35 @@ import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 
 export default function EmetseesWordmark({
   compact = false,
-  className = "",
   showDescriptor = false,
+  className = "",
 }: {
   compact?: boolean;
-  className?: string;
   showDescriptor?: boolean;
+  className?: string;
 }) {
-  return (
-    <div className={`inline-flex items-center gap-3 ${className}`}>
-      <EmetseesLogo
-        size={compact ? 30 : 44}
-        className="shrink-0 text-amber-500"
-        title="EMETSEES"
-      />
+  const logoSize = compact ? 30 : 48;
 
-      <div className="min-w-0">
-        <p
-          className={`font-black tracking-[0.12em] ${
-            compact ? "text-sm" : "text-xl"
-          }`}
+  return (
+    <div
+      className={`inline-flex items-center ${compact ? "gap-2.5" : "gap-3.5"} ${className}`}
+    >
+      <span className={`rounded-2xl bg-[var(--brand-soft)] ${compact ? "p-1.5" : "p-2.5"}`}>
+        <EmetseesLogo size={logoSize} variant="gold" priority />
+      </span>
+
+      <span className="min-w-0 text-left">
+        <span
+          className={`block font-black tracking-[0.11em] text-[var(--foreground)] ${compact ? "text-sm" : "text-2xl sm:text-[1.7rem]"}`}
         >
           EMETSEES
-        </p>
-
+        </span>
         {showDescriptor ? (
-          <p className="mt-0.5 text-xs font-medium text-[var(--muted)]">
+          <span className="mt-1 block text-sm font-semibold text-[var(--muted)]">
             Scripture-first Bible study
-          </p>
+          </span>
         ) : null}
-      </div>
+      </span>
     </div>
   );
 }

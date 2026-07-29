@@ -42,9 +42,9 @@ const FEATURE_COPY: Record<
 > = {
   "ask-emet": {
     eyebrow: "Live EMET",
-    title: "Upgrade to ask EMET",
+    title: "Ask EMET",
     description:
-      "Live EMET reasoning is a paid feature. The free reader continues to include cached EMET explanations for ordinary word taps.",
+      "Ask EMET will add live, contextual questions grounded in the Scripture evidence. Word taps already include source evidence and cached EMET explanations.",
     benefits: [
       "Ask contextual questions about a verse or word",
       "Trace answers through the whole scriptural witness",
@@ -255,9 +255,9 @@ function UpgradeSheet({
           </div>
 
           <div className="mt-7 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-4">
-            <p className="text-sm font-black">Paid plans are coming in P06.</p>
+            <p className="text-sm font-black">Ask EMET is coming soon.</p>
             <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
-              This lock is the final entitlement boundary. Billing and live
+              Ask contextual questions about a verse or word and follow the Scriptural evidence. Billing and live
               EMET will connect here without changing the reader again.
             </p>
           </div>

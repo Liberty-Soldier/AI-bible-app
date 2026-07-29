@@ -81,18 +81,51 @@ export default function VerseActionSheet({
     window.setTimeout(() => setMessage(""), 1200);
   }
 
-  async function copySelection() {
-    try {
-      await navigator.clipboard.writeText(shareText);
-      showMessage(verses.length === 1 ? "Verse copied" : "Verses copied");
-    } catch {
-      showMessage("Copy failed");
+  async function copyTextWithFallback(text: string) {
+    if (window.isSecureContext && navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Continue to the legacy copy fallback.
+      }
     }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, textarea.value.length);
+
+    let copied = false;
+
+    try {
+      copied = document.execCommand("copy");
+    } finally {
+      textarea.remove();
+    }
+
+    return copied;
+  }
+
+  async function copySelection() {
+    const copied = await copyTextWithFallback(shareText);
+    showMessage(
+      copied
+        ? verses.length === 1
+          ? "Verse copied"
+          : "Verses copied"
+        : "Copy unavailable",
+    );
   }
 
   async function shareSelection() {
-    try {
-      if (navigator.share) {
+    if (window.isSecureContext && navigator.share) {
+      try {
         await navigator.share({
           title: referenceLabel,
           text: `${referenceLabel}\n\n${selectedText}`,
@@ -100,13 +133,23 @@ export default function VerseActionSheet({
         });
         showMessage("Share opened");
         return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") {
+          showMessage("Share cancelled");
+          return;
+        }
       }
-
-      await navigator.clipboard.writeText(shareText);
-      showMessage("Share text copied");
-    } catch {
-      showMessage("Share cancelled");
     }
+
+    const copied = await copyTextWithFallback(shareText);
+
+    showMessage(
+      copied
+        ? verses.length === 1
+          ? "Verse copied for sharing"
+          : "Verses copied for sharing"
+        : "Sharing unavailable",
+    );
   }
 
   function highlightSelection(color: ReaderHighlight["color"]) {
@@ -213,7 +256,7 @@ export default function VerseActionSheet({
                 onClick={onClose}
                 className="shrink-0 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold text-[var(--muted)]"
               >
-                Clear
+                Close
               </button>
             </div>
 

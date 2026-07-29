@@ -149,6 +149,7 @@ export default function ScriptureText({
             type="button"
             data-word-token="true"
             data-word-kind={functionWord ? "function" : "lexical"}
+            data-word-focused={focused ? "true" : undefined}
             aria-label={`Open source word study for ${selectedWord}`}
             title={`Study ${selectedWord} from its ${
               availability.source === "greek-nt"
@@ -166,14 +167,7 @@ export default function ScriptureText({
                 availability.sourceWord,
               );
             }}
-            style={{
-              textDecorationLine: "underline",
-              textDecorationStyle: "dotted",
-              textDecorationColor: functionWord
-                ? "rgba(176, 137, 63, 0.14)"
-                : "rgba(176, 137, 63, 0.34)",
-              textUnderlineOffset: "0.22em",
-            }}
+            style={{ textDecoration: "none" }}
             className={`inline rounded-[0.22em] px-[0.03em] text-inherit transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/45 active:bg-amber-500/10 ${
               functionWord
                 ? "hover:bg-[var(--surface)] hover:decoration-amber-500/50"

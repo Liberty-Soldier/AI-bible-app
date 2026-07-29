@@ -905,16 +905,16 @@ export default function WordStudySheet({
 
       <section
         className={`absolute bottom-0 left-1/2 flex w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
-          snap === "expanded" ? "h-[92dvh]" : "h-[78dvh]"
+          snap === "expanded" ? "h-[92dvh]" : "h-[74dvh]"
         }`}
       >
-        <div className="shrink-0 border-b border-[var(--border)] bg-[var(--background)] px-5 py-4">
+        <div className="shrink-0 border-b border-[var(--border)] bg-[var(--background)] px-5 py-3">
           <button
             type="button"
             aria-label="Resize EMETSEES word study panel"
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
-            className="mx-auto mb-4 block h-1.5 w-12 rounded-full bg-[var(--border)]"
+            className="mx-auto mb-3 block h-1.5 w-11 rounded-full bg-[var(--border)]"
           />
 
           <div className="flex items-center justify-between gap-4">
@@ -938,7 +938,7 @@ export default function WordStudySheet({
               onClick={onClose}
               className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-sm font-semibold text-[var(--muted)]"
             >
-              Back to reading
+              Done
             </button>
           </div>
         </div>
@@ -946,7 +946,7 @@ export default function WordStudySheet({
         <div
           key={sheetKey}
           ref={scrollRef}
-          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-6 pb-24"
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 pb-20"
         >
           {loading ? (
             <Panel>
@@ -1008,6 +1008,8 @@ export default function WordStudySheet({
               transliteration={transliteration}
               pronunciation={pronunciation}
               readableMorphology={readableMorphology}
+              principalRenderings={principalRenderings}
+              onRenderings={() => changeView("renderings")}
               onTechnical={() => changeView("technical")}
               readingLabel={readingLabel}
               onClose={onClose}
@@ -1141,7 +1143,7 @@ function OverviewView({
         <p className="text-[0.68rem] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
           Selected word
         </p>
-        <h2 className="mt-2 break-words text-[2.35rem] font-bold leading-[1.02] tracking-[-0.045em]">
+        <h2 className="mt-2 break-words text-[2.05rem] font-bold leading-[1.04] tracking-[-0.04em]">
           {word}
         </h2>
 
@@ -1149,7 +1151,7 @@ function OverviewView({
           <button
             type="button"
             onClick={() => onView("lexicon")}
-            className="mt-4 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-left transition hover:border-amber-500/35 active:scale-[0.995]"
+            className="mt-4 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3.5 text-left transition hover:border-amber-500/35 active:scale-[0.995]"
           >
             <div className="flex items-center justify-between gap-4">
               <div className="min-w-0">
@@ -1246,7 +1248,7 @@ function OverviewView({
             disabled={!keyReferences.length}
           />
           <ExploreButtonRow
-            label="Principal renderings"
+            label="English translations"
             summary={summarizeRenderings(principalRenderings)}
             onClick={() => onView("renderings")}
             disabled={!principalRenderings.length}
@@ -1301,6 +1303,8 @@ function LexiconView({
   transliteration,
   pronunciation,
   readableMorphology,
+  principalRenderings,
+  onRenderings,
   onTechnical,
   readingLabel,
   onClose,
@@ -1311,6 +1315,8 @@ function LexiconView({
   transliteration?: string;
   pronunciation?: string;
   readableMorphology?: string;
+  principalRenderings: BibleIQRenderingForm[];
+  onRenderings: () => void;
   onTechnical: () => void;
   readingLabel: string;
   onClose: () => void;
@@ -1339,6 +1345,9 @@ function LexiconView({
     return result;
   })();
   const sourceForms = lexical?.sourceForms.slice(0, SOURCE_FORM_LIMIT) || [];
+  const sourceLanguageLabel =
+    alignment?.source === "hebrew" ? "Hebrew" : "Greek";
+  const englishSummary = summarizeRenderings(principalRenderings);
 
   return (
     <div className="space-y-5">
@@ -1379,19 +1388,50 @@ function LexiconView({
         </div>
       </Panel>
 
+      {principalRenderings.length ? (
+        <Panel>
+          <SectionHeading
+            eyebrow="In English"
+            title="How this word is expressed in English"
+          />
+          <p className="mt-3 text-[1rem] leading-7">
+            {englishSummary}
+          </p>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            {principalRenderings.slice(0, 6).map((form) => (
+              <button
+                key={`${form.translation}-${form.text}`}
+                type="button"
+                onClick={onRenderings}
+                className="rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-left transition active:scale-[0.98]"
+              >
+                <span className="block text-sm font-bold">{form.text}</span>
+                <span className="mt-1 block text-xs text-[var(--muted)]">
+                  {form.count.toLocaleString()} aligned use
+                  {form.count === 1 ? "" : "s"}
+                </span>
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={onRenderings}
+            className="mt-4 w-full rounded-xl border border-[var(--border)] px-4 py-3 text-sm font-bold text-[var(--muted)]"
+          >
+            See all English renderings ›
+          </button>
+        </Panel>
+      ) : null}
+
       {definitions.length ? (
         <Panel>
           <SectionHeading
             eyebrow={
               alignment?.source === "lxx"
-                ? "Lexical meaning"
-                : "Strong's definition"
+                ? "Plain-English meaning"
+                : "Plain-English meaning"
             }
-            title={
-              alignment?.source === "lxx"
-                ? "What this entry means"
-                : `${alignment?.lexicalId || "Strong's"} definition`
-            }
+            title="What this word can mean"
           />
           <p className="mt-4 text-[1.02rem] leading-7">
             {definitions[0]}
@@ -1401,16 +1441,14 @@ function LexiconView({
               <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
                 Additional glosses and usage
               </p>
-              <div className="mt-2 flex flex-wrap gap-2">
+              <ul className="mt-2 space-y-1.5 text-sm leading-6 text-[var(--muted)]">
                 {definitions.slice(1, 7).map((definition) => (
-                  <span
-                    key={definition}
-                    className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3.5 py-2 text-sm font-semibold"
-                  >
-                    {definition}
-                  </span>
+                  <li key={definition} className="flex gap-2">
+                    <span aria-hidden="true" className="text-[var(--brand)]">•</span>
+                    <span>{definition}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           ) : null}
         </Panel>
@@ -1418,31 +1456,52 @@ function LexiconView({
 
       {sourceForms.length ? (
         <Panel>
-          <SectionHeading eyebrow="Source forms" title="Common forms in Scripture" />
-          <div className="mt-4 space-y-2">
-            {sourceForms.map((form) => (
-              <div
-                key={`${form.surface}-${form.count}`}
-                className="flex items-center justify-between gap-4 rounded-xl border border-[var(--border)] bg-[var(--background)] px-4 py-3"
+          <details>
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
+              <span>
+                <span className="block text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+                  Optional original-language detail
+                </span>
+                <span className="mt-1 block text-xl font-bold">
+                  {sourceLanguageLabel} forms in Scripture
+                </span>
+              </span>
+              <Chevron />
+            </summary>
+
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">
+              These are different written forms of the same {sourceLanguageLabel}
+              word. You do not need to read {sourceLanguageLabel} to use this
+              study—the English meanings and renderings are shown above.
+            </p>
+
+            <div className="mt-4 space-y-2">
+              {sourceForms.map((form) => (
+                <div
+                  key={`${form.surface}-${form.count}`}
+                  className="flex items-center justify-between gap-4 rounded-xl border border-[var(--border)] bg-[var(--background)] px-4 py-3"
+                >
+                  <span className="min-w-0 break-words text-base font-bold">
+                    {form.surface}
+                  </span>
+                  <span className="shrink-0 text-xs font-semibold text-[var(--muted)]">
+                    {form.count.toLocaleString()} occurrence
+                    {form.count === 1 ? "" : "s"}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {lexical && lexical.sourceForms.length > SOURCE_FORM_LIMIT ? (
+              <button
+                type="button"
+                onClick={onTechnical}
+                className="mt-4 w-full rounded-xl border border-[var(--border)] px-4 py-3 text-sm font-bold text-[var(--muted)]"
               >
-                <span className="min-w-0 break-words text-base font-bold">
-                  {form.surface}
-                </span>
-                <span className="shrink-0 text-xs font-semibold text-[var(--muted)]">
-                  {form.count.toLocaleString()}
-                </span>
-              </div>
-            ))}
-          </div>
-          {lexical && lexical.sourceForms.length > SOURCE_FORM_LIMIT ? (
-            <button
-              type="button"
-              onClick={onTechnical}
-              className="mt-4 w-full rounded-xl border border-[var(--border)] px-4 py-3 text-sm font-bold text-[var(--muted)]"
-            >
-              View all technical forms ›
-            </button>
-          ) : null}
+                View all technical forms ›
+              </button>
+            ) : null}
+          </details>
         </Panel>
       ) : null}
 
@@ -1475,7 +1534,7 @@ function RenderingsView({
 }) {
   return (
     <div className="space-y-5">
-      <ViewTitle eyebrow="Renderings" title="How translations express this word" />
+      <ViewTitle eyebrow="Renderings" title="How this word is expressed in English" />
 
       {principal.length ? (
         <Panel>
@@ -1812,7 +1871,7 @@ function PremiumStudyPanel({
 
 function Panel({ children }: { children: ReactNode }) {
   return (
-    <section className="rounded-[1.55rem] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-sm">
+    <section className="rounded-[1.35rem] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-sm)]">
       {children}
     </section>
   );
@@ -1947,7 +2006,7 @@ function BackToReadingButton({
     <button
       type="button"
       onClick={onClick}
-      className="w-full rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3.5 text-sm font-black text-amber-800 dark:text-amber-200"
+      className="w-full rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-sm font-bold text-amber-800 dark:text-amber-200"
     >
       Back to reading at {label}
     </button>
