@@ -1,0 +1,729 @@
+{
+  "version": "p0512ah-token-level-kjv-crosswalk-overlay@1",
+  "description": "Use the existing canonicalReference as the default KJV destination, then apply only the explicit source-wide and token-level exception rules required by P05.12AB–P05.12AG.",
+  "sourceWideRules": {
+    "1 kings:22:43": {
+      "target": "1 kings:22:43",
+      "ruleId": "p0512ah-1kgs-22-43-44-to-22-43",
+      "reason": "KJV 1 Kings 22:43 begins with Hebrew 22:43."
+    },
+    "1 kings:22:44": {
+      "target": "1 kings:22:43",
+      "ruleId": "p0512ah-1kgs-22-43-44-to-22-43",
+      "reason": "KJV 1 Kings 22:43 continues with Hebrew 22:44."
+    },
+    "1 kings:22:45": {
+      "target": "1 kings:22:44",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:46": {
+      "target": "1 kings:22:45",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:47": {
+      "target": "1 kings:22:46",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:48": {
+      "target": "1 kings:22:47",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:49": {
+      "target": "1 kings:22:48",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:50": {
+      "target": "1 kings:22:49",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:51": {
+      "target": "1 kings:22:50",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:52": {
+      "target": "1 kings:22:51",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:53": {
+      "target": "1 kings:22:52",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "1 kings:22:54": {
+      "target": "1 kings:22:53",
+      "ruleId": "p0512ah-1kgs-22-45-54-to-22-44-53",
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in KJV."
+    },
+    "numbers:25:19": {
+      "target": "numbers:26:1",
+      "ruleId": "p0512ah-num-25-19-and-26-1-to-26-1",
+      "reason": "The opening clause of KJV Numbers 26:1 is Hebrew Numbers 25:19."
+    },
+    "numbers:26:1": {
+      "target": "numbers:26:1",
+      "ruleId": "p0512ah-num-25-19-and-26-1-to-26-1",
+      "reason": "KJV Numbers 26:1 continues with Hebrew Numbers 26:1."
+    },
+    "nehemiah:7:68": {
+      "target": "nehemiah:7:69",
+      "ruleId": "p0512ah-neh-7-68-72-to-7-69-73",
+      "reason": "Hebrew Nehemiah 7:68-72 is numbered KJV Nehemiah 7:69-73."
+    },
+    "nehemiah:7:69": {
+      "target": "nehemiah:7:70",
+      "ruleId": "p0512ah-neh-7-68-72-to-7-69-73",
+      "reason": "Hebrew Nehemiah 7:68-72 is numbered KJV Nehemiah 7:69-73."
+    },
+    "nehemiah:7:70": {
+      "target": "nehemiah:7:71",
+      "ruleId": "p0512ah-neh-7-68-72-to-7-69-73",
+      "reason": "Hebrew Nehemiah 7:68-72 is numbered KJV Nehemiah 7:69-73."
+    },
+    "nehemiah:7:71": {
+      "target": "nehemiah:7:72",
+      "ruleId": "p0512ah-neh-7-68-72-to-7-69-73",
+      "reason": "Hebrew Nehemiah 7:68-72 is numbered KJV Nehemiah 7:69-73."
+    },
+    "nehemiah:7:72": {
+      "target": "nehemiah:7:73",
+      "ruleId": "p0512ah-neh-7-68-72-to-7-69-73",
+      "reason": "Hebrew Nehemiah 7:68-72 is numbered KJV Nehemiah 7:69-73."
+    },
+    "hosea:14:1": {
+      "target": "hosea:13:16",
+      "ruleId": "p0512ah-hos-14-1-to-13-16",
+      "reason": "Hebrew Hosea 14:1 is KJV Hosea 13:16."
+    },
+    "hosea:14:2": {
+      "target": "hosea:14:1",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "hosea:14:3": {
+      "target": "hosea:14:2",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "hosea:14:4": {
+      "target": "hosea:14:3",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "hosea:14:5": {
+      "target": "hosea:14:4",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "hosea:14:6": {
+      "target": "hosea:14:5",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "hosea:14:7": {
+      "target": "hosea:14:6",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "hosea:14:8": {
+      "target": "hosea:14:7",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "hosea:14:9": {
+      "target": "hosea:14:8",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "hosea:14:10": {
+      "target": "hosea:14:9",
+      "ruleId": "p0512ah-hos-14-2-10-to-14-1-9",
+      "reason": "Hebrew Hosea 14:2-10 is numbered KJV Hosea 14:1-9."
+    },
+    "joel:3:1": {
+      "target": "joel:2:28",
+      "ruleId": "p0512ah-joel-3-1-5-to-2-28-32",
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    "joel:3:2": {
+      "target": "joel:2:29",
+      "ruleId": "p0512ah-joel-3-1-5-to-2-28-32",
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    "joel:3:3": {
+      "target": "joel:2:30",
+      "ruleId": "p0512ah-joel-3-1-5-to-2-28-32",
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    "joel:3:4": {
+      "target": "joel:2:31",
+      "ruleId": "p0512ah-joel-3-1-5-to-2-28-32",
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    "joel:3:5": {
+      "target": "joel:2:32",
+      "ruleId": "p0512ah-joel-3-1-5-to-2-28-32",
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    "joel:4:1": {
+      "target": "joel:3:1",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:2": {
+      "target": "joel:3:2",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:3": {
+      "target": "joel:3:3",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:4": {
+      "target": "joel:3:4",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:5": {
+      "target": "joel:3:5",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:6": {
+      "target": "joel:3:6",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:7": {
+      "target": "joel:3:7",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:8": {
+      "target": "joel:3:8",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:9": {
+      "target": "joel:3:9",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:10": {
+      "target": "joel:3:10",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:11": {
+      "target": "joel:3:11",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:12": {
+      "target": "joel:3:12",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:13": {
+      "target": "joel:3:13",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:14": {
+      "target": "joel:3:14",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:15": {
+      "target": "joel:3:15",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:16": {
+      "target": "joel:3:16",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:17": {
+      "target": "joel:3:17",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:18": {
+      "target": "joel:3:18",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:19": {
+      "target": "joel:3:19",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:20": {
+      "target": "joel:3:20",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "joel:4:21": {
+      "target": "joel:3:21",
+      "ruleId": "p0512ah-joel-4-1-21-to-3-1-21",
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    "song of solomon:7:1": {
+      "target": "song of solomon:6:13",
+      "ruleId": "p0512ah-song-7-1-to-6-13",
+      "reason": "Hebrew Song of Solomon 7:1 is KJV Song of Solomon 6:13."
+    },
+    "song of solomon:7:2": {
+      "target": "song of solomon:7:1",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:3": {
+      "target": "song of solomon:7:2",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:4": {
+      "target": "song of solomon:7:3",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:5": {
+      "target": "song of solomon:7:4",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:6": {
+      "target": "song of solomon:7:5",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:7": {
+      "target": "song of solomon:7:6",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:8": {
+      "target": "song of solomon:7:7",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:9": {
+      "target": "song of solomon:7:8",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:10": {
+      "target": "song of solomon:7:9",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:11": {
+      "target": "song of solomon:7:10",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:12": {
+      "target": "song of solomon:7:11",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:13": {
+      "target": "song of solomon:7:12",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "song of solomon:7:14": {
+      "target": "song of solomon:7:13",
+      "ruleId": "p0512ah-song-7-2-14-to-7-1-13",
+      "reason": "Hebrew Song of Solomon 7:2-14 is numbered KJV 7:1-13."
+    },
+    "2 corinthians:13:13": {
+      "target": "2 corinthians:13:14",
+      "ruleId": "p0512ah-2cor-13-13-to-13-14",
+      "reason": "OpenGNT 2 Corinthians 13:13 is KJV 13:14."
+    },
+    "3 john:1:15": {
+      "target": "3 john:1:14",
+      "ruleId": "p0512ah-3john-1-14-15-to-1-14",
+      "reason": "KJV 3 John 1:14 combines OpenGNT 1:14 and 1:15."
+    },
+    "revelation:12:18": {
+      "target": "revelation:13:1",
+      "ruleId": "p0512ah-rev-12-18-and-13-1-to-13-1",
+      "reason": "The opening clause of KJV Revelation 13:1 is OpenGNT Revelation 12:18."
+    }
+  },
+  "tokenRules": {
+    "hebrew:Isa:64:1:0": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:63:19",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:1": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:63:19",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:2": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:63:19",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:3": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:63:19",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:4": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:64:1",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:5": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:63:19",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:6": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:63:19",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:7": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:64:1",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:8": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:63:19",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:9": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:64:1",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:10": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:64:1",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:11": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:63:19",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:12": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:64:1",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:13": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:64:1",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "hebrew:Isa:64:1:14": {
+      "source": "isaiah:63:19",
+      "target": "isaiah:64:1",
+      "ruleId": "p0512ah-isa-63-19-split-to-63-19-and-64-1",
+      "reason": "Hebrew Isaiah 63:19 contains the material numbered KJV 63:19 and 64:1."
+    },
+    "greek-nt:Acts.19.40:0": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:1": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:2": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:3": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:4": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:5": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:6": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:7": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:8": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:9": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:10": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:11": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:12": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:13": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:14": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:15": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:16": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:17": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:18": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:19": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:20": {
+      "source": "acts:19:40",
+      "target": "acts:19:40",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:21": {
+      "source": "acts:19:40",
+      "target": "acts:19:41",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:22": {
+      "source": "acts:19:40",
+      "target": "acts:19:41",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:23": {
+      "source": "acts:19:40",
+      "target": "acts:19:41",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:24": {
+      "source": "acts:19:40",
+      "target": "acts:19:41",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:25": {
+      "source": "acts:19:40",
+      "target": "acts:19:41",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:Acts.19.40:26": {
+      "source": "acts:19:40",
+      "target": "acts:19:41",
+      "ruleId": "p0512ah-acts-19-40-split-to-19-40-41",
+      "reason": "OpenGNT Acts 19:40 contains the material numbered KJV Acts 19:40-41."
+    },
+    "greek-nt:2_Corinthians.13.12:0": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:12",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:1": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:12",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:2": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:12",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:3": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:12",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:4": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:12",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:5": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:13",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:6": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:13",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:7": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:13",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:8": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:13",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    },
+    "greek-nt:2_Corinthians.13.12:9": {
+      "source": "2 corinthians:13:12",
+      "target": "2 corinthians:13:13",
+      "ruleId": "p0512ah-2cor-13-12-split-to-13-12-13",
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the material numbered KJV 13:12-13."
+    }
+  },
+  "readerOnly": [
+    "acts:15:34",
+    "acts:24:7",
+    "acts:28:29",
+    "acts:8:37",
+    "john:5:4",
+    "luke:17:36",
+    "luke:23:17",
+    "mark:11:26",
+    "mark:15:28",
+    "mark:7:16",
+    "mark:9:44",
+    "mark:9:46",
+    "matthew:17:21",
+    "matthew:18:11",
+    "matthew:23:14",
+    "nehemiah:7:68",
+    "romans:16:24"
+  ],
+  "expected": {
+    "sourceOwnedFiles": 66,
+    "sourceOwnedRecords": 31086,
+    "sourceTokens": 438452,
+    "uniqueSourceCoordinates": 31088,
+    "kjv2006ReaderCoordinates": 31102,
+    "mappedReaderCoordinates": 31085,
+    "readerOnlyCoordinates": 17,
+    "sourceToReaderEdges": 31091,
+    "multiTargetSourceCoordinates": [
+      "2 corinthians:13:12",
+      "acts:19:40",
+      "isaiah:63:19"
+    ],
+    "multiSourceReaderCoordinates": [
+      "1 chronicles:11:47",
+      "1 kings:22:43",
+      "1 samuel:20:42",
+      "3 john:1:14",
+      "numbers:26:1",
+      "revelation:13:1"
+    ]
+  },
+  "safety": {
+    "defaultUsesExistingCanonicalReference": true,
+    "allOverridesAreExplicit": true,
+    "readerOnlyVersesRemainVisible": true,
+    "readerOnlyVersesFailClosedForSourceStudy": true,
+    "productionPromotionAuthorized": false
+  }
+}

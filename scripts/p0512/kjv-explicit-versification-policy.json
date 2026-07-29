@@ -1,0 +1,1170 @@
+{
+  "version": "p0512ae-kjv-explicit-versification-crosswalk@1",
+  "visibleEdition": "eng-kjv2006",
+  "sourceTraditions": {
+    "oldTestament": "hebrew",
+    "newTestament": "greek-nt"
+  },
+  "defaultRule": {
+    "type": "identity",
+    "description": "Every source-owned coordinate not listed in sourceExceptions maps to the same KJV reader coordinate."
+  },
+  "sourceExceptions": [
+    {
+      "source": "numbers:25:19",
+      "readers": [
+        "numbers:26:1"
+      ],
+      "topology": "multi-source-to-one-reader",
+      "evidence": [
+        "TVTMS $Num.26:1-26:47 line 412"
+      ],
+      "reason": "The English KJV verse 26:1 contains Hebrew 25:19 followed by Hebrew 26:1."
+    },
+    {
+      "source": "numbers:26:1",
+      "readers": [
+        "numbers:26:1"
+      ],
+      "topology": "multi-source-to-one-reader",
+      "evidence": [
+        "TVTMS $Num.26:1-26:47 line 412"
+      ],
+      "reason": "The English KJV verse 26:1 contains Hebrew 25:19 followed by Hebrew 26:1."
+    },
+    {
+      "source": "1 kings:22:43",
+      "readers": [
+        "1 kings:22:43"
+      ],
+      "topology": "multi-source-to-one-reader",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "The first portion of KJV 22:43 comes from Hebrew 22:43."
+    },
+    {
+      "source": "1 kings:22:44",
+      "readers": [
+        "1 kings:22:43"
+      ],
+      "topology": "multi-source-to-one-reader",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref=22.43"
+      ],
+      "reason": "The latter portion of KJV 22:43 comes from Hebrew 22:44."
+    },
+    {
+      "source": "1 kings:22:45",
+      "readers": [
+        "1 kings:22:44"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:46",
+      "readers": [
+        "1 kings:22:45"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:47",
+      "readers": [
+        "1 kings:22:46"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:48",
+      "readers": [
+        "1 kings:22:47"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:49",
+      "readers": [
+        "1 kings:22:48"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:50",
+      "readers": [
+        "1 kings:22:49"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:51",
+      "readers": [
+        "1 kings:22:50"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:52",
+      "readers": [
+        "1 kings:22:51"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:53",
+      "readers": [
+        "1 kings:22:52"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "1 kings:22:54",
+      "readers": [
+        "1 kings:22:53"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP THOT 1 Kings 22 English Ref annotations"
+      ],
+      "reason": "Hebrew 1 Kings 22:45-54 is numbered one verse earlier in the English KJV."
+    },
+    {
+      "source": "nehemiah:7:68",
+      "readers": [
+        "nehemiah:7:69"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Neh.7:68-7:73 lines 749-751",
+        "STEP THOT Nehemiah 7 English Ref=7.69"
+      ],
+      "reason": "Hebrew Nehemiah 7:68 is KJV Nehemiah 7:69."
+    },
+    {
+      "source": "nehemiah:7:69",
+      "readers": [
+        "nehemiah:7:70"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Neh.7:68-7:73 lines 750-751",
+        "STEP THOT Nehemiah 7 English Ref annotations"
+      ],
+      "reason": "Hebrew Nehemiah 7:69-72 is KJV Nehemiah 7:70-73."
+    },
+    {
+      "source": "nehemiah:7:70",
+      "readers": [
+        "nehemiah:7:71"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Neh.7:68-7:73 lines 750-751",
+        "STEP THOT Nehemiah 7 English Ref annotations"
+      ],
+      "reason": "Hebrew Nehemiah 7:69-72 is KJV Nehemiah 7:70-73."
+    },
+    {
+      "source": "nehemiah:7:71",
+      "readers": [
+        "nehemiah:7:72"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Neh.7:68-7:73 lines 750-751",
+        "STEP THOT Nehemiah 7 English Ref annotations"
+      ],
+      "reason": "Hebrew Nehemiah 7:69-72 is KJV Nehemiah 7:70-73."
+    },
+    {
+      "source": "nehemiah:7:72",
+      "readers": [
+        "nehemiah:7:73"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Neh.7:68-7:73 lines 750-751",
+        "STEP THOT Nehemiah 7 English Ref annotations"
+      ],
+      "reason": "Hebrew Nehemiah 7:69-72 is KJV Nehemiah 7:70-73."
+    },
+    {
+      "source": "isaiah:63:19",
+      "readers": [
+        "isaiah:63:19",
+        "isaiah:64:1"
+      ],
+      "topology": "one-source-to-reader-span",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538",
+        "STEP THOT Isaiah 63:19 source text"
+      ],
+      "reason": "The English KJV divides Hebrew Isaiah 63:19 between KJV 63:19 and 64:1."
+    },
+    {
+      "source": "isaiah:64:1",
+      "readers": [
+        "isaiah:64:2"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:2",
+      "readers": [
+        "isaiah:64:3"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:3",
+      "readers": [
+        "isaiah:64:4"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:4",
+      "readers": [
+        "isaiah:64:5"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:5",
+      "readers": [
+        "isaiah:64:6"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:6",
+      "readers": [
+        "isaiah:64:7"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:7",
+      "readers": [
+        "isaiah:64:8"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:8",
+      "readers": [
+        "isaiah:64:9"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:9",
+      "readers": [
+        "isaiah:64:10"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:10",
+      "readers": [
+        "isaiah:64:11"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "isaiah:64:11",
+      "readers": [
+        "isaiah:64:12"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Isa.63:19--64:12 lines 2535-2538"
+      ],
+      "reason": "Hebrew Isaiah 64:1-11 is KJV Isaiah 64:2-12."
+    },
+    {
+      "source": "hosea:14:1",
+      "readers": [
+        "hosea:13:16"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref=13.16"
+      ],
+      "reason": "Hebrew Hosea 14:1 is KJV Hosea 13:16."
+    },
+    {
+      "source": "hosea:14:2",
+      "readers": [
+        "hosea:14:1"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "hosea:14:3",
+      "readers": [
+        "hosea:14:2"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "hosea:14:4",
+      "readers": [
+        "hosea:14:3"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "hosea:14:5",
+      "readers": [
+        "hosea:14:4"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "hosea:14:6",
+      "readers": [
+        "hosea:14:5"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "hosea:14:7",
+      "readers": [
+        "hosea:14:6"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "hosea:14:8",
+      "readers": [
+        "hosea:14:7"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "hosea:14:9",
+      "readers": [
+        "hosea:14:8"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "hosea:14:10",
+      "readers": [
+        "hosea:14:9"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Hos.13:16--14:9 lines 2767-2770",
+        "STEP THOT Hosea 14 English Ref annotations"
+      ],
+      "reason": "Hebrew Hosea 14:2-10 is KJV Hosea 14:1-9."
+    },
+    {
+      "source": "joel:3:1",
+      "readers": [
+        "joel:2:28"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel English-reference note at KJV 2:28 / Hebrew 3:1"
+      ],
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    {
+      "source": "joel:3:2",
+      "readers": [
+        "joel:2:29"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel English-reference note at KJV 2:28 / Hebrew 3:1"
+      ],
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    {
+      "source": "joel:3:3",
+      "readers": [
+        "joel:2:30"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel English-reference note at KJV 2:28 / Hebrew 3:1"
+      ],
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    {
+      "source": "joel:3:4",
+      "readers": [
+        "joel:2:31"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel English-reference note at KJV 2:28 / Hebrew 3:1"
+      ],
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    {
+      "source": "joel:3:5",
+      "readers": [
+        "joel:2:32"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel English-reference note at KJV 2:28 / Hebrew 3:1"
+      ],
+      "reason": "Hebrew Joel 3:1-5 is KJV Joel 2:28-32."
+    },
+    {
+      "source": "joel:4:1",
+      "readers": [
+        "joel:3:1"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:2",
+      "readers": [
+        "joel:3:2"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:3",
+      "readers": [
+        "joel:3:3"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:4",
+      "readers": [
+        "joel:3:4"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:5",
+      "readers": [
+        "joel:3:5"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:6",
+      "readers": [
+        "joel:3:6"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:7",
+      "readers": [
+        "joel:3:7"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:8",
+      "readers": [
+        "joel:3:8"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:9",
+      "readers": [
+        "joel:3:9"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:10",
+      "readers": [
+        "joel:3:10"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:11",
+      "readers": [
+        "joel:3:11"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:12",
+      "readers": [
+        "joel:3:12"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:13",
+      "readers": [
+        "joel:3:13"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:14",
+      "readers": [
+        "joel:3:14"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:15",
+      "readers": [
+        "joel:3:15"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:16",
+      "readers": [
+        "joel:3:16"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:17",
+      "readers": [
+        "joel:3:17"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:18",
+      "readers": [
+        "joel:3:18"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:19",
+      "readers": [
+        "joel:3:19"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:20",
+      "readers": [
+        "joel:3:20"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "joel:4:21",
+      "readers": [
+        "joel:3:21"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "STEP Joel 3:1 note: English Joel 3:1 is Hebrew 4:1"
+      ],
+      "reason": "Hebrew Joel 4:1-21 is KJV Joel 3:1-21."
+    },
+    {
+      "source": "song of solomon:7:1",
+      "readers": [
+        "song of solomon:6:13"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:1 is KJV Song 6:13."
+    },
+    {
+      "source": "song of solomon:7:2",
+      "readers": [
+        "song of solomon:7:1"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:3",
+      "readers": [
+        "song of solomon:7:2"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:4",
+      "readers": [
+        "song of solomon:7:3"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:5",
+      "readers": [
+        "song of solomon:7:4"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:6",
+      "readers": [
+        "song of solomon:7:5"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:7",
+      "readers": [
+        "song of solomon:7:6"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:8",
+      "readers": [
+        "song of solomon:7:7"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:9",
+      "readers": [
+        "song of solomon:7:8"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:10",
+      "readers": [
+        "song of solomon:7:9"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:11",
+      "readers": [
+        "song of solomon:7:10"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:12",
+      "readers": [
+        "song of solomon:7:11"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:13",
+      "readers": [
+        "song of solomon:7:12"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "song of solomon:7:14",
+      "readers": [
+        "song of solomon:7:13"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "TVTMS $Sng.6:1--7:13 lines 2507-2513"
+      ],
+      "reason": "Hebrew Song 7:2-14 is KJV Song 7:1-13."
+    },
+    {
+      "source": "acts:19:40",
+      "readers": [
+        "acts:19:40",
+        "acts:19:41"
+      ],
+      "topology": "one-source-to-reader-span",
+      "evidence": [
+        "P05.12AD OpenGNT source tokens",
+        "TVTMS $Act.19:40-41"
+      ],
+      "reason": "OpenGNT Acts 19:40 contains both KJV 19:40 and the dismissal sentence numbered KJV 19:41."
+    },
+    {
+      "source": "2 corinthians:13:12",
+      "readers": [
+        "2 corinthians:13:12",
+        "2 corinthians:13:13"
+      ],
+      "topology": "one-source-to-reader-span",
+      "evidence": [
+        "P05.12AD OpenGNT source tokens",
+        "TVTMS $2Co.13:12-13"
+      ],
+      "reason": "OpenGNT 2 Corinthians 13:12 contains the holy-kiss sentence and the saints' greeting, divided as KJV 13:12-13."
+    },
+    {
+      "source": "2 corinthians:13:13",
+      "readers": [
+        "2 corinthians:13:14"
+      ],
+      "topology": "shifted-one-to-one",
+      "evidence": [
+        "P05.12AD OpenGNT source tokens",
+        "TVTMS $2Co.13:12-13"
+      ],
+      "reason": "OpenGNT 2 Corinthians 13:13 is the benediction numbered KJV 13:14."
+    },
+    {
+      "source": "3 john:1:14",
+      "readers": [
+        "3 john:1:14"
+      ],
+      "topology": "multi-source-to-one-reader",
+      "evidence": [
+        "TVTMS $3Jn.14:15 line 4100",
+        "P05.12AD OpenGNT source tokens"
+      ],
+      "reason": "KJV 3 John 1:14 combines OpenGNT 1:14 and 1:15."
+    },
+    {
+      "source": "3 john:1:15",
+      "readers": [
+        "3 john:1:14"
+      ],
+      "topology": "multi-source-to-one-reader",
+      "evidence": [
+        "TVTMS $3Jn.14:15 line 4100",
+        "P05.12AD OpenGNT source tokens"
+      ],
+      "reason": "KJV 3 John 1:14 combines OpenGNT 1:14 and 1:15."
+    },
+    {
+      "source": "revelation:12:18",
+      "readers": [
+        "revelation:13:1"
+      ],
+      "topology": "multi-source-to-one-reader",
+      "evidence": [
+        "TVTMS $Rev.12:17-13.1a",
+        "P05.12AD OpenGNT source tokens"
+      ],
+      "reason": "The opening clause of KJV Revelation 13:1 is OpenGNT Revelation 12:18."
+    },
+    {
+      "source": "revelation:13:1",
+      "readers": [
+        "revelation:13:1"
+      ],
+      "topology": "multi-source-to-one-reader",
+      "evidence": [
+        "TVTMS $Rev.12:17-13.1a",
+        "P05.12AD OpenGNT source tokens"
+      ],
+      "reason": "KJV Revelation 13:1 continues with OpenGNT Revelation 13:1."
+    }
+  ],
+  "readerOnly": [
+    {
+      "reader": "nehemiah:7:68",
+      "classification": "source-absent-in-owned-hebrew",
+      "evidence": [
+        "TVTMS $Neh.7:68-7:73 line 749",
+        "STEP THOT Nehemiah 7"
+      ],
+      "reason": "The separate KJV 7:68 content is absent from the owned Masoretic source tradition."
+    },
+    {
+      "reader": "matthew:17:21",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "matthew:18:11",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "matthew:23:14",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "mark:7:16",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "mark:9:44",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "mark:9:46",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "mark:11:26",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "mark:15:28",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "luke:17:36",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "luke:23:17",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "john:5:4",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "acts:8:37",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "acts:15:34",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "acts:24:7",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "acts:28:29",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    },
+    {
+      "reader": "romans:16:24",
+      "classification": "kjv-textual-variant-without-owned-greek-source",
+      "evidence": [
+        "P05.12AB non-owned shadow inventory",
+        "P05.12AD OpenGNT source-token evidence"
+      ],
+      "reason": "The verse remains visible in KJV2006 but has no source-owned OpenGNT verse at this coordinate and must fail closed for source word study."
+    }
+  ],
+  "safety": {
+    "readerOnlyVersesRemainVisible": true,
+    "readerOnlyVersesFailClosedForSourceWordStudy": true,
+    "noSourceRouteMayBeInvented": true,
+    "multiSourceAndMultiReaderTopologyMustRemainExplicit": true,
+    "productionPromotionAuthorized": false
+  }
+}

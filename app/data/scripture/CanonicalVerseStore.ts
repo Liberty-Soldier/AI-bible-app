@@ -49,6 +49,12 @@ type RuntimeManifest = {
   corpora: Record<BibleIQSource, RuntimeCorpusManifest>;
 };
 
+type KjvReaderRuntimeManifest = {
+  version: number;
+  aliases: Record<string, string>;
+  books: Record<string, unknown>;
+};
+
 export type CanonicalCompoundRoute = {
   routeId: string;
   lexicalId: string;
@@ -67,6 +73,9 @@ export type CanonicalHit = {
 const RUNTIME_ROOT = "/data/bibleiq/word-study";
 const manifestCache = new Map<string, Promise<RuntimeManifest | null>>();
 const bookCache = new Map<string, Promise<CompactBook | null>>();
+const KJV_READER_RUNTIME_ROOT = "/data/bibleiq/word-study-kjv-reader";
+const kjvReaderManifestCache = new Map<string, Promise<KjvReaderRuntimeManifest | null>>();
+const kjvReaderBookCache = new Map<string, Promise<CompactBook | null>>();
 
 
 const GREEK_COMPOUND_ROUTES: Record<
@@ -204,6 +213,13 @@ function runtimeUrl(origin: string, relativePath: string) {
   ).toString();
 }
 
+function kjvReaderRuntimeUrl(origin: string, relativePath: string) {
+  return new URL(
+    `${KJV_READER_RUNTIME_ROOT}/${relativePath.replace(/^\/+/, "")}`,
+    origin,
+  ).toString();
+}
+
 async function fetchJson<T>(url: string): Promise<T | null> {
   try {
     const response = await fetch(url, { cache: "no-store" });
@@ -270,6 +286,48 @@ async function loadRuntimeBook(
   return pending;
 }
 
+function loadKjvReaderManifest(origin: string) {
+  const key = new URL(origin).origin;
+  let pending = kjvReaderManifestCache.get(key);
+
+  if (!pending) {
+    pending = fetchJson<KjvReaderRuntimeManifest>(
+      kjvReaderRuntimeUrl(key, "manifest.json"),
+    );
+    kjvReaderManifestCache.set(key, pending);
+  }
+
+  return pending;
+}
+
+async function loadKjvReaderBook(
+  origin: string,
+  book: string,
+): Promise<CompactBook | null> {
+  const manifest = await loadKjvReaderManifest(origin);
+  const aliases = [book, canonicalBookName(book)]
+    .map(normalizeAlias)
+    .filter(Boolean);
+  const outputFile = aliases
+    .map((alias) => manifest?.aliases?.[alias])
+    .find(Boolean);
+
+  if (!outputFile) return null;
+
+  const originKey = new URL(origin).origin;
+  const cacheKey = `${originKey}|${outputFile}`;
+  let pending = kjvReaderBookCache.get(cacheKey);
+
+  if (!pending) {
+    pending = fetchJson<CompactBook>(
+      kjvReaderRuntimeUrl(originKey, outputFile),
+    );
+    kjvReaderBookCache.set(cacheKey, pending);
+  }
+
+  return pending;
+}
+
 function expandSourceToken(
   corpus: BibleIQSource,
   compact: CompactSourceToken,
@@ -304,9 +362,17 @@ export async function findCanonicalHit({
 }): Promise<CanonicalHit | null> {
   if (displayTokenIndex == null || displayTokenIndex < 0) return null;
 
-  const corpus = preferredCorpusForTranslation(translation, book);
   const translationKey = safeTranslation(translation);
-  const runtimeBook = await loadRuntimeBook(origin, corpus, book);
+  const kjvReaderBook =
+    translationKey === "kjv"
+      ? await loadKjvReaderBook(origin, book)
+      : null;
+  const corpus =
+    kjvReaderBook?.corpus ||
+    preferredCorpusForTranslation(translation, book);
+  const runtimeBook =
+    kjvReaderBook ||
+    (await loadRuntimeBook(origin, corpus, book));
   const compactVerse = runtimeBook?.verses?.[`${chapter}:${verse}`];
   if (!compactVerse) return null;
 
@@ -363,9 +429,17 @@ export async function getCanonicalChapterTokenAvailability({
   chapter: number;
   translation: string;
 }): Promise<BibleIQChapterTokenAvailability> {
-  const corpus = preferredCorpusForTranslation(translation, book);
   const translationKey = safeTranslation(translation);
-  const runtimeBook = await loadRuntimeBook(origin, corpus, book);
+  const kjvReaderBook =
+    translationKey === "kjv"
+      ? await loadKjvReaderBook(origin, book)
+      : null;
+  const corpus =
+    kjvReaderBook?.corpus ||
+    preferredCorpusForTranslation(translation, book);
+  const runtimeBook =
+    kjvReaderBook ||
+    (await loadRuntimeBook(origin, corpus, book));
   const result: BibleIQChapterTokenAvailability = {};
 
   if (!runtimeBook) return result;

@@ -22,4 +22,5 @@ export interface Verse {
   verseLabel?: string;
   reference: string;
   sources: VerseSource[];
+  tokenAvailabilityKey?: string | null;
 }
