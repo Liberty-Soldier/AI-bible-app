@@ -13,7 +13,6 @@ import {
 import { usePathname, useSearchParams } from "next/navigation";
 import { normalizeBookName } from "@/app/data/bookAliases";
 import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
-import { usePremiumAccess } from "@/app/components/premium/PremiumAccessProvider";
 import type {
   BibleIQEmet,
   BibleIQEntityEvidence,
@@ -53,6 +52,60 @@ const OCCURRENCE_PAGE_SIZE = 40;
 const SOURCE_FORM_LIMIT = 10;
 const TECHNICAL_SOURCE_FORM_LIMIT = 40;
 const CONNECTION_LIMIT = 12;
+
+const RENDERING_NOISE_WORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "are",
+  "as",
+  "at",
+  "be",
+  "been",
+  "being",
+  "but",
+  "by",
+  "for",
+  "from",
+  "had",
+  "has",
+  "have",
+  "he",
+  "her",
+  "hers",
+  "him",
+  "his",
+  "i",
+  "in",
+  "is",
+  "it",
+  "its",
+  "me",
+  "my",
+  "of",
+  "on",
+  "or",
+  "our",
+  "ours",
+  "she",
+  "that",
+  "the",
+  "their",
+  "theirs",
+  "them",
+  "they",
+  "this",
+  "to",
+  "us",
+  "was",
+  "we",
+  "were",
+  "will",
+  "with",
+  "you",
+  "your",
+  "yours",
+]);
 
 const GREEK_DIGRAPHS: Record<string, string> = {
   αι: "ai",
@@ -423,19 +476,13 @@ function getPrincipalRenderings(
 
   const direct = cleaned.filter((form) => {
     const stem = englishStem(form.text);
-    return (
-      stem === selectedStem ||
-      lexicalTerms.includes(stem) ||
-      lexicalTerms.some(
-        (term) => term && stem && (term.includes(stem) || stem.includes(term)),
-      )
-    );
+    if (!stem) return false;
+    if (stem === selectedStem) return true;
+    if (RENDERING_NOISE_WORDS.has(stem)) return false;
+    return lexicalTerms.includes(stem);
   });
 
-  const seed = direct.length ? direct : cleaned.slice(0, 1);
-  const seedStems = new Set(seed.map((form) => englishStem(form.text)));
-  const family = cleaned.filter((form) => seedStems.has(englishStem(form.text)));
-  const candidates = direct.length ? direct : family;
+  const candidates = direct;
 
   const seen = new Set<string>();
   return candidates
@@ -474,18 +521,13 @@ function getAllCleanRenderings(
         normalizeEnglish(form.text).length > 1,
     );
 
-  const topStem = englishStem(cleaned[0]?.text || selectedWord);
   const seen = new Set<string>();
 
   return cleaned.filter((form) => {
     const stem = englishStem(form.text);
     const direct =
       stem === selectedStem ||
-      stem === topStem ||
-      lexicalTerms.includes(stem) ||
-      lexicalTerms.some(
-        (term) => term && stem && (term.includes(stem) || stem.includes(term)),
-      );
+      (!RENDERING_NOISE_WORDS.has(stem) && lexicalTerms.includes(stem));
 
     if (!direct) return false;
 
@@ -494,6 +536,40 @@ function getAllCleanRenderings(
     seen.add(key);
     return true;
   });
+}
+
+function isReaderReadyLexicalMeaning(value?: string) {
+  const clean = String(value || "").replace(/\s+/g, " ").trim();
+  if (!clean) return false;
+  if (clean.length > 120) return false;
+  if (/[;:]/.test(clean)) return false;
+  if (
+    /\b(symbolical|properly|figuratively|by implication|from an unused root|a primitive root|compare|proper name|name of|symbolical name|capital city|city of|town of|region of|country of|inhabitant|patronymic)\b/i.test(
+      clean,
+    )
+  ) {
+    return false;
+  }
+  return true;
+}
+
+function getPrimaryLexicalMeaning(
+  evidence: BibleIQEntityEvidence | undefined,
+) {
+  const values = [
+    ...(evidence?.lexical.shortDefinitions || []),
+    ...(evidence?.lexical.glosses || []),
+  ];
+
+  for (const value of values) {
+    const clean = String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (clean) return clean;
+  }
+
+  return "";
 }
 
 function humanizeMorphology(
@@ -625,16 +701,28 @@ function buildReaderMeaning({
   const source = sourceWord ? `The source word ${sourceWord}` : "This source word";
   const same = englishStem(rendered) === englishStem(selectedEnglish);
 
-  return `${source} is rendered “${selectedEnglish}” in ${reference}.${
+  return `${source} is rendered “${selectedEnglish}” here.${
     !same && rendered
-      ? ` Its principal English sense is “${rendered}.”`
+      ? ` A common English rendering is “${rendered}.”`
       : ""
   }`;
 }
 
 function summarizeRenderings(forms: BibleIQRenderingForm[]) {
   if (!forms.length) return "See how this word is rendered";
-  return forms.map((form) => form.text).join(" · ");
+
+  const seen = new Set<string>();
+  const labels = forms
+    .map((form) => cleanRendering(form.text))
+    .filter((text) => {
+      const key = normalizeEnglish(text);
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 4);
+
+  return labels.length ? labels.join(" · ") : "See how this word is rendered";
 }
 
 export default function WordStudySheet({
@@ -664,7 +752,6 @@ export default function WordStudySheet({
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { requestUpgrade } = usePremiumAccess();
 
   const sheetKey = `${word || ""}-${data?.entity?.id || "loading"}`;
 
@@ -800,6 +887,27 @@ export default function WordStudySheet({
   const pronunciation = original?.pronunciation || lexical?.pronunciation;
   const principalRenderings = getPrincipalRenderings(entityEvidence, word);
   const allCleanRenderings = getAllCleanRenderings(entityEvidence, word);
+  const rawPrimaryLexicalMeaning = getPrimaryLexicalMeaning(entityEvidence);
+  const primaryLexicalMeaning = isReaderReadyLexicalMeaning(
+    rawPrimaryLexicalMeaning,
+  )
+    ? rawPrimaryLexicalMeaning
+    : "";
+  const overviewLexicalMeaning =
+    primaryLexicalMeaning || rawPrimaryLexicalMeaning;
+  const overviewLexicalMeaningLabel = primaryLexicalMeaning
+    ? "Simple meaning"
+    : rawPrimaryLexicalMeaning
+      ? "Lexicon meaning"
+      : "";
+  const overviewLexicalMeaningIsRaw =
+    Boolean(rawPrimaryLexicalMeaning) && !primaryLexicalMeaning;
+  const occurrenceMeaningIsReaderReady = isReaderReadyStatement(
+    meaningInVerse?.statement,
+  );
+  const readerMeaningLabel = occurrenceMeaningIsReaderReady
+    ? "Meaning here"
+    : "In this verse";
   const readableMorphology = humanizeMorphology(
     alignment?.morph,
     alignment?.source,
@@ -905,7 +1013,7 @@ export default function WordStudySheet({
 
       <section
         className={`absolute bottom-0 left-1/2 flex w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
-          snap === "expanded" ? "h-[92dvh]" : "h-[74dvh]"
+          snap === "expanded" ? "h-[96dvh]" : "h-[86dvh]"
         }`}
       >
         <div className="shrink-0 border-b border-[var(--border)] bg-[var(--background)] px-5 py-3">
@@ -949,11 +1057,18 @@ export default function WordStudySheet({
           className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 pb-20"
         >
           {loading ? (
-            <Panel>
+            <div className="animate-pulse py-2">
               <p className="text-sm font-semibold text-[var(--muted)]">
-                Loading source evidence...
+                Loading word evidence...
               </p>
-            </Panel>
+              <div className="mt-5 h-6 w-3/4 rounded bg-[var(--surface)]" />
+              <div className="mt-3 h-4 w-full rounded bg-[var(--surface)]" />
+              <div className="mt-2 h-4 w-5/6 rounded bg-[var(--surface)]" />
+              <div className="mt-6 border-t border-[var(--border)] pt-5">
+                <div className="h-5 w-2/5 rounded bg-[var(--surface)]" />
+                <div className="mt-3 h-16 w-full rounded bg-[var(--surface)]" />
+              </div>
+            </div>
           ) : !entity ? (
             <Panel>
               <SectionHeading eyebrow="EMETSEES" title="This word is not mapped yet" />
@@ -975,6 +1090,10 @@ export default function WordStudySheet({
               transliteration={transliteration}
               pronunciation={pronunciation}
               readerMeaning={readerMeaning}
+              readerMeaningLabel={readerMeaningLabel}
+              overviewLexicalMeaning={overviewLexicalMeaning}
+              overviewLexicalMeaningLabel={overviewLexicalMeaningLabel}
+              overviewLexicalMeaningIsRaw={overviewLexicalMeaningIsRaw}
               verseText={meaningInVerse?.verseText || verseText}
               emet={emet}
               firstOccurrence={firstOccurrence}
@@ -986,18 +1105,6 @@ export default function WordStudySheet({
               returnTo={readingReturnTo}
               returnLabel={readingLabel}
               onView={changeView}
-              onAsk={() =>
-                requestUpgrade(
-                  "ask-emet",
-                  `${word} • ${book} ${chapter}${verse ? `:${verse}` : ""}`,
-                )
-              }
-              onDeepStudy={() =>
-                requestUpgrade(
-                  "deep-word-study",
-                  `${word} • ${getSourceLabel(alignment?.source)}`,
-                )
-              }
               onClose={onClose}
             />
           ) : view === "lexicon" ? (
@@ -1095,6 +1202,10 @@ function OverviewView({
   transliteration,
   pronunciation,
   readerMeaning,
+  readerMeaningLabel,
+  overviewLexicalMeaning,
+  overviewLexicalMeaningLabel,
+  overviewLexicalMeaningIsRaw,
   verseText,
   emet,
   firstOccurrence,
@@ -1106,8 +1217,6 @@ function OverviewView({
   returnTo,
   returnLabel,
   onView,
-  onAsk,
-  onDeepStudy,
   onClose,
 }: {
   word: string;
@@ -1120,6 +1229,10 @@ function OverviewView({
   transliteration?: string;
   pronunciation?: string;
   readerMeaning: string;
+  readerMeaningLabel: string;
+  overviewLexicalMeaning: string;
+  overviewLexicalMeaningLabel: string;
+  overviewLexicalMeaningIsRaw: boolean;
   verseText?: string;
   emet?: BibleIQEmet;
   firstOccurrence?: BibleIQReference;
@@ -1131,125 +1244,153 @@ function OverviewView({
   returnTo: string;
   returnLabel: string;
   onView: (view: StudyView) => void;
-  onAsk: () => void;
-  onDeepStudy: () => void;
   onClose: () => void;
 }) {
   const firstHref = buildReferenceHref(firstOccurrence, returnTo, returnLabel);
+  const originalLanguageLabel =
+    alignment?.source === "hebrew" ? "Original Hebrew" : "Original Greek";
+  const meaningHere = readerMeaning;
+  const showMeaningHere =
+    Boolean(meaningHere) &&
+    normalizeEnglish(meaningHere) !== normalizeEnglish(overviewLexicalMeaning);
 
   return (
-    <div className="space-y-5">
-      <header>
+    <div>
+      <header className="pb-4">
         <p className="text-[0.68rem] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
           Selected word
         </p>
         <h2 className="mt-2 break-words text-[2.05rem] font-bold leading-[1.04] tracking-[-0.04em]">
           {word}
         </h2>
+        <p className="mt-2 text-sm font-semibold text-[var(--muted)]">
+          {book} {chapter}
+          {verse ? `:${verse}` : ""} · {getTranslationLabel(translation)}
+        </p>
+      </header>
 
-        {sourceDisplay ? (
+      <section className="border-t border-[var(--border)] py-5">
+        {overviewLexicalMeaning ? (
+          <>
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+              {overviewLexicalMeaningLabel}
+            </p>
+            {overviewLexicalMeaningIsRaw ? (
+              <p className="mt-1 text-xs font-semibold text-[var(--muted)]">
+                Source dictionary wording
+              </p>
+            ) : null}
+            <p
+              className={`mt-2 leading-8 tracking-[-0.015em] ${
+                overviewLexicalMeaningIsRaw
+                  ? "text-[1.02rem] font-medium"
+                  : "text-[1.3rem] font-semibold"
+              }`}
+            >
+              {overviewLexicalMeaning}
+            </p>
+          </>
+        ) : null}
+
+        {showMeaningHere ? (
+          <div className={overviewLexicalMeaning ? "mt-5" : ""}>
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[var(--muted)]">
+              {readerMeaningLabel}
+            </p>
+            <p className="mt-2 text-[1.05rem] leading-7">{meaningHere}</p>
+          </div>
+        ) : null}
+
+        {verseText ? (
+          <blockquote className="mt-4 text-[0.95rem] italic leading-7 text-[var(--muted)]">
+            “{verseText}”
+          </blockquote>
+        ) : null}
+      </section>
+
+      {emet?.status === "complete" && emet.explanation ? (
+        <section className="border-t border-[var(--border)] py-5">
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+            Across Scripture
+          </p>
+          <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
+            {emet.headline || "What the evidence shows"}
+          </h3>
+          <p className="mt-3 text-[1.02rem] leading-7">{emet.explanation}</p>
+          {emet.citations?.length ? (
+            <p className="mt-3 text-xs font-semibold leading-5 text-[var(--muted)]">
+              Supported by {emet.citations.slice(0, 4).join(" · ")}
+            </p>
+          ) : null}
+        </section>
+      ) : null}
+
+      {sourceDisplay ? (
+        <section className="border-t border-[var(--border)] py-5">
           <button
             type="button"
             onClick={() => onView("lexicon")}
-            className="mt-4 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3.5 text-left transition hover:border-amber-500/35 active:scale-[0.995]"
+            className="w-full text-left transition active:opacity-70"
           >
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
-                <p className="break-words text-2xl font-bold leading-tight">
+                <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+                  {originalLanguageLabel}
+                </p>
+                <p className="mt-2 break-words text-2xl font-bold leading-tight">
                   {sourceDisplay}
                 </p>
-                {transliteration ? (
-                  <p className="mt-2 break-words text-sm font-semibold text-[var(--muted)]">
-                    Transliteration:{" "}
-                    <span className="text-base font-bold text-[var(--foreground)]">
-                      {transliteration}
-                    </span>
-                  </p>
-                ) : null}
-                {pronunciation ? (
-                  <p className="mt-1 break-words text-sm font-semibold text-[var(--muted)]">
-                    Pronounced:{" "}
-                    <span className="font-bold text-[var(--foreground)]">
-                      {pronunciation}
-                    </span>
-                  </p>
-                ) : null}
-                {alignment?.sourceWord && alignment.sourceWord !== alignment.lemma ? (
-                  <p className="mt-2 break-words text-sm font-semibold text-[var(--muted)]">
-                    Form in this verse: {alignment.sourceWord}
-                  </p>
-                ) : null}
+
+                <div className="mt-3 space-y-1 text-sm leading-6 text-[var(--muted)]">
+                  {transliteration ? (
+                    <p>
+                      <span className="font-semibold text-[var(--foreground)]">
+                        {transliteration}
+                      </span>
+                      {" · transliteration"}
+                    </p>
+                  ) : null}
+                  {pronunciation ? (
+                    <p>
+                      <span className="font-semibold text-[var(--foreground)]">
+                        {pronunciation}
+                      </span>
+                      {" · pronunciation"}
+                    </p>
+                  ) : null}
+                  {alignment?.sourceWord &&
+                  alignment.sourceWord !== alignment.lemma ? (
+                    <p>Form in this verse: {alignment.sourceWord}</p>
+                  ) : null}
+                  {alignment?.lexicalId ? (
+                    <p>
+                      {alignment.lexicalId}
+                      {readableMorphology ? ` · ${readableMorphology}` : ""}
+                    </p>
+                  ) : readableMorphology ? (
+                    <p>{readableMorphology}</p>
+                  ) : null}
+                </div>
               </div>
               <Chevron />
             </div>
           </button>
-        ) : null}
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          <MetaPill>
-            {book} {chapter}
-            {verse ? `:${verse}` : ""}
-          </MetaPill>
-          <MetaPill>{getTranslationLabel(translation)}</MetaPill>
-          {alignment?.source ? (
-            <MetaPill>{getSourceLabel(alignment.source)}</MetaPill>
-          ) : null}
-          {alignment?.lexicalId ? (
-            <button type="button" onClick={() => onView("lexicon")}>
-              <MetaPill interactive>{alignment.lexicalId} ›</MetaPill>
-            </button>
-          ) : null}
-        </div>
-      </header>
-
-      <Panel>
-        <SectionHeading eyebrow="What it means here" title={returnLabel} />
-        <p className="mt-4 text-[1.02rem] leading-7">{readerMeaning}</p>
-        {verseText ? (
-          <blockquote className="mt-4 border-l-2 border-amber-500/35 pl-4 text-[0.96rem] italic leading-7 text-[var(--muted)]">
-            “{verseText}”
-          </blockquote>
-        ) : null}
-      </Panel>
-
-      {emet?.status === "complete" && emet.explanation ? (
-        <Panel>
-          <SectionHeading
-            eyebrow="Across Scripture"
-            title={emet.headline || "EMET explains"}
-          />
-          <p className="mt-4 text-[1.02rem] leading-7">{emet.explanation}</p>
-          {emet.citations?.length ? (
-            <p className="mt-4 text-xs font-semibold text-[var(--muted)]">
-              Supported by {emet.citations.slice(0, 4).join(" · ")}
-            </p>
-          ) : null}
-        </Panel>
+        </section>
       ) : null}
 
-      <Panel>
-        <SectionHeading eyebrow="Explore" title="SEE Evidence is one tap away" />
-        <div className="mt-4 divide-y divide-[var(--border)]">
-          {firstOccurrence && firstHref ? (
-            <ExploreLinkRow
-              href={firstHref}
-              label="First occurrence"
-              summary={firstOccurrence.reference}
-            />
-          ) : null}
+      <section className="border-t border-[var(--border)] py-5">
+        <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+          In Scripture
+        </p>
+
+        <div className="mt-2 divide-y divide-[var(--border)]">
           <ExploreButtonRow
-            label="Key passages"
+            label="Common English renderings"
             summary={
-              keyReferences.length
-                ? `${keyReferences.length} selected passages`
-                : "Representative Scripture references"
+              principalRenderings.length
+                ? summarizeRenderings(principalRenderings)
+                : "No reliable English rendering summary is available yet"
             }
-            onClick={() => onView("references")}
-            disabled={!keyReferences.length}
-          />
-          <ExploreButtonRow
-            label="English translations"
-            summary={summarizeRenderings(principalRenderings)}
             onClick={() => onView("renderings")}
             disabled={!principalRenderings.length}
           />
@@ -1261,8 +1402,37 @@ function OverviewView({
             onClick={() => onView("occurrences")}
             disabled={uniqueVerseCount === 0}
           />
+        </div>
+      </section>
+
+      <section className="border-t border-[var(--border)] py-5">
+        <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+          Scripture evidence
+        </p>
+        <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
+          Trace the evidence
+        </h3>
+
+        <div className="mt-3 divide-y divide-[var(--border)]">
           <ExploreButtonRow
-            label="SEE connections"
+            label="Key passages"
+            summary={
+              keyReferences.length
+                ? `${keyReferences.length} selected passages`
+                : "Representative Scripture references"
+            }
+            onClick={() => onView("references")}
+            disabled={!keyReferences.length}
+          />
+          {firstOccurrence && firstHref ? (
+            <ExploreLinkRow
+              href={firstHref}
+              label="First occurrence"
+              summary={firstOccurrence.reference}
+            />
+          ) : null}
+          <ExploreButtonRow
+            label="Related evidence"
             summary="Relationships, events, and themes"
             onClick={() => onView("connections")}
             disabled={!hasConnections}
@@ -1271,7 +1441,7 @@ function OverviewView({
             label={
               alignment?.source === "lxx"
                 ? "LXX lexicon and grammar"
-                : "Strong's definition and lexicon"
+                : "Lexicon and grammar"
             }
             summary={
               readableMorphology ||
@@ -1282,16 +1452,17 @@ function OverviewView({
             onClick={() => onView("lexicon")}
           />
           <ExploreButtonRow
-            label="Technical details"
+            label="Technical evidence"
             summary="Alignment, raw codes, and evidence health"
             onClick={() => onView("technical")}
             quiet
           />
         </div>
-      </Panel>
+      </section>
 
-      <PremiumStudyPanel onAsk={onAsk} onDeepStudy={onDeepStudy} />
-      <BackToReadingButton label={returnLabel} onClick={onClose} />
+      <div className="border-t border-[var(--border)] pt-5">
+        <BackToReadingButton label={returnLabel} onClick={onClose} />
+      </div>
     </div>
   );
 }
@@ -1397,17 +1568,17 @@ function LexiconView({
           <p className="mt-3 text-[1rem] leading-7">
             {englishSummary}
           </p>
-          <div className="mt-4 grid grid-cols-2 gap-2">
+          <div className="mt-3 divide-y divide-[var(--border)]">
             {principalRenderings.slice(0, 6).map((form) => (
               <button
                 key={`${form.translation}-${form.text}`}
                 type="button"
                 onClick={onRenderings}
-                className="rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-left transition active:scale-[0.98]"
+                className="flex w-full items-center justify-between gap-4 py-3 text-left transition active:opacity-70"
               >
-                <span className="block text-sm font-bold">{form.text}</span>
-                <span className="mt-1 block text-xs text-[var(--muted)]">
-                  {form.count.toLocaleString()} aligned use
+                <span className="text-sm font-bold">{form.text}</span>
+                <span className="shrink-0 text-xs text-[var(--muted)]">
+                  {form.count.toLocaleString()} use
                   {form.count === 1 ? "" : "s"}
                 </span>
               </button>
@@ -1416,7 +1587,7 @@ function LexiconView({
           <button
             type="button"
             onClick={onRenderings}
-            className="mt-4 w-full rounded-xl border border-[var(--border)] px-4 py-3 text-sm font-bold text-[var(--muted)]"
+            className="mt-3 text-sm font-bold text-amber-700 dark:text-amber-300"
           >
             See all English renderings ›
           </button>
@@ -1426,12 +1597,8 @@ function LexiconView({
       {definitions.length ? (
         <Panel>
           <SectionHeading
-            eyebrow={
-              alignment?.source === "lxx"
-                ? "Plain-English meaning"
-                : "Plain-English meaning"
-            }
-            title="What this word can mean"
+            eyebrow="Lexicon meaning"
+            title="Source dictionary wording"
           />
           <p className="mt-4 text-[1.02rem] leading-7">
             {definitions[0]}
@@ -1479,7 +1646,7 @@ function LexiconView({
               {sourceForms.map((form) => (
                 <div
                   key={`${form.surface}-${form.count}`}
-                  className="flex items-center justify-between gap-4 rounded-xl border border-[var(--border)] bg-[var(--background)] px-4 py-3"
+                  className="flex items-center justify-between gap-4 border-b border-[var(--border)] py-3"
                 >
                   <span className="min-w-0 break-words text-base font-bold">
                     {form.surface}
@@ -1809,7 +1976,7 @@ function TechnicalView({
             {sourceForms.slice(0, TECHNICAL_SOURCE_FORM_LIMIT).map((form) => (
               <div
                 key={`${form.surface}-${form.count}`}
-                className="flex items-center justify-between gap-4 rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-2"
+                className="flex items-center justify-between gap-4 border-b border-[var(--border)] py-3"
               >
                 <span className="min-w-0 break-words text-sm font-bold">
                   {form.surface}
@@ -1828,50 +1995,9 @@ function TechnicalView({
   );
 }
 
-function PremiumStudyPanel({
-  onAsk,
-  onDeepStudy,
-}: {
-  onAsk: () => void;
-  onDeepStudy: () => void;
-}) {
-  return (
-    <Panel>
-      <div className="flex items-start justify-between gap-4">
-        <SectionHeading eyebrow="Go deeper" title="Guided study tools" />
-        <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-[0.62rem] font-black uppercase tracking-[0.14em] text-amber-600 dark:text-amber-400">
-          Paid
-        </span>
-      </div>
-      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <button
-          type="button"
-          onClick={onAsk}
-          className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4 text-left"
-        >
-          <p className="text-sm font-black">Ask EMET</p>
-          <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
-            Ask a live question grounded in this word and verse.
-          </p>
-        </button>
-        <button
-          type="button"
-          onClick={onDeepStudy}
-          className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4 text-left"
-        >
-          <p className="text-sm font-black">Deep Word Study</p>
-          <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
-            Build a guided study from the complete SEE evidence.
-          </p>
-        </button>
-      </div>
-    </Panel>
-  );
-}
-
 function Panel({ children }: { children: ReactNode }) {
   return (
-    <section className="rounded-[1.35rem] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-sm)]">
+    <section className="border-t border-[var(--border)] py-5">
       {children}
     </section>
   );
@@ -1918,11 +2044,11 @@ function SectionHeading({
 
 function ViewTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
-    <header className="mb-6">
+    <header className="mb-4">
       <p className="text-[0.68rem] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
         {eyebrow}
       </p>
-      <h2 className="mt-2 text-3xl font-bold leading-tight tracking-[-0.04em]">
+      <h2 className="mt-2 text-[1.65rem] font-bold leading-tight tracking-[-0.035em]">
         {title}
       </h2>
     </header>
@@ -2024,7 +2150,7 @@ function ReferenceCard({
 }) {
   const href = buildReferenceHref(reference, returnTo, returnLabel);
   const content = (
-    <article className="rounded-[1.2rem] border border-[var(--border)] bg-[var(--background)] p-4 transition active:scale-[0.99]">
+    <article className="border-b border-[var(--border)] py-4 transition active:opacity-70">
       <div className="flex items-start justify-between gap-3">
         <p className="text-lg font-bold tracking-[-0.02em]">
           {reference.reference}
@@ -2066,7 +2192,7 @@ function OccurrenceCard({
 }) {
   const href = buildReferenceHref(occurrence, returnTo, returnLabel);
   const content = (
-    <article className="rounded-[1.2rem] border border-[var(--border)] bg-[var(--background)] p-4 transition active:scale-[0.99]">
+    <article className="border-b border-[var(--border)] py-4 transition active:opacity-70">
       <div className="flex items-start justify-between gap-3">
         <p className="text-lg font-bold tracking-[-0.02em]">
           {occurrence.reference}
@@ -2108,7 +2234,7 @@ function ConnectionCard({
 }) {
   const href = buildReferenceHref(connection.reference, returnTo, returnLabel);
   const content = (
-    <article className="rounded-[1.2rem] border border-[var(--border)] bg-[var(--background)] p-4">
+    <article className="border-b border-[var(--border)] py-4">
       <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[var(--muted)]">
         {connection.group}
       </p>
@@ -2158,7 +2284,7 @@ function InfoRow({
 
 function EmptyState({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--background)] p-4 text-sm leading-6 text-[var(--muted)]">
+    <div className="border-l-2 border-[var(--border)] pl-4 text-sm leading-6 text-[var(--muted)]">
       {children}
     </div>
   );

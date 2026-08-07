@@ -18,6 +18,7 @@ import {
   type ReaderHighlight,
   type ReaderMemoryVerse,
   type ReaderNote,
+  type ReaderTranslation,
 } from "@/app/lib/readerMemory";
 
 export type SelectedVerse = ReaderMemoryVerse;
@@ -32,7 +33,7 @@ export default function VerseActionController({
 }: {
   verses: ReaderVerse[];
   superscriptions?: ReaderSuperscription[];
-  activeTranslation: string;
+  activeTranslation: ReaderTranslation;
   highlightedVerse?: string | null;
   focusedTokenIndex?: number | null;
   tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
@@ -102,6 +103,7 @@ export default function VerseActionController({
       verse: verse.verse,
       verseLabel: verse.verseLabel,
       text: verse.sources[0]?.text || "",
+      translation: activeTranslation,
     };
   }
 

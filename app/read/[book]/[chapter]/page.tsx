@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
@@ -74,6 +75,68 @@ function getTranslationLabel(translation: Translation) {
   if (translation === "kjv") return "King James Version";
   if (translation === "brenton") return "Brenton Septuagint";
   return "World English Bible";
+}
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ book: string; chapter: string }>;
+  searchParams: Promise<{
+    verse?: string;
+    translation?: string;
+  }>;
+}): Promise<Metadata> {
+  const { book, chapter } = await params;
+  const { verse, translation } = await searchParams;
+
+  const decodedBook = decodeURIComponent(book);
+  const chapterNumber = Number(chapter);
+  const requestedTranslation: Translation =
+    translation === "kjv" ||
+    translation === "brenton" ||
+    translation === "web"
+      ? translation
+      : "web";
+  const translationLabel = getTranslationLabel(requestedTranslation);
+  const reference = `${decodedBook} ${chapterNumber}${verse ? `:${verse}` : ""}`;
+  const canonicalParams = new URLSearchParams();
+
+  canonicalParams.set("translation", requestedTranslation);
+  if (verse) canonicalParams.set("verse", verse);
+
+  const canonicalUrl = `/read/${encodeURIComponent(decodedBook)}/${chapterNumber}?${canonicalParams.toString()}`;
+  const title = `${reference} — ${translationLabel}`;
+  const description = `Read ${reference} in the ${translationLabel}, then trace source-word and Scripture evidence with EMETSEES.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: "article",
+      url: canonicalUrl,
+      siteName: "EMETSEES",
+      title,
+      description,
+      images: [
+        {
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: "EMETSEES — Bible Study & Scripture Evidence",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/twitter-image"],
+    },
+  };
 }
 
 function getAvailableBooks() {

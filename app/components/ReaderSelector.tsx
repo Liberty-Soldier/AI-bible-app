@@ -1,8 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import {
+  setPreferredTranslation,
+  type TranslationPreference,
+} from "@/app/lib/translationPreference";
 
-type Translation = "web" | "kjv" | "brenton";
+type Translation = TranslationPreference;
 
 type Props = {
   books: string[];
@@ -41,10 +45,12 @@ export default function ReaderSelector({
       ? `&verse=${encodeURIComponent(verse)}`
       : "";
 
+    const preferredTranslation = setPreferredTranslation(translation);
+
     router.push(
       `/read/${encodeURIComponent(
         book
-      )}/${chapter}?translation=${translation}${verseParam}`
+      )}/${chapter}?translation=${preferredTranslation}${verseParam}`
     );
   }
 

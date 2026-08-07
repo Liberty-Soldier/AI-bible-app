@@ -1,0 +1,62 @@
+{
+  "phase": "P08.2A",
+  "name": "Notes Lifecycle",
+  "mode": "transactional-targeted-apply",
+  "sourceAudit": {
+    "package": "EMETSEES-P08.1-CURRENT-MOBILE-UX-ARCHITECTURE-AUDIT-20260806-111142.zip",
+    "branch": "main",
+    "head": "b7a7c331d2556acf2b52435a7d5ad1eed4d3a026"
+  },
+  "targets": [
+    {
+      "path": "app/lib/readerMemory.ts",
+      "beforeSha256": "bf557943fc36591fdcaa1c5120eee10a9d5574594c16bb9ff03f0a642f8576f2",
+      "afterSha256": "6476f9c9244d2f16423505dec5a4a2fdf9a2435d9a458fe6a2499db7364c1ab6"
+    },
+    {
+      "path": "app/components/VerseActionController.tsx",
+      "beforeSha256": "f0fbc23c70b1d6afeb045b581583b9ab64ae59ff8bebe77dd89aee00914837a4",
+      "afterSha256": "70f023999b2d63e669e9332779d61a8855590366e7d94a703e422ebe49f9d1bf"
+    },
+    {
+      "path": "app/library/page.tsx",
+      "beforeSha256": "b62a6bb5bc4c2243ec983e22d3a566aec1449410a1fa3f68927846c513545ea8",
+      "afterSha256": "18622fc682a1db6d5a1211d2a38c0427264ca030150219060211e58678b78f65"
+    },
+    {
+      "path": "app/page.tsx",
+      "beforeSha256": "5d61a5b64dee7aca7501b41a15f4baf2a7d075d731fa834a2812f8d2f27bd045",
+      "afterSha256": "70b73c300aef12bbfffa12cc0f570ae0cd6d0a163033ec99be59e06957a311c4"
+    }
+  ],
+  "protectedPaths": [
+    "scripts/p07/full-cache-generation",
+    ".private/staging/P07-FULL-CACHE-GENERATION",
+    ".private/reports/P07-FULL-CACHE-GENERATION",
+    ".private/entity/build/P01",
+    ".private/entity/build/P02",
+    ".private/entity/build/P03",
+    ".private/entity/build/P04",
+    ".private/entity/build/P04.2"
+  ],
+  "forbiddenOperations": [
+    "git switch",
+    "git checkout",
+    "git reset",
+    "git clean",
+    "dependency install",
+    "dependency upgrade",
+    "npm build",
+    "P07 stop or modification",
+    "P01-P04 modification"
+  ],
+  "verification": [
+    "exact target post-install SHA-256",
+    "isolated TypeScript syntax transpilation",
+    "legacy note migration behavior",
+    "edit preserves savedAt",
+    "delete removes note",
+    "same-tab memory synchronization event",
+    "static UI behavior assertions"
+  ]
+}

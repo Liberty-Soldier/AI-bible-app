@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SelectedVerse } from "@/app/components/VerseActionController";
-import { usePremiumAccess } from "@/app/components/premium/PremiumAccessProvider";
 import {
   areAllBookmarked,
   highlightVerses,
@@ -29,8 +28,10 @@ export default function VerseActionSheet({
   const [noteOpen, setNoteOpen] = useState(false);
   const [noteText, setNoteText] = useState("");
   const [bookmarked, setBookmarked] = useState(false);
+  const [keyboardInset, setKeyboardInset] = useState(0);
+  const [noteViewportHeight, setNoteViewportHeight] = useState(0);
   const touchStartY = useRef<number | null>(null);
-  const { requestUpgrade } = usePremiumAccess();
+  const noteTextareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const firstVerse = verses[0];
   const lastVerse = verses[verses.length - 1];
@@ -46,14 +47,26 @@ export default function VerseActionSheet({
     [verses]
   );
 
+  const shareTranslation = firstVerse?.translation || "web";
+  const shareTranslationLabel =
+    shareTranslation === "kjv"
+      ? "KJV"
+      : shareTranslation === "brenton"
+        ? "Brenton"
+        : "WEB";
+
   const verseUrl =
     typeof window !== "undefined" && firstVerse
       ? `${window.location.origin}/read/${encodeURIComponent(
           firstVerse.book
-        )}/${firstVerse.chapter}?verse=${encodeURIComponent(getReaderMemoryVerseLabel(firstVerse))}`
+        )}/${firstVerse.chapter}?translation=${encodeURIComponent(
+          shareTranslation
+        )}&verse=${encodeURIComponent(getReaderMemoryVerseLabel(firstVerse))}`
       : "";
 
-  const shareText = `${referenceLabel}\n\n${selectedText}\n\nRead in EMETSEES:\n${verseUrl}`;
+  const shareHeading = `${referenceLabel} · ${shareTranslationLabel}`;
+  const shareText = `${shareHeading}\n\n${selectedText}\n\nRead in EMETSEES:\n${verseUrl}`;
+
 
   useEffect(() => {
     if (!open || !firstVerse) return;
@@ -66,8 +79,41 @@ export default function VerseActionSheet({
       setMessage("");
       setNoteOpen(false);
       setNoteText("");
+      setKeyboardInset(0);
+      setNoteViewportHeight(0);
     }
   }, [open]);
+
+  useEffect(() => {
+    if (!open || !noteOpen || typeof window === "undefined") {
+      setKeyboardInset(0);
+      return;
+    }
+
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    const updateKeyboardInset = () => {
+      const inset = Math.max(
+        0,
+        window.innerHeight - viewport.height - viewport.offsetTop,
+      );
+      const nextInset = inset > 80 ? Math.round(inset) : 0;
+      setKeyboardInset(nextInset);
+      setNoteViewportHeight(
+        nextInset > 0 ? Math.max(320, Math.round(viewport.height)) : 0,
+      );
+    };
+
+    updateKeyboardInset();
+    viewport.addEventListener("resize", updateKeyboardInset);
+    viewport.addEventListener("scroll", updateKeyboardInset);
+
+    return () => {
+      viewport.removeEventListener("resize", updateKeyboardInset);
+      viewport.removeEventListener("scroll", updateKeyboardInset);
+    };
+  }, [noteOpen, open]);
 
   if (!open || verses.length === 0 || !firstVerse) return null;
 
@@ -127,8 +173,8 @@ export default function VerseActionSheet({
     if (window.isSecureContext && navigator.share) {
       try {
         await navigator.share({
-          title: referenceLabel,
-          text: `${referenceLabel}\n\n${selectedText}`,
+          title: shareHeading,
+          text: `${shareHeading}\n\n${selectedText}`,
           url: verseUrl,
         });
         showMessage("Share opened");
@@ -174,6 +220,17 @@ export default function VerseActionSheet({
   function openNoteEditor() {
     setExpanded(true);
     setNoteOpen(true);
+
+    window.setTimeout(() => {
+      noteTextareaRef.current?.focus({ preventScroll: true });
+    }, 80);
+  }
+
+  function closeNoteEditor() {
+    noteTextareaRef.current?.blur();
+    setNoteOpen(false);
+    setKeyboardInset(0);
+    setNoteViewportHeight(0);
   }
 
   function submitNote() {
@@ -185,8 +242,11 @@ export default function VerseActionSheet({
     }
 
     saveNote(verses, cleanNote);
+    noteTextareaRef.current?.blur();
     setNoteText("");
     setNoteOpen(false);
+    setKeyboardInset(0);
+    setNoteViewportHeight(0);
     emitMemoryChange();
     showMessage("Note saved");
   }
@@ -202,7 +262,7 @@ export default function VerseActionSheet({
     const delta = touchStartY.current - endY;
 
     if (delta > 20) setExpanded(true);
-    if (delta < -20) setExpanded(false);
+    if (delta < -20 && !noteOpen) setExpanded(false);
 
     touchStartY.current = null;
   }
@@ -225,9 +285,19 @@ export default function VerseActionSheet({
       <section
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
-        className={`pointer-events-auto absolute bottom-0 left-0 right-0 rounded-t-[1.75rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl transition-all duration-200 ${
+        className={`pointer-events-auto absolute left-0 right-0 rounded-t-[1.75rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl transition-all duration-200 ${
           expanded ? "h-[78dvh]" : "h-[178px]"
         }`}
+        style={
+          noteOpen && keyboardInset
+            ? {
+                bottom: `${keyboardInset}px`,
+                height: noteViewportHeight
+                  ? `${noteViewportHeight}px`
+                  : "auto",
+              }
+            : { bottom: 0 }
+        }
       >
         <div className="flex h-full flex-col">
           <button
@@ -256,7 +326,7 @@ export default function VerseActionSheet({
                 onClick={onClose}
                 className="shrink-0 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold text-[var(--muted)]"
               >
-                Close
+                Done
               </button>
             </div>
 
@@ -268,7 +338,7 @@ export default function VerseActionSheet({
 
             {!expanded ? (
               <>
-                <div className="mt-2 grid grid-cols-6 gap-2">
+                <div className="mt-2 flex items-center gap-2">
                   <ColorButton
                     label="Yellow"
                     onClick={() => highlightSelection("yellow")}
@@ -297,7 +367,7 @@ export default function VerseActionSheet({
                   <button
                     type="button"
                     onClick={clearHighlightSelection}
-                    className="min-h-9 rounded-xl border border-[var(--border)] text-[0.65rem] font-semibold text-[var(--muted)]"
+                    className="ml-auto min-h-9 shrink-0 rounded-xl border border-[var(--border)] px-2.5 text-[0.68rem] font-semibold text-[var(--muted)]"
                   >
                     Clear
                   </button>
@@ -315,27 +385,47 @@ export default function VerseActionSheet({
                   </CompactButton>
                 </div>
               </>
+            ) : noteOpen ? (
+              <div className="mt-3 flex min-h-0 flex-1 flex-col">
+                <div className="flex items-center justify-between border-b border-[var(--border)] pb-3">
+                  <div>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+                      New note
+                    </p>
+                    <p className="mt-1 text-sm font-semibold">
+                      {referenceLabel}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={closeNoteEditor}
+                    className="rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-semibold text-[var(--muted)]"
+                  >
+                    Cancel
+                  </button>
+                </div>
+
+                <textarea
+                  ref={noteTextareaRef}
+                  value={noteText}
+                  onChange={(event) => setNoteText(event.target.value)}
+                  placeholder="Write a note..."
+                  className="mt-3 min-h-0 flex-1 resize-none rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-base leading-7 text-[var(--foreground)] outline-none focus:border-amber-500/50 placeholder:text-[var(--muted)]"
+                />
+
+                <div className="mt-3 shrink-0 border-t border-[var(--border)] pt-3">
+                  <button
+                    type="button"
+                    onClick={submitNote}
+                    disabled={!noteText.trim()}
+                    className="w-full rounded-full bg-[var(--foreground)] py-3 text-sm font-semibold text-[var(--background)] disabled:opacity-45"
+                  >
+                    Save Note
+                  </button>
+                </div>
+              </div>
             ) : (
               <div className="mt-3 flex-1 overflow-y-auto overscroll-contain pb-6">
-                {noteOpen ? (
-                  <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3">
-                    <textarea
-                      value={noteText}
-                      onChange={(event) => setNoteText(event.target.value)}
-                      placeholder="Write a note..."
-                      className="min-h-28 w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--background)] p-3 text-sm text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
-                    />
-
-                    <button
-                      type="button"
-                      onClick={submitNote}
-                      className="mt-3 w-full rounded-full bg-[var(--foreground)] py-3 text-sm font-semibold text-[var(--background)]"
-                    >
-                      Save Note
-                    </button>
-                  </div>
-                ) : null}
-
                 <div className="mt-3 rounded-2xl bg-[var(--surface)] p-3 text-xs leading-5">
                   {selectedText}
                 </div>
@@ -345,7 +435,7 @@ export default function VerseActionSheet({
                     Highlight
                   </p>
 
-                  <div className="grid grid-cols-6 gap-2">
+                  <div className="flex items-center gap-2">
                     <ColorButton
                       label="Yellow"
                       onClick={() => highlightSelection("yellow")}
@@ -374,7 +464,7 @@ export default function VerseActionSheet({
                     <button
                       type="button"
                       onClick={clearHighlightSelection}
-                      className="min-h-10 rounded-xl border border-[var(--border)] text-xs font-semibold text-[var(--muted)]"
+                      className="ml-auto min-h-10 shrink-0 rounded-xl border border-[var(--border)] px-3 text-xs font-semibold text-[var(--muted)]"
                     >
                       Clear
                     </button>
@@ -389,22 +479,6 @@ export default function VerseActionSheet({
                   </ActionButton>
                   <ActionButton onClick={() => setNoteOpen((v) => !v)}>
                     Note
-                  </ActionButton>
-                  <ActionButton
-                    locked
-                    onClick={() =>
-                      requestUpgrade("ask-emet", referenceLabel)
-                    }
-                  >
-                    Ask EMET
-                  </ActionButton>
-                  <ActionButton
-                    locked
-                    onClick={() =>
-                      requestUpgrade("compare-passages", referenceLabel)
-                    }
-                  >
-                    Compare
                   </ActionButton>
                 </div>
               </div>
@@ -437,24 +511,17 @@ function CompactButton({
 function ActionButton({
   children,
   onClick,
-  locked = false,
 }: {
   children: React.ReactNode;
   onClick: () => void;
-  locked?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="min-h-11 rounded-2xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98]"
+      className="min-h-11 rounded-xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98]"
     >
-      <span>{children}</span>
-      {locked ? (
-        <span className="ml-1 text-[0.62rem] font-black text-amber-600 dark:text-amber-400">
-          LOCKED
-        </span>
-      ) : null}
+      {children}
     </button>
   );
 }
@@ -474,7 +541,7 @@ function ColorButton({
       aria-label={label}
       title={label}
       onClick={onClick}
-      className={`min-h-9 rounded-xl border border-black/10 ${className}`}
+      className={`h-9 w-9 shrink-0 rounded-full border border-black/10 ${className}`}
     />
   );
 }

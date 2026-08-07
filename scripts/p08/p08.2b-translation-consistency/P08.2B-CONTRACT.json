@@ -1,0 +1,46 @@
+{
+  "phase": "P08.2B",
+  "title": "Translation Persistence Consistency",
+  "mode": "targeted-transactional-apply",
+  "sourceAuditVerdict": "CORE_TRANSLATION_PERSISTENCE_WORKING_NARROW_GAPS_CONFIRMED",
+  "scope": {
+    "create": [
+      "app/lib/translationPreference.ts"
+    ],
+    "modify": [
+      "app/read/page.tsx",
+      "app/components/ReaderSelector.tsx",
+      "app/library/page.tsx",
+      "app/page.tsx"
+    ],
+    "deferred": [
+      "Ask EMET prototype links",
+      "future translation selector expansion",
+      "production build",
+      "P08.3 Search and navigation"
+    ]
+  },
+  "invariants": {
+    "defaultTranslation": "web",
+    "storageKey": "preferredTranslation",
+    "dependenciesChanged": false,
+    "buildRun": false,
+    "gitMutation": false,
+    "p07PathsTouched": false,
+    "p01P04Touched": false
+  },
+  "expectedBeforeSha256": {
+    "app/read/page.tsx": "9e3c8f9e7e61ff9f66c7de4b705307746920c156a41390e0160cef1a26b1dfbc",
+    "app/components/ReaderSelector.tsx": "808ff83c1ca8c640fb0b5e5c67a68530bef3b385d13f88ed187fa7b6d5c22500",
+    "app/library/page.tsx": "18622fc682a1db6d5a1211d2a38c0427264ca030150219060211e58678b78f65",
+    "app/page.tsx": "70b73c300aef12bbfffa12cc0f570ae0cd6d0a163033ec99be59e06957a311c4",
+    "app/lib/translationPreference.ts": "ABSENT"
+  },
+  "expectedAfterSha256": {
+    "app/read/page.tsx": "e05b9e1c40079079ae92f6f612d41fed38b15622ff9adb38912f32a2427224fe",
+    "app/components/ReaderSelector.tsx": "166160b9f9f05820140ba3b282d76e0aa93e1c393b21448e625c768e23143c6e",
+    "app/library/page.tsx": "abf11a4b321db36511cc095efef4e3bc3afbc27c0c354bd2e4a253b132ab2219",
+    "app/page.tsx": "122c95e7c718b77affe3cea628333afb212be072ac399999ba68fc51d8b0fa3a",
+    "app/lib/translationPreference.ts": "7dd094282d42be1356fba5b3ed9677675675e0dc905e4ab64ca3c91c7291da1b"
+  }
+}

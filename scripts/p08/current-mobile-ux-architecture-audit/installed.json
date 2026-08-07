@@ -1,0 +1,21 @@
+{
+    "phase":  "P08.1",
+    "packageRevision":  4,
+    "installedAt":  "2026-08-06T11:11:42.7634401-04:00",
+    "repository":  "C:\\Users\\CreatorStudio\\ai-bible-app",
+    "target":  "C:\\Users\\CreatorStudio\\ai-bible-app\\scripts\\p08\\current-mobile-ux-architecture-audit",
+    "parserValidation":  "passed",
+    "installedFiles":  [
+                           {
+                               "path":  "C:\\Users\\CreatorStudio\\ai-bible-app\\scripts\\p08\\current-mobile-ux-architecture-audit\\run-p08.1-current-mobile-ux-architecture-audit.ps1",
+                               "sha256":  "b6fd3ea75ec53b12470d2fbf83f7056727354c1e5262ba67423a6b68e9abbf88",
+                               "bytes":  28952
+                           },
+                           {
+                               "path":  "C:\\Users\\CreatorStudio\\ai-bible-app\\scripts\\p08\\current-mobile-ux-architecture-audit\\P08.1-AUDIT-CONTRACT.json",
+                               "sha256":  "e4f23de77ab46b9a47adf12c3693cc49754b40875f6a32e0c7ce749c4ca57322",
+                               "bytes":  1704
+                           }
+                       ],
+    "note":  "This installer adds or replaces only the P08.1 audit runner and contract. It does not change package.json, dependencies, Git state, UI source, P07 files, or P01-P04 artifacts."
+}

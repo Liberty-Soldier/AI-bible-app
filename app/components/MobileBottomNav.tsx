@@ -3,13 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
-import { usePremiumAccess } from "@/app/components/premium/PremiumAccessProvider";
 import { useReaderChromeVisibility } from "@/app/components/useReaderChromeVisibility";
 
 function Icon({
   name,
 }: {
-  name: "home" | "read" | "library" | "settings";
+  name: "home" | "read" | "search" | "settings";
 }) {
   const paths = {
     home: (
@@ -24,11 +23,10 @@ function Icon({
         <path d="M20 5.5c-2.7-.8-5.4-.3-8 1.5v14c2.6-1.8 5.3-2.3 8-1.5z" />
       </>
     ),
-    library: (
+    search: (
       <>
-        <path d="M4 4h4v16H4z" />
-        <path d="M10 4h4v16h-4z" />
-        <path d="m16 5 4-1 2.5 15-4 1z" />
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <path d="m15.5 15.5 5 5" />
       </>
     ),
     settings: (
@@ -62,19 +60,28 @@ export default function MobileBottomNav({
 }) {
   const pathname = usePathname();
   const visible = useReaderChromeVisibility();
-  const { requestUpgrade } = usePremiumAccess();
   const shouldShow = !autoHide || visible;
-
-  const items = [
-    { href: "/", label: "Home", icon: "home" as const },
-    { href: "/read", label: "Read", icon: "read" as const },
-    { href: "/library", label: "Library", icon: "library" as const },
-    { href: "/settings", label: "Settings", icon: "settings" as const },
-  ];
 
   function activeFor(href: string) {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
+  }
+
+  const standardItems = [
+    { href: "/", label: "Home", icon: "home" as const },
+    { href: "/read", label: "Read", icon: "read" as const },
+    { href: "/search", label: "Search", icon: "search" as const },
+  ];
+
+  const askActive = activeFor("/ask");
+  const settingsActive = activeFor("/settings");
+
+  function navItemClass(active: boolean) {
+    return `premium-nav-item ${
+      active
+        ? "is-active bg-[var(--surface)] shadow-[var(--shadow-sm)]"
+        : ""
+    }`;
   }
 
   return (
@@ -82,51 +89,43 @@ export default function MobileBottomNav({
       aria-label="Primary navigation"
       className={`premium-bottom-nav fixed inset-x-0 bottom-0 z-50 border-t border-[var(--border)] bg-[var(--background)]/96 px-2 pb-[max(0.45rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl transition-transform duration-200 ${shouldShow ? "translate-y-0" : "translate-y-full"}`}
     >
-      <div className="mx-auto grid max-w-xl grid-cols-5 items-end">
-        <Link
-          href={items[0].href}
-          className={`premium-nav-item ${activeFor(items[0].href) ? "is-active" : ""}`}
-        >
-          <Icon name={items[0].icon} />
-          <span>{items[0].label}</span>
-        </Link>
+      <div className="mx-auto grid max-w-xl grid-cols-5 items-end gap-1">
+        {standardItems.map((item) => {
+          const active = activeFor(item.href);
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              className={navItemClass(active)}
+            >
+              <Icon name={item.icon} />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
 
         <Link
-          href={items[1].href}
-          className={`premium-nav-item ${activeFor(items[1].href) ? "is-active" : ""}`}
-        >
-          <Icon name={items[1].icon} />
-          <span>{items[1].label}</span>
-        </Link>
-
-        <button
-          type="button"
+          href="/ask"
           aria-label="Ask EMET"
-          onClick={() =>
-            requestUpgrade("ask-emet", "Ask contextual questions about Scripture")
-          }
-          className="premium-ask-nav"
+          aria-current={askActive ? "page" : undefined}
+          className={navItemClass(askActive)}
         >
-          <span className="premium-ask-nav-mark">
-            <EmetseesLogo size={28} variant="gold" />
-          </span>
-          <span>Ask</span>
-        </button>
-
-        <Link
-          href={items[2].href}
-          className={`premium-nav-item ${activeFor(items[2].href) ? "is-active" : ""}`}
-        >
-          <Icon name={items[2].icon} />
-          <span>{items[2].label}</span>
+          <EmetseesLogo
+            size={21}
+            variant={askActive ? "gold" : "auto"}
+          />
+          <span>Ask EMET</span>
         </Link>
 
         <Link
-          href={items[3].href}
-          className={`premium-nav-item ${activeFor(items[3].href) ? "is-active" : ""}`}
+          href="/settings"
+          aria-current={settingsActive ? "page" : undefined}
+          className={navItemClass(settingsActive)}
         >
-          <Icon name={items[3].icon} />
-          <span>{items[3].label}</span>
+          <Icon name="settings" />
+          <span>Settings</span>
         </Link>
       </div>
     </nav>

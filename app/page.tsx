@@ -10,6 +10,7 @@ import {
   getReaderMemoryVerseLabel,
   type ReaderMemory,
 } from "@/app/lib/readerMemory";
+import { buildReaderHref } from "@/app/lib/translationPreference";
 
 type LastReadingPosition = {
   book: string;
@@ -71,11 +72,11 @@ function HomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--background)] px-5 pb-28 pt-6 text-[var(--foreground)]">
+    <main className="min-h-screen bg-[var(--background)] px-5 pb-28 pt-4 text-[var(--foreground)]">
       <section className="mx-auto max-w-xl">
-        <div className="mb-7 flex flex-col items-center pt-4 text-center">
+        <div className="mb-4 flex flex-col items-center pt-1 text-center">
           <EmetseesWordmark showDescriptor />
-          <p className="mt-4 max-w-sm text-base leading-7 text-[var(--muted)]">
+          <p className="mt-2 max-w-sm text-sm leading-5 text-[var(--muted)]">
             Read Scripture, tap any word, and follow the source evidence
             without leaving the reader.
           </p>
@@ -107,7 +108,7 @@ function HomePage() {
             href={`/read/${encodeURIComponent(lastReading.book)}/${
               lastReading.chapter
             }?translation=${lastReading.translation}`}
-            className="mt-8 block rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-sm)] transition active:scale-[0.995]"
+            className="mt-8 block border-y border-[var(--border)] py-5 transition active:opacity-70"
           >
             <p className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
               Continue Reading
@@ -138,26 +139,29 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
-<LibraryStat href="/library" label="Bookmarks" value={memory.bookmarks.length} />
-<LibraryStat href="/library" label="Highlights" value={memory.highlights.length} />
-<LibraryStat href="/library" label="Notes" value={memory.notes.length} />
+          <div className="grid grid-cols-3 divide-x divide-[var(--border)] border-y border-[var(--border)]">
+<LibraryStat href="/library?tab=bookmarks" label="Bookmarks" value={memory.bookmarks.length} />
+<LibraryStat href="/library?tab=highlights" label="Highlights" value={memory.highlights.length} />
+<LibraryStat href="/library?tab=notes" label="Notes" value={memory.notes.length} />
           </div>
 
           {recentBookmarks.length > 0 ? (
-            <div className="mt-5 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="mt-6 border-t border-[var(--border)] pt-5">
               <p className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
                 Recent Bookmarks
               </p>
 
-              <div className="mt-4 space-y-3">
+              <div className="mt-3 divide-y divide-[var(--border)]">
                 {recentBookmarks.map((bookmark) => (
                   <Link
                     key={`${bookmark.id}-${bookmark.savedAt}`}
-                    href={`/read/${encodeURIComponent(bookmark.book)}/${
-                      bookmark.chapter
-                    }?verse=${encodeURIComponent(getReaderMemoryVerseLabel(bookmark))}`}
-                    className="block rounded-2xl bg-[var(--background)] p-3"
+                    href={buildReaderHref({
+                      book: bookmark.book,
+                      chapter: bookmark.chapter,
+                      verse: getReaderMemoryVerseLabel(bookmark),
+                      translation: bookmark.translation,
+                    })}
+                    className="block py-3.5 transition active:opacity-70"
                   >
                     <p className="text-sm font-semibold">
                       {bookmark.reference}
@@ -172,12 +176,12 @@ function HomePage() {
           ) : null}
 
           {recentNotes.length > 0 ? (
-            <div className="mt-5 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="mt-6 border-t border-[var(--border)] pt-5">
               <p className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
                 Recent Notes
               </p>
 
-              <div className="mt-4 space-y-3">
+              <div className="mt-3 divide-y divide-[var(--border)]">
                 {recentNotes.map((note) => {
                   const firstVerse = note.verses[0];
 
@@ -186,10 +190,10 @@ function HomePage() {
                   return (
                     <Link
                       key={note.id}
-                      href={`/read/${encodeURIComponent(firstVerse.book)}/${
-                        firstVerse.chapter
-                      }?verse=${encodeURIComponent(getReaderMemoryVerseLabel(firstVerse))}`}
-                      className="block rounded-2xl bg-[var(--background)] p-3"
+                      href={`/library?tab=notes&note=${encodeURIComponent(
+                        note.id,
+                      )}`}
+                      className="block py-3.5 transition active:opacity-70"
                     >
                       <p className="text-sm font-semibold">
                         {note.verses.length === 1
@@ -225,7 +229,7 @@ function LibraryStat({
   return (
     <Link
       href={href}
-      className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-center shadow-[var(--shadow-sm)] transition active:scale-[0.98]"
+      className="px-2 py-4 text-center transition active:opacity-70"
     >
       <p className="text-2xl font-semibold">{value}</p>
       <p className="mt-1 text-xs text-[var(--muted)]">{label}</p>

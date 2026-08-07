@@ -1,7 +1,7 @@
 {
-  "name": "EMETSEES",
+  "name": "EMETSEES Bible Study",
   "short_name": "EMETSEES",
-  "description": "Read Scripture, inspect source-word evidence, and follow Scripture-grounded explanations.",
+  "description": "Bible study and Scripture evidence engine for reading Scripture, tracing source words, and following evidence across Scripture.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fffdf9",
@@ -23,5 +23,14 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "id": "/",
+  "scope": "/",
+  "lang": "en",
+  "categories": [
+    "books",
+    "education",
+    "reference"
+  ],
+  "prefer_related_applications": false
 }

@@ -1,54 +1,57 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-type Translation = "web" | "kjv" | "brenton";
+import {
+  AVAILABLE_TRANSLATION_OPTIONS,
+  getPreferredTranslation,
+  setPreferredTranslation,
+  type TranslationPreference,
+} from "@/app/lib/translationPreference";
 
 type Props = {
-  onTranslationChange?: (translation: Translation) => void;
+  onTranslationChange?: (translation: TranslationPreference) => void;
 };
 
 export default function TranslationSelector({
   onTranslationChange,
 }: Props) {
-  const [translation, setTranslation] = useState<Translation>("web");
+  const [translation, setTranslation] =
+    useState<TranslationPreference>("web");
 
   useEffect(() => {
-    const saved = localStorage.getItem("preferredTranslation");
-
-    if (saved === "web" || saved === "kjv" || saved === "brenton") {
-      setTranslation(saved);
-      onTranslationChange?.(saved);
-    }
+    const saved = getPreferredTranslation();
+    setTranslation(saved);
+    onTranslationChange?.(saved);
   }, [onTranslationChange]);
 
-  function handleChange(value: Translation) {
-    setTranslation(value);
-    localStorage.setItem("preferredTranslation", value);
-    onTranslationChange?.(value);
+  function handleChange(value: TranslationPreference) {
+    const saved = setPreferredTranslation(value);
+    setTranslation(saved);
+    onTranslationChange?.(saved);
   }
 
   return (
-    <div className="mb-8 rounded-2xl border border-neutral-800 bg-neutral-900 p-5">
-      <p className="mb-3 text-sm uppercase tracking-[0.25em] text-neutral-500">
-        Preferred Translation
+    <section className="border-t border-[var(--border)] pt-4">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+        Preferred translation
       </p>
 
-      <div className="grid gap-3 sm:grid-cols-3">
-        {(["web", "kjv", "brenton"] as Translation[]).map((value) => (
+      <div className="mt-3 flex items-center gap-6 overflow-x-auto border-b border-[var(--border)]">
+        {AVAILABLE_TRANSLATION_OPTIONS.map((option) => (
           <button
-            key={value}
-            onClick={() => handleChange(value)}
-            className={`rounded-xl p-3 ${
-              translation === value
-                ? "bg-white text-black"
-                : "bg-neutral-950 text-white"
+            key={option.id}
+            type="button"
+            onClick={() => handleChange(option.id)}
+            className={`border-b-2 px-0.5 pb-2.5 pt-1 text-sm font-semibold transition ${
+              translation === option.id
+                ? "border-[var(--foreground)] text-[var(--foreground)]"
+                : "border-transparent text-[var(--muted)]"
             }`}
           >
-            {value === "web" ? "WEB" : value === "kjv" ? "KJV" : "Brenton"}
+            {option.shortLabel}
           </button>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

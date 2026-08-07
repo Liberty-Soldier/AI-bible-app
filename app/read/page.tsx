@@ -4,8 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { bookCatalog } from "@/app/data/scripture/bookCatalog";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
+import {
+  AVAILABLE_TRANSLATION_OPTIONS,
+  getPreferredTranslation,
+  setPreferredTranslation,
+  type TranslationPreference,
+} from "@/app/lib/translationPreference";
 
-type Translation = "web" | "kjv" | "brenton";
+type Translation = TranslationPreference;
 
 type Section =
   | "torah"
@@ -270,11 +276,7 @@ export default function ReadPage() {
   const selectedBook = books.find((item) => item.book === book);
 
   useEffect(() => {
-    const saved = localStorage.getItem("preferredTranslation");
-
-    if (saved === "web" || saved === "kjv" || saved === "brenton") {
-      setTranslation(saved);
-    }
+    setTranslation(getPreferredTranslation());
   }, []);
 
 useEffect(() => {
@@ -323,20 +325,20 @@ const found = books.find(
   }
 
 return (
-  <main className="min-h-screen bg-[var(--background)] px-4 py-6 pb-24 text-[var(--foreground)]">
+  <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-5 text-[var(--foreground)]">
     <section className="mx-auto max-w-2xl">
-      <div className="mb-6">
-        <p className="mb-3 text-sm uppercase tracking-[0.3em] text-[var(--muted)]">
+      <div className="mb-5">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--muted)]">
           Read
         </p>
-        <h1 className="text-4xl font-bold">Open Scripture</h1>
-        <p className="mt-3 text-[var(--muted)]">
+        <h1 className="text-[2.35rem] font-bold leading-tight tracking-[-0.035em]">Open Scripture</h1>
+        <p className="mt-2 text-[0.95rem] leading-6 text-[var(--muted)]">
           Jump straight to a passage or tap through Scripture.
         </p>
       </div>
 
-      <div className="mb-6 rounded-3xl border border-[var(--border)] bg-[var(--surface)]/70 p-4">
-        <label className="mb-2 block text-sm font-medium text-[var(--muted)]">
+      <div className="mb-5">
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
           Go to Scripture
         </label>
 
@@ -347,50 +349,45 @@ return (
   onKeyDown={(event) => {
     if (event.key === "Enter") handleQuickJump();
   }}
-  placeholder="John 3:16 or John 3 16"
-  className="w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-[var(--foreground)] outline-none"
+  placeholder="Book, chapter, or verse"
+  className="w-full rounded-2xl border border-[var(--border)] bg-transparent px-4 py-3.5 text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
 />
 
           <button
             type="button"
             onClick={handleQuickJump}
-            className="rounded-2xl bg-white px-5 py-3 font-semibold text-black"
+            className="rounded-2xl bg-[var(--foreground)] px-5 py-3.5 font-semibold text-[var(--background)] transition active:scale-[0.98]"
           >
             Go
           </button>
         </div>
       </div>
 
-      <div className="mb-5 flex gap-2 overflow-x-auto">
-        {[
-          ["web", "WEB"],
-          ["kjv", "KJV"],
-          ["brenton", "Brenton"],
-        ].map(([value, label]) => (
+      <div className="mb-5 flex items-center gap-6 overflow-x-auto border-b border-[var(--border)]">
+        {AVAILABLE_TRANSLATION_OPTIONS.map((option) => (
           <button
-            key={value}
+            key={option.id}
             type="button"
             onClick={() => {
-              const next = value as Translation;
+              const next = setPreferredTranslation(option.id);
               setTranslation(next);
-              localStorage.setItem("preferredTranslation", next);
             }}
-            className={`rounded-full px-4 py-2 text-sm font-medium ${
-              translation === value
-                ? "bg-[var(--foreground)] text-[var(--background)]"
-                : "bg-[var(--surface)] text-[var(--muted)]"
+            className={`border-b-2 px-0.5 pb-2.5 pt-1 text-sm font-semibold transition ${
+              translation === option.id
+                ? "border-[var(--foreground)] text-[var(--foreground)]"
+                : "border-transparent text-[var(--muted)]"
             }`}
           >
-            {label}
+            {option.shortLabel}
           </button>
         ))}
       </div>
 
-      <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-4">
-        <div className="mb-4 flex items-center justify-between">
+      <div className="border-t border-[var(--border)] pt-4">
+        <div className="mb-3 flex items-center justify-between">
           <div>
             <p className="text-sm text-[var(--muted)]">Choose passage</p>
-            <h2 className="text-xl font-bold">
+            <h2 className="text-lg font-bold tracking-[-0.015em]">
               {pickerStep === "section" && "Section"}
               {pickerStep === "book" && "Book"}
               {pickerStep === "chapter" && book}
@@ -404,7 +401,7 @@ return (
                 if (pickerStep === "chapter") setPickerStep("book");
                 else setPickerStep("section");
               }}
-              className="rounded-full bg-[var(--surface)] px-4 py-2 text-sm text-[var(--muted)]"
+              className="px-1 py-2 text-sm font-semibold text-[var(--muted)] transition active:opacity-70"
             >
               Back
             </button>
@@ -412,7 +409,7 @@ return (
         </div>
 
         {pickerStep === "section" && (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-x-5">
             {[
               ["torah", "Torah", "Genesis–Deuteronomy"],
               ["history", "History", "Joshua–Nehemiah"],
@@ -428,7 +425,7 @@ return (
                   setSection(value as Section);
                   setPickerStep("book");
                 }}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-left"
+                className="border-b border-[var(--border)] py-4 text-left transition active:opacity-70"
               >
                 <span className="block font-semibold">{label}</span>
                 <span className="mt-1 block text-sm text-[var(--muted)]">
@@ -440,7 +437,7 @@ return (
         )}
 
         {pickerStep === "book" && (
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-x-5">
             {sectionBooks.map((item) => (
               <button
                 key={item.book}
@@ -450,7 +447,7 @@ return (
                   setChapter(1);
                   setPickerStep("chapter");
                 }}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-left"
+                className="border-b border-[var(--border)] py-4 text-left transition active:opacity-70"
               >
                 <span className="block font-semibold">{item.book}</span>
                 <span className="mt-1 block text-sm text-[var(--muted)]">
@@ -478,7 +475,7 @@ return (
                         )}/${chapterNumber}?translation=${translation}`
                       );
                     }}
-                    className="rounded-xl border border-[var(--border)] bg-[var(--surface-soft)] py-3 text-sm font-semibold text-[var(--foreground)]"
+                    className="rounded-xl border border-[var(--border)] bg-transparent py-3 text-sm font-semibold text-[var(--foreground)] transition active:scale-[0.98]"
                   >
                     {chapterNumber}
                   </button>

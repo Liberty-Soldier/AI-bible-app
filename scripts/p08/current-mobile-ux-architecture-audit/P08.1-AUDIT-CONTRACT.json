@@ -1,0 +1,44 @@
+{
+  "phase": "P08.1",
+  "name": "Current Mobile UX and Architecture Audit",
+  "mode": "read-only",
+  "allowedWrites": [
+    "scripts/p08/current-mobile-ux-architecture-audit",
+    ".private/reports/P08.1"
+  ],
+  "forbiddenPaths": [
+    "scripts/p07/full-cache-generation",
+    ".private/staging/P07-FULL-CACHE-GENERATION",
+    ".private/reports/P07-FULL-CACHE-GENERATION",
+    ".private/entity/build/P01",
+    ".private/entity/build/P02",
+    ".private/entity/build/P03",
+    ".private/entity/build/P04",
+    "retained current P04.2 candidate",
+    "active P07 cache-generation files"
+  ],
+  "forbiddenOperations": [
+    "git switch",
+    "git checkout branch",
+    "git reset",
+    "git clean",
+    "dependency install",
+    "dependency upgrade",
+    "production build",
+    "dev server start",
+    "application source edit"
+  ],
+  "outputs": [
+    ".private/reports/P08.1/<timestamp>-current-mobile-ux-architecture-audit",
+    ".private/reports/P08.1/EMETSEES-P08.1-CURRENT-MOBILE-UX-ARCHITECTURE-AUDIT-<timestamp>.zip",
+    ".private/reports/P08.1/EMETSEES-P08.1-CURRENT-MOBILE-UX-ARCHITECTURE-AUDIT-FAILURE-<timestamp>.zip"
+  ],
+  "packageRevision": 4,
+  "scriptEncoding": "ASCII-compatible",
+  "installerParserGate": "System.Management.Automation.Language.Parser",
+  "literalPathHardening": true,
+  "literalPathReason": "Next.js dynamic route folders use square brackets and must not be interpreted as PowerShell wildcard patterns.",
+  "automaticRegexVariableGuard": true,
+  "automaticRegexVariableReason": "PowerShell's automatic $Matches variable is case-insensitive and must not be reused as a collection name.",
+  "storageKeyCaptureHardening": true
+}

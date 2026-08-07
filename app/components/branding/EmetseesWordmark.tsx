@@ -27,7 +27,7 @@ export default function EmetseesWordmark({
         </span>
         {showDescriptor ? (
           <span className="mt-1 block text-sm font-semibold text-[var(--muted)]">
-            Scripture-first Bible study
+            Bible Study & Scripture Evidence
           </span>
         ) : null}
       </span>

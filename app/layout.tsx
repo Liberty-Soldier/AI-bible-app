@@ -15,14 +15,46 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://emetsees.com"),
   title: {
-    default: "EMETSEES",
+    default: "EMETSEES — Bible Study & Scripture Evidence",
     template: "%s | EMETSEES",
   },
   description:
-    "Read Scripture, inspect source-word evidence, and receive Scripture-grounded EMET explanations.",
-  applicationName: "EMETSEES",
+    "A Scripture evidence engine for reading the Bible, tracing source words, and following evidence across Scripture.",
+  applicationName: "EMETSEES Bible Study",
   manifest: "/manifest.webmanifest",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "EMETSEES",
+    title: "EMETSEES — Bible Study & Scripture Evidence",
+    description:
+      "Read Scripture. Trace source words. Follow the evidence across Scripture.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "EMETSEES — Bible Study & Scripture Evidence",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EMETSEES — Bible Study & Scripture Evidence",
+    description:
+      "Read Scripture. Trace source words. Follow the evidence across Scripture.",
+    images: ["/twitter-image"],
+  },
+  appleWebApp: {
+    capable: true,
+    title: "EMETSEES Bible",
+    statusBarStyle: "default",
+  },
   icons: {
     icon: [
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
