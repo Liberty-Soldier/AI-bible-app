@@ -42,12 +42,27 @@ for (const view of [
 ]) {
   assert(sheet.includes(`| "${view}"`) || sheet.includes(`"${view}"`), `Missing ${view} view.`);
 }
-assert(/What it means here/.test(sheet), "The 30-second contextual meaning section is missing.");
+assert(
+  /readerMeaningLabel/.test(sheet) &&
+    /Meaning here/.test(sheet) &&
+    /In this verse/.test(sheet),
+  "The contextual meaning section is missing.",
+);
 assert(/Across Scripture/.test(sheet), "Approved EMET teaching section is missing.");
-assert(/SEE Evidence is one tap away/.test(sheet), "Progressive SEE disclosure is missing.");
+assert(
+  /Across Scripture/.test(sheet) &&
+    /readerReadyConnections/.test(sheet) &&
+    /Common English renderings/.test(sheet),
+  "Progressive Scripture-evidence disclosure is missing.",
+);
 assert(/Back to reading at/.test(sheet), "Back-to-reading action is missing.");
 assert(/returnLabel/.test(sheet) && /returnTo/.test(sheet), "Reference return navigation is incomplete.");
-assert(/Strong's definition and lexicon/.test(sheet), "Clickable Strong's entry is missing.");
+assert(
+  /Strong's number/.test(sheet) &&
+    /Source dictionary wording/.test(sheet) &&
+    /onView\("lexicon"\)/.test(sheet),
+  "Strong's / lexicon evidence path is missing.",
+);
 assert(/LXX lexical ID/.test(sheet), "LXX lexical identity rule is missing.");
 assert(!/relationshipCount\}/.test(sheet), "Giant connection counts are exposed in the default UI.");
 assert(!/low confidence/i.test(sheet), "Low-confidence graph labels are exposed.");
@@ -99,8 +114,9 @@ assert(
   "Compact reader help is missing.",
 );
 assert(
-  />\s*Close\s*</.test(verseActionSheet),
-  "Verse-action close label is missing.",
+  />\s*Done\s*</.test(verseActionSheet) &&
+    /aria-label="Dismiss verse actions"/.test(verseActionSheet),
+  "Verse-action dismiss behavior is missing.",
 );
 assert(
   /document\.execCommand\("copy"\)/.test(verseActionSheet),

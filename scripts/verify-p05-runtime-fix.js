@@ -29,14 +29,30 @@ assert(/export function normalizeWordEntityId/.test(store), "Entity normalizatio
 assert(/`word:\$\{corpus\}:\$\{lexicalId\}`/.test(store), "Canonical word entity format is missing.");
 assert(/canonicalEntityId/.test(engine), "Engine does not normalize canonical entity IDs.");
 assert(/loadWordStudyEntity\(\s*origin,\s*canonicalEntityId/.test(engine), "Engine does not load by canonical entity ID.");
-assert(/SEE Evidence is one tap away/.test(sheet), "Word-study overview is missing SEE Evidence disclosure.");
+assert(
+  /Across Scripture/.test(sheet),
+  "Word-study overview is missing the approved Across Scripture slot.",
+);
+assert(
+  /readerReadyConnections/.test(sheet),
+  "Reader-ready Scripture connections are missing.",
+);
 assert(!/eyebrow="Entity Evidence"/.test(sheet), "Legacy Entity Evidence label remains.");
 assert(!/locked\s+cached P04/i.test(sheet), "Internal P04 language remains visible.");
 assert(!/compact P05 entity record/i.test(engine), "Internal P05 language remains visible.");
 assert(!/Status:\s*\{status/.test(sheet), "Internal cache status remains visible.");
 assert(!/label="Strong"/.test(sheet), "Duplicate Strong row remains visible.");
 assert(/deriveReaderTransliteration/.test(sheet), "Reader transliteration fallback is missing.");
-assert(/SEE Evidence is one tap away[\s\S]*<PremiumStudyPanel/.test(sheet), "Paid extensions must follow the free overview and Explore section.");
+assert(
+  !/PremiumStudyPanel/.test(sheet),
+  "Premature paid word-study panel returned before P09.",
+);
+assert(
+  /Common English renderings/.test(sheet) &&
+    /Back to reading at/.test(sheet) &&
+    /readerReadyConnections/.test(sheet),
+  "P08 evidence progressive disclosure is incomplete.",
+);
 assert(!/BibleIQ could/.test(route + engine), "Legacy BibleIQ user error text remains.");
 assert(/SEE Evidence Summary/.test(askView), "Ask view SEE branding is missing.");
 assert(/SEE Evidence/.test(loader), "Evidence loader SEE branding is missing.");

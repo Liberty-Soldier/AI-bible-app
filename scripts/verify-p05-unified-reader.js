@@ -151,8 +151,13 @@ assertAbsent(
 );
 assertPresent(
   verseActionSheet,
-  />\s*Close\s*</,
-  "verse action sheet",
+  />\s*Done\s*</,
+  "verse action sheet Done control",
+);
+assertPresent(
+  verseActionSheet,
+  /aria-label="Dismiss verse actions"/,
+  "verse action sheet dismiss control",
 );
 assertPresent(
   verseActionSheet,
@@ -170,12 +175,54 @@ assertPresent(
   "word-study return focus",
 );
 
-assertPresent(mobileNav, /href:\s*["']\/library["']/, "mobile nav");
-assertAbsent(mobileNav, /href:\s*["']\/study["']/, "mobile nav");
+assertPresent(
+  mobileNav,
+  /href(?::|=)\s*["']\/read["']/,
+  "mobile nav Read route",
+);
+assertPresent(
+  mobileNav,
+  /href(?::|=)\s*["']\/search["']/,
+  "mobile nav Search route",
+);
+assertPresent(
+  mobileNav,
+  /href(?::|=)\s*["']\/ask["']/,
+  "mobile nav Ask EMET route",
+);
+assertPresent(
+  mobileNav,
+  /href(?::|=)\s*["']\/settings["']/,
+  "mobile nav Settings route",
+);
+assertAbsent(
+  mobileNav,
+  /href(?::|=)\s*["']\/library["']/,
+  "mobile nav",
+);
+assertAbsent(
+  mobileNav,
+  /href(?::|=)\s*["']\/study["']/,
+  "mobile nav",
+);
 
 assertPresent(layout, /PremiumAccessProvider/, "root layout");
 assertAbsent(layout, /GlobalAskButton/, "root layout");
-assertPresent(mobileNav, /requestUpgrade\("ask-emet"/, "mobile Ask EMET");
+assertPresent(
+  mobileNav,
+  /href=["']\/ask["']/,
+  "mobile Ask EMET route",
+);
+assertPresent(
+  mobileNav,
+  /aria-label=["']Ask EMET["']/,
+  "mobile Ask EMET accessible label",
+);
+assertAbsent(
+  mobileNav,
+  /requestUpgrade\("ask-emet"/,
+  "mobile Ask EMET route",
+);
 assertPresent(globalAsk, /feature=["']ask-emet["']/, "global Ask EMET button");
 assertPresent(premiumProvider, /initialPlan\s*=\s*["']free["']/, "premium provider");
 assertPresent(premiumProvider, /initialPlan\s*===\s*["']paid["']/, "premium provider");
@@ -186,8 +233,22 @@ assertAbsent(
   /EmetService|openai|\/api\/emet\/explain/i,
   "word-study API",
 );
-assertPresent(wordSheet, /PremiumStudyPanel/, "WordStudySheet");
-assertPresent(wordSheet, /SEE Evidence is one tap away/, "WordStudySheet");
+assertAbsent(wordSheet, /PremiumStudyPanel/, "WordStudySheet");
+assertPresent(
+  wordSheet,
+  /Across Scripture/,
+  "WordStudySheet Across Scripture slot",
+);
+assertPresent(
+  wordSheet,
+  /readerReadyConnections/,
+  "WordStudySheet reader-ready connections",
+);
+assertPresent(
+  wordSheet,
+  /Common English renderings/,
+  "WordStudySheet rendering exploration",
+);
 assertPresent(wordSheet, /Back to reading at/, "WordStudySheet");
 assertPresent(wordSheet, /Strong's (?:definition|number)/, "WordStudySheet");
 assertPresent(wordSheet, /LXX lexical ID/, "WordStudySheet");
