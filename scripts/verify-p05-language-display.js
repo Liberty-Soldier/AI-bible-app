@@ -112,8 +112,22 @@ function main() {
     fail("WordStudySheet must retain a distinct pronunciation label");
   }
 
-  if (!sheet.includes("Strong's definition")) {
-    fail("WordStudySheet must expose the Strong definition in the lexicon view");
+  const exposesLegacyStrongDefinition =
+    sheet.includes("Strong's definition");
+  const exposesP08SourceDictionaryDefinition =
+    sheet.includes('eyebrow="Lexicon meaning"') &&
+    sheet.includes('title="Source dictionary wording"') &&
+    sheet.includes("...(lexical?.shortDefinitions || [])") &&
+    sheet.includes("...(lexical?.glosses || [])") &&
+    sheet.includes("{definitions[0]}");
+
+  if (
+    !exposesLegacyStrongDefinition &&
+    !exposesP08SourceDictionaryDefinition
+  ) {
+    fail(
+      "WordStudySheet must expose the lexical source definition in the lexicon view",
+    );
   }
 
   if (
