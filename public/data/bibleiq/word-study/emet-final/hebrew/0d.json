@@ -1,0 +1,2865 @@
+{
+  "version": 1,
+  "schemaVersion": "p07-emet-final-runtime@1.0.0",
+  "corpus": "hebrew",
+  "shard": "0d",
+  "entities": {
+    "word:hebrew:H1013": {
+      "entityId": "word:hebrew:H1013",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word functions as a name, rendered “Gader.” It is not presented here with an explicit definition describing an object, action, or quality, so its clearest ordinary sense is its role as a proper name. It occurs twice in the Hebrew Old Testament corpus, both occurrences appearing in 1 Chronicles 2:51. The surrounding verse text is not available here, so the passage determines whether the name identifies a person, place, or another named entity.",
+      "citations": [
+        {
+          "reference": "1Chr:2:51",
+          "book": "1Chr",
+          "chapter": 2,
+          "verse": 51,
+          "evidenceId": "p01:word:hebrew:H1013:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "117e89a71af8ef95671d1ab31f8899dae99ccc829afb3fd1984a8323ad4664d7",
+      "sourceRecordChecksum": "6f00a53d35d755653fdc4a38fffd0cbbb7d526b5ccc44c39436bfd416e4b2fbb",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H1170": {
+      "entityId": "word:hebrew:H1170",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word is used as the designation “Berith.” It functions as a name or title rather than describing an action, quality, or ordinary object. In the Hebrew Old Testament, it occurs four times, all in Judges, appearing in two verses: Judges 8:33 and 9:4. Because the available passages do not include their verse text here, the precise significance of the designation in each occurrence depends on its surrounding context.",
+      "citations": [
+        {
+          "reference": "Judg:8:33",
+          "book": "Judg",
+          "chapter": 8,
+          "verse": 33,
+          "evidenceId": "p01:word:hebrew:H1170:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Judg:9:4",
+          "book": "Judg",
+          "chapter": 9,
+          "verse": 4,
+          "evidenceId": "p01:word:hebrew:H1170:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "d710caee3b15adab1b9500cad9b38cbbe463c1caf99a2797c7a591d104ad3560",
+      "sourceRecordChecksum": "4ea0316900950636bcdce0ae806d223e795bf5f9c41ae5bf758eac86be23fd42",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H120": {
+      "entityId": "word:hebrew:H120",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Adam means a human being, whether an individual person or humanity considered as a whole.",
+      "citations": [
+        {
+          "reference": "Num:9:6"
+        },
+        {
+          "reference": "Gen:1:26"
+        }
+      ],
+      "explanationChecksum": "13f55a3ee4c5126cc82a3c158419137232773e03537067bd90e8ceff82992381",
+      "viewChecksum": "94bacc69bbdda0f7e44e4e7e192e59e5c08985fa546318419425bd7020e895d3",
+      "sourceRecordChecksum": "b6364cfc89fcded5e12b15eae7863fdd28e4df970979f702aa085e047956e49f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1228": {
+      "entityId": "word:hebrew:H1228",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Baqbuq means a bottle or cruse.",
+      "citations": [
+        {
+          "reference": "1Kgs:14:3"
+        },
+        {
+          "reference": "Jer:19:1"
+        }
+      ],
+      "explanationChecksum": "e147c8aaff6ee8f83160e4d6ab56621f9557078a9b1c6eb0bcd2b31b5285c8c0",
+      "viewChecksum": "a0f5609ca4aa2fc25cf62b32c8f102a44379584b521d1ef2a5b6a681a4650cf6",
+      "sourceRecordChecksum": "5c87c3c5c457e54b8c20b37f89f51621901b1f3b12d924c5fd307d79614d0de9",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1251": {
+      "entityId": "word:hebrew:H1251",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "final-residual-v2",
+      "explanation": "Bar means a field.",
+      "citations": [
+        {
+          "reference": "Dan:2:38"
+        }
+      ],
+      "explanationChecksum": "80d6d4bbd62a58063440bfdf78cb23129f541b05a543f4ac5936450db2f4f1aa",
+      "viewChecksum": "7846ab2ee033691d07466731c1246122c4058598c176a00e3b50927df0c398f6",
+      "sourceRecordChecksum": "31bd1bc2decd50a0826d917938ce1b4ad1d6cf1bcc7c6399747fa0df1726084e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1325": {
+      "entityId": "word:hebrew:H1325",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Bath names a measure used for wine and oil.",
+      "citations": [
+        {
+          "reference": "Ezra:7:22"
+        }
+      ],
+      "explanationChecksum": "7349e15b5e189b6970bdf59b90072292a2a5425cd77c7d80f70f4df5399d5dc0",
+      "viewChecksum": "0ed68b67b387ff060ba34de0b57d73a78060d8fec9ee95dcbb90baae27b9b17b",
+      "sourceRecordChecksum": "4e815146bfc80e6064958ed26182133b908b9a813b66ec1c622b9b2986344978",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1383": {
+      "entityId": "word:hebrew:H1383",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word means “ends,” referring to the terminal parts or outer limits of something. It appears twice in the Old Testament Hebrew corpus, both times in Exodus. In each occurrence, it functions as a concrete noun connected with an object being made or described, so it identifies the object’s ending portions rather than an action or quality. Its precise significance in either verse depends on the surrounding passage and the item being discussed.",
+      "citations": [],
+      "explanationChecksum": "b6d768589c30c6c96d34a076318f0282eb174293ef0c42f49b17ea6efe8d8e91",
+      "sourceRecordChecksum": "65d13c6b8569f42cc843c1761dcbafef3955f7330597e018daa498b7af03986f",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H1417": {
+      "entityId": "word:hebrew:H1417",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "final-residual-v2",
+      "explanation": "Gᵉdûwd means a furrow, or cutting.",
+      "citations": [
+        {
+          "reference": "Jer:48:37"
+        }
+      ],
+      "explanationChecksum": "a958ae998101e1faf5f0e2531a13d6883bc39a69192f773a77c2c44da5c16031",
+      "viewChecksum": "2e7699ef9f8f816b058183d6dfa1d4d883cad8f99c02e94c45910010674a669a",
+      "sourceRecordChecksum": "f44c19d45f48541cdd2f1c58507212c16638e7f0472876495c25750625ee1c00",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1462": {
+      "entityId": "word:hebrew:H1462",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Gôwb means locust or grasshopper.",
+      "citations": [
+        {
+          "reference": "Amos:7:1"
+        }
+      ],
+      "explanationChecksum": "ddacaed83aaa2ba1d12c820950b31ecdac4432f644fcd25f1d575c65d29d8f00",
+      "viewChecksum": "0fb8f4f29b94e6e1715e1a38737b93f2812e03201b840f4662b0151a4c3c177e",
+      "sourceRecordChecksum": "b79a14756af357f42d421ae97500e2d5f079ffe9a59a8117f32d652ab76d3ff5",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1549": {
+      "entityId": "word:hebrew:H1549",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Gillayown means a tablet for writing. By analogy, it can also refer to a mirror.",
+      "citations": [
+        {
+          "reference": "Isa:8:1"
+        },
+        {
+          "reference": "Isa:3:23"
+        }
+      ],
+      "explanationChecksum": "a1029f1d9ab9efc514333da67cefffc6ae0107b103e01bd3439ae655007af8fd",
+      "viewChecksum": "ed485d9b8d6bbdb830c1d0fe9335e9dfe9a29875c8924188c8948bb5a940b4b6",
+      "sourceRecordChecksum": "4fea488228e163fa42a1904fd9927ae6aa0755877b4534d6df16dd3909becd15",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1606": {
+      "entityId": "word:hebrew:H1606",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Ge'arah means a rebuke, reproof, or chiding.",
+      "citations": [
+        {
+          "reference": "Job:26:11"
+        }
+      ],
+      "explanationChecksum": "46fa2afb87a130e8376452eb3bd81d4923db8dddd45009f039589e965c6171d4",
+      "viewChecksum": "3bba045e449a219c18116f0c338bce15dee07b82ceb763313f0a56cd0b653387",
+      "sourceRecordChecksum": "5fa8a40ea9c9bab03b76ddc5198fbee3b4cf597ced070b2fabb53647f2453e86",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1691": {
+      "entityId": "word:hebrew:H1691",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Diblaim is a Hebrew proper name, used to identify a person rather than to describe an action, quality, or object. It appears once in the Hebrew Old Testament, at Hosea 1:3, and is rendered “Diblaim.” Its recorded use is connected with a family or genealogy setting and with birth or begetting, so its main function is as a name within that lineage. The surrounding verse text would be needed to explain its specific role there.",
+      "citations": [
+        {
+          "reference": "Hos:1:3",
+          "book": "Hos",
+          "chapter": 1,
+          "verse": 3,
+          "evidenceId": "p01:word:hebrew:H1691:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "25f2b7129ddce846f5310d514439193a94616507cf0b906bf42dcffa41a5811b",
+      "sourceRecordChecksum": "0c127fe1647f1216d9cc3cb1f02011df3e3131702d8d31d975de6f8285018cb0",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H1743": {
+      "entityId": "word:hebrew:H1743",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew verb means “beat,” describing the action of striking or pounding something. It appears once in the Hebrew Old Testament, at Numbers 11:8. As a verb, it expresses an action rather than a person, object, or quality. Its single occurrence means this word has a narrow recorded use in the Hebrew Bible, so its precise force in that sentence depends on the surrounding verse and passage. The related wording at that reference connects the action with other words describing what the people did with the food they prepared.",
+      "citations": [
+        {
+          "reference": "Num:11:8",
+          "book": "Num",
+          "chapter": 11,
+          "verse": 8,
+          "evidenceId": "p01:word:hebrew:H1743:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "c93d4368ce897e99d10f2ddc52356e6d23fe6b404112eb3100497eb90f9daeea",
+      "sourceRecordChecksum": "69bc359ed9f129839cba9490f0e0cd0f24d8defcbe8f5d464fb41bf75804ab55",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H1808": {
+      "entityId": "word:hebrew:H1808",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Daliyah means a dangling bough or branch.",
+      "citations": [
+        {
+          "reference": "Jer:11:16"
+        }
+      ],
+      "explanationChecksum": "ca6615c649b817be3503e9282180b753986282cb26dd11fdd5bf9276a123070b",
+      "viewChecksum": "c2680b13774debfac2cc1081806a71ea04adf1d0bb2b44a486acb2930d523829",
+      "sourceRecordChecksum": "4d8979efb8f946662260f21884eb76440aa230b13c394ee3d9191dfae90aa575",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H182": {
+      "entityId": "word:hebrew:H182",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word means “on” and functions as a relational word, connecting speech, action, or circumstance with the matter being discussed. It appears 11 times in the Hebrew Old Testament, showing a recurring use rather than a rare or isolated one. Its role is seen in passages involving reports, spoken statements, and matters connected with what people do or say. The exact sense in any verse depends on the surrounding wording and sentence structure.",
+      "citations": [],
+      "explanationChecksum": "0dff90f677c8390a98134450996cbdf4db382a19e3585d80151fd13ec806c3c4",
+      "sourceRecordChecksum": "bfefe8e6e9b43056df5c390ee7c9641032fc0a1e7ef416db210264c26867d342",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H1871": {
+      "entityId": "word:hebrew:H1871",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Darkemon means a drachma, a coin.",
+      "citations": [
+        {
+          "reference": "Ezra:2:69"
+        }
+      ],
+      "explanationChecksum": "991794c988537c12ce64c8eee298dead688a95c6d5e2aa26350202ca0d033775",
+      "viewChecksum": "ce293e11f2510eabfdd54a18581fd98ff9a8b660815e0ea3903711c3083cb0b3",
+      "sourceRecordChecksum": "02269aff9caa6fef5152c6cc40e5d702335b981eb605228b05328f3919d923f0",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H1945": {
+      "entityId": "word:hebrew:H1945",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Hôwy is an exclamation such as “woe,” “alas,” “ah,” or “ho.”",
+      "citations": [
+        {
+          "reference": "1Kgs:13:30"
+        },
+        {
+          "reference": "Isa:5:8"
+        },
+        {
+          "reference": "Isa:18:1"
+        },
+        {
+          "reference": "Isa:55:1"
+        }
+      ],
+      "explanationChecksum": "e21cbd6a804a61269ee6d0cbbf28abab5d864602ccff58256a6ddd6881338a82",
+      "viewChecksum": "c96a088a35c7de429ac69b6eb196b0dfb9c713368d5ab3578fa41df0707e8038",
+      "sourceRecordChecksum": "4b08d25cecf37de15f7deaf3bffb1989cdccccbcb5fec642f11947b61a47be31",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2005": {
+      "entityId": "word:hebrew:H2005",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Hên means behold or lo, drawing attention to what follows.",
+      "citations": [
+        {
+          "reference": "Gen:3:22"
+        }
+      ],
+      "explanationChecksum": "57ffb1213d7b85116ce57f2d9de0c4fe55390b91ab2bfd6bc7fa6c792de16019",
+      "viewChecksum": "b3b5a15155f9beb72140b50afedf6031ab7a1c33040fecc868de289c540fa955",
+      "sourceRecordChecksum": "5b60ee745ab8c68dea1e68c79bcd0c809134af25d045508e82b1836feadaccf4",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2139": {
+      "entityId": "word:hebrew:H2139",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Zakkur is a personal name.",
+      "citations": [
+        {
+          "reference": "Num:13:4"
+        }
+      ],
+      "explanationChecksum": "f37221305a102f7294c9f2bef3981aa34f4cb890b52288a97532bd1b56eb0d58",
+      "viewChecksum": "ba230703656956cf326922524ef46dafb502875b0abb846b800046f3b4949f38",
+      "sourceRecordChecksum": "29e8e0afe02fe70091a47704b4458f2aea31af7713a92640942d4cb76244a44f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2184": {
+      "entityId": "word:hebrew:H2184",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Zenuth means adultery; figuratively, it can describe unfaithfulness expressed as idolatry.",
+      "citations": [
+        {
+          "reference": "Jer:13:27"
+        },
+        {
+          "reference": "Jer:3:9"
+        }
+      ],
+      "explanationChecksum": "0375ac35b57cebf238427ee425a848c9151906cb1b2cbb3fec38770cf6145202",
+      "viewChecksum": "4788577702d79323a269857f0c2d4e24403f32f77f9540f9fe582def41db9546",
+      "sourceRecordChecksum": "2067d5e1b176957e79bbd62b68e52a266ec11e89e42512c5d954687e71071784",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2214": {
+      "entityId": "word:hebrew:H2214",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Zara describes something loathsome or disgusting.",
+      "citations": [
+        {
+          "reference": "Num:11:20"
+        }
+      ],
+      "explanationChecksum": "6957a31bc57644dfe4de48235d573cc686921e251ffb4eb1fdedbf1c7cc727f9",
+      "viewChecksum": "1dc864e80d6a0bc4f76ce7adfee861da9d26a630700c0d73839d70880dddb471",
+      "sourceRecordChecksum": "848181ca725c1649f2a7e399045f6e34b8e38e4d1bda971543cfca0f315e8908",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2337": {
+      "entityId": "word:hebrew:H2337",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word functions as a definite article, meaning “the.” It appears once in the Hebrew Old Testament, at 1 Samuel 13:6. Because the word is recorded only once, its precise role in that verse depends on the surrounding Hebrew and the full verse context. It should therefore be read as a small grammatical marker connected with the noun it determines, rather than as a standalone idea.",
+      "citations": [
+        {
+          "reference": "1Sam:13:6",
+          "book": "1Sam",
+          "chapter": 13,
+          "verse": 6,
+          "evidenceId": "p01:word:hebrew:H2337:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "889fb6cd086b8189b305b4f235377134fc13d36384eee3ceee8b553c62d76680",
+      "sourceRecordChecksum": "1de61ad0b0d8ca10470f816b6579651ad4a913ff84b66c367e46263eb911cc9d",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H2342": {
+      "entityId": "word:hebrew:H2342",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Chuwl means to twist or whirl. It can also describe dancing, waiting, or writhing in pain.",
+      "citations": [
+        {
+          "reference": "Ps:29:8"
+        },
+        {
+          "reference": "Judg:21:21"
+        },
+        {
+          "reference": "Gen:8:10"
+        },
+        {
+          "reference": "Ps:55:4"
+        }
+      ],
+      "explanationChecksum": "45fa4c634430febe27a8d8508c68799e1b6779567ab86d55c0b58a040f2eb12a",
+      "viewChecksum": "2333afde20fc48e97a0a0ca98cdf3f8e326d5b3b6c796052584164986e926092",
+      "sourceRecordChecksum": "6bba3f45573bf973ff927e650f923027496f298213b7fa7a1c195ab8e3f52499",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2401": {
+      "entityId": "word:hebrew:H2401",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Chăṭâʼâh means an offence or sin. It can also refer to a sacrifice for that offence.",
+      "citations": [
+        {
+          "reference": "Gen:20:9"
+        },
+        {
+          "reference": "Ps:40:6"
+        }
+      ],
+      "explanationChecksum": "3c874c2b6eadc1a72bba02d31013678a523fc7d1664d46b0070984d0b62f33e0",
+      "viewChecksum": "797f388d2c79eb54c84dd49d50c9d07f252ad47e88fc1d4eb5ef4bf1ebf855a6",
+      "sourceRecordChecksum": "b3b5026d57387f9056e7c99c93f418c1774b416038fc0ac536053fc0d05c1669",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H245": {
+      "entityId": "word:hebrew:H245",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Azaniah is a personal name for an Israelite.",
+      "citations": [
+        {
+          "reference": "Neh:10:9"
+        }
+      ],
+      "explanationChecksum": "527c0ed236dc890a1d59336a65200e0e5712bd92a4a09ea1ec65cd95cfa5cc94",
+      "viewChecksum": "467d3dea72df5fa28b63b20d9f3432af0ae0c7b2c02488e5b277bdebe2e3c37d",
+      "sourceRecordChecksum": "e59868dc0918758a020488948bdf38f02b30855c762d471e5a8f975109ee9fca",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2478": {
+      "entityId": "word:hebrew:H2478",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Halhul is a proper name for a place. In the Hebrew Old Testament, it refers to a location listed among the cities of the hill country of Judah. The word occurs once, in Joshua 15:58, and the available English renderings preserve it as “Halhul.” Because it functions as a place name rather than a descriptive term, its ordinary meaning is the identification of that location, not a quality or action. The surrounding verse gives the specific setting for its listing.",
+      "citations": [
+        {
+          "reference": "Josh:15:58",
+          "book": "Josh",
+          "chapter": 15,
+          "verse": 58,
+          "evidenceId": "p01:word:hebrew:H2478:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "4f59372075c246502eb00798d064add94e6ff7cdd966ff3a5c8aefc3267c2320",
+      "sourceRecordChecksum": "6054d69228858e615fa34bdc7d719e061d14d188242c53987ee3804e6d58e79c",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H2496": {
+      "entityId": "word:hebrew:H2496",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Challamish means flint.",
+      "citations": [
+        {
+          "reference": "Deut:8:15"
+        }
+      ],
+      "explanationChecksum": "5216691f3867c65a74ea110aed32342b22bb0f3688cd5c6e1893108030a51391",
+      "viewChecksum": "1449774de6c576bc0b0d78eaf965ff3da494bf7ea49ac3f2f94db559fd57c6a4",
+      "sourceRecordChecksum": "81d8aaf40a93d57480f95ccddcb48196cef75feefbdb4312f1af03e7c0b490b6",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2544": {
+      "entityId": "word:hebrew:H2544",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word is the personal name “Hamor.” It functions as a proper name, identifying an individual rather than expressing an action, quality, or general object. In the Hebrew Old Testament corpus, it occurs 13 times, chiefly in Genesis, and appears in passages where Hamor is named or spoken about. Its ordinary meaning is therefore a person’s name, while the surrounding verse supplies the particular role or significance associated with him.",
+      "citations": [
+        {
+          "reference": "Gen:33:19",
+          "book": "Gen",
+          "chapter": 33,
+          "verse": 19,
+          "evidenceId": "p01:word:hebrew:H2544:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Gen:34:2",
+          "book": "Gen",
+          "chapter": 34,
+          "verse": 2,
+          "evidenceId": "p01:word:hebrew:H2544:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "50e790b27106c16ddeb91b7b699d271f1b88a2da70500f65b9e1b9e78cdae1cc",
+      "sourceRecordChecksum": "c85c0e62d9fcb7a59205bd77dc1975b2561a94c6d325cdddc437728d204ad55d",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H2610": {
+      "entityId": "word:hebrew:H2610",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Chaneph means to soil or pollute, especially in a moral sense. Scripture uses it when blood pollutes the land.",
+      "citations": [
+        {
+          "reference": "Jer:3:2"
+        },
+        {
+          "reference": "Num:35:33"
+        }
+      ],
+      "explanationChecksum": "8ab10a286ec441d398a9602b49dc85d203d912808baf390240235514ff8ff581",
+      "viewChecksum": "6d0f30de089a13bb1f4798efc71a8f99591a7d25d40cba90d75587e39f5e6a92",
+      "sourceRecordChecksum": "92415a544ebfc134f37ef3d06788de3eb5a2afff54c3aedda955021947257278",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2733": {
+      "entityId": "word:hebrew:H2733",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "The word means “Harodite,” functioning as a designation that identifies a person. It is not presented here as a general action, quality, or object, but as a name-like identifier attached to an individual. In the Hebrew Old Testament data, it occurs twice, both within 2 Samuel 23:25. Its precise significance in that verse depends on the surrounding passage, but the lexical sense supplied is simply “Harodite.”",
+      "citations": [
+        {
+          "reference": "2Sam:23:25",
+          "book": "2Sam",
+          "chapter": 23,
+          "verse": 25,
+          "evidenceId": "p01:word:hebrew:H2733:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "b08232ceda78ef91e9028a04645f15fb4c998f9f2bf49d61b4653b392e87d098",
+      "sourceRecordChecksum": "1a2151a3be5575b9b3acbf2071ef57a31c464e9234789daa14f6a1526d1f3d23",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H2795": {
+      "entityId": "word:hebrew:H2795",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Chêresh means deaf—literally or spiritually.",
+      "citations": [
+        {
+          "reference": "Exod:4:11"
+        },
+        {
+          "reference": "Isa:42:19"
+        }
+      ],
+      "explanationChecksum": "16c30422ad0b0b9949ab397d5c376601515eb63de10250fbc721dd8da02eece2",
+      "viewChecksum": "d6be29b15b4e582e3bb252fbddde3a4b439736861881fcfd73d6c1d3600433d9",
+      "sourceRecordChecksum": "40062884e0e33e430019392793c07a3cae4bfa3a1dd94b542a35c97ae303a372",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2830": {
+      "entityId": "word:hebrew:H2830",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Chashmal probably means bronze or a polished metal. It can also be rendered as amber.",
+      "citations": [
+        {
+          "reference": "Ezek:1:4"
+        }
+      ],
+      "explanationChecksum": "0afae06277b7ec3605b05b5d7a6c218ba5f1e76eced2dbb4246e09de0b74b5eb",
+      "viewChecksum": "ba331c5e15312cb59ab4d01d67a9dd44c2a9a7c8b66f97cfac832e25d75c127f",
+      "sourceRecordChecksum": "860610fca8cf63466d10415fad92eb669a60a233d327ab53df9edf8d4e17528d",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2892": {
+      "entityId": "word:hebrew:H2892",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Tohar means brightness or clearness.",
+      "citations": [
+        {
+          "reference": "Exod:24:10"
+        }
+      ],
+      "explanationChecksum": "c2d6251f150a21d9ffd5140fffcfc21ece022c153a1ca1ee995ea815387c6012",
+      "viewChecksum": "74d65d0032e3cf8a853158dc7e37b64f6968fcf8f2c49d78f7d7b351d97453db",
+      "sourceRecordChecksum": "c77b8e23bf40828a7c1f8fbd32c01ad5f0bec4e9de0858f8b5334596241e13bf",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H2975": {
+      "entityId": "word:hebrew:H2975",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Ye’or means a river or channel. In Pharaoh’s dream, it refers to the river beside which he stands.",
+      "citations": [
+        {
+          "reference": "Gen:41:1"
+        },
+        {
+          "reference": "Gen:41:17"
+        }
+      ],
+      "explanationChecksum": "2c747953e42d394889d2ca9f870e46059aed8deaefe6383bb3290b08329a453d",
+      "viewChecksum": "2286d1ede648f84c483c92efeac53fbf6a315fa4d2207d0558cc970b7c490487",
+      "sourceRecordChecksum": "e1775afae4325c84d74dea2ff5efbc18880fd598120f9c314fc6aa5915b6346b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3046": {
+      "entityId": "word:hebrew:H3046",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Yeda means to know. It can also mean to make something known. It can describe teaching those who do not know.",
+      "citations": [
+        {
+          "reference": "Ezra:4:15"
+        },
+        {
+          "reference": "Dan:2:9"
+        },
+        {
+          "reference": "Ezra:7:25"
+        }
+      ],
+      "explanationChecksum": "310546775689148deb4e14dccdd5345d6129b89546639b164ae24826ed7ead3a",
+      "viewChecksum": "8c6c7f8ce0de3194963c46553e3267fdb54cd33fcbce84f8d9afb69a21f6b4a5",
+      "sourceRecordChecksum": "5332009325ea95c27070e74289542909b0aa4a27db77d57e7a379a69da741278",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H308": {
+      "entityId": "word:hebrew:H308",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Ahasbai is a Hebrew personal name, referring to an individual rather than expressing an action, quality, or ordinary object. It appears once in the Hebrew Old Testament, at 2 Samuel 23:34, and is rendered consistently as “Ahasbai.” Because the available information identifies the person’s name but does not provide a lexical definition or the surrounding verse text, the name itself is the clearest meaning: it designates Ahasbai as a historical individual mentioned in that passage.",
+      "citations": [
+        {
+          "reference": "2Sam:23:34",
+          "book": "2Sam",
+          "chapter": 23,
+          "verse": 34,
+          "evidenceId": "p01:word:hebrew:H308:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "7e356e2c0bbca27f743365de4b8f667140784da8b9516bcd3ed24fbf3f9b6b8f",
+      "sourceRecordChecksum": "de754d7bdcb1dfc8a2db33c2914452a99bab2f27f5126630359c266ab5bbc95f",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H3103": {
+      "entityId": "word:hebrew:H3103",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Jobab is a personal name, rendered consistently as “Jobab.” It identifies different people in the Old Testament rather than expressing an action, quality, or general idea. The name appears nine times in the Hebrew Bible, including genealogical records and accounts involving rulers and family lines. Because it functions as a name, its meaning is chiefly identification: it points to the particular person being mentioned in each passage.",
+      "citations": [
+        {
+          "reference": "Gen:10:29",
+          "book": "Gen",
+          "chapter": 10,
+          "verse": 29,
+          "evidenceId": "p01:word:hebrew:H3103:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Gen:36:33",
+          "book": "Gen",
+          "chapter": 36,
+          "verse": 33,
+          "evidenceId": "p01:word:hebrew:H3103:reference:1",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Josh:11:1",
+          "book": "Josh",
+          "chapter": 11,
+          "verse": 1,
+          "evidenceId": "p01:word:hebrew:H3103:reference:3",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "d4f855132ab7ad09cc1c20a4d7eb3bb98454425d4a34dec3ef98e1f31c93c09a",
+      "sourceRecordChecksum": "cd5386810c51428698dd05c745412d4cb0c2b924a257daf0030deda8c04396e7",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H32": {
+      "entityId": "word:hebrew:H32",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Abihail is a personal name.",
+      "citations": [
+        {
+          "reference": "Num:3:35"
+        }
+      ],
+      "explanationChecksum": "e23dac735699e126de14cb509463da0d9c34b4996296017f20f5246e751a9818",
+      "viewChecksum": "58952d1926df01b84967a49da5bf3f46c2ead7583b411b87076863ec7fce8edf",
+      "sourceRecordChecksum": "cd418648b0419b9d2781c74152ac9240acc6a4873feef6ab110d8632dd70c305",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3222": {
+      "entityId": "word:hebrew:H3222",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word refers to “mules,” describing the animal named in Genesis 36:24. It occurs only once in the Hebrew Old Testament corpus, so its ordinary meaning is narrow rather than a broad recurring concept. In that passage, it functions as the name of a concrete animal, not as an abstract quality or action. The surrounding verse supplies the specific scene in which the animal is mentioned; the word itself identifies what is being referred to.",
+      "citations": [
+        {
+          "reference": "Gen:36:24",
+          "book": "Gen",
+          "chapter": 36,
+          "verse": 24,
+          "evidenceId": "p01:word:hebrew:H3222:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "3f245753c643236d96016f51641fe9b405aae0086dc5afb2d197b815a26e65eb",
+      "sourceRecordChecksum": "42ab1572e6519e31b985d5be2222f8345f51ff5a85416d3b4deb05d00c5680e4",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H3257": {
+      "entityId": "word:hebrew:H3257",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Yâʻ means a shovel.⁣",
+      "citations": [
+        {
+          "reference": "Exod:27:3"
+        }
+      ],
+      "explanationChecksum": "0377fe46c36f1f850da9363a8ccf4e77da951bf7fae023c1f27cecedd2a4939e",
+      "viewChecksum": "a7d90870df96c34c92ddf259bed1bb1fd0c89bab9b588dc06d116dde2de5ef13",
+      "sourceRecordChecksum": "284e29cfe84e30420c10ac6ae97cc0c574b7b6d93e0c8fa51ededded2f42e239",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3280": {
+      "entityId": "word:hebrew:H3280",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Yaʻălâh means roe, a type of deer.",
+      "citations": [
+        {
+          "reference": "Prov:5:19"
+        }
+      ],
+      "explanationChecksum": "b5100a8b59078fd891e449f4d0044ef21542836eedb9cd90f5fc7b41703a2f6e",
+      "viewChecksum": "d625732b616215926b5b5011af60f4824762914b4c236ba57a6eadef24ee044e",
+      "sourceRecordChecksum": "1358166ad9f53260e6650d6fb62d58c05df8374f29f78fe71de3047d49953e50",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3334": {
+      "entityId": "word:hebrew:H3334",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Yatsar means to be pressed, narrowed, or straitened. It can also describe distress.",
+      "citations": [
+        {
+          "reference": "Job:18:7"
+        },
+        {
+          "reference": "Job:20:22"
+        },
+        {
+          "reference": "Gen:32:7"
+        }
+      ],
+      "explanationChecksum": "4618878e6e15f11ebe6eb6a8a3265b0606ae2d0032c55d8cf549443cb4e2aa51",
+      "viewChecksum": "2101049983f8250cbefe2b85c05d4edc3952d7aba83b181304c48b1ea6fc3b91",
+      "sourceRecordChecksum": "e6330794101224b71a5fa349798a4151ade00fb5d2a86839a6b305b8c12cd05c",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3389": {
+      "entityId": "word:hebrew:H3389",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Yerushalaim means Jerusalem, the name of a city.",
+      "citations": [
+        {
+          "reference": "Josh:10:1"
+        }
+      ],
+      "explanationChecksum": "fcbb8280381e729de364e69a1ce86a7fe864c6661d97bc5c5183c003485d8c52",
+      "viewChecksum": "61e76ac092d4d08b26a2a5600fd8bed1c89bec956b8abe851768806552faec85",
+      "sourceRecordChecksum": "e368681767212d678e88cd10a9022f65e0614b35a554e09eabc63138aba1a39e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3455": {
+      "entityId": "word:hebrew:H3455",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Yasam means to place. It can also describe something being placed.",
+      "citations": [
+        {
+          "reference": "Gen:24:33"
+        },
+        {
+          "reference": "Gen:50:26"
+        }
+      ],
+      "explanationChecksum": "2d1fb986144420dbb428f41cdba5f87e526bad5d9827b17dc6c28f117dfe169d",
+      "viewChecksum": "765a391a1e0d5962accc3117bb24c25fff0c70575a69bf6c884ad6de3cff47ad",
+      "sourceRecordChecksum": "82c396705f7200c39fb08a4a59f2815b2c1418b9f276054084a514ecbf8d5365",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3507": {
+      "entityId": "word:hebrew:H3507",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Ithream is a personal name, referring to an individual rather than describing an action or quality. In the Hebrew Old Testament, it appears twice, in 2 Samuel 3:5 and 1 Chronicles 3:3. Its recorded use belongs to genealogical material, where it identifies one of David’s sons. Because it functions as a name, its ordinary meaning for readers is the person designated by “Ithream,” not a general word or character trait.",
+      "citations": [
+        {
+          "reference": "2Sam:3:5",
+          "book": "2Sam",
+          "chapter": 3,
+          "verse": 5,
+          "evidenceId": "p01:word:hebrew:H3507:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "1Chr:3:3",
+          "book": "1Chr",
+          "chapter": 3,
+          "verse": 3,
+          "evidenceId": "p01:word:hebrew:H3507:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "9abda0f6fa1c39b7bdfc43a6554dd17105e2bc502746aa849a626e6c462dd0f0",
+      "sourceRecordChecksum": "f517d0c07981ebf70bf1c2e107804dff86c708b41e6406a29652fc0e8fdcb814",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H3572": {
+      "entityId": "word:hebrew:H3572",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Cushan is the name of a region of Arabia.",
+      "citations": [
+        {
+          "reference": "Hab:3:7"
+        }
+      ],
+      "explanationChecksum": "9879dd9a6119ce91439ee8d4902db020d641b118afaf15bbcb0aa938408563e4",
+      "viewChecksum": "92b333ceda63cc728ffb6f9ae2e67f1cdf4938e1bf0ded1deaac6dc348da045c",
+      "sourceRecordChecksum": "dd9019084210abf8b264d1af71b47a4fc229d187eb35cb7f2c6c6d0f94ea7d36",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3640": {
+      "entityId": "word:hebrew:H3640",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Kelimuth means disgrace or shame.",
+      "citations": [
+        {
+          "reference": "Jer:23:40"
+        }
+      ],
+      "explanationChecksum": "d807f4f2775de46c2cf9c499c3f0b8728ff1b0259830ced934a493c52a3df634",
+      "viewChecksum": "688c283e5d02490e5931663f6222d05115e74139beaa502bf4f0e2bcabf56a85",
+      "sourceRecordChecksum": "fed123271e1359fc1bdcb2a192c5c2d0f89f10de7db3f64a7b012b93cd623c7f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3697": {
+      "entityId": "word:hebrew:H3697",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Kasam means to shear, as when hair is cut.",
+      "citations": [
+        {
+          "reference": "Ezek:44:20"
+        }
+      ],
+      "explanationChecksum": "b505e3a9451843eb5155bde14cc2907d3e29eca1472cc7d10bc90442f6213ee5",
+      "viewChecksum": "d7b789ae7bc3c093e42126e48a441a59737e42ca779f36601f0404add40e4562",
+      "sourceRecordChecksum": "6aa843f694f1d8b74ae690fdedf4d86664b29f07a8110e841702608eac5010b3",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H371": {
+      "entityId": "word:hebrew:H371",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "ʼÎyn means “is it not?”",
+      "citations": [
+        {
+          "reference": "1Sam:21:8"
+        }
+      ],
+      "explanationChecksum": "07dbdc5754175573822d552e9a7204ad7493b9bb661ccb8cd8d5e0e693945f21",
+      "viewChecksum": "5dd9a2e048a62b41a0e04a045670c940fc41a4b780845d14e9d42d3501eaca7a",
+      "sourceRecordChecksum": "b6f3e546e730a8c0be436700f1d0aed72bd2e874d5d268aafb45876c6068a470",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3738": {
+      "entityId": "word:hebrew:H3738",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Karah means to dig. It describes digging a well or pit.",
+      "citations": [
+        {
+          "reference": "Gen:26:25"
+        },
+        {
+          "reference": "Exod:21:33"
+        }
+      ],
+      "explanationChecksum": "3ec6ad81154aa804c3936147e1232fdabc9a5a37a7187e9d5c886111bea375d7",
+      "viewChecksum": "c83724aa8cedc4825d4211b28ce54bc8f6172be077e6273c49229ed158e67307",
+      "sourceRecordChecksum": "420db7780b6c91b4504f4fd2900bedbf0be370bcf3b38c8243c00b87d7f363a2",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H3741": {
+      "entityId": "word:hebrew:H3741",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word means “cottages.” It functions as a noun, identifying what is being referred to rather than describing an action, quality, or person. In the Hebrew Old Testament, it appears once, in Zephaniah 2:6. Because it occurs only there and no surrounding verse text is provided here, its broader contextual force cannot be described beyond this basic lexical sense.",
+      "citations": [
+        {
+          "reference": "Zeph:2:6",
+          "book": "Zeph",
+          "chapter": 2,
+          "verse": 6,
+          "evidenceId": "p01:word:hebrew:H3741:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "86d34f131202622201586062e55c5ba92e817dec609f2b65793e417b34234fbd",
+      "sourceRecordChecksum": "9f38d5db2c9ac888e9d31879671be40e1e25ad6166768079f72c079a7dee4fab",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H3802": {
+      "entityId": "word:hebrew:H3802",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew noun refers to the shoulder, or to shoulders when more than one is meant. It describes the body area at the upper side of a person and is also used for parts or positions associated with the shoulder. The word occurs 67 times in the Hebrew Old Testament, appearing in descriptions of clothing, boundaries, structures, and bodily placement. Its normal sense remains a shoulder or shoulders, while the surrounding passage determines how that shoulder is being described or used.",
+      "citations": [
+        {
+          "reference": "Exod:28:25",
+          "book": "Exod",
+          "chapter": 28,
+          "verse": 25,
+          "evidenceId": "p01:word:hebrew:H3802:reference:4",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Exod:39:4",
+          "book": "Exod",
+          "chapter": 39,
+          "verse": 4,
+          "evidenceId": "p01:word:hebrew:H3802:reference:8",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "b847c1e7f96906f7f4c395dced0e32b2e7b09826595b8ee939ff6459cf4eb727",
+      "sourceRecordChecksum": "78b85bd9efd7a1c6eb89cea89fac296d5d3ca4a6136f52b4421a37988c1feec4",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H3877": {
+      "entityId": "word:hebrew:H3877",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Lotan is a personal name, referring to an individual rather than expressing a general idea or action. In the Hebrew Old Testament, it appears seven times across five verses, all in Genesis and 1 Chronicles. The name is associated with genealogical records, where Lotan is identified and relationships involving him are recorded. Its precise significance beyond identifying this person is not stated by the available wording, so the safest meaning is simply the proper name “Lotan.”",
+      "citations": [
+        {
+          "reference": "Gen:36:20",
+          "book": "Gen",
+          "chapter": 36,
+          "verse": 20,
+          "evidenceId": "p01:word:hebrew:H3877:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Gen:36:22",
+          "book": "Gen",
+          "chapter": 36,
+          "verse": 22,
+          "evidenceId": "p01:word:hebrew:H3877:reference:1",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Gen:36:29",
+          "book": "Gen",
+          "chapter": 36,
+          "verse": 29,
+          "evidenceId": "p01:word:hebrew:H3877:reference:2",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "1Chr:1:38",
+          "book": "1Chr",
+          "chapter": 1,
+          "verse": 38,
+          "evidenceId": "p01:word:hebrew:H3877:reference:3",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "1Chr:1:39",
+          "book": "1Chr",
+          "chapter": 1,
+          "verse": 39,
+          "evidenceId": "p01:word:hebrew:H3877:reference:4",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "1ba4638ff5a8429054738e6a76e6cff10132241d7ea01247a6d25d51158834c4",
+      "sourceRecordChecksum": "adf9bec70630ede4ad895dec10c57093389daa72c8cd2ca7ec3f18f396da1156",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H3954": {
+      "entityId": "word:hebrew:H3954",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Leqesh means the after crop, or latter growth.",
+      "citations": [
+        {
+          "reference": "Amos:7:1"
+        }
+      ],
+      "explanationChecksum": "15327790b483d1acf37eacb1a0883bf7a4dcac9935a7f354bb59a145df7abca1",
+      "viewChecksum": "644aee296f1d841b95cf763852e0ef28226ee770f827dd703c2c77e0f20e3f87",
+      "sourceRecordChecksum": "bee223ccbfce7ca7bc01cd110784c6897d4d1faa5d1f06452a9f47fe9605855b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4007": {
+      "entityId": "word:hebrew:H4007",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Mabbat means expectation—something expected. It can describe what people look to for help, and an expectation can be disappointed.",
+      "citations": [
+        {
+          "reference": "Isa:20:5"
+        },
+        {
+          "reference": "Isa:20:6"
+        },
+        {
+          "reference": "Zech:9:5"
+        }
+      ],
+      "explanationChecksum": "ced11ddfb1ee4feac67f40ee6a2ab5430e1166f71e071432f350a29fe10169cd",
+      "viewChecksum": "41d882dced09371f63cc9c61f4b2f615b6292d276f4625be57a4f860cdaa1e6f",
+      "sourceRecordChecksum": "93c5dd5269cf6ba38f4915e9a506c5f1ad503344525c93d7715fd7d9bc717c20",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4072": {
+      "entityId": "word:hebrew:H4072",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "final-residual-v2",
+      "explanation": "Midcheh means ruin.",
+      "citations": [
+        {
+          "reference": "Prov:26:28"
+        }
+      ],
+      "explanationChecksum": "cd3160d4fec058a31dff7dec13d6b147cd79604edc778b24f87b10501d4dc6c5",
+      "viewChecksum": "ce0fed781ffab948e3c1ea4d6e99e8ddf1bdcc1baefc1aaaba13fee6eb69f2a2",
+      "sourceRecordChecksum": "81dd229d77073ccb1b478cb739bf3366cb8466b40a53f2481f5a4e16ac71c4b0",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4155": {
+      "entityId": "word:hebrew:H4155",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word means “dimness.” It names a condition in which light or visibility is diminished, rather than describing an action or a person. In the Hebrew Old Testament, it occurs once, in Isaiah 9:1. Its precise force in that verse depends on the surrounding passage, but its basic lexical sense remains a state of dimness. The word therefore points readers toward obscurity or reduced brightness when it appears in the text.",
+      "citations": [
+        {
+          "reference": "Isa:9:1",
+          "book": "Isa",
+          "chapter": 9,
+          "verse": 1,
+          "evidenceId": "p01:word:hebrew:H4155:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "7874b769731214edfff63ae46d1cefc10654d9e4527ea1e52ff5dc5694fc3558",
+      "sourceRecordChecksum": "74072003013a3f5ede076cdb63379f5d3975e5f06b815080bdcfa352c9231d94",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H421": {
+      "entityId": "word:hebrew:H421",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word means “Lament,” expressing an act of mourning or sorrow. It functions as an action word rather than naming a person, object, or place. In the Hebrew Old Testament, it occurs once, in Joel 1:8. Because the verse text and surrounding passage are not included here, its precise force in that verse must be understood from its context. Its basic sense remains a call or expression to lament.",
+      "citations": [
+        {
+          "reference": "Joel:1:8",
+          "book": "Joel",
+          "chapter": 1,
+          "verse": 8,
+          "evidenceId": "p01:word:hebrew:H421:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "ade50c8848d0d09156340a4bba64f7f601cf08b7cb400362e2c6bffdebf79eee",
+      "sourceRecordChecksum": "319da30ded294d66352d815c8bd19e3268362d40dbe1e788d7a0932f3e2a32a8",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H4238": {
+      "entityId": "word:hebrew:H4238",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Mahazioth is a Hebrew name preserved as a proper name rather than rendered as an ordinary descriptive word. It occurs twice in the Hebrew Old Testament corpus, both times in 1 Chronicles 25, and the English form remains “Mahazioth.” No broader translated meaning is established here, so the safest understanding is the person’s name itself, not a claim about a wider concept. Its precise significance in either verse requires the surrounding passage.",
+      "citations": [
+        {
+          "reference": "1Chr:25:4",
+          "book": "1Chr",
+          "chapter": 25,
+          "verse": 4,
+          "evidenceId": "p01:word:hebrew:H4238:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "1Chr:25:30",
+          "book": "1Chr",
+          "chapter": 25,
+          "verse": 30,
+          "evidenceId": "p01:word:hebrew:H4238:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "b05e665989ccaf529def82ce8f0cf91e0fbc52784f20405a521220f7e553fe6b",
+      "sourceRecordChecksum": "fe4625c5af52cae9e9f2f3b003e90e01212ba49fd527ae4be7b266a5dedb2e7b",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H4241": {
+      "entityId": "word:hebrew:H4241",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Michyah means preservation of life and can also refer to sustenance. It can also refer to living flesh, rendered as “quick flesh.”",
+      "citations": [
+        {
+          "reference": "Gen:45:5"
+        },
+        {
+          "reference": "Judg:6:4"
+        },
+        {
+          "reference": "Lev:13:24"
+        }
+      ],
+      "explanationChecksum": "ef7c5e9b301054291d3f641cef42da309138b6c10e20a28975347b8f5a6549dd",
+      "viewChecksum": "d4eb0a1bba3aafc2bd4fd0630dd325029c9981b523087400d4b7bf6d3e8412f7",
+      "sourceRecordChecksum": "088f827e0b065716d80db64b684c9d505fc27e431823fd57606c37552a224ce6",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4340": {
+      "entityId": "word:hebrew:H4340",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Meythar means a cord. It can also mean the string of a bow.",
+      "citations": [
+        {
+          "reference": "Exod:35:18"
+        },
+        {
+          "reference": "Ps:21:12"
+        }
+      ],
+      "explanationChecksum": "082e62a67213dc399e3602135ad5e1dabbd44ea533d9eb05bb4b644b3e064d8f",
+      "viewChecksum": "775f80755cdaefae5db181ef4a18a965308d8faa2aca065d8e9a1b3330a120c2",
+      "sourceRecordChecksum": "9e56885658d1833ca2886c08df12855aa49d84f08fd1d530e6566dcc83ccbd00",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4397": {
+      "entityId": "word:hebrew:H4397",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Mal'ak means a messenger and can also refer to an angel.",
+      "citations": [
+        {
+          "reference": "Num:22:5"
+        },
+        {
+          "reference": "Gen:16:7"
+        }
+      ],
+      "explanationChecksum": "56a56079291d28fcec40a712027b7d9be0358402b70e56b80240cc8514a6866e",
+      "viewChecksum": "0eb1bf0f5e14f9c831f397669ae56456ac6b3d397554a7a36065a62d34f4154d",
+      "sourceRecordChecksum": "71ddf760689ce16dc73c739486d15c3e0185e794bfe57877a93238e306303dc1",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4403": {
+      "entityId": "word:hebrew:H4403",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Malbûwsh means a garment or clothing.",
+      "citations": [
+        {
+          "reference": "1Kgs:10:5"
+        }
+      ],
+      "explanationChecksum": "2af359a847d8e1f92a99a936b0f55889a209476c128a95731e8cdfe5c50e932f",
+      "viewChecksum": "ec58171170f67b35f5e2f8c76bda9fdc295adcb018561c9b7e76275f8314f0e5",
+      "sourceRecordChecksum": "6599d97852cb6fba17f3c117b49cf999e448cfea0f4039aef765a0742251facc",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4546": {
+      "entityId": "word:hebrew:H4546",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Mesillah means a highway or thoroughfare, a route for going from one place to another. It can also refer to a causeway or terraces.",
+      "citations": [
+        {
+          "reference": "Num:20:19"
+        },
+        {
+          "reference": "Judg:21:19"
+        },
+        {
+          "reference": "1Chr:26:16"
+        },
+        {
+          "reference": "2Chr:9:11"
+        }
+      ],
+      "explanationChecksum": "a8a7a480d958f904ea9b1dede3e3a9f0a85763abb363e1139c85ef1d4c194bb4",
+      "viewChecksum": "5bf6732d81747968744a4ff5004a917b3aed73fd467c980a76a7c8ada50edc46",
+      "sourceRecordChecksum": "b1b8b666005abfceaaea6858036c45b31961ccdc5267721e519e40bbc0d0373a",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H458": {
+      "entityId": "word:hebrew:H458",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word is a man’s personal name, rendered “Elimelech.” It functions as a proper name rather than a general description or action word. In the Hebrew Old Testament corpus, it occurs six times, all in the book of Ruth, and each occurrence refers to the same named person. The name appears in references connected with family relationships and is also associated with his death in the narrative. Its precise significance in any particular verse depends on the surrounding passage.",
+      "citations": [
+        {
+          "reference": "Ruth:1:2",
+          "book": "Ruth",
+          "chapter": 1,
+          "verse": 2,
+          "evidenceId": "p01:word:hebrew:H458:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "5a01dfd910893b1ac77e57ef5db70af7bf95b34f995e3e61d2e0fb511ac7a909",
+      "sourceRecordChecksum": "4ad81f103afda335e37a5331448e19838f444791723eeb55f5ae363f3c067fee",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H4634": {
+      "entityId": "word:hebrew:H4634",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Ma'arakhah means an arrangement or ordered formation. It can also describe a military array set for battle.",
+      "citations": [
+        {
+          "reference": "Lev:24:6"
+        },
+        {
+          "reference": "1Sam:4:2"
+        }
+      ],
+      "explanationChecksum": "19f1e9be5499498e3ad130f1e80ce32a6d48cc159d426c057e181e47dbac5897",
+      "viewChecksum": "5c62fc389d9c3cbc3416be72f75a81e4968b3d55ecf86434630b64ebd85c3ddb",
+      "sourceRecordChecksum": "c1de5ab03147de3835014bb95112af2b225ca0bfc781729c08b882c234e15971",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4689": {
+      "entityId": "word:hebrew:H4689",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Matsowq means a narrow or confined condition, expressed as distress, anguish, or straitness.",
+      "citations": [
+        {
+          "reference": "Deut:28:53"
+        },
+        {
+          "reference": "Ps:119:143"
+        }
+      ],
+      "explanationChecksum": "c0e1d71174ed768466e0920e3cd6ed80a5d12c06329a32bbff5b72949bf49de4",
+      "viewChecksum": "6b0d3ba7ffed6527d85e9478f01bb04108a382da51745c365f4d4cd5ac892ed9",
+      "sourceRecordChecksum": "26cac3760da9f317b4655679dd34b7c761bcf7ef6ff07ce56a708f5f54b15443",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H47": {
+      "entityId": "word:hebrew:H47",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Abbir means mighty or strong. It can also refer to a bull.",
+      "citations": [
+        {
+          "reference": "Judg:5:22"
+        },
+        {
+          "reference": "Ps:22:12"
+        },
+        {
+          "reference": "Ps:50:13"
+        }
+      ],
+      "explanationChecksum": "fa0ad0e89d92679907ac94a9a365b0dd4f0cd630bbfdf70e6485fe5e6416d83a",
+      "viewChecksum": "e0c32d297b196cd7ee20c3ee7c27860cc502ebf8494abbc0ac518d1a6d4edc75",
+      "sourceRecordChecksum": "ddffde984fa55e969a7a03a724174c2df6abafa12e24094e52c4c9fa73b62fde",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4722": {
+      "entityId": "word:hebrew:H4722",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Makheloth is a Hebrew proper name identifying a location, rather than an ordinary word describing an action, quality, or object. It is rendered “Makheloth” and appears twice in the Hebrew Old Testament, both times in Numbers 33:25–26. As a place-name, its meaning is primarily its identity as a named location; the word itself is not translated into a broader descriptive idea. Its precise significance in either verse depends on the surrounding passage.",
+      "citations": [
+        {
+          "reference": "Num:33:25",
+          "book": "Num",
+          "chapter": 33,
+          "verse": 25,
+          "evidenceId": "p01:word:hebrew:H4722:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Num:33:26",
+          "book": "Num",
+          "chapter": 33,
+          "verse": 26,
+          "evidenceId": "p01:word:hebrew:H4722:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "72a2add74c64e5a11bc38bc8268f3314bf51166119f64a43c52150b86c637a2d",
+      "sourceRecordChecksum": "645f9977aa3c1cf9cb59269010fc602a20e16ee389f78dfdef670a4da21fed93",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H4757": {
+      "entityId": "word:hebrew:H4757",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Merodak-Baladan is the name of a Babylonian king.",
+      "citations": [
+        {
+          "reference": "Isa:39:1"
+        }
+      ],
+      "explanationChecksum": "fbbc96be6363b7895ad1955552bb43d08a55f2a635a47d9ba9e15ede0944e54e",
+      "viewChecksum": "57bd259c91c1edc7a0526463bdaf7fa991086f53435b066315cd795a96fef15e",
+      "sourceRecordChecksum": "49fea6fb6cafb57074ed8e01f0badb6390b8c66098d3a38a867edc844c55178e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4780": {
+      "entityId": "word:hebrew:H4780",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word means “rebellious.” It functions as a descriptive word, identifying someone or something characterized in that way rather than naming an action. The word occurs once in the Hebrew Old Testament, in 1 Samuel 20:30, so its normal scriptural use is represented by this single occurrence. Its precise force in that verse depends on the surrounding passage and the person or thing being described.",
+      "citations": [
+        {
+          "reference": "1Sam:20:30",
+          "book": "1Sam",
+          "chapter": 20,
+          "verse": 30,
+          "evidenceId": "p01:word:hebrew:H4780:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "b53df35840bd9e1e586efa64aa4debe8928d98b5cf9d0945940980c161d869cc",
+      "sourceRecordChecksum": "7960adb0d2f06b54db33233f9858db8a81439c0ac1bf22fb7bdf58e3e0a6fb08",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H4829": {
+      "entityId": "word:hebrew:H4829",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Mir'eh means pasture, a feeding place for flocks.",
+      "citations": [
+        {
+          "reference": "Gen:47:4"
+        }
+      ],
+      "explanationChecksum": "8dc15a82ec77333b3b3eaf29c02609ed0ee7c23b997550025e5f4563d92738ac",
+      "viewChecksum": "a9946b287ce62b0485cd6740b681da559430205ee0a02af72400193fd9f736c4",
+      "sourceRecordChecksum": "ce360f54f8a9a338101326439971fc064c7d127a4a3ca7f051bee6a4fdde1a5b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4894": {
+      "entityId": "word:hebrew:H4894",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Mishṭowach means a spreading-place, a place for spreading nets.",
+      "citations": [
+        {
+          "reference": "Ezek:26:5"
+        }
+      ],
+      "explanationChecksum": "e76ed07b1b642bb1910b88e51c7d9bdfe487e81dd6a889cf77e6ffa611877660",
+      "viewChecksum": "e5524752313f9f5737fecde155eac50c3244428807bb99737cfce17ca5ff5ab8",
+      "sourceRecordChecksum": "2304bdf5c329b990e6c87cd9d764e67849d17867b5779c801ac1a988a93fadb9",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H4960": {
+      "entityId": "word:hebrew:H4960",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Mishteh means a drink or drinking. It can also mean a feast or banquet.",
+      "citations": [
+        {
+          "reference": "Ezra:3:7"
+        },
+        {
+          "reference": "Gen:29:22"
+        }
+      ],
+      "explanationChecksum": "1247a07d1090ef145c6bcb5a23f485f8c3bff452aa7d46a9abb4f3279bc6a2fa",
+      "viewChecksum": "fb77fa92dd0c5296fa37e46a90276c078dc7cacdbfc5db0780c7075a37c6f65c",
+      "sourceRecordChecksum": "5fac422efe1c419e30bfa7fe08447d06f1d6af6459ccb0b50aff7913e7b6acb1",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5053": {
+      "entityId": "word:hebrew:H5053",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "The word means “morning,” referring to the beginning portion of the day. It is a noun used to name that time rather than an action or quality. In the Hebrew Old Testament, it occurs once, in Daniel 6:19. Its precise role in that verse depends on the surrounding passage, but its basic meaning remains clear and direct: morning. This is a simple time word, identifying the day’s morning period rather than expressing an event, feeling, or command.",
+      "citations": [
+        {
+          "reference": "Dan:6:19",
+          "book": "Dan",
+          "chapter": 6,
+          "verse": 19,
+          "evidenceId": "p01:word:hebrew:H5053:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "2899cd8a318cfdc3725734e6ce50bb177545f1a9bed8bb6e8fd4f318c6309f27",
+      "sourceRecordChecksum": "95fbad1be8b8fe09864215b7e5d6f4d5629ed6ed409b94ce19a3060922539c60",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H5174": {
+      "entityId": "word:hebrew:H5174",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Nechash means copper or brass.",
+      "citations": [
+        {
+          "reference": "Dan:2:32"
+        }
+      ],
+      "explanationChecksum": "33da15dcbce2417581f19cc765786d227c5bfcd839efecd4acb8d42e7586197e",
+      "viewChecksum": "19c6d7b26c9dc9fb0d62b88c18306f8caba3997b65ca299ed8c54907814b4d83",
+      "sourceRecordChecksum": "ab05f6824d218cbdd481a2fa3601200bd417e0b53e5b311c9b56db58dce6a5bb",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5211": {
+      "entityId": "word:hebrew:H5211",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Nîyç means a fugitive, one who flees.",
+      "citations": [
+        {
+          "reference": "Jer:48:44"
+        }
+      ],
+      "explanationChecksum": "a57f29c4b59d348e843b2efd85942445cb05bccab11de770511fbe785d7ae20e",
+      "viewChecksum": "258cdcf9f6c21de0907bc4a268756f947cdaba2a1d66a9e4fae0b5de8cfbb4fb",
+      "sourceRecordChecksum": "f94f379cad9fb8388996a5464ec6db61d72b10720bf3740ce70677a3e51677fe",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H524": {
+      "entityId": "word:hebrew:H524",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Ummah means nation. Scripture renders it as “nations” when nations are mentioned alongside peoples and languages.",
+      "citations": [
+        {
+          "reference": "Dan:3:4"
+        }
+      ],
+      "explanationChecksum": "87bc5a59e14c717be847ca214eb6a9c2ae61b748c8049c04ee81f1b8fa52b65e",
+      "viewChecksum": "d2c16cec16b54ae6731bfe1be58da534ee312e356afaddd60dad4f0070c8e90b",
+      "sourceRecordChecksum": "0b2f96e4dfe83093a0f9efb4c61e61b38823de440253c91bd01928bc9e462601",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5268": {
+      "entityId": "word:hebrew:H5268",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Nisroch is a proper name referring to a named figure, rather than a general word describing an action or quality. In the Hebrew Old Testament, the name appears twice: once in 2 Kings 19:37 and once in Isaiah 37:38. In both occurrences, Nisroch is associated with worship or bowing, indicating that the name identifies an object of religious devotion in those passages. Its normal meaning is therefore the personal name “Nisroch.”",
+      "citations": [],
+      "explanationChecksum": "9a05215741c3f043beb6d22dc187cfc5a4d532b2568e3684908720f63ca81db7",
+      "sourceRecordChecksum": "abfe9442e82eb373f4bceeea647a0bded170f83500851aa42592899e45515999",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H5286": {
+      "entityId": "word:hebrew:H5286",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Na'ar means to growl or yell.",
+      "citations": [
+        {
+          "reference": "Jer:51:38"
+        }
+      ],
+      "explanationChecksum": "9eb59ab77cd82c3fab42a0540da48d7ad8cdfa51283e0626fd8f825ea56731f8",
+      "viewChecksum": "2eaa4c98f5689b6540a5d98f502d23281f0cbd6b8321216734099af9caebce30",
+      "sourceRecordChecksum": "0b696da7ca66182a87e06ceec30c2bda987030eded7b40e344541f5026194d58",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5365": {
+      "entityId": "word:hebrew:H5365",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Naqar means to bore, pierce, or dig into something.",
+      "citations": [
+        {
+          "reference": "Job:30:17"
+        },
+        {
+          "reference": "Isa:51:1"
+        }
+      ],
+      "explanationChecksum": "037f660625a5fa873ee674f4c8dd1c8732ff44da27fa350c4c690ffd89f6f708",
+      "viewChecksum": "98dd0486f07a5159f4fdb8efafb1845952a86fb294e0c2d628464026999468b0",
+      "sourceRecordChecksum": "8b2c5b16ddc8615a110d02c709ca36d4f090cd8e3e2894a028c45ef95759a6da",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5435": {
+      "entityId": "word:hebrew:H5435",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Sobe refers to drink or wine. It can also describe drunkenness.",
+      "citations": [
+        {
+          "reference": "Isa:1:22"
+        },
+        {
+          "reference": "Hos:4:18"
+        },
+        {
+          "reference": "Nah:1:10"
+        }
+      ],
+      "explanationChecksum": "fb4a2ff8e28604751e2f00a51a4ae4f9ed06fb99534d1a6704d3df18f9ce71f6",
+      "viewChecksum": "542b7d3dc38b0bec01e805972ea4134ae3574f68424e541ba12bb0484c48bd34",
+      "sourceRecordChecksum": "5631db7a0615dbb5eb433145c3ae59106aac03cb83d3cbd94827f7dc3e628d27",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5493": {
+      "entityId": "word:hebrew:H5493",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Sûr means to turn aside, literally or figuratively. It can also describe departing or removing something, as when Yahweh departs from someone or a covering is removed.",
+      "citations": [
+        {
+          "reference": "Deut:2:27"
+        },
+        {
+          "reference": "1Sam:28:16"
+        },
+        {
+          "reference": "Gen:8:13"
+        }
+      ],
+      "explanationChecksum": "91c9d05636d3a630397f6ec2c3eaa4b3f5928eadaf11acb3cac101a9e97c53c0",
+      "viewChecksum": "0b2c661336a00976f97123174934f4231dbafd374598bf968e3f2c414908012d",
+      "sourceRecordChecksum": "a2015777e1116427bda6d9ea947ade20ac7e67e5d9559afbee18b75e7fec5bda",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5527": {
+      "entityId": "word:hebrew:H5527",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Secacah is a Hebrew proper name, rendered “Secacah.” It identifies a named entity rather than expressing an action, quality, or general idea. This word appears once in the Hebrew Old Testament corpus, at Joshua 15:61. Because no explicit definition or surrounding verse text is available here, its lexical meaning cannot be stated beyond its role as a name. The precise significance of the named entity belongs to the context of that passage.",
+      "citations": [
+        {
+          "reference": "Josh:15:61",
+          "book": "Josh",
+          "chapter": 15,
+          "verse": 61,
+          "evidenceId": "p01:word:hebrew:H5527:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "842daba86d3ede89ea4b992bec8ef0aa6939e27a94edef30159ce197abc0044d",
+      "sourceRecordChecksum": "38028f5c0f448dbb10e5eb1179ba615402046e99dddde4a3b6209fb2e583f112",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H5552": {
+      "entityId": "word:hebrew:H5552",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word refers to “baskets,” meaning containers used to hold or carry something. It appears once in the Hebrew Old Testament, in Jeremiah 6:9, so its broader range of use cannot be established from repeated scriptural examples. In that passage, the word functions as the object associated with an action involving gathering or handling the baskets. Its precise force in the verse depends on the surrounding wording, but the basic meaning is baskets or basket-like containers.",
+      "citations": [
+        {
+          "reference": "Jer:6:9",
+          "book": "Jer",
+          "chapter": 6,
+          "verse": 9,
+          "evidenceId": "p01:word:hebrew:H5552:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "cfe22a0cd0054e5b6e7891ee9ea5de602eb815563c478e2a93a26defea3fe606",
+      "sourceRecordChecksum": "620f980f78259ba1ea248b37a4543c19f44df05aab5359324f64849588837c2f",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H5659": {
+      "entityId": "word:hebrew:H5659",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Abduth means servitude or bondage.",
+      "citations": [
+        {
+          "reference": "Ezra:9:8"
+        }
+      ],
+      "explanationChecksum": "e29a854bb3368665661f4870be3dbf7cb3b13e061a9552b0eedc1fc9a758be86",
+      "viewChecksum": "af0b70150d265f23d74673a0dde70cf28f5238ed34eadb27d759066b25cc7ffe",
+      "sourceRecordChecksum": "5318f8c57f30e053308f551e0b5f6664917f4856e1a3bc56ab5fb9885b9c353d",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5776": {
+      "entityId": "word:hebrew:H5776",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word means “fowl.” It is a naming word, used for fowl rather than describing an action, quality, or relationship. Within the Hebrew Old Testament, it appears twice, both times in Daniel: once in Daniel 2:38 and once in Daniel 7:6. The available wording supports the simple meaning “fowl,” while the precise significance in either passage depends on the surrounding verse and passage context.",
+      "citations": [
+        {
+          "reference": "Dan:2:38",
+          "book": "Dan",
+          "chapter": 2,
+          "verse": 38,
+          "evidenceId": "p01:word:hebrew:H5776:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Dan:7:6",
+          "book": "Dan",
+          "chapter": 7,
+          "verse": 6,
+          "evidenceId": "p01:word:hebrew:H5776:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "2c616852203000ccad2dfd99213ec3be878810d0ce438f8af7df6a33929353dd",
+      "sourceRecordChecksum": "141932132ee10272fd37dbed2d4abee9e8ffee9d31ecb5c6b173e0a3b79d376a",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H5798": {
+      "entityId": "word:hebrew:H5798",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Uzza is a personal name used for Israelites.",
+      "citations": [
+        {
+          "reference": "2Sam:6:3"
+        }
+      ],
+      "explanationChecksum": "90e813875623483300ddaad3315b1bfb811ed5b93aafb8274357c7595dbc4883",
+      "viewChecksum": "1b8f9100ae84cfc3b27c00ed66eaa37ef4bb4f48502c6bb1f69eb6396571c839",
+      "sourceRecordChecksum": "e1c4aa6e2c3c98bea16e02f660999d9bde4c4b65ac33032f6b4687ddbcbbeba5",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H5804": {
+      "entityId": "word:hebrew:H5804",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word is the place name “Gaza,” referring to the city and surrounding location known in the Old Testament. It functions as a proper name rather than describing an action, quality, or object. The word occurs 21 times in the Hebrew Old Testament, from Genesis through Zechariah, and appears in accounts concerning the land, its cities, rulers, and peoples. Its precise significance in any particular verse comes from the surrounding passage, but its normal lexical use is the geographical name Gaza.",
+      "citations": [
+        {
+          "reference": "Gen:10:19",
+          "book": "Gen",
+          "chapter": 10,
+          "verse": 19,
+          "evidenceId": "p01:word:hebrew:H5804:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Deut:2:23",
+          "book": "Deut",
+          "chapter": 2,
+          "verse": 23,
+          "evidenceId": "p01:word:hebrew:H5804:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "ba75255c73ce59f72085644e40657b1d2f7ea2ab1239886509b238e3a9cd2227",
+      "sourceRecordChecksum": "d76ec1ceb632adec186e3136ab2efbccf62fa62a01fbf09baa93f14f183e04ab",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H5956": {
+      "entityId": "word:hebrew:H5956",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "ʻÂlam means to conceal or hide something from sight.",
+      "citations": [
+        {
+          "reference": "Lev:5:3"
+        }
+      ],
+      "explanationChecksum": "4e49f6e320f193ebc77c706f7c98baf9ee3e3d82c5c1eb2725eac8179cd3f049",
+      "viewChecksum": "4ab64da34bbffd2c72b5a1076d8b4dff3f91b216a72f76184a55e1afb74771e3",
+      "sourceRecordChecksum": "5971137d4733db1dd2a0939325f4c1edf5dcb111cc2b24a6a3756f9d0a405f1e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H599": {
+      "entityId": "word:hebrew:H599",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Anaph means to be angry or enraged, expressing strong displeasure. One passage says Yahweh was angry with Aaron, illustrating this sense.",
+      "citations": [
+        {
+          "reference": "Deut:1:37"
+        },
+        {
+          "reference": "Deut:9:20"
+        }
+      ],
+      "explanationChecksum": "e20db36630f9750af8574535adfe9c3fc183627913e126c9423c3b407b4b3d15",
+      "viewChecksum": "493267216449f24c3d4a421e3a99ed6a5a1c5a340015f56953fd8cd8e293b506",
+      "sourceRecordChecksum": "d4fe29b82c05248847617d3b4556359a56c52c0b8960b509837bb7344653e405",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6045": {
+      "entityId": "word:hebrew:H6045",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Inyan means employment or an affair, including work, business, or a burdensome task.",
+      "citations": [
+        {
+          "reference": "Eccl:1:13"
+        },
+        {
+          "reference": "Eccl:8:16"
+        }
+      ],
+      "explanationChecksum": "e77b9b55961c33b0a0b2b55c7a633e19d32749f0fd5a87d716d201caa36c083e",
+      "viewChecksum": "be14961bb6a6c601a6a28f5466ed87885e2e298f91827e79be0ce3fbd2a0aea3",
+      "sourceRecordChecksum": "239a44e9575cf86f96618f8c6511c2e7ad0f95bba5eec4eaf1cc0572ace64b8f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6108": {
+      "entityId": "word:hebrew:H6108",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Otsem means power or might. It can also refer to the body or bodily substance, including a person's physical frame.",
+      "citations": [
+        {
+          "reference": "Deut:8:17"
+        },
+        {
+          "reference": "Ps:139:15"
+        }
+      ],
+      "explanationChecksum": "85a504de1097bb82a4d48ebafacd639833c1d913be022e0e9f48e2baa64e5717",
+      "viewChecksum": "d28c4382bd75775d94da844fb963b578ecb70b42c4f0f786a52701a1d7d3c165",
+      "sourceRecordChecksum": "7a11cbfb783e0f5305ce13a4c32b44be8d3a20a7b57303cb63a8f0ad3e1e80ed",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H612": {
+      "entityId": "word:hebrew:H612",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word refers to “bands”—straps or bindings used to hold someone or something. It describes a physical means of restraint rather than an action or feeling. The word occurs three times in the Old Testament, and its uses point to bands as something that can bind or confine. Its exact force in any particular verse depends on the surrounding sentence, but the central idea remains a binding restraint.",
+      "citations": [],
+      "explanationChecksum": "8a36bd1af9b78316e5e5f0f2eba655fc7f6e93ca28ca9d5876808ccfa43f1e4a",
+      "sourceRecordChecksum": "82df025a7d3089a5d924935eb937ced4693cd46a07f5be47205827388284ae78",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H6171": {
+      "entityId": "word:hebrew:H6171",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Arod means an onager, or wild ass.",
+      "citations": [
+        {
+          "reference": "Job:39:5"
+        }
+      ],
+      "explanationChecksum": "2ed9a45ab42dfea7b423db78aaf7474000f345d5461816edcb36f47216c0d65b",
+      "viewChecksum": "3dc13791869a9bde6907f133df9a22e8bde85164788e7d016f6e5c560d3482dc",
+      "sourceRecordChecksum": "f4327d69998ce498248df6a6cba354b192bbf3476a016971240fa09665c2a4d9",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6269": {
+      "entityId": "word:hebrew:H6269",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word is a proper name rendered “Athach.” It does not function as an ordinary descriptive word with a broader meaning supplied here; rather, it identifies a named entity in the Old Testament text. It occurs once in the Hebrew Bible, in 1 Samuel 30:30. Because the surrounding verse text is not available here, its specific role in that passage cannot be described more fully without adding unsupported details.",
+      "citations": [
+        {
+          "reference": "1Sam:30:30",
+          "book": "1Sam",
+          "chapter": 30,
+          "verse": 30,
+          "evidenceId": "p01:word:hebrew:H6269:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "aadf7c20d4bde4e4397fb7d47fd5395b961642f8bcc966d6597dc187a1ba2b8d",
+      "sourceRecordChecksum": "64cce7ba69d6928d8e2b1513e2a7b707a52b760b3aed5d32b0a23df37944983c",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H6320": {
+      "entityId": "word:hebrew:H6320",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Pûwk means dye, specifically a cosmetic for the eyes.",
+      "citations": [
+        {
+          "reference": "2Kgs:9:30"
+        }
+      ],
+      "explanationChecksum": "a4bda376cd6b548f4e44b8f720ef1df34e0fadaee7a46ec9caea1b04688391ac",
+      "viewChecksum": "40a833bc68cc376efe0837296b397b7e6ea8aa86a50331e83dcc8a1e76487fa3",
+      "sourceRecordChecksum": "f71770e4152e50abe59b3d49c7ba24ce42688eeb05fc110c89051fecdb1c7035",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6382": {
+      "entityId": "word:hebrew:H6382",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Pele means a miracle or marvelous wonder. In Scripture, it describes wonders Yahweh does and wonders remembered from old.",
+      "citations": [
+        {
+          "reference": "Exod:15:11"
+        },
+        {
+          "reference": "Ps:77:11"
+        }
+      ],
+      "explanationChecksum": "8c581e49b1c90d4e5d394da918450bd6c24f96007e90521c225993293597bac1",
+      "viewChecksum": "f83b43a2b54cbba56f6e890cac17ebf5bb7d0acc348c0dfcc62749c5aeeda79a",
+      "sourceRecordChecksum": "73c041b09bb978274992995612ae35ae5a8527337f5edb0b1905bd97b64bc1a4",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6412": {
+      "entityId": "word:hebrew:H6412",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Palit means a refugee—someone who has escaped. It also refers to a fugitive.",
+      "citations": [
+        {
+          "reference": "Gen:14:13"
+        },
+        {
+          "reference": "Judg:12:4"
+        }
+      ],
+      "explanationChecksum": "f7de9bf08f94e90129d78971d68a8a7d642d51083087e04618d0a772fb3b490c",
+      "viewChecksum": "1d0ba163792b718c605087ed113a8848332932148a552d8bef3960e5c8e68798",
+      "sourceRecordChecksum": "c1867c1bf7a1ff394570ecf247406da8ba701e9de408c4706d95ab9a83c909be",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6467": {
+      "entityId": "word:hebrew:H6467",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Po'al means an act or work—something done. It can describe a person's work or Yahweh's work.",
+      "citations": [
+        {
+          "reference": "Deut:32:4"
+        },
+        {
+          "reference": "Job:34:11"
+        },
+        {
+          "reference": "Ps:92:4"
+        }
+      ],
+      "explanationChecksum": "887ce20bae3fd22bbce73100cbee58c564e7a7acd03612c661abd43673b57eb5",
+      "viewChecksum": "9e9fd66fba4e3df7fd5682f3822b3f2e76925148ed9f02162f215c52b6ddea63",
+      "sourceRecordChecksum": "5ca18a626211bad51afaa9344c314c082e7958bd247cc4eb98a728af36c34420",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6526": {
+      "entityId": "word:hebrew:H6526",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "final-residual-v2",
+      "explanation": "Pirchach means a brood or group of young people.",
+      "citations": [
+        {
+          "reference": "Job:30:12"
+        }
+      ],
+      "explanationChecksum": "877909fb737577710950646618e091812f9126507d1b845b9015b0fbbd31201a",
+      "viewChecksum": "6bd231da43f1521a9a9e400717967d66eeeae26cfc5c5eca2103e1a935e6852f",
+      "sourceRecordChecksum": "b0edc5a045922b6b0a539a26c45cd1408eed575fe651fa1fe6e1f372fe3e9b24",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6621": {
+      "entityId": "word:hebrew:H6621",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Petha means suddenly, in an instant.",
+      "citations": [
+        {
+          "reference": "Num:6:9"
+        },
+        {
+          "reference": "Isa:29:5"
+        }
+      ],
+      "explanationChecksum": "0e9a989231debc819cf5eea2c23defde1f133491d83059bcc6709c65613f2698",
+      "viewChecksum": "4760f05749a2e3a23f46b17372f1b94ea992052ab2533e07191af18ba96e7ea7",
+      "sourceRecordChecksum": "6ac98a8c122c36d70e169775f44bdc2fd0afddac141ae850d7b698f73215fd1d",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6658": {
+      "entityId": "word:hebrew:H6658",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Tsadah means to chase or hunt. It can also mean to desolate or destroy.",
+      "citations": [
+        {
+          "reference": "1Sam:24:11"
+        },
+        {
+          "reference": "Zeph:3:6"
+        }
+      ],
+      "explanationChecksum": "f8ca967c4a780457e81f3ec8b19affff21745ed88937d127a3c68a745da26bed",
+      "viewChecksum": "111709a9729177e150d72c6de3fb5c271d61dac4b551a0610b00101b2d6700bf",
+      "sourceRecordChecksum": "1487194349510e2e80a72c72a68b3852abcdf4eea249568d44f9880e7819a549",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H667": {
+      "entityId": "word:hebrew:H667",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Ephroach means the brood of a bird, or its young.",
+      "citations": [
+        {
+          "reference": "Deut:22:6"
+        }
+      ],
+      "explanationChecksum": "e50a7fe6c270d8943c2f197cdd1423097930e6c3f549de325a99c2673e0a3cd6",
+      "viewChecksum": "3d6c0254c63fd795b2b0b5b16b171d7bf989619ba426f4bba022af8094f41354",
+      "sourceRecordChecksum": "84868f50c21fdb138ee8b85c366042623f8e4d994649a1868b4fd58ea185352e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6724": {
+      "entityId": "word:hebrew:H6724",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Tsiyown means a desert or dry place.",
+      "citations": [
+        {
+          "reference": "Isa:25:5"
+        },
+        {
+          "reference": "Isa:32:2"
+        }
+      ],
+      "explanationChecksum": "748225d1ce28012dbbd0ea4b0f65c863d76b18c7c625aef9bd312753b2a30d1f",
+      "viewChecksum": "74dd4aeafb409d1d724dc3b2241d5db58bee826f489c6a1ed43c6393674d9fd3",
+      "sourceRecordChecksum": "1959e2d041f58868e9765f3138c7294c3445b416e0904b71deb6778c1f6a787c",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6799": {
+      "entityId": "word:hebrew:H6799",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "The Hebrew word צְנָן is rendered “Zenan,” so it functions as a proper name rather than an ordinary descriptive word. It occurs once in the Hebrew corpus, at Joshua 15:37, and the English renderings preserve the same name. Because no explicit lexical definition or verse text is available here, the safest meaning is the identified name itself: Zenan. Its precise significance belongs to the surrounding passage.",
+      "citations": [
+        {
+          "reference": "Josh:15:37",
+          "book": "Josh",
+          "chapter": 15,
+          "verse": 37,
+          "evidenceId": "p01:word:hebrew:H6799:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "96e8a0bd8d98a53a21858141924987528810be2925500b18b130921814f68d09",
+      "sourceRecordChecksum": "e035fac7398ce1de1f01b838fbffbce18b5372ddc5da71c34b531e513761975f",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H6870": {
+      "entityId": "word:hebrew:H6870",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Tserujah is the name rendered Zeruiah in English.",
+      "citations": [
+        {
+          "reference": "1Sam:26:6"
+        }
+      ],
+      "explanationChecksum": "f8d3654163bfcd9e0953b902aa1fd4b47652131fb10070ade32a13df704d4961",
+      "viewChecksum": "2a667553b31decebd92f261929b0e1afbabe61644b156d1e825a9c83cbc19e1b",
+      "sourceRecordChecksum": "1222728c545677f154fccb5c23b5e0e78ebb48dff164a6ffc436dc3bfb394f1e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H6913": {
+      "entityId": "word:hebrew:H6913",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Qeber means a grave, burial place, or sepulchre.",
+      "citations": [
+        {
+          "reference": "Gen:23:4"
+        },
+        {
+          "reference": "Num:19:16"
+        },
+        {
+          "reference": "2Sam:2:32"
+        }
+      ],
+      "explanationChecksum": "c1cd74ea3ec5cbfa3637ff1f3cdc29f7d294d087d26fb8496a553d11f708616d",
+      "viewChecksum": "6508b41f611c73a3b7fc4d41c30a94588a4bcac4afd67cd9cd5405ea4451fb23",
+      "sourceRecordChecksum": "5aa68c2b7bfbfa32cf7fefa75624d011e71cd5599ee4670e97077c1fd6ed7487",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7060": {
+      "entityId": "word:hebrew:H7060",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Qâmal means to wither.",
+      "citations": [
+        {
+          "reference": "Isa:19:6"
+        }
+      ],
+      "explanationChecksum": "079b2decc94367439d0f3b5cd03460448b667c1d00cd038363d18188ce09741b",
+      "viewChecksum": "1f49449dbf610df9499f61f216d8342681319a5d22d62aa246117aff36a48889",
+      "sourceRecordChecksum": "bef1b96e2c1da3f0138faa1d59044df65dc408d3695b1fd52b63bb3b2dcf78ac",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7129": {
+      "entityId": "word:hebrew:H7129",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew noun means “war.” It names war as a thing or condition, rather than describing an action, person, or quality. The word occurs once in the Hebrew Old Testament, in Daniel 7:21, and its recorded English rendering is consistently “war.” The precise force of the word in that verse depends on Daniel 7:21 and its surrounding passage, but its ordinary lexical meaning is simply war.",
+      "citations": [
+        {
+          "reference": "Dan:7:21",
+          "book": "Dan",
+          "chapter": 7,
+          "verse": 21,
+          "evidenceId": "p01:word:hebrew:H7129:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "a2b27ce6ab8277fc2012d84d811ec6ab9cb6fe268e2580c9154cdb8d5b293766",
+      "sourceRecordChecksum": "3d3e91e2990023299ff2ad4fa93e8e0b350f59dcbc6ee9909ea16f19179a2f70",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H7194": {
+      "entityId": "word:hebrew:H7194",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Qashar means to tie or bind. It can also describe conspiring together.",
+      "citations": [
+        {
+          "reference": "Josh:2:18"
+        },
+        {
+          "reference": "1Sam:22:8"
+        }
+      ],
+      "explanationChecksum": "7320a8eb65d909c5a70303c348cb5eb6c97ac95384850e10162cad355bade305",
+      "viewChecksum": "783cdbdda966053b7155c04b4ee79ad93b1bc6d424a75409a0c8047333d126ce",
+      "sourceRecordChecksum": "7375222a916766e7e0e084993b836a2388e2c416b89d12cc5771e234c6420626",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7231": {
+      "entityId": "word:hebrew:H7231",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Râbab means to increase in number, multiply, or become many.",
+      "citations": [
+        {
+          "reference": "Gen:6:1"
+        },
+        {
+          "reference": "Ps:3:1"
+        }
+      ],
+      "explanationChecksum": "b51d0c6d241e6bee2ea06f71c295c1b3f49ab004e34dac1625e05846848736bd",
+      "viewChecksum": "31fd7a4586ecabf4ad3122954bfac25f3ee33834a43b96e6259344ca16750694",
+      "sourceRecordChecksum": "7d648a91e434ffabd95c807dee786fbbdbdfee715608e61cdbeb8a7f9b31f507",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7248": {
+      "entityId": "word:hebrew:H7248",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Rab-Mag means a Babylonian official. Rabmag appears among the princes and chief officers of the king of Babylon.",
+      "citations": [
+        {
+          "reference": "Jer:39:3"
+        },
+        {
+          "reference": "Jer:39:13"
+        }
+      ],
+      "explanationChecksum": "e1917c85b9adcd5cf6f315ee34c65984ad1842f3b2c395de116ccdfc49f2ee73",
+      "viewChecksum": "9cdf504820a1696b9616de3e488dbe4f6ca8e0592a9aa1665d70c1ff873f7ba2",
+      "sourceRecordChecksum": "792c594ce09006746a153d069b8c9868fd790eccc566193bb506f2eb8f98e053",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H726": {
+      "entityId": "word:hebrew:H726",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "final-residual-v2",
+      "explanation": "Aromi means Syrian.",
+      "citations": [
+        {
+          "reference": "2Kgs:16:6"
+        }
+      ],
+      "explanationChecksum": "35f3b1681caa8a9eb3211857844eb5d61fa195ce54d755d9860cf33771a189c4",
+      "viewChecksum": "ddb5e8733c0aa55bdbd5b6d3875344f80abba26b1ad959f54b20dfd272f463b4",
+      "sourceRecordChecksum": "0f442e5bac2cdb7e6925508a8fa826bd649c627a0b4c84c0a1b97b8643a09261",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7323": {
+      "entityId": "word:hebrew:H7323",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Ruwts means to run, especially to rush. It can describe hurrying toward someone, as when a man ran to meet three men.",
+      "citations": [
+        {
+          "reference": "Gen:18:2"
+        }
+      ],
+      "explanationChecksum": "e34e55cfd6fbe726dd617be22aa74e32c7ffa46570e18b0394ed6c9e82d919e4",
+      "viewChecksum": "9e4230b435e6cf50c26aa57083814bfcef40be06a4bc2614432d8fdb3d99c6a5",
+      "sourceRecordChecksum": "4db4775a6bd02c14ae59ffd940c9d2da364e5cc529060a1fddcf8b795b2681b1",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7385": {
+      "entityId": "word:hebrew:H7385",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Rîyq describes a vain thing or something without purpose. It can also describe effort done in vain.",
+      "citations": [
+        {
+          "reference": "Ps:2:1"
+        },
+        {
+          "reference": "Isa:30:7"
+        },
+        {
+          "reference": "Job:39:16"
+        }
+      ],
+      "explanationChecksum": "a03422445b59e3beb0dbe28b2c1caa713ee7df19edf3d5a3b8f4a06836c0aace",
+      "viewChecksum": "5c805b5baa3bec623ed1c5091b7115124b52d42585e298eb697b59fb4a5f71fa",
+      "sourceRecordChecksum": "12a2af9d3202e241b6b5015f8a93499ce5aa63dd8b6e752c8b8ad1f855830620",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7402": {
+      "entityId": "word:hebrew:H7402",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "final-residual-v2",
+      "explanation": "Râkal means a merchant.",
+      "citations": [
+        {
+          "reference": "Neh:3:31"
+        }
+      ],
+      "explanationChecksum": "d259c111f03dc24504171d560bda4b388bf547de31281fce2f79052f42be5f61",
+      "viewChecksum": "55d16974f17b248b9d7fb28cfbb48954a2187b348080d9cf47cc417723da666a",
+      "sourceRecordChecksum": "9530fb4dc33b97fffd22da15020648b14a42336d8e06a7222dd25f3f696d992f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7477": {
+      "entityId": "word:hebrew:H7477",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew verb expresses the action “brandished”—to wave or display something forcefully. It describes an action rather than a person, object, or quality. The word appears once in the Hebrew Old Testament, in Nahum 2:3, so its normal scriptural use is attested in only that single passage. Its precise force in that verse is determined by the surrounding verse text and context.",
+      "citations": [
+        {
+          "reference": "Nah:2:3",
+          "book": "Nah",
+          "chapter": 2,
+          "verse": 3,
+          "evidenceId": "p01:word:hebrew:H7477:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "9d5f6516e93ef2be5b5d19bc8e82359ed1923cbfe63f33adce237ede5ea2291b",
+      "sourceRecordChecksum": "7c25733a0ebdaabab020a1f49f541c22668cc39fc4f7e0ffc8d609e81fad57fb",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H7554": {
+      "entityId": "word:hebrew:H7554",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Raqa means to beat or pound something into a broader, thinner form. It can also describe spreading something out, such as the sky or earth.",
+      "citations": [
+        {
+          "reference": "Exod:39:3"
+        },
+        {
+          "reference": "Num:16:39"
+        },
+        {
+          "reference": "Job:37:18"
+        },
+        {
+          "reference": "Ps:136:6"
+        }
+      ],
+      "explanationChecksum": "794de5cb04781ddde86ddd5ac42b1cc0896f7b7771f658981d27fda0d9795595",
+      "viewChecksum": "a41be552634dea1ddbc5961bfca7ff2f3f5a5803fe552344f6c6b5113e4d2723",
+      "sourceRecordChecksum": "2a29f64648da67fcb2f453edcffc2f3cf1a58915088d4e90474f34e8adcb0914",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7679": {
+      "entityId": "word:hebrew:H7679",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Sâgâ means to increase or enlarge. It can also mean to magnify.",
+      "citations": [
+        {
+          "reference": "Job:12:23"
+        },
+        {
+          "reference": "Job:36:24"
+        }
+      ],
+      "explanationChecksum": "9d3e0390a57a5737c85e324f922866f27381e373b6d6a9aeff2b124a763b91cc",
+      "viewChecksum": "a741b61da27113285ec5619146c04bcf5aefd3608b009e25ab4c4346cf3d38ae",
+      "sourceRecordChecksum": "86b58a01290e2182648bcb8ef39b4215e879efe37f800e0f9c1a1e7d97a3533a",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7716": {
+      "entityId": "word:hebrew:H7716",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Seh means a member of a flock, such as a sheep or goat. It can also refer to a lamb used for a burnt offering.",
+      "citations": [
+        {
+          "reference": "Exod:12:5"
+        },
+        {
+          "reference": "Gen:22:7"
+        }
+      ],
+      "explanationChecksum": "85587b728fd96efb21b481bb1454b1de15cd4c8b2e2d45f0925a0f4e87fd37e8",
+      "viewChecksum": "df21849c860c6d88d9c21ece8773862511702fd54eed0785bad47ad2782d1661",
+      "sourceRecordChecksum": "2fdf7ae698edb4003e1d04e425ee1773fc882964de022529b85dff20326bc787",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7781": {
+      "entityId": "word:hebrew:H7781",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word means “Shuphamites,” a name for a people group. It functions as a group designation rather than describing an action, quality, or object. In the Hebrew Bible, it occurs once, in Numbers 26:39, so its normal lexical sense is narrow: it identifies those called Shuphamites. The exact significance of the group in that verse belongs to the surrounding passage, not to the word alone.",
+      "citations": [
+        {
+          "reference": "Num:26:39",
+          "book": "Num",
+          "chapter": 26,
+          "verse": 39,
+          "evidenceId": "p01:word:hebrew:H7781:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "c50fdf2a17f50f2a35075cd6828bdbb1b312b4e1cfa08b8ccffc0637fd8ed1bf",
+      "sourceRecordChecksum": "3519372d67f55c120b6e95e68397adc9c4803e4ef624be0924da664228a2c7b8",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H7855": {
+      "entityId": "word:hebrew:H7855",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Hebrew word refers to an “accusation” made against someone. It occurs once in the Old Testament, in Ezra 4:6, and functions as something directed against a person or group. Its relationship with the verb for writing indicates that the accusation was presented in written form. The word therefore describes a formal statement of wrongdoing or opposition, rather than a general feeling of disapproval. Its precise force in Ezra 4:6 depends on the surrounding verse and passage.",
+      "citations": [
+        {
+          "reference": "Ezra:4:6",
+          "book": "Ezra",
+          "chapter": 4,
+          "verse": 6,
+          "evidenceId": "p01:word:hebrew:H7855:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "d9a075474aa2c5c53831fa0978cb664fd6ad2db5670b4da2ca67b4f3257ebc80",
+      "sourceRecordChecksum": "013299e3b3afc900eb33ac1499664eb721e5888db4ab32213ba721ce2295500c",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H7907": {
+      "entityId": "word:hebrew:H7907",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Sekviy means an observant mind. It can also be rendered “heart,” referring here to inward understanding.",
+      "citations": [
+        {
+          "reference": "Job:38:36"
+        }
+      ],
+      "explanationChecksum": "41124377b58b26a8bd521ca7f432791c988c2ca6853824e2178a3422b297779f",
+      "viewChecksum": "a6ff62af1c61e794ebda3eae831484834320bb60b9e31ee135eff182147227d4",
+      "sourceRecordChecksum": "8adec9a95c882cec8aaf6896b4f73e450c866be16157807f7032384053d1a5d6",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H7972": {
+      "entityId": "word:hebrew:H7972",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Shelach means to send, and it can also mean to put.",
+      "citations": [
+        {
+          "reference": "Ezra:4:11"
+        },
+        {
+          "reference": "Ezra:6:12"
+        }
+      ],
+      "explanationChecksum": "ab648bfb3655935471ea9c146f6364f462926ed0c6e4c43c0b27a66946271a80",
+      "viewChecksum": "56cb8588c5f7498de334e588e13c3cc293688df2d4b9cf76dcd1a74712bd2be4",
+      "sourceRecordChecksum": "764676987302d101ea306cc9c56dba9c84b0441bb9e77f03604d29cf287507ff",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H8010": {
+      "entityId": "word:hebrew:H8010",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Shelomah is the personal name Solomon.",
+      "citations": [
+        {
+          "reference": "2Sam:5:14"
+        }
+      ],
+      "explanationChecksum": "2beba0980ff537958d83cab00b111b635862e6431a310ddbc8eaa8b1d0b671d8",
+      "viewChecksum": "5d985872cfadf6da20e9403ccdddb89878b64bcc0fa0177e532a3b933b8cd417",
+      "sourceRecordChecksum": "299b8c3cb386117bc45d1365a5395a0001d47e9dabfb81c1514e85c18c5b33f0",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H8133": {
+      "entityId": "word:hebrew:H8133",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Shena means to alter or change.",
+      "citations": [
+        {
+          "reference": "Ezra:6:11"
+        }
+      ],
+      "explanationChecksum": "f0072a16027ca9646fe07946db87e9692b3831fdcdc3fdf87ef690c39296de11",
+      "viewChecksum": "bdda9a3623a4f63d5e6f0b1e08b4dd711277642ea46cb9233dbaa22208e8f4f2",
+      "sourceRecordChecksum": "d4e7d283248028e8e37983911cbd5c3d33aef7e4d556ffd588bd9352e2471248",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H8195": {
+      "entityId": "word:hebrew:H8195",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Shepho is a personal name, also rendered Shephi. It identifies a person in the Old Testament rather than expressing a general quality, action, or theological idea. The name occurs twice in the Hebrew Bible, once in Genesis 36:23 and once in 1 Chronicles 1:40. Because the available passages do not provide a meaning or definition for the name itself, its ordinary sense is limited to its use as a personal designation. The two English renderings reflect the same Hebrew name in these genealogical references.",
+      "citations": [
+        {
+          "reference": "Gen:36:23",
+          "book": "Gen",
+          "chapter": 36,
+          "verse": 23,
+          "evidenceId": "p01:word:hebrew:H8195:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "1Chr:1:40",
+          "book": "1Chr",
+          "chapter": 1,
+          "verse": 40,
+          "evidenceId": "p01:word:hebrew:H8195:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "ac64ce52f569af20db3d0776a4a53fbe1173cc7f239c677401a1c18aed0530f5",
+      "sourceRecordChecksum": "bad393958ecd83d035815dfc2d1ef6c414edbfd5ad72f1809a7919ec189e6094",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H8201": {
+      "entityId": "word:hebrew:H8201",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Shephet means judgment—an imposed sentence or infliction.",
+      "citations": [
+        {
+          "reference": "Prov:19:29"
+        }
+      ],
+      "explanationChecksum": "68925175cb21a52f225ce82a5e1d1b503c85beecc6646ebc17d8a15ffaeaa382",
+      "viewChecksum": "747a73df2e4977ccc58e744894da31e3ab8a3f6dcb2ef5ba9c26dba791a1f17a",
+      "sourceRecordChecksum": "9b0aa537075cd11a7d1e97d9c76c0ae15af0f8f274314f3d5e1e67fce674a49f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H825": {
+      "entityId": "word:hebrew:H825",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Ashshaph means a conjurer. It can also mean an astrologer.",
+      "citations": [
+        {
+          "reference": "Dan:2:2"
+        },
+        {
+          "reference": "Dan:1:20"
+        }
+      ],
+      "explanationChecksum": "f7dd9575810ac36f41a04caed234a1ac26a39d984b2dcd1dce6057dea3911ed6",
+      "viewChecksum": "0372735f9502c36d61dd5fc3ff1892d67f5b129f2c4298144b64b2e3655fb5ec",
+      "sourceRecordChecksum": "eba452c8ecdfd35601277a9eb70ad5de66ae6b179a4cc3a6863aaaee3e75a3b8",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H8278": {
+      "entityId": "word:hebrew:H8278",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "final-residual-v2",
+      "explanation": "Serad means stitching—needlework used for finely worked garments.",
+      "citations": [
+        {
+          "reference": "Exod:31:10"
+        }
+      ],
+      "explanationChecksum": "dd3ba3042ff7e157eff837f1e3d47517883f278190a7969918e7a2713bf4a28c",
+      "viewChecksum": "799436a19776762ee42f971403b4aa6c55f93ff12c0e89dae660465642be95cf",
+      "sourceRecordChecksum": "eaf138b91f1c314659279d2cbaeddaa73f8b351f86f78a498b4576c0ce18101e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H8296": {
+      "entityId": "word:hebrew:H8296",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Sereṭ means an incision or cutting.",
+      "citations": [
+        {
+          "reference": "Lev:19:28"
+        }
+      ],
+      "explanationChecksum": "7db5a046292892adde11b5cadfa902f33ca3e37fae9470a8f25878bdd23563fe",
+      "viewChecksum": "fba4f0ba20007d60eaea348ed0b11a973b467ba5a482132c49147377ecdc8234",
+      "sourceRecordChecksum": "9f52bc55d02fd6dfe71fc4d2a9d7519c13fc5b51411fd15d5be3cfc7e46dda24",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H8344": {
+      "entityId": "word:hebrew:H8344",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Sheshai is a personal name, rendered “Sheshai” in each of its three Old Testament occurrences. It identifies an individual mentioned in Numbers, Joshua, and Judges rather than describing an action, quality, or general idea. The name appears in accounts concerning the descendants and later defeat of the Anakim, but the word itself functions simply as a person’s name. Its precise significance as a name is not explained in these passages.",
+      "citations": [
+        {
+          "reference": "Num:13:22",
+          "book": "Num",
+          "chapter": 13,
+          "verse": 22,
+          "evidenceId": "p01:word:hebrew:H8344:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Josh:15:14",
+          "book": "Josh",
+          "chapter": 15,
+          "verse": 14,
+          "evidenceId": "p01:word:hebrew:H8344:reference:1",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "Judg:1:10",
+          "book": "Judg",
+          "chapter": 1,
+          "verse": 10,
+          "evidenceId": "p01:word:hebrew:H8344:reference:2",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "7de67a8a2bc1d2f590397a0e19ff8433f465ec15be13ef1031934a778f78d8df",
+      "sourceRecordChecksum": "3551bed433bb30632df7ac49c98cea2b1573c69b19214515b7b25bb39dbb18f3",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H8414": {
+      "entityId": "word:hebrew:H8414",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Tohu means desolation, emptiness, or waste, and it can also describe something worthless or vain.",
+      "citations": [
+        {
+          "reference": "Gen:1:2"
+        },
+        {
+          "reference": "Deut:32:10"
+        },
+        {
+          "reference": "Job:26:7"
+        },
+        {
+          "reference": "1Sam:12:21"
+        }
+      ],
+      "explanationChecksum": "85a4e00011172e4ea8b95b5d290d7e4ae8abadebf86aa7e59a4c162c6931d134",
+      "viewChecksum": "0bf07c0dc20e9d9f77041c17b4d054d40762373b716cdfd6b87b1d1734930637",
+      "sourceRecordChecksum": "9183930bed33e1cdc2c69f01f8111cc416d5450c2d64bc1babba4aba62724384",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H8537": {
+      "entityId": "word:hebrew:H8537",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Tôm means completeness. It can also describe integrity or innocence.",
+      "citations": [
+        {
+          "reference": "Lev:25:29"
+        },
+        {
+          "reference": "Gen:20:5"
+        }
+      ],
+      "explanationChecksum": "42eaf4922190dc16ffc25f79dd76bc15ab809e0a589a88c4d3c14edfc1bb0fad",
+      "viewChecksum": "ed54722e697f52ae38fabc2cae49b250fd9ab105fbc3be5c3ec77d5c1c4c25c6",
+      "sourceRecordChecksum": "5214e148e11318a3442cb5c0644395563f9dfbaca6b6da990903e9c6acfefe1f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H8542": {
+      "entityId": "word:hebrew:H8542",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "The Hebrew word refers to “Tammuz,” a proper name rather than a general description or action. It appears once in the Hebrew Old Testament, at Ezekiel 8:14. Because it functions as a name, its basic role is to identify the person or figure designated by that name; the surrounding verse is needed to explain the word’s particular significance there. The English rendering preserves the name as Tammuz.",
+      "citations": [
+        {
+          "reference": "Ezek:8:14",
+          "book": "Ezek",
+          "chapter": 8,
+          "verse": 14,
+          "evidenceId": "p01:word:hebrew:H8542:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "108b3748f1298c555d43c62a3a48de85e0f5c9e570e412de51b864788d160346",
+      "sourceRecordChecksum": "a5673ca68faf1b782ac0a9c5dd86681c683d0cd614305bf25ffa22c18d52460e",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:hebrew:H8605": {
+      "entityId": "word:hebrew:H8605",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Tefillah means prayer.",
+      "citations": [
+        {
+          "reference": "2Sam:7:27"
+        }
+      ],
+      "explanationChecksum": "9fdcd622290ac9a1fcf9bcc6c95457c9a1ef72d5550fb32cabe8034decad1ad7",
+      "viewChecksum": "6ae8459bb66b4d9fdfd5a5f239451aa89f76bb2f1959fe6c3e1aad13dec39967",
+      "sourceRecordChecksum": "9bab7f7b4dea3374f0c2d8aa06ba2b5fe8ecc780481010bb42833eba32f59979",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H883": {
+      "entityId": "word:hebrew:H883",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Beer-Lachai-Roi is the name of a place in the desert.",
+      "citations": [
+        {
+          "reference": "Gen:16:14"
+        }
+      ],
+      "explanationChecksum": "5965747b58ae252c41581ba336e4a26e4dad09514761b89569c09ab481480eee",
+      "viewChecksum": "2f2ec517c6121d53954cc89a989801c3c5355e730754c5c983fa56f829c29fae",
+      "sourceRecordChecksum": "f7d361c5c84f6e47bdfb6140031ebf3ea0c8e8040515f5baf7948c50eea74e64",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H90": {
+      "entityId": "word:hebrew:H90",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Agag is a title used for Amalekite kings.",
+      "citations": [
+        {
+          "reference": "1Sam:15:8"
+        }
+      ],
+      "explanationChecksum": "0cd7031f94953f8e1a861b631e3c367ef0603cf74a7b44ba9a1bfe0a5d9bce81",
+      "viewChecksum": "106bc45a4d91d120c1d7cfb90ca2bd1058a87ec453308bf0554e05b2fedec60d",
+      "sourceRecordChecksum": "2808845bdeccba121cbe7bdc11440073a0f7c85718379bc73fd5d4414f1f1c93",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H928": {
+      "entityId": "word:hebrew:H928",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Behâlâh means panic; its scriptural renderings include terror and trouble.",
+      "citations": [
+        {
+          "reference": "Lev:26:16"
+        },
+        {
+          "reference": "Ps:78:33"
+        }
+      ],
+      "explanationChecksum": "0aefbe1902971e2b914962f42c5a805aa0fcc783beb7f753455d3c9baadb85f8",
+      "viewChecksum": "dcf1483c197cf7760ce73ea051877ccbd2b22fe8153abeed6f7590e59108b474",
+      "sourceRecordChecksum": "a623e4865d6fb8952ad4f3d0d0300800643fd404c865259670794a0be47954c2",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:hebrew:H951": {
+      "entityId": "word:hebrew:H951",
+      "corpus": "hebrew",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Boqer means a cattle-tender, or herdman.",
+      "citations": [
+        {
+          "reference": "Amos:7:14"
+        }
+      ],
+      "explanationChecksum": "43a5658bca2167c4db62826b5b41f7f9d290050d75e5eae5ae153e7b7af87abf",
+      "viewChecksum": "bef8607279d5ffa5ecfe23b73c827914acbb2ae3dd2dac8283e821e349fc2b46",
+      "sourceRecordChecksum": "27afbdb0ecd5cc09bd72a92774533850f4823d678673811c5995bb45f3f43346",
+      "independentReviewerApproved": true,
+      "policy": null
+    }
+  }
+}

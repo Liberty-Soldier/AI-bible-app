@@ -1,0 +1,2044 @@
+{
+  "version": 1,
+  "schemaVersion": "p07-emet-final-runtime@1.0.0",
+  "corpus": "greek-nt",
+  "shard": "1f",
+  "entities": {
+    "word:greek-nt:G0062": {
+      "entityId": "word:greek-nt:G0062",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “unschooled,” describing someone without formal education or training. It is an adjective that identifies a person by a lack of learned instruction, rather than by intelligence, character, or spiritual worth. In the Greek New Testament, it occurs once, in Acts 4:13. Its precise force in that verse depends on the surrounding passage, but the basic idea is that the person had not received the expected level of formal schooling.",
+      "citations": [
+        {
+          "reference": "Acts.4.13",
+          "book": "Acts",
+          "chapter": 4,
+          "verse": 13,
+          "evidenceId": "p01:word:greek-nt:G0062:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "06c76f35a99fd831fab989ae20ccbc4a660b8a154ddcf5c3086ebf60b036bcb2",
+      "sourceRecordChecksum": "d894f9c1caf08c9b76468fb496d76d033e3d49790d5b6ea588e1a971deea05a3",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G0185": {
+      "entityId": "word:greek-nt:G0185",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "final-residual-v1-approved",
+      "explanation": "Akeraios means simple.",
+      "citations": [
+        {
+          "reference": "Romans 16:19",
+          "book": "Romans",
+          "chapter": 16,
+          "verse": 19
+        }
+      ],
+      "explanationChecksum": "7bc64a3a5dad9ec49f808467a0e48aab5c32e0e454aeab208845e35c319e0426",
+      "viewChecksum": "2b0ba39e2d6ca1c11882f9266da98ae83d9a4ff4b78f53b744f6230e3180b183",
+      "sourceRecordChecksum": "84e747602b1d0cace8e84215d173f1faea07899fae1120bdd4cd884baf70e2f0",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0215": {
+      "entityId": "word:greek-nt:G0215",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “inexpressible”: something that cannot be put into words or fully expressed in speech. It describes what lies beyond ordinary verbal expression rather than naming a specific object or action. In the Greek New Testament, it occurs once, at Romans 8:26. Its precise force in that verse depends on the surrounding passage, but its central idea remains something too deep, great, or otherwise unable to be adequately expressed with words.",
+      "citations": [
+        {
+          "reference": "Romans.8.26",
+          "book": "Romans",
+          "chapter": 8,
+          "verse": 26,
+          "evidenceId": "p01:word:greek-nt:G0215:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "e980b91224196348691603744e932a7301abae65889c750ef2ccf0b6d84c788c",
+      "sourceRecordChecksum": "278515c622dadc333159f9d0c93ad108bc79dc915f0d492c1a85e72188001ded",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G0259": {
+      "entityId": "word:greek-nt:G0259",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “capture,” referring to the taking or seizing of someone or something. It appears once in the Greek New Testament, in 2 Peter 2:12. Its central idea is being taken into possession or control, though the precise force in that verse depends on the surrounding passage. The word’s meaning is direct and concrete rather than a broad description of attitude, teaching, or character.",
+      "citations": [
+        {
+          "reference": "2 Peter.2.12",
+          "book": "2 Peter",
+          "chapter": 2,
+          "verse": 12,
+          "evidenceId": "p01:word:greek-nt:G0259:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "7919f3ad36c9847d55f5dcf71094463cc1243fd02c0b72c3b32bdf6565e2eeaf",
+      "sourceRecordChecksum": "7ea21810de292e97026df5218f2c0feb26d7bdb7898d8e9f8d88b32887e0f798",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G0260": {
+      "entityId": "word:greek-nt:G0260",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Hama means together. It can also mean at the same time.",
+      "citations": [
+        {
+          "reference": "Romans 3:12",
+          "book": "Romans",
+          "chapter": 3,
+          "verse": 12
+        },
+        {
+          "reference": "Acts 27:40",
+          "book": "Acts",
+          "chapter": 27,
+          "verse": 40
+        }
+      ],
+      "explanationChecksum": "d20c1a6dccbceb706c5135486395f7299e011916c964ad966a7079e95a567a5d",
+      "viewChecksum": "7884932df4523632c1c5af6dd99f930947c9cbf131ce0ff7bb3c1d9106e62e30",
+      "sourceRecordChecksum": "b92907617e05f747816f54b128369140d6f793815ec589b94fb53624fde227a0",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0321": {
+      "entityId": "word:greek-nt:G0321",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Anago means to lead up or bring up.",
+      "citations": [
+        {
+          "reference": "Matthew 4:1",
+          "book": "Matthew",
+          "chapter": 4,
+          "verse": 1
+        },
+        {
+          "reference": "Luke 2:22",
+          "book": "Luke",
+          "chapter": 2,
+          "verse": 22
+        }
+      ],
+      "explanationChecksum": "2bbf4870c5f973cd5ef2c7a91da723dc6a2fdb084c60c64c9c58047747e1c1f3",
+      "viewChecksum": "72487b83cbb561dd3c567ce3ff729bd87b4435832e84c51ede99e0b39b73748c",
+      "sourceRecordChecksum": "897758612cb9c853e9ee98eff6dc9541c24de1f287f7216b600d30c1777e3eca",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0453": {
+      "entityId": "word:greek-nt:G0453",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Anoētos means foolish.",
+      "citations": [
+        {
+          "reference": "Luke 24:25",
+          "book": "Luke",
+          "chapter": 24,
+          "verse": 25
+        }
+      ],
+      "explanationChecksum": "6ce43d58f152e2cbe3e15fb3151e94c0614a61ed555b92bbaf2de8b81239eb0f",
+      "viewChecksum": "91f2f1c28faa9f6e9769d767b01219122566c7c4d8fa4138ae7d069ea61d10e1",
+      "sourceRecordChecksum": "3b4480390372bc25ebc1789e8420c0daa770e77bda9b30ee89164cac37299288",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0527": {
+      "entityId": "word:greek-nt:G0527",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Hapalos means soft or tender, as of a young shoot or a fig-tree branch.",
+      "citations": [
+        {
+          "reference": "Matthew 24:32",
+          "book": "Matthew",
+          "chapter": 24,
+          "verse": 32
+        }
+      ],
+      "explanationChecksum": "cff3ee6fffb4f0f31022945bf2ab79e11f9d2510347b0bcfd5231b9d4fd8cc76",
+      "viewChecksum": "dd56fbec237745cb893ef27aa9b3f74b98ff81c43dd10d201bffb0950fc2d5ed",
+      "sourceRecordChecksum": "b42cdc5560c5fffc380c5547443a67960ae918390b370ebe02dd6748c8392305",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0592": {
+      "entityId": "word:greek-nt:G0592",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “to divide,” describing the act of separating people or things rather than keeping them united. It functions as an action word, pointing to the act of making a distinction or creating separation. In the Greek New Testament, it occurs once, in Jude 1:19. Its precise force in that verse depends on the surrounding sentence and passage, but its central idea remains division or separation.",
+      "citations": [
+        {
+          "reference": "Jude.1.19",
+          "book": "Jude",
+          "chapter": 1,
+          "verse": 19,
+          "evidenceId": "p01:word:greek-nt:G0592:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "d64344ffe348848189f5f0d652f1679fad63d766223a25e41a2f207cbfbbc3e6",
+      "sourceRecordChecksum": "3d052b555d91b2ca51418d84be8793fdc38bef949a49e2f9b0476dc6d3128d21",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G0699": {
+      "entityId": "word:greek-nt:G0699",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Areskeia means pleasing.",
+      "citations": [
+        {
+          "reference": "Colossians 1:10",
+          "book": "Colossians",
+          "chapter": 1,
+          "verse": 10
+        }
+      ],
+      "explanationChecksum": "d6724ba39041aa88787e8b282e51c6938b3f45479e0331e97ec066c892d9b93c",
+      "viewChecksum": "8f4b6843474f30158af7cce743eaede15a0c8898d5edb9fa5f090db010806b52",
+      "sourceRecordChecksum": "e232f01161e94e9a8bbec02de85bbc3f77fecd6dd4699fbcbcb28337b382afd6",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0714": {
+      "entityId": "word:greek-nt:G0714",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Arkeō means to be sufficient or enough. It can also describe being content with what one has.",
+      "citations": [
+        {
+          "reference": "John 6:7",
+          "book": "John",
+          "chapter": 6,
+          "verse": 7
+        },
+        {
+          "reference": "Hebrews 13:5",
+          "book": "Hebrews",
+          "chapter": 13,
+          "verse": 5
+        }
+      ],
+      "explanationChecksum": "a0f914c3cda4b0453e95e8e1d1760dbc764f91673cb170c869ec20dd26306508",
+      "viewChecksum": "e3fc3ecc316d48581d7ccc001b726919e67b8ab96d8f5051c9e56c851181d3a3",
+      "sourceRecordChecksum": "e8e9fbb0d16aede7f3882e7fb74c44257d6594a98bc9085fd7fdee16196207a4",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0758": {
+      "entityId": "word:greek-nt:G0758",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Archōn means a ruler or leader. It can refer to a ruler among the Jews or to one of the rulers associated with the Pharisees.",
+      "citations": [
+        {
+          "reference": "Matthew 9:18",
+          "book": "Matthew",
+          "chapter": 9,
+          "verse": 18
+        },
+        {
+          "reference": "John 3:1",
+          "book": "John",
+          "chapter": 3,
+          "verse": 1
+        },
+        {
+          "reference": "Luke 14:1",
+          "book": "Luke",
+          "chapter": 14,
+          "verse": 1
+        }
+      ],
+      "explanationChecksum": "bb15c307018f8ea6a3d9643123b637047a22f4e96c16e24a3cde0e2bf39dce0b",
+      "viewChecksum": "2c4d2780a8ed46564aa0d59ba7fa3a3221671ac0aef55f852979f9c5636cc070",
+      "sourceRecordChecksum": "50083ad1036b715c574f45bc59a18931cf051cb925e5cbfc0b13b216f7bc90a4",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0835": {
+      "entityId": "word:greek-nt:G0835",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Aulizomai means to lodge or spend the night.",
+      "citations": [
+        {
+          "reference": "Matthew 21:17",
+          "book": "Matthew",
+          "chapter": 21,
+          "verse": 17
+        },
+        {
+          "reference": "Luke 21:37",
+          "book": "Luke",
+          "chapter": 21,
+          "verse": 37
+        }
+      ],
+      "explanationChecksum": "52cb944a5e043c1f0ef970629ce8d8a1ba8b6ab78d5a5bb6df681558b930722f",
+      "viewChecksum": "d35a93acc0807eb5ef7e39e4d5c411967b5a1fcd8ebb8847d1cfdcb1e3812710",
+      "sourceRecordChecksum": "ed691ecbb813073c5027c45eaa2df5dfe31e9014e11926285e9bddb0602c49ae",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0840": {
+      "entityId": "word:greek-nt:G0840",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Austēros means severe or exacting.",
+      "citations": [
+        {
+          "reference": "Luke 19:21",
+          "book": "Luke",
+          "chapter": 19,
+          "verse": 21
+        }
+      ],
+      "explanationChecksum": "6ce9859f6a35921b07293ccfd8100507394ffaaac71b1f0eaf5794575e0c01b8",
+      "viewChecksum": "f3dd45e3e04d2a95eb1c7b5a6356c13359213bca5f6f49ca2f98271e66e257f9",
+      "sourceRecordChecksum": "e6b7622f2d30d87db18f45fab2ef553edf006cb768a8a6c9d043d715d79e0310",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G0879": {
+      "entityId": "word:greek-nt:G0879",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “to fall asleep,” describing the act of entering sleep rather than simply being awake or resting. It appears once in the Greek New Testament, at Luke 8:23. The word therefore names a specific action: a person becomes asleep. Its precise significance in that verse depends on the surrounding passage and the actual sentence in which it appears, but its ordinary meaning is straightforward—the beginning or occurrence of sleep.",
+      "citations": [
+        {
+          "reference": "Luke.8.23",
+          "book": "Luke",
+          "chapter": 8,
+          "verse": 23,
+          "evidenceId": "p01:word:greek-nt:G0879:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "41fa1ce7e9a2d3510f95bc14a449a8b42983fba81862991a0846c984d21852af",
+      "sourceRecordChecksum": "5244fdfc3425ffcf38c8946864a2c90d0219fd57134269c4828db37bd08597ce",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G0916": {
+      "entityId": "word:greek-nt:G0916",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Bareō means to weigh down or burden. It can describe hearts loaded down with life's cares or people being burdened.",
+      "citations": [
+        {
+          "reference": "2 Corinthians 1:8",
+          "book": "2 Corinthians",
+          "chapter": 1,
+          "verse": 8
+        },
+        {
+          "reference": "2 Corinthians 5:4",
+          "book": "2 Corinthians",
+          "chapter": 5,
+          "verse": 4
+        },
+        {
+          "reference": "Luke 21:34",
+          "book": "Luke",
+          "chapter": 21,
+          "verse": 34
+        }
+      ],
+      "explanationChecksum": "da943793e006e489410e1b6bb1aedefa3c3965f0c7d34318e9dc030700589248",
+      "viewChecksum": "b1c171694fdf4ffe2c62ca2280da43100297b62f5197c5bd6420dfaf5d033ee1",
+      "sourceRecordChecksum": "65a67410bc6d4f3283c51034e66e08eabece580ab69d368101300608894f8bd7",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1047": {
+      "entityId": "word:greek-nt:G1047",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Gaza means treasure or treasury; it can refer to treasure held under someone’s charge.",
+      "citations": [
+        {
+          "reference": "Acts 8:27",
+          "book": "Acts",
+          "chapter": 8,
+          "verse": 27
+        }
+      ],
+      "explanationChecksum": "679f451f36c7348f28758d067d4018548dce28eaf746321e11f3d963aaa0e710",
+      "viewChecksum": "478f4d712c65a26cee43d788c2902fd16fab6dca3e2d19addffc0d267707c853",
+      "sourceRecordChecksum": "42adf8789b4e814f7d98e624631b0ffa9e73dbca41383a40daaaf0be652aac5b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1173": {
+      "entityId": "word:greek-nt:G1173",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Deipnon means a dinner, an afternoon or evening meal.",
+      "citations": [
+        {
+          "reference": "Luke 14:12",
+          "book": "Luke",
+          "chapter": 14,
+          "verse": 12
+        }
+      ],
+      "explanationChecksum": "978540277b9d4b57b88a0133fa557b68a7996865441495a8486bf90776021697",
+      "viewChecksum": "24399e5ad94485b448ec09c7efaf15b25e20b603e1edab7606ac5c471e70153b",
+      "sourceRecordChecksum": "ff05210179150f97e56da1096cb4bef8a34d2d4e8f23808a377b96476570e475",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1191": {
+      "entityId": "word:greek-nt:G1191",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Derbe is the name of a town in Lycaonia.",
+      "citations": [
+        {
+          "reference": "Acts 14:6",
+          "book": "Acts",
+          "chapter": 14,
+          "verse": 6
+        }
+      ],
+      "explanationChecksum": "7112ea756a2f31698594732f60c6a0bb0a8bb92eb06f30858d5881600ba6bdfd",
+      "viewChecksum": "5a12d13f36d8c256d69f667c90fde5db1d0ef7892930a026292d7a8310c6ec00",
+      "sourceRecordChecksum": "d01d239d4b6c3909a72678debe1514cd3b9d83a5ed71a5c11aa0c7522704689b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1201": {
+      "entityId": "word:greek-nt:G1201",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Desmoterion means a prison.",
+      "citations": [
+        {
+          "reference": "Matthew 11:2",
+          "book": "Matthew",
+          "chapter": 11,
+          "verse": 2
+        }
+      ],
+      "explanationChecksum": "36889425ad0fee858c446e6aaec18aef4aa647fd9d9da05e55a1a1dc9619f96c",
+      "viewChecksum": "82068e2a8a52156d84691f4f8c2442ab93c599e3e7efbb812ad3c66c5bc46ead",
+      "sourceRecordChecksum": "5da587908c9946dfeb153fc5cf676d7f5751487b4ceb285f5f42cdf6c3ed9484",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1308": {
+      "entityId": "word:greek-nt:G1308",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Diapherō means to carry through. It can also mean to surpass or be more valuable than something else. It can describe something being spread abroad.",
+      "citations": [
+        {
+          "reference": "Mark 11:16",
+          "book": "Mark",
+          "chapter": 11,
+          "verse": 16
+        },
+        {
+          "reference": "Matthew 10:31",
+          "book": "Matthew",
+          "chapter": 10,
+          "verse": 31
+        },
+        {
+          "reference": "Acts 13:49",
+          "book": "Acts",
+          "chapter": 13,
+          "verse": 49
+        }
+      ],
+      "explanationChecksum": "362713763d997c3c0afdd1f71121ecbbcb98057e1339e00d5474c24ed38a0302",
+      "viewChecksum": "90f5edeb67b4f56c3c6cd34fcebf10e124145d5e6ecb57a203e45808068f9ef5",
+      "sourceRecordChecksum": "aaae3b9af84a8bf0b8cce1fca9b82b42843e3ceff02c9b6c79f15c2858b0f350",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1344": {
+      "entityId": "word:greek-nt:G1344",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Dikaioō means to justify—to declare or regard someone as righteous. It can also describe something being upheld as right; wisdom is described as justified by her children. Scripture also says that the doers of the law will be justified before God.",
+      "citations": [
+        {
+          "reference": "Luke 7:29",
+          "book": "Luke",
+          "chapter": 7,
+          "verse": 29
+        },
+        {
+          "reference": "Matthew 11:19",
+          "book": "Matthew",
+          "chapter": 11,
+          "verse": 19
+        },
+        {
+          "reference": "Romans 2:13",
+          "book": "Romans",
+          "chapter": 2,
+          "verse": 13
+        }
+      ],
+      "explanationChecksum": "ed73b0c2d439ae4e7bd9ab79162e79a50a0857c7c81952f94af7f8902841918a",
+      "viewChecksum": "b99784dd36104518f8c52f0215c996d2fa0ed0ae6084801b9f946bd6ca2444f6",
+      "sourceRecordChecksum": "b658a96091914652d9b5a471b05df593a5db6d0e004d10d10330f42677b0f33a",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1410": {
+      "entityId": "word:greek-nt:G1410",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Dynamai means to have power or to be able to do something. It describes God's ability to raise children from stones and the inability of adversaries to withstand or contradict.",
+      "citations": [
+        {
+          "reference": "Matthew 3:9",
+          "book": "Matthew",
+          "chapter": 3,
+          "verse": 9
+        },
+        {
+          "reference": "Luke 21:15",
+          "book": "Luke",
+          "chapter": 21,
+          "verse": 15
+        }
+      ],
+      "explanationChecksum": "ccb0cd12ee60d071e2417aefe6e1a14a263054bc7b25273dd72734b9a7462597",
+      "viewChecksum": "424f4f530221248a16315c537baac5114a4f13b4862916651ad9ebb1860e0e83",
+      "sourceRecordChecksum": "81686ddb0adf9646d3226a7d2114eef68a205a9f5013fa48c94536362412c7d9",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1429": {
+      "entityId": "word:greek-nt:G1429",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “twelve tribes,” referring to the collective designation of twelve tribal groups. It identifies the twelve tribes as a united whole rather than naming one tribe individually. In the Greek New Testament, it occurs once, in Acts 26:7. The word itself provides the shared number and group identity; the surrounding verse supplies the specific context for how this designation is being used there.",
+      "citations": [
+        {
+          "reference": "Acts.26.7",
+          "book": "Acts",
+          "chapter": 26,
+          "verse": 7,
+          "evidenceId": "p01:word:greek-nt:G1429:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "3ce2b5d4ccc1d9f9f5a9cb2c791bdfe741ca1cb53bb875cfb60e31b4832242c1",
+      "sourceRecordChecksum": "81d6ead6d30aab251e490f716d5b6e3f1a0eb13c66ff5160c1ebb012858f59a5",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G1465": {
+      "entityId": "word:greek-nt:G1465",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Enkopto means to hinder or interrupt.",
+      "citations": [
+        {
+          "reference": "Romans 15:22",
+          "book": "Romans",
+          "chapter": 15,
+          "verse": 22
+        },
+        {
+          "reference": "Galatians 5:7",
+          "book": "Galatians",
+          "chapter": 5,
+          "verse": 7
+        }
+      ],
+      "explanationChecksum": "aa6a29395fb81d97bca2517d1aebbd3fd18b51653176754f35760bfb06b0d72e",
+      "viewChecksum": "68695b9523a06afa6e01a13f803cfcd9a6def693f814e632d4e8dee7bb2a3ba1",
+      "sourceRecordChecksum": "7748e86d5811ffe3dd22e767c9349c1d2e3145d9483c9d8d4e366f60c265fa41",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1542": {
+      "entityId": "word:greek-nt:G1542",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Hekatontaplasion means a hundredfold, or a hundred times.",
+      "citations": [
+        {
+          "reference": "Luke 8:8",
+          "book": "Luke",
+          "chapter": 8,
+          "verse": 8
+        }
+      ],
+      "explanationChecksum": "aa8989be1707a67d0d974d8745a0aa4bc3d7afdd270396f112cfd632d0178cc9",
+      "viewChecksum": "432e1121d7866f489a223fc35fccfa6ae3c087b054dcc6921ac0d519383142a5",
+      "sourceRecordChecksum": "6bb462c676b844cffa580093047cb2c377d43148b53946e407f65a22040d9aaf",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1623": {
+      "entityId": "word:greek-nt:G1623",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Hektos means sixth!",
+      "citations": [
+        {
+          "reference": "Matthew 20:5",
+          "book": "Matthew",
+          "chapter": 20,
+          "verse": 5
+        }
+      ],
+      "explanationChecksum": "7ac6f70030d83cf518d66cc8cc76d6e7e0ff60e55d91aa17bb50f005251d7b62",
+      "viewChecksum": "9f664c93b43001367d5ae51b583e76adfb421de42d2a0b8aac8db754e796cb4a",
+      "sourceRecordChecksum": "5f8ae4b5ef1279bd56b8c3a2d1f5b9e7f84de326840c16c82d71a0ad43b31bb9",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1726": {
+      "entityId": "word:greek-nt:G1726",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Enantion means before, describing someone or something as in another’s presence or sight.",
+      "citations": [
+        {
+          "reference": "Luke 1:6",
+          "book": "Luke",
+          "chapter": 1,
+          "verse": 6
+        },
+        {
+          "reference": "Luke 20:26",
+          "book": "Luke",
+          "chapter": 20,
+          "verse": 26
+        },
+        {
+          "reference": "Acts 7:10",
+          "book": "Acts",
+          "chapter": 7,
+          "verse": 10
+        }
+      ],
+      "explanationChecksum": "94035c08f44dca190be1bda6e8865e73b99cde235c7f654838f1a33bf95fd85b",
+      "viewChecksum": "8718faab284e00437c8b131f4029091961ceb3757d7064ea42f78bbdfeb8fce5",
+      "sourceRecordChecksum": "c853d630ddb054bb865fccf019c7b8bb21260c53ce68ccb87c0a0d825adee604",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1784": {
+      "entityId": "word:greek-nt:G1784",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Entimos means precious or highly valued. It can also describe someone honored or honorable in rank.",
+      "citations": [
+        {
+          "reference": "1 Peter 2:4",
+          "book": "1 Peter",
+          "chapter": 2,
+          "verse": 4
+        },
+        {
+          "reference": "Luke 14:8",
+          "book": "Luke",
+          "chapter": 14,
+          "verse": 8
+        }
+      ],
+      "explanationChecksum": "b52fe0a6b96657a4e6057669e3c9d3e303eaeb6d4520f9fa35db6aa813d6464f",
+      "viewChecksum": "15f69dadad98654203791073163c1b213f0be0a096d08f6e99275797cc6abbcd",
+      "sourceRecordChecksum": "a98cc31fa555b43ea2d78fd5d8a4cb1050c01badef832fa19c20978d0d2d145e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1861": {
+      "entityId": "word:greek-nt:G1861",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Epangellomai means to promise and can also mean to profess.",
+      "citations": [
+        {
+          "reference": "Mark 14:11",
+          "book": "Mark",
+          "chapter": 14,
+          "verse": 11
+        },
+        {
+          "reference": "1 Timothy 2:10",
+          "book": "1 Timothy",
+          "chapter": 2,
+          "verse": 10
+        }
+      ],
+      "explanationChecksum": "f335aef996e0f93a1c9793cc2ccb5ff97fe0ff8ab1a8545246230115040e7e0c",
+      "viewChecksum": "30beba866523aa600a5fd2f3fb452daae86da694eba8287ff39fd0f86527c24e",
+      "sourceRecordChecksum": "3db7ed8bfa5c8ea1ddc18d24933ef0d22b7d6ef621cf1fee818642cf5a578d09",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1883": {
+      "entityId": "word:greek-nt:G1883",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Epanō means above or over. It can also mean more than when comparing amounts.",
+      "citations": [
+        {
+          "reference": "Matthew 2:9",
+          "book": "Matthew",
+          "chapter": 2,
+          "verse": 9
+        },
+        {
+          "reference": "Mark 14:5",
+          "book": "Mark",
+          "chapter": 14,
+          "verse": 5
+        }
+      ],
+      "explanationChecksum": "7c4c101fef651dbc4235384167e9db856a2493d28e73fe0fa875570851dae824",
+      "viewChecksum": "38b851ed0ba43dd7fcd905e86c718a678994bcd83ef72997fb49d4d8b39443d2",
+      "sourceRecordChecksum": "9973be3bcea605e5fad84d6dc977a8449b03904f77ac33f79218384cbd58f75c",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G1928": {
+      "entityId": "word:greek-nt:G1928",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “to add to”: it describes putting an additional requirement, statement, or matter alongside what is already established. Its basic idea is addition rather than replacement or removal. In the Greek New Testament, it occurs once, in Galatians 3:15, so its ordinary meaning is clear while its precise force in that verse depends on the surrounding passage. It functions as an action word.",
+      "citations": [
+        {
+          "reference": "Galatians.3.15",
+          "book": "Galatians",
+          "chapter": 3,
+          "verse": 15,
+          "evidenceId": "p01:word:greek-nt:G1928:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "7d881c0eb8a61b77593d1e4a133bb3506ebf14eaa66f7415739b6a9cd2b8a139",
+      "sourceRecordChecksum": "299ebe58038b640831ab73f2730784402fd7a83a19657d05362ad9198d0d38cc",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G1964": {
+      "entityId": "word:greek-nt:G1964",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Epiorkeo means to swear falsely or to break an oath.",
+      "citations": [
+        {
+          "reference": "Matthew 5:33",
+          "book": "Matthew",
+          "chapter": 5,
+          "verse": 33
+        }
+      ],
+      "explanationChecksum": "655f198036d136a38047a945a04c1930348d3adbf4394bd3e961e6e1b7caf3f8",
+      "viewChecksum": "fa569b438f6850f4e9093e013e9755cb17728d13b15cb552953633e831118d7b",
+      "sourceRecordChecksum": "12c20c20728d533ef24cafac52cc67491156d917c2c7e9a9e083f5beee9f372b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2095": {
+      "entityId": "word:greek-nt:G2095",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Euge means well. It can also mean “well done” or “good.”",
+      "citations": [
+        {
+          "reference": "Acts 15:29",
+          "book": "Acts",
+          "chapter": 15,
+          "verse": 29
+        },
+        {
+          "reference": "Matthew 25:21",
+          "book": "Matthew",
+          "chapter": 25,
+          "verse": 21
+        },
+        {
+          "reference": "Mark 14:7",
+          "book": "Mark",
+          "chapter": 14,
+          "verse": 7
+        }
+      ],
+      "explanationChecksum": "9a903a83432532aa302c2034080ec498b96d84d1bb99f33a6eaf3513ad183876",
+      "viewChecksum": "425d06d6b735c6490e4d29fa169638defe0187195df5212ea860e4ecb171d446",
+      "sourceRecordChecksum": "8261de8f5741298c4bab50ef3a0067507dde242ce5b4bb828e3cd71ae8afb438",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2176": {
+      "entityId": "word:greek-nt:G2176",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Euonymos means left or on the left-hand side.",
+      "citations": [
+        {
+          "reference": "Matthew 20:21",
+          "book": "Matthew",
+          "chapter": 20,
+          "verse": 21
+        }
+      ],
+      "explanationChecksum": "50ef2fb62d33147f74f8014635dbc8033c8e051a43488c47b562a5b7f155a556",
+      "viewChecksum": "fe5143d269ad5234da101f9229b5152e80243becb3cef7e4b03fad1067160a8b",
+      "sourceRecordChecksum": "eeae625198ce656f1d49c571a00b435a9db84e5bf87deee9d6e93415d9c037c2",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2198": {
+      "entityId": "word:greek-nt:G2198",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Zao means to live and can describe being alive.",
+      "citations": [
+        {
+          "reference": "Matthew 4:4",
+          "book": "Matthew",
+          "chapter": 4,
+          "verse": 4
+        },
+        {
+          "reference": "Mark 16:11",
+          "book": "Mark",
+          "chapter": 16,
+          "verse": 11
+        }
+      ],
+      "explanationChecksum": "dfd6769f0b9e0e59a7f5a178a6411611d0f9addff123a35b682e256cb55ddc6c",
+      "viewChecksum": "87c80bac13ba4526ede000745b566c1db8ed6bb2d90a31600d3e71c330114c21",
+      "sourceRecordChecksum": "a5bc8ef865330a4c2af9efb94af11fb02268d622a711426c33bd8f85bd42dddd",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2213": {
+      "entityId": "word:greek-nt:G2213",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Zētēma means a question for discussion. It can also mean a dispute.",
+      "citations": [
+        {
+          "reference": "Acts 15:2",
+          "book": "Acts",
+          "chapter": 15,
+          "verse": 2
+        }
+      ],
+      "explanationChecksum": "a8d7ca6dbbb0c45d611524ef45c69ff3fe46f5fcff4526efd6e20d437d118cc3",
+      "viewChecksum": "15630fac51e27a2aefb43d03344dda3d36a13b1fc83654b7d771cad1f318c079",
+      "sourceRecordChecksum": "c2056e06f9e7f432b8dd5bc8bcb8986288c8cf7835f798d3db203ab6bac7e0a7",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2367": {
+      "entityId": "word:greek-nt:G2367",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “citron,” referring to the citron fruit. It is a specific object word rather than a description of a person, action, or spiritual quality. In the Greek New Testament, it occurs once, at Revelation 18:12. Because the verse text and surrounding passage are not included here, the word’s precise role in that verse cannot be explained further, but its basic meaning remains the name of this fruit.",
+      "citations": [
+        {
+          "reference": "Revelation.18.12",
+          "book": "Revelation",
+          "chapter": 18,
+          "verse": 12,
+          "evidenceId": "p01:word:greek-nt:G2367:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "06048811a47ea2247dc1b893d7eef43db61ce9bff33d9daa15fc52bc77f14911",
+      "sourceRecordChecksum": "de619c45e599b96fe2da1e4901ab572ba97e954fbaea1e3d6fb79a71539577c8",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G2437": {
+      "entityId": "word:greek-nt:G2437",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Illyricum is the name of a Roman province.",
+      "citations": [
+        {
+          "reference": "Romans 15:19",
+          "book": "Romans",
+          "chapter": 15,
+          "verse": 19
+        }
+      ],
+      "explanationChecksum": "f2e298d4099b30d4d35638c5a97230a943df5f488b3757f31bf70e4772ec5c85",
+      "viewChecksum": "f1d37538a7b0d7cdf2b9c3660a7681bff10dadfe0caa6627867291601189ae06",
+      "sourceRecordChecksum": "d4bf900bd5bf86055e025d3db5d9dcccf97ad5ff9919d85106355c07ec09b64a",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2482": {
+      "entityId": "word:greek-nt:G2482",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Italia means Italy.",
+      "citations": [
+        {
+          "reference": "Acts 18:2",
+          "book": "Acts",
+          "chapter": 18,
+          "verse": 2
+        }
+      ],
+      "explanationChecksum": "1e4b2d5966019a9cf4fb3137fa96689aa9fc597b65d9e92b962af6083c30cb77",
+      "viewChecksum": "3313915d3d943b5f5d593541fb63b3a65c531a846019551b11070e97736bc54a",
+      "sourceRecordChecksum": "7b8547a1902d9ae043b582fa902d9bac3218cdcb55ea8b9f36a76a0252347400",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2525": {
+      "entityId": "word:greek-nt:G2525",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Kathistēmi means to appoint or put someone in charge. It can also mean to make or constitute someone in a particular role, as when someone is made a judge or governor.",
+      "citations": [
+        {
+          "reference": "Matthew 24:45",
+          "book": "Matthew",
+          "chapter": 24,
+          "verse": 45
+        },
+        {
+          "reference": "Luke 12:14",
+          "book": "Luke",
+          "chapter": 12,
+          "verse": 14
+        },
+        {
+          "reference": "Acts 7:10",
+          "book": "Acts",
+          "chapter": 7,
+          "verse": 10
+        }
+      ],
+      "explanationChecksum": "2edcfacb2c483335d1fa4d61d0b85b6dbf44c3042394442ea95505ed61acab5d",
+      "viewChecksum": "e567b8ec24ad5f7364a82574a29b21570e9c0a885445885db0d203d084b7feaa",
+      "sourceRecordChecksum": "70e2f828c998ab09c532f7342ac30f1dbb71744a8243e4315e295fcb585978dd",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2550": {
+      "entityId": "word:greek-nt:G2550",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Kakoētheia means malice or malignity—an evil-minded disposition.",
+      "citations": [
+        {
+          "reference": "Romans 1:29",
+          "book": "Romans",
+          "chapter": 1,
+          "verse": 29
+        }
+      ],
+      "explanationChecksum": "8acf3654f6b97e1842171ef81158db8c2afb751dd8a3ce0f4cc684d8f8c5da88",
+      "viewChecksum": "369d4c31be13e5c4193fd0e0c7dc797011dfce6332c6ddef8a5215284edf92df",
+      "sourceRecordChecksum": "ca32f6a09c10a35697c534157887cf31f6e3c182088b0f011f5789634cf48760",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2569": {
+      "entityId": "word:greek-nt:G2569",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This Greek New Testament word means “to do good” or “to do what is good.” It describes the action of practicing or carrying out what is good, functioning as a verb. The word occurs once in the Greek New Testament, in 2 Thessalonians 3:13. Because the verse text and surrounding passage are not included here, its precise emphasis in that sentence must be understood from its context, but its basic meaning is the active practice of goodness.",
+      "citations": [
+        {
+          "reference": "2 Thessalonians.3.13",
+          "book": "2 Thessalonians",
+          "chapter": 3,
+          "verse": 13,
+          "evidenceId": "p01:word:greek-nt:G2569:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "00db90a769e95299e039c1577f068e3174d5ed5cee8a01d1aa0efbfdf49310ea",
+      "sourceRecordChecksum": "c612371c335ae4a8091f46e8deb227faacc5b3d557035e723d7626d3811879a7",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G2631": {
+      "entityId": "word:greek-nt:G2631",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Katakrima means condemnation.",
+      "citations": [
+        {
+          "reference": "Romans 5:16",
+          "book": "Romans",
+          "chapter": 5,
+          "verse": 16
+        }
+      ],
+      "explanationChecksum": "cfc08e73e7cec4b8e55f7aad5f87b0d350ef2d6f982a432bf62ae9d22609fd79",
+      "viewChecksum": "0f2d098f7d2d639b2d194496dc4ad4fcca071a3d1f6fb42c096440e976573604",
+      "sourceRecordChecksum": "88888197b4961a19c54c0793e775f5f7828750315d7eccb9ea992e58311d04c4",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G2712": {
+      "entityId": "word:greek-nt:G2712",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word describes something filled with images and therefore marked by idolatry. It points to an environment or condition characterized by many images connected with worship, rather than simply mentioning one isolated object. In the Greek New Testament, it occurs once, in Acts 17:16. Its basic sense is “full of images” or “idolatrous”; the surrounding verse and passage determine how that description applies in its particular setting.",
+      "citations": [
+        {
+          "reference": "Acts.17.16",
+          "book": "Acts",
+          "chapter": 17,
+          "verse": 16,
+          "evidenceId": "p01:word:greek-nt:G2712:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "2827166138f074dced9a7f34acb6c818ca76f6a6469109da7c48dad556843d3a",
+      "sourceRecordChecksum": "f08e9c1b281935ceb26f645b2b8b38aecae1f1f6859b26c15a70af588c98f145",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G2833": {
+      "entityId": "word:greek-nt:G2833",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word describes feeling an itch or experiencing an irritating desire for something. It is a verb, expressing an inward sensation rather than naming a person or object. In the Greek New Testament, it occurs once, in 2 Timothy 4:3, and its ordinary sense is simply “to feel an itch” or “to itch.” The surrounding verse determines what the image signifies there, but the word itself points to the restless feeling that seeks relief or satisfaction.",
+      "citations": [
+        {
+          "reference": "2 Timothy.4.3",
+          "book": "2 Timothy",
+          "chapter": 4,
+          "verse": 3,
+          "evidenceId": "p01:word:greek-nt:G2833:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "39514e64cc520ad7ee41f51d262e258de7fa06e89af567b37aaaa94a49da3203",
+      "sourceRecordChecksum": "dccd6c265abcb81c4e645511e6dc3334f66be8d7691ac8d82b1770f3ed4bea49",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G2990": {
+      "entityId": "word:greek-nt:G2990",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Lanthano means to be hidden or concealed. It can also mean to escape notice.",
+      "citations": [
+        {
+          "reference": "Luke 8:47",
+          "book": "Luke",
+          "chapter": 8,
+          "verse": 47
+        },
+        {
+          "reference": "Mark 7:24",
+          "book": "Mark",
+          "chapter": 7,
+          "verse": 24
+        }
+      ],
+      "explanationChecksum": "e34ec3e213519b798f6f651edd06cc0aec96e499acf42889a735a427ed860277",
+      "viewChecksum": "2eee503562c6f786470b5fc284ffc355d71ddd9c29a0f21ea0035a3597adbf16",
+      "sourceRecordChecksum": "5955beffce4b11073b40dea5a1c5e0cbc81e6dd042d04e2345264aa9bb53968f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3005": {
+      "entityId": "word:greek-nt:G3005",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Leimma means a remnant or remainder.",
+      "citations": [
+        {
+          "reference": "Romans 11:5",
+          "book": "Romans",
+          "chapter": 11,
+          "verse": 5
+        }
+      ],
+      "explanationChecksum": "708bfb527189b4fd8651c3fb850de78122f29a5a3d0b345f44872849e0c2a64b",
+      "viewChecksum": "62df8410afa62797cb8c53ffef289e1d9c3762879a26c6dd7816aaeca83c3eb0",
+      "sourceRecordChecksum": "0fb8439550b0bdc65ffbd79e6edc61d8bfed56e73db352df8f6c4f7088c9849b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3049": {
+      "entityId": "word:greek-nt:G3049",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Logizomai means to reckon or count something. It can also mean to credit or account something to someone, as righteousness is accounted to them. It can describe thinking or considering something. It can also mean reaching a conclusion.",
+      "citations": [
+        {
+          "reference": "Luke 22:37",
+          "book": "Luke",
+          "chapter": 22,
+          "verse": 37
+        },
+        {
+          "reference": "Romans 4:11",
+          "book": "Romans",
+          "chapter": 4,
+          "verse": 11
+        },
+        {
+          "reference": "Romans 2:3",
+          "book": "Romans",
+          "chapter": 2,
+          "verse": 3
+        },
+        {
+          "reference": "Romans 3:28",
+          "book": "Romans",
+          "chapter": 3,
+          "verse": 28
+        }
+      ],
+      "explanationChecksum": "a97249bed8d4214037a2876e15035eebe594c059cf48432bf1baaa1103708f00",
+      "viewChecksum": "4657e39cbcfcc32100b79d65eb3f5322dfddc1efbb5fdb5f3aff0849822e61ab",
+      "sourceRecordChecksum": "c20d18d7caed679db4c6fbe4b3cb98e7447dbaadfc8e24476dce85b2c1d56153",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3070": {
+      "entityId": "word:greek-nt:G3070",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Lydia is the name of a woman from Thyatira who sold purple cloth.",
+      "citations": [
+        {
+          "reference": "Acts 16:14",
+          "book": "Acts",
+          "chapter": 16,
+          "verse": 14
+        }
+      ],
+      "explanationChecksum": "555c2e8c729e3390f3e62e6209f71c12257c4ba8c8c598d298454d6d453be639",
+      "viewChecksum": "784c76e80829e1ce09bdccc2296f449a9b74584b088484cb804418aaa497eebc",
+      "sourceRecordChecksum": "51389e0c889a8bfc7cc9849706d39584414e68b343fe62371abacafb8580ad48",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3157": {
+      "entityId": "word:greek-nt:G3157",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Matthan is a personal name, referring to a man named Matthan. It is not presented here as a descriptive word or action, but as the name by which this individual is identified. In the Greek New Testament, Matthan occurs twice, with both occurrences appearing in Matthew 1:15. The English rendering is “Matthan,” preserving the person’s name rather than translating it as an ordinary vocabulary term. The surrounding verse and genealogy provide the specific role of this person in that passage.",
+      "citations": [
+        {
+          "reference": "Matthew.1.15",
+          "book": "Matthew",
+          "chapter": 1,
+          "verse": 15,
+          "evidenceId": "p01:word:greek-nt:G3157:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "069ec4896e74c811e980529e397f30a5eebe415313f87bef7846e89fe51f859f",
+      "sourceRecordChecksum": "7dc7af789693e914f28dd7232ef6f4bd1779d5f58298d58108115331aa7f5a49",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G3324": {
+      "entityId": "word:greek-nt:G3324",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Mestos means full or filled with.",
+      "citations": [
+        {
+          "reference": "John 19:29",
+          "book": "John",
+          "chapter": 19,
+          "verse": 29
+        }
+      ],
+      "explanationChecksum": "a66f1176c353acad4e0e144b8a4b5524d0c210576409635d0426323814011c02",
+      "viewChecksum": "9e60f6290705d9af92479ffbd1b27dddc100ebf80b00618a7a391bea5721660a",
+      "sourceRecordChecksum": "57589c2a49d9d92e5cbb4298596c90ce7ef6cb9c8d95efc3e4ecdf4505fb28d9",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3368": {
+      "entityId": "word:greek-nt:G3368",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Mēdepote means never, or not at any time.",
+      "citations": [
+        {
+          "reference": "2 Timothy 3:7",
+          "book": "2 Timothy",
+          "chapter": 3,
+          "verse": 7
+        }
+      ],
+      "explanationChecksum": "650ddf36e15169d6f08cfd3e16c106f0ebf9d734326b06d6bad298a18a0f95c9",
+      "viewChecksum": "6b8c58acdfbbf25a26fdd511fab77e0bdbe8301d5e1db3d897ebf6aaca9b5149",
+      "sourceRecordChecksum": "c375ce4e08b5c7b5d33d04112e74e79d07ed1c8735c828f579903fafa17303da",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3489": {
+      "entityId": "word:greek-nt:G3489",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “be shipwrecked,” describing a person whose vessel has been wrecked at sea. It functions as an action word, focusing on the experience of suffering a shipwreck rather than merely referring to a boat or journey. In the Greek New Testament, it occurs twice, in 2 Corinthians 11:25 and 1 Timothy 1:19. Its precise force in either passage depends on the surrounding verse and passage, but its basic meaning remains the experience of being shipwrecked.",
+      "citations": [
+        {
+          "reference": "2 Corinthians.11.25",
+          "book": "2 Corinthians",
+          "chapter": 11,
+          "verse": 25,
+          "evidenceId": "p01:word:greek-nt:G3489:reference:0",
+          "kind": "scripture-reference"
+        },
+        {
+          "reference": "1 Timothy.1.19",
+          "book": "1 Timothy",
+          "chapter": 1,
+          "verse": 19,
+          "evidenceId": "p01:word:greek-nt:G3489:reference:1",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "17ac8fa73ecaabf7cc7a0911c2f492e74f77d867ccadc95632b332fa2e4a40ae",
+      "sourceRecordChecksum": "4da05294d92a6f3bc60d93ec013c223ae577e427d886aab7f0540a3d1656dba9",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G3522": {
+      "entityId": "word:greek-nt:G3522",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Nesteuō means to fast, or to abstain from food.",
+      "citations": [
+        {
+          "reference": "Matthew 4:2",
+          "book": "Matthew",
+          "chapter": 4,
+          "verse": 2
+        }
+      ],
+      "explanationChecksum": "1a61f4304b1c85bdc3fadd4aeb49280ac1a605237cf45796b18c122ec9529504",
+      "viewChecksum": "644bd79ac9c641a4961d10bcb1cb746b0c372048ad4b70c0407197f5a545ec82",
+      "sourceRecordChecksum": "706cb615b04b16c88ee2025729a6268e2f996d1fc70114d0af7fee6765a3b658",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3597": {
+      "entityId": "word:greek-nt:G3597",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Hodoiporia means a journey, journeying, or travel.",
+      "citations": [
+        {
+          "reference": "John 4:6",
+          "book": "John",
+          "chapter": 4,
+          "verse": 6
+        },
+        {
+          "reference": "2 Corinthians 11:26",
+          "book": "2 Corinthians",
+          "chapter": 11,
+          "verse": 26
+        }
+      ],
+      "explanationChecksum": "e442d425fbee40346c99ef6d9a27d5de925bc39636bffcc7b222889f51ae6951",
+      "viewChecksum": "e02cfd1335ba3d4f278d38cd2ac1d192620afeb87711fda19797a4d01d01f4c2",
+      "sourceRecordChecksum": "ad835de74c89994102563f11b1a59c80a11c1873801d23b24a6de4a62dfef392",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3636": {
+      "entityId": "word:greek-nt:G3636",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Oknēros means slothful or lazy.",
+      "citations": [
+        {
+          "reference": "Matthew 25:26",
+          "book": "Matthew",
+          "chapter": 25,
+          "verse": 26
+        }
+      ],
+      "explanationChecksum": "a2fd634b27d37efbdf54d4fad6f5c975750ae0c2408a3f9335684db5306d3559",
+      "viewChecksum": "9bef3ae6180e36b9a8a830abc5ca4e0e1e19a282c9d2158b0a3779fb7372ca78",
+      "sourceRecordChecksum": "e14917eec8807b3d8d26ce80bd5297a4ffccbddc33d2035fdcf79c12a286fed2",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3694": {
+      "entityId": "word:greek-nt:G3694",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Opiso means after, behind, or back.",
+      "citations": [
+        {
+          "reference": "Matthew 3:11",
+          "book": "Matthew",
+          "chapter": 3,
+          "verse": 11
+        },
+        {
+          "reference": "Mark 8:33",
+          "book": "Mark",
+          "chapter": 8,
+          "verse": 33
+        },
+        {
+          "reference": "Matthew 24:18",
+          "book": "Matthew",
+          "chapter": 24,
+          "verse": 18
+        }
+      ],
+      "explanationChecksum": "0a46796687a6321157a831a197edfae4304e386cf1398e576ace8238d38c6436",
+      "viewChecksum": "ffbce47d3fa58ec6e15eb6fb8578b8ea4b48d5849070a1e442edd0431488c88d",
+      "sourceRecordChecksum": "9cc12bc211a97705cc6bf2be4c2d985bcf6133de06fa47f906bb91a14b060ee5",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3719": {
+      "entityId": "word:greek-nt:G3719",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “to get up early in the morning” or “to rise at dawn.” It describes the act of rising early, before or around daybreak, and functions as an action word. In the Greek New Testament, it occurs once, in Luke 21:38. The basic idea is simply getting up early, with the surrounding passage determining the particular reason or purpose for doing so. [p03:word:greek-nt:G3719:identity] [p03:word:greek-nt:G3719:occurrences]",
+      "citations": [
+        {
+          "reference": "Luke.21.38",
+          "book": "Luke",
+          "chapter": 21,
+          "verse": 38,
+          "evidenceId": "p01:word:greek-nt:G3719:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "919b056949214f92f566b26fc6de0a45cee00378dc72cd8beb631275040afff9",
+      "sourceRecordChecksum": "b310484356a7143bc74b4f59726f817ba7eafab04c5a4be19a637bb3383d409b",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G3720": {
+      "entityId": "word:greek-nt:G3720",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Orthrinos means early.",
+      "citations": [
+        {
+          "reference": "Luke 24:22",
+          "book": "Luke",
+          "chapter": 24,
+          "verse": 22
+        }
+      ],
+      "explanationChecksum": "a59af0dc79c09cf4c62227ecdd11e2a6806e13a69caea246b98216ca04279ee7",
+      "viewChecksum": "d853d47448631a3aabdbdaa7e4c93631042898db840a7f449ab8f251c4fa6392",
+      "sourceRecordChecksum": "70fe38eb74cbfe0fb7c759d122e45daa2db8506eab4ef5052bca509c27fd9bb4",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3852": {
+      "entityId": "word:greek-nt:G3852",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Parangelia means a command or charge—an injunction or rule directing what someone should do.",
+      "citations": [
+        {
+          "reference": "Acts 5:28",
+          "book": "Acts",
+          "chapter": 5,
+          "verse": 28
+        }
+      ],
+      "explanationChecksum": "d48b598a725c8ebe9b9b3df33f3ed4364efcef88e5ae0a88933c53aa13358581",
+      "viewChecksum": "cb1c66e36ec5475ec47b158bdcd6cbce71cc8526920730673997909bce360b4d",
+      "sourceRecordChecksum": "86f2767ff0d69c146921b05e45c7809418b81b55b05eb5cdce67dcf8ff5e5c4e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3971": {
+      "entityId": "word:greek-nt:G3971",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Patroōos means ancestral—something hereditary or received from fathers.",
+      "citations": [
+        {
+          "reference": "Acts 22:3",
+          "book": "Acts",
+          "chapter": 22,
+          "verse": 3
+        }
+      ],
+      "explanationChecksum": "7b977d3620e19f41fc33f7120a4520d22e76112045a5f879f9f0dbc922679180",
+      "viewChecksum": "6a1990c495bf06ba43342d5e477a19d9e545277c90370d067c327f1ab8329c5e",
+      "sourceRecordChecksum": "aca691bd58b62ebad2e32277c4b5b002325349a26eaf0b750f03944d65ac98e4",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G3993": {
+      "entityId": "word:greek-nt:G3993",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Penēs means poor, referring to a poor person.",
+      "citations": [
+        {
+          "reference": "2 Corinthians 9:9",
+          "book": "2 Corinthians",
+          "chapter": 9,
+          "verse": 9
+        }
+      ],
+      "explanationChecksum": "91b5356367b1db716d1246d386b8092d9d1d4477f624b34e27d709b64394d3a0",
+      "viewChecksum": "f6f15b15403a79938543ee63ec583561d9db15b46bca2666daf4045effd74718",
+      "sourceRecordChecksum": "fbd5750215902885bd28880d92d432a563f9cc572ddcdeb18256fef3817bdd53",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4022": {
+      "entityId": "word:greek-nt:G4022",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Perierchomai means to go around or move about. It can describe people going from one house to another.",
+      "citations": [
+        {
+          "reference": "1 Timothy 5:13",
+          "book": "1 Timothy",
+          "chapter": 5,
+          "verse": 13
+        },
+        {
+          "reference": "Hebrews 11:37",
+          "book": "Hebrews",
+          "chapter": 11,
+          "verse": 37
+        }
+      ],
+      "explanationChecksum": "dadfeb2a346d4a2f5059e9371feee67367df5916ac7a935c432d21bc43503d20",
+      "viewChecksum": "4bb0c5fb7f08b43ded7a1491d5bbe9a0eb73e487fd4c946718074971d4a1b252",
+      "sourceRecordChecksum": "d8cc24acaa46259da6d6f5aef0b2ff0497afed57a27d3c4d65fb9cffd0c020ed",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4097": {
+      "entityId": "word:greek-nt:G4097",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Piprasko means to sell.",
+      "citations": [
+        {
+          "reference": "Matthew 13:46",
+          "book": "Matthew",
+          "chapter": 13,
+          "verse": 46
+        }
+      ],
+      "explanationChecksum": "86da7a2c0342ce10d945fd0c4ead36b175159bfb226d4b5acf9dbcacec281562",
+      "viewChecksum": "b7460a61af08c74e5d80abc2a44a7fd1aa23d4386e6e6f8367696063bb2cf9ef",
+      "sourceRecordChecksum": "0be13dfe541b6e1d4f2f0297ff60c031b747f48363d371c31db72367b4d9689e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4189": {
+      "entityId": "word:greek-nt:G4189",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Ponería means wickedness, evil, or iniquity.",
+      "citations": [
+        {
+          "reference": "Matthew 22:18",
+          "book": "Matthew",
+          "chapter": 22,
+          "verse": 18
+        },
+        {
+          "reference": "Acts 3:26",
+          "book": "Acts",
+          "chapter": 3,
+          "verse": 26
+        }
+      ],
+      "explanationChecksum": "6495a77cfaa22a2b26a4a0a0a8f32c3690479d134c74a066d1bc7dd41a0020bc",
+      "viewChecksum": "f61b620149b4a5349e55a9962572040bfc43e72090f27e79d60915d0f1011bc0",
+      "sourceRecordChecksum": "aa8667a1c5feb59c0358b6e3a6b20c575d00111fba2effbb66fa9cd6c64f0226",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4219": {
+      "entityId": "word:greek-nt:G4219",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Πότε means when or at what time.",
+      "citations": [
+        {
+          "reference": "Matthew 24:3",
+          "book": "Matthew",
+          "chapter": 24,
+          "verse": 3
+        }
+      ],
+      "explanationChecksum": "540bcddc6975834dc1c761b151b0f2c17fe2438b4f7445977ee0532cc9abde72",
+      "viewChecksum": "57df7211a027a7d808b5aa84cd6d7005a16aaebb571dfb64328cbeee9bcbd382",
+      "sourceRecordChecksum": "5ae25c55756dd37202a2f6f4d6602ba9998d98c3622784a921f285bc019bf729",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4220": {
+      "entityId": "word:greek-nt:G4220",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "current-evidence-canary",
+      "explanation": "Poteron means which of two or whether; it presents alternatives. It can distinguish whether a teaching is from God or whether the speaker speaks from himself.",
+      "citations": [
+        {
+          "reference": "John 7:17",
+          "book": "John",
+          "chapter": 7,
+          "verse": 17
+        }
+      ],
+      "explanationChecksum": "c5fece4a4e6d41d29419b71512f2637939ef2d1be24040f819848c314309ef43",
+      "viewChecksum": "e22ea86d1c2c50fc5398e1d158439815054b503d81b50913330dcbf40895d3e9",
+      "sourceRecordChecksum": "712c34122bf1b82d70fa0c8ed1083c5199cdc2d543b02133ffbc6c7bee8195ea",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4255": {
+      "entityId": "word:greek-nt:G4255",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “to decide” or “to predetermine.” It describes an intentional choice or resolution, especially when something is settled beforehand rather than left undecided. The word may therefore point either to the act of making a decision or to determining an outcome in advance. In the Greek New Testament, it occurs once, in 2 Corinthians 9:7; its precise force there depends on the surrounding verse and passage.",
+      "citations": [
+        {
+          "reference": "2 Corinthians.9.7",
+          "book": "2 Corinthians",
+          "chapter": 9,
+          "verse": 7,
+          "evidenceId": "p01:word:greek-nt:G4255:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "335aba824d6c342a81acc8f266b0033beebb9610dfc4e21faf783ec7393b81a9",
+      "sourceRecordChecksum": "c1658e269100e950e375270afec06bc3ae6054bfec441ec69d0b5f2bbd7abb08",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G4336": {
+      "entityId": "word:greek-nt:G4336",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Proseuchomai means to pray or offer prayer.",
+      "citations": [
+        {
+          "reference": "Matthew 14:23",
+          "book": "Matthew",
+          "chapter": 14,
+          "verse": 23
+        }
+      ],
+      "explanationChecksum": "5edd017bbfa992abaddb72e121410917349289c3f88c1028bac5cb8eccaf17bf",
+      "viewChecksum": "d3411bfd0ffc8c9f1d153ca9c8f32de0c70fd15bdc8331b4226cae67b3d7bd9e",
+      "sourceRecordChecksum": "93390281db96160f374fac9485be3782f4d32d702782afefe1df43b36b2a5f49",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4394": {
+      "entityId": "word:greek-nt:G4394",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Prophecy means a communicated message of revealed truth, and it can also refer to prophesying as an activity.",
+      "citations": [
+        {
+          "reference": "Matthew 13:14",
+          "book": "Matthew",
+          "chapter": 13,
+          "verse": 14
+        },
+        {
+          "reference": "1 Corinthians 14:6",
+          "book": "1 Corinthians",
+          "chapter": 14,
+          "verse": 6
+        }
+      ],
+      "explanationChecksum": "317815e6f709fdfb9f7c128d05060a22440007fee27de4c5eb1ed01983c7f380",
+      "viewChecksum": "0dc50328290149ebf6786f6d716d34a78a99c9eb1cd02efb6be2e92dbc15c72f",
+      "sourceRecordChecksum": "8ee0d7aadd90b34f623ca59c948db1ff47ace2d49427c62d5a908f789e719dd7",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4457": {
+      "entityId": "word:greek-nt:G4457",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Porosis means hardness of heart or hardening.",
+      "citations": [
+        {
+          "reference": "Mark 3:5",
+          "book": "Mark",
+          "chapter": 3,
+          "verse": 5
+        }
+      ],
+      "explanationChecksum": "64655b035707bb50d49da720c691d6786963bfd984acecab9c727adbb3afdb6f",
+      "viewChecksum": "280ff8a38cb4871586c731836ec589a90631df89ab26b6f5b1e2530543ee63dd",
+      "sourceRecordChecksum": "471d0133c8f4e7c474958a8ffd5f419ce5f28b0dd009ef4547576516b4a64ec2",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4505": {
+      "entityId": "word:greek-nt:G4505",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Rhyme means a narrow street or lane in a town or city.",
+      "citations": [
+        {
+          "reference": "Luke 14:21",
+          "book": "Luke",
+          "chapter": 14,
+          "verse": 21
+        }
+      ],
+      "explanationChecksum": "362e042dc69b52412418a9a080e89f0cc7dd3101cdb46815b6347ea87e71fdf3",
+      "viewChecksum": "8d253ff9b6f726ef02103e2d6564bb96304d36152f3c83c7e78e1fbcb1640257",
+      "sourceRecordChecksum": "ef3648dfe307bb26d8949ec2c1951124ae9037f35ad567c868ab2ec3297f7fff",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4570": {
+      "entityId": "word:greek-nt:G4570",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Sbennymi means to extinguish or quench. It can also mean to suppress or thwart, as when the Spirit is not to be quenched.",
+      "citations": [
+        {
+          "reference": "Mark 9:48",
+          "book": "Mark",
+          "chapter": 9,
+          "verse": 48
+        },
+        {
+          "reference": "1 Thessalonians 5:19",
+          "book": "1 Thessalonians",
+          "chapter": 5,
+          "verse": 19
+        }
+      ],
+      "explanationChecksum": "586f3c97d949825add216767cc1aa12b65bd17f8527718170f06e9c07b075772",
+      "viewChecksum": "c7c02b3ac639901b7b095bf3558e9a8107ec50edf993526e1fa8df1ba5baed52",
+      "sourceRecordChecksum": "dd9c6da28301ef0edcb4324386a97c95b5ebacc52d6857aa3ffe3a50cee0e1e7",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4624": {
+      "entityId": "word:greek-nt:G4624",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Skandalizo means to cause someone to stumble or to offend. An eye can cause a person to stumble, while people may be offended when they hear a saying.",
+      "citations": [
+        {
+          "reference": "Matthew 5:29",
+          "book": "Matthew",
+          "chapter": 5,
+          "verse": 29
+        },
+        {
+          "reference": "Matthew 15:12",
+          "book": "Matthew",
+          "chapter": 15,
+          "verse": 12
+        }
+      ],
+      "explanationChecksum": "55a30d4f1467faf0f5b81802466b6b6ece0bddf7b0ac0a0c10c2ef4c0bbe956c",
+      "viewChecksum": "ba31f56659a3a5592023c3c455a58e20d04309614122a18ea1a38bba7b2aa636",
+      "sourceRecordChecksum": "448f4bdbf3ca4435e5a4861f050b3257c678ff8fbb9fa7024ce7a44cd6f7bc4b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4686": {
+      "entityId": "word:greek-nt:G4686",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Speira means a band or company of soldiers.",
+      "citations": [
+        {
+          "reference": "Matthew 27:27",
+          "book": "Matthew",
+          "chapter": 27,
+          "verse": 27
+        }
+      ],
+      "explanationChecksum": "a7cddcc957137285db31a945b5ded6d83db1aeccac66b94251a4a0817a287f74",
+      "viewChecksum": "e1abc73c809370e5930cbddb8172d7eeefcf1632b976cc4ce6b7721e5b41f3b5",
+      "sourceRecordChecksum": "e22631865e348d434a8ce5711ad5e87d86eb3c1374ce34b52ff39454a07d9b6f",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4743": {
+      "entityId": "word:greek-nt:G4743",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Stigmē means a moment, an instant, or a brief point in time.",
+      "citations": [
+        {
+          "reference": "Luke 4:5",
+          "book": "Luke",
+          "chapter": 4,
+          "verse": 5
+        }
+      ],
+      "explanationChecksum": "c59b1f1e2abab40da3c2a60c5aaea9feb0a0faa41772f711b3c0524cbc8988dc",
+      "viewChecksum": "6ebe7622109d47e297fb291ec07657771d7bff60b58710cd60c48d003d449401",
+      "sourceRecordChecksum": "2516e15748bb68cd6acba5f7d58b12f3c98527d01a238b7f3863c79e0b5e5406",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4866": {
+      "entityId": "word:greek-nt:G4866",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “to contend” or “to contend at one's side,” describing earnest effort alongside others. It presents shared struggle or cooperation in a demanding cause, rather than quiet agreement or distant support. In the Greek New Testament, it occurs twice, both times in Philippians, so its use is focused rather than broad. The exact emphasis in either verse depends on the surrounding passage, but the central idea is standing and striving together with fellow believers.",
+      "citations": [],
+      "explanationChecksum": "b0257b131f45881528426321b0ff192ec6a3ed4f0c0801acc78177986ce46f91",
+      "sourceRecordChecksum": "92bf0842443ca5e1c31f2e048a27d2d0807b88cb79abb2ff3aa8c0cc47f2da12",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G4888": {
+      "entityId": "word:greek-nt:G4888",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Syndoxazō means to be glorified together with another.",
+      "citations": [
+        {
+          "reference": "Romans 8:17",
+          "book": "Romans",
+          "chapter": 8,
+          "verse": 17
+        }
+      ],
+      "explanationChecksum": "057189e22ebbc6c5afbbf7d78e0d60643e9089902adc9f9969cc66e65feb469f",
+      "viewChecksum": "12376c6310ffb305d5fc63f2e8fe56d692d127a500dddc53f22e8428441dd5a9",
+      "sourceRecordChecksum": "58ae539f596137dc8b1146fee79ba5355715ae611b0058fa8fbd95dc1d94dabc",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4963": {
+      "entityId": "word:greek-nt:G4963",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Systrophē means a gathering together, a riotous concourse, or a conspiracy.",
+      "citations": [
+        {
+          "reference": "Acts 23:12",
+          "book": "Acts",
+          "chapter": 23,
+          "verse": 12
+        },
+        {
+          "reference": "Acts 19:40",
+          "book": "Acts",
+          "chapter": 19,
+          "verse": 40
+        }
+      ],
+      "explanationChecksum": "6fc730d9869ef2dbd9524a3dcce95a24e5ea3d664c399c22576170e49d3c011e",
+      "viewChecksum": "b20f00a32bcfde6fbac3b58dcf78e089aa8ccd326b352b7873ade1b445381b9c",
+      "sourceRecordChecksum": "e8a33bb49c431a8db0fa862255949d339e66800497df0009e42ba74b8911510e",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G4981": {
+      "entityId": "word:greek-nt:G4981",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Scholē means leisure. It can also mean a school.",
+      "citations": [
+        {
+          "reference": "Sirach 38:24",
+          "book": "Sirach",
+          "chapter": 38,
+          "verse": 24
+        },
+        {
+          "reference": "Acts 19:9",
+          "book": "Acts",
+          "chapter": 19,
+          "verse": 9
+        }
+      ],
+      "explanationChecksum": "8249277a1ac54778463c6962e6dbfea7e9e8458029086cbcb9e675a1236fac81",
+      "viewChecksum": "c1bab334350094cf9e5b70e1baf441435f39efa5bf78d9483d73bc4100507f10",
+      "sourceRecordChecksum": "23cff316bfa38b66cd8e0990709e6f1988b21b7120accbb406df1af94d1082fb",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G5007": {
+      "entityId": "word:greek-nt:G5007",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Talanton means a talent of silver or gold.",
+      "citations": [
+        {
+          "reference": "Exodus 25:39",
+          "book": "Exodus",
+          "chapter": 25,
+          "verse": 39
+        },
+        {
+          "reference": "Exodus 39:4",
+          "book": "Exodus",
+          "chapter": 39,
+          "verse": 4
+        }
+      ],
+      "explanationChecksum": "1d1ba1d4675eae143de1c76a6bc8ab4cdfd19586c2d52d503fa1f52b2a4afabe",
+      "viewChecksum": "98c767ebd2048f7a82d0579b096bd9e46dc7f779d62bd7197c6b33265b7c64f6",
+      "sourceRecordChecksum": "420251315ee51dd760cb9bda13160bd09b6d9b98d9e76c882d5bca52f15acef2",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G5151": {
+      "entityId": "word:greek-nt:G5151",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Tris means three times.",
+      "citations": [
+        {
+          "reference": "Matthew 26:34",
+          "book": "Matthew",
+          "chapter": 26,
+          "verse": 34
+        }
+      ],
+      "explanationChecksum": "68c3966ea72b43ee2aa8aab3de68b2cac4c8c73ed7946650e62670a99aedbe21",
+      "viewChecksum": "08d55338250fcf22001b08add99fbd36f31ac3da7586c6355f65cc7f370d6f8b",
+      "sourceRecordChecksum": "56286c0617fc83472adb69f8db79209fbbb2fffcc0915e32f494254b4f547e0c",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G5335": {
+      "entityId": "word:greek-nt:G5335",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "broad-generation",
+      "explanation": "Phaskō means to assert something. It is used for affirming that something is so and for professing oneself to be wise.",
+      "citations": [
+        {
+          "reference": "Acts 25:19",
+          "book": "Acts",
+          "chapter": 25,
+          "verse": 19
+        },
+        {
+          "reference": "Acts 24:9",
+          "book": "Acts",
+          "chapter": 24,
+          "verse": 9
+        },
+        {
+          "reference": "Romans 1:22",
+          "book": "Romans",
+          "chapter": 1,
+          "verse": 22
+        }
+      ],
+      "explanationChecksum": "3f34f57cc5246ef8655913dbbe0a9f10c0fb4fd46874f5cec37cffdc651fd175",
+      "viewChecksum": "951220ed184ff3ac3df4938b0d0bb4093b15c1b03ef262d6d653e17d64fd5252",
+      "sourceRecordChecksum": "a1fd0790e1d388eec3569cfd43818311c22e9c7fa0a9495f757a4127b6c331bc",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G5340": {
+      "entityId": "word:greek-nt:G5340",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “sparingly”: doing or giving something in a limited or restrained way. It describes the amount or manner of an action rather than naming the action itself. In the Greek New Testament, it occurs twice, both within one verse in 2 Corinthians, and its English rendering is consistently “sparingly.” The surrounding passage is needed to identify precisely what action or gift is being described there. Its central idea remains a small measure or restrained practice, set against the contrasting idea of acting generously or abundantly.",
+      "citations": [
+        {
+          "reference": "2 Corinthians.9.6",
+          "book": "2 Corinthians",
+          "chapter": 9,
+          "verse": 6,
+          "evidenceId": "p01:word:greek-nt:G5340:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "2429b9ce9723780f58343d30584c5af3fb1c738d455d93652f1952fa47215524",
+      "sourceRecordChecksum": "1ab4c7c036ef88ad0eb7c1116ed81bb5db021b423b58d61f9ee244925e6da2a9",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G5379": {
+      "entityId": "word:greek-nt:G5379",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “dispute” or “love of dispute.” It refers to contentious arguing—the presence of conflict shaped by a desire to contend, not merely the existence of different opinions. In the Greek New Testament, it occurs once, in Luke 22:24. Because no verse text is provided here, the word’s precise force in that sentence must be understood from its surrounding passage; its basic sense remains dispute or love of dispute.",
+      "citations": [
+        {
+          "reference": "Luke.22.24",
+          "book": "Luke",
+          "chapter": 22,
+          "verse": 24,
+          "evidenceId": "p01:word:greek-nt:G5379:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "8a0a836adba1b938473807d9a85b570ea1a2291d4f378cb1f658882557729424",
+      "sourceRecordChecksum": "4e933c2fb19a8e201648378f173b61c9742b14ca7f3cc41a3dca4b48ef07958d",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G5403": {
+      "entityId": "word:greek-nt:G5403",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "exception-triage",
+      "explanation": "Phoinike means Phoenicia.",
+      "citations": [
+        {
+          "reference": "Acts 11:19",
+          "book": "Acts",
+          "chapter": 11,
+          "verse": 19
+        }
+      ],
+      "explanationChecksum": "7ba5dca6c8bbce0312ad2a01741c2573c42dbc54d25c3e745d124ab97be02b6f",
+      "viewChecksum": "f35d2bb6e62e472b3d8e91623130bca6698cbad1c280eea051c82c5e7eb95ac0",
+      "sourceRecordChecksum": "8692e711c545915af2e2c7ec591ab2dbecdd445aff4cd512fc544f9d108fbc8b",
+      "independentReviewerApproved": true,
+      "policy": null
+    },
+    "word:greek-nt:G5546": {
+      "entityId": "word:greek-nt:G5546",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "Christian is the name or designation for a person identified as belonging to Christ’s people. It functions as a personal noun rather than describing an action or quality. In the Greek New Testament, this word occurs three times, in Acts and 1 Peter, and is consistently rendered “Christian.” Its precise force in any one passage depends on the surrounding verse and context, but its central meaning is a person known by this identification.",
+      "citations": [],
+      "explanationChecksum": "d45ff345d07715d580c62b4cfb1fa22d80f3ebb4cd3b5702a16df78f28ef7c42",
+      "sourceRecordChecksum": "4d75624a8db31e3d07234c9c533cfd7dc313d37e248c3807c99199593aefe5b1",
+      "independentReviewerApproved": false,
+      "policy": null
+    },
+    "word:greek-nt:G6011": {
+      "entityId": "word:greek-nt:G6011",
+      "corpus": "greek-nt",
+      "status": "approved",
+      "sourceKind": "retained-p04",
+      "explanation": "This word means “needle,” referring to a small, slender tool used for sewing. It names an ordinary physical object rather than an action or quality. In the Greek New Testament, it occurs once, in Luke 18:25. Its exact significance in that verse depends on the surrounding passage, but the word itself carries the straightforward meaning of a needle. [p03:word:greek-nt:G6011:identity] [p03:word:greek-nt:G6011:occurrences] [p01:word:greek-nt:G6011:reference:0]",
+      "citations": [
+        {
+          "reference": "Luke.18.25",
+          "book": "Luke",
+          "chapter": 18,
+          "verse": 25,
+          "evidenceId": "p01:word:greek-nt:G6011:reference:0",
+          "kind": "scripture-reference"
+        }
+      ],
+      "explanationChecksum": "ca25cc6a4025a99265d0dc9b9c4c05cbe1250c3b6bdaa7085161f0cb713b4f66",
+      "sourceRecordChecksum": "db609f8f21cf970cf741fe125356fa6e33536716f4f405214e2d26fce47e0d1a",
+      "independentReviewerApproved": false,
+      "policy": null
+    }
+  }
+}

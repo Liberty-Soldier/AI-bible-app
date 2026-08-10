@@ -1,0 +1,1583 @@
+{
+  "version": 1,
+  "schemaVersion": "p07-emet-final-runtime@1.0.0",
+  "shardAlgorithm": "fnv1a-32-mod",
+  "shardCount": 64,
+  "source": {
+    "runtimeCachePath": "public/data/bibleiq/word-study/emet-explanations.json",
+    "runtimeCacheSha256": "3d8e36c865a7d5b6b36d894d509cd9c3d29f4a7849d48e9656c8c64e74bb9e0a",
+    "runtimeSchemaVersion": "p07-runtime-emet-explanations@1.0.0",
+    "runtimeChecksum": "d1a1b7353ccdead7dbea12aaa26ca15be29858734efdd955fa71dc8e7b4ae0c0"
+  },
+  "corpora": {
+    "hebrew": {
+      "entities": 8634,
+      "approved": 8529,
+      "noExplanation": 105,
+      "shards": {
+        "10": {
+          "file": "hebrew/10.json",
+          "entities": 135,
+          "approved": 132,
+          "noExplanation": 3,
+          "bytes": 120888,
+          "checksum": "5282265e03ec4cd0c78aa68e36557ff3eb287094fd59d2c3409cde3f4f1d0d58"
+        },
+        "11": {
+          "file": "hebrew/11.json",
+          "entities": 128,
+          "approved": 126,
+          "noExplanation": 2,
+          "bytes": 107638,
+          "checksum": "fe12d4f65620caef2ecb4ac744d946edbc3e57764b584a32ee801b8fb577e5a4"
+        },
+        "12": {
+          "file": "hebrew/12.json",
+          "entities": 128,
+          "approved": 124,
+          "noExplanation": 4,
+          "bytes": 114250,
+          "checksum": "514f9d73228b7f3c5f483eef6795168c2609f50d16258a9b40bec31742fbf9db"
+        },
+        "13": {
+          "file": "hebrew/13.json",
+          "entities": 124,
+          "approved": 121,
+          "noExplanation": 3,
+          "bytes": 103466,
+          "checksum": "ea9d8476d5af084b486ace6c03333a54729bd0f25454f334a3cc686c9e6ab73d"
+        },
+        "14": {
+          "file": "hebrew/14.json",
+          "entities": 140,
+          "approved": 138,
+          "noExplanation": 2,
+          "bytes": 125570,
+          "checksum": "220fd6541a3defcd7ac0b82713374584255accbfcb4253e66a1835eecd5602a1"
+        },
+        "15": {
+          "file": "hebrew/15.json",
+          "entities": 135,
+          "approved": 132,
+          "noExplanation": 3,
+          "bytes": 117828,
+          "checksum": "64cd0f65aec42db2f79942117925e1353c5114f66ee10d889b199cda7807d930"
+        },
+        "16": {
+          "file": "hebrew/16.json",
+          "entities": 136,
+          "approved": 136,
+          "noExplanation": 0,
+          "bytes": 117262,
+          "checksum": "6f6bba734d66eeefb3f483f2e607d0d019888fc012fdc8358fe27787db44e6dc"
+        },
+        "17": {
+          "file": "hebrew/17.json",
+          "entities": 142,
+          "approved": 140,
+          "noExplanation": 2,
+          "bytes": 125761,
+          "checksum": "33561b1e039cddbe6e3fba36778be44be6f2ad6488b083c4d4a3928e62ae9d4d"
+        },
+        "18": {
+          "file": "hebrew/18.json",
+          "entities": 132,
+          "approved": 131,
+          "noExplanation": 1,
+          "bytes": 111346,
+          "checksum": "1d09765db390f91ed72e2bdc5006af19a8087b6d22519661539e209e180401ba"
+        },
+        "19": {
+          "file": "hebrew/19.json",
+          "entities": 136,
+          "approved": 134,
+          "noExplanation": 2,
+          "bytes": 116450,
+          "checksum": "dd0883a7bbe9b50077c535152bf0fd1a1740a102425d9a5e773c28b8599e3dca"
+        },
+        "20": {
+          "file": "hebrew/20.json",
+          "entities": 133,
+          "approved": 133,
+          "noExplanation": 0,
+          "bytes": 117166,
+          "checksum": "f0c8f2b788811e3fe47231a477284657a7e23c70e2cf8ad007e3da5011f11835"
+        },
+        "21": {
+          "file": "hebrew/21.json",
+          "entities": 141,
+          "approved": 139,
+          "noExplanation": 2,
+          "bytes": 128494,
+          "checksum": "b5f69a6179cf04d8cf3838e6e6faf29adb09fecd7a609a2faa23e190b45cc933"
+        },
+        "22": {
+          "file": "hebrew/22.json",
+          "entities": 134,
+          "approved": 134,
+          "noExplanation": 0,
+          "bytes": 120113,
+          "checksum": "0000e6d8f1e4004d1a9bbb3c3e7deb90d4db3a7246bfa568f348c18e3535092c"
+        },
+        "23": {
+          "file": "hebrew/23.json",
+          "entities": 136,
+          "approved": 131,
+          "noExplanation": 5,
+          "bytes": 119437,
+          "checksum": "0f16e14ce1233e05ceed6c12f2da17f3ae42a5ab9ea06781c19e56b26b43cf51"
+        },
+        "24": {
+          "file": "hebrew/24.json",
+          "entities": 136,
+          "approved": 136,
+          "noExplanation": 0,
+          "bytes": 120643,
+          "checksum": "ad6553227791fb8bd343c70fa1358a19995dd095e61c02e8263ebf9ef7b701db"
+        },
+        "25": {
+          "file": "hebrew/25.json",
+          "entities": 128,
+          "approved": 126,
+          "noExplanation": 2,
+          "bytes": 115409,
+          "checksum": "83ebcaf3920e0bf1c7209556eb35801033fd6bd65c917279da90c4b65f639e86"
+        },
+        "26": {
+          "file": "hebrew/26.json",
+          "entities": 129,
+          "approved": 127,
+          "noExplanation": 2,
+          "bytes": 110880,
+          "checksum": "841bd2d545a10dec5bd07fde6aae7c8592c97099c4ac299cb15f16ca54d9bf32"
+        },
+        "27": {
+          "file": "hebrew/27.json",
+          "entities": 140,
+          "approved": 138,
+          "noExplanation": 2,
+          "bytes": 117624,
+          "checksum": "8e0fddf74fdc73914e5d4c01eb5af3b220e7257e7556e4ab37a87c1b7da71202"
+        },
+        "28": {
+          "file": "hebrew/28.json",
+          "entities": 139,
+          "approved": 138,
+          "noExplanation": 1,
+          "bytes": 118842,
+          "checksum": "adc7ba128145f350882fc56d6377919080a7d89a2e7d8f4751a226d673a75d56"
+        },
+        "29": {
+          "file": "hebrew/29.json",
+          "entities": 135,
+          "approved": 134,
+          "noExplanation": 1,
+          "bytes": 116344,
+          "checksum": "2869f840d4cdd5586f2ba96a7f2aa13f9b89d037a93820fc9211cae7e387ff3f"
+        },
+        "30": {
+          "file": "hebrew/30.json",
+          "entities": 132,
+          "approved": 130,
+          "noExplanation": 2,
+          "bytes": 116817,
+          "checksum": "eeabb532d6e4f566bd3f76a4deb6bb7abf41fbff94e86ad5abe6dbeb21a827b2"
+        },
+        "31": {
+          "file": "hebrew/31.json",
+          "entities": 133,
+          "approved": 130,
+          "noExplanation": 3,
+          "bytes": 115589,
+          "checksum": "76280e2fed6654f2973b1393a50dd4c4dd7b34c87a25d06da6f0bac515971fa6"
+        },
+        "32": {
+          "file": "hebrew/32.json",
+          "entities": 121,
+          "approved": 118,
+          "noExplanation": 3,
+          "bytes": 106380,
+          "checksum": "2c088277034e0d3f6fafa210da32db7a0ed9582914dc4f3aede0c9bbd2afa9d6"
+        },
+        "33": {
+          "file": "hebrew/33.json",
+          "entities": 134,
+          "approved": 134,
+          "noExplanation": 0,
+          "bytes": 113462,
+          "checksum": "1806a66b026e46acced16a40523163bef0d9119c7c0185a192f3220772ae47e7"
+        },
+        "34": {
+          "file": "hebrew/34.json",
+          "entities": 138,
+          "approved": 138,
+          "noExplanation": 0,
+          "bytes": 117460,
+          "checksum": "fbaeb51e393487a7ad5c53abf12df45bc30b3303ed5ca52ff518bd3ac359bbbb"
+        },
+        "35": {
+          "file": "hebrew/35.json",
+          "entities": 133,
+          "approved": 133,
+          "noExplanation": 0,
+          "bytes": 115402,
+          "checksum": "2215b7402aa3409a5c8f3b673a40a977cd91581518c50b1da95414821f0830ac"
+        },
+        "36": {
+          "file": "hebrew/36.json",
+          "entities": 135,
+          "approved": 134,
+          "noExplanation": 1,
+          "bytes": 115746,
+          "checksum": "76ee821ca40bba21d4f3f68f21cf52eea13575b2cfd0fb7ea8e9d61cd4261f0a"
+        },
+        "37": {
+          "file": "hebrew/37.json",
+          "entities": 136,
+          "approved": 136,
+          "noExplanation": 0,
+          "bytes": 123072,
+          "checksum": "74a29c8f271a0f4f1357d5ef5f91f1439009195699cf3923e3801e2c3e1de0c2"
+        },
+        "38": {
+          "file": "hebrew/38.json",
+          "entities": 141,
+          "approved": 138,
+          "noExplanation": 3,
+          "bytes": 126902,
+          "checksum": "d61f64a5f11899f1abd95b2233057b1fe26766fc4fc92532e170fa2059cccf3c"
+        },
+        "39": {
+          "file": "hebrew/39.json",
+          "entities": 126,
+          "approved": 126,
+          "noExplanation": 0,
+          "bytes": 107109,
+          "checksum": "05be39d6b0e1616b054b8782311210c9f710f7b9c45f7f96b993f489f0fdea14"
+        },
+        "00": {
+          "file": "hebrew/00.json",
+          "entities": 122,
+          "approved": 120,
+          "noExplanation": 2,
+          "bytes": 102015,
+          "checksum": "116f94d857ec07f0adbedee271ce5c72db2f4740a2f1fe1c83ffb96ff0340644"
+        },
+        "01": {
+          "file": "hebrew/01.json",
+          "entities": 143,
+          "approved": 140,
+          "noExplanation": 3,
+          "bytes": 125822,
+          "checksum": "0eac02c0410c0667de9d8f4ea17121c2cade94ef7b56925931e303a1eefd477d"
+        },
+        "02": {
+          "file": "hebrew/02.json",
+          "entities": 135,
+          "approved": 132,
+          "noExplanation": 3,
+          "bytes": 111666,
+          "checksum": "e5af2a72f47a3b861d8f17fb4f15edc5f588a6edbaedcbb4b7cf9f77b85571d0"
+        },
+        "03": {
+          "file": "hebrew/03.json",
+          "entities": 132,
+          "approved": 132,
+          "noExplanation": 0,
+          "bytes": 116033,
+          "checksum": "15efb31d6ce56efed7b44abb7be0f5d6a82a832bba46967d918c66ebedbf5e0a"
+        },
+        "04": {
+          "file": "hebrew/04.json",
+          "entities": 143,
+          "approved": 142,
+          "noExplanation": 1,
+          "bytes": 121106,
+          "checksum": "99b19f6715763cb80ca9618361a4e81e8456a9b54f1136bb505a5dd06b1db946"
+        },
+        "05": {
+          "file": "hebrew/05.json",
+          "entities": 122,
+          "approved": 122,
+          "noExplanation": 0,
+          "bytes": 103841,
+          "checksum": "2231d0178e93e6dcee5a3a0a5ec49aa6f5db6b150b271aecb9ca7afadd256711"
+        },
+        "06": {
+          "file": "hebrew/06.json",
+          "entities": 136,
+          "approved": 135,
+          "noExplanation": 1,
+          "bytes": 121335,
+          "checksum": "adee78eef0a8e8e8d8d37c26f1f5ae1606936f083307ea44a8f1463ace347d9c"
+        },
+        "07": {
+          "file": "hebrew/07.json",
+          "entities": 138,
+          "approved": 134,
+          "noExplanation": 4,
+          "bytes": 116931,
+          "checksum": "8a7cf29489f869f72201a4ff9fce1a286f28df75a759a6244e11fb84da7a1f75"
+        },
+        "08": {
+          "file": "hebrew/08.json",
+          "entities": 144,
+          "approved": 142,
+          "noExplanation": 2,
+          "bytes": 126264,
+          "checksum": "f065998715730f136b0bb79a964dda8fcc57129b6c83f4c05ecf11f9f0cc658e"
+        },
+        "09": {
+          "file": "hebrew/09.json",
+          "entities": 135,
+          "approved": 135,
+          "noExplanation": 0,
+          "bytes": 116138,
+          "checksum": "530615cf8cef1441e8927b7dcc8e43b77c49ec7c0387c81b2833d3359bb77c7a"
+        },
+        "0a": {
+          "file": "hebrew/0a.json",
+          "entities": 136,
+          "approved": 135,
+          "noExplanation": 1,
+          "bytes": 116318,
+          "checksum": "2ccfbed6c91996597a23f0f37454e7c982285d8879da7548fd27e2421fc2df4c"
+        },
+        "0b": {
+          "file": "hebrew/0b.json",
+          "entities": 141,
+          "approved": 140,
+          "noExplanation": 1,
+          "bytes": 124808,
+          "checksum": "f9fc9d5e38f4d0f74768d726d5a5721d173ceeaf91d9a7c975738892086a4dbf"
+        },
+        "0c": {
+          "file": "hebrew/0c.json",
+          "entities": 124,
+          "approved": 123,
+          "noExplanation": 1,
+          "bytes": 104652,
+          "checksum": "ae0050c10a06a1574979d3a5ffe90e1374553fb537cf6bff2ca4fca90795dbe8"
+        },
+        "0d": {
+          "file": "hebrew/0d.json",
+          "entities": 141,
+          "approved": 141,
+          "noExplanation": 0,
+          "bytes": 122045,
+          "checksum": "328d342b5d9c9a5b9571b579cb8e840d375093301c633638b63427685a4232a9"
+        },
+        "0e": {
+          "file": "hebrew/0e.json",
+          "entities": 140,
+          "approved": 140,
+          "noExplanation": 0,
+          "bytes": 117759,
+          "checksum": "254ffbe507e5ab268d6b5f980d44b9ac17cceb001c170a0ba113051eb19e2b51"
+        },
+        "0f": {
+          "file": "hebrew/0f.json",
+          "entities": 131,
+          "approved": 128,
+          "noExplanation": 3,
+          "bytes": 115724,
+          "checksum": "abe4a04c390f94ee781ba7a7af55183c58229bbc8416536bba8a600d31291bdf"
+        },
+        "1a": {
+          "file": "hebrew/1a.json",
+          "entities": 143,
+          "approved": 142,
+          "noExplanation": 1,
+          "bytes": 128824,
+          "checksum": "9b6f710b3ad83646ff407674cc4148b5c8a131721b2a08400a958d70b8824324"
+        },
+        "1b": {
+          "file": "hebrew/1b.json",
+          "entities": 145,
+          "approved": 143,
+          "noExplanation": 2,
+          "bytes": 126731,
+          "checksum": "0f4fc41afbd606cc801cc1486b0e07ca551de05d6f335aae92800064fd912941"
+        },
+        "1c": {
+          "file": "hebrew/1c.json",
+          "entities": 135,
+          "approved": 134,
+          "noExplanation": 1,
+          "bytes": 111558,
+          "checksum": "99fdbe0022542d019747639f6d7088f6eb06a28e6a0ceac7e175e311ccd7753f"
+        },
+        "1d": {
+          "file": "hebrew/1d.json",
+          "entities": 137,
+          "approved": 135,
+          "noExplanation": 2,
+          "bytes": 118482,
+          "checksum": "92d1c91887a4becda50ccf4545a756fac73da6b5e9145342cf04bdb1e59459e9"
+        },
+        "1e": {
+          "file": "hebrew/1e.json",
+          "entities": 133,
+          "approved": 132,
+          "noExplanation": 1,
+          "bytes": 115406,
+          "checksum": "2a97f63546e9f3edfdfd19946133d8d685914d39a45e1581907816b7f5afdbcb"
+        },
+        "1f": {
+          "file": "hebrew/1f.json",
+          "entities": 124,
+          "approved": 121,
+          "noExplanation": 3,
+          "bytes": 108898,
+          "checksum": "2e1b3f77171b9d59ae6ef076d1364161734f1a29912a54df3268c3a8c76e5e90"
+        },
+        "2a": {
+          "file": "hebrew/2a.json",
+          "entities": 140,
+          "approved": 140,
+          "noExplanation": 0,
+          "bytes": 121389,
+          "checksum": "cc9b0fa03372d20959963bdad6f1334a6573f1f5b8e29fba582f1ddc09bccbfe"
+        },
+        "2b": {
+          "file": "hebrew/2b.json",
+          "entities": 133,
+          "approved": 130,
+          "noExplanation": 3,
+          "bytes": 115434,
+          "checksum": "63ef818a64c23914a0bed5d5a27211b6c38333b3dc94ddfb991785fccac19c4b"
+        },
+        "2c": {
+          "file": "hebrew/2c.json",
+          "entities": 130,
+          "approved": 126,
+          "noExplanation": 4,
+          "bytes": 116984,
+          "checksum": "316a2df9591c899c543471b98899dde6a4195b186dbf858186497ce97e8fb90d"
+        },
+        "2d": {
+          "file": "hebrew/2d.json",
+          "entities": 144,
+          "approved": 142,
+          "noExplanation": 2,
+          "bytes": 124514,
+          "checksum": "acbcd1b49740c861a5289e76e997fb7bbb4b7fcba5746c764ecb930c1c5adca2"
+        },
+        "2e": {
+          "file": "hebrew/2e.json",
+          "entities": 143,
+          "approved": 142,
+          "noExplanation": 1,
+          "bytes": 130847,
+          "checksum": "7c7a04939750b5f0774ed6342af2ad5833c071a63875f67edef98e6f60c94e91"
+        },
+        "2f": {
+          "file": "hebrew/2f.json",
+          "entities": 135,
+          "approved": 133,
+          "noExplanation": 2,
+          "bytes": 118140,
+          "checksum": "f1ff66ca1bca504c370fc2e19e088267caf644911f421990e2923de44074e916"
+        },
+        "3a": {
+          "file": "hebrew/3a.json",
+          "entities": 141,
+          "approved": 141,
+          "noExplanation": 0,
+          "bytes": 122073,
+          "checksum": "e9eab25c41506f3fa8452e3720357a4831429c5d897fd5312f0f6a2e02ce2a57"
+        },
+        "3b": {
+          "file": "hebrew/3b.json",
+          "entities": 139,
+          "approved": 137,
+          "noExplanation": 2,
+          "bytes": 118820,
+          "checksum": "5b7d7adef1b0ecf6c5b33ce2129dbdfb2cf842e82ea2d24c9a62f1cc4ecdbcb2"
+        },
+        "3c": {
+          "file": "hebrew/3c.json",
+          "entities": 134,
+          "approved": 131,
+          "noExplanation": 3,
+          "bytes": 124544,
+          "checksum": "8268522e628ac7a005936302c1833bfdfea06d42bdd2868d423d27edb12b934f"
+        },
+        "3d": {
+          "file": "hebrew/3d.json",
+          "entities": 141,
+          "approved": 138,
+          "noExplanation": 3,
+          "bytes": 122904,
+          "checksum": "1fc770023f39c234458b5dbdd1630750ee4d3d5135c38b572410d67cd4a36ecb"
+        },
+        "3e": {
+          "file": "hebrew/3e.json",
+          "entities": 128,
+          "approved": 125,
+          "noExplanation": 3,
+          "bytes": 114032,
+          "checksum": "f98573a2cc7187a8b07704a608a3b38af2c74fb419afc7af577bd4f70865669c"
+        },
+        "3f": {
+          "file": "hebrew/3f.json",
+          "entities": 130,
+          "approved": 129,
+          "noExplanation": 1,
+          "bytes": 113652,
+          "checksum": "c54c37c98b62191a1d9e9baf80a6fda1bdcb909a20256833f149902c857e8795"
+        }
+      }
+    },
+    "greek-nt": {
+      "entities": 5380,
+      "approved": 5369,
+      "noExplanation": 11,
+      "shards": {
+        "10": {
+          "file": "greek-nt/10.json",
+          "entities": 89,
+          "approved": 89,
+          "noExplanation": 0,
+          "bytes": 85955,
+          "checksum": "6c87bc15e44dbdcfbe5f80080b13acb6b53c5baaa1692902184a32799eaf9eec"
+        },
+        "11": {
+          "file": "greek-nt/11.json",
+          "entities": 82,
+          "approved": 82,
+          "noExplanation": 0,
+          "bytes": 72500,
+          "checksum": "05eee452a5975104b0bc58998a6b74f6e449a75de96b16fc7c349430f7e805ba"
+        },
+        "12": {
+          "file": "greek-nt/12.json",
+          "entities": 84,
+          "approved": 84,
+          "noExplanation": 0,
+          "bytes": 77029,
+          "checksum": "507fe92c02c08c26efccea3428478bcdfa541a5bbfb1d666ecedba914873a04a"
+        },
+        "13": {
+          "file": "greek-nt/13.json",
+          "entities": 88,
+          "approved": 88,
+          "noExplanation": 0,
+          "bytes": 80633,
+          "checksum": "751e5766049150aa6d5c1631fc9832533ea4825c58c8fe7e24cc59604533238a"
+        },
+        "14": {
+          "file": "greek-nt/14.json",
+          "entities": 80,
+          "approved": 80,
+          "noExplanation": 0,
+          "bytes": 73672,
+          "checksum": "17d40943331295b1e73e3a57e3ca73d132f7688ad5af3afa696488330ed92962"
+        },
+        "15": {
+          "file": "greek-nt/15.json",
+          "entities": 91,
+          "approved": 91,
+          "noExplanation": 0,
+          "bytes": 81644,
+          "checksum": "5f6f1dbeb2fd875f9709dfd0967e37240f6f9d4a453568876e4d5168a032e7ff"
+        },
+        "16": {
+          "file": "greek-nt/16.json",
+          "entities": 78,
+          "approved": 78,
+          "noExplanation": 0,
+          "bytes": 69410,
+          "checksum": "8fb9ed9b5a5ededce6f5f8f16c87227a0b030646c4ad775cc7e474ff2b3d5b40"
+        },
+        "17": {
+          "file": "greek-nt/17.json",
+          "entities": 83,
+          "approved": 82,
+          "noExplanation": 1,
+          "bytes": 77774,
+          "checksum": "392e04fcf17e945dd2050675f56800b9f761a05d5bbc014d6963fd79ac35c393"
+        },
+        "18": {
+          "file": "greek-nt/18.json",
+          "entities": 84,
+          "approved": 84,
+          "noExplanation": 0,
+          "bytes": 82500,
+          "checksum": "0569a6a40534fb893a502013991bc1c010ad3f68fa0be1fce2d7c46cdf961ed7"
+        },
+        "19": {
+          "file": "greek-nt/19.json",
+          "entities": 85,
+          "approved": 85,
+          "noExplanation": 0,
+          "bytes": 76191,
+          "checksum": "0765b2c1bec06f79fc4f4ea370146577698b7b3aed52712c45ddc6acb65ba6a1"
+        },
+        "20": {
+          "file": "greek-nt/20.json",
+          "entities": 84,
+          "approved": 84,
+          "noExplanation": 0,
+          "bytes": 79137,
+          "checksum": "975ff7a2e5fab6d06e7f8fbf1d8ad9fca27189aee21acc1bad7f9de2a2b9ee43"
+        },
+        "21": {
+          "file": "greek-nt/21.json",
+          "entities": 88,
+          "approved": 88,
+          "noExplanation": 0,
+          "bytes": 79259,
+          "checksum": "ed395dd077013eda68f114834cae234599ba9b5f63f7b7c2f5bbc492c498b0dc"
+        },
+        "22": {
+          "file": "greek-nt/22.json",
+          "entities": 85,
+          "approved": 84,
+          "noExplanation": 1,
+          "bytes": 80805,
+          "checksum": "d29563ac1efdf2c21629bd3fd1324ea56f7b3c6f2c8b58327bfdee3894e9dbcc"
+        },
+        "23": {
+          "file": "greek-nt/23.json",
+          "entities": 88,
+          "approved": 88,
+          "noExplanation": 0,
+          "bytes": 84015,
+          "checksum": "6e8a1c4af8562942edc4020002e52de73e48ab2fdcded8c914b6d48245a99a16"
+        },
+        "24": {
+          "file": "greek-nt/24.json",
+          "entities": 85,
+          "approved": 85,
+          "noExplanation": 0,
+          "bytes": 77327,
+          "checksum": "680498f76cf82442fbb1adbb4bdb00c4b0b13efd82c57089f3c8b40793576f25"
+        },
+        "25": {
+          "file": "greek-nt/25.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 74897,
+          "checksum": "093f0fb58e58df5c3aedc8d59d22d5bc2aca73583c28011b8d2d143714b8f467"
+        },
+        "26": {
+          "file": "greek-nt/26.json",
+          "entities": 84,
+          "approved": 84,
+          "noExplanation": 0,
+          "bytes": 76297,
+          "checksum": "7de27dbe18486f24f34c3fe4d23a14838ec20eb5946773ae06fc6369ad856392"
+        },
+        "27": {
+          "file": "greek-nt/27.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 76863,
+          "checksum": "c9958ee3c4ed91854b2e5ec2fbc1ff032988e1456581121ddb25bd5c51440227"
+        },
+        "28": {
+          "file": "greek-nt/28.json",
+          "entities": 84,
+          "approved": 84,
+          "noExplanation": 0,
+          "bytes": 80466,
+          "checksum": "831c9e2843e748a56ff4c627cbc1cf260d3ac3b6e5b136c95f8df0e331a6635e"
+        },
+        "29": {
+          "file": "greek-nt/29.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 78279,
+          "checksum": "67b09360400b5c969b0e31957410463777df7780d32e616566d25a07c39afa89"
+        },
+        "30": {
+          "file": "greek-nt/30.json",
+          "entities": 85,
+          "approved": 85,
+          "noExplanation": 0,
+          "bytes": 81981,
+          "checksum": "596410eedd98869b0feca8b90ac86b86759f617620bba94ee2714dda75f1cd3e"
+        },
+        "31": {
+          "file": "greek-nt/31.json",
+          "entities": 75,
+          "approved": 75,
+          "noExplanation": 0,
+          "bytes": 71530,
+          "checksum": "05b63bf9337ef3b188042bd840bdf9fb8c047fd5a51c03144a4ea1a2c75b813e"
+        },
+        "32": {
+          "file": "greek-nt/32.json",
+          "entities": 92,
+          "approved": 92,
+          "noExplanation": 0,
+          "bytes": 86867,
+          "checksum": "86fa1fab584aaf76839a0159aa7646548846aa30042d9312f977a67d6c3a8627"
+        },
+        "33": {
+          "file": "greek-nt/33.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 96572,
+          "checksum": "5e7ee992b2215d16481c7df7bc8787ba99e9d3ddd5cb81e20dc41b41cf17e0d9"
+        },
+        "34": {
+          "file": "greek-nt/34.json",
+          "entities": 84,
+          "approved": 84,
+          "noExplanation": 0,
+          "bytes": 78099,
+          "checksum": "870703fb99ab3e4f3cd31e7ffdf4acc62ecd9b71720d3eb632f053ed60e10d7e"
+        },
+        "35": {
+          "file": "greek-nt/35.json",
+          "entities": 85,
+          "approved": 85,
+          "noExplanation": 0,
+          "bytes": 79891,
+          "checksum": "b440a5a5b1568450bb9d059c40cb5069990cb94557faa8f0f2c6e5d27a91c04c"
+        },
+        "36": {
+          "file": "greek-nt/36.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 78668,
+          "checksum": "3d31b58bdfb0b9a0ed22595d61adf56e8d7478028bf69cd0e01810423ea2095e"
+        },
+        "37": {
+          "file": "greek-nt/37.json",
+          "entities": 77,
+          "approved": 76,
+          "noExplanation": 1,
+          "bytes": 73701,
+          "checksum": "8bc2321b05588f79fca6f29bb5df463399f30b973434ee1d819e11de91901bb0"
+        },
+        "38": {
+          "file": "greek-nt/38.json",
+          "entities": 82,
+          "approved": 82,
+          "noExplanation": 0,
+          "bytes": 80211,
+          "checksum": "926e2595d764dbd50c02039db62164bfa311f39e8a7dd6061c347f8ffc54f6b0"
+        },
+        "39": {
+          "file": "greek-nt/39.json",
+          "entities": 85,
+          "approved": 84,
+          "noExplanation": 1,
+          "bytes": 77202,
+          "checksum": "82fcd3658ba1c67ffafc35287854a88ec5598105a96f630908a70efcec2fc442"
+        },
+        "00": {
+          "file": "greek-nt/00.json",
+          "entities": 85,
+          "approved": 85,
+          "noExplanation": 0,
+          "bytes": 73543,
+          "checksum": "cbc09bb9c33d51976c88ebe2545306bfb85acf8bce951016bfac61f6e6e73d3d"
+        },
+        "01": {
+          "file": "greek-nt/01.json",
+          "entities": 87,
+          "approved": 86,
+          "noExplanation": 1,
+          "bytes": 79545,
+          "checksum": "6c81ba7507873c981dce30a904ab7087048596928cd330c8c1bd1c9bfe9c16c4"
+        },
+        "02": {
+          "file": "greek-nt/02.json",
+          "entities": 92,
+          "approved": 92,
+          "noExplanation": 0,
+          "bytes": 86555,
+          "checksum": "447157d0615949d3e9800bd8f8e59770835e0960a213ee416de224c6f9c18c91"
+        },
+        "03": {
+          "file": "greek-nt/03.json",
+          "entities": 81,
+          "approved": 81,
+          "noExplanation": 0,
+          "bytes": 72714,
+          "checksum": "63ab1214eeac60443f444b360a361fc45bef2800ee87f95be7301f78d52aea27"
+        },
+        "04": {
+          "file": "greek-nt/04.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 74777,
+          "checksum": "8c162b49283db7d75ab8babc07849a57981712c61b73180876c70a538d304f5d"
+        },
+        "05": {
+          "file": "greek-nt/05.json",
+          "entities": 92,
+          "approved": 91,
+          "noExplanation": 1,
+          "bytes": 86689,
+          "checksum": "5b44558c8983306b01c7a7672ad3186bcc449d50caa94e220a7e6784722c1035"
+        },
+        "06": {
+          "file": "greek-nt/06.json",
+          "entities": 85,
+          "approved": 84,
+          "noExplanation": 1,
+          "bytes": 82409,
+          "checksum": "03dc3d630598b47b8c46bbe632f7c3b0336e9c94ecd51f0e3d5fb52380e3ad3c"
+        },
+        "07": {
+          "file": "greek-nt/07.json",
+          "entities": 80,
+          "approved": 80,
+          "noExplanation": 0,
+          "bytes": 75395,
+          "checksum": "095c97d50293f4f7e4199c4e914c53a749095299d0a91c251bf5e2fb7a11a32f"
+        },
+        "08": {
+          "file": "greek-nt/08.json",
+          "entities": 88,
+          "approved": 88,
+          "noExplanation": 0,
+          "bytes": 83335,
+          "checksum": "ccad03b6037ebb6d11071c856257b24363193bc5842292525810c808e0d4af0c"
+        },
+        "09": {
+          "file": "greek-nt/09.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 77782,
+          "checksum": "e45bd49c2ba60d9d00b707f25f43bc70e43079ba3feb91b9ab21485d94a10b06"
+        },
+        "0a": {
+          "file": "greek-nt/0a.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 78289,
+          "checksum": "c3fa9ece0091feef707cd0681205a77faef3a631a291fb38f29b7297de1268ec"
+        },
+        "0b": {
+          "file": "greek-nt/0b.json",
+          "entities": 79,
+          "approved": 79,
+          "noExplanation": 0,
+          "bytes": 77306,
+          "checksum": "02cea1add93ba497d1502aa2aa9d71d2aca1a50ecae8fdf54e3a8bee2f849951"
+        },
+        "0c": {
+          "file": "greek-nt/0c.json",
+          "entities": 88,
+          "approved": 87,
+          "noExplanation": 1,
+          "bytes": 81314,
+          "checksum": "7cfd74eb9cff8830f4402ff1bb886560df9628c5ef70732d1916d62db9d1a321"
+        },
+        "0d": {
+          "file": "greek-nt/0d.json",
+          "entities": 79,
+          "approved": 79,
+          "noExplanation": 0,
+          "bytes": 73237,
+          "checksum": "3ec8ef4238721c9d50f9676d602c2b41de67b28cf4aa673f4e640b0021a0cae1"
+        },
+        "0e": {
+          "file": "greek-nt/0e.json",
+          "entities": 86,
+          "approved": 86,
+          "noExplanation": 0,
+          "bytes": 80494,
+          "checksum": "7bbce77217c7cdb3239f9fda8cb629d0fcb87f11a4ec2c2bb500836ac194c7e4"
+        },
+        "0f": {
+          "file": "greek-nt/0f.json",
+          "entities": 89,
+          "approved": 89,
+          "noExplanation": 0,
+          "bytes": 81407,
+          "checksum": "b8824e514da91cbd76fefa4d72379ff2ed26a032658e952e916a51e7ad1fcbdc"
+        },
+        "1a": {
+          "file": "greek-nt/1a.json",
+          "entities": 83,
+          "approved": 82,
+          "noExplanation": 1,
+          "bytes": 75651,
+          "checksum": "ecdb6c767df59377b2430c8ebc3f2000bad72495645d034c91add37de02cdc4c"
+        },
+        "1b": {
+          "file": "greek-nt/1b.json",
+          "entities": 85,
+          "approved": 85,
+          "noExplanation": 0,
+          "bytes": 82870,
+          "checksum": "a5199aac3a06e5cef157f406502f5ad8fad1770b07707812387b797dd42677a5"
+        },
+        "1c": {
+          "file": "greek-nt/1c.json",
+          "entities": 85,
+          "approved": 85,
+          "noExplanation": 0,
+          "bytes": 80961,
+          "checksum": "bd8b21e030633fa4bb255b02cf564b6d36fae40335ab92033caf3d99c23ef736"
+        },
+        "1d": {
+          "file": "greek-nt/1d.json",
+          "entities": 81,
+          "approved": 81,
+          "noExplanation": 0,
+          "bytes": 76078,
+          "checksum": "3837520097df62216e000610736cfb43a6762046fcb3d9dd5302218929779c4d"
+        },
+        "1e": {
+          "file": "greek-nt/1e.json",
+          "entities": 79,
+          "approved": 79,
+          "noExplanation": 0,
+          "bytes": 74601,
+          "checksum": "546d31b0fb4f7a29ef468f6ad6b2eb756367c45775e23c029378b69f67c281cc"
+        },
+        "1f": {
+          "file": "greek-nt/1f.json",
+          "entities": 89,
+          "approved": 89,
+          "noExplanation": 0,
+          "bytes": 82468,
+          "checksum": "40cd6cdf25b890a5c947666ee346de456c90631104b32588b8365d1d65bf7c25"
+        },
+        "2a": {
+          "file": "greek-nt/2a.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 81611,
+          "checksum": "b4ed1a9bf2ec2d403030d002b1a86627722c77d55c0db789037a7469a87e975e"
+        },
+        "2b": {
+          "file": "greek-nt/2b.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 76311,
+          "checksum": "5965a9160a369a8cb35e6e82e68aa6435fe55f7481902dc971dad5ecb2793bb0"
+        },
+        "2c": {
+          "file": "greek-nt/2c.json",
+          "entities": 84,
+          "approved": 84,
+          "noExplanation": 0,
+          "bytes": 77696,
+          "checksum": "c6c653dd50c5a08b6008e06574d58e20e89af77b8bdc8b306fd1ebb585442f74"
+        },
+        "2d": {
+          "file": "greek-nt/2d.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 75813,
+          "checksum": "ce23bb4ffcf6a728ff71bd92a1477b1efe087dfcb7f2d5e03bfde2ee9d04c64c"
+        },
+        "2e": {
+          "file": "greek-nt/2e.json",
+          "entities": 86,
+          "approved": 86,
+          "noExplanation": 0,
+          "bytes": 78532,
+          "checksum": "0ccef84b9a0edd28e0b0f71a607a2f1e4bfabf23ebab80e94009099ff548781c"
+        },
+        "2f": {
+          "file": "greek-nt/2f.json",
+          "entities": 84,
+          "approved": 84,
+          "noExplanation": 0,
+          "bytes": 78369,
+          "checksum": "9a095340f28d76e4475eb3873eb30706679afc0a547b0b42a949f8b92b008259"
+        },
+        "3a": {
+          "file": "greek-nt/3a.json",
+          "entities": 83,
+          "approved": 83,
+          "noExplanation": 0,
+          "bytes": 76597,
+          "checksum": "8da09be625bc9672cd0745d36a936f03855855ba88906d4734b2e3332b619829"
+        },
+        "3b": {
+          "file": "greek-nt/3b.json",
+          "entities": 85,
+          "approved": 83,
+          "noExplanation": 2,
+          "bytes": 77812,
+          "checksum": "67f14953f6b8f4d632974b1bdd459e692131684b956e95a0aa1b2b0a6adb7aaa"
+        },
+        "3c": {
+          "file": "greek-nt/3c.json",
+          "entities": 80,
+          "approved": 80,
+          "noExplanation": 0,
+          "bytes": 73313,
+          "checksum": "23ae59697b1af80092ffc3854fc3ee74db2d05c4405c1fba137cc9426913389e"
+        },
+        "3d": {
+          "file": "greek-nt/3d.json",
+          "entities": 79,
+          "approved": 79,
+          "noExplanation": 0,
+          "bytes": 72767,
+          "checksum": "96d9dd536250ea9ca730340d3cc3e17c766b5f4edbe2ab44beec46878066bb83"
+        },
+        "3e": {
+          "file": "greek-nt/3e.json",
+          "entities": 79,
+          "approved": 79,
+          "noExplanation": 0,
+          "bytes": 73463,
+          "checksum": "7941b2753f461e3dc43e8ebe0a06a43092dddc70ac06d6628f6f891f90de7632"
+        },
+        "3f": {
+          "file": "greek-nt/3f.json",
+          "entities": 87,
+          "approved": 87,
+          "noExplanation": 0,
+          "bytes": 81387,
+          "checksum": "9d3f2cff9895bd02228ed572691161d4b4469e1a7254fe1287c86207ecd0bf52"
+        }
+      }
+    },
+    "lxx": {
+      "entities": 13170,
+      "approved": 12998,
+      "noExplanation": 172,
+      "shards": {
+        "10": {
+          "file": "lxx/10.json",
+          "entities": 214,
+          "approved": 211,
+          "noExplanation": 3,
+          "bytes": 237307,
+          "checksum": "ac537524f67aa2db3d3f67fa08976115a102640befb6925c59172568851f9274"
+        },
+        "11": {
+          "file": "lxx/11.json",
+          "entities": 196,
+          "approved": 194,
+          "noExplanation": 2,
+          "bytes": 212489,
+          "checksum": "7398e2bb4dd80d86b6b62f6a946693fee05d1e4704046d359cb5792dfd59b5b4"
+        },
+        "12": {
+          "file": "lxx/12.json",
+          "entities": 214,
+          "approved": 213,
+          "noExplanation": 1,
+          "bytes": 230100,
+          "checksum": "e8a77987149e7c7aa10cda07cf199a07f09f600ab4b7f9625c8ef2d9564418d2"
+        },
+        "13": {
+          "file": "lxx/13.json",
+          "entities": 211,
+          "approved": 208,
+          "noExplanation": 3,
+          "bytes": 229332,
+          "checksum": "5bf42574c4bd3342ca8934873df4f560eeda0fbb3cc3b3a4adedd2d80c4e1744"
+        },
+        "14": {
+          "file": "lxx/14.json",
+          "entities": 205,
+          "approved": 203,
+          "noExplanation": 2,
+          "bytes": 214843,
+          "checksum": "2c370674f37428a32e32f8fceb72bd6eda295213b690581ee3f84bf8b23664a2"
+        },
+        "15": {
+          "file": "lxx/15.json",
+          "entities": 201,
+          "approved": 199,
+          "noExplanation": 2,
+          "bytes": 211013,
+          "checksum": "cda83e1d649990e4c267247d52c74618a342c3c180850911f16fc1085e0d0c1d"
+        },
+        "16": {
+          "file": "lxx/16.json",
+          "entities": 208,
+          "approved": 202,
+          "noExplanation": 6,
+          "bytes": 219330,
+          "checksum": "9842f8c826111cdd72543479e7096be2ed0f01e5dfbf9ea3f04e4d22a4be1c5b"
+        },
+        "17": {
+          "file": "lxx/17.json",
+          "entities": 207,
+          "approved": 203,
+          "noExplanation": 4,
+          "bytes": 219371,
+          "checksum": "bf22eb30ffde03c2212187c7c150bf40ad8b0d7d043231c5aeb71c4bf46c5f98"
+        },
+        "18": {
+          "file": "lxx/18.json",
+          "entities": 200,
+          "approved": 195,
+          "noExplanation": 5,
+          "bytes": 211410,
+          "checksum": "65a0df28f8bcd471a568fd8d25e9ea4f961f8aa962f83405a1230213dd23e52c"
+        },
+        "19": {
+          "file": "lxx/19.json",
+          "entities": 215,
+          "approved": 214,
+          "noExplanation": 1,
+          "bytes": 224612,
+          "checksum": "bf47dad1db248cc9792a94cd862b9a6f487026cf7b96519f4064f9b6bd687c66"
+        },
+        "20": {
+          "file": "lxx/20.json",
+          "entities": 204,
+          "approved": 201,
+          "noExplanation": 3,
+          "bytes": 218195,
+          "checksum": "d3562898909f6f62efcad7cfb055f5aa177d11913f81d0cb27c7dd58617340de"
+        },
+        "21": {
+          "file": "lxx/21.json",
+          "entities": 202,
+          "approved": 199,
+          "noExplanation": 3,
+          "bytes": 210397,
+          "checksum": "a705e7ba46eb94378364414d6e5a5c7e7084a834151bfe8cf8cec48087b01db1"
+        },
+        "22": {
+          "file": "lxx/22.json",
+          "entities": 222,
+          "approved": 219,
+          "noExplanation": 3,
+          "bytes": 234449,
+          "checksum": "d673ab8bdd7dcf13cd3b50e43a99377830866245643a63914d1d386b988805bc"
+        },
+        "23": {
+          "file": "lxx/23.json",
+          "entities": 210,
+          "approved": 210,
+          "noExplanation": 0,
+          "bytes": 223428,
+          "checksum": "549f5308a8b10b49f2747eaee59183efa98b4baa1a667cb4507e54438e2ab289"
+        },
+        "24": {
+          "file": "lxx/24.json",
+          "entities": 201,
+          "approved": 192,
+          "noExplanation": 9,
+          "bytes": 224355,
+          "checksum": "166e323da763063d3b3e2fd43bbaf6412686a5938aa0581fe51eb530394ed7eb"
+        },
+        "25": {
+          "file": "lxx/25.json",
+          "entities": 209,
+          "approved": 203,
+          "noExplanation": 6,
+          "bytes": 227162,
+          "checksum": "bb52fe7eeecad7565ce10b2f4ff4c9053da189765ed2d74618cf841ac0131c68"
+        },
+        "26": {
+          "file": "lxx/26.json",
+          "entities": 209,
+          "approved": 206,
+          "noExplanation": 3,
+          "bytes": 220285,
+          "checksum": "7237ee956e0fa7eb60dc4a6a855b1a263766ead063a107d2fd3e995e3d493da2"
+        },
+        "27": {
+          "file": "lxx/27.json",
+          "entities": 203,
+          "approved": 200,
+          "noExplanation": 3,
+          "bytes": 218060,
+          "checksum": "6318fbc510236289a755dd6eabf3fee5b768a159442e16d4fffe4defe163b483"
+        },
+        "28": {
+          "file": "lxx/28.json",
+          "entities": 204,
+          "approved": 203,
+          "noExplanation": 1,
+          "bytes": 216293,
+          "checksum": "145c35f7aad391c70e16d5643bcc1ed4b8370deaf7a8d81a46933f68b8f91052"
+        },
+        "29": {
+          "file": "lxx/29.json",
+          "entities": 210,
+          "approved": 206,
+          "noExplanation": 4,
+          "bytes": 228009,
+          "checksum": "d4b72aa6a16b2f3f4550a152dbd64bba6f9af9adffe04b3f58033667fb37774a"
+        },
+        "30": {
+          "file": "lxx/30.json",
+          "entities": 213,
+          "approved": 210,
+          "noExplanation": 3,
+          "bytes": 233229,
+          "checksum": "fe5443c2edd36192a4aca0f6ec844763412d6519ca45b8efba22408dd3258e66"
+        },
+        "31": {
+          "file": "lxx/31.json",
+          "entities": 199,
+          "approved": 196,
+          "noExplanation": 3,
+          "bytes": 205658,
+          "checksum": "2042bd1e685d06d2f770acae02aec828e41a09d786b615ab473457fbab8d3d0c"
+        },
+        "32": {
+          "file": "lxx/32.json",
+          "entities": 207,
+          "approved": 204,
+          "noExplanation": 3,
+          "bytes": 221585,
+          "checksum": "5d7cdc67b20d71c6665476cf9192f16e0dc11a4d4c387dde19a6955ca853c8e4"
+        },
+        "33": {
+          "file": "lxx/33.json",
+          "entities": 207,
+          "approved": 202,
+          "noExplanation": 5,
+          "bytes": 233875,
+          "checksum": "96d4f33e284556bebbac4cff398289f2a04d06f0d0c96fd9f46d1c8e8c0ec2ee"
+        },
+        "34": {
+          "file": "lxx/34.json",
+          "entities": 201,
+          "approved": 199,
+          "noExplanation": 2,
+          "bytes": 212875,
+          "checksum": "8ebfa446f533562ccc890534b27269088e023d43d72070f38a38a33a59bd4555"
+        },
+        "35": {
+          "file": "lxx/35.json",
+          "entities": 218,
+          "approved": 216,
+          "noExplanation": 2,
+          "bytes": 231558,
+          "checksum": "56e1b63bd365432b1ea284033aac416cf6b50c545143ce61e093124f583b160a"
+        },
+        "36": {
+          "file": "lxx/36.json",
+          "entities": 202,
+          "approved": 201,
+          "noExplanation": 1,
+          "bytes": 212194,
+          "checksum": "cb07b15cbf817f7ee1919a375d2c151faa4caae07528343f0eea7eef639a0671"
+        },
+        "37": {
+          "file": "lxx/37.json",
+          "entities": 204,
+          "approved": 202,
+          "noExplanation": 2,
+          "bytes": 212001,
+          "checksum": "5969d75a166edbf9c9db73216895658a66021b4be6f303798a350912f6bd7a79"
+        },
+        "38": {
+          "file": "lxx/38.json",
+          "entities": 201,
+          "approved": 198,
+          "noExplanation": 3,
+          "bytes": 220186,
+          "checksum": "587b0d0c5255b68c5a7c897db11d0151faf42d1d357519c6c5f6368eb8db1d30"
+        },
+        "39": {
+          "file": "lxx/39.json",
+          "entities": 212,
+          "approved": 210,
+          "noExplanation": 2,
+          "bytes": 226962,
+          "checksum": "469abdc338328b5cea4ec1697c691a376f682cf5fe3d1995bc62ce6219b3f3f1"
+        },
+        "00": {
+          "file": "lxx/00.json",
+          "entities": 203,
+          "approved": 201,
+          "noExplanation": 2,
+          "bytes": 213272,
+          "checksum": "1e61efad6556613685c8ab72707ad26351cafa28fe5cda2ac20494917d59aaf4"
+        },
+        "01": {
+          "file": "lxx/01.json",
+          "entities": 219,
+          "approved": 219,
+          "noExplanation": 0,
+          "bytes": 225671,
+          "checksum": "cecfdac5e7243b7b4c224fe558316689c2cda289b814c4686f7df04fbc7b0269"
+        },
+        "02": {
+          "file": "lxx/02.json",
+          "entities": 208,
+          "approved": 204,
+          "noExplanation": 4,
+          "bytes": 223387,
+          "checksum": "87dfc84f344d58653124ded3a81905b5e63e6cfce254bcd1782401c0336e957e"
+        },
+        "03": {
+          "file": "lxx/03.json",
+          "entities": 209,
+          "approved": 206,
+          "noExplanation": 3,
+          "bytes": 228792,
+          "checksum": "22b50eebfda0e96a63e530ffd2816c4373fb4b80e38b493964755e9ac3c6a8a3"
+        },
+        "04": {
+          "file": "lxx/04.json",
+          "entities": 205,
+          "approved": 203,
+          "noExplanation": 2,
+          "bytes": 215162,
+          "checksum": "9c4669508d7ac74a7618da88bb3e0a288fd318225c0606359ef4f4225147d92b"
+        },
+        "05": {
+          "file": "lxx/05.json",
+          "entities": 202,
+          "approved": 199,
+          "noExplanation": 3,
+          "bytes": 216629,
+          "checksum": "b90661b4f3bb065bec4aa80a859a5e8ff98e8c53dd11432eb115f431c6567a39"
+        },
+        "06": {
+          "file": "lxx/06.json",
+          "entities": 218,
+          "approved": 217,
+          "noExplanation": 1,
+          "bytes": 236021,
+          "checksum": "bd9d991e753e62c1777c1827915505bcc99bcce4a3f8491c08a544ca7747609e"
+        },
+        "07": {
+          "file": "lxx/07.json",
+          "entities": 199,
+          "approved": 196,
+          "noExplanation": 3,
+          "bytes": 218165,
+          "checksum": "eb74c12366270d53c9a7a475ac19c6683ae8fa57798b6f444285747112034870"
+        },
+        "08": {
+          "file": "lxx/08.json",
+          "entities": 211,
+          "approved": 211,
+          "noExplanation": 0,
+          "bytes": 227863,
+          "checksum": "dd50d88360e6ba995cfc1a6c41275d4947a708b062982b504673478362b795f1"
+        },
+        "09": {
+          "file": "lxx/09.json",
+          "entities": 206,
+          "approved": 204,
+          "noExplanation": 2,
+          "bytes": 211888,
+          "checksum": "82bbb0b7cccd77dcb3b1115b15ba195d8d0b08670f470f616cc78301d6a76c1c"
+        },
+        "0a": {
+          "file": "lxx/0a.json",
+          "entities": 200,
+          "approved": 195,
+          "noExplanation": 5,
+          "bytes": 217830,
+          "checksum": "eeaaa0dc248b8de7bceaeb31a03acc00e9ef4700cf3704af2af328149e611d65"
+        },
+        "0b": {
+          "file": "lxx/0b.json",
+          "entities": 205,
+          "approved": 203,
+          "noExplanation": 2,
+          "bytes": 218402,
+          "checksum": "27420739dc24bf22b9e2e382f94155528aa00993566f5ed4bb7b02a550c60d5c"
+        },
+        "0c": {
+          "file": "lxx/0c.json",
+          "entities": 198,
+          "approved": 196,
+          "noExplanation": 2,
+          "bytes": 213046,
+          "checksum": "6b858ddce22f1d2bb1ea126866dcbbffa9bf97c76f49acbbb2632f3f2b54ea37"
+        },
+        "0d": {
+          "file": "lxx/0d.json",
+          "entities": 203,
+          "approved": 201,
+          "noExplanation": 2,
+          "bytes": 213441,
+          "checksum": "e465dfcd60bb675dec7d8f4e00babbeca79e856514b455bf12bc524f69d626ba"
+        },
+        "0e": {
+          "file": "lxx/0e.json",
+          "entities": 207,
+          "approved": 205,
+          "noExplanation": 2,
+          "bytes": 222715,
+          "checksum": "f3e2ff4f99202b5ac9e17866929dc306acf4071d8f4b8907ffa488a13c47c5e8"
+        },
+        "0f": {
+          "file": "lxx/0f.json",
+          "entities": 212,
+          "approved": 208,
+          "noExplanation": 4,
+          "bytes": 223948,
+          "checksum": "5e9475a171a6b5f0eee618813977a465999b795f68bf0a17f1a6a7c27f5001d3"
+        },
+        "1a": {
+          "file": "lxx/1a.json",
+          "entities": 208,
+          "approved": 205,
+          "noExplanation": 3,
+          "bytes": 225570,
+          "checksum": "71d38364da192edeb385d3e1a21ab411b78bc498a7da543c9b4472fd6b47aa00"
+        },
+        "1b": {
+          "file": "lxx/1b.json",
+          "entities": 210,
+          "approved": 207,
+          "noExplanation": 3,
+          "bytes": 231579,
+          "checksum": "866b6ee5a868e21920820f2926c7f84b754e5c7f8dccd0db967c991fa6576157"
+        },
+        "1c": {
+          "file": "lxx/1c.json",
+          "entities": 209,
+          "approved": 206,
+          "noExplanation": 3,
+          "bytes": 224094,
+          "checksum": "3277479b5a5d8de874d747a79060df32e5043d180f201556506e8394cbca2900"
+        },
+        "1d": {
+          "file": "lxx/1d.json",
+          "entities": 192,
+          "approved": 191,
+          "noExplanation": 1,
+          "bytes": 201583,
+          "checksum": "52c6aa06de8a2a98150ba89a7bb974c61a4a7512a7580f1f2155c6bedd9a6925"
+        },
+        "1e": {
+          "file": "lxx/1e.json",
+          "entities": 194,
+          "approved": 194,
+          "noExplanation": 0,
+          "bytes": 206546,
+          "checksum": "08ad063fe446c1971712e5da4ab8bb914cff378fe08577cb092845fe65931e0e"
+        },
+        "1f": {
+          "file": "lxx/1f.json",
+          "entities": 200,
+          "approved": 198,
+          "noExplanation": 2,
+          "bytes": 207067,
+          "checksum": "18d7d083b780fc383ce809ea4f5045add80ddbf91ea5451ef0ffd82d4f91d2a6"
+        },
+        "2a": {
+          "file": "lxx/2a.json",
+          "entities": 201,
+          "approved": 199,
+          "noExplanation": 2,
+          "bytes": 213073,
+          "checksum": "f2e2d09ae01e8eb4170e32906785ecf764f260a4db445b102a5a2a0b00d21a8c"
+        },
+        "2b": {
+          "file": "lxx/2b.json",
+          "entities": 202,
+          "approved": 201,
+          "noExplanation": 1,
+          "bytes": 212815,
+          "checksum": "4ed62511afb366a2f9cb3dbd0b661dc5b8aa113e08946ec623d2fa8ec2b17357"
+        },
+        "2c": {
+          "file": "lxx/2c.json",
+          "entities": 212,
+          "approved": 210,
+          "noExplanation": 2,
+          "bytes": 220909,
+          "checksum": "85b715db940ec9c8cb6ea60b0c3d06d6aab207a954a1eaf00fb444f861124536"
+        },
+        "2d": {
+          "file": "lxx/2d.json",
+          "entities": 199,
+          "approved": 196,
+          "noExplanation": 3,
+          "bytes": 210817,
+          "checksum": "685a67bccc606b162968b78d384248c3d45361fee534cda33e26a919d02ff352"
+        },
+        "2e": {
+          "file": "lxx/2e.json",
+          "entities": 208,
+          "approved": 202,
+          "noExplanation": 6,
+          "bytes": 214267,
+          "checksum": "7e737cadd75e0463cab513a19bd0a49772d595d59a479277bc1717974ea8f373"
+        },
+        "2f": {
+          "file": "lxx/2f.json",
+          "entities": 197,
+          "approved": 193,
+          "noExplanation": 4,
+          "bytes": 210134,
+          "checksum": "5459df857fb7167b4a4e26cf0a43bb771bda4468885320030b2de84a5e09c001"
+        },
+        "3a": {
+          "file": "lxx/3a.json",
+          "entities": 201,
+          "approved": 197,
+          "noExplanation": 4,
+          "bytes": 214697,
+          "checksum": "2094982610fe8891d4ec26355171a2478ce47facc516779fed9f0aff5a57155b"
+        },
+        "3b": {
+          "file": "lxx/3b.json",
+          "entities": 205,
+          "approved": 201,
+          "noExplanation": 4,
+          "bytes": 219913,
+          "checksum": "9ba865c1894566705e7e84469175e8d767873277aa01c346df9b9173ba92134d"
+        },
+        "3c": {
+          "file": "lxx/3c.json",
+          "entities": 204,
+          "approved": 202,
+          "noExplanation": 2,
+          "bytes": 221572,
+          "checksum": "1a5adab958ac893f5c8ccbadac2d7645cb28505bd173da6dc91630f1286a73a2"
+        },
+        "3d": {
+          "file": "lxx/3d.json",
+          "entities": 204,
+          "approved": 203,
+          "noExplanation": 1,
+          "bytes": 214735,
+          "checksum": "7d7ad10ab6e9a0275ec455fa08d6e3cb2f650dbe8cc09683645f28807538e83c"
+        },
+        "3e": {
+          "file": "lxx/3e.json",
+          "entities": 203,
+          "approved": 201,
+          "noExplanation": 2,
+          "bytes": 214457,
+          "checksum": "7619f91a027d780c6784e6458b7c6cbde5e30f20ef8a2131019e05b7b2951bfc"
+        },
+        "3f": {
+          "file": "lxx/3f.json",
+          "entities": 207,
+          "approved": 205,
+          "noExplanation": 2,
+          "bytes": 219428,
+          "checksum": "24bc1a92a6beda9ade1a65582e5859bb5b183c343fcf9002c4bc8a8c5b4fec29"
+        }
+      }
+    }
+  },
+  "totals": {
+    "entities": 27184,
+    "approved": 26896,
+    "noExplanation": 288,
+    "shards": 192,
+    "byCorpus": {
+      "hebrew": 8634,
+      "greek-nt": 5380,
+      "lxx": 13170
+    }
+  },
+  "checksum": "8d478d88aefe5f5555b8e94775cce9dbda40e09635408e55f4b5b10a929d8cba"
+}
