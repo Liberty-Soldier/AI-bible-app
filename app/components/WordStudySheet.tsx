@@ -544,7 +544,7 @@ function isReaderReadyLexicalMeaning(value?: string) {
   if (clean.length > 120) return false;
   if (/[;:]/.test(clean)) return false;
   if (
-    /\b(symbolical|properly|figuratively|by implication|from an unused root|a primitive root|compare|proper name|name of|symbolical name|capital city|city of|town of|region of|country of|inhabitant|patronymic)\b/i.test(
+    /\b(symbolical|properly|figuratively|by implication|abstractly|literally|etymologically|apparently|perhaps|contracted|denominative|causative|intensive|from its|from an unused root|a primitive root|compare|proper name|name of|symbolical name|capital city|city of|town of|region of|country of|inhabitant|patronymic)\b/i.test(
       clean,
     )
   ) {
@@ -570,6 +570,95 @@ function getPrimaryLexicalMeaning(
   }
 
   return "";
+}
+
+
+function firstReaderSentence(value?: string) {
+  const clean = String(value || "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!clean) return "";
+
+  const match = clean.match(/^(.+?[.!?])(?:\s|$)/u);
+  return (match?.[1] || clean).trim();
+}
+
+function capitalizeReaderMeaning(value: string) {
+  const clean = String(value || "").trim();
+  if (!clean) return "";
+
+  const firstLetter = clean.search(/[A-Za-zÀ-ÖØ-öø-ÿĀ-ž]/u);
+  if (firstLetter < 0) return clean;
+
+  return (
+    clean.slice(0, firstLetter) +
+    clean[firstLetter].toLocaleUpperCase() +
+    clean.slice(firstLetter + 1)
+  );
+}
+
+function deriveReaderFirstMeaning({
+  lexicalMeaning,
+  lexicalMeaningIsRaw,
+  emetExplanation,
+  meaningHere,
+  principalRenderings,
+  selectedEnglish,
+}: {
+  lexicalMeaning: string;
+  lexicalMeaningIsRaw: boolean;
+  emetExplanation?: string;
+  meaningHere: string;
+  principalRenderings: BibleIQRenderingForm[];
+  selectedEnglish: string;
+}) {
+  if (lexicalMeaning && !lexicalMeaningIsRaw) return lexicalMeaning;
+
+  const emetSentence = firstReaderSentence(emetExplanation);
+  if (emetSentence) {
+    const directMeaning = emetSentence.match(
+      /^(?:[\p{L}\p{M}'’ʼ.\-]+(?:\s+[\p{L}\p{M}'’ʼ.\-]+){0,3})\s+(?:means|can\s+mean|refers\s+to|can\s+refer\s+to|names|can\s+name|is|can\s+be)\s+(.+)$/iu,
+    );
+
+    if (directMeaning?.[1]) {
+      return capitalizeReaderMeaning(directMeaning[1]);
+    }
+
+    if (emetSentence.length <= 170) return emetSentence;
+  }
+
+  if (meaningHere && isReaderReadyStatement(meaningHere)) {
+    return meaningHere;
+  }
+
+  const renderings = principalRenderings
+    .map((form) => cleanRendering(form.text))
+    .filter(Boolean)
+    .filter((value, index, values) => {
+      const key = normalizeEnglish(value);
+      return values.findIndex((item) => normalizeEnglish(item) === key) === index;
+    })
+    .slice(0, 3);
+
+  const distinctRenderings = renderings.filter(
+    (value) => englishStem(value) !== englishStem(selectedEnglish),
+  );
+
+  if (distinctRenderings.length) {
+    return distinctRenderings.join(" · ");
+  }
+
+  return lexicalMeaning;
+}
+
+function formatReaderCitation(value: string) {
+  const clean = String(value || "").trim();
+
+  return clean.replace(
+    /^((?:[1-3]\s*)?[A-Za-z]+):(\d+):(\d+)$/u,
+    "$1 $2:$3",
+  );
 }
 
 function humanizeMorphology(
@@ -895,11 +984,6 @@ export default function WordStudySheet({
     : "";
   const overviewLexicalMeaning =
     primaryLexicalMeaning || rawPrimaryLexicalMeaning;
-  const overviewLexicalMeaningLabel = primaryLexicalMeaning
-    ? "Simple meaning"
-    : rawPrimaryLexicalMeaning
-      ? "Lexicon meaning"
-      : "";
   const overviewLexicalMeaningIsRaw =
     Boolean(rawPrimaryLexicalMeaning) && !primaryLexicalMeaning;
   const occurrenceMeaningIsReaderReady = isReaderReadyStatement(
@@ -1092,7 +1176,6 @@ export default function WordStudySheet({
               readerMeaning={readerMeaning}
               readerMeaningLabel={readerMeaningLabel}
               overviewLexicalMeaning={overviewLexicalMeaning}
-              overviewLexicalMeaningLabel={overviewLexicalMeaningLabel}
               overviewLexicalMeaningIsRaw={overviewLexicalMeaningIsRaw}
               verseText={meaningInVerse?.verseText || verseText}
               emet={emet}
@@ -1204,7 +1287,6 @@ function OverviewView({
   readerMeaning,
   readerMeaningLabel,
   overviewLexicalMeaning,
-  overviewLexicalMeaningLabel,
   overviewLexicalMeaningIsRaw,
   verseText,
   emet,
@@ -1231,7 +1313,6 @@ function OverviewView({
   readerMeaning: string;
   readerMeaningLabel: string;
   overviewLexicalMeaning: string;
-  overviewLexicalMeaningLabel: string;
   overviewLexicalMeaningIsRaw: boolean;
   verseText?: string;
   emet?: BibleIQEmet;
@@ -1247,12 +1328,29 @@ function OverviewView({
   onClose: () => void;
 }) {
   const firstHref = buildReferenceHref(firstOccurrence, returnTo, returnLabel);
+  const sourceLanguageLabel = getSourceLabel(alignment?.source);
   const originalLanguageLabel =
-    alignment?.source === "hebrew" ? "Original Hebrew" : "Original Greek";
+    alignment?.source === "hebrew"
+      ? "Hebrew details"
+      : alignment?.source === "lxx"
+        ? "Greek LXX details"
+        : "Greek details";
   const meaningHere = readerMeaning;
+  const readerFirstMeaning = deriveReaderFirstMeaning({
+    lexicalMeaning: overviewLexicalMeaning,
+    lexicalMeaningIsRaw: overviewLexicalMeaningIsRaw,
+    emetExplanation:
+      emet?.status === "complete" ? emet.explanation : undefined,
+    meaningHere,
+    principalRenderings,
+    selectedEnglish: word,
+  });
+  const sourceDictionaryWording = overviewLexicalMeaningIsRaw
+    ? overviewLexicalMeaning
+    : "";
   const showMeaningHere =
     Boolean(meaningHere) &&
-    normalizeEnglish(meaningHere) !== normalizeEnglish(overviewLexicalMeaning);
+    normalizeEnglish(meaningHere) !== normalizeEnglish(readerFirstMeaning);
 
   return (
     <div>
@@ -1263,53 +1361,82 @@ function OverviewView({
         <h2 className="mt-2 break-words text-[2.05rem] font-bold leading-[1.04] tracking-[-0.04em]">
           {word}
         </h2>
-        <p className="mt-2 text-sm font-semibold text-[var(--muted)]">
+
+        {sourceDisplay ? (
+          <div className="mt-3">
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <span
+                dir={alignment?.source === "hebrew" ? "rtl" : "ltr"}
+                className="break-words text-[1.16rem] font-semibold leading-6"
+              >
+                {sourceDisplay}
+              </span>
+              {transliteration ? (
+                <span className="text-[0.98rem] font-medium italic text-[var(--muted)]">
+                  {transliteration}
+                </span>
+              ) : null}
+              {sourceLanguageLabel ? (
+                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--muted)]">
+                  {sourceLanguageLabel}
+                </span>
+              ) : null}
+            </div>
+            <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+              {sourceLanguageLabel || "Source-language"} word behind “{word}”
+            </p>
+          </div>
+        ) : null}
+
+        <p className="mt-3 text-sm font-semibold text-[var(--muted)]">
           {book} {chapter}
           {verse ? `:${verse}` : ""} · {getTranslationLabel(translation)}
         </p>
       </header>
 
-      <section className="border-t border-[var(--border)] py-5">
-        {overviewLexicalMeaning ? (
+      <section className="border-t border-[var(--border)] py-4">
+        {readerFirstMeaning ? (
           <>
             <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-              {overviewLexicalMeaningLabel}
+              Meaning
             </p>
-            {overviewLexicalMeaningIsRaw ? (
-              <p className="mt-1 text-xs font-semibold text-[var(--muted)]">
-                Source dictionary wording
-              </p>
-            ) : null}
-            <p
-              className={`mt-2 leading-8 tracking-[-0.015em] ${
-                overviewLexicalMeaningIsRaw
-                  ? "text-[1.02rem] font-medium"
-                  : "text-[1.3rem] font-semibold"
-              }`}
-            >
-              {overviewLexicalMeaning}
+            <p className="mt-2 text-[1.28rem] font-semibold leading-8 tracking-[-0.015em]">
+              {readerFirstMeaning}
             </p>
           </>
         ) : null}
 
+        {sourceDictionaryWording &&
+        normalizeEnglish(sourceDictionaryWording) !==
+          normalizeEnglish(readerFirstMeaning) ? (
+          <div className={readerFirstMeaning ? "mt-4" : ""}>
+            <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+              Source dictionary wording
+            </p>
+            <p className="mt-1.5 text-[0.9rem] leading-6 text-[var(--muted)]">
+              {sourceDictionaryWording}
+            </p>
+          </div>
+        ) : null}
+
         {showMeaningHere ? (
-          <div className={overviewLexicalMeaning ? "mt-5" : ""}>
+          <div className={readerFirstMeaning || sourceDictionaryWording ? "mt-4" : ""}>
             <p className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[var(--muted)]">
               {readerMeaningLabel}
             </p>
-            <p className="mt-2 text-[1.05rem] leading-7">{meaningHere}</p>
+            <p className="mt-1.5 text-[1.02rem] leading-7">{meaningHere}</p>
           </div>
         ) : null}
 
         {verseText ? (
-          <blockquote className="mt-4 text-[0.95rem] italic leading-7 text-[var(--muted)]">
+          <blockquote className="mt-3 border-l-2 border-[var(--border)] pl-3 text-[0.9rem] italic leading-6 text-[var(--muted)]">
             “{verseText}”
           </blockquote>
         ) : null}
       </section>
 
       {emet?.status === "complete" && emet.explanation ? (
-        <section className="border-t border-[var(--border)] py-5">
+        <section className="border-t border-[var(--border)] py-4">
           <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
             Across Scripture
           </p>
@@ -1319,14 +1446,17 @@ function OverviewView({
           <p className="mt-3 text-[1.02rem] leading-7">{emet.explanation}</p>
           {emet.citations?.length ? (
             <p className="mt-3 text-xs font-semibold leading-5 text-[var(--muted)]">
-              Supported by {emet.citations.slice(0, 4).join(" · ")}
+              Supported by {emet.citations
+                .slice(0, 4)
+                .map(formatReaderCitation)
+                .join(" · ")}
             </p>
           ) : null}
         </section>
       ) : null}
 
       {sourceDisplay ? (
-        <section className="border-t border-[var(--border)] py-5">
+        <section className="border-t border-[var(--border)] py-4">
           <button
             type="button"
             onClick={() => onView("lexicon")}
@@ -1337,7 +1467,7 @@ function OverviewView({
                 <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
                   {originalLanguageLabel}
                 </p>
-                <p className="mt-2 break-words text-2xl font-bold leading-tight">
+                <p className="mt-2 break-words text-xl font-bold leading-tight">
                   {sourceDisplay}
                 </p>
 
