@@ -131,6 +131,14 @@ export default function ScriptureText({
         const selectedWord = cleanWord(part);
         if (!selectedWord) return part;
 
+        // Reader/display-token indices belong only to lexical display tokens.
+        // Punctuation-only markers such as the KJV paragraph sign (¶) are
+        // rendered, but they must not consume an index because the canonical
+        // and compact word-study runtimes do not index them.
+        if (!/[\p{L}\p{N}]/u.test(selectedWord)) {
+          return <span key={`${part}-${index}`}>{part}</span>;
+        }
+
         const tokenIndex = displayTokenIndex;
         displayTokenIndex += 1;
 
