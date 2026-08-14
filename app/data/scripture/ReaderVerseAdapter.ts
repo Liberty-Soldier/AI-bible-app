@@ -229,6 +229,13 @@ export function normalizeReaderVerse(value: unknown): ReaderVerse {
     raw.translationId === "brenton" ||
     Boolean(raw.lxxOwnership);
 
+
+  const defensibleLxxOwnership = Boolean(
+    lxxOwnership?.directLxxCoordinateExists &&
+      lxxOwnership?.entityRoutingEligible &&
+      lxxOwnership?.authoritativeOwnershipKey &&
+      !lxxOwnership?.exclusionReason,
+  );
   const hasExplicitTokenKey = Object.prototype.hasOwnProperty.call(
     raw,
     "tokenAvailabilityKey",
@@ -259,11 +266,16 @@ export function normalizeReaderVerse(value: unknown): ReaderVerse {
     legacyCompatibility: raw.legacyCompatibility
       ? (raw.legacyCompatibility as ReaderLegacyCompatibility)
       : undefined,
-    tokenAvailabilityKey: hasExplicitTokenKey
-      ? explicitTokenKey
-      : candidateOwnedRecord
-        ? null
-        : String(verse),
+    tokenAvailabilityKey:
+      hasExplicitTokenKey && explicitTokenKey
+        ? explicitTokenKey
+        : defensibleLxxOwnership
+          ? String(verse)
+          : hasExplicitTokenKey
+            ? null
+            : candidateOwnedRecord
+              ? null
+              : String(verse),
   };
 }
 

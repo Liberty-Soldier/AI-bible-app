@@ -13,6 +13,7 @@ const { applySacredNamesStrategy } = require("./strategies/sacredNames");
 const { applyExactWordsStrategy } = require("./strategies/exactWords");
 const { applyMorphologyStrategy } = require("./strategies/morphology");
 const { applyHighValueLexicalFamiliesStrategy } = require("./strategies/highValueLexicalFamilies");
+const { reconcileWeakSourceCollisions } = require("./strategies/weakSourceCollisions");
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -151,6 +152,14 @@ applyProperNamesStrategy(canonicalByVerse, lexicon);
 applyExactWordsStrategy(canonicalByVerse, lexicon);
 applyMorphologyStrategy(canonicalByVerse, alignmentIndex);
 applyHighValueLexicalFamiliesStrategy(canonicalByVerse);
+
+reconcileWeakSourceCollisions(canonicalByVerse, lexicon, {
+
+  translationIds: ["kjv"],
+
+  minRemoteDisplayDistance: 5,
+
+});
 
   const result = writeCorpus(corpusId, canonicalByVerse);
 
