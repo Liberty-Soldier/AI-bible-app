@@ -21,6 +21,7 @@ export const evidenceBookMap: Record<string, string> = {
   Proverbs: "Prov",
   Ecclesiastes: "Eccl",
   "Song of Solomon": "Song",
+  "Song of Songs": "Song",
   Isaiah: "Isa",
   Jeremiah: "Jer",
   Lamentations: "Lam",

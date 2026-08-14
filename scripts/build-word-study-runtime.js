@@ -268,6 +268,24 @@ function buildBook(corpus, inputFile, outputFile, aliasMap) {
     if (normalized) registerAlias(aliasMap, normalized, outputFile);
   }
 
+  // p0810-v7-song-runtime-aliases
+  // The displayed reader uses "Song of Songs"; historical EMETSEES layers
+  // also use "Song of Solomon", "Song", and "Canticles". They all own the
+  // same canonical LXX SongofSongs.json runtime book.
+  if (
+    corpus === "lxx" &&
+    normalizeAlias(path.basename(inputFile, ".json")) === "songofsongs"
+  ) {
+    for (const alias of [
+      "Song of Songs",
+      "Song of Solomon",
+      "Song",
+      "Canticles",
+    ]) {
+      registerAlias(aliasMap, alias, outputFile);
+    }
+  }
+
   return {
     file: outputFile,
     verses: Object.keys(compactVerses).length,

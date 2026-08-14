@@ -1,72 +1,128 @@
 {
-  "version": 1,
+  "version": 2,
   "edition": "kjv2006-standardized-1769",
+  "generatedAt": "2026-08-14T15:14:43.915Z",
+  "method": "actual-display-to-existing-canonical-exact-structural-reconciliation-with-safe-unresolved-baseline-preservation",
+  "semanticGuessing": false,
+  "stopWordListUsed": false,
   "aliases": {
+    "1chr": "1_Chronicles.json",
     "1chronicles": "1_Chronicles.json",
+    "1cor": "1_Corinthians.json",
     "1corinthians": "1_Corinthians.json",
     "1john": "1_John.json",
+    "1kgs": "1_Kings.json",
     "1kings": "1_Kings.json",
+    "1pet": "1_Peter.json",
     "1peter": "1_Peter.json",
+    "1sam": "1_Samuel.json",
     "1samuel": "1_Samuel.json",
+    "1thess": "1_Thessalonians.json",
     "1thessalonians": "1_Thessalonians.json",
+    "1tim": "1_Timothy.json",
     "1timothy": "1_Timothy.json",
+    "2chr": "2_Chronicles.json",
     "2chronicles": "2_Chronicles.json",
+    "2cor": "2_Corinthians.json",
     "2corinthians": "2_Corinthians.json",
     "2john": "2_John.json",
+    "2kgs": "2_Kings.json",
     "2kings": "2_Kings.json",
+    "2pet": "2_Peter.json",
     "2peter": "2_Peter.json",
+    "2sam": "2_Samuel.json",
     "2samuel": "2_Samuel.json",
+    "2thess": "2_Thessalonians.json",
     "2thessalonians": "2_Thessalonians.json",
+    "2tim": "2_Timothy.json",
     "2timothy": "2_Timothy.json",
     "3john": "3_John.json",
     "acts": "Acts.json",
     "amos": "Amos.json",
+    "col": "Colossians.json",
     "colossians": "Colossians.json",
+    "dan": "Daniel.json",
     "daniel": "Daniel.json",
+    "deut": "Deuteronomy.json",
     "deuteronomy": "Deuteronomy.json",
+    "eccl": "Ecclesiastes.json",
     "ecclesiastes": "Ecclesiastes.json",
+    "eph": "Ephesians.json",
     "ephesians": "Ephesians.json",
+    "esth": "Esther.json",
     "esther": "Esther.json",
+    "exod": "Exodus.json",
     "exodus": "Exodus.json",
+    "ezek": "Ezekiel.json",
     "ezekiel": "Ezekiel.json",
     "ezra": "Ezra.json",
+    "gal": "Galatians.json",
     "galatians": "Galatians.json",
+    "gen": "Genesis.json",
     "genesis": "Genesis.json",
+    "hab": "Habakkuk.json",
     "habakkuk": "Habakkuk.json",
+    "hag": "Haggai.json",
     "haggai": "Haggai.json",
+    "heb": "Hebrews.json",
     "hebrews": "Hebrews.json",
+    "hos": "Hosea.json",
     "hosea": "Hosea.json",
+    "isa": "Isaiah.json",
     "isaiah": "Isaiah.json",
     "james": "James.json",
+    "jas": "James.json",
+    "jer": "Jeremiah.json",
     "jeremiah": "Jeremiah.json",
     "job": "Job.json",
     "joel": "Joel.json",
     "john": "John.json",
     "jonah": "Jonah.json",
+    "josh": "Joshua.json",
     "joshua": "Joshua.json",
     "jude": "Jude.json",
+    "judg": "Judges.json",
     "judges": "Judges.json",
+    "lam": "Lamentations.json",
     "lamentations": "Lamentations.json",
+    "lev": "Leviticus.json",
     "leviticus": "Leviticus.json",
     "luke": "Luke.json",
+    "mal": "Malachi.json",
     "malachi": "Malachi.json",
     "mark": "Mark.json",
+    "matt": "Matthew.json",
     "matthew": "Matthew.json",
+    "mic": "Micah.json",
     "micah": "Micah.json",
+    "nah": "Nahum.json",
     "nahum": "Nahum.json",
+    "neh": "Nehemiah.json",
     "nehemiah": "Nehemiah.json",
+    "num": "Numbers.json",
     "numbers": "Numbers.json",
+    "obad": "Obadiah.json",
     "obadiah": "Obadiah.json",
+    "phil": "Philippians.json",
     "philemon": "Philemon.json",
     "philippians": "Philippians.json",
+    "phlm": "Philemon.json",
+    "prov": "Proverbs.json",
     "proverbs": "Proverbs.json",
+    "ps": "Psalms.json",
     "psalms": "Psalms.json",
+    "rev": "Revelation.json",
     "revelation": "Revelation.json",
+    "rom": "Romans.json",
     "romans": "Romans.json",
     "ruth": "Ruth.json",
+    "song": "Song_of_Solomon.json",
     "songofsolomon": "Song_of_Solomon.json",
+    "songofsongs": "Song_of_Solomon.json",
     "titus": "Titus.json",
+    "zech": "Zechariah.json",
     "zechariah": "Zechariah.json",
+    "zeph": "Zephaniah.json",
     "zephaniah": "Zephaniah.json"
   },
   "books": {
@@ -74,397 +130,907 @@
       "book": "1 Chronicles",
       "corpus": "hebrew",
       "verses": 942,
-      "sha256": "0ebc5f847e5ae27ff8e3749d48b54cd1ad72da807db1ba57bfda3002315e63ac"
+      "sha256": "4f48a5a980b60cf9dcdb64505a25d282463f603d1822af2b2040849c849b568a"
     },
     "1_Corinthians.json": {
       "book": "1 Corinthians",
       "corpus": "greek-nt",
       "verses": 437,
-      "sha256": "a3c28b3b0647f042d239b4ce8e7d3cd93f9ce433fb3b4443685bc9ecb6d21230"
+      "sha256": "6cc5a83f8665ca96673aa12cb41463282f22a93e4b3454bc466e24db42288495"
     },
     "1_John.json": {
       "book": "1 John",
       "corpus": "greek-nt",
       "verses": 105,
-      "sha256": "a785be6685f14f2b6bfdce7c4f4ba1b07c1f54009fa3f0c5194a87b8f8d503b4"
+      "sha256": "e0abf35abd77d004eb525827d158ec6196c03c28f571c61c0f6417cbe8f0409b"
     },
     "1_Kings.json": {
       "book": "1 Kings",
       "corpus": "hebrew",
       "verses": 816,
-      "sha256": "ba834460bb0cff2d515f08c14a9279f6bac3d0dba4a9613d6e02c50a998eada7"
+      "sha256": "682e1008aa431ab3c2c33e18a9c69fc04473b65bbf6d06d6d4f800db12b89a79"
     },
     "1_Peter.json": {
       "book": "1 Peter",
       "corpus": "greek-nt",
       "verses": 105,
-      "sha256": "da787c4539e406ff631482e2daf6fae50fd1be65cde6a3ebcde784d15199fa73"
+      "sha256": "77d0a07678114dae5043ca29eee6c7358aba2687c6beca0d357f74b1a0552d21"
     },
     "1_Samuel.json": {
       "book": "1 Samuel",
       "corpus": "hebrew",
       "verses": 810,
-      "sha256": "73ded185866243e3b1f893479afc835994f7f9e552541a56259dfba766c56506"
+      "sha256": "ac32d13a72282d4b642cea0e55ef04c90b146b2e481b89cf67b86b68d69cf725"
     },
     "1_Thessalonians.json": {
       "book": "1 Thessalonians",
       "corpus": "greek-nt",
       "verses": 89,
-      "sha256": "f00826d96cac83f534b7e1e4577e9e0ac1099b5f25b91d837ffa5c518aae0ec3"
+      "sha256": "f73d407c09bff52e081db91b4af08909390befa6ca8fe4a3fbf524d3be9024ad"
     },
     "1_Timothy.json": {
       "book": "1 Timothy",
       "corpus": "greek-nt",
       "verses": 113,
-      "sha256": "9ac6cf40e7bea5d929304e57b884a690b7ec387c77431ab778acc0361c163f26"
+      "sha256": "aa6ae45a07f70bd1ef427937e21f7f6f504f13e1f8dc61aa65cad3aa999cb1f4"
     },
     "2_Chronicles.json": {
       "book": "2 Chronicles",
       "corpus": "hebrew",
       "verses": 822,
-      "sha256": "10ec39437c3aab4d49707b2b412cd166659c639e8da2e67d336d897651ce7ce6"
+      "sha256": "db6cf7743f3b0d39f8329a1a689b4dc810b873821d288bf3ecdd37de36bda483"
     },
     "2_Corinthians.json": {
       "book": "2 Corinthians",
       "corpus": "greek-nt",
       "verses": 257,
-      "sha256": "d1ebe861c8fec76bbf298475a9200e7cc7cb38ce3de13aaf45c738052d6df2b1"
+      "sha256": "c52d0aa43db4ff9d19774634bd65cc0aff779e0aa3e1f201a087185dc72cf93d"
     },
     "2_John.json": {
       "book": "2 John",
       "corpus": "greek-nt",
       "verses": 13,
-      "sha256": "1f55cf5279a7add56c36d506b00af15bfa95f47d6707017aa0b5f06d681ecc64"
+      "sha256": "3b60e9e567042d4946198ed32fcf90894e59801c12e21f87123deb3f4adb8cee"
     },
     "2_Kings.json": {
       "book": "2 Kings",
       "corpus": "hebrew",
       "verses": 719,
-      "sha256": "35fffcdaf0241af3756886c3d745f656c35d4a9c46c6acaeb0a9f9c1bb31029a"
+      "sha256": "2ada9c3f58098ebf0a7ad1651fb6e621c084b4ec5b2c68e9ee1296032c2de2e8"
     },
     "2_Peter.json": {
       "book": "2 Peter",
       "corpus": "greek-nt",
       "verses": 61,
-      "sha256": "5a5e5e7dd6e43e2fcc5e57b1dfb76eb10ccfe0394db91b7deaf29e567514fcc4"
+      "sha256": "8a22ec53830da38ffe5ec8aa77979c398fe5154469cbff6165e1401d55be5116"
     },
     "2_Samuel.json": {
       "book": "2 Samuel",
       "corpus": "hebrew",
       "verses": 695,
-      "sha256": "f549a2d53c0bde3ee6e436f64e02d6ea277b7cfa564f434b0178983878dbec87"
+      "sha256": "30f593e62e53c0d9465b29fcd5b212719b6391e922a325d3640f463f78e0687d"
     },
     "2_Thessalonians.json": {
       "book": "2 Thessalonians",
       "corpus": "greek-nt",
       "verses": 47,
-      "sha256": "f7f585ff2e9ece9e746a74e6c72693aebaf66cad2ec12e1881a47f201480864f"
+      "sha256": "200b35a4fcc38406b99c9bde88943aac853cec15475cd723ec9d30293839d04d"
     },
     "2_Timothy.json": {
       "book": "2 Timothy",
       "corpus": "greek-nt",
       "verses": 83,
-      "sha256": "df414328b524ca6f272ccfd7be1343ffa59deeb58e884e85dab776d3dab1689d"
+      "sha256": "ed37f771c6ff86d3fe0bb2daf6da63abbca89d64f474b22ef18b16abe7e5e6f1"
     },
     "3_John.json": {
       "book": "3 John",
       "corpus": "greek-nt",
       "verses": 14,
-      "sha256": "395a4b969ea08429bb73e1dd05d665c1cbbc262f0278734e792e1f9c409dde4d"
+      "sha256": "52f1e3489744db1284cfd697903997b2a13a685fc7ffc4bcc6bf71823cab97d5"
     },
     "Acts.json": {
       "book": "Acts",
       "corpus": "greek-nt",
       "verses": 1007,
-      "sha256": "b7ae21fedc86d8b2b82fc542c3c70597293e1500509f3383e927af5b168d4dd6"
+      "sha256": "9f9a07abe5f44b5544002d0909ef7f3d00c66a5b79d8637c08746d533c91b204"
     },
     "Amos.json": {
       "book": "Amos",
       "corpus": "hebrew",
       "verses": 146,
-      "sha256": "c9f97b75369d0bd8bc2ffe5173b58b15ff3bfc9a6c13b6987b5e4d8f4d3b65d7"
+      "sha256": "c9e70bd9c1416ef23a5bc7ab2bd39521f88860668e4056052b41592b679990a3"
     },
     "Colossians.json": {
       "book": "Colossians",
       "corpus": "greek-nt",
       "verses": 95,
-      "sha256": "3f43da377ad27d7b17c1e6d33186b3c11c4f02ec4918c8ac5bff347e7d5497e4"
+      "sha256": "9cc8560dd552bac36989ce7b44574228f0697a3002af7aa00d56b576c5125dab"
     },
     "Daniel.json": {
       "book": "Daniel",
       "corpus": "hebrew",
       "verses": 357,
-      "sha256": "19748a3f21d954b5e752548b3004b489fa612f2136e327f64bbec4409eb87819"
+      "sha256": "f220287453013150e355ba6e42e129aeb46dc8dc8e1b85359459faa7fda5d64f"
     },
     "Deuteronomy.json": {
       "book": "Deuteronomy",
       "corpus": "hebrew",
       "verses": 959,
-      "sha256": "c1b79f63f70b818198cf7b6da4b169f420b937c8a8ca20e3e2ec89202dd96027"
+      "sha256": "c09303a8677ae867d134de787d31379e8687c689340543eafdcf36bdcd9cd1e7"
     },
     "Ecclesiastes.json": {
       "book": "Ecclesiastes",
       "corpus": "hebrew",
       "verses": 222,
-      "sha256": "b74182e1d1bd654c60037957cdec03c49b171c6ba44e246a323ae8fed551e69c"
+      "sha256": "79a31362ef20ed3d31b6ea0e54d2be9bec7351f006f836d9491639c9335b40f1"
     },
     "Ephesians.json": {
       "book": "Ephesians",
       "corpus": "greek-nt",
       "verses": 155,
-      "sha256": "f447bcefdaf2131511d118829394734c2351b58cabc1d3bbc323075e79ed6c32"
+      "sha256": "28b3268e179707a86a50c39eeed5e4a7b03f53194a66f9c8ab0409647a63b122"
     },
     "Esther.json": {
       "book": "Esther",
       "corpus": "hebrew",
       "verses": 167,
-      "sha256": "dda7604f68d1541f76def0b20413dca19ede9131fcf758e336b7ecd7ba773d45"
+      "sha256": "7cebda16fa3bfa44fb58fc96508a57bcd7b08f217e8b59c96a252ea54137d63d"
     },
     "Exodus.json": {
       "book": "Exodus",
       "corpus": "hebrew",
       "verses": 1213,
-      "sha256": "a7aaaa3a16e1b3c261a84733f0a89fc366c3616af44d433f574f91ead7f9a862"
+      "sha256": "bdb46b7e468220ac09659b0a6677aeec84dfa9a5b9d22f6c2e12d983b435e8b1"
     },
     "Ezekiel.json": {
       "book": "Ezekiel",
       "corpus": "hebrew",
       "verses": 1273,
-      "sha256": "85f43a0f1274ddf76785d7dfebfe1cd6ea505b7d702322ed262dbfaf7c8f9d38"
+      "sha256": "beebdd48b32e0a65fe41c028e5fec638082ba540d8a0ca9975b5fa99cf0be04e"
     },
     "Ezra.json": {
       "book": "Ezra",
       "corpus": "hebrew",
       "verses": 280,
-      "sha256": "2d810c1a16e63778e6764d1f53aa82fff7e72b737417258158d75e667ab38ca8"
+      "sha256": "2bb51df44d9723ca5614ef5a7722ca3173288bc5afb887784cbeaf0eb03e6915"
     },
     "Galatians.json": {
       "book": "Galatians",
       "corpus": "greek-nt",
       "verses": 149,
-      "sha256": "3f3da2fc5e78d3024f721a307152d8a39608b18b37ded24f88bed2efa9d22b16"
+      "sha256": "66a04914fbe4414375ebb898114775d5d65c1f83ea9d48507870b84a5858f5f8"
     },
     "Genesis.json": {
       "book": "Genesis",
       "corpus": "hebrew",
       "verses": 1533,
-      "sha256": "d3c204cc07c4a3f9edd039ad8f2b6a361a1d395ff8f5e50c399bb77091f569ca"
+      "sha256": "32ad9282824478cfa71ba070459848ecc033488640226d422e96a420f49b8460"
     },
     "Habakkuk.json": {
       "book": "Habakkuk",
       "corpus": "hebrew",
       "verses": 56,
-      "sha256": "e1255b3683a7dba5e203767cbfa018635936bed2a83f2585e1c16aa330cee3ea"
+      "sha256": "83696e2b4512c2679ee436cc5673a1b0e4f2a49b6d5f882a93ffade36cc1bf91"
     },
     "Haggai.json": {
       "book": "Haggai",
       "corpus": "hebrew",
       "verses": 38,
-      "sha256": "e3ab5ad8dd3ea493a51110769396a559fedd0cc39f8f029f283ff3f9d43c12d8"
+      "sha256": "4ebe4740729638241103a0c3c591fc22f3127562171b205e3fd7f3bb9dd43ba6"
     },
     "Hebrews.json": {
       "book": "Hebrews",
       "corpus": "greek-nt",
       "verses": 303,
-      "sha256": "b2e3df8659bf78c8a05d58af650855c2030acba4d20e0ffb079daeb41d07cdcd"
+      "sha256": "90ca9ef73faf7d9b7c15e426161daf0cfb78f133df08c276e55b22c51ea195fc"
     },
     "Hosea.json": {
       "book": "Hosea",
       "corpus": "hebrew",
       "verses": 197,
-      "sha256": "d0e72d3b85d8f528d3e5cdf76d49f51bae85432352e03b24dc2468c920bd7414"
+      "sha256": "667a2dd3d7c355779193948200063528c89a15d49e5ed5f0c89e6d4aba83f59b"
     },
     "Isaiah.json": {
       "book": "Isaiah",
       "corpus": "hebrew",
       "verses": 1292,
-      "sha256": "c55313f6a5fda8a0e0cb33dc9a964a141b92ae4e97b088739dd7831362a91e23"
+      "sha256": "943ef4c5d7435951fe9e8b7ce23cc338acba6f2818792565ae576fa0394d9c5a"
     },
     "James.json": {
       "book": "James",
       "corpus": "greek-nt",
       "verses": 108,
-      "sha256": "c42e33cfc67a591cda42baa3eb1c85b2051533440a5f94522d3b8a75108e68f4"
+      "sha256": "108fc44f17eba7b69bfe0749a4b431268f4965f1abc6b084722d0a75862d0209"
     },
     "Jeremiah.json": {
       "book": "Jeremiah",
       "corpus": "hebrew",
       "verses": 1364,
-      "sha256": "321400428cc81a6d33befe32a99ab96fbe2763e076d86216fe422fe72a09ffe9"
+      "sha256": "d1edf773f3dbfa00061b4bd40399a5616371295c1ff3ae2ae01e447577abedc7"
     },
     "Job.json": {
       "book": "Job",
       "corpus": "hebrew",
       "verses": 1070,
-      "sha256": "5bb05ec3beb6019ddade07ed3d6faa7afd2c54b3ed9ad1600682b6855cdaad55"
+      "sha256": "675ebf9d95fe031364dfa41ef75e38d7849243f4e9887a986ed10660421869e3"
     },
     "Joel.json": {
       "book": "Joel",
       "corpus": "hebrew",
       "verses": 73,
-      "sha256": "f2aaf3f20cbdbf639dc50634990672a21d2949642e7d9eca5449119ea6321359"
+      "sha256": "1e8e9013170a471f03eef6a7d605587bd1e344b88a38b65bd9e619fc71ec4883"
     },
     "John.json": {
       "book": "John",
       "corpus": "greek-nt",
       "verses": 879,
-      "sha256": "1090a41fb61d6eb49ac878cf2052a31967bef99f2b2ae31f878de2f1db7226e5"
+      "sha256": "0f5659529b6c8a4ca11b54cb46c989f1622536bdc04aba86bd09aed40d5bb67e"
     },
     "Jonah.json": {
       "book": "Jonah",
       "corpus": "hebrew",
       "verses": 48,
-      "sha256": "a8de0a8dc366b1c05de87acc4c1ad5076b17d2d937d1e0510889f34f839f9031"
+      "sha256": "f6ff08d8b3be388e4b0d59afa6de26efbc3e863f034aa6ff9eeceea17fd80cf9"
     },
     "Joshua.json": {
       "book": "Joshua",
       "corpus": "hebrew",
       "verses": 658,
-      "sha256": "5e6bc1ede8df848881288ad66938506619ac44bca6b6c7a57b0bb1fb590ac251"
+      "sha256": "6d59e370191dfd1d403a36bc8e3fde6912ae66f4bd669153b55293129a1c3c5d"
     },
     "Jude.json": {
       "book": "Jude",
       "corpus": "greek-nt",
       "verses": 25,
-      "sha256": "6b00e16630cfde469870d6a14e509337f5ab2817bca250f3decbbd9abe130d7d"
+      "sha256": "b90f2834496f0b5193c971e633ca2313fdd8ee1f3b917d53c60b586e9b3a9dbf"
     },
     "Judges.json": {
       "book": "Judges",
       "corpus": "hebrew",
       "verses": 618,
-      "sha256": "18de79a2a55671c2c3cc9ccfcf7005534e8e9ae5ade922c930ec06530256e0a7"
+      "sha256": "1fb0182acdaa5399027c4f75bf7d9dc4b9a41b7ad2aee78c19213d1be2c1f69d"
     },
     "Lamentations.json": {
       "book": "Lamentations",
       "corpus": "hebrew",
       "verses": 154,
-      "sha256": "346df2e58cbc78a6737f97bdcab40af769adf3f80cd8b6c0f0f553e9ac7b38a0"
+      "sha256": "5bb38840c432e6f6b78fd44a6381235d21a98b1c459e53ef46fb200f6ef5a230"
     },
     "Leviticus.json": {
       "book": "Leviticus",
       "corpus": "hebrew",
       "verses": 859,
-      "sha256": "b1eae5e27279eff6f8af48a70577a4b4db6cfa3ea6fe3f995d94eff3096213a4"
+      "sha256": "22ef1d379895b809eee9087c895b8f082be76ce7de7c2c92d70d66619e04022c"
     },
     "Luke.json": {
       "book": "Luke",
       "corpus": "greek-nt",
       "verses": 1151,
-      "sha256": "847d84c45b68d6bb0c1421daebdf99f91073a9534585931efc078430dcec70d1"
+      "sha256": "7f6e2ebff5973447284814f3071174e0984ccb171923cb3f8f9e65474e65cebf"
     },
     "Malachi.json": {
       "book": "Malachi",
       "corpus": "hebrew",
       "verses": 55,
-      "sha256": "b266eaa6e7145ff905b7cd9a2632a01c1e8cbe6253ef97b673ada26786fa1882"
+      "sha256": "223e9708ca676a2cda34b409d14be35a72edf1ba6f78187bc4bb87f8b700b765"
     },
     "Mark.json": {
       "book": "Mark",
       "corpus": "greek-nt",
       "verses": 678,
-      "sha256": "fb3a607beff0cbd2f62904e55f0452ef1599838e10dafd5dd9486c9f0721a501"
+      "sha256": "1065a0b037cce622d76e4c405b9c4e859ef9c94c098ccf727cef0e8ddfc838d2"
     },
     "Matthew.json": {
       "book": "Matthew",
       "corpus": "greek-nt",
       "verses": 1071,
-      "sha256": "9190ac77350b06a2d6e3af3ee0e080e1154f0b0b93ab3ab7a07a2d107c6ef652"
+      "sha256": "e43aa11f843d17dbda7215e68eff4bafd211e7a4ffd254459f632bf40dbd3c66"
     },
     "Micah.json": {
       "book": "Micah",
       "corpus": "hebrew",
       "verses": 105,
-      "sha256": "a88d40d2684c63b208f86a196bea04a658f12c31dd662c805f8b17a527c8bb95"
+      "sha256": "c32b7b8715dc34243d3a713b1a5e873ee6848fa94825733d8d4bacd8def68b1b"
     },
     "Nahum.json": {
       "book": "Nahum",
       "corpus": "hebrew",
       "verses": 47,
-      "sha256": "de15a7ee51c569a492f937cbf627f55639a834741c59f009414704ee2586160c"
+      "sha256": "53d5b29b3cfbb01af6345284717f78eb4dea784ca8f819776e46f256fc934dbf"
     },
     "Nehemiah.json": {
       "book": "Nehemiah",
       "corpus": "hebrew",
       "verses": 406,
-      "sha256": "a37d13f75912f486ef3b0ad0c084b76d846d4d327e8ff4e2fc6a9ded5dc65c0f"
+      "sha256": "b2759eb57ba3b98a83e5ce7bfb3d3828132e93df20bc8723e6090d779af2a8d5"
     },
     "Numbers.json": {
       "book": "Numbers",
       "corpus": "hebrew",
       "verses": 1288,
-      "sha256": "b6e94bea5e0c2cffcb73fb8be6aa5bdcd917cc8256a8c5412c49425f5157aed8"
+      "sha256": "ed698db8367d520dc3ff3f51a559029b4fc2820ace7898b517d512d6cb3e7a8a"
     },
     "Obadiah.json": {
       "book": "Obadiah",
       "corpus": "hebrew",
       "verses": 21,
-      "sha256": "9b653680d4d4f45e970775856461d5e823bebbdcbb8b274d8ade2b5b352d8233"
+      "sha256": "f16f4b81d302de2b5273e64ce40f3f69a6e6250752d94edc034375424a2f21bc"
     },
     "Philemon.json": {
       "book": "Philemon",
       "corpus": "greek-nt",
       "verses": 25,
-      "sha256": "6855078e3f1784ddf42dc044a76cd025eb7fde28a52bd6180dd68850f315ae3a"
+      "sha256": "8ec0f88cd6477200f94c477cc77c8c13b71a0aa5f5262b00176691de837cf70b"
     },
     "Philippians.json": {
       "book": "Philippians",
       "corpus": "greek-nt",
       "verses": 104,
-      "sha256": "555a587afc1b75698a04a3a317c20cf243a05dddd1e2dc090d9c81f38de03439"
+      "sha256": "93e67b655e90c17c4a40b5232e2de44ce02617e71cf1c00be132545488d35b1c"
     },
     "Proverbs.json": {
       "book": "Proverbs",
       "corpus": "hebrew",
       "verses": 915,
-      "sha256": "c7b84be1ea1543fdbb8afc7efd5b53fe95ecb4ca15421c3dae9adf188868881f"
+      "sha256": "d470ab07cef8d83b575cd38ebd01195dcba820f8a12fa670682827d6143698ea"
     },
     "Psalms.json": {
       "book": "Psalms",
       "corpus": "hebrew",
       "verses": 2461,
-      "sha256": "08a6cd283d205c0915bc8e335960689c8041306de110a294745f2386dca43503"
+      "sha256": "79d57b6e171462dfb8ecb48b83c3ad9d0820d98025a3fdb3dc0bd69137cce5c8"
     },
     "Revelation.json": {
       "book": "Revelation",
       "corpus": "greek-nt",
       "verses": 404,
-      "sha256": "c07ef59e240dc6449523868db5c0e0189c0b282f350efe03830edfe315a4cf7b"
+      "sha256": "9d9c17f3f05d0ca03e7f9a370973858dcf3b568c00780f0ffaddf46bbdf42136"
     },
     "Romans.json": {
       "book": "Romans",
       "corpus": "greek-nt",
       "verses": 433,
-      "sha256": "b463c317a8511a529cd563a5779846c1fb1065dda0f892973b2d431ede5c9906"
+      "sha256": "d709644a05ad4ae856a489f161b65434dd220224c895ae65fafff0e9e66a569a"
     },
     "Ruth.json": {
       "book": "Ruth",
       "corpus": "hebrew",
       "verses": 85,
-      "sha256": "cb11b416064c5a53ba0f18091852c5eca1e6f089930a03895b4f4443e51d7533"
+      "sha256": "e22073ec8597eaa30f73addf816a9f671513134f05f91d9086b53d660f00b2c9"
     },
     "Song_of_Solomon.json": {
       "book": "Song of Solomon",
       "corpus": "hebrew",
       "verses": 117,
-      "sha256": "2f834638c608a5857b6a98413908939dbccc5ea33bc0ecfbfb82a7fbc206598c"
+      "sha256": "4c669fcc496c0cc2684b1293c3e04ec56c52f0a55b7fcd0c48ee1695cc208036"
     },
     "Titus.json": {
       "book": "Titus",
       "corpus": "greek-nt",
       "verses": 46,
-      "sha256": "3d2397459ed0eb8a06ef9336451730acfc067c57a2cc51aff70613df1382baef"
+      "sha256": "d823aa3bdd603925ce22a70274bd659f55d478977a6464004cfb2036d014524b"
     },
     "Zechariah.json": {
       "book": "Zechariah",
       "corpus": "hebrew",
       "verses": 211,
-      "sha256": "4beb7918f7602b9e89e80a30233e3b09755e607065be466b73c38555e10af9a6"
+      "sha256": "43eccb36c9f41aca21adeae5c27b737ca441d24a5f23f690277697fa9df98188"
     },
     "Zephaniah.json": {
       "book": "Zephaniah",
       "corpus": "hebrew",
       "verses": 53,
-      "sha256": "a47c16d95ff188ad67ad1924f231172c98d38eb1572694071d391c7bb95c05e5"
+      "sha256": "ba11501beb49d4414c59e9b107a2e668578ea7ade1a0cf07e11522057f3d49fe"
     }
+  },
+  "stats": {
+    "displayRecords": 31102,
+    "books": 66,
+    "ownerResolved": 31059,
+    "ownerUnresolved": 43,
+    "routedDisplayTokens": 339949,
+    "ownerReasons": {
+      "no-unique-high-confidence-owner": 37,
+      "no-canonical-kjv-owner": 6
+    },
+    "ownerConfidence": {
+      "exact-sequence": 30963,
+      "high-sequence-similarity": 54,
+      "exact-joined": 41,
+      "same-coordinate-high-similarity": 1
+    },
+    "oldRuntime": {
+      "presentRoutes": 339958,
+      "canonicalConsistentRoutes": 339958,
+      "canonicalConsistentPreserved": 339958,
+      "changedOrRemovedOldRoutes": 0
+    },
+    "unresolvedFallback": {
+      "preservedVerses": 43,
+      "suppressedKnownBadRoutes": 0,
+      "noBaselineVerse": 0
+    },
+    "methods": {
+      "exact-token-position": 339937,
+      "display-fused-same-entity": 4,
+      "display-fused-over-one-routed-canonical-token": 4,
+      "display-split-of-one-canonical-token": 4
+    },
+    "unresolvedOwnerSamples": [
+      {
+        "book": "1 Chronicles",
+        "chapter": 7,
+        "verse": 27,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.8333333333333334,
+        "bestDelta": 0,
+        "margin": 0.30000000000000004,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "1 Chronicles",
+        "chapter": 24,
+        "verse": 11,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.875,
+        "bestDelta": 0,
+        "margin": 0.375,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "2 Corinthians",
+        "chapter": 13,
+        "verse": 14,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.3137254901960784,
+        "bestDelta": -3,
+        "margin": 0.1757944557133198,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Acts",
+        "chapter": 8,
+        "verse": 37,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.28,
+        "bestDelta": -3,
+        "margin": 0.09395348837209305,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Acts",
+        "chapter": 15,
+        "verse": 34,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.1,
+        "bestDelta": 3,
+        "margin": 0.020000000000000004,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Acts",
+        "chapter": 19,
+        "verse": 41,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.10256410256410256,
+        "bestDelta": -3,
+        "margin": 0.02849002849002849,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Acts",
+        "chapter": 24,
+        "verse": 7,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.15384615384615385,
+        "bestDelta": -1,
+        "margin": 0.03139717425431712,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Acts",
+        "chapter": 28,
+        "verse": 29,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.11428571428571428,
+        "bestDelta": 1,
+        "margin": 0.009022556390977446,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Hosea",
+        "chapter": 13,
+        "verse": 16,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.20512820512820512,
+        "bestDelta": -1,
+        "margin": 0.09084249084249084,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Isaiah",
+        "chapter": 63,
+        "verse": 19,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.17777777777777778,
+        "bestDelta": -3,
+        "margin": 0.08888888888888889,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 2,
+        "verse": 28,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.23880597014925373,
+        "bestDelta": -1,
+        "margin": 0.0623353819139596,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 2,
+        "verse": 29,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.20833333333333334,
+        "bestDelta": -2,
+        "margin": 0.045068027210884376,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 2,
+        "verse": 30,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.32653061224489793,
+        "bestDelta": -3,
+        "margin": 0.32653061224489793,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 2,
+        "verse": 31,
+        "reason": "no-canonical-kjv-owner",
+        "bestSimilarity": null,
+        "bestDelta": null,
+        "margin": null,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 2,
+        "verse": 32,
+        "reason": "no-canonical-kjv-owner",
+        "bestSimilarity": null,
+        "bestDelta": null,
+        "margin": null,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 6,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.19607843137254902,
+        "bestDelta": -3,
+        "margin": 0.04682470002926545,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 7,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.3384615384615385,
+        "bestDelta": -3,
+        "margin": 0.14798534798534801,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 8,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.10909090909090909,
+        "bestDelta": -3,
+        "margin": 0.10909090909090909,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 9,
+        "reason": "no-canonical-kjv-owner",
+        "bestSimilarity": null,
+        "bestDelta": null,
+        "margin": null,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 10,
+        "reason": "no-canonical-kjv-owner",
+        "bestSimilarity": null,
+        "bestDelta": null,
+        "margin": null,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 11,
+        "reason": "no-canonical-kjv-owner",
+        "bestSimilarity": null,
+        "bestDelta": null,
+        "margin": null,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 12,
+        "reason": "no-canonical-kjv-owner",
+        "bestSimilarity": null,
+        "bestDelta": null,
+        "margin": null,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 13,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.11940298507462686,
+        "bestDelta": 3,
+        "margin": 0.11940298507462686,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 14,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.23333333333333334,
+        "bestDelta": 2,
+        "margin": 0.11794871794871795,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 15,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.2545454545454545,
+        "bestDelta": 1,
+        "margin": 0.04177949709864601,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 19,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.2318840579710145,
+        "bestDelta": -3,
+        "margin": 0.06115235065394131,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 20,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.09230769230769231,
+        "bestDelta": -2,
+        "margin": 0.0013986013986014012,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joel",
+        "chapter": 3,
+        "verse": 21,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.08571428571428572,
+        "bestDelta": -3,
+        "margin": 0.08571428571428572,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "John",
+        "chapter": 5,
+        "verse": 4,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.18181818181818182,
+        "bestDelta": -1,
+        "margin": 0.018552875695732857,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joshua",
+        "chapter": 13,
+        "verse": 18,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.8333333333333334,
+        "bestDelta": 0,
+        "margin": 0.33333333333333337,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Joshua",
+        "chapter": 19,
+        "verse": 19,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.6666666666666666,
+        "bestDelta": 0,
+        "margin": 0.16666666666666663,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Luke",
+        "chapter": 17,
+        "verse": 36,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.7741935483870968,
+        "bestDelta": -1,
+        "margin": 0.1888276947285602,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Luke",
+        "chapter": 23,
+        "verse": 17,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.1875,
+        "bestDelta": -2,
+        "margin": 0.005681818181818177,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Mark",
+        "chapter": 7,
+        "verse": 16,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.10526315789473684,
+        "bestDelta": 2,
+        "margin": 0.0026990553306342757,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Mark",
+        "chapter": 9,
+        "verse": 44,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.17391304347826086,
+        "bestDelta": -1,
+        "margin": 0.0037002775208140604,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Mark",
+        "chapter": 11,
+        "verse": 26,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.5238095238095238,
+        "bestDelta": -1,
+        "margin": 0.46320346320346323,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Mark",
+        "chapter": 15,
+        "verse": 28,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.2857142857142857,
+        "bestDelta": -2,
+        "margin": 0.0357142857142857,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Matthew",
+        "chapter": 17,
+        "verse": 21,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.14814814814814814,
+        "bestDelta": -2,
+        "margin": 0.019115890083632014,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Matthew",
+        "chapter": 18,
+        "verse": 11,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.22857142857142856,
+        "bestDelta": 3,
+        "margin": 0.0546583850931677,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Matthew",
+        "chapter": 23,
+        "verse": 14,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.4406779661016949,
+        "bestDelta": 1,
+        "margin": 0.07401129943502827,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Nehemiah",
+        "chapter": 7,
+        "verse": 73,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.2571428571428571,
+        "bestDelta": -2,
+        "margin": 0.021848739495798297,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Romans",
+        "chapter": 16,
+        "verse": 24,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.25,
+        "bestDelta": 3,
+        "margin": 0.07352941176470587,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      },
+      {
+        "book": "Song of Solomon",
+        "chapter": 6,
+        "verse": 13,
+        "reason": "no-unique-high-confidence-owner",
+        "bestSimilarity": 0.1568627450980392,
+        "bestDelta": -3,
+        "margin": 0.04365519792822789,
+        "baselineVersePreserved": true,
+        "suppressedKnownBadRoutes": 0
+      }
+    ],
+    "changedOldRouteSamples": []
   }
 }
