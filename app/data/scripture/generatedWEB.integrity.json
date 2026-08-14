@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "web-production-integrity@1",
-  "generatedAtUtc": "2026-07-27T18:36:56.472Z",
+  "schemaVersion": "web-production-integrity@2",
+  "generatedAtUtc": "2026-08-14T18:49:11.396Z",
   "sourceCandidateFingerprint": "8be4eee9f896f96e",
   "production": {
     "path": "app/data/scripture/generatedWEB.json",
@@ -12,12 +12,13 @@
     "lastReference": "Revelation 22:21"
   },
   "canonicalWeb": {
-    "sha256": "333a2e2680f3ded41ba358f49521669d6da8a803811df8c46067602ccab1ad50",
+    "sha256": "ba3d098473b0625eba77881b01c10002ba08caac4c8c519039ce704a4e58a089",
+    "immutableSha256": "8ea7d5336495967948f8e83fe2b444aed037d216f73c1fb44b902c42dd07ca82",
     "files": 66,
     "records": 31086,
     "webRecords": 31062,
     "webTokens": 748126,
-    "alignedWebTokens": 291181
+    "alignedWebTokens": 313555
   },
   "immutableSource": {
     "path": ".private/sources/web-usfm/eng-web",
@@ -65,6 +66,22 @@
     "productionMatchesApprovedCandidate": true,
     "canonicalWebRecordsPresent": true,
     "canonicalWebTextAndTokensPinned": true,
-    "immutableSourceFingerprintRecorded": true
+    "immutableSourceFingerprintRecorded": true,
+    "canonicalWebAlignmentStatePinned": true
+  },
+  "alignmentRevision": {
+    "milestone": "P08.12R1-V10",
+    "migratedAtUtc": "2026-08-14T18:49:11.396Z",
+    "priorCanonicalWeb": {
+      "sha256": "333a2e2680f3ded41ba358f49521669d6da8a803811df8c46067602ccab1ad50",
+      "files": 66,
+      "records": 31086,
+      "webRecords": 31062,
+      "webTokens": 748126,
+      "alignedWebTokens": 291181
+    },
+    "immutableProjectionPreserved": true,
+    "auditedAlignmentStateSealed": true,
+    "auditSummarySha256": "3fd46a56daeff40694228ce3550d64e942dc49b30e30c1ce0f76ed1c054de93b"
   }
 }

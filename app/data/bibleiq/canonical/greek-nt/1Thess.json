@@ -63464,8 +63464,12 @@
             "index": 2,
             "text": "us",
             "normalized": "us",
-            "alignedSourceTokenIds": [],
-            "alignmentStatus": "unaligned"
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Thessalonians.5.8:0"
+            ],
+            "alignmentStatus": "unaligned",
+            "confidence": "high",
+            "method": "p0812-global-witness-verse-unique"
           },
           {
             "index": 3,
@@ -67527,7 +67531,11 @@
             "index": 12,
             "text": "Be",
             "normalized": "be",
-            "alignedSourceTokenIds": []
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Thessalonians.5.13:10"
+            ],
+            "confidence": "high",
+            "method": "p0812-cross-translation-exact"
           },
           {
             "index": 13,
@@ -67545,13 +67553,21 @@
             "index": 15,
             "text": "among",
             "normalized": "among",
-            "alignedSourceTokenIds": []
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Thessalonians.5.13:11"
+            ],
+            "confidence": "high",
+            "method": "p0812-cross-translation-exact"
           },
           {
             "index": 16,
             "text": "yourselves",
             "normalized": "yourselves",
-            "alignedSourceTokenIds": []
+            "alignedSourceTokenIds": [
+              "greek-nt:1_Thessalonians.5.13:12"
+            ],
+            "confidence": "high",
+            "method": "p0812-cross-translation-exact"
           }
         ]
       }
