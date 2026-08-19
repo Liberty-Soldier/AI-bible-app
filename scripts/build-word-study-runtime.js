@@ -7,7 +7,7 @@ const ROOT = process.cwd();
 const INPUT_ROOT = path.join(ROOT, "app", "data", "bibleiq", "canonical");
 const OUTPUT_ROOT = path.join(ROOT, "public", "data", "bibleiq", "word-study");
 const CORPORA = ["hebrew", "greek-nt", "lxx"];
-const VERSION = 1;
+const VERSION = 3;
 
 const GREEK_COMPOUND_ROUTES = Object.freeze({
   "G4566«G4567": {
@@ -143,7 +143,9 @@ function compactSourceToken(token) {
 }
 
 function compactVerse(verse, fallbackReference) {
-  const sourceTokens = Array.isArray(verse?.sourceTokens) ? verse.sourceTokens : [];
+  const sourceTokens = Array.isArray(verse?.sourceTokens)
+    ? verse.sourceTokens
+    : [];
   const sourceIndexById = new Map();
 
   sourceTokens.forEach((token, index) => {
@@ -152,55 +154,99 @@ function compactVerse(verse, fallbackReference) {
   });
 
   const alignments = {};
-  const translations = verse?.translations && typeof verse.translations === "object"
-    ? verse.translations
-    : {};
+  const v2Maps = {};
+  const translations =
+    verse?.translations && typeof verse.translations === "object"
+      ? verse.translations
+      : {};
 
   for (const translationKey of Object.keys(translations).sort()) {
     const translation = translations[translationKey];
-    const tokens = Array.isArray(translation?.tokens) ? translation.tokens : [];
+    const tokens = Array.isArray(translation?.tokens)
+      ? translation.tokens
+      : [];
     const aligned = {};
+    const v2 = {};
+    const key = String(translationKey).toLowerCase();
 
     for (const token of tokens) {
       const displayIndex = Number(token?.index);
       if (!Number.isInteger(displayIndex) || displayIndex < 0) continue;
 
-      const sourceTokenId = Array.isArray(token?.alignedSourceTokenIds)
-        ? String(token.alignedSourceTokenIds[0] || "")
-        : "";
-      if (!sourceTokenId) continue;
+      const ids = Array.isArray(token?.alignedSourceTokenIds)
+        ? token.alignedSourceTokenIds.map(String).filter(Boolean)
+        : [];
 
-      const sourceIndex = sourceIndexById.get(sourceTokenId);
-      if (sourceIndex == null) continue;
-      aligned[String(displayIndex)] = sourceIndex;
+      if (key === "web" && token?.v2Alignment) {
+        const route = token.v2Alignment;
+        const exactRoutes = Array.isArray(route.exactRoutes)
+          ? route.exactRoutes
+          : [];
+        const sourceIndices = ids.map((id) => sourceIndexById.get(id));
+
+        if (sourceIndices.some((index) => index == null)) {
+          throw new Error(
+            "WEB v3 source bridge missing at " +
+              fallbackReference +
+              ":" +
+              displayIndex,
+          );
+        }
+
+        if (
+          route.mode === "exact-single" &&
+          exactRoutes.length === 1 &&
+          exactRoutes[0]?.k === "lexical" &&
+          sourceIndices.length === 1
+        ) {
+          aligned[String(displayIndex)] = sourceIndices[0];
+        }
+
+        v2[String(displayIndex)] = {
+          mode: route.mode,
+          si: sourceIndices,
+          routes: exactRoutes,
+          segment: route.segment,
+          d: String(token.text || ""),
+        };
+      } else if (ids[0]) {
+        const sourceIndex = sourceIndexById.get(ids[0]);
+        if (sourceIndex != null) {
+          aligned[String(displayIndex)] = sourceIndex;
+        }
+      }
     }
 
     if (Object.keys(aligned).length > 0) {
-      alignments[String(translationKey).toLowerCase()] = aligned;
+      alignments[key] = aligned;
+    }
+    if (Object.keys(v2).length > 0) {
+      v2Maps[key] = v2;
     }
   }
 
   const chapter = Number(verse?.chapter);
   const verseNumber = Number(verse?.verse);
-  if (!Number.isInteger(chapter) || !Number.isInteger(verseNumber)) {
-    const match = String(verse?.reference || fallbackReference || "").match(/:(\d+):(\d+)$/);
-    if (!match) return null;
-    return {
-      key: `${Number(match[1])}:${Number(match[2])}`,
-      value: {
-        s: sourceTokens.map(compactSourceToken),
-        a: alignments,
-      },
-    };
+  let key = null;
+
+  if (Number.isInteger(chapter) && Number.isInteger(verseNumber)) {
+    key = chapter + ":" + verseNumber;
+  } else {
+    const match = String(
+      verse?.reference || fallbackReference || "",
+    ).match(/:(\d+):(\d+)$/);
+    if (match) key = Number(match[1]) + ":" + Number(match[2]);
   }
 
-  return {
-    key: `${chapter}:${verseNumber}`,
-    value: {
-      s: sourceTokens.map(compactSourceToken),
-      a: alignments,
-    },
+  if (!key) return null;
+
+  const value = {
+    s: sourceTokens.map(compactSourceToken),
+    a: alignments,
   };
+  if (Object.keys(v2Maps).length > 0) value.v = v2Maps;
+
+  return { key, value };
 }
 
 function registerAlias(aliasMap, alias, outputFile) {
@@ -237,8 +283,16 @@ function buildBook(corpus, inputFile, outputFile, aliasMap) {
 
     compactVerses[compact.key] = compact.value;
     sourceTokenCount += compact.value.s.length;
-    for (const translation of Object.values(compact.value.a)) {
-      alignedDisplayTokenCount += Object.keys(translation).length;
+    const translationKeys = new Set([
+      ...Object.keys(compact.value.a || {}),
+      ...Object.keys(compact.value.v || {}),
+    ]);
+    for (const translationKey of translationKeys) {
+      const indices = new Set([
+        ...Object.keys(compact.value.a?.[translationKey] || {}),
+        ...Object.keys(compact.value.v?.[translationKey] || {}),
+      ]);
+      alignedDisplayTokenCount += indices.size;
     }
   }
 
@@ -382,3 +436,6 @@ function main() {
 }
 
 main();
+
+require("./apply-p0812r2-word-study-runtime-lock.cjs")
+  .applyP0812R2RuntimeLock(process.cwd());

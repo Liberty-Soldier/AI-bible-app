@@ -16,6 +16,34 @@ export type BibleIQCompoundRouteKind =
   | "compositional-number"
   | "compositional-function-word";
 
+export type BibleIQV2RouteMode =
+  | "exact-single"
+  | "exact-multi"
+  | "segment-context";
+
+export type BibleIQV2SourceRoute = {
+  kind: "lexical" | "grammar";
+  sourceTokenId?: string;
+  sourceWord?: string;
+  occurrenceId?: string;
+  componentId?: string;
+  grammarId?: string;
+  strong?: string;
+  lexicalId?: string;
+  lemma?: string;
+  morph?: string;
+  entityId?: string;
+};
+
+export type BibleIQV2SourceSegment = {
+  sourceOccurrenceIds: string[];
+  sourceComponentIds: string[];
+  layer?: string | null;
+  lane?: string | null;
+  renderingStartTokenIndex?: number;
+  renderingEndTokenIndex?: number;
+};
+
 export type BibleIQTokenAvailability = {
   entityId: string;
   source: BibleIQSource;
@@ -24,6 +52,11 @@ export type BibleIQTokenAvailability = {
   isCompoundRoute?: boolean;
   compoundRouteKind?: BibleIQCompoundRouteKind;
   componentLexicalIds?: string[];
+  displayText?: string;
+  isV2SpanRoute?: boolean;
+  routeMode?: BibleIQV2RouteMode;
+  sourceRoutes?: BibleIQV2SourceRoute[];
+  sourceSegment?: BibleIQV2SourceSegment;
 };
 
 export type BibleIQVerseTokenAvailability = Record<
@@ -98,6 +131,10 @@ export type BibleIQSourceAlignment = {
   isCompoundRoute?: boolean;
   compoundRouteKind?: BibleIQCompoundRouteKind;
   componentLexicalIds?: string[];
+  routeMode?: BibleIQV2RouteMode;
+  sourceRoutes?: BibleIQV2SourceRoute[];
+  sourceSegment?: BibleIQV2SourceSegment;
+  noForcedSingleSourceIdentity?: boolean;
 };
 
 export type BibleIQEmetCitation = {

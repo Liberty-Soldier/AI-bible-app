@@ -27,6 +27,7 @@ import type {
   BibleIQSource,
   BibleIQSourceAlignment,
   BibleIQTranslation,
+  BibleIQV2SourceRoute,
 } from "./BibleIQTypes";
 
 const NEW_TESTAMENT_BOOKS = new Set([
@@ -728,6 +729,136 @@ function buildRuntimeEntity({
   };
 }
 
+function buildV2SpanAlignmentEntity({
+  input,
+  preferredSource,
+  hit,
+}: {
+  input: BibleIQRequest;
+  preferredSource: BibleIQSource;
+  hit: NonNullable<Awaited<ReturnType<typeof findCanonicalHit>>>;
+}): BibleIQEntity {
+  const route = hit.v2Route!;
+  const reference = referenceLabel(
+    input.book,
+    input.chapter,
+    input.verse,
+  );
+  const routes: BibleIQV2SourceRoute[] = route.sourceRoutes || [];
+  const lexical = routes.filter((item) => item.kind === "lexical");
+  const grammar = routes.filter((item) => item.kind === "grammar");
+  const sourceWords = routes
+    .map((item) => item.sourceWord)
+    .filter((value): value is string => Boolean(value));
+  const sourceWord = sourceWords.join(" + ") || hit.sourceWord;
+  const routeLabel =
+    route.mode === "segment-context"
+      ? "Source Segment Context"
+      : route.mode === "exact-multi"
+        ? "Multiple Exact Source Components"
+        : grammar.length
+          ? "Exact Grammatical Source Component"
+          : "Exact Source Alignment";
+
+  const statement =
+    route.mode === "segment-context"
+      ? "This English word belongs to an established WEB rendering of the shown Hebrew source segment. No one-token source identity is claimed."
+      : route.mode === "exact-multi"
+        ? "This English word is supported by multiple exact Hebrew source components. SEE preserves all of them instead of selecting only the first."
+        : grammar.length
+          ? "This English word renders an exact grammatical component of the Hebrew source occurrence; it is not being relabeled as a lexical Strong entry."
+          : "The selected word is aligned to " +
+            (sourceWord || "the exact Hebrew source occurrence") +
+            ".";
+
+  const alignment: BibleIQSourceAlignment = {
+    selectedEnglish: input.selectedText || input.displayWord,
+    sourceWord,
+    source: preferredSource,
+    strong:
+      lexical.length === 1 && routes.length === 1
+        ? lexical[0].strong
+        : undefined,
+    lexicalId:
+      lexical.length === 1 && routes.length === 1
+        ? lexical[0].lexicalId
+        : undefined,
+    lemma: routes.length === 1 ? routes[0].lemma : undefined,
+    morph: routes.length === 1 ? routes[0].morph : undefined,
+    entityId: hit.entityId,
+    routeMode: route.mode,
+    sourceRoutes: routes,
+    sourceSegment: route.sourceSegment,
+    noForcedSingleSourceIdentity:
+      route.mode !== "exact-single" || grammar.length > 0,
+  };
+
+  return {
+    id: hit.entityId,
+    type: "word",
+    title: input.selectedText || input.displayWord,
+    subtitle: routeLabel + " • Hebrew",
+    alignment,
+    emet: {
+      status: "insufficient-evidence",
+      packet: null,
+      explanation: undefined,
+      citations: [reference],
+    },
+    meaningInVerse: {
+      reference,
+      selectedEnglish: input.selectedText || input.displayWord,
+      selectedTranslation: translationLabel(input.translation),
+      verseText: input.verseText,
+      sourceWord,
+      lemma: alignment.lemma,
+      lexicalId: alignment.lexicalId,
+      morph: alignment.morph,
+      statement,
+    },
+    simple: {
+      meaning: sourceWord || input.displayWord,
+      inThisVerse: statement,
+      whyItMatters:
+        "SEE keeps source occurrence, component, and segment identity separate and does not invent a one-Strong-per-English-token relationship.",
+      summary:
+        "This is an evidence-grounded alignment context. No synthetic cached EMET explanation was created, and no live AI was invoked.",
+    },
+    evidence: {
+      originalLanguage: {
+        source: preferredSource,
+        word: sourceWord || input.displayWord,
+        strong: alignment.strong,
+        lemma: alignment.lemma,
+        lemmaId: alignment.lexicalId,
+        morph: alignment.morph,
+      },
+      keyReferences: [reference],
+      related: {
+        people: [],
+        places: [],
+        concepts: [routeLabel],
+        events: [],
+      },
+      occurrences: [
+        {
+          reference,
+          book: input.book,
+          chapter: input.chapter,
+          verse: input.verse,
+          englishText: input.verseText || undefined,
+          sourceWord,
+          source: preferredSource,
+          routeTranslation: routeTranslationForSource(
+            preferredSource,
+            input.translation,
+          ),
+        },
+      ],
+    },
+  };
+}
+
 function buildCanonicalAlignmentEntity({
   input,
   preferredSource,
@@ -949,6 +1080,30 @@ export async function resolveBibleIQ(
 
   if (hit) {
     const source = hit.sourceToken?.source || preferredSource;
+    const v2NeedsContextEntity = Boolean(
+      hit.v2Route &&
+        !(
+          hit.v2Route.mode === "exact-single" &&
+          hit.v2Route.sourceRoutes.length === 1 &&
+          hit.v2Route.sourceRoutes[0]?.kind === "lexical" &&
+          /^word:hebrew:H\d+$/.test(hit.entityId)
+        ),
+    );
+
+    if (v2NeedsContextEntity) {
+      return {
+        resolved: true,
+        resolutionType: "verse-context",
+        preferredSource: source,
+        query: input.displayWord,
+        entity: buildV2SpanAlignmentEntity({
+          input,
+          preferredSource: source,
+          hit,
+        }),
+      };
+    }
+
     const canonicalEntityId =
       normalizeWordEntityId(hit.entityId) || hit.entityId;
     const runtime = hit.compoundRoute

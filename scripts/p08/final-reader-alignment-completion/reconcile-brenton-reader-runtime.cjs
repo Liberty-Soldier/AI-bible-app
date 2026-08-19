@@ -523,7 +523,6 @@ function main() {
     sharedKeyCollisionSuppression: true,
     semanticGuessing: false,
     stopWordListUsed: false,
-    generatedAt: new Date().toISOString(),
   };
   writeJson(MANIFEST_FILE, manifest);
   writeJson(path.join(REPORT_DIR, "brenton-runtime-reconciliation.json"), stats);

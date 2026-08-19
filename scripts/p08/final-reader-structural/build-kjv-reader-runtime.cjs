@@ -726,7 +726,6 @@ function main() {
   const manifest = {
     version: 2,
     edition: "kjv2006-standardized-1769",
-    generatedAt: new Date().toISOString(),
     method: "actual-display-to-existing-canonical-exact-structural-reconciliation-with-safe-unresolved-baseline-preservation",
     semanticGuessing: false,
     stopWordListUsed: false,

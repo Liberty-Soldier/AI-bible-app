@@ -2,8 +2,12 @@ import "server-only";
 
 import type {
   BibleIQChapterTokenAvailability,
+  BibleIQVerseTokenAvailability,
   BibleIQCompoundRouteKind,
   BibleIQSource,
+  BibleIQV2RouteMode,
+  BibleIQV2SourceRoute,
+  BibleIQV2SourceSegment,
 } from "@/app/data/lexicon/BibleIQTypes";
 import { toEvidenceBook } from "@/app/data/evidence/evidenceBookMap";
 
@@ -27,9 +31,18 @@ type CompactSourceToken = [
   morph: string,
 ];
 
+type CompactV2Route = {
+  mode: BibleIQV2RouteMode;
+  si?: number[];
+  routes?: Array<Record<string, unknown>>;
+  segment?: Record<string, unknown>;
+  d?: string;
+};
+
 type CompactVerse = {
   s: CompactSourceToken[];
   a: Record<string, Record<string, number>>;
+  v?: Record<string, Record<string, CompactV2Route>>;
 };
 
 type CompactBook = {
@@ -63,11 +76,19 @@ export type CanonicalCompoundRoute = {
   componentLexicalIds: string[];
 };
 
+export type CanonicalV2Route = {
+  mode: BibleIQV2RouteMode;
+  displayText?: string;
+  sourceRoutes: BibleIQV2SourceRoute[];
+  sourceSegment?: BibleIQV2SourceSegment;
+};
+
 export type CanonicalHit = {
   entityId: string;
   sourceWord?: string;
   sourceToken?: CanonicalSourceToken;
   compoundRoute?: CanonicalCompoundRoute;
+  v2Route?: CanonicalV2Route;
 };
 
 const RUNTIME_ROOT = "/data/bibleiq/word-study";
@@ -345,6 +366,106 @@ function expandSourceToken(
   };
 }
 
+function expandCompactV2Route(
+  corpus: BibleIQSource,
+  compactVerse: CompactVerse,
+  compact: CompactV2Route,
+): { route: CanonicalV2Route; sourceTokens: CanonicalSourceToken[] } {
+  const indices = Array.isArray(compact.si)
+    ? compact.si.filter(
+        (value) => Number.isInteger(value) && Number(value) >= 0,
+      )
+    : [];
+
+  const sourceTokens = indices
+    .map((index) => {
+      const token = compactVerse.s?.[index];
+      return token ? expandSourceToken(corpus, token, index) : null;
+    })
+    .filter(
+      (token): token is CanonicalSourceToken => Boolean(token),
+    );
+
+  const compactRoutes = Array.isArray(compact.routes)
+    ? compact.routes
+    : [];
+
+  const sourceRoutes: BibleIQV2SourceRoute[] = compactRoutes.map(
+    (item, index) => {
+      const token = sourceTokens[index];
+      const kind = item?.k === "grammar" ? "grammar" : "lexical";
+      const strong = String(item?.s || token?.strong || "") || undefined;
+
+      return {
+        kind,
+        sourceTokenId: token?.id,
+        sourceWord: token?.surface,
+        occurrenceId: String(item?.o || "") || undefined,
+        componentId: String(item?.c || "") || undefined,
+        grammarId: String(item?.g || "") || undefined,
+        strong: kind === "lexical" ? strong : undefined,
+        lexicalId: kind === "lexical" ? strong : undefined,
+        lemma: token?.lemma,
+        morph: token?.morph,
+        entityId:
+          kind === "lexical"
+            ? String(item?.e || token?.entityId || "") || undefined
+            : undefined,
+      };
+    },
+  );
+
+  const segment = compact.segment || {};
+  const sourceSegment: BibleIQV2SourceSegment = {
+    sourceOccurrenceIds: Array.isArray(segment.sourceOccurrenceIds)
+      ? segment.sourceOccurrenceIds.map(String)
+      : [],
+    sourceComponentIds: Array.isArray(segment.sourceComponentIds)
+      ? segment.sourceComponentIds.map(String)
+      : [],
+    layer: typeof segment.layer === "string" ? segment.layer : null,
+    lane: typeof segment.lane === "string" ? segment.lane : null,
+    renderingStartTokenIndex: Number.isInteger(
+      Number(segment.renderingStartTokenIndex),
+    )
+      ? Number(segment.renderingStartTokenIndex)
+      : undefined,
+    renderingEndTokenIndex: Number.isInteger(
+      Number(segment.renderingEndTokenIndex),
+    )
+      ? Number(segment.renderingEndTokenIndex)
+      : undefined,
+  };
+
+  return {
+    route: {
+      mode: compact.mode,
+      displayText: compact.d || undefined,
+      sourceRoutes,
+      sourceSegment,
+    },
+    sourceTokens,
+  };
+}
+
+function syntheticV2RouteEntityId(
+  book: string,
+  chapter: number,
+  verse: number,
+  displayTokenIndex: number,
+) {
+  return (
+    "route:web-wlc-v2:" +
+    normalizeAlias(book) +
+    ":" +
+    chapter +
+    ":" +
+    verse +
+    ":" +
+    displayTokenIndex
+  );
+}
+
 export async function findCanonicalHit({
   origin,
   book,
@@ -375,6 +496,54 @@ export async function findCanonicalHit({
     (await loadRuntimeBook(origin, corpus, book));
   const compactVerse = runtimeBook?.verses?.[`${chapter}:${verse}`];
   if (!compactVerse) return null;
+
+  if (translationKey === "web") {
+    const compactV2 =
+      compactVerse.v?.web?.[String(displayTokenIndex)];
+
+    if (compactV2) {
+      const expanded = expandCompactV2Route(
+        corpus,
+        compactVerse,
+        compactV2,
+      );
+      const routes = expanded.route.sourceRoutes;
+      const exactLexicalSingle =
+        expanded.route.mode === "exact-single" &&
+        routes.length === 1 &&
+        routes[0]?.kind === "lexical" &&
+        expanded.sourceTokens.length === 1 &&
+        /^word:hebrew:H\d+$/.test(
+          expanded.sourceTokens[0]?.entityId || "",
+        );
+
+      if (exactLexicalSingle) {
+        const sourceToken = expanded.sourceTokens[0];
+        return {
+          entityId: sourceToken.entityId,
+          sourceWord: sourceToken.surface,
+          sourceToken,
+          compoundRoute: compoundRouteForSourceToken(sourceToken),
+          v2Route: expanded.route,
+        };
+      }
+
+      return {
+        entityId: syntheticV2RouteEntityId(
+          book,
+          chapter,
+          verse,
+          displayTokenIndex,
+        ),
+        sourceWord:
+          expanded.sourceTokens
+            .map((token) => token.surface)
+            .filter(Boolean)
+            .join(" + ") || undefined,
+        v2Route: expanded.route,
+      };
+    }
+  }
 
   const sourceIndex =
     compactVerse.a?.[translationKey]?.[String(displayTokenIndex)];
@@ -455,52 +624,93 @@ export async function getCanonicalChapterTokenAvailability({
       continue;
     }
 
-    const aligned = compactVerse.a?.[translationKey] || {};
-    const available: Record<
-      string,
-      {
-        entityId: string;
-        source: BibleIQSource;
-        sourceWord?: string;
-        lexicalId?: string;
-        isCompoundRoute?: boolean;
-        compoundRouteKind?: BibleIQCompoundRouteKind;
-        componentLexicalIds?: string[];
-      }
-    > = {};
+    const available: BibleIQVerseTokenAvailability = {};
 
-    for (const [displayIndex, sourceIndex] of Object.entries(aligned)) {
-      if (!Number.isInteger(sourceIndex) || sourceIndex < 0) continue;
-
-      const compactSource = compactVerse.s?.[sourceIndex];
-      const entityId = String(compactSource?.[4] || "").trim();
-
-      const isOrdinaryEntity =
-        /^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(
-          entityId,
+    if (translationKey === "web" && compactVerse.v?.web) {
+      for (const [displayIndex, compactV2] of Object.entries(
+        compactVerse.v.web,
+      )) {
+        const expanded = expandCompactV2Route(
+          corpus,
+          compactVerse,
+          compactV2,
         );
-      const isCompoundRoute =
-        /^compound:greek-nt:G\d+-G\d+$/.test(entityId);
-
-      if (!isOrdinaryEntity && !isCompoundRoute) {
-        continue;
-      }
-
-      const strong = compactSource?.[3] || undefined;
-      const route =
-        isCompoundRoute && strong
-          ? GREEK_COMPOUND_ROUTES[strong]
+        const routes = expanded.route.sourceRoutes;
+        const exactLexicalSingle =
+          expanded.route.mode === "exact-single" &&
+          routes.length === 1 &&
+          routes[0]?.kind === "lexical" &&
+          expanded.sourceTokens.length === 1 &&
+          /^word:hebrew:H\d+$/.test(
+            expanded.sourceTokens[0]?.entityId || "",
+          );
+        const sourceToken = exactLexicalSingle
+          ? expanded.sourceTokens[0]
           : undefined;
 
-      available[displayIndex] = {
-        entityId,
-        source: corpus,
-        sourceWord: compactSource?.[1] || undefined,
-        lexicalId: lexicalIdFromEntityId(entityId, strong),
-        isCompoundRoute,
-        compoundRouteKind: route?.routeKind,
-        componentLexicalIds: route?.componentLexicalIds,
-      };
+        available[displayIndex] = {
+          entityId: sourceToken?.entityId ||
+            syntheticV2RouteEntityId(
+              book,
+              chapter,
+              verseNumber,
+              Number(displayIndex),
+            ),
+          source: corpus,
+          sourceWord:
+            sourceToken?.surface ||
+            expanded.sourceTokens
+              .map((token) => token.surface)
+              .filter(Boolean)
+              .join(" + ") ||
+            undefined,
+          lexicalId: sourceToken
+            ? lexicalIdFromEntityId(
+                sourceToken.entityId,
+                sourceToken.strong,
+              )
+            : undefined,
+          displayText: expanded.route.displayText,
+          isV2SpanRoute: true,
+          routeMode: expanded.route.mode,
+          sourceRoutes: expanded.route.sourceRoutes,
+          sourceSegment: expanded.route.sourceSegment,
+        };
+      }
+    } else {
+      const aligned = compactVerse.a?.[translationKey] || {};
+
+      for (const [displayIndex, sourceIndex] of Object.entries(aligned)) {
+        if (!Number.isInteger(sourceIndex) || sourceIndex < 0) continue;
+
+        const compactSource = compactVerse.s?.[sourceIndex];
+        const entityId = String(compactSource?.[4] || "").trim();
+
+        const isOrdinaryEntity =
+          /^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(
+            entityId,
+          );
+        const isCompoundRoute =
+          /^compound:greek-nt:G\d+-G\d+$/.test(entityId);
+
+        if (!isOrdinaryEntity && !isCompoundRoute) continue;
+
+        const strong = compactSource?.[3] || undefined;
+        const route =
+          isCompoundRoute && strong
+            ? GREEK_COMPOUND_ROUTES[strong]
+            : undefined;
+
+        available[displayIndex] = {
+          entityId,
+          source: corpus,
+          sourceWord: compactSource?.[1] || undefined,
+          lexicalId: lexicalIdFromEntityId(entityId, strong),
+          isCompoundRoute,
+          compoundRouteKind: route?.routeKind,
+          componentLexicalIds: route?.componentLexicalIds,
+        };
+      }
     }
 
     if (Object.keys(available).length > 0) {
@@ -510,4 +720,3 @@ export async function getCanonicalChapterTokenAvailability({
 
   return result;
 }
-
