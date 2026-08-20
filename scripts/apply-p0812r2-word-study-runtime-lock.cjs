@@ -104,6 +104,33 @@ function reconstructBook(generated, bookLock) {
   return out;
 }
 
+function applyP0812R2R10AOverlayAfterR13(repositoryRoot, expectedR13Checksum) {
+  const runtimeRoot = path.join(repositoryRoot, "public", "data", "bibleiq", "word-study");
+  const manifest = readJson(path.join(runtimeRoot, "manifest.json"));
+  if (!expectedR13Checksum || manifest.checksum !== expectedR13Checksum) {
+    fail(
+      `R10A overlay requires exact locked R13 ${expectedR13Checksum || "<missing>"}, ` +
+        `found ${manifest.checksum}.`,
+    );
+  }
+
+  const overlayModule = path.join(
+    repositoryRoot,
+    "scripts",
+    "apply-p0812r2-web-wlc-r10a-runtime-overlay.cjs",
+  );
+  if (!fs.existsSync(overlayModule)) {
+    fail(`R10A overlay module is missing: ${overlayModule}`);
+  }
+
+  const overlay = require(overlayModule);
+  if (typeof overlay.applyP0812R2R10ARuntimeOverlay !== "function") {
+    fail("R10A overlay module does not export applyP0812R2R10ARuntimeOverlay.");
+  }
+
+  return overlay.applyP0812R2R10ARuntimeOverlay(repositoryRoot);
+}
+
 function applyP0812R2RuntimeLock(repositoryRoot = process.cwd()) {
   const runtimeRoot = path.join(repositoryRoot, "public", "data", "bibleiq", "word-study");
   const lockFile = path.join(
@@ -155,10 +182,15 @@ function applyP0812R2RuntimeLock(repositoryRoot = process.cwd()) {
     `[P08.12R2 runtime lock] PASS: baseline ${lock.baseline.manifestChecksum} -> ` +
       `R13 ${lock.reference.manifest.checksum}; books=${Object.keys(lock.books).length}`,
   );
+
+  applyP0812R2R10AOverlayAfterR13(
+    repositoryRoot,
+    lock.reference.manifest.checksum,
+  );
 }
 
 if (require.main === module) {
   applyP0812R2RuntimeLock(process.cwd());
 }
 
-module.exports = { applyP0812R2RuntimeLock };
+module.exports = { applyP0812R2RuntimeLock, applyP0812R2R10AOverlayAfterR13 };
