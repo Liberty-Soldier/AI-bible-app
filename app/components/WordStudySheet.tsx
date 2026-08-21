@@ -23,6 +23,7 @@ import type {
   BibleIQResponse,
   BibleIQSeeKnowledge,
   BibleIQSourceAlignment,
+  BibleIQSourceComponentEvidence,
 } from "@/app/data/lexicon/BibleIQTypes";
 
 type WordStudySheetProps = {
@@ -52,60 +53,6 @@ const OCCURRENCE_PAGE_SIZE = 40;
 const SOURCE_FORM_LIMIT = 10;
 const TECHNICAL_SOURCE_FORM_LIMIT = 40;
 const CONNECTION_LIMIT = 12;
-
-const RENDERING_NOISE_WORDS = new Set([
-  "a",
-  "an",
-  "and",
-  "are",
-  "as",
-  "at",
-  "be",
-  "been",
-  "being",
-  "but",
-  "by",
-  "for",
-  "from",
-  "had",
-  "has",
-  "have",
-  "he",
-  "her",
-  "hers",
-  "him",
-  "his",
-  "i",
-  "in",
-  "is",
-  "it",
-  "its",
-  "me",
-  "my",
-  "of",
-  "on",
-  "or",
-  "our",
-  "ours",
-  "she",
-  "that",
-  "the",
-  "their",
-  "theirs",
-  "them",
-  "they",
-  "this",
-  "to",
-  "us",
-  "was",
-  "we",
-  "were",
-  "will",
-  "with",
-  "you",
-  "your",
-  "yours",
-]);
 
 const GREEK_DIGRAPHS: Record<string, string> = {
   αι: "ai",
@@ -245,6 +192,53 @@ function cleanRendering(value: string) {
     .replace(/^[\s'“”"]+|[\s'“”".,;:!?]+$/g, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+
+function renderingSpanFromVerse(
+  verseText: string | undefined,
+  alignment: BibleIQSourceAlignment | undefined,
+  fallback: string,
+) {
+  const explicit = String((alignment as BibleIQSourceAlignment & {
+    renderingText?: string;
+  } | undefined)?.renderingText || "").trim();
+  if (explicit) return explicit;
+
+  const start = alignment?.sourceSegment?.renderingStartTokenIndex;
+  const end = alignment?.sourceSegment?.renderingEndTokenIndex;
+  const tokens = String(verseText || "")
+    .split(/\s+/u)
+    .map((token) => token.trim())
+    .filter((token) => token && /[\p{L}\p{N}]/u.test(token));
+
+  if (
+    Number.isInteger(start) &&
+    Number.isInteger(end) &&
+    Number(start) >= 0 &&
+    Number(end) >= Number(start) &&
+    Number(end) < tokens.length
+  ) {
+    const span = cleanRendering(
+      tokens.slice(Number(start), Number(end) + 1).join(" "),
+    );
+    if (span) return span;
+  }
+
+  return fallback;
+}
+
+function uniqueLexicalSourceRoutes(alignment?: BibleIQSourceAlignment) {
+  const routes = (alignment?.sourceRoutes || []).filter(
+    (route) => route.kind === "lexical",
+  );
+  const seen = new Set<string>();
+  return routes.filter((route) => {
+    const key = String(route.entityId || route.lexicalId || route.sourceTokenId || "");
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function getTranslationLabel(value?: string) {
@@ -446,68 +440,23 @@ function isReaderReadyStatement(value?: string) {
   );
 }
 
-function getPrincipalRenderings(
+function getEntityOwnedRenderings(
   evidence: BibleIQEntityEvidence | undefined,
-  selectedWord: string,
+  translation?: string,
 ) {
-  const forms = evidence?.renderings?.mostCommon || [];
-  if (!forms.length) return [];
+  const translationKey = String(translation || "").trim().toLowerCase();
 
-  const selectedStem = englishStem(selectedWord);
-  const lexicalTerms = [
-    ...(evidence?.lexical.shortDefinitions || []),
-    ...(evidence?.lexical.glosses || []),
-  ]
-    .flatMap((value) => String(value).split(/[;,/|]/g))
-    .map((value) => englishStem(value))
-    .filter(Boolean);
+  const translationBucket = translationKey
+    ? (evidence?.renderings?.translations || []).find(
+        (bucket) =>
+          String(bucket.translation || "").trim().toLowerCase() ===
+          translationKey,
+      )
+    : undefined;
 
-  const cleaned = forms
-    .map((form) => ({
-      ...form,
-      text: cleanRendering(form.text),
-    }))
-    .filter(
-      (form) =>
-        form.text &&
-        !/[<>\[\]{}§¶]/.test(form.text) &&
-        normalizeEnglish(form.text).length > 1,
-    );
-
-  const direct = cleaned.filter((form) => {
-    const stem = englishStem(form.text);
-    if (!stem) return false;
-    if (stem === selectedStem) return true;
-    if (RENDERING_NOISE_WORDS.has(stem)) return false;
-    return lexicalTerms.includes(stem);
-  });
-
-  const candidates = direct;
-
-  const seen = new Set<string>();
-  return candidates
-    .filter((form) => {
-      const key = `${normalizeEnglish(form.text)}|${form.translation}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .slice(0, 5);
-}
-
-function getAllCleanRenderings(
-  evidence: BibleIQEntityEvidence | undefined,
-  selectedWord: string,
-) {
-  const forms = evidence?.renderings?.mostCommon || [];
-  const selectedStem = englishStem(selectedWord);
-  const lexicalTerms = [
-    ...(evidence?.lexical.shortDefinitions || []),
-    ...(evidence?.lexical.glosses || []),
-  ]
-    .flatMap((value) => String(value).split(/[;,/|]/g))
-    .map((value) => englishStem(value))
-    .filter(Boolean);
+  const forms = translationBucket
+    ? translationBucket.forms
+    : evidence?.renderings?.mostCommon || [];
 
   const cleaned = forms
     .map((form) => ({
@@ -524,18 +473,27 @@ function getAllCleanRenderings(
   const seen = new Set<string>();
 
   return cleaned.filter((form) => {
-    const stem = englishStem(form.text);
-    const direct =
-      stem === selectedStem ||
-      (!RENDERING_NOISE_WORDS.has(stem) && lexicalTerms.includes(stem));
-
-    if (!direct) return false;
-
     const key = `${normalizeEnglish(form.text)}|${form.translation}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
   });
+}
+
+function getPrincipalRenderings(
+  evidence: BibleIQEntityEvidence | undefined,
+  _selectedWord: string,
+  translation?: string,
+) {
+  return getEntityOwnedRenderings(evidence, translation).slice(0, 5);
+}
+
+function getAllCleanRenderings(
+  evidence: BibleIQEntityEvidence | undefined,
+  _selectedWord: string,
+  translation?: string,
+) {
+  return getEntityOwnedRenderings(evidence, translation);
 }
 
 function isReaderReadyLexicalMeaning(value?: string) {
@@ -835,6 +793,10 @@ export default function WordStudySheet({
   const [visibleOccurrenceCount, setVisibleOccurrenceCount] = useState(
     OCCURRENCE_PAGE_SIZE,
   );
+  const [sourceEntityId, setSourceEntityId] = useState<string | null>(null);
+  const [sourceEntityLabel, setSourceEntityLabel] = useState<string>("");
+  const [sourceEntityData, setSourceEntityData] = useState<BibleIQResponse | null>(null);
+  const [sourceEntityLoading, setSourceEntityLoading] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const dragStartYRef = useRef<number | null>(null);
@@ -885,6 +847,10 @@ export default function WordStudySheet({
     setSelectedBook(null);
     setSelectedRendering(null);
     setVisibleOccurrenceCount(OCCURRENCE_PAGE_SIZE);
+    setSourceEntityId(null);
+    setSourceEntityLabel("");
+    setSourceEntityData(null);
+    setSourceEntityLoading(false);
     setSnap("compact");
 
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
@@ -952,6 +918,68 @@ export default function WordStudySheet({
     verseText,
   ]);
 
+  useEffect(() => {
+    if (!sourceEntityId) {
+      setSourceEntityData(null);
+      setSourceEntityLoading(false);
+      return;
+    }
+
+    const activeEntityId = sourceEntityId;
+    let cancelled = false;
+
+    async function loadSourceEntity() {
+      setSourceEntityLoading(true);
+      setSourceEntityData(null);
+
+      try {
+        const response = await fetch(
+          `/api/word-study?${new URLSearchParams({
+            entityId: activeEntityId,
+            displayWord: sourceEntityLabel || activeEntityId,
+            book,
+            chapter: String(chapter),
+            verse: String(verse ?? ""),
+            translation,
+            verseText: verseText ?? "",
+          }).toString()}`,
+        );
+
+        if (!response.ok) {
+          throw new Error(`Source entity request failed: ${response.status}`);
+        }
+
+        const json = (await response.json()) as BibleIQResponse;
+        if (!cancelled) setSourceEntityData(json);
+      } catch {
+        if (!cancelled) {
+          setSourceEntityData({
+            resolved: false,
+            resolutionType: "unresolved",
+            query: sourceEntityLabel || activeEntityId,
+            message: "EMETSEES could not load this lexical source entity.",
+          });
+        }
+      } finally {
+        if (!cancelled) setSourceEntityLoading(false);
+      }
+    }
+
+    loadSourceEntity();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    sourceEntityId,
+    sourceEntityLabel,
+    book,
+    chapter,
+    verse,
+    translation,
+    verseText,
+  ]);
+
   if (!word) return null;
 
   const entity = data?.entity;
@@ -964,18 +992,24 @@ export default function WordStudySheet({
   const keyReferences = entity?.keyReferences || [];
   const lexical = entityEvidence?.lexical;
   const occurrences = uniqueOccurrences(entity?.evidence?.occurrences || []);
-  const sourceDisplay = alignment?.lemma || alignment?.sourceWord || original?.word;
-  const transliteration =
-    original?.transliteration ||
-    lexical?.transliteration ||
-    deriveReaderTransliteration(
-      sourceDisplay,
-      alignment?.source,
-      alignment?.lexicalId,
-    );
+  const lexicalSourceRoutes = uniqueLexicalSourceRoutes(alignment);
+  const primaryLexicalRoute =
+    lexicalSourceRoutes.length === 1 ? lexicalSourceRoutes[0] : undefined;
+  const sourceDisplay = alignment?.noForcedSingleSourceIdentity
+    ? primaryLexicalRoute?.lemma || primaryLexicalRoute?.sourceWord
+    : alignment?.lemma || alignment?.sourceWord || original?.word;
+  const transliteration = sourceDisplay
+    ? original?.transliteration ||
+      lexical?.transliteration ||
+      deriveReaderTransliteration(
+        sourceDisplay,
+        alignment?.source,
+        alignment?.lexicalId,
+      )
+    : undefined;
   const pronunciation = original?.pronunciation || lexical?.pronunciation;
-  const principalRenderings = getPrincipalRenderings(entityEvidence, word);
-  const allCleanRenderings = getAllCleanRenderings(entityEvidence, word);
+  const principalRenderings = getPrincipalRenderings(entityEvidence, word, translation);
+  const allCleanRenderings = getAllCleanRenderings(entityEvidence, word, translation);
   const rawPrimaryLexicalMeaning = getPrimaryLexicalMeaning(entityEvidence);
   const primaryLexicalMeaning = isReaderReadyLexicalMeaning(
     rawPrimaryLexicalMeaning,
@@ -1140,7 +1174,27 @@ export default function WordStudySheet({
           ref={scrollRef}
           className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 pb-20"
         >
-          {loading ? (
+          {sourceEntityId ? (
+            <SourceEntityDrilldown
+              label={sourceEntityLabel || sourceEntityId}
+              data={sourceEntityData}
+              loading={sourceEntityLoading}
+              translation={translation}
+              backLabel={
+                alignment?.noForcedSingleSourceIdentity
+                  ? "source construction"
+                  : "source occurrence"
+              }
+              onBack={() => {
+                setSourceEntityId(null);
+                setSourceEntityLabel("");
+                setSourceEntityData(null);
+                requestAnimationFrame(() => {
+                  if (scrollRef.current) scrollRef.current.scrollTop = 0;
+                });
+              }}
+            />
+          ) : loading ? (
             <div className="animate-pulse py-2">
               <p className="text-sm font-semibold text-[var(--muted)]">
                 Loading word evidence...
@@ -1188,6 +1242,14 @@ export default function WordStudySheet({
               returnTo={readingReturnTo}
               returnLabel={readingLabel}
               onView={changeView}
+              onOpenSourceEntity={(entityId, label) => {
+                setSourceEntityId(entityId);
+                setSourceEntityLabel(label);
+                setSourceEntityData(null);
+                requestAnimationFrame(() => {
+                  if (scrollRef.current) scrollRef.current.scrollTop = 0;
+                });
+              }}
               onClose={onClose}
             />
           ) : view === "lexicon" ? (
@@ -1299,6 +1361,7 @@ function OverviewView({
   returnTo,
   returnLabel,
   onView,
+  onOpenSourceEntity,
   onClose,
 }: {
   word: string;
@@ -1325,16 +1388,10 @@ function OverviewView({
   returnTo: string;
   returnLabel: string;
   onView: (view: StudyView) => void;
+  onOpenSourceEntity: (entityId: string, label: string) => void;
   onClose: () => void;
 }) {
-  const firstHref = buildReferenceHref(firstOccurrence, returnTo, returnLabel);
   const sourceLanguageLabel = getSourceLabel(alignment?.source);
-  const originalLanguageLabel =
-    alignment?.source === "hebrew"
-      ? "Hebrew details"
-      : alignment?.source === "lxx"
-        ? "Greek LXX details"
-        : "Greek details";
   const meaningHere = readerMeaning;
   const readerFirstMeaning = deriveReaderFirstMeaning({
     lexicalMeaning: overviewLexicalMeaning,
@@ -1345,12 +1402,70 @@ function OverviewView({
     principalRenderings,
     selectedEnglish: word,
   });
-  const sourceDictionaryWording = overviewLexicalMeaningIsRaw
-    ? overviewLexicalMeaning
+  const renderingText = renderingSpanFromVerse(verseText, alignment, word);
+  const isSpanRendering = Boolean(alignment?.noForcedSingleSourceIdentity);
+  const emetReady = emet?.status === "complete" && Boolean(emet.explanation);
+  const emetScopeLabel =
+    emet?.scope === "lexical-source" ? "EMET · source word" : "EMET explanation";
+  const lexicalRoutes = uniqueLexicalSourceRoutes(alignment);
+  const sourceComponents = alignment?.sourceComponentEvidence || [];
+  const hasAmbiguousLexicalSpan =
+    isSpanRendering && lexicalRoutes.length !== 1;
+  const sourceSegmentText = (alignment?.sourceRoutes || [])
+    .map((route) => route.sourceWord)
+    .filter(Boolean)
+    .join(" ");
+  const exactSingleRoute =
+    !isSpanRendering && alignment?.sourceRoutes?.length === 1
+      ? alignment.sourceRoutes[0]
+      : undefined;
+  const occurrenceSurface =
+    exactSingleRoute?.sourceWord || alignment?.sourceWord;
+  const showOccurrenceSurface =
+    Boolean(occurrenceSurface && sourceDisplay) &&
+    String(occurrenceSurface).trim() !== String(sourceDisplay).trim();
+  const overviewSourceComponents: BibleIQSourceComponentEvidence[] =
+    sourceComponents.length
+      ? sourceComponents
+      : sourceDisplay && alignment?.entityId
+        ? [
+            {
+              kind: "lexical",
+              sourceWord: occurrenceSurface || sourceDisplay,
+              lemma: sourceDisplay,
+              strong: alignment.strong,
+              lexicalId: alignment.lexicalId,
+              morph: alignment.morph,
+              entityId: alignment.entityId,
+              transliteration,
+              pronunciation,
+              shortDefinition: overviewLexicalMeaning || undefined,
+              uniqueVerseCount,
+              firstOccurrence,
+              commonRenderings: principalRenderings,
+            },
+          ]
+        : [];
+  const lexicalComponents = overviewSourceComponents.filter(
+    (component) => component.kind === "lexical",
+  );
+  const acrossScriptureLexicalComponents = (() => {
+    const seen = new Set<string>();
+    return lexicalComponents.filter((component, index) => {
+      const key = String(
+        component.entityId ||
+          component.lexicalId ||
+          component.sourceTokenId ||
+          `component-${index}`,
+      );
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  })();
+  const spanEvidenceMeaning = hasAmbiguousLexicalSpan
+    ? `The ${getTranslationLabel(translation)} rendering “${renderingText}” is supported by a source segment with multiple lexical or grammatical components. The alignment does not safely assign “${word}” to one source word by itself, so EMETSEES keeps the components distinct rather than forcing a one-to-one match. Their individual lexical evidence and Scripture usage are shown below.`
     : "";
-  const showMeaningHere =
-    Boolean(meaningHere) &&
-    normalizeEnglish(meaningHere) !== normalizeEnglish(readerFirstMeaning);
 
   return (
     <div>
@@ -1361,71 +1476,249 @@ function OverviewView({
         <h2 className="mt-2 break-words text-[2.05rem] font-bold leading-[1.04] tracking-[-0.04em]">
           {word}
         </h2>
-
-        {sourceDisplay ? (
-          <div className="mt-3">
-            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-              <span
-                dir={alignment?.source === "hebrew" ? "rtl" : "ltr"}
-                className="break-words text-[1.16rem] font-semibold leading-6"
-              >
-                {sourceDisplay}
-              </span>
-              {transliteration ? (
-                <span className="text-[0.98rem] font-medium italic text-[var(--muted)]">
-                  {transliteration}
-                </span>
-              ) : null}
-              {sourceLanguageLabel ? (
-                <span className="text-xs font-bold uppercase tracking-[0.12em] text-[var(--muted)]">
-                  {sourceLanguageLabel}
-                </span>
-              ) : null}
-            </div>
-            <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
-              {sourceLanguageLabel || "Source-language"} word behind “{word}”
-            </p>
-          </div>
-        ) : null}
-
-        <p className="mt-3 text-sm font-semibold text-[var(--muted)]">
+        <p className="mt-2 text-sm font-semibold text-[var(--muted)]">
           {book} {chapter}
           {verse ? `:${verse}` : ""} · {getTranslationLabel(translation)}
         </p>
       </header>
 
-      <section className="border-t border-[var(--border)] py-4">
-        {readerFirstMeaning ? (
+      <section className="border-t border-[var(--border)] py-5">
+        <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+          {emetReady ? emetScopeLabel : "Meaning"}
+        </p>
+
+        {emetReady ? (
           <>
-            <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-              Meaning
+            <h3 className="mt-2 text-[1.42rem] font-bold leading-8 tracking-[-0.025em]">
+              {emet?.headline || "What this word means"}
+            </h3>
+            <p className="mt-3 text-[1.04rem] leading-7">{emet?.explanation}</p>
+            {emet?.scope === "lexical-source" && isSpanRendering ? (
+              <p className="mt-3 rounded-xl bg-[var(--surface)] px-3 py-2 text-sm leading-6 text-[var(--muted)]">
+                EMET is explaining the lexical source word inside this Hebrew segment. WEB may use several English words to render the whole segment, shown below.
+              </p>
+            ) : null}
+            {emet?.citations?.length ? (
+              <p className="mt-3 text-xs font-semibold leading-5 text-[var(--muted)]">
+                Evidence references · {emet.citations
+                  .slice(0, 4)
+                  .map(formatReaderCitation)
+                  .join(" · ")}
+              </p>
+            ) : null}
+          </>
+        ) : spanEvidenceMeaning || readerFirstMeaning ? (
+          <>
+            <h3 className="mt-2 text-[1.38rem] font-bold leading-8 tracking-[-0.025em]">
+              {hasAmbiguousLexicalSpan
+                ? "What this source construction shows"
+                : "What the available evidence supports"}
+            </h3>
+            <p className="mt-3 text-[1.04rem] leading-7">
+              {spanEvidenceMeaning || readerFirstMeaning}
             </p>
-            <p className="mt-2 text-[1.28rem] font-semibold leading-8 tracking-[-0.015em]">
-              {readerFirstMeaning}
+            <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
+              {hasAmbiguousLexicalSpan
+                ? "This is a source-segment explanation, not a claim that one English word equals one source word."
+                : "This summary stays with the lexical and alignment evidence available for this source context."}
             </p>
           </>
-        ) : null}
+        ) : (
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+            This source context is mapped, but there is not yet enough approved explanatory evidence to summarize its meaning without overclaiming.
+          </p>
+        )}
+      </section>
 
-        {sourceDictionaryWording &&
-        normalizeEnglish(sourceDictionaryWording) !==
-          normalizeEnglish(readerFirstMeaning) ? (
-          <div className={readerFirstMeaning ? "mt-4" : ""}>
-            <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
-              Source dictionary wording
-            </p>
-            <p className="mt-1.5 text-[0.9rem] leading-6 text-[var(--muted)]">
-              {sourceDictionaryWording}
-            </p>
-          </div>
-        ) : null}
+      <section className="border-t border-[var(--border)] py-5">
+        <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+          In this verse
+        </p>
+        <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
+          How the English relates to the source
+        </h3>
 
-        {showMeaningHere ? (
-          <div className={readerFirstMeaning || sourceDictionaryWording ? "mt-4" : ""}>
-            <p className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[var(--muted)]">
-              {readerMeaningLabel}
-            </p>
-            <p className="mt-1.5 text-[1.02rem] leading-7">{meaningHere}</p>
+        <div className="mt-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+          <div className="grid gap-3 text-sm leading-6">
+            <div>
+              <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+                You tapped
+              </p>
+              <p className="mt-1 font-bold text-[var(--foreground)]">“{word}”</p>
+            </div>
+
+            {renderingText ? (
+              <div>
+                <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+                  Rendered here
+                </p>
+                <p className="mt-1 font-semibold text-[var(--foreground)]">“{renderingText}”</p>
+              </div>
+            ) : null}
+
+            {showOccurrenceSurface && occurrenceSurface ? (
+              <div>
+                <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+                  {sourceLanguageLabel || "Source"} occurrence
+                </p>
+                <p
+                  dir={alignment?.source === "hebrew" ? "rtl" : "ltr"}
+                  className="mt-1 break-words text-[1.08rem] font-bold text-[var(--foreground)]"
+                >
+                  {occurrenceSurface}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+                  The occurrence form preserves attached grammatical material. The lexical entry below identifies the source lemma without pretending those attached components are separate English words.
+                </p>
+              </div>
+            ) : null}
+
+            {isSpanRendering && sourceSegmentText ? (
+              <div>
+                <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+                  Source segment
+                </p>
+                <p
+                  dir={alignment?.source === "hebrew" ? "rtl" : "ltr"}
+                  className="mt-1 break-words font-semibold text-[var(--foreground)]"
+                >
+                  {sourceSegmentText}
+                </p>
+                <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+                  Phrase-to-segment alignment. The English words may jointly render lexical and grammatical source components.
+                </p>
+              </div>
+            ) : null}
+
+            {overviewSourceComponents.length ? (
+              <div>
+                <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+                  {overviewSourceComponents.length === 1 ? "Source component" : "Source components"}
+                </p>
+                <div className="mt-2 space-y-2">
+                  {overviewSourceComponents.map((component, index) => {
+                    const componentWord =
+                      (isSpanRendering
+                        ? component.sourceWord || component.lemma
+                        : component.lemma || sourceDisplay || component.sourceWord) ||
+                      component.lexicalId ||
+                      component.grammarId ||
+                      `Component ${index + 1}`;
+                    const componentTransliteration =
+                      component.kind === "lexical"
+                        ? component.transliteration ||
+                          deriveReaderTransliteration(
+                            component.sourceWord || component.lemma,
+                            alignment?.source,
+                            component.lexicalId,
+                          )
+                        : undefined;
+                    const componentIdentity = [
+                      component.strong || component.lexicalId,
+                      component.partsOfSpeech?.[0],
+                      component.morph && !component.partsOfSpeech?.length
+                        ? component.morph
+                        : undefined,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ");
+                    const canOpenLexicalEvidence =
+                      component.kind === "lexical" &&
+                      /^word:(?:hebrew|greek-nt|lxx):[^:]+$/.test(
+                        String(component.entityId || ""),
+                      );
+                    const lexicalLabel =
+                      component.lemma ||
+                      component.transliteration ||
+                      component.strong ||
+                      component.lexicalId ||
+                      componentWord;
+
+                    return (
+                      <button
+                        type="button"
+                        key={`${
+                          component.componentId ||
+                          component.sourceTokenId ||
+                          component.entityId ||
+                          component.lexicalId ||
+                          component.kind
+                        }-${index}`}
+                        onClick={() => {
+                          if (canOpenLexicalEvidence && component.entityId) {
+                            onOpenSourceEntity(component.entityId, lexicalLabel);
+                          } else if (component.kind === "grammar") {
+                            onView("technical");
+                          }
+                        }}
+                        disabled={
+                          !canOpenLexicalEvidence && component.kind !== "grammar"
+                        }
+                        className="w-full rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-left transition enabled:active:scale-[0.995] disabled:cursor-default"
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0">
+                            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                              <span
+                                dir={alignment?.source === "hebrew" ? "rtl" : "ltr"}
+                                className="break-words text-[1.02rem] font-bold"
+                              >
+                                {componentWord}
+                              </span>
+                              {componentTransliteration ? (
+                                <span className="text-sm font-medium italic text-[var(--muted)]">
+                                  {componentTransliteration}
+                                </span>
+                              ) : null}
+                            </div>
+                            {component.shortDefinition ? (
+                              <p className="mt-1 text-sm leading-5 text-[var(--foreground)]">
+                                {component.shortDefinition}
+                              </p>
+                            ) : null}
+                            {componentIdentity ? (
+                              <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+                                {componentIdentity}
+                              </p>
+                            ) : component.kind === "grammar" && component.morph ? (
+                              <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+                                {component.morph}
+                              </p>
+                            ) : null}
+                          </div>
+                          <div className="flex shrink-0 items-center gap-2">
+                            <span className="rounded-full border border-[var(--border)] px-2 py-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] text-[var(--muted)]">
+                              {component.kind === "lexical"
+                                ? "Lexical source"
+                                : "Grammar source"}
+                            </span>
+                            {canOpenLexicalEvidence || component.kind === "grammar" ? (
+                              <Chevron />
+                            ) : null}
+                          </div>
+                        </div>
+                        {canOpenLexicalEvidence ? (
+                          <p className="mt-2 text-xs font-semibold text-[var(--muted)]">
+                            Open lexical evidence
+                          </p>
+                        ) : component.kind === "grammar" ? (
+                          <p className="mt-2 text-xs font-semibold text-[var(--muted)]">
+                            Open grammatical source record
+                          </p>
+                        ) : null}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
           </div>
+        </div>
+
+        {meaningHere && !hasAmbiguousLexicalSpan ? (
+          <p className="mt-3 text-[0.96rem] leading-7 text-[var(--muted)]">
+            {meaningHere}
+          </p>
         ) : null}
 
         {verseText ? (
@@ -1435,112 +1728,140 @@ function OverviewView({
         ) : null}
       </section>
 
-      {emet?.status === "complete" && emet.explanation ? (
-        <section className="border-t border-[var(--border)] py-4">
-          <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-            Across Scripture
-          </p>
-          <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
-            {emet.headline || "What the evidence shows"}
-          </h3>
-          <p className="mt-3 text-[1.02rem] leading-7">{emet.explanation}</p>
-          {emet.citations?.length ? (
-            <p className="mt-3 text-xs font-semibold leading-5 text-[var(--muted)]">
-              Supported by {emet.citations
-                .slice(0, 4)
-                .map(formatReaderCitation)
-                .join(" · ")}
-            </p>
-          ) : null}
-        </section>
-      ) : null}
-
-      {sourceDisplay ? (
-        <section className="border-t border-[var(--border)] py-4">
-          <button
-            type="button"
-            onClick={() => onView("lexicon")}
-            className="w-full text-left transition active:opacity-70"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div className="min-w-0">
-                <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-                  {originalLanguageLabel}
-                </p>
-                <p className="mt-2 break-words text-xl font-bold leading-tight">
-                  {sourceDisplay}
-                </p>
-
-                <div className="mt-3 space-y-1 text-sm leading-6 text-[var(--muted)]">
-                  {transliteration ? (
-                    <p>
-                      <span className="font-semibold text-[var(--foreground)]">
-                        {transliteration}
-                      </span>
-                      {" · transliteration"}
-                    </p>
-                  ) : null}
-                  {pronunciation ? (
-                    <p>
-                      <span className="font-semibold text-[var(--foreground)]">
-                        {pronunciation}
-                      </span>
-                      {" · pronunciation"}
-                    </p>
-                  ) : null}
-                  {alignment?.sourceWord &&
-                  alignment.sourceWord !== alignment.lemma ? (
-                    <p>Form in this verse: {alignment.sourceWord}</p>
-                  ) : null}
-                  {alignment?.lexicalId ? (
-                    <p>
-                      {alignment.lexicalId}
-                      {readableMorphology ? ` · ${readableMorphology}` : ""}
-                    </p>
-                  ) : readableMorphology ? (
-                    <p>{readableMorphology}</p>
-                  ) : null}
-                </div>
-              </div>
-              <Chevron />
-            </div>
-          </button>
-        </section>
-      ) : null}
-
       <section className="border-t border-[var(--border)] py-5">
         <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-          In Scripture
+          Across Scripture
         </p>
+        <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
+          {acrossScriptureLexicalComponents.length === 1
+            ? "Explore the source word"
+            : "Explore the source words"}
+        </h3>
 
-        <div className="mt-2 divide-y divide-[var(--border)]">
-          <ExploreButtonRow
-            label="Common English renderings"
-            summary={
-              principalRenderings.length
-                ? summarizeRenderings(principalRenderings)
-                : "No reliable English rendering summary is available yet"
-            }
-            onClick={() => onView("renderings")}
-            disabled={!principalRenderings.length}
-          />
-          <ExploreButtonRow
-            label="Occurrences"
-            summary={`${uniqueVerseCount.toLocaleString()} verse${
-              uniqueVerseCount === 1 ? "" : "s"
-            }`}
-            onClick={() => onView("occurrences")}
-            disabled={uniqueVerseCount === 0}
-          />
-        </div>
+        {acrossScriptureLexicalComponents.length ? (
+          <div className="mt-3 space-y-3">
+            <p className="text-sm leading-6 text-[var(--muted)]">
+              {acrossScriptureLexicalComponents.length === 1
+                ? "This source word keeps its own lexical identity, occurrence count, and rendering evidence. Open it for the full lexical record."
+                : "This English rendering spans more than one lexical source word. Each source word keeps its own lexical identity and occurrence record; English subword ownership is not inferred from the phrase."}
+            </p>
+
+            {acrossScriptureLexicalComponents.length === 1 ? (
+              <div className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
+                <ExploreButtonRow
+                  label="Common English renderings"
+                  summary={
+                    principalRenderings.length
+                      ? summarizeRenderings(principalRenderings)
+                      : "No reliable English rendering summary is available yet"
+                  }
+                  onClick={() => onView("renderings")}
+                  disabled={!principalRenderings.length}
+                />
+              </div>
+            ) : null}
+
+            {acrossScriptureLexicalComponents.map((component, index) => {
+              const componentWord =
+                component.lemma ||
+                component.sourceWord ||
+                component.lexicalId ||
+                `Source word ${index + 1}`;
+              const componentTransliteration =
+                component.transliteration ||
+                deriveReaderTransliteration(
+                  component.lemma || component.sourceWord,
+                  alignment?.source,
+                  component.lexicalId,
+                );
+              const countSummary = component.uniqueVerseCount
+                ? `${component.uniqueVerseCount.toLocaleString()} verse${
+                    component.uniqueVerseCount === 1 ? "" : "s"
+                  }`
+                : component.occurrenceCount
+                  ? `${component.occurrenceCount.toLocaleString()} source occurrence${
+                      component.occurrenceCount === 1 ? "" : "s"
+                    }`
+                  : "Occurrence count unavailable";
+              const canOpenLexicalEvidence =
+                component.kind === "lexical" &&
+                /^word:(?:hebrew|greek-nt|lxx):[^:]+$/.test(
+                  String(component.entityId || ""),
+                );
+              const lexicalLabel =
+                component.lemma ||
+                component.transliteration ||
+                component.strong ||
+                component.lexicalId ||
+                componentWord;
+
+              return (
+                <button
+                  type="button"
+                  key={`${
+                    component.entityId ||
+                    component.componentId ||
+                    component.sourceTokenId ||
+                    component.lexicalId ||
+                    "lexical-component"
+                  }-${index}`}
+                  onClick={() => {
+                    if (canOpenLexicalEvidence && component.entityId) {
+                      onOpenSourceEntity(component.entityId, lexicalLabel);
+                    }
+                  }}
+                  disabled={!canOpenLexicalEvidence}
+                  className="w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 text-left transition enabled:active:scale-[0.995] disabled:cursor-default"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                      <span
+                        dir={alignment?.source === "hebrew" ? "rtl" : "ltr"}
+                        className="text-lg font-bold"
+                      >
+                        {componentWord}
+                      </span>
+                      {componentTransliteration ? (
+                        <span className="text-sm font-medium italic text-[var(--muted)]">
+                          {componentTransliteration}
+                        </span>
+                      ) : null}
+                      {component.strong || component.lexicalId ? (
+                        <span className="text-xs font-semibold text-[var(--muted)]">
+                          {component.strong || component.lexicalId}
+                        </span>
+                      ) : null}
+                    </div>
+                    {canOpenLexicalEvidence ? <Chevron /> : null}
+                  </div>
+                  <p className="mt-2 text-xs font-semibold leading-5 text-[var(--muted)]">
+                    {countSummary}
+                    {component.firstOccurrence
+                      ? ` · first: ${component.firstOccurrence.reference}`
+                      : ""}
+                  </p>
+                  {canOpenLexicalEvidence ? (
+                    <p className="mt-2 text-xs font-semibold text-[var(--muted)]">
+                      Open full lexical evidence
+                    </p>
+                  ) : null}
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+            This source context does not yet expose a safe lexical occurrence summary.
+          </p>
+        )}
       </section>
 
       <section className="border-t border-[var(--border)] py-5">
         <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-          Scripture evidence
+          Evidence
         </p>
         <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
-          Trace the evidence
+          {emetReady ? "Verify the explanation" : "Inspect the evidence"}
         </h3>
 
         <div className="mt-3 divide-y divide-[var(--border)]">
@@ -1554,45 +1875,270 @@ function OverviewView({
             onClick={() => onView("references")}
             disabled={!keyReferences.length}
           />
-          {firstOccurrence && firstHref ? (
-            <ExploreLinkRow
-              href={firstHref}
-              label="First occurrence"
-              summary={firstOccurrence.reference}
-            />
-          ) : null}
           <ExploreButtonRow
             label="Related evidence"
-            summary="Relationships, events, and themes"
+            summary={
+              hasConnections
+                ? "Relationships, events, and themes"
+                : "No reader-ready related evidence yet"
+            }
             onClick={() => onView("connections")}
             disabled={!hasConnections}
           />
+          {!isSpanRendering && alignment?.entityId ? (
+            <ExploreButtonRow
+              label="Source dictionary wording"
+              summary={
+                alignment.source === "lxx"
+                  ? "LXX lexical ID and source dictionary evidence"
+                  : `${alignment.lexicalId || alignment.strong || "Strong's"} · Strong's / lexicon evidence`
+              }
+              onClick={() => onView("lexicon")}
+            />
+          ) : null}
           <ExploreButtonRow
-            label={
-              alignment?.source === "lxx"
-                ? "LXX lexicon and grammar"
-                : "Lexicon and grammar"
-            }
-            summary={
-              readableMorphology ||
-              (alignment?.lexicalId
-                ? `Source entry ${alignment.lexicalId}`
-                : "Source forms and grammar")
-            }
-            onClick={() => onView("lexicon")}
-          />
-          <ExploreButtonRow
-            label="Technical evidence"
-            summary="Alignment, raw codes, and evidence health"
+            label="Technical source record"
+            summary="Alignment route, source forms, counts, and provenance"
             onClick={() => onView("technical")}
-            quiet
           />
         </div>
       </section>
 
-      <div className="border-t border-[var(--border)] pt-5">
-        <BackToReadingButton label={returnLabel} onClick={onClose} />
+      <p className="border-t border-[var(--border)] py-4 text-xs leading-5 text-[var(--muted)]">
+        EMET explains. SEE and the source witnesses provide the evidence. English is treated as a rendering, not as the source text.
+      </p>
+
+      <button
+        type="button"
+        onClick={onClose}
+        className="mb-2 w-full rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm font-bold"
+      >
+        Back to reading
+      </button>
+    </div>
+  );
+
+}
+
+
+function SourceEntityDrilldown({
+  label,
+  data,
+  loading,
+  translation,
+  backLabel,
+  onBack,
+}: {
+  label: string;
+  data: BibleIQResponse | null;
+  loading: boolean;
+  translation: string;
+  backLabel: string;
+  onBack: () => void;
+}) {
+  if (loading) {
+    return (
+      <div className="animate-pulse py-2">
+        <button
+          type="button"
+          onClick={onBack}
+          className="text-sm font-semibold text-[var(--muted)]"
+        >
+          ← Back to {backLabel}
+        </button>
+        <p className="mt-5 text-sm font-semibold text-[var(--muted)]">
+          Loading lexical evidence...
+        </p>
       </div>
+    );
+  }
+
+  const entity = data?.entity;
+  if (!entity) {
+    return (
+      <Panel>
+        <button
+          type="button"
+          onClick={onBack}
+          className="text-sm font-semibold text-[var(--muted)]"
+        >
+          ← Back to {backLabel}
+        </button>
+        <SectionHeading
+          eyebrow="Source component"
+          title="Lexical evidence is not available"
+        />
+        <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+          {data?.message ||
+            "This source component does not currently resolve to a lexical runtime entity."}
+        </p>
+      </Panel>
+    );
+  }
+
+  const evidence = entity.entityEvidence;
+  const lexical = evidence?.lexical;
+  const alignment = entity.alignment;
+  const lemma =
+    lexical?.lemma ||
+    lexical?.normalizedLemma ||
+    alignment?.lemma ||
+    entity.evidence.originalLanguage?.lemma ||
+    label;
+  const transliteration =
+    lexical?.transliteration ||
+    entity.evidence.originalLanguage?.transliteration;
+  const pronunciation =
+    lexical?.pronunciation ||
+    entity.evidence.originalLanguage?.pronunciation;
+  const strong =
+    lexical?.strong ||
+    alignment?.strong ||
+    entity.evidence.originalLanguage?.strong ||
+    lexical?.lexicalId;
+  const uniqueText = (values: Array<string | undefined>) =>
+    Array.from(
+      new Set(
+        values
+          .map((value) => String(value || "").replace(/\s+/g, " ").trim())
+          .filter(Boolean),
+      ),
+    );
+  const definitions = uniqueText([
+    ...(lexical?.shortDefinitions || []),
+    ...(lexical?.glosses || []),
+  ]).slice(0, 6);
+  const partsOfSpeech = uniqueText(lexical?.partsOfSpeech || []);
+  const morphology = uniqueText([
+    ...(lexical?.morphologyEnglish || []),
+    ...(lexical?.morphology || []),
+  ]).slice(0, 6);
+  const principal = getPrincipalRenderings(evidence, label, translation);
+  const uniqueVerseCount = evidence?.occurrenceSummary.uniqueVerseCount || 0;
+  const firstOccurrence = evidence?.chronology.firstOccurrence?.reference;
+  const witnesses = uniqueText(lexical?.witnesses || []);
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={onBack}
+        className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-sm font-semibold text-[var(--muted)] transition active:scale-[0.98]"
+      >
+        ← Back to {backLabel}
+      </button>
+
+      <header className="pb-4">
+        <p className="text-[0.68rem] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
+          Lexical source
+        </p>
+        <h2
+          dir={alignment?.source === "hebrew" ? "rtl" : "ltr"}
+          className="mt-2 break-words text-[2rem] font-bold leading-[1.05] tracking-[-0.035em]"
+        >
+          {lemma}
+        </h2>
+        <div className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm text-[var(--muted)]">
+          {transliteration ? (
+            <span className="font-semibold italic text-[var(--foreground)]">
+              {transliteration}
+            </span>
+          ) : null}
+          {strong ? <span>{strong}</span> : null}
+          <span>{getSourceLabel(alignment?.source)}</span>
+        </div>
+      </header>
+
+      <section className="border-t border-[var(--border)] py-5">
+        <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+          Lexical evidence
+        </p>
+        <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
+          Source identity and lexicon
+        </h3>
+
+        <div className="mt-4 space-y-3">
+          {pronunciation ? (
+            <InfoRow label="Pronunciation" value={pronunciation} />
+          ) : null}
+          {strong ? <InfoRow label="Lexical ID" value={strong} /> : null}
+          {partsOfSpeech.length ? (
+            <InfoRow label="Part of speech" value={partsOfSpeech.join(" · ")} />
+          ) : null}
+          {morphology.length ? (
+            <InfoRow label="Morphology evidence" value={morphology.join(" · ")} />
+          ) : null}
+        </div>
+
+        {definitions.length ? (
+          <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+            <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+              Lexicon wording
+            </p>
+            <p className="mt-2 text-[0.96rem] leading-7">
+              {definitions[0]}
+            </p>
+            {definitions.length > 1 ? (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {definitions.slice(1).map((definition) => (
+                  <span
+                    key={definition}
+                    className="rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-semibold text-[var(--muted)]"
+                  >
+                    {definition}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+      </section>
+
+      <section className="border-t border-[var(--border)] py-5">
+        <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+          Across Scripture
+        </p>
+        <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
+          Entity-owned lexical usage
+        </h3>
+        <div className="mt-3 space-y-2 text-sm leading-6">
+          <InfoRow
+            label="Occurrences"
+            value={
+              uniqueVerseCount
+                ? `${uniqueVerseCount.toLocaleString()} verse${
+                    uniqueVerseCount === 1 ? "" : "s"
+                  }`
+                : "No verse count available"
+            }
+          />
+          {firstOccurrence ? (
+            <InfoRow label="First occurrence" value={firstOccurrence} />
+          ) : null}
+          <InfoRow
+            label={`${getTranslationLabel(translation)} renderings`}
+            value={
+              principal.length
+                ? summarizeRenderings(principal)
+                : "No entity-owned rendering summary available"
+            }
+          />
+        </div>
+        <p className="mt-3 text-xs leading-5 text-[var(--muted)]">
+          These counts and rendering forms come from this lexical entity’s runtime record. Phrase/segment alignments remain phrase/segment evidence; EMETSEES does not convert them into one-to-one English subword ownership.
+        </p>
+      </section>
+
+      {witnesses.length ? (
+        <section className="border-t border-[var(--border)] py-5">
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+            Source witnesses
+          </p>
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+            {witnesses.join(" · ")}
+          </p>
+        </section>
+      ) : null}
     </div>
   );
 }
