@@ -44,6 +44,17 @@ export type BibleIQV2SourceSegment = {
   renderingEndTokenIndex?: number;
 };
 
+export type BibleIQSourceComponentEvidence = BibleIQV2SourceRoute & {
+  transliteration?: string;
+  pronunciation?: string;
+  shortDefinition?: string;
+  partsOfSpeech?: string[];
+  occurrenceCount?: number;
+  uniqueVerseCount?: number;
+  firstOccurrence?: BibleIQReference;
+  commonRenderings?: BibleIQRenderingForm[];
+};
+
 export type BibleIQTokenAvailability = {
   entityId: string;
   source: BibleIQSource;
@@ -70,6 +81,7 @@ export type BibleIQChapterTokenAvailability = Record<
 >;
 
 export type BibleIQRequest = {
+  entityId?: string;
   book: string;
   chapter: number;
   verse: number;
@@ -134,6 +146,7 @@ export type BibleIQSourceAlignment = {
   routeMode?: BibleIQV2RouteMode;
   sourceRoutes?: BibleIQV2SourceRoute[];
   sourceSegment?: BibleIQV2SourceSegment;
+  sourceComponentEvidence?: BibleIQSourceComponentEvidence[];
   noForcedSingleSourceIdentity?: boolean;
 };
 
@@ -147,6 +160,10 @@ export type BibleIQEmetCitation = {
 };
 
 export type BibleIQEmet = {
+  scope?: "entity" | "lexical-source";
+  sourceEntityId?: string;
+  sourceLemma?: string;
+  sourceLexicalId?: string;
   status:
     | "not-ready"
     | "pending"
@@ -173,6 +190,7 @@ export type BibleIQMeaningInVerse = {
   selectedEnglish: string;
   selectedTranslation: string;
   verseText?: string;
+  renderingText?: string;
   sourceWord?: string;
   lemma?: string;
   lexicalId?: string;

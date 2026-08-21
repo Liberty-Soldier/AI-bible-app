@@ -26,6 +26,7 @@ import type {
   BibleIQSeeKnowledge,
   BibleIQSource,
   BibleIQSourceAlignment,
+  BibleIQSourceComponentEvidence,
   BibleIQTranslation,
   BibleIQV2SourceRoute,
 } from "./BibleIQTypes";
@@ -353,6 +354,7 @@ function buildMeaningInVerse({
     selectedEnglish,
     selectedTranslation: translation,
     verseText: input.verseText,
+    renderingText: selectedEnglish,
     sourceWord,
     lemma,
     lexicalId,
@@ -509,12 +511,20 @@ function buildRuntimeEntity({
   sourceWord,
   morph,
   finalEmet,
+  routeMode,
+  sourceRoutes,
+  sourceSegment,
+  sourceComponentEvidence,
 }: {
   input: BibleIQRequest;
   runtime: WordStudyRuntimeEntity;
   sourceWord?: string;
   morph?: string;
   finalEmet?: FinalEmetRuntimeRecord | null;
+  routeMode?: BibleIQSourceAlignment["routeMode"];
+  sourceRoutes?: BibleIQV2SourceRoute[];
+  sourceSegment?: BibleIQSourceAlignment["sourceSegment"];
+  sourceComponentEvidence?: BibleIQSourceComponentEvidence[];
 }): BibleIQEntity {
   const identity = runtime.identity;
   const lemma =
@@ -576,6 +586,11 @@ function buildRuntimeEntity({
     morph,
     entityId: runtime.entityId,
     seeEvidenceId: see.evidenceId,
+    routeMode,
+    sourceRoutes,
+    sourceSegment,
+    sourceComponentEvidence,
+    noForcedSingleSourceIdentity: false,
   };
 
   const approvedExplanation =
@@ -608,6 +623,10 @@ function buildRuntimeEntity({
   const emet =
     finalEmet?.status === "approved"
       ? {
+          scope: "entity" as const,
+          sourceEntityId: runtime.entityId,
+          sourceLemma: lemma,
+          sourceLexicalId: identity.lexicalId,
           status: "complete" as const,
           approval: "approved-p07" as const,
           explanation: finalEmet.explanation,
@@ -729,15 +748,136 @@ function buildRuntimeEntity({
   };
 }
 
-function buildV2SpanAlignmentEntity({
+function readerDisplayTokens(value?: string) {
+  return String(value || "")
+    .split(/\s+/u)
+    .map((token) => token.trim())
+    .filter((token) => token && /[\p{L}\p{N}]/u.test(token));
+}
+
+function cleanRenderingSpanBoundary(value: string) {
+  return String(value || "")
+    .replace(/^[\s“”‘’'"«»]+|[\s“”‘’'"«».,;:!?]+$/gu, "")
+    .replace(/\s+/gu, " ")
+    .trim();
+}
+
+function renderingTextForRoute(
+  input: BibleIQRequest,
+  route: NonNullable<NonNullable<Awaited<ReturnType<typeof findCanonicalHit>>>["v2Route"]>,
+) {
+  const start = route.sourceSegment?.renderingStartTokenIndex;
+  const end = route.sourceSegment?.renderingEndTokenIndex;
+  const tokens = readerDisplayTokens(input.verseText);
+
+  if (
+    Number.isInteger(start) &&
+    Number.isInteger(end) &&
+    Number(start) >= 0 &&
+    Number(end) >= Number(start) &&
+    Number(end) < tokens.length
+  ) {
+    const rendered = cleanRenderingSpanBoundary(
+      tokens.slice(Number(start), Number(end) + 1).join(" "),
+    );
+    if (rendered) return rendered;
+  }
+
+  return input.selectedText || input.displayWord;
+}
+
+function componentRenderingsForTranslation(
+  runtime: WordStudyRuntimeEntity,
+  translation: string,
+) {
+  const wanted = String(translation || "").trim().toLowerCase();
+  const selected = runtime.renderings.byTranslation.find(
+    (entry) => String(entry.translation || "").trim().toLowerCase() === wanted,
+  );
+
+  if (!selected) return [];
+
+  return selected.forms.slice(0, 4).map((form) => ({
+    text: form.text,
+    count: form.count,
+    translation: selected.translation,
+  }));
+}
+
+async function buildV2SourceComponentEvidence({
+  routes,
+  input,
+  origin,
+}: {
+  routes: BibleIQV2SourceRoute[];
+  input: BibleIQRequest;
+  origin: string;
+}): Promise<BibleIQSourceComponentEvidence[]> {
+  const runtimeByEntityId = new Map<string, WordStudyRuntimeEntity | null>();
+  const lexicalEntityIds = Array.from(
+    new Set(
+      routes
+        .filter((route) => route.kind === "lexical")
+        .map((route) => String(route.entityId || ""))
+        .filter((entityId) => /^word:(?:hebrew|greek-nt|lxx):[^:]+$/.test(entityId)),
+    ),
+  );
+
+  await Promise.all(
+    lexicalEntityIds.map(async (entityId) => {
+      runtimeByEntityId.set(
+        entityId,
+        await loadWordStudyEntity(origin, entityId),
+      );
+    }),
+  );
+
+  return routes.map((route) => {
+    const runtime = route.entityId
+      ? runtimeByEntityId.get(route.entityId) || null
+      : null;
+    const identity = runtime?.identity;
+    const firstOccurrence = runtime
+      ? chronologyReference(
+          runtime.occurrences.firstOccurrence,
+          runtime.corpus,
+          input.translation,
+        )
+      : undefined;
+
+    return {
+      ...route,
+      strong: route.strong || identity?.strong,
+      lexicalId: route.lexicalId || identity?.lexicalId,
+      lemma: route.lemma || identity?.lemma || identity?.normalizedLemma,
+      transliteration: identity?.transliteration,
+      pronunciation: identity?.pronunciation,
+      shortDefinition:
+        identity?.shortDefinitions?.[0] || identity?.glosses?.[0],
+      partsOfSpeech: identity?.partsOfSpeech,
+      occurrenceCount:
+        runtime?.occurrences.corpusOccurrenceCount ||
+        runtime?.occurrences.totalEntityOccurrences,
+      uniqueVerseCount: runtime?.occurrences.uniqueVerseCount,
+      firstOccurrence,
+      commonRenderings: runtime
+        ? componentRenderingsForTranslation(runtime, input.translation)
+        : [],
+    };
+  });
+}
+
+async function buildV2SpanAlignmentEntity({
   input,
   preferredSource,
   hit,
+  origin,
 }: {
   input: BibleIQRequest;
   preferredSource: BibleIQSource;
   hit: NonNullable<Awaited<ReturnType<typeof findCanonicalHit>>>;
-}): BibleIQEntity {
+  origin: string;
+}): Promise<BibleIQEntity> {
   const route = hit.v2Route!;
   const reference = referenceLabel(
     input.book,
@@ -745,12 +885,19 @@ function buildV2SpanAlignmentEntity({
     input.verse,
   );
   const routes: BibleIQV2SourceRoute[] = route.sourceRoutes || [];
+  const sourceComponentEvidence = await buildV2SourceComponentEvidence({
+    routes,
+    input,
+    origin,
+  });
   const lexical = routes.filter((item) => item.kind === "lexical");
   const grammar = routes.filter((item) => item.kind === "grammar");
   const sourceWords = routes
     .map((item) => item.sourceWord)
     .filter((value): value is string => Boolean(value));
   const sourceWord = sourceWords.join(" + ") || hit.sourceWord;
+  const renderingText = renderingTextForRoute(input, route);
+  const selectedEnglish = input.selectedText || input.displayWord;
   const routeLabel =
     route.mode === "segment-context"
       ? "Source Segment Context"
@@ -760,19 +907,43 @@ function buildV2SpanAlignmentEntity({
           ? "Exact Grammatical Source Component"
           : "Exact Source Alignment";
 
+  const lexicalOwnerIds = Array.from(
+    new Set(
+      lexical
+        .map((item) => String(item.entityId || ""))
+        .filter((entityId) => /^word:hebrew:H\d+$/.test(entityId)),
+    ),
+  );
+  const lexicalOwnerId =
+    lexicalOwnerIds.length === 1 ? lexicalOwnerIds[0] : undefined;
+  const lexicalRoute = lexicalOwnerId
+    ? lexical.find((item) => item.entityId === lexicalOwnerId)
+    : undefined;
+  const lexicalRuntime = lexicalOwnerId
+    ? await loadWordStudyEntity(origin, lexicalOwnerId)
+    : null;
+  const lexicalEmet = lexicalRuntime
+    ? await loadFinalEmetRecord(origin, lexicalRuntime.entityId)
+    : null;
+  const lexicalIdentity = lexicalRuntime?.identity;
+  const lexicalLemma =
+    lexicalRoute?.lemma ||
+    lexicalIdentity?.lemma ||
+    lexicalIdentity?.normalizedLemma;
+
   const statement =
     route.mode === "segment-context"
-      ? "This English word belongs to an established WEB rendering of the shown Hebrew source segment. No one-token source identity is claimed."
+      ? `In ${reference}, “${selectedEnglish}” is part of the ${translationLabel(input.translation)} rendering “${renderingText}” for this Hebrew source segment. The relationship is phrase-to-segment; no one-English-word-to-one-Hebrew-word identity is being claimed.`
       : route.mode === "exact-multi"
-        ? "This English word is supported by multiple exact Hebrew source components. SEE preserves all of them instead of selecting only the first."
+        ? `In ${reference}, “${selectedEnglish}” is supported by multiple exact Hebrew source components. SEE preserves the full source relationship instead of selecting only one component.`
         : grammar.length
-          ? "This English word renders an exact grammatical component of the Hebrew source occurrence; it is not being relabeled as a lexical Strong entry."
+          ? `In ${reference}, “${selectedEnglish}” renders an exact grammatical component of the Hebrew source occurrence. It is not being relabeled as a lexical Strong entry.`
           : "The selected word is aligned to " +
             (sourceWord || "the exact Hebrew source occurrence") +
             ".";
 
   const alignment: BibleIQSourceAlignment = {
-    selectedEnglish: input.selectedText || input.displayWord,
+    selectedEnglish,
     sourceWord,
     source: preferredSource,
     strong:
@@ -789,72 +960,200 @@ function buildV2SpanAlignmentEntity({
     routeMode: route.mode,
     sourceRoutes: routes,
     sourceSegment: route.sourceSegment,
+    sourceComponentEvidence,
     noForcedSingleSourceIdentity:
       route.mode !== "exact-single" || grammar.length > 0,
   };
 
+  const citationDetails = (lexicalEmet?.status === "approved"
+    ? lexicalEmet.citations
+    : []
+  )
+    .filter(
+      (citation) =>
+        Boolean(citation.book) &&
+        Number.isFinite(citation.chapter) &&
+        Number.isFinite(citation.verse),
+    )
+    .map((citation) => ({
+      reference:
+        citation.reference ||
+        referenceLabel(
+          citation.book!,
+          citation.chapter!,
+          citation.verse!,
+        ),
+      book: citation.book!,
+      chapter: citation.chapter!,
+      verse: citation.verse!,
+      evidenceId: citation.evidenceId,
+      kind: citation.kind,
+    }));
+
+  const emet =
+    lexicalEmet?.status === "approved" && lexicalOwnerId
+      ? {
+          scope: "lexical-source" as const,
+          sourceEntityId: lexicalOwnerId,
+          sourceLemma: lexicalLemma,
+          sourceLexicalId: lexicalIdentity?.lexicalId,
+          status: "complete" as const,
+          approval: "approved-p07" as const,
+          explanation: lexicalEmet.explanation,
+          citations: lexicalEmet.citations.map(
+            (citation) => citation.reference,
+          ),
+          citationDetails,
+          explanationChecksum: lexicalEmet.explanationChecksum,
+          packetChecksum: lexicalEmet.viewChecksum,
+          packet: null,
+        }
+      : lexicalEmet?.status === "no-explanation"
+        ? {
+            scope: "lexical-source" as const,
+            sourceEntityId: lexicalOwnerId,
+            sourceLemma: lexicalLemma,
+            sourceLexicalId: lexicalIdentity?.lexicalId,
+            status: "insufficient-evidence" as const,
+            approval: "no-explanation-p07" as const,
+            explanation: undefined,
+            citations: [],
+            citationDetails: [],
+            packet: null,
+          }
+        : {
+            status: "insufficient-evidence" as const,
+            packet: null,
+            explanation: undefined,
+            citations: [reference],
+          };
+
+  const entityEvidence = lexicalRuntime
+    ? buildEntityEvidence(lexicalRuntime, input.translation)
+    : undefined;
+  const seeKnowledge = lexicalRuntime
+    ? buildSeeKnowledge(lexicalRuntime, input.translation)
+    : undefined;
+  const keyReferences = lexicalRuntime
+    ? buildKeyReferences(lexicalRuntime, input.translation, lexicalEmet)
+    : [];
+  const firstOccurrence = lexicalRuntime
+    ? chronologyReference(
+        lexicalRuntime.occurrences.firstOccurrence,
+        lexicalRuntime.corpus,
+        input.translation,
+      )
+    : undefined;
+  const lexicalOccurrences = lexicalRuntime
+    ? buildOccurrences({
+        input,
+        runtime: lexicalRuntime,
+        sourceWord: lexicalRoute?.sourceWord,
+      })
+    : [];
+
   return {
     id: hit.entityId,
     type: "word",
-    title: input.selectedText || input.displayWord,
+    title: selectedEnglish,
     subtitle: routeLabel + " • Hebrew",
     alignment,
-    emet: {
-      status: "insufficient-evidence",
-      packet: null,
-      explanation: undefined,
-      citations: [reference],
-    },
+    emet,
+    entityEvidence,
+    seeKnowledge,
+    keyReferences,
     meaningInVerse: {
       reference,
-      selectedEnglish: input.selectedText || input.displayWord,
+      selectedEnglish,
       selectedTranslation: translationLabel(input.translation),
       verseText: input.verseText,
+      renderingText,
       sourceWord,
-      lemma: alignment.lemma,
-      lexicalId: alignment.lexicalId,
-      morph: alignment.morph,
+      lemma: lexicalLemma,
+      lexicalId: lexicalIdentity?.lexicalId,
+      morph: lexicalRoute?.morph,
       statement,
     },
     simple: {
-      meaning: sourceWord || input.displayWord,
+      meaning:
+        lexicalIdentity?.shortDefinitions?.[0] ||
+        lexicalIdentity?.glosses?.[0] ||
+        lexicalLemma ||
+        selectedEnglish,
       inThisVerse: statement,
       whyItMatters:
-        "SEE keeps source occurrence, component, and segment identity separate and does not invent a one-Strong-per-English-token relationship.",
+        "SEE preserves the full source segment behind the English rendering while keeping lexical and grammatical evidence distinct.",
       summary:
-        "This is an evidence-grounded alignment context. No synthetic cached EMET explanation was created, and no live AI was invoked.",
+        lexicalEmet?.status === "approved" && lexicalEmet.explanation
+          ? lexicalEmet.explanation
+          : "This is an evidence-grounded source-segment alignment. No unsupported one-word source identity is asserted.",
     },
     evidence: {
-      originalLanguage: {
-        source: preferredSource,
-        word: sourceWord || input.displayWord,
-        strong: alignment.strong,
-        lemma: alignment.lemma,
-        lemmaId: alignment.lexicalId,
-        morph: alignment.morph,
-      },
-      keyReferences: [reference],
+      originalLanguage: lexicalRuntime
+        ? {
+            source: preferredSource,
+            word:
+              lexicalRoute?.sourceWord ||
+              lexicalIdentity?.lemma ||
+              lexicalIdentity?.normalizedLemma ||
+              sourceWord ||
+              selectedEnglish,
+            transliteration: lexicalIdentity?.transliteration,
+            pronunciation: lexicalIdentity?.pronunciation,
+            strong: lexicalIdentity?.strong,
+            lemma: lexicalLemma,
+            lemmaId: lexicalIdentity?.lexicalId,
+            partOfSpeech:
+              lexicalIdentity?.partsOfSpeech?.join(", ") || undefined,
+            forms: lexicalIdentity?.sourceForms?.map(
+              (form) => form.surface,
+            ),
+            morph: lexicalRoute?.morph,
+            seeEvidenceId: `p03:${lexicalRuntime.entityId}`,
+          }
+        : {
+            source: preferredSource,
+            word: sourceWord || selectedEnglish,
+          },
+      definitions: lexicalRuntime
+        ? {
+            short:
+              lexicalIdentity?.shortDefinitions?.[0] ||
+              lexicalIdentity?.glosses?.[0],
+            usage: lexicalIdentity?.glosses?.join("; ") || undefined,
+            sources: lexicalIdentity?.witnesses,
+          }
+        : undefined,
+      firstMention: firstOccurrence?.reference,
+      keyReferences: keyReferences.length
+        ? keyReferences.map((item) => item.reference)
+        : [reference],
       related: {
         people: [],
         places: [],
-        concepts: [routeLabel],
-        events: [],
+        concepts: seeKnowledge?.relationships.map((item) => item.label) || [routeLabel],
+        events: seeKnowledge?.events.map((item) => item.label) || [],
       },
-      occurrences: [
-        {
-          reference,
-          book: input.book,
-          chapter: input.chapter,
-          verse: input.verse,
-          englishText: input.verseText || undefined,
-          sourceWord,
-          source: preferredSource,
-          routeTranslation: routeTranslationForSource(
-            preferredSource,
-            input.translation,
-          ),
-        },
-      ],
+      occurrenceCount:
+        lexicalRuntime?.occurrences.corpusOccurrenceCount ||
+        lexicalRuntime?.occurrences.totalEntityOccurrences,
+      occurrences: lexicalOccurrences.length
+        ? lexicalOccurrences
+        : [
+            {
+              reference,
+              book: input.book,
+              chapter: input.chapter,
+              verse: input.verse,
+              englishText: input.verseText || undefined,
+              sourceWord,
+              source: preferredSource,
+              routeTranslation: routeTranslationForSource(
+                preferredSource,
+                input.translation,
+              ),
+            },
+          ],
     },
   };
 }
@@ -1064,6 +1363,50 @@ export async function resolveBibleIQ(
   origin: string,
 ): Promise<BibleIQResponse> {
   const preferredSource = determinePreferredSource(input);
+  const requestedEntityId = normalizeWordEntityId(input.entityId || "");
+
+  if (requestedEntityId) {
+    const runtime = await loadWordStudyEntity(origin, requestedEntityId);
+
+    if (!runtime) {
+      return {
+        resolved: false,
+        resolutionType: "unresolved",
+        preferredSource,
+        query: input.displayWord || requestedEntityId,
+        message: "This lexical source entity is not available in the current runtime.",
+      };
+    }
+
+    const finalEmet = await loadFinalEmetRecord(origin, runtime.entityId);
+    const directWord =
+      input.displayWord?.trim() ||
+      runtime.identity.lemma ||
+      runtime.identity.normalizedLemma ||
+      runtime.identity.lexicalId ||
+      requestedEntityId;
+    const directInput: BibleIQRequest = {
+      ...input,
+      displayWord: directWord,
+      selectedText: directWord,
+    };
+
+    return {
+      resolved: true,
+      resolutionType: "entity",
+      preferredSource: runtime.corpus,
+      query: directWord,
+      entity: buildRuntimeEntity({
+        input: directInput,
+        runtime,
+        sourceWord:
+          runtime.identity.lemma ||
+          runtime.identity.normalizedLemma ||
+          runtime.identity.lexicalId,
+        finalEmet,
+      }),
+    };
+  }
 
   if (!input.displayWord?.trim()) {
     return unresolved(input, preferredSource);
@@ -1096,10 +1439,11 @@ export async function resolveBibleIQ(
         resolutionType: "verse-context",
         preferredSource: source,
         query: input.displayWord,
-        entity: buildV2SpanAlignmentEntity({
+        entity: await buildV2SpanAlignmentEntity({
           input,
           preferredSource: source,
           hit,
+          origin,
         }),
       };
     }
@@ -1116,6 +1460,15 @@ export async function resolveBibleIQ(
       ? await loadFinalEmetRecord(origin, runtime.entityId)
       : null;
 
+    const exactSourceComponentEvidence =
+      runtime && hit.v2Route
+        ? await buildV2SourceComponentEvidence({
+            routes: hit.v2Route.sourceRoutes || [],
+            input,
+            origin,
+          })
+        : undefined;
+
     const entity = runtime
       ? buildRuntimeEntity({
           input,
@@ -1123,6 +1476,10 @@ export async function resolveBibleIQ(
           sourceWord: hit.sourceWord,
           morph: hit.sourceToken?.morph,
           finalEmet,
+          routeMode: hit.v2Route?.mode,
+          sourceRoutes: hit.v2Route?.sourceRoutes,
+          sourceSegment: hit.v2Route?.sourceSegment,
+          sourceComponentEvidence: exactSourceComponentEvidence,
         })
       : buildCanonicalAlignmentEntity({
           input,

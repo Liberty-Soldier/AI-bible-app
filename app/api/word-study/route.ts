@@ -15,6 +15,7 @@ export async function GET(request: Request) {
     const { searchParams, origin } = new URL(request.url);
 
     const input: BibleIQRequest = {
+      entityId: searchParams.get("entityId") || undefined,
       book: searchParams.get("book") || "",
       chapter: toNumber(searchParams.get("chapter")),
       verse: toNumber(searchParams.get("verse")),
