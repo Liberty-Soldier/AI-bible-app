@@ -45,8 +45,8 @@ export default async function Image() {
           >
             <img
               src={logoSrc}
-              width="82"
-              height="82"
+              width={82}
+              height={82}
               alt=""
               style={{ objectFit: "contain" }}
             />

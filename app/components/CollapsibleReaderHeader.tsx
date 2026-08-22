@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { useReaderChromeVisibility } from "@/app/components/useReaderChromeVisibility";
 
 const OPEN_HELP_EVENT = "emetsees:open-reader-help";
@@ -35,7 +34,14 @@ export default function CollapsibleReaderHeader({
           onClick={() => setOpen(!open)}
           className="flex min-w-0 flex-1 items-center gap-3 text-left"
         >
-          <EmetseesLogo size={30} className="shrink-0 text-amber-500" />
+          <img
+            src="/icons/icon-192.png"
+            alt=""
+            aria-hidden="true"
+            width={32}
+            height={32}
+            className="h-8 w-8 shrink-0 rounded-[9px] object-contain"
+          />
 
           <span className="truncate text-xl font-semibold tracking-tight">
             {title}

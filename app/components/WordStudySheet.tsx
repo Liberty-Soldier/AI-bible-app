@@ -1656,8 +1656,8 @@ function OverviewView({
                         }
                         className="w-full rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-left transition enabled:active:scale-[0.995] disabled:cursor-default"
                       >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="min-w-0">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                          <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                               <span
                                 dir={alignment?.source === "hebrew" ? "rtl" : "ltr"}
@@ -1686,7 +1686,7 @@ function OverviewView({
                               </p>
                             ) : null}
                           </div>
-                          <div className="flex shrink-0 items-center gap-2">
+                          <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:shrink-0 sm:justify-end">
                             <span className="rounded-full border border-[var(--border)] px-2 py-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] text-[var(--muted)]">
                               {component.kind === "lexical"
                                 ? "Lexical source"
@@ -2079,16 +2079,19 @@ function SourceEntityDrilldown({
               {definitions[0]}
             </p>
             {definitions.length > 1 ? (
-              <div className="mt-3 flex flex-wrap gap-2">
-                {definitions.slice(1).map((definition) => (
-                  <span
-                    key={definition}
-                    className="rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-semibold text-[var(--muted)]"
-                  >
-                    {definition}
-                  </span>
-                ))}
-              </div>
+              <details className="mt-3 rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-2">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-xs font-bold text-[var(--muted)]">
+                  <span>Raw lexicon glosses and usage</span>
+                  <Chevron />
+                </summary>
+                <ul className="mt-3 space-y-2 text-xs leading-5 text-[var(--muted)]">
+                  {definitions.slice(1).map((definition) => (
+                    <li key={definition} className="break-words [overflow-wrap:anywhere]">
+                      {definition}
+                    </li>
+                  ))}
+                </ul>
+              </details>
             ) : null}
           </div>
         ) : null}
@@ -2280,19 +2283,20 @@ function LexiconView({
             {definitions[0]}
           </p>
           {definitions.length > 1 ? (
-            <div className="mt-4">
-              <p className="text-[0.68rem] font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
-                Additional glosses and usage
-              </p>
-              <ul className="mt-2 space-y-1.5 text-sm leading-6 text-[var(--muted)]">
-                {definitions.slice(1, 7).map((definition) => (
-                  <li key={definition} className="flex gap-2">
-                    <span aria-hidden="true" className="text-[var(--brand)]">•</span>
-                    <span>{definition}</span>
+            <details className="mt-4 rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-2">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-bold text-[var(--muted)]">
+                <span>Raw lexicon glosses and usage</span>
+                <Chevron />
+              </summary>
+              <ul className="mt-3 space-y-2 text-sm leading-6 text-[var(--muted)]">
+                {definitions.slice(1).map((definition) => (
+                  <li key={definition} className="flex min-w-0 gap-2">
+                    <span aria-hidden="true" className="shrink-0 text-[var(--brand)]">•</span>
+                    <span className="min-w-0 break-words [overflow-wrap:anywhere]">{definition}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </details>
           ) : null}
         </Panel>
       ) : null}
@@ -2947,11 +2951,11 @@ function InfoRow({
   if (value === undefined || value === null || value === "") return null;
 
   return (
-    <div className="flex items-start justify-between gap-5 border-t border-[var(--border)] pt-3 first:border-t-0 first:pt-0">
+    <div className="flex flex-col gap-1.5 border-t border-[var(--border)] pt-3 first:border-t-0 first:pt-0 sm:flex-row sm:items-start sm:justify-between sm:gap-5">
       <p className="shrink-0 text-xs font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
         {label}
       </p>
-      <div className="min-w-0 break-words text-right text-sm font-bold leading-6">
+      <div className="min-w-0 w-full break-words text-left text-sm font-bold leading-6 [overflow-wrap:anywhere] sm:w-auto sm:text-right">
         {value}
       </div>
     </div>
