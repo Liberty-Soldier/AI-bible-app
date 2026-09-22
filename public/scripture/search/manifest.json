@@ -1,0 +1,41 @@
+{
+  "phase": "P08.3",
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-09T13:58:43.636Z",
+  "sourceOfTruth": "public/scripture/runtime",
+  "summaries": [
+    {
+      "translation": "web",
+      "sourceRoot": "public/scripture/runtime/web",
+      "sourceFiles": 1189,
+      "verseCount": 31098,
+      "books": 66,
+      "sourceFingerprint": "3fb70bb69aa4397da4a69c73bd9ce9bb892e570d73dc7a4a63af69c9ebf8f9f8",
+      "output": "public/scripture/search/web.json",
+      "outputBytes": 4689134,
+      "outputSha256": "56d7e820c621ff4c65b9bc4c6e96e2caca2666fd5e3ad55c26ab3c4564561102"
+    },
+    {
+      "translation": "kjv",
+      "sourceRoot": "public/scripture/runtime/kjv",
+      "sourceFiles": 1189,
+      "verseCount": 31102,
+      "books": 66,
+      "sourceFingerprint": "82b18a0b8c48ab4d6e033c242fc7595b4c9d042e794daa3209bbdb8dd8dcebb9",
+      "output": "public/scripture/search/kjv.json",
+      "outputBytes": 4820127,
+      "outputSha256": "2e8c8cc9f7ad83f0096372d61d9d6f5233eb2474993774f243ad727b130a1993"
+    },
+    {
+      "translation": "brenton",
+      "sourceRoot": "public/scripture/runtime/brenton",
+      "sourceFiles": 1104,
+      "verseCount": 28548,
+      "books": 53,
+      "sourceFingerprint": "782b3ef3ad2edd7a8843c01ae2f374943d109303d4afcdecf3e2fc52535e8099",
+      "output": "public/scripture/search/brenton.json",
+      "outputBytes": 4539172,
+      "outputSha256": "74d69e371eac98c8ea86967768dcb9333c7744a180e63e823d9e207633b8d4eb"
+    }
+  ]
+}

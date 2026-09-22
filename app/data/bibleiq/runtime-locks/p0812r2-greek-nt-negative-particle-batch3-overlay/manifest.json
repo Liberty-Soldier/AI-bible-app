@@ -1,0 +1,4735 @@
+{
+  "schemaVersion": "emet-p0812r2-greek-nt-negative-particle-batch3-overlay/v1",
+  "milestone": "P08.12R2",
+  "purpose": "Evidence-reviewed WEB negative renderings owned by explicit OpenGNT negative-particle occurrences.",
+  "authority": {
+    "source": "Ordered OpenGNT negative-particle occurrences",
+    "sourceStrongs": [
+      "G3756",
+      "G3361"
+    ],
+    "sourceMorph": "PRT-N",
+    "approvedEnglishTargets": [
+      "don't",
+      "didn't",
+      "doesn't",
+      "never"
+    ],
+    "genericNegativeHeuristic": false,
+    "recurrenceAutomaticApproval": false,
+    "adjacencyAutomaticApproval": false,
+    "subwordInference": false,
+    "canonicalModified": false,
+    "kjvIncluded": false,
+    "dummyAuxiliaryTreatment": "English do/did/does in negative contractions is grammatical support. The explicit OpenGNT negative particle supplies the negative rendering only."
+  },
+  "counts": {
+    "approvedFamilies": 11,
+    "approvedSpans": 54,
+    "meaningfulRoutes": 54,
+    "webMeaningfulRoutes": 54,
+    "kjvMeaningfulRoutes": 0
+  },
+  "targetDistribution": {
+    "dont": 27,
+    "didnt": 19,
+    "doesnt": 4,
+    "never": 4
+  },
+  "families": [
+    {
+      "key": "web|i dont|G3756",
+      "translation": "web",
+      "englishSpan": "I dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 10,
+      "meaningfulResidualPositions": 10,
+      "target": "dont",
+      "references": [
+        "Matthew 26:70",
+        "Luke 22:60",
+        "John 5:30",
+        "Romans 7:16",
+        "Romans 7:20",
+        "1 Corinthians 11:17",
+        "2 Corinthians 11:17",
+        "2 Corinthians 12:2",
+        "2 Corinthians 12:2",
+        "2 Corinthians 12:3"
+      ]
+    },
+    {
+      "key": "web|i didnt|G3756",
+      "translation": "web",
+      "englishSpan": "I didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 6,
+      "meaningfulResidualPositions": 6,
+      "target": "didnt",
+      "references": [
+        "Matthew 5:17",
+        "Matthew 10:34",
+        "Matthew 25:26",
+        "Matthew 25:26",
+        "Luke 19:22",
+        "Luke 19:22"
+      ]
+    },
+    {
+      "key": "web|you didnt|G3756",
+      "translation": "web",
+      "englishSpan": "you didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 6,
+      "meaningfulResidualPositions": 6,
+      "target": "didnt",
+      "references": [
+        "Matthew 25:24",
+        "Matthew 25:24",
+        "Luke 19:21",
+        "Luke 19:21",
+        "2 Corinthians 11:4",
+        "Hebrews 10:8"
+      ]
+    },
+    {
+      "key": "web|dont be|G3361",
+      "translation": "web",
+      "englishSpan": "dont be",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "gloss": "not",
+      "cases": 5,
+      "meaningfulResidualPositions": 5,
+      "target": "dont",
+      "references": [
+        "Matthew 1:20",
+        "Matthew 28:5",
+        "Mark 5:36",
+        "Acts 27:24",
+        "2 Thessalonians 3:13"
+      ]
+    },
+    {
+      "key": "web|they dont|G3756",
+      "translation": "web",
+      "englishSpan": "They dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 5,
+      "meaningfulResidualPositions": 5,
+      "target": "dont",
+      "references": [
+        "Matthew 6:28",
+        "Matthew 13:13",
+        "Matthew 13:13",
+        "Luke 12:27",
+        "John 16:9"
+      ]
+    },
+    {
+      "key": "web|he didnt|G3756",
+      "translation": "web",
+      "englishSpan": "he didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 4,
+      "meaningfulResidualPositions": 4,
+      "target": "didnt",
+      "references": [
+        "Mark 4:34",
+        "John 2:25",
+        "Romans 4:20",
+        "1 Peter 2:23"
+      ]
+    },
+    {
+      "key": "web|he doesnt|G3756",
+      "translation": "web",
+      "englishSpan": "he doesnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 4,
+      "meaningfulResidualPositions": 4,
+      "target": "doesnt",
+      "references": [
+        "Luke 9:49",
+        "John 9:16",
+        "John 11:9",
+        "1 Corinthians 7:36"
+      ]
+    },
+    {
+      "key": "web|may it never|G3361",
+      "translation": "web",
+      "englishSpan": "May it never",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "gloss": "not",
+      "cases": 4,
+      "meaningfulResidualPositions": 4,
+      "target": "never",
+      "references": [
+        "Romans 6:15",
+        "Romans 9:14",
+        "Romans 11:11",
+        "1 Corinthians 6:15"
+      ]
+    },
+    {
+      "key": "web|we dont|G3756",
+      "translation": "web",
+      "englishSpan": "we dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 4,
+      "meaningfulResidualPositions": 4,
+      "target": "dont",
+      "references": [
+        "John 9:21",
+        "John 14:5",
+        "Acts 7:40",
+        "Romans 8:25"
+      ]
+    },
+    {
+      "key": "web|dont you|G3756",
+      "translation": "web",
+      "englishSpan": "dont you",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 3,
+      "meaningfulResidualPositions": 3,
+      "target": "dont",
+      "references": [
+        "Mark 4:38",
+        "Luke 10:40",
+        "James 4:4"
+      ]
+    },
+    {
+      "key": "web|they didnt|G3756",
+      "translation": "web",
+      "englishSpan": "they didnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "cases": 3,
+      "meaningfulResidualPositions": 3,
+      "target": "didnt",
+      "references": [
+        "Matthew 11:20",
+        "John 12:42",
+        "John 19:33"
+      ]
+    }
+  ],
+  "spans": [
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "Matthew 26:70",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "26:70",
+      "canonicalKey": "Matthew.26.70",
+      "englishSpan": {
+        "start": 8,
+        "end": 9,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 8,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 9,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 9,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:Matthew.26.70:6",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "Luke 22:60",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "22:60",
+      "canonicalKey": "Luke.22.60",
+      "englishSpan": {
+        "start": 4,
+        "end": 5,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 4,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 5,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 5,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Luke.22.60:5",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "John 5:30",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "5:30",
+      "canonicalKey": "John.5.30",
+      "englishSpan": {
+        "start": 17,
+        "end": 18,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 17,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 18,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 18,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 18,
+        "sourceOccurrenceId": "greek-nt:John.5.30:18",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "Romans 7:16",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "7:16",
+      "canonicalKey": "Romans.7.16",
+      "englishSpan": {
+        "start": 3,
+        "end": 4,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 3,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 4,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 4,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Romans.7.16:3",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "Romans 7:20",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "7:20",
+      "canonicalKey": "Romans.7.20",
+      "englishSpan": {
+        "start": 3,
+        "end": 4,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 3,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 4,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 4,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Romans.7.20:3",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "1 Corinthians 11:17",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "11:17",
+      "canonicalKey": "1 Corinthians.11.17",
+      "englishSpan": {
+        "start": 6,
+        "end": 7,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 6,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 7,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 7,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.11.17:3",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "2 Corinthians 11:17",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "11:17",
+      "canonicalKey": "2 Corinthians.11.17",
+      "englishSpan": {
+        "start": 4,
+        "end": 5,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 4,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 5,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 5,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:2_Corinthians.11.17:2",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "2 Corinthians 12:2",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "12:2",
+      "canonicalKey": "2 Corinthians.12.2",
+      "englishSpan": {
+        "start": 20,
+        "end": 21,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 20,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 21,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 21,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:2_Corinthians.12.2:10",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "2 Corinthians 12:2",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "12:2",
+      "canonicalKey": "2 Corinthians.12.2",
+      "englishSpan": {
+        "start": 29,
+        "end": 30,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 29,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 30,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 30,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 16,
+        "sourceOccurrenceId": "greek-nt:2_Corinthians.12.2:16",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i dont|G3756",
+      "reference": "2 Corinthians 12:3",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "12:3",
+      "canonicalKey": "2 Corinthians.12.3",
+      "englishSpan": {
+        "start": 14,
+        "end": 15,
+        "text": "I dont",
+        "tokens": [
+          {
+            "index": 14,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 15,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 15,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:2_Corinthians.12.3:12",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Matthew 5:17",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "5:17",
+      "canonicalKey": "Matthew.5.17",
+      "englishSpan": {
+        "start": 12,
+        "end": 13,
+        "text": "I didnt",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 13,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 13,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:Matthew.5.17:10",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Matthew 10:34",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "10:34",
+      "canonicalKey": "Matthew.10.34",
+      "englishSpan": {
+        "start": 11,
+        "end": 12,
+        "text": "I didnt",
+        "tokens": [
+          {
+            "index": 11,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 12,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 12,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Matthew.10.34:9",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Matthew 25:26",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:26",
+      "canonicalKey": "Matthew.25.26",
+      "englishSpan": {
+        "start": 16,
+        "end": 17,
+        "text": "I didnt",
+        "tokens": [
+          {
+            "index": 16,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 17,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 17,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 15,
+        "sourceOccurrenceId": "greek-nt:Matthew.25.26:15",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Matthew 25:26",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:26",
+      "canonicalKey": "Matthew.25.26",
+      "englishSpan": {
+        "start": 22,
+        "end": 23,
+        "text": "I didnt",
+        "tokens": [
+          {
+            "index": 22,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 23,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 23,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 20,
+        "sourceOccurrenceId": "greek-nt:Matthew.25.26:20",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Luke 19:22",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "19:22",
+      "canonicalKey": "Luke.19.22",
+      "englishSpan": {
+        "start": 28,
+        "end": 29,
+        "text": "I didnt",
+        "tokens": [
+          {
+            "index": 28,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 29,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 29,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 18,
+        "sourceOccurrenceId": "greek-nt:Luke.19.22:18",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Luke 19:22",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "19:22",
+      "canonicalKey": "Luke.19.22",
+      "englishSpan": {
+        "start": 36,
+        "end": 37,
+        "text": "I didnt",
+        "tokens": [
+          {
+            "index": 36,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 37,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 37,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 23,
+        "sourceOccurrenceId": "greek-nt:Luke.19.22:23",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Matthew 25:24",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:24",
+      "canonicalKey": "Matthew.25.24",
+      "englishSpan": {
+        "start": 23,
+        "end": 24,
+        "text": "you didnt",
+        "tokens": [
+          {
+            "index": 23,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 24,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 24,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 18,
+        "sourceOccurrenceId": "greek-nt:Matthew.25.24:18",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Matthew 25:24",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:24",
+      "canonicalKey": "Matthew.25.24",
+      "englishSpan": {
+        "start": 29,
+        "end": 30,
+        "text": "you didnt",
+        "tokens": [
+          {
+            "index": 29,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 30,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 30,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 23,
+        "sourceOccurrenceId": "greek-nt:Matthew.25.24:23",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Luke 19:21",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "19:21",
+      "canonicalKey": "Luke.19.21",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "text": "you didnt",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 16,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 16,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Luke.19.21:9",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Luke 19:21",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "19:21",
+      "canonicalKey": "Luke.19.21",
+      "englishSpan": {
+        "start": 23,
+        "end": 24,
+        "text": "you didnt",
+        "tokens": [
+          {
+            "index": 23,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 24,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 24,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 14,
+        "sourceOccurrenceId": "greek-nt:Luke.19.21:14",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|you didnt|G3756",
+      "reference": "2 Corinthians 11:4",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "11:4",
+      "canonicalKey": "2 Corinthians.11.4",
+      "englishSpan": {
+        "start": 20,
+        "end": 21,
+        "text": "you didnt",
+        "tokens": [
+          {
+            "index": 20,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 21,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 21,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 22,
+        "sourceOccurrenceId": "greek-nt:2_Corinthians.11.4:22",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Hebrews 10:8",
+      "runtimeFile": "Heb.json",
+      "runtimeVerseKey": "10:8",
+      "canonicalKey": "Hebrews.10.8",
+      "englishSpan": {
+        "start": 13,
+        "end": 14,
+        "text": "you didnt",
+        "tokens": [
+          {
+            "index": 13,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 14,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 14,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 11,
+        "sourceOccurrenceId": "greek-nt:Hebrews.10.8:11",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|dont be|G3361",
+      "reference": "Matthew 1:20",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "1:20",
+      "canonicalKey": "Matthew.1.20",
+      "englishSpan": {
+        "start": 24,
+        "end": 25,
+        "text": "dont be",
+        "tokens": [
+          {
+            "index": 24,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 25,
+            "text": "be",
+            "normalized": "be",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 24,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 15,
+        "sourceOccurrenceId": "greek-nt:Matthew.1.20:15",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|dont be|G3361",
+      "reference": "Matthew 28:5",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "28:5",
+      "canonicalKey": "Matthew.28.5",
+      "englishSpan": {
+        "start": 5,
+        "end": 6,
+        "text": "Dont be",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "Dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 6,
+            "text": "be",
+            "normalized": "be",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 5,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:Matthew.28.5:7",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|dont be|G3361",
+      "reference": "Mark 5:36",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "5:36",
+      "canonicalKey": "Mark.5.36",
+      "englishSpan": {
+        "start": 16,
+        "end": 17,
+        "text": "Dont be",
+        "tokens": [
+          {
+            "index": 16,
+            "text": "Dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 17,
+            "text": "be",
+            "normalized": "be",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 16,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:Mark.5.36:10",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|dont be|G3361",
+      "reference": "Acts 27:24",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "27:24",
+      "canonicalKey": "Acts.27.24",
+      "englishSpan": {
+        "start": 1,
+        "end": 2,
+        "text": "Dont be",
+        "tokens": [
+          {
+            "index": 1,
+            "text": "Dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 2,
+            "text": "be",
+            "normalized": "be",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 1,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:Acts.27.24:1",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|dont be|G3361",
+      "reference": "2 Thessalonians 3:13",
+      "runtimeFile": "2Thess.json",
+      "runtimeVerseKey": "3:13",
+      "canonicalKey": "2 Thessalonians.3.13",
+      "englishSpan": {
+        "start": 3,
+        "end": 4,
+        "text": "dont be",
+        "tokens": [
+          {
+            "index": 3,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 4,
+            "text": "be",
+            "normalized": "be",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 3,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:2_Thessalonians.3.13:3",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|they dont|G3756",
+      "reference": "Matthew 6:28",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "6:28",
+      "canonicalKey": "Matthew.6.28",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "text": "They dont",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "They",
+            "normalized": "they",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 16,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 16,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Matthew.6.28:12",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|they dont|G3756",
+      "reference": "Matthew 13:13",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "13:13",
+      "canonicalKey": "Matthew.13.13",
+      "englishSpan": {
+        "start": 9,
+        "end": 10,
+        "text": "they dont",
+        "tokens": [
+          {
+            "index": 9,
+            "text": "they",
+            "normalized": "they",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 10,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 10,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:Matthew.13.13:8",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|they dont|G3756",
+      "reference": "Matthew 13:13",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "13:13",
+      "canonicalKey": "Matthew.13.13",
+      "englishSpan": {
+        "start": 14,
+        "end": 15,
+        "text": "they dont",
+        "tokens": [
+          {
+            "index": 14,
+            "text": "they",
+            "normalized": "they",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 15,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 15,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Matthew.13.13:12",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|they dont|G3756",
+      "reference": "Luke 12:27",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "12:27",
+      "canonicalKey": "Luke.12.27",
+      "englishSpan": {
+        "start": 6,
+        "end": 7,
+        "text": "They dont",
+        "tokens": [
+          {
+            "index": 6,
+            "text": "They",
+            "normalized": "they",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 7,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 7,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Luke.12.27:5",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|they dont|G3756",
+      "reference": "John 16:9",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "16:9",
+      "canonicalKey": "John.16.9",
+      "englishSpan": {
+        "start": 3,
+        "end": 4,
+        "text": "they dont",
+        "tokens": [
+          {
+            "index": 3,
+            "text": "they",
+            "normalized": "they",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 4,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 4,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:John.16.9:4",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|he didnt|G3756",
+      "reference": "Mark 4:34",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "4:34",
+      "canonicalKey": "Mark.4.34",
+      "englishSpan": {
+        "start": 3,
+        "end": 4,
+        "text": "he didnt",
+        "tokens": [
+          {
+            "index": 3,
+            "text": "he",
+            "normalized": "he",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 4,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 4,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Mark.4.34:3",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|he didnt|G3756",
+      "reference": "John 2:25",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "2:25",
+      "canonicalKey": "John.2.25",
+      "englishSpan": {
+        "start": 2,
+        "end": 3,
+        "text": "he didnt",
+        "tokens": [
+          {
+            "index": 2,
+            "text": "he",
+            "normalized": "he",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 3,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 3,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:John.2.25:2",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|he didnt|G3756",
+      "reference": "Romans 4:20",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "4:20",
+      "canonicalKey": "Romans.4.20",
+      "englishSpan": {
+        "start": 7,
+        "end": 8,
+        "text": "he didnt",
+        "tokens": [
+          {
+            "index": 7,
+            "text": "he",
+            "normalized": "he",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 8,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 8,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:Romans.4.20:6",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|he didnt|G3756",
+      "reference": "1 Peter 2:23",
+      "runtimeFile": "1Pet.json",
+      "runtimeVerseKey": "2:23",
+      "canonicalKey": "1 Peter.2.23",
+      "englishSpan": {
+        "start": 11,
+        "end": 12,
+        "text": "he didnt",
+        "tokens": [
+          {
+            "index": 11,
+            "text": "he",
+            "normalized": "he",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 12,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 12,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:1_Peter.2.23:5",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|he doesnt|G3756",
+      "reference": "Luke 9:49",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "9:49",
+      "canonicalKey": "Luke.9.49",
+      "englishSpan": {
+        "start": 17,
+        "end": 18,
+        "text": "he doesnt",
+        "tokens": [
+          {
+            "index": 17,
+            "text": "he",
+            "normalized": "he",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 18,
+            "text": "doesnt",
+            "normalized": "doesnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 18,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 17,
+        "sourceOccurrenceId": "greek-nt:Luke.9.49:17",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|he doesnt|G3756",
+      "reference": "John 9:16",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "9:16",
+      "canonicalKey": "John.9.16",
+      "englishSpan": {
+        "start": 13,
+        "end": 14,
+        "text": "he doesnt",
+        "tokens": [
+          {
+            "index": 13,
+            "text": "he",
+            "normalized": "he",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 14,
+            "text": "doesnt",
+            "normalized": "doesnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 14,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 16,
+        "sourceOccurrenceId": "greek-nt:John.9.16:16",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|he doesnt|G3756",
+      "reference": "John 11:9",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "11:9",
+      "canonicalKey": "John.11.9",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "text": "he doesnt",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "he",
+            "normalized": "he",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 16,
+            "text": "doesnt",
+            "normalized": "doesnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 16,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 14,
+        "sourceOccurrenceId": "greek-nt:John.11.9:14",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|he doesnt|G3756",
+      "reference": "1 Corinthians 7:36",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "7:36",
+      "canonicalKey": "1 Corinthians.7.36",
+      "englishSpan": {
+        "start": 33,
+        "end": 34,
+        "text": "He doesnt",
+        "tokens": [
+          {
+            "index": 33,
+            "text": "He",
+            "normalized": "he",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 34,
+            "text": "doesnt",
+            "normalized": "doesnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 34,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 19,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.7.36:19",
+        "surface": "οὐχ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|may it never|G3361",
+      "reference": "Romans 6:15",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "6:15",
+      "canonicalKey": "Romans.6.15",
+      "englishSpan": {
+        "start": 14,
+        "end": 16,
+        "text": "May it never",
+        "tokens": [
+          {
+            "index": 14,
+            "text": "May",
+            "normalized": "may",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 15,
+            "text": "it",
+            "normalized": "it",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 16,
+            "text": "never",
+            "normalized": "never",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 16,
+        "displayText": "never"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 11,
+        "sourceOccurrenceId": "greek-nt:Romans.6.15:11",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|may it never|G3361",
+      "reference": "Romans 9:14",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "9:14",
+      "canonicalKey": "Romans.9.14",
+      "englishSpan": {
+        "start": 10,
+        "end": 12,
+        "text": "May it never",
+        "tokens": [
+          {
+            "index": 10,
+            "text": "May",
+            "normalized": "may",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 11,
+            "text": "it",
+            "normalized": "it",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 12,
+            "text": "never",
+            "normalized": "never",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 12,
+        "displayText": "never"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:Romans.9.14:8",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|may it never|G3361",
+      "reference": "Romans 11:11",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "11:11",
+      "canonicalKey": "Romans.11.11",
+      "englishSpan": {
+        "start": 10,
+        "end": 12,
+        "text": "May it never",
+        "tokens": [
+          {
+            "index": 10,
+            "text": "May",
+            "normalized": "may",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 11,
+            "text": "it",
+            "normalized": "it",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 12,
+            "text": "never",
+            "normalized": "never",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 12,
+        "displayText": "never"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:Romans.11.11:6",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|may it never|G3361",
+      "reference": "1 Corinthians 6:15",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "6:15",
+      "canonicalKey": "1 Corinthians.6.15",
+      "englishSpan": {
+        "start": 25,
+        "end": 27,
+        "text": "May it never",
+        "tokens": [
+          {
+            "index": 25,
+            "text": "May",
+            "normalized": "may",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 26,
+            "text": "it",
+            "normalized": "it",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 27,
+            "text": "never",
+            "normalized": "never",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 27,
+        "displayText": "never"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 18,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.6.15:18",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|we dont|G3756",
+      "reference": "John 9:21",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "9:21",
+      "canonicalKey": "John.9.21",
+      "englishSpan": {
+        "start": 5,
+        "end": 6,
+        "text": "we dont",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "we",
+            "normalized": "we",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 6,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 6,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:John.9.21:4",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|we dont|G3756",
+      "reference": "John 14:5",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:5",
+      "canonicalKey": "John.14.5",
+      "englishSpan": {
+        "start": 5,
+        "end": 6,
+        "text": "we dont",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "we",
+            "normalized": "we",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 6,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 6,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:John.14.5:4",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|we dont|G3756",
+      "reference": "Acts 7:40",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "7:40",
+      "canonicalKey": "Acts.7.40",
+      "englishSpan": {
+        "start": 25,
+        "end": 26,
+        "text": "we dont",
+        "tokens": [
+          {
+            "index": 25,
+            "text": "we",
+            "normalized": "we",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 26,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 26,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 19,
+        "sourceOccurrenceId": "greek-nt:Acts.7.40:19",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|we dont|G3756",
+      "reference": "Romans 8:25",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "8:25",
+      "canonicalKey": "Romans.8.25",
+      "englishSpan": {
+        "start": 7,
+        "end": 8,
+        "text": "we dont",
+        "tokens": [
+          {
+            "index": 7,
+            "text": "we",
+            "normalized": "we",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 8,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 8,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Romans.8.25:3",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|dont you|G3756",
+      "reference": "Mark 4:38",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "4:38",
+      "canonicalKey": "Mark.4.38",
+      "englishSpan": {
+        "start": 19,
+        "end": 20,
+        "text": "dont you",
+        "tokens": [
+          {
+            "index": 19,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 20,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 19,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 17,
+        "sourceOccurrenceId": "greek-nt:Mark.4.38:17",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|dont you|G3756",
+      "reference": "Luke 10:40",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "10:40",
+      "canonicalKey": "Luke.10.40",
+      "englishSpan": {
+        "start": 16,
+        "end": 17,
+        "text": "dont you",
+        "tokens": [
+          {
+            "index": 16,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 17,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 16,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 11,
+        "sourceOccurrenceId": "greek-nt:Luke.10.40:11",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|dont you|G3756",
+      "reference": "James 4:4",
+      "runtimeFile": "Jas.json",
+      "runtimeVerseKey": "4:4",
+      "canonicalKey": "James.4.4",
+      "englishSpan": {
+        "start": 4,
+        "end": 5,
+        "text": "dont you",
+        "tokens": [
+          {
+            "index": 4,
+            "text": "dont",
+            "normalized": "dont",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 5,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 4,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:James.4.4:1",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|they didnt|G3756",
+      "reference": "Matthew 11:20",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "11:20",
+      "canonicalKey": "Matthew.11.20",
+      "englishSpan": {
+        "start": 18,
+        "end": 19,
+        "text": "they didnt",
+        "tokens": [
+          {
+            "index": 18,
+            "text": "they",
+            "normalized": "they",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 19,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 19,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 13,
+        "sourceOccurrenceId": "greek-nt:Matthew.11.20:13",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|they didnt|G3756",
+      "reference": "John 12:42",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "12:42",
+      "canonicalKey": "John.12.42",
+      "englishSpan": {
+        "start": 14,
+        "end": 15,
+        "text": "they didnt",
+        "tokens": [
+          {
+            "index": 14,
+            "text": "they",
+            "normalized": "they",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 15,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 15,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 14,
+        "sourceOccurrenceId": "greek-nt:John.12.42:14",
+        "surface": "οὐχ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    },
+    {
+      "familyKey": "web|they didnt|G3756",
+      "reference": "John 19:33",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "19:33",
+      "canonicalKey": "John.19.33",
+      "englishSpan": {
+        "start": 13,
+        "end": 14,
+        "text": "they didnt",
+        "tokens": [
+          {
+            "index": 13,
+            "text": "they",
+            "normalized": "they",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 14,
+            "text": "didnt",
+            "normalized": "didnt",
+            "meaningful": true,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "target": {
+        "displayIndex": 14,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:John.19.33:10",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "Matthew 26:70",
+      "book": "Matthew",
+      "chapter": 26,
+      "verse": 70,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "26:70",
+      "canonicalKey": "Matthew.26.70",
+      "displayIndex": 9,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 8,
+      "spanEnd": 9,
+      "spanText": "I dont",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Matthew.26.70:6",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "Luke 22:60",
+      "book": "Luke",
+      "chapter": 22,
+      "verse": 60,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "22:60",
+      "canonicalKey": "Luke.22.60",
+      "displayIndex": 5,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 4,
+      "spanEnd": 5,
+      "spanText": "I dont",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Luke.22.60:5",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "John 5:30",
+      "book": "John",
+      "chapter": 5,
+      "verse": 30,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "5:30",
+      "canonicalKey": "John.5.30",
+      "displayIndex": 18,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 17,
+      "spanEnd": 18,
+      "spanText": "I dont",
+      "sourceIndex": 18,
+      "sourceOccurrenceId": "greek-nt:John.5.30:18",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "Romans 7:16",
+      "book": "Romans",
+      "chapter": 7,
+      "verse": 16,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "7:16",
+      "canonicalKey": "Romans.7.16",
+      "displayIndex": 4,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 3,
+      "spanEnd": 4,
+      "spanText": "I dont",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Romans.7.16:3",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "Romans 7:20",
+      "book": "Romans",
+      "chapter": 7,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "7:20",
+      "canonicalKey": "Romans.7.20",
+      "displayIndex": 4,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 3,
+      "spanEnd": 4,
+      "spanText": "I dont",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Romans.7.20:3",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "1 Corinthians 11:17",
+      "book": "1 Corinthians",
+      "chapter": 11,
+      "verse": 17,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "11:17",
+      "canonicalKey": "1 Corinthians.11.17",
+      "displayIndex": 7,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 6,
+      "spanEnd": 7,
+      "spanText": "I dont",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.11.17:3",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "2 Corinthians 11:17",
+      "book": "2 Corinthians",
+      "chapter": 11,
+      "verse": 17,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "11:17",
+      "canonicalKey": "2 Corinthians.11.17",
+      "displayIndex": 5,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 4,
+      "spanEnd": 5,
+      "spanText": "I dont",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:2_Corinthians.11.17:2",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "2 Corinthians 12:2",
+      "book": "2 Corinthians",
+      "chapter": 12,
+      "verse": 2,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "12:2",
+      "canonicalKey": "2 Corinthians.12.2",
+      "displayIndex": 21,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 20,
+      "spanEnd": 21,
+      "spanText": "I dont",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:2_Corinthians.12.2:10",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "2 Corinthians 12:2",
+      "book": "2 Corinthians",
+      "chapter": 12,
+      "verse": 2,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "12:2",
+      "canonicalKey": "2 Corinthians.12.2",
+      "displayIndex": 30,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 29,
+      "spanEnd": 30,
+      "spanText": "I dont",
+      "sourceIndex": 16,
+      "sourceOccurrenceId": "greek-nt:2_Corinthians.12.2:16",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i dont|G3756",
+      "reference": "2 Corinthians 12:3",
+      "book": "2 Corinthians",
+      "chapter": 12,
+      "verse": 3,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "12:3",
+      "canonicalKey": "2 Corinthians.12.3",
+      "displayIndex": 15,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 14,
+      "spanEnd": 15,
+      "spanText": "I dont",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:2_Corinthians.12.3:12",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Matthew 5:17",
+      "book": "Matthew",
+      "chapter": 5,
+      "verse": 17,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "5:17",
+      "canonicalKey": "Matthew.5.17",
+      "displayIndex": 13,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 12,
+      "spanEnd": 13,
+      "spanText": "I didnt",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Matthew.5.17:10",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Matthew 10:34",
+      "book": "Matthew",
+      "chapter": 10,
+      "verse": 34,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "10:34",
+      "canonicalKey": "Matthew.10.34",
+      "displayIndex": 12,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 11,
+      "spanEnd": 12,
+      "spanText": "I didnt",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Matthew.10.34:9",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Matthew 25:26",
+      "book": "Matthew",
+      "chapter": 25,
+      "verse": 26,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:26",
+      "canonicalKey": "Matthew.25.26",
+      "displayIndex": 17,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 16,
+      "spanEnd": 17,
+      "spanText": "I didnt",
+      "sourceIndex": 15,
+      "sourceOccurrenceId": "greek-nt:Matthew.25.26:15",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Matthew 25:26",
+      "book": "Matthew",
+      "chapter": 25,
+      "verse": 26,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:26",
+      "canonicalKey": "Matthew.25.26",
+      "displayIndex": 23,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 22,
+      "spanEnd": 23,
+      "spanText": "I didnt",
+      "sourceIndex": 20,
+      "sourceOccurrenceId": "greek-nt:Matthew.25.26:20",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Luke 19:22",
+      "book": "Luke",
+      "chapter": 19,
+      "verse": 22,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "19:22",
+      "canonicalKey": "Luke.19.22",
+      "displayIndex": 29,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 28,
+      "spanEnd": 29,
+      "spanText": "I didnt",
+      "sourceIndex": 18,
+      "sourceOccurrenceId": "greek-nt:Luke.19.22:18",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|i didnt|G3756",
+      "reference": "Luke 19:22",
+      "book": "Luke",
+      "chapter": 19,
+      "verse": 22,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "19:22",
+      "canonicalKey": "Luke.19.22",
+      "displayIndex": 37,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 36,
+      "spanEnd": 37,
+      "spanText": "I didnt",
+      "sourceIndex": 23,
+      "sourceOccurrenceId": "greek-nt:Luke.19.22:23",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Matthew 25:24",
+      "book": "Matthew",
+      "chapter": 25,
+      "verse": 24,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:24",
+      "canonicalKey": "Matthew.25.24",
+      "displayIndex": 24,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 23,
+      "spanEnd": 24,
+      "spanText": "you didnt",
+      "sourceIndex": 18,
+      "sourceOccurrenceId": "greek-nt:Matthew.25.24:18",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Matthew 25:24",
+      "book": "Matthew",
+      "chapter": 25,
+      "verse": 24,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:24",
+      "canonicalKey": "Matthew.25.24",
+      "displayIndex": 30,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 29,
+      "spanEnd": 30,
+      "spanText": "you didnt",
+      "sourceIndex": 23,
+      "sourceOccurrenceId": "greek-nt:Matthew.25.24:23",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Luke 19:21",
+      "book": "Luke",
+      "chapter": 19,
+      "verse": 21,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "19:21",
+      "canonicalKey": "Luke.19.21",
+      "displayIndex": 16,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 15,
+      "spanEnd": 16,
+      "spanText": "you didnt",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Luke.19.21:9",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Luke 19:21",
+      "book": "Luke",
+      "chapter": 19,
+      "verse": 21,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "19:21",
+      "canonicalKey": "Luke.19.21",
+      "displayIndex": 24,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 23,
+      "spanEnd": 24,
+      "spanText": "you didnt",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:Luke.19.21:14",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|you didnt|G3756",
+      "reference": "2 Corinthians 11:4",
+      "book": "2 Corinthians",
+      "chapter": 11,
+      "verse": 4,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Cor.json",
+      "runtimeVerseKey": "11:4",
+      "canonicalKey": "2 Corinthians.11.4",
+      "displayIndex": 21,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 20,
+      "spanEnd": 21,
+      "spanText": "you didnt",
+      "sourceIndex": 22,
+      "sourceOccurrenceId": "greek-nt:2_Corinthians.11.4:22",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|you didnt|G3756",
+      "reference": "Hebrews 10:8",
+      "book": "Hebrews",
+      "chapter": 10,
+      "verse": 8,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Heb.json",
+      "runtimeVerseKey": "10:8",
+      "canonicalKey": "Hebrews.10.8",
+      "displayIndex": 14,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 13,
+      "spanEnd": 14,
+      "spanText": "you didnt",
+      "sourceIndex": 11,
+      "sourceOccurrenceId": "greek-nt:Hebrews.10.8:11",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|dont be|G3361",
+      "reference": "Matthew 1:20",
+      "book": "Matthew",
+      "chapter": 1,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "1:20",
+      "canonicalKey": "Matthew.1.20",
+      "displayIndex": 24,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 24,
+      "spanEnd": 25,
+      "spanText": "dont be",
+      "sourceIndex": 15,
+      "sourceOccurrenceId": "greek-nt:Matthew.1.20:15",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|dont be|G3361",
+      "reference": "Matthew 28:5",
+      "book": "Matthew",
+      "chapter": 28,
+      "verse": 5,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "28:5",
+      "canonicalKey": "Matthew.28.5",
+      "displayIndex": 5,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 5,
+      "spanEnd": 6,
+      "spanText": "Dont be",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:Matthew.28.5:7",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|dont be|G3361",
+      "reference": "Mark 5:36",
+      "book": "Mark",
+      "chapter": 5,
+      "verse": 36,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "5:36",
+      "canonicalKey": "Mark.5.36",
+      "displayIndex": 16,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 16,
+      "spanEnd": 17,
+      "spanText": "Dont be",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Mark.5.36:10",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|dont be|G3361",
+      "reference": "Acts 27:24",
+      "book": "Acts",
+      "chapter": 27,
+      "verse": 24,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "27:24",
+      "canonicalKey": "Acts.27.24",
+      "displayIndex": 1,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 1,
+      "spanEnd": 2,
+      "spanText": "Dont be",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:Acts.27.24:1",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|dont be|G3361",
+      "reference": "2 Thessalonians 3:13",
+      "book": "2 Thessalonians",
+      "chapter": 3,
+      "verse": 13,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Thess.json",
+      "runtimeVerseKey": "3:13",
+      "canonicalKey": "2 Thessalonians.3.13",
+      "displayIndex": 3,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 3,
+      "spanEnd": 4,
+      "spanText": "dont be",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:2_Thessalonians.3.13:3",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|they dont|G3756",
+      "reference": "Matthew 6:28",
+      "book": "Matthew",
+      "chapter": 6,
+      "verse": 28,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "6:28",
+      "canonicalKey": "Matthew.6.28",
+      "displayIndex": 16,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 15,
+      "spanEnd": 16,
+      "spanText": "They dont",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Matthew.6.28:12",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|they dont|G3756",
+      "reference": "Matthew 13:13",
+      "book": "Matthew",
+      "chapter": 13,
+      "verse": 13,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "13:13",
+      "canonicalKey": "Matthew.13.13",
+      "displayIndex": 10,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 9,
+      "spanEnd": 10,
+      "spanText": "they dont",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:Matthew.13.13:8",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|they dont|G3756",
+      "reference": "Matthew 13:13",
+      "book": "Matthew",
+      "chapter": 13,
+      "verse": 13,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "13:13",
+      "canonicalKey": "Matthew.13.13",
+      "displayIndex": 15,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 14,
+      "spanEnd": 15,
+      "spanText": "they dont",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Matthew.13.13:12",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|they dont|G3756",
+      "reference": "Luke 12:27",
+      "book": "Luke",
+      "chapter": 12,
+      "verse": 27,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "12:27",
+      "canonicalKey": "Luke.12.27",
+      "displayIndex": 7,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 6,
+      "spanEnd": 7,
+      "spanText": "They dont",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Luke.12.27:5",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|they dont|G3756",
+      "reference": "John 16:9",
+      "book": "John",
+      "chapter": 16,
+      "verse": 9,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "16:9",
+      "canonicalKey": "John.16.9",
+      "displayIndex": 4,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 3,
+      "spanEnd": 4,
+      "spanText": "they dont",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:John.16.9:4",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|he didnt|G3756",
+      "reference": "Mark 4:34",
+      "book": "Mark",
+      "chapter": 4,
+      "verse": 34,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "4:34",
+      "canonicalKey": "Mark.4.34",
+      "displayIndex": 4,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 3,
+      "spanEnd": 4,
+      "spanText": "he didnt",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Mark.4.34:3",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|he didnt|G3756",
+      "reference": "John 2:25",
+      "book": "John",
+      "chapter": 2,
+      "verse": 25,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "2:25",
+      "canonicalKey": "John.2.25",
+      "displayIndex": 3,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 2,
+      "spanEnd": 3,
+      "spanText": "he didnt",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:John.2.25:2",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|he didnt|G3756",
+      "reference": "Romans 4:20",
+      "book": "Romans",
+      "chapter": 4,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "4:20",
+      "canonicalKey": "Romans.4.20",
+      "displayIndex": 8,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 7,
+      "spanEnd": 8,
+      "spanText": "he didnt",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Romans.4.20:6",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|he didnt|G3756",
+      "reference": "1 Peter 2:23",
+      "book": "1 Peter",
+      "chapter": 2,
+      "verse": 23,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Pet.json",
+      "runtimeVerseKey": "2:23",
+      "canonicalKey": "1 Peter.2.23",
+      "displayIndex": 12,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 11,
+      "spanEnd": 12,
+      "spanText": "he didnt",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:1_Peter.2.23:5",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|he doesnt|G3756",
+      "reference": "Luke 9:49",
+      "book": "Luke",
+      "chapter": 9,
+      "verse": 49,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "9:49",
+      "canonicalKey": "Luke.9.49",
+      "displayIndex": 18,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 17,
+      "spanEnd": 18,
+      "spanText": "he doesnt",
+      "sourceIndex": 17,
+      "sourceOccurrenceId": "greek-nt:Luke.9.49:17",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|he doesnt|G3756",
+      "reference": "John 9:16",
+      "book": "John",
+      "chapter": 9,
+      "verse": 16,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "9:16",
+      "canonicalKey": "John.9.16",
+      "displayIndex": 14,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 13,
+      "spanEnd": 14,
+      "spanText": "he doesnt",
+      "sourceIndex": 16,
+      "sourceOccurrenceId": "greek-nt:John.9.16:16",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|he doesnt|G3756",
+      "reference": "John 11:9",
+      "book": "John",
+      "chapter": 11,
+      "verse": 9,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "11:9",
+      "canonicalKey": "John.11.9",
+      "displayIndex": 16,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 15,
+      "spanEnd": 16,
+      "spanText": "he doesnt",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:John.11.9:14",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|he doesnt|G3756",
+      "reference": "1 Corinthians 7:36",
+      "book": "1 Corinthians",
+      "chapter": 7,
+      "verse": 36,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "7:36",
+      "canonicalKey": "1 Corinthians.7.36",
+      "displayIndex": 34,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 33,
+      "spanEnd": 34,
+      "spanText": "He doesnt",
+      "sourceIndex": 19,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.7.36:19",
+      "sourceSurface": "οὐχ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|may it never|G3361",
+      "reference": "Romans 6:15",
+      "book": "Romans",
+      "chapter": 6,
+      "verse": 15,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "6:15",
+      "canonicalKey": "Romans.6.15",
+      "displayIndex": 16,
+      "displayText": "never",
+      "normalizedDisplayText": "never",
+      "spanStart": 14,
+      "spanEnd": 16,
+      "spanText": "May it never",
+      "sourceIndex": 11,
+      "sourceOccurrenceId": "greek-nt:Romans.6.15:11",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|may it never|G3361",
+      "reference": "Romans 9:14",
+      "book": "Romans",
+      "chapter": 9,
+      "verse": 14,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "9:14",
+      "canonicalKey": "Romans.9.14",
+      "displayIndex": 12,
+      "displayText": "never",
+      "normalizedDisplayText": "never",
+      "spanStart": 10,
+      "spanEnd": 12,
+      "spanText": "May it never",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:Romans.9.14:8",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|may it never|G3361",
+      "reference": "Romans 11:11",
+      "book": "Romans",
+      "chapter": 11,
+      "verse": 11,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "11:11",
+      "canonicalKey": "Romans.11.11",
+      "displayIndex": 12,
+      "displayText": "never",
+      "normalizedDisplayText": "never",
+      "spanStart": 10,
+      "spanEnd": 12,
+      "spanText": "May it never",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Romans.11.11:6",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|may it never|G3361",
+      "reference": "1 Corinthians 6:15",
+      "book": "1 Corinthians",
+      "chapter": 6,
+      "verse": 15,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "6:15",
+      "canonicalKey": "1 Corinthians.6.15",
+      "displayIndex": 27,
+      "displayText": "never",
+      "normalizedDisplayText": "never",
+      "spanStart": 25,
+      "spanEnd": 27,
+      "spanText": "May it never",
+      "sourceIndex": 18,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.6.15:18",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|we dont|G3756",
+      "reference": "John 9:21",
+      "book": "John",
+      "chapter": 9,
+      "verse": 21,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "9:21",
+      "canonicalKey": "John.9.21",
+      "displayIndex": 6,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 5,
+      "spanEnd": 6,
+      "spanText": "we dont",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:John.9.21:4",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|we dont|G3756",
+      "reference": "John 14:5",
+      "book": "John",
+      "chapter": 14,
+      "verse": 5,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:5",
+      "canonicalKey": "John.14.5",
+      "displayIndex": 6,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 5,
+      "spanEnd": 6,
+      "spanText": "we dont",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:John.14.5:4",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|we dont|G3756",
+      "reference": "Acts 7:40",
+      "book": "Acts",
+      "chapter": 7,
+      "verse": 40,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "7:40",
+      "canonicalKey": "Acts.7.40",
+      "displayIndex": 26,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 25,
+      "spanEnd": 26,
+      "spanText": "we dont",
+      "sourceIndex": 19,
+      "sourceOccurrenceId": "greek-nt:Acts.7.40:19",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|we dont|G3756",
+      "reference": "Romans 8:25",
+      "book": "Romans",
+      "chapter": 8,
+      "verse": 25,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "8:25",
+      "canonicalKey": "Romans.8.25",
+      "displayIndex": 8,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 7,
+      "spanEnd": 8,
+      "spanText": "we dont",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Romans.8.25:3",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|dont you|G3756",
+      "reference": "Mark 4:38",
+      "book": "Mark",
+      "chapter": 4,
+      "verse": 38,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "4:38",
+      "canonicalKey": "Mark.4.38",
+      "displayIndex": 19,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 19,
+      "spanEnd": 20,
+      "spanText": "dont you",
+      "sourceIndex": 17,
+      "sourceOccurrenceId": "greek-nt:Mark.4.38:17",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|dont you|G3756",
+      "reference": "Luke 10:40",
+      "book": "Luke",
+      "chapter": 10,
+      "verse": 40,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "10:40",
+      "canonicalKey": "Luke.10.40",
+      "displayIndex": 16,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 16,
+      "spanEnd": 17,
+      "spanText": "dont you",
+      "sourceIndex": 11,
+      "sourceOccurrenceId": "greek-nt:Luke.10.40:11",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|dont you|G3756",
+      "reference": "James 4:4",
+      "book": "James",
+      "chapter": 4,
+      "verse": 4,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Jas.json",
+      "runtimeVerseKey": "4:4",
+      "canonicalKey": "James.4.4",
+      "displayIndex": 4,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 4,
+      "spanEnd": 5,
+      "spanText": "dont you",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:James.4.4:1",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|they didnt|G3756",
+      "reference": "Matthew 11:20",
+      "book": "Matthew",
+      "chapter": 11,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "11:20",
+      "canonicalKey": "Matthew.11.20",
+      "displayIndex": 19,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 18,
+      "spanEnd": 19,
+      "spanText": "they didnt",
+      "sourceIndex": 13,
+      "sourceOccurrenceId": "greek-nt:Matthew.11.20:13",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|they didnt|G3756",
+      "reference": "John 12:42",
+      "book": "John",
+      "chapter": 12,
+      "verse": 42,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "12:42",
+      "canonicalKey": "John.12.42",
+      "displayIndex": 15,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 14,
+      "spanEnd": 15,
+      "spanText": "they didnt",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:John.12.42:14",
+      "sourceSurface": "οὐχ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    },
+    {
+      "batch": "BATCH3_NEGATIVE_PARTICLE",
+      "familyKey": "web|they didnt|G3756",
+      "reference": "John 19:33",
+      "book": "John",
+      "chapter": 19,
+      "verse": 33,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "19:33",
+      "canonicalKey": "John.19.33",
+      "displayIndex": 14,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 13,
+      "spanEnd": 14,
+      "spanText": "they didnt",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:John.19.33:10",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-rendering"
+    }
+  ],
+  "caseEvidence": [
+    {
+      "reference": "Matthew 26:70",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Luke 22:60",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "John 5:30",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Romans 7:16",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Romans 7:20",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "1 Corinthians 11:17",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "2 Corinthians 11:17",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "2 Corinthians 12:2",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "2 Corinthians 12:2",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "2 Corinthians 12:3",
+      "familyKey": "web|i dont|G3756",
+      "englishSpan": "I dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 5:17",
+      "familyKey": "web|i didnt|G3756",
+      "englishSpan": "I didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 10:34",
+      "familyKey": "web|i didnt|G3756",
+      "englishSpan": "I didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 25:26",
+      "familyKey": "web|i didnt|G3756",
+      "englishSpan": "I didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 25:26",
+      "familyKey": "web|i didnt|G3756",
+      "englishSpan": "I didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Luke 19:22",
+      "familyKey": "web|i didnt|G3756",
+      "englishSpan": "I didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Luke 19:22",
+      "familyKey": "web|i didnt|G3756",
+      "englishSpan": "I didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 25:24",
+      "familyKey": "web|you didnt|G3756",
+      "englishSpan": "you didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 25:24",
+      "familyKey": "web|you didnt|G3756",
+      "englishSpan": "you didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Luke 19:21",
+      "familyKey": "web|you didnt|G3756",
+      "englishSpan": "you didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Luke 19:21",
+      "familyKey": "web|you didnt|G3756",
+      "englishSpan": "you didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "2 Corinthians 11:4",
+      "familyKey": "web|you didnt|G3756",
+      "englishSpan": "you didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Hebrews 10:8",
+      "familyKey": "web|you didnt|G3756",
+      "englishSpan": "you didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 1:20",
+      "familyKey": "web|dont be|G3361",
+      "englishSpan": "dont be",
+      "target": "dont",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 28:5",
+      "familyKey": "web|dont be|G3361",
+      "englishSpan": "Dont be",
+      "target": "Dont",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Mark 5:36",
+      "familyKey": "web|dont be|G3361",
+      "englishSpan": "Dont be",
+      "target": "Dont",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Acts 27:24",
+      "familyKey": "web|dont be|G3361",
+      "englishSpan": "Dont be",
+      "target": "Dont",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "2 Thessalonians 3:13",
+      "familyKey": "web|dont be|G3361",
+      "englishSpan": "dont be",
+      "target": "dont",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 6:28",
+      "familyKey": "web|they dont|G3756",
+      "englishSpan": "They dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 13:13",
+      "familyKey": "web|they dont|G3756",
+      "englishSpan": "they dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 13:13",
+      "familyKey": "web|they dont|G3756",
+      "englishSpan": "they dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Luke 12:27",
+      "familyKey": "web|they dont|G3756",
+      "englishSpan": "They dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "John 16:9",
+      "familyKey": "web|they dont|G3756",
+      "englishSpan": "they dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Mark 4:34",
+      "familyKey": "web|he didnt|G3756",
+      "englishSpan": "he didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "John 2:25",
+      "familyKey": "web|he didnt|G3756",
+      "englishSpan": "he didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Romans 4:20",
+      "familyKey": "web|he didnt|G3756",
+      "englishSpan": "he didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "1 Peter 2:23",
+      "familyKey": "web|he didnt|G3756",
+      "englishSpan": "he didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Luke 9:49",
+      "familyKey": "web|he doesnt|G3756",
+      "englishSpan": "he doesnt",
+      "target": "doesnt",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "John 9:16",
+      "familyKey": "web|he doesnt|G3756",
+      "englishSpan": "he doesnt",
+      "target": "doesnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "John 11:9",
+      "familyKey": "web|he doesnt|G3756",
+      "englishSpan": "he doesnt",
+      "target": "doesnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "1 Corinthians 7:36",
+      "familyKey": "web|he doesnt|G3756",
+      "englishSpan": "He doesnt",
+      "target": "doesnt",
+      "sourceSurface": "οὐχ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Romans 6:15",
+      "familyKey": "web|may it never|G3361",
+      "englishSpan": "May it never",
+      "target": "never",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English negative adverb directly renders the explicit Greek negative particle."
+    },
+    {
+      "reference": "Romans 9:14",
+      "familyKey": "web|may it never|G3361",
+      "englishSpan": "May it never",
+      "target": "never",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English negative adverb directly renders the explicit Greek negative particle."
+    },
+    {
+      "reference": "Romans 11:11",
+      "familyKey": "web|may it never|G3361",
+      "englishSpan": "May it never",
+      "target": "never",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English negative adverb directly renders the explicit Greek negative particle."
+    },
+    {
+      "reference": "1 Corinthians 6:15",
+      "familyKey": "web|may it never|G3361",
+      "englishSpan": "May it never",
+      "target": "never",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "decision": "English negative adverb directly renders the explicit Greek negative particle."
+    },
+    {
+      "reference": "John 9:21",
+      "familyKey": "web|we dont|G3756",
+      "englishSpan": "we dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "John 14:5",
+      "familyKey": "web|we dont|G3756",
+      "englishSpan": "we dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Acts 7:40",
+      "familyKey": "web|we dont|G3756",
+      "englishSpan": "we dont",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Romans 8:25",
+      "familyKey": "web|we dont|G3756",
+      "englishSpan": "we dont",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Mark 4:38",
+      "familyKey": "web|dont you|G3756",
+      "englishSpan": "dont you",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Luke 10:40",
+      "familyKey": "web|dont you|G3756",
+      "englishSpan": "dont you",
+      "target": "dont",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "James 4:4",
+      "familyKey": "web|dont you|G3756",
+      "englishSpan": "dont you",
+      "target": "dont",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "Matthew 11:20",
+      "familyKey": "web|they didnt|G3756",
+      "englishSpan": "they didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "John 12:42",
+      "familyKey": "web|they didnt|G3756",
+      "englishSpan": "they didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐχ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    },
+    {
+      "reference": "John 19:33",
+      "familyKey": "web|they didnt|G3756",
+      "englishSpan": "they didnt",
+      "target": "didnt",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "decision": "English contraction contains dummy do/did/does auxiliary plus explicit negation; the Greek negative particle supplies the negation. No lexical-verb ownership is transferred."
+    }
+  ],
+  "deferred": {
+    "kjvCannot": "Deferred because cannot combines lexical ability plus negation in one English token.",
+    "kjvThouShaltNot": "Deferred because the rendering includes person/modal material beyond the negative particle.",
+    "kjvHathNot": "Deferred because the residual token is auxiliary material rather than a clean negative target.",
+    "articleAndBoundaryFamilies": "Remain deferred."
+  },
+  "base": {
+    "directOwnerOverlaySha256": "b02f7578e5c6b5315107dc16959cdb4cc025be6b5b79698dfaefa42c285403fd",
+    "span1OverlaySha256": "771772c8afda637ba4296649382e83b8ec8e4f056c4da2f2fba068f61a153090",
+    "batch2OverlaySha256": "c6d2eb09402b5ef160c6c34c9baf3660bc94f608608df32acc94405d8c790f99",
+    "compatibilityReferenceChecksum": "3392f1f0b8b22eee0d164f63f9526ce79af4caa76bd37ee993bc81411c22f3c9",
+    "r10aBaseChecksum": "3392f1f0b8b22eee0d164f63f9526ce79af4caa76bd37ee993bc81411c22f3c9",
+    "primaryManifestChecksum": "881c7b17d02fe70bfb2ee4af2916e8fa246e0b7008d1ad309a83e4e2738b5dab",
+    "primaryAffectedFiles": {
+      "1Cor.json": {
+        "bytes": 672584,
+        "sha256": "19ce4c4498eb28cf12e6b9416067721bbac9f377cf615e7f8b3ddf4bbc8b0787"
+      },
+      "1Pet.json": {
+        "bytes": 156821,
+        "sha256": "6e8d22aaa0da4498b6a948ea474ee951e9fdf521f4534921e0581b685ece0635"
+      },
+      "2Cor.json": {
+        "bytes": 438481,
+        "sha256": "229ed3b6b97568df3f96a09b735c5788cd636a6fd76561e411dd6129ed968609"
+      },
+      "2Thess.json": {
+        "bytes": 82257,
+        "sha256": "c36ee3e282756b68bd79fbdac62a2bc4a77f4496b86e6c15439847958331eb97"
+      },
+      "Acts.json": {
+        "bytes": 1668496,
+        "sha256": "47c57367b3f05e50b64be921334e00f4938d4da27f93beb97bbc9ec168ba506a"
+      },
+      "Heb.json": {
+        "bytes": 462649,
+        "sha256": "b9e06eb06748b9df4a9a41bcbe209482e4de018255c57318569303c80d0ec84a"
+      },
+      "Jas.json": {
+        "bytes": 158040,
+        "sha256": "4ea188c38acda6a31f36684c0517ca4c7765966bd356b8dd18b6a9fd7b4ddb6c"
+      },
+      "John.json": {
+        "bytes": 1389100,
+        "sha256": "7195148613851949b53167299b33ef564f675d7fe82b9b8d3b7f31ce40f6644e"
+      },
+      "Luke.json": {
+        "bytes": 1750900,
+        "sha256": "18c17b1fbf5450f4db50673da54cdf26254d596f3318ebfca00ca2cc44df66ea"
+      },
+      "Mark.json": {
+        "bytes": 1013190,
+        "sha256": "06cc15e8ab2eb9f22cef34aeeaf1ffa5e1e5fb67541a2a0cc98f8d080c4557d4"
+      },
+      "Matt.json": {
+        "bytes": 1703596,
+        "sha256": "551be9b247a87216676e0d1ed2f9eabad2ff2f87bb72c3078b25933c3916afb2"
+      },
+      "Rom.json": {
+        "bytes": 652129,
+        "sha256": "4dceb95e273686ae6db05bdb2371e584cc8df6b283254dcef3fb232a50c873a2"
+      }
+    },
+    "kjvState": {
+      "manifestSha256": "c0f9d2aa4b287d56f620edd37b229fa486dfa9941054d30bffd74bc07afc9ef9",
+      "books": {
+        "1_Corinthians.json": {
+          "sha256": "7a31f7f37daf888393825008b394850f6bf8a1e1f1dd64d3b1dffbe4a8c5682a",
+          "bytes": 788847
+        },
+        "1_John.json": {
+          "sha256": "1f32f69025ef60ba68c15e8d09d40a23948a18f718bafe8ae8b8fbed63c58e67",
+          "bytes": 223277
+        },
+        "1_Peter.json": {
+          "sha256": "dbcf82c3f16dfbd34d427691fc74aa29a315b19117fb466c4617fb1ec830f1a6",
+          "bytes": 184963
+        },
+        "1_Thessalonians.json": {
+          "sha256": "0677a6a927e6ea4eadd004049003b371939eccef1832e839830e7030eaf67d26",
+          "bytes": 171810
+        },
+        "1_Timothy.json": {
+          "sha256": "c76bbdc6fd0e73da7173254ecfbc6bc61361544c698c33231ef9eb5aeb983839",
+          "bytes": 183851
+        },
+        "2_Corinthians.json": {
+          "sha256": "b5d3aae1b98a7691a04e6e0ea4c4f79349b32cc9ca946625ebc9ffac188a0279",
+          "bytes": 509641
+        },
+        "2_John.json": {
+          "sha256": "3b60e9e567042d4946198ed32fcf90894e59801c12e21f87123deb3f4adb8cee",
+          "bytes": 25919
+        },
+        "2_Peter.json": {
+          "sha256": "804989038ad6cc66dc2c3ab22c8debbe0be28f1fa944b4fcb7342812f30698f4",
+          "bytes": 120185
+        },
+        "2_Thessalonians.json": {
+          "sha256": "200b35a4fcc38406b99c9bde88943aac853cec15475cd723ec9d30293839d04d",
+          "bytes": 95794
+        },
+        "2_Timothy.json": {
+          "sha256": "cfb5686e052e86c88a0676552e60cb1dafaa2a48b536bc35fcea5e5da1abca9b",
+          "bytes": 139303
+        },
+        "3_John.json": {
+          "sha256": "6db68e1a82c62f111387593a489f425a80500b52fed1155903da916d0255d9a9",
+          "bytes": 22397
+        },
+        "Acts.json": {
+          "sha256": "15b0c54a4f6c9dddebe36961091e9ea724698ed01dca33cb3d3f84361dd0ac86",
+          "bytes": 1949176
+        },
+        "Colossians.json": {
+          "sha256": "904d148ef3063dff7d308bfb0f03728e18a7c9a80028bc387e76d0736abec0be",
+          "bytes": 177338
+        },
+        "Ephesians.json": {
+          "sha256": "8b066621ecf151196ead7a1ae1e6209e3381211682d3a4c0590f17d4be75e8aa",
+          "bytes": 270704
+        },
+        "Galatians.json": {
+          "sha256": "33cca7f645c262fa29a4cdc2e0ba53ad0a019178f6239d6781c35851cb876f72",
+          "bytes": 250735
+        },
+        "Hebrews.json": {
+          "sha256": "835eb80f634239155d32b24e25c3e06628d7608bb74dd90ae676a5938571f594",
+          "bytes": 543710
+        },
+        "James.json": {
+          "sha256": "108fc44f17eba7b69bfe0749a4b431268f4965f1abc6b084722d0a75862d0209",
+          "bytes": 186024
+        },
+        "John.json": {
+          "sha256": "78019f20fad4a8c2e0ebcfb5f3d1ce496ef7d14937b67f5fed78e644ed71c69c",
+          "bytes": 1621596
+        },
+        "Jude.json": {
+          "sha256": "b90f2834496f0b5193c971e633ca2313fdd8ee1f3b917d53c60b586e9b3a9dbf",
+          "bytes": 48787
+        },
+        "Luke.json": {
+          "sha256": "4e4f320fe4d517f6ed21a61f09bfd3aa31fe4d784baf11b5f565dcdf76882498",
+          "bytes": 2056715
+        },
+        "Mark.json": {
+          "sha256": "22944508f785d2d975f4d2e20f11b35cec82fcf5aa683c5c1a805a6416f15b94",
+          "bytes": 1187883
+        },
+        "Matthew.json": {
+          "sha256": "b69562d7d88b767930e5655caaecf1471ba70aeb0ca298d4179f3124a47bd465",
+          "bytes": 1991886
+        },
+        "Philemon.json": {
+          "sha256": "7e3325800d998038e0a1319f86e37fca82c9123625957b836025d47c3a7ed4fa",
+          "bytes": 36719
+        },
+        "Philippians.json": {
+          "sha256": "4303ac42410f5445b4e1bffe0a3e9bb75113a3ee7a32c2bfdc9ce2e518f8e8d8",
+          "bytes": 183028
+        },
+        "Revelation.json": {
+          "sha256": "191edefeeae5c2c983ad80329ede7f03f198dd724c490610ca7b73eef6587acb",
+          "bytes": 1069581
+        },
+        "Romans.json": {
+          "sha256": "ab9d96a66e6ce21d8fe9cbc202d4d53eae6ea8e706445cf115510a2164729f3d",
+          "bytes": 770320
+        },
+        "Titus.json": {
+          "sha256": "6f893bb47ccdc68db2018e8292cb0478b521e886b614524cf3dc1779d0dd2c40",
+          "bytes": 73159
+        }
+      }
+    }
+  },
+  "expectedFinal": {
+    "compatibilityReferenceChecksum": "8194d6cb8dcf5a0cf6e76a231371e174668791629a366c409c3982d6a6d76bae",
+    "r10aBaseChecksum": "8194d6cb8dcf5a0cf6e76a231371e174668791629a366c409c3982d6a6d76bae",
+    "primaryManifestChecksum": "6fade2347726d3f3c864c55d3684d4179262a89c1128dd54a0d409caabadf047",
+    "primaryManifestBytes": 26490,
+    "primaryManifestSha256": "9ad4bd838337edce62772ebc86151e391a99d50c290ff8758d97731d5718c3a1",
+    "primaryAffectedFiles": {
+      "1Cor.json": {
+        "bytes": 672606,
+        "sha256": "582301048b5194dba1811d8e2213c258279ab3ae18a5e275d8ea853ac80da285"
+      },
+      "1Pet.json": {
+        "bytes": 156828,
+        "sha256": "a6aa1ad9c0ee4a1d5fe12d230cf71e92117ceeb2d5392a44ab4b305c5da4418c"
+      },
+      "2Cor.json": {
+        "bytes": 438519,
+        "sha256": "e02d73d2c886a14d391ab946c586970b340945a71def2cfbbec7acc8cff4b801"
+      },
+      "2Thess.json": {
+        "bytes": 82263,
+        "sha256": "63719646873b71a208bb66340044a94ad38b2cda3436c83021c52524a5e82bd4"
+      },
+      "Acts.json": {
+        "bytes": 1668510,
+        "sha256": "284757d029f8db8680c2330d4ef7315cec2009a87eed9e982906dc5c9822f71a"
+      },
+      "Heb.json": {
+        "bytes": 462657,
+        "sha256": "cdde7a5b1e2ec1f8963a502d72c93e29636e271d12b95873b9c9f9714f1f18e6"
+      },
+      "Jas.json": {
+        "bytes": 158046,
+        "sha256": "b27e723883bdbac1bd3f3707002c9bfd0770bc49a1e228e4cf680ce8d4ef94cf"
+      },
+      "John.json": {
+        "bytes": 1389164,
+        "sha256": "03c069f69e0a516b3468c5e9458c21994abf67abb4d7b1ea4d8bb128db460661"
+      },
+      "Luke.json": {
+        "bytes": 1750959,
+        "sha256": "5604036781547e0542ea611122b1640d48c762afe2eee87340875024fadc61ec"
+      },
+      "Mark.json": {
+        "bytes": 1013212,
+        "sha256": "94a73e1c65d621dae58a182086df9e327534d9139eb0dc700141c1abc314f006"
+      },
+      "Matt.json": {
+        "bytes": 1703694,
+        "sha256": "b19afb9c270aba5dd58dc434da2df389c3048e40145d3e56dd9403b138053f1b"
+      },
+      "Rom.json": {
+        "bytes": 652175,
+        "sha256": "1da0d76ff0c4d445d04a392eaeb47ea4b394b6d3eb169d23718289377fb2a615"
+      }
+    },
+    "kjvState": {
+      "manifestSha256": "c0f9d2aa4b287d56f620edd37b229fa486dfa9941054d30bffd74bc07afc9ef9",
+      "books": {
+        "1_Corinthians.json": {
+          "sha256": "7a31f7f37daf888393825008b394850f6bf8a1e1f1dd64d3b1dffbe4a8c5682a",
+          "bytes": 788847
+        },
+        "1_John.json": {
+          "sha256": "1f32f69025ef60ba68c15e8d09d40a23948a18f718bafe8ae8b8fbed63c58e67",
+          "bytes": 223277
+        },
+        "1_Peter.json": {
+          "sha256": "dbcf82c3f16dfbd34d427691fc74aa29a315b19117fb466c4617fb1ec830f1a6",
+          "bytes": 184963
+        },
+        "1_Thessalonians.json": {
+          "sha256": "0677a6a927e6ea4eadd004049003b371939eccef1832e839830e7030eaf67d26",
+          "bytes": 171810
+        },
+        "1_Timothy.json": {
+          "sha256": "c76bbdc6fd0e73da7173254ecfbc6bc61361544c698c33231ef9eb5aeb983839",
+          "bytes": 183851
+        },
+        "2_Corinthians.json": {
+          "sha256": "b5d3aae1b98a7691a04e6e0ea4c4f79349b32cc9ca946625ebc9ffac188a0279",
+          "bytes": 509641
+        },
+        "2_John.json": {
+          "sha256": "3b60e9e567042d4946198ed32fcf90894e59801c12e21f87123deb3f4adb8cee",
+          "bytes": 25919
+        },
+        "2_Peter.json": {
+          "sha256": "804989038ad6cc66dc2c3ab22c8debbe0be28f1fa944b4fcb7342812f30698f4",
+          "bytes": 120185
+        },
+        "2_Thessalonians.json": {
+          "sha256": "200b35a4fcc38406b99c9bde88943aac853cec15475cd723ec9d30293839d04d",
+          "bytes": 95794
+        },
+        "2_Timothy.json": {
+          "sha256": "cfb5686e052e86c88a0676552e60cb1dafaa2a48b536bc35fcea5e5da1abca9b",
+          "bytes": 139303
+        },
+        "3_John.json": {
+          "sha256": "6db68e1a82c62f111387593a489f425a80500b52fed1155903da916d0255d9a9",
+          "bytes": 22397
+        },
+        "Acts.json": {
+          "sha256": "15b0c54a4f6c9dddebe36961091e9ea724698ed01dca33cb3d3f84361dd0ac86",
+          "bytes": 1949176
+        },
+        "Colossians.json": {
+          "sha256": "904d148ef3063dff7d308bfb0f03728e18a7c9a80028bc387e76d0736abec0be",
+          "bytes": 177338
+        },
+        "Ephesians.json": {
+          "sha256": "8b066621ecf151196ead7a1ae1e6209e3381211682d3a4c0590f17d4be75e8aa",
+          "bytes": 270704
+        },
+        "Galatians.json": {
+          "sha256": "33cca7f645c262fa29a4cdc2e0ba53ad0a019178f6239d6781c35851cb876f72",
+          "bytes": 250735
+        },
+        "Hebrews.json": {
+          "sha256": "835eb80f634239155d32b24e25c3e06628d7608bb74dd90ae676a5938571f594",
+          "bytes": 543710
+        },
+        "James.json": {
+          "sha256": "108fc44f17eba7b69bfe0749a4b431268f4965f1abc6b084722d0a75862d0209",
+          "bytes": 186024
+        },
+        "John.json": {
+          "sha256": "78019f20fad4a8c2e0ebcfb5f3d1ce496ef7d14937b67f5fed78e644ed71c69c",
+          "bytes": 1621596
+        },
+        "Jude.json": {
+          "sha256": "b90f2834496f0b5193c971e633ca2313fdd8ee1f3b917d53c60b586e9b3a9dbf",
+          "bytes": 48787
+        },
+        "Luke.json": {
+          "sha256": "4e4f320fe4d517f6ed21a61f09bfd3aa31fe4d784baf11b5f565dcdf76882498",
+          "bytes": 2056715
+        },
+        "Mark.json": {
+          "sha256": "22944508f785d2d975f4d2e20f11b35cec82fcf5aa683c5c1a805a6416f15b94",
+          "bytes": 1187883
+        },
+        "Matthew.json": {
+          "sha256": "b69562d7d88b767930e5655caaecf1471ba70aeb0ca298d4179f3124a47bd465",
+          "bytes": 1991886
+        },
+        "Philemon.json": {
+          "sha256": "7e3325800d998038e0a1319f86e37fca82c9123625957b836025d47c3a7ed4fa",
+          "bytes": 36719
+        },
+        "Philippians.json": {
+          "sha256": "4303ac42410f5445b4e1bffe0a3e9bb75113a3ee7a32c2bfdc9ce2e518f8e8d8",
+          "bytes": 183028
+        },
+        "Revelation.json": {
+          "sha256": "191edefeeae5c2c983ad80329ede7f03f198dd724c490610ca7b73eef6587acb",
+          "bytes": 1069581
+        },
+        "Romans.json": {
+          "sha256": "ab9d96a66e6ce21d8fe9cbc202d4d53eae6ea8e706445cf115510a2164729f3d",
+          "bytes": 770320
+        },
+        "Titus.json": {
+          "sha256": "6f893bb47ccdc68db2018e8292cb0478b521e886b614524cf3dc1779d0dd2c40",
+          "bytes": 73159
+        }
+      }
+    }
+  },
+  "checksum": "ddda234dd1efd22e4d4bf636b8586f95fba20d99fdf520fe7133b529afb2cedd"
+}

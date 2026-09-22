@@ -222,6 +222,7 @@ export default async function ReadChapterPage({
       translation: activeTranslation,
       book: decodedBook,
       chapter: chapterNumber,
+      readerVerses: chapterVerses,
     });
 
   if (!chapterVerses.length) {

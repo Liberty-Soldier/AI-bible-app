@@ -1419,6 +1419,7 @@ export async function resolveBibleIQ(
     chapter: input.chapter,
     verse: input.verse,
     displayTokenIndex: input.displayTokenIndex,
+    readerRecordId: input.readerRecordId,
   });
 
   if (hit) {

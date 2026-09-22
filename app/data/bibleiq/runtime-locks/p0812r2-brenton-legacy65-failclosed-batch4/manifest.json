@@ -1,0 +1,1221 @@
+{
+  "schemaVersion": 1,
+  "batchId": "p0812r2-brenton-legacy65-failclosed-batch4",
+  "mode": "SEALED_FAIL_CLOSED_REMOVAL_BATCH",
+  "proof": {
+    "proofZipSha256": "a8253ad7279da1118a5b174a7b8ed8cb1c3e8cee9fba55f96515b8fc5f184cae",
+    "proofResult": "PASS_BRENTON_LEGACY102_PROVENANCE_CLOSURE_PROOF",
+    "legacyCandidates": 102,
+    "sealedBatch1Keep": 37,
+    "removalCandidates": 65
+  },
+  "baseline": {
+    "meaningfulDisplayed": 353466,
+    "meaningfulRoutePresent": 123960,
+    "defensibleMeaningful": 123858,
+    "unresolvedLegacyMeaningful": 102,
+    "meaningfulResidual": 229506,
+    "numericRoutes": 143073,
+    "overlayRoutes": 10009
+  },
+  "expectedPost": {
+    "meaningfulRoutePresent": 123895,
+    "defensibleMeaningful": 123895,
+    "unresolvedLegacyMeaningful": 0,
+    "meaningfulResidual": 229571,
+    "numericRoutes": 143008,
+    "overlayRoutes": 10009
+  },
+  "counts": {
+    "removeRoutes": 65,
+    "runtimeFiles": 1,
+    "sealedBatch1Kept": 37
+  },
+  "candidates": [
+    {
+      "readerRecordId": "brenton:PSA:3:2",
+      "reference": "Psalms 3:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "3:1",
+      "displayIndex": 1,
+      "displayText": "Lord",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 0,
+        "sourceId": "lxx:Psalms.3.1:0",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:3:2",
+      "reference": "Psalms 3:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "3:1",
+      "displayIndex": 12,
+      "displayText": "against",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 9,
+        "sourceId": "lxx:Psalms.3.1:9",
+        "entityId": "word:lxx:L713075"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:4:2",
+      "reference": "Psalms 4:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "4:1",
+      "displayIndex": 9,
+      "displayText": "righteousness",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 4,
+        "sourceId": "lxx:Psalms.4.1:4",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:6:2",
+      "reference": "Psalms 6:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "6:1",
+      "displayIndex": 9,
+      "displayText": "chasten",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 4,
+        "sourceId": "lxx:Psalms.6.1:4",
+        "entityId": "word:lxx:L713089"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:6:2",
+      "reference": "Psalms 6:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "6:1",
+      "displayIndex": 12,
+      "displayText": "thine",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 7,
+        "sourceId": "lxx:Psalms.6.1:7",
+        "entityId": "word:lxx:L709444"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:7:2",
+      "reference": "Psalms 7:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "7:1",
+      "displayIndex": 1,
+      "displayText": "Lord",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 0,
+        "sourceId": "lxx:Psalms.7.1:0",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:7:2",
+      "reference": "Psalms 7:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "7:1",
+      "displayIndex": 9,
+      "displayText": "save",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 6,
+        "sourceId": "lxx:Psalms.7.1:6",
+        "entityId": "word:lxx:L707996"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:8:2",
+      "reference": "Psalms 8:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "8:1",
+      "displayIndex": 7,
+      "displayText": "thy",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 6,
+        "sourceId": "lxx:Psalms.8.1:6",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:10:1",
+      "reference": "Psalms 11:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "11:1",
+      "displayIndex": 9,
+      "displayText": "Lord",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 5,
+        "sourceId": "lxx:Psalms.11.1:5",
+        "entityId": "word:lxx:L709444"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "LEFT_BOUNDARY_NOT_IMMEDIATE",
+        "SOURCE_NOT_ONE_AFTER_LEFT"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:16:1",
+      "reference": "Psalms 17:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "17:1",
+      "displayIndex": 13,
+      "displayText": "petition",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 13,
+        "sourceId": "lxx:Psalms.17.1:13",
+        "entityId": "word:lxx:L708236"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "SOURCE_NOT_UNIQUELY_OWNED_BY_TARGET"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:16:1",
+      "reference": "Psalms 17:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "17:1",
+      "displayIndex": 20,
+      "displayText": "uttered",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 29,
+        "sourceId": "lxx:Psalms.17.1:29",
+        "entityId": "word:lxx:L707031"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:16:1",
+      "reference": "Psalms 17:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "17:1",
+      "displayIndex": 22,
+      "displayText": "deceitful",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 13,
+        "sourceId": "lxx:Psalms.17.1:13",
+        "entityId": "word:lxx:L708236"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "SOURCE_NOT_UNIQUELY_OWNED_BY_TARGET"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:18:2",
+      "reference": "Psalms 19:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "19:1",
+      "displayIndex": 4,
+      "displayText": "glory",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 3,
+        "sourceId": "lxx:Psalms.19.1:3",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:20:2",
+      "reference": "Psalms 21:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "21:1",
+      "displayIndex": 8,
+      "displayText": "strength",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 8,
+        "sourceId": "lxx:Psalms.21.1:8",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:28:1",
+      "reference": "Psalms 29:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "29:1",
+      "displayIndex": 6,
+      "displayText": "occasion",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 4,
+        "sourceId": "lxx:Psalms.29.1:4",
+        "entityId": "word:lxx:L714091"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "LEFT_BOUNDARY_NOT_IMMEDIATE"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:28:1",
+      "reference": "Psalms 29:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "29:1",
+      "displayIndex": 9,
+      "displayText": "solemn",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 6,
+        "sourceId": "lxx:Psalms.29.1:6",
+        "entityId": "word:lxx:L703958"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "LEFT_BOUNDARY_NOT_IMMEDIATE",
+        "SOURCE_NOT_ONE_AFTER_LEFT"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:32:1",
+      "reference": "Psalms 33:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "33:1",
+      "displayIndex": 4,
+      "displayText": "Rejoice",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 2,
+        "sourceId": "lxx:Psalms.33.1:2",
+        "entityId": "word:lxx:L709709"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:32:1",
+      "reference": "Psalms 33:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "33:1",
+      "displayIndex": 9,
+      "displayText": "righteous",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 7,
+        "sourceId": "lxx:Psalms.33.1:7",
+        "entityId": "word:lxx:L704654"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:32:1",
+      "reference": "Psalms 33:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "33:1",
+      "displayIndex": 10,
+      "displayText": "praise",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 8,
+        "sourceId": "lxx:Psalms.33.1:8",
+        "entityId": "word:lxx:L700068"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:38:2",
+      "reference": "Psalms 39:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "39:1",
+      "displayIndex": 4,
+      "displayText": "take",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 5,
+        "sourceId": "lxx:Psalms.39.1:5",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:42:1",
+      "reference": "Psalms 43:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "43:1",
+      "displayIndex": 9,
+      "displayText": "plead",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 4,
+        "sourceId": "lxx:Psalms.43.1:4",
+        "entityId": "word:lxx:L713075"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "LEFT_BOUNDARY_NOT_IMMEDIATE",
+        "SOURCE_NOT_ONE_AFTER_LEFT"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:43:2",
+      "reference": "Psalms 44:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "44:1",
+      "displayIndex": 14,
+      "displayText": "work",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 11,
+        "sourceId": "lxx:Psalms.44.1:11",
+        "entityId": "word:lxx:L714091"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:43:2",
+      "reference": "Psalms 44:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "44:1",
+      "displayIndex": 17,
+      "displayText": "wroughtest",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 14,
+        "sourceId": "lxx:Psalms.44.1:14",
+        "entityId": "word:lxx:L700124"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:44:2",
+      "reference": "Psalms 45:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "45:1",
+      "displayIndex": 5,
+      "displayText": "good",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 5,
+        "sourceId": "lxx:Psalms.45.1:5",
+        "entityId": "word:lxx:L713075"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:45:2",
+      "reference": "Psalms 46:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "46:1",
+      "displayIndex": 7,
+      "displayText": "help",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 5,
+        "sourceId": "lxx:Psalms.46.1:5",
+        "entityId": "word:lxx:L713075"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:46:2",
+      "reference": "Psalms 47:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "47:1",
+      "displayIndex": 6,
+      "displayText": "shout",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 3,
+        "sourceId": "lxx:Psalms.47.1:3",
+        "entityId": "word:lxx:L713075"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:46:2",
+      "reference": "Psalms 47:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "47:1",
+      "displayIndex": 11,
+      "displayText": "voice",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 5,
+        "sourceId": "lxx:Psalms.47.1:5",
+        "entityId": "word:lxx:L703389"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:49:2",
+      "reference": "Psalms 50:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "50:2",
+      "displayIndex": 0,
+      "displayText": "Out",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 8,
+        "sourceId": "lxx:Psalms.50.2:8",
+        "entityId": "word:lxx:L706008"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:49:2",
+      "reference": "Psalms 50:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "50:2",
+      "displayIndex": 3,
+      "displayText": "comes",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 7,
+        "sourceId": "lxx:Psalms.50.2:7",
+        "entityId": "word:lxx:L711009"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:50:4",
+      "reference": "Psalms 51:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "51:2",
+      "displayIndex": 7,
+      "displayText": "cleanse",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 9,
+        "sourceId": "lxx:Psalms.51.2:9",
+        "entityId": "word:lxx:L711499"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:51:3",
+      "reference": "Psalms 52:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "52:1",
+      "displayIndex": 8,
+      "displayText": "iniquity",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 4,
+        "sourceId": "lxx:Psalms.52.1:4",
+        "entityId": "word:lxx:L708363"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:52:3",
+      "reference": "Psalms 53:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "53:2",
+      "displayIndex": 7,
+      "displayText": "sons",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 8,
+        "sourceId": "lxx:Psalms.53.2:8",
+        "entityId": "word:lxx:L711499"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:52:3",
+      "reference": "Psalms 53:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "53:2",
+      "displayIndex": 12,
+      "displayText": "if",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 12,
+        "sourceId": "lxx:Psalms.53.2:12",
+        "entityId": "word:lxx:L707923"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:55:2",
+      "reference": "Psalms 56:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "56:1",
+      "displayIndex": 17,
+      "displayText": "warring",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 15,
+        "sourceId": "lxx:Psalms.56.1:15",
+        "entityId": "word:lxx:L711499"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:57:2",
+      "reference": "Psalms 58:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "58:1",
+      "displayIndex": 4,
+      "displayText": "speak",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 3,
+        "sourceId": "lxx:Psalms.58.1:3",
+        "entityId": "word:lxx:L708851"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:57:2",
+      "reference": "Psalms 58:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "58:1",
+      "displayIndex": 10,
+      "displayText": "rightly",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 9,
+        "sourceId": "lxx:Psalms.58.1:9",
+        "entityId": "word:lxx:L709709"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:57:2",
+      "reference": "Psalms 58:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "58:1",
+      "displayIndex": 11,
+      "displayText": "ye",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 11,
+        "sourceId": "lxx:Psalms.58.1:11",
+        "entityId": "word:lxx:L711499"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:58:3",
+      "reference": "Psalms 59:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "59:2",
+      "displayIndex": 0,
+      "displayText": "Deliver",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 0,
+        "sourceId": "lxx:Psalms.59.2:0",
+        "entityId": "word:lxx:L709709"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:58:3",
+      "reference": "Psalms 59:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "59:2",
+      "displayIndex": 4,
+      "displayText": "workers",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 3,
+        "sourceId": "lxx:Psalms.59.2:3",
+        "entityId": "word:lxx:L708767"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:58:3",
+      "reference": "Psalms 59:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "59:2",
+      "displayIndex": 6,
+      "displayText": "iniquity",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 4,
+        "sourceId": "lxx:Psalms.59.2:4",
+        "entityId": "word:lxx:L712533"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:58:3",
+      "reference": "Psalms 59:2",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "59:2",
+      "displayIndex": 8,
+      "displayText": "save",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 7,
+        "sourceId": "lxx:Psalms.59.2:7",
+        "entityId": "word:lxx:L712533"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:61:2",
+      "reference": "Psalms 62:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "62:1",
+      "displayIndex": 7,
+      "displayText": "God",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 3,
+        "sourceId": "lxx:Psalms.62.1:3",
+        "entityId": "word:lxx:L704639"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:63:2",
+      "reference": "Psalms 64:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "64:1",
+      "displayIndex": 4,
+      "displayText": "God",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 3,
+        "sourceId": "lxx:Psalms.64.1:3",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:65:1",
+      "reference": "Psalms 66:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "66:1",
+      "displayIndex": 4,
+      "displayText": "Song",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 5,
+        "sourceId": "lxx:Psalms.66.1:5",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:65:1",
+      "reference": "Psalms 66:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "66:1",
+      "displayIndex": 9,
+      "displayText": "resurrection",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 4,
+        "sourceId": "lxx:Psalms.66.1:4",
+        "entityId": "word:lxx:L713089"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:73:1",
+      "reference": "Psalms 74:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "74:1",
+      "displayIndex": 6,
+      "displayText": "Wherefore",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 5,
+        "sourceId": "lxx:Psalms.74.1:5",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:73:1",
+      "reference": "Psalms 74:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "74:1",
+      "displayIndex": 9,
+      "displayText": "rejected",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 8,
+        "sourceId": "lxx:Psalms.74.1:8",
+        "entityId": "word:lxx:L714091"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:74:2",
+      "reference": "Psalms 75:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "75:1",
+      "displayIndex": 5,
+      "displayText": "thee",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 4,
+        "sourceId": "lxx:Psalms.75.1:4",
+        "entityId": "word:lxx:L713089"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:74:2",
+      "reference": "Psalms 75:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "75:1",
+      "displayIndex": 7,
+      "displayText": "God",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 5,
+        "sourceId": "lxx:Psalms.75.1:5",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:74:2",
+      "reference": "Psalms 75:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "75:1",
+      "displayIndex": 11,
+      "displayText": "thanks",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 8,
+        "sourceId": "lxx:Psalms.75.1:8",
+        "entityId": "word:lxx:L714091"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:75:2",
+      "reference": "Psalms 76:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "76:1",
+      "displayIndex": 6,
+      "displayText": "name",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 7,
+        "sourceId": "lxx:Psalms.76.1:7",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:75:2",
+      "reference": "Psalms 76:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "76:1",
+      "displayIndex": 8,
+      "displayText": "great",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 6,
+        "sourceId": "lxx:Psalms.76.1:6",
+        "entityId": "word:lxx:L701894"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:78:1",
+      "reference": "Psalms 79:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "79:1",
+      "displayIndex": 7,
+      "displayText": "heathen",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 6,
+        "sourceId": "lxx:Psalms.79.1:6",
+        "entityId": "word:lxx:L708525"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:78:1",
+      "reference": "Psalms 79:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "79:1",
+      "displayIndex": 9,
+      "displayText": "come",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 8,
+        "sourceId": "lxx:Psalms.79.1:8",
+        "entityId": "word:lxx:L701894"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:78:1",
+      "reference": "Psalms 79:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "79:1",
+      "displayIndex": 11,
+      "displayText": "thine",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 9,
+        "sourceId": "lxx:Psalms.79.1:9",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:79:2",
+      "reference": "Psalms 80:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "80:1",
+      "displayIndex": 4,
+      "displayText": "Israel",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 8,
+        "sourceId": "lxx:Psalms.80.1:8",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:79:2",
+      "reference": "Psalms 80:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "80:1",
+      "displayIndex": 6,
+      "displayText": "guidest",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 7,
+        "sourceId": "lxx:Psalms.80.1:7",
+        "entityId": "word:lxx:L701894"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:81:1",
+      "reference": "Psalms 82:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "82:1",
+      "displayIndex": 4,
+      "displayText": "God",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 1,
+        "sourceId": "lxx:Psalms.82.1:1",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "SOURCE_NOT_ONE_AFTER_LEFT"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:82:2",
+      "reference": "Psalms 83:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "83:1",
+      "displayIndex": 7,
+      "displayText": "thee",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 7,
+        "sourceId": "lxx:Psalms.83.1:7",
+        "entityId": "word:lxx:L713075"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:83:2",
+      "reference": "Psalms 84:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "84:1",
+      "displayIndex": 4,
+      "displayText": "tabernacles",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 6,
+        "sourceId": "lxx:Psalms.84.1:6",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:86:1",
+      "reference": "Psalms 87:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "87:1",
+      "displayIndex": 1,
+      "displayText": "Psalm",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 0,
+        "sourceId": "lxx:Psalms.87.1:0",
+        "entityId": "word:lxx:L714091"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "RIGHT_BOUNDARY_NOT_IMMEDIATE",
+        "SOURCE_NOT_ONE_BEFORE_RIGHT"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:86:1",
+      "reference": "Psalms 87:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "87:1",
+      "displayIndex": 4,
+      "displayText": "Song",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 1,
+        "sourceId": "lxx:Psalms.87.1:1",
+        "entityId": "word:lxx:L714022"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND",
+        "RIGHT_BOUNDARY_NOT_IMMEDIATE",
+        "SOURCE_NOT_ONE_BEFORE_RIGHT"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:100:1",
+      "reference": "Psalms 101:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "101:1",
+      "displayIndex": 1,
+      "displayText": "Psalm",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 0,
+        "sourceId": "lxx:Psalms.101.1:0",
+        "entityId": "word:lxx:L710892"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:100:1",
+      "reference": "Psalms 101:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "101:1",
+      "displayIndex": 17,
+      "displayText": "sing",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 7,
+        "sourceId": "lxx:Psalms.101.1:7",
+        "entityId": "word:lxx:L707996"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    },
+    {
+      "readerRecordId": "brenton:PSA:106:1",
+      "reference": "Psalms 107:1",
+      "book": "Psalms",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "107:1",
+      "displayIndex": 0,
+      "displayText": "Alleluia",
+      "meaningful": true,
+      "from": {
+        "sourceIndex": 0,
+        "sourceId": "lxx:Psalms.107.1:0",
+        "entityId": "word:lxx:L714091"
+      },
+      "proofReasons": [
+        "STRICT_BOUNDARIES_NOT_FOUND"
+      ]
+    }
+  ],
+  "checksum": "4bcef42847db9154bdf5ddf5d477f9670a6412f6f04dda85436dfd5580958b2e"
+}

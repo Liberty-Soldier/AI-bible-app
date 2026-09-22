@@ -1,0 +1,3256 @@
+{
+  "schemaVersion": "emet-p0812r2-greek-nt-approved-span-batch2-overlay/v1",
+  "milestone": "P08.12R2",
+  "purpose": "Second evidence-reviewed OpenGNT occurrence -> English rendering span batch. Separate from the 23 direct owners and first 61 span routes.",
+  "authority": {
+    "source": "Ordered OpenGNT source occurrences",
+    "unit": "Source occurrence -> English rendering span",
+    "canonicalModified": false,
+    "recurrenceAutomaticApproval": false,
+    "adjacencyAutomaticApproval": false,
+    "semanticGuessing": false,
+    "negativeParticleFamiliesIncluded": false,
+    "genealogyArticleFamiliesIncluded": false,
+    "approvalBasis": "Seven manually reviewed recurring lexical/morphological rendering families from the runtime-aware post-61 census."
+  },
+  "counts": {
+    "approvedFamilies": 7,
+    "approvedSpans": 27,
+    "meaningfulRoutes": 35,
+    "webMeaningfulRoutes": 16,
+    "kjvMeaningfulRoutes": 19
+  },
+  "families": [
+    {
+      "key": "web|most certainly i|G0281",
+      "translation": "web",
+      "englishSpan": "Most certainly I",
+      "strong": "G0281",
+      "sourceSurface": "ἀμὴν",
+      "morph": "HEB",
+      "gloss": "amen",
+      "mounceGloss": "amen",
+      "tyndaleGloss": "amen",
+      "caseCount": 5,
+      "meaningfulResidualPositions": 10,
+      "references": [
+        "Matthew 6:16",
+        "Matthew 8:10",
+        "Matthew 10:42",
+        "Matthew 25:45",
+        "Mark 9:41"
+      ]
+    },
+    {
+      "key": "web|do you want us to|G2309",
+      "translation": "web",
+      "englishSpan": "do you want us to",
+      "strong": "G2309",
+      "sourceSurface": "θέλεις",
+      "morph": "V-PAI-2S",
+      "gloss": "to will",
+      "mounceGloss": "to will",
+      "tyndaleGloss": "to will/desire",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3,
+      "references": [
+        "Matthew 26:17",
+        "Mark 14:12",
+        "Luke 22:9"
+      ]
+    },
+    {
+      "key": "web|behold the|G2400",
+      "translation": "web",
+      "englishSpan": "Behold the",
+      "strong": "G2400",
+      "sourceSurface": "ἰδοὺ",
+      "morph": "INJ",
+      "gloss": "look!",
+      "mounceGloss": "look!",
+      "tyndaleGloss": "look!",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3,
+      "references": [
+        "Acts 5:9",
+        "Acts 13:11",
+        "Jude 1:14"
+      ]
+    },
+    {
+      "key": "kjv|behold i|G2400",
+      "translation": "kjv",
+      "englishSpan": "Behold I",
+      "strong": "G2400",
+      "sourceSurface": "ἰδοὺ",
+      "morph": "INJ",
+      "gloss": "look!",
+      "mounceGloss": "look!",
+      "tyndaleGloss": "look!",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3,
+      "references": [
+        "1 Peter 2:6",
+        "Acts 7:56",
+        "Mark 1:2"
+      ]
+    },
+    {
+      "key": "kjv|saith the|G3004",
+      "translation": "kjv",
+      "englishSpan": "saith the",
+      "strong": "G3004",
+      "sourceSurface": "λέγει",
+      "morph": "V-PAI-3S",
+      "gloss": "says",
+      "mounceGloss": "say",
+      "tyndaleGloss": "to speak",
+      "caseCount": 4,
+      "meaningfulResidualPositions": 4,
+      "references": [
+        "2 Corinthians 6:17",
+        "2 Corinthians 6:18",
+        "Hebrews 8:8",
+        "Romans 12:19"
+      ]
+    },
+    {
+      "key": "kjv|verily i|G0281",
+      "translation": "kjv",
+      "englishSpan": "verily I",
+      "strong": "G0281",
+      "sourceSurface": "ἀμὴν",
+      "morph": "HEB",
+      "gloss": "amen",
+      "mounceGloss": "amen",
+      "tyndaleGloss": "amen",
+      "caseCount": 6,
+      "meaningfulResidualPositions": 6,
+      "references": [
+        "Luke 12:37",
+        "Mark 8:12",
+        "Matthew 6:16",
+        "Matthew 8:10",
+        "Matthew 10:42",
+        "Matthew 25:45"
+      ]
+    },
+    {
+      "key": "kjv|wilt thou that we|G2309",
+      "translation": "kjv",
+      "englishSpan": "wilt thou that we",
+      "strong": "G2309",
+      "sourceSurface": "θέλεις",
+      "morph": "V-PAI-2S",
+      "gloss": "to will",
+      "mounceGloss": "to will",
+      "tyndaleGloss": "to will/desire",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 6,
+      "references": [
+        "Luke 22:9",
+        "Mark 14:12",
+        "Matthew 26:17"
+      ]
+    }
+  ],
+  "spans": [
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 6:16",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "6:16",
+      "canonicalKey": "Matthew.6.16",
+      "englishSpan": {
+        "start": 27,
+        "end": 29,
+        "text": "Most certainly I",
+        "tokens": [
+          {
+            "index": 27,
+            "text": "Most",
+            "normalized": "most",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 28,
+            "text": "certainly",
+            "normalized": "certainly",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 29,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        27,
+        28
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 19,
+        "sourceOccurrenceId": "greek-nt:Matthew.6.16:19",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Matthew 6:16",
+          "book": "Matthew",
+          "chapter": 6,
+          "verse": 16,
+          "runtimeVerseKey": "6:16",
+          "canonicalKey": "Matthew.6.16",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 27,
+          "displayText": "Most",
+          "spanStart": 27,
+          "spanEnd": 29,
+          "spanText": "Most certainly I",
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "greek-nt:Matthew.6.16:19",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        },
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Matthew 6:16",
+          "book": "Matthew",
+          "chapter": 6,
+          "verse": 16,
+          "runtimeVerseKey": "6:16",
+          "canonicalKey": "Matthew.6.16",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 28,
+          "displayText": "certainly",
+          "spanStart": 27,
+          "spanEnd": 29,
+          "spanText": "Most certainly I",
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "greek-nt:Matthew.6.16:19",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 8:10",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "8:10",
+      "canonicalKey": "Matthew.8.10",
+      "englishSpan": {
+        "start": 12,
+        "end": 14,
+        "text": "Most certainly I",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "Most",
+            "normalized": "most",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 13,
+            "text": "certainly",
+            "normalized": "certainly",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 14,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        12,
+        13
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Matthew.8.10:9",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Matthew 8:10",
+          "book": "Matthew",
+          "chapter": 8,
+          "verse": 10,
+          "runtimeVerseKey": "8:10",
+          "canonicalKey": "Matthew.8.10",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 12,
+          "displayText": "Most",
+          "spanStart": 12,
+          "spanEnd": 14,
+          "spanText": "Most certainly I",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:Matthew.8.10:9",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        },
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Matthew 8:10",
+          "book": "Matthew",
+          "chapter": 8,
+          "verse": 10,
+          "runtimeVerseKey": "8:10",
+          "canonicalKey": "Matthew.8.10",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 13,
+          "displayText": "certainly",
+          "spanStart": 12,
+          "spanEnd": 14,
+          "spanText": "Most certainly I",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:Matthew.8.10:9",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 10:42",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "10:42",
+      "canonicalKey": "Matthew.10.42",
+      "englishSpan": {
+        "start": 21,
+        "end": 23,
+        "text": "most certainly I",
+        "tokens": [
+          {
+            "index": 21,
+            "text": "most",
+            "normalized": "most",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 22,
+            "text": "certainly",
+            "normalized": "certainly",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 23,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        21,
+        22
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 14,
+        "sourceOccurrenceId": "greek-nt:Matthew.10.42:14",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Matthew 10:42",
+          "book": "Matthew",
+          "chapter": 10,
+          "verse": 42,
+          "runtimeVerseKey": "10:42",
+          "canonicalKey": "Matthew.10.42",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 21,
+          "displayText": "most",
+          "spanStart": 21,
+          "spanEnd": 23,
+          "spanText": "most certainly I",
+          "sourceIndex": 14,
+          "sourceOccurrenceId": "greek-nt:Matthew.10.42:14",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        },
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Matthew 10:42",
+          "book": "Matthew",
+          "chapter": 10,
+          "verse": 42,
+          "runtimeVerseKey": "10:42",
+          "canonicalKey": "Matthew.10.42",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 22,
+          "displayText": "certainly",
+          "spanStart": 21,
+          "spanEnd": 23,
+          "spanText": "most certainly I",
+          "sourceIndex": 14,
+          "sourceOccurrenceId": "greek-nt:Matthew.10.42:14",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 25:45",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "25:45",
+      "canonicalKey": "Matthew.25.45",
+      "englishSpan": {
+        "start": 6,
+        "end": 8,
+        "text": "Most certainly I",
+        "tokens": [
+          {
+            "index": 6,
+            "text": "Most",
+            "normalized": "most",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 7,
+            "text": "certainly",
+            "normalized": "certainly",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 8,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        6,
+        7
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Matthew.25.45:4",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Matthew 25:45",
+          "book": "Matthew",
+          "chapter": 25,
+          "verse": 45,
+          "runtimeVerseKey": "25:45",
+          "canonicalKey": "Matthew.25.45",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 6,
+          "displayText": "Most",
+          "spanStart": 6,
+          "spanEnd": 8,
+          "spanText": "Most certainly I",
+          "sourceIndex": 4,
+          "sourceOccurrenceId": "greek-nt:Matthew.25.45:4",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        },
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Matthew 25:45",
+          "book": "Matthew",
+          "chapter": 25,
+          "verse": 45,
+          "runtimeVerseKey": "25:45",
+          "canonicalKey": "Matthew.25.45",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 7,
+          "displayText": "certainly",
+          "spanStart": 6,
+          "spanEnd": 8,
+          "spanText": "Most certainly I",
+          "sourceIndex": 4,
+          "sourceOccurrenceId": "greek-nt:Matthew.25.45:4",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Mark 9:41",
+      "translation": "web",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "9:41",
+      "canonicalKey": "Mark.9.41",
+      "englishSpan": {
+        "start": 18,
+        "end": 20,
+        "text": "most certainly I",
+        "tokens": [
+          {
+            "index": 18,
+            "text": "most",
+            "normalized": "most",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 19,
+            "text": "certainly",
+            "normalized": "certainly",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 20,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        18,
+        19
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Mark.9.41:12",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Mark 9:41",
+          "book": "Mark",
+          "chapter": 9,
+          "verse": 41,
+          "runtimeVerseKey": "9:41",
+          "canonicalKey": "Mark.9.41",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Mark.json",
+          "displayIndex": 18,
+          "displayText": "most",
+          "spanStart": 18,
+          "spanEnd": 20,
+          "spanText": "most certainly I",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:Mark.9.41:12",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        },
+        {
+          "familyKey": "web|most certainly i|G0281",
+          "reference": "Mark 9:41",
+          "book": "Mark",
+          "chapter": 9,
+          "verse": 41,
+          "runtimeVerseKey": "9:41",
+          "canonicalKey": "Mark.9.41",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Mark.json",
+          "displayIndex": 19,
+          "displayText": "certainly",
+          "spanStart": 18,
+          "spanEnd": 20,
+          "spanText": "most certainly I",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:Mark.9.41:12",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|do you want us to|G2309",
+      "reference": "Matthew 26:17",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "26:17",
+      "canonicalKey": "Matthew.26.17",
+      "englishSpan": {
+        "start": 17,
+        "end": 21,
+        "text": "do you want us to",
+        "tokens": [
+          {
+            "index": 17,
+            "text": "do",
+            "normalized": "do",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 18,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 19,
+            "text": "want",
+            "normalized": "want",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 20,
+            "text": "us",
+            "normalized": "us",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 21,
+            "text": "to",
+            "normalized": "to",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        19
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Matthew.26.17:12",
+        "surface": "θέλεις",
+        "strong": "G2309",
+        "entityId": "word:greek-nt:G2309",
+        "morph": "V-PAI-2S"
+      },
+      "routes": [
+        {
+          "familyKey": "web|do you want us to|G2309",
+          "reference": "Matthew 26:17",
+          "book": "Matthew",
+          "chapter": 26,
+          "verse": 17,
+          "runtimeVerseKey": "26:17",
+          "canonicalKey": "Matthew.26.17",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Matt.json",
+          "displayIndex": 19,
+          "displayText": "want",
+          "spanStart": 17,
+          "spanEnd": 21,
+          "spanText": "do you want us to",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:Matthew.26.17:12",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|do you want us to|G2309",
+      "reference": "Mark 14:12",
+      "translation": "web",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "14:12",
+      "canonicalKey": "Mark.14.12",
+      "englishSpan": {
+        "start": 17,
+        "end": 21,
+        "text": "do you want us to",
+        "tokens": [
+          {
+            "index": 17,
+            "text": "do",
+            "normalized": "do",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 18,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 19,
+            "text": "want",
+            "normalized": "want",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 20,
+            "text": "us",
+            "normalized": "us",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 21,
+            "text": "to",
+            "normalized": "to",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        19
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 16,
+        "sourceOccurrenceId": "greek-nt:Mark.14.12:16",
+        "surface": "θέλεις",
+        "strong": "G2309",
+        "entityId": "word:greek-nt:G2309",
+        "morph": "V-PAI-2S"
+      },
+      "routes": [
+        {
+          "familyKey": "web|do you want us to|G2309",
+          "reference": "Mark 14:12",
+          "book": "Mark",
+          "chapter": 14,
+          "verse": 12,
+          "runtimeVerseKey": "14:12",
+          "canonicalKey": "Mark.14.12",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Mark.json",
+          "displayIndex": 19,
+          "displayText": "want",
+          "spanStart": 17,
+          "spanEnd": 21,
+          "spanText": "do you want us to",
+          "sourceIndex": 16,
+          "sourceOccurrenceId": "greek-nt:Mark.14.12:16",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|do you want us to|G2309",
+      "reference": "Luke 22:9",
+      "translation": "web",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "22:9",
+      "canonicalKey": "Luke.22.9",
+      "englishSpan": {
+        "start": 5,
+        "end": 9,
+        "text": "do you want us to",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "do",
+            "normalized": "do",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 6,
+            "text": "you",
+            "normalized": "you",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 7,
+            "text": "want",
+            "normalized": "want",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 8,
+            "text": "us",
+            "normalized": "us",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 9,
+            "text": "to",
+            "normalized": "to",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        7
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Luke.22.9:5",
+        "surface": "θέλεις",
+        "strong": "G2309",
+        "entityId": "word:greek-nt:G2309",
+        "morph": "V-PAI-2S"
+      },
+      "routes": [
+        {
+          "familyKey": "web|do you want us to|G2309",
+          "reference": "Luke 22:9",
+          "book": "Luke",
+          "chapter": 22,
+          "verse": 9,
+          "runtimeVerseKey": "22:9",
+          "canonicalKey": "Luke.22.9",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Luke.json",
+          "displayIndex": 7,
+          "displayText": "want",
+          "spanStart": 5,
+          "spanEnd": 9,
+          "spanText": "do you want us to",
+          "sourceIndex": 5,
+          "sourceOccurrenceId": "greek-nt:Luke.22.9:5",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|behold the|G2400",
+      "reference": "Acts 5:9",
+      "translation": "web",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "5:9",
+      "canonicalKey": "Acts.5.9",
+      "englishSpan": {
+        "start": 19,
+        "end": 20,
+        "text": "Behold the",
+        "tokens": [
+          {
+            "index": 19,
+            "text": "Behold",
+            "normalized": "behold",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 20,
+            "text": "the",
+            "normalized": "the",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        19
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 13,
+        "sourceOccurrenceId": "greek-nt:Acts.5.9:13",
+        "surface": "ἰδοὺ",
+        "strong": "G2400",
+        "entityId": "word:greek-nt:G2400",
+        "morph": "INJ"
+      },
+      "routes": [
+        {
+          "familyKey": "web|behold the|G2400",
+          "reference": "Acts 5:9",
+          "book": "Acts",
+          "chapter": 5,
+          "verse": 9,
+          "runtimeVerseKey": "5:9",
+          "canonicalKey": "Acts.5.9",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Acts.json",
+          "displayIndex": 19,
+          "displayText": "Behold",
+          "spanStart": 19,
+          "spanEnd": 20,
+          "spanText": "Behold the",
+          "sourceIndex": 13,
+          "sourceOccurrenceId": "greek-nt:Acts.5.9:13",
+          "sourceSurface": "ἰδοὺ",
+          "strong": "G2400",
+          "entityId": "word:greek-nt:G2400",
+          "morph": "INJ",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|behold the|G2400",
+      "reference": "Acts 13:11",
+      "translation": "web",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "13:11",
+      "canonicalKey": "Acts.13.11",
+      "englishSpan": {
+        "start": 1,
+        "end": 2,
+        "text": "behold the",
+        "tokens": [
+          {
+            "index": 1,
+            "text": "behold",
+            "normalized": "behold",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 2,
+            "text": "the",
+            "normalized": "the",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        1
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:Acts.13.11:2",
+        "surface": "ἰδοὺ",
+        "strong": "G2400",
+        "entityId": "word:greek-nt:G2400",
+        "morph": "INJ"
+      },
+      "routes": [
+        {
+          "familyKey": "web|behold the|G2400",
+          "reference": "Acts 13:11",
+          "book": "Acts",
+          "chapter": 13,
+          "verse": 11,
+          "runtimeVerseKey": "13:11",
+          "canonicalKey": "Acts.13.11",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Acts.json",
+          "displayIndex": 1,
+          "displayText": "behold",
+          "spanStart": 1,
+          "spanEnd": 2,
+          "spanText": "behold the",
+          "sourceIndex": 2,
+          "sourceOccurrenceId": "greek-nt:Acts.13.11:2",
+          "sourceSurface": "ἰδοὺ",
+          "strong": "G2400",
+          "entityId": "word:greek-nt:G2400",
+          "morph": "INJ",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "web|behold the|G2400",
+      "reference": "Jude 1:14",
+      "translation": "web",
+      "runtimeFile": "Jude.json",
+      "runtimeVerseKey": "1:14",
+      "canonicalKey": "Jude.1.14",
+      "englishSpan": {
+        "start": 10,
+        "end": 11,
+        "text": "Behold the",
+        "tokens": [
+          {
+            "index": 10,
+            "text": "Behold",
+            "normalized": "behold",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 11,
+            "text": "the",
+            "normalized": "the",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        10
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Jude.1.14:9",
+        "surface": "ἰδοὺ",
+        "strong": "G2400",
+        "entityId": "word:greek-nt:G2400",
+        "morph": "INJ"
+      },
+      "routes": [
+        {
+          "familyKey": "web|behold the|G2400",
+          "reference": "Jude 1:14",
+          "book": "Jude",
+          "chapter": 1,
+          "verse": 14,
+          "runtimeVerseKey": "1:14",
+          "canonicalKey": "Jude.1.14",
+          "translation": "web",
+          "activeLayer": "primary-greek-nt-runtime",
+          "runtimeFile": "Jude.json",
+          "displayIndex": 10,
+          "displayText": "Behold",
+          "spanStart": 10,
+          "spanEnd": 11,
+          "spanText": "Behold the",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:Jude.1.14:9",
+          "sourceSurface": "ἰδοὺ",
+          "strong": "G2400",
+          "entityId": "word:greek-nt:G2400",
+          "morph": "INJ",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|behold i|G2400",
+      "reference": "1 Peter 2:6",
+      "translation": "kjv",
+      "runtimeFile": "1_Peter.json",
+      "runtimeVerseKey": "2:6",
+      "canonicalKey": "1 Peter.2.6",
+      "englishSpan": {
+        "start": 8,
+        "end": 9,
+        "text": "Behold I",
+        "tokens": [
+          {
+            "index": 8,
+            "text": "Behold",
+            "normalized": "behold",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 9,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        8
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:1_Peter.2.6:4",
+        "surface": "ἰδοὺ",
+        "strong": "G2400",
+        "entityId": "word:greek-nt:G2400",
+        "morph": "INJ"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|behold i|G2400",
+          "reference": "1 Peter 2:6",
+          "book": "1 Peter",
+          "chapter": 2,
+          "verse": 6,
+          "runtimeVerseKey": "2:6",
+          "canonicalKey": "1 Peter.2.6",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "1_Peter.json",
+          "displayIndex": 8,
+          "displayText": "Behold",
+          "spanStart": 8,
+          "spanEnd": 9,
+          "spanText": "Behold I",
+          "sourceIndex": 4,
+          "sourceOccurrenceId": "greek-nt:1_Peter.2.6:4",
+          "sourceSurface": "ἰδοὺ",
+          "strong": "G2400",
+          "entityId": "word:greek-nt:G2400",
+          "morph": "INJ",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|behold i|G2400",
+      "reference": "Acts 7:56",
+      "translation": "kjv",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "7:56",
+      "canonicalKey": "Acts.7.56",
+      "englishSpan": {
+        "start": 2,
+        "end": 3,
+        "text": "Behold I",
+        "tokens": [
+          {
+            "index": 2,
+            "text": "Behold",
+            "normalized": "behold",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 3,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        2
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:Acts.7.56:2",
+        "surface": "ἰδοὺ",
+        "strong": "G2400",
+        "entityId": "word:greek-nt:G2400",
+        "morph": "INJ"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|behold i|G2400",
+          "reference": "Acts 7:56",
+          "book": "Acts",
+          "chapter": 7,
+          "verse": 56,
+          "runtimeVerseKey": "7:56",
+          "canonicalKey": "Acts.7.56",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Acts.json",
+          "displayIndex": 2,
+          "displayText": "Behold",
+          "spanStart": 2,
+          "spanEnd": 3,
+          "spanText": "Behold I",
+          "sourceIndex": 2,
+          "sourceOccurrenceId": "greek-nt:Acts.7.56:2",
+          "sourceSurface": "ἰδοὺ",
+          "strong": "G2400",
+          "entityId": "word:greek-nt:G2400",
+          "morph": "INJ",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|behold i|G2400",
+      "reference": "Mark 1:2",
+      "translation": "kjv",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "1:2",
+      "canonicalKey": "Mark.1.2",
+      "englishSpan": {
+        "start": 7,
+        "end": 8,
+        "text": "Behold I",
+        "tokens": [
+          {
+            "index": 7,
+            "text": "Behold",
+            "normalized": "behold",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 8,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        7
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:Mark.1.2:7",
+        "surface": "ἰδοὺ",
+        "strong": "G2400",
+        "entityId": "word:greek-nt:G2400",
+        "morph": "INJ"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|behold i|G2400",
+          "reference": "Mark 1:2",
+          "book": "Mark",
+          "chapter": 1,
+          "verse": 2,
+          "runtimeVerseKey": "1:2",
+          "canonicalKey": "Mark.1.2",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Mark.json",
+          "displayIndex": 7,
+          "displayText": "Behold",
+          "spanStart": 7,
+          "spanEnd": 8,
+          "spanText": "Behold I",
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:Mark.1.2:7",
+          "sourceSurface": "ἰδοὺ",
+          "strong": "G2400",
+          "entityId": "word:greek-nt:G2400",
+          "morph": "INJ",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|saith the|G3004",
+      "reference": "2 Corinthians 6:17",
+      "translation": "kjv",
+      "runtimeFile": "2_Corinthians.json",
+      "runtimeVerseKey": "6:17",
+      "canonicalKey": "2 Corinthians.6.17",
+      "englishSpan": {
+        "start": 10,
+        "end": 11,
+        "text": "saith the",
+        "tokens": [
+          {
+            "index": 10,
+            "text": "saith",
+            "normalized": "saith",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 11,
+            "text": "the",
+            "normalized": "the",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        10
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:2_Corinthians.6.17:7",
+        "surface": "λέγει",
+        "strong": "G3004",
+        "entityId": "word:greek-nt:G3004",
+        "morph": "V-PAI-3S"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|saith the|G3004",
+          "reference": "2 Corinthians 6:17",
+          "book": "2 Corinthians",
+          "chapter": 6,
+          "verse": 17,
+          "runtimeVerseKey": "6:17",
+          "canonicalKey": "2 Corinthians.6.17",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "2_Corinthians.json",
+          "displayIndex": 10,
+          "displayText": "saith",
+          "spanStart": 10,
+          "spanEnd": 11,
+          "spanText": "saith the",
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:2_Corinthians.6.17:7",
+          "sourceSurface": "λέγει",
+          "strong": "G3004",
+          "entityId": "word:greek-nt:G3004",
+          "morph": "V-PAI-3S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|saith the|G3004",
+      "reference": "2 Corinthians 6:18",
+      "translation": "kjv",
+      "runtimeFile": "2_Corinthians.json",
+      "runtimeVerseKey": "6:18",
+      "canonicalKey": "2 Corinthians.6.18",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "text": "saith the",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "saith",
+            "normalized": "saith",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 16,
+            "text": "the",
+            "normalized": "the",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        15
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 13,
+        "sourceOccurrenceId": "greek-nt:2_Corinthians.6.18:13",
+        "surface": "λέγει",
+        "strong": "G3004",
+        "entityId": "word:greek-nt:G3004",
+        "morph": "V-PAI-3S"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|saith the|G3004",
+          "reference": "2 Corinthians 6:18",
+          "book": "2 Corinthians",
+          "chapter": 6,
+          "verse": 18,
+          "runtimeVerseKey": "6:18",
+          "canonicalKey": "2 Corinthians.6.18",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "2_Corinthians.json",
+          "displayIndex": 15,
+          "displayText": "saith",
+          "spanStart": 15,
+          "spanEnd": 16,
+          "spanText": "saith the",
+          "sourceIndex": 13,
+          "sourceOccurrenceId": "greek-nt:2_Corinthians.6.18:13",
+          "sourceSurface": "λέγει",
+          "strong": "G3004",
+          "entityId": "word:greek-nt:G3004",
+          "morph": "V-PAI-3S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|saith the|G3004",
+      "reference": "Hebrews 8:8",
+      "translation": "kjv",
+      "runtimeFile": "Hebrews.json",
+      "runtimeVerseKey": "8:8",
+      "canonicalKey": "Hebrews.8.8",
+      "englishSpan": {
+        "start": 11,
+        "end": 12,
+        "text": "saith the",
+        "tokens": [
+          {
+            "index": 11,
+            "text": "saith",
+            "normalized": "saith",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 12,
+            "text": "the",
+            "normalized": "the",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        11
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:Hebrews.8.8:7",
+        "surface": "λέγει",
+        "strong": "G3004",
+        "entityId": "word:greek-nt:G3004",
+        "morph": "V-PAI-3S"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|saith the|G3004",
+          "reference": "Hebrews 8:8",
+          "book": "Hebrews",
+          "chapter": 8,
+          "verse": 8,
+          "runtimeVerseKey": "8:8",
+          "canonicalKey": "Hebrews.8.8",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Hebrews.json",
+          "displayIndex": 11,
+          "displayText": "saith",
+          "spanStart": 11,
+          "spanEnd": 12,
+          "spanText": "saith the",
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:Hebrews.8.8:7",
+          "sourceSurface": "λέγει",
+          "strong": "G3004",
+          "entityId": "word:greek-nt:G3004",
+          "morph": "V-PAI-3S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|saith the|G3004",
+      "reference": "Romans 12:19",
+      "translation": "kjv",
+      "runtimeFile": "Romans.json",
+      "runtimeVerseKey": "12:19",
+      "canonicalKey": "Romans.12.19",
+      "englishSpan": {
+        "start": 21,
+        "end": 22,
+        "text": "saith the",
+        "tokens": [
+          {
+            "index": 21,
+            "text": "saith",
+            "normalized": "saith",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 22,
+            "text": "the",
+            "normalized": "the",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        21
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 15,
+        "sourceOccurrenceId": "greek-nt:Romans.12.19:15",
+        "surface": "λέγει",
+        "strong": "G3004",
+        "entityId": "word:greek-nt:G3004",
+        "morph": "V-PAI-3S"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|saith the|G3004",
+          "reference": "Romans 12:19",
+          "book": "Romans",
+          "chapter": 12,
+          "verse": 19,
+          "runtimeVerseKey": "12:19",
+          "canonicalKey": "Romans.12.19",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Romans.json",
+          "displayIndex": 21,
+          "displayText": "saith",
+          "spanStart": 21,
+          "spanEnd": 22,
+          "spanText": "saith the",
+          "sourceIndex": 15,
+          "sourceOccurrenceId": "greek-nt:Romans.12.19:15",
+          "sourceSurface": "λέγει",
+          "strong": "G3004",
+          "entityId": "word:greek-nt:G3004",
+          "morph": "V-PAI-3S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Luke 12:37",
+      "translation": "kjv",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "12:37",
+      "canonicalKey": "Luke.12.37",
+      "englishSpan": {
+        "start": 13,
+        "end": 14,
+        "text": "verily I",
+        "tokens": [
+          {
+            "index": 13,
+            "text": "verily",
+            "normalized": "verily",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 14,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        13
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:Luke.12.37:10",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|verily i|G0281",
+          "reference": "Luke 12:37",
+          "book": "Luke",
+          "chapter": 12,
+          "verse": 37,
+          "runtimeVerseKey": "12:37",
+          "canonicalKey": "Luke.12.37",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Luke.json",
+          "displayIndex": 13,
+          "displayText": "verily",
+          "spanStart": 13,
+          "spanEnd": 14,
+          "spanText": "verily I",
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "greek-nt:Luke.12.37:10",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Mark 8:12",
+      "translation": "kjv",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "8:12",
+      "canonicalKey": "Mark.8.12",
+      "englishSpan": {
+        "start": 17,
+        "end": 18,
+        "text": "verily I",
+        "tokens": [
+          {
+            "index": 17,
+            "text": "verily",
+            "normalized": "verily",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 18,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        17
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Mark.8.12:12",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|verily i|G0281",
+          "reference": "Mark 8:12",
+          "book": "Mark",
+          "chapter": 8,
+          "verse": 12,
+          "runtimeVerseKey": "8:12",
+          "canonicalKey": "Mark.8.12",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Mark.json",
+          "displayIndex": 17,
+          "displayText": "verily",
+          "spanStart": 17,
+          "spanEnd": 18,
+          "spanText": "verily I",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:Mark.8.12:12",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Matthew 6:16",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "6:16",
+      "canonicalKey": "Matthew.6.16",
+      "englishSpan": {
+        "start": 26,
+        "end": 27,
+        "text": "Verily I",
+        "tokens": [
+          {
+            "index": 26,
+            "text": "Verily",
+            "normalized": "verily",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 27,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        26
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 19,
+        "sourceOccurrenceId": "greek-nt:Matthew.6.16:19",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|verily i|G0281",
+          "reference": "Matthew 6:16",
+          "book": "Matthew",
+          "chapter": 6,
+          "verse": 16,
+          "runtimeVerseKey": "6:16",
+          "canonicalKey": "Matthew.6.16",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Matthew.json",
+          "displayIndex": 26,
+          "displayText": "Verily",
+          "spanStart": 26,
+          "spanEnd": 27,
+          "spanText": "Verily I",
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "greek-nt:Matthew.6.16:19",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Matthew 8:10",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "8:10",
+      "canonicalKey": "Matthew.8.10",
+      "englishSpan": {
+        "start": 12,
+        "end": 13,
+        "text": "Verily I",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "Verily",
+            "normalized": "verily",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 13,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        12
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Matthew.8.10:9",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|verily i|G0281",
+          "reference": "Matthew 8:10",
+          "book": "Matthew",
+          "chapter": 8,
+          "verse": 10,
+          "runtimeVerseKey": "8:10",
+          "canonicalKey": "Matthew.8.10",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Matthew.json",
+          "displayIndex": 12,
+          "displayText": "Verily",
+          "spanStart": 12,
+          "spanEnd": 13,
+          "spanText": "Verily I",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:Matthew.8.10:9",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Matthew 10:42",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "10:42",
+      "canonicalKey": "Matthew.10.42",
+      "englishSpan": {
+        "start": 24,
+        "end": 25,
+        "text": "verily I",
+        "tokens": [
+          {
+            "index": 24,
+            "text": "verily",
+            "normalized": "verily",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 25,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        24
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 14,
+        "sourceOccurrenceId": "greek-nt:Matthew.10.42:14",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|verily i|G0281",
+          "reference": "Matthew 10:42",
+          "book": "Matthew",
+          "chapter": 10,
+          "verse": 42,
+          "runtimeVerseKey": "10:42",
+          "canonicalKey": "Matthew.10.42",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Matthew.json",
+          "displayIndex": 24,
+          "displayText": "verily",
+          "spanStart": 24,
+          "spanEnd": 25,
+          "spanText": "verily I",
+          "sourceIndex": 14,
+          "sourceOccurrenceId": "greek-nt:Matthew.10.42:14",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Matthew 25:45",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "25:45",
+      "canonicalKey": "Matthew.25.45",
+      "englishSpan": {
+        "start": 6,
+        "end": 7,
+        "text": "Verily I",
+        "tokens": [
+          {
+            "index": 6,
+            "text": "Verily",
+            "normalized": "verily",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 7,
+            "text": "I",
+            "normalized": "i",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        6
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Matthew.25.45:4",
+        "surface": "ἀμὴν",
+        "strong": "G0281",
+        "entityId": "word:greek-nt:G0281",
+        "morph": "HEB"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|verily i|G0281",
+          "reference": "Matthew 25:45",
+          "book": "Matthew",
+          "chapter": 25,
+          "verse": 45,
+          "runtimeVerseKey": "25:45",
+          "canonicalKey": "Matthew.25.45",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Matthew.json",
+          "displayIndex": 6,
+          "displayText": "Verily",
+          "spanStart": 6,
+          "spanEnd": 7,
+          "spanText": "Verily I",
+          "sourceIndex": 4,
+          "sourceOccurrenceId": "greek-nt:Matthew.25.45:4",
+          "sourceSurface": "ἀμὴν",
+          "strong": "G0281",
+          "entityId": "word:greek-nt:G0281",
+          "morph": "HEB",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Luke 22:9",
+      "translation": "kjv",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "22:9",
+      "canonicalKey": "Luke.22.9",
+      "englishSpan": {
+        "start": 6,
+        "end": 9,
+        "text": "wilt thou that we",
+        "tokens": [
+          {
+            "index": 6,
+            "text": "wilt",
+            "normalized": "wilt",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 7,
+            "text": "thou",
+            "normalized": "thou",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 8,
+            "text": "that",
+            "normalized": "that",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 9,
+            "text": "we",
+            "normalized": "we",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        6,
+        7
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Luke.22.9:5",
+        "surface": "θέλεις",
+        "strong": "G2309",
+        "entityId": "word:greek-nt:G2309",
+        "morph": "V-PAI-2S"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|wilt thou that we|G2309",
+          "reference": "Luke 22:9",
+          "book": "Luke",
+          "chapter": 22,
+          "verse": 9,
+          "runtimeVerseKey": "22:9",
+          "canonicalKey": "Luke.22.9",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Luke.json",
+          "displayIndex": 6,
+          "displayText": "wilt",
+          "spanStart": 6,
+          "spanEnd": 9,
+          "spanText": "wilt thou that we",
+          "sourceIndex": 5,
+          "sourceOccurrenceId": "greek-nt:Luke.22.9:5",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        },
+        {
+          "familyKey": "kjv|wilt thou that we|G2309",
+          "reference": "Luke 22:9",
+          "book": "Luke",
+          "chapter": 22,
+          "verse": 9,
+          "runtimeVerseKey": "22:9",
+          "canonicalKey": "Luke.22.9",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Luke.json",
+          "displayIndex": 7,
+          "displayText": "thou",
+          "spanStart": 6,
+          "spanEnd": 9,
+          "spanText": "wilt thou that we",
+          "sourceIndex": 5,
+          "sourceOccurrenceId": "greek-nt:Luke.22.9:5",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Mark 14:12",
+      "translation": "kjv",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "14:12",
+      "canonicalKey": "Mark.14.12",
+      "englishSpan": {
+        "start": 18,
+        "end": 21,
+        "text": "wilt thou that we",
+        "tokens": [
+          {
+            "index": 18,
+            "text": "wilt",
+            "normalized": "wilt",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 19,
+            "text": "thou",
+            "normalized": "thou",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 20,
+            "text": "that",
+            "normalized": "that",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 21,
+            "text": "we",
+            "normalized": "we",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        18,
+        19
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 16,
+        "sourceOccurrenceId": "greek-nt:Mark.14.12:16",
+        "surface": "θέλεις",
+        "strong": "G2309",
+        "entityId": "word:greek-nt:G2309",
+        "morph": "V-PAI-2S"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|wilt thou that we|G2309",
+          "reference": "Mark 14:12",
+          "book": "Mark",
+          "chapter": 14,
+          "verse": 12,
+          "runtimeVerseKey": "14:12",
+          "canonicalKey": "Mark.14.12",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Mark.json",
+          "displayIndex": 18,
+          "displayText": "wilt",
+          "spanStart": 18,
+          "spanEnd": 21,
+          "spanText": "wilt thou that we",
+          "sourceIndex": 16,
+          "sourceOccurrenceId": "greek-nt:Mark.14.12:16",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        },
+        {
+          "familyKey": "kjv|wilt thou that we|G2309",
+          "reference": "Mark 14:12",
+          "book": "Mark",
+          "chapter": 14,
+          "verse": 12,
+          "runtimeVerseKey": "14:12",
+          "canonicalKey": "Mark.14.12",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Mark.json",
+          "displayIndex": 19,
+          "displayText": "thou",
+          "spanStart": 18,
+          "spanEnd": 21,
+          "spanText": "wilt thou that we",
+          "sourceIndex": 16,
+          "sourceOccurrenceId": "greek-nt:Mark.14.12:16",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Matthew 26:17",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "26:17",
+      "canonicalKey": "Matthew.26.17",
+      "englishSpan": {
+        "start": 19,
+        "end": 22,
+        "text": "wilt thou that we",
+        "tokens": [
+          {
+            "index": 19,
+            "text": "wilt",
+            "normalized": "wilt",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 20,
+            "text": "thou",
+            "normalized": "thou",
+            "meaningful": true,
+            "currentlyRouted": false
+          },
+          {
+            "index": 21,
+            "text": "that",
+            "normalized": "that",
+            "meaningful": false,
+            "currentlyRouted": false
+          },
+          {
+            "index": 22,
+            "text": "we",
+            "normalized": "we",
+            "meaningful": false,
+            "currentlyRouted": false
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        19,
+        20
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Matthew.26.17:12",
+        "surface": "θέλεις",
+        "strong": "G2309",
+        "entityId": "word:greek-nt:G2309",
+        "morph": "V-PAI-2S"
+      },
+      "routes": [
+        {
+          "familyKey": "kjv|wilt thou that we|G2309",
+          "reference": "Matthew 26:17",
+          "book": "Matthew",
+          "chapter": 26,
+          "verse": 17,
+          "runtimeVerseKey": "26:17",
+          "canonicalKey": "Matthew.26.17",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Matthew.json",
+          "displayIndex": 19,
+          "displayText": "wilt",
+          "spanStart": 19,
+          "spanEnd": 22,
+          "spanText": "wilt thou that we",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:Matthew.26.17:12",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        },
+        {
+          "familyKey": "kjv|wilt thou that we|G2309",
+          "reference": "Matthew 26:17",
+          "book": "Matthew",
+          "chapter": 26,
+          "verse": 17,
+          "runtimeVerseKey": "26:17",
+          "canonicalKey": "Matthew.26.17",
+          "translation": "kjv",
+          "activeLayer": "kjv-reader-runtime",
+          "runtimeFile": "Matthew.json",
+          "displayIndex": 20,
+          "displayText": "thou",
+          "spanStart": 19,
+          "spanEnd": 22,
+          "spanText": "wilt thou that we",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:Matthew.26.17:12",
+          "sourceSurface": "θέλεις",
+          "strong": "G2309",
+          "entityId": "word:greek-nt:G2309",
+          "morph": "V-PAI-2S",
+          "method": "p0812r2-greek-approved-span-batch2"
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 6:16",
+      "book": "Matthew",
+      "chapter": 6,
+      "verse": 16,
+      "runtimeVerseKey": "6:16",
+      "canonicalKey": "Matthew.6.16",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 27,
+      "displayText": "Most",
+      "spanStart": 27,
+      "spanEnd": 29,
+      "spanText": "Most certainly I",
+      "sourceIndex": 19,
+      "sourceOccurrenceId": "greek-nt:Matthew.6.16:19",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 6:16",
+      "book": "Matthew",
+      "chapter": 6,
+      "verse": 16,
+      "runtimeVerseKey": "6:16",
+      "canonicalKey": "Matthew.6.16",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 28,
+      "displayText": "certainly",
+      "spanStart": 27,
+      "spanEnd": 29,
+      "spanText": "Most certainly I",
+      "sourceIndex": 19,
+      "sourceOccurrenceId": "greek-nt:Matthew.6.16:19",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 8:10",
+      "book": "Matthew",
+      "chapter": 8,
+      "verse": 10,
+      "runtimeVerseKey": "8:10",
+      "canonicalKey": "Matthew.8.10",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 12,
+      "displayText": "Most",
+      "spanStart": 12,
+      "spanEnd": 14,
+      "spanText": "Most certainly I",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Matthew.8.10:9",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 8:10",
+      "book": "Matthew",
+      "chapter": 8,
+      "verse": 10,
+      "runtimeVerseKey": "8:10",
+      "canonicalKey": "Matthew.8.10",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 13,
+      "displayText": "certainly",
+      "spanStart": 12,
+      "spanEnd": 14,
+      "spanText": "Most certainly I",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Matthew.8.10:9",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 10:42",
+      "book": "Matthew",
+      "chapter": 10,
+      "verse": 42,
+      "runtimeVerseKey": "10:42",
+      "canonicalKey": "Matthew.10.42",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 21,
+      "displayText": "most",
+      "spanStart": 21,
+      "spanEnd": 23,
+      "spanText": "most certainly I",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:Matthew.10.42:14",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 10:42",
+      "book": "Matthew",
+      "chapter": 10,
+      "verse": 42,
+      "runtimeVerseKey": "10:42",
+      "canonicalKey": "Matthew.10.42",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 22,
+      "displayText": "certainly",
+      "spanStart": 21,
+      "spanEnd": 23,
+      "spanText": "most certainly I",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:Matthew.10.42:14",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 25:45",
+      "book": "Matthew",
+      "chapter": 25,
+      "verse": 45,
+      "runtimeVerseKey": "25:45",
+      "canonicalKey": "Matthew.25.45",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 6,
+      "displayText": "Most",
+      "spanStart": 6,
+      "spanEnd": 8,
+      "spanText": "Most certainly I",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Matthew.25.45:4",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Matthew 25:45",
+      "book": "Matthew",
+      "chapter": 25,
+      "verse": 45,
+      "runtimeVerseKey": "25:45",
+      "canonicalKey": "Matthew.25.45",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 7,
+      "displayText": "certainly",
+      "spanStart": 6,
+      "spanEnd": 8,
+      "spanText": "Most certainly I",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Matthew.25.45:4",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Mark 9:41",
+      "book": "Mark",
+      "chapter": 9,
+      "verse": 41,
+      "runtimeVerseKey": "9:41",
+      "canonicalKey": "Mark.9.41",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 18,
+      "displayText": "most",
+      "spanStart": 18,
+      "spanEnd": 20,
+      "spanText": "most certainly I",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Mark.9.41:12",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|most certainly i|G0281",
+      "reference": "Mark 9:41",
+      "book": "Mark",
+      "chapter": 9,
+      "verse": 41,
+      "runtimeVerseKey": "9:41",
+      "canonicalKey": "Mark.9.41",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 19,
+      "displayText": "certainly",
+      "spanStart": 18,
+      "spanEnd": 20,
+      "spanText": "most certainly I",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Mark.9.41:12",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|do you want us to|G2309",
+      "reference": "Matthew 26:17",
+      "book": "Matthew",
+      "chapter": 26,
+      "verse": 17,
+      "runtimeVerseKey": "26:17",
+      "canonicalKey": "Matthew.26.17",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 19,
+      "displayText": "want",
+      "spanStart": 17,
+      "spanEnd": 21,
+      "spanText": "do you want us to",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Matthew.26.17:12",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|do you want us to|G2309",
+      "reference": "Mark 14:12",
+      "book": "Mark",
+      "chapter": 14,
+      "verse": 12,
+      "runtimeVerseKey": "14:12",
+      "canonicalKey": "Mark.14.12",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 19,
+      "displayText": "want",
+      "spanStart": 17,
+      "spanEnd": 21,
+      "spanText": "do you want us to",
+      "sourceIndex": 16,
+      "sourceOccurrenceId": "greek-nt:Mark.14.12:16",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|do you want us to|G2309",
+      "reference": "Luke 22:9",
+      "book": "Luke",
+      "chapter": 22,
+      "verse": 9,
+      "runtimeVerseKey": "22:9",
+      "canonicalKey": "Luke.22.9",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 7,
+      "displayText": "want",
+      "spanStart": 5,
+      "spanEnd": 9,
+      "spanText": "do you want us to",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Luke.22.9:5",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|behold the|G2400",
+      "reference": "Acts 5:9",
+      "book": "Acts",
+      "chapter": 5,
+      "verse": 9,
+      "runtimeVerseKey": "5:9",
+      "canonicalKey": "Acts.5.9",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "displayIndex": 19,
+      "displayText": "Behold",
+      "spanStart": 19,
+      "spanEnd": 20,
+      "spanText": "Behold the",
+      "sourceIndex": 13,
+      "sourceOccurrenceId": "greek-nt:Acts.5.9:13",
+      "sourceSurface": "ἰδοὺ",
+      "strong": "G2400",
+      "entityId": "word:greek-nt:G2400",
+      "morph": "INJ",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|behold the|G2400",
+      "reference": "Acts 13:11",
+      "book": "Acts",
+      "chapter": 13,
+      "verse": 11,
+      "runtimeVerseKey": "13:11",
+      "canonicalKey": "Acts.13.11",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "displayIndex": 1,
+      "displayText": "behold",
+      "spanStart": 1,
+      "spanEnd": 2,
+      "spanText": "behold the",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Acts.13.11:2",
+      "sourceSurface": "ἰδοὺ",
+      "strong": "G2400",
+      "entityId": "word:greek-nt:G2400",
+      "morph": "INJ",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "web|behold the|G2400",
+      "reference": "Jude 1:14",
+      "book": "Jude",
+      "chapter": 1,
+      "verse": 14,
+      "runtimeVerseKey": "1:14",
+      "canonicalKey": "Jude.1.14",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Jude.json",
+      "displayIndex": 10,
+      "displayText": "Behold",
+      "spanStart": 10,
+      "spanEnd": 11,
+      "spanText": "Behold the",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Jude.1.14:9",
+      "sourceSurface": "ἰδοὺ",
+      "strong": "G2400",
+      "entityId": "word:greek-nt:G2400",
+      "morph": "INJ",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|behold i|G2400",
+      "reference": "1 Peter 2:6",
+      "book": "1 Peter",
+      "chapter": 2,
+      "verse": 6,
+      "runtimeVerseKey": "2:6",
+      "canonicalKey": "1 Peter.2.6",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "1_Peter.json",
+      "displayIndex": 8,
+      "displayText": "Behold",
+      "spanStart": 8,
+      "spanEnd": 9,
+      "spanText": "Behold I",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:1_Peter.2.6:4",
+      "sourceSurface": "ἰδοὺ",
+      "strong": "G2400",
+      "entityId": "word:greek-nt:G2400",
+      "morph": "INJ",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|behold i|G2400",
+      "reference": "Acts 7:56",
+      "book": "Acts",
+      "chapter": 7,
+      "verse": 56,
+      "runtimeVerseKey": "7:56",
+      "canonicalKey": "Acts.7.56",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Acts.json",
+      "displayIndex": 2,
+      "displayText": "Behold",
+      "spanStart": 2,
+      "spanEnd": 3,
+      "spanText": "Behold I",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Acts.7.56:2",
+      "sourceSurface": "ἰδοὺ",
+      "strong": "G2400",
+      "entityId": "word:greek-nt:G2400",
+      "morph": "INJ",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|behold i|G2400",
+      "reference": "Mark 1:2",
+      "book": "Mark",
+      "chapter": 1,
+      "verse": 2,
+      "runtimeVerseKey": "1:2",
+      "canonicalKey": "Mark.1.2",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 7,
+      "displayText": "Behold",
+      "spanStart": 7,
+      "spanEnd": 8,
+      "spanText": "Behold I",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:Mark.1.2:7",
+      "sourceSurface": "ἰδοὺ",
+      "strong": "G2400",
+      "entityId": "word:greek-nt:G2400",
+      "morph": "INJ",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|saith the|G3004",
+      "reference": "2 Corinthians 6:17",
+      "book": "2 Corinthians",
+      "chapter": 6,
+      "verse": 17,
+      "runtimeVerseKey": "6:17",
+      "canonicalKey": "2 Corinthians.6.17",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "2_Corinthians.json",
+      "displayIndex": 10,
+      "displayText": "saith",
+      "spanStart": 10,
+      "spanEnd": 11,
+      "spanText": "saith the",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:2_Corinthians.6.17:7",
+      "sourceSurface": "λέγει",
+      "strong": "G3004",
+      "entityId": "word:greek-nt:G3004",
+      "morph": "V-PAI-3S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|saith the|G3004",
+      "reference": "2 Corinthians 6:18",
+      "book": "2 Corinthians",
+      "chapter": 6,
+      "verse": 18,
+      "runtimeVerseKey": "6:18",
+      "canonicalKey": "2 Corinthians.6.18",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "2_Corinthians.json",
+      "displayIndex": 15,
+      "displayText": "saith",
+      "spanStart": 15,
+      "spanEnd": 16,
+      "spanText": "saith the",
+      "sourceIndex": 13,
+      "sourceOccurrenceId": "greek-nt:2_Corinthians.6.18:13",
+      "sourceSurface": "λέγει",
+      "strong": "G3004",
+      "entityId": "word:greek-nt:G3004",
+      "morph": "V-PAI-3S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|saith the|G3004",
+      "reference": "Hebrews 8:8",
+      "book": "Hebrews",
+      "chapter": 8,
+      "verse": 8,
+      "runtimeVerseKey": "8:8",
+      "canonicalKey": "Hebrews.8.8",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Hebrews.json",
+      "displayIndex": 11,
+      "displayText": "saith",
+      "spanStart": 11,
+      "spanEnd": 12,
+      "spanText": "saith the",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:Hebrews.8.8:7",
+      "sourceSurface": "λέγει",
+      "strong": "G3004",
+      "entityId": "word:greek-nt:G3004",
+      "morph": "V-PAI-3S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|saith the|G3004",
+      "reference": "Romans 12:19",
+      "book": "Romans",
+      "chapter": 12,
+      "verse": 19,
+      "runtimeVerseKey": "12:19",
+      "canonicalKey": "Romans.12.19",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Romans.json",
+      "displayIndex": 21,
+      "displayText": "saith",
+      "spanStart": 21,
+      "spanEnd": 22,
+      "spanText": "saith the",
+      "sourceIndex": 15,
+      "sourceOccurrenceId": "greek-nt:Romans.12.19:15",
+      "sourceSurface": "λέγει",
+      "strong": "G3004",
+      "entityId": "word:greek-nt:G3004",
+      "morph": "V-PAI-3S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Luke 12:37",
+      "book": "Luke",
+      "chapter": 12,
+      "verse": 37,
+      "runtimeVerseKey": "12:37",
+      "canonicalKey": "Luke.12.37",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 13,
+      "displayText": "verily",
+      "spanStart": 13,
+      "spanEnd": 14,
+      "spanText": "verily I",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Luke.12.37:10",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Mark 8:12",
+      "book": "Mark",
+      "chapter": 8,
+      "verse": 12,
+      "runtimeVerseKey": "8:12",
+      "canonicalKey": "Mark.8.12",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 17,
+      "displayText": "verily",
+      "spanStart": 17,
+      "spanEnd": 18,
+      "spanText": "verily I",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Mark.8.12:12",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Matthew 6:16",
+      "book": "Matthew",
+      "chapter": 6,
+      "verse": 16,
+      "runtimeVerseKey": "6:16",
+      "canonicalKey": "Matthew.6.16",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 26,
+      "displayText": "Verily",
+      "spanStart": 26,
+      "spanEnd": 27,
+      "spanText": "Verily I",
+      "sourceIndex": 19,
+      "sourceOccurrenceId": "greek-nt:Matthew.6.16:19",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Matthew 8:10",
+      "book": "Matthew",
+      "chapter": 8,
+      "verse": 10,
+      "runtimeVerseKey": "8:10",
+      "canonicalKey": "Matthew.8.10",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 12,
+      "displayText": "Verily",
+      "spanStart": 12,
+      "spanEnd": 13,
+      "spanText": "Verily I",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Matthew.8.10:9",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Matthew 10:42",
+      "book": "Matthew",
+      "chapter": 10,
+      "verse": 42,
+      "runtimeVerseKey": "10:42",
+      "canonicalKey": "Matthew.10.42",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 24,
+      "displayText": "verily",
+      "spanStart": 24,
+      "spanEnd": 25,
+      "spanText": "verily I",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:Matthew.10.42:14",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|verily i|G0281",
+      "reference": "Matthew 25:45",
+      "book": "Matthew",
+      "chapter": 25,
+      "verse": 45,
+      "runtimeVerseKey": "25:45",
+      "canonicalKey": "Matthew.25.45",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 6,
+      "displayText": "Verily",
+      "spanStart": 6,
+      "spanEnd": 7,
+      "spanText": "Verily I",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Matthew.25.45:4",
+      "sourceSurface": "ἀμὴν",
+      "strong": "G0281",
+      "entityId": "word:greek-nt:G0281",
+      "morph": "HEB",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Luke 22:9",
+      "book": "Luke",
+      "chapter": 22,
+      "verse": 9,
+      "runtimeVerseKey": "22:9",
+      "canonicalKey": "Luke.22.9",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 6,
+      "displayText": "wilt",
+      "spanStart": 6,
+      "spanEnd": 9,
+      "spanText": "wilt thou that we",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Luke.22.9:5",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Luke 22:9",
+      "book": "Luke",
+      "chapter": 22,
+      "verse": 9,
+      "runtimeVerseKey": "22:9",
+      "canonicalKey": "Luke.22.9",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 7,
+      "displayText": "thou",
+      "spanStart": 6,
+      "spanEnd": 9,
+      "spanText": "wilt thou that we",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Luke.22.9:5",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Mark 14:12",
+      "book": "Mark",
+      "chapter": 14,
+      "verse": 12,
+      "runtimeVerseKey": "14:12",
+      "canonicalKey": "Mark.14.12",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 18,
+      "displayText": "wilt",
+      "spanStart": 18,
+      "spanEnd": 21,
+      "spanText": "wilt thou that we",
+      "sourceIndex": 16,
+      "sourceOccurrenceId": "greek-nt:Mark.14.12:16",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Mark 14:12",
+      "book": "Mark",
+      "chapter": 14,
+      "verse": 12,
+      "runtimeVerseKey": "14:12",
+      "canonicalKey": "Mark.14.12",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 19,
+      "displayText": "thou",
+      "spanStart": 18,
+      "spanEnd": 21,
+      "spanText": "wilt thou that we",
+      "sourceIndex": 16,
+      "sourceOccurrenceId": "greek-nt:Mark.14.12:16",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Matthew 26:17",
+      "book": "Matthew",
+      "chapter": 26,
+      "verse": 17,
+      "runtimeVerseKey": "26:17",
+      "canonicalKey": "Matthew.26.17",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 19,
+      "displayText": "wilt",
+      "spanStart": 19,
+      "spanEnd": 22,
+      "spanText": "wilt thou that we",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Matthew.26.17:12",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    },
+    {
+      "familyKey": "kjv|wilt thou that we|G2309",
+      "reference": "Matthew 26:17",
+      "book": "Matthew",
+      "chapter": 26,
+      "verse": 17,
+      "runtimeVerseKey": "26:17",
+      "canonicalKey": "Matthew.26.17",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 20,
+      "displayText": "thou",
+      "spanStart": 19,
+      "spanEnd": 22,
+      "spanText": "wilt thou that we",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Matthew.26.17:12",
+      "sourceSurface": "θέλεις",
+      "strong": "G2309",
+      "entityId": "word:greek-nt:G2309",
+      "morph": "V-PAI-2S",
+      "method": "p0812r2-greek-approved-span-batch2"
+    }
+  ],
+  "deferred": {
+    "negativeParticles": "don't/didn't/doesn't/cannot families remain deferred for dedicated negative-particle review.",
+    "genealogyAndArticles": "article/ellipsis families remain deferred.",
+    "adjacencyArtifacts": "positional/boundary-only families remain deferred."
+  },
+  "base": {
+    "directOwnerOverlaySha256": "b02f7578e5c6b5315107dc16959cdb4cc025be6b5b79698dfaefa42c285403fd",
+    "span1OverlaySha256": "771772c8afda637ba4296649382e83b8ec8e4f056c4da2f2fba068f61a153090",
+    "compatibilityReferenceChecksum": "07c0e53c5f32aae8b4b01a6f16c0a3143002c39fca2a9e15a25089b0e5c742b4",
+    "r10aBaseChecksum": "07c0e53c5f32aae8b4b01a6f16c0a3143002c39fca2a9e15a25089b0e5c742b4",
+    "primaryManifestChecksum": "db32485180f5ee0a25647f62de7b04eaac02b57ea0ac818533868f80e35a5ebd",
+    "primaryAffectedFiles": {
+      "Acts.json": {
+        "bytes": 1668482,
+        "sha256": "ce39d1138a256f3dda709845437cdc5de0074f63235682f638e92ca044d12e62"
+      },
+      "Jude.json": {
+        "bytes": 41606,
+        "sha256": "c9f6e7954fc6925a523db4637092dbb030fd167702b50debc7bdcd55496a663e"
+      },
+      "Luke.json": {
+        "bytes": 1750894,
+        "sha256": "b784d517a5fe7d49610b075e638cebd60af8e9b905a329480648c74c8e10e4f8"
+      },
+      "Mark.json": {
+        "bytes": 1013166,
+        "sha256": "7b6947fc5fba51b9c66c3c434ff8adeddbc51ed9bf51e71186f202c5e4faa6ca"
+      },
+      "Matt.json": {
+        "bytes": 1703530,
+        "sha256": "df5b818cf70e9510d87b3ee9a5fd210a9936902784ef4b50ada778a246796726"
+      }
+    },
+    "kjvAffectedFiles": {
+      "1_Peter.json": {
+        "bytes": 184916,
+        "sha256": "cdf3c8cd4938ea3504c32cc78af0c7d3edb47833639ba22ddd350e6b84823ed8"
+      },
+      "2_Corinthians.json": {
+        "bytes": 509542,
+        "sha256": "62510ee0e1ed3754eede399fd5789382449318432374d40cdc4b148cf1659da7"
+      },
+      "Acts.json": {
+        "bytes": 1949129,
+        "sha256": "d2a8f0fe41903aa8d7c4641b0cc07740a67b52144eb9689ff011bf3a0a4d8d84"
+      },
+      "Hebrews.json": {
+        "bytes": 543661,
+        "sha256": "53ffe431b2308c78dd69925a4a67696440fa282d20671b807380969ddc7c6460"
+      },
+      "Luke.json": {
+        "bytes": 2056571,
+        "sha256": "58755ae1fecb72780f70b05dcda0d31755a99c77b7ba1fd9cd3a14176bb1f2bb"
+      },
+      "Mark.json": {
+        "bytes": 1187686,
+        "sha256": "024a100c785bfba1d38a93f82af411411dee4a3334ee88ce531c40f26ec00916"
+      },
+      "Matthew.json": {
+        "bytes": 1991590,
+        "sha256": "89b9352801b23e0361bb39794ea041120473f355f8b683f1279e435ceafdf1ed"
+      },
+      "Romans.json": {
+        "bytes": 770270,
+        "sha256": "1b0b98ad16c485e1c6fc27ba7539e0c221152a5f2f5fe4143aa5769f0d073cb0"
+      }
+    }
+  },
+  "expectedFinal": {
+    "compatibilityReferenceChecksum": "3392f1f0b8b22eee0d164f63f9526ce79af4caa76bd37ee993bc81411c22f3c9",
+    "r10aBaseChecksum": "3392f1f0b8b22eee0d164f63f9526ce79af4caa76bd37ee993bc81411c22f3c9",
+    "primaryManifestChecksum": "881c7b17d02fe70bfb2ee4af2916e8fa246e0b7008d1ad309a83e4e2738b5dab",
+    "primaryManifestBytes": 26490,
+    "primaryManifestSha256": "5b01265413617d0c38fe1bf83cc52c8149abd7f61c953f8c4cdde6379ef3c8b7",
+    "primaryAffectedFiles": {
+      "Acts.json": {
+        "bytes": 1668496,
+        "sha256": "47c57367b3f05e50b64be921334e00f4938d4da27f93beb97bbc9ec168ba506a"
+      },
+      "Jude.json": {
+        "bytes": 41613,
+        "sha256": "2cf7dca756dec688ef019c7438514ed03df2d1244b29d58e508306616b3822a3"
+      },
+      "Luke.json": {
+        "bytes": 1750900,
+        "sha256": "18c17b1fbf5450f4db50673da54cdf26254d596f3318ebfca00ca2cc44df66ea"
+      },
+      "Mark.json": {
+        "bytes": 1013190,
+        "sha256": "06cc15e8ab2eb9f22cef34aeeaf1ffa5e1e5fb67541a2a0cc98f8d080c4557d4"
+      },
+      "Matt.json": {
+        "bytes": 1703596,
+        "sha256": "551be9b247a87216676e0d1ed2f9eabad2ff2f87bb72c3078b25933c3916afb2"
+      }
+    },
+    "kjvReaderManifestSha256": "c0f9d2aa4b287d56f620edd37b229fa486dfa9941054d30bffd74bc07afc9ef9",
+    "kjvAffectedFiles": {
+      "1_Peter.json": {
+        "bytes": 184963,
+        "sha256": "dbcf82c3f16dfbd34d427691fc74aa29a315b19117fb466c4617fb1ec830f1a6"
+      },
+      "2_Corinthians.json": {
+        "bytes": 509641,
+        "sha256": "b5d3aae1b98a7691a04e6e0ea4c4f79349b32cc9ca946625ebc9ffac188a0279"
+      },
+      "Acts.json": {
+        "bytes": 1949176,
+        "sha256": "15b0c54a4f6c9dddebe36961091e9ea724698ed01dca33cb3d3f84361dd0ac86"
+      },
+      "Hebrews.json": {
+        "bytes": 543710,
+        "sha256": "835eb80f634239155d32b24e25c3e06628d7608bb74dd90ae676a5938571f594"
+      },
+      "Luke.json": {
+        "bytes": 2056715,
+        "sha256": "4e4f320fe4d517f6ed21a61f09bfd3aa31fe4d784baf11b5f565dcdf76882498"
+      },
+      "Mark.json": {
+        "bytes": 1187883,
+        "sha256": "22944508f785d2d975f4d2e20f11b35cec82fcf5aa683c5c1a805a6416f15b94"
+      },
+      "Matthew.json": {
+        "bytes": 1991886,
+        "sha256": "b69562d7d88b767930e5655caaecf1471ba70aeb0ca298d4179f3124a47bd465"
+      },
+      "Romans.json": {
+        "bytes": 770320,
+        "sha256": "ab9d96a66e6ce21d8fe9cbc202d4d53eae6ea8e706445cf115510a2164729f3d"
+      }
+    }
+  },
+  "checksum": "838430202af0130c0d67155ca8c02dabe02bf935be2d44c2d83b32324e6060e4"
+}

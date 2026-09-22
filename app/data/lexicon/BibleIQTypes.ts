@@ -87,6 +87,7 @@ export type BibleIQRequest = {
   verse: number;
   translation: string;
   displayWord: string;
+  readerRecordId?: string;
   displayTokenIndex?: number;
   originalWord?: string;
   selectedText?: string;

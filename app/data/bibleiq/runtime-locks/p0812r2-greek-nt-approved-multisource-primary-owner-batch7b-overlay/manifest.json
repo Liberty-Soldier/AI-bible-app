@@ -1,0 +1,693 @@
+{
+  "schemaVersion": "emet-p0812r2-greek-nt-approved-multisource-primary-owner-batch7b-overlay/v1",
+  "milestone": "P08.12R2",
+  "purpose": "Evidence-reviewed multi-Greek -> one-English source segments with a single lexical tap head. Full source segment preserved; runtime tap opens only the approved lexical head.",
+  "authority": {
+    "source": "Ordered OpenGNT source occurrences",
+    "sourceFirst": true,
+    "fullSourceSegmentPreserved": true,
+    "singleEnglishTokenMayRenderMultipleSourceOccurrences": true,
+    "runtimeTapUsesSingleLexicalHead": true,
+    "supportingSourceOccurrencesRemainAttachedInOverlayEvidence": true,
+    "supportingOccurrencesAreNotIndependentTapOwners": true,
+    "forcedOneToOne": false,
+    "recurrenceAutomaticApproval": false,
+    "semanticGuessing": false,
+    "canonicalModified": false
+  },
+  "counts": {
+    "approvedCases": 8,
+    "meaningfulRoutes": 8,
+    "webMeaningfulRoutes": 6,
+    "kjvMeaningfulRoutes": 2
+  },
+  "segments": [
+    {
+      "batch": "BATCH7B_MULTISOURCE_PRIMARY_OWNER",
+      "translation": "kjv",
+      "reference": "John 14:17",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:17",
+      "englishTarget": {
+        "displayIndex": 8,
+        "text": "cannot",
+        "normalized": "cannot"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:John.14.17:7",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "greek-nt:John.14.17:8",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "primarySource": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:John.14.17:8",
+        "surface": "δύναται",
+        "strong": "G1410",
+        "entityId": "word:greek-nt:G1410",
+        "morph": "V-PNI-3S",
+        "gloss": "be able"
+      },
+      "ownership": "MULTI_SOURCE_SEGMENT_WITH_SINGLE_LEXICAL_TAP_HEAD",
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b",
+      "reason": "KJV cannot renders negative particle G3756 + lexical verb G1410 (be able/can). The lexical head is G1410; G3756 remains a supporting negative occurrence in the sealed source segment."
+    },
+    {
+      "batch": "BATCH7B_MULTISOURCE_PRIMARY_OWNER",
+      "translation": "kjv",
+      "reference": "John 15:4",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "15:4",
+      "englishTarget": {
+        "displayIndex": 10,
+        "text": "cannot",
+        "normalized": "cannot"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:John.15.4:9",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "greek-nt:John.15.4:10",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "primarySource": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:John.15.4:10",
+        "surface": "δύναται",
+        "strong": "G1410",
+        "entityId": "word:greek-nt:G1410",
+        "morph": "V-PNI-3S",
+        "gloss": "be able"
+      },
+      "ownership": "MULTI_SOURCE_SEGMENT_WITH_SINGLE_LEXICAL_TAP_HEAD",
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b",
+      "reason": "KJV cannot renders negative particle G3756 + lexical verb G1410 (be able/can). The lexical head is G1410; G3756 remains a supporting negative occurrence in the sealed source segment."
+    },
+    {
+      "batch": "BATCH7B_MULTISOURCE_PRIMARY_OWNER",
+      "translation": "web",
+      "reference": "John 14:17",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:17",
+      "englishTarget": {
+        "displayIndex": 7,
+        "text": "cant",
+        "normalized": "cant"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:John.14.17:7",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "greek-nt:John.14.17:8",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "primarySource": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:John.14.17:8",
+        "surface": "δύναται",
+        "strong": "G1410",
+        "entityId": "word:greek-nt:G1410",
+        "morph": "V-PNI-3S",
+        "gloss": "be able"
+      },
+      "ownership": "MULTI_SOURCE_SEGMENT_WITH_SINGLE_LEXICAL_TAP_HEAD",
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b",
+      "reason": "WEB can't renders negative particle G3756 + lexical verb G1410 (be able/can). The lexical head is G1410; G3756 remains in the full source segment."
+    },
+    {
+      "batch": "BATCH7B_MULTISOURCE_PRIMARY_OWNER",
+      "translation": "web",
+      "reference": "John 15:4",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "15:4",
+      "englishTarget": {
+        "displayIndex": 10,
+        "text": "cant",
+        "normalized": "cant"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:John.15.4:9",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "greek-nt:John.15.4:10",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "primarySource": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:John.15.4:10",
+        "surface": "δύναται",
+        "strong": "G1410",
+        "entityId": "word:greek-nt:G1410",
+        "morph": "V-PNI-3S",
+        "gloss": "be able"
+      },
+      "ownership": "MULTI_SOURCE_SEGMENT_WITH_SINGLE_LEXICAL_TAP_HEAD",
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b",
+      "reason": "WEB can't renders negative particle G3756 + lexical verb G1410 (be able/can). The lexical head is G1410; G3756 remains in the full source segment."
+    },
+    {
+      "batch": "BATCH7B_MULTISOURCE_PRIMARY_OWNER",
+      "translation": "web",
+      "reference": "John 11:10",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "11:10",
+      "englishTarget": {
+        "displayIndex": 13,
+        "text": "isnt",
+        "normalized": "isnt"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 11,
+          "sourceOccurrenceId": "greek-nt:John.11.10:11",
+          "surface": "οὐκ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:John.11.10:12",
+          "surface": "ἔστιν",
+          "strong": "G1510",
+          "entityId": "word:greek-nt:G1510",
+          "morph": "V-PAI-3S",
+          "gloss": "is"
+        }
+      ],
+      "primarySource": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:John.11.10:12",
+        "surface": "ἔστιν",
+        "strong": "G1510",
+        "entityId": "word:greek-nt:G1510",
+        "morph": "V-PAI-3S",
+        "gloss": "is"
+      },
+      "ownership": "MULTI_SOURCE_SEGMENT_WITH_SINGLE_LEXICAL_TAP_HEAD",
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b",
+      "reason": "WEB isn't renders negative particle G3756 + lexical verb G1510 (be). The lexical head is G1510; G3756 remains supporting segment evidence."
+    },
+    {
+      "batch": "BATCH7B_MULTISOURCE_PRIMARY_OWNER",
+      "translation": "web",
+      "reference": "John 14:24",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:24",
+      "englishTarget": {
+        "displayIndex": 14,
+        "text": "isnt",
+        "normalized": "isnt"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 14,
+          "sourceOccurrenceId": "greek-nt:John.14.24:14",
+          "surface": "οὐκ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 15,
+          "sourceOccurrenceId": "greek-nt:John.14.24:15",
+          "surface": "ἔστιν",
+          "strong": "G1510",
+          "entityId": "word:greek-nt:G1510",
+          "morph": "V-PAI-3S",
+          "gloss": "is"
+        }
+      ],
+      "primarySource": {
+        "sourceIndex": 15,
+        "sourceOccurrenceId": "greek-nt:John.14.24:15",
+        "surface": "ἔστιν",
+        "strong": "G1510",
+        "entityId": "word:greek-nt:G1510",
+        "morph": "V-PAI-3S",
+        "gloss": "is"
+      },
+      "ownership": "MULTI_SOURCE_SEGMENT_WITH_SINGLE_LEXICAL_TAP_HEAD",
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b",
+      "reason": "WEB isn't renders negative particle G3756 + lexical verb G1510 (be). The lexical head is G1510; G3756 remains supporting segment evidence."
+    },
+    {
+      "batch": "BATCH7B_MULTISOURCE_PRIMARY_OWNER",
+      "translation": "web",
+      "reference": "Romans 1:25",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "1:25",
+      "englishTarget": {
+        "displayIndex": 22,
+        "text": "forever",
+        "normalized": "forever"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 21,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:21",
+          "surface": "εἰς",
+          "strong": "G1519",
+          "entityId": "word:greek-nt:G1519",
+          "morph": "PREP",
+          "gloss": "toward"
+        },
+        {
+          "sourceIndex": 22,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:22",
+          "surface": "τοὺς",
+          "strong": "G3588",
+          "entityId": "word:greek-nt:G3588",
+          "morph": "T-APM",
+          "gloss": "the"
+        },
+        {
+          "sourceIndex": 23,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:23",
+          "surface": "αἰῶνας",
+          "strong": "G0165",
+          "entityId": "word:greek-nt:G0165",
+          "morph": "N-APM",
+          "gloss": "ages"
+        }
+      ],
+      "primarySource": {
+        "sourceIndex": 23,
+        "sourceOccurrenceId": "greek-nt:Romans.1.25:23",
+        "surface": "αἰῶνας",
+        "strong": "G0165",
+        "entityId": "word:greek-nt:G0165",
+        "morph": "N-APM",
+        "gloss": "ages"
+      },
+      "ownership": "MULTI_SOURCE_SEGMENT_WITH_SINGLE_LEXICAL_TAP_HEAD",
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b",
+      "reason": "WEB forever renders the prepositional phrase G1519 + article G3588 + lexical noun G0165 (age). G0165 is the lexical head; preposition/article remain part of the source segment."
+    },
+    {
+      "batch": "BATCH7B_MULTISOURCE_PRIMARY_OWNER",
+      "translation": "web",
+      "reference": "Romans 9:5",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "9:5",
+      "englishTarget": {
+        "displayIndex": 20,
+        "text": "forever",
+        "normalized": "forever"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 17,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:17",
+          "surface": "εἰς",
+          "strong": "G1519",
+          "entityId": "word:greek-nt:G1519",
+          "morph": "PREP",
+          "gloss": "toward"
+        },
+        {
+          "sourceIndex": 18,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:18",
+          "surface": "τοὺς",
+          "strong": "G3588",
+          "entityId": "word:greek-nt:G3588",
+          "morph": "T-APM",
+          "gloss": "the"
+        },
+        {
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:19",
+          "surface": "αἰῶνας",
+          "strong": "G0165",
+          "entityId": "word:greek-nt:G0165",
+          "morph": "N-APM",
+          "gloss": "ages"
+        }
+      ],
+      "primarySource": {
+        "sourceIndex": 19,
+        "sourceOccurrenceId": "greek-nt:Romans.9.5:19",
+        "surface": "αἰῶνας",
+        "strong": "G0165",
+        "entityId": "word:greek-nt:G0165",
+        "morph": "N-APM",
+        "gloss": "ages"
+      },
+      "ownership": "MULTI_SOURCE_SEGMENT_WITH_SINGLE_LEXICAL_TAP_HEAD",
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b",
+      "reason": "WEB forever renders the prepositional phrase G1519 + article G3588 + lexical noun G0165 (age). G0165 is the lexical head; preposition/article remain part of the source segment."
+    }
+  ],
+  "routes": [
+    {
+      "translation": "kjv",
+      "reference": "John 14:17",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:17",
+      "displayIndex": 8,
+      "displayText": "cannot",
+      "primarySourceIndex": 8,
+      "primarySourceOccurrenceId": "greek-nt:John.14.17:8",
+      "primaryStrong": "G1410",
+      "primaryEntityId": "word:greek-nt:G1410",
+      "sourceSegment": [
+        {
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:John.14.17:7",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "greek-nt:John.14.17:8",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b"
+    },
+    {
+      "translation": "kjv",
+      "reference": "John 15:4",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "15:4",
+      "displayIndex": 10,
+      "displayText": "cannot",
+      "primarySourceIndex": 10,
+      "primarySourceOccurrenceId": "greek-nt:John.15.4:10",
+      "primaryStrong": "G1410",
+      "primaryEntityId": "word:greek-nt:G1410",
+      "sourceSegment": [
+        {
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:John.15.4:9",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "greek-nt:John.15.4:10",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b"
+    },
+    {
+      "translation": "web",
+      "reference": "John 14:17",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:17",
+      "displayIndex": 7,
+      "displayText": "cant",
+      "primarySourceIndex": 8,
+      "primarySourceOccurrenceId": "greek-nt:John.14.17:8",
+      "primaryStrong": "G1410",
+      "primaryEntityId": "word:greek-nt:G1410",
+      "sourceSegment": [
+        {
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:John.14.17:7",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "greek-nt:John.14.17:8",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b"
+    },
+    {
+      "translation": "web",
+      "reference": "John 15:4",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "15:4",
+      "displayIndex": 10,
+      "displayText": "cant",
+      "primarySourceIndex": 10,
+      "primarySourceOccurrenceId": "greek-nt:John.15.4:10",
+      "primaryStrong": "G1410",
+      "primaryEntityId": "word:greek-nt:G1410",
+      "sourceSegment": [
+        {
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:John.15.4:9",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "greek-nt:John.15.4:10",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b"
+    },
+    {
+      "translation": "web",
+      "reference": "John 11:10",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "11:10",
+      "displayIndex": 13,
+      "displayText": "isnt",
+      "primarySourceIndex": 12,
+      "primarySourceOccurrenceId": "greek-nt:John.11.10:12",
+      "primaryStrong": "G1510",
+      "primaryEntityId": "word:greek-nt:G1510",
+      "sourceSegment": [
+        {
+          "sourceIndex": 11,
+          "sourceOccurrenceId": "greek-nt:John.11.10:11",
+          "surface": "οὐκ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:John.11.10:12",
+          "surface": "ἔστιν",
+          "strong": "G1510",
+          "entityId": "word:greek-nt:G1510",
+          "morph": "V-PAI-3S",
+          "gloss": "is"
+        }
+      ],
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b"
+    },
+    {
+      "translation": "web",
+      "reference": "John 14:24",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:24",
+      "displayIndex": 14,
+      "displayText": "isnt",
+      "primarySourceIndex": 15,
+      "primarySourceOccurrenceId": "greek-nt:John.14.24:15",
+      "primaryStrong": "G1510",
+      "primaryEntityId": "word:greek-nt:G1510",
+      "sourceSegment": [
+        {
+          "sourceIndex": 14,
+          "sourceOccurrenceId": "greek-nt:John.14.24:14",
+          "surface": "οὐκ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 15,
+          "sourceOccurrenceId": "greek-nt:John.14.24:15",
+          "surface": "ἔστιν",
+          "strong": "G1510",
+          "entityId": "word:greek-nt:G1510",
+          "morph": "V-PAI-3S",
+          "gloss": "is"
+        }
+      ],
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b"
+    },
+    {
+      "translation": "web",
+      "reference": "Romans 1:25",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "1:25",
+      "displayIndex": 22,
+      "displayText": "forever",
+      "primarySourceIndex": 23,
+      "primarySourceOccurrenceId": "greek-nt:Romans.1.25:23",
+      "primaryStrong": "G0165",
+      "primaryEntityId": "word:greek-nt:G0165",
+      "sourceSegment": [
+        {
+          "sourceIndex": 21,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:21",
+          "surface": "εἰς",
+          "strong": "G1519",
+          "entityId": "word:greek-nt:G1519",
+          "morph": "PREP",
+          "gloss": "toward"
+        },
+        {
+          "sourceIndex": 22,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:22",
+          "surface": "τοὺς",
+          "strong": "G3588",
+          "entityId": "word:greek-nt:G3588",
+          "morph": "T-APM",
+          "gloss": "the"
+        },
+        {
+          "sourceIndex": 23,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:23",
+          "surface": "αἰῶνας",
+          "strong": "G0165",
+          "entityId": "word:greek-nt:G0165",
+          "morph": "N-APM",
+          "gloss": "ages"
+        }
+      ],
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b"
+    },
+    {
+      "translation": "web",
+      "reference": "Romans 9:5",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "9:5",
+      "displayIndex": 20,
+      "displayText": "forever",
+      "primarySourceIndex": 19,
+      "primarySourceOccurrenceId": "greek-nt:Romans.9.5:19",
+      "primaryStrong": "G0165",
+      "primaryEntityId": "word:greek-nt:G0165",
+      "sourceSegment": [
+        {
+          "sourceIndex": 17,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:17",
+          "surface": "εἰς",
+          "strong": "G1519",
+          "entityId": "word:greek-nt:G1519",
+          "morph": "PREP",
+          "gloss": "toward"
+        },
+        {
+          "sourceIndex": 18,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:18",
+          "surface": "τοὺς",
+          "strong": "G3588",
+          "entityId": "word:greek-nt:G3588",
+          "morph": "T-APM",
+          "gloss": "the"
+        },
+        {
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:19",
+          "surface": "αἰῶνας",
+          "strong": "G0165",
+          "entityId": "word:greek-nt:G0165",
+          "morph": "N-APM",
+          "gloss": "ages"
+        }
+      ],
+      "method": "p0812r2-greek-multisource-primary-owner-batch7b"
+    }
+  ],
+  "previousPromotedRoutes": {
+    "direct": 23,
+    "batch1": 61,
+    "batch2": 35,
+    "batch3": 54,
+    "batch4": 50,
+    "batch5": 170,
+    "batch6": 41,
+    "batch7a": 24,
+    "total": 458
+  },
+  "expectedPromotedTotalAfterBatch7B": 466,
+  "checksum": "77a76c6bb9e684d2255635a710ef7b75db337fcc085f88747dbe614351575dee"
+}

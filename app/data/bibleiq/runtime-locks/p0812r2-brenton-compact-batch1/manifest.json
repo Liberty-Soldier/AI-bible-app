@@ -1,0 +1,3455 @@
+{
+  "schemaVersion": "emet-p0812r2-brenton-compact-approved/v1",
+  "count": 37,
+  "method": "exact-canonical-gloss-in-bounded-source-span-with-unowned-occurrence",
+  "inputHashes": {
+    "app/data/scripture/generatedBrenton.json": "28786b790c642dd6d67800c25f8062853f49d877cfb23264dbb90fc6cade6c32",
+    "app/data/scripture/generatedBrenton.integrity.json": "4769adb231d725ea8409e395686579758320e640f0af08a5ee18a44aa7ef9753",
+    "app/data/bibleiq/canonical/lxx/1Chronicles.json": "9ba14e438cc9d5cc800121576720af1b709e2c55eea5882a3e301ee95a3e8896",
+    "app/data/bibleiq/canonical/lxx/1Kings.json": "d1cd08923919fabe6df189df5654ed1cc64467ac3e7acf99b0db24e5af9ea84e",
+    "app/data/bibleiq/canonical/lxx/1Maccabees.json": "a1678ce28d99ba247cb2a7f40f2e3ab436d9130844c9caa5949e0467ea46c6e9",
+    "app/data/bibleiq/canonical/lxx/1Samuel.json": "7b79f299d7b044297883ff6f934f4adc7c7feb381802ac9066062dab50f31540",
+    "app/data/bibleiq/canonical/lxx/2Chronicles.json": "45d350f2ef497f1e5c2365bd8faf9d04809b65dd130f14414f800f8bfea51370",
+    "app/data/bibleiq/canonical/lxx/2Kings.json": "d348ad646ecfd304a98dcca9d83782aa59abb1a89ff8fd446d4f07de3fddceee",
+    "app/data/bibleiq/canonical/lxx/2Maccabees.json": "8033d2e8070ff39193e117aa03792bea97980575f044c73777272b9b58beecd3",
+    "app/data/bibleiq/canonical/lxx/2Samuel.json": "9df4f0150598c871d14f3912ea0487609da7c1c9b5d6e26690b15bf4540ebe99",
+    "app/data/bibleiq/canonical/lxx/3Maccabees.json": "8730132364ce095e1efd0e4242f9a62ddb3181af8eb3b0263656ddfdf7f9d813",
+    "app/data/bibleiq/canonical/lxx/4Maccabees.json": "4cb8512e579bf03124b65b99010b99274b20182e6394f5ae93b031e0e83d08b7",
+    "app/data/bibleiq/canonical/lxx/Amos.json": "4aa45f8453fab97fed2b5dc9aa9f459b2548ebf63e2c89d80bac231d525a2bcc",
+    "app/data/bibleiq/canonical/lxx/Baruch.json": "2484a6a614e76753c00ba7ed341fcad9d75cff5c5757a9a826211961dde12e2f",
+    "app/data/bibleiq/canonical/lxx/BelandtheDragon.json": "57b4f81c390e62c56108399d89fba69ae339f87fe99709cbf356db3c7772e025",
+    "app/data/bibleiq/canonical/lxx/Daniel.json": "53392038da0139cd3fb85fc02258f7c6809c1887454a2d5585a6da496230d887",
+    "app/data/bibleiq/canonical/lxx/Deuteronomy.json": "a7ea302c3aa2b67a2366ea650f24ec675f7d8e33b03b6de6f9f2780619429e91",
+    "app/data/bibleiq/canonical/lxx/Ecclesiastes.json": "7bdc793fd25d07a8fb1a931457d26f8c782786e354c0985248707716cda5536e",
+    "app/data/bibleiq/canonical/lxx/EpistleofJeremiah.json": "f5eed9644551572f1ade7d5aecba9655adf401c82d986d848e86314b650feb41",
+    "app/data/bibleiq/canonical/lxx/Esther.json": "31257751a6ad880f356bbf17b61b4ddd12bb258fb884a6c3793e1dea10b649a6",
+    "app/data/bibleiq/canonical/lxx/Exodus.json": "e24cff5435b805c62346c2af67c9493daa033f86993165411e8524953495c500",
+    "app/data/bibleiq/canonical/lxx/Ezekiel.json": "e2812e70c69a85c762b226e1165156824bb5da3e73a9b333ad27b6e2565b7558",
+    "app/data/bibleiq/canonical/lxx/Ezra.json": "a32c369d556aa2e51471b7fef8a26c24395103b07dbfa0cbc830d6e0e41356fa",
+    "app/data/bibleiq/canonical/lxx/Genesis.json": "f827e5193d49f222e2bb9a5b70221a31631c35bbe56b8d9bf3e63989b313615a",
+    "app/data/bibleiq/canonical/lxx/Habakkuk.json": "c4290049a209b598701a490fb7c1947a89db71711bf0f0187cd59d2943aef4f5",
+    "app/data/bibleiq/canonical/lxx/Haggai.json": "b3e862509fea09ba8430d1ce6ea4cba969626c7cd2dd18ad5c2fe8be35db6ab8",
+    "app/data/bibleiq/canonical/lxx/Hosea.json": "4a7921e171aa53e127ae492c556172ae75d7f2083c2b8352e4cbb91cdbc61c9c",
+    "app/data/bibleiq/canonical/lxx/Isaiah.json": "6dc3fc57df57e7954f9e1ae8153bc0b976c0e37aa1189f60980502e55bd0b08f",
+    "app/data/bibleiq/canonical/lxx/Jeremiah.json": "1bdb1dccf1fa5ee1048a4b0d261472a7e85730f53a49aa88689bcfa65360f157",
+    "app/data/bibleiq/canonical/lxx/Job.json": "2a2c081043338857c652eec2fce4fdc383d35ff9d5822e1945cfc40c8ac9119f",
+    "app/data/bibleiq/canonical/lxx/Joel.json": "6ff26a704bc8c8f11be4b0a4a41b786b594be06a3704dd7dd4c92b28abfc4ad9",
+    "app/data/bibleiq/canonical/lxx/Jonah.json": "a5eb414563017f4833a8f60cd18de9173d005d687639bffa53dcc57584594c2e",
+    "app/data/bibleiq/canonical/lxx/Joshua.json": "ecf1cf6ec8cb898f90fdbf90b8d3c7d36b659cdd92b37ec744eddaffcc0333da",
+    "app/data/bibleiq/canonical/lxx/Judges.json": "5af14f28b8b0a0edf0c3d5bdce20a95362363f851c0f6a61050069d1dee24d66",
+    "app/data/bibleiq/canonical/lxx/Lamentations.json": "d7e5c6e657946184685608ecb6981d53b6516e006ba2f1ff8463918ffc5cece5",
+    "app/data/bibleiq/canonical/lxx/Leviticus.json": "447f82ee4c57113b4ab4bc72a770d93e53caca56a93ea3d5147eac3363280f78",
+    "app/data/bibleiq/canonical/lxx/Malachi.json": "4b69f29a68100d0a820f053467e657b65d38eee9b7e72ce2c92676f4fd6c4d72",
+    "app/data/bibleiq/canonical/lxx/Micah.json": "0e7a74d1e5355f894a876a518eea855d249006f3f20478e4018ba2460e228387",
+    "app/data/bibleiq/canonical/lxx/Nahum.json": "49258791cde0e8d836b4dbe9376d2ab5a8237fc3e5de9c93d5f6ba34ab07a7a6",
+    "app/data/bibleiq/canonical/lxx/Nehemiah.json": "9d57ebbfcfef3e901968d140c399b2927511880a72be48c23d08dfd0fcd702c1",
+    "app/data/bibleiq/canonical/lxx/Numbers.json": "e90740c0d58527f95fb1348756b2e626b1c1bb11395cdcdac2523a9cf3e00c13",
+    "app/data/bibleiq/canonical/lxx/Obadiah.json": "20385a8e6c4d9dc4556def1e579827d6ad073a7d139a5f694308cfa615cc9fc1",
+    "app/data/bibleiq/canonical/lxx/Proverbs.json": "892dedfd9d59c961611b6091fd05e3cf16e959fbd51dff6e502ce54adba8c7e2",
+    "app/data/bibleiq/canonical/lxx/Psalms.json": "76e324621014021bec42d09123d89acc2f29331863ecd3ef6a053eadb0e13927",
+    "app/data/bibleiq/canonical/lxx/Ruth.json": "4c1a62da92f9084ea0e96a748c6535fad8d28ac1f53bc4f921dba7247ca50e0a",
+    "app/data/bibleiq/canonical/lxx/Sirach.json": "95afc8f954e20887852a2fb927c9d6abc4c675cde8b9a65486e88278ae99a47d",
+    "app/data/bibleiq/canonical/lxx/SongofSongs.json": "a3b070deea74ab4bc5d27eb6fba46827c342aec7d57bbe76984e8a16f64a047f",
+    "app/data/bibleiq/canonical/lxx/Susanna.json": "61ce3c6ff455e2ae065b7c617283098dee5daa82b25b6f9147a7029b7383862a",
+    "app/data/bibleiq/canonical/lxx/Wisdom.json": "3ae7b35263dc559c04e34353414109e2411a298b31ef1c6a3323ca90bd76bdba",
+    "app/data/bibleiq/canonical/lxx/Zechariah.json": "137dd57bd4d375caf69cb37aa131f8d2bf4618a9938cf126e9470c8107cedce5",
+    "app/data/bibleiq/canonical/lxx/Zephaniah.json": "80c169cb8c0ac81dcd6d180cda638018ac7792824ed330d74abbc0bad4ebb438"
+  },
+  "candidates": [
+    {
+      "readerRecordId": "brenton:1CH:21:18",
+      "reference": "1 Chronicles 21:18",
+      "book": "1 Chronicles",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "1Chronicles.json",
+      "runtimeVerseKey": "21:18",
+      "displayIndex": 25,
+      "displayText": "threshing-floor",
+      "sourceIndex": 18,
+      "occurrenceId": "lxx:1_Chronicles.21.18:18",
+      "entityId": "word:lxx:L700741",
+      "canonicalGloss": "threshing floor",
+      "boundaries": {
+        "left": {
+          "displayIndex": 23,
+          "displayText": "in",
+          "sourceIndex": 17,
+          "sourceOccurrenceId": "lxx:1_Chronicles.21.18:17"
+        },
+        "right": {
+          "displayIndex": 27,
+          "displayText": "Orna",
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "lxx:1_Chronicles.21.18:19"
+        }
+      },
+      "englishSpan": {
+        "start": 24,
+        "end": 26,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 24,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 25,
+            "text": "threshing-floor",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 26,
+            "text": "of",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 1,
+        "occurrences": [
+          {
+            "sourceIndex": 18,
+            "occurrenceId": "lxx:1_Chronicles.21.18:18",
+            "surface": "ἅλῳ",
+            "lemma": "ἅλων",
+            "partOfSpeech": "Noun",
+            "gloss": "threshing floor",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L700741"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:1CH:21:22",
+      "reference": "1 Chronicles 21:22",
+      "book": "1 Chronicles",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "1Chronicles.json",
+      "runtimeVerseKey": "21:22",
+      "displayIndex": 11,
+      "displayText": "threshing-floor",
+      "sourceIndex": 11,
+      "occurrenceId": "lxx:1_Chronicles.21.22:11",
+      "entityId": "word:lxx:L700741",
+      "canonicalGloss": "threshing floor",
+      "boundaries": {
+        "left": {
+          "displayIndex": 8,
+          "displayText": "place",
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "lxx:1_Chronicles.21.22:8"
+        },
+        "right": {
+          "displayIndex": 15,
+          "displayText": "build",
+          "sourceIndex": 13,
+          "sourceOccurrenceId": "lxx:1_Chronicles.21.22:13"
+        }
+      },
+      "englishSpan": {
+        "start": 9,
+        "end": 14,
+        "length": 6,
+        "tokens": [
+          {
+            "index": 9,
+            "text": "of",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 10,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 11,
+            "text": "threshing-floor",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 12,
+            "text": "and",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 13,
+            "text": "I",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 14,
+            "text": "will",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 4,
+        "occurrences": [
+          {
+            "sourceIndex": 9,
+            "occurrenceId": "lxx:1_Chronicles.21.22:9",
+            "surface": "σου",
+            "lemma": "σοῦ",
+            "partOfSpeech": "Pronouns",
+            "gloss": "of you; your",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L711945"
+          },
+          {
+            "sourceIndex": 10,
+            "occurrenceId": "lxx:1_Chronicles.21.22:10",
+            "surface": "τῆς",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 11,
+            "occurrenceId": "lxx:1_Chronicles.21.22:11",
+            "surface": "ἅλω",
+            "lemma": "ἅλων",
+            "partOfSpeech": "Noun",
+            "gloss": "threshing floor",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L700741"
+          },
+          {
+            "sourceIndex": 12,
+            "occurrenceId": "lxx:1_Chronicles.21.22:12",
+            "surface": "καὶ",
+            "lemma": "καί",
+            "partOfSpeech": "Conjunction, Adverb, Preposition",
+            "gloss": "and; even",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707031"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:1CH:21:28",
+      "reference": "1 Chronicles 21:28",
+      "book": "1 Chronicles",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "1Chronicles.json",
+      "runtimeVerseKey": "21:28",
+      "displayIndex": 13,
+      "displayText": "threshing-floor",
+      "sourceIndex": 15,
+      "occurrenceId": "lxx:1_Chronicles.21.28:15",
+      "entityId": "word:lxx:L700741",
+      "canonicalGloss": "threshing floor",
+      "boundaries": {
+        "left": {
+          "displayIndex": 11,
+          "displayText": "in",
+          "sourceIndex": 13,
+          "sourceOccurrenceId": "lxx:1_Chronicles.21.28:13"
+        },
+        "right": {
+          "displayIndex": 15,
+          "displayText": "Orna",
+          "sourceIndex": 16,
+          "sourceOccurrenceId": "lxx:1_Chronicles.21.28:16"
+        }
+      },
+      "englishSpan": {
+        "start": 12,
+        "end": 14,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 12,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 13,
+            "text": "threshing-floor",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 14,
+            "text": "of",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 14,
+            "occurrenceId": "lxx:1_Chronicles.21.28:14",
+            "surface": "τῷ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 15,
+            "occurrenceId": "lxx:1_Chronicles.21.28:15",
+            "surface": "ἅλῳ",
+            "lemma": "ἅλων",
+            "partOfSpeech": "Noun",
+            "gloss": "threshing floor",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L700741"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:1CH:22:1",
+      "reference": "1 Chronicles 22:1",
+      "book": "1 Chronicles",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "1Chronicles.json",
+      "runtimeVerseKey": "22:1",
+      "displayIndex": 17,
+      "displayText": "whole-burnt-offering",
+      "sourceIndex": 15,
+      "occurrenceId": "lxx:1_Chronicles.22.1:15",
+      "entityId": "word:lxx:L709590",
+      "canonicalGloss": "holocaust; whole burnt offering",
+      "boundaries": {
+        "left": {
+          "displayIndex": 15,
+          "displayText": "altar",
+          "sourceIndex": 13,
+          "sourceOccurrenceId": "lxx:1_Chronicles.22.1:13"
+        },
+        "right": {
+          "displayIndex": 19,
+          "displayText": "Israel",
+          "sourceIndex": 17,
+          "sourceOccurrenceId": "lxx:1_Chronicles.22.1:17"
+        }
+      },
+      "englishSpan": {
+        "start": 16,
+        "end": 18,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 16,
+            "text": "for",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 17,
+            "text": "whole-burnt-offering",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 18,
+            "text": "for",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 14,
+            "occurrenceId": "lxx:1_Chronicles.22.1:14",
+            "surface": "εἰς",
+            "lemma": "εἰς",
+            "partOfSpeech": "Preposition",
+            "gloss": "into; for",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704105"
+          },
+          {
+            "sourceIndex": 15,
+            "occurrenceId": "lxx:1_Chronicles.22.1:15",
+            "surface": "ὁλοκαύτωσιν",
+            "lemma": "ὁλοκαύτωσις",
+            "partOfSpeech": "Noun",
+            "gloss": "holocaust; whole burnt offering",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709590"
+          },
+          {
+            "sourceIndex": 16,
+            "occurrenceId": "lxx:1_Chronicles.22.1:16",
+            "surface": "τῷ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:1KI:8:27",
+      "reference": "1 Kings 8:27",
+      "book": "1 Kings",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "1Kings.json",
+      "runtimeVerseKey": "8:27",
+      "displayIndex": 10,
+      "displayText": "if",
+      "sourceIndex": 11,
+      "occurrenceId": "lxx:1_Kings.8.27:11",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 9,
+          "displayText": "earth",
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "lxx:1_Kings.8.27:10"
+        },
+        "right": {
+          "displayIndex": 12,
+          "displayText": "heaven",
+          "sourceIndex": 13,
+          "sourceOccurrenceId": "lxx:1_Kings.8.27:13"
+        }
+      },
+      "englishSpan": {
+        "start": 10,
+        "end": 11,
+        "length": 2,
+        "tokens": [
+          {
+            "index": 10,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 11,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 11,
+            "occurrenceId": "lxx:1_Kings.8.27:11",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 12,
+            "occurrenceId": "lxx:1_Kings.8.27:12",
+            "surface": "ὁ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:1SA:21:4",
+      "reference": "1 Samuel 21:4",
+      "book": "1 Samuel",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "1Samuel.json",
+      "runtimeVerseKey": "21:4",
+      "displayIndex": 2,
+      "displayText": "if",
+      "sourceIndex": 2,
+      "occurrenceId": "lxx:1_Samuel.21.4:2",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 1,
+          "displayText": "now",
+          "sourceIndex": 1,
+          "sourceOccurrenceId": "lxx:1_Samuel.21.4:1"
+        },
+        "right": {
+          "displayIndex": 5,
+          "displayText": "under",
+          "sourceIndex": 4,
+          "sourceOccurrenceId": "lxx:1_Samuel.21.4:4"
+        }
+      },
+      "englishSpan": {
+        "start": 2,
+        "end": 4,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 2,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 3,
+            "text": "there",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 4,
+            "text": "are",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 2,
+            "occurrenceId": "lxx:1_Samuel.21.4:2",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 3,
+            "occurrenceId": "lxx:1_Samuel.21.4:3",
+            "surface": "εἰσὶν",
+            "lemma": "εἶμι",
+            "partOfSpeech": "Verbs",
+            "gloss": "go",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704094"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:1SA:6:9",
+      "reference": "1 Samuel 6:9",
+      "book": "1 Samuel",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "1Samuel.json",
+      "runtimeVerseKey": "6:9",
+      "displayIndex": 4,
+      "displayText": "if",
+      "sourceIndex": 2,
+      "occurrenceId": "lxx:1_Samuel.6.9:2",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 3,
+          "displayText": "see",
+          "sourceIndex": 1,
+          "sourceOccurrenceId": "lxx:1_Samuel.6.9:1"
+        },
+        "right": {
+          "displayIndex": 7,
+          "displayText": "go",
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "lxx:1_Samuel.6.9:7"
+        }
+      },
+      "englishSpan": {
+        "start": 4,
+        "end": 6,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 4,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 5,
+            "text": "it",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 6,
+            "text": "shall",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 4,
+        "occurrences": [
+          {
+            "sourceIndex": 2,
+            "occurrenceId": "lxx:1_Samuel.6.9:2",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 3,
+            "occurrenceId": "lxx:1_Samuel.6.9:3",
+            "surface": "εἰς",
+            "lemma": "εἰς",
+            "partOfSpeech": "Preposition",
+            "gloss": "into; for",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704105"
+          },
+          {
+            "sourceIndex": 5,
+            "occurrenceId": "lxx:1_Samuel.6.9:5",
+            "surface": "ὁρίων",
+            "lemma": "ὅριον",
+            "partOfSpeech": "Noun",
+            "gloss": "frontier",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709749"
+          },
+          {
+            "sourceIndex": 6,
+            "occurrenceId": "lxx:1_Samuel.6.9:6",
+            "surface": "αὐτῆς",
+            "lemma": "αὐτός",
+            "partOfSpeech": "Pronouns",
+            "gloss": "he; him",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L702165"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:1SA:7:9",
+      "reference": "1 Samuel 7:9",
+      "book": "1 Samuel",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "1Samuel.json",
+      "runtimeVerseKey": "7:9",
+      "displayIndex": 12,
+      "displayText": "whole-burnt-offering",
+      "sourceIndex": 9,
+      "occurrenceId": "lxx:1_Samuel.7.9:9",
+      "entityId": "word:lxx:L709590",
+      "canonicalGloss": "holocaust; whole burnt offering",
+      "boundaries": {
+        "left": {
+          "displayIndex": 9,
+          "displayText": "up",
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "lxx:1_Samuel.7.9:7"
+        },
+        "right": {
+          "displayIndex": 13,
+          "displayText": "with",
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "lxx:1_Samuel.7.9:10"
+        }
+      },
+      "englishSpan": {
+        "start": 10,
+        "end": 12,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 10,
+            "text": "as",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 11,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 12,
+            "text": "whole-burnt-offering",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 8,
+            "occurrenceId": "lxx:1_Samuel.7.9:8",
+            "surface": "αὐτὸν",
+            "lemma": "αὐτός",
+            "partOfSpeech": "Pronouns",
+            "gloss": "he; him",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L702165"
+          },
+          {
+            "sourceIndex": 9,
+            "occurrenceId": "lxx:1_Samuel.7.9:9",
+            "surface": "ὁλοκαύτωσιν",
+            "lemma": "ὁλοκαύτωσις",
+            "partOfSpeech": "Noun",
+            "gloss": "holocaust; whole burnt offering",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709590"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:2CH:29:27",
+      "reference": "2 Chronicles 29:27",
+      "book": "2 Chronicles",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "2Chronicles.json",
+      "runtimeVerseKey": "29:27",
+      "displayIndex": 8,
+      "displayText": "whole-burnt-offering",
+      "sourceIndex": 5,
+      "occurrenceId": "lxx:2_Chronicles.29.27:5",
+      "entityId": "word:lxx:L709590",
+      "canonicalGloss": "holocaust; whole burnt offering",
+      "boundaries": {
+        "left": {
+          "displayIndex": 6,
+          "displayText": "up",
+          "sourceIndex": 3,
+          "sourceOccurrenceId": "lxx:2_Chronicles.29.27:3"
+        },
+        "right": {
+          "displayIndex": 11,
+          "displayText": "altar",
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "lxx:2_Chronicles.29.27:8"
+        }
+      },
+      "englishSpan": {
+        "start": 7,
+        "end": 10,
+        "length": 4,
+        "tokens": [
+          {
+            "index": 7,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 8,
+            "text": "whole-burnt-offering",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 9,
+            "text": "on",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 10,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 4,
+        "occurrences": [
+          {
+            "sourceIndex": 4,
+            "occurrenceId": "lxx:2_Chronicles.29.27:4",
+            "surface": "τὴν",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 5,
+            "occurrenceId": "lxx:2_Chronicles.29.27:5",
+            "surface": "ὁλοκαύτωσιν",
+            "lemma": "ὁλοκαύτωσις",
+            "partOfSpeech": "Noun",
+            "gloss": "holocaust; whole burnt offering",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709590"
+          },
+          {
+            "sourceIndex": 6,
+            "occurrenceId": "lxx:2_Chronicles.29.27:6",
+            "surface": "ἐπὶ",
+            "lemma": "ἐπί",
+            "partOfSpeech": "Preposition",
+            "gloss": "in; on",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L705080"
+          },
+          {
+            "sourceIndex": 7,
+            "occurrenceId": "lxx:2_Chronicles.29.27:7",
+            "surface": "τὸ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:2CH:3:1",
+      "reference": "2 Chronicles 3:1",
+      "book": "2 Chronicles",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "2Chronicles.json",
+      "runtimeVerseKey": "3:1",
+      "displayIndex": 34,
+      "displayText": "threshing-floor",
+      "sourceIndex": 28,
+      "occurrenceId": "lxx:2_Chronicles.3.1:28",
+      "entityId": "word:lxx:L700741",
+      "canonicalGloss": "threshing floor",
+      "boundaries": {
+        "left": {
+          "displayIndex": 32,
+          "displayText": "in",
+          "sourceIndex": 27,
+          "sourceOccurrenceId": "lxx:2_Chronicles.3.1:27"
+        },
+        "right": {
+          "displayIndex": 36,
+          "displayText": "Orna",
+          "sourceIndex": 29,
+          "sourceOccurrenceId": "lxx:2_Chronicles.3.1:29"
+        }
+      },
+      "englishSpan": {
+        "start": 33,
+        "end": 35,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 33,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 34,
+            "text": "threshing-floor",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 35,
+            "text": "of",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 1,
+        "occurrences": [
+          {
+            "sourceIndex": 28,
+            "occurrenceId": "lxx:2_Chronicles.3.1:28",
+            "surface": "ἅλῳ",
+            "lemma": "ἅλων",
+            "partOfSpeech": "Noun",
+            "gloss": "threshing floor",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L700741"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:2CH:6:18",
+      "reference": "2 Chronicles 6:18",
+      "book": "2 Chronicles",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "2Chronicles.json",
+      "runtimeVerseKey": "6:18",
+      "displayIndex": 10,
+      "displayText": "if",
+      "sourceIndex": 10,
+      "occurrenceId": "lxx:2_Chronicles.6.18:10",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 9,
+          "displayText": "earth",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "lxx:2_Chronicles.6.18:9"
+        },
+        "right": {
+          "displayIndex": 12,
+          "displayText": "heaven",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "lxx:2_Chronicles.6.18:12"
+        }
+      },
+      "englishSpan": {
+        "start": 10,
+        "end": 11,
+        "length": 2,
+        "tokens": [
+          {
+            "index": 10,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 11,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 10,
+            "occurrenceId": "lxx:2_Chronicles.6.18:10",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 11,
+            "occurrenceId": "lxx:2_Chronicles.6.18:11",
+            "surface": "ὁ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:2SA:17:6",
+      "reference": "2 Samuel 17:6",
+      "book": "2 Samuel",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "2Samuel.json",
+      "runtimeVerseKey": "17:6",
+      "displayIndex": 25,
+      "displayText": "if",
+      "sourceIndex": 23,
+      "occurrenceId": "lxx:2_Samuel.17.6:23",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 23,
+          "displayText": "word",
+          "sourceIndex": 21,
+          "sourceOccurrenceId": "lxx:2_Samuel.17.6:21"
+        },
+        "right": {
+          "displayIndex": 26,
+          "displayText": "not",
+          "sourceIndex": 25,
+          "sourceOccurrenceId": "lxx:2_Samuel.17.6:25"
+        }
+      },
+      "englishSpan": {
+        "start": 24,
+        "end": 25,
+        "length": 2,
+        "tokens": [
+          {
+            "index": 24,
+            "text": "but",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 25,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 22,
+            "occurrenceId": "lxx:2_Samuel.17.6:22",
+            "surface": "αὐτοῦ",
+            "lemma": "αὐτοῦ",
+            "partOfSpeech": "Adverb",
+            "gloss": "right here",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L702167"
+          },
+          {
+            "sourceIndex": 23,
+            "occurrenceId": "lxx:2_Samuel.17.6:23",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 24,
+            "occurrenceId": "lxx:2_Samuel.17.6:24",
+            "surface": "δὲ",
+            "lemma": "δέ",
+            "partOfSpeech": "Conjunction, Particle",
+            "gloss": "though; while",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L703303"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:2SA:24:18",
+      "reference": "2 Samuel 24:18",
+      "book": "2 Samuel",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "2Samuel.json",
+      "runtimeVerseKey": "24:18",
+      "displayIndex": 24,
+      "displayText": "threshing-floor",
+      "sourceIndex": 20,
+      "occurrenceId": "lxx:2_Samuel.24.18:20",
+      "entityId": "word:lxx:L700741",
+      "canonicalGloss": "threshing floor",
+      "boundaries": {
+        "left": {
+          "displayIndex": 22,
+          "displayText": "in",
+          "sourceIndex": 18,
+          "sourceOccurrenceId": "lxx:2_Samuel.24.18:18"
+        },
+        "right": {
+          "displayIndex": 26,
+          "displayText": "Orna",
+          "sourceIndex": 21,
+          "sourceOccurrenceId": "lxx:2_Samuel.24.18:21"
+        }
+      },
+      "englishSpan": {
+        "start": 23,
+        "end": 25,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 23,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 24,
+            "text": "threshing-floor",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 25,
+            "text": "of",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 19,
+            "occurrenceId": "lxx:2_Samuel.24.18:19",
+            "surface": "τῷ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 20,
+            "occurrenceId": "lxx:2_Samuel.24.18:20",
+            "surface": "ἅλωνι",
+            "lemma": "ἅλων",
+            "partOfSpeech": "Noun",
+            "gloss": "threshing floor",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L700741"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:DEU:4:32",
+      "reference": "Deuteronomy 4:32",
+      "book": "Deuteronomy",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Deuteronomy.json",
+      "runtimeVerseKey": "4:32",
+      "displayIndex": 33,
+      "displayText": "if",
+      "sourceIndex": 28,
+      "occurrenceId": "lxx:Deuteronomy.4.32:28",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 32,
+          "displayText": "heaven",
+          "sourceIndex": 27,
+          "sourceOccurrenceId": "lxx:Deuteronomy.4.32:27"
+        },
+        "right": {
+          "displayIndex": 36,
+          "displayText": "happened",
+          "sourceIndex": 29,
+          "sourceOccurrenceId": "lxx:Deuteronomy.4.32:29"
+        }
+      },
+      "englishSpan": {
+        "start": 33,
+        "end": 35,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 33,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 34,
+            "text": "there",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 35,
+            "text": "has",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 1,
+        "occurrences": [
+          {
+            "sourceIndex": 28,
+            "occurrenceId": "lxx:Deuteronomy.4.32:28",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:ESG:5:4",
+      "reference": "Esther Greek 5:4",
+      "book": "Esther Greek",
+      "topologyMode": "OVERLAY",
+      "runtimeFile": "Esther.json",
+      "runtimeVerseKey": "5:4",
+      "displayIndex": 8,
+      "displayText": "if",
+      "sourceIndex": 8,
+      "occurrenceId": "lxx:Esther.5.4:8",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 7,
+          "displayText": "day",
+          "sourceIndex": 3,
+          "sourceOccurrenceId": "lxx:Esther.5.4:3"
+        },
+        "right": {
+          "displayIndex": 11,
+          "displayText": "seem",
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "lxx:Esther.5.4:10"
+        }
+      },
+      "englishSpan": {
+        "start": 8,
+        "end": 10,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 8,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 9,
+            "text": "then",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 10,
+            "text": "it",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 6,
+        "occurrences": [
+          {
+            "sourceIndex": 4,
+            "occurrenceId": "lxx:Esther.5.4:4",
+            "surface": "μου",
+            "lemma": "μου",
+            "partOfSpeech": "Pronouns",
+            "gloss": "of me; mine",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709032"
+          },
+          {
+            "sourceIndex": 5,
+            "occurrenceId": "lxx:Esther.5.4:5",
+            "surface": "ἐπίσημος",
+            "lemma": "ἐπίσημος",
+            "partOfSpeech": "Adjective",
+            "gloss": "notorious; notable",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L705245"
+          },
+          {
+            "sourceIndex": 6,
+            "occurrenceId": "lxx:Esther.5.4:6",
+            "surface": "σήμερόν",
+            "lemma": "σήμερον",
+            "partOfSpeech": "Adverb",
+            "gloss": "today; present",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L711751"
+          },
+          {
+            "sourceIndex": 7,
+            "occurrenceId": "lxx:Esther.5.4:7",
+            "surface": "ἐστιν",
+            "lemma": "εἶμι",
+            "partOfSpeech": "Verbs",
+            "gloss": "go",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704094"
+          },
+          {
+            "sourceIndex": 8,
+            "occurrenceId": "lxx:Esther.5.4:8",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 9,
+            "occurrenceId": "lxx:Esther.5.4:9",
+            "surface": "οὖν",
+            "lemma": "οὖν",
+            "partOfSpeech": "Particle",
+            "gloss": "then",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709835"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:EXO:4:18",
+      "reference": "Exodus 4:18",
+      "book": "Exodus",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Exodus.json",
+      "runtimeVerseKey": "4:18",
+      "displayIndex": 24,
+      "displayText": "if",
+      "sourceIndex": 24,
+      "occurrenceId": "lxx:Exodus.4.18:24",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 23,
+          "displayText": "see",
+          "sourceIndex": 23,
+          "sourceOccurrenceId": "lxx:Exodus.4.18:23"
+        },
+        "right": {
+          "displayIndex": 27,
+          "displayText": "yet",
+          "sourceIndex": 25,
+          "sourceOccurrenceId": "lxx:Exodus.4.18:25"
+        }
+      },
+      "englishSpan": {
+        "start": 24,
+        "end": 26,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 24,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 25,
+            "text": "they",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 26,
+            "text": "are",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 1,
+        "occurrences": [
+          {
+            "sourceIndex": 24,
+            "occurrenceId": "lxx:Exodus.4.18:24",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:EXO:8:17",
+      "reference": "Exodus 8:17",
+      "book": "Exodus",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Exodus.json",
+      "runtimeVerseKey": "8:17",
+      "displayIndex": 39,
+      "displayText": "dog-fly",
+      "sourceIndex": 36,
+      "occurrenceId": "lxx:Exodus.8.17:36",
+      "entityId": "word:lxx:L707978",
+      "canonicalGloss": "dog fly",
+      "boundaries": {
+        "left": {
+          "displayIndex": 36,
+          "displayText": "filled",
+          "sourceIndex": 30,
+          "sourceOccurrenceId": "lxx:Exodus.8.17:30"
+        },
+        "right": {
+          "displayIndex": 40,
+          "displayText": "even",
+          "sourceIndex": 37,
+          "sourceOccurrenceId": "lxx:Exodus.8.17:37"
+        }
+      },
+      "englishSpan": {
+        "start": 37,
+        "end": 39,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 37,
+            "text": "with",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 38,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 39,
+            "text": "dog-fly",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 4,
+        "occurrences": [
+          {
+            "sourceIndex": 31,
+            "occurrenceId": "lxx:Exodus.8.17:31",
+            "surface": "αἱ",
+            "lemma": "ὅς",
+            "partOfSpeech": "Pronouns, Particle, Adverb",
+            "gloss": "who; what",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709781"
+          },
+          {
+            "sourceIndex": 33,
+            "occurrenceId": "lxx:Exodus.8.17:33",
+            "surface": "τῶν",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 35,
+            "occurrenceId": "lxx:Exodus.8.17:35",
+            "surface": "τῆς",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 36,
+            "occurrenceId": "lxx:Exodus.8.17:36",
+            "surface": "κυνομυίης",
+            "lemma": "κυνόμυια",
+            "partOfSpeech": "Noun",
+            "gloss": "dog fly",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707978"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:GEN:27:37",
+      "reference": "Genesis 27:37",
+      "book": "Genesis",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Genesis.json",
+      "runtimeVerseKey": "27:37",
+      "displayIndex": 7,
+      "displayText": "If",
+      "sourceIndex": 6,
+      "occurrenceId": "lxx:Genesis.27.37:6",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 6,
+          "displayText": "Esau",
+          "sourceIndex": 5,
+          "sourceOccurrenceId": "lxx:Genesis.27.37:5"
+        },
+        "right": {
+          "displayIndex": 10,
+          "displayText": "made",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "lxx:Genesis.27.37:9"
+        }
+      },
+      "englishSpan": {
+        "start": 7,
+        "end": 9,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 7,
+            "text": "If",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 8,
+            "text": "I",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 9,
+            "text": "have",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 6,
+            "occurrenceId": "lxx:Genesis.27.37:6",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 8,
+            "occurrenceId": "lxx:Genesis.27.37:8",
+            "surface": "αὐτὸν",
+            "lemma": "αὐτός",
+            "partOfSpeech": "Pronouns",
+            "gloss": "he; him",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L702165"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:GEN:39:8",
+      "reference": "Genesis 39:8",
+      "book": "Genesis",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Genesis.json",
+      "runtimeVerseKey": "39:8",
+      "displayIndex": 10,
+      "displayText": "If",
+      "sourceIndex": 11,
+      "occurrenceId": "lxx:Genesis.39.8:11",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 9,
+          "displayText": "wife",
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "lxx:Genesis.39.8:7"
+        },
+        "right": {
+          "displayIndex": 11,
+          "displayText": "because",
+          "sourceIndex": 17,
+          "sourceOccurrenceId": "lxx:Genesis.39.8:17"
+        }
+      },
+      "englishSpan": {
+        "start": 10,
+        "end": 10,
+        "length": 1,
+        "tokens": [
+          {
+            "index": 10,
+            "text": "If",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 5,
+        "occurrences": [
+          {
+            "sourceIndex": 8,
+            "occurrenceId": "lxx:Genesis.39.8:8",
+            "surface": "τοῦ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 10,
+            "occurrenceId": "lxx:Genesis.39.8:10",
+            "surface": "αὐτοῦ",
+            "lemma": "αὐτοῦ",
+            "partOfSpeech": "Adverb",
+            "gloss": "right here",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L702167"
+          },
+          {
+            "sourceIndex": 11,
+            "occurrenceId": "lxx:Genesis.39.8:11",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 12,
+            "occurrenceId": "lxx:Genesis.39.8:12",
+            "surface": "ὁ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 14,
+            "occurrenceId": "lxx:Genesis.39.8:14",
+            "surface": "μου",
+            "lemma": "μου",
+            "partOfSpeech": "Pronouns",
+            "gloss": "of me; mine",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709032"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:HAG:2:19",
+      "reference": "Haggai 2:19",
+      "book": "Haggai",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Haggai.json",
+      "runtimeVerseKey": "2:19",
+      "displayIndex": 19,
+      "displayText": "fig-tree",
+      "sourceIndex": 13,
+      "occurrenceId": "lxx:Haggai.2.19:13",
+      "entityId": "word:lxx:L712254",
+      "canonicalGloss": "fig tree",
+      "boundaries": {
+        "left": {
+          "displayIndex": 16,
+          "displayText": "vine",
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "lxx:Haggai.2.19:10"
+        },
+        "right": {
+          "displayIndex": 22,
+          "displayText": "pomegranate",
+          "sourceIndex": 16,
+          "sourceOccurrenceId": "lxx:Haggai.2.19:16"
+        }
+      },
+      "englishSpan": {
+        "start": 17,
+        "end": 21,
+        "length": 5,
+        "tokens": [
+          {
+            "index": 17,
+            "text": "and",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 18,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 19,
+            "text": "fig-tree",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 20,
+            "text": "and",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 21,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 5,
+        "occurrences": [
+          {
+            "sourceIndex": 11,
+            "occurrenceId": "lxx:Haggai.2.19:11",
+            "surface": "καὶ",
+            "lemma": "καί",
+            "partOfSpeech": "Conjunction, Adverb, Preposition",
+            "gloss": "and; even",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707031"
+          },
+          {
+            "sourceIndex": 12,
+            "occurrenceId": "lxx:Haggai.2.19:12",
+            "surface": "ἡ",
+            "lemma": "ἤ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "or; than",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L705924"
+          },
+          {
+            "sourceIndex": 13,
+            "occurrenceId": "lxx:Haggai.2.19:13",
+            "surface": "συκῆ",
+            "lemma": "συκῆ",
+            "partOfSpeech": "Noun",
+            "gloss": "fig tree",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L712254"
+          },
+          {
+            "sourceIndex": 14,
+            "occurrenceId": "lxx:Haggai.2.19:14",
+            "surface": "καὶ",
+            "lemma": "καί",
+            "partOfSpeech": "Conjunction, Adverb, Preposition",
+            "gloss": "and; even",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707031"
+          },
+          {
+            "sourceIndex": 15,
+            "occurrenceId": "lxx:Haggai.2.19:15",
+            "surface": "ἡ",
+            "lemma": "ἤ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "or; than",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L705924"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:ISA:44:8",
+      "reference": "Isaiah 44:8",
+      "book": "Isaiah",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Isaiah.json",
+      "runtimeVerseKey": "44:8",
+      "displayIndex": 22,
+      "displayText": "if",
+      "sourceIndex": 12,
+      "occurrenceId": "lxx:Isaiah.44.8:12",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 21,
+          "displayText": "witnesses",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "lxx:Isaiah.44.8:9"
+        },
+        "right": {
+          "displayIndex": 26,
+          "displayText": "God",
+          "sourceIndex": 14,
+          "sourceOccurrenceId": "lxx:Isaiah.44.8:14"
+        }
+      },
+      "englishSpan": {
+        "start": 22,
+        "end": 25,
+        "length": 4,
+        "tokens": [
+          {
+            "index": 22,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 23,
+            "text": "there",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 24,
+            "text": "is",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 25,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 10,
+            "occurrenceId": "lxx:Isaiah.44.8:10",
+            "surface": "ὑμεῖς",
+            "lemma": "ὑμεῖς",
+            "partOfSpeech": "Pronouns",
+            "gloss": "you",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L713081"
+          },
+          {
+            "sourceIndex": 12,
+            "occurrenceId": "lxx:Isaiah.44.8:12",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 13,
+            "occurrenceId": "lxx:Isaiah.44.8:13",
+            "surface": "ἔστιν",
+            "lemma": "εἶμι",
+            "partOfSpeech": "Verbs",
+            "gloss": "go",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704094"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:ISA:49:15",
+      "reference": "Isaiah 49:15",
+      "book": "Isaiah",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Isaiah.json",
+      "runtimeVerseKey": "49:15",
+      "displayIndex": 19,
+      "displayText": "if",
+      "sourceIndex": 14,
+      "occurrenceId": "lxx:Isaiah.49.15:14",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 17,
+          "displayText": "womb",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "lxx:Isaiah.49.15:12"
+        },
+        "right": {
+          "displayIndex": 21,
+          "displayText": "woman",
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "lxx:Isaiah.49.15:19"
+        }
+      },
+      "englishSpan": {
+        "start": 18,
+        "end": 20,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 18,
+            "text": "but",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 19,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 20,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 4,
+        "occurrences": [
+          {
+            "sourceIndex": 13,
+            "occurrenceId": "lxx:Isaiah.49.15:13",
+            "surface": "αὐτῆς",
+            "lemma": "αὐτός",
+            "partOfSpeech": "Pronouns",
+            "gloss": "he; him",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L702165"
+          },
+          {
+            "sourceIndex": 14,
+            "occurrenceId": "lxx:Isaiah.49.15:14",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 15,
+            "occurrenceId": "lxx:Isaiah.49.15:15",
+            "surface": "δὲ",
+            "lemma": "δέ",
+            "partOfSpeech": "Conjunction, Particle",
+            "gloss": "though; while",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L703303"
+          },
+          {
+            "sourceIndex": 18,
+            "occurrenceId": "lxx:Isaiah.49.15:18",
+            "surface": "ταῦτα",
+            "lemma": "οὗτος",
+            "partOfSpeech": "Pronouns",
+            "gloss": "this; he",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709858"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:JER:34:18",
+      "reference": "Jeremiah 34:18",
+      "book": "Jeremiah",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Jeremiah.json",
+      "runtimeVerseKey": "34:18",
+      "displayIndex": 5,
+      "displayText": "if",
+      "sourceIndex": 4,
+      "occurrenceId": "lxx:Jeremiah.34.18:4",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 3,
+          "displayText": "prophets",
+          "sourceIndex": 1,
+          "sourceOccurrenceId": "lxx:Jeremiah.34.18:1"
+        },
+        "right": {
+          "displayIndex": 7,
+          "displayText": "word",
+          "sourceIndex": 6,
+          "sourceOccurrenceId": "lxx:Jeremiah.34.18:6"
+        }
+      },
+      "englishSpan": {
+        "start": 4,
+        "end": 6,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 4,
+            "text": "and",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 5,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 6,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 4,
+        "occurrences": [
+          {
+            "sourceIndex": 2,
+            "occurrenceId": "lxx:Jeremiah.34.18:2",
+            "surface": "εἰσιν",
+            "lemma": "εἶμι",
+            "partOfSpeech": "Verbs",
+            "gloss": "go",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704094"
+          },
+          {
+            "sourceIndex": 3,
+            "occurrenceId": "lxx:Jeremiah.34.18:3",
+            "surface": "καὶ",
+            "lemma": "καί",
+            "partOfSpeech": "Conjunction, Adverb, Preposition",
+            "gloss": "and; even",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707031"
+          },
+          {
+            "sourceIndex": 4,
+            "occurrenceId": "lxx:Jeremiah.34.18:4",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 5,
+            "occurrenceId": "lxx:Jeremiah.34.18:5",
+            "surface": "ἔστιν",
+            "lemma": "εἶμι",
+            "partOfSpeech": "Verbs",
+            "gloss": "go",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704094"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:JOS:22:19",
+      "reference": "Joshua 22:19",
+      "book": "Joshua",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Joshua.json",
+      "runtimeVerseKey": "22:19",
+      "displayIndex": 2,
+      "displayText": "if",
+      "sourceIndex": 2,
+      "occurrenceId": "lxx:Joshua.22.19:2",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 1,
+          "displayText": "now",
+          "sourceIndex": 1,
+          "sourceOccurrenceId": "lxx:Joshua.22.19:1"
+        },
+        "right": {
+          "displayIndex": 4,
+          "displayText": "land",
+          "sourceIndex": 6,
+          "sourceOccurrenceId": "lxx:Joshua.22.19:6"
+        }
+      },
+      "englishSpan": {
+        "start": 2,
+        "end": 3,
+        "length": 2,
+        "tokens": [
+          {
+            "index": 2,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 3,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 2,
+            "occurrenceId": "lxx:Joshua.22.19:2",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 4,
+            "occurrenceId": "lxx:Joshua.22.19:4",
+            "surface": "ὑμῖν",
+            "lemma": "ὑμῖν",
+            "partOfSpeech": "Pronouns",
+            "gloss": "you",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L713084"
+          },
+          {
+            "sourceIndex": 5,
+            "occurrenceId": "lxx:Joshua.22.19:5",
+            "surface": "ἡ",
+            "lemma": "ἤ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "or; than",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L705924"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:JDG:4:5",
+      "reference": "Judges 4:5",
+      "book": "Judges",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Judges.json",
+      "runtimeVerseKey": "4:5",
+      "displayIndex": 5,
+      "displayText": "palm-tree",
+      "sourceIndex": 4,
+      "occurrenceId": "lxx:Judges.4.5:4",
+      "entityId": "word:lxx:L713541",
+      "canonicalGloss": "palm tree; palm",
+      "boundaries": {
+        "left": {
+          "displayIndex": 3,
+          "displayText": "under",
+          "sourceIndex": 3,
+          "sourceOccurrenceId": "lxx:Judges.4.5:3"
+        },
+        "right": {
+          "displayIndex": 7,
+          "displayText": "Debbora",
+          "sourceIndex": 5,
+          "sourceOccurrenceId": "lxx:Judges.4.5:5"
+        }
+      },
+      "englishSpan": {
+        "start": 4,
+        "end": 6,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 4,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 5,
+            "text": "palm-tree",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 6,
+            "text": "of",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 1,
+        "occurrences": [
+          {
+            "sourceIndex": 4,
+            "occurrenceId": "lxx:Judges.4.5:4",
+            "surface": "φοίνικα",
+            "lemma": "φοῖνιξ",
+            "partOfSpeech": "Noun",
+            "gloss": "palm tree; palm",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L713541"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:JDG:9:15",
+      "reference": "Judges 9:15",
+      "book": "Judges",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Judges.json",
+      "runtimeVerseKey": "9:15",
+      "displayIndex": 23,
+      "displayText": "if",
+      "sourceIndex": 24,
+      "occurrenceId": "lxx:Judges.9.15:24",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 21,
+          "displayText": "shadow",
+          "sourceIndex": 21,
+          "sourceOccurrenceId": "lxx:Judges.9.15:21"
+        },
+        "right": {
+          "displayIndex": 24,
+          "displayText": "not",
+          "sourceIndex": 25,
+          "sourceOccurrenceId": "lxx:Judges.9.15:25"
+        }
+      },
+      "englishSpan": {
+        "start": 22,
+        "end": 23,
+        "length": 2,
+        "tokens": [
+          {
+            "index": 22,
+            "text": "and",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 23,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 22,
+            "occurrenceId": "lxx:Judges.9.15:22",
+            "surface": "μου",
+            "lemma": "μου",
+            "partOfSpeech": "Pronouns",
+            "gloss": "of me; mine",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709032"
+          },
+          {
+            "sourceIndex": 23,
+            "occurrenceId": "lxx:Judges.9.15:23",
+            "surface": "καὶ",
+            "lemma": "καί",
+            "partOfSpeech": "Conjunction, Adverb, Preposition",
+            "gloss": "and; even",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707031"
+          },
+          {
+            "sourceIndex": 24,
+            "occurrenceId": "lxx:Judges.9.15:24",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:LEV:1:13",
+      "reference": "Leviticus 1:13",
+      "book": "Leviticus",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Leviticus.json",
+      "runtimeVerseKey": "1:13",
+      "displayIndex": 28,
+      "displayText": "burnt-offering",
+      "sourceIndex": 19,
+      "occurrenceId": "lxx:Leviticus.1.13:19",
+      "entityId": "word:lxx:L707174",
+      "canonicalGloss": "burnt offering",
+      "boundaries": {
+        "left": {
+          "displayIndex": 24,
+          "displayText": "altar",
+          "sourceIndex": 18,
+          "sourceOccurrenceId": "lxx:Leviticus.1.13:18"
+        },
+        "right": {
+          "displayIndex": 30,
+          "displayText": "sacrifice",
+          "sourceIndex": 21,
+          "sourceOccurrenceId": "lxx:Leviticus.1.13:21"
+        }
+      },
+      "englishSpan": {
+        "start": 25,
+        "end": 29,
+        "length": 5,
+        "tokens": [
+          {
+            "index": 25,
+            "text": "it",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 26,
+            "text": "is",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 27,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 28,
+            "text": "burnt-offering",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 29,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 19,
+            "occurrenceId": "lxx:Leviticus.1.13:19",
+            "surface": "κάρπωμά",
+            "lemma": "κάρπωμα",
+            "partOfSpeech": "Noun",
+            "gloss": "burnt offering",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707174"
+          },
+          {
+            "sourceIndex": 20,
+            "occurrenceId": "lxx:Leviticus.1.13:20",
+            "surface": "ἐστιν",
+            "lemma": "εἶμι",
+            "partOfSpeech": "Verbs",
+            "gloss": "go",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704094"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:LEV:1:9",
+      "reference": "Leviticus 1:9",
+      "book": "Leviticus",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Leviticus.json",
+      "runtimeVerseKey": "1:9",
+      "displayIndex": 23,
+      "displayText": "burnt-offering",
+      "sourceIndex": 17,
+      "occurrenceId": "lxx:Leviticus.1.9:17",
+      "entityId": "word:lxx:L707174",
+      "canonicalGloss": "burnt offering",
+      "boundaries": {
+        "left": {
+          "displayIndex": 19,
+          "displayText": "altar",
+          "sourceIndex": 16,
+          "sourceOccurrenceId": "lxx:Leviticus.1.9:16"
+        },
+        "right": {
+          "displayIndex": 25,
+          "displayText": "sacrifice",
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "lxx:Leviticus.1.9:19"
+        }
+      },
+      "englishSpan": {
+        "start": 20,
+        "end": 24,
+        "length": 5,
+        "tokens": [
+          {
+            "index": 20,
+            "text": "it",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 21,
+            "text": "is",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 22,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 23,
+            "text": "burnt-offering",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 24,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 17,
+            "occurrenceId": "lxx:Leviticus.1.9:17",
+            "surface": "κάρπωμά",
+            "lemma": "κάρπωμα",
+            "partOfSpeech": "Noun",
+            "gloss": "burnt offering",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707174"
+          },
+          {
+            "sourceIndex": 18,
+            "occurrenceId": "lxx:Leviticus.1.9:18",
+            "surface": "ἐστιν",
+            "lemma": "εἶμι",
+            "partOfSpeech": "Verbs",
+            "gloss": "go",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704094"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:LEV:7:5",
+      "reference": "Leviticus 7:5",
+      "book": "Leviticus",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Leviticus.json",
+      "runtimeVerseKey": "7:5",
+      "displayIndex": 10,
+      "displayText": "burnt-offering",
+      "sourceIndex": 8,
+      "occurrenceId": "lxx:Leviticus.7.5:8",
+      "entityId": "word:lxx:L707174",
+      "canonicalGloss": "burnt offering",
+      "boundaries": {
+        "left": {
+          "displayIndex": 8,
+          "displayText": "altar",
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "lxx:Leviticus.7.5:7"
+        },
+        "right": {
+          "displayIndex": 13,
+          "displayText": "Lord",
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "lxx:Leviticus.7.5:10"
+        }
+      },
+      "englishSpan": {
+        "start": 9,
+        "end": 12,
+        "length": 4,
+        "tokens": [
+          {
+            "index": 9,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 10,
+            "text": "burnt-offering",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 11,
+            "text": "to",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 12,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 8,
+            "occurrenceId": "lxx:Leviticus.7.5:8",
+            "surface": "κάρπωμα",
+            "lemma": "κάρπωμα",
+            "partOfSpeech": "Noun",
+            "gloss": "burnt offering",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707174"
+          },
+          {
+            "sourceIndex": 9,
+            "occurrenceId": "lxx:Leviticus.7.5:9",
+            "surface": "τῷ",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:MAL:1:6",
+      "reference": "Malachi 1:6",
+      "book": "Malachi",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Malachi.json",
+      "runtimeVerseKey": "1:6",
+      "displayIndex": 10,
+      "displayText": "if",
+      "sourceIndex": 9,
+      "occurrenceId": "lxx:Malachi.1.6:9",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 9,
+          "displayText": "master",
+          "sourceIndex": 6,
+          "sourceOccurrenceId": "lxx:Malachi.1.6:6"
+        },
+        "right": {
+          "displayIndex": 15,
+          "displayText": "father",
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "lxx:Malachi.1.6:10"
+        }
+      },
+      "englishSpan": {
+        "start": 10,
+        "end": 14,
+        "length": 5,
+        "tokens": [
+          {
+            "index": 10,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 11,
+            "text": "then",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 12,
+            "text": "I",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 13,
+            "text": "am",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 14,
+            "text": "a",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 7,
+            "occurrenceId": "lxx:Malachi.1.6:7",
+            "surface": "αὐτοῦ",
+            "lemma": "αὐτοῦ",
+            "partOfSpeech": "Adverb",
+            "gloss": "right here",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L702167"
+          },
+          {
+            "sourceIndex": 8,
+            "occurrenceId": "lxx:Malachi.1.6:8",
+            "surface": "καὶ",
+            "lemma": "καί",
+            "partOfSpeech": "Conjunction, Adverb, Preposition",
+            "gloss": "and; even",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707031"
+          },
+          {
+            "sourceIndex": 9,
+            "occurrenceId": "lxx:Malachi.1.6:9",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:NUM:22:34",
+      "reference": "Numbers 22:34",
+      "book": "Numbers",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Numbers.json",
+      "runtimeVerseKey": "22:34",
+      "displayIndex": 30,
+      "displayText": "if",
+      "sourceIndex": 21,
+      "occurrenceId": "lxx:Numbers.22.34:21",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 29,
+          "displayText": "now",
+          "sourceIndex": 20,
+          "sourceOccurrenceId": "lxx:Numbers.22.34:20"
+        },
+        "right": {
+          "displayIndex": 33,
+          "displayText": "not",
+          "sourceIndex": 22,
+          "sourceOccurrenceId": "lxx:Numbers.22.34:22"
+        }
+      },
+      "englishSpan": {
+        "start": 30,
+        "end": 32,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 30,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 31,
+            "text": "it",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 32,
+            "text": "shall",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 1,
+        "occurrences": [
+          {
+            "sourceIndex": 21,
+            "occurrenceId": "lxx:Numbers.22.34:21",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:NUM:23:27",
+      "reference": "Numbers 23:27",
+      "book": "Numbers",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Numbers.json",
+      "runtimeVerseKey": "23:27",
+      "displayIndex": 14,
+      "displayText": "if",
+      "sourceIndex": 11,
+      "occurrenceId": "lxx:Numbers.23.27:11",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 13,
+          "displayText": "place",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "lxx:Numbers.23.27:9"
+        },
+        "right": {
+          "displayIndex": 17,
+          "displayText": "please",
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "lxx:Numbers.23.27:12"
+        }
+      },
+      "englishSpan": {
+        "start": 14,
+        "end": 16,
+        "length": 3,
+        "tokens": [
+          {
+            "index": 14,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 15,
+            "text": "it",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 16,
+            "text": "shall",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 1,
+        "occurrences": [
+          {
+            "sourceIndex": 11,
+            "occurrenceId": "lxx:Numbers.23.27:11",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:PSA:43:21",
+      "reference": "Psalms 44:20",
+      "book": "Psalms",
+      "topologyMode": "OVERLAY",
+      "runtimeFile": "Psalms.json",
+      "runtimeVerseKey": "43:21",
+      "displayIndex": 10,
+      "displayText": "if",
+      "sourceIndex": 8,
+      "occurrenceId": "lxx:Psalms.43.21:8",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 8,
+          "displayText": "God",
+          "sourceIndex": 5,
+          "sourceOccurrenceId": "lxx:Psalms.43.21:5"
+        },
+        "right": {
+          "displayIndex": 13,
+          "displayText": "spread",
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "lxx:Psalms.43.21:9"
+        }
+      },
+      "englishSpan": {
+        "start": 9,
+        "end": 12,
+        "length": 4,
+        "tokens": [
+          {
+            "index": 9,
+            "text": "and",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 10,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 11,
+            "text": "we",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 12,
+            "text": "have",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 6,
+            "occurrenceId": "lxx:Psalms.43.21:6",
+            "surface": "ἡμῶν",
+            "lemma": "ἡμῶν",
+            "partOfSpeech": "Pronouns",
+            "gloss": "our",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L705999"
+          },
+          {
+            "sourceIndex": 7,
+            "occurrenceId": "lxx:Psalms.43.21:7",
+            "surface": "καὶ",
+            "lemma": "καί",
+            "partOfSpeech": "Conjunction, Adverb, Preposition",
+            "gloss": "and; even",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L707031"
+          },
+          {
+            "sourceIndex": 8,
+            "occurrenceId": "lxx:Psalms.43.21:8",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:RUT:3:3",
+      "reference": "Ruth 3:3",
+      "book": "Ruth",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Ruth.json",
+      "runtimeVerseKey": "3:3",
+      "displayIndex": 18,
+      "displayText": "threshing-floor",
+      "sourceIndex": 16,
+      "occurrenceId": "lxx:Ruth.3.3:16",
+      "entityId": "word:lxx:L700741",
+      "canonicalGloss": "threshing floor",
+      "boundaries": {
+        "left": {
+          "displayIndex": 15,
+          "displayText": "up",
+          "sourceIndex": 13,
+          "sourceOccurrenceId": "lxx:Ruth.3.3:13"
+        },
+        "right": {
+          "displayIndex": 20,
+          "displayText": "not",
+          "sourceIndex": 17,
+          "sourceOccurrenceId": "lxx:Ruth.3.3:17"
+        }
+      },
+      "englishSpan": {
+        "start": 16,
+        "end": 19,
+        "length": 4,
+        "tokens": [
+          {
+            "index": 16,
+            "text": "to",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 17,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 18,
+            "text": "threshing-floor",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 19,
+            "text": "do",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 14,
+            "occurrenceId": "lxx:Ruth.3.3:14",
+            "surface": "ἐπὶ",
+            "lemma": "ἐπί",
+            "partOfSpeech": "Preposition",
+            "gloss": "in; on",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L705080"
+          },
+          {
+            "sourceIndex": 15,
+            "occurrenceId": "lxx:Ruth.3.3:15",
+            "surface": "τὸν",
+            "lemma": "ὁ",
+            "partOfSpeech": "Pronouns, Noun",
+            "gloss": "the",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L709436"
+          },
+          {
+            "sourceIndex": 16,
+            "occurrenceId": "lxx:Ruth.3.3:16",
+            "surface": "ἅλω",
+            "lemma": "ἅλων",
+            "partOfSpeech": "Noun",
+            "gloss": "threshing floor",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L700741"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:SNG:7:13",
+      "reference": "Song of Songs 7:13",
+      "book": "Song of Songs",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "SongofSongs.json",
+      "runtimeVerseKey": "7:13",
+      "displayIndex": 10,
+      "displayText": "if",
+      "sourceIndex": 4,
+      "occurrenceId": "lxx:Song_of_Songs.7.13:4",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 9,
+          "displayText": "see",
+          "sourceIndex": 3,
+          "sourceOccurrenceId": "lxx:Song_of_Songs.7.13:3"
+        },
+        "right": {
+          "displayIndex": 12,
+          "displayText": "vine",
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "lxx:Song_of_Songs.7.13:7"
+        }
+      },
+      "englishSpan": {
+        "start": 10,
+        "end": 11,
+        "length": 2,
+        "tokens": [
+          {
+            "index": 10,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 11,
+            "text": "the",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 3,
+        "occurrences": [
+          {
+            "sourceIndex": 4,
+            "occurrenceId": "lxx:Song_of_Songs.7.13:4",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          },
+          {
+            "sourceIndex": 5,
+            "occurrenceId": "lxx:Song_of_Songs.7.13:5",
+            "surface": "ἤνθησεν",
+            "lemma": "ἀνθέω",
+            "partOfSpeech": "Verbs",
+            "gloss": "blossom; bloom",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L701152"
+          },
+          {
+            "sourceIndex": 6,
+            "occurrenceId": "lxx:Song_of_Songs.7.13:6",
+            "surface": "ἡ",
+            "lemma": "ἤ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "or; than",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L705924"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:WIS:2:17",
+      "reference": "Wisdom 2:17",
+      "book": "Wisdom",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Wisdom.json",
+      "runtimeVerseKey": "2:17",
+      "displayIndex": 3,
+      "displayText": "if",
+      "sourceIndex": 1,
+      "occurrenceId": "lxx:Wisdom.2.17:1",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 2,
+          "displayText": "see",
+          "sourceIndex": 0,
+          "sourceOccurrenceId": "lxx:Wisdom.2.17:0"
+        },
+        "right": {
+          "displayIndex": 5,
+          "displayText": "words",
+          "sourceIndex": 3,
+          "sourceOccurrenceId": "lxx:Wisdom.2.17:3"
+        }
+      },
+      "englishSpan": {
+        "start": 3,
+        "end": 4,
+        "length": 2,
+        "tokens": [
+          {
+            "index": 3,
+            "text": "if",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 4,
+            "text": "his",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 1,
+        "occurrences": [
+          {
+            "sourceIndex": 1,
+            "occurrenceId": "lxx:Wisdom.2.17:1",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    },
+    {
+      "readerRecordId": "brenton:ZEC:8:6",
+      "reference": "Zechariah 8:6",
+      "book": "Zechariah",
+      "topologyMode": "NUMERIC_FALLBACK",
+      "runtimeFile": "Zechariah.json",
+      "runtimeVerseKey": "8:6",
+      "displayIndex": 5,
+      "displayText": "If",
+      "sourceIndex": 5,
+      "occurrenceId": "lxx:Zechariah.8.6:5",
+      "entityId": "word:lxx:L704071",
+      "canonicalGloss": "if; whether",
+      "boundaries": {
+        "left": {
+          "displayIndex": 4,
+          "displayText": "Almighty",
+          "sourceIndex": 3,
+          "sourceOccurrenceId": "lxx:Zechariah.8.6:3"
+        },
+        "right": {
+          "displayIndex": 9,
+          "displayText": "impossible",
+          "sourceIndex": 6,
+          "sourceOccurrenceId": "lxx:Zechariah.8.6:6"
+        }
+      },
+      "englishSpan": {
+        "start": 5,
+        "end": 8,
+        "length": 4,
+        "tokens": [
+          {
+            "index": 5,
+            "text": "If",
+            "meaningful": true,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 6,
+            "text": "it",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 7,
+            "text": "shall",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          },
+          {
+            "index": 8,
+            "text": "be",
+            "meaningful": false,
+            "tappable": false,
+            "correctAnchor": false
+          }
+        ]
+      },
+      "sourceSegment": {
+        "length": 2,
+        "occurrences": [
+          {
+            "sourceIndex": 4,
+            "occurrenceId": "lxx:Zechariah.8.6:4",
+            "surface": "διότι",
+            "lemma": "διότι",
+            "partOfSpeech": "Conjunction, Adverb",
+            "gloss": "because; that",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L703734"
+          },
+          {
+            "sourceIndex": 5,
+            "occurrenceId": "lxx:Zechariah.8.6:5",
+            "surface": "εἰ",
+            "lemma": "εἰ",
+            "partOfSpeech": "Conjunction, Adverb, Particle",
+            "gloss": "if; whether",
+            "strong": "",
+            "morph": "",
+            "entityId": "word:lxx:L704071"
+          }
+        ]
+      }
+    }
+  ],
+  "quarantine": [
+    {
+      "readerRecordId": "brenton:ESG:4:17u",
+      "displayIndex": 24,
+      "reasons": [
+        "EXISTING_CANONICAL_SOURCE_OWNER",
+        "EXISTING_RUNTIME_OR_OVERLAY_SOURCE_OWNER"
+      ]
+    }
+  ],
+  "provenance": {
+    "censusSummarySha256": "02e3e4fd53a84547cb9ec958e48ac808c136dba545d2bf3b1365ac4cf2901215",
+    "ownershipChecksSha256": "a199c6c86de980d170365fb7658f7ac408ecb148a2785a9cfbcc31893925db8f"
+  },
+  "checksum": "e4036b82b6adf45c6e16fb83d1c20a2938923dd525dc01fd0598bd8876729b58"
+}

@@ -1,0 +1,3929 @@
+{
+  "schemaVersion": "emet-p0812r2-greek-nt-approved-span-overlay/v1",
+  "milestone": "P08.12R2",
+  "purpose": "Evidence-reviewed OpenGNT occurrence -> English rendering span ownership.",
+  "authority": {
+    "source": "Ordered OpenGNT source occurrences",
+    "unit": "One OpenGNT occurrence -> English rendering span",
+    "canonicalModified": false,
+    "recurrenceAutomaticApproval": false,
+    "adjacencyAutomaticApproval": false,
+    "semanticGuessing": false,
+    "fuzzyMatching": false,
+    "approvalBasis": "Thirteen manually reviewed recurring phrase families whose complete English rendering is defensibly supplied by the single Greek occurrence."
+  },
+  "counts": {
+    "approvedFamilies": 13,
+    "approvedSpans": 58,
+    "meaningfulRoutes": 61,
+    "webMeaningfulRoutes": 30,
+    "kjvMeaningfulRoutes": 31
+  },
+  "families": [
+    {
+      "key": "kjv|unto thee|G4771",
+      "translation": "kjv",
+      "englishSpan": "unto thee",
+      "strong": "G4771",
+      "sourceSurfaceExample": "σοι",
+      "morphExample": "P-2DS",
+      "caseCount": 10,
+      "meaningfulResidualPositions": 10
+    },
+    {
+      "key": "web|like a|G5613",
+      "translation": "web",
+      "englishSpan": "like a",
+      "strong": "G5613",
+      "sourceSurfaceExample": "ὡς",
+      "morphExample": "CONJ",
+      "caseCount": 8,
+      "meaningfulResidualPositions": 8
+    },
+    {
+      "key": "kjv|these things|G3778",
+      "translation": "kjv",
+      "englishSpan": "these things",
+      "strong": "G3778",
+      "sourceSurfaceExample": "ταῦτα",
+      "morphExample": "D-APN",
+      "caseCount": 6,
+      "meaningfulResidualPositions": 6
+    },
+    {
+      "key": "web|of every|G3956",
+      "translation": "web",
+      "englishSpan": "of every",
+      "strong": "G3956",
+      "sourceSurfaceExample": "πάσης",
+      "morphExample": "A-GSF",
+      "caseCount": 5,
+      "meaningfulResidualPositions": 5
+    },
+    {
+      "key": "web|stood by|G3936",
+      "translation": "web",
+      "englishSpan": "stood by",
+      "strong": "G3936",
+      "sourceSurfaceExample": "παρεστηκότων",
+      "morphExample": "V-RAP-GPM",
+      "caseCount": 4,
+      "meaningfulResidualPositions": 4
+    },
+    {
+      "key": "web|this man|G3778",
+      "translation": "web",
+      "englishSpan": "This man",
+      "strong": "G3778",
+      "sourceSurfaceExample": "οὗτος",
+      "morphExample": "D-NSM",
+      "caseCount": 4,
+      "meaningfulResidualPositions": 4
+    },
+    {
+      "key": "kjv|a thief|G3027",
+      "translation": "kjv",
+      "englishSpan": "a thief",
+      "strong": "G3027",
+      "sourceSurfaceExample": "λῃστὴν",
+      "morphExample": "N-ASM",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3
+    },
+    {
+      "key": "kjv|it is raised|G1453",
+      "translation": "kjv",
+      "englishSpan": "it is raised",
+      "strong": "G1453",
+      "sourceSurfaceExample": "ἐγείρεται",
+      "morphExample": "V-PPI-3S",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3
+    },
+    {
+      "key": "kjv|thou sawest|G1492",
+      "translation": "kjv",
+      "englishSpan": "thou sawest",
+      "strong": "G1492",
+      "sourceSurfaceExample": "εἶδες",
+      "morphExample": "V-2AAI-2S",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 6
+    },
+    {
+      "key": "kjv|was cast|G0906",
+      "translation": "kjv",
+      "englishSpan": "was cast",
+      "strong": "G0906",
+      "sourceSurfaceExample": "βεβλημένον",
+      "morphExample": "V-RPP-ASM",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3
+    },
+    {
+      "key": "web|has left|G0863",
+      "translation": "web",
+      "englishSpan": "has left",
+      "strong": "G0863",
+      "sourceSurfaceExample": "ἀφῆκεν",
+      "morphExample": "V-AAI-3S",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3
+    },
+    {
+      "key": "web|is called|G3004",
+      "translation": "web",
+      "englishSpan": "is called",
+      "strong": "G3004",
+      "sourceSurfaceExample": "λεγόμενον",
+      "morphExample": "V-PPP-ASM",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3
+    },
+    {
+      "key": "web|these things|G3778",
+      "translation": "web",
+      "englishSpan": "these things",
+      "strong": "G3778",
+      "sourceSurfaceExample": "ταῦτα",
+      "morphExample": "D-APN",
+      "caseCount": 3,
+      "meaningfulResidualPositions": 3
+    }
+  ],
+  "spans": [
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "John 5:12",
+      "translation": "kjv",
+      "runtimeFile": "John.json",
+      "englishSpan": {
+        "start": 10,
+        "end": 11,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 10,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 11,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        11
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:John.5.12:8",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "John 21:18",
+      "translation": "kjv",
+      "runtimeFile": "John.json",
+      "englishSpan": {
+        "start": 4,
+        "end": 5,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 4,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 5,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        5
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:John.21.18:3",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Luke 10:13",
+      "translation": "kjv",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 1,
+        "end": 2,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 1,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 2,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        2
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:Luke.10.13:1",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Luke 10:13",
+      "translation": "kjv",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 5,
+        "end": 6,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 6,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        6
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Luke.10.13:4",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Luke 14:10",
+      "translation": "kjv",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 23,
+        "end": 24,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 23,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 24,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        24
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 16,
+        "sourceOccurrenceId": "greek-nt:Luke.14.10:16",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Mark 14:36",
+      "translation": "kjv",
+      "runtimeFile": "Mark.json",
+      "englishSpan": {
+        "start": 9,
+        "end": 10,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 9,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 10,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        10
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:Mark.14.36:7",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Matthew 11:21",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "englishSpan": {
+        "start": 1,
+        "end": 2,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 1,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 2,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        2
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:Matthew.11.21:1",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Matthew 11:21",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "englishSpan": {
+        "start": 5,
+        "end": 6,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 6,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        6
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Matthew.11.21:4",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Philemon 1:21",
+      "translation": "kjv",
+      "runtimeFile": "Philemon.json",
+      "englishSpan": {
+        "start": 7,
+        "end": 8,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 7,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 8,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        8
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Philemon.1.21:5",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Revelation 2:16",
+      "translation": "kjv",
+      "runtimeFile": "Revelation.json",
+      "englishSpan": {
+        "start": 6,
+        "end": 7,
+        "text": "unto thee",
+        "tokens": [
+          {
+            "index": 6,
+            "text": "unto",
+            "normalized": "unto",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 7,
+            "text": "thee",
+            "normalized": "thee",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        7
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:Revelation.2.16:6",
+        "surface": "σοι",
+        "strong": "G4771",
+        "entityId": "word:greek-nt:G4771",
+        "morph": "P-2DS"
+      }
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Luke 3:22",
+      "translation": "web",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 9,
+        "end": 10,
+        "text": "like a",
+        "tokens": [
+          {
+            "index": 9,
+            "text": "like",
+            "normalized": "like",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 10,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        9
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:Luke.3.22:8",
+        "surface": "ὡς",
+        "strong": "G5613",
+        "entityId": "word:greek-nt:G5613",
+        "morph": "CONJ"
+      }
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "John 1:32",
+      "translation": "web",
+      "runtimeFile": "John.json",
+      "englishSpan": {
+        "start": 9,
+        "end": 10,
+        "text": "like a",
+        "tokens": [
+          {
+            "index": 9,
+            "text": "like",
+            "normalized": "like",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 10,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        9
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:John.1.32:9",
+        "surface": "ὡς",
+        "strong": "G5613",
+        "entityId": "word:greek-nt:G5613",
+        "morph": "CONJ"
+      }
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 4:1",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 19,
+        "end": 20,
+        "text": "like a",
+        "tokens": [
+          {
+            "index": 19,
+            "text": "like",
+            "normalized": "like",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 20,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        19
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 17,
+        "sourceOccurrenceId": "greek-nt:Revelation.4.1:17",
+        "surface": "ὡς",
+        "strong": "G5613",
+        "entityId": "word:greek-nt:G5613",
+        "morph": "CONJ"
+      }
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 6:13",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 9,
+        "end": 10,
+        "text": "like a",
+        "tokens": [
+          {
+            "index": 9,
+            "text": "like",
+            "normalized": "like",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 10,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        9
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Revelation.6.13:9",
+        "surface": "ὡς",
+        "strong": "G5613",
+        "entityId": "word:greek-nt:G5613",
+        "morph": "CONJ"
+      }
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 8:10",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 13,
+        "end": 14,
+        "text": "like a",
+        "tokens": [
+          {
+            "index": 13,
+            "text": "like",
+            "normalized": "like",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 14,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        13
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 13,
+        "sourceOccurrenceId": "greek-nt:Revelation.8.10:13",
+        "surface": "ὡς",
+        "strong": "G5613",
+        "entityId": "word:greek-nt:G5613",
+        "morph": "CONJ"
+      }
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 12:15",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 11,
+        "end": 12,
+        "text": "like a",
+        "tokens": [
+          {
+            "index": 11,
+            "text": "like",
+            "normalized": "like",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 12,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        11
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Revelation.12.15:12",
+        "surface": "ὡς",
+        "strong": "G5613",
+        "entityId": "word:greek-nt:G5613",
+        "morph": "CONJ"
+      }
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 16:15",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 3,
+        "end": 4,
+        "text": "like a",
+        "tokens": [
+          {
+            "index": 3,
+            "text": "like",
+            "normalized": "like",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 4,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        3
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:Revelation.16.15:2",
+        "surface": "ὡς",
+        "strong": "G5613",
+        "entityId": "word:greek-nt:G5613",
+        "morph": "CONJ"
+      }
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 21:2",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "text": "like a",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "like",
+            "normalized": "like",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 16,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        15
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 16,
+        "sourceOccurrenceId": "greek-nt:Revelation.21.2:16",
+        "surface": "ὡς",
+        "strong": "G5613",
+        "entityId": "word:greek-nt:G5613",
+        "morph": "CONJ"
+      }
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "John 2:16",
+      "translation": "kjv",
+      "runtimeFile": "John.json",
+      "englishSpan": {
+        "start": 8,
+        "end": 9,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 8,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 9,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        9
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:John.2.16:7",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-APN"
+      }
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "John 3:22",
+      "translation": "kjv",
+      "runtimeFile": "John.json",
+      "englishSpan": {
+        "start": 1,
+        "end": 2,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 1,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 2,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        2
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:John.3.22:1",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-APN"
+      }
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "Luke 21:31",
+      "translation": "kjv",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 6,
+        "end": 7,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 6,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 7,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        7
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Luke.21.31:5",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-APN"
+      }
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "Mark 13:29",
+      "translation": "kjv",
+      "runtimeFile": "Mark.json",
+      "englishSpan": {
+        "start": 9,
+        "end": 10,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 9,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 10,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        10
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Mark.13.29:5",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-APN"
+      }
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "Matthew 24:33",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "englishSpan": {
+        "start": 8,
+        "end": 9,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 8,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 9,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        9
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:Matthew.24.33:6",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-APN"
+      }
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "Matthew 24:34",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "englishSpan": {
+        "start": 12,
+        "end": 13,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 13,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        13
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 13,
+        "sourceOccurrenceId": "greek-nt:Matthew.24.34:13",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-NPN"
+      }
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Luke 5:17",
+      "translation": "web",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 23,
+        "end": 24,
+        "text": "of every",
+        "tokens": [
+          {
+            "index": 23,
+            "text": "of",
+            "normalized": "of",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 24,
+            "text": "every",
+            "normalized": "every",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        24
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 20,
+        "sourceOccurrenceId": "greek-nt:Luke.5.17:20",
+        "surface": "πάσης",
+        "strong": "G3956",
+        "entityId": "word:greek-nt:G3956",
+        "morph": "A-GSF"
+      }
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Philemon 1:6",
+      "translation": "web",
+      "runtimeFile": "Phlm.json",
+      "englishSpan": {
+        "start": 12,
+        "end": 13,
+        "text": "of every",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "of",
+            "normalized": "of",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 13,
+            "text": "every",
+            "normalized": "every",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        13
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:Philemon.1.6:10",
+        "surface": "παντὸς",
+        "strong": "G3956",
+        "entityId": "word:greek-nt:G3956",
+        "morph": "A-GSN"
+      }
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Revelation 7:4",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "text": "of every",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "of",
+            "normalized": "of",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 16,
+            "text": "every",
+            "normalized": "every",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        16
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Revelation.7.4:12",
+        "surface": "πάσης",
+        "strong": "G3956",
+        "entityId": "word:greek-nt:G3956",
+        "morph": "A-GSF"
+      }
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Revelation 18:2",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 23,
+        "end": 24,
+        "text": "of every",
+        "tokens": [
+          {
+            "index": 23,
+            "text": "of",
+            "normalized": "of",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 24,
+            "text": "every",
+            "normalized": "every",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        24
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 17,
+        "sourceOccurrenceId": "greek-nt:Revelation.18.2:17",
+        "surface": "παντὸς",
+        "strong": "G3956",
+        "entityId": "word:greek-nt:G3956",
+        "morph": "A-GSN"
+      }
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Revelation 18:2",
+      "translation": "web",
+      "runtimeFile": "Rev.json",
+      "englishSpan": {
+        "start": 30,
+        "end": 31,
+        "text": "of every",
+        "tokens": [
+          {
+            "index": 30,
+            "text": "of",
+            "normalized": "of",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 31,
+            "text": "every",
+            "normalized": "every",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        31
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 22,
+        "sourceOccurrenceId": "greek-nt:Revelation.18.2:22",
+        "surface": "παντὸς",
+        "strong": "G3956",
+        "entityId": "word:greek-nt:G3956",
+        "morph": "A-GSN"
+      }
+    },
+    {
+      "familyKey": "web|stood by|G3936",
+      "reference": "Mark 14:47",
+      "translation": "web",
+      "runtimeFile": "Mark.json",
+      "englishSpan": {
+        "start": 7,
+        "end": 8,
+        "text": "stood by",
+        "tokens": [
+          {
+            "index": 7,
+            "text": "stood",
+            "normalized": "stood",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 8,
+            "text": "by",
+            "normalized": "by",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        7
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Mark.14.47:4",
+        "surface": "παρεστηκότων",
+        "strong": "G3936",
+        "entityId": "word:greek-nt:G3936",
+        "morph": "V-RAP-GPM"
+      }
+    },
+    {
+      "familyKey": "web|stood by|G3936",
+      "reference": "Mark 14:70",
+      "translation": "web",
+      "runtimeFile": "Mark.json",
+      "englishSpan": {
+        "start": 12,
+        "end": 13,
+        "text": "stood by",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "stood",
+            "normalized": "stood",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 13,
+            "text": "by",
+            "normalized": "by",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        12
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Mark.14.70:9",
+        "surface": "παρεστῶτες",
+        "strong": "G3936",
+        "entityId": "word:greek-nt:G3936",
+        "morph": "V-RAP-NPM"
+      }
+    },
+    {
+      "familyKey": "web|stood by|G3936",
+      "reference": "Mark 15:39",
+      "translation": "web",
+      "runtimeFile": "Mark.json",
+      "englishSpan": {
+        "start": 4,
+        "end": 5,
+        "text": "stood by",
+        "tokens": [
+          {
+            "index": 4,
+            "text": "stood",
+            "normalized": "stood",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 5,
+            "text": "by",
+            "normalized": "by",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        4
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Mark.15.39:5",
+        "surface": "παρεστηκὼς",
+        "strong": "G3936",
+        "entityId": "word:greek-nt:G3936",
+        "morph": "V-RAP-NSM"
+      }
+    },
+    {
+      "familyKey": "web|stood by|G3936",
+      "reference": "Luke 19:24",
+      "translation": "web",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 5,
+        "end": 6,
+        "text": "stood by",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "stood",
+            "normalized": "stood",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 6,
+            "text": "by",
+            "normalized": "by",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        5
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:Luke.19.24:2",
+        "surface": "παρεστῶσιν",
+        "strong": "G3936",
+        "entityId": "word:greek-nt:G3936",
+        "morph": "V-RAP-DPM"
+      }
+    },
+    {
+      "familyKey": "web|this man|G3778",
+      "reference": "Matthew 9:3",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "englishSpan": {
+        "start": 8,
+        "end": 9,
+        "text": "This man",
+        "tokens": [
+          {
+            "index": 8,
+            "text": "This",
+            "normalized": "this",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 9,
+            "text": "man",
+            "normalized": "man",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        9
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:Matthew.9.3:8",
+        "surface": "οὗτος",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-NSM"
+      }
+    },
+    {
+      "familyKey": "web|this man|G3778",
+      "reference": "John 10:41",
+      "translation": "web",
+      "runtimeFile": "John.json",
+      "englishSpan": {
+        "start": 17,
+        "end": 18,
+        "text": "this man",
+        "tokens": [
+          {
+            "index": 17,
+            "text": "this",
+            "normalized": "this",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 18,
+            "text": "man",
+            "normalized": "man",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        18
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 19,
+        "sourceOccurrenceId": "greek-nt:John.10.41:19",
+        "surface": "τούτου",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-GSM"
+      }
+    },
+    {
+      "familyKey": "web|this man|G3778",
+      "reference": "Acts 5:37",
+      "translation": "web",
+      "runtimeFile": "Acts.json",
+      "englishSpan": {
+        "start": 1,
+        "end": 2,
+        "text": "this man",
+        "tokens": [
+          {
+            "index": 1,
+            "text": "this",
+            "normalized": "this",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 2,
+            "text": "man",
+            "normalized": "man",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        2
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:Acts.5.37:1",
+        "surface": "τοῦτον",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-ASM"
+      }
+    },
+    {
+      "familyKey": "web|this man|G3778",
+      "reference": "Acts 8:10",
+      "translation": "web",
+      "runtimeFile": "Acts.json",
+      "englishSpan": {
+        "start": 12,
+        "end": 13,
+        "text": "This man",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "This",
+            "normalized": "this",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 13,
+            "text": "man",
+            "normalized": "man",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": "no-expected-greek-source-token-in-verse"
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        13
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:Acts.8.10:8",
+        "surface": "οὗτός",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-NSM"
+      }
+    },
+    {
+      "familyKey": "kjv|a thief|G3027",
+      "reference": "Luke 22:52",
+      "translation": "kjv",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 26,
+        "end": 27,
+        "text": "a thief",
+        "tokens": [
+          {
+            "index": 26,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          },
+          {
+            "index": 27,
+            "text": "thief",
+            "normalized": "thief",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        27
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 17,
+        "sourceOccurrenceId": "greek-nt:Luke.22.52:17",
+        "surface": "λῃστὴν",
+        "strong": "G3027",
+        "entityId": "word:greek-nt:G3027",
+        "morph": "N-ASM"
+      }
+    },
+    {
+      "familyKey": "kjv|a thief|G3027",
+      "reference": "Mark 14:48",
+      "translation": "kjv",
+      "runtimeFile": "Mark.json",
+      "englishSpan": {
+        "start": 13,
+        "end": 14,
+        "text": "a thief",
+        "tokens": [
+          {
+            "index": 13,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          },
+          {
+            "index": 14,
+            "text": "thief",
+            "normalized": "thief",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        14
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:Mark.14.48:8",
+        "surface": "λῃστὴν",
+        "strong": "G3027",
+        "entityId": "word:greek-nt:G3027",
+        "morph": "N-ASM"
+      }
+    },
+    {
+      "familyKey": "kjv|a thief|G3027",
+      "reference": "Matthew 26:55",
+      "translation": "kjv",
+      "runtimeFile": "Matthew.json",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "text": "a thief",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "a",
+            "normalized": "a",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "empty-or-short-token"
+          },
+          {
+            "index": 16,
+            "text": "thief",
+            "normalized": "thief",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        16
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 11,
+        "sourceOccurrenceId": "greek-nt:Matthew.26.55:11",
+        "surface": "λῃστὴν",
+        "strong": "G3027",
+        "entityId": "word:greek-nt:G3027",
+        "morph": "N-ASM"
+      }
+    },
+    {
+      "familyKey": "kjv|it is raised|G1453",
+      "reference": "1 Corinthians 15:42",
+      "translation": "kjv",
+      "runtimeFile": "1_Corinthians.json",
+      "englishSpan": {
+        "start": 13,
+        "end": 15,
+        "text": "it is raised",
+        "tokens": [
+          {
+            "index": 13,
+            "text": "it",
+            "normalized": "it",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 14,
+            "text": "is",
+            "normalized": "is",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 15,
+            "text": "raised",
+            "normalized": "raised",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        15
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.15.42:9",
+        "surface": "ἐγείρεται",
+        "strong": "G1453",
+        "entityId": "word:greek-nt:G1453",
+        "morph": "V-PPI-3S"
+      }
+    },
+    {
+      "familyKey": "kjv|it is raised|G1453",
+      "reference": "1 Corinthians 15:43",
+      "translation": "kjv",
+      "runtimeFile": "1_Corinthians.json",
+      "englishSpan": {
+        "start": 5,
+        "end": 7,
+        "text": "it is raised",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "it",
+            "normalized": "it",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 6,
+            "text": "is",
+            "normalized": "is",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 7,
+            "text": "raised",
+            "normalized": "raised",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        7
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.15.43:3",
+        "surface": "ἐγείρεται",
+        "strong": "G1453",
+        "entityId": "word:greek-nt:G1453",
+        "morph": "V-PPI-3S"
+      }
+    },
+    {
+      "familyKey": "kjv|it is raised|G1453",
+      "reference": "1 Corinthians 15:43",
+      "translation": "kjv",
+      "runtimeFile": "1_Corinthians.json",
+      "englishSpan": {
+        "start": 15,
+        "end": 17,
+        "text": "it is raised",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "it",
+            "normalized": "it",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 16,
+            "text": "is",
+            "normalized": "is",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 17,
+            "text": "raised",
+            "normalized": "raised",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        17
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.15.43:9",
+        "surface": "ἐγείρεται",
+        "strong": "G1453",
+        "entityId": "word:greek-nt:G1453",
+        "morph": "V-PPI-3S"
+      }
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:12",
+      "translation": "kjv",
+      "runtimeFile": "Revelation.json",
+      "englishSpan": {
+        "start": 5,
+        "end": 6,
+        "text": "thou sawest",
+        "tokens": [
+          {
+            "index": 5,
+            "text": "thou",
+            "normalized": "thou",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 6,
+            "text": "sawest",
+            "normalized": "sawest",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        5,
+        6
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Revelation.17.12:5",
+        "surface": "εἶδες",
+        "strong": "G1492",
+        "entityId": "word:greek-nt:G1492",
+        "morph": "V-2AAI-2S"
+      }
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:15",
+      "translation": "kjv",
+      "runtimeFile": "Revelation.json",
+      "englishSpan": {
+        "start": 8,
+        "end": 9,
+        "text": "thou sawest",
+        "tokens": [
+          {
+            "index": 8,
+            "text": "thou",
+            "normalized": "thou",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 9,
+            "text": "sawest",
+            "normalized": "sawest",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        8,
+        9
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:Revelation.17.15:6",
+        "surface": "εἶδες",
+        "strong": "G1492",
+        "entityId": "word:greek-nt:G1492",
+        "morph": "V-2AAI-2S"
+      }
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:18",
+      "translation": "kjv",
+      "runtimeFile": "Revelation.json",
+      "englishSpan": {
+        "start": 4,
+        "end": 5,
+        "text": "thou sawest",
+        "tokens": [
+          {
+            "index": 4,
+            "text": "thou",
+            "normalized": "thou",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 5,
+            "text": "sawest",
+            "normalized": "sawest",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        4,
+        5
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Revelation.17.18:4",
+        "surface": "εἶδες",
+        "strong": "G1492",
+        "entityId": "word:greek-nt:G1492",
+        "morph": "V-2AAI-2S"
+      }
+    },
+    {
+      "familyKey": "kjv|was cast|G0906",
+      "reference": "Luke 23:25",
+      "translation": "kjv",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 11,
+        "end": 12,
+        "text": "was cast",
+        "tokens": [
+          {
+            "index": 11,
+            "text": "was",
+            "normalized": "was",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 12,
+            "text": "cast",
+            "normalized": "cast",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        12
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:Luke.23.25:7",
+        "surface": "βεβλημένον",
+        "strong": "G0906",
+        "entityId": "word:greek-nt:G0906",
+        "morph": "V-RPP-ASM"
+      }
+    },
+    {
+      "familyKey": "kjv|was cast|G0906",
+      "reference": "Revelation 8:8",
+      "translation": "kjv",
+      "runtimeFile": "Revelation.json",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "text": "was cast",
+        "tokens": [
+          {
+            "index": 15,
+            "text": "was",
+            "normalized": "was",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 16,
+            "text": "cast",
+            "normalized": "cast",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        16
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 11,
+        "sourceOccurrenceId": "greek-nt:Revelation.8.8:11",
+        "surface": "ἐβλήθη",
+        "strong": "G0906",
+        "entityId": "word:greek-nt:G0906",
+        "morph": "V-API-3S"
+      }
+    },
+    {
+      "familyKey": "kjv|was cast|G0906",
+      "reference": "Revelation 20:15",
+      "translation": "kjv",
+      "runtimeFile": "Revelation.json",
+      "englishSpan": {
+        "start": 11,
+        "end": 12,
+        "text": "was cast",
+        "tokens": [
+          {
+            "index": 11,
+            "text": "was",
+            "normalized": "was",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 12,
+            "text": "cast",
+            "normalized": "cast",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        12
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 11,
+        "sourceOccurrenceId": "greek-nt:Revelation.20.15:11",
+        "surface": "ἐβλήθη",
+        "strong": "G0906",
+        "entityId": "word:greek-nt:G0906",
+        "morph": "V-API-3S"
+      }
+    },
+    {
+      "familyKey": "web|has left|G0863",
+      "reference": "Matthew 19:29",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "englishSpan": {
+        "start": 2,
+        "end": 3,
+        "text": "has left",
+        "tokens": [
+          {
+            "index": 2,
+            "text": "has",
+            "normalized": "has",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 3,
+            "text": "left",
+            "normalized": "left",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        3
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Matthew.19.29:3",
+        "surface": "ἀφῆκεν",
+        "strong": "G0863",
+        "entityId": "word:greek-nt:G0863",
+        "morph": "V-AAI-3S"
+      }
+    },
+    {
+      "familyKey": "web|has left|G0863",
+      "reference": "Mark 10:29",
+      "translation": "web",
+      "runtimeFile": "Mark.json",
+      "englishSpan": {
+        "start": 12,
+        "end": 13,
+        "text": "has left",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "has",
+            "normalized": "has",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 13,
+            "text": "left",
+            "normalized": "left",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        13
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Mark.10.29:9",
+        "surface": "ἀφῆκεν",
+        "strong": "G0863",
+        "entityId": "word:greek-nt:G0863",
+        "morph": "V-AAI-3S"
+      }
+    },
+    {
+      "familyKey": "web|has left|G0863",
+      "reference": "Luke 18:29",
+      "translation": "web",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 14,
+        "end": 15,
+        "text": "has left",
+        "tokens": [
+          {
+            "index": 14,
+            "text": "has",
+            "normalized": "has",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 15,
+            "text": "left",
+            "normalized": "left",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        15
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 11,
+        "sourceOccurrenceId": "greek-nt:Luke.18.29:11",
+        "surface": "ἀφῆκεν",
+        "strong": "G0863",
+        "entityId": "word:greek-nt:G0863",
+        "morph": "V-AAI-3S"
+      }
+    },
+    {
+      "familyKey": "web|is called|G3004",
+      "reference": "Matthew 27:22",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "englishSpan": {
+        "start": 12,
+        "end": 13,
+        "text": "is called",
+        "tokens": [
+          {
+            "index": 12,
+            "text": "is",
+            "normalized": "is",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 13,
+            "text": "called",
+            "normalized": "called",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        13
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Matthew.27.22:9",
+        "surface": "λεγόμενον",
+        "strong": "G3004",
+        "entityId": "word:greek-nt:G3004",
+        "morph": "V-PPP-ASM"
+      }
+    },
+    {
+      "familyKey": "web|is called|G3004",
+      "reference": "John 4:25",
+      "translation": "web",
+      "runtimeFile": "John.json",
+      "englishSpan": {
+        "start": 13,
+        "end": 14,
+        "text": "is called",
+        "tokens": [
+          {
+            "index": 13,
+            "text": "is",
+            "normalized": "is",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 14,
+            "text": "called",
+            "normalized": "called",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        14
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:John.4.25:9",
+        "surface": "λεγόμενος",
+        "strong": "G3004",
+        "entityId": "word:greek-nt:G3004",
+        "morph": "V-PPP-NSM"
+      }
+    },
+    {
+      "familyKey": "web|is called|G3004",
+      "reference": "John 19:17",
+      "translation": "web",
+      "runtimeFile": "John.json",
+      "englishSpan": {
+        "start": 16,
+        "end": 17,
+        "text": "is called",
+        "tokens": [
+          {
+            "index": 16,
+            "text": "is",
+            "normalized": "is",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          },
+          {
+            "index": 17,
+            "text": "called",
+            "normalized": "called",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        17
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:John.19.17:12",
+        "surface": "λέγεται",
+        "strong": "G3004",
+        "entityId": "word:greek-nt:G3004",
+        "morph": "V-PPI-3S"
+      }
+    },
+    {
+      "familyKey": "web|these things|G3778",
+      "reference": "Matthew 24:33",
+      "translation": "web",
+      "runtimeFile": "Matt.json",
+      "englishSpan": {
+        "start": 8,
+        "end": 9,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 8,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 9,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        9
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:Matthew.24.33:6",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-APN"
+      }
+    },
+    {
+      "familyKey": "web|these things|G3778",
+      "reference": "Mark 13:29",
+      "translation": "web",
+      "runtimeFile": "Mark.json",
+      "englishSpan": {
+        "start": 7,
+        "end": 8,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 7,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 8,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        8
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Mark.13.29:5",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-APN"
+      }
+    },
+    {
+      "familyKey": "web|these things|G3778",
+      "reference": "Luke 21:31",
+      "translation": "web",
+      "runtimeFile": "Luke.json",
+      "englishSpan": {
+        "start": 7,
+        "end": 8,
+        "text": "these things",
+        "tokens": [
+          {
+            "index": 7,
+            "text": "these",
+            "normalized": "these",
+            "alignmentStatus": "ignored",
+            "alignmentReason": "english-grammar-token"
+          },
+          {
+            "index": 8,
+            "text": "things",
+            "normalized": "things",
+            "alignmentStatus": "unaligned",
+            "alignmentReason": null
+          }
+        ]
+      },
+      "meaningfulResidualIndices": [
+        8
+      ],
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Luke.21.31:5",
+        "surface": "ταῦτα",
+        "strong": "G3778",
+        "entityId": "word:greek-nt:G3778",
+        "morph": "D-APN"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "John 5:12",
+      "book": "John",
+      "chapter": 5,
+      "verse": 12,
+      "verseKey": "5:12",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "John.json",
+      "displayIndex": 11,
+      "displayText": "thee",
+      "spanStart": 10,
+      "spanEnd": 11,
+      "spanText": "unto thee",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:John.5.12:8",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "John 21:18",
+      "book": "John",
+      "chapter": 21,
+      "verse": 18,
+      "verseKey": "21:18",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "John.json",
+      "displayIndex": 5,
+      "displayText": "thee",
+      "spanStart": 4,
+      "spanEnd": 5,
+      "spanText": "unto thee",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:John.21.18:3",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Luke 10:13",
+      "book": "Luke",
+      "chapter": 10,
+      "verse": 13,
+      "verseKey": "10:13",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 2,
+      "displayText": "thee",
+      "spanStart": 1,
+      "spanEnd": 2,
+      "spanText": "unto thee",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:Luke.10.13:1",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Luke 10:13",
+      "book": "Luke",
+      "chapter": 10,
+      "verse": 13,
+      "verseKey": "10:13",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 6,
+      "displayText": "thee",
+      "spanStart": 5,
+      "spanEnd": 6,
+      "spanText": "unto thee",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Luke.10.13:4",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Luke 14:10",
+      "book": "Luke",
+      "chapter": 14,
+      "verse": 10,
+      "verseKey": "14:10",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 24,
+      "displayText": "thee",
+      "spanStart": 23,
+      "spanEnd": 24,
+      "spanText": "unto thee",
+      "sourceIndex": 16,
+      "sourceOccurrenceId": "greek-nt:Luke.14.10:16",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Mark 14:36",
+      "book": "Mark",
+      "chapter": 14,
+      "verse": 36,
+      "verseKey": "14:36",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 10,
+      "displayText": "thee",
+      "spanStart": 9,
+      "spanEnd": 10,
+      "spanText": "unto thee",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:Mark.14.36:7",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Matthew 11:21",
+      "book": "Matthew",
+      "chapter": 11,
+      "verse": 21,
+      "verseKey": "11:21",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 2,
+      "displayText": "thee",
+      "spanStart": 1,
+      "spanEnd": 2,
+      "spanText": "unto thee",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:Matthew.11.21:1",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Matthew 11:21",
+      "book": "Matthew",
+      "chapter": 11,
+      "verse": 21,
+      "verseKey": "11:21",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 6,
+      "displayText": "thee",
+      "spanStart": 5,
+      "spanEnd": 6,
+      "spanText": "unto thee",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Matthew.11.21:4",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Philemon 1:21",
+      "book": "Philemon",
+      "chapter": 1,
+      "verse": 21,
+      "verseKey": "1:21",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Philemon.json",
+      "displayIndex": 8,
+      "displayText": "thee",
+      "spanStart": 7,
+      "spanEnd": 8,
+      "spanText": "unto thee",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Philemon.1.21:5",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|unto thee|G4771",
+      "reference": "Revelation 2:16",
+      "book": "Revelation",
+      "chapter": 2,
+      "verse": 16,
+      "verseKey": "2:16",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 7,
+      "displayText": "thee",
+      "spanStart": 6,
+      "spanEnd": 7,
+      "spanText": "unto thee",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Revelation.2.16:6",
+      "sourceSurface": "σοι",
+      "strong": "G4771",
+      "entityId": "word:greek-nt:G4771",
+      "morph": "P-2DS",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Luke 3:22",
+      "book": "Luke",
+      "chapter": 3,
+      "verse": 22,
+      "verseKey": "3:22",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 9,
+      "displayText": "like",
+      "spanStart": 9,
+      "spanEnd": 10,
+      "spanText": "like a",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:Luke.3.22:8",
+      "sourceSurface": "ὡς",
+      "strong": "G5613",
+      "entityId": "word:greek-nt:G5613",
+      "morph": "CONJ",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "John 1:32",
+      "book": "John",
+      "chapter": 1,
+      "verse": 32,
+      "verseKey": "1:32",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "displayIndex": 9,
+      "displayText": "like",
+      "spanStart": 9,
+      "spanEnd": 10,
+      "spanText": "like a",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:John.1.32:9",
+      "sourceSurface": "ὡς",
+      "strong": "G5613",
+      "entityId": "word:greek-nt:G5613",
+      "morph": "CONJ",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 4:1",
+      "book": "Revelation",
+      "chapter": 4,
+      "verse": 1,
+      "verseKey": "4:1",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 19,
+      "displayText": "like",
+      "spanStart": 19,
+      "spanEnd": 20,
+      "spanText": "like a",
+      "sourceIndex": 17,
+      "sourceOccurrenceId": "greek-nt:Revelation.4.1:17",
+      "sourceSurface": "ὡς",
+      "strong": "G5613",
+      "entityId": "word:greek-nt:G5613",
+      "morph": "CONJ",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 6:13",
+      "book": "Revelation",
+      "chapter": 6,
+      "verse": 13,
+      "verseKey": "6:13",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 9,
+      "displayText": "like",
+      "spanStart": 9,
+      "spanEnd": 10,
+      "spanText": "like a",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Revelation.6.13:9",
+      "sourceSurface": "ὡς",
+      "strong": "G5613",
+      "entityId": "word:greek-nt:G5613",
+      "morph": "CONJ",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 8:10",
+      "book": "Revelation",
+      "chapter": 8,
+      "verse": 10,
+      "verseKey": "8:10",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 13,
+      "displayText": "like",
+      "spanStart": 13,
+      "spanEnd": 14,
+      "spanText": "like a",
+      "sourceIndex": 13,
+      "sourceOccurrenceId": "greek-nt:Revelation.8.10:13",
+      "sourceSurface": "ὡς",
+      "strong": "G5613",
+      "entityId": "word:greek-nt:G5613",
+      "morph": "CONJ",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 12:15",
+      "book": "Revelation",
+      "chapter": 12,
+      "verse": 15,
+      "verseKey": "12:15",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 11,
+      "displayText": "like",
+      "spanStart": 11,
+      "spanEnd": 12,
+      "spanText": "like a",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Revelation.12.15:12",
+      "sourceSurface": "ὡς",
+      "strong": "G5613",
+      "entityId": "word:greek-nt:G5613",
+      "morph": "CONJ",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 16:15",
+      "book": "Revelation",
+      "chapter": 16,
+      "verse": 15,
+      "verseKey": "16:15",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 3,
+      "displayText": "like",
+      "spanStart": 3,
+      "spanEnd": 4,
+      "spanText": "like a",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Revelation.16.15:2",
+      "sourceSurface": "ὡς",
+      "strong": "G5613",
+      "entityId": "word:greek-nt:G5613",
+      "morph": "CONJ",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|like a|G5613",
+      "reference": "Revelation 21:2",
+      "book": "Revelation",
+      "chapter": 21,
+      "verse": 2,
+      "verseKey": "21:2",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 15,
+      "displayText": "like",
+      "spanStart": 15,
+      "spanEnd": 16,
+      "spanText": "like a",
+      "sourceIndex": 16,
+      "sourceOccurrenceId": "greek-nt:Revelation.21.2:16",
+      "sourceSurface": "ὡς",
+      "strong": "G5613",
+      "entityId": "word:greek-nt:G5613",
+      "morph": "CONJ",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "John 2:16",
+      "book": "John",
+      "chapter": 2,
+      "verse": 16,
+      "verseKey": "2:16",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "John.json",
+      "displayIndex": 9,
+      "displayText": "things",
+      "spanStart": 8,
+      "spanEnd": 9,
+      "spanText": "these things",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:John.2.16:7",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-APN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "John 3:22",
+      "book": "John",
+      "chapter": 3,
+      "verse": 22,
+      "verseKey": "3:22",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "John.json",
+      "displayIndex": 2,
+      "displayText": "things",
+      "spanStart": 1,
+      "spanEnd": 2,
+      "spanText": "these things",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:John.3.22:1",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-APN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "Luke 21:31",
+      "book": "Luke",
+      "chapter": 21,
+      "verse": 31,
+      "verseKey": "21:31",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 7,
+      "displayText": "things",
+      "spanStart": 6,
+      "spanEnd": 7,
+      "spanText": "these things",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Luke.21.31:5",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-APN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "Mark 13:29",
+      "book": "Mark",
+      "chapter": 13,
+      "verse": 29,
+      "verseKey": "13:29",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 10,
+      "displayText": "things",
+      "spanStart": 9,
+      "spanEnd": 10,
+      "spanText": "these things",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Mark.13.29:5",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-APN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "Matthew 24:33",
+      "book": "Matthew",
+      "chapter": 24,
+      "verse": 33,
+      "verseKey": "24:33",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 9,
+      "displayText": "things",
+      "spanStart": 8,
+      "spanEnd": 9,
+      "spanText": "these things",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Matthew.24.33:6",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-APN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|these things|G3778",
+      "reference": "Matthew 24:34",
+      "book": "Matthew",
+      "chapter": 24,
+      "verse": 34,
+      "verseKey": "24:34",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 13,
+      "displayText": "things",
+      "spanStart": 12,
+      "spanEnd": 13,
+      "spanText": "these things",
+      "sourceIndex": 13,
+      "sourceOccurrenceId": "greek-nt:Matthew.24.34:13",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-NPN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Luke 5:17",
+      "book": "Luke",
+      "chapter": 5,
+      "verse": 17,
+      "verseKey": "5:17",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 24,
+      "displayText": "every",
+      "spanStart": 23,
+      "spanEnd": 24,
+      "spanText": "of every",
+      "sourceIndex": 20,
+      "sourceOccurrenceId": "greek-nt:Luke.5.17:20",
+      "sourceSurface": "πάσης",
+      "strong": "G3956",
+      "entityId": "word:greek-nt:G3956",
+      "morph": "A-GSF",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Philemon 1:6",
+      "book": "Philemon",
+      "chapter": 1,
+      "verse": 6,
+      "verseKey": "1:6",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Phlm.json",
+      "displayIndex": 13,
+      "displayText": "every",
+      "spanStart": 12,
+      "spanEnd": 13,
+      "spanText": "of every",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Philemon.1.6:10",
+      "sourceSurface": "παντὸς",
+      "strong": "G3956",
+      "entityId": "word:greek-nt:G3956",
+      "morph": "A-GSN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Revelation 7:4",
+      "book": "Revelation",
+      "chapter": 7,
+      "verse": 4,
+      "verseKey": "7:4",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 16,
+      "displayText": "every",
+      "spanStart": 15,
+      "spanEnd": 16,
+      "spanText": "of every",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Revelation.7.4:12",
+      "sourceSurface": "πάσης",
+      "strong": "G3956",
+      "entityId": "word:greek-nt:G3956",
+      "morph": "A-GSF",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Revelation 18:2",
+      "book": "Revelation",
+      "chapter": 18,
+      "verse": 2,
+      "verseKey": "18:2",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 24,
+      "displayText": "every",
+      "spanStart": 23,
+      "spanEnd": 24,
+      "spanText": "of every",
+      "sourceIndex": 17,
+      "sourceOccurrenceId": "greek-nt:Revelation.18.2:17",
+      "sourceSurface": "παντὸς",
+      "strong": "G3956",
+      "entityId": "word:greek-nt:G3956",
+      "morph": "A-GSN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|of every|G3956",
+      "reference": "Revelation 18:2",
+      "book": "Revelation",
+      "chapter": 18,
+      "verse": 2,
+      "verseKey": "18:2",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "displayIndex": 31,
+      "displayText": "every",
+      "spanStart": 30,
+      "spanEnd": 31,
+      "spanText": "of every",
+      "sourceIndex": 22,
+      "sourceOccurrenceId": "greek-nt:Revelation.18.2:22",
+      "sourceSurface": "παντὸς",
+      "strong": "G3956",
+      "entityId": "word:greek-nt:G3956",
+      "morph": "A-GSN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|stood by|G3936",
+      "reference": "Mark 14:47",
+      "book": "Mark",
+      "chapter": 14,
+      "verse": 47,
+      "verseKey": "14:47",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 7,
+      "displayText": "stood",
+      "spanStart": 7,
+      "spanEnd": 8,
+      "spanText": "stood by",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Mark.14.47:4",
+      "sourceSurface": "παρεστηκότων",
+      "strong": "G3936",
+      "entityId": "word:greek-nt:G3936",
+      "morph": "V-RAP-GPM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|stood by|G3936",
+      "reference": "Mark 14:70",
+      "book": "Mark",
+      "chapter": 14,
+      "verse": 70,
+      "verseKey": "14:70",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 12,
+      "displayText": "stood",
+      "spanStart": 12,
+      "spanEnd": 13,
+      "spanText": "stood by",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Mark.14.70:9",
+      "sourceSurface": "παρεστῶτες",
+      "strong": "G3936",
+      "entityId": "word:greek-nt:G3936",
+      "morph": "V-RAP-NPM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|stood by|G3936",
+      "reference": "Mark 15:39",
+      "book": "Mark",
+      "chapter": 15,
+      "verse": 39,
+      "verseKey": "15:39",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 4,
+      "displayText": "stood",
+      "spanStart": 4,
+      "spanEnd": 5,
+      "spanText": "stood by",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Mark.15.39:5",
+      "sourceSurface": "παρεστηκὼς",
+      "strong": "G3936",
+      "entityId": "word:greek-nt:G3936",
+      "morph": "V-RAP-NSM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|stood by|G3936",
+      "reference": "Luke 19:24",
+      "book": "Luke",
+      "chapter": 19,
+      "verse": 24,
+      "verseKey": "19:24",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 5,
+      "displayText": "stood",
+      "spanStart": 5,
+      "spanEnd": 6,
+      "spanText": "stood by",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Luke.19.24:2",
+      "sourceSurface": "παρεστῶσιν",
+      "strong": "G3936",
+      "entityId": "word:greek-nt:G3936",
+      "morph": "V-RAP-DPM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|this man|G3778",
+      "reference": "Matthew 9:3",
+      "book": "Matthew",
+      "chapter": 9,
+      "verse": 3,
+      "verseKey": "9:3",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 9,
+      "displayText": "man",
+      "spanStart": 8,
+      "spanEnd": 9,
+      "spanText": "This man",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:Matthew.9.3:8",
+      "sourceSurface": "οὗτος",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-NSM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|this man|G3778",
+      "reference": "John 10:41",
+      "book": "John",
+      "chapter": 10,
+      "verse": 41,
+      "verseKey": "10:41",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "displayIndex": 18,
+      "displayText": "man",
+      "spanStart": 17,
+      "spanEnd": 18,
+      "spanText": "this man",
+      "sourceIndex": 19,
+      "sourceOccurrenceId": "greek-nt:John.10.41:19",
+      "sourceSurface": "τούτου",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-GSM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|this man|G3778",
+      "reference": "Acts 5:37",
+      "book": "Acts",
+      "chapter": 5,
+      "verse": 37,
+      "verseKey": "5:37",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "displayIndex": 2,
+      "displayText": "man",
+      "spanStart": 1,
+      "spanEnd": 2,
+      "spanText": "this man",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:Acts.5.37:1",
+      "sourceSurface": "τοῦτον",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-ASM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|this man|G3778",
+      "reference": "Acts 8:10",
+      "book": "Acts",
+      "chapter": 8,
+      "verse": 10,
+      "verseKey": "8:10",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "displayIndex": 13,
+      "displayText": "man",
+      "spanStart": 12,
+      "spanEnd": 13,
+      "spanText": "This man",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:Acts.8.10:8",
+      "sourceSurface": "οὗτός",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-NSM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|a thief|G3027",
+      "reference": "Luke 22:52",
+      "book": "Luke",
+      "chapter": 22,
+      "verse": 52,
+      "verseKey": "22:52",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 27,
+      "displayText": "thief",
+      "spanStart": 26,
+      "spanEnd": 27,
+      "spanText": "a thief",
+      "sourceIndex": 17,
+      "sourceOccurrenceId": "greek-nt:Luke.22.52:17",
+      "sourceSurface": "λῃστὴν",
+      "strong": "G3027",
+      "entityId": "word:greek-nt:G3027",
+      "morph": "N-ASM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|a thief|G3027",
+      "reference": "Mark 14:48",
+      "book": "Mark",
+      "chapter": 14,
+      "verse": 48,
+      "verseKey": "14:48",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 14,
+      "displayText": "thief",
+      "spanStart": 13,
+      "spanEnd": 14,
+      "spanText": "a thief",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:Mark.14.48:8",
+      "sourceSurface": "λῃστὴν",
+      "strong": "G3027",
+      "entityId": "word:greek-nt:G3027",
+      "morph": "N-ASM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|a thief|G3027",
+      "reference": "Matthew 26:55",
+      "book": "Matthew",
+      "chapter": 26,
+      "verse": 55,
+      "verseKey": "26:55",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 16,
+      "displayText": "thief",
+      "spanStart": 15,
+      "spanEnd": 16,
+      "spanText": "a thief",
+      "sourceIndex": 11,
+      "sourceOccurrenceId": "greek-nt:Matthew.26.55:11",
+      "sourceSurface": "λῃστὴν",
+      "strong": "G3027",
+      "entityId": "word:greek-nt:G3027",
+      "morph": "N-ASM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|it is raised|G1453",
+      "reference": "1 Corinthians 15:42",
+      "book": "1 Corinthians",
+      "chapter": 15,
+      "verse": 42,
+      "verseKey": "15:42",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "1_Corinthians.json",
+      "displayIndex": 15,
+      "displayText": "raised",
+      "spanStart": 13,
+      "spanEnd": 15,
+      "spanText": "it is raised",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.15.42:9",
+      "sourceSurface": "ἐγείρεται",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "morph": "V-PPI-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|it is raised|G1453",
+      "reference": "1 Corinthians 15:43",
+      "book": "1 Corinthians",
+      "chapter": 15,
+      "verse": 43,
+      "verseKey": "15:43",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "1_Corinthians.json",
+      "displayIndex": 7,
+      "displayText": "raised",
+      "spanStart": 5,
+      "spanEnd": 7,
+      "spanText": "it is raised",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.15.43:3",
+      "sourceSurface": "ἐγείρεται",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "morph": "V-PPI-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|it is raised|G1453",
+      "reference": "1 Corinthians 15:43",
+      "book": "1 Corinthians",
+      "chapter": 15,
+      "verse": 43,
+      "verseKey": "15:43",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "1_Corinthians.json",
+      "displayIndex": 17,
+      "displayText": "raised",
+      "spanStart": 15,
+      "spanEnd": 17,
+      "spanText": "it is raised",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.15.43:9",
+      "sourceSurface": "ἐγείρεται",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "morph": "V-PPI-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:12",
+      "book": "Revelation",
+      "chapter": 17,
+      "verse": 12,
+      "verseKey": "17:12",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 5,
+      "displayText": "thou",
+      "spanStart": 5,
+      "spanEnd": 6,
+      "spanText": "thou sawest",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Revelation.17.12:5",
+      "sourceSurface": "εἶδες",
+      "strong": "G1492",
+      "entityId": "word:greek-nt:G1492",
+      "morph": "V-2AAI-2S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:12",
+      "book": "Revelation",
+      "chapter": 17,
+      "verse": 12,
+      "verseKey": "17:12",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 6,
+      "displayText": "sawest",
+      "spanStart": 5,
+      "spanEnd": 6,
+      "spanText": "thou sawest",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Revelation.17.12:5",
+      "sourceSurface": "εἶδες",
+      "strong": "G1492",
+      "entityId": "word:greek-nt:G1492",
+      "morph": "V-2AAI-2S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:15",
+      "book": "Revelation",
+      "chapter": 17,
+      "verse": 15,
+      "verseKey": "17:15",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 8,
+      "displayText": "thou",
+      "spanStart": 8,
+      "spanEnd": 9,
+      "spanText": "thou sawest",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Revelation.17.15:6",
+      "sourceSurface": "εἶδες",
+      "strong": "G1492",
+      "entityId": "word:greek-nt:G1492",
+      "morph": "V-2AAI-2S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:15",
+      "book": "Revelation",
+      "chapter": 17,
+      "verse": 15,
+      "verseKey": "17:15",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 9,
+      "displayText": "sawest",
+      "spanStart": 8,
+      "spanEnd": 9,
+      "spanText": "thou sawest",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Revelation.17.15:6",
+      "sourceSurface": "εἶδες",
+      "strong": "G1492",
+      "entityId": "word:greek-nt:G1492",
+      "morph": "V-2AAI-2S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:18",
+      "book": "Revelation",
+      "chapter": 17,
+      "verse": 18,
+      "verseKey": "17:18",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 4,
+      "displayText": "thou",
+      "spanStart": 4,
+      "spanEnd": 5,
+      "spanText": "thou sawest",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Revelation.17.18:4",
+      "sourceSurface": "εἶδες",
+      "strong": "G1492",
+      "entityId": "word:greek-nt:G1492",
+      "morph": "V-2AAI-2S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|thou sawest|G1492",
+      "reference": "Revelation 17:18",
+      "book": "Revelation",
+      "chapter": 17,
+      "verse": 18,
+      "verseKey": "17:18",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 5,
+      "displayText": "sawest",
+      "spanStart": 4,
+      "spanEnd": 5,
+      "spanText": "thou sawest",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Revelation.17.18:4",
+      "sourceSurface": "εἶδες",
+      "strong": "G1492",
+      "entityId": "word:greek-nt:G1492",
+      "morph": "V-2AAI-2S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|was cast|G0906",
+      "reference": "Luke 23:25",
+      "book": "Luke",
+      "chapter": 23,
+      "verse": 25,
+      "verseKey": "23:25",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 12,
+      "displayText": "cast",
+      "spanStart": 11,
+      "spanEnd": 12,
+      "spanText": "was cast",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:Luke.23.25:7",
+      "sourceSurface": "βεβλημένον",
+      "strong": "G0906",
+      "entityId": "word:greek-nt:G0906",
+      "morph": "V-RPP-ASM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|was cast|G0906",
+      "reference": "Revelation 8:8",
+      "book": "Revelation",
+      "chapter": 8,
+      "verse": 8,
+      "verseKey": "8:8",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 16,
+      "displayText": "cast",
+      "spanStart": 15,
+      "spanEnd": 16,
+      "spanText": "was cast",
+      "sourceIndex": 11,
+      "sourceOccurrenceId": "greek-nt:Revelation.8.8:11",
+      "sourceSurface": "ἐβλήθη",
+      "strong": "G0906",
+      "entityId": "word:greek-nt:G0906",
+      "morph": "V-API-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "kjv|was cast|G0906",
+      "reference": "Revelation 20:15",
+      "book": "Revelation",
+      "chapter": 20,
+      "verse": 15,
+      "verseKey": "20:15",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 12,
+      "displayText": "cast",
+      "spanStart": 11,
+      "spanEnd": 12,
+      "spanText": "was cast",
+      "sourceIndex": 11,
+      "sourceOccurrenceId": "greek-nt:Revelation.20.15:11",
+      "sourceSurface": "ἐβλήθη",
+      "strong": "G0906",
+      "entityId": "word:greek-nt:G0906",
+      "morph": "V-API-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|has left|G0863",
+      "reference": "Matthew 19:29",
+      "book": "Matthew",
+      "chapter": 19,
+      "verse": 29,
+      "verseKey": "19:29",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 3,
+      "displayText": "left",
+      "spanStart": 2,
+      "spanEnd": 3,
+      "spanText": "has left",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Matthew.19.29:3",
+      "sourceSurface": "ἀφῆκεν",
+      "strong": "G0863",
+      "entityId": "word:greek-nt:G0863",
+      "morph": "V-AAI-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|has left|G0863",
+      "reference": "Mark 10:29",
+      "book": "Mark",
+      "chapter": 10,
+      "verse": 29,
+      "verseKey": "10:29",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 13,
+      "displayText": "left",
+      "spanStart": 12,
+      "spanEnd": 13,
+      "spanText": "has left",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Mark.10.29:9",
+      "sourceSurface": "ἀφῆκεν",
+      "strong": "G0863",
+      "entityId": "word:greek-nt:G0863",
+      "morph": "V-AAI-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|has left|G0863",
+      "reference": "Luke 18:29",
+      "book": "Luke",
+      "chapter": 18,
+      "verse": 29,
+      "verseKey": "18:29",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 15,
+      "displayText": "left",
+      "spanStart": 14,
+      "spanEnd": 15,
+      "spanText": "has left",
+      "sourceIndex": 11,
+      "sourceOccurrenceId": "greek-nt:Luke.18.29:11",
+      "sourceSurface": "ἀφῆκεν",
+      "strong": "G0863",
+      "entityId": "word:greek-nt:G0863",
+      "morph": "V-AAI-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|is called|G3004",
+      "reference": "Matthew 27:22",
+      "book": "Matthew",
+      "chapter": 27,
+      "verse": 22,
+      "verseKey": "27:22",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 13,
+      "displayText": "called",
+      "spanStart": 12,
+      "spanEnd": 13,
+      "spanText": "is called",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Matthew.27.22:9",
+      "sourceSurface": "λεγόμενον",
+      "strong": "G3004",
+      "entityId": "word:greek-nt:G3004",
+      "morph": "V-PPP-ASM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|is called|G3004",
+      "reference": "John 4:25",
+      "book": "John",
+      "chapter": 4,
+      "verse": 25,
+      "verseKey": "4:25",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "displayIndex": 14,
+      "displayText": "called",
+      "spanStart": 13,
+      "spanEnd": 14,
+      "spanText": "is called",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:John.4.25:9",
+      "sourceSurface": "λεγόμενος",
+      "strong": "G3004",
+      "entityId": "word:greek-nt:G3004",
+      "morph": "V-PPP-NSM",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|is called|G3004",
+      "reference": "John 19:17",
+      "book": "John",
+      "chapter": 19,
+      "verse": 17,
+      "verseKey": "19:17",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "displayIndex": 17,
+      "displayText": "called",
+      "spanStart": 16,
+      "spanEnd": 17,
+      "spanText": "is called",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:John.19.17:12",
+      "sourceSurface": "λέγεται",
+      "strong": "G3004",
+      "entityId": "word:greek-nt:G3004",
+      "morph": "V-PPI-3S",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|these things|G3778",
+      "reference": "Matthew 24:33",
+      "book": "Matthew",
+      "chapter": 24,
+      "verse": 33,
+      "verseKey": "24:33",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "displayIndex": 9,
+      "displayText": "things",
+      "spanStart": 8,
+      "spanEnd": 9,
+      "spanText": "these things",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Matthew.24.33:6",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-APN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|these things|G3778",
+      "reference": "Mark 13:29",
+      "book": "Mark",
+      "chapter": 13,
+      "verse": 29,
+      "verseKey": "13:29",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "displayIndex": 8,
+      "displayText": "things",
+      "spanStart": 7,
+      "spanEnd": 8,
+      "spanText": "these things",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Mark.13.29:5",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-APN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    },
+    {
+      "familyKey": "web|these things|G3778",
+      "reference": "Luke 21:31",
+      "book": "Luke",
+      "chapter": 21,
+      "verse": 31,
+      "verseKey": "21:31",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "displayIndex": 8,
+      "displayText": "things",
+      "spanStart": 7,
+      "spanEnd": 8,
+      "spanText": "these things",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Luke.21.31:5",
+      "sourceSurface": "ταῦτα",
+      "strong": "G3778",
+      "entityId": "word:greek-nt:G3778",
+      "morph": "D-APN",
+      "method": "p0812r2-approved-single-source-rendering-span"
+    }
+  ],
+  "deferred": {
+    "genealogyArticleFamilies": "Not approved in this batch.",
+    "negativeParticleBoundaryFamilies": "Not approved in this batch.",
+    "adjacencyOnlyFamilies": "Not approved in this batch."
+  },
+  "base": {
+    "directOwnerOverlayChecksum": "f82f1c1b94267a2d00f8e3094aaee03a70454cb698a2958647d67ac0d86cfbf6",
+    "compatibilityReferenceChecksum": "2306a199265725538b540cde929489b5527aa1ec66627dd035ffb8408869b150",
+    "r10aBaseChecksum": "2306a199265725538b540cde929489b5527aa1ec66627dd035ffb8408869b150",
+    "primaryManifestChecksum": "771719ec00b1ccb30a1bba7bbc481cb19fa4633d4ae06180cc8741cdb8b98c1f",
+    "primaryAffectedFiles": {
+      "Acts.json": {
+        "bytes": 1668469,
+        "sha256": "192a0694d09f6243f040a45bfece85dc7f58df50d7bb87e2bc76e2624d42d414"
+      },
+      "John.json": {
+        "bytes": 1389071,
+        "sha256": "1083a7e658cf4eab07e146eb01f1a73505096c3aca1e056abcda7fe72557f2a9"
+      },
+      "Luke.json": {
+        "bytes": 1750860,
+        "sha256": "7fc57fd640b569524a6240270ad3421fa543734500c1f1c93da2889c43956c51"
+      },
+      "Mark.json": {
+        "bytes": 1013134,
+        "sha256": "e6795fcbf636432856fde6f2b4617b32f6c8c3776f6c1be24c7339e20b6d47f8"
+      },
+      "Matt.json": {
+        "bytes": 1703505,
+        "sha256": "8bedb4855c7194591b6f78f88f95ac294839520d2d4a75c1eb6c78d257453eaf"
+      },
+      "Phlm.json": {
+        "bytes": 30873,
+        "sha256": "f74a98053209664dcac9c1cf1cbbb66bf528874f741928d0d99d8add71436d9b"
+      },
+      "Rev.json": {
+        "bytes": 932957,
+        "sha256": "751dc1136593eb0ea0016ba7e18f3dadba92a0d24e9cd0f0655bf9f2f5e84857"
+      }
+    },
+    "kjvAffectedFiles": {
+      "1_Corinthians.json": {
+        "bytes": 788699,
+        "sha256": "7ef472ce7309e4cb1f2accbec160183ed3ae19350f7f86e9759548d4c885f8b2"
+      },
+      "John.json": {
+        "bytes": 1621402,
+        "sha256": "b92ccacc13c29c2d52e39733f83d9afa87206fb2bd7f36f53f12be2bd22c1832"
+      },
+      "Luke.json": {
+        "bytes": 2056275,
+        "sha256": "66828f0e407557e2bcca164c5e29d88ed3f97d2b516c9129f3b0d17c0901b7fb"
+      },
+      "Mark.json": {
+        "bytes": 1187536,
+        "sha256": "81cc20fdc8ca48a78a4012ebfff0fbf49a86142869b02d24d9fd8ac80e6e57f1"
+      },
+      "Matthew.json": {
+        "bytes": 1991344,
+        "sha256": "a7b37f993989e1938dc695e785fb0512a2f27ad0235725ccf0117a2dba12e13a"
+      },
+      "Philemon.json": {
+        "bytes": 36671,
+        "sha256": "2f8e3262a98f0063464dc3bc2f664fe65bd2f2982272434f198798e7c49db10f"
+      },
+      "Revelation.json": {
+        "bytes": 1069143,
+        "sha256": "f6221438327faa3242dfa82b894b8ef60bceb4a2fbebd23fab38e91650e3ab6e"
+      }
+    }
+  },
+  "expectedFinal": {
+    "compatibilityReferenceChecksum": "07c0e53c5f32aae8b4b01a6f16c0a3143002c39fca2a9e15a25089b0e5c742b4",
+    "r10aBaseChecksum": "07c0e53c5f32aae8b4b01a6f16c0a3143002c39fca2a9e15a25089b0e5c742b4",
+    "primaryManifestChecksum": "db32485180f5ee0a25647f62de7b04eaac02b57ea0ac818533868f80e35a5ebd",
+    "primaryManifestBytes": 26490,
+    "primaryManifestSha256": "08b2aa6cca50b04d65cf8a8d3cb61af29f0cacf17460e19ee71d500428578be5",
+    "primaryAffectedFiles": {
+      "Acts.json": {
+        "bytes": 1668482,
+        "sha256": "ce39d1138a256f3dda709845437cdc5de0074f63235682f638e92ca044d12e62"
+      },
+      "John.json": {
+        "bytes": 1389100,
+        "sha256": "7195148613851949b53167299b33ef564f675d7fe82b9b8d3b7f31ce40f6644e"
+      },
+      "Luke.json": {
+        "bytes": 1750894,
+        "sha256": "b784d517a5fe7d49610b075e638cebd60af8e9b905a329480648c74c8e10e4f8"
+      },
+      "Mark.json": {
+        "bytes": 1013166,
+        "sha256": "7b6947fc5fba51b9c66c3c434ff8adeddbc51ed9bf51e71186f202c5e4faa6ca"
+      },
+      "Matt.json": {
+        "bytes": 1703530,
+        "sha256": "df5b818cf70e9510d87b3ee9a5fd210a9936902784ef4b50ada778a246796726"
+      },
+      "Phlm.json": {
+        "bytes": 30881,
+        "sha256": "ba5ade311d349c548619356936db6536e8d43729147fc2c575d03005debc1c10"
+      },
+      "Rev.json": {
+        "bytes": 933025,
+        "sha256": "bf54c26d09ef26f5e7b040ed006546435f8bfe91c0393cf41429a53c0870fd1d"
+      }
+    },
+    "kjvReaderManifestSha256": "86b7504d28b5795283b461850bf79eb8ad5f3ab0368bfce104aeca65bb009c47",
+    "kjvAffectedFiles": {
+      "1_Corinthians.json": {
+        "bytes": 788847,
+        "sha256": "7a31f7f37daf888393825008b394850f6bf8a1e1f1dd64d3b1dffbe4a8c5682a"
+      },
+      "John.json": {
+        "bytes": 1621596,
+        "sha256": "78019f20fad4a8c2e0ebcfb5f3d1ce496ef7d14937b67f5fed78e644ed71c69c"
+      },
+      "Luke.json": {
+        "bytes": 2056571,
+        "sha256": "58755ae1fecb72780f70b05dcda0d31755a99c77b7ba1fd9cd3a14176bb1f2bb"
+      },
+      "Mark.json": {
+        "bytes": 1187686,
+        "sha256": "024a100c785bfba1d38a93f82af411411dee4a3334ee88ce531c40f26ec00916"
+      },
+      "Matthew.json": {
+        "bytes": 1991590,
+        "sha256": "89b9352801b23e0361bb39794ea041120473f355f8b683f1279e435ceafdf1ed"
+      },
+      "Philemon.json": {
+        "bytes": 36719,
+        "sha256": "7e3325800d998038e0a1319f86e37fca82c9123625957b836025d47c3a7ed4fa"
+      },
+      "Revelation.json": {
+        "bytes": 1069581,
+        "sha256": "191edefeeae5c2c983ad80329ede7f03f198dd724c490610ca7b73eef6587acb"
+      }
+    }
+  },
+  "checksum": "ac5108cfe2022d1d4e2a72fa150c62a0e279105960c1a5eda652cdf6d8ee28f6"
+}

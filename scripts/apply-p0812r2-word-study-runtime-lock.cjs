@@ -187,6 +187,8 @@ function applyP0812R2RuntimeLock(repositoryRoot = process.cwd()) {
     repositoryRoot,
     lock.reference.manifest.checksum,
   );
+  require("./apply-p0812r2-brenton-compact-batch1.cjs")
+    .applyBrentonCompactBatch1(repositoryRoot);
 }
 
 if (require.main === module) {

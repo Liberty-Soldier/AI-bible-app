@@ -1,5 +1,7 @@
 import "server-only";
 
+import { createHash } from "node:crypto";
+
 import type {
   BibleIQChapterTokenAvailability,
   BibleIQVerseTokenAvailability,
@@ -43,6 +45,7 @@ type CompactVerse = {
   s: CompactSourceToken[];
   a: Record<string, Record<string, number>>;
   v?: Record<string, Record<string, CompactV2Route>>;
+  vo?: Record<string, Record<string, string>>;
 };
 
 type CompactBook = {
@@ -66,6 +69,30 @@ type KjvReaderRuntimeManifest = {
   version: number;
   aliases: Record<string, string>;
   books: Record<string, unknown>;
+};
+
+type BrentonReaderRecordRoute = [
+  sourceIndex: number,
+  sourceOccurrenceId: string,
+  entityId: string,
+];
+
+type BrentonReaderRecordOverlayRecord = {
+  reference?: string;
+  ownershipKey?: string;
+  runtimeFile: string;
+  runtimeVerseKey: string;
+  routes: Record<string, BrentonReaderRecordRoute>;
+};
+
+type BrentonReaderRecordOverlay = {
+  schemaVersion: string;
+  counts: {
+    records: number;
+    routes: number;
+  };
+  records: Record<string, BrentonReaderRecordOverlayRecord>;
+  checksum: string;
 };
 
 export type CanonicalCompoundRoute = {
@@ -97,6 +124,12 @@ const bookCache = new Map<string, Promise<CompactBook | null>>();
 const KJV_READER_RUNTIME_ROOT = "/data/bibleiq/word-study-kjv-reader";
 const kjvReaderManifestCache = new Map<string, Promise<KjvReaderRuntimeManifest | null>>();
 const kjvReaderBookCache = new Map<string, Promise<CompactBook | null>>();
+const BRENTON_READER_RECORD_RUNTIME_ROOT =
+  "/data/bibleiq/word-study-brenton-reader-record";
+const brentonReaderRecordOverlayCache = new Map<
+  string,
+  Promise<BrentonReaderRecordOverlay | null>
+>();
 
 
 const GREEK_COMPOUND_ROUTES: Record<
@@ -349,6 +382,251 @@ async function loadKjvReaderBook(
   return pending;
 }
 
+function brentonReaderRecordRuntimeUrl(
+  origin: string,
+  relativePath: string,
+) {
+  return new URL(
+    `${BRENTON_READER_RECORD_RUNTIME_ROOT}/${relativePath.replace(/^\/+/, "")}`,
+    origin,
+  ).toString();
+}
+
+async function loadRuntimeBookFile(
+  origin: string,
+  corpus: BibleIQSource,
+  outputFile: string,
+): Promise<CompactBook | null> {
+  const originKey = new URL(origin).origin;
+  const cacheKey = `${originKey}|${corpus}|${outputFile}`;
+  let pending = bookCache.get(cacheKey);
+
+  if (!pending) {
+    pending = fetchJson<CompactBook>(
+      runtimeUrl(originKey, `${corpus}/${outputFile}`),
+    );
+    bookCache.set(cacheKey, pending);
+  }
+
+  return pending;
+}
+
+function brentonReaderRecordOverlayChecksum(
+  overlay: BrentonReaderRecordOverlay,
+) {
+  const { checksum: _checksum, ...check } = overlay;
+
+  return createHash("sha256")
+    .update(JSON.stringify(check))
+    .digest("hex");
+}
+
+function loadBrentonReaderRecordOverlay(origin: string) {
+  const key = new URL(origin).origin;
+  let pending = brentonReaderRecordOverlayCache.get(key);
+
+  if (!pending) {
+    pending = (async () => {
+      const overlay = await fetchJson<BrentonReaderRecordOverlay>(
+        brentonReaderRecordRuntimeUrl(key, "manifest.json"),
+      );
+
+      if (!overlay) return null;
+
+      const recordCount = Object.keys(overlay.records || {}).length;
+      const routeCount = Object.values(overlay.records || {}).reduce(
+        (total, record) => total + Object.keys(record.routes || {}).length,
+        0,
+      );
+
+      const checksum = brentonReaderRecordOverlayChecksum(overlay);
+
+      if (
+        overlay.schemaVersion !==
+          "emet-p0812r2-brenton-reader-record-routes/v1" ||
+        overlay.counts?.records !== 2017 ||
+        overlay.counts?.routes !== 9915 ||
+        recordCount !== 2017 ||
+        routeCount !== 9915 ||
+        !overlay.checksum ||
+        overlay.checksum !== checksum
+      ) {
+        console.error(
+          "SEE Brenton reader-record overlay failed its sealed contract.",
+        );
+        return null;
+      }
+
+      return overlay;
+    })();
+
+    brentonReaderRecordOverlayCache.set(key, pending);
+  }
+
+  return pending;
+}
+
+async function resolveBrentonReaderRecordHit({
+  origin,
+  readerRecordId,
+  displayTokenIndex,
+}: {
+  origin: string;
+  readerRecordId: string;
+  displayTokenIndex: number;
+}): Promise<{
+  recordScoped: boolean;
+  hit: CanonicalHit | null;
+}> {
+  const overlay = await loadBrentonReaderRecordOverlay(origin);
+
+  // If the record-specific overlay cannot be verified, Brenton taps fail
+  // closed rather than falling back to an ambiguous numeric-verse route.
+  if (!overlay) {
+    return {
+      recordScoped: true,
+      hit: null,
+    };
+  }
+
+  const record = overlay.records?.[readerRecordId];
+
+  if (!record) {
+    return {
+      recordScoped: false,
+      hit: null,
+    };
+  }
+
+  const runtimeBook = await loadRuntimeBookFile(
+    origin,
+    "lxx",
+    record.runtimeFile,
+  );
+  const compactVerse = runtimeBook?.verses?.[record.runtimeVerseKey];
+
+  if (!compactVerse) {
+    return {
+      recordScoped: true,
+      hit: null,
+    };
+  }
+
+  const route = record.routes?.[String(displayTokenIndex)];
+
+  if (route) {
+    const [sourceIndex, sourceOccurrenceId, entityId] = route;
+
+    if (
+      !Number.isInteger(sourceIndex) ||
+      sourceIndex < 0 ||
+      !sourceOccurrenceId ||
+      !/^word:lxx:L\d+$/.test(entityId)
+    ) {
+      return {
+        recordScoped: true,
+        hit: null,
+      };
+    }
+
+    const compactSource = compactVerse.s?.[sourceIndex];
+
+    if (
+      !compactSource ||
+      compactSource[0] !== sourceOccurrenceId ||
+      compactSource[4] !== entityId
+    ) {
+      return {
+        recordScoped: true,
+        hit: null,
+      };
+    }
+
+    const sourceToken = expandSourceToken("lxx", compactSource, sourceIndex);
+
+    return {
+      recordScoped: true,
+      hit: {
+        entityId: sourceToken.entityId,
+        sourceWord: sourceToken.surface,
+        sourceToken,
+      },
+    };
+  }
+
+  return {
+    recordScoped: true,
+    hit: resolveOwnedBrentonCompactV2Hit(
+      compactVerse,
+      readerRecordId,
+      displayTokenIndex,
+    ),
+  };
+}
+
+async function buildBrentonReaderRecordAvailability(
+  origin: string,
+  overlay: BrentonReaderRecordOverlay,
+  readerRecordId: string,
+): Promise<BibleIQVerseTokenAvailability | undefined> {
+  const record = overlay.records?.[readerRecordId];
+  if (!record) return undefined;
+
+  const runtimeBook = await loadRuntimeBookFile(
+    origin,
+    "lxx",
+    record.runtimeFile,
+  );
+  const compactVerse = runtimeBook?.verses?.[record.runtimeVerseKey];
+
+  if (!compactVerse) return undefined;
+
+  const available: BibleIQVerseTokenAvailability = {};
+
+  for (const [displayIndex, route] of Object.entries(record.routes || {})) {
+    const [sourceIndex, sourceOccurrenceId, entityId] = route;
+
+    if (
+      !Number.isInteger(sourceIndex) ||
+      sourceIndex < 0 ||
+      !sourceOccurrenceId ||
+      !/^word:lxx:L\d+$/.test(entityId)
+    ) {
+      continue;
+    }
+
+    const compactSource = compactVerse.s?.[sourceIndex];
+
+    if (
+      !compactSource ||
+      compactSource[0] !== sourceOccurrenceId ||
+      compactSource[4] !== entityId
+    ) {
+      continue;
+    }
+
+    available[displayIndex] = {
+      entityId,
+      source: "lxx",
+      sourceWord: compactSource[1] || undefined,
+      lexicalId: lexicalIdFromEntityId(
+        entityId,
+        compactSource[3] || undefined,
+      ),
+    };
+  }
+
+  Object.assign(
+    available,
+    buildOwnedBrentonCompactV2Availability(
+      compactVerse,
+      readerRecordId,
+    ),
+  );
+
+  return available;
+}
+
 function expandSourceToken(
   corpus: BibleIQSource,
   compact: CompactSourceToken,
@@ -466,6 +744,167 @@ function syntheticV2RouteEntityId(
   );
 }
 
+function brentonCompactV2Owner(
+  compactVerse: CompactVerse,
+  displayTokenIndex: number,
+) {
+  const owner = String(
+    compactVerse.vo?.brenton?.[String(displayTokenIndex)] || "",
+  ).trim();
+
+  return owner || null;
+}
+
+function ownedBrentonCompactV2(
+  compactVerse: CompactVerse,
+  readerRecordId: string | undefined,
+  displayTokenIndex: number,
+) {
+  if (
+    !readerRecordId ||
+    brentonCompactV2Owner(compactVerse, displayTokenIndex) !== readerRecordId
+  ) {
+    return undefined;
+  }
+
+  return compactVerse.v?.brenton?.[String(displayTokenIndex)];
+}
+
+function syntheticBrentonReaderV2RouteEntityId(
+  readerRecordId: string,
+  displayTokenIndex: number,
+) {
+  return (
+    "route:brenton-lxx-v2:" +
+    readerRecordId +
+    ":" +
+    displayTokenIndex
+  );
+}
+
+function resolveOwnedBrentonCompactV2Hit(
+  compactVerse: CompactVerse,
+  readerRecordId: string | undefined,
+  displayTokenIndex: number,
+): CanonicalHit | null {
+  const compactV2 = ownedBrentonCompactV2(
+    compactVerse,
+    readerRecordId,
+    displayTokenIndex,
+  );
+
+  if (!compactV2 || !readerRecordId) return null;
+
+  const expanded = expandCompactV2Route(
+    "lxx",
+    compactVerse,
+    compactV2,
+  );
+  const routes = expanded.route.sourceRoutes;
+  const exactLexicalSingle =
+    expanded.route.mode === "exact-single" &&
+    routes.length === 1 &&
+    routes[0]?.kind === "lexical" &&
+    expanded.sourceTokens.length === 1 &&
+    /^word:lxx:L\d+$/.test(
+      expanded.sourceTokens[0]?.entityId || "",
+    );
+
+  if (exactLexicalSingle) {
+    const sourceToken = expanded.sourceTokens[0];
+
+    return {
+      entityId: sourceToken.entityId,
+      sourceWord: sourceToken.surface,
+      sourceToken,
+      compoundRoute: compoundRouteForSourceToken(sourceToken),
+      v2Route: expanded.route,
+    };
+  }
+
+  return {
+    entityId: syntheticBrentonReaderV2RouteEntityId(
+      readerRecordId,
+      displayTokenIndex,
+    ),
+    sourceWord:
+      expanded.sourceTokens
+        .map((token) => token.surface)
+        .filter(Boolean)
+        .join(" + ") || undefined,
+    v2Route: expanded.route,
+  };
+}
+
+function buildOwnedBrentonCompactV2Availability(
+  compactVerse: CompactVerse,
+  readerRecordId: string,
+): BibleIQVerseTokenAvailability {
+  const available: BibleIQVerseTokenAvailability = {};
+
+  for (const [displayIndex, compactV2] of Object.entries(
+    compactVerse.v?.brenton || {},
+  )) {
+    const numericDisplayIndex = Number(displayIndex);
+
+    if (
+      !Number.isInteger(numericDisplayIndex) ||
+      brentonCompactV2Owner(compactVerse, numericDisplayIndex) !==
+        readerRecordId
+    ) {
+      continue;
+    }
+
+    const expanded = expandCompactV2Route(
+      "lxx",
+      compactVerse,
+      compactV2,
+    );
+    const routes = expanded.route.sourceRoutes;
+    const exactLexicalSingle =
+      expanded.route.mode === "exact-single" &&
+      routes.length === 1 &&
+      routes[0]?.kind === "lexical" &&
+      expanded.sourceTokens.length === 1 &&
+      /^word:lxx:L\d+$/.test(
+        expanded.sourceTokens[0]?.entityId || "",
+      );
+    const sourceToken = exactLexicalSingle
+      ? expanded.sourceTokens[0]
+      : undefined;
+
+    available[displayIndex] = {
+      entityId:
+        sourceToken?.entityId ||
+        syntheticBrentonReaderV2RouteEntityId(
+          readerRecordId,
+          numericDisplayIndex,
+        ),
+      source: "lxx",
+      sourceWord:
+        sourceToken?.surface ||
+        expanded.sourceTokens
+          .map((token) => token.surface)
+          .filter(Boolean)
+          .join(" + ") ||
+        undefined,
+      lexicalId: sourceToken
+        ? lexicalIdFromEntityId(
+            sourceToken.entityId,
+            sourceToken.strong,
+          )
+        : undefined,
+      displayText: expanded.route.displayText,
+      isV2SpanRoute: true,
+      routeMode: expanded.route.mode,
+      sourceRoutes: expanded.route.sourceRoutes,
+      sourceSegment: expanded.route.sourceSegment,
+    };
+  }
+
+  return available;
+}
+
 export async function findCanonicalHit({
   origin,
   book,
@@ -473,6 +912,7 @@ export async function findCanonicalHit({
   verse,
   translation,
   displayTokenIndex,
+  readerRecordId,
 }: {
   origin: string;
   book: string;
@@ -480,10 +920,23 @@ export async function findCanonicalHit({
   verse: number;
   translation: string;
   displayTokenIndex?: number;
+  readerRecordId?: string;
 }): Promise<CanonicalHit | null> {
   if (displayTokenIndex == null || displayTokenIndex < 0) return null;
 
   const translationKey = safeTranslation(translation);
+
+  if (translationKey === "brenton" && readerRecordId) {
+    const recordSpecific = await resolveBrentonReaderRecordHit({
+      origin,
+      readerRecordId,
+      displayTokenIndex,
+    });
+
+    if (recordSpecific.recordScoped) {
+      return recordSpecific.hit;
+    }
+  }
   const kjvReaderBook =
     translationKey === "kjv"
       ? await loadKjvReaderBook(origin, book)
@@ -545,6 +998,18 @@ export async function findCanonicalHit({
     }
   }
 
+  if (translationKey === "brenton") {
+    const brentonV2Hit = resolveOwnedBrentonCompactV2Hit(
+      compactVerse,
+      readerRecordId,
+      displayTokenIndex,
+    );
+
+    if (brentonV2Hit) {
+      return brentonV2Hit;
+    }
+  }
+
   const sourceIndex =
     compactVerse.a?.[translationKey]?.[String(displayTokenIndex)];
 
@@ -592,11 +1057,16 @@ export async function getCanonicalChapterTokenAvailability({
   book,
   chapter,
   translation,
+  readerVerses,
 }: {
   origin: string;
   book: string;
   chapter: number;
   translation: string;
+  readerVerses?: Array<{
+    id: string;
+    tokenAvailabilityKey: string | null;
+  }>;
 }): Promise<BibleIQChapterTokenAvailability> {
   const translationKey = safeTranslation(translation);
   const kjvReaderBook =
@@ -611,112 +1081,185 @@ export async function getCanonicalChapterTokenAvailability({
     (await loadRuntimeBook(origin, corpus, book));
   const result: BibleIQChapterTokenAvailability = {};
 
-  if (!runtimeBook) return result;
+  if (runtimeBook) {
+    for (const [verseKey, compactVerse] of Object.entries(
+      runtimeBook.verses || {},
+    )) {
+      const [chapterText, verseText] = verseKey.split(":");
+      const verseChapter = Number(chapterText);
+      const verseNumber = Number(verseText);
 
-  for (const [verseKey, compactVerse] of Object.entries(
-    runtimeBook.verses || {},
-  )) {
-    const [chapterText, verseText] = verseKey.split(":");
-    const verseChapter = Number(chapterText);
-    const verseNumber = Number(verseText);
+      if (verseChapter !== chapter || !Number.isInteger(verseNumber)) {
+        continue;
+      }
 
-    if (verseChapter !== chapter || !Number.isInteger(verseNumber)) {
+      const available: BibleIQVerseTokenAvailability = {};
+
+      const compactV2ByTranslation =
+        translationKey === "web"
+          ? compactVerse.v?.web
+          : undefined;
+
+      if (compactV2ByTranslation) {
+        for (const [displayIndex, compactV2] of Object.entries(
+          compactV2ByTranslation,
+        )) {
+          const expanded = expandCompactV2Route(
+            corpus,
+            compactVerse,
+            compactV2,
+          );
+          const routes = expanded.route.sourceRoutes;
+          const exactLexicalEntity =
+            translationKey === "web"
+              ? /^word:hebrew:H\d+$/.test(
+                  expanded.sourceTokens[0]?.entityId || "",
+                )
+              : /^word:lxx:L\d+$/.test(
+                  expanded.sourceTokens[0]?.entityId || "",
+                );
+          const exactLexicalSingle =
+            expanded.route.mode === "exact-single" &&
+            routes.length === 1 &&
+            routes[0]?.kind === "lexical" &&
+            expanded.sourceTokens.length === 1 &&
+            exactLexicalEntity;
+          const sourceToken = exactLexicalSingle
+            ? expanded.sourceTokens[0]
+            : undefined;
+
+          available[displayIndex] = {
+            entityId:
+              sourceToken?.entityId ||
+              syntheticV2RouteEntityId(
+                book,
+                chapter,
+                verseNumber,
+                Number(displayIndex),
+              ),
+            source: corpus,
+            sourceWord:
+              sourceToken?.surface ||
+              expanded.sourceTokens
+                .map((token) => token.surface)
+                .filter(Boolean)
+                .join(" + ") ||
+              undefined,
+            lexicalId: sourceToken
+              ? lexicalIdFromEntityId(
+                  sourceToken.entityId,
+                  sourceToken.strong,
+                )
+              : undefined,
+            displayText: expanded.route.displayText,
+            isV2SpanRoute: true,
+            routeMode: expanded.route.mode,
+            sourceRoutes: expanded.route.sourceRoutes,
+            sourceSegment: expanded.route.sourceSegment,
+          };
+        }
+      } else {
+        const aligned = compactVerse.a?.[translationKey] || {};
+
+        for (const [displayIndex, sourceIndex] of Object.entries(aligned)) {
+          if (!Number.isInteger(sourceIndex) || sourceIndex < 0) continue;
+
+          const compactSource = compactVerse.s?.[sourceIndex];
+          const entityId = String(compactSource?.[4] || "").trim();
+
+          const isOrdinaryEntity =
+            /^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(
+              entityId,
+            );
+          const isCompoundRoute =
+            /^compound:greek-nt:G\d+-G\d+$/.test(entityId);
+
+          if (!isOrdinaryEntity && !isCompoundRoute) continue;
+
+          const strong = compactSource?.[3] || undefined;
+          const route =
+            isCompoundRoute && strong
+              ? GREEK_COMPOUND_ROUTES[strong]
+              : undefined;
+
+          available[displayIndex] = {
+            entityId,
+            source: corpus,
+            sourceWord: compactSource?.[1] || undefined,
+            lexicalId: lexicalIdFromEntityId(entityId, strong),
+            isCompoundRoute,
+            compoundRouteKind: route?.routeKind,
+            componentLexicalIds: route?.componentLexicalIds,
+          };
+        }
+      }
+
+      if (Object.keys(available).length > 0) {
+        result[String(verseNumber)] = available;
+      }
+    }
+  }
+
+  if (translationKey !== "brenton" || !readerVerses) {
+    return result;
+  }
+
+  const overlay = await loadBrentonReaderRecordOverlay(origin);
+
+  // The Brenton reader uses reader-record identity after this integration.
+  // If the sealed overlay is unavailable, return no Brenton availability
+  // rather than exposing ambiguous numeric-verse taps.
+  if (!overlay) {
+    return {};
+  }
+
+  const recordScoped: BibleIQChapterTokenAvailability = {};
+
+  for (const readerVerse of readerVerses) {
+    if (!readerVerse?.id) continue;
+
+    const overlayRecord = overlay.records?.[readerVerse.id];
+
+    if (overlayRecord) {
+      const availability = await buildBrentonReaderRecordAvailability(
+        origin,
+        overlay,
+        readerVerse.id,
+      );
+
+      if (availability && Object.keys(availability).length > 0) {
+        recordScoped[readerVerse.id] = availability;
+      }
+
       continue;
     }
 
-    const available: BibleIQVerseTokenAvailability = {};
+    const numericKey = readerVerse.tokenAvailabilityKey;
+    const available: BibleIQVerseTokenAvailability = {
+      ...(numericKey && result[numericKey]
+        ? result[numericKey]
+        : {}),
+    };
 
-    if (translationKey === "web" && compactVerse.v?.web) {
-      for (const [displayIndex, compactV2] of Object.entries(
-        compactVerse.v.web,
-      )) {
-        const expanded = expandCompactV2Route(
-          corpus,
-          compactVerse,
-          compactV2,
+    if (numericKey && runtimeBook) {
+      const compactVerse =
+        runtimeBook.verses?.[chapter + ":" + Number(numericKey)];
+
+      if (compactVerse) {
+        Object.assign(
+          available,
+          buildOwnedBrentonCompactV2Availability(
+            compactVerse,
+            readerVerse.id,
+          ),
         );
-        const routes = expanded.route.sourceRoutes;
-        const exactLexicalSingle =
-          expanded.route.mode === "exact-single" &&
-          routes.length === 1 &&
-          routes[0]?.kind === "lexical" &&
-          expanded.sourceTokens.length === 1 &&
-          /^word:hebrew:H\d+$/.test(
-            expanded.sourceTokens[0]?.entityId || "",
-          );
-        const sourceToken = exactLexicalSingle
-          ? expanded.sourceTokens[0]
-          : undefined;
-
-        available[displayIndex] = {
-          entityId: sourceToken?.entityId ||
-            syntheticV2RouteEntityId(
-              book,
-              chapter,
-              verseNumber,
-              Number(displayIndex),
-            ),
-          source: corpus,
-          sourceWord:
-            sourceToken?.surface ||
-            expanded.sourceTokens
-              .map((token) => token.surface)
-              .filter(Boolean)
-              .join(" + ") ||
-            undefined,
-          lexicalId: sourceToken
-            ? lexicalIdFromEntityId(
-                sourceToken.entityId,
-                sourceToken.strong,
-              )
-            : undefined,
-          displayText: expanded.route.displayText,
-          isV2SpanRoute: true,
-          routeMode: expanded.route.mode,
-          sourceRoutes: expanded.route.sourceRoutes,
-          sourceSegment: expanded.route.sourceSegment,
-        };
-      }
-    } else {
-      const aligned = compactVerse.a?.[translationKey] || {};
-
-      for (const [displayIndex, sourceIndex] of Object.entries(aligned)) {
-        if (!Number.isInteger(sourceIndex) || sourceIndex < 0) continue;
-
-        const compactSource = compactVerse.s?.[sourceIndex];
-        const entityId = String(compactSource?.[4] || "").trim();
-
-        const isOrdinaryEntity =
-          /^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(
-            entityId,
-          );
-        const isCompoundRoute =
-          /^compound:greek-nt:G\d+-G\d+$/.test(entityId);
-
-        if (!isOrdinaryEntity && !isCompoundRoute) continue;
-
-        const strong = compactSource?.[3] || undefined;
-        const route =
-          isCompoundRoute && strong
-            ? GREEK_COMPOUND_ROUTES[strong]
-            : undefined;
-
-        available[displayIndex] = {
-          entityId,
-          source: corpus,
-          sourceWord: compactSource?.[1] || undefined,
-          lexicalId: lexicalIdFromEntityId(entityId, strong),
-          isCompoundRoute,
-          compoundRouteKind: route?.routeKind,
-          componentLexicalIds: route?.componentLexicalIds,
-        };
       }
     }
 
     if (Object.keys(available).length > 0) {
-      result[String(verseNumber)] = available;
+      recordScoped[readerVerse.id] = available;
     }
   }
 
-  return result;
+  return recordScoped;
 }

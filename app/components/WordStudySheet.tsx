@@ -32,6 +32,7 @@ type WordStudySheetProps = {
   chapter: number;
   verse?: number;
   translation: string;
+  readerRecordId?: string;
   displayTokenIndex?: number;
   selectedText?: string;
   originalWord?: string;
@@ -778,6 +779,7 @@ export default function WordStudySheet({
   chapter,
   verse,
   translation,
+  readerRecordId,
   displayTokenIndex,
   selectedText,
   originalWord,
@@ -874,6 +876,7 @@ export default function WordStudySheet({
             chapter: String(chapter),
             verse: String(verse ?? ""),
             translation,
+            readerRecordId: readerRecordId ?? "",
             displayTokenIndex: String(displayTokenIndex ?? -1),
             selectedText: selectedText ?? "",
             originalWord: originalWord ?? "",
@@ -912,6 +915,7 @@ export default function WordStudySheet({
     chapter,
     verse,
     translation,
+    readerRecordId,
     displayTokenIndex,
     selectedText,
     originalWord,

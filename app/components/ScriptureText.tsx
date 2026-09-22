@@ -150,11 +150,17 @@ export default function ScriptureText({
   text,
   reference,
   tokenAvailability,
+  readerRecordId,
+  readerVerseLabel,
+  verseNumber,
   focusedTokenIndex,
 }: {
   text: string;
   reference?: string;
   tokenAvailability?: BibleIQVerseTokenAvailability;
+  readerRecordId?: string;
+  readerVerseLabel?: string;
+  verseNumber?: number;
   focusedTokenIndex?: number | null;
 }) {
   const router = useRouter();
@@ -189,6 +195,18 @@ export default function ScriptureText({
     params.set("selectedText", selectedWord);
     params.set("verseText", renderedText);
 
+    if (readerRecordId) {
+      params.set("readerRecordId", readerRecordId);
+    } else {
+      params.delete("readerRecordId");
+    }
+
+    if (readerVerseLabel) {
+      params.set("readerVerseLabel", readerVerseLabel);
+    } else {
+      params.delete("readerVerseLabel");
+    }
+
     if (sourceWord) {
       params.set("originalWord", sourceWord);
     } else {
@@ -197,7 +215,9 @@ export default function ScriptureText({
 
     params.delete("verse");
 
-    if (parsedReference?.verse) {
+    if (verseNumber != null && verseNumber > 0) {
+      params.set("verse", String(verseNumber));
+    } else if (parsedReference?.verse) {
       params.set("verse", String(parsedReference.verse));
     }
 

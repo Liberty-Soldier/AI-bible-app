@@ -541,6 +541,29 @@ function main() {
   console.log(`Collision-suppressed routes: ${stats.collisionSuppressedRoutes}`);
   console.log("Semantic guessing: NO");
   console.log("");
+  // The legacy structural reconstruction does not contain later approved spans.
+  require("../../apply-p0812r2-brenton-reader-owner-batch7.cjs")
+    .prepareForLegacyReplay(ROOT);
+  require("../../apply-p0812r2-brenton-bulk-compact-span-batch6.cjs")
+    .prepareForLegacyReplay(ROOT);
+  require("../../apply-p0812r2-brenton-tier3-recurring-family-span-batch5.cjs")
+    .prepareForLegacyReplay(ROOT);
+  require("../../apply-p0812r2-brenton-bounded-1e1s-batch3.cjs")
+    .prepareForLegacyReplay(ROOT);
+  require("../../apply-p0812r2-brenton-compact-batch1.cjs")
+    .applyBrentonCompactBatch1(ROOT);
+  require("../../apply-p0812r2-brenton-nonparity-coordinate-batch2.cjs")
+    .applyBatch2(ROOT);
+  require("../../apply-p0812r2-brenton-bounded-1e1s-batch3.cjs")
+    .applyBatch3(ROOT);
+  require("../../apply-p0812r2-brenton-legacy65-failclosed-batch4.cjs")
+    .applyBatch4(ROOT);
+  require("../../apply-p0812r2-brenton-tier3-recurring-family-span-batch5.cjs")
+    .applyBatch5(ROOT);
+  require("../../apply-p0812r2-brenton-bulk-compact-span-batch6.cjs")
+    .applyBatch6(ROOT);
+  require("../../apply-p0812r2-brenton-reader-owner-batch7.cjs")
+    .applyBatch7(ROOT);
 }
 if (require.main === module) main();
 module.exports = { applyCollisionSafeSuppression };

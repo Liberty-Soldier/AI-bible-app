@@ -1,0 +1,1630 @@
+{
+  "schemaVersion": "emet-p0812r2-greek-nt-approved-source-first-span-batch7a-overlay/v1",
+  "milestone": "P08.12R2",
+  "purpose": "Evidence-reviewed source-first Greek NT phrase spans: one OpenGNT occurrence may own multiple meaningful English display positions inside one approved rendering span.",
+  "authority": {
+    "source": "Ordered OpenGNT source occurrences",
+    "sourceFirst": true,
+    "forcedOneToOne": false,
+    "oneSourceMayOwnEnglishPhrase": true,
+    "sharedSourceOwnershipAllowedOnlyInsideApprovedSpan": true,
+    "multiSourceToOneEnglishPromoted": false,
+    "recurrenceAutomaticApproval": false,
+    "positionalClosure": false,
+    "semanticGuessing": false,
+    "canonicalModified": false
+  },
+  "counts": {
+    "approvedFamilies": 6,
+    "approvedSpans": 12,
+    "meaningfulRoutes": 24,
+    "webMeaningfulRoutes": 12,
+    "kjvMeaningfulRoutes": 12,
+    "deferredMultiSourceSegments": 17
+  },
+  "phraseSpans": [
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "kjv|get thee|G5217",
+      "translation": "kjv",
+      "reference": "Mark 8:33",
+      "book": "Mark",
+      "chapter": 8,
+      "verse": 33,
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "8:33",
+      "canonicalKey": "Mark.8.33",
+      "englishSpan": {
+        "start": 15,
+        "end": 16,
+        "tokens": [
+          {
+            "index": 15,
+            "text": "Get",
+            "normalized": "get",
+            "meaningful": true
+          },
+          {
+            "index": 16,
+            "text": "thee",
+            "normalized": "thee",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          15,
+          16
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 12,
+        "sourceIndices": [
+          12
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Mark.8.33:12"
+        ],
+        "surface": "ὕπαγε",
+        "strong": "G5217",
+        "entityId": "word:greek-nt:G5217",
+        "morph": "V-PAM-2S",
+        "gloss": "to go",
+        "mounceGloss": "to go",
+        "tyndaleGloss": "to go"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "kjv|get thee|G5217",
+      "translation": "kjv",
+      "reference": "Matthew 16:23",
+      "book": "Matthew",
+      "chapter": 16,
+      "verse": 23,
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "16:23",
+      "canonicalKey": "Matthew.16.23",
+      "englishSpan": {
+        "start": 7,
+        "end": 8,
+        "tokens": [
+          {
+            "index": 7,
+            "text": "Get",
+            "normalized": "get",
+            "meaningful": true
+          },
+          {
+            "index": 8,
+            "text": "thee",
+            "normalized": "thee",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          7,
+          8
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 6,
+        "sourceIndices": [
+          6
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Matthew.16.23:6"
+        ],
+        "surface": "ὕπαγε",
+        "strong": "G5217",
+        "entityId": "word:greek-nt:G5217",
+        "morph": "V-PAM-2S",
+        "gloss": "to go",
+        "mounceGloss": "to go",
+        "tyndaleGloss": "to go"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "kjv|shall rise up|G1453",
+      "translation": "kjv",
+      "reference": "Luke 11:31",
+      "book": "Luke",
+      "chapter": 11,
+      "verse": 31,
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "11:31",
+      "canonicalKey": "Luke.11.31",
+      "englishSpan": {
+        "start": 5,
+        "end": 7,
+        "tokens": [
+          {
+            "index": 5,
+            "text": "shall",
+            "normalized": "shall",
+            "meaningful": false
+          },
+          {
+            "index": 6,
+            "text": "rise",
+            "normalized": "rise",
+            "meaningful": true
+          },
+          {
+            "index": 7,
+            "text": "up",
+            "normalized": "up",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          6,
+          7
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 2,
+        "sourceIndices": [
+          2
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Luke.11.31:2"
+        ],
+        "surface": "ἐγερθήσεται",
+        "strong": "G1453",
+        "entityId": "word:greek-nt:G1453",
+        "morph": "V-FPI-3S",
+        "gloss": "to arise",
+        "mounceGloss": "to arise",
+        "tyndaleGloss": "to arise"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "kjv|shall rise up|G1453",
+      "translation": "kjv",
+      "reference": "Matthew 12:42",
+      "book": "Matthew",
+      "chapter": 12,
+      "verse": 42,
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "12:42",
+      "canonicalKey": "Matthew.12.42",
+      "englishSpan": {
+        "start": 5,
+        "end": 7,
+        "tokens": [
+          {
+            "index": 5,
+            "text": "shall",
+            "normalized": "shall",
+            "meaningful": false
+          },
+          {
+            "index": 6,
+            "text": "rise",
+            "normalized": "rise",
+            "meaningful": true
+          },
+          {
+            "index": 7,
+            "text": "up",
+            "normalized": "up",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          6,
+          7
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 2,
+        "sourceIndices": [
+          2
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Matthew.12.42:2"
+        ],
+        "surface": "ἐγερθήσεται",
+        "strong": "G1453",
+        "entityId": "word:greek-nt:G1453",
+        "morph": "V-FPI-3S",
+        "gloss": "to arise",
+        "mounceGloss": "to arise",
+        "tyndaleGloss": "to arise"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "kjv|tarry ye|G3306",
+      "translation": "kjv",
+      "reference": "Mark 14:34",
+      "book": "Mark",
+      "chapter": 14,
+      "verse": 34,
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "14:34",
+      "canonicalKey": "Mark.14.34",
+      "englishSpan": {
+        "start": 11,
+        "end": 12,
+        "tokens": [
+          {
+            "index": 11,
+            "text": "tarry",
+            "normalized": "tarry",
+            "meaningful": true
+          },
+          {
+            "index": 12,
+            "text": "ye",
+            "normalized": "ye",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          11,
+          12
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 10,
+        "sourceIndices": [
+          10
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Mark.14.34:10"
+        ],
+        "surface": "μείνατε",
+        "strong": "G3306",
+        "entityId": "word:greek-nt:G3306",
+        "morph": "V-AAM-2P",
+        "gloss": "to stay",
+        "mounceGloss": "to stay",
+        "tyndaleGloss": "to stay"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "kjv|tarry ye|G3306",
+      "translation": "kjv",
+      "reference": "Matthew 26:38",
+      "book": "Matthew",
+      "chapter": 26,
+      "verse": 38,
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "26:38",
+      "canonicalKey": "Matthew.26.38",
+      "englishSpan": {
+        "start": 13,
+        "end": 14,
+        "tokens": [
+          {
+            "index": 13,
+            "text": "tarry",
+            "normalized": "tarry",
+            "meaningful": true
+          },
+          {
+            "index": 14,
+            "text": "ye",
+            "normalized": "ye",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          13,
+          14
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 10,
+        "sourceIndices": [
+          10
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Matthew.26.38:10"
+        ],
+        "surface": "μείνατε",
+        "strong": "G3306",
+        "entityId": "word:greek-nt:G3306",
+        "morph": "V-AAM-2P",
+        "gloss": "to stay",
+        "mounceGloss": "to stay",
+        "tyndaleGloss": "to stay"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "web|occasion for stumbling|G4624",
+      "translation": "web",
+      "reference": "Matthew 11:6",
+      "book": "Matthew",
+      "chapter": 11,
+      "verse": 6,
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "11:6",
+      "canonicalKey": "Matthew.11.6",
+      "englishSpan": {
+        "start": 6,
+        "end": 8,
+        "tokens": [
+          {
+            "index": 6,
+            "text": "occasion",
+            "normalized": "occasion",
+            "meaningful": true
+          },
+          {
+            "index": 7,
+            "text": "for",
+            "normalized": "for",
+            "meaningful": false
+          },
+          {
+            "index": 8,
+            "text": "stumbling",
+            "normalized": "stumbling",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          6,
+          8
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 6,
+        "sourceIndices": [
+          6
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Matthew.11.6:6"
+        ],
+        "surface": "σκανδαλισθῇ",
+        "strong": "G4624",
+        "entityId": "word:greek-nt:G4624",
+        "morph": "V-APS-3S",
+        "gloss": "to cause to stumble",
+        "mounceGloss": "to cause to sin",
+        "tyndaleGloss": "to cause to stumble"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "web|occasion for stumbling|G4624",
+      "translation": "web",
+      "reference": "Luke 7:23",
+      "book": "Luke",
+      "chapter": 7,
+      "verse": 23,
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "7:23",
+      "canonicalKey": "Luke.7.23",
+      "englishSpan": {
+        "start": 6,
+        "end": 8,
+        "tokens": [
+          {
+            "index": 6,
+            "text": "occasion",
+            "normalized": "occasion",
+            "meaningful": true
+          },
+          {
+            "index": 7,
+            "text": "for",
+            "normalized": "for",
+            "meaningful": false
+          },
+          {
+            "index": 8,
+            "text": "stumbling",
+            "normalized": "stumbling",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          6,
+          8
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 6,
+        "sourceIndices": [
+          6
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Luke.7.23:6"
+        ],
+        "surface": "σκανδαλισθῇ",
+        "strong": "G4624",
+        "entityId": "word:greek-nt:G4624",
+        "morph": "V-APS-3S",
+        "gloss": "to cause to stumble",
+        "mounceGloss": "to cause to sin",
+        "tyndaleGloss": "to cause to stumble"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "web|speaks evil of|G2551",
+      "translation": "web",
+      "reference": "Matthew 15:4",
+      "book": "Matthew",
+      "chapter": 15,
+      "verse": 4,
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "15:4",
+      "canonicalKey": "Matthew.15.4",
+      "englishSpan": {
+        "start": 12,
+        "end": 14,
+        "tokens": [
+          {
+            "index": 12,
+            "text": "speaks",
+            "normalized": "speaks",
+            "meaningful": true
+          },
+          {
+            "index": 13,
+            "text": "evil",
+            "normalized": "evil",
+            "meaningful": true
+          },
+          {
+            "index": 14,
+            "text": "of",
+            "normalized": "of",
+            "meaningful": false
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          12,
+          13
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 12,
+        "sourceIndices": [
+          12
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Matthew.15.4:12"
+        ],
+        "surface": "κακολογῶν",
+        "strong": "G2551",
+        "entityId": "word:greek-nt:G2551",
+        "morph": "V-PAP-NSM",
+        "gloss": "to revile",
+        "mounceGloss": "to curse",
+        "tyndaleGloss": "to curse/revile"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "web|speaks evil of|G2551",
+      "translation": "web",
+      "reference": "Mark 7:10",
+      "book": "Mark",
+      "chapter": 7,
+      "verse": 10,
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "7:10",
+      "canonicalKey": "Mark.7.10",
+      "englishSpan": {
+        "start": 12,
+        "end": 14,
+        "tokens": [
+          {
+            "index": 12,
+            "text": "speaks",
+            "normalized": "speaks",
+            "meaningful": true
+          },
+          {
+            "index": 13,
+            "text": "evil",
+            "normalized": "evil",
+            "meaningful": true
+          },
+          {
+            "index": 14,
+            "text": "of",
+            "normalized": "of",
+            "meaningful": false
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          12,
+          13
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 13,
+        "sourceIndices": [
+          13
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Mark.7.10:13"
+        ],
+        "surface": "κακολογῶν",
+        "strong": "G2551",
+        "entityId": "word:greek-nt:G2551",
+        "morph": "V-PAP-NSM",
+        "gloss": "to revile",
+        "mounceGloss": "to curse",
+        "tyndaleGloss": "to curse/revile"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "web|will rise up|G1453",
+      "translation": "web",
+      "reference": "Matthew 12:42",
+      "book": "Matthew",
+      "chapter": 12,
+      "verse": 42,
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "12:42",
+      "canonicalKey": "Matthew.12.42",
+      "englishSpan": {
+        "start": 5,
+        "end": 7,
+        "tokens": [
+          {
+            "index": 5,
+            "text": "will",
+            "normalized": "will",
+            "meaningful": false
+          },
+          {
+            "index": 6,
+            "text": "rise",
+            "normalized": "rise",
+            "meaningful": true
+          },
+          {
+            "index": 7,
+            "text": "up",
+            "normalized": "up",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          6,
+          7
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 2,
+        "sourceIndices": [
+          2
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Matthew.12.42:2"
+        ],
+        "surface": "ἐγερθήσεται",
+        "strong": "G1453",
+        "entityId": "word:greek-nt:G1453",
+        "morph": "V-FPI-3S",
+        "gloss": "to arise",
+        "mounceGloss": "to arise",
+        "tyndaleGloss": "to arise"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    },
+    {
+      "batch": "BATCH7A_SOURCE_FIRST_PHRASE_SPANS",
+      "familyKey": "web|will rise up|G1453",
+      "translation": "web",
+      "reference": "Luke 11:31",
+      "book": "Luke",
+      "chapter": 11,
+      "verse": 31,
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "11:31",
+      "canonicalKey": "Luke.11.31",
+      "englishSpan": {
+        "start": 5,
+        "end": 7,
+        "tokens": [
+          {
+            "index": 5,
+            "text": "will",
+            "normalized": "will",
+            "meaningful": false
+          },
+          {
+            "index": 6,
+            "text": "rise",
+            "normalized": "rise",
+            "meaningful": true
+          },
+          {
+            "index": 7,
+            "text": "up",
+            "normalized": "up",
+            "meaningful": true
+          }
+        ],
+        "meaningfulDisplayIndices": [
+          6,
+          7
+        ]
+      },
+      "sourceSegment": {
+        "primarySourceIndex": 2,
+        "sourceIndices": [
+          2
+        ],
+        "sourceOccurrenceIds": [
+          "greek-nt:Luke.11.31:2"
+        ],
+        "surface": "ἐγερθήσεται",
+        "strong": "G1453",
+        "entityId": "word:greek-nt:G1453",
+        "morph": "V-FPI-3S",
+        "gloss": "to arise",
+        "mounceGloss": "to arise",
+        "tyndaleGloss": "to arise"
+      },
+      "ownership": "ONE_SOURCE_OCCURRENCE_OWNS_ENGLISH_PHRASE",
+      "method": "p0812r2-greek-source-first-phrase-span-batch7a"
+    }
+  ],
+  "routes": [
+    {
+      "translation": "kjv",
+      "reference": "Mark 8:33",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "8:33",
+      "displayIndex": 15,
+      "displayText": "Get",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Mark.8.33:12",
+      "strong": "G5217",
+      "entityId": "word:greek-nt:G5217",
+      "spanFamilyKey": "kjv|get thee|G5217",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Mark 8:33",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "8:33",
+      "displayIndex": 16,
+      "displayText": "thee",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Mark.8.33:12",
+      "strong": "G5217",
+      "entityId": "word:greek-nt:G5217",
+      "spanFamilyKey": "kjv|get thee|G5217",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Matthew 16:23",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "16:23",
+      "displayIndex": 7,
+      "displayText": "Get",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Matthew.16.23:6",
+      "strong": "G5217",
+      "entityId": "word:greek-nt:G5217",
+      "spanFamilyKey": "kjv|get thee|G5217",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Matthew 16:23",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "16:23",
+      "displayIndex": 8,
+      "displayText": "thee",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Matthew.16.23:6",
+      "strong": "G5217",
+      "entityId": "word:greek-nt:G5217",
+      "spanFamilyKey": "kjv|get thee|G5217",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Luke 11:31",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "11:31",
+      "displayIndex": 6,
+      "displayText": "rise",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Luke.11.31:2",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "spanFamilyKey": "kjv|shall rise up|G1453",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Luke 11:31",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "11:31",
+      "displayIndex": 7,
+      "displayText": "up",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Luke.11.31:2",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "spanFamilyKey": "kjv|shall rise up|G1453",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Matthew 12:42",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "12:42",
+      "displayIndex": 6,
+      "displayText": "rise",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Matthew.12.42:2",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "spanFamilyKey": "kjv|shall rise up|G1453",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Matthew 12:42",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "12:42",
+      "displayIndex": 7,
+      "displayText": "up",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Matthew.12.42:2",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "spanFamilyKey": "kjv|shall rise up|G1453",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Mark 14:34",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "14:34",
+      "displayIndex": 11,
+      "displayText": "tarry",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Mark.14.34:10",
+      "strong": "G3306",
+      "entityId": "word:greek-nt:G3306",
+      "spanFamilyKey": "kjv|tarry ye|G3306",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Mark 14:34",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "14:34",
+      "displayIndex": 12,
+      "displayText": "ye",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Mark.14.34:10",
+      "strong": "G3306",
+      "entityId": "word:greek-nt:G3306",
+      "spanFamilyKey": "kjv|tarry ye|G3306",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Matthew 26:38",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "26:38",
+      "displayIndex": 13,
+      "displayText": "tarry",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Matthew.26.38:10",
+      "strong": "G3306",
+      "entityId": "word:greek-nt:G3306",
+      "spanFamilyKey": "kjv|tarry ye|G3306",
+      "spanOwnership": true
+    },
+    {
+      "translation": "kjv",
+      "reference": "Matthew 26:38",
+      "runtimeFile": "Matthew.json",
+      "runtimeVerseKey": "26:38",
+      "displayIndex": 14,
+      "displayText": "ye",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Matthew.26.38:10",
+      "strong": "G3306",
+      "entityId": "word:greek-nt:G3306",
+      "spanFamilyKey": "kjv|tarry ye|G3306",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Matthew 11:6",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "11:6",
+      "displayIndex": 6,
+      "displayText": "occasion",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Matthew.11.6:6",
+      "strong": "G4624",
+      "entityId": "word:greek-nt:G4624",
+      "spanFamilyKey": "web|occasion for stumbling|G4624",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Matthew 11:6",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "11:6",
+      "displayIndex": 8,
+      "displayText": "stumbling",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Matthew.11.6:6",
+      "strong": "G4624",
+      "entityId": "word:greek-nt:G4624",
+      "spanFamilyKey": "web|occasion for stumbling|G4624",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Luke 7:23",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "7:23",
+      "displayIndex": 6,
+      "displayText": "occasion",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Luke.7.23:6",
+      "strong": "G4624",
+      "entityId": "word:greek-nt:G4624",
+      "spanFamilyKey": "web|occasion for stumbling|G4624",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Luke 7:23",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "7:23",
+      "displayIndex": 8,
+      "displayText": "stumbling",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:Luke.7.23:6",
+      "strong": "G4624",
+      "entityId": "word:greek-nt:G4624",
+      "spanFamilyKey": "web|occasion for stumbling|G4624",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Matthew 15:4",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "15:4",
+      "displayIndex": 12,
+      "displayText": "speaks",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Matthew.15.4:12",
+      "strong": "G2551",
+      "entityId": "word:greek-nt:G2551",
+      "spanFamilyKey": "web|speaks evil of|G2551",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Matthew 15:4",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "15:4",
+      "displayIndex": 13,
+      "displayText": "evil",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Matthew.15.4:12",
+      "strong": "G2551",
+      "entityId": "word:greek-nt:G2551",
+      "spanFamilyKey": "web|speaks evil of|G2551",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Mark 7:10",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "7:10",
+      "displayIndex": 12,
+      "displayText": "speaks",
+      "sourceIndex": 13,
+      "sourceOccurrenceId": "greek-nt:Mark.7.10:13",
+      "strong": "G2551",
+      "entityId": "word:greek-nt:G2551",
+      "spanFamilyKey": "web|speaks evil of|G2551",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Mark 7:10",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "7:10",
+      "displayIndex": 13,
+      "displayText": "evil",
+      "sourceIndex": 13,
+      "sourceOccurrenceId": "greek-nt:Mark.7.10:13",
+      "strong": "G2551",
+      "entityId": "word:greek-nt:G2551",
+      "spanFamilyKey": "web|speaks evil of|G2551",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Matthew 12:42",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "12:42",
+      "displayIndex": 6,
+      "displayText": "rise",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Matthew.12.42:2",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "spanFamilyKey": "web|will rise up|G1453",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Matthew 12:42",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "12:42",
+      "displayIndex": 7,
+      "displayText": "up",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Matthew.12.42:2",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "spanFamilyKey": "web|will rise up|G1453",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Luke 11:31",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "11:31",
+      "displayIndex": 6,
+      "displayText": "rise",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Luke.11.31:2",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "spanFamilyKey": "web|will rise up|G1453",
+      "spanOwnership": true
+    },
+    {
+      "translation": "web",
+      "reference": "Luke 11:31",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "11:31",
+      "displayIndex": 7,
+      "displayText": "up",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Luke.11.31:2",
+      "strong": "G1453",
+      "entityId": "word:greek-nt:G1453",
+      "spanFamilyKey": "web|will rise up|G1453",
+      "spanOwnership": true
+    }
+  ],
+  "deferredMultiSourceSegments": [
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "kjv",
+      "reference": "John 14:17",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:17",
+      "englishTarget": {
+        "displayIndex": 8,
+        "text": "cannot",
+        "normalized": "cannot"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:John.14.17:7",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "greek-nt:John.14.17:8",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "kjv",
+      "reference": "John 15:4",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "15:4",
+      "englishTarget": {
+        "displayIndex": 10,
+        "text": "cannot",
+        "normalized": "cannot"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:John.15.4:9",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "greek-nt:John.15.4:10",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "John 14:17",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:17",
+      "englishTarget": {
+        "displayIndex": 7,
+        "text": "cant",
+        "normalized": "cant"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:John.14.17:7",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "greek-nt:John.14.17:8",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "John 15:4",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "15:4",
+      "englishTarget": {
+        "displayIndex": 10,
+        "text": "cant",
+        "normalized": "cant"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 9,
+          "sourceOccurrenceId": "greek-nt:John.15.4:9",
+          "surface": "οὐ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 10,
+          "sourceOccurrenceId": "greek-nt:John.15.4:10",
+          "surface": "δύναται",
+          "strong": "G1410",
+          "entityId": "word:greek-nt:G1410",
+          "morph": "V-PNI-3S",
+          "gloss": "be able"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "John 11:10",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "11:10",
+      "englishTarget": {
+        "displayIndex": 13,
+        "text": "isnt",
+        "normalized": "isnt"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 11,
+          "sourceOccurrenceId": "greek-nt:John.11.10:11",
+          "surface": "οὐκ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:John.11.10:12",
+          "surface": "ἔστιν",
+          "strong": "G1510",
+          "entityId": "word:greek-nt:G1510",
+          "morph": "V-PAI-3S",
+          "gloss": "is"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "John 14:24",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:24",
+      "englishTarget": {
+        "displayIndex": 14,
+        "text": "isnt",
+        "normalized": "isnt"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 14,
+          "sourceOccurrenceId": "greek-nt:John.14.24:14",
+          "surface": "οὐκ",
+          "strong": "G3756",
+          "entityId": "word:greek-nt:G3756",
+          "morph": "PRT-N",
+          "gloss": "no"
+        },
+        {
+          "sourceIndex": 15,
+          "sourceOccurrenceId": "greek-nt:John.14.24:15",
+          "surface": "ἔστιν",
+          "strong": "G1510",
+          "entityId": "word:greek-nt:G1510",
+          "morph": "V-PAI-3S",
+          "gloss": "is"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Luke 18:19",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:19",
+      "englishTarget": {
+        "displayIndex": 13,
+        "text": "except",
+        "normalized": "except"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 11,
+          "sourceOccurrenceId": "greek-nt:Luke.18.19:11",
+          "surface": "εἰ",
+          "strong": "G1487",
+          "entityId": "word:greek-nt:G1487",
+          "morph": "CONJ",
+          "gloss": "if"
+        },
+        {
+          "sourceIndex": 12,
+          "sourceOccurrenceId": "greek-nt:Luke.18.19:12",
+          "surface": "μὴ",
+          "strong": "G3361",
+          "entityId": "word:greek-nt:G3361",
+          "morph": "PRT-N",
+          "gloss": "not"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "John 14:6",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:6",
+      "englishTarget": {
+        "displayIndex": 19,
+        "text": "except",
+        "normalized": "except"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "greek-nt:John.14.6:19",
+          "surface": "εἰ",
+          "strong": "G1487",
+          "entityId": "word:greek-nt:G1487",
+          "morph": "CONJ",
+          "gloss": "if"
+        },
+        {
+          "sourceIndex": 20,
+          "sourceOccurrenceId": "greek-nt:John.14.6:20",
+          "surface": "μὴ",
+          "strong": "G3361",
+          "entityId": "word:greek-nt:G3361",
+          "morph": "PRT-N",
+          "gloss": "not"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Galatians 6:14",
+      "runtimeFile": "Gal.json",
+      "runtimeVerseKey": "6:14",
+      "englishTarget": {
+        "displayIndex": 8,
+        "text": "except",
+        "normalized": "except"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 5,
+          "sourceOccurrenceId": "greek-nt:Galatians.6.14:5",
+          "surface": "εἰ",
+          "strong": "G1487",
+          "entityId": "word:greek-nt:G1487",
+          "morph": "CONJ",
+          "gloss": "if"
+        },
+        {
+          "sourceIndex": 6,
+          "sourceOccurrenceId": "greek-nt:Galatians.6.14:6",
+          "surface": "μὴ",
+          "strong": "G3361",
+          "entityId": "word:greek-nt:G3361",
+          "morph": "PRT-N",
+          "gloss": "not"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Romans 1:25",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "1:25",
+      "englishTarget": {
+        "displayIndex": 22,
+        "text": "forever",
+        "normalized": "forever"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 21,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:21",
+          "surface": "εἰς",
+          "strong": "G1519",
+          "entityId": "word:greek-nt:G1519",
+          "morph": "PREP",
+          "gloss": "toward"
+        },
+        {
+          "sourceIndex": 22,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:22",
+          "surface": "τοὺς",
+          "strong": "G3588",
+          "entityId": "word:greek-nt:G3588",
+          "morph": "T-APM",
+          "gloss": "the"
+        },
+        {
+          "sourceIndex": 23,
+          "sourceOccurrenceId": "greek-nt:Romans.1.25:23",
+          "surface": "αἰῶνας",
+          "strong": "G0165",
+          "entityId": "word:greek-nt:G0165",
+          "morph": "N-APM",
+          "gloss": "ages"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Romans 9:5",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "9:5",
+      "englishTarget": {
+        "displayIndex": 20,
+        "text": "forever",
+        "normalized": "forever"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 17,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:17",
+          "surface": "εἰς",
+          "strong": "G1519",
+          "entityId": "word:greek-nt:G1519",
+          "morph": "PREP",
+          "gloss": "toward"
+        },
+        {
+          "sourceIndex": 18,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:18",
+          "surface": "τοὺς",
+          "strong": "G3588",
+          "entityId": "word:greek-nt:G3588",
+          "morph": "T-APM",
+          "gloss": "the"
+        },
+        {
+          "sourceIndex": 19,
+          "sourceOccurrenceId": "greek-nt:Romans.9.5:19",
+          "surface": "αἰῶνας",
+          "strong": "G0165",
+          "entityId": "word:greek-nt:G0165",
+          "morph": "N-APM",
+          "gloss": "ages"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Luke 9:4",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "9:4",
+      "englishTarget": {
+        "displayIndex": 1,
+        "text": "whatever",
+        "normalized": "whatever"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 2,
+          "sourceOccurrenceId": "greek-nt:Luke.9.4:2",
+          "surface": "ἣν",
+          "strong": "G3739",
+          "entityId": "word:greek-nt:G3739",
+          "morph": "R-ASF",
+          "gloss": "which"
+        },
+        {
+          "sourceIndex": 3,
+          "sourceOccurrenceId": "greek-nt:Luke.9.4:3",
+          "surface": "ἂν",
+          "strong": "G0302",
+          "entityId": "word:greek-nt:G0302",
+          "morph": "PRT",
+          "gloss": "if"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Luke 10:8",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "10:8",
+      "englishTarget": {
+        "displayIndex": 1,
+        "text": "whatever",
+        "normalized": "whatever"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 2,
+          "sourceOccurrenceId": "greek-nt:Luke.10.8:2",
+          "surface": "ἣν",
+          "strong": "G3739",
+          "entityId": "word:greek-nt:G3739",
+          "morph": "R-ASF",
+          "gloss": "which"
+        },
+        {
+          "sourceIndex": 3,
+          "sourceOccurrenceId": "greek-nt:Luke.10.8:3",
+          "surface": "ἂν",
+          "strong": "G0302",
+          "entityId": "word:greek-nt:G0302",
+          "morph": "PRT",
+          "gloss": "if"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Revelation 7:4",
+      "runtimeFile": "Rev.json",
+      "runtimeVerseKey": "7:4",
+      "englishTarget": {
+        "displayIndex": 11,
+        "text": "forty-four",
+        "normalized": "forty four"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:Revelation.7.4:7",
+          "surface": "τεσσεράκοντα",
+          "strong": "G5062",
+          "entityId": "word:greek-nt:G5062",
+          "morph": "A-NPF-NUI",
+          "gloss": "forty"
+        },
+        {
+          "sourceIndex": 8,
+          "sourceOccurrenceId": "greek-nt:Revelation.7.4:8",
+          "surface": "τέσσαρες",
+          "strong": "G5064",
+          "entityId": "word:greek-nt:G5064",
+          "morph": "A-NPF",
+          "gloss": "four"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Revelation 14:1",
+      "runtimeFile": "Rev.json",
+      "runtimeVerseKey": "14:1",
+      "englishTarget": {
+        "displayIndex": 17,
+        "text": "forty-four",
+        "normalized": "forty four"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 15,
+          "sourceOccurrenceId": "greek-nt:Revelation.14.1:15",
+          "surface": "τεσσεράκοντα",
+          "strong": "G5062",
+          "entityId": "word:greek-nt:G5062",
+          "morph": "A-NPF-NUI",
+          "gloss": "forty"
+        },
+        {
+          "sourceIndex": 16,
+          "sourceOccurrenceId": "greek-nt:Revelation.14.1:16",
+          "surface": "τέσσαρες",
+          "strong": "G5064",
+          "entityId": "word:greek-nt:G5064",
+          "morph": "A-NPF",
+          "gloss": "four"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Revelation 14:3",
+      "runtimeFile": "Rev.json",
+      "runtimeVerseKey": "14:3",
+      "englishTarget": {
+        "displayIndex": 27,
+        "text": "forty-four",
+        "normalized": "forty four"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 26,
+          "sourceOccurrenceId": "greek-nt:Revelation.14.3:26",
+          "surface": "τεσσεράκοντα",
+          "strong": "G5062",
+          "entityId": "word:greek-nt:G5062",
+          "morph": "A-NPF-NUI",
+          "gloss": "forty"
+        },
+        {
+          "sourceIndex": 27,
+          "sourceOccurrenceId": "greek-nt:Revelation.14.3:27",
+          "surface": "τέσσαρες",
+          "strong": "G5064",
+          "entityId": "word:greek-nt:G5064",
+          "morph": "A-NPF-NUI",
+          "gloss": "four"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    },
+    {
+      "status": "DEFERRED_REQUIRES_PRIMARY_TAP_OWNER",
+      "translation": "web",
+      "reference": "Revelation 21:17",
+      "runtimeFile": "Rev.json",
+      "runtimeVerseKey": "21:17",
+      "englishTarget": {
+        "displayIndex": 5,
+        "text": "forty-four",
+        "normalized": "forty four"
+      },
+      "sourceSegment": [
+        {
+          "sourceIndex": 6,
+          "sourceOccurrenceId": "greek-nt:Revelation.21.17:6",
+          "surface": "τεσσεράκοντα",
+          "strong": "G5062",
+          "entityId": "word:greek-nt:G5062",
+          "morph": "A-GPM-NUI",
+          "gloss": "forty"
+        },
+        {
+          "sourceIndex": 7,
+          "sourceOccurrenceId": "greek-nt:Revelation.21.17:7",
+          "surface": "τεσσάρων",
+          "strong": "G5064",
+          "entityId": "word:greek-nt:G5064",
+          "morph": "A-GPM-NUI",
+          "gloss": "four"
+        }
+      ],
+      "reason": "The English token genuinely renders a multi-occurrence Greek segment, but promotion is deferred until the tap target has an explicit primary source/entity policy."
+    }
+  ],
+  "previousPromotedRoutes": {
+    "direct": 23,
+    "batch1": 61,
+    "batch2": 35,
+    "batch3": 54,
+    "batch4": 50,
+    "batch5": 170,
+    "batch6": 41,
+    "total": 434
+  },
+  "expectedPromotedTotalAfterBatch7A": 458,
+  "checksum": "c804cffc0d0e18ee510903fca992b3813880372c429614e696124f2d3ba1aed1"
+}

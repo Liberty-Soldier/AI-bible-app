@@ -168,6 +168,12 @@ export default function VerseActionController({
           const verseLabel = readerVerseQueryValue(verse);
           const availabilityKey =
             readerVerseTokenAvailabilityKey(verse);
+          const verseTokenAvailability =
+            activeTranslation === "brenton"
+              ? tokenAvailabilityByVerse?.[verse.id]
+              : availabilityKey
+                ? tokenAvailabilityByVerse?.[availabilityKey]
+                : undefined;
           const isHighlightedFromUrl =
             highlightedVerse === verseLabel;
           const hasFocusedWord =
@@ -213,11 +219,10 @@ export default function VerseActionController({
               <ScriptureText
                 text={selectedText}
                 reference={verse.reference}
-                tokenAvailability={
-                  availabilityKey
-                    ? tokenAvailabilityByVerse?.[availabilityKey]
-                    : undefined
-                }
+                tokenAvailability={verseTokenAvailability}
+                readerRecordId={verse.id}
+                readerVerseLabel={verseLabel}
+                verseNumber={verse.verse}
                 focusedTokenIndex={
                   hasFocusedWord ? focusedTokenIndex : null
                 }

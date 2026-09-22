@@ -23,6 +23,8 @@ export default function ReaderWordStudyController({
   const selectedText = searchParams.get("selectedText");
   const originalWord = searchParams.get("originalWord");
   const displayTokenIndex = searchParams.get("displayTokenIndex");
+  const readerRecordId = searchParams.get("readerRecordId");
+  const readerVerseLabel = searchParams.get("readerVerseLabel");
   const verseText = searchParams.get("verseText");
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export default function ReaderWordStudyController({
 
   function closeWordStudy() {
     const params = new URLSearchParams(queryString);
-    const verseToFocus = selectedVerse;
+    const verseToFocus = readerVerseLabel || selectedVerse;
     const tokenToFocus = displayTokenIndex;
 
     params.delete("study");
@@ -47,6 +49,8 @@ export default function ReaderWordStudyController({
     params.delete("selectedText");
     params.delete("originalWord");
     params.delete("displayTokenIndex");
+    params.delete("readerRecordId");
+    params.delete("readerVerseLabel");
     params.delete("verseText");
     params.delete("wordOccurrence");
 
@@ -81,6 +85,7 @@ export default function ReaderWordStudyController({
       chapter={chapter}
       verse={numericSelectedVerse}
       translation={translation}
+      readerRecordId={readerRecordId || undefined}
       displayTokenIndex={
         displayTokenIndex !== null
           ? Number(displayTokenIndex)

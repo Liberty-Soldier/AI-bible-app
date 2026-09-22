@@ -20,6 +20,7 @@ export async function GET(request: Request) {
       chapter: toNumber(searchParams.get("chapter")),
       verse: toNumber(searchParams.get("verse")),
       translation: searchParams.get("translation") || "",
+      readerRecordId: searchParams.get("readerRecordId") || undefined,
       displayWord:
         searchParams.get("displayWord") ||
         searchParams.get("q") ||

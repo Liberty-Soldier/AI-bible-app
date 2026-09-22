@@ -1,0 +1,2832 @@
+{
+  "schemaVersion": "emet-p0812r2-greek-nt-negative-particle-batch4-overlay/v1",
+  "milestone": "P08.12R2",
+  "purpose": "Evidence-reviewed WEB single-token negative renderings owned by explicit OpenGNT negative particles.",
+  "authority": {
+    "source": "Ordered OpenGNT negative-particle occurrences",
+    "analysisClass": "1-English-token -> 1-unowned-source-occurrence",
+    "sourceStrongs": [
+      "G3361",
+      "G3756"
+    ],
+    "sourceMorph": "PRT-N",
+    "approvedEnglishTargets": [
+      "don't",
+      "doesn't",
+      "didn't"
+    ],
+    "genericNegativeHeuristic": false,
+    "recurrenceAutomaticApproval": false,
+    "adjacencyAutomaticApproval": false,
+    "sourceReuseAllowed": false,
+    "kjvIncluded": false,
+    "canonicalModified": false
+  },
+  "counts": {
+    "approvedFamilies": 5,
+    "approvedCases": 50,
+    "meaningfulRoutes": 50,
+    "webMeaningfulRoutes": 50,
+    "kjvMeaningfulRoutes": 0
+  },
+  "targetDistribution": {
+    "dont": 21,
+    "doesnt": 17,
+    "didnt": 12
+  },
+  "sourceDistribution": {
+    "G3361": 33,
+    "G3756": 17
+  },
+  "families": [
+    {
+      "key": "web|dont|G3361",
+      "translation": "web",
+      "displayExample": "dont",
+      "sourceSurfaceExample": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "gloss": "not",
+      "mounceGloss": "no",
+      "tyndaleGloss": "not",
+      "caseCount": 21,
+      "meaningfulResidualPositions": 21,
+      "target": "dont",
+      "references": [
+        "Matthew 6:16",
+        "Mark 13:7",
+        "Luke 8:52",
+        "Luke 18:20",
+        "Luke 18:20",
+        "Luke 18:20",
+        "Luke 23:28",
+        "John 2:16",
+        "John 9:39",
+        "Romans 12:16",
+        "1 Corinthians 7:23",
+        "1 Corinthians 10:28",
+        "1 Corinthians 14:20",
+        "Colossians 3:21",
+        "1 Thessalonians 4:5",
+        "2 Thessalonians 1:8",
+        "2 Thessalonians 1:8",
+        "1 John 3:21",
+        "2 John 1:7",
+        "3 John 1:11",
+        "Revelation 7:3"
+      ]
+    },
+    {
+      "key": "web|doesnt|G3756",
+      "translation": "web",
+      "displayExample": "doesnt",
+      "sourceSurfaceExample": "οὐ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "mounceGloss": "no",
+      "tyndaleGloss": "no",
+      "caseCount": 9,
+      "meaningfulResidualPositions": 9,
+      "target": "doesnt",
+      "references": [
+        "Matthew 10:38",
+        "John 5:23",
+        "John 12:35",
+        "Acts 19:35",
+        "1 Corinthians 2:14",
+        "James 1:20",
+        "1 John 3:1",
+        "1 John 4:8",
+        "1 John 5:18"
+      ]
+    },
+    {
+      "key": "web|didnt|G3756",
+      "translation": "web",
+      "displayExample": "didnt",
+      "sourceSurfaceExample": "οὐκ",
+      "strong": "G3756",
+      "morph": "PRT-N",
+      "gloss": "no",
+      "mounceGloss": "no",
+      "tyndaleGloss": "no",
+      "caseCount": 8,
+      "meaningfulResidualPositions": 8,
+      "target": "didnt",
+      "references": [
+        "John 5:13",
+        "John 8:40",
+        "Acts 7:18",
+        "Romans 15:3",
+        "Philippians 2:6",
+        "Hebrews 5:5",
+        "2 Peter 2:4",
+        "Revelation 20:5"
+      ]
+    },
+    {
+      "key": "web|doesnt|G3361",
+      "translation": "web",
+      "displayExample": "doesnt",
+      "sourceSurfaceExample": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "gloss": "not",
+      "mounceGloss": "no",
+      "tyndaleGloss": "not",
+      "caseCount": 8,
+      "meaningfulResidualPositions": 8,
+      "target": "doesnt",
+      "references": [
+        "Luke 11:23",
+        "John 5:23",
+        "John 10:1",
+        "John 14:24",
+        "Romans 14:3",
+        "Romans 14:22",
+        "1 John 3:14",
+        "1 John 4:8"
+      ]
+    },
+    {
+      "key": "web|didnt|G3361",
+      "translation": "web",
+      "displayExample": "didnt",
+      "sourceSurfaceExample": "μὴ",
+      "strong": "G3361",
+      "morph": "PRT-N",
+      "gloss": "not",
+      "mounceGloss": "no",
+      "tyndaleGloss": "not",
+      "caseCount": 4,
+      "meaningfulResidualPositions": 4,
+      "target": "didnt",
+      "references": [
+        "Luke 18:2",
+        "John 6:64",
+        "Jude 1:5",
+        "Jude 1:6"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Matthew 6:16",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "6:16",
+      "target": {
+        "displayIndex": 4,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Matthew.6.16:3",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Mark 13:7",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "13:7",
+      "target": {
+        "displayIndex": 9,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:Mark.13.7:7",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 8:52",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "8:52",
+      "target": {
+        "displayIndex": 9,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Luke.8.52:9",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 18:20",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:20",
+      "target": {
+        "displayIndex": 4,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Luke.18.20:3",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 18:20",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:20",
+      "target": {
+        "displayIndex": 9,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 7,
+        "sourceOccurrenceId": "greek-nt:Luke.18.20:7",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 18:20",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:20",
+      "target": {
+        "displayIndex": 11,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Luke.18.20:9",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 23:28",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "23:28",
+      "target": {
+        "displayIndex": 9,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Luke.23.28:9",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "John 2:16",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "2:16",
+      "target": {
+        "displayIndex": 14,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:John.2.16:9",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "John 9:39",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "9:39",
+      "target": {
+        "displayIndex": 12,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 14,
+        "sourceOccurrenceId": "greek-nt:John.9.39:14",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Romans 12:16",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "12:16",
+      "target": {
+        "displayIndex": 20,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 13,
+        "sourceOccurrenceId": "greek-nt:Romans.12.16:13",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "1 Corinthians 7:23",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "7:23",
+      "target": {
+        "displayIndex": 6,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.7.23:2",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "1 Corinthians 10:28",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "10:28",
+      "target": {
+        "displayIndex": 11,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.10.28:8",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "1 Corinthians 14:20",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "14:20",
+      "target": {
+        "displayIndex": 1,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.14.20:1",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Colossians 3:21",
+      "runtimeFile": "Col.json",
+      "runtimeVerseKey": "3:21",
+      "target": {
+        "displayIndex": 1,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:Colossians.3.21:2",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "1 Thessalonians 4:5",
+      "runtimeFile": "1Thess.json",
+      "runtimeVerseKey": "4:5",
+      "target": {
+        "displayIndex": 11,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:1_Thessalonians.4.5:9",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "2 Thessalonians 1:8",
+      "runtimeFile": "2Thess.json",
+      "runtimeVerseKey": "1:8",
+      "target": {
+        "displayIndex": 3,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:2_Thessalonians.1.8:6",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "2 Thessalonians 1:8",
+      "runtimeFile": "2Thess.json",
+      "runtimeVerseKey": "1:8",
+      "target": {
+        "displayIndex": 10,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 11,
+        "sourceOccurrenceId": "greek-nt:2_Thessalonians.1.8:11",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "1 John 3:21",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "3:21",
+      "target": {
+        "displayIndex": 4,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:1_John.3.21:5",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "2 John 1:7",
+      "runtimeFile": "2John.json",
+      "runtimeVerseKey": "1:7",
+      "target": {
+        "displayIndex": 11,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:2_John.1.7:8",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "3 John 1:11",
+      "runtimeFile": "3John.json",
+      "runtimeVerseKey": "1:11",
+      "target": {
+        "displayIndex": 1,
+        "displayText": "dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:3_John.1.11:1",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|dont|G3361",
+      "reference": "Revelation 7:3",
+      "runtimeFile": "Rev.json",
+      "runtimeVerseKey": "7:3",
+      "target": {
+        "displayIndex": 1,
+        "displayText": "Dont"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:Revelation.7.3:1",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "Matthew 10:38",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "10:38",
+      "target": {
+        "displayIndex": 2,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 2,
+        "sourceOccurrenceId": "greek-nt:Matthew.10.38:2",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "John 5:23",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "5:23",
+      "target": {
+        "displayIndex": 18,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 14,
+        "sourceOccurrenceId": "greek-nt:John.5.23:14",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "John 12:35",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "12:35",
+      "target": {
+        "displayIndex": 31,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 29,
+        "sourceOccurrenceId": "greek-nt:John.12.35:29",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "Acts 19:35",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "19:35",
+      "target": {
+        "displayIndex": 19,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 14,
+        "sourceOccurrenceId": "greek-nt:Acts.19.35:14",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "1 Corinthians 2:14",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "2:14",
+      "target": {
+        "displayIndex": 4,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:1_Corinthians.2.14:3",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "James 1:20",
+      "runtimeFile": "Jas.json",
+      "runtimeVerseKey": "1:20",
+      "target": {
+        "displayIndex": 5,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:James.1.20:5",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "1 John 3:1",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "3:1",
+      "target": {
+        "displayIndex": 24,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 17,
+        "sourceOccurrenceId": "greek-nt:1_John.3.1:17",
+        "surface": "οὐ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "1 John 4:8",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "4:8",
+      "target": {
+        "displayIndex": 4,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:1_John.4.8:3",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3756",
+      "reference": "1 John 5:18",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "5:18",
+      "target": {
+        "displayIndex": 8,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:1_John.5.18:8",
+        "surface": "οὐχ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3756",
+      "reference": "John 5:13",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "5:13",
+      "target": {
+        "displayIndex": 5,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:John.5.13:3",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3756",
+      "reference": "John 8:40",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "8:40",
+      "target": {
+        "displayIndex": 21,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 18,
+        "sourceOccurrenceId": "greek-nt:John.8.40:18",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3756",
+      "reference": "Acts 7:18",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "7:18",
+      "target": {
+        "displayIndex": 7,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 8,
+        "sourceOccurrenceId": "greek-nt:Acts.7.18:8",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3756",
+      "reference": "Romans 15:3",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "15:3",
+      "target": {
+        "displayIndex": 3,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Romans.15.3:4",
+        "surface": "οὐχ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3756",
+      "reference": "Philippians 2:6",
+      "runtimeFile": "Phil.json",
+      "runtimeVerseKey": "2:6",
+      "target": {
+        "displayIndex": 7,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:Philippians.2.6:5",
+        "surface": "οὐχ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3756",
+      "reference": "Hebrews 5:5",
+      "runtimeFile": "Heb.json",
+      "runtimeVerseKey": "5:5",
+      "target": {
+        "displayIndex": 3,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Hebrews.5.5:4",
+        "surface": "οὐχ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3756",
+      "reference": "2 Peter 2:4",
+      "runtimeFile": "2Pet.json",
+      "runtimeVerseKey": "2:4",
+      "target": {
+        "displayIndex": 3,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 6,
+        "sourceOccurrenceId": "greek-nt:2_Peter.2.4:6",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3756",
+      "reference": "Revelation 20:5",
+      "runtimeFile": "Rev.json",
+      "runtimeVerseKey": "20:5",
+      "target": {
+        "displayIndex": 5,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 4,
+        "sourceOccurrenceId": "greek-nt:Revelation.20.5:4",
+        "surface": "οὐκ",
+        "strong": "G3756",
+        "entityId": "word:greek-nt:G3756",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3361",
+      "reference": "Luke 11:23",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "11:23",
+      "target": {
+        "displayIndex": 11,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:Luke.11.23:10",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3361",
+      "reference": "John 5:23",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "5:23",
+      "target": {
+        "displayIndex": 14,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 10,
+        "sourceOccurrenceId": "greek-nt:John.5.23:10",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3361",
+      "reference": "John 10:1",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "10:1",
+      "target": {
+        "displayIndex": 7,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 5,
+        "sourceOccurrenceId": "greek-nt:John.10.1:5",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3361",
+      "reference": "John 14:24",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:24",
+      "target": {
+        "displayIndex": 2,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:John.14.24:1",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3361",
+      "reference": "Romans 14:3",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "14:3",
+      "target": {
+        "displayIndex": 8,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Romans.14.3:3",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3361",
+      "reference": "Romans 14:22",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "14:22",
+      "target": {
+        "displayIndex": 14,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 12,
+        "sourceOccurrenceId": "greek-nt:Romans.14.22:12",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3361",
+      "reference": "1 John 3:14",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "3:14",
+      "target": {
+        "displayIndex": 18,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 15,
+        "sourceOccurrenceId": "greek-nt:1_John.3.14:15",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|doesnt|G3361",
+      "reference": "1 John 4:8",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "4:8",
+      "target": {
+        "displayIndex": 2,
+        "displayText": "doesnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 1,
+        "sourceOccurrenceId": "greek-nt:1_John.4.8:1",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3361",
+      "reference": "Luke 18:2",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:2",
+      "target": {
+        "displayIndex": 10,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 9,
+        "sourceOccurrenceId": "greek-nt:Luke.18.2:9",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3361",
+      "reference": "John 6:64",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "6:64",
+      "target": {
+        "displayIndex": 19,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 17,
+        "sourceOccurrenceId": "greek-nt:John.6.64:17",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3361",
+      "reference": "Jude 1:5",
+      "runtimeFile": "Jude.json",
+      "runtimeVerseKey": "1:5",
+      "target": {
+        "displayIndex": 28,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 18,
+        "sourceOccurrenceId": "greek-nt:Jude.1.5:18",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    },
+    {
+      "familyKey": "web|didnt|G3361",
+      "reference": "Jude 1:6",
+      "runtimeFile": "Jude.json",
+      "runtimeVerseKey": "1:6",
+      "target": {
+        "displayIndex": 2,
+        "displayText": "didnt"
+      },
+      "sourceOccurrence": {
+        "sourceIndex": 3,
+        "sourceOccurrenceId": "greek-nt:Jude.1.6:3",
+        "surface": "μὴ",
+        "strong": "G3361",
+        "entityId": "word:greek-nt:G3361",
+        "morph": "PRT-N"
+      },
+      "decision": "Single visible WEB negative-contraction token is the complete residual English rendering of the explicit unowned OpenGNT negative particle."
+    }
+  ],
+  "routes": [
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Matthew 6:16",
+      "book": "Matthew",
+      "chapter": 6,
+      "verse": 16,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "6:16",
+      "canonicalKey": "Matthew.6.16",
+      "displayIndex": 4,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 4,
+      "spanEnd": 4,
+      "spanText": "dont",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Matthew.6.16:3",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Mark 13:7",
+      "book": "Mark",
+      "chapter": 13,
+      "verse": 7,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Mark.json",
+      "runtimeVerseKey": "13:7",
+      "canonicalKey": "Mark.13.7",
+      "displayIndex": 9,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 9,
+      "spanEnd": 9,
+      "spanText": "dont",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:Mark.13.7:7",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 8:52",
+      "book": "Luke",
+      "chapter": 8,
+      "verse": 52,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "8:52",
+      "canonicalKey": "Luke.8.52",
+      "displayIndex": 9,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 9,
+      "spanEnd": 9,
+      "spanText": "Dont",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Luke.8.52:9",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 18:20",
+      "book": "Luke",
+      "chapter": 18,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:20",
+      "canonicalKey": "Luke.18.20",
+      "displayIndex": 4,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 4,
+      "spanEnd": 4,
+      "spanText": "Dont",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Luke.18.20:3",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 18:20",
+      "book": "Luke",
+      "chapter": 18,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:20",
+      "canonicalKey": "Luke.18.20",
+      "displayIndex": 9,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 9,
+      "spanEnd": 9,
+      "spanText": "Dont",
+      "sourceIndex": 7,
+      "sourceOccurrenceId": "greek-nt:Luke.18.20:7",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 18:20",
+      "book": "Luke",
+      "chapter": 18,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:20",
+      "canonicalKey": "Luke.18.20",
+      "displayIndex": 11,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 11,
+      "spanEnd": 11,
+      "spanText": "Dont",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Luke.18.20:9",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Luke 23:28",
+      "book": "Luke",
+      "chapter": 23,
+      "verse": 28,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "23:28",
+      "canonicalKey": "Luke.23.28",
+      "displayIndex": 9,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 9,
+      "spanEnd": 9,
+      "spanText": "dont",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Luke.23.28:9",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "John 2:16",
+      "book": "John",
+      "chapter": 2,
+      "verse": 16,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "2:16",
+      "canonicalKey": "John.2.16",
+      "displayIndex": 14,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 14,
+      "spanEnd": 14,
+      "spanText": "Dont",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:John.2.16:9",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "John 9:39",
+      "book": "John",
+      "chapter": 9,
+      "verse": 39,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "9:39",
+      "canonicalKey": "John.9.39",
+      "displayIndex": 12,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 12,
+      "spanEnd": 12,
+      "spanText": "dont",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:John.9.39:14",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Romans 12:16",
+      "book": "Romans",
+      "chapter": 12,
+      "verse": 16,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "12:16",
+      "canonicalKey": "Romans.12.16",
+      "displayIndex": 20,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 20,
+      "spanEnd": 20,
+      "spanText": "Dont",
+      "sourceIndex": 13,
+      "sourceOccurrenceId": "greek-nt:Romans.12.16:13",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "1 Corinthians 7:23",
+      "book": "1 Corinthians",
+      "chapter": 7,
+      "verse": 23,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "7:23",
+      "canonicalKey": "1 Corinthians.7.23",
+      "displayIndex": 6,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 6,
+      "spanEnd": 6,
+      "spanText": "Dont",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.7.23:2",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "1 Corinthians 10:28",
+      "book": "1 Corinthians",
+      "chapter": 10,
+      "verse": 28,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "10:28",
+      "canonicalKey": "1 Corinthians.10.28",
+      "displayIndex": 11,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 11,
+      "spanEnd": 11,
+      "spanText": "dont",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.10.28:8",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "1 Corinthians 14:20",
+      "book": "1 Corinthians",
+      "chapter": 14,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "14:20",
+      "canonicalKey": "1 Corinthians.14.20",
+      "displayIndex": 1,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 1,
+      "spanEnd": 1,
+      "spanText": "dont",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.14.20:1",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Colossians 3:21",
+      "book": "Colossians",
+      "chapter": 3,
+      "verse": 21,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Col.json",
+      "runtimeVerseKey": "3:21",
+      "canonicalKey": "Colossians.3.21",
+      "displayIndex": 1,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 1,
+      "spanEnd": 1,
+      "spanText": "dont",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Colossians.3.21:2",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "1 Thessalonians 4:5",
+      "book": "1 Thessalonians",
+      "chapter": 4,
+      "verse": 5,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Thess.json",
+      "runtimeVerseKey": "4:5",
+      "canonicalKey": "1 Thessalonians.4.5",
+      "displayIndex": 11,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 11,
+      "spanEnd": 11,
+      "spanText": "dont",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:1_Thessalonians.4.5:9",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "2 Thessalonians 1:8",
+      "book": "2 Thessalonians",
+      "chapter": 1,
+      "verse": 8,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Thess.json",
+      "runtimeVerseKey": "1:8",
+      "canonicalKey": "2 Thessalonians.1.8",
+      "displayIndex": 3,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 3,
+      "spanEnd": 3,
+      "spanText": "dont",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:2_Thessalonians.1.8:6",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "2 Thessalonians 1:8",
+      "book": "2 Thessalonians",
+      "chapter": 1,
+      "verse": 8,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Thess.json",
+      "runtimeVerseKey": "1:8",
+      "canonicalKey": "2 Thessalonians.1.8",
+      "displayIndex": 10,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 10,
+      "spanEnd": 10,
+      "spanText": "dont",
+      "sourceIndex": 11,
+      "sourceOccurrenceId": "greek-nt:2_Thessalonians.1.8:11",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "1 John 3:21",
+      "book": "1 John",
+      "chapter": 3,
+      "verse": 21,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "3:21",
+      "canonicalKey": "1 John.3.21",
+      "displayIndex": 4,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 4,
+      "spanEnd": 4,
+      "spanText": "dont",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:1_John.3.21:5",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "2 John 1:7",
+      "book": "2 John",
+      "chapter": 1,
+      "verse": 7,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2John.json",
+      "runtimeVerseKey": "1:7",
+      "canonicalKey": "2 John.1.7",
+      "displayIndex": 11,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 11,
+      "spanEnd": 11,
+      "spanText": "dont",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:2_John.1.7:8",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "3 John 1:11",
+      "book": "3 John",
+      "chapter": 1,
+      "verse": 11,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "3John.json",
+      "runtimeVerseKey": "1:11",
+      "canonicalKey": "3 John.1.11",
+      "displayIndex": 1,
+      "displayText": "dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 1,
+      "spanEnd": 1,
+      "spanText": "dont",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:3_John.1.11:1",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|dont|G3361",
+      "reference": "Revelation 7:3",
+      "book": "Revelation",
+      "chapter": 7,
+      "verse": 3,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "runtimeVerseKey": "7:3",
+      "canonicalKey": "Revelation.7.3",
+      "displayIndex": 1,
+      "displayText": "Dont",
+      "normalizedDisplayText": "dont",
+      "spanStart": 1,
+      "spanEnd": 1,
+      "spanText": "Dont",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:Revelation.7.3:1",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "Matthew 10:38",
+      "book": "Matthew",
+      "chapter": 10,
+      "verse": 38,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Matt.json",
+      "runtimeVerseKey": "10:38",
+      "canonicalKey": "Matthew.10.38",
+      "displayIndex": 2,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 2,
+      "spanEnd": 2,
+      "spanText": "doesnt",
+      "sourceIndex": 2,
+      "sourceOccurrenceId": "greek-nt:Matthew.10.38:2",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "John 5:23",
+      "book": "John",
+      "chapter": 5,
+      "verse": 23,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "5:23",
+      "canonicalKey": "John.5.23",
+      "displayIndex": 18,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 18,
+      "spanEnd": 18,
+      "spanText": "doesnt",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:John.5.23:14",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "John 12:35",
+      "book": "John",
+      "chapter": 12,
+      "verse": 35,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "12:35",
+      "canonicalKey": "John.12.35",
+      "displayIndex": 31,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 31,
+      "spanEnd": 31,
+      "spanText": "doesnt",
+      "sourceIndex": 29,
+      "sourceOccurrenceId": "greek-nt:John.12.35:29",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "Acts 19:35",
+      "book": "Acts",
+      "chapter": 19,
+      "verse": 35,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "19:35",
+      "canonicalKey": "Acts.19.35",
+      "displayIndex": 19,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 19,
+      "spanEnd": 19,
+      "spanText": "doesnt",
+      "sourceIndex": 14,
+      "sourceOccurrenceId": "greek-nt:Acts.19.35:14",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "1 Corinthians 2:14",
+      "book": "1 Corinthians",
+      "chapter": 2,
+      "verse": 14,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1Cor.json",
+      "runtimeVerseKey": "2:14",
+      "canonicalKey": "1 Corinthians.2.14",
+      "displayIndex": 4,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 4,
+      "spanEnd": 4,
+      "spanText": "doesnt",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.2.14:3",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "James 1:20",
+      "book": "James",
+      "chapter": 1,
+      "verse": 20,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Jas.json",
+      "runtimeVerseKey": "1:20",
+      "canonicalKey": "James.1.20",
+      "displayIndex": 5,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 5,
+      "spanEnd": 5,
+      "spanText": "doesnt",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:James.1.20:5",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "1 John 3:1",
+      "book": "1 John",
+      "chapter": 3,
+      "verse": 1,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "3:1",
+      "canonicalKey": "1 John.3.1",
+      "displayIndex": 24,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 24,
+      "spanEnd": 24,
+      "spanText": "doesnt",
+      "sourceIndex": 17,
+      "sourceOccurrenceId": "greek-nt:1_John.3.1:17",
+      "sourceSurface": "οὐ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "1 John 4:8",
+      "book": "1 John",
+      "chapter": 4,
+      "verse": 8,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "4:8",
+      "canonicalKey": "1 John.4.8",
+      "displayIndex": 4,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 4,
+      "spanEnd": 4,
+      "spanText": "doesnt",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:1_John.4.8:3",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3756",
+      "reference": "1 John 5:18",
+      "book": "1 John",
+      "chapter": 5,
+      "verse": 18,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "5:18",
+      "canonicalKey": "1 John.5.18",
+      "displayIndex": 8,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 8,
+      "spanEnd": 8,
+      "spanText": "doesnt",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:1_John.5.18:8",
+      "sourceSurface": "οὐχ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3756",
+      "reference": "John 5:13",
+      "book": "John",
+      "chapter": 5,
+      "verse": 13,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "5:13",
+      "canonicalKey": "John.5.13",
+      "displayIndex": 5,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 5,
+      "spanEnd": 5,
+      "spanText": "didnt",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:John.5.13:3",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3756",
+      "reference": "John 8:40",
+      "book": "John",
+      "chapter": 8,
+      "verse": 40,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "8:40",
+      "canonicalKey": "John.8.40",
+      "displayIndex": 21,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 21,
+      "spanEnd": 21,
+      "spanText": "didnt",
+      "sourceIndex": 18,
+      "sourceOccurrenceId": "greek-nt:John.8.40:18",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3756",
+      "reference": "Acts 7:18",
+      "book": "Acts",
+      "chapter": 7,
+      "verse": 18,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "runtimeVerseKey": "7:18",
+      "canonicalKey": "Acts.7.18",
+      "displayIndex": 7,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 7,
+      "spanEnd": 7,
+      "spanText": "didnt",
+      "sourceIndex": 8,
+      "sourceOccurrenceId": "greek-nt:Acts.7.18:8",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3756",
+      "reference": "Romans 15:3",
+      "book": "Romans",
+      "chapter": 15,
+      "verse": 3,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "15:3",
+      "canonicalKey": "Romans.15.3",
+      "displayIndex": 3,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 3,
+      "spanEnd": 3,
+      "spanText": "didnt",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Romans.15.3:4",
+      "sourceSurface": "οὐχ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3756",
+      "reference": "Philippians 2:6",
+      "book": "Philippians",
+      "chapter": 2,
+      "verse": 6,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Phil.json",
+      "runtimeVerseKey": "2:6",
+      "canonicalKey": "Philippians.2.6",
+      "displayIndex": 7,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 7,
+      "spanEnd": 7,
+      "spanText": "didnt",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:Philippians.2.6:5",
+      "sourceSurface": "οὐχ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3756",
+      "reference": "Hebrews 5:5",
+      "book": "Hebrews",
+      "chapter": 5,
+      "verse": 5,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Heb.json",
+      "runtimeVerseKey": "5:5",
+      "canonicalKey": "Hebrews.5.5",
+      "displayIndex": 3,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 3,
+      "spanEnd": 3,
+      "spanText": "didnt",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Hebrews.5.5:4",
+      "sourceSurface": "οὐχ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3756",
+      "reference": "2 Peter 2:4",
+      "book": "2 Peter",
+      "chapter": 2,
+      "verse": 4,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "2Pet.json",
+      "runtimeVerseKey": "2:4",
+      "canonicalKey": "2 Peter.2.4",
+      "displayIndex": 3,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 3,
+      "spanEnd": 3,
+      "spanText": "didnt",
+      "sourceIndex": 6,
+      "sourceOccurrenceId": "greek-nt:2_Peter.2.4:6",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3756",
+      "reference": "Revelation 20:5",
+      "book": "Revelation",
+      "chapter": 20,
+      "verse": 5,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rev.json",
+      "runtimeVerseKey": "20:5",
+      "canonicalKey": "Revelation.20.5",
+      "displayIndex": 5,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 5,
+      "spanEnd": 5,
+      "spanText": "didnt",
+      "sourceIndex": 4,
+      "sourceOccurrenceId": "greek-nt:Revelation.20.5:4",
+      "sourceSurface": "οὐκ",
+      "strong": "G3756",
+      "entityId": "word:greek-nt:G3756",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3361",
+      "reference": "Luke 11:23",
+      "book": "Luke",
+      "chapter": 11,
+      "verse": 23,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "11:23",
+      "canonicalKey": "Luke.11.23",
+      "displayIndex": 11,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 11,
+      "spanEnd": 11,
+      "spanText": "doesnt",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:Luke.11.23:10",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3361",
+      "reference": "John 5:23",
+      "book": "John",
+      "chapter": 5,
+      "verse": 23,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "5:23",
+      "canonicalKey": "John.5.23",
+      "displayIndex": 14,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 14,
+      "spanEnd": 14,
+      "spanText": "doesnt",
+      "sourceIndex": 10,
+      "sourceOccurrenceId": "greek-nt:John.5.23:10",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3361",
+      "reference": "John 10:1",
+      "book": "John",
+      "chapter": 10,
+      "verse": 1,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "10:1",
+      "canonicalKey": "John.10.1",
+      "displayIndex": 7,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 7,
+      "spanEnd": 7,
+      "spanText": "doesnt",
+      "sourceIndex": 5,
+      "sourceOccurrenceId": "greek-nt:John.10.1:5",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3361",
+      "reference": "John 14:24",
+      "book": "John",
+      "chapter": 14,
+      "verse": 24,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "14:24",
+      "canonicalKey": "John.14.24",
+      "displayIndex": 2,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 2,
+      "spanEnd": 2,
+      "spanText": "doesnt",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:John.14.24:1",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3361",
+      "reference": "Romans 14:3",
+      "book": "Romans",
+      "chapter": 14,
+      "verse": 3,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "14:3",
+      "canonicalKey": "Romans.14.3",
+      "displayIndex": 8,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 8,
+      "spanEnd": 8,
+      "spanText": "doesnt",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Romans.14.3:3",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3361",
+      "reference": "Romans 14:22",
+      "book": "Romans",
+      "chapter": 14,
+      "verse": 22,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "runtimeVerseKey": "14:22",
+      "canonicalKey": "Romans.14.22",
+      "displayIndex": 14,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 14,
+      "spanEnd": 14,
+      "spanText": "doesnt",
+      "sourceIndex": 12,
+      "sourceOccurrenceId": "greek-nt:Romans.14.22:12",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3361",
+      "reference": "1 John 3:14",
+      "book": "1 John",
+      "chapter": 3,
+      "verse": 14,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "3:14",
+      "canonicalKey": "1 John.3.14",
+      "displayIndex": 18,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 18,
+      "spanEnd": 18,
+      "spanText": "doesnt",
+      "sourceIndex": 15,
+      "sourceOccurrenceId": "greek-nt:1_John.3.14:15",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|doesnt|G3361",
+      "reference": "1 John 4:8",
+      "book": "1 John",
+      "chapter": 4,
+      "verse": 8,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "1John.json",
+      "runtimeVerseKey": "4:8",
+      "canonicalKey": "1 John.4.8",
+      "displayIndex": 2,
+      "displayText": "doesnt",
+      "normalizedDisplayText": "doesnt",
+      "spanStart": 2,
+      "spanEnd": 2,
+      "spanText": "doesnt",
+      "sourceIndex": 1,
+      "sourceOccurrenceId": "greek-nt:1_John.4.8:1",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3361",
+      "reference": "Luke 18:2",
+      "book": "Luke",
+      "chapter": 18,
+      "verse": 2,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Luke.json",
+      "runtimeVerseKey": "18:2",
+      "canonicalKey": "Luke.18.2",
+      "displayIndex": 10,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 10,
+      "spanEnd": 10,
+      "spanText": "didnt",
+      "sourceIndex": 9,
+      "sourceOccurrenceId": "greek-nt:Luke.18.2:9",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3361",
+      "reference": "John 6:64",
+      "book": "John",
+      "chapter": 6,
+      "verse": 64,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "John.json",
+      "runtimeVerseKey": "6:64",
+      "canonicalKey": "John.6.64",
+      "displayIndex": 19,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 19,
+      "spanEnd": 19,
+      "spanText": "didnt",
+      "sourceIndex": 17,
+      "sourceOccurrenceId": "greek-nt:John.6.64:17",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3361",
+      "reference": "Jude 1:5",
+      "book": "Jude",
+      "chapter": 1,
+      "verse": 5,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Jude.json",
+      "runtimeVerseKey": "1:5",
+      "canonicalKey": "Jude.1.5",
+      "displayIndex": 28,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 28,
+      "spanEnd": 28,
+      "spanText": "didnt",
+      "sourceIndex": 18,
+      "sourceOccurrenceId": "greek-nt:Jude.1.5:18",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    },
+    {
+      "batch": "BATCH4_NEGATIVE_SINGLE_TOKEN",
+      "familyKey": "web|didnt|G3361",
+      "reference": "Jude 1:6",
+      "book": "Jude",
+      "chapter": 1,
+      "verse": 6,
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Jude.json",
+      "runtimeVerseKey": "1:6",
+      "canonicalKey": "Jude.1.6",
+      "displayIndex": 2,
+      "displayText": "didnt",
+      "normalizedDisplayText": "didnt",
+      "spanStart": 2,
+      "spanEnd": 2,
+      "spanText": "didnt",
+      "sourceIndex": 3,
+      "sourceOccurrenceId": "greek-nt:Jude.1.6:3",
+      "sourceSurface": "μὴ",
+      "strong": "G3361",
+      "entityId": "word:greek-nt:G3361",
+      "morph": "PRT-N",
+      "method": "p0812r2-greek-web-negative-particle-single-token"
+    }
+  ],
+  "deferred": {
+    "webWayG3361": "Explicitly excluded. WEB 'way' is not the lexical rendering of G3361.",
+    "kjvNegativeFamilies": "Remain excluded from this batch.",
+    "mixedLexicalModalNegatives": "Remain excluded.",
+    "articleAndBoundaryFamilies": "Remain excluded."
+  },
+  "base": {
+    "directOverlaySha256": "b02f7578e5c6b5315107dc16959cdb4cc025be6b5b79698dfaefa42c285403fd",
+    "batch1OverlaySha256": "771772c8afda637ba4296649382e83b8ec8e4f056c4da2f2fba068f61a153090",
+    "batch2OverlaySha256": "c6d2eb09402b5ef160c6c34c9baf3660bc94f608608df32acc94405d8c790f99",
+    "batch3OverlaySha256": "9bed7286c2e3d99a7cb188eab078d6e80c7138b729f93fb380d2c5214b44527d",
+    "compatibilityReferenceChecksum": "8194d6cb8dcf5a0cf6e76a231371e174668791629a366c409c3982d6a6d76bae",
+    "r10aBaseChecksum": "8194d6cb8dcf5a0cf6e76a231371e174668791629a366c409c3982d6a6d76bae",
+    "primaryManifestChecksum": "6fade2347726d3f3c864c55d3684d4179262a89c1128dd54a0d409caabadf047",
+    "primaryAffectedFiles": {
+      "1Cor.json": {
+        "bytes": 672606,
+        "sha256": "582301048b5194dba1811d8e2213c258279ab3ae18a5e275d8ea853ac80da285"
+      },
+      "1John.json": {
+        "bytes": 192654,
+        "sha256": "8bb7efd7aa766c7a29d4717a6aef9fa0fedf521eb1cdc7da6712506c408d984c"
+      },
+      "1Thess.json": {
+        "bytes": 147947,
+        "sha256": "068806db801b8a6425dd61128f14fe486d899e53feaadcda069b0c2c0ab0b364"
+      },
+      "2John.json": {
+        "bytes": 22093,
+        "sha256": "50a45238af40c5b332247bb7b198533c8204ac2df3f6b6856a72b5b1056116e3"
+      },
+      "2Pet.json": {
+        "bytes": 102899,
+        "sha256": "e13622f98d107a26eb03acdaee8c183a9c67f707f419ef55773593ccc849bcca"
+      },
+      "2Thess.json": {
+        "bytes": 82263,
+        "sha256": "63719646873b71a208bb66340044a94ad38b2cda3436c83021c52524a5e82bd4"
+      },
+      "3John.json": {
+        "bytes": 19918,
+        "sha256": "8543dd291508c67fc4d3a20bf12f0c0ffe46b760619c975ad90c78cce94874a4"
+      },
+      "Acts.json": {
+        "bytes": 1668510,
+        "sha256": "284757d029f8db8680c2330d4ef7315cec2009a87eed9e982906dc5c9822f71a"
+      },
+      "Col.json": {
+        "bytes": 150895,
+        "sha256": "8508ba1813d949783292ce155c4597e031f47f1c8552de0ff86a657e8198a165"
+      },
+      "Heb.json": {
+        "bytes": 462657,
+        "sha256": "cdde7a5b1e2ec1f8963a502d72c93e29636e271d12b95873b9c9f9714f1f18e6"
+      },
+      "Jas.json": {
+        "bytes": 158046,
+        "sha256": "b27e723883bdbac1bd3f3707002c9bfd0770bc49a1e228e4cf680ce8d4ef94cf"
+      },
+      "John.json": {
+        "bytes": 1389164,
+        "sha256": "03c069f69e0a516b3468c5e9458c21994abf67abb4d7b1ea4d8bb128db460661"
+      },
+      "Jude.json": {
+        "bytes": 41613,
+        "sha256": "2cf7dca756dec688ef019c7438514ed03df2d1244b29d58e508306616b3822a3"
+      },
+      "Luke.json": {
+        "bytes": 1750959,
+        "sha256": "5604036781547e0542ea611122b1640d48c762afe2eee87340875024fadc61ec"
+      },
+      "Mark.json": {
+        "bytes": 1013212,
+        "sha256": "94a73e1c65d621dae58a182086df9e327534d9139eb0dc700141c1abc314f006"
+      },
+      "Matt.json": {
+        "bytes": 1703694,
+        "sha256": "b19afb9c270aba5dd58dc434da2df389c3048e40145d3e56dd9403b138053f1b"
+      },
+      "Phil.json": {
+        "bytes": 156099,
+        "sha256": "693c08099a6b64236b827d16467e38f1c32ba08cc7dc8ee05cf799431815fe36"
+      },
+      "Rev.json": {
+        "bytes": 933025,
+        "sha256": "bf54c26d09ef26f5e7b040ed006546435f8bfe91c0393cf41429a53c0870fd1d"
+      },
+      "Rom.json": {
+        "bytes": 652175,
+        "sha256": "1da0d76ff0c4d445d04a392eaeb47ea4b394b6d3eb169d23718289377fb2a615"
+      }
+    },
+    "kjvState": {
+      "manifestSha256": "c0f9d2aa4b287d56f620edd37b229fa486dfa9941054d30bffd74bc07afc9ef9",
+      "books": {
+        "1_Corinthians.json": {
+          "bytes": 788847,
+          "sha256": "7a31f7f37daf888393825008b394850f6bf8a1e1f1dd64d3b1dffbe4a8c5682a"
+        },
+        "1_John.json": {
+          "bytes": 223277,
+          "sha256": "1f32f69025ef60ba68c15e8d09d40a23948a18f718bafe8ae8b8fbed63c58e67"
+        },
+        "1_Peter.json": {
+          "bytes": 184963,
+          "sha256": "dbcf82c3f16dfbd34d427691fc74aa29a315b19117fb466c4617fb1ec830f1a6"
+        },
+        "1_Thessalonians.json": {
+          "bytes": 171810,
+          "sha256": "0677a6a927e6ea4eadd004049003b371939eccef1832e839830e7030eaf67d26"
+        },
+        "1_Timothy.json": {
+          "bytes": 183851,
+          "sha256": "c76bbdc6fd0e73da7173254ecfbc6bc61361544c698c33231ef9eb5aeb983839"
+        },
+        "2_Corinthians.json": {
+          "bytes": 509641,
+          "sha256": "b5d3aae1b98a7691a04e6e0ea4c4f79349b32cc9ca946625ebc9ffac188a0279"
+        },
+        "2_John.json": {
+          "bytes": 25919,
+          "sha256": "3b60e9e567042d4946198ed32fcf90894e59801c12e21f87123deb3f4adb8cee"
+        },
+        "2_Peter.json": {
+          "bytes": 120185,
+          "sha256": "804989038ad6cc66dc2c3ab22c8debbe0be28f1fa944b4fcb7342812f30698f4"
+        },
+        "2_Thessalonians.json": {
+          "bytes": 95794,
+          "sha256": "200b35a4fcc38406b99c9bde88943aac853cec15475cd723ec9d30293839d04d"
+        },
+        "2_Timothy.json": {
+          "bytes": 139303,
+          "sha256": "cfb5686e052e86c88a0676552e60cb1dafaa2a48b536bc35fcea5e5da1abca9b"
+        },
+        "3_John.json": {
+          "bytes": 22397,
+          "sha256": "6db68e1a82c62f111387593a489f425a80500b52fed1155903da916d0255d9a9"
+        },
+        "Acts.json": {
+          "bytes": 1949176,
+          "sha256": "15b0c54a4f6c9dddebe36961091e9ea724698ed01dca33cb3d3f84361dd0ac86"
+        },
+        "Colossians.json": {
+          "bytes": 177338,
+          "sha256": "904d148ef3063dff7d308bfb0f03728e18a7c9a80028bc387e76d0736abec0be"
+        },
+        "Ephesians.json": {
+          "bytes": 270704,
+          "sha256": "8b066621ecf151196ead7a1ae1e6209e3381211682d3a4c0590f17d4be75e8aa"
+        },
+        "Galatians.json": {
+          "bytes": 250735,
+          "sha256": "33cca7f645c262fa29a4cdc2e0ba53ad0a019178f6239d6781c35851cb876f72"
+        },
+        "Hebrews.json": {
+          "bytes": 543710,
+          "sha256": "835eb80f634239155d32b24e25c3e06628d7608bb74dd90ae676a5938571f594"
+        },
+        "James.json": {
+          "bytes": 186024,
+          "sha256": "108fc44f17eba7b69bfe0749a4b431268f4965f1abc6b084722d0a75862d0209"
+        },
+        "John.json": {
+          "bytes": 1621596,
+          "sha256": "78019f20fad4a8c2e0ebcfb5f3d1ce496ef7d14937b67f5fed78e644ed71c69c"
+        },
+        "Jude.json": {
+          "bytes": 48787,
+          "sha256": "b90f2834496f0b5193c971e633ca2313fdd8ee1f3b917d53c60b586e9b3a9dbf"
+        },
+        "Luke.json": {
+          "bytes": 2056715,
+          "sha256": "4e4f320fe4d517f6ed21a61f09bfd3aa31fe4d784baf11b5f565dcdf76882498"
+        },
+        "Mark.json": {
+          "bytes": 1187883,
+          "sha256": "22944508f785d2d975f4d2e20f11b35cec82fcf5aa683c5c1a805a6416f15b94"
+        },
+        "Matthew.json": {
+          "bytes": 1991886,
+          "sha256": "b69562d7d88b767930e5655caaecf1471ba70aeb0ca298d4179f3124a47bd465"
+        },
+        "Philemon.json": {
+          "bytes": 36719,
+          "sha256": "7e3325800d998038e0a1319f86e37fca82c9123625957b836025d47c3a7ed4fa"
+        },
+        "Philippians.json": {
+          "bytes": 183028,
+          "sha256": "4303ac42410f5445b4e1bffe0a3e9bb75113a3ee7a32c2bfdc9ce2e518f8e8d8"
+        },
+        "Revelation.json": {
+          "bytes": 1069581,
+          "sha256": "191edefeeae5c2c983ad80329ede7f03f198dd724c490610ca7b73eef6587acb"
+        },
+        "Romans.json": {
+          "bytes": 770320,
+          "sha256": "ab9d96a66e6ce21d8fe9cbc202d4d53eae6ea8e706445cf115510a2164729f3d"
+        },
+        "Titus.json": {
+          "bytes": 73159,
+          "sha256": "6f893bb47ccdc68db2018e8292cb0478b521e886b614524cf3dc1779d0dd2c40"
+        }
+      }
+    }
+  },
+  "expectedFinal": {
+    "compatibilityReferenceChecksum": "9e60bdb4e5bd633629df317a1af55dd6c57be27fb427f4372ac074cb23aad265",
+    "r10aBaseChecksum": "9e60bdb4e5bd633629df317a1af55dd6c57be27fb427f4372ac074cb23aad265",
+    "primaryManifestChecksum": "fc4fc327c31229c76077482054af4fc0e07f7bebbf99f651fad0985199973b7f",
+    "primaryManifestBytes": 26490,
+    "primaryManifestSha256": "402378949a23529bbc1a4caf402b345f015804a2169b0d4cab962f22028295ef",
+    "primaryAffectedFiles": {
+      "1Cor.json": {
+        "bytes": 672631,
+        "sha256": "dd27d16f0cfc2c5658f2b370048556b96ef570b7fc128ed27e63ccd12152c51c"
+      },
+      "1John.json": {
+        "bytes": 192694,
+        "sha256": "d8345289aeff530f34c3cb539b07a7e92ec045878678c8adf4a2a86895a2a57e"
+      },
+      "1Thess.json": {
+        "bytes": 147954,
+        "sha256": "b1144dff75d427971fef4c9c7bc4823f691ea7656481bcecc75d8959dc17d561"
+      },
+      "2John.json": {
+        "bytes": 22100,
+        "sha256": "b9abf2b93deeb1247951cc1542cdc77ac50327d23594f0de458453f3c73dedea"
+      },
+      "2Pet.json": {
+        "bytes": 102905,
+        "sha256": "ddfe3e677864a31f9400f42ea40f2bbbee04402f6065141ba262a2a895845ef0"
+      },
+      "2Thess.json": {
+        "bytes": 82277,
+        "sha256": "b259efd777b3840d09c79193b3c61350edb6b31d3adc4befae5477c0f437e7db"
+      },
+      "3John.json": {
+        "bytes": 19924,
+        "sha256": "829c400c9fcdbfefbe25b8f22af806b4472e1d30e331893d4524665c809596fe"
+      },
+      "Acts.json": {
+        "bytes": 1668524,
+        "sha256": "d5672ae8ef9cee615bc6bb6ba880c0e5693b5904d96b479189cbbff7b616fd9d"
+      },
+      "Col.json": {
+        "bytes": 150901,
+        "sha256": "d731e932e9d1c1d486454543b87c8af08e1edb6a0cd3dc7b64a6bb737dabd128"
+      },
+      "Heb.json": {
+        "bytes": 462663,
+        "sha256": "7655bfac222cea38c375e548f6a9ed43c5221f2cdb20009d56fce0a69b571612"
+      },
+      "Jas.json": {
+        "bytes": 158052,
+        "sha256": "9db989f02f0557f25e7097281f3c2df6413fb1ec34329d6f41d8e5f8fe5f42c3"
+      },
+      "John.json": {
+        "bytes": 1389237,
+        "sha256": "d9111793dd23017fc3b874563c4513f381ae993465fb4a7de85256c5b5cbf33e"
+      },
+      "Jude.json": {
+        "bytes": 41627,
+        "sha256": "465e36d3eaaa30c73593376b6b2b78487e3d3b39012a3ed6f3b50ab667f07109"
+      },
+      "Luke.json": {
+        "bytes": 1751005,
+        "sha256": "876e687dcbeefeaa23b0a36be652ceadecf14ebb1e7e65f48d9a88ada886c280"
+      },
+      "Mark.json": {
+        "bytes": 1013218,
+        "sha256": "c45ccc870ddcb95096d5678f25976d0b5bd06657e5f8f6b81e917cff8118b807"
+      },
+      "Matt.json": {
+        "bytes": 1703706,
+        "sha256": "c708f1c2d888e67436d1c90077d874d72e53acb8b6883292c0848fefd92d9845"
+      },
+      "Phil.json": {
+        "bytes": 156105,
+        "sha256": "73af3ea34672ac1e65bbda69c64441c695edf03e270290ba08c5aab9a134c0b6"
+      },
+      "Rev.json": {
+        "bytes": 933037,
+        "sha256": "080628e70f65b618be0a13325919b7e2db0f029b328a4693155be6ee346431f2"
+      },
+      "Rom.json": {
+        "bytes": 652203,
+        "sha256": "70c2dd91567f3a9d73736a417d54e3a1781ccb63447e770b08ca820b3abccccf"
+      }
+    },
+    "kjvState": {
+      "manifestSha256": "c0f9d2aa4b287d56f620edd37b229fa486dfa9941054d30bffd74bc07afc9ef9",
+      "books": {
+        "1_Corinthians.json": {
+          "bytes": 788847,
+          "sha256": "7a31f7f37daf888393825008b394850f6bf8a1e1f1dd64d3b1dffbe4a8c5682a"
+        },
+        "1_John.json": {
+          "bytes": 223277,
+          "sha256": "1f32f69025ef60ba68c15e8d09d40a23948a18f718bafe8ae8b8fbed63c58e67"
+        },
+        "1_Peter.json": {
+          "bytes": 184963,
+          "sha256": "dbcf82c3f16dfbd34d427691fc74aa29a315b19117fb466c4617fb1ec830f1a6"
+        },
+        "1_Thessalonians.json": {
+          "bytes": 171810,
+          "sha256": "0677a6a927e6ea4eadd004049003b371939eccef1832e839830e7030eaf67d26"
+        },
+        "1_Timothy.json": {
+          "bytes": 183851,
+          "sha256": "c76bbdc6fd0e73da7173254ecfbc6bc61361544c698c33231ef9eb5aeb983839"
+        },
+        "2_Corinthians.json": {
+          "bytes": 509641,
+          "sha256": "b5d3aae1b98a7691a04e6e0ea4c4f79349b32cc9ca946625ebc9ffac188a0279"
+        },
+        "2_John.json": {
+          "bytes": 25919,
+          "sha256": "3b60e9e567042d4946198ed32fcf90894e59801c12e21f87123deb3f4adb8cee"
+        },
+        "2_Peter.json": {
+          "bytes": 120185,
+          "sha256": "804989038ad6cc66dc2c3ab22c8debbe0be28f1fa944b4fcb7342812f30698f4"
+        },
+        "2_Thessalonians.json": {
+          "bytes": 95794,
+          "sha256": "200b35a4fcc38406b99c9bde88943aac853cec15475cd723ec9d30293839d04d"
+        },
+        "2_Timothy.json": {
+          "bytes": 139303,
+          "sha256": "cfb5686e052e86c88a0676552e60cb1dafaa2a48b536bc35fcea5e5da1abca9b"
+        },
+        "3_John.json": {
+          "bytes": 22397,
+          "sha256": "6db68e1a82c62f111387593a489f425a80500b52fed1155903da916d0255d9a9"
+        },
+        "Acts.json": {
+          "bytes": 1949176,
+          "sha256": "15b0c54a4f6c9dddebe36961091e9ea724698ed01dca33cb3d3f84361dd0ac86"
+        },
+        "Colossians.json": {
+          "bytes": 177338,
+          "sha256": "904d148ef3063dff7d308bfb0f03728e18a7c9a80028bc387e76d0736abec0be"
+        },
+        "Ephesians.json": {
+          "bytes": 270704,
+          "sha256": "8b066621ecf151196ead7a1ae1e6209e3381211682d3a4c0590f17d4be75e8aa"
+        },
+        "Galatians.json": {
+          "bytes": 250735,
+          "sha256": "33cca7f645c262fa29a4cdc2e0ba53ad0a019178f6239d6781c35851cb876f72"
+        },
+        "Hebrews.json": {
+          "bytes": 543710,
+          "sha256": "835eb80f634239155d32b24e25c3e06628d7608bb74dd90ae676a5938571f594"
+        },
+        "James.json": {
+          "bytes": 186024,
+          "sha256": "108fc44f17eba7b69bfe0749a4b431268f4965f1abc6b084722d0a75862d0209"
+        },
+        "John.json": {
+          "bytes": 1621596,
+          "sha256": "78019f20fad4a8c2e0ebcfb5f3d1ce496ef7d14937b67f5fed78e644ed71c69c"
+        },
+        "Jude.json": {
+          "bytes": 48787,
+          "sha256": "b90f2834496f0b5193c971e633ca2313fdd8ee1f3b917d53c60b586e9b3a9dbf"
+        },
+        "Luke.json": {
+          "bytes": 2056715,
+          "sha256": "4e4f320fe4d517f6ed21a61f09bfd3aa31fe4d784baf11b5f565dcdf76882498"
+        },
+        "Mark.json": {
+          "bytes": 1187883,
+          "sha256": "22944508f785d2d975f4d2e20f11b35cec82fcf5aa683c5c1a805a6416f15b94"
+        },
+        "Matthew.json": {
+          "bytes": 1991886,
+          "sha256": "b69562d7d88b767930e5655caaecf1471ba70aeb0ca298d4179f3124a47bd465"
+        },
+        "Philemon.json": {
+          "bytes": 36719,
+          "sha256": "7e3325800d998038e0a1319f86e37fca82c9123625957b836025d47c3a7ed4fa"
+        },
+        "Philippians.json": {
+          "bytes": 183028,
+          "sha256": "4303ac42410f5445b4e1bffe0a3e9bb75113a3ee7a32c2bfdc9ce2e518f8e8d8"
+        },
+        "Revelation.json": {
+          "bytes": 1069581,
+          "sha256": "191edefeeae5c2c983ad80329ede7f03f198dd724c490610ca7b73eef6587acb"
+        },
+        "Romans.json": {
+          "bytes": 770320,
+          "sha256": "ab9d96a66e6ce21d8fe9cbc202d4d53eae6ea8e706445cf115510a2164729f3d"
+        },
+        "Titus.json": {
+          "bytes": 73159,
+          "sha256": "6f893bb47ccdc68db2018e8292cb0478b521e886b614524cf3dc1779d0dd2c40"
+        }
+      }
+    }
+  },
+  "checksum": "31bd369563cb271d698c2a85b9cdff51bc562f354ffb0ab95526d910324c78d4"
+}

@@ -7,7 +7,7 @@ const crypto = require("crypto");
 
 const OVERLAY_SCHEMA = "emet-p0812r2-web-wlc-r10a-runtime-overlay/v1";
 const BOOK_SCHEMA = "emet-p0812r2-web-wlc-r10a-runtime-overlay-book/v1";
-const BASE_R13 = "6a0a5bd5f222ba860a2fec74df9e30588932fefca093ee9bf184fca420149f4d";
+const BASE_R13 = "093616837144e58b3885a0724312e76a71ed9b92954583cc2c293f370c618513";
 
 function fail(message) {
   throw new Error(`[P08.12R2 R10A runtime overlay] ${message}`);

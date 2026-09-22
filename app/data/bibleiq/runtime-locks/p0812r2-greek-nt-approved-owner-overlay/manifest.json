@@ -1,0 +1,567 @@
+{
+  "schemaVersion": "emet-p0812r2-greek-nt-approved-owner-overlay/v1",
+  "milestone": "P08.12R2",
+  "purpose": "Evidence-reviewed post-canonical Greek NT source ownership. WEB routes are mirrored into the compatibility lock for runtime durability; KJV routes are applied to the active KJV-reader runtime and its builder.",
+  "authority": {
+    "source": "OpenGNT ordered source occurrences",
+    "canonicalModified": false,
+    "semanticGuessing": false,
+    "adjacencyHeuristic": false,
+    "fuzzyMatching": false,
+    "approvalBasis": "Evidence-reviewed unique exact lexical OpenGNT occurrence",
+    "compatibilityLockRole": "Durability/seal mirror only; approval evidence lives in this overlay."
+  },
+  "counts": {
+    "approvedOwners": 23,
+    "web": 2,
+    "kjv": 21,
+    "quarantined": 1
+  },
+  "routes": [
+    {
+      "reference": "Acts 8:23",
+      "book": "Acts",
+      "chapter": 8,
+      "verse": 23,
+      "verseKey": "8:23",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Acts.json",
+      "displayIndex": 14,
+      "displayText": "bondage",
+      "sourceOccurrenceId": "greek-nt:Acts.8.23:5",
+      "sourceIndex": 5,
+      "sourceSurface": "σύνδεσμον",
+      "strong": "G4886",
+      "entityId": "word:greek-nt:G4886",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Romans 12:3",
+      "book": "Romans",
+      "chapter": 12,
+      "verse": 3,
+      "verseKey": "12:3",
+      "translation": "web",
+      "activeLayer": "primary-greek-nt-runtime",
+      "runtimeFile": "Rom.json",
+      "displayIndex": 37,
+      "displayText": "each",
+      "sourceOccurrenceId": "greek-nt:Romans.12.3:24",
+      "sourceIndex": 24,
+      "sourceSurface": "ἑκάστῳ",
+      "strong": "G1538",
+      "entityId": "word:greek-nt:G1538",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "1 Corinthians 1:23",
+      "book": "1 Corinthians",
+      "chapter": 1,
+      "verse": 23,
+      "verseKey": "1:23",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "1_Corinthians.json",
+      "displayIndex": 9,
+      "displayText": "stumblingblock",
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.1.23:7",
+      "sourceIndex": 7,
+      "sourceSurface": "σκάνδαλον",
+      "strong": "G4625",
+      "entityId": "word:greek-nt:G4625",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "1 Corinthians 3:10",
+      "book": "1 Corinthians",
+      "chapter": 3,
+      "verse": 10,
+      "verseKey": "3:10",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "1_Corinthians.json",
+      "displayIndex": 14,
+      "displayText": "masterbuilder",
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.3.10:10",
+      "sourceIndex": 10,
+      "sourceSurface": "ἀρχιτέκτων",
+      "strong": "G0753",
+      "entityId": "word:greek-nt:G0753",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "1 Corinthians 8:9",
+      "book": "1 Corinthians",
+      "chapter": 8,
+      "verse": 9,
+      "verseKey": "8:9",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "1_Corinthians.json",
+      "displayIndex": 13,
+      "displayText": "stumblingblock",
+      "sourceOccurrenceId": "greek-nt:1_Corinthians.8.9:8",
+      "sourceIndex": 8,
+      "sourceSurface": "πρόσκομμα",
+      "strong": "G4348",
+      "entityId": "word:greek-nt:G4348",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Acts 13:6",
+      "book": "Acts",
+      "chapter": 13,
+      "verse": 6,
+      "verseKey": "13:6",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Acts.json",
+      "displayIndex": 23,
+      "displayText": "Barjesus",
+      "sourceOccurrenceId": "greek-nt:Acts.13.6:15",
+      "sourceIndex": 15,
+      "sourceSurface": "Βαριησοῦ",
+      "strong": "G0919",
+      "entityId": "word:greek-nt:G0919",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Colossians 1:7",
+      "book": "Colossians",
+      "chapter": 1,
+      "verse": 7,
+      "verseKey": "1:7",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Colossians.json",
+      "displayIndex": 8,
+      "displayText": "fellowservant",
+      "sourceOccurrenceId": "greek-nt:Colossians.1.7:6",
+      "sourceIndex": 6,
+      "sourceSurface": "συνδούλου",
+      "strong": "G4889",
+      "entityId": "word:greek-nt:G4889",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Colossians 3:22",
+      "book": "Colossians",
+      "chapter": 3,
+      "verse": 22,
+      "verseKey": "3:22",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Colossians.json",
+      "displayIndex": 13,
+      "displayText": "eyeservice",
+      "sourceOccurrenceId": "greek-nt:Colossians.3.22:11",
+      "sourceIndex": 11,
+      "sourceSurface": "ὀφθαλμοδουλίᾳ",
+      "strong": "G3787",
+      "entityId": "word:greek-nt:G3787",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Colossians 4:7",
+      "book": "Colossians",
+      "chapter": 4,
+      "verse": 7,
+      "verseKey": "4:7",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Colossians.json",
+      "displayIndex": 18,
+      "displayText": "fellowservant",
+      "sourceOccurrenceId": "greek-nt:Colossians.4.7:14",
+      "sourceIndex": 14,
+      "sourceSurface": "σύνδουλος",
+      "strong": "G4889",
+      "entityId": "word:greek-nt:G4889",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Colossians 4:10",
+      "book": "Colossians",
+      "chapter": 4,
+      "verse": 10,
+      "verseKey": "4:10",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Colossians.json",
+      "displayIndex": 2,
+      "displayText": "fellowprisoner",
+      "sourceOccurrenceId": "greek-nt:Colossians.4.10:4",
+      "sourceIndex": 4,
+      "sourceSurface": "συναιχμάλωτός",
+      "strong": "G4869",
+      "entityId": "word:greek-nt:G4869",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Ephesians 2:19",
+      "book": "Ephesians",
+      "chapter": 2,
+      "verse": 19,
+      "verseKey": "2:19",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Ephesians.json",
+      "displayIndex": 10,
+      "displayText": "fellowcitizens",
+      "sourceOccurrenceId": "greek-nt:Ephesians.2.19:9",
+      "sourceIndex": 9,
+      "sourceSurface": "συμπολῖται",
+      "strong": "G4847",
+      "entityId": "word:greek-nt:G4847",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Ephesians 6:6",
+      "book": "Ephesians",
+      "chapter": 6,
+      "verse": 6,
+      "verseKey": "6:6",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Ephesians.json",
+      "displayIndex": 2,
+      "displayText": "eyeservice",
+      "sourceOccurrenceId": "greek-nt:Ephesians.6.6:2",
+      "sourceIndex": 2,
+      "sourceSurface": "ὀφθαλμοδουλίαν",
+      "strong": "G3787",
+      "entityId": "word:greek-nt:G3787",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Hebrews 13:21",
+      "book": "Hebrews",
+      "chapter": 13,
+      "verse": 21,
+      "verseKey": "13:21",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Hebrews.json",
+      "displayIndex": 17,
+      "displayText": "wellpleasing",
+      "sourceOccurrenceId": "greek-nt:Hebrews.13.21:15",
+      "sourceIndex": 15,
+      "sourceSurface": "εὐάρεστον",
+      "strong": "G2101",
+      "entityId": "word:greek-nt:G2101",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Matthew 18:29",
+      "book": "Matthew",
+      "chapter": 18,
+      "verse": 29,
+      "verseKey": "18:29",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 2,
+      "displayText": "fellowservant",
+      "sourceOccurrenceId": "greek-nt:Matthew.18.29:3",
+      "sourceIndex": 3,
+      "sourceSurface": "σύνδουλος",
+      "strong": "G4889",
+      "entityId": "word:greek-nt:G4889",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Matthew 18:33",
+      "book": "Matthew",
+      "chapter": 18,
+      "verse": 33,
+      "verseKey": "18:33",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Matthew.json",
+      "displayIndex": 9,
+      "displayText": "fellowservant",
+      "sourceOccurrenceId": "greek-nt:Matthew.18.33:6",
+      "sourceIndex": 6,
+      "sourceSurface": "σύνδουλόν",
+      "strong": "G4889",
+      "entityId": "word:greek-nt:G4889",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Philemon 1:2",
+      "book": "Philemon",
+      "chapter": 1,
+      "verse": 2,
+      "verseKey": "1:2",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Philemon.json",
+      "displayIndex": 8,
+      "displayText": "fellowsoldier",
+      "sourceOccurrenceId": "greek-nt:Philemon.1.2:7",
+      "sourceIndex": 7,
+      "sourceSurface": "συστρατιώτῃ",
+      "strong": "G4961",
+      "entityId": "word:greek-nt:G4961",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Philemon 1:23",
+      "book": "Philemon",
+      "chapter": 1,
+      "verse": 23,
+      "verseKey": "1:23",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Philemon.json",
+      "displayIndex": 5,
+      "displayText": "fellowprisoner",
+      "sourceOccurrenceId": "greek-nt:Philemon.1.23:4",
+      "sourceIndex": 4,
+      "sourceSurface": "συναιχμάλωτός",
+      "strong": "G4869",
+      "entityId": "word:greek-nt:G4869",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Philippians 2:25",
+      "book": "Philippians",
+      "chapter": 2,
+      "verse": 25,
+      "verseKey": "2:25",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Philippians.json",
+      "displayIndex": 17,
+      "displayText": "fellowsoldier",
+      "sourceOccurrenceId": "greek-nt:Philippians.2.25:9",
+      "sourceIndex": 9,
+      "sourceSurface": "συστρατιώτην",
+      "strong": "G4961",
+      "entityId": "word:greek-nt:G4961",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Revelation 2:14",
+      "book": "Revelation",
+      "chapter": 2,
+      "verse": 14,
+      "verseKey": "2:14",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 25,
+      "displayText": "stumblingblock",
+      "sourceOccurrenceId": "greek-nt:Revelation.2.14:17",
+      "sourceIndex": 17,
+      "sourceSurface": "σκάνδαλον",
+      "strong": "G4625",
+      "entityId": "word:greek-nt:G4625",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Revelation 3:18",
+      "book": "Revelation",
+      "chapter": 3,
+      "verse": 18,
+      "verseKey": "3:18",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 40,
+      "displayText": "eyesalve",
+      "sourceOccurrenceId": "greek-nt:Revelation.3.18:25",
+      "sourceIndex": 25,
+      "sourceSurface": "κολλούριον",
+      "strong": "G2854",
+      "entityId": "word:greek-nt:G2854",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Revelation 19:10",
+      "book": "Revelation",
+      "chapter": 19,
+      "verse": 10,
+      "verseKey": "19:10",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 22,
+      "displayText": "fellowservant",
+      "sourceOccurrenceId": "greek-nt:Revelation.19.10:13",
+      "sourceIndex": 13,
+      "sourceSurface": "σύνδουλός",
+      "strong": "G4889",
+      "entityId": "word:greek-nt:G4889",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Revelation 22:9",
+      "book": "Revelation",
+      "chapter": 22,
+      "verse": 9,
+      "verseKey": "22:9",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Revelation.json",
+      "displayIndex": 14,
+      "displayText": "fellowservant",
+      "sourceOccurrenceId": "greek-nt:Revelation.22.9:5",
+      "sourceIndex": 5,
+      "sourceSurface": "σύνδουλός",
+      "strong": "G4889",
+      "entityId": "word:greek-nt:G4889",
+      "method": "approved-exact-lexical-owner"
+    },
+    {
+      "reference": "Titus 1:7",
+      "book": "Titus",
+      "chapter": 1,
+      "verse": 7,
+      "verseKey": "1:7",
+      "translation": "kjv",
+      "activeLayer": "kjv-reader-runtime",
+      "runtimeFile": "Titus.json",
+      "displayIndex": 12,
+      "displayText": "selfwilled",
+      "sourceOccurrenceId": "greek-nt:Titus.1.7:10",
+      "sourceIndex": 10,
+      "sourceSurface": "αὐθάδη",
+      "strong": "G0829",
+      "entityId": "word:greek-nt:G0829",
+      "method": "approved-exact-lexical-owner"
+    }
+  ],
+  "quarantined": [
+    {
+      "reference": "Matthew 19:17",
+      "translation": "web",
+      "displayIndex": 13,
+      "text": "good",
+      "reason": "Duplicate G0018 occurrence ambiguity / existing occurrence ownership conflict"
+    }
+  ],
+  "base": {
+    "primaryManifestChecksum": "d8c5d30dc39a4d0d7f5ec8b9668360323e6eadede4f0e6b5b47a0fdd2feed09e",
+    "primaryManifestSha256": "9376f430beb9c00a3120987b6d9c24bacdf421fb63e9f0816e935b5a26d6d09b",
+    "compatibilityReferenceChecksumBefore": "e3f7e50200fefec6d276e001ae41fdcdc3bfd1e63347f447bd8121eaa43fb3a6",
+    "r10aBaseChecksumBefore": "6a0a5bd5f222ba860a2fec74df9e30588932fefca093ee9bf184fca420149f4d",
+    "r10aChainWasStaleBeforePromotion": true,
+    "primaryAffectedFiles": {
+      "Acts.json": {
+        "bytes": 1668462,
+        "sha256": "7dfbb3782465c323d193eac80e74b9df148a7e3a38530d3dae4d6a0c39a370da"
+      },
+      "Rom.json": {
+        "bytes": 652121,
+        "sha256": "bbe605d240b074d32edd9b2a8423485fe28ef0b2058a144e7f81bccc71c15318"
+      }
+    },
+    "kjvReaderManifestSha256": "14df89e740214d178d409e1e2bd95f401bd0b6f1589995c188be19889fdceda7",
+    "kjvAffectedFiles": {
+      "1_Corinthians.json": {
+        "bytes": 788547,
+        "sha256": "5dd8ca544bcd152d7785284a1961506d480075602626fe702cc375c3c259086e"
+      },
+      "Acts.json": {
+        "bytes": 1949077,
+        "sha256": "3088839c7b01849d86c51402741d6ab1bc201dbf2e575915ac1eba4190a69339"
+      },
+      "Colossians.json": {
+        "bytes": 177136,
+        "sha256": "81a92dfb293259fb9a1d30105e094c0b6dbc278abfb5816ccd663282b8fc827f"
+      },
+      "Ephesians.json": {
+        "bytes": 270604,
+        "sha256": "4f8b3f51705c1b8339ca13566e6f29f4eb112d69c83ae195c61e2eed83a40dcb"
+      },
+      "Hebrews.json": {
+        "bytes": 543609,
+        "sha256": "5216695df4d4cf0c8a7417ea191426a456d18c4c8ac0b24d5c1c323e5bf361fa"
+      },
+      "Matthew.json": {
+        "bytes": 1991248,
+        "sha256": "91a4f54fc682e8dfd54fa54658401bd8d41e03a93c612c399a21217340728d06"
+      },
+      "Philemon.json": {
+        "bytes": 36573,
+        "sha256": "b2538586f77c5b7f8100be9ba62034e86f074c3fd7f18c078ec89465c21f5a0b"
+      },
+      "Philippians.json": {
+        "bytes": 182977,
+        "sha256": "9104a36a1623ebe23b31efab1acb730a9f8963ed2c7a7b3db7c4f1ee1285689b"
+      },
+      "Revelation.json": {
+        "bytes": 1068936,
+        "sha256": "44e6e9d6bee87e359a60045901d38344adce7779eda1596bab3ccac33cd1ecda"
+      },
+      "Titus.json": {
+        "bytes": 73107,
+        "sha256": "d823aa3bdd603925ce22a70274bd659f55d478977a6464004cfb2036d014524b"
+      }
+    }
+  },
+  "expectedFinal": {
+    "compatibilityReferenceChecksum": "2306a199265725538b540cde929489b5527aa1ec66627dd035ffb8408869b150",
+    "r10aBaseRuntimeManifestChecksum": "2306a199265725538b540cde929489b5527aa1ec66627dd035ffb8408869b150",
+    "primaryManifestChecksum": "771719ec00b1ccb30a1bba7bbc481cb19fa4633d4ae06180cc8741cdb8b98c1f",
+    "primaryManifestBytes": 26490,
+    "primaryManifestSha256": "9376f430beb9c00a3120987b6d9c24bacdf421fb63e9f0816e935b5a26d6d09b",
+    "primaryAffectedFiles": {
+      "Acts.json": {
+        "bytes": 1668469,
+        "sha256": "192a0694d09f6243f040a45bfece85dc7f58df50d7bb87e2bc76e2624d42d414"
+      },
+      "Rom.json": {
+        "bytes": 652129,
+        "sha256": "4dceb95e273686ae6db05bdb2371e584cc8df6b283254dcef3fb232a50c873a2"
+      }
+    },
+    "kjvReaderManifestSha256": "14df89e740214d178d409e1e2bd95f401bd0b6f1589995c188be19889fdceda7",
+    "kjvAffectedFiles": {
+      "1_Corinthians.json": {
+        "bytes": 788699,
+        "sha256": "7ef472ce7309e4cb1f2accbec160183ed3ae19350f7f86e9759548d4c885f8b2"
+      },
+      "Acts.json": {
+        "bytes": 1949129,
+        "sha256": "d2a8f0fe41903aa8d7c4641b0cc07740a67b52144eb9689ff011bf3a0a4d8d84"
+      },
+      "Colossians.json": {
+        "bytes": 177338,
+        "sha256": "904d148ef3063dff7d308bfb0f03728e18a7c9a80028bc387e76d0736abec0be"
+      },
+      "Ephesians.json": {
+        "bytes": 270704,
+        "sha256": "8b066621ecf151196ead7a1ae1e6209e3381211682d3a4c0590f17d4be75e8aa"
+      },
+      "Hebrews.json": {
+        "bytes": 543661,
+        "sha256": "53ffe431b2308c78dd69925a4a67696440fa282d20671b807380969ddc7c6460"
+      },
+      "Matthew.json": {
+        "bytes": 1991344,
+        "sha256": "a7b37f993989e1938dc695e785fb0512a2f27ad0235725ccf0117a2dba12e13a"
+      },
+      "Philemon.json": {
+        "bytes": 36671,
+        "sha256": "2f8e3262a98f0063464dc3bc2f664fe65bd2f2982272434f198798e7c49db10f"
+      },
+      "Philippians.json": {
+        "bytes": 183028,
+        "sha256": "4303ac42410f5445b4e1bffe0a3e9bb75113a3ee7a32c2bfdc9ce2e518f8e8d8"
+      },
+      "Revelation.json": {
+        "bytes": 1069143,
+        "sha256": "f6221438327faa3242dfa82b894b8ef60bceb4a2fbebd23fab38e91650e3ab6e"
+      },
+      "Titus.json": {
+        "bytes": 73159,
+        "sha256": "6f893bb47ccdc68db2018e8292cb0478b521e886b614524cf3dc1779d0dd2c40"
+      }
+    },
+    "meaningfulRoutesAdded": 23
+  },
+  "checksum": "f82f1c1b94267a2d00f8e3094aaee03a70454cb698a2958647d67ac0d86cfbf6"
+}

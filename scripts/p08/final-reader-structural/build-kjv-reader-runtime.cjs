@@ -59,6 +59,771 @@ const GREEK_COMPOUND_ROUTES = Object.freeze({
   "G3379+G4219": "compound:greek-nt:G3379-G4219",
 });
 
+
+const KJV_EXACT_DISPLAY_ROUTE_OVERRIDES = Object.freeze({
+  "Romans|4:19": Object.freeze([
+    Object.freeze({
+      displayIndex: 27,
+      displayIdentity: "saras",
+      canonicalIndex: 27,
+      canonicalIdentity: "sarahs",
+      sourceIndex: 19,
+      strong: "G4564",
+      entityId: "word:greek-nt:G4564",
+    }),
+  ]),
+  "Romans|9:9": Object.freeze([
+    Object.freeze({
+      displayIndex: 14,
+      displayIdentity: "sara",
+      canonicalIndex: 14,
+      canonicalIdentity: "sarah",
+      sourceIndex: 13,
+      strong: "G4564",
+      entityId: "word:greek-nt:G4564",
+    }),
+  ]),
+});
+
+
+const P0812R2_GREEK_APPROVED_OWNER_OVERLAY_FILE = path.join(
+  ROOT,
+  "app",
+  "data",
+  "bibleiq",
+  "runtime-locks",
+  "p0812r2-greek-nt-approved-owner-overlay",
+  "manifest.json",
+);
+
+function loadP0812R2GreekApprovedOwnerOverlay() {
+  const overlay =
+    readJson(
+      P0812R2_GREEK_APPROVED_OWNER_OVERLAY_FILE
+    );
+
+  if (
+    overlay.schemaVersion !==
+    "emet-p0812r2-greek-nt-approved-owner-overlay/v1"
+  ) {
+    fail(
+      `Unsupported Greek approved-owner overlay schema: ${overlay.schemaVersion}`
+    );
+  }
+
+  const check =
+    JSON.parse(JSON.stringify(overlay));
+
+  const storedChecksum =
+    String(check.checksum || "");
+
+  delete check.checksum;
+
+  const actualChecksum =
+    crypto
+      .createHash("sha256")
+      .update(JSON.stringify(check))
+      .digest("hex");
+
+  if (
+    !storedChecksum ||
+    storedChecksum !== actualChecksum
+  ) {
+    fail(
+      "Greek approved-owner overlay checksum mismatch."
+    );
+  }
+
+  const routes =
+    (overlay.routes || [])
+      .filter(
+        route =>
+          route.translation === "kjv"
+      );
+
+  if (routes.length !== 21) {
+    fail(
+      `Expected 21 approved KJV Greek routes; found ${routes.length}.`
+    );
+  }
+
+  return routes;
+}
+
+const P0812R2_GREEK_APPROVED_OWNER_OVERLAY =
+  loadP0812R2GreekApprovedOwnerOverlay();
+
+
+const P0812R2_GREEK_APPROVED_SPAN_OVERLAY_FILE = path.join(
+  ROOT,
+  "app",
+  "data",
+  "bibleiq",
+  "runtime-locks",
+  "p0812r2-greek-nt-approved-span-overlay",
+  "manifest.json",
+);
+
+function loadP0812R2GreekApprovedSpanOverlay() {
+  const overlay =
+    readJson(
+      P0812R2_GREEK_APPROVED_SPAN_OVERLAY_FILE
+    );
+
+  if (
+    overlay.schemaVersion !==
+    "emet-p0812r2-greek-nt-approved-span-overlay/v1"
+  ) {
+    fail(
+      `Unsupported Greek span overlay schema: ${overlay.schemaVersion}`
+    );
+  }
+
+  const check =
+    JSON.parse(
+      JSON.stringify(overlay)
+    );
+
+  const storedChecksum =
+    String(check.checksum || "");
+
+  delete check.checksum;
+
+  const actualChecksum =
+    crypto
+      .createHash("sha256")
+      .update(
+        JSON.stringify(check)
+      )
+      .digest("hex");
+
+  if (
+    !storedChecksum ||
+    storedChecksum !== actualChecksum
+  ) {
+    fail(
+      "Greek span overlay checksum mismatch."
+    );
+  }
+
+  const routes =
+    (overlay.routes || [])
+      .filter(
+        route =>
+          route.translation === "kjv"
+      );
+
+  if (routes.length !== 31) {
+    fail(
+      `Expected 31 approved KJV span routes; found ${routes.length}.`
+    );
+  }
+
+  const groups = {};
+
+  for (const route of routes) {
+    const key = [
+      route.runtimeFile,
+      route.verseKey,
+      route.sourceOccurrenceId,
+      route.spanStart,
+      route.spanEnd
+    ].join("|");
+
+    groups[key] ??= {
+      key,
+      runtimeFile:
+        route.runtimeFile,
+      verseKey:
+        route.verseKey,
+      reference:
+        route.reference,
+      book:
+        route.book,
+      chapter:
+        route.chapter,
+      verse:
+        route.verse,
+      sourceOccurrenceId:
+        route.sourceOccurrenceId,
+      sourceIndex:
+        Number(route.sourceIndex),
+      strong:
+        route.strong,
+      entityId:
+        route.entityId,
+      spanStart:
+        Number(route.spanStart),
+      spanEnd:
+        Number(route.spanEnd),
+      spanText:
+        route.spanText,
+      routes:[]
+    };
+
+    groups[key].routes.push(route);
+  }
+
+  return {
+    overlay,
+    routes,
+    groups:Object.values(groups)
+  };
+}
+
+const P0812R2_GREEK_APPROVED_SPAN_OVERLAY =
+  loadP0812R2GreekApprovedSpanOverlay();
+
+
+const P0812R2_GREEK_APPROVED_SPAN_BATCH2_OVERLAY_FILE = path.join(
+  ROOT,
+  "app",
+  "data",
+  "bibleiq",
+  "runtime-locks",
+  "p0812r2-greek-nt-approved-span-batch2-overlay",
+  "manifest.json",
+);
+
+function loadP0812R2GreekApprovedSpanBatch2Overlay() {
+  const overlay =
+    readJson(
+      P0812R2_GREEK_APPROVED_SPAN_BATCH2_OVERLAY_FILE
+    );
+
+  if (
+    overlay.schemaVersion !==
+    "emet-p0812r2-greek-nt-approved-span-batch2-overlay/v1"
+  ) {
+    fail(
+      `Unsupported Greek Batch-2 span overlay schema: ${overlay.schemaVersion}`
+    );
+  }
+
+  const check =
+    JSON.parse(
+      JSON.stringify(overlay)
+    );
+
+  const storedChecksum =
+    String(
+      check.checksum || ""
+    );
+
+  delete check.checksum;
+
+  const actualChecksum =
+    crypto
+      .createHash("sha256")
+      .update(
+        JSON.stringify(check)
+      )
+      .digest("hex");
+
+  if (
+    !storedChecksum ||
+    storedChecksum !==
+      actualChecksum
+  ) {
+    fail(
+      "Greek Batch-2 span overlay checksum mismatch."
+    );
+  }
+
+  const routes =
+    (overlay.routes || [])
+      .filter(
+        route =>
+          route.translation === "kjv"
+      );
+
+  if (
+    routes.length !== 19
+  ) {
+    fail(
+      `Expected 19 Batch-2 KJV routes; found ${routes.length}.`
+    );
+  }
+
+  const groups = {};
+
+  for (const route of routes) {
+
+    const key = [
+      route.runtimeFile,
+      route.runtimeVerseKey,
+      route.sourceOccurrenceId,
+      route.spanStart,
+      route.spanEnd
+    ].join("|");
+
+    groups[key] ??= {
+      key,
+
+      familyKey:
+        route.familyKey,
+
+      reference:
+        route.reference,
+
+      runtimeFile:
+        route.runtimeFile,
+
+      runtimeVerseKey:
+        route.runtimeVerseKey,
+
+      sourceOccurrenceId:
+        route.sourceOccurrenceId,
+
+      sourceIndex:
+        Number(
+          route.sourceIndex
+        ),
+
+      strong:
+        route.strong,
+
+      entityId:
+        route.entityId,
+
+      routes:[]
+    };
+
+    groups[key]
+      .routes
+      .push(route);
+  }
+
+  const groupList =
+    Object.values(groups);
+
+  if (
+    groupList.length !== 16
+  ) {
+    fail(
+      `Expected 16 Batch-2 KJV span groups; found ${groupList.length}.`
+    );
+  }
+
+  return {
+    overlay,
+    routes,
+    groups:groupList
+  };
+}
+
+const P0812R2_GREEK_APPROVED_SPAN_BATCH2_OVERLAY =
+  loadP0812R2GreekApprovedSpanBatch2Overlay();
+
+
+const P0812R2_GREEK_APPROVED_LEXICAL_BATCH5_OVERLAY_FILE = path.join(
+  ROOT,
+  "app",
+  "data",
+  "bibleiq",
+  "runtime-locks",
+  "p0812r2-greek-nt-approved-lexical-batch5-overlay",
+  "manifest.json",
+);
+
+function loadP0812R2GreekApprovedLexicalBatch5Overlay() {
+  const overlay =
+    readJson(
+      P0812R2_GREEK_APPROVED_LEXICAL_BATCH5_OVERLAY_FILE
+    );
+
+  if (
+    overlay.schemaVersion !==
+    "emet-p0812r2-greek-nt-approved-lexical-batch5-overlay/v1"
+  ) {
+    fail(
+      "Unsupported Greek Batch-5 lexical overlay schema: " +
+      overlay.schemaVersion
+    );
+  }
+
+  const check =
+    JSON.parse(
+      JSON.stringify(
+        overlay
+      )
+    );
+
+  const storedChecksum =
+    String(
+      check.checksum || ""
+    );
+
+  delete check.checksum;
+
+  const actualChecksum =
+    crypto
+      .createHash("sha256")
+      .update(
+        JSON.stringify(
+          check
+        )
+      )
+      .digest("hex");
+
+  if (
+    !storedChecksum ||
+    storedChecksum !==
+      actualChecksum
+  ) {
+    fail(
+      "Greek Batch-5 lexical overlay checksum mismatch."
+    );
+  }
+
+  const routes =
+    (overlay.routes || [])
+      .filter(
+        route =>
+          route.translation === "kjv"
+      );
+
+  if (
+    routes.length !== 102
+  ) {
+    fail(
+      "Expected 102 Batch-5 KJV routes; found " +
+      routes.length +
+      "."
+    );
+  }
+
+  return {
+    overlay,
+    routes
+  };
+}
+
+const P0812R2_GREEK_APPROVED_LEXICAL_BATCH5_OVERLAY =
+  loadP0812R2GreekApprovedLexicalBatch5Overlay();
+
+const P0812R2_GREEK_APPROVED_CONSERVATIVE_BATCH6_OVERLAY_FILE = path.join(
+  ROOT,
+  "app",
+  "data",
+  "bibleiq",
+  "runtime-locks",
+  "p0812r2-greek-nt-approved-conservative-batch6-overlay",
+  "manifest.json",
+);
+
+function loadP0812R2GreekApprovedConservativeBatch6Overlay() {
+  const overlay =
+    readJson(
+      P0812R2_GREEK_APPROVED_CONSERVATIVE_BATCH6_OVERLAY_FILE
+    );
+
+  if (
+    overlay.schemaVersion !==
+    "emet-p0812r2-greek-nt-approved-conservative-batch6-overlay/v1"
+  ) {
+    fail(
+      "Unsupported Greek Batch-6 overlay schema: " +
+      overlay.schemaVersion
+    );
+  }
+
+  const check =
+    JSON.parse(
+      JSON.stringify(overlay)
+    );
+
+  const storedChecksum =
+    String(check.checksum || "");
+
+  delete check.checksum;
+
+  const actualChecksum =
+    crypto
+      .createHash("sha256")
+      .update(JSON.stringify(check))
+      .digest("hex");
+
+  if (
+    !storedChecksum ||
+    storedChecksum !== actualChecksum
+  ) {
+    fail(
+      "Greek Batch-6 overlay checksum mismatch."
+    );
+  }
+
+  const routes =
+    (overlay.routes || [])
+      .filter(
+        route =>
+          route.translation === "kjv"
+      );
+
+  if (routes.length !== 22) {
+    fail(
+      "Expected 22 Batch-6 KJV routes; found " +
+      routes.length +
+      "."
+    );
+  }
+
+  return {
+    overlay,
+    routes
+  };
+}
+
+const P0812R2_GREEK_APPROVED_CONSERVATIVE_BATCH6_OVERLAY =
+  loadP0812R2GreekApprovedConservativeBatch6Overlay();
+
+const P0812R2_GREEK_APPROVED_SOURCE_FIRST_BATCH7A_OVERLAY_FILE = path.join(
+  ROOT,
+  "app",
+  "data",
+  "bibleiq",
+  "runtime-locks",
+  "p0812r2-greek-nt-approved-source-first-span-batch7a-overlay",
+  "manifest.json",
+);
+
+function loadP0812R2GreekApprovedSourceFirstBatch7AOverlay() {
+  const overlay =
+    readJson(
+      P0812R2_GREEK_APPROVED_SOURCE_FIRST_BATCH7A_OVERLAY_FILE
+    );
+
+  if (
+    overlay.schemaVersion !==
+    "emet-p0812r2-greek-nt-approved-source-first-span-batch7a-overlay/v1"
+  ) {
+    fail(
+      "Unsupported Greek Batch-7A overlay schema: " +
+      overlay.schemaVersion
+    );
+  }
+
+  const check =
+    JSON.parse(JSON.stringify(overlay));
+
+  const storedChecksum =
+    String(check.checksum || "");
+
+  delete check.checksum;
+
+  const actualChecksum =
+    crypto
+      .createHash("sha256")
+      .update(JSON.stringify(check))
+      .digest("hex");
+
+  if (
+    !storedChecksum ||
+    storedChecksum !== actualChecksum
+  ) {
+    fail(
+      "Greek Batch-7A overlay checksum mismatch."
+    );
+  }
+
+  const spans =
+    (overlay.phraseSpans || [])
+      .filter(
+        span =>
+          span.translation === "kjv"
+      );
+
+  const routeCount =
+    spans.reduce(
+      (n, span) =>
+        n +
+        (span.englishSpan?.meaningfulDisplayIndices || []).length,
+      0
+    );
+
+  if (
+    spans.length !== 6 ||
+    routeCount !== 12
+  ) {
+    fail(
+      "Expected 6 Batch-7A KJV spans / 12 routes; found " +
+      spans.length +
+      " spans / " +
+      routeCount +
+      " routes."
+    );
+  }
+
+  return {
+    overlay,
+    spans
+  };
+}
+
+const P0812R2_GREEK_APPROVED_SOURCE_FIRST_BATCH7A_OVERLAY =
+  loadP0812R2GreekApprovedSourceFirstBatch7AOverlay();
+
+const P0812R2_GREEK_APPROVED_MULTISOURCE_BATCH7B_OVERLAY_FILE = path.join(
+  ROOT,
+  "app",
+  "data",
+  "bibleiq",
+  "runtime-locks",
+  "p0812r2-greek-nt-approved-multisource-primary-owner-batch7b-overlay",
+  "manifest.json",
+);
+
+function loadP0812R2GreekApprovedMultisourceBatch7BOverlay() {
+  const overlay =
+    readJson(
+      P0812R2_GREEK_APPROVED_MULTISOURCE_BATCH7B_OVERLAY_FILE
+    );
+
+  if (
+    overlay.schemaVersion !==
+    "emet-p0812r2-greek-nt-approved-multisource-primary-owner-batch7b-overlay/v1"
+  ) {
+    fail(
+      "Unsupported Greek Batch 7B overlay schema: " +
+      overlay.schemaVersion
+    );
+  }
+
+  const check =
+    JSON.parse(JSON.stringify(overlay));
+
+  const storedChecksum =
+    String(check.checksum || "");
+
+  delete check.checksum;
+
+  const actualChecksum =
+    crypto
+      .createHash("sha256")
+      .update(JSON.stringify(check))
+      .digest("hex");
+
+  if (
+    !storedChecksum ||
+    storedChecksum !== actualChecksum
+  ) {
+    fail(
+      "Greek Batch 7B overlay checksum mismatch."
+    );
+  }
+
+  const routes =
+    (overlay.routes || [])
+      .filter(
+        route =>
+          route.translation === "kjv"
+      );
+
+  if (routes.length !== 2) {
+    fail(
+      "Expected 2 Batch 7B KJV routes; found " +
+      routes.length +
+      "."
+    );
+  }
+
+  return {
+    overlay,
+    routes
+  };
+}
+
+const P0812R2_GREEK_APPROVED_MULTISOURCE_BATCH7B_OVERLAY =
+  loadP0812R2GreekApprovedMultisourceBatch7BOverlay();
+
+const P0812R2_GREEK_APPROVED_PROVEN_RENDERING_BATCH8_OVERLAY_FILE = path.join(
+  ROOT,
+  "app",
+  "data",
+  "bibleiq",
+  "runtime-locks",
+  "p0812r2-greek-nt-approved-proven-rendering-reuse-batch8-overlay",
+  "manifest.json",
+);
+
+function loadP0812R2GreekApprovedProvenRenderingBatch8Overlay() {
+  const overlay =
+    readJson(
+      P0812R2_GREEK_APPROVED_PROVEN_RENDERING_BATCH8_OVERLAY_FILE
+    );
+
+  if (
+    overlay.schemaVersion !==
+    "emet-p0812r2-greek-nt-approved-proven-rendering-reuse-batch8-overlay/v1"
+  ) {
+    fail(
+      "Unsupported Greek Batch 8 overlay schema: " +
+      overlay.schemaVersion
+    );
+  }
+
+  const check =
+    JSON.parse(JSON.stringify(overlay));
+
+  const storedChecksum =
+    String(check.checksum || "");
+
+  delete check.checksum;
+
+  const actualChecksum =
+    crypto
+      .createHash("sha256")
+      .update(JSON.stringify(check))
+      .digest("hex");
+
+  if (
+    !storedChecksum ||
+    storedChecksum !== actualChecksum
+  ) {
+    fail(
+      "Greek Batch 8 overlay checksum mismatch."
+    );
+  }
+
+  const candidates =
+    (overlay.candidates || [])
+      .filter(
+        candidate =>
+          candidate.translation === "kjv"
+      );
+
+  const routeCount =
+    candidates.reduce(
+      (n, candidate) =>
+        n +
+        (
+          candidate.englishSpan?.meaningfulDisplayIndices || []
+        ).length,
+      0
+    );
+
+  if (
+    candidates.length !== 358 ||
+    routeCount !== 362
+  ) {
+    fail(
+      "Expected 358 Batch 8 KJV cases / 362 routes; found " +
+      candidates.length +
+      " cases / " +
+      routeCount +
+      " routes."
+    );
+  }
+
+  return {
+    overlay,
+    candidates
+  };
+}
+
+const P0812R2_GREEK_APPROVED_PROVEN_RENDERING_BATCH8_OVERLAY =
+  loadP0812R2GreekApprovedProvenRenderingBatch8Overlay();
+
 const VALID_ENTITY =
   /^(?:word:(?:hebrew:H\d+[A-Za-z]?|greek-nt:G\d+[A-Za-z]?)|compound:greek-nt:G\d+-G\d+)$/u;
 
@@ -640,6 +1405,85 @@ function main() {
         : [];
       const assigned = assignRoutes(displayTokens, canonicalTokens, verse, corpus);
 
+      const exactOverrideKey =
+        `${book}|${Number(record.chapter)}:${Number(record.verse)}`;
+
+      const exactOverrides =
+        KJV_EXACT_DISPLAY_ROUTE_OVERRIDES[exactOverrideKey] || [];
+
+      for (const override of exactOverrides) {
+        const displayToken = displayTokens[override.displayIndex];
+        const canonicalToken = canonicalTokens[override.canonicalIndex];
+
+        if (!displayToken || !canonicalToken) {
+          fail(
+            `Exact KJV override token missing: ${exactOverrideKey}`
+          );
+        }
+
+        const actualDisplayIdentity =
+          tokenIdentity(displayToken.text);
+
+        const actualCanonicalIdentity =
+          tokenIdentity(canonicalToken.text);
+
+        if (actualDisplayIdentity !== override.displayIdentity) {
+          fail(
+            `Exact KJV override display identity changed: ${exactOverrideKey}`
+          );
+        }
+
+        if (actualCanonicalIdentity !== override.canonicalIdentity) {
+          fail(
+            `Exact KJV override canonical identity changed: ${exactOverrideKey}`
+          );
+        }
+
+        const route =
+          sourceRouteForCanonicalToken(
+            canonicalToken,
+            verse,
+            corpus
+          );
+
+        if (
+          !route ||
+          route.sourceIndex !== override.sourceIndex ||
+          route.entityId !== override.entityId
+        ) {
+          fail(
+            `Exact KJV override owner changed: ${exactOverrideKey}`
+          );
+        }
+
+        const source = verse.sourceTokens?.[route.sourceIndex];
+
+        if (
+          !source ||
+          String(source.strong || "") !== override.strong
+        ) {
+          fail(
+            `Exact KJV override Strong changed: ${exactOverrideKey}`
+          );
+        }
+
+        const key = String(override.displayIndex);
+        const existing = assigned.map[key];
+
+        if (
+          existing !== undefined &&
+          existing !== route.sourceIndex
+        ) {
+          fail(
+            `Exact KJV override conflicts with derived route: ${exactOverrideKey}`
+          );
+        }
+
+        assigned.map[key] = route.sourceIndex;
+        assigned.methods[key] =
+          "exact-coordinate-spelling-variant-override";
+      }
+
       for (const method of Object.values(assigned.methods)) {
         stats.methods[method] = (stats.methods[method] || 0) + 1;
       }
@@ -667,6 +1511,1244 @@ function main() {
       aliases.songofsongs = outputFile;
       aliases.songofsolomon = outputFile;
     }
+  }
+
+
+  for (
+    const approved of
+    P0812R2_GREEK_APPROVED_OWNER_OVERLAY
+  ) {
+    const runtimeBook =
+      newBooks.get(
+        String(approved.runtimeFile)
+      );
+
+    if (!runtimeBook) {
+      fail(
+        `Approved Greek KJV runtime book missing: ${approved.runtimeFile}`
+      );
+    }
+
+    const verse =
+      runtimeBook.verses?.[
+        String(approved.verseKey)
+      ];
+
+    if (!verse) {
+      fail(
+        `Approved Greek KJV verse missing: ${approved.reference}`
+      );
+    }
+
+    const bookRecords =
+      recordsByBook.get(
+        String(approved.book)
+      ) || [];
+
+    const record =
+      bookRecords.find(
+        candidate =>
+          Number(candidate.chapter) ===
+            Number(approved.chapter) &&
+          Number(candidate.verse) ===
+            Number(approved.verse)
+      );
+
+    if (!record) {
+      fail(
+        `Approved Greek KJV display record missing: ${approved.reference}`
+      );
+    }
+
+    const displayTokens =
+      tokenizeDisplayText(
+        displayText(record)
+      );
+
+    const displayToken =
+      displayTokens[
+        Number(approved.displayIndex)
+      ];
+
+    if (
+      !displayToken ||
+      tokenIdentity(displayToken.text) !==
+        tokenIdentity(approved.displayText)
+    ) {
+      fail(
+        `Approved Greek KJV display identity changed: ${approved.reference}`
+      );
+    }
+
+    const sourceMatches =
+      (verse.s || [])
+        .map((row,index) => ({row,index}))
+        .filter(
+          hit =>
+            String(hit.row?.[0] || "") ===
+            String(approved.sourceOccurrenceId)
+        );
+
+    if (sourceMatches.length !== 1) {
+      fail(
+        `Approved Greek KJV source occurrence not unique: ${approved.reference}`
+      );
+    }
+
+    const hit =
+      sourceMatches[0];
+
+    if (
+      hit.index !==
+        Number(approved.sourceIndex) ||
+      String(hit.row?.[3] || "") !==
+        String(approved.strong) ||
+      String(hit.row?.[4] || "") !==
+        String(approved.entityId)
+    ) {
+      fail(
+        `Approved Greek KJV source contract changed: ${approved.reference}`
+      );
+    }
+
+    verse.a ??= {};
+    verse.a.kjv ??= {};
+    verse.m ??= {};
+
+    const displayKey =
+      String(
+        Number(approved.displayIndex)
+      );
+
+    const existing =
+      verse.a.kjv[displayKey];
+
+    if (
+      existing !== undefined &&
+      Number(existing) !== hit.index
+    ) {
+      fail(
+        `Approved Greek KJV target has conflicting route: ${approved.reference}`
+      );
+    }
+
+    const otherOwners =
+      Object.entries(verse.a.kjv)
+        .filter(
+          ([key,sourceIndex]) =>
+            key !== displayKey &&
+            Number(sourceIndex) === hit.index
+        );
+
+    if (otherOwners.length !== 0) {
+      fail(
+        `Approved Greek KJV source already has another display owner: ${approved.reference}`
+      );
+    }
+
+    if (existing === undefined) {
+      verse.a.kjv[displayKey] =
+        hit.index;
+
+      verse.m[displayKey] =
+        "p0812r2-greek-approved-owner-overlay";
+
+      stats.routedDisplayTokens += 1;
+
+      stats.methods[
+        "p0812r2-greek-approved-owner-overlay"
+      ] =
+        (
+          stats.methods[
+            "p0812r2-greek-approved-owner-overlay"
+          ] || 0
+        ) + 1;
+    }
+  }
+
+
+  let approvedGreekSpanRouteCount = 0;
+
+  for (
+    const group of
+    P0812R2_GREEK_APPROVED_SPAN_OVERLAY.groups
+  ) {
+    const runtimeBook =
+      newBooks.get(
+        String(group.runtimeFile)
+      );
+
+    if (!runtimeBook) {
+      fail(
+        `Approved Greek span runtime book missing: ${group.runtimeFile}`
+      );
+    }
+
+    const verse =
+      runtimeBook.verses?.[
+        String(group.verseKey)
+      ];
+
+    if (!verse) {
+      fail(
+        `Approved Greek span verse missing: ${group.reference}`
+      );
+    }
+
+    const sourceMatches =
+      (verse.s || [])
+        .map(
+          (row,index) => ({
+            row,
+            index
+          })
+        )
+        .filter(
+          hit =>
+            String(hit.row?.[0] || "") ===
+            String(group.sourceOccurrenceId)
+        );
+
+    if (sourceMatches.length !== 1) {
+      fail(
+        `Approved Greek span source occurrence not unique: ${group.reference}`
+      );
+    }
+
+    const hit =
+      sourceMatches[0];
+
+    if (
+      hit.index !==
+        Number(group.sourceIndex) ||
+      String(hit.row?.[3] || "") !==
+        String(group.strong) ||
+      String(hit.row?.[4] || "") !==
+        String(group.entityId)
+    ) {
+      fail(
+        `Approved Greek span source contract changed: ${group.reference}`
+      );
+    }
+
+    verse.a ??= {};
+    verse.a.kjv ??= {};
+    verse.m ??= {};
+
+    const approvedKeys =
+      new Set(
+        group.routes.map(
+          route =>
+            String(route.displayIndex)
+        )
+      );
+
+    const outsideOwners =
+      Object.entries(verse.a.kjv)
+        .filter(
+          ([displayKey,sourceIndex]) =>
+            Number(sourceIndex) === hit.index &&
+            !approvedKeys.has(displayKey)
+        );
+
+    if (outsideOwners.length !== 0) {
+      fail(
+        `Approved Greek span source already owned outside span: ${group.reference}`
+      );
+    }
+
+    for (const approved of group.routes) {
+
+      const displayKey =
+        String(
+          Number(approved.displayIndex)
+        );
+
+      const existing =
+        verse.a.kjv[
+          displayKey
+        ];
+
+      if (existing !== undefined) {
+        fail(
+          `Approved Greek span target unexpectedly has a pre-overlay route: ${approved.reference}`
+        );
+      }
+
+      verse.a.kjv[
+        displayKey
+      ] = hit.index;
+
+      verse.m[
+        displayKey
+      ] =
+        "p0812r2-greek-approved-span-overlay";
+
+      stats.routedDisplayTokens += 1;
+
+      stats.methods[
+        "p0812r2-greek-approved-span-overlay"
+      ] =
+        (
+          stats.methods[
+            "p0812r2-greek-approved-span-overlay"
+          ] || 0
+        ) + 1;
+
+      approvedGreekSpanRouteCount++;
+    }
+  }
+
+  if (
+    approvedGreekSpanRouteCount !== 31
+  ) {
+    fail(
+      `Expected 31 approved Greek span KJV routes; applied ${approvedGreekSpanRouteCount}.`
+    );
+  }
+
+
+  let approvedGreekBatch2RouteCount = 0;
+
+  for (
+    const group of
+    P0812R2_GREEK_APPROVED_SPAN_BATCH2_OVERLAY.groups
+  ) {
+    const runtimeBook =
+      newBooks.get(
+        String(
+          group.runtimeFile
+        )
+      );
+
+    if (!runtimeBook) {
+      fail(
+        `Batch-2 Greek runtime book missing: ${group.runtimeFile}`
+      );
+    }
+
+    const verse =
+      runtimeBook.verses?.[
+        String(
+          group.runtimeVerseKey
+        )
+      ];
+
+    if (!verse) {
+      fail(
+        `Batch-2 Greek KJV verse missing: ${group.reference}`
+      );
+    }
+
+    const sourceMatches =
+      (verse.s || [])
+        .map(
+          (row,index) => ({
+            row,
+            index
+          })
+        )
+        .filter(
+          hit =>
+            String(
+              hit.row?.[0] || ""
+            ) ===
+            String(
+              group.sourceOccurrenceId
+            )
+        );
+
+    if (
+      sourceMatches.length !== 1
+    ) {
+      fail(
+        `Batch-2 Greek source occurrence not unique: ${group.reference}`
+      );
+    }
+
+    const hit =
+      sourceMatches[0];
+
+    if (
+      hit.index !==
+        Number(
+          group.sourceIndex
+        ) ||
+      String(
+        hit.row?.[3] || ""
+      ) !==
+        String(
+          group.strong
+        ) ||
+      String(
+        hit.row?.[4] || ""
+      ) !==
+        String(
+          group.entityId
+        )
+    ) {
+      fail(
+        `Batch-2 Greek source contract changed: ${group.reference}`
+      );
+    }
+
+    verse.a ??= {};
+    verse.a.kjv ??= {};
+    verse.m ??= {};
+
+    const approvedKeys =
+      new Set(
+        group.routes.map(
+          route =>
+            String(
+              route.displayIndex
+            )
+        )
+      );
+
+    const outsideOwners =
+      Object.entries(
+        verse.a.kjv
+      )
+        .filter(
+          ([displayKey,sourceIndex]) =>
+            Number(sourceIndex) ===
+              hit.index &&
+            !approvedKeys.has(
+              displayKey
+            )
+        );
+
+    if (
+      outsideOwners.length !== 0
+    ) {
+      fail(
+        `Batch-2 source already owned outside approved span: ${group.reference}`
+      );
+    }
+
+    for (
+      const approved of
+      group.routes
+    ) {
+
+      const displayKey =
+        String(
+          Number(
+            approved.displayIndex
+          )
+        );
+
+      if (
+        verse.a.kjv[
+          displayKey
+        ] !== undefined
+      ) {
+        fail(
+          `Batch-2 KJV target unexpectedly already routed: ${approved.reference}`
+        );
+      }
+
+      verse.a.kjv[
+        displayKey
+      ] =
+        hit.index;
+
+      verse.m[
+        displayKey
+      ] =
+        "p0812r2-greek-approved-span-batch2";
+
+      stats.routedDisplayTokens +=
+        1;
+
+      stats.methods[
+        "p0812r2-greek-approved-span-batch2"
+      ] =
+        (
+          stats.methods[
+            "p0812r2-greek-approved-span-batch2"
+          ] || 0
+        ) + 1;
+
+      approvedGreekBatch2RouteCount++;
+    }
+  }
+
+  if (
+    approvedGreekBatch2RouteCount !== 19
+  ) {
+    fail(
+      `Expected 19 Batch-2 Greek KJV routes; applied ${approvedGreekBatch2RouteCount}.`
+    );
+  }
+
+
+  let approvedGreekBatch5RouteCount = 0;
+
+  for (
+    const approved of
+    P0812R2_GREEK_APPROVED_LEXICAL_BATCH5_OVERLAY.routes
+  ) {
+    const runtimeBook =
+      newBooks.get(
+        String(
+          approved.runtimeFile
+        )
+      );
+
+    if (!runtimeBook) {
+      fail(
+        "Batch-5 Greek runtime book missing: " +
+        approved.runtimeFile
+      );
+    }
+
+    const verse =
+      runtimeBook.verses?.[
+        String(
+          approved.runtimeVerseKey
+        )
+      ];
+
+    if (!verse) {
+      fail(
+        "Batch-5 Greek KJV verse missing: " +
+        approved.reference
+      );
+    }
+
+    const matches =
+      (verse.s || [])
+        .map(
+          (row,index) => ({
+            row,
+            index
+          })
+        )
+        .filter(
+          hit =>
+            String(
+              hit.row?.[0] || ""
+            ) ===
+            String(
+              approved.sourceOccurrenceId
+            )
+        );
+
+    if (
+      matches.length !== 1
+    ) {
+      fail(
+        "Batch-5 Greek source occurrence not unique: " +
+        approved.reference
+      );
+    }
+
+    const hit =
+      matches[0];
+
+    if (
+      hit.index !==
+        Number(
+          approved.sourceIndex
+        ) ||
+      String(
+        hit.row?.[3] || ""
+      ) !==
+        String(
+          approved.strong
+        ) ||
+      String(
+        hit.row?.[4] || ""
+      ) !==
+        String(
+          approved.entityId
+        )
+    ) {
+      fail(
+        "Batch-5 Greek source contract changed: " +
+        approved.reference
+      );
+    }
+
+    verse.a ??= {};
+    verse.a.kjv ??= {};
+    verse.m ??= {};
+
+    const displayKey =
+      String(
+        Number(
+          approved.displayIndex
+        )
+      );
+
+    if (
+      verse.a.kjv[
+        displayKey
+      ] !== undefined
+    ) {
+      fail(
+        "Batch-5 KJV target unexpectedly already routed: " +
+        approved.reference
+      );
+    }
+
+    const existingOwners =
+      Object.entries(
+        verse.a.kjv
+      )
+        .filter(
+          ([,sourceIndex]) =>
+            Number(
+              sourceIndex
+            ) ===
+            hit.index
+        );
+
+    if (
+      existingOwners.length !== 0
+    ) {
+      fail(
+        "Batch-5 source already owned: " +
+        approved.reference
+      );
+    }
+
+    verse.a.kjv[
+      displayKey
+    ] =
+      hit.index;
+
+    verse.m[
+      displayKey
+    ] =
+      "p0812r2-greek-approved-lexical-batch5";
+
+    stats.routedDisplayTokens +=
+      1;
+
+    stats.methods[
+      "p0812r2-greek-approved-lexical-batch5"
+    ] =
+      (
+        stats.methods[
+          "p0812r2-greek-approved-lexical-batch5"
+        ] || 0
+      ) + 1;
+
+    approvedGreekBatch5RouteCount++;
+  }
+
+  if (
+    approvedGreekBatch5RouteCount !==
+    102
+  ) {
+    fail(
+      "Expected 102 Batch-5 KJV routes; applied " +
+      approvedGreekBatch5RouteCount +
+      "."
+    );
+  }
+
+  let approvedGreekBatch6RouteCount = 0;
+
+  for (
+    const approved of
+    P0812R2_GREEK_APPROVED_CONSERVATIVE_BATCH6_OVERLAY.routes
+  ) {
+    const runtimeBook =
+      newBooks.get(
+        String(approved.runtimeFile)
+      );
+
+    if (!runtimeBook) {
+      fail(
+        "Batch-6 Greek runtime book missing: " +
+        approved.runtimeFile
+      );
+    }
+
+    const verse =
+      runtimeBook.verses?.[
+        String(approved.runtimeVerseKey)
+      ];
+
+    if (!verse) {
+      fail(
+        "Batch-6 Greek KJV verse missing: " +
+        approved.reference
+      );
+    }
+
+    const matches =
+      (verse.s || [])
+        .map(
+          (row,index) => ({
+            row,
+            index
+          })
+        )
+        .filter(
+          hit =>
+            String(hit.row?.[0] || "") ===
+            String(approved.sourceOccurrenceId)
+        );
+
+    if (matches.length !== 1) {
+      fail(
+        "Batch-6 Greek source occurrence not unique: " +
+        approved.reference
+      );
+    }
+
+    const hit = matches[0];
+
+    if (
+      hit.index !== Number(approved.sourceIndex) ||
+      String(hit.row?.[3] || "") !== String(approved.strong) ||
+      String(hit.row?.[4] || "") !== String(approved.entityId)
+    ) {
+      fail(
+        "Batch-6 Greek source contract changed: " +
+        approved.reference
+      );
+    }
+
+    verse.a ??= {};
+    verse.a.kjv ??= {};
+    verse.m ??= {};
+
+    const displayKey =
+      String(Number(approved.displayIndex));
+
+    if (
+      verse.a.kjv[displayKey] !== undefined
+    ) {
+      fail(
+        "Batch-6 KJV target unexpectedly already routed: " +
+        approved.reference
+      );
+    }
+
+    const existingOwners =
+      Object.entries(verse.a.kjv)
+        .filter(
+          ([,sourceIndex]) =>
+            Number(sourceIndex) === hit.index
+        );
+
+    if (existingOwners.length !== 0) {
+      fail(
+        "Batch-6 source already owned: " +
+        approved.reference
+      );
+    }
+
+    verse.a.kjv[displayKey] =
+      hit.index;
+
+    verse.m[displayKey] =
+      "p0812r2-greek-approved-conservative-batch6";
+
+    stats.routedDisplayTokens += 1;
+
+    stats.methods[
+      "p0812r2-greek-approved-conservative-batch6"
+    ] =
+      (
+        stats.methods[
+          "p0812r2-greek-approved-conservative-batch6"
+        ] || 0
+      ) + 1;
+
+    approvedGreekBatch6RouteCount++;
+  }
+
+  if (approvedGreekBatch6RouteCount !== 22) {
+    fail(
+      "Expected 22 Batch-6 KJV routes; applied " +
+      approvedGreekBatch6RouteCount +
+      "."
+    );
+  }
+
+  let approvedGreekBatch7ARouteCount = 0;
+
+  for (
+    const span of
+    P0812R2_GREEK_APPROVED_SOURCE_FIRST_BATCH7A_OVERLAY.spans
+  ) {
+    const runtimeBook =
+      newBooks.get(
+        String(span.runtimeFile)
+      );
+
+    if (!runtimeBook) {
+      fail(
+        "Batch-7A Greek runtime book missing: " +
+        span.runtimeFile
+      );
+    }
+
+    const verse =
+      runtimeBook.verses?.[
+        String(span.runtimeVerseKey)
+      ];
+
+    if (!verse) {
+      fail(
+        "Batch-7A Greek KJV verse missing: " +
+        span.reference
+      );
+    }
+
+    const occurrenceId =
+      String(
+        span.sourceSegment.sourceOccurrenceIds[0]
+      );
+
+    const expectedSourceIndex =
+      Number(
+        span.sourceSegment.primarySourceIndex
+      );
+
+    const sourceMatches =
+      (verse.s || [])
+        .map(
+          (row,index) => ({
+            row,
+            index
+          })
+        )
+        .filter(
+          hit =>
+            String(hit.row?.[0] || "") ===
+            occurrenceId
+        );
+
+    if (sourceMatches.length !== 1) {
+      fail(
+        "Batch-7A Greek source occurrence not unique: " +
+        span.reference
+      );
+    }
+
+    const hit =
+      sourceMatches[0];
+
+    if (
+      hit.index !== expectedSourceIndex ||
+      String(hit.row?.[3] || "") !==
+        String(span.sourceSegment.strong) ||
+      String(hit.row?.[4] || "") !==
+        String(span.sourceSegment.entityId)
+    ) {
+      fail(
+        "Batch-7A Greek source contract changed: " +
+        span.reference
+      );
+    }
+
+    verse.a ??= {};
+    verse.a.kjv ??= {};
+    verse.m ??= {};
+
+    const approvedKeys =
+      new Set(
+        span.englishSpan.meaningfulDisplayIndices
+          .map(
+            index =>
+              String(Number(index))
+          )
+      );
+
+    const outsideOwners =
+      Object.entries(verse.a.kjv)
+        .filter(
+          ([displayKey,sourceIndex]) =>
+            Number(sourceIndex) === hit.index &&
+            !approvedKeys.has(displayKey)
+        );
+
+    if (outsideOwners.length !== 0) {
+      fail(
+        "Batch-7A source already owned outside approved span: " +
+        span.reference
+      );
+    }
+
+    for (
+      const displayIndex of
+      span.englishSpan.meaningfulDisplayIndices
+    ) {
+      const displayKey =
+        String(Number(displayIndex));
+
+      if (
+        verse.a.kjv[displayKey] !== undefined
+      ) {
+        fail(
+          "Batch-7A KJV target unexpectedly already routed: " +
+          span.reference
+        );
+      }
+
+      verse.a.kjv[displayKey] =
+        hit.index;
+
+      verse.m[displayKey] =
+        "p0812r2-greek-source-first-phrase-span-batch7a";
+
+      stats.routedDisplayTokens += 1;
+
+      stats.methods[
+        "p0812r2-greek-source-first-phrase-span-batch7a"
+      ] =
+        (
+          stats.methods[
+            "p0812r2-greek-source-first-phrase-span-batch7a"
+          ] || 0
+        ) + 1;
+
+      approvedGreekBatch7ARouteCount++;
+    }
+  }
+
+  if (approvedGreekBatch7ARouteCount !== 12) {
+    fail(
+      "Expected 12 Batch-7A KJV routes; applied " +
+      approvedGreekBatch7ARouteCount +
+      "."
+    );
+  }
+
+  let approvedGreekBatch7BRouteCount = 0;
+
+  for (
+    const approved of
+    P0812R2_GREEK_APPROVED_MULTISOURCE_BATCH7B_OVERLAY.routes
+  ) {
+    const runtimeBook =
+      newBooks.get(
+        String(approved.runtimeFile)
+      );
+
+    if (!runtimeBook) {
+      fail(
+        "Batch 7B Greek runtime book missing: " +
+        approved.runtimeFile
+      );
+    }
+
+    const verse =
+      runtimeBook.verses?.[
+        String(approved.runtimeVerseKey)
+      ];
+
+    if (!verse) {
+      fail(
+        "Batch 7B Greek KJV verse missing: " +
+        approved.reference
+      );
+    }
+
+    const validatedSegment = [];
+
+    for (
+      const source of
+      approved.sourceSegment
+    ) {
+      const hits =
+        (verse.s || [])
+          .map(
+            (row,index) => ({
+              row,
+              index
+            })
+          )
+          .filter(
+            hit =>
+              String(hit.row?.[0] || "") ===
+              String(source.sourceOccurrenceId)
+          );
+
+      if (hits.length !== 1) {
+        fail(
+          "Batch 7B source occurrence not unique: " +
+          approved.reference
+        );
+      }
+
+      const hit = hits[0];
+
+      if (
+        hit.index !== Number(source.sourceIndex) ||
+        String(hit.row?.[3] || "") !== String(source.strong) ||
+        String(hit.row?.[4] || "") !== String(source.entityId)
+      ) {
+        fail(
+          "Batch 7B source segment contract changed: " +
+          approved.reference
+        );
+      }
+
+      validatedSegment.push({
+        ...source,
+        sourceIndex: hit.index
+      });
+    }
+
+    const primary =
+      validatedSegment
+        .filter(
+          source =>
+            String(source.sourceOccurrenceId) ===
+            String(approved.primarySourceOccurrenceId)
+        );
+
+    if (primary.length !== 1) {
+      fail(
+        "Batch 7B primary source missing from segment: " +
+        approved.reference
+      );
+    }
+
+    const primarySource = primary[0];
+
+    if (
+      Number(primarySource.sourceIndex) !==
+        Number(approved.primarySourceIndex) ||
+      String(primarySource.strong) !==
+        String(approved.primaryStrong) ||
+      String(primarySource.entityId) !==
+        String(approved.primaryEntityId)
+    ) {
+      fail(
+        "Batch 7B primary-head contract changed: " +
+        approved.reference
+      );
+    }
+
+    verse.a ??= {};
+    verse.a.kjv ??= {};
+    verse.m ??= {};
+
+    const displayKey =
+      String(Number(approved.displayIndex));
+
+    if (
+      verse.a.kjv[displayKey] !== undefined
+    ) {
+      fail(
+        "Batch 7B KJV target unexpectedly already routed: " +
+        approved.reference
+      );
+    }
+
+    for (
+      const source of
+      validatedSegment
+    ) {
+      const owners =
+        Object.entries(verse.a.kjv)
+          .filter(
+            ([,sourceIndex]) =>
+              Number(sourceIndex) ===
+              Number(source.sourceIndex)
+          );
+
+      if (owners.length !== 0) {
+        fail(
+          "Batch 7B segment source already owned: " +
+          approved.reference
+        );
+      }
+    }
+
+    verse.a.kjv[displayKey] =
+      Number(approved.primarySourceIndex);
+
+    verse.m[displayKey] =
+      "p0812r2-greek-multisource-primary-owner-batch7b";
+
+    stats.routedDisplayTokens += 1;
+
+    stats.methods[
+      "p0812r2-greek-multisource-primary-owner-batch7b"
+    ] =
+      (
+        stats.methods[
+          "p0812r2-greek-multisource-primary-owner-batch7b"
+        ] || 0
+      ) + 1;
+
+    approvedGreekBatch7BRouteCount++;
+  }
+
+  if (approvedGreekBatch7BRouteCount !== 2) {
+    fail(
+      "Expected 2 Batch 7B KJV routes; applied " +
+      approvedGreekBatch7BRouteCount +
+      "."
+    );
+  }
+
+  let approvedGreekBatch8RouteCount = 0;
+
+  for (
+    const candidate of
+    P0812R2_GREEK_APPROVED_PROVEN_RENDERING_BATCH8_OVERLAY.candidates
+  ) {
+    const runtimeBook =
+      newBooks.get(
+        String(candidate.runtimeFile)
+      );
+
+    if (!runtimeBook) {
+      fail(
+        "Batch 8 Greek runtime book missing: " +
+        candidate.runtimeFile
+      );
+    }
+
+    const verse =
+      runtimeBook.verses?.[
+        String(candidate.runtimeVerseKey)
+      ];
+
+    if (!verse) {
+      fail(
+        "Batch 8 Greek KJV verse missing: " +
+        candidate.reference
+      );
+    }
+
+    const occurrenceId =
+      String(
+        candidate.lexicalSource.sourceOccurrenceId
+      );
+
+    const expectedSourceIndex =
+      Number(
+        candidate.lexicalSource.sourceIndex
+      );
+
+    const sourceMatches =
+      (verse.s || [])
+        .map(
+          (row,index) => ({
+            row,
+            index
+          })
+        )
+        .filter(
+          hit =>
+            String(hit.row?.[0] || "") ===
+            occurrenceId
+        );
+
+    if (sourceMatches.length !== 1) {
+      fail(
+        "Batch 8 Greek source occurrence not unique: " +
+        candidate.reference
+      );
+    }
+
+    const hit = sourceMatches[0];
+
+    if (
+      hit.index !== expectedSourceIndex ||
+      String(hit.row?.[3] || "") !==
+        String(candidate.lexicalSource.strong) ||
+      String(hit.row?.[4] || "") !==
+        String(candidate.lexicalSource.entityId)
+    ) {
+      fail(
+        "Batch 8 Greek source contract changed: " +
+        candidate.reference
+      );
+    }
+
+    verse.a ??= {};
+    verse.a.kjv ??= {};
+    verse.m ??= {};
+
+    const approvedKeys =
+      new Set(
+        candidate.englishSpan.meaningfulDisplayIndices
+          .map(
+            index =>
+              String(Number(index))
+          )
+      );
+
+    const outsideOwners =
+      Object.entries(verse.a.kjv)
+        .filter(
+          ([displayKey,sourceIndex]) =>
+            Number(sourceIndex) === hit.index &&
+            !approvedKeys.has(displayKey)
+        );
+
+    if (outsideOwners.length !== 0) {
+      fail(
+        "Batch 8 source already owned outside approved candidate phrase: " +
+        candidate.reference
+      );
+    }
+
+    for (
+      const displayIndex of
+      candidate.englishSpan.meaningfulDisplayIndices
+    ) {
+      const displayKey =
+        String(Number(displayIndex));
+
+      if (
+        verse.a.kjv[displayKey] !== undefined
+      ) {
+        fail(
+          "Batch 8 KJV target unexpectedly already routed: " +
+          candidate.reference
+        );
+      }
+    }
+
+    for (
+      const displayIndex of
+      candidate.englishSpan.meaningfulDisplayIndices
+    ) {
+      const displayKey =
+        String(Number(displayIndex));
+
+      verse.a.kjv[displayKey] =
+        hit.index;
+
+      verse.m[displayKey] =
+        "p0812r2-greek-translation-specific-proven-rendering-reuse-batch8";
+
+      stats.routedDisplayTokens += 1;
+
+      stats.methods[
+        "p0812r2-greek-translation-specific-proven-rendering-reuse-batch8"
+      ] =
+        (
+          stats.methods[
+            "p0812r2-greek-translation-specific-proven-rendering-reuse-batch8"
+          ] || 0
+        ) + 1;
+
+      approvedGreekBatch8RouteCount++;
+    }
+  }
+
+  if (approvedGreekBatch8RouteCount !== 362) {
+    fail(
+      "Expected 362 Batch 8 KJV routes; applied " +
+      approvedGreekBatch8RouteCount +
+      "."
+    );
   }
 
   // Regression accounting against the pre-existing dedicated KJV runtime.
