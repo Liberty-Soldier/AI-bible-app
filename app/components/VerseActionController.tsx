@@ -1,7 +1,7 @@
 "use client";
 
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
-import ScriptureText from "@/app/components/ScriptureText";
+import SourceBreakdownVerse from "@/app/components/SourceBreakdownVerse";
 import {
   buildReaderChapterItems,
   compareReaderVerses,
@@ -216,16 +216,16 @@ export default function VerseActionController({
                 {verseLabel}
               </button>
 
-              <ScriptureText
-                text={selectedText}
+              <SourceBreakdownVerse
                 reference={verse.reference}
-                tokenAvailability={verseTokenAvailability}
-                readerRecordId={verse.id}
-                readerVerseLabel={verseLabel}
-                verseNumber={verse.verse}
-                focusedTokenIndex={
-                  hasFocusedWord ? focusedTokenIndex : null
+                verse={verse.verse}
+                translation={
+                  activeTranslation as
+                    | "web"
+                    | "kjv"
+                    | "brenton"
                 }
+                verseText={selectedText}
               />
 
               {isBookmarked || hasNote ? (

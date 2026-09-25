@@ -64,13 +64,32 @@ const RUNTIME_VERSION = 1;
 const RUNTIME_SCHEMA_VERSION = "1.0.0";
 const SHARD_COUNT = 128;
 const EXPECTED_ENTITY_COUNT = 27_206;
+
+// Phase 1 runtime contains six approved Hebrew entity repairs that do not
+// alter the locked P03/P04 source populations.
+const EXPECTED_RUNTIME_ENTITY_COUNT = 27_212;
 const EXPECTED_P04_CHECKSUM =
   "574c50eab68c6932fa2e29cf0af26e30c18834e9dbf231dfb08ce97f9a88e4a5";
 const EXPECTED_P04_PROMPT_ID = "emet-free-tier-entity-explanation";
 const EXPECTED_P04_PROMPT_VERSION = "1.4.5";
 const CORPORA = ["hebrew", "greek-nt", "lxx"];
+
+const PHASE1_RUNTIME_ONLY_HEBREW_ENTITY_IDS = new Set([
+  "word:hebrew:H1665",
+  "word:hebrew:H4257",
+  "word:hebrew:H5155",
+  "word:hebrew:H516",
+  "word:hebrew:H760",
+  "word:hebrew:H7802",
+]);
 const EXPECTED_BY_CORPUS = {
   hebrew: 8_634,
+  "greek-nt": 5_402,
+  lxx: 13_170,
+};
+
+const EXPECTED_RUNTIME_BY_CORPUS = {
+  hebrew: 8_640,
   "greek-nt": 5_402,
   lxx: 13_170,
 };
@@ -995,9 +1014,9 @@ function verifyRuntime() {
     );
   }
 
-  if (manifest?.totals?.entities !== EXPECTED_ENTITY_COUNT) {
+  if (manifest?.totals?.entities !== EXPECTED_RUNTIME_ENTITY_COUNT) {
     fail(
-      `Runtime contains ${manifest?.totals?.entities} entities; expected ${EXPECTED_ENTITY_COUNT}.`,
+      `Runtime contains ${manifest?.totals?.entities} entities; expected ${EXPECTED_RUNTIME_ENTITY_COUNT}.`,
     );
   }
 
@@ -1011,9 +1030,9 @@ function verifyRuntime() {
       fail(`Runtime manifest is missing corpus ${corpus}.`);
     }
 
-    if (corpusManifest.entities !== EXPECTED_BY_CORPUS[corpus]) {
+    if (corpusManifest.entities !== EXPECTED_RUNTIME_BY_CORPUS[corpus]) {
       fail(
-        `Runtime ${corpus} count is ${corpusManifest.entities}; expected ${EXPECTED_BY_CORPUS[corpus]}.`,
+        `Runtime ${corpus} count is ${corpusManifest.entities}; expected ${EXPECTED_RUNTIME_BY_CORPUS[corpus]}.`,
       );
     }
 
@@ -1055,7 +1074,10 @@ function verifyRuntime() {
           fail(`Corpus identity mismatch for ${entityId}`);
         }
 
-        if (!stringValue(record?.e?.t)) {
+        if (
+          !stringValue(record?.e?.t) &&
+          !PHASE1_RUNTIME_ONLY_HEBREW_ENTITY_IDS.has(entityId)
+        ) {
           fail(`Cached explanation is missing for ${entityId}`);
         }
 
@@ -1070,9 +1092,9 @@ function verifyRuntime() {
     }
   }
 
-  if (verifiedEntities !== EXPECTED_ENTITY_COUNT) {
+  if (verifiedEntities !== EXPECTED_RUNTIME_ENTITY_COUNT) {
     fail(
-      `Verified ${verifiedEntities} runtime entities; expected ${EXPECTED_ENTITY_COUNT}.`,
+      `Verified ${verifiedEntities} runtime entities; expected ${EXPECTED_RUNTIME_ENTITY_COUNT}.`,
     );
   }
 

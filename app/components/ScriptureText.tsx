@@ -154,6 +154,7 @@ export default function ScriptureText({
   readerVerseLabel,
   verseNumber,
   focusedTokenIndex,
+  interactionMode = "word",
 }: {
   text: string;
   reference?: string;
@@ -162,6 +163,7 @@ export default function ScriptureText({
   readerVerseLabel?: string;
   verseNumber?: number;
   focusedTokenIndex?: number | null;
+  interactionMode?: "word" | "plain";
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -173,6 +175,16 @@ export default function ScriptureText({
   const renderedText = sacredNames
     ? renderSacredNames(cleanedText, reference)
     : cleanedText;
+
+  /*
+   * Phase 1 verse-first mode.
+   *
+   * Preserve ScriptureText cleaning + sacred-name rendering,
+   * but do not construct English word tap targets.
+   */
+  if (interactionMode === "plain") {
+    return <>{renderedText}</>;
+  }
 
   const parsedReference = parseReference(reference);
   const parts = renderedText.split(/(\s+)/);

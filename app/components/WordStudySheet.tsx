@@ -27,6 +27,7 @@ import type {
 } from "@/app/data/lexicon/BibleIQTypes";
 
 type WordStudySheetProps = {
+  entityId?: string;
   word: string | null;
   book: string;
   chapter: number;
@@ -774,6 +775,7 @@ function summarizeRenderings(forms: BibleIQRenderingForm[]) {
 }
 
 export default function WordStudySheet({
+  entityId,
   word,
   book,
   chapter,
@@ -871,6 +873,7 @@ export default function WordStudySheet({
       try {
         const response = await fetch(
           `/api/word-study?${new URLSearchParams({
+            entityId: entityId ?? "",
             displayWord: activeWord,
             book,
             chapter: String(chapter),
