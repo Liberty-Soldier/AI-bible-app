@@ -55,22 +55,41 @@ async function loadChapter(
   chapter: number,
 ): Promise<ReaderChapter> {
   const baseUrl = await getBaseUrl();
+
   const fileUrl = `${baseUrl}/scripture/runtime/${translation}/${safeBook(
     book,
   )}/${chapter}.json`;
 
   try {
+    const incomingHeaders = await headers();
+
+    const fetchHeaders: Record<string, string> = {};
+
+    const cookie = incomingHeaders.get("cookie");
+    const authorization = incomingHeaders.get("authorization");
+
+    if (cookie) {
+      fetchHeaders.cookie = cookie;
+    }
+
+    if (authorization) {
+      fetchHeaders.authorization = authorization;
+    }
+
     const response = await fetch(fileUrl, {
       cache: "no-store",
+      headers: fetchHeaders,
     });
 
-    if (!response.ok) return { verses: [], superscriptions: [] };
+    if (!response.ok) {
+      return { verses: [], superscriptions: [] };
+    }
+
     return normalizeReaderChapter(await response.json());
   } catch {
     return { verses: [], superscriptions: [] };
   }
 }
-
 function getTranslationLabel(translation: Translation) {
   if (translation === "kjv") return "King James Version";
   if (translation === "brenton") return "Brenton Septuagint";
