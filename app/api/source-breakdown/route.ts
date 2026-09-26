@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import {
   isSourceBreakdownTranslation,
@@ -50,12 +50,26 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const runtimeHeaders: Record<string, string> = {};
+
+    const cookie = request.headers.get("cookie");
+    const authorization = request.headers.get("authorization");
+
+    if (cookie) {
+      runtimeHeaders.cookie = cookie;
+    }
+
+    if (authorization) {
+      runtimeHeaders.authorization = authorization;
+    }
+
     const result = await resolveSourceBreakdown({
       origin: request.nextUrl.origin,
       translation,
       book,
       chapter,
       verse,
+      requestHeaders: runtimeHeaders,
     });
 
     if (!result) {

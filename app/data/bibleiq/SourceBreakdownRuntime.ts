@@ -1,4 +1,4 @@
-﻿export type SourceBreakdownTranslation = "web" | "kjv" | "brenton";
+export type SourceBreakdownTranslation = "web" | "kjv" | "brenton";
 export type SourceBreakdownCorpus = "hebrew" | "greek-nt" | "lxx";
 
 export type SourceBreakdownOccurrence = {
@@ -124,9 +124,13 @@ function url(origin: string, relative: string) {
   );
 }
 
-async function loadJson<T>(target: string): Promise<T> {
+async function loadJson<T>(
+  target: string,
+  requestHeaders?: Record<string, string>
+): Promise<T> {
   const response = await fetch(target, {
     cache: "no-store",
+    headers: requestHeaders,
   });
 
   if (!response.ok) {
@@ -138,10 +142,14 @@ async function loadJson<T>(target: string): Promise<T> {
   return (await response.json()) as T;
 }
 
-async function getManifest(origin: string) {
+async function getManifest(
+  origin: string,
+  requestHeaders?: Record<string, string>
+) {
   if (!manifestPromise) {
     manifestPromise = loadJson<RuntimeManifest>(
-      url(origin, "manifest.json")
+      url(origin, "manifest.json"),
+      requestHeaders
     ).catch((error) => {
       manifestPromise = null;
       throw error;
@@ -151,10 +159,14 @@ async function getManifest(origin: string) {
   return manifestPromise;
 }
 
-async function getDisplay(origin: string) {
+async function getDisplay(
+  origin: string,
+  requestHeaders?: Record<string, string>
+) {
   if (!displayPromise) {
     displayPromise = loadJson<DisplayRuntime>(
-      url(origin, "display-index.json")
+      url(origin, "display-index.json"),
+      requestHeaders
     ).catch((error) => {
       displayPromise = null;
       throw error;
@@ -164,10 +176,13 @@ async function getDisplay(origin: string) {
   return displayPromise;
 }
 
-async function getLookup(origin: string) {
+async function getLookup(
+  origin: string,
+  requestHeaders?: Record<string, string>
+) {
   if (!lookupPromise) {
     lookupPromise = (async () => {
-      const runtime = await getDisplay(origin);
+      const runtime = await getDisplay(origin, requestHeaders);
       const lookup = new Map<string, DisplayIndexEntry>();
 
       for (const entry of Object.values(runtime.displayIndex || {})) {
@@ -207,13 +222,17 @@ async function getLookup(origin: string) {
   return lookupPromise;
 }
 
-async function getShard(origin: string, relative: string) {
+async function getShard(
+  origin: string,
+  relative: string,
+  requestHeaders?: Record<string, string>
+) {
   const target = url(origin, relative);
 
   let promise = shardPromises.get(target);
 
   if (!promise) {
-    promise = loadJson<SourceShard>(target).catch((error) => {
+    promise = loadJson<SourceShard>(target, requestHeaders).catch((error) => {
       shardPromises.delete(target);
       throw error;
     });
@@ -236,6 +255,7 @@ export async function resolveSourceBreakdown(args: {
   book: string;
   chapter: number;
   verse: string | number;
+  requestHeaders?: Record<string, string>;
 }): Promise<SourceBreakdownResult | null> {
   const chapter = Number(args.chapter);
 
@@ -249,8 +269,8 @@ export async function resolveSourceBreakdown(args: {
   }
 
   const [manifest, lookup] = await Promise.all([
-    getManifest(args.origin),
-    getLookup(args.origin),
+    getManifest(args.origin, args.requestHeaders),
+    getLookup(args.origin, args.requestHeaders),
   ]);
 
   const key = displayKey({
@@ -279,7 +299,11 @@ export async function resolveSourceBreakdown(args: {
       );
     }
 
-    const shard = await getShard(args.origin, location.file);
+    const shard = await getShard(
+      args.origin,
+      location.file,
+      args.requestHeaders
+    );
     const verse = shard.verses?.[location.key];
 
     if (!verse) {
