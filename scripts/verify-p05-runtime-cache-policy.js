@@ -16,7 +16,7 @@ const store = read("app/data/lexicon/WordStudyEntityStore.ts");
 const route = read("app/api/word-study/route.ts");
 
 assert(
-  store.includes('fetch(url, { cache: "no-store" })'),
+  /fetch\(url,\s*\{[\s\S]*?cache:\s*"no-store"[\s\S]*?\}\)/.test(store),
   "Runtime JSON fetch must bypass the cross-deployment data cache.",
 );
 
