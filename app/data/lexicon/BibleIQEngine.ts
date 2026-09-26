@@ -1361,12 +1361,17 @@ function buildPlaceholderEntity(
 export async function resolveBibleIQ(
   input: BibleIQRequest,
   origin: string,
+  requestHeaders?: Record<string, string>,
 ): Promise<BibleIQResponse> {
   const preferredSource = determinePreferredSource(input);
   const requestedEntityId = normalizeWordEntityId(input.entityId || "");
 
   if (requestedEntityId) {
-    const runtime = await loadWordStudyEntity(origin, requestedEntityId);
+    const runtime = await loadWordStudyEntity(
+      origin,
+      requestedEntityId,
+      requestHeaders,
+    );
 
     if (!runtime) {
       return {
@@ -1378,7 +1383,11 @@ export async function resolveBibleIQ(
       };
     }
 
-    const finalEmet = await loadFinalEmetRecord(origin, runtime.entityId);
+    const finalEmet = await loadFinalEmetRecord(
+      origin,
+      runtime.entityId,
+      requestHeaders,
+    );
     const directWord =
       input.displayWord?.trim() ||
       runtime.identity.lemma ||

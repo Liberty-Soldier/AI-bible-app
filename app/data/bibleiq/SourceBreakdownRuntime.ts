@@ -185,31 +185,73 @@ async function getLookup(
       const runtime = await getDisplay(origin, requestHeaders);
       const lookup = new Map<string, DisplayIndexEntry>();
 
+      const addLookup = (
+        key: string,
+        entry: DisplayIndexEntry,
+        strictConflict: boolean,
+      ) => {
+        const existing = lookup.get(key);
+
+        if (existing) {
+          const sameOwnership =
+            existing.corpus === entry.corpus &&
+            JSON.stringify(existing.sourceVerses) ===
+              JSON.stringify(entry.sourceVerses);
+
+          if (!sameOwnership && strictConflict) {
+            throw new Error(
+              `Conflicting Source Breakdown display ownership: ${key}`,
+            );
+          }
+
+          return;
+        }
+
+        lookup.set(key, entry);
+      };
+
       for (const entry of Object.values(runtime.displayIndex || {})) {
-        const key = displayKey({
+        const primaryKey = displayKey({
           translation: entry.translation,
           book: entry.displayedBook,
           chapter: entry.displayedChapter,
           verse: entry.displayedVerse,
         });
 
-        const existing = lookup.get(key);
+        addLookup(primaryKey, entry, true);
 
-        if (existing) {
-          if (
-            existing.corpus !== entry.corpus ||
-            JSON.stringify(existing.sourceVerses) !==
-              JSON.stringify(entry.sourceVerses)
-          ) {
-            throw new Error(
-              `Conflicting Source Breakdown display ownership: ${key}`
-            );
-          }
-
+        if (entry.translation !== "brenton") {
           continue;
         }
 
-        lookup.set(key, entry);
+        const sourceBooks = Array.from(
+          new Set(
+            (entry.sourceVerses || [])
+              .map((owner) => String(owner.book || "").trim())
+              .filter(Boolean),
+          ),
+        );
+
+        const normalizedSourceBooks = new Set(
+          sourceBooks.map((book) => normalizeBook(book)),
+        );
+
+        if (sourceBooks.length === 0 || normalizedSourceBooks.size !== 1) {
+          continue;
+        }
+
+        const canonicalBookKey = displayKey({
+          translation: entry.translation,
+          book: sourceBooks[0],
+          chapter: entry.displayedChapter,
+          verse: entry.displayedVerse,
+        });
+
+        if (canonicalBookKey !== primaryKey) {
+          // Alias collisions are intentionally fail-closed: preserve the
+          // native Brenton key and do not invent ambiguous ownership.
+          addLookup(canonicalBookKey, entry, false);
+        }
       }
 
       return lookup;

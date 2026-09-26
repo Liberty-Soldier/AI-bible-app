@@ -125,9 +125,13 @@ function runtimeUrl(origin: string, relativePath: string) {
 
 async function fetchJsonWithChecksum<T>(
   url: string,
+  requestHeaders?: Record<string, string>,
 ): Promise<FetchedJson<T> | null> {
   try {
-    const response = await fetch(url, { cache: "force-cache" });
+    const response = await fetch(url, {
+      cache: "force-cache",
+      headers: requestHeaders,
+    });
 
     if (!response.ok) {
       console.error(`P07 final EMET runtime returned ${response.status}: ${url}`);
@@ -162,8 +166,30 @@ function validateManifest(manifest: RuntimeManifest) {
   );
 }
 
-function loadManifest(origin: string) {
+function loadManifest(
+  origin: string,
+  requestHeaders?: Record<string, string>,
+) {
   const key = originKey(origin);
+
+  if (requestHeaders && Object.keys(requestHeaders).length > 0) {
+    return (async () => {
+      const fetched = await fetchJsonWithChecksum<RuntimeManifest>(
+        runtimeUrl(key, "manifest.json"),
+        requestHeaders,
+      );
+
+      if (!fetched) return null;
+
+      if (!validateManifest(fetched.data)) {
+        console.error("P07 final EMET runtime manifest validation failed.");
+        return null;
+      }
+
+      return fetched.data;
+    })();
+  }
+
   let pending = manifestCache.get(key);
 
   if (!pending) {
@@ -220,8 +246,42 @@ async function loadShard(
   corpus: BibleIQSource,
   shardId: string,
   meta: RuntimeShardMeta,
+  requestHeaders?: Record<string, string>,
 ) {
   const key = `${originKey(origin)}|${corpus}|${shardId}`;
+
+  if (requestHeaders && Object.keys(requestHeaders).length > 0) {
+    const fetched = await fetchJsonWithChecksum<RuntimeShard>(
+      runtimeUrl(originKey(origin), meta.file),
+      requestHeaders,
+    );
+
+    if (!fetched) return null;
+
+    if (fetched.byteChecksum !== meta.checksum) {
+      console.error(
+        `P07 final EMET shard checksum mismatch: ${corpus}/${shardId}`,
+      );
+      return null;
+    }
+
+    const shard = fetched.data;
+
+    if (
+      shard.version !== EXPECTED_RUNTIME_VERSION ||
+      shard.schemaVersion !== EXPECTED_SCHEMA_VERSION ||
+      shard.corpus !== corpus ||
+      shard.shard !== shardId
+    ) {
+      console.error(
+        `P07 final EMET shard identity mismatch: ${corpus}/${shardId}`,
+      );
+      return null;
+    }
+
+    return shard;
+  }
+
   let pending = shardCache.get(key);
 
   if (!pending) {
@@ -265,11 +325,12 @@ async function loadShard(
 export async function loadFinalEmetRecord(
   origin: string,
   entityId: string,
+  requestHeaders?: Record<string, string>,
 ): Promise<FinalEmetRuntimeRecord | null> {
   const corpus = corpusFromEntityId(entityId);
   if (!corpus) return null;
 
-  const manifest = await loadManifest(origin);
+  const manifest = await loadManifest(origin, requestHeaders);
   if (!manifest) return null;
 
   const shardId = shardIdForEntity(entityId, manifest.shardCount);
@@ -280,7 +341,13 @@ export async function loadFinalEmetRecord(
     return null;
   }
 
-  const shard = await loadShard(origin, corpus, shardId, shardMeta);
+  const shard = await loadShard(
+    origin,
+    corpus,
+    shardId,
+    shardMeta,
+    requestHeaders,
+  );
   const record = shard?.entities?.[entityId];
 
   if (!record) {

@@ -292,9 +292,15 @@ function runtimeUrl(origin: string, relativePath: string) {
   ).toString();
 }
 
-async function fetchJson<T>(url: string): Promise<T | null> {
+async function fetchJson<T>(
+  url: string,
+  requestHeaders?: Record<string, string>,
+): Promise<T | null> {
   try {
-    const response = await fetch(url, { cache: "no-store" });
+    const response = await fetch(url, {
+      cache: "no-store",
+      headers: requestHeaders,
+    });
 
     if (!response.ok) {
       console.error(`P05 runtime returned ${response.status}: ${url}`);
@@ -312,8 +318,19 @@ function originKey(origin: string) {
   return new URL(origin).origin;
 }
 
-function loadManifest(origin: string) {
+function loadManifest(
+  origin: string,
+  requestHeaders?: Record<string, string>,
+) {
   const key = originKey(origin);
+
+  if (requestHeaders && Object.keys(requestHeaders).length > 0) {
+    return fetchJson<RuntimeManifest>(
+      runtimeUrl(key, "manifest.json"),
+      requestHeaders,
+    );
+  }
+
   let pending = manifestCache.get(key);
 
   if (!pending) {
@@ -540,8 +557,17 @@ async function loadRuntimeShard(
   corpus: BibleIQSource,
   shardId: string,
   file: string,
+  requestHeaders?: Record<string, string>,
 ) {
   const key = `${originKey(origin)}|${corpus}|${shardId}`;
+
+  if (requestHeaders && Object.keys(requestHeaders).length > 0) {
+    return fetchJson<RuntimeShard>(
+      runtimeUrl(originKey(origin), file),
+      requestHeaders,
+    );
+  }
+
   let pending = shardCache.get(key);
 
   if (!pending) {
@@ -555,6 +581,7 @@ async function loadRuntimeShard(
 export async function loadWordStudyEntity(
   origin: string,
   entityId: string,
+  requestHeaders?: Record<string, string>,
 ): Promise<WordStudyRuntimeEntity | null> {
   const canonicalEntityId = normalizeWordEntityId(entityId);
   if (!canonicalEntityId) return null;
@@ -562,7 +589,7 @@ export async function loadWordStudyEntity(
   const corpus = corpusFromEntityId(canonicalEntityId);
   if (!corpus) return null;
 
-  const manifest = await loadManifest(origin);
+  const manifest = await loadManifest(origin, requestHeaders);
 
   if (
     !manifest ||
@@ -597,6 +624,7 @@ export async function loadWordStudyEntity(
     corpus,
     shardId,
     shardMeta.file,
+    requestHeaders,
   );
 
   if (

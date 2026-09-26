@@ -36,7 +36,24 @@ export async function GET(request: Request) {
       verseText: searchParams.get("verseText") || undefined,
     };
 
-    const result = await BibleIQEngine.resolve(input, origin);
+    const runtimeHeaders: Record<string, string> = {};
+
+    const cookie = request.headers.get("cookie");
+    const authorization = request.headers.get("authorization");
+
+    if (cookie) {
+      runtimeHeaders.cookie = cookie;
+    }
+
+    if (authorization) {
+      runtimeHeaders.authorization = authorization;
+    }
+
+    const result = await BibleIQEngine.resolve(
+      input,
+      origin,
+      runtimeHeaders,
+    );
 
     return NextResponse.json(result, {
       headers: {
