@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 
@@ -82,7 +82,7 @@ export default function SourceBreakdownVerse({
       parsed.chapter < 1
     ) {
       setError(
-        "Source Breakdown unavailable for this reference."
+        "Source Text unavailable for this reference."
       );
 
       return;
@@ -127,7 +127,7 @@ export default function SourceBreakdownVerse({
           "error" in json &&
             json.error
             ? json.error
-            : "Source Breakdown unavailable."
+            : "Source Text unavailable."
         );
       }
 
@@ -136,7 +136,7 @@ export default function SourceBreakdownVerse({
       setError(
         cause instanceof Error
           ? cause.message
-          : "Source Breakdown unavailable."
+          : "Source Text unavailable."
       );
     } finally {
       setLoading(false);
@@ -150,7 +150,7 @@ export default function SourceBreakdownVerse({
         onClick={openBreakdown}
         disabled={loading}
         aria-busy={loading}
-        aria-label={`Open source breakdown for ${reference}`}
+        aria-label={`Open source text for ${reference}`}
         className="inline cursor-pointer text-left align-baseline text-inherit disabled:cursor-wait disabled:opacity-70"
       >
         <ScriptureText

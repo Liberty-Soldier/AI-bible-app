@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import ScriptureText from "@/app/components/ScriptureText";
 import WordStudySheet from "@/app/components/WordStudySheet";
 
 import type {
@@ -16,8 +17,31 @@ type SourceBreakdownSheetProps = {
   onClose: () => void;
 };
 
+type SelectedEntityDetails = {
+  resolved?: boolean;
+  entity?: {
+    simple?: {
+      meaning?: string;
+    };
+    evidence?: {
+      originalLanguage?: {
+        transliteration?: string;
+        lemma?: string;
+        lemmaId?: string;
+        strong?: string;
+        partOfSpeech?: string;
+        morph?: string;
+      };
+      definitions?: {
+        short?: string;
+        usage?: string;
+      };
+    };
+  };
+};
+
 function corpusTitle(
-  corpus: SourceBreakdownResult["corpus"]
+  corpus: SourceBreakdownResult["corpus"],
 ) {
   if (corpus === "hebrew") {
     return "Hebrew Source";
@@ -30,8 +54,22 @@ function corpusTitle(
   return "Greek Septuagint";
 }
 
+function translationTitle(
+  translation: SourceBreakdownResult["translation"],
+) {
+  if (translation === "web") {
+    return "WEB";
+  }
+
+  if (translation === "kjv") {
+    return "KJV";
+  }
+
+  return "Brenton";
+}
+
 function lexicalLabel(
-  occurrence: SourceBreakdownOccurrence
+  occurrence: SourceBreakdownOccurrence,
 ) {
   const lexicalId =
     occurrence.lexicalId?.trim();
@@ -48,7 +86,7 @@ function lexicalLabel(
 }
 
 function occurrenceMorphology(
-  occurrence: SourceBreakdownOccurrence
+  occurrence: SourceBreakdownOccurrence,
 ) {
   return (
     occurrence.morphologyEnglish ||
@@ -57,98 +95,183 @@ function occurrenceMorphology(
   );
 }
 
-function OccurrenceContent({
+function canOpenWordOverview(
+  occurrence: SourceBreakdownOccurrence,
+) {
+  return Boolean(
+    occurrence.lexicalId &&
+      occurrence.entityId &&
+      !occurrence.grammarOnly,
+  );
+}
+
+function englishMeaning(
+  occurrence: SourceBreakdownOccurrence,
+  detail: SelectedEntityDetails | null,
+) {
+  return (
+    occurrence.meaning?.trim() ||
+    detail?.entity?.simple?.meaning?.trim() ||
+    detail?.entity?.evidence?.definitions?.short?.trim() ||
+    null
+  );
+}
+
+function SelectedWordDetails({
   occurrence,
+  detail,
+  detailLoading,
+  onOpenWordOverview,
 }: {
   occurrence: SourceBreakdownOccurrence;
+  detail: SelectedEntityDetails | null;
+  detailLoading: boolean;
+  onOpenWordOverview: (
+    occurrence: SourceBreakdownOccurrence,
+  ) => void;
 }) {
-  const morphology =
-    occurrenceMorphology(
-      occurrence
-    );
+  const sourceDetail =
+    detail?.entity?.evidence?.originalLanguage;
+
+  const meaning =
+    englishMeaning(occurrence, detail);
+
+  const transliteration =
+    occurrence.transliteration ||
+    sourceDetail?.transliteration ||
+    null;
+
+  const lemma =
+    occurrence.lemma ||
+    sourceDetail?.lemma ||
+    null;
 
   const lexical =
-    lexicalLabel(
-      occurrence
-    );
+    lexicalLabel(occurrence) ||
+    sourceDetail?.strong ||
+    sourceDetail?.lemmaId ||
+    null;
+
+  const morphology =
+    occurrenceMorphology(occurrence) ||
+    sourceDetail?.morph ||
+    null;
+
+  const partOfSpeech =
+    occurrence.partOfSpeech ||
+    sourceDetail?.partOfSpeech ||
+    null;
+
+  const hasFullWordOverview =
+    canOpenWordOverview(occurrence);
 
   return (
-    <>
-      <div className="flex items-start justify-between gap-4">
-        <div className="min-w-0">
-          <div
-            dir={
-              /[\u0590-\u05FF]/.test(
-                occurrence.surface
-              )
-                ? "rtl"
-                : "ltr"
-            }
-            className="text-2xl font-semibold leading-tight text-[var(--foreground)]"
-          >
-            {occurrence.surface}
-          </div>
-
-          {occurrence.transliteration ? (
-            <div className="mt-1 text-sm italic text-[var(--muted)]">
-              {occurrence.transliteration}
-            </div>
-          ) : null}
-        </div>
-
-        {lexical ? (
-          <span className="shrink-0 rounded-full border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-[11px] font-semibold text-[var(--muted)]">
-            {lexical}
-          </span>
-        ) : occurrence.grammarOnly ? (
-          <span className="shrink-0 rounded-full border border-[var(--border)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--muted)]">
-            Grammar
-          </span>
-        ) : null}
+    <div
+      className="emet-source-word-detail mt-5 border-t border-[var(--border)] pt-5"
+      aria-live="polite"
+    >
+      <div
+        dir={
+          /[\u0590-\u05FF]/.test(
+            occurrence.surface,
+          )
+            ? "rtl"
+            : "ltr"
+        }
+        className="text-3xl font-semibold leading-tight text-[var(--foreground)]"
+      >
+        {occurrence.surface}
       </div>
 
-      {occurrence.meaning ? (
-        <div className="mt-2 text-sm font-medium leading-relaxed text-[var(--foreground)]">
-          {occurrence.meaning}
+      {transliteration ? (
+        <div className="mt-1 text-sm italic text-[var(--muted)]">
+          {transliteration}
         </div>
       ) : null}
 
-      <div className="mt-2 space-y-1 text-xs leading-relaxed text-[var(--muted)]">
-        {occurrence.lemma ? (
-          <div>
-            <span className="font-semibold">
-              Lemma:
-            </span>{" "}
-            {occurrence.lemma}
+      {meaning ? (
+        <div className="mt-4">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+            English meaning
           </div>
+          <div className="mt-1 text-base font-medium leading-relaxed text-[var(--foreground)]">
+            {meaning}
+          </div>
+        </div>
+      ) : detailLoading ? (
+        <div className="mt-4 text-sm text-[var(--muted)]">
+          Loading English meaning...
+        </div>
+      ) : null}
+
+      <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm leading-relaxed">
+        {lemma ? (
+          <>
+            <dt className="font-semibold text-[var(--muted)]">
+              Lemma
+            </dt>
+            <dd className="min-w-0 text-[var(--foreground)]">
+              {lemma}
+            </dd>
+          </>
+        ) : null}
+
+        {lexical ? (
+          <>
+            <dt className="font-semibold text-[var(--muted)]">
+              Lexical
+            </dt>
+            <dd className="min-w-0 text-[var(--foreground)]">
+              {lexical}
+            </dd>
+          </>
+        ) : null}
+
+        {partOfSpeech ? (
+          <>
+            <dt className="font-semibold text-[var(--muted)]">
+              Part of speech
+            </dt>
+            <dd className="min-w-0 text-[var(--foreground)]">
+              {partOfSpeech}
+            </dd>
+          </>
         ) : null}
 
         {morphology ? (
-          <div>
-            <span className="font-semibold">
-              Morphology:
-            </span>{" "}
-            {morphology}
-          </div>
+          <>
+            <dt className="font-semibold text-[var(--muted)]">
+              Morphology
+            </dt>
+            <dd className="min-w-0 text-[var(--foreground)]">
+              {morphology}
+            </dd>
+          </>
         ) : null}
+      </dl>
 
-        {occurrence.partOfSpeech ? (
-          <div>
-            <span className="font-semibold">
-              Part of speech:
-            </span>{" "}
-            {occurrence.partOfSpeech}
-          </div>
-        ) : null}
+      {!hasFullWordOverview &&
+      occurrence.grammarOnly ? (
+        <div className="mt-4 text-sm text-[var(--muted)]">
+          This grammatical form has no standalone lexical entry.
+        </div>
+      ) : null}
 
-        {occurrence.grammarOnly &&
-        !occurrence.lexicalId ? (
-          <div>
-            No standalone lexical ID.
-          </div>
-        ) : null}
-      </div>
-    </>
+      {hasFullWordOverview ? (
+        <button
+          type="button"
+          onClick={() =>
+            onOpenWordOverview(occurrence)
+          }
+          className="mt-5 inline-flex items-center gap-1 border-b border-current pb-0.5 text-sm font-semibold text-[var(--foreground)] transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/40"
+        >
+          View full Word Overview
+          <span aria-hidden="true">
+            &rarr;
+          </span>
+        </button>
+      ) : null}
+    </div>
   );
 }
 
@@ -156,89 +279,124 @@ function SourceVerseBlock({
   sourceVerse,
   index,
   total,
+  selectedOccurrence,
+  selectedDetail,
+  selectedDetailLoading,
   onOccurrence,
+  onOpenWordOverview,
 }: {
   sourceVerse: SourceBreakdownSourceVerse;
   index: number;
   total: number;
+  selectedOccurrence: SourceBreakdownOccurrence | null;
+  selectedDetail: SelectedEntityDetails | null;
+  selectedDetailLoading: boolean;
   onOccurrence: (
-    occurrence: SourceBreakdownOccurrence
+    occurrence: SourceBreakdownOccurrence,
+  ) => void;
+  onOpenWordOverview: (
+    occurrence: SourceBreakdownOccurrence,
   ) => void;
 }) {
+  const isHebrew =
+    sourceVerse.source === "hebrew";
+
+  const selectedHere =
+    selectedOccurrence &&
+    sourceVerse.occurrences.some(
+      (occurrence) =>
+        occurrence.id ===
+        selectedOccurrence.id,
+    )
+      ? selectedOccurrence
+      : null;
+
   return (
-    <section className="border-t border-[var(--border)] py-5 first:border-t-0 first:pt-0">
-      <div className="mb-4 flex items-start justify-between gap-3">
-        <div>
-          {total > 1 ? (
-            <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-              Source verse {index + 1}
-            </div>
-          ) : null}
-
-          <div className="text-sm font-semibold text-[var(--foreground)]">
-            {sourceVerse.reference}
+    <section className="border-t border-[var(--border)] py-6 first:border-t-0 first:pt-0">
+      <div className="mb-4">
+        {total > 1 ? (
+          <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+            Source verse {index + 1}
           </div>
+        ) : null}
 
-          <div className="mt-1 text-xs text-[var(--muted)]">
-            {sourceVerse.witness}
-          </div>
+        <div className="text-sm font-semibold text-[var(--foreground)]">
+          {sourceVerse.reference}
         </div>
 
-        <div className="max-w-[48%] text-right text-[10px] uppercase tracking-wide text-[var(--muted)]">
-          {sourceVerse.orderAuthority}
+        <div className="mt-1 text-xs text-[var(--muted)]">
+          {sourceVerse.witness}
         </div>
       </div>
 
-      <div className="space-y-2.5">
+      <div
+        dir={isHebrew ? "rtl" : "ltr"}
+        lang={isHebrew ? "he" : "grc"}
+        className={
+          "emet-source-resolve text-[1.55rem] font-medium leading-[2.15] text-[var(--foreground)] " +
+          (isHebrew
+            ? "text-right"
+            : "text-left")
+        }
+      >
         {sourceVerse.occurrences.map(
-          (occurrence) => {
-            const lexical =
-              Boolean(
-                occurrence.lexicalId &&
-                  occurrence.entityId &&
-                  !occurrence.grammarOnly
-              );
-
-            if (!lexical) {
-              return (
-                <div
-                  key={occurrence.id}
-                  className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 p-4"
-                >
-                  <OccurrenceContent
-                    occurrence={
-                      occurrence
-                    }
-                  />
-                </div>
-              );
-            }
+          (occurrence, occurrenceIndex) => {
+            const selected =
+              selectedOccurrence?.id ===
+              occurrence.id;
 
             return (
-              <button
-                type="button"
+              <span
                 key={occurrence.id}
-                onClick={() =>
-                  onOccurrence(
-                    occurrence
-                  )
-                }
-                className="block w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)]/70 p-4 text-left transition hover:bg-[var(--surface)] active:scale-[0.995]"
+                className="inline"
               >
-                <OccurrenceContent
-                  occurrence={
-                    occurrence
+                <button
+                  type="button"
+                  data-source-word="true"
+                  aria-pressed={
+                    selected
+                      ? "true"
+                      : undefined
                   }
-                />
-
-                <div className="mt-3 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
-                  Open Word Overview →
-                </div>
-              </button>
+                  onClick={() =>
+                    onOccurrence(
+                      occurrence,
+                    )
+                  }
+                  className={
+                    "inline rounded-[0.22em] px-[0.08em] py-[0.03em] align-baseline text-inherit transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/45 " +
+                    (selected
+                      ? "emet-source-word-selected bg-amber-500/15 ring-1 ring-amber-500/30"
+                      : "hover:bg-amber-500/10")
+                  }
+                  style={{
+                    animationDelay:
+                      `${Math.min(
+                        occurrenceIndex * 8,
+                        96,
+                      )}ms`,
+                  }}
+                >
+                  {occurrence.surface}
+                </button>{" "}
+              </span>
             );
-          }
+          },
         )}
       </div>
+
+      {selectedHere ? (
+        <SelectedWordDetails
+          occurrence={selectedHere}
+          detail={selectedDetail}
+          detailLoading={
+            selectedDetailLoading
+          }
+          onOpenWordOverview={
+            onOpenWordOverview
+          }
+        />
+      ) : null}
     </section>
   );
 }
@@ -253,8 +411,30 @@ export default function SourceBreakdownSheet({
     setSelectedOccurrence,
   ] =
     useState<SourceBreakdownOccurrence | null>(
-      null
+      null,
     );
+
+  const [
+    wordOverviewOccurrence,
+    setWordOverviewOccurrence,
+  ] =
+    useState<SourceBreakdownOccurrence | null>(
+      null,
+    );
+
+  const [
+    selectedDetail,
+    setSelectedDetail,
+  ] =
+    useState<SelectedEntityDetails | null>(
+      null,
+    );
+
+  const [
+    selectedDetailLoading,
+    setSelectedDetailLoading,
+  ] =
+    useState(false);
 
   useEffect(() => {
     const scrollY =
@@ -299,20 +479,122 @@ export default function SourceBreakdownSheet({
 
       window.scrollTo(
         0,
-        scrollY
+        scrollY,
       );
     };
   }, []);
 
+  useEffect(() => {
+    if (
+      !selectedOccurrence?.entityId ||
+      !selectedOccurrence.lexicalId ||
+      selectedOccurrence.grammarOnly
+    ) {
+      setSelectedDetail(null);
+      setSelectedDetailLoading(false);
+      return;
+    }
+
+    const active =
+      selectedOccurrence;
+
+    const controller =
+      new AbortController();
+
+    setSelectedDetail(null);
+    setSelectedDetailLoading(true);
+
+    const query =
+      new URLSearchParams({
+        entityId:
+          active.entityId || "",
+        displayWord:
+          active.lexicalId || "",
+        book:
+          data.displayedReference.book,
+        chapter:
+          String(
+            data.displayedReference
+              .chapter,
+          ),
+        verse:
+          String(
+            data.displayedReference
+              .verse,
+          ),
+        translation:
+          data.translation,
+        selectedText:
+          active.surface,
+        originalWord:
+          active.surface,
+        verseText,
+      });
+
+    fetch(
+      `/api/word-study?${query.toString()}`,
+      {
+        cache: "no-store",
+        signal: controller.signal,
+      },
+    )
+      .then(async (response) => {
+        if (!response.ok) {
+          return null;
+        }
+
+        return (
+          (await response.json()) as
+            SelectedEntityDetails
+        );
+      })
+      .then((detail) => {
+        if (
+          detail?.resolved !== false
+        ) {
+          setSelectedDetail(detail);
+        }
+      })
+      .catch((error) => {
+        if (
+          error instanceof DOMException &&
+          error.name === "AbortError"
+        ) {
+          return;
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setSelectedDetailLoading(
+            false,
+          );
+        }
+      });
+
+    return () => {
+      controller.abort();
+    };
+  }, [
+    data.displayedReference.book,
+    data.displayedReference.chapter,
+    data.displayedReference.verse,
+    data.translation,
+    selectedOccurrence,
+    verseText,
+  ]);
+
   if (
-    selectedOccurrence &&
-    selectedOccurrence.lexicalId
+    wordOverviewOccurrence &&
+    wordOverviewOccurrence.lexicalId
   ) {
     return (
       <WordStudySheet
-        entityId={selectedOccurrence.entityId ?? undefined}
+        entityId={
+          wordOverviewOccurrence.entityId ??
+          undefined
+        }
         word={
-          selectedOccurrence.lexicalId
+          wordOverviewOccurrence.lexicalId
         }
         book={
           data.displayedReference.book
@@ -324,24 +606,24 @@ export default function SourceBreakdownSheet({
         verse={
           Number(
             data.displayedReference
-              .verse
+              .verse,
           )
         }
         translation={
           data.translation
         }
         selectedText={
-          selectedOccurrence.surface
+          wordOverviewOccurrence.surface
         }
         originalWord={
-          selectedOccurrence.surface
+          wordOverviewOccurrence.surface
         }
         verseText={
           verseText
         }
         onClose={() =>
-          setSelectedOccurrence(
-            null
+          setWordOverviewOccurrence(
+            null,
           )
         }
       />
@@ -352,12 +634,12 @@ export default function SourceBreakdownSheet({
     <div className="fixed inset-0 z-[65] overflow-hidden">
       <button
         type="button"
-        aria-label="Close Source Breakdown"
+        aria-label="Close Source Text"
         onClick={onClose}
         className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
       />
 
-      <section className="absolute bottom-0 left-1/2 flex max-h-[88dvh] w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl">
+      <section className="absolute bottom-0 left-1/2 flex max-h-[90dvh] w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl">
         <div className="flex shrink-0 justify-center pb-1 pt-3">
           <div className="h-1.5 w-11 rounded-full bg-[var(--border)]" />
         </div>
@@ -366,7 +648,7 @@ export default function SourceBreakdownSheet({
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--muted)]">
-                Source Breakdown
+                Source Text
               </div>
 
               <h2 className="mt-1 text-xl font-semibold tracking-tight">
@@ -387,7 +669,7 @@ export default function SourceBreakdownSheet({
 
               <div className="mt-1 text-sm text-[var(--muted)]">
                 {corpusTitle(
-                  data.corpus
+                  data.corpus,
                 )}
               </div>
             </div>
@@ -398,45 +680,158 @@ export default function SourceBreakdownSheet({
               onClick={onClose}
               className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-lg text-[var(--muted)]"
             >
-              ×
+              &times;
             </button>
           </div>
-
-          <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-            Original-language occurrences
-            are shown in canonical source
-            order. Tap a lexical word for
-            Word Overview.
-          </p>
         </header>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-5 overscroll-contain">
-          {data.sourceVerses.map(
-            (
-              sourceVerse,
-              index
-            ) => (
-              <SourceVerseBlock
-                key={
-                  sourceVerse.sourceKey ||
-                  `${sourceVerse.reference}-${index}`
+          <section className="pb-6">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+              English - {
+                translationTitle(
+                  data.translation,
+                )
+              }
+            </div>
+
+            <div className="mt-3 text-[1.05rem] leading-8 text-[var(--foreground)]">
+              <ScriptureText
+                text={verseText}
+                reference={`${data.displayedReference.book} ${data.displayedReference.chapter}:${data.displayedReference.verse}`}
+                verseNumber={
+                  Number(
+                    data.displayedReference
+                      .verse,
+                  )
                 }
-                sourceVerse={
-                  sourceVerse
-                }
-                index={index}
-                total={
-                  data.sourceVerses
-                    .length
-                }
-                onOccurrence={
-                  setSelectedOccurrence
-                }
+                interactionMode="plain"
               />
-            )
-          )}
+            </div>
+          </section>
+
+          <section className="border-t border-[var(--border)] pt-6">
+            <div className="mb-5">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+                Original Language
+              </div>
+
+              <div className="mt-1 text-sm text-[var(--muted)]">
+                Tap any source word for lexical details.
+              </div>
+            </div>
+
+            {data.sourceVerses.map(
+              (
+                sourceVerse,
+                index,
+              ) => (
+                <SourceVerseBlock
+                  key={
+                    sourceVerse.sourceKey ||
+                    `${sourceVerse.reference}-${index}`
+                  }
+                  sourceVerse={
+                    sourceVerse
+                  }
+                  index={index}
+                  total={
+                    data.sourceVerses
+                      .length
+                  }
+                  selectedOccurrence={
+                    selectedOccurrence
+                  }
+                  selectedDetail={
+                    selectedDetail
+                  }
+                  selectedDetailLoading={
+                    selectedDetailLoading
+                  }
+                  onOccurrence={
+                    setSelectedOccurrence
+                  }
+                  onOpenWordOverview={
+                    setWordOverviewOccurrence
+                  }
+                />
+              ),
+            )}
+          </section>
         </div>
       </section>
+
+      <style>{`
+        @keyframes emetSourceResolve {
+          0% {
+            opacity: 0.44;
+            filter: blur(1.35px) contrast(0.86);
+            text-shadow:
+              -0.8px 0 0 currentColor,
+              0.8px 0 0 currentColor,
+              0 0 2px currentColor;
+          }
+          55% {
+            opacity: 0.82;
+            filter: blur(0.4px) contrast(0.96);
+            text-shadow:
+              -0.3px 0 0 currentColor,
+              0.3px 0 0 currentColor;
+          }
+          100% {
+            opacity: 1;
+            filter: blur(0) contrast(1);
+            text-shadow: none;
+          }
+        }
+
+        @keyframes emetSourceWordResolve {
+          0% {
+            filter: blur(0.8px);
+            text-shadow:
+              -0.5px 0 0 currentColor,
+              0.5px 0 0 currentColor;
+          }
+          100% {
+            filter: blur(0);
+            text-shadow: none;
+          }
+        }
+
+        .emet-source-resolve {
+          animation:
+            emetSourceResolve
+            280ms
+            cubic-bezier(0.2, 0.75, 0.25, 1)
+            both;
+        }
+
+        .emet-source-word-selected {
+          animation:
+            emetSourceWordResolve
+            220ms
+            ease-out
+            both;
+        }
+
+        .emet-source-word-detail {
+          animation:
+            emetSourceResolve
+            220ms
+            ease-out
+            both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .emet-source-resolve,
+          .emet-source-word-selected,
+          .emet-source-word-detail {
+            animation: none !important;
+            filter: none !important;
+            text-shadow: none !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
