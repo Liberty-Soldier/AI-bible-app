@@ -303,7 +303,13 @@ export default function ScriptureText({
                         piece.availability.sourceWord,
                       );
                     }}
-                    style={{ textDecoration: "none" }}
+                    style={{
+                      textDecorationLine: "underline",
+                      textDecorationStyle: "dotted",
+                      textDecorationThickness: "1px",
+                      textUnderlineOffset: "3px",
+                      textDecorationColor: "var(--muted)",
+                    }}
                     className={
                       "inline rounded-[0.22em] px-[0.03em] text-inherit transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/45 active:bg-amber-500/10 " +
                       (functionWord
@@ -365,7 +371,13 @@ export default function ScriptureText({
                 availability.sourceWord,
               );
             }}
-            style={{ textDecoration: "none" }}
+            style={{
+                      textDecorationLine: "underline",
+                      textDecorationStyle: "dotted",
+                      textDecorationThickness: "1px",
+                      textUnderlineOffset: "3px",
+                      textDecorationColor: "var(--muted)",
+                    }}
             className={
               "inline rounded-[0.22em] px-[0.03em] text-inherit transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/45 active:bg-amber-500/10 " +
               (functionWord

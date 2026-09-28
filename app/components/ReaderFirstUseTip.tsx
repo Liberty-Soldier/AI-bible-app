@@ -54,12 +54,12 @@ export default function ReaderFirstUseTip() {
     >
       <span
         aria-hidden="true"
-        className="inline-block h-px w-7 shrink-0 bg-[var(--muted)]"
+        className="inline-block w-7 shrink-0 border-b border-dotted border-[var(--muted)]"
       />
 
       <p className="min-w-0 flex-1 text-xs leading-5 text-[var(--muted)]">
         <strong className="font-bold text-[var(--foreground)]">
-          Tap any verse to view its source text
+          Dotted words open source evidence
         </strong>
         <span aria-hidden="true"> · </span>
         Verse numbers open tools

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import ScriptureText from "@/app/components/ScriptureText";
 import SourceBreakdownSheet from "@/app/components/SourceBreakdownSheet";
 
 import type {
@@ -19,7 +18,7 @@ type SourceBreakdownVerseProps = {
 
 function parseDisplayedReference(
   reference: string,
-  fallbackVerse: number
+  fallbackVerse: number,
 ) {
   const dotMatch =
     reference.match(/^(.+)\.(\d+)\.([^.]+)$/);
@@ -73,7 +72,7 @@ export default function SourceBreakdownVerse({
     const parsed =
       parseDisplayedReference(
         reference,
-        verse
+        verse,
       );
 
     if (
@@ -82,9 +81,8 @@ export default function SourceBreakdownVerse({
       parsed.chapter < 1
     ) {
       setError(
-        "Source Text unavailable for this reference."
+        "Source Text unavailable for this reference.",
       );
-
       return;
     }
 
@@ -107,7 +105,7 @@ export default function SourceBreakdownVerse({
           `/api/source-breakdown?${query.toString()}`,
           {
             cache: "no-store",
-          }
+          },
         );
 
       const json =
@@ -127,7 +125,7 @@ export default function SourceBreakdownVerse({
           "error" in json &&
             json.error
             ? json.error
-            : "Source Text unavailable."
+            : "Source Text unavailable.",
         );
       }
 
@@ -136,7 +134,7 @@ export default function SourceBreakdownVerse({
       setError(
         cause instanceof Error
           ? cause.message
-          : "Source Text unavailable."
+          : "Source Text unavailable.",
       );
     } finally {
       setLoading(false);
@@ -147,24 +145,23 @@ export default function SourceBreakdownVerse({
     <>
       <button
         type="button"
-        onClick={openBreakdown}
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          void openBreakdown();
+        }}
         disabled={loading}
         aria-busy={loading}
         aria-label={`Open source text for ${reference}`}
-        className="inline cursor-pointer text-left align-baseline text-inherit disabled:cursor-wait disabled:opacity-70"
+        className="ml-2 inline-flex align-baseline text-[10px] font-semibold uppercase tracking-[0.13em] text-[var(--muted)] opacity-55 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/40 disabled:cursor-wait"
       >
-        <ScriptureText
-          text={verseText}
-          reference={reference}
-          verseNumber={verse}
-          interactionMode="plain"
-        />
+        Source
       </button>
 
       {error ? (
         <span
           role="status"
-          className="ml-2 text-xs text-[var(--muted)]"
+          className="ml-2 text-[10px] text-[var(--muted)]"
         >
           {error}
         </span>

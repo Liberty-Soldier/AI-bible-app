@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import ScriptureText from "@/app/components/ScriptureText";
 import WordStudySheet from "@/app/components/WordStudySheet";
 
 import type {
+  SourceBreakdownCorpus,
   SourceBreakdownOccurrence,
   SourceBreakdownResult,
   SourceBreakdownSourceVerse,
@@ -23,6 +24,18 @@ type SelectedEntityDetails = {
     simple?: {
       meaning?: string;
     };
+    entityEvidence?: {
+      renderings?: {
+        translations?: Array<{
+          translation?: string;
+          forms?: Array<{
+            text?: string;
+            count?: number;
+            translation?: string;
+          }>;
+        }>;
+      };
+    };
     evidence?: {
       originalLanguage?: {
         transliteration?: string;
@@ -39,6 +52,11 @@ type SelectedEntityDetails = {
     };
   };
 };
+
+type EntityDetailMap = Record<
+  string,
+  SelectedEntityDetails | null
+>;
 
 function corpusTitle(
   corpus: SourceBreakdownResult["corpus"],
@@ -105,25 +123,118 @@ function canOpenWordOverview(
   );
 }
 
-function englishMeaning(
+function displaySourceSurface(
+  occurrence: SourceBreakdownOccurrence,
+  corpus: SourceBreakdownCorpus,
+) {
+  const surface =
+    String(occurrence.surface || "").trim();
+
+  if (corpus !== "hebrew") {
+    return surface;
+  }
+
+  return surface
+    .replace(/[\/\\]+/gu, "")
+    .replace(/\u2060/gu, "")
+    .trim();
+}
+
+function safeOccurrenceMeaning(
+  occurrence: SourceBreakdownOccurrence,
+) {
+  const value =
+    occurrence.meaning?.trim();
+
+  if (!value) {
+    return null;
+  }
+
+  if (
+    /^[A-Z]{1,4}[A-Za-z0-9]{2,}$/u.test(
+      value,
+    ) &&
+    !/\s/u.test(value)
+  ) {
+    return null;
+  }
+
+  return value;
+}
+
+function translationRendering(
+  detail: SelectedEntityDetails | null,
+  translation: SourceBreakdownResult["translation"],
+) {
+  const groups =
+    detail?.entity?.entityEvidence
+      ?.renderings?.translations || [];
+
+  const wanted =
+    String(translation).toLowerCase();
+
+  const exact =
+    groups.find(
+      (group) =>
+        String(
+          group.translation || "",
+        ).toLowerCase() === wanted,
+    ) ||
+    null;
+
+  const exactText =
+    exact?.forms
+      ?.map((form) =>
+        String(form.text || "").trim(),
+      )
+      .find(Boolean) ||
+    null;
+
+  if (exactText) {
+    return exactText;
+  }
+
+  return (
+    groups
+      .flatMap((group) =>
+        group.forms || [],
+      )
+      .map((form) =>
+        String(form.text || "").trim(),
+      )
+      .find(Boolean) ||
+    null
+  );
+}
+
+function englishRendering(
   occurrence: SourceBreakdownOccurrence,
   detail: SelectedEntityDetails | null,
+  translation: SourceBreakdownResult["translation"],
 ) {
   return (
-    occurrence.meaning?.trim() ||
-    detail?.entity?.simple?.meaning?.trim() ||
+    safeOccurrenceMeaning(occurrence) ||
+    translationRendering(
+      detail,
+      translation,
+    ) ||
     detail?.entity?.evidence?.definitions?.short?.trim() ||
+    detail?.entity?.simple?.meaning?.trim() ||
     null
   );
 }
 
 function SelectedWordDetails({
   occurrence,
+  corpus,
+  translation,
   detail,
   detailLoading,
   onOpenWordOverview,
 }: {
   occurrence: SourceBreakdownOccurrence;
+  corpus: SourceBreakdownCorpus;
+  translation: SourceBreakdownResult["translation"];
   detail: SelectedEntityDetails | null;
   detailLoading: boolean;
   onOpenWordOverview: (
@@ -134,7 +245,11 @@ function SelectedWordDetails({
     detail?.entity?.evidence?.originalLanguage;
 
   const meaning =
-    englishMeaning(occurrence, detail);
+    englishRendering(
+      occurrence,
+      detail,
+      translation,
+    );
 
   const transliteration =
     occurrence.transliteration ||
@@ -172,15 +287,16 @@ function SelectedWordDetails({
     >
       <div
         dir={
-          /[\u0590-\u05FF]/.test(
-            occurrence.surface,
-          )
+          corpus === "hebrew"
             ? "rtl"
             : "ltr"
         }
         className="text-3xl font-semibold leading-tight text-[var(--foreground)]"
       >
-        {occurrence.surface}
+        {displaySourceSurface(
+          occurrence,
+          corpus,
+        )}
       </div>
 
       {transliteration ? (
@@ -192,7 +308,7 @@ function SelectedWordDetails({
       {meaning ? (
         <div className="mt-4">
           <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
-            English meaning
+            English rendering
           </div>
           <div className="mt-1 text-base font-medium leading-relaxed text-[var(--foreground)]">
             {meaning}
@@ -200,7 +316,7 @@ function SelectedWordDetails({
         </div>
       ) : detailLoading ? (
         <div className="mt-4 text-sm text-[var(--muted)]">
-          Loading English meaning...
+          Loading English rendering...
         </div>
       ) : null}
 
@@ -279,18 +395,18 @@ function SourceVerseBlock({
   sourceVerse,
   index,
   total,
+  translation,
+  entityDetails,
   selectedOccurrence,
-  selectedDetail,
-  selectedDetailLoading,
   onOccurrence,
   onOpenWordOverview,
 }: {
   sourceVerse: SourceBreakdownSourceVerse;
   index: number;
   total: number;
+  translation: SourceBreakdownResult["translation"];
+  entityDetails: EntityDetailMap;
   selectedOccurrence: SourceBreakdownOccurrence | null;
-  selectedDetail: SelectedEntityDetails | null;
-  selectedDetailLoading: boolean;
   onOccurrence: (
     occurrence: SourceBreakdownOccurrence,
   ) => void;
@@ -310,6 +426,24 @@ function SourceVerseBlock({
     )
       ? selectedOccurrence
       : null;
+
+  const selectedEntityId =
+    selectedHere?.entityId || "";
+
+  const selectedDetail =
+    selectedEntityId
+      ? entityDetails[selectedEntityId] ??
+        null
+      : null;
+
+  const selectedDetailLoading =
+    Boolean(
+      selectedEntityId &&
+        !Object.prototype.hasOwnProperty.call(
+          entityDetails,
+          selectedEntityId,
+        ),
+    );
 
   return (
     <section className="border-t border-[var(--border)] py-6 first:border-t-0 first:pt-0">
@@ -333,10 +467,10 @@ function SourceVerseBlock({
         dir={isHebrew ? "rtl" : "ltr"}
         lang={isHebrew ? "he" : "grc"}
         className={
-          "emet-source-resolve text-[1.55rem] font-medium leading-[2.15] text-[var(--foreground)] " +
+          "flex flex-wrap items-start gap-x-3 gap-y-4 " +
           (isHebrew
-            ? "text-right"
-            : "text-left")
+            ? "justify-start text-right"
+            : "justify-start text-left")
         }
       >
         {sourceVerse.occurrences.map(
@@ -345,41 +479,85 @@ function SourceVerseBlock({
               selectedOccurrence?.id ===
               occurrence.id;
 
+            const entityId =
+              occurrence.entityId || "";
+
+            const detail =
+              entityId
+                ? entityDetails[entityId] ??
+                  null
+                : null;
+
+            const detailLoaded =
+              Boolean(
+                entityId &&
+                  Object.prototype.hasOwnProperty.call(
+                    entityDetails,
+                    entityId,
+                  ),
+              );
+
+            const rendering =
+              englishRendering(
+                occurrence,
+                detail,
+                translation,
+              );
+
             return (
-              <span
+              <button
+                type="button"
                 key={occurrence.id}
-                className="inline"
+                data-source-word="true"
+                aria-pressed={
+                  selected
+                    ? "true"
+                    : undefined
+                }
+                onClick={() =>
+                  onOccurrence(
+                    occurrence,
+                  )
+                }
+                className={
+                  "emet-source-word-reveal inline-flex min-w-[2.25rem] max-w-[8.5rem] flex-col items-center rounded-lg px-1.5 py-1 text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/45 " +
+                  (selected
+                    ? "emet-source-word-selected bg-amber-500/15 ring-1 ring-amber-500/30"
+                    : "hover:bg-amber-500/10")
+                }
+                style={{
+                  animationDelay:
+                    `${Math.min(
+                      occurrenceIndex * 14,
+                      140,
+                    )}ms`,
+                }}
               >
-                <button
-                  type="button"
-                  data-source-word="true"
-                  aria-pressed={
-                    selected
-                      ? "true"
-                      : undefined
+                <span
+                  dir={
+                    isHebrew
+                      ? "rtl"
+                      : "ltr"
                   }
-                  onClick={() =>
-                    onOccurrence(
-                      occurrence,
-                    )
-                  }
-                  className={
-                    "inline rounded-[0.22em] px-[0.08em] py-[0.03em] align-baseline text-inherit transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/45 " +
-                    (selected
-                      ? "emet-source-word-selected bg-amber-500/15 ring-1 ring-amber-500/30"
-                      : "hover:bg-amber-500/10")
-                  }
-                  style={{
-                    animationDelay:
-                      `${Math.min(
-                        occurrenceIndex * 8,
-                        96,
-                      )}ms`,
-                  }}
+                  className="text-[1.48rem] font-medium leading-tight text-[var(--foreground)]"
                 >
-                  {occurrence.surface}
-                </button>{" "}
-              </span>
+                  {displaySourceSurface(
+                    occurrence,
+                    sourceVerse.source,
+                  )}
+                </span>
+
+                <span
+                  dir="ltr"
+                  className="mt-1 max-w-full text-[11px] font-medium leading-tight text-[var(--muted)]"
+                >
+                  {rendering ||
+                    (entityId &&
+                    !detailLoaded
+                      ? "..."
+                      : "â€”")}
+                </span>
+              </button>
             );
           },
         )}
@@ -388,6 +566,8 @@ function SourceVerseBlock({
       {selectedHere ? (
         <SelectedWordDetails
           occurrence={selectedHere}
+          corpus={sourceVerse.source}
+          translation={translation}
           detail={selectedDetail}
           detailLoading={
             selectedDetailLoading
@@ -423,18 +603,41 @@ export default function SourceBreakdownSheet({
     );
 
   const [
-    selectedDetail,
-    setSelectedDetail,
+    entityDetails,
+    setEntityDetails,
   ] =
-    useState<SelectedEntityDetails | null>(
-      null,
-    );
+    useState<EntityDetailMap>({});
 
-  const [
-    selectedDetailLoading,
-    setSelectedDetailLoading,
-  ] =
-    useState(false);
+  const uniqueEntityOccurrences =
+    useMemo(() => {
+      const byEntity =
+        new Map<
+          string,
+          SourceBreakdownOccurrence
+        >();
+
+      for (const sourceVerse of data.sourceVerses) {
+        for (const occurrence of sourceVerse.occurrences) {
+          if (
+            occurrence.entityId &&
+            occurrence.lexicalId &&
+            !occurrence.grammarOnly &&
+            !byEntity.has(
+              occurrence.entityId,
+            )
+          ) {
+            byEntity.set(
+              occurrence.entityId,
+              occurrence,
+            );
+          }
+        }
+      }
+
+      return Array.from(
+        byEntity.values(),
+      );
+    }, [data.sourceVerses]);
 
   useEffect(() => {
     const scrollY =
@@ -485,101 +688,127 @@ export default function SourceBreakdownSheet({
   }, []);
 
   useEffect(() => {
-    if (
-      !selectedOccurrence?.entityId ||
-      !selectedOccurrence.lexicalId ||
-      selectedOccurrence.grammarOnly
-    ) {
-      setSelectedDetail(null);
-      setSelectedDetailLoading(false);
-      return;
-    }
-
-    const active =
-      selectedOccurrence;
-
     const controller =
       new AbortController();
 
-    setSelectedDetail(null);
-    setSelectedDetailLoading(true);
+    setEntityDetails({});
 
-    const query =
-      new URLSearchParams({
-        entityId:
-          active.entityId || "",
-        displayWord:
-          active.lexicalId || "",
-        book:
-          data.displayedReference.book,
-        chapter:
-          String(
-            data.displayedReference
-              .chapter,
+    async function loadEntityDetails() {
+      const results =
+        await Promise.all(
+          uniqueEntityOccurrences.map(
+            async (occurrence) => {
+              const entityId =
+                occurrence.entityId || "";
+
+              const query =
+                new URLSearchParams({
+                  entityId,
+                  displayWord:
+                    occurrence.lexicalId ||
+                    entityId,
+                  book:
+                    data.displayedReference.book,
+                  chapter:
+                    String(
+                      data.displayedReference
+                        .chapter,
+                    ),
+                  verse:
+                    String(
+                      data.displayedReference
+                        .verse,
+                    ),
+                  translation:
+                    data.translation,
+                  selectedText:
+                    displaySourceSurface(
+                      occurrence,
+                      data.corpus,
+                    ),
+                  originalWord:
+                    occurrence.surface,
+                  verseText,
+                });
+
+              try {
+                const response =
+                  await fetch(
+                    `/api/word-study?${query.toString()}`,
+                    {
+                      cache: "no-store",
+                      signal:
+                        controller.signal,
+                    },
+                  );
+
+                if (!response.ok) {
+                  return [
+                    entityId,
+                    null,
+                  ] as const;
+                }
+
+                const json =
+                  (await response.json()) as
+                    SelectedEntityDetails;
+
+                return [
+                  entityId,
+                  json.resolved === false
+                    ? null
+                    : json,
+                ] as const;
+              } catch (error) {
+                if (
+                  error instanceof DOMException &&
+                  error.name === "AbortError"
+                ) {
+                  return null;
+                }
+
+                return [
+                  entityId,
+                  null,
+                ] as const;
+              }
+            },
           ),
-        verse:
-          String(
-            data.displayedReference
-              .verse,
-          ),
-        translation:
-          data.translation,
-        selectedText:
-          active.surface,
-        originalWord:
-          active.surface,
-        verseText,
-      });
-
-    fetch(
-      `/api/word-study?${query.toString()}`,
-      {
-        cache: "no-store",
-        signal: controller.signal,
-      },
-    )
-      .then(async (response) => {
-        if (!response.ok) {
-          return null;
-        }
-
-        return (
-          (await response.json()) as
-            SelectedEntityDetails
         );
-      })
-      .then((detail) => {
-        if (
-          detail?.resolved !== false
-        ) {
-          setSelectedDetail(detail);
+
+      if (
+        controller.signal.aborted
+      ) {
+        return;
+      }
+
+      const next: EntityDetailMap =
+        {};
+
+      for (const result of results) {
+        if (!result) {
+          continue;
         }
-      })
-      .catch((error) => {
-        if (
-          error instanceof DOMException &&
-          error.name === "AbortError"
-        ) {
-          return;
-        }
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) {
-          setSelectedDetailLoading(
-            false,
-          );
-        }
-      });
+
+        next[result[0]] =
+          result[1];
+      }
+
+      setEntityDetails(next);
+    }
+
+    void loadEntityDetails();
 
     return () => {
       controller.abort();
     };
   }, [
+    data.corpus,
     data.displayedReference.book,
     data.displayedReference.chapter,
     data.displayedReference.verse,
     data.translation,
-    selectedOccurrence,
+    uniqueEntityOccurrences,
     verseText,
   ]);
 
@@ -587,6 +816,12 @@ export default function SourceBreakdownSheet({
     wordOverviewOccurrence &&
     wordOverviewOccurrence.lexicalId
   ) {
+    const overviewSurface =
+      displaySourceSurface(
+        wordOverviewOccurrence,
+        data.corpus,
+      );
+
     return (
       <WordStudySheet
         entityId={
@@ -613,10 +848,10 @@ export default function SourceBreakdownSheet({
           data.translation
         }
         selectedText={
-          wordOverviewOccurrence.surface
+          overviewSurface
         }
         originalWord={
-          wordOverviewOccurrence.surface
+          overviewSurface
         }
         verseText={
           verseText
@@ -717,7 +952,7 @@ export default function SourceBreakdownSheet({
               </div>
 
               <div className="mt-1 text-sm text-[var(--muted)]">
-                Tap any source word for lexical details.
+                English renderings appear under each source word. Tap a source word for lexical details.
               </div>
             </div>
 
@@ -739,14 +974,14 @@ export default function SourceBreakdownSheet({
                     data.sourceVerses
                       .length
                   }
+                  translation={
+                    data.translation
+                  }
+                  entityDetails={
+                    entityDetails
+                  }
                   selectedOccurrence={
                     selectedOccurrence
-                  }
-                  selectedDetail={
-                    selectedDetail
-                  }
-                  selectedDetailLoading={
-                    selectedDetailLoading
                   }
                   onOccurrence={
                     setSelectedOccurrence
@@ -762,35 +997,37 @@ export default function SourceBreakdownSheet({
       </section>
 
       <style>{`
-        @keyframes emetSourceResolve {
+        @keyframes emetSourceWordReveal {
           0% {
-            opacity: 0.44;
-            filter: blur(1.35px) contrast(0.86);
+            opacity: 0.28;
+            filter: blur(1.75px) contrast(0.78);
             text-shadow:
-              -0.8px 0 0 currentColor,
-              0.8px 0 0 currentColor,
+              -1px 0 0 currentColor,
+              1px 0 0 currentColor,
               0 0 2px currentColor;
+            transform: translateY(1px);
           }
-          55% {
+          58% {
             opacity: 0.82;
-            filter: blur(0.4px) contrast(0.96);
+            filter: blur(0.45px) contrast(0.96);
             text-shadow:
-              -0.3px 0 0 currentColor,
-              0.3px 0 0 currentColor;
+              -0.35px 0 0 currentColor,
+              0.35px 0 0 currentColor;
           }
           100% {
             opacity: 1;
             filter: blur(0) contrast(1);
             text-shadow: none;
+            transform: translateY(0);
           }
         }
 
         @keyframes emetSourceWordResolve {
           0% {
-            filter: blur(0.8px);
+            filter: blur(0.9px);
             text-shadow:
-              -0.5px 0 0 currentColor,
-              0.5px 0 0 currentColor;
+              -0.55px 0 0 currentColor,
+              0.55px 0 0 currentColor;
           }
           100% {
             filter: blur(0);
@@ -798,10 +1035,10 @@ export default function SourceBreakdownSheet({
           }
         }
 
-        .emet-source-resolve {
+        .emet-source-word-reveal {
           animation:
-            emetSourceResolve
-            280ms
+            emetSourceWordReveal
+            340ms
             cubic-bezier(0.2, 0.75, 0.25, 1)
             both;
         }
@@ -809,26 +1046,27 @@ export default function SourceBreakdownSheet({
         .emet-source-word-selected {
           animation:
             emetSourceWordResolve
-            220ms
+            240ms
             ease-out
             both;
         }
 
         .emet-source-word-detail {
           animation:
-            emetSourceResolve
-            220ms
+            emetSourceWordResolve
+            240ms
             ease-out
             both;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .emet-source-resolve,
+          .emet-source-word-reveal,
           .emet-source-word-selected,
           .emet-source-word-detail {
             animation: none !important;
             filter: none !important;
             text-shadow: none !important;
+            transform: none !important;
           }
         }
       `}</style>
