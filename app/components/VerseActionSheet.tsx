@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SelectedVerse } from "@/app/components/VerseActionController";
+import SourceBreakdownVerse from "@/app/components/SourceBreakdownVerse";
 import {
   areAllBookmarked,
   highlightVerses,
@@ -480,6 +481,20 @@ export default function VerseActionSheet({
                   <ActionButton onClick={() => setNoteOpen((v) => !v)}>
                     Note
                   </ActionButton>
+
+                  {verses.length === 1 ? (
+                    <SourceBreakdownVerse
+                      reference={firstVerse.reference}
+                      verse={firstVerse.verse}
+                      translation={
+                        firstVerse.translation as
+                          | "web"
+                          | "kjv"
+                          | "brenton"
+                      }
+                      verseText={firstVerse.text}
+                    />
+                  ) : null}
                 </div>
               </div>
             )}

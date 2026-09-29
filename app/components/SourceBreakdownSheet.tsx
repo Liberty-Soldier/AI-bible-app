@@ -833,50 +833,52 @@ export default function SourceBreakdownSheet({
       );
 
     return (
-      <WordStudySheet
-        entityId={
-          wordOverviewOccurrence.entityId ??
-          undefined
-        }
-        word={
-          overviewSurface
-        }
-        book={
-          data.displayedReference.book
-        }
-        chapter={
-          data.displayedReference
-            .chapter
-        }
-        verse={
-          Number(
+      <div className="fixed inset-0 z-[110]">
+        <WordStudySheet
+          entityId={
+            wordOverviewOccurrence.entityId ??
+            undefined
+          }
+          word={
+            overviewSurface
+          }
+          book={
+            data.displayedReference.book
+          }
+          chapter={
             data.displayedReference
-              .verse,
-          )
-        }
-        translation={
-          data.translation
-        }
-        selectedText={
-          overviewSurface
-        }
-        originalWord={
-          overviewSurface
-        }
-        verseText={
-          verseText
-        }
-        onClose={() =>
-          setWordOverviewOccurrence(
-            null,
-          )
-        }
-      />
+              .chapter
+          }
+          verse={
+            Number(
+              data.displayedReference
+                .verse,
+            )
+          }
+          translation={
+            data.translation
+          }
+          selectedText={
+            overviewSurface
+          }
+          originalWord={
+            overviewSurface
+          }
+          verseText={
+            verseText
+          }
+          onClose={() =>
+            setWordOverviewOccurrence(
+              null,
+            )
+          }
+        />
+      </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-[65] overflow-hidden">
+    <div className="fixed inset-0 z-[100] overflow-hidden">
       <button
         type="button"
         aria-label="Close Source Text"

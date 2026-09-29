@@ -21,23 +21,29 @@ function parseDisplayedReference(
   fallbackVerse: number,
 ) {
   const dotMatch =
-    reference.match(/^(.+)\.(\d+)\.([^.]+)$/);
+    reference.match(
+      /^(.+)\.(\d+)\.([^.]+)$/,
+    );
 
   if (dotMatch) {
     return {
       book: dotMatch[1],
-      chapter: Number(dotMatch[2]),
+      chapter:
+        Number(dotMatch[2]),
       verse: dotMatch[3],
     };
   }
 
   const humanMatch =
-    reference.match(/^(.+?)\s+(\d+):(.+)$/);
+    reference.match(
+      /^(.+?)\s+(\d+):(.+)$/,
+    );
 
   if (humanMatch) {
     return {
       book: humanMatch[1],
-      chapter: Number(humanMatch[2]),
+      chapter:
+        Number(humanMatch[2]),
       verse: humanMatch[3],
     };
   }
@@ -45,7 +51,8 @@ function parseDisplayedReference(
   return {
     book: "",
     chapter: 0,
-    verse: String(fallbackVerse),
+    verse:
+      String(fallbackVerse),
   };
 }
 
@@ -55,14 +62,27 @@ export default function SourceBreakdownVerse({
   translation,
   verseText,
 }: SourceBreakdownVerseProps) {
-  const [breakdown, setBreakdown] =
-    useState<SourceBreakdownResult | null>(null);
+  const [
+    breakdown,
+    setBreakdown,
+  ] =
+    useState<SourceBreakdownResult | null>(
+      null,
+    );
 
-  const [loading, setLoading] =
+  const [
+    loading,
+    setLoading,
+  ] =
     useState(false);
 
-  const [error, setError] =
-    useState<string | null>(null);
+  const [
+    error,
+    setError,
+  ] =
+    useState<string | null>(
+      null,
+    );
 
   async function openBreakdown() {
     if (loading) {
@@ -77,12 +97,15 @@ export default function SourceBreakdownVerse({
 
     if (
       !parsed.book ||
-      !Number.isFinite(parsed.chapter) ||
+      !Number.isFinite(
+        parsed.chapter,
+      ) ||
       parsed.chapter < 1
     ) {
       setError(
         "Source Text unavailable for this reference.",
       );
+
       return;
     }
 
@@ -95,7 +118,9 @@ export default function SourceBreakdownVerse({
           translation,
           book: parsed.book,
           chapter:
-            String(parsed.chapter),
+            String(
+              parsed.chapter,
+            ),
           verse:
             String(parsed.verse),
         });
@@ -142,27 +167,28 @@ export default function SourceBreakdownVerse({
   }
 
   return (
-    <>
+    <div className="contents">
       <button
         type="button"
-        onClick={(event) => {
-          event.preventDefault();
-          event.stopPropagation();
+        onClick={() => {
           void openBreakdown();
         }}
         disabled={loading}
         aria-busy={loading}
-        aria-label={`Open source text for ${reference}`}
-        className="ml-1 inline-flex min-h-6 min-w-6 items-center justify-center rounded-full align-super text-[9px] font-semibold tracking-tight text-[var(--muted)] opacity-45 transition hover:bg-[var(--surface)] hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/40 disabled:cursor-wait"
-      >`n        <span aria-hidden="true">{"\u05D0\u00B7\u03B1"}</span>`n      </button>
+        className="min-h-11 rounded-xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
+      >
+        {loading
+          ? "Loading..."
+          : "Source Text"}
+      </button>
 
       {error ? (
-        <span
+        <div
           role="status"
-          className="ml-2 text-[10px] text-[var(--muted)]"
+          className="col-span-2 rounded-xl border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)]"
         >
           {error}
-        </span>
+        </div>
       ) : null}
 
       {breakdown ? (
@@ -174,6 +200,6 @@ export default function SourceBreakdownVerse({
           }
         />
       ) : null}
-    </>
+    </div>
   );
 }

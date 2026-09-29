@@ -2,7 +2,6 @@
 
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
 import ScriptureText from "@/app/components/ScriptureText";
-import SourceBreakdownVerse from "@/app/components/SourceBreakdownVerse";
 import {
   buildReaderChapterItems,
   compareReaderVerses,
@@ -217,17 +216,6 @@ export default function VerseActionController({
                 {verseLabel}
               </button>
 
-              <SourceBreakdownVerse
-                reference={verse.reference}
-                verse={verse.verse}
-                translation={
-                  activeTranslation as
-                    | "web"
-                    | "kjv"
-                    | "brenton"
-                }
-                verseText={selectedText}
-              />
 
               <ScriptureText
                 text={selectedText}
