@@ -190,21 +190,112 @@ export default function ScriptureText({
   const parts = renderedText.split(/(\s+)/);
   let displayTokenIndex = 0;
 
+  /*
+   * Phase-1 ownership is English SPAN <-> canonical SOURCE SEGMENT.
+   * Only canonical rendering bounds already carried by availability
+   * are honored here. No new alignment is inferred in the UI.
+   */
+  function ownedEnglishSpan(
+    fallbackWord: string,
+    tokenIndex: number,
+    availability?: unknown,
+  ) {
+    const approvedWord = cleanWord(fallbackWord);
+    if (!approvedWord) return "";
+
+    const candidate = availability as
+      | {
+          sourceSegment?: {
+            renderingStartTokenIndex?: number;
+            renderingEndTokenIndex?: number;
+          };
+          route?: {
+            sourceSegment?: {
+              renderingStartTokenIndex?: number;
+              renderingEndTokenIndex?: number;
+            };
+          };
+          v2Route?: {
+            sourceSegment?: {
+              renderingStartTokenIndex?: number;
+              renderingEndTokenIndex?: number;
+            };
+          };
+          sourceRoutes?: Array<{
+            sourceSegment?: {
+              renderingStartTokenIndex?: number;
+              renderingEndTokenIndex?: number;
+            };
+          }>;
+          routes?: Array<{
+            sourceSegment?: {
+              renderingStartTokenIndex?: number;
+              renderingEndTokenIndex?: number;
+            };
+          }>;
+        }
+      | undefined;
+
+    const segment =
+      candidate?.sourceSegment ||
+      candidate?.route?.sourceSegment ||
+      candidate?.v2Route?.sourceSegment ||
+      candidate?.sourceRoutes?.[0]?.sourceSegment ||
+      candidate?.routes?.[0]?.sourceSegment ||
+      null;
+
+    const start = segment?.renderingStartTokenIndex;
+    const end = segment?.renderingEndTokenIndex;
+
+    if (
+      !Number.isInteger(start) ||
+      !Number.isInteger(end) ||
+      Number(start) < 0 ||
+      Number(end) < Number(start) ||
+      tokenIndex < Number(start) ||
+      tokenIndex > Number(end)
+    ) {
+      return approvedWord;
+    }
+
+    const verseTokens = renderedText
+      .split(/\s+/u)
+      .map((token) => token.trim())
+      .filter((token) => token && /[\p{L}\p{N}]/u.test(token));
+
+    if (Number(end) >= verseTokens.length) return approvedWord;
+
+    const span = verseTokens
+      .slice(Number(start), Number(end) + 1)
+      .map((token) => cleanWord(token))
+      .filter(Boolean)
+      .join(" ")
+      .trim();
+
+    return span || approvedWord;
+  }
   function openWordStudy(
     word: string,
     tokenIndex: number,
-    sourceWord?: string,
+    availability?: unknown,
   ) {
     const selectedWord = cleanWord(word);
     if (!selectedWord) return;
+
+    const selectedSpan = ownedEnglishSpan(
+      word,
+      tokenIndex,
+      availability,
+    );
+    if (!selectedSpan) return;
 
     const params = new URLSearchParams(searchParams.toString());
 
     params.delete("study");
     params.delete("focusToken");
-    params.set("word", selectedWord);
+    params.set("word", selectedSpan);
     params.set("displayTokenIndex", String(tokenIndex));
-    params.set("selectedText", selectedWord);
+    params.set("selectedText", selectedSpan);
     params.set("verseText", renderedText);
 
     if (readerRecordId) {
@@ -219,11 +310,9 @@ export default function ScriptureText({
       params.delete("readerVerseLabel");
     }
 
-    if (sourceWord) {
-      params.set("originalWord", sourceWord);
-    } else {
-      params.delete("originalWord");
-    }
+    // English taps are identified by readerRecordId/displayTokenIndex.
+    // Never surface a lexical ID as the word the reader tapped.
+    params.delete("originalWord");
 
     params.delete("verse");
 
@@ -300,7 +389,7 @@ export default function ScriptureText({
                       openWordStudy(
                         piece.text,
                         piece.tokenIndex,
-                        piece.availability.sourceWord,
+                        piece.availability,
                       );
                     }}
                     style={{
@@ -368,7 +457,7 @@ export default function ScriptureText({
               openWordStudy(
                 part,
                 tokenIndex,
-                availability.sourceWord,
+                availability,
               );
             }}
             style={{

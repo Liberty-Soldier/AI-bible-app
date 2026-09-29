@@ -217,6 +217,18 @@ export default function VerseActionController({
                 {verseLabel}
               </button>
 
+              <SourceBreakdownVerse
+                reference={verse.reference}
+                verse={verse.verse}
+                translation={
+                  activeTranslation as
+                    | "web"
+                    | "kjv"
+                    | "brenton"
+                }
+                verseText={selectedText}
+              />
+
               <ScriptureText
                 text={selectedText}
                 reference={verse.reference}
@@ -229,17 +241,6 @@ export default function VerseActionController({
                 }
               />
 
-              <SourceBreakdownVerse
-                reference={verse.reference}
-                verse={verse.verse}
-                translation={
-                  activeTranslation as
-                    | "web"
-                    | "kjv"
-                    | "brenton"
-                }
-                verseText={selectedText}
-              />
 
               {isBookmarked || hasNote ? (
                 <span className="ml-2 inline-flex align-middle text-xs text-[var(--muted)]">

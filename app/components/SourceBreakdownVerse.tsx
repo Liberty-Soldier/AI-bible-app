@@ -153,10 +153,8 @@ export default function SourceBreakdownVerse({
         disabled={loading}
         aria-busy={loading}
         aria-label={`Open source text for ${reference}`}
-        className="ml-2 inline-flex align-baseline text-[10px] font-semibold uppercase tracking-[0.13em] text-[var(--muted)] opacity-55 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/40 disabled:cursor-wait"
-      >
-        Source
-      </button>
+        className="ml-1 inline-flex min-h-6 min-w-6 items-center justify-center rounded-full align-super text-[9px] font-semibold tracking-tight text-[var(--muted)] opacity-45 transition hover:bg-[var(--surface)] hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/40 disabled:cursor-wait"
+      >`n        <span aria-hidden="true">{"\u05D0\u00B7\u03B1"}</span>`n      </button>
 
       {error ? (
         <span

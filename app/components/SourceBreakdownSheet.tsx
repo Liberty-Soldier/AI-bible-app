@@ -211,9 +211,17 @@ function englishRendering(
   occurrence: SourceBreakdownOccurrence,
   detail: SelectedEntityDetails | null,
   translation: SourceBreakdownResult["translation"],
+  corpus: SourceBreakdownCorpus,
 ) {
+  // Hebrew occurrence.meaning can contain MorphHB codes.
+  // Never present that legacy slot as reader English.
+  const occurrenceMeaning =
+    corpus === "hebrew"
+      ? null
+      : safeOccurrenceMeaning(occurrence);
+
   return (
-    safeOccurrenceMeaning(occurrence) ||
+    occurrenceMeaning ||
     translationRendering(
       detail,
       translation,
@@ -249,6 +257,7 @@ function SelectedWordDetails({
       occurrence,
       detail,
       translation,
+      corpus,
     );
 
   const transliteration =
@@ -502,6 +511,7 @@ function SourceVerseBlock({
                 occurrence,
                 detail,
                 translation,
+                sourceVerse.source,
               );
 
             return (
@@ -829,7 +839,7 @@ export default function SourceBreakdownSheet({
           undefined
         }
         word={
-          wordOverviewOccurrence.lexicalId
+          overviewSurface
         }
         book={
           data.displayedReference.book
