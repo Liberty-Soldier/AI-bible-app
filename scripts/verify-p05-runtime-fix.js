@@ -58,7 +58,44 @@ assert(/SEE Evidence Summary/.test(askView), "Ask view SEE branding is missing."
 assert(/SEE Evidence/.test(loader), "Evidence loader SEE branding is missing.");
 assert(!/\/api\/emet\/explain/.test(sheet), "Ordinary word taps still reference live AI.");
 assert(/getCanonicalChapterTokenAvailability/.test(canonicalStore), "Chapter token availability is missing.");
-assert(/if \(!availability\)/.test(scriptureText), "Unaligned translator words are still interactive.");
+assert(
+  (() => {
+    const scriptureText = require("fs").readFileSync(
+      "app/components/ScriptureText.tsx",
+      "utf8",
+    );
+
+    /*
+     * Phase 1 now uses audited English SPAN <-> SOURCE SEGMENT
+     * ownership instead of treating every translator token as an
+     * independent interactive word.
+     *
+     * This verification intentionally checks the fail-closed
+     * structure of the span renderer:
+     *
+     * - candidates originate only from tokenAvailability
+     * - canonical rendering bounds are honored
+     * - plain text is emitted when no owned span exists
+     * - conflicting overlapping spans are rejected
+     * - English taps route by canonical reader token identity
+     * - lexical/source IDs are never presented as the English tap
+     */
+    return (
+      scriptureText.includes("function buildOwnedSpans(") &&
+      scriptureText.includes("Object.entries(") &&
+      scriptureText.includes("tokenAvailability") &&
+      scriptureText.includes("renderingStartTokenIndex") &&
+      scriptureText.includes("renderingEndTokenIndex") &&
+      scriptureText.includes("spanByStart.get(") &&
+      scriptureText.includes("if (!span)") &&
+      scriptureText.includes("rejected.add(leftIndex)") &&
+      scriptureText.includes("rejected.add(rightIndex)") &&
+      scriptureText.includes("anchorTokenIndex") &&
+      scriptureText.includes('params.delete("originalWord")')
+    );
+  })(),
+  "Unaligned translator words are still interactive.",
+);
 
 console.log("P05 runtime-fix source verification passed.");
 console.log("- Canonical entity lookup remains strict");
