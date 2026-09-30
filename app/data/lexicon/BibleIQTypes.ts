@@ -47,6 +47,7 @@ export type BibleIQV2SourceSegment = {
 export type BibleIQReaderOwnership = {
   kind: "exact" | "context";
   ownershipId: string;
+  sourceOccurrenceIds: string[];
   anchorTokenIndex: number;
   startTokenIndex: number;
   endTokenIndex: number;

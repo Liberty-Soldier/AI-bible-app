@@ -110,6 +110,19 @@ assert(!/cursor-pointer rounded-xl/.test(verseActions), "The entire verse still 
 assert(/data-verse-study-control="true"/.test(readerStudy), "Every verse lacks a Study control.");
 assert(/data-source-word="true"/.test(readerStudy), "Source lexical words are not tappable.");
 assert(/setWordOverview\(occurrence\)/.test(readerStudy), "Source-word taps do not open Word Overview.");
+assert(/presentation="inline"/.test(readerStudy), "Deeper Word Overview is not inline.");
+assert(
+  !/className="fixed inset-0 z-\[110\]"/.test(readerStudy),
+  "Legacy fixed Word Overview wrapper remains.",
+);
+assert(
+  /ownership\?\.kind !== "exact"[\s\S]*?spans\.size === 1/.test(readerStudy),
+  "Source correspondence is not exact-only and fail-closed.",
+);
+assert(
+  /data-source-correspondence/.test(scripture),
+  "Non-interactive English correspondence highlighting is missing.",
+);
 assert(/Loading gloss/.test(readerStudy), "English lexical glosses are missing.");
 assert(/transliteration/.test(readerStudy), "Source transliterations are missing.");
 assert(/Verse numbers open tools/.test(readerFirstUseTip), "Reader instructions do not match the interaction.");
@@ -125,3 +138,5 @@ console.log("- Source words show glosses and transliterations inline");
 console.log("- First-use guidance dismisses after Study is opened");
 console.log("- Verse actions use the verse number");
 console.log("- Deeper exploration always offers a return to the tapped reading location");
+console.log("- Deeper Word Overview stays inline with the selected source word");
+console.log("- English correspondence highlighting is exact-only and non-interactive");

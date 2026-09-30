@@ -18,6 +18,7 @@ import {
   type ReaderChapter,
 } from "@/app/data/scripture/ReaderVerseAdapter";
 import ReaderFirstUseTip from "@/app/components/ReaderFirstUseTip";
+import { getCanonicalChapterTokenAvailability } from "@/app/data/scripture/CanonicalVerseStore";
 
 export const dynamic = "force-dynamic";
 
@@ -230,6 +231,17 @@ export default async function ReadChapterPage({
     notFound();
   }
 
+  const tokenAvailabilityByVerse = await getCanonicalChapterTokenAvailability({
+    origin: await getBaseUrl(),
+    book: decodedBook,
+    chapter: chapterNumber,
+    translation: activeTranslation,
+    readerVerses: chapterVerses.map((readerVerse) => ({
+      id: readerVerse.id,
+      tokenAvailabilityKey: readerVerse.tokenAvailabilityKey,
+    })),
+  });
+
   const books = getAvailableBooks();
   const maxChapter = getMaxChapter(decodedBook);
   const translationLabel = getTranslationLabel(activeTranslation);
@@ -317,6 +329,7 @@ export default async function ReadChapterPage({
               superscriptions={chapterSuperscriptions}
               activeTranslation={activeTranslation}
               highlightedVerse={highlightedVerse}
+              tokenAvailabilityByVerse={tokenAvailabilityByVerse}
             />
           </article>
         </ChapterSwipe>

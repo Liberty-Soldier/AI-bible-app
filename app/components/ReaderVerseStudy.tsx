@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import ScriptureText from "@/app/components/ScriptureText";
 import WordStudySheet from "@/app/components/WordStudySheet";
 import type {
   SourceBreakdownCorpus,
@@ -9,12 +10,14 @@ import type {
   SourceBreakdownResult,
   SourceBreakdownTranslation,
 } from "@/app/data/bibleiq/SourceBreakdownRuntime";
+import type { BibleIQVerseTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 
 type ReaderVerseStudyProps = {
   reference: string;
   verse: number;
   translation: SourceBreakdownTranslation;
   verseText: string;
+  tokenAvailability?: BibleIQVerseTokenAvailability;
 };
 
 type EntityDetails = {
@@ -134,6 +137,7 @@ export default function ReaderVerseStudy({
   verse,
   translation,
   verseText,
+  tokenAvailability,
 }: ReaderVerseStudyProps) {
   const [expanded, setExpanded] = useState(false);
   const [breakdown, setBreakdown] = useState<SourceBreakdownResult | null>(null);
@@ -153,6 +157,8 @@ export default function ReaderVerseStudy({
 
   async function loadBreakdown(source?: SourceBreakdownCorpus) {
     if (loading) return;
+
+    if (source) setWordOverview(null);
 
     if (!parsed.book || !Number.isFinite(parsed.chapter) || parsed.chapter < 1) {
       setError("Original-language text is unavailable for this reference.");
@@ -211,6 +217,7 @@ export default function ReaderVerseStudy({
   function toggleStudy() {
     if (expanded) {
       setExpanded(false);
+      setWordOverview(null);
       return;
     }
 
@@ -292,20 +299,58 @@ export default function ReaderVerseStudy({
   const showOldTestamentSources = breakdown?.corpus === "hebrew" ||
     (breakdown?.corpus === "lxx" && translation !== "brenton");
 
-  return (
-    <div className="mt-1 pl-10 text-base leading-normal">
-      <button
-        type="button"
-        data-verse-study-control="true"
-        aria-expanded={expanded}
-        onClick={toggleStudy}
-        className="rounded px-1 py-0.5 text-xs font-semibold tracking-wide text-[var(--muted)] transition hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/45"
-      >
-        {expanded ? "Hide study" : "Study \u203a"}
-      </button>
+  const highlightRange = useMemo(() => {
+    if (!wordOverview || !tokenAvailability) return null;
 
-      {expanded ? (
-        <section className="mt-3 rounded-xl border border-[var(--border)] bg-[var(--surface)]/55 px-3 py-3 sm:px-4">
+    const spans = new Map<
+      string,
+      { startTokenIndex: number; endTokenIndex: number }
+    >();
+
+    for (const availability of Object.values(tokenAvailability)) {
+      const ownership = availability.readerOwnership;
+
+      if (
+        ownership?.kind !== "exact" ||
+        !ownership.sourceOccurrenceIds.includes(wordOverview.id) ||
+        !Number.isInteger(ownership.startTokenIndex) ||
+        !Number.isInteger(ownership.endTokenIndex) ||
+        ownership.startTokenIndex < 0 ||
+        ownership.endTokenIndex < ownership.startTokenIndex
+      ) {
+        continue;
+      }
+
+      spans.set(`${ownership.startTokenIndex}:${ownership.endTokenIndex}`, {
+        startTokenIndex: ownership.startTokenIndex,
+        endTokenIndex: ownership.endTokenIndex,
+      });
+    }
+
+    return spans.size === 1 ? Array.from(spans.values())[0] : null;
+  }, [tokenAvailability, wordOverview]);
+
+  return (
+    <>
+      <ScriptureText
+        text={verseText}
+        reference={reference}
+        highlightRange={highlightRange}
+      />
+
+      <div className="mt-1 pl-10 text-base leading-normal">
+        <button
+          type="button"
+          data-verse-study-control="true"
+          aria-expanded={expanded}
+          onClick={toggleStudy}
+          className="rounded px-1 py-0.5 text-xs font-semibold tracking-wide text-[var(--muted)] transition hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/45"
+        >
+          {expanded ? "Hide study" : "Study \u203a"}
+        </button>
+
+        {expanded ? (
+          <section className="mt-3 rounded-xl border border-[var(--border)] bg-[var(--surface)]/55 px-3 py-3 sm:px-4">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
               Original language
@@ -340,6 +385,12 @@ export default function ReaderVerseStudy({
               </div>
             ) : null}
           </div>
+
+          <p className="mb-3 text-xs leading-5 text-[var(--muted)]">
+            Lexical gloss appears beneath each source word; it is not
+            necessarily the exact wording used in this translation.
+            Transliteration follows below.
+          </p>
 
           {loading && !breakdown ? (
             <div role="status" className="text-sm text-[var(--muted)]">
@@ -441,7 +492,12 @@ export default function ReaderVerseStudy({
                               sourceVerse.source,
                             )}`}
                             onClick={() => setWordOverview(occurrence)}
-                            className="inline-flex min-w-[3rem] max-w-[9rem] flex-col items-center rounded-lg px-1.5 py-1 text-center transition hover:bg-amber-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/45"
+                            aria-pressed={wordOverview?.id === occurrence.id}
+                            className={`inline-flex min-w-[3rem] max-w-[9rem] flex-col items-center rounded-lg px-1.5 py-1 text-center transition hover:bg-amber-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/45 ${
+                              wordOverview?.id === occurrence.id
+                                ? "bg-amber-500/10 ring-2 ring-amber-500/35"
+                                : ""
+                            }`}
                           >
                             {content}
                           </button>
@@ -460,25 +516,33 @@ export default function ReaderVerseStudy({
               })}
             </div>
           ) : null}
-        </section>
-      ) : null}
 
-      {wordOverview && breakdown ? (
-        <div className="fixed inset-0 z-[110]">
-          <WordStudySheet
-            entityId={wordOverview.entityId || undefined}
-            word={displaySourceSurface(wordOverview, breakdown.corpus)}
-            book={breakdown.displayedReference.book}
-            chapter={breakdown.displayedReference.chapter}
-            verse={Number(breakdown.displayedReference.verse)}
-            translation={breakdown.translation}
-            selectedText={displaySourceSurface(wordOverview, breakdown.corpus)}
-            originalWord={displaySourceSurface(wordOverview, breakdown.corpus)}
-            verseText={verseText}
-            onClose={() => setWordOverview(null)}
-          />
-        </div>
-      ) : null}
-    </div>
+          {wordOverview && breakdown ? (
+            <div className="mt-4 border-t border-[var(--border)] pt-4">
+              <WordStudySheet
+                presentation="inline"
+                entityId={wordOverview.entityId || undefined}
+                word={displaySourceSurface(wordOverview, breakdown.corpus)}
+                book={breakdown.displayedReference.book}
+                chapter={breakdown.displayedReference.chapter}
+                verse={Number(breakdown.displayedReference.verse)}
+                translation={breakdown.translation}
+                selectedText={displaySourceSurface(
+                  wordOverview,
+                  breakdown.corpus,
+                )}
+                originalWord={displaySourceSurface(
+                  wordOverview,
+                  breakdown.corpus,
+                )}
+                verseText={verseText}
+                onClose={() => setWordOverview(null)}
+              />
+            </div>
+          ) : null}
+          </section>
+        ) : null}
+      </div>
+    </>
   );
 }

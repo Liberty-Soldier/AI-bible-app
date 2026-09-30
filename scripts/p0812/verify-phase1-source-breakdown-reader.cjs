@@ -69,7 +69,7 @@ need(
 );
 
 need(
-  controller,
+  verse,
   '<ScriptureText',
   "reading-only ScriptureText remains"
 );
@@ -108,6 +108,36 @@ need(
   verse,
   "transliteration",
   "source transliteration remains visible"
+);
+
+need(
+  verse,
+  'presentation="inline"',
+  "deeper Word Overview renders inline"
+);
+
+forbid(
+  verse,
+  'className="fixed inset-0 z-[110]"',
+  "legacy fixed Word Overview wrapper remains"
+);
+
+need(
+  verse,
+  'ownership?.kind !== "exact"',
+  "source correspondence does not require exact ownership"
+);
+
+need(
+  verse,
+  "spans.size === 1",
+  "ambiguous source correspondence does not fail closed"
+);
+
+need(
+  scripture,
+  'data-source-correspondence',
+  "visual source correspondence marker is missing"
 );
 
 if (failures.length) {

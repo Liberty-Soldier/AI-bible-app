@@ -493,7 +493,7 @@ async function verifyReaderPage(
 
   if (
     !html.includes(
-      "Open source breakdown"
+      'data-verse-study-control="true"'
     )
   ) {
     throw new Error(

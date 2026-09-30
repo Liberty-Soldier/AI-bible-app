@@ -79,8 +79,8 @@ assert(
 
     /*
      * CanonicalVerseStore retains a centralized ownership contract for
-     * alignment evidence, but the approved reader no longer consumes it
-     * for navigation. Only source-language occurrences are interactive.
+     * alignment evidence. The approved reader may consume exact ownership
+     * for a fail-closed visual highlight, never for English navigation.
      */
     return (
       types.includes("export type BibleIQReaderOwnership") &&
@@ -95,6 +95,9 @@ assert(
       readerStudy.includes('data-source-word="true"') &&
       readerStudy.includes("setWordOverview(occurrence)") &&
       readerStudy.includes('data-verse-study-control="true"') &&
+      readerStudy.includes('ownership?.kind !== "exact"') &&
+      readerStudy.includes("spans.size === 1") &&
+      scriptureText.includes('data-source-correspondence') &&
       !scriptureText.includes("availability.sourceSegment") &&
       !scriptureText.includes('availability.routeMode ===')
     );

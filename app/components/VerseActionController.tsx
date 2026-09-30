@@ -1,13 +1,14 @@
 "use client";
 
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
-import ScriptureText from "@/app/components/ScriptureText";
 import ReaderVerseStudy from "@/app/components/ReaderVerseStudy";
+import type { BibleIQChapterTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 import {
   buildReaderChapterItems,
   compareReaderVerses,
   readerVerseAnchorId,
   readerVerseQueryValue,
+  readerVerseTokenAvailabilityKey,
   type ReaderSuperscription,
   type ReaderVerse,
 } from "@/app/data/scripture/ReaderVerseAdapter";
@@ -27,11 +28,13 @@ export default function VerseActionController({
   activeTranslation,
   superscriptions,
   highlightedVerse,
+  tokenAvailabilityByVerse,
 }: {
   verses: ReaderVerse[];
   superscriptions?: ReaderSuperscription[];
   activeTranslation: ReaderTranslation;
   highlightedVerse?: string | null;
+  tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
 }) {
   const [selectedVerses, setSelectedVerses] = useState<SelectedVerse[]>([]);
   const [memory, setMemory] = useState(() => getReaderMemory());
@@ -168,6 +171,13 @@ export default function VerseActionController({
           const storedHighlight = highlightByVerseId.get(verse.id);
           const isBookmarked = bookmarkedIds.has(verse.id);
           const hasNote = (noteByVerseId.get(verse.id) || []).length > 0;
+          const availabilityKey =
+            activeTranslation === "brenton"
+              ? verse.id
+              : readerVerseTokenAvailabilityKey(verse);
+          const verseTokenAvailability = availabilityKey
+            ? tokenAvailabilityByVerse?.[availabilityKey]
+            : undefined;
 
           return (
             <div
@@ -201,17 +211,12 @@ export default function VerseActionController({
                 {verseLabel}
               </button>
 
-
-              <ScriptureText
-                text={selectedText}
-                reference={verse.reference}
-              />
-
               <ReaderVerseStudy
                 reference={verse.reference}
                 verse={verse.verse}
                 translation={activeTranslation}
                 verseText={selectedText}
+                tokenAvailability={verseTokenAvailability}
               />
 
 

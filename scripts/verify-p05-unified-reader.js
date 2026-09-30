@@ -94,6 +94,26 @@ assertPresent(
 );
 assertPresent(
   readerStudy,
+  /presentation="inline"/,
+  "inline deeper Word Overview",
+);
+assertAbsent(
+  readerStudy,
+  /className="fixed inset-0 z-\[110\]"/,
+  "legacy fixed Word Overview wrapper",
+);
+assertPresent(
+  readerStudy,
+  /ownership\?\.kind !== "exact"[\s\S]*?spans\.size === 1/,
+  "fail-closed exact source correspondence",
+);
+assertPresent(
+  scriptureText,
+  /data-source-correspondence/,
+  "non-interactive source correspondence highlight",
+);
+assertPresent(
+  readerStudy,
   /\["hebrew", "lxx"\]/,
   "Hebrew/LXX selector",
 );
@@ -285,3 +305,5 @@ console.log("- Verse-number actions are preserved");
 console.log("- Paid features remain centrally gated");
 console.log("- No live AI runs on ordinary word taps");
 console.log("- Source-owned occurrence routing is preserved");
+console.log("- Exact source correspondence is visual-only and fails closed");
+console.log("- Deeper Word Overview renders inline");

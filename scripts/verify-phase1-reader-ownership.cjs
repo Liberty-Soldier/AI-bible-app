@@ -523,6 +523,7 @@ function verifySourceContract() {
 
   const required = [
     [types.includes("export type BibleIQReaderOwnership"), "BibleIQReaderOwnership type missing"],
+    [types.includes("sourceOccurrenceIds: string[]"), "reader ownership source occurrence IDs missing"],
     [types.includes("readerOwnership?: BibleIQReaderOwnership"), "token availability ownership field missing"],
     [store.includes("function resolveCompactReaderOwnershipAtToken("), "authoritative compact ownership resolver missing"],
     [store.includes("exact V2 ownership"), "exact V2 precedence marker missing"],
@@ -531,6 +532,8 @@ function verifySourceContract() {
     [!scriptureText.includes("readerOwnership"), "English reader still consumes ownership for navigation"],
     [!scriptureText.includes("data-word-token"), "English reader still exposes word tap targets"],
     [readerStudy.includes('data-source-word="true"'), "source-word navigation is missing"],
+    [readerStudy.includes('ownership?.kind !== "exact"'), "reader highlight does not reject contextual ownership"],
+    [readerStudy.includes("spans.size === 1"), "reader highlight does not reject ambiguous ownership"],
     [!scriptureText.includes("availability.sourceSegment"), "reader still interprets source segments"],
     [!scriptureText.includes('availability.routeMode ==='), "reader still interprets route modes"],
   ];

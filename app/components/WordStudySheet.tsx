@@ -38,6 +38,7 @@ type WordStudySheetProps = {
   selectedText?: string;
   originalWord?: string;
   verseText?: string;
+  presentation?: "sheet" | "inline";
   onClose: () => void;
 };
 
@@ -786,6 +787,7 @@ export default function WordStudySheet({
   selectedText,
   originalWord,
   verseText,
+  presentation = "sheet",
   onClose,
 }: WordStudySheetProps) {
   const [data, setData] = useState<BibleIQResponse | null>(null);
@@ -824,7 +826,7 @@ export default function WordStudySheet({
   const readingLabel = `${book} ${chapter}${verse ? `:${verse}` : ""}`;
 
   useEffect(() => {
-    if (!word) return;
+    if (!word || presentation === "inline") return;
 
     const scrollY = window.scrollY;
     const originalOverflow = document.body.style.overflow;
@@ -844,7 +846,7 @@ export default function WordStudySheet({
       document.body.style.width = originalWidth;
       window.scrollTo(0, scrollY);
     };
-  }, [word]);
+  }, [presentation, word]);
 
   useLayoutEffect(() => {
     setView("overview");
@@ -1129,26 +1131,40 @@ export default function WordStudySheet({
   }
 
   return (
-    <div className="fixed inset-0 z-[70] overflow-hidden">
-      <button
-        aria-label="Close EMETSEES word study"
-        className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
-        onClick={onClose}
-      />
+    <div
+      className={
+        presentation === "inline"
+          ? "overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--background)]"
+          : "fixed inset-0 z-[70] overflow-hidden"
+      }
+    >
+      {presentation === "sheet" ? (
+        <button
+          aria-label="Close EMETSEES word study"
+          className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
+          onClick={onClose}
+        />
+      ) : null}
 
       <section
-        className={`absolute bottom-0 left-1/2 flex w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
-          snap === "expanded" ? "h-[96dvh]" : "h-[86dvh]"
-        }`}
+        className={
+          presentation === "inline"
+            ? "flex w-full flex-col bg-[var(--background)] text-[var(--foreground)]"
+            : `absolute bottom-0 left-1/2 flex w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
+                snap === "expanded" ? "h-[96dvh]" : "h-[86dvh]"
+              }`
+        }
       >
         <div className="shrink-0 border-b border-[var(--border)] bg-[var(--background)] px-5 py-3">
-          <button
-            type="button"
-            aria-label="Resize EMETSEES word study panel"
-            onPointerDown={handlePointerDown}
-            onPointerUp={handlePointerUp}
-            className="mx-auto mb-3 block h-1.5 w-11 rounded-full bg-[var(--border)]"
-          />
+          {presentation === "sheet" ? (
+            <button
+              type="button"
+              aria-label="Resize EMETSEES word study panel"
+              onPointerDown={handlePointerDown}
+              onPointerUp={handlePointerUp}
+              className="mx-auto mb-3 block h-1.5 w-11 rounded-full bg-[var(--border)]"
+            />
+          ) : null}
 
           <div className="flex items-center justify-between gap-4">
             {view === "overview" ? (
@@ -1171,7 +1187,7 @@ export default function WordStudySheet({
               onClick={onClose}
               className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2 text-sm font-semibold text-[var(--muted)]"
             >
-              Done
+              {presentation === "inline" ? "Back to source text" : "Done"}
             </button>
           </div>
         </div>
@@ -1179,7 +1195,11 @@ export default function WordStudySheet({
         <div
           key={sheetKey}
           ref={scrollRef}
-          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 pb-20"
+          className={
+            presentation === "inline"
+              ? "px-4 py-4"
+              : "min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 pb-20"
+          }
         >
           {sourceEntityId ? (
             <SourceEntityDrilldown
