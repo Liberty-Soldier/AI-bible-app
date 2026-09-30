@@ -25,7 +25,7 @@ const readerFirstUseTip = read("app/components/ReaderFirstUseTip.tsx");
 const readerHeader = read("app/components/CollapsibleReaderHeader.tsx");
 const verseActionSheet = read("app/components/VerseActionSheet.tsx");
 const verseActions = read("app/components/VerseActionController.tsx");
-const wordController = read("app/components/ReaderWordStudyController.tsx");
+const readerStudy = read("app/components/ReaderVerseStudy.tsx");
 const readerPage = read("app/read/[book]/[chapter]/page.tsx");
 const canonicalStore = read("app/data/scripture/CanonicalVerseStore.ts");
 const types = read("app/data/lexicon/BibleIQTypes.ts");
@@ -72,33 +72,16 @@ assert(/TECHNICAL_SOURCE_FORM_LIMIT/.test(sheet), "Raw source forms are not isol
 
 assert(/BibleIQChapterTokenAvailability/.test(types), "Shared token-availability type is missing.");
 assert(/getCanonicalChapterTokenAvailability/.test(canonicalStore), "Chapter alignment availability loader is missing.");
-assert(/tokenAvailabilityByVerse/.test(readerPage), "Reader does not receive token availability.");
-assert(/tokenAvailability\?\.\[String\(tokenIndex\)\]/.test(scripture), "Scripture tokens do not consult source availability.");
-assert(/if \(!availability\)/.test(scripture), "Unaligned English words are not excluded.");
-assert(/FUNCTION_WORDS/.test(scripture), "Aligned function-word visual classification is missing.");
-assert(/data-word-kind=/.test(scripture), "Token visual kind is missing.");
 assert(
-  /data-word-focused=/.test(scripture),
-  "Selected-word focus marker is missing.",
+  !/data-word-token|useRouter|openWordStudy|displayTokenIndex/.test(scripture),
+  "English Scripture still contains lexical navigation.",
 );
 assert(
-  /textDecoration:\s*"none"/.test(scripture),
-  "Normal Scripture words are not visually clean.",
+  !/\[data-word-token="true"\]/.test(globalStyles),
+  "English-word interaction styles remain.",
 );
 assert(
-  !/textDecorationStyle:\s*"dotted"/.test(scripture),
-  "Obsolete dotted word hint remains.",
-);
-assert(
-  /@media\s*\(hover:\s*none\)\s*and\s*\(pointer:\s*coarse\)/.test(globalStyles),
-  "Mobile touch affordance is missing.",
-);
-assert(
-  /MOBILE SOURCE-WORD AFFORDANCE[\s\S]*?text-decoration-style:\s*dotted/.test(globalStyles),
-  "Mobile source-word cue is missing.",
-);
-assert(
-  /Dotted words open source evidence/.test(readerFirstUseTip),
+  /Study opens the original-language text/.test(readerFirstUseTip),
   "First-use reader tip is missing.",
 );
 assert(
@@ -106,8 +89,8 @@ assert(
   "Reader-tip persistence is missing.",
 );
 assert(
-  /\[data-word-token="true"\]/.test(readerFirstUseTip),
-  "Reader-tip automatic dismissal after a word tap is missing.",
+  /\[data-verse-study-control="true"\]/.test(readerFirstUseTip),
+  "Reader-tip automatic dismissal after Study is opened is missing.",
 );
 assert(
   /emetsees:open-reader-help/.test(readerHeader + readerFirstUseTip),
@@ -124,7 +107,11 @@ assert(
 );
 assert(/data-verse-selector="true"/.test(verseActions), "Verse-number selection is missing.");
 assert(!/cursor-pointer rounded-xl/.test(verseActions), "The entire verse still looks like the selection target.");
-assert(/focusToken/.test(wordController + readerPage + scripture), "Exact tapped-word return focus is missing.");
+assert(/data-verse-study-control="true"/.test(readerStudy), "Every verse lacks a Study control.");
+assert(/data-source-word="true"/.test(readerStudy), "Source lexical words are not tappable.");
+assert(/setWordOverview\(occurrence\)/.test(readerStudy), "Source-word taps do not open Word Overview.");
+assert(/Loading gloss/.test(readerStudy), "English lexical glosses are missing.");
+assert(/transliteration/.test(readerStudy), "Source transliterations are missing.");
 assert(/Verse numbers open tools/.test(readerFirstUseTip), "Reader instructions do not match the interaction.");
 assert(!/\/api\/emet\/explain/.test(sheet), "Ordinary word taps still invoke live AI.");
 
@@ -132,11 +119,9 @@ console.log("P05 word-study UX verification passed.");
 console.log("- The default sheet teaches before exposing data");
 console.log("- Evidence is progressively disclosed through clickable rows");
 console.log("- Strong’s and LXX lexical entries are reachable without duplication");
-console.log("- Only source-aligned words are interactive");
-console.log("- Normal Scripture remains visually clean");
-console.log("- Only the selected word receives persistent emphasis");
-console.log("- Touch devices receive a subtle source-word cue");
-console.log("- First-use guidance dismisses after the first word tap");
-console.log("- Translator-added words remain plain reading text");
+console.log("- English Scripture remains reading-only");
+console.log("- Original-language lexical words alone open Word Overview");
+console.log("- Source words show glosses and transliterations inline");
+console.log("- First-use guidance dismisses after Study is opened");
 console.log("- Verse actions use the verse number");
 console.log("- Deeper exploration always offers a return to the tapped reading location");

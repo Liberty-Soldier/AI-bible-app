@@ -2,17 +2,16 @@
 
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
 import ScriptureText from "@/app/components/ScriptureText";
+import ReaderVerseStudy from "@/app/components/ReaderVerseStudy";
 import {
   buildReaderChapterItems,
   compareReaderVerses,
   readerVerseAnchorId,
   readerVerseQueryValue,
-  readerVerseTokenAvailabilityKey,
   type ReaderSuperscription,
   type ReaderVerse,
 } from "@/app/data/scripture/ReaderVerseAdapter";
 import VerseActionSheet from "@/app/components/VerseActionSheet";
-import type { BibleIQChapterTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 import {
   getReaderMemory,
   type ReaderHighlight,
@@ -28,15 +27,11 @@ export default function VerseActionController({
   activeTranslation,
   superscriptions,
   highlightedVerse,
-  focusedTokenIndex,
-  tokenAvailabilityByVerse,
 }: {
   verses: ReaderVerse[];
   superscriptions?: ReaderSuperscription[];
   activeTranslation: ReaderTranslation;
   highlightedVerse?: string | null;
-  focusedTokenIndex?: number | null;
-  tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
 }) {
   const [selectedVerses, setSelectedVerses] = useState<SelectedVerse[]>([]);
   const [memory, setMemory] = useState(() => getReaderMemory());
@@ -166,18 +161,8 @@ export default function VerseActionController({
 
           const verse = item.value;
           const verseLabel = readerVerseQueryValue(verse);
-          const availabilityKey =
-            readerVerseTokenAvailabilityKey(verse);
-          const verseTokenAvailability =
-            activeTranslation === "brenton"
-              ? tokenAvailabilityByVerse?.[verse.id]
-              : availabilityKey
-                ? tokenAvailabilityByVerse?.[availabilityKey]
-                : undefined;
           const isHighlightedFromUrl =
             highlightedVerse === verseLabel;
-          const hasFocusedWord =
-            isHighlightedFromUrl && focusedTokenIndex != null;
           const isSelected = selectedIds.has(verse.id);
           const selectedText = verse.sources[0]?.text || "";
           const storedHighlight = highlightByVerseId.get(verse.id);
@@ -191,7 +176,7 @@ export default function VerseActionController({
               className={`group relative block w-full border-l-2 px-2 py-1 text-left transition ${
                 isSelected
                   ? "border-amber-500/70 bg-amber-500/10"
-                  : isHighlightedFromUrl && !hasFocusedWord
+                  : isHighlightedFromUrl
                     ? "border-amber-400/40 bg-amber-500/10"
                     : storedHighlight
                       ? `border-transparent ${getHighlightClass(storedHighlight.color)}`
@@ -220,13 +205,13 @@ export default function VerseActionController({
               <ScriptureText
                 text={selectedText}
                 reference={verse.reference}
-                tokenAvailability={verseTokenAvailability}
-                readerRecordId={verse.id}
-                readerVerseLabel={verseLabel}
-                verseNumber={verse.verse}
-                focusedTokenIndex={
-                  hasFocusedWord ? focusedTokenIndex : null
-                }
+              />
+
+              <ReaderVerseStudy
+                reference={verse.reference}
+                verse={verse.verse}
+                translation={activeTranslation}
+                verseText={selectedText}
               />
 
 

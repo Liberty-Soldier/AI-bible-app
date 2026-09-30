@@ -946,13 +946,6 @@ export default function SourceBreakdownSheet({
               <ScriptureText
                 text={verseText}
                 reference={`${data.displayedReference.book} ${data.displayedReference.chapter}:${data.displayedReference.verse}`}
-                verseNumber={
-                  Number(
-                    data.displayedReference
-                      .verse,
-                  )
-                }
-                interactionMode="plain"
               />
             </div>
           </section>

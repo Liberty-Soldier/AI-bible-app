@@ -10,11 +10,9 @@ import ChapterSwipe from "@/app/components/ChapterSwipe";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
 import SaveBibleIQContext from "@/app/components/SaveBibleIQContext";
-import ReaderWordStudyController from "@/app/components/ReaderWordStudyController";
 import VerseActionController from "@/app/components/VerseActionController";
 import ReaderStickyHeader from "@/app/components/ReaderStickyHeader";
 import { bookCatalog } from "../../../data/scripture/bookCatalog";
-import { getCanonicalChapterTokenAvailability } from "@/app/data/scripture/CanonicalVerseStore";
 import {
   normalizeReaderChapter,
   type ReaderChapter,
@@ -194,7 +192,6 @@ export default async function ReadChapterPage({
     translation?: string;
     returnTo?: string;
     returnLabel?: string;
-    focusToken?: string;
   }>;
 }) {
   const { book, chapter } = await params;
@@ -203,17 +200,11 @@ export default async function ReadChapterPage({
     translation,
     returnTo,
     returnLabel,
-    focusToken,
   } = await searchParams;
 
   const decodedBook = decodeURIComponent(book);
   const chapterNumber = Number(chapter);
   const highlightedVerse = verse || null;
-  const focusedTokenIndex =
-    focusToken !== undefined && Number(focusToken) >= 0
-      ? Number(focusToken)
-      : null;
-
   const requestedTranslation: Translation =
     translation === "kjv" ||
     translation === "brenton" ||
@@ -234,15 +225,6 @@ export default async function ReadChapterPage({
   );
   const chapterVerses = chapterData.verses;
   const chapterSuperscriptions = chapterData.superscriptions;
-
-  const tokenAvailabilityByVerse =
-    await getCanonicalChapterTokenAvailability({
-      origin: await getBaseUrl(),
-      translation: activeTranslation,
-      book: decodedBook,
-      chapter: chapterNumber,
-      readerVerses: chapterVerses,
-    });
 
   if (!chapterVerses.length) {
     notFound();
@@ -270,12 +252,6 @@ export default async function ReadChapterPage({
     <main className="min-h-screen bg-[var(--background)] px-4 pb-20 text-[var(--foreground)] sm:px-6">
       <section className="mx-auto max-w-2xl">
         <ReaderVerseScroller verseLabel={highlightedVerse} />
-
-        <ReaderWordStudyController
-          book={decodedBook}
-          chapter={chapterNumber}
-          translation={activeTranslation}
-        />
 
         <SaveBibleIQContext
           book={decodedBook}
@@ -341,8 +317,6 @@ export default async function ReadChapterPage({
               superscriptions={chapterSuperscriptions}
               activeTranslation={activeTranslation}
               highlightedVerse={highlightedVerse}
-              focusedTokenIndex={focusedTokenIndex}
-              tokenAvailabilityByVerse={tokenAvailabilityByVerse}
             />
           </article>
         </ChapterSwipe>

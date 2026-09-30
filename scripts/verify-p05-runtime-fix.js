@@ -64,37 +64,42 @@ assert(
       "app/components/ScriptureText.tsx",
       "utf8",
     );
+    const readerStudy = require("fs").readFileSync(
+      "app/components/ReaderVerseStudy.tsx",
+      "utf8",
+    );
+    const canonicalStore = require("fs").readFileSync(
+      "app/data/scripture/CanonicalVerseStore.ts",
+      "utf8",
+    );
+    const types = require("fs").readFileSync(
+      "app/data/lexicon/BibleIQTypes.ts",
+      "utf8",
+    );
 
     /*
-     * Phase 1 now uses audited English SPAN <-> SOURCE SEGMENT
-     * ownership instead of treating every translator token as an
-     * independent interactive word.
-     *
-     * This verification intentionally checks the fail-closed
-     * structure of the span renderer:
-     *
-     * - candidates originate only from tokenAvailability
-     * - canonical rendering bounds are honored
-     * - plain text is emitted when no owned span exists
-     * - conflicting overlapping spans are rejected
-     * - English taps route by canonical reader token identity
-     * - lexical/source IDs are never presented as the English tap
+     * CanonicalVerseStore retains a centralized ownership contract for
+     * alignment evidence, but the approved reader no longer consumes it
+     * for navigation. Only source-language occurrences are interactive.
      */
     return (
-      scriptureText.includes("function buildOwnedSpans(") &&
-      scriptureText.includes("Object.entries(") &&
-      scriptureText.includes("tokenAvailability") &&
-      scriptureText.includes("renderingStartTokenIndex") &&
-      scriptureText.includes("renderingEndTokenIndex") &&
-      scriptureText.includes("spanByStart.get(") &&
-      scriptureText.includes("if (!span)") &&
-      scriptureText.includes("rejected.add(leftIndex)") &&
-      scriptureText.includes("rejected.add(rightIndex)") &&
-      scriptureText.includes("anchorTokenIndex") &&
-      scriptureText.includes('params.delete("originalWord")')
+      types.includes("export type BibleIQReaderOwnership") &&
+      types.includes("readerOwnership?: BibleIQReaderOwnership") &&
+      canonicalStore.includes("function resolveCompactReaderOwnershipAtToken(") &&
+      canonicalStore.includes("exact V2 ownership") &&
+      canonicalStore.includes("sealed legacy exact ownership") &&
+      canonicalStore.includes("V2 segment context") &&
+      !scriptureText.includes("readerOwnership") &&
+      !scriptureText.includes("data-word-token") &&
+      !scriptureText.includes("useRouter") &&
+      readerStudy.includes('data-source-word="true"') &&
+      readerStudy.includes("setWordOverview(occurrence)") &&
+      readerStudy.includes('data-verse-study-control="true"') &&
+      !scriptureText.includes("availability.sourceSegment") &&
+      !scriptureText.includes('availability.routeMode ===')
     );
   })(),
-  "Unaligned translator words are still interactive.",
+  "Ownership is not centralized or the reader still exposes English lexical navigation.",
 );
 
 console.log("P05 runtime-fix source verification passed.");

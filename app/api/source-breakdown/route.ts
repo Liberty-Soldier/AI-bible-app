@@ -29,6 +29,13 @@ export async function GET(request: NextRequest) {
     const book = params.get("book")?.trim() || "";
     const chapter = Number(params.get("chapter"));
     const verse = params.get("verse")?.trim() || "";
+    const requestedSource = params.get("source")?.toLowerCase();
+    const source =
+      requestedSource === "hebrew" ||
+      requestedSource === "greek-nt" ||
+      requestedSource === "lxx"
+        ? requestedSource
+        : undefined;
 
     if (!isSourceBreakdownTranslation(translation)) {
       return json(
@@ -69,6 +76,7 @@ export async function GET(request: NextRequest) {
       book,
       chapter,
       verse,
+      source,
       requestHeaders: runtimeHeaders,
     });
 

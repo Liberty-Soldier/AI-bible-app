@@ -168,60 +168,6 @@ a {
   box-shadow: var(--shadow-sm);
 }
 
-[data-word-token="true"] {
-  text-decoration: none !important;
-  cursor: pointer;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  [data-word-token="true"]:hover {
-    background: color-mix(in srgb, var(--brand) 8%, transparent);
-  }
-}
-
-[data-word-token="true"]:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--brand) 55%, transparent);
-  outline-offset: 0.12em;
-}
-
-[data-word-token="true"][data-word-focused="true"] {
-  background: color-mix(in srgb, var(--brand) 15%, transparent) !important;
-  box-shadow: inset 0 -0.08em 0 color-mix(in srgb, var(--brand) 48%, transparent);
-}
-
-
-/* MOBILE SOURCE-WORD AFFORDANCE
-   Touch devices have no hover state. A faint dotted underline identifies
-   source-supported words without turning the reader into an annotated page. */
-@media (hover: none) and (pointer: coarse) {
-  [data-word-token="true"] {
-    text-decoration-line: underline !important;
-    text-decoration-style: dotted !important;
-    text-decoration-thickness: 1px !important;
-    text-decoration-color: color-mix(
-      in srgb,
-      var(--muted) 31%,
-      transparent
-    ) !important;
-    text-underline-offset: 0.2em !important;
-    text-decoration-skip-ink: auto;
-    touch-action: manipulation;
-  }
-
-  [data-word-token="true"][data-word-kind="function"] {
-    text-decoration-color: color-mix(
-      in srgb,
-      var(--muted) 19%,
-      transparent
-    ) !important;
-  }
-
-  [data-word-token="true"][data-word-focused="true"] {
-    text-decoration-style: solid !important;
-    text-decoration-color: var(--brand) !important;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

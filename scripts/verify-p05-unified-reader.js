@@ -41,7 +41,8 @@ const readerFirstUseTip = read("app/components/ReaderFirstUseTip.tsx");
 const readerHeader = read("app/components/CollapsibleReaderHeader.tsx");
 const verseActionSheet = read("app/components/VerseActionSheet.tsx");
 const verseController = read("app/components/VerseActionController.tsx");
-const wordController = read("app/components/ReaderWordStudyController.tsx");
+const readerStudy = read("app/components/ReaderVerseStudy.tsx");
+const sourceRuntime = read("app/data/bibleiq/SourceBreakdownRuntime.ts");
 const wordSheet = read("app/components/WordStudySheet.tsx");
 const wordRoute = read("app/api/word-study/route.ts");
 const mobileNav = read("app/components/MobileBottomNav.tsx");
@@ -66,33 +67,40 @@ for (const [label, text] of [
   assertAbsent(text, /params\.set\(["']study["']/, label);
 }
 
-assertPresent(scriptureText, /data-word-token="true"/, "ScriptureText");
-assertPresent(scriptureText, /if \(!availability\)/, "ScriptureText");
-assertPresent(scriptureText, /FUNCTION_WORDS/, "ScriptureText");
-assertPresent(
-  scriptureText,
-  /data-word-focused=\{focused \? "true" : undefined\}/,
-  "ScriptureText",
-);
-assertPresent(
-  scriptureText,
-  /textDecoration:\s*"none"/,
-  "ScriptureText",
-);
 assertAbsent(
   scriptureText,
-  /textDecorationStyle:\s*"dotted"/,
-  "ScriptureText",
+  /data-word-token|useRouter|openWordStudy|displayTokenIndex/,
+  "ScriptureText English navigation",
+);
+assertAbsent(
+  globalStyles,
+  /\[data-word-token="true"\]/,
+  "global English-word styles",
 );
 assertPresent(
-  globalStyles,
-  /@media\s*\(hover:\s*none\)\s*and\s*\(pointer:\s*coarse\)/,
-  "global styles",
+  readerStudy,
+  /data-verse-study-control="true"/,
+  "per-verse Study control",
 );
 assertPresent(
-  globalStyles,
-  /MOBILE SOURCE-WORD AFFORDANCE[\s\S]*?text-decoration-style:\s*dotted/,
-  "global styles",
+  readerStudy,
+  /data-source-word="true"/,
+  "original-language word controls",
+);
+assertPresent(
+  readerStudy,
+  /setWordOverview\(occurrence\)/,
+  "source-word Word Overview navigation",
+);
+assertPresent(
+  readerStudy,
+  /\["hebrew", "lxx"\]/,
+  "Hebrew/LXX selector",
+);
+assertPresent(
+  sourceRuntime,
+  /args\.source === "lxx"[\s\S]*?"brenton"/,
+  "settled Brenton-to-LXX lookup",
 );
 assertPresent(
   verseController,
@@ -111,7 +119,7 @@ assertPresent(
 );
 assertPresent(
   readerFirstUseTip,
-  /Dotted words open source evidence/,
+  /Study opens the original-language text/,
   "reader first-use tip",
 );
 assertPresent(
@@ -126,7 +134,7 @@ assertPresent(
 );
 assertPresent(
   readerFirstUseTip,
-  /\[data-word-token="true"\]/,
+  /\[data-verse-study-control="true"\]/,
   "reader first-use tip",
 );
 assertPresent(
@@ -169,12 +177,6 @@ assertPresent(
   /Verse copied for sharing/,
   "verse action sheet",
 );
-assertPresent(
-  wordController,
-  /params\.set\("focusToken"/,
-  "word-study return focus",
-);
-
 assertPresent(
   mobileNav,
   /href(?::|=)\s*["']\/read["']/,
@@ -277,8 +279,8 @@ assertPresent(
 
 console.log("P05 unified-reader source verification passed.");
 console.log("- One reader experience");
-console.log("- Only source-aligned words are tappable");
-console.log("- Translator-added words remain plain text");
+console.log("- English Scripture is reading-only");
+console.log("- Only original-language lexical words are tappable");
 console.log("- Verse-number actions are preserved");
 console.log("- Paid features remain centrally gated");
 console.log("- No live AI runs on ordinary word taps");

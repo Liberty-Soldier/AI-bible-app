@@ -17,9 +17,12 @@ export default function ReaderFirstUseTip() {
     setVisible(localStorage.getItem(STORAGE_KEY) !== "true");
     setReady(true);
 
-    function dismissAfterWordTap(event: PointerEvent) {
+    function dismissAfterStudyOpen(event: PointerEvent) {
       const target = event.target;
-      if (target instanceof Element && target.closest('[data-word-token="true"]')) {
+      if (
+        target instanceof Element &&
+        target.closest('[data-verse-study-control="true"]')
+      ) {
         rememberDismissal();
         setVisible(false);
       }
@@ -29,11 +32,11 @@ export default function ReaderFirstUseTip() {
       setVisible(true);
     }
 
-    document.addEventListener("pointerdown", dismissAfterWordTap, true);
+    document.addEventListener("pointerdown", dismissAfterStudyOpen, true);
     window.addEventListener(OPEN_HELP_EVENT, reopenHelp);
 
     return () => {
-      document.removeEventListener("pointerdown", dismissAfterWordTap, true);
+      document.removeEventListener("pointerdown", dismissAfterStudyOpen, true);
       window.removeEventListener(OPEN_HELP_EVENT, reopenHelp);
     };
   }, []);
@@ -52,14 +55,9 @@ export default function ReaderFirstUseTip() {
       className="mb-3 flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 shadow-[var(--shadow-sm)]"
       aria-label="Reader tip"
     >
-      <span
-        aria-hidden="true"
-        className="inline-block w-7 shrink-0 border-b border-dotted border-[var(--muted)]"
-      />
-
       <p className="min-w-0 flex-1 text-xs leading-5 text-[var(--muted)]">
         <strong className="font-bold text-[var(--foreground)]">
-          Dotted words open source evidence
+          Study opens the original-language text
         </strong>
         <span aria-hidden="true"> · </span>
         Verse numbers open tools

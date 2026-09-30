@@ -18,7 +18,7 @@ const controller = read(
 );
 
 const verse = read(
-  "app/components/SourceBreakdownVerse.tsx"
+  "app/components/ReaderVerseStudy.tsx"
 );
 
 const sheet = read(
@@ -47,17 +47,8 @@ function forbid(
   }
 }
 
-need(
-  scripture,
-  'interactionMode?: "word" | "plain"',
-  "ScriptureText plain mode exists"
-);
-
-need(
-  scripture,
-  'if (interactionMode === "plain")',
-  "plain mode bypasses English word taps"
-);
+forbid(scripture, "data-word-token", "English word tap remains");
+forbid(scripture, "useRouter", "English navigation remains");
 
 need(
   controller,
@@ -73,50 +64,50 @@ need(
 
 need(
   controller,
-  "<SourceBreakdownVerse",
-  "verse text now uses SourceBreakdownVerse"
+  "<ReaderVerseStudy",
+  "verse uses inline ReaderVerseStudy"
 );
 
-forbid(
+need(
   controller,
   '<ScriptureText',
-  "old ScriptureText verse renderer remains"
+  "reading-only ScriptureText remains"
 );
 
 need(
   verse,
-  'interactionMode="plain"',
-  "whole verse disables old English word interaction"
+  'data-verse-study-control="true"',
+  "per-verse Study control exists"
 );
 
 need(
   verse,
   "/api/source-breakdown",
-  "whole verse opens Source Breakdown API"
+  "Study opens Source Breakdown API"
 );
 
 need(
-  sheet,
+  verse,
   "WordStudySheet",
   "source lexical occurrence opens Word Overview"
 );
 
 need(
-  sheet,
-  "occurrence.grammarOnly",
-  "Hebrew grammar-only rendering remains"
+  verse,
+  'data-source-word="true"',
+  "source lexical words are tappable"
 );
 
 need(
-  sheet,
-  "occurrence.morphology",
-  "occurrence morphology remains"
+  verse,
+  '["hebrew", "lxx"]',
+  "Hebrew and LXX choices exist"
 );
 
 need(
-  sheet,
-  "occurrence.partOfSpeech",
-  "LXX part of speech remains distinct"
+  verse,
+  "transliteration",
+  "source transliteration remains visible"
 );
 
 if (failures.length) {
@@ -143,7 +134,7 @@ console.log(
         "existing VerseActionController selector preserved",
 
       englishVerse:
-        "whole verse opens Source Breakdown",
+        "reading-only with inline Study control",
 
       englishWordToSourceTap:
         false,

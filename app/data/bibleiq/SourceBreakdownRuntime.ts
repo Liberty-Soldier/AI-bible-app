@@ -297,6 +297,7 @@ export async function resolveSourceBreakdown(args: {
   book: string;
   chapter: number;
   verse: string | number;
+  source?: SourceBreakdownCorpus;
   requestHeaders?: Record<string, string>;
 }): Promise<SourceBreakdownResult | null> {
   const chapter = Number(args.chapter);
@@ -315,8 +316,13 @@ export async function resolveSourceBreakdown(args: {
     getLookup(args.origin, args.requestHeaders),
   ]);
 
+  const lookupTranslation =
+    args.source === "lxx" && args.translation !== "brenton"
+      ? "brenton"
+      : args.translation;
+
   const key = displayKey({
-    translation: args.translation,
+    translation: lookupTranslation,
     book: args.book,
     chapter,
     verse: args.verse,
@@ -325,6 +331,10 @@ export async function resolveSourceBreakdown(args: {
   const display = lookup.get(key);
 
   if (!display) {
+    return null;
+  }
+
+  if (args.source && display.corpus !== args.source) {
     return null;
   }
 
