@@ -44,6 +44,14 @@ export type BibleIQV2SourceSegment = {
   renderingEndTokenIndex?: number;
 };
 
+export type BibleIQReaderOwnership = {
+  kind: "exact" | "context";
+  ownershipId: string;
+  anchorTokenIndex: number;
+  startTokenIndex: number;
+  endTokenIndex: number;
+};
+
 export type BibleIQSourceComponentEvidence = BibleIQV2SourceRoute & {
   transliteration?: string;
   pronunciation?: string;
@@ -68,6 +76,7 @@ export type BibleIQTokenAvailability = {
   routeMode?: BibleIQV2RouteMode;
   sourceRoutes?: BibleIQV2SourceRoute[];
   sourceSegment?: BibleIQV2SourceSegment;
+  readerOwnership?: BibleIQReaderOwnership;
 };
 
 export type BibleIQVerseTokenAvailability = Record<

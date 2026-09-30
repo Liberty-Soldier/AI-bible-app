@@ -5,7 +5,9 @@ import { createHash } from "node:crypto";
 import type {
   BibleIQChapterTokenAvailability,
   BibleIQVerseTokenAvailability,
+  BibleIQTokenAvailability,
   BibleIQCompoundRouteKind,
+  BibleIQReaderOwnership,
   BibleIQSource,
   BibleIQV2RouteMode,
   BibleIQV2SourceRoute,
@@ -605,6 +607,17 @@ async function buildBrentonReaderRecordAvailability(
       continue;
     }
 
+    const numericDisplayIndex = Number(displayIndex);
+    if (!Number.isInteger(numericDisplayIndex) || numericDisplayIndex < 0) {
+      continue;
+    }
+
+    const sourceToken = expandSourceToken(
+      "lxx",
+      compactSource,
+      sourceIndex,
+    );
+
     available[displayIndex] = {
       entityId,
       source: "lxx",
@@ -613,16 +626,28 @@ async function buildBrentonReaderRecordAvailability(
         entityId,
         compactSource[3] || undefined,
       ),
+      readerOwnership: legacyReaderOwnership(
+        "lxx",
+        numericDisplayIndex,
+        sourceToken,
+      ),
     };
   }
 
-  Object.assign(
-    available,
-    buildOwnedBrentonCompactV2Availability(
-      compactVerse,
-      readerRecordId,
-    ),
+  const v2Availability = buildOwnedBrentonCompactV2Availability(
+    compactVerse,
+    readerRecordId,
   );
+
+  /*
+   * The sealed reader-record overlay is the exact Brenton authority.
+   * Owned V2 routes fill gaps but never replace an exact overlay tap.
+   */
+  for (const [displayIndex, candidate] of Object.entries(v2Availability)) {
+    if (!available[displayIndex]) {
+      available[displayIndex] = candidate;
+    }
+  }
 
   return available;
 }
@@ -742,6 +767,309 @@ function syntheticV2RouteEntityId(
     ":" +
     displayTokenIndex
   );
+}
+
+type CanonicalReaderOwnershipResolution = {
+  availability: BibleIQTokenAvailability;
+  hit: CanonicalHit;
+};
+
+function isCanonicalWordEntityForCorpus(
+  entityId: string,
+  corpus: BibleIQSource,
+) {
+  const value = String(entityId || "");
+
+  if (corpus === "hebrew") {
+    return /^word:hebrew:H\d+$/.test(value);
+  }
+
+  if (corpus === "greek-nt") {
+    return /^word:greek-nt:G\d+$/.test(value);
+  }
+
+  return /^word:lxx:L\d+$/.test(value);
+}
+
+function v2ReaderOwnership(
+  corpus: BibleIQSource,
+  displayTokenIndex: number,
+  route: CanonicalV2Route,
+): BibleIQReaderOwnership {
+  const segment = route.sourceSegment;
+  const rawStart = segment?.renderingStartTokenIndex;
+  const rawEnd = segment?.renderingEndTokenIndex;
+  const hasValidExactBounds =
+    route.mode !== "segment-context" &&
+    Number.isInteger(rawStart) &&
+    Number.isInteger(rawEnd) &&
+    Number(rawStart) >= 0 &&
+    Number(rawEnd) >= Number(rawStart) &&
+    displayTokenIndex >= Number(rawStart) &&
+    displayTokenIndex <= Number(rawEnd);
+
+  const startTokenIndex = hasValidExactBounds
+    ? Number(rawStart)
+    : displayTokenIndex;
+  const endTokenIndex = hasValidExactBounds
+    ? Number(rawEnd)
+    : displayTokenIndex;
+  const kind: BibleIQReaderOwnership["kind"] =
+    route.mode === "segment-context" ? "context" : "exact";
+  const sourceOccurrenceIds = [
+    ...(segment?.sourceOccurrenceIds || []),
+  ].sort();
+  const sourceComponentIds = [
+    ...(segment?.sourceComponentIds || []),
+  ].sort();
+  const anchorSuffix =
+    kind === "context" ? `:${displayTokenIndex}` : "";
+
+  return {
+    kind,
+    ownershipId: [
+      "v2",
+      corpus,
+      route.mode,
+      startTokenIndex,
+      endTokenIndex,
+      sourceOccurrenceIds.join(","),
+      sourceComponentIds.join(","),
+    ].join("|") + anchorSuffix,
+    anchorTokenIndex: displayTokenIndex,
+    startTokenIndex,
+    endTokenIndex,
+  };
+}
+
+function legacyReaderOwnership(
+  corpus: BibleIQSource,
+  displayTokenIndex: number,
+  sourceToken: CanonicalSourceToken,
+): BibleIQReaderOwnership {
+  return {
+    kind: "exact",
+    ownershipId: [
+      "legacy",
+      corpus,
+      displayTokenIndex,
+      sourceToken.id,
+      sourceToken.entityId,
+    ].join("|"),
+    anchorTokenIndex: displayTokenIndex,
+    startTokenIndex: displayTokenIndex,
+    endTokenIndex: displayTokenIndex,
+  };
+}
+
+function resolveLegacyCompactReaderOwnership(
+  corpus: BibleIQSource,
+  translationKey: string,
+  compactVerse: CompactVerse,
+  displayTokenIndex: number,
+): CanonicalReaderOwnershipResolution | null {
+  const sourceIndex =
+    compactVerse.a?.[translationKey]?.[String(displayTokenIndex)];
+
+  if (
+    typeof sourceIndex !== "number" ||
+    !Number.isInteger(sourceIndex) ||
+    sourceIndex < 0
+  ) {
+    return null;
+  }
+
+  const compactSource = compactVerse.s?.[sourceIndex];
+  if (!compactSource) return null;
+
+  const sourceToken = expandSourceToken(
+    corpus,
+    compactSource,
+    sourceIndex,
+  );
+  const entityId = String(sourceToken.entityId || "").trim();
+  const isOrdinaryEntity =
+    /^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(entityId);
+  const isCompoundRoute =
+    /^compound:greek-nt:G\d+-G\d+$/.test(entityId);
+
+  if (!isOrdinaryEntity && !isCompoundRoute) {
+    return null;
+  }
+
+  const compoundRoute = compoundRouteForSourceToken(sourceToken);
+
+  return {
+    availability: {
+      entityId,
+      source: corpus,
+      sourceWord: sourceToken.surface || undefined,
+      lexicalId: lexicalIdFromEntityId(
+        entityId,
+        sourceToken.strong,
+      ),
+      isCompoundRoute,
+      compoundRouteKind: compoundRoute?.routeKind,
+      componentLexicalIds: compoundRoute?.componentLexicalIds,
+      readerOwnership: legacyReaderOwnership(
+        corpus,
+        displayTokenIndex,
+        sourceToken,
+      ),
+    },
+    hit: {
+      entityId,
+      sourceWord: sourceToken.surface,
+      sourceToken,
+      compoundRoute,
+    },
+  };
+}
+
+function resolveWebV2ReaderOwnership(
+  corpus: BibleIQSource,
+  compactVerse: CompactVerse,
+  compactV2: CompactV2Route,
+  book: string,
+  chapter: number,
+  verse: number,
+  displayTokenIndex: number,
+): CanonicalReaderOwnershipResolution | null {
+  const expanded = expandCompactV2Route(
+    corpus,
+    compactVerse,
+    compactV2,
+  );
+  const routes = expanded.route.sourceRoutes;
+
+  if (!routes.length || !expanded.sourceTokens.length) {
+    return null;
+  }
+
+  const exactLexicalSingle =
+    expanded.route.mode === "exact-single" &&
+    routes.length === 1 &&
+    routes[0]?.kind === "lexical" &&
+    expanded.sourceTokens.length === 1 &&
+    isCanonicalWordEntityForCorpus(
+      expanded.sourceTokens[0]?.entityId || "",
+      corpus,
+    );
+  const sourceToken = exactLexicalSingle
+    ? expanded.sourceTokens[0]
+    : undefined;
+  const entityId =
+    sourceToken?.entityId ||
+    syntheticV2RouteEntityId(
+      book,
+      chapter,
+      verse,
+      displayTokenIndex,
+    );
+  const sourceWord =
+    sourceToken?.surface ||
+    expanded.sourceTokens
+      .map((token) => token.surface)
+      .filter(Boolean)
+      .join(" + ") ||
+    undefined;
+
+  return {
+    availability: {
+      entityId,
+      source: corpus,
+      sourceWord,
+      lexicalId: sourceToken
+        ? lexicalIdFromEntityId(
+            sourceToken.entityId,
+            sourceToken.strong,
+          )
+        : undefined,
+      displayText: expanded.route.displayText,
+      isV2SpanRoute: true,
+      routeMode: expanded.route.mode,
+      sourceRoutes: expanded.route.sourceRoutes,
+      sourceSegment: expanded.route.sourceSegment,
+      readerOwnership: v2ReaderOwnership(
+        corpus,
+        displayTokenIndex,
+        expanded.route,
+      ),
+    },
+    hit: sourceToken
+      ? {
+          entityId: sourceToken.entityId,
+          sourceWord: sourceToken.surface,
+          sourceToken,
+          compoundRoute: compoundRouteForSourceToken(sourceToken),
+          v2Route: expanded.route,
+        }
+      : {
+          entityId,
+          sourceWord,
+          v2Route: expanded.route,
+        },
+  };
+}
+
+/*
+ * Single authority for ordinary WEB/KJV reader taps.
+ *
+ * Precedence is evidence-based and global:
+ *   1. exact V2 ownership
+ *   2. sealed legacy exact ownership at the same English token
+ *   3. V2 segment context
+ *   4. unmapped / fail closed
+ *
+ * Segment context never becomes a one-source-word lexical claim here.
+ */
+function resolveCompactReaderOwnershipAtToken({
+  corpus,
+  translationKey,
+  compactVerse,
+  book,
+  chapter,
+  verse,
+  displayTokenIndex,
+}: {
+  corpus: BibleIQSource;
+  translationKey: string;
+  compactVerse: CompactVerse;
+  book: string;
+  chapter: number;
+  verse: number;
+  displayTokenIndex: number;
+}): CanonicalReaderOwnershipResolution | null {
+  const legacy = resolveLegacyCompactReaderOwnership(
+    corpus,
+    translationKey,
+    compactVerse,
+    displayTokenIndex,
+  );
+  const compactV2 =
+    translationKey === "web"
+      ? compactVerse.v?.web?.[String(displayTokenIndex)]
+      : undefined;
+  const v2 = compactV2
+    ? resolveWebV2ReaderOwnership(
+        corpus,
+        compactVerse,
+        compactV2,
+        book,
+        chapter,
+        verse,
+        displayTokenIndex,
+      )
+    : null;
+
+  if (v2?.hit.v2Route?.mode !== "segment-context") {
+    if (v2) return v2;
+  }
+
+  if (legacy) return legacy;
+  if (v2) return v2;
+
+  return null;
 }
 
 function brentonCompactV2Owner(
@@ -899,6 +1227,11 @@ function buildOwnedBrentonCompactV2Availability(
       routeMode: expanded.route.mode,
       sourceRoutes: expanded.route.sourceRoutes,
       sourceSegment: expanded.route.sourceSegment,
+      readerOwnership: v2ReaderOwnership(
+        "lxx",
+        numericDisplayIndex,
+        expanded.route,
+      ),
     };
   }
 
@@ -950,52 +1283,18 @@ export async function findCanonicalHit({
   const compactVerse = runtimeBook?.verses?.[`${chapter}:${verse}`];
   if (!compactVerse) return null;
 
-  if (translationKey === "web") {
-    const compactV2 =
-      compactVerse.v?.web?.[String(displayTokenIndex)];
+  if (translationKey === "web" || translationKey === "kjv") {
+    const resolved = resolveCompactReaderOwnershipAtToken({
+      corpus,
+      translationKey,
+      compactVerse,
+      book,
+      chapter,
+      verse,
+      displayTokenIndex,
+    });
 
-    if (compactV2) {
-      const expanded = expandCompactV2Route(
-        corpus,
-        compactVerse,
-        compactV2,
-      );
-      const routes = expanded.route.sourceRoutes;
-      const exactLexicalSingle =
-        expanded.route.mode === "exact-single" &&
-        routes.length === 1 &&
-        routes[0]?.kind === "lexical" &&
-        expanded.sourceTokens.length === 1 &&
-        /^word:hebrew:H\d+$/.test(
-          expanded.sourceTokens[0]?.entityId || "",
-        );
-
-      if (exactLexicalSingle) {
-        const sourceToken = expanded.sourceTokens[0];
-        return {
-          entityId: sourceToken.entityId,
-          sourceWord: sourceToken.surface,
-          sourceToken,
-          compoundRoute: compoundRouteForSourceToken(sourceToken),
-          v2Route: expanded.route,
-        };
-      }
-
-      return {
-        entityId: syntheticV2RouteEntityId(
-          book,
-          chapter,
-          verse,
-          displayTokenIndex,
-        ),
-        sourceWord:
-          expanded.sourceTokens
-            .map((token) => token.surface)
-            .filter(Boolean)
-            .join(" + ") || undefined,
-        v2Route: expanded.route,
-      };
-    }
+    return resolved?.hit || null;
   }
 
   if (translationKey === "brenton") {
@@ -1005,34 +1304,36 @@ export async function findCanonicalHit({
       displayTokenIndex,
     );
 
-    if (brentonV2Hit) {
-      return brentonV2Hit;
+    /*
+     * Record-scoped Brenton routes returned above are authoritative.
+     * Without a record-specific overlay, exact owned V2 may lead;
+     * legacy exact ownership then beats contextual V2.
+     */
+    if (brentonV2Hit?.v2Route?.mode !== "segment-context") {
+      if (brentonV2Hit) return brentonV2Hit;
     }
-  }
 
-  const sourceIndex =
-    compactVerse.a?.[translationKey]?.[String(displayTokenIndex)];
+    const legacy = resolveLegacyCompactReaderOwnership(
+      corpus,
+      translationKey,
+      compactVerse,
+      displayTokenIndex,
+    );
 
-  if (
-    typeof sourceIndex !== "number" ||
-    !Number.isInteger(sourceIndex) ||
-    sourceIndex < 0
-  ) {
+    if (legacy) return legacy.hit;
+    if (brentonV2Hit) return brentonV2Hit;
+
     return null;
   }
 
-  const compactSource = compactVerse.s?.[sourceIndex];
-  if (!compactSource) return null;
+  const legacy = resolveLegacyCompactReaderOwnership(
+    corpus,
+    translationKey,
+    compactVerse,
+    displayTokenIndex,
+  );
 
-  const sourceToken = expandSourceToken(corpus, compactSource, sourceIndex);
-  if (!sourceToken.entityId) return null;
-
-  return {
-    entityId: sourceToken.entityId,
-    sourceWord: sourceToken.surface,
-    sourceToken,
-    compoundRoute: compoundRouteForSourceToken(sourceToken),
-  };
+  return legacy?.hit || null;
 }
 
 function lexicalIdFromEntityId(entityId: string, strong?: string) {
@@ -1095,102 +1396,31 @@ export async function getCanonicalChapterTokenAvailability({
 
       const available: BibleIQVerseTokenAvailability = {};
 
-      const compactV2ByTranslation =
-        translationKey === "web"
-          ? compactVerse.v?.web
-          : undefined;
+      const candidateDisplayIndexes = new Set<string>([
+        ...Object.keys(compactVerse.a?.[translationKey] || {}),
+        ...(translationKey === "web"
+          ? Object.keys(compactVerse.v?.web || {})
+          : []),
+      ]);
 
-      if (compactV2ByTranslation) {
-        for (const [displayIndex, compactV2] of Object.entries(
-          compactV2ByTranslation,
-        )) {
-          const expanded = expandCompactV2Route(
-            corpus,
-            compactVerse,
-            compactV2,
-          );
-          const routes = expanded.route.sourceRoutes;
-          const exactLexicalEntity =
-            translationKey === "web"
-              ? /^word:hebrew:H\d+$/.test(
-                  expanded.sourceTokens[0]?.entityId || "",
-                )
-              : /^word:lxx:L\d+$/.test(
-                  expanded.sourceTokens[0]?.entityId || "",
-                );
-          const exactLexicalSingle =
-            expanded.route.mode === "exact-single" &&
-            routes.length === 1 &&
-            routes[0]?.kind === "lexical" &&
-            expanded.sourceTokens.length === 1 &&
-            exactLexicalEntity;
-          const sourceToken = exactLexicalSingle
-            ? expanded.sourceTokens[0]
-            : undefined;
-
-          available[displayIndex] = {
-            entityId:
-              sourceToken?.entityId ||
-              syntheticV2RouteEntityId(
-                book,
-                chapter,
-                verseNumber,
-                Number(displayIndex),
-              ),
-            source: corpus,
-            sourceWord:
-              sourceToken?.surface ||
-              expanded.sourceTokens
-                .map((token) => token.surface)
-                .filter(Boolean)
-                .join(" + ") ||
-              undefined,
-            lexicalId: sourceToken
-              ? lexicalIdFromEntityId(
-                  sourceToken.entityId,
-                  sourceToken.strong,
-                )
-              : undefined,
-            displayText: expanded.route.displayText,
-            isV2SpanRoute: true,
-            routeMode: expanded.route.mode,
-            sourceRoutes: expanded.route.sourceRoutes,
-            sourceSegment: expanded.route.sourceSegment,
-          };
+      for (const displayIndex of candidateDisplayIndexes) {
+        const numericDisplayIndex = Number(displayIndex);
+        if (!Number.isInteger(numericDisplayIndex) || numericDisplayIndex < 0) {
+          continue;
         }
-      } else {
-        const aligned = compactVerse.a?.[translationKey] || {};
 
-        for (const [displayIndex, sourceIndex] of Object.entries(aligned)) {
-          if (!Number.isInteger(sourceIndex) || sourceIndex < 0) continue;
+        const resolved = resolveCompactReaderOwnershipAtToken({
+          corpus,
+          translationKey,
+          compactVerse,
+          book,
+          chapter: verseChapter,
+          verse: verseNumber,
+          displayTokenIndex: numericDisplayIndex,
+        });
 
-          const compactSource = compactVerse.s?.[sourceIndex];
-          const entityId = String(compactSource?.[4] || "").trim();
-
-          const isOrdinaryEntity =
-            /^word:(?:hebrew:H\d+|greek-nt:G\d+|lxx:L\d+)$/.test(
-              entityId,
-            );
-          const isCompoundRoute =
-            /^compound:greek-nt:G\d+-G\d+$/.test(entityId);
-
-          if (!isOrdinaryEntity && !isCompoundRoute) continue;
-
-          const strong = compactSource?.[3] || undefined;
-          const route =
-            isCompoundRoute && strong
-              ? GREEK_COMPOUND_ROUTES[strong]
-              : undefined;
-
-          available[displayIndex] = {
-            entityId,
-            source: corpus,
-            sourceWord: compactSource?.[1] || undefined,
-            lexicalId: lexicalIdFromEntityId(entityId, strong),
-            isCompoundRoute,
-            compoundRouteKind: route?.routeKind,
-            componentLexicalIds: route?.componentLexicalIds,
-          };
+        if (resolved) {
+          available[displayIndex] = resolved.availability;
         }
       }
 
@@ -1246,13 +1476,21 @@ export async function getCanonicalChapterTokenAvailability({
         runtimeBook.verses?.[chapter + ":" + Number(numericKey)];
 
       if (compactVerse) {
-        Object.assign(
-          available,
-          buildOwnedBrentonCompactV2Availability(
-            compactVerse,
-            readerVerse.id,
-          ),
+        const v2Availability = buildOwnedBrentonCompactV2Availability(
+          compactVerse,
+          readerVerse.id,
         );
+
+        for (const [displayIndex, candidate] of Object.entries(v2Availability)) {
+          const existing = available[displayIndex];
+
+          if (
+            !existing ||
+            candidate.readerOwnership?.kind === "exact"
+          ) {
+            available[displayIndex] = candidate;
+          }
+        }
       }
     }
 
