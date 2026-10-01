@@ -24,6 +24,48 @@ const translations: { value: Translation; label: string }[] = [
   { value: "brenton", label: "Brenton" },
 ];
 
+const newTestamentBooks = new Set([
+  "Matthew",
+  "Mark",
+  "Luke",
+  "John",
+  "Acts",
+  "Romans",
+  "1 Corinthians",
+  "2 Corinthians",
+  "Galatians",
+  "Ephesians",
+  "Philippians",
+  "Colossians",
+  "1 Thessalonians",
+  "2 Thessalonians",
+  "1 Timothy",
+  "2 Timothy",
+  "Titus",
+  "Philemon",
+  "Hebrews",
+  "James",
+  "1 Peter",
+  "2 Peter",
+  "1 John",
+  "2 John",
+  "3 John",
+  "Jude",
+  "Revelation",
+]);
+
+const septuagintOnlyBooks = new Set([
+  "Tobit",
+  "Judith",
+  "Wisdom",
+  "Sirach",
+  "Baruch",
+  "1 Maccabees",
+  "2 Maccabees",
+  "3 Maccabees",
+  "4 Maccabees",
+]);
+
 export default function ReaderSelector({
   books,
   currentBook,
@@ -34,6 +76,23 @@ export default function ReaderSelector({
   verseOptions,
 }: Props) {
   const router = useRouter();
+  const bookGroups = [
+    {
+      label: "Old Testament",
+      books: books.filter(
+        (book) =>
+          !newTestamentBooks.has(book) && !septuagintOnlyBooks.has(book),
+      ),
+    },
+    {
+      label: "New Testament",
+      books: books.filter((book) => newTestamentBooks.has(book)),
+    },
+    {
+      label: "Septuagint / Deuterocanonical",
+      books: books.filter((book) => septuagintOnlyBooks.has(book)),
+    },
+  ].filter((group) => group.books.length > 0);
 
   function goTo(
     book: string,
@@ -93,10 +152,14 @@ return (
           onChange={(e) => goTo(e.target.value, 1, currentTranslation)}
           className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-sm text-white"
         >
-          {books.map((book) => (
-            <option key={book} value={book}>
-              {book}
-            </option>
+          {bookGroups.map((group) => (
+            <optgroup key={group.label} label={group.label}>
+              {group.books.map((book) => (
+                <option key={book} value={book}>
+                  {book}
+                </option>
+              ))}
+            </optgroup>
           ))}
         </select>
       </label>

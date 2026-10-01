@@ -21,6 +21,7 @@ function forbidText(source, forbidden, label) {
 
 const home = read("app/page.tsx");
 const navigation = read("app/components/MobileBottomNav.tsx");
+const readerSelector = read("app/components/ReaderSelector.tsx");
 const layout = read("app/layout.tsx");
 const ask = read("app/ask/page.tsx");
 const study = read("app/study/page.tsx");
@@ -36,6 +37,16 @@ requireText(home, 'action="/search"', "home Scripture-search action");
 requireText(home, 'name="q"', "home Scripture-search query parameter");
 forbidText(home, "usePremiumAccess", "home premium dependency");
 forbidText(home, "requestUpgrade", "home upgrade interception");
+forbidText(home, "tap any word", "obsolete English-word tapping claim");
+requireText(
+  home,
+  "explore its Hebrew and Greek source words",
+  "source-word home description",
+);
+requireText(readerSelector, 'label: "New Testament"', "New Testament book group");
+requireText(readerSelector, '"Matthew"', "first New Testament book");
+requireText(readerSelector, '"Revelation"', "last New Testament book");
+requireText(readerSelector, "<optgroup", "grouped reader book selector");
 
 requireText(navigation, 'href: "/library"', "free Library navigation");
 forbidText(navigation, 'href="/ask"', "unfinished Ask navigation");
@@ -102,6 +113,8 @@ for (const relativePath of publicTestRoutes) {
 
 console.log("Free-reader MVP verification passed.");
 console.log("- Home prompt performs Scripture search.");
+console.log("- Home description accurately identifies Hebrew and Greek source-word study.");
+console.log("- Reader book selector explicitly groups Matthew through Revelation as New Testament.");
 console.log("- Primary navigation exposes only working free features.");
 console.log("- Legacy Ask and Study URLs redirect to working free routes.");
 console.log("- Live EMET API is fail-closed and cannot invoke OpenAI.");
