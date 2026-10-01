@@ -49,7 +49,95 @@ function shardIdForEntity(entityId) {
     .padStart(2, "0");
 }
 
+function verifyRuntimeArtifacts() {
+  const manifestPath = path.join(OUTPUT_ROOT, "manifest.json");
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error("LXX occurrence fallback manifest is missing.");
+  }
+
+  const manifest = readJson(manifestPath);
+  if (
+    manifest.schema !== "emet-lxx-occurrence-entity-fallback-manifest/v1" ||
+    manifest.shardAlgorithm !== "fnv1a-32-mod" ||
+    manifest.shardCount !== SHARD_COUNT ||
+    manifest.policy?.identityAuthority !==
+      "LXX_final_main.csv occurrence stream" ||
+    manifest.policy?.englishAlignmentChoosesIdentity !== false ||
+    manifest.policy?.cachedEmetExplanationAvailable !== false
+  ) {
+    throw new Error("LXX occurrence fallback manifest contract is invalid.");
+  }
+
+  const expectedFiles = new Set(["manifest.json"]);
+  let entityCount = 0;
+
+  for (let index = 0; index < SHARD_COUNT; index += 1) {
+    const shardId = index.toString(16).padStart(2, "0");
+    const meta = manifest.shards?.[shardId];
+    if (!meta || meta.file !== `${shardId}.json`) {
+      throw new Error(`LXX occurrence fallback shard metadata is missing: ${shardId}.`);
+    }
+
+    expectedFiles.add(meta.file);
+    const shardPath = path.join(OUTPUT_ROOT, meta.file);
+    if (!fs.existsSync(shardPath)) {
+      throw new Error(`LXX occurrence fallback shard is missing: ${meta.file}.`);
+    }
+    if (fs.statSync(shardPath).size !== meta.bytes) {
+      throw new Error(`LXX occurrence fallback shard byte count is stale: ${meta.file}.`);
+    }
+
+    const shard = readJson(shardPath);
+    const entries = Object.entries(shard.entities || {});
+    if (
+      shard.schema !== "emet-lxx-occurrence-entity-fallback-shard/v1" ||
+      shard.shard !== shardId ||
+      shard.entityCount !== entries.length ||
+      meta.entityCount !== entries.length
+    ) {
+      throw new Error(`LXX occurrence fallback shard contract is invalid: ${meta.file}.`);
+    }
+
+    for (const [entityId, entity] of entries) {
+      const lexicalId = entityId.replace(/^word:lxx:/, "");
+      if (
+        !/^word:lxx:L\d+$/.test(entityId) ||
+        shardIdForEntity(entityId) !== shardId ||
+        entity?.entityId !== entityId ||
+        entity?.corpus !== "lxx" ||
+        entity?.identity?.lexicalId !== lexicalId ||
+        entity?.health?.status !== "occurrence-backed-lexical-fallback" ||
+        entity?.explanation?.citations?.length !== 0
+      ) {
+        throw new Error(`LXX occurrence fallback entity contract is invalid: ${entityId}.`);
+      }
+    }
+
+    entityCount += entries.length;
+  }
+
+  const actualFiles = fs
+    .readdirSync(OUTPUT_ROOT)
+    .filter((file) => file.endsWith(".json"));
+  if (
+    actualFiles.length !== expectedFiles.size ||
+    actualFiles.some((file) => !expectedFiles.has(file)) ||
+    entityCount !== manifest.entityCount
+  ) {
+    throw new Error("LXX occurrence fallback runtime set is incomplete or stale.");
+  }
+
+  console.log(
+    `[LXX occurrence fallback] ${entityCount} committed entities across ${SHARD_COUNT} shards verified without private source inputs.`,
+  );
+}
+
 function main() {
+  if (process.argv.includes("--verify-runtime")) {
+    verifyRuntimeArtifacts();
+    return;
+  }
+
   const existing = new Map();
   for (const file of fs.readdirSync(ENTITY_ROOT)) {
     if (!file.endsWith(".json")) continue;

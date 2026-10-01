@@ -780,6 +780,48 @@ function summarizeRenderings(forms: BibleIQRenderingForm[]) {
   return labels.length ? labels.join(" · ") : "See how this word is rendered";
 }
 
+function buildShortEmetUsageNote({
+  explanation,
+  sourceLabel,
+  uniqueVerseCount,
+  principalRenderings,
+}: {
+  explanation?: string;
+  sourceLabel?: string;
+  uniqueVerseCount: number;
+  principalRenderings: BibleIQRenderingForm[];
+}) {
+  const explanationWords = String(explanation || "")
+    .trim()
+    .split(/\s+/u)
+    .filter(Boolean).length;
+
+  if (explanationWords >= 60 || uniqueVerseCount < 1) return "";
+
+  const seen = new Set<string>();
+  const renderings = principalRenderings
+    .map((form) => cleanRendering(form.text))
+    .filter((rendering) => {
+      const key = normalizeEnglish(rendering);
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 3);
+  const verseLabel = uniqueVerseCount === 1 ? "verse" : "verses";
+  const corpusLabel = sourceLabel || "source-language";
+  const occurrenceBreadth = `Across the indexed ${corpusLabel} text, this lexical identity appears in ${uniqueVerseCount.toLocaleString()} ${verseLabel}.`;
+
+  if (!renderings.length) return occurrenceBreadth;
+
+  const renderingList = renderings
+    .map((rendering) => `“${rendering}”`)
+    .join(renderings.length > 2 ? ", " : " and ")
+    .replace(/, ([^,]+)$/u, ", and $1");
+
+  return `${occurrenceBreadth} Verified English renderings include ${renderingList}. These renderings show the word’s attested range; the surrounding passage determines which expression fits each occurrence.`;
+}
+
 export default function WordStudySheet({
   entityId,
   word,
@@ -1455,6 +1497,12 @@ function OverviewView({
   const emetReady = emet?.status === "complete" && Boolean(emet.explanation);
   const emetScopeLabel =
     emet?.scope === "lexical-source" ? "EMET · source word" : "EMET explanation";
+  const shortEmetUsageNote = buildShortEmetUsageNote({
+    explanation: emet?.explanation,
+    sourceLabel: sourceLanguageLabel,
+    uniqueVerseCount,
+    principalRenderings,
+  });
   const lexicalRoutes = uniqueLexicalSourceRoutes(alignment);
   const sourceComponents = alignment?.sourceComponentEvidence || [];
   const hasAmbiguousLexicalSpan =
@@ -1541,6 +1589,16 @@ function OverviewView({
               {emet?.headline || "What this word means"}
             </h3>
             <p className="mt-3 text-[1.04rem] leading-7">{emet?.explanation}</p>
+            {shortEmetUsageNote ? (
+              <div className="mt-4 border-l-2 border-amber-500/35 pl-3">
+                <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
+                  Usage range
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+                  {shortEmetUsageNote}
+                </p>
+              </div>
+            ) : null}
             {emet?.scope === "lexical-source" && isSpanRendering ? (
               <p className="mt-3 rounded-xl bg-[var(--surface)] px-3 py-2 text-sm leading-6 text-[var(--muted)]">
                 EMET is explaining the lexical source word inside this Hebrew segment. WEB may use several English words to render the whole segment, shown below.
