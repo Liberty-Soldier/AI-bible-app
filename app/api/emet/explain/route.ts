@@ -1,39 +1,31 @@
 import { NextResponse } from "next/server";
-import type { EmetEvidencePacket } from "@/app/lib/emet/EmetEvidencePacket";
-import { explainWithEmet } from "@/app/lib/emet/EmetServer";
 
 export const dynamic = "force-dynamic";
 
-export async function POST(request: Request) {
-  try {
-    const body = (await request.json()) as {
-      packet?: EmetEvidencePacket | null;
-    };
-
-    if (!body.packet) {
-      return NextResponse.json(
-        {
-          status: "insufficient-evidence",
-          explanation: "No SEE evidence packet was provided to EMET.",
-          citations: [],
-          limitations: ["Missing packet."],
-        },
-        { status: 400 }
-      );
-    }
-
-    const result = await explainWithEmet(body.packet);
-
-    return NextResponse.json(result);
-  } catch {
-    return NextResponse.json(
-      {
-        status: "insufficient-evidence",
-        explanation: "EMET could not explain this evidence packet yet.",
-        citations: [],
-        limitations: ["Unexpected EMET server error."],
+function disabledResponse() {
+  return NextResponse.json(
+    {
+      status: "disabled",
+      explanation:
+        "Live EMET is not available in the free-reader release.",
+      citations: [],
+      limitations: [
+        "Live AI requires authenticated premium access and usage controls.",
+      ],
+    },
+    {
+      status: 503,
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
       },
-      { status: 500 }
-    );
-  }
+    },
+  );
+}
+
+export async function GET() {
+  return disabledResponse();
+}
+
+export async function POST() {
+  return disabledResponse();
 }

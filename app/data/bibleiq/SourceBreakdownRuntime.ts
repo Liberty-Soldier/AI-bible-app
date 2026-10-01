@@ -19,6 +19,22 @@ export type SourceBreakdownOccurrence = {
   partOfSpeech?: string | null;
   meaning?: string | null;
   grammarOnly?: boolean;
+  lexicalResolution?:
+    | {
+        status: "resolved";
+        authority: string;
+        method: "exact-occurrence-stream" | "unique-monotonic-surface-anchor";
+        corpus: SourceBreakdownCorpus;
+        lexicalId: string;
+        entityId: string;
+      }
+    | {
+        status: "unresolved";
+        authority: string;
+        method: "fail-closed";
+        corpus: SourceBreakdownCorpus;
+        reason: string;
+      };
 };
 
 export type SourceBreakdownSourceVerse = {

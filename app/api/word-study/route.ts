@@ -34,6 +34,17 @@ export async function GET(request: Request) {
       selectedText:
         searchParams.get("selectedText") || undefined,
       verseText: searchParams.get("verseText") || undefined,
+      sourceOccurrenceId:
+        searchParams.get("sourceOccurrenceId") || undefined,
+      sourceLexicalId:
+        searchParams.get("sourceLexicalId") || undefined,
+      sourceCorpus:
+        (searchParams.get("sourceCorpus") as BibleIQRequest["sourceCorpus"]) ||
+        undefined,
+      sourceResolutionAuthority:
+        searchParams.get("sourceResolutionAuthority") || undefined,
+      sourceResolutionMethod:
+        searchParams.get("sourceResolutionMethod") || undefined,
     };
 
     const runtimeHeaders: Record<string, string> = {};

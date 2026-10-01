@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "repo": "C:\\Users\\CreatorStudio\\ai-bible-app",
+  "output": "C:\\Users\\CreatorStudio\\ai-bible-app\\public\\data\\bibleiq\\source-breakdown\\runtime",
+  "immutableAuthorities": {
+    "verseMap": "C:\\Users\\CreatorStudio\\ai-bible-app\\public\\data\\bibleiq\\source-breakdown\\verse-map.json",
+    "wlcSourceGraph": "C:\\Users\\CreatorStudio\\ai-bible-app\\.private\\scripture\\canonical\\source-graphs\\wlc-morpheme\\v2\\books",
+    "wlcTopology": "C:\\Users\\CreatorStudio\\ai-bible-app\\.private\\scripture\\canonical\\source-graphs\\wlc-morpheme\\v2\\source-slot-topology.v2.jsonl.gz",
+    "openGnt": "C:\\Users\\CreatorStudio\\ai-bible-app\\app\\data\\bibleiq\\canonical\\greek-nt",
+    "lxxCanonical": "C:\\Users\\CreatorStudio\\ai-bible-app\\app\\data\\bibleiq\\canonical\\lxx",
+    "lxxOccurrenceMorphology": "C:\\Users\\CreatorStudio\\ai-bible-app\\sources\\lxx-greek\\LXX-Rahlfs-1935-master\\11_end-users_files\\MyBible\\Bibles\\LXX_final_main.csv"
+  },
+  "stats": {
+    "displayedVerseMappings": 89389,
+    "sourceVerseIndexEntries": 58009,
+    "hebrew": {
+      "realOccurrences": 306785,
+      "lexicalOccurrences": 300808,
+      "grammarOnlyOccurrences": 5977,
+      "constructionSummariesExcluded": 401,
+      "missingTopology": 0,
+      "emittedSourceVerses": 23147
+    },
+    "greekNt": {
+      "sourceVerses": 7941,
+      "sourceOccurrences": 138013,
+      "referencedEntities": 5380,
+      "missingEntities": 0,
+      "missingReaderMeanings": 0,
+      "missingTransliterationEntities": 205,
+      "emittedSourceVerses": 7939
+    },
+    "lxx": {
+      "canonicalSourceVerses": 27237,
+      "emittedSourceVerses": 26923,
+      "morphologyAttachedOccurrences": 549856,
+      "morphologyUnavailableOccurrences": 266,
+      "exactOccurrenceStreamResolutions": 541905,
+      "uniqueAnchorResolutions": 7951,
+      "unresolvedOccurrences": 266,
+      "correctedCanonicalIdentities": 53004,
+      "morphologyAuthority": "LXX_final_main.csv exact per-occurrence surface + lexical ID + morphology",
+      "lexicalIdentityPolicy": "authoritative occurrence identity only; ambiguous matches fail closed"
+    }
+  },
+  "missingMappedSourceVerses": 0,
+  "sourceTextsModified": false,
+  "alignmentRegenerated": false,
+  "deploymentPerformed": false
+}

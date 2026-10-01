@@ -12,8 +12,6 @@ const files = {
   read: path.join(repo, "app", "read", "page.tsx"),
   search: path.join(repo, "app", "search", "page.tsx"),
   ask: path.join(repo, "app", "ask", "page.tsx"),
-  askView: path.join(repo, "app", "components", "ask", "AskView.tsx"),
-  globalAsk: path.join(repo, "app", "components", "GlobalAskButton.tsx"),
 };
 
 function fail(message) {
@@ -77,24 +75,15 @@ for (const plannedLabel of ["Hebrew", "Greek NT"]) {
   }
 }
 
-for (const marker of [
-  "Ask EMET",
-  "View premium access",
-  "Three distinct paths",
-  "Reading, Scripture Search, and cached word studies remain separate.",
-]) {
+for (const marker of ["redirect", '"/search"', "encodeURIComponent(query)"]) {
   if (!ask.includes(marker)) {
-    fail(`Missing compact Ask EMET marker: ${marker}`);
+    fail(`Missing free-reader Ask redirect marker: ${marker}`);
   }
 }
 
-for (const legacy of [
-  "Ask Scripture-grounded questions",
-  "View upgrade information",
-  'rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6',
-]) {
+for (const legacy of ["Ask EMET", "View premium access", "PremiumLockBadge"]) {
   if (ask.includes(legacy)) {
-    fail(`Legacy oversized Ask placeholder remains: ${legacy}`);
+    fail(`Inactive premium Ask surface remains: ${legacy}`);
   }
 }
 
@@ -131,14 +120,14 @@ for (const file of [
 }
 
 console.log(JSON.stringify({
-  verdict: "P08_6_P08_7_TRANSLATION_FUTUREPROOF_ASK_POLISH_VERIFIED",
+  verdict: "P08_6_P08_7_TRANSLATION_FUTUREPROOF_FREE_MVP_VERIFIED",
   currentVisibleTranslations: ["web", "kjv", "brenton"],
   plannedCatalogEntries: ["hebrew", "greek-nt"],
   plannedEntriesVisible: false,
   globalPreferenceHelperUsed: true,
-  askPlaceholderCompacted: true,
-  askProductionRetrievalChanged: false,
-  globalAskEntryChanged: false,
+  askRouteRedirectsToSearch: true,
+  askProductionRetrievalDisabled: true,
+  globalAskEntryRemoved: true,
   p09ImplementationStarted: false,
   p07Touched: false
 }, null, 2));

@@ -102,6 +102,11 @@ export type BibleIQRequest = {
   originalWord?: string;
   selectedText?: string;
   verseText?: string;
+  sourceOccurrenceId?: string;
+  sourceLexicalId?: string;
+  sourceCorpus?: BibleIQSource;
+  sourceResolutionAuthority?: string;
+  sourceResolutionMethod?: string;
 };
 
 export type BibleIQReference = {
@@ -159,6 +164,15 @@ export type BibleIQSourceAlignment = {
   sourceSegment?: BibleIQV2SourceSegment;
   sourceComponentEvidence?: BibleIQSourceComponentEvidence[];
   noForcedSingleSourceIdentity?: boolean;
+  lexicalResolution?: {
+    status: "resolved";
+    sourceOccurrenceId: string;
+    authority: string;
+    method: string;
+    corpus: BibleIQSource;
+    lexicalId: string;
+    entityId: string;
+  };
 };
 
 export type BibleIQEmetCitation = {

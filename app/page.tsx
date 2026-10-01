@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
-import { usePremiumAccess } from "@/app/components/premium/PremiumAccessProvider";
 import {
   getReaderMemory,
   getReaderMemoryVerseLabel,
@@ -26,7 +25,6 @@ function getTranslationLabel(translation: string) {
 }
 
 function HomePage() {
-  const { requestUpgrade } = usePremiumAccess();
   const [search, setSearch] = useState("");
   const [lastReading, setLastReading] =
     useState<LastReadingPosition | null>(null);
@@ -60,17 +58,6 @@ function HomePage() {
     [memory.notes]
   );
 
-  function goToAsk() {
-    const finalQuery = search.trim();
-
-    requestUpgrade(
-      "ask-emet",
-      finalQuery
-        ? `Question: ${finalQuery}`
-        : "Ask from your current reading context",
-    );
-  }
-
   return (
     <main className="min-h-screen bg-[var(--background)] px-5 pb-28 pt-4 text-[var(--foreground)]">
       <section className="mx-auto max-w-xl">
@@ -82,26 +69,27 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3 shadow-[var(--shadow-sm)]">
+        <form
+          action="/search"
+          className="flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3 shadow-[var(--shadow-sm)]"
+        >
           <input
             type="text"
-            placeholder="Ask a question about Scripture"
+            name="q"
+            placeholder="Search Scripture"
+            aria-label="Search Scripture"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") goToAsk();
-            }}
             className="min-w-0 flex-1 bg-transparent text-base text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
           />
 
           <button
-            type="button"
-            onClick={goToAsk}
+            type="submit"
             className="ml-3 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-bold text-[var(--accent-text)] transition active:scale-[0.98]"
           >
-            Ask EMET
+            Search
           </button>
-        </div>
+        </form>
 
         {lastReading ? (
           <Link

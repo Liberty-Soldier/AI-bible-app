@@ -3,6 +3,10 @@
 const fs = require("fs");
 const path = require("path");
 const zlib = require("zlib");
+const {
+  parseTaggedOccurrenceStream,
+  resolveOccurrenceStream,
+} = require("./lxx-occurrence-resolver.cjs");
 
 const ROOT = process.cwd();
 
@@ -85,6 +89,14 @@ const PATHS = {
     "MyBible",
     "Bibles",
     "LXX_final_main.csv"
+  ),
+
+  lxxLexicon: path.join(
+    ROOT,
+    "app",
+    "data",
+    "lexicon",
+    "generatedLXXGreekLexiconV12.json"
   ),
 
   out: path.join(
@@ -1277,16 +1289,12 @@ function parseLxxMorphFile() {
     const verse = line.slice(second + 1, third).trim();
     const stream = line.slice(third + 1);
 
-    const occurrences = [];
-
-    const rx = /<S>(\d+)<\/S><m>(lxx\.[^<]+)<\/m>/g;
-
-    for (const match of stream.matchAll(rx)) {
-      occurrences.push({
-        lxxId: `L${match[1]}`,
-        morphology: match[2],
-      });
-    }
+    const occurrences = parseTaggedOccurrenceStream(stream).map(
+      (occurrence) => ({
+        ...occurrence,
+        lxxId: occurrence.lexicalId,
+      }),
+    );
 
     const record = {
       bookNo,
@@ -1372,6 +1380,9 @@ function resolveLxxBookNumber(bookVerses, morphIndex) {
 function buildLxxRuntime(needed) {
   const canonicalVerses = readCanonicalCorpus(PATHS.lxx);
   const morphIndex = parseLxxMorphFile();
+  const lexiconById = new Map(
+    readJson(PATHS.lxxLexicon).map((entry) => [entry.lxxId, entry]),
+  );
 
   const byBook = new Map();
 
@@ -1400,6 +1411,10 @@ function buildLxxRuntime(needed) {
 
   let morphAttached = 0;
   let morphMissing = 0;
+  let exactOccurrenceStreamResolutions = 0;
+  let uniqueAnchorResolutions = 0;
+  let unresolvedOccurrences = 0;
+  let correctedCanonicalIdentities = 0;
 
   const grouped = new Map();
 
@@ -1422,54 +1437,75 @@ function buildLxxRuntime(needed) {
       .get(bno)
       ?.get(`${verse.chapter}:${verse.verse}`);
 
-    const morphBuckets = new Map();
+    const authoritativeOccurrences = morphVerse?.occurrences || [];
+    const resolutions = resolveOccurrenceStream(
+      tokens,
+      authoritativeOccurrences,
+    );
 
-    for (const entry of morphVerse?.occurrences || []) {
-      if (!morphBuckets.has(entry.lxxId)) {
-        morphBuckets.set(entry.lxxId, []);
-      }
+    const occurrences = tokens.map((token, tokenIndex) => {
+      const resolution = resolutions[tokenIndex];
+      const authoritative = resolution
+        ? authoritativeOccurrences[resolution.authoritativeIndex]
+        : null;
+      const lexical = authoritative
+        ? lexiconById.get(authoritative.lxxId)
+        : null;
+      const resolved = Boolean(authoritative && lexical);
 
-      morphBuckets.get(entry.lxxId).push(entry.morphology);
-    }
-
-    const morphCursor = new Map();
-
-    const occurrences = tokens.map((token) => {
-      let morphology = null;
-
-      if (token.lxxId) {
-        const list = morphBuckets.get(token.lxxId) || [];
-        const cursor = morphCursor.get(token.lxxId) || 0;
-
-        morphology = list[cursor] || null;
-        morphCursor.set(token.lxxId, cursor + 1);
-
-        if (morphology) morphAttached += 1;
-        else morphMissing += 1;
+      if (resolved) {
+        morphAttached += 1;
+        if (resolution.method === "exact-occurrence-stream") {
+          exactOccurrenceStreamResolutions += 1;
+        } else {
+          uniqueAnchorResolutions += 1;
+        }
+        if (token.lxxId !== authoritative.lxxId) {
+          correctedCanonicalIdentities += 1;
+        }
+      } else {
+        morphMissing += 1;
+        unresolvedOccurrences += 1;
       }
 
       return {
         id: token.tokenId || token.id,
         sourceOrder: Number(token.index),
         surface: token.surface || "",
-        lemma: token.lemma || null,
-        transliteration: token.transliteration || null,
+        lemma: resolved ? lexical.lemma || null : null,
+        transliteration: resolved ? lexical.transliteration || null : null,
 
-        // LXX lexical ID is honest even when no NT Strong number exists.
-        lexicalId: token.lxxId || null,
-        entityId: token.entityId || null,
+        // Identity comes only from the authoritative occurrence stream.
+        lexicalId: resolved ? authoritative.lxxId : null,
+        entityId: resolved ? `word:lxx:${authoritative.lxxId}` : null,
 
-        // Only authoritative occurrence morphology from LXX_final_main.csv.
-        morphology,
+        morphology: resolved ? authoritative.morphology : null,
         morphologyEnglish: null,
 
-        // Kept separate: lexical POS is not occurrence morphology.
-        partOfSpeech: token.partOfSpeech || null,
+        partOfSpeech: resolved ? lexical.partOfSpeech || null : null,
 
-        meaning:
-          token.shortDefinition ||
-          token.gloss ||
-          null,
+        meaning: resolved
+          ? lexical.shortDefinition || lexical.gloss || null
+          : null,
+
+        lexicalResolution: resolved
+          ? {
+              status: "resolved",
+              authority: "LXX_final_main.csv occurrence stream",
+              method: resolution.method,
+              corpus: "lxx",
+              lexicalId: authoritative.lxxId,
+              entityId: `word:lxx:${authoritative.lxxId}`,
+            }
+          : {
+              status: "unresolved",
+              authority: "LXX_final_main.csv occurrence stream",
+              method: "fail-closed",
+              corpus: "lxx",
+              reason: authoritative
+                ? "authoritative lexical ID is missing from the LXX lexicon"
+                : "source occurrence does not have a unique authoritative stream match",
+            },
 
         grammarOnly: false,
       };
@@ -1497,8 +1533,14 @@ function buildLxxRuntime(needed) {
       emittedSourceVerses: grouped.size,
       morphologyAttachedOccurrences: morphAttached,
       morphologyUnavailableOccurrences: morphMissing,
+      exactOccurrenceStreamResolutions,
+      uniqueAnchorResolutions,
+      unresolvedOccurrences,
+      correctedCanonicalIdentities,
       morphologyAuthority:
-        "LXX_final_main.csv exact source verse + repeated lxxId occurrence order",
+        "LXX_final_main.csv exact per-occurrence surface + lexical ID + morphology",
+      lexicalIdentityPolicy:
+        "authoritative occurrence identity only; ambiguous matches fail closed",
     },
   };
 }
@@ -1568,6 +1610,7 @@ function main() {
   assertDir(PATHS.greekNt);
   assertDir(PATHS.lxx);
   assertFile(PATHS.lxxMorph);
+  assertFile(PATHS.lxxLexicon);
 
   const verseMap = readJson(PATHS.verseMap);
   const { displayIndex, needed } = buildDisplayIndex(verseMap);
@@ -1703,14 +1746,10 @@ function main() {
   fs.mkdirSync(path.dirname(PATHS.out), { recursive: true });
   fs.renameSync(tmp, PATHS.out);
 
-  const downloads = path.join(
-    process.env.USERPROFILE || ROOT,
-    "Downloads"
-  );
-
   const reportPath = path.join(
-    downloads,
-    `EMETSEES-PHASE1-SOURCE-BREAKDOWN-RUNTIME-${Date.now()}.json`
+    ROOT,
+    "reports",
+    "phase1-source-breakdown-runtime-audit.json"
   );
 
   const report = {

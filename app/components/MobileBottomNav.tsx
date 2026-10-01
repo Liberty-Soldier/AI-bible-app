@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { useReaderChromeVisibility } from "@/app/components/useReaderChromeVisibility";
 
 function Icon({
   name,
 }: {
-  name: "home" | "read" | "search" | "settings";
+  name: "home" | "read" | "search" | "library" | "settings";
 }) {
   const paths = {
     home: (
@@ -27,6 +26,14 @@ function Icon({
       <>
         <circle cx="10.5" cy="10.5" r="6.5" />
         <path d="m15.5 15.5 5 5" />
+      </>
+    ),
+    library: (
+      <>
+        <path d="M5 4.5h14v16H5z" />
+        <path d="M8 4.5v16" />
+        <path d="M11 8h5" />
+        <path d="M11 12h5" />
       </>
     ),
     settings: (
@@ -71,9 +78,9 @@ export default function MobileBottomNav({
     { href: "/", label: "Home", icon: "home" as const },
     { href: "/read", label: "Read", icon: "read" as const },
     { href: "/search", label: "Search", icon: "search" as const },
+    { href: "/library", label: "Library", icon: "library" as const },
   ];
 
-  const askActive = activeFor("/ask");
   const settingsActive = activeFor("/settings");
 
   function navItemClass(active: boolean) {
@@ -105,19 +112,6 @@ export default function MobileBottomNav({
             </Link>
           );
         })}
-
-        <Link
-          href="/ask"
-          aria-label="Ask EMET"
-          aria-current={askActive ? "page" : undefined}
-          className={navItemClass(askActive)}
-        >
-          <EmetseesLogo
-            size={21}
-            variant={askActive ? "gold" : "auto"}
-          />
-          <span>Ask EMET</span>
-        </Link>
 
         <Link
           href="/settings"

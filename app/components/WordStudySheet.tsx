@@ -38,6 +38,11 @@ type WordStudySheetProps = {
   selectedText?: string;
   originalWord?: string;
   verseText?: string;
+  sourceOccurrenceId?: string;
+  sourceLexicalId?: string;
+  sourceCorpus?: "hebrew" | "greek-nt" | "lxx";
+  sourceResolutionAuthority?: string;
+  sourceResolutionMethod?: string;
   presentation?: "sheet" | "inline";
   onClose: () => void;
 };
@@ -787,6 +792,11 @@ export default function WordStudySheet({
   selectedText,
   originalWord,
   verseText,
+  sourceOccurrenceId,
+  sourceLexicalId,
+  sourceCorpus,
+  sourceResolutionAuthority,
+  sourceResolutionMethod,
   presentation = "sheet",
   onClose,
 }: WordStudySheetProps) {
@@ -886,6 +896,11 @@ export default function WordStudySheet({
             selectedText: selectedText ?? "",
             originalWord: originalWord ?? "",
             verseText: verseText ?? "",
+            sourceOccurrenceId: sourceOccurrenceId ?? "",
+            sourceLexicalId: sourceLexicalId ?? "",
+            sourceCorpus: sourceCorpus ?? "",
+            sourceResolutionAuthority: sourceResolutionAuthority ?? "",
+            sourceResolutionMethod: sourceResolutionMethod ?? "",
           }).toString()}`,
         );
 
@@ -915,6 +930,7 @@ export default function WordStudySheet({
       cancelled = true;
     };
   }, [
+    entityId,
     word,
     book,
     chapter,
@@ -925,6 +941,11 @@ export default function WordStudySheet({
     selectedText,
     originalWord,
     verseText,
+    sourceOccurrenceId,
+    sourceLexicalId,
+    sourceCorpus,
+    sourceResolutionAuthority,
+    sourceResolutionMethod,
   ]);
 
   useEffect(() => {

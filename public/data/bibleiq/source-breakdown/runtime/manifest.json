@@ -1,6 +1,6 @@
 {
   "schema": "emet-phase1-source-breakdown-runtime/v1",
-  "generatedAt": "2026-09-24T14:48:35.803Z",
+  "generatedAt": "2026-09-30T19:04:08.914Z",
   "policy": {
     "interaction": "verse-first",
     "englishWordToSourceHighlighting": false,
@@ -232075,9 +232075,14 @@
     "lxx": {
       "canonicalSourceVerses": 27237,
       "emittedSourceVerses": 26923,
-      "morphologyAttachedOccurrences": 497578,
-      "morphologyUnavailableOccurrences": 52278,
-      "morphologyAuthority": "LXX_final_main.csv exact source verse + repeated lxxId occurrence order"
+      "morphologyAttachedOccurrences": 549856,
+      "morphologyUnavailableOccurrences": 266,
+      "exactOccurrenceStreamResolutions": 541905,
+      "uniqueAnchorResolutions": 7951,
+      "unresolvedOccurrences": 266,
+      "correctedCanonicalIdentities": 53004,
+      "morphologyAuthority": "LXX_final_main.csv exact per-occurrence surface + lexical ID + morphology",
+      "lexicalIdentityPolicy": "authoritative occurrence identity only; ambiguous matches fail closed"
     }
   },
   "nonBlocking": {

@@ -1,0 +1,283 @@
+{
+  "schema": "emet-lxx-occurrence-resolution-audit/v1",
+  "generatedAt": "2026-09-30T19:16:32.139Z",
+  "authorities": {
+    "sourceTextAndOrder": "app/data/bibleiq/canonical/lxx",
+    "occurrenceIdentityAndMorphology": "LXX_final_main.csv",
+    "lexicalEntityMetadata": "generatedLXXGreekLexiconV12.json by exact LXX ID"
+  },
+  "policy": {
+    "englishAlignmentChoosesIdentity": false,
+    "normalizedSurfaceChoosesIdentity": false,
+    "ambiguousIdentityFailsClosed": true
+  },
+  "stats": {
+    "books": 49,
+    "verses": 27237,
+    "sourceOccurrences": 554111,
+    "normalizedSurfaceCollisionKeys": 1046,
+    "collisionExposedOccurrences": 114400,
+    "exactStreamVerses": 27152,
+    "nonExactStreamVerses": 85,
+    "exactStreamComparableOccurrences": 545727,
+    "preRepairIdentityMismatches": 52564,
+    "resolvedByExactOccurrenceStream": 545727,
+    "resolvedByUniqueMonotonicSurfaceAnchor": 8112,
+    "failClosedUnresolvedOccurrences": 272,
+    "authoritativeIdsMissingLexicon": 0,
+    "postRepairResolvedIdentityMismatches": 0,
+    "postRepairCrossCorpusEntityLeaks": 0
+  },
+  "topPreRepairMisroutes": [
+    {
+      "route": "L702167->L702165",
+      "count": 7964
+    },
+    {
+      "route": "L709781->L709436",
+      "count": 5059
+    },
+    {
+      "route": "L704094->L704093",
+      "count": 4336
+    },
+    {
+      "route": "L709806->L709805",
+      "count": 3513
+    },
+    {
+      "route": "L705924->L709436",
+      "count": 3367
+    },
+    {
+      "route": "L703917->L702165",
+      "count": 3338
+    },
+    {
+      "route": "L705414->L705373",
+      "count": 2888
+    },
+    {
+      "route": "L706838->L706839",
+      "count": 2552
+    },
+    {
+      "route": "L714147->L714148",
+      "count": 1849
+    },
+    {
+      "route": "L712866->L712867",
+      "count": 1372
+    },
+    {
+      "route": "L704828->L704132",
+      "count": 875
+    },
+    {
+      "route": "L712913->L709858",
+      "count": 856
+    },
+    {
+      "route": "L709781->L704093",
+      "count": 780
+    },
+    {
+      "route": "L704075->L709725",
+      "count": 721
+    },
+    {
+      "route": "L704105->L704106",
+      "count": 721
+    },
+    {
+      "route": "L709436->L709781",
+      "count": 410
+    },
+    {
+      "route": "L705414->L705415",
+      "count": 405
+    },
+    {
+      "route": "L709499->L709516",
+      "count": 385
+    },
+    {
+      "route": "L700001->L709781",
+      "count": 379
+    },
+    {
+      "route": "L709348->L709349",
+      "count": 377
+    },
+    {
+      "route": "L714118->L709781",
+      "count": 366
+    },
+    {
+      "route": "L702165->L709858",
+      "count": 361
+    },
+    {
+      "route": "L700901->L700902",
+      "count": 343
+    },
+    {
+      "route": "L709805->L709781",
+      "count": 319
+    },
+    {
+      "route": "L709769->L709768",
+      "count": 317
+    },
+    {
+      "route": "L705924->L709781",
+      "count": 313
+    },
+    {
+      "route": "L711431->L711430",
+      "count": 282
+    },
+    {
+      "route": "L708873->L708874",
+      "count": 269
+    },
+    {
+      "route": "L708124->L705373",
+      "count": 249
+    },
+    {
+      "route": "L709852->L709781",
+      "count": 236
+    },
+    {
+      "route": "L705495->L713296",
+      "count": 218
+    },
+    {
+      "route": "L704071->L704093",
+      "count": 208
+    },
+    {
+      "route": "L711843->L711844",
+      "count": 195
+    },
+    {
+      "route": "L714081->L709781",
+      "count": 174
+    },
+    {
+      "route": "L701072->L701071",
+      "count": 167
+    },
+    {
+      "route": "L700152->L700159",
+      "count": 148
+    },
+    {
+      "route": "L710584->L710582",
+      "count": 142
+    },
+    {
+      "route": "L710195->L710192",
+      "count": 139
+    },
+    {
+      "route": "L713799->L713787",
+      "count": 135
+    },
+    {
+      "route": "L709461->L709458",
+      "count": 126
+    },
+    {
+      "route": "L711120->L711121",
+      "count": 121
+    },
+    {
+      "route": "L709805->L709806",
+      "count": 114
+    },
+    {
+      "route": "L710705->L710706",
+      "count": 112
+    },
+    {
+      "route": "L711101->L711088",
+      "count": 110
+    },
+    {
+      "route": "L704743->L704106",
+      "count": 99
+    },
+    {
+      "route": "L709736->L709768",
+      "count": 98
+    },
+    {
+      "route": "L704639->L704106",
+      "count": 97
+    },
+    {
+      "route": "L705924->L704093",
+      "count": 97
+    },
+    {
+      "route": "L710442->L710443",
+      "count": 87
+    },
+    {
+      "route": "L701912->L701909",
+      "count": 77
+    }
+  ],
+  "genesis2_2Regression": {
+    "ἕκτῃ": [
+      {
+        "lexicalId": "L704340",
+        "entityId": "word:lxx:L704340",
+        "lemma": "ἕκτος",
+        "gloss": "sixth",
+        "morphology": "lxx.A.DSF",
+        "method": "exact-occurrence-stream"
+      }
+    ],
+    "αὐτοῦ": [
+      {
+        "lexicalId": "L702165",
+        "entityId": "word:lxx:L702165",
+        "lemma": "αὐτός",
+        "gloss": "he; him",
+        "morphology": "lxx.RD.GSM",
+        "method": "exact-occurrence-stream"
+      },
+      {
+        "lexicalId": "L702165",
+        "entityId": "word:lxx:L702165",
+        "lemma": "αὐτός",
+        "gloss": "he; him",
+        "morphology": "lxx.RD.GSM",
+        "method": "exact-occurrence-stream"
+      }
+    ],
+    "ἃ": [
+      {
+        "lexicalId": "L709781",
+        "entityId": "word:lxx:L709781",
+        "lemma": "ὅς",
+        "gloss": "who; what",
+        "morphology": "lxx.RR.APN",
+        "method": "exact-occurrence-stream"
+      }
+    ],
+    "ὧν": [
+      {
+        "lexicalId": "L709781",
+        "entityId": "word:lxx:L709781",
+        "lemma": "ὅς",
+        "gloss": "who; what",
+        "morphology": "lxx.RR.GPN",
+        "method": "exact-occurrence-stream"
+      }
+    ]
+  }
+}

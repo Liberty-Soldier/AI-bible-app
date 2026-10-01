@@ -536,6 +536,31 @@ export default function ReaderVerseStudy({
                   breakdown.corpus,
                 )}
                 verseText={verseText}
+                sourceOccurrenceId={
+                  wordOverview.lexicalResolution?.status === "resolved"
+                    ? wordOverview.id
+                    : undefined
+                }
+                sourceLexicalId={
+                  wordOverview.lexicalResolution?.status === "resolved"
+                    ? wordOverview.lexicalId || undefined
+                    : undefined
+                }
+                sourceCorpus={
+                  wordOverview.lexicalResolution?.status === "resolved"
+                    ? breakdown.corpus
+                    : undefined
+                }
+                sourceResolutionAuthority={
+                  wordOverview.lexicalResolution?.status === "resolved"
+                    ? wordOverview.lexicalResolution.authority
+                    : undefined
+                }
+                sourceResolutionMethod={
+                  wordOverview.lexicalResolution?.status === "resolved"
+                    ? wordOverview.lexicalResolution.method
+                    : undefined
+                }
                 onClose={() => setWordOverview(null)}
               />
             </div>

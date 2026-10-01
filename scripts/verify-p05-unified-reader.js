@@ -47,10 +47,7 @@ const wordSheet = read("app/components/WordStudySheet.tsx");
 const wordRoute = read("app/api/word-study/route.ts");
 const mobileNav = read("app/components/MobileBottomNav.tsx");
 const layout = read("app/layout.tsx");
-const globalAsk = read("app/components/GlobalAskButton.tsx");
-const premiumProvider = read(
-  "app/components/premium/PremiumAccessProvider.tsx",
-);
+const liveEmetRoute = read("app/api/emet/explain/route.ts");
 const entityStore = read("app/data/lexicon/WordStudyEntityStore.ts");
 const buildEntityRuntime = read(
   "scripts/build-word-study-entity-runtime.js",
@@ -209,45 +206,31 @@ assertPresent(
 );
 assertPresent(
   mobileNav,
-  /href(?::|=)\s*["']\/ask["']/,
-  "mobile nav Ask EMET route",
+  /href(?::|=)\s*["']\/library["']/,
+  "mobile nav Library route",
 );
 assertPresent(
   mobileNav,
   /href(?::|=)\s*["']\/settings["']/,
   "mobile nav Settings route",
 );
-assertAbsent(
-  mobileNav,
-  /href(?::|=)\s*["']\/library["']/,
-  "mobile nav",
-);
+assertAbsent(mobileNav, /href(?::|=)\s*["']\/ask["']/, "mobile nav");
 assertAbsent(
   mobileNav,
   /href(?::|=)\s*["']\/study["']/,
   "mobile nav",
 );
 
-assertPresent(layout, /PremiumAccessProvider/, "root layout");
+assertAbsent(layout, /PremiumAccessProvider/, "root layout");
 assertAbsent(layout, /GlobalAskButton/, "root layout");
-assertPresent(
-  mobileNav,
-  /href=["']\/ask["']/,
-  "mobile Ask EMET route",
-);
-assertPresent(
-  mobileNav,
-  /aria-label=["']Ask EMET["']/,
-  "mobile Ask EMET accessible label",
-);
 assertAbsent(
   mobileNav,
-  /requestUpgrade\("ask-emet"/,
-  "mobile Ask EMET route",
+  /Ask EMET|requestUpgrade\("ask-emet"/,
+  "free-reader navigation",
 );
-assertPresent(globalAsk, /feature=["']ask-emet["']/, "global Ask EMET button");
-assertPresent(premiumProvider, /initialPlan\s*=\s*["']free["']/, "premium provider");
-assertPresent(premiumProvider, /initialPlan\s*===\s*["']paid["']/, "premium provider");
+assertPresent(liveEmetRoute, /status:\s*["']disabled["']/, "live EMET route");
+assertPresent(liveEmetRoute, /status:\s*503/, "live EMET route");
+assertAbsent(liveEmetRoute, /openai|explainWithEmet/i, "live EMET route");
 
 assertAbsent(wordSheet, /\/api\/emet\/explain/, "WordStudySheet");
 assertAbsent(
@@ -302,7 +285,8 @@ console.log("- One reader experience");
 console.log("- English Scripture is reading-only");
 console.log("- Only original-language lexical words are tappable");
 console.log("- Verse-number actions are preserved");
-console.log("- Paid features remain centrally gated");
+console.log("- Inactive paid entry points are absent from the free-reader shell");
+console.log("- Live EMET is fail-closed");
 console.log("- No live AI runs on ordinary word taps");
 console.log("- Source-owned occurrence routing is preserved");
 console.log("- Exact source correspondence is visual-only and fails closed");

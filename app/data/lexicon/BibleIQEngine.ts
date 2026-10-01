@@ -9,6 +9,7 @@ import {
   type WordStudyRuntimeEntity,
   type WordStudyRuntimeReference,
 } from "./WordStudyEntityStore";
+import { loadLxxOccurrenceEntity } from "./LxxOccurrenceEntityStore";
 import {
   loadFinalEmetRecord,
   type FinalEmetRuntimeRecord,
@@ -591,6 +592,22 @@ function buildRuntimeEntity({
     sourceSegment,
     sourceComponentEvidence,
     noForcedSingleSourceIdentity: false,
+    lexicalResolution:
+      input.sourceOccurrenceId &&
+      input.sourceLexicalId &&
+      input.sourceCorpus &&
+      input.sourceResolutionAuthority &&
+      input.sourceResolutionMethod
+        ? {
+            status: "resolved",
+            sourceOccurrenceId: input.sourceOccurrenceId,
+            authority: input.sourceResolutionAuthority,
+            method: input.sourceResolutionMethod,
+            corpus: input.sourceCorpus,
+            lexicalId: input.sourceLexicalId,
+            entityId: runtime.entityId,
+          }
+        : undefined,
   };
 
   const approvedExplanation =
@@ -641,6 +658,10 @@ function buildRuntimeEntity({
         }
       : finalEmet?.status === "no-explanation"
         ? {
+            scope: "entity" as const,
+            sourceEntityId: runtime.entityId,
+            sourceLemma: lemma,
+            sourceLexicalId: identity.lexicalId,
             status: "insufficient-evidence" as const,
             approval: "no-explanation-p07" as const,
             explanation: undefined,
@@ -649,6 +670,10 @@ function buildRuntimeEntity({
             packet: null,
           }
         : {
+            scope: "entity" as const,
+            sourceEntityId: runtime.entityId,
+            sourceLemma: lemma,
+            sourceLexicalId: identity.lexicalId,
             status: "missing" as const,
             explanation: undefined,
             citations: [],
@@ -1367,11 +1392,60 @@ export async function resolveBibleIQ(
   const requestedEntityId = normalizeWordEntityId(input.entityId || "");
 
   if (requestedEntityId) {
-    const runtime = await loadWordStudyEntity(
+    const hasOccurrenceContract = Boolean(
+      input.sourceOccurrenceId ||
+        input.sourceLexicalId ||
+        input.sourceCorpus ||
+        input.sourceResolutionAuthority ||
+        input.sourceResolutionMethod,
+    );
+    const expectedOccurrenceEntityId =
+      input.sourceCorpus && input.sourceLexicalId
+        ? normalizeWordEntityId(
+            `word:${input.sourceCorpus}:${input.sourceLexicalId}`,
+          )
+        : null;
+
+    if (
+      hasOccurrenceContract &&
+      (!input.sourceOccurrenceId ||
+        !input.sourceLexicalId ||
+        !input.sourceCorpus ||
+        !input.sourceResolutionAuthority ||
+        !input.sourceResolutionMethod ||
+        expectedOccurrenceEntityId !== requestedEntityId)
+    ) {
+      return {
+        resolved: false,
+        resolutionType: "unresolved",
+        preferredSource,
+        query: input.displayWord || requestedEntityId,
+        message:
+          "This source occurrence does not have one verified lexical identity.",
+      };
+    }
+
+    let runtime = await loadWordStudyEntity(
       origin,
       requestedEntityId,
       requestHeaders,
     );
+    let occurrenceEvidenceOverride = false;
+
+    if (
+      hasOccurrenceContract &&
+      input.sourceCorpus === "lxx"
+    ) {
+      const occurrenceRuntime = await loadLxxOccurrenceEntity(
+        origin,
+        requestedEntityId,
+        requestHeaders,
+      );
+      if (occurrenceRuntime) {
+        runtime = occurrenceRuntime;
+        occurrenceEvidenceOverride = true;
+      }
+    }
 
     if (!runtime) {
       return {
@@ -1383,11 +1457,29 @@ export async function resolveBibleIQ(
       };
     }
 
-    const finalEmet = await loadFinalEmetRecord(
-      origin,
-      runtime.entityId,
-      requestHeaders,
-    );
+    if (
+      hasOccurrenceContract &&
+      (runtime.corpus !== input.sourceCorpus ||
+        runtime.identity.lexicalId !== input.sourceLexicalId ||
+        runtime.entityId !== requestedEntityId)
+    ) {
+      return {
+        resolved: false,
+        resolutionType: "unresolved",
+        preferredSource,
+        query: input.displayWord || requestedEntityId,
+        message:
+          "The source occurrence identity disagrees with the canonical lexical entity.",
+      };
+    }
+
+    const finalEmet = occurrenceEvidenceOverride
+      ? null
+      : await loadFinalEmetRecord(
+          origin,
+          runtime.entityId,
+          requestHeaders,
+        );
     const directWord =
       input.displayWord?.trim() ||
       runtime.identity.lemma ||

@@ -405,6 +405,20 @@ async function verifyWordOverview(
         "",
     });
 
+  if (occurrence.lexicalResolution?.status === "resolved") {
+    query.set("sourceOccurrenceId", occurrence.id);
+    query.set("sourceLexicalId", occurrence.lexicalId);
+    query.set("sourceCorpus", data.corpus);
+    query.set(
+      "sourceResolutionAuthority",
+      occurrence.lexicalResolution.authority,
+    );
+    query.set(
+      "sourceResolutionMethod",
+      occurrence.lexicalResolution.method,
+    );
+  }
+
   const response =
     await fetch(
       `${base}/api/word-study?${query.toString()}`,
@@ -429,6 +443,20 @@ async function verifyWordOverview(
   ) {
     throw new Error(
       `${name}: lexical source word did not resolve in Word Overview: ${occurrence.lexicalId}`
+    );
+  }
+
+  const provenance = json.entity?.alignment?.lexicalResolution;
+  if (
+    occurrence.lexicalResolution?.status === "resolved" &&
+    (provenance?.sourceOccurrenceId !== occurrence.id ||
+      provenance?.lexicalId !== occurrence.lexicalId ||
+      provenance?.entityId !== occurrence.entityId ||
+      json.entity?.emet?.sourceEntityId !== occurrence.entityId ||
+      json.entity?.emet?.sourceLexicalId !== occurrence.lexicalId)
+  ) {
+    throw new Error(
+      `${name}: Reader, Word Overview, and EMET identity contract diverged`,
     );
   }
 
