@@ -24,6 +24,14 @@ const OUTPUT_ROOT = path.join(
 );
 const SHARD_COUNT = 64;
 
+function referenceKey(reference) {
+  let book = String(reference.book || "")
+    .replace(/[^0-9A-Za-z]+/g, "")
+    .toLowerCase();
+  if (book === "songofsongs" || book === "songofsolomon") book = "song";
+  return `${book}:${Number(reference.chapter)}:${Number(reference.verse)}`;
+}
+
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
@@ -57,7 +65,7 @@ function verifyRuntimeArtifacts() {
 
   const manifest = readJson(manifestPath);
   if (
-    manifest.schema !== "emet-lxx-occurrence-entity-fallback-manifest/v1" ||
+    manifest.schema !== "emet-lxx-occurrence-entity-fallback-manifest/v2" ||
     manifest.shardAlgorithm !== "fnv1a-32-mod" ||
     manifest.shardCount !== SHARD_COUNT ||
     manifest.policy?.identityAuthority !==
@@ -90,7 +98,7 @@ function verifyRuntimeArtifacts() {
     const shard = readJson(shardPath);
     const entries = Object.entries(shard.entities || {});
     if (
-      shard.schema !== "emet-lxx-occurrence-entity-fallback-shard/v1" ||
+      shard.schema !== "emet-lxx-occurrence-entity-fallback-shard/v2" ||
       shard.shard !== shardId ||
       shard.entityCount !== entries.length ||
       meta.entityCount !== entries.length
@@ -107,6 +115,7 @@ function verifyRuntimeArtifacts() {
         entity?.corpus !== "lxx" ||
         entity?.identity?.lexicalId !== lexicalId ||
         entity?.health?.status !== "occurrence-backed-lexical-fallback" ||
+        !Array.isArray(entity?.occurrences?.verifiedReferenceKeys) ||
         entity?.explanation?.citations?.length !== 0
       ) {
         throw new Error(`LXX occurrence fallback entity contract is invalid: ${entityId}.`);
@@ -273,6 +282,7 @@ function main() {
           ...reference,
           renderings: {},
         })),
+        verifiedReferenceKeys: references.map(referenceKey),
       },
       renderings: {
         available: false,
@@ -299,7 +309,7 @@ function main() {
         hasLemma: Boolean(lexical.lemma),
         hasLexicalId: true,
         hasReferences: references.length > 0,
-        compilerVersion: "lxx-occurrence-fallback/v1",
+        compilerVersion: "lxx-occurrence-fallback/v2",
       },
       explanation: {
         text: "No cached EMET explanation is available for this occurrence-backed lexical entity.",
@@ -328,7 +338,7 @@ function main() {
   for (let index = 0; index < SHARD_COUNT; index += 1) {
     const shardId = index.toString(16).padStart(2, "0");
     const shard = {
-      schema: "emet-lxx-occurrence-entity-fallback-shard/v1",
+      schema: "emet-lxx-occurrence-entity-fallback-shard/v2",
       shard: shardId,
       entityCount: Object.keys(shardEntities.get(shardId) || {}).length,
       entities: shardEntities.get(shardId) || {},
@@ -344,11 +354,13 @@ function main() {
   }
 
   const manifest = {
-    schema: "emet-lxx-occurrence-entity-fallback-manifest/v1",
+    schema: "emet-lxx-occurrence-entity-fallback-manifest/v2",
     shardAlgorithm: "fnv1a-32-mod",
     shardCount: SHARD_COUNT,
     policy: {
       ...policy,
+      externalEmetReuse:
+        "exact entity/corpus, independent approval, current meaning match, and every citation in verifiedReferenceKeys",
     },
     entityCount: Object.keys(entities).length,
     shards: shardManifest,

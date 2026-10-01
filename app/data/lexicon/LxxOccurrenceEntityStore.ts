@@ -5,9 +5,9 @@ import type { WordStudyRuntimeEntity } from "./WordStudyEntityStore";
 const RUNTIME_ROOT =
   "/data/bibleiq/word-study/lxx-occurrence-fallback";
 const EXPECTED_MANIFEST_SCHEMA =
-  "emet-lxx-occurrence-entity-fallback-manifest/v1";
+  "emet-lxx-occurrence-entity-fallback-manifest/v2";
 const EXPECTED_SHARD_SCHEMA =
-  "emet-lxx-occurrence-entity-fallback-shard/v1";
+  "emet-lxx-occurrence-entity-fallback-shard/v2";
 
 type RuntimeManifest = {
   schema: string;

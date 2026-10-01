@@ -465,6 +465,16 @@ function getEntityOwnedRenderings(
   const forms = translationBucket
     ? translationBucket.forms
     : evidence?.renderings?.mostCommon || [];
+  const explicitMeaningTerms = new Set(
+    [
+      ...(evidence?.lexical.shortDefinitions || []),
+      ...(evidence?.lexical.glosses || []),
+    ]
+      .flatMap((value) => String(value || "").split(/[;,/]/u))
+      .map(normalizeEnglish)
+      .filter(Boolean),
+  );
+  const unattestedArticleFragments = new Set(["a", "an", "the"]);
 
   const cleaned = forms
     .map((form) => ({
@@ -475,7 +485,9 @@ function getEntityOwnedRenderings(
       (form) =>
         form.text &&
         !/[<>\[\]{}§¶]/.test(form.text) &&
-        normalizeEnglish(form.text).length > 1,
+        normalizeEnglish(form.text).length > 1 &&
+        (!unattestedArticleFragments.has(normalizeEnglish(form.text)) ||
+          explicitMeaningTerms.has(normalizeEnglish(form.text))),
     );
 
   const seen = new Set<string>();
@@ -761,6 +773,25 @@ function buildReaderMeaning({
       ? ` A common English rendering is “${rendered}.”`
       : ""
   }`;
+}
+
+function buildSourceOccurrenceMeaning({
+  occurrence,
+  lemma,
+  lexicalId,
+  principalRenderings,
+}: {
+  occurrence: string;
+  lemma?: string;
+  lexicalId?: string;
+  principalRenderings: BibleIQRenderingForm[];
+}) {
+  const identity = [lemma, lexicalId].filter(Boolean).join(" · ");
+  const rendering = principalRenderings[0]?.text;
+
+  return `${occurrence} is the selected source occurrence${
+    identity ? ` belonging to ${identity}` : ""
+  }.${rendering ? ` A common verified English rendering is “${rendering}.”` : ""}`;
 }
 
 function summarizeRenderings(forms: BibleIQRenderingForm[]) {
@@ -1114,6 +1145,14 @@ export default function WordStudySheet({
     selectedEnglish: word,
     principalRenderings,
   });
+  const contextualReaderMeaning = sourceOccurrenceId
+    ? buildSourceOccurrenceMeaning({
+        occurrence: word,
+        lemma: sourceDisplay,
+        lexicalId: alignment?.lexicalId,
+        principalRenderings,
+      })
+    : readerMeaning;
 
   const groupedOccurrences = new Map<string, BibleIQOccurrence[]>();
 
@@ -1317,7 +1356,7 @@ export default function WordStudySheet({
               sourceDisplay={sourceDisplay}
               transliteration={transliteration}
               pronunciation={pronunciation}
-              readerMeaning={readerMeaning}
+              readerMeaning={contextualReaderMeaning}
               readerMeaningLabel={readerMeaningLabel}
               overviewLexicalMeaning={overviewLexicalMeaning}
               overviewLexicalMeaningIsRaw={overviewLexicalMeaningIsRaw}
@@ -1329,6 +1368,7 @@ export default function WordStudySheet({
               uniqueVerseCount={uniqueVerseCount}
               hasConnections={Boolean(seeKnowledge?.available)}
               readableMorphology={readableMorphology}
+              isSourceOccurrenceSelection={Boolean(sourceOccurrenceId)}
               returnTo={readingReturnTo}
               returnLabel={readingLabel}
               onView={changeView}
@@ -1448,6 +1488,7 @@ function OverviewView({
   uniqueVerseCount,
   hasConnections,
   readableMorphology,
+  isSourceOccurrenceSelection,
   returnTo,
   returnLabel,
   onView,
@@ -1475,6 +1516,7 @@ function OverviewView({
   uniqueVerseCount: number;
   hasConnections: boolean;
   readableMorphology?: string;
+  isSourceOccurrenceSelection: boolean;
   returnTo: string;
   returnLabel: string;
   onView: (view: StudyView) => void;
@@ -1492,11 +1534,17 @@ function OverviewView({
     principalRenderings,
     selectedEnglish: word,
   });
-  const renderingText = renderingSpanFromVerse(verseText, alignment, word);
+  const renderingText = isSourceOccurrenceSelection
+    ? ""
+    : renderingSpanFromVerse(verseText, alignment, word);
   const isSpanRendering = Boolean(alignment?.noForcedSingleSourceIdentity);
   const emetReady = emet?.status === "complete" && Boolean(emet.explanation);
   const emetScopeLabel =
-    emet?.scope === "lexical-source" ? "EMET · source word" : "EMET explanation";
+    emet?.derivation === "lexicon-baseline"
+      ? "EMET · lexical evidence"
+      : emet?.scope === "lexical-source"
+        ? "EMET · source word"
+        : "EMET explanation";
   const shortEmetUsageNote = buildShortEmetUsageNote({
     explanation: emet?.explanation,
     sourceLabel: sourceLanguageLabel,
@@ -1589,6 +1637,12 @@ function OverviewView({
               {emet?.headline || "What this word means"}
             </h3>
             <p className="mt-3 text-[1.04rem] leading-7">{emet?.explanation}</p>
+            {emet?.derivation === "lexicon-baseline" &&
+            emet.evidenceSources?.length ? (
+              <p className="mt-2 text-xs leading-5 text-[var(--muted)]">
+                Evidence basis · {emet.evidenceSources.join(" · ")}
+              </p>
+            ) : null}
             {shortEmetUsageNote ? (
               <div className="mt-4 border-l-2 border-amber-500/35 pl-3">
                 <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
@@ -1641,14 +1695,18 @@ function OverviewView({
           In this verse
         </p>
         <h3 className="mt-2 text-xl font-bold tracking-[-0.02em]">
-          How the English relates to the source
+          {isSourceOccurrenceSelection
+            ? "How this source occurrence is identified"
+            : "How the English relates to the source"}
         </h3>
 
         <div className="mt-3 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
           <div className="grid gap-3 text-sm leading-6">
             <div>
               <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-[var(--muted)]">
-                You tapped
+                {isSourceOccurrenceSelection
+                  ? "Selected source occurrence"
+                  : "You tapped"}
               </p>
               <p className="mt-1 font-bold text-[var(--foreground)]">“{word}”</p>
             </div>

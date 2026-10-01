@@ -17,6 +17,7 @@ import {
 import type {
   BibleIQEntity,
   BibleIQEntityEvidence,
+  BibleIQEmet,
   BibleIQKnowledgeExample,
   BibleIQMeaningInVerse,
   BibleIQOccurrence,
@@ -92,6 +93,214 @@ function booksEquivalent(left: string, right: string) {
       normalizedBookKey(rightEvidence) ||
     normalizedBookKey(left) === normalizedBookKey(right)
   );
+}
+
+function runtimeReferenceKey(book: string, chapter: number, verse: number) {
+  return `${normalizedBookKey(book)}:${chapter}:${verse}`;
+}
+
+function validatedOccurrenceEmet(
+  runtime: WordStudyRuntimeEntity,
+  candidate: FinalEmetRuntimeRecord | null,
+) {
+  if (
+    !candidate ||
+    candidate.status !== "approved" ||
+    candidate.independentReviewerApproved !== true ||
+    candidate.entityId !== runtime.entityId ||
+    candidate.corpus !== runtime.corpus ||
+    !candidate.explanation?.trim() ||
+    candidate.citations.length === 0
+  ) {
+    return null;
+  }
+
+  const verifiedReferenceKeys = new Set(
+    runtime.occurrences.verifiedReferenceKeys ||
+      runtime.occurrences.orderedReferences.map((reference) =>
+        runtimeReferenceKey(
+          reference.book,
+          reference.chapter,
+          reference.verse,
+        ),
+      ),
+  );
+  const citationsRemainValid = candidate.citations.every(
+    (citation) =>
+      Boolean(citation.book) &&
+      Number.isFinite(citation.chapter) &&
+      Number.isFinite(citation.verse) &&
+      (verifiedReferenceKeys.has(
+        runtimeReferenceKey(
+          citation.book!,
+          citation.chapter!,
+          citation.verse!,
+        ),
+      ) ||
+        runtime.occurrences.orderedReferences.some(
+          (reference) =>
+            booksEquivalent(reference.book, citation.book!) &&
+            reference.chapter === citation.chapter &&
+            reference.verse === citation.verse,
+        )),
+  );
+
+  if (!citationsRemainValid) return null;
+
+  const explanation = normalize(candidate.explanation);
+  const currentMeaningTerms = [
+    ...runtime.identity.shortDefinitions,
+    ...runtime.identity.glosses,
+  ]
+    .flatMap((value) => String(value || "").split(/[;,/]/u))
+    .map(normalize)
+    .filter((value) => value.length >= 3);
+
+  return currentMeaningTerms.some((meaning) => explanation.includes(meaning))
+    ? candidate
+    : null;
+}
+
+function lexicalEvidenceSources(runtime: WordStudyRuntimeEntity) {
+  const witnesses = runtime.identity.witnesses
+    .map((value) => String(value || "").trim())
+    .filter(Boolean);
+
+  if (witnesses.length) return Array.from(new Set(witnesses));
+  if (runtime.corpus === "lxx") return ["LXX lexical source record"];
+  if (runtime.corpus === "hebrew") return ["Strong's / Hebrew lexicon record"];
+  return ["Strong's / Greek lexicon record"];
+}
+
+function hasVerifiedLexicalIdentity(runtime: WordStudyRuntimeEntity) {
+  const lexicalId = String(runtime.identity.lexicalId || "").trim();
+  const lemma = String(
+    runtime.identity.lemma || runtime.identity.normalizedLemma || "",
+  ).trim();
+
+  return Boolean(
+    lexicalId &&
+      lemma &&
+      runtime.entityId === `word:${runtime.corpus}:${lexicalId}`,
+  );
+}
+
+function lexicalBaselineExplanation(runtime: WordStudyRuntimeEntity) {
+  if (!hasVerifiedLexicalIdentity(runtime)) return null;
+
+  const meaning = [
+    ...runtime.identity.shortDefinitions,
+    ...runtime.identity.glosses,
+  ]
+    .map((value) =>
+      String(value || "")
+        .replace(/\s+/gu, " ")
+        .replace(/\s+([,;:.!?])/gu, "$1")
+        .trim(),
+    )
+    .find(Boolean);
+  if (!meaning) return null;
+
+  const label =
+    String(runtime.identity.transliteration || "").trim() ||
+    String(runtime.identity.lemma || runtime.identity.normalizedLemma || "").trim();
+  const cleanMeaning = meaning.replace(/[.\s]+$/u, "");
+
+  return `The lexical evidence describes ${label} as “${cleanMeaning}.”`;
+}
+
+function buildRuntimeEmet(
+  runtime: WordStudyRuntimeEntity,
+  finalEmet: FinalEmetRuntimeRecord | null | undefined,
+  scope: BibleIQEmet["scope"] = "entity",
+): BibleIQEmet {
+  const identity = runtime.identity;
+  const lemma =
+    identity.lemma ||
+    identity.normalizedLemma ||
+    identity.lexicalId ||
+    runtime.entityId;
+  const evidenceSources = lexicalEvidenceSources(runtime);
+
+  if (finalEmet?.status === "approved" && finalEmet.explanation?.trim()) {
+    const citationDetails = finalEmet.citations
+      .filter(
+        (citation) =>
+          Boolean(citation.book) &&
+          Number.isFinite(citation.chapter) &&
+          Number.isFinite(citation.verse),
+      )
+      .map((citation) => ({
+        reference:
+          citation.reference ||
+          referenceLabel(
+            citation.book!,
+            citation.chapter!,
+            citation.verse!,
+          ),
+        book: citation.book!,
+        chapter: citation.chapter!,
+        verse: citation.verse!,
+        evidenceId: citation.evidenceId,
+        kind: citation.kind,
+      }));
+
+    return {
+      scope,
+      sourceEntityId: runtime.entityId,
+      sourceLemma: lemma,
+      sourceLexicalId: identity.lexicalId,
+      status: "complete",
+      approval: "approved-p07",
+      derivation: "reviewed-explanation",
+      evidenceSources,
+      explanation: finalEmet.explanation,
+      citations: finalEmet.citations.map((citation) => citation.reference),
+      citationDetails,
+      explanationChecksum: finalEmet.explanationChecksum,
+      packetChecksum: finalEmet.viewChecksum,
+      packet: null,
+    };
+  }
+
+  const baseline = lexicalBaselineExplanation(runtime);
+  if (baseline) {
+    return {
+      scope,
+      sourceEntityId: runtime.entityId,
+      sourceLemma: lemma,
+      sourceLexicalId: identity.lexicalId,
+      status: "complete",
+      approval: "evidence-derived-lexicon",
+      derivation: "lexicon-baseline",
+      evidenceSources,
+      headline: "What the lexical evidence supports",
+      explanation: baseline,
+      citations: [],
+      citationDetails: [],
+      packet: null,
+    };
+  }
+
+  return {
+    scope,
+    sourceEntityId: runtime.entityId,
+    sourceLemma: lemma,
+    sourceLexicalId: identity.lexicalId,
+    status:
+      finalEmet?.status === "no-explanation"
+        ? "insufficient-evidence"
+        : "missing",
+    approval:
+      finalEmet?.status === "no-explanation"
+        ? "no-explanation-p07"
+        : undefined,
+    evidenceSources,
+    explanation: undefined,
+    citations: [],
+    citationDetails: [],
+    packet: null,
+  };
 }
 
 function determinePreferredSource(input: BibleIQRequest): BibleIQSource {
@@ -615,71 +824,7 @@ function buildRuntimeEntity({
       ? finalEmet
       : null;
 
-  const citationDetails = (approvedExplanation?.citations || [])
-    .filter(
-      (citation) =>
-        Boolean(citation.book) &&
-        Number.isFinite(citation.chapter) &&
-        Number.isFinite(citation.verse),
-    )
-    .map((citation) => ({
-      reference:
-        citation.reference ||
-        referenceLabel(
-          citation.book!,
-          citation.chapter!,
-          citation.verse!,
-        ),
-      book: citation.book!,
-      chapter: citation.chapter!,
-      verse: citation.verse!,
-      evidenceId: citation.evidenceId,
-      kind: citation.kind,
-    }));
-
-  const emet =
-    finalEmet?.status === "approved"
-      ? {
-          scope: "entity" as const,
-          sourceEntityId: runtime.entityId,
-          sourceLemma: lemma,
-          sourceLexicalId: identity.lexicalId,
-          status: "complete" as const,
-          approval: "approved-p07" as const,
-          explanation: finalEmet.explanation,
-          citations: finalEmet.citations.map(
-            (citation) => citation.reference,
-          ),
-          citationDetails,
-          explanationChecksum:
-            finalEmet.explanationChecksum,
-          packetChecksum: finalEmet.viewChecksum,
-          packet: null,
-        }
-      : finalEmet?.status === "no-explanation"
-        ? {
-            scope: "entity" as const,
-            sourceEntityId: runtime.entityId,
-            sourceLemma: lemma,
-            sourceLexicalId: identity.lexicalId,
-            status: "insufficient-evidence" as const,
-            approval: "no-explanation-p07" as const,
-            explanation: undefined,
-            citations: [],
-            citationDetails: [],
-            packet: null,
-          }
-        : {
-            scope: "entity" as const,
-            sourceEntityId: runtime.entityId,
-            sourceLemma: lemma,
-            sourceLexicalId: identity.lexicalId,
-            status: "missing" as const,
-            explanation: undefined,
-            citations: [],
-            citationDetails: [],
-            packet: null,
-          };
+  const emet = buildRuntimeEmet(runtime, finalEmet, "entity");
 
   return {
     id: runtime.entityId,
@@ -712,7 +857,7 @@ function buildRuntimeEntity({
       whyItMatters:
         "This study preserves the aligned source occurrence and the supporting SEE evidence.",
       summary:
-        approvedExplanation?.explanation ||
+        emet.explanation || approvedExplanation?.explanation ||
         `SEE preserves the source identity, usage, and references for ${lemma}.`,
     },
     contextConnections: {
@@ -990,68 +1135,14 @@ async function buildV2SpanAlignmentEntity({
       route.mode !== "exact-single" || grammar.length > 0,
   };
 
-  const citationDetails = (lexicalEmet?.status === "approved"
-    ? lexicalEmet.citations
-    : []
-  )
-    .filter(
-      (citation) =>
-        Boolean(citation.book) &&
-        Number.isFinite(citation.chapter) &&
-        Number.isFinite(citation.verse),
-    )
-    .map((citation) => ({
-      reference:
-        citation.reference ||
-        referenceLabel(
-          citation.book!,
-          citation.chapter!,
-          citation.verse!,
-        ),
-      book: citation.book!,
-      chapter: citation.chapter!,
-      verse: citation.verse!,
-      evidenceId: citation.evidenceId,
-      kind: citation.kind,
-    }));
-
-  const emet =
-    lexicalEmet?.status === "approved" && lexicalOwnerId
-      ? {
-          scope: "lexical-source" as const,
-          sourceEntityId: lexicalOwnerId,
-          sourceLemma: lexicalLemma,
-          sourceLexicalId: lexicalIdentity?.lexicalId,
-          status: "complete" as const,
-          approval: "approved-p07" as const,
-          explanation: lexicalEmet.explanation,
-          citations: lexicalEmet.citations.map(
-            (citation) => citation.reference,
-          ),
-          citationDetails,
-          explanationChecksum: lexicalEmet.explanationChecksum,
-          packetChecksum: lexicalEmet.viewChecksum,
-          packet: null,
-        }
-      : lexicalEmet?.status === "no-explanation"
-        ? {
-            scope: "lexical-source" as const,
-            sourceEntityId: lexicalOwnerId,
-            sourceLemma: lexicalLemma,
-            sourceLexicalId: lexicalIdentity?.lexicalId,
-            status: "insufficient-evidence" as const,
-            approval: "no-explanation-p07" as const,
-            explanation: undefined,
-            citations: [],
-            citationDetails: [],
-            packet: null,
-          }
-        : {
-            status: "insufficient-evidence" as const,
-            packet: null,
-            explanation: undefined,
-            citations: [reference],
-          };
+  const emet = lexicalRuntime
+    ? buildRuntimeEmet(lexicalRuntime, lexicalEmet, "lexical-source")
+    : {
+        status: "insufficient-evidence" as const,
+        packet: null,
+        explanation: undefined,
+        citations: [reference],
+      };
 
   const entityEvidence = lexicalRuntime
     ? buildEntityEvidence(lexicalRuntime, input.translation)
@@ -1473,13 +1564,14 @@ export async function resolveBibleIQ(
       };
     }
 
+    const finalEmetCandidate = await loadFinalEmetRecord(
+      origin,
+      runtime.entityId,
+      requestHeaders,
+    );
     const finalEmet = occurrenceEvidenceOverride
-      ? null
-      : await loadFinalEmetRecord(
-          origin,
-          runtime.entityId,
-          requestHeaders,
-        );
+      ? validatedOccurrenceEmet(runtime, finalEmetCandidate)
+      : finalEmetCandidate;
     const directWord =
       input.displayWord?.trim() ||
       runtime.identity.lemma ||

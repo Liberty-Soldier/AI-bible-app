@@ -25,14 +25,15 @@ async function main() {
   );
   const occurrences = source.sourceVerses.flatMap((verse) => verse.occurrences);
   const expected = {
-    "ἕκτῃ": "L704340",
-    "αὐτοῦ": "L702165",
-    "ἃ": "L709781",
-    "ὧν": "L709781",
+    "ἕκτῃ": { lexicalId: "L704340", explanationTerm: "sixth" },
+    "αὐτοῦ": { lexicalId: "L702165", explanationTerm: "him" },
+    "ἃ": { lexicalId: "L709781", explanationTerm: "who" },
+    "ὧν": { lexicalId: "L709781", explanationTerm: "who" },
   };
   const verified = [];
 
-  for (const [surface, lexicalId] of Object.entries(expected)) {
+  for (const [surface, expectation] of Object.entries(expected)) {
+    const { lexicalId, explanationTerm } = expectation;
     const matches = occurrences.filter((item) => item.surface === surface);
     if (!matches.length) fail(`Missing Genesis 2:2 occurrence: ${surface}`);
 
@@ -73,6 +74,14 @@ async function main() {
       ) {
         fail(`Reader/Word Overview/EMET contract mismatch for ${surface}`);
       }
+      if (
+        overview.entity?.emet?.status !== "complete" ||
+        !String(overview.entity?.emet?.explanation || "")
+          .toLowerCase()
+          .includes(explanationTerm)
+      ) {
+        fail(`Missing evidence-derived EMET explanation for ${surface}`);
+      }
 
       verified.push({
         surface,
@@ -82,6 +91,8 @@ async function main() {
         meaning: occurrence.meaning,
         morphology: occurrence.morphology,
         emetStatus: overview.entity?.emet?.status,
+        emetDerivation: overview.entity?.emet?.derivation,
+        explanation: overview.entity?.emet?.explanation,
       });
     }
   }

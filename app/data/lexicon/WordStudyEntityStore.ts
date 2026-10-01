@@ -232,6 +232,7 @@ export type WordStudyRuntimeEntity = {
     };
     orderedReferences: WordStudyRuntimeReference[];
     representativeReferences: WordStudyRuntimeReference[];
+    verifiedReferenceKeys?: string[];
   };
   renderings: {
     available: boolean;

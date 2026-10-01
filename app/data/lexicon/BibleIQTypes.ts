@@ -203,8 +203,11 @@ export type BibleIQEmet = {
   explanationChecksum?: string;
   packetChecksum?: string;
   packet?: unknown | null;
+  derivation?: "reviewed-explanation" | "lexicon-baseline";
+  evidenceSources?: string[];
   approval?:
     | "approved-p07"
+    | "evidence-derived-lexicon"
     | "no-explanation-p07"
     | "approved-p04.1"
     | "unapproved-p04";

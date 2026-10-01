@@ -26,6 +26,7 @@ const ask = read("app/ask/page.tsx");
 const study = read("app/study/page.tsx");
 const liveApi = read("app/api/emet/explain/route.ts");
 const wordStudy = read("app/components/WordStudySheet.tsx");
+const bibleIqEngine = read("app/data/lexicon/BibleIQEngine.ts");
 const publicTestRoutes = [
   "app/test-concept/page.tsx",
   "app/test-lemma/page.tsx",
@@ -62,6 +63,36 @@ requireText(
   "Verified English renderings include",
   "short-EMET verified-rendering evidence",
 );
+requireText(
+  wordStudy,
+  'new Set(["a", "an", "the"])',
+  "unattested article-fragment filter",
+);
+requireText(
+  wordStudy,
+  "How this source occurrence is identified",
+  "source-occurrence study wording",
+);
+requireText(
+  wordStudy,
+  "EMET · lexical evidence",
+  "evidence-derived explanation label",
+);
+requireText(
+  bibleIqEngine,
+  "lexicalBaselineExplanation",
+  "systemic lexical explanation fallback",
+);
+requireText(
+  bibleIqEngine,
+  'approval: "evidence-derived-lexicon"',
+  "evidence-derived provenance contract",
+);
+requireText(
+  bibleIqEngine,
+  'runtime.entityId === `word:${runtime.corpus}:${lexicalId}`',
+  "exact lexical identity gate",
+);
 
 for (const relativePath of publicTestRoutes) {
   if (fs.existsSync(path.join(ROOT, relativePath))) {
@@ -75,4 +106,5 @@ console.log("- Primary navigation exposes only working free features.");
 console.log("- Legacy Ask and Study URLs redirect to working free routes.");
 console.log("- Live EMET API is fail-closed and cannot invoke OpenAI.");
 console.log("- Short legacy EMET explanations receive canonical usage-range evidence.");
+console.log("- Exact lexical entities receive a provenance-marked lexicon baseline when reviewed prose is unavailable.");
 console.log("- Developer-only diagnostic pages are absent from public routes.");
