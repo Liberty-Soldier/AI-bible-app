@@ -70,14 +70,22 @@ function HomePage() {
         </div>
 
         <form
-          action="/search"
+          action="/emet"
+          onSubmit={(event) => {
+            event.preventDefault();
+            window.dispatchEvent(
+              new CustomEvent("emetsees:open-emet", {
+                detail: { question: search },
+              }),
+            );
+          }}
           className="flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3 shadow-[var(--shadow-sm)]"
         >
           <input
             type="text"
             name="q"
-            placeholder="Search Scripture"
-            aria-label="Search Scripture"
+            placeholder="Ask a question about Scripture"
+            aria-label="Ask EMET a question about Scripture"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="min-w-0 flex-1 bg-transparent text-base text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
@@ -87,9 +95,19 @@ function HomePage() {
             type="submit"
             className="ml-3 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-bold text-[var(--accent-text)] transition active:scale-[0.98]"
           >
-            Search
+            Ask EMET
           </button>
         </form>
+
+        <p className="mt-3 text-center text-xs text-[var(--muted)]">
+          Looking for a verse or phrase?{" "}
+          <Link
+            href="/search"
+            className="font-bold text-[var(--foreground)] underline decoration-[var(--brand)] underline-offset-4"
+          >
+            Search Scripture
+          </Link>
+        </p>
 
         {lastReading ? (
           <Link

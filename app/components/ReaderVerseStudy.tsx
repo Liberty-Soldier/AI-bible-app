@@ -537,29 +537,33 @@ export default function ReaderVerseStudy({
                 )}
                 verseText={verseText}
                 sourceOccurrenceId={
-                  wordOverview.lexicalResolution?.status === "resolved"
+                  wordOverview.lexicalId && wordOverview.entityId
                     ? wordOverview.id
                     : undefined
                 }
                 sourceLexicalId={
-                  wordOverview.lexicalResolution?.status === "resolved"
+                  wordOverview.lexicalId && wordOverview.entityId
                     ? wordOverview.lexicalId || undefined
                     : undefined
                 }
                 sourceCorpus={
-                  wordOverview.lexicalResolution?.status === "resolved"
+                  wordOverview.lexicalId && wordOverview.entityId
                     ? breakdown.corpus
                     : undefined
                 }
                 sourceResolutionAuthority={
                   wordOverview.lexicalResolution?.status === "resolved"
                     ? wordOverview.lexicalResolution.authority
-                    : undefined
+                    : wordOverview.lexicalId && wordOverview.entityId
+                      ? "canonical-source-breakdown-occurrence"
+                      : undefined
                 }
                 sourceResolutionMethod={
                   wordOverview.lexicalResolution?.status === "resolved"
                     ? wordOverview.lexicalResolution.method
-                    : undefined
+                    : wordOverview.lexicalId && wordOverview.entityId
+                      ? "exact-source-occurrence"
+                      : undefined
                 }
                 onClose={() => setWordOverview(null)}
               />

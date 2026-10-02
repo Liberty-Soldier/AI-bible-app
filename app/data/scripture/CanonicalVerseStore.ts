@@ -447,9 +447,9 @@ function loadBrentonReaderRecordOverlay(origin: string) {
         overlay.schemaVersion !==
           "emet-p0812r2-brenton-reader-record-routes/v1" ||
         overlay.counts?.records !== 2017 ||
-        overlay.counts?.routes !== 9915 ||
+        overlay.counts?.routes !== 10009 ||
         recordCount !== 2017 ||
-        routeCount !== 9915 ||
+        routeCount !== 10009 ||
         !overlay.checksum ||
         overlay.checksum !== checksum
       ) {

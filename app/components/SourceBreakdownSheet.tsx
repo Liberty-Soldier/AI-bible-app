@@ -867,6 +867,35 @@ export default function SourceBreakdownSheet({
           verseText={
             verseText
           }
+          sourceOccurrenceId={
+            wordOverviewOccurrence.lexicalId && wordOverviewOccurrence.entityId
+              ? wordOverviewOccurrence.id
+              : undefined
+          }
+          sourceLexicalId={
+            wordOverviewOccurrence.lexicalId && wordOverviewOccurrence.entityId
+              ? wordOverviewOccurrence.lexicalId || undefined
+              : undefined
+          }
+          sourceCorpus={
+            wordOverviewOccurrence.lexicalId && wordOverviewOccurrence.entityId
+              ? data.corpus
+              : undefined
+          }
+          sourceResolutionAuthority={
+            wordOverviewOccurrence.lexicalResolution?.status === "resolved"
+              ? wordOverviewOccurrence.lexicalResolution.authority
+              : wordOverviewOccurrence.lexicalId && wordOverviewOccurrence.entityId
+                ? "canonical-source-breakdown-occurrence"
+                : undefined
+          }
+          sourceResolutionMethod={
+            wordOverviewOccurrence.lexicalResolution?.status === "resolved"
+              ? wordOverviewOccurrence.lexicalResolution.method
+              : wordOverviewOccurrence.lexicalId && wordOverviewOccurrence.entityId
+                ? "exact-source-occurrence"
+                : undefined
+          }
           onClose={() =>
             setWordOverviewOccurrence(
               null,

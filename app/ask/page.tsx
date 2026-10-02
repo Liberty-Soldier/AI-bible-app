@@ -8,5 +8,5 @@ export default async function AskPage({
   const queryValue = (await searchParams).q;
   const query = Array.isArray(queryValue) ? queryValue[0] : queryValue;
 
-  redirect(query ? `/search?q=${encodeURIComponent(query)}` : "/search");
+  redirect(query ? `/emet?q=${encodeURIComponent(query)}` : "/emet");
 }

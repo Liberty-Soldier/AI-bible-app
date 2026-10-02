@@ -34,6 +34,14 @@
     "emet:generate:watch": "node --max-old-space-size=4096 scripts/entity/schedule-cached-emet-generation.js --run --watch",
     "emet:generate:reset": "node --max-old-space-size=4096 scripts/entity/schedule-cached-emet-generation.js --reset",
     "test:emet-reader": "node --max-old-space-size=4096 scripts/entity/test-emet-reader-explanation.js",
+    "verify:emet-ai": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-ai-foundation.mjs",
+    "verify:emet-ai-db": "node scripts/verify-emet-ai-supabase.mjs",
+    "verify:emet-auth": "node scripts/verify-emet-auth.mjs",
+    "verify:emet-ui": "node scripts/verify-emet-question-ui.mjs",
+    "verify:emet-billing": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-billing.mjs",
+    "verify:emet-topic": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-topic-evidence.mjs",
+    "smoke:emet-live": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/smoke-emet-ai-live.mjs",
+    "verify:brenton-overlay": "node scripts/verify-brenton-reader-overlay-contract.mjs",
     "repair:cached-emet": "node --max-old-space-size=4096 scripts/entity/repair-cached-emet-failures.js",
     "build:word-study-entities": "node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js",
     "verify:word-study-entities": "node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js --verify-runtime",
@@ -58,6 +66,8 @@
     "reconcile:brenton-reader-runtime": "node --max-old-space-size=4096 scripts/p08/final-reader-alignment-completion/reconcile-brenton-reader-runtime.cjs"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.2",
     "fast-xml-parser": "^5.9.2",
     "next": "16.2.7",
     "openai": "^6.45.0",

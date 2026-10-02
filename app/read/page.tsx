@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { bookCatalog } from "@/app/data/scripture/bookCatalog";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import {
@@ -264,37 +265,13 @@ export default function ReadPage() {
   const books = useMemo(() => getBooksFromScripture(), []);
 
   const [translation, setTranslation] = useState<Translation>("web");
-  const [section, setSection] = useState<Section>("torah");
-  const [book, setBook] = useState("Genesis");
-  const [chapter, setChapter] = useState(1);
   const [quickJump, setQuickJump] = useState("");
 
-  const [pickerStep, setPickerStep] = useState<"section" | "book" | "chapter">(
-  "section"
-);
-  const sectionBooks = books.filter((item) => getSection(item.book) === section);
-  const selectedBook = books.find((item) => item.book === book);
-
   useEffect(() => {
+    // Read the device-only preference after hydration; SSR intentionally uses WEB.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTranslation(getPreferredTranslation());
   }, []);
-
-useEffect(() => {
-  const firstBook = sectionBooks[0];
-
-  if (firstBook) {
-    setBook(firstBook.book);
-    setChapter(1);
-  }
-}, [section]);
-
-  function openChapter() {
-    if (!book) return;
-
-    router.push(
-      `/read/${encodeURIComponent(book)}/${chapter}?translation=${translation}`
-    );
-  }
 
   function handleQuickJump() {
     const value = quickJump.trim();
@@ -387,103 +364,87 @@ return (
         <div className="mb-3 flex items-center justify-between">
           <div>
             <p className="text-sm text-[var(--muted)]">Choose passage</p>
-            <h2 className="text-lg font-bold tracking-[-0.015em]">
-              {pickerStep === "section" && "Section"}
-              {pickerStep === "book" && "Book"}
-              {pickerStep === "chapter" && book}
-            </h2>
+            <h2 className="text-lg font-bold tracking-[-0.015em]">Section</h2>
           </div>
-
-          {pickerStep !== "section" && (
-            <button
-              type="button"
-              onClick={() => {
-                if (pickerStep === "chapter") setPickerStep("book");
-                else setPickerStep("section");
-              }}
-              className="px-1 py-2 text-sm font-semibold text-[var(--muted)] transition active:opacity-70"
-            >
-              Back
-            </button>
-          )}
         </div>
+        <div className="grid grid-cols-1 gap-x-5 sm:grid-cols-2">
+          {([
+            ["torah", "Torah", "Genesis–Deuteronomy"],
+            ["history", "History", "Joshua–Nehemiah"],
+            ["wisdom", "Wisdom", "Job–Song"],
+            ["prophets", "Prophets", "Isaiah–Malachi"],
+            ["septuagint", "Septuagint", "Greek books"],
+            ["new", "New Testament", "Matthew–Revelation"],
+          ] as const).map(([value, label, helper]) => {
+            const sectionBooks = books.filter(
+              (item) => getSection(item.book) === value,
+            );
 
-        {pickerStep === "section" && (
-          <div className="grid grid-cols-2 gap-x-5">
-            {[
-              ["torah", "Torah", "Genesis–Deuteronomy"],
-              ["history", "History", "Joshua–Nehemiah"],
-              ["wisdom", "Wisdom", "Job–Song"],
-              ["prophets", "Prophets", "Isaiah–Malachi"],
-              ["septuagint", "Septuagint", "Greek books"],
-              ["new", "New Testament", "Matthew–Revelation"],
-            ].map(([value, label, helper]) => (
-              <button
+            return (
+              <details
                 key={value}
-                type="button"
-                onClick={() => {
-                  setSection(value as Section);
-                  setPickerStep("book");
-                }}
-                className="border-b border-[var(--border)] py-4 text-left transition active:opacity-70"
+                className="group border-b border-[var(--border)]"
               >
-                <span className="block font-semibold">{label}</span>
-                <span className="mt-1 block text-sm text-[var(--muted)]">
-                  {helper}
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
-
-        {pickerStep === "book" && (
-          <div className="grid grid-cols-2 gap-x-5">
-            {sectionBooks.map((item) => (
-              <button
-                key={item.book}
-                type="button"
-                onClick={() => {
-                  setBook(item.book);
-                  setChapter(1);
-                  setPickerStep("chapter");
-                }}
-                className="border-b border-[var(--border)] py-4 text-left transition active:opacity-70"
-              >
-                <span className="block font-semibold">{item.book}</span>
-                <span className="mt-1 block text-sm text-[var(--muted)]">
-                  {item.chapters} chapters
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
-
-        {pickerStep === "chapter" && (
-          <div className="grid grid-cols-6 gap-2">
-            {Array.from({ length: selectedBook?.chapters || 1 }).map(
-              (_, index) => {
-                const chapterNumber = index + 1;
-
-                return (
-                  <button
-                    key={chapterNumber}
-                    type="button"
-                    onClick={() => {
-                      router.push(
-                        `/read/${encodeURIComponent(
-                          book
-                        )}/${chapterNumber}?translation=${translation}`
-                      );
-                    }}
-                    className="rounded-xl border border-[var(--border)] bg-transparent py-3 text-sm font-semibold text-[var(--foreground)] transition active:scale-[0.98]"
+                <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-left active:opacity-70 [&::-webkit-details-marker]:hidden">
+                  <span>
+                    <span className="block font-semibold">{label}</span>
+                    <span className="mt-1 block text-sm text-[var(--muted)]">
+                      {helper}
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="text-lg text-[var(--muted)] transition-transform group-open:rotate-90"
                   >
-                    {chapterNumber}
-                  </button>
-                );
-              }
-            )}
-          </div>
-        )}
+                    ›
+                  </span>
+                </summary>
+
+                <div className="border-t border-[var(--border)] pb-3 pl-3">
+                  {sectionBooks.map((item) => (
+                    <details
+                      key={item.book}
+                      className="group/book border-b border-[var(--border)] last:border-b-0"
+                    >
+                      <summary className="flex cursor-pointer list-none items-center justify-between py-3 pr-1 [&::-webkit-details-marker]:hidden">
+                        <span>
+                          <span className="block font-semibold">{item.book}</span>
+                          <span className="mt-0.5 block text-xs text-[var(--muted)]">
+                            {item.chapters} chapters
+                          </span>
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="text-[var(--muted)] transition-transform group-open/book:rotate-90"
+                        >
+                          ›
+                        </span>
+                      </summary>
+
+                      <div className="grid grid-cols-6 gap-2 pb-3 pr-1">
+                        {Array.from({ length: item.chapters }, (_, index) => {
+                          const chapterNumber = index + 1;
+
+                          return (
+                            <Link
+                              key={chapterNumber}
+                              href={`/read/${encodeURIComponent(
+                                item.book,
+                              )}/${chapterNumber}?translation=${translation}`}
+                              className="rounded-xl border border-[var(--border)] bg-transparent py-2.5 text-center text-sm font-semibold text-[var(--foreground)] transition active:scale-[0.98]"
+                            >
+                              {chapterNumber}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </details>
+            );
+          })}
+        </div>
       </div>
     </section>
 

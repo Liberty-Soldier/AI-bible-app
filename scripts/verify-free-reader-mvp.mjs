@@ -21,6 +21,7 @@ function forbidText(source, forbidden, label) {
 
 const home = read("app/page.tsx");
 const navigation = read("app/components/MobileBottomNav.tsx");
+const readerPassagePicker = read("app/read/page.tsx");
 const readerSelector = read("app/components/ReaderSelector.tsx");
 const layout = read("app/layout.tsx");
 const ask = read("app/ask/page.tsx");
@@ -33,8 +34,9 @@ const publicTestRoutes = [
   "app/test-lemma/page.tsx",
 ];
 
-requireText(home, 'action="/search"', "home Scripture-search action");
-requireText(home, 'name="q"', "home Scripture-search query parameter");
+requireText(home, 'action="/emet"', "home Ask EMET action");
+requireText(home, 'name="q"', "home Ask EMET query parameter");
+requireText(home, 'href="/search"', "home Scripture-search access");
 forbidText(home, "usePremiumAccess", "home premium dependency");
 forbidText(home, "requestUpgrade", "home upgrade interception");
 forbidText(home, "tap any word", "obsolete English-word tapping claim");
@@ -47,17 +49,56 @@ requireText(readerSelector, 'label: "New Testament"', "New Testament book group"
 requireText(readerSelector, '"Matthew"', "first New Testament book");
 requireText(readerSelector, '"Revelation"', "last New Testament book");
 requireText(readerSelector, "<optgroup", "grouped reader book selector");
+requireText(
+  readerPassagePicker,
+  "<details",
+  "native mobile passage disclosure controls",
+);
+requireText(
+  readerPassagePicker,
+  "<summary",
+  "native mobile passage disclosure labels",
+);
+requireText(
+  readerPassagePicker,
+  "href={`/read/${encodeURIComponent(",
+  "real chapter navigation links",
+);
+forbidText(
+  readerPassagePicker,
+  'setPickerStep("book")',
+  "JavaScript-only section navigation",
+);
 
-requireText(navigation, 'href: "/library"', "free Library navigation");
-forbidText(navigation, 'href="/ask"', "unfinished Ask navigation");
-forbidText(navigation, "Ask EMET", "unfinished Ask navigation label");
+requireText(navigation, 'href="/library"', "free Library navigation");
+requireText(navigation, 'href="/emet"', "authenticated Ask EMET navigation");
+requireText(navigation, "Ask EMET", "Ask EMET navigation label");
 
 forbidText(layout, "PremiumAccessProvider", "premium provider mount");
-requireText(ask, 'redirect(query ? `/search?q=', "Ask-to-Search redirect");
+requireText(ask, 'redirect(query ? `/emet?q=', "legacy Ask-to-EMET redirect");
 requireText(study, 'redirect("/read")', "Study-to-Reader redirect");
 
 requireText(liveApi, 'status: "disabled"', "disabled live-EMET status");
-requireText(liveApi, "status: 503", "disabled live-EMET HTTP status");
+requireText(
+  liveApi,
+  'process.env.EMET_LIVE_ENABLED !== "true"',
+  "live-EMET environment gate",
+);
+requireText(
+  liveApi,
+  "getVerifiedSupabaseUserId",
+  "live-EMET verified authentication gate",
+);
+requireText(
+  liveApi,
+  "resolveEmetAiReaderWord",
+  "live-EMET canonical reader occurrence resolver",
+);
+requireText(
+  liveApi,
+  "reserveEmetAiQuestion",
+  "live-EMET quota reservation gate",
+);
 forbidText(liveApi, "OPENAI_API_KEY", "live OpenAI credential access");
 forbidText(liveApi, "explainWithEmet", "live EMET invocation");
 forbidText(liveApi, 'from "openai"', "live OpenAI import");
@@ -112,12 +153,13 @@ for (const relativePath of publicTestRoutes) {
 }
 
 console.log("Free-reader MVP verification passed.");
-console.log("- Home prompt performs Scripture search.");
+console.log("- Home prompt opens authenticated Ask EMET while preserving direct Scripture search access.");
 console.log("- Home description accurately identifies Hebrew and Greek source-word study.");
 console.log("- Reader book selector explicitly groups Matthew through Revelation as New Testament.");
-console.log("- Primary navigation exposes only working free features.");
-console.log("- Legacy Ask and Study URLs redirect to working free routes.");
-console.log("- Live EMET API is fail-closed and cannot invoke OpenAI.");
+console.log("- Mobile section and book selection uses native disclosures with real chapter links.");
+console.log("- Primary navigation restores Ask EMET as the central action.");
+console.log("- Legacy Ask and Study URLs redirect to their current working routes.");
+console.log("- Live EMET API remains environment-gated and requires verified auth, canonical identity, and quota.");
 console.log("- Short legacy EMET explanations receive canonical usage-range evidence.");
 console.log("- Exact lexical entities receive a provenance-marked lexicon baseline when reviewed prose is unavailable.");
 console.log("- Developer-only diagnostic pages are absent from public routes.");

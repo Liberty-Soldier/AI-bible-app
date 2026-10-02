@@ -1346,42 +1346,85 @@ export default function WordStudySheet({
               <BackToReadingButton label={readingLabel} onClick={onClose} />
             </Panel>
           ) : view === "overview" ? (
-            <OverviewView
-              word={word}
-              book={book}
-              chapter={chapter}
-              verse={verse}
-              translation={translation}
-              alignment={alignment}
-              sourceDisplay={sourceDisplay}
-              transliteration={transliteration}
-              pronunciation={pronunciation}
-              readerMeaning={contextualReaderMeaning}
-              readerMeaningLabel={readerMeaningLabel}
-              overviewLexicalMeaning={overviewLexicalMeaning}
-              overviewLexicalMeaningIsRaw={overviewLexicalMeaningIsRaw}
-              verseText={meaningInVerse?.verseText || verseText}
-              emet={emet}
-              firstOccurrence={firstOccurrence}
-              keyReferences={keyReferences}
-              principalRenderings={principalRenderings}
-              uniqueVerseCount={uniqueVerseCount}
-              hasConnections={Boolean(seeKnowledge?.available)}
-              readableMorphology={readableMorphology}
-              isSourceOccurrenceSelection={Boolean(sourceOccurrenceId)}
-              returnTo={readingReturnTo}
-              returnLabel={readingLabel}
-              onView={changeView}
-              onOpenSourceEntity={(entityId, label) => {
-                setSourceEntityId(entityId);
-                setSourceEntityLabel(label);
-                setSourceEntityData(null);
-                requestAnimationFrame(() => {
-                  if (scrollRef.current) scrollRef.current.scrollTop = 0;
-                });
-              }}
-              onClose={onClose}
-            />
+            <>
+              <OverviewView
+                word={word}
+                book={book}
+                chapter={chapter}
+                verse={verse}
+                translation={translation}
+                alignment={alignment}
+                sourceDisplay={sourceDisplay}
+                transliteration={transliteration}
+                pronunciation={pronunciation}
+                readerMeaning={contextualReaderMeaning}
+                readerMeaningLabel={readerMeaningLabel}
+                overviewLexicalMeaning={overviewLexicalMeaning}
+                overviewLexicalMeaningIsRaw={overviewLexicalMeaningIsRaw}
+                verseText={meaningInVerse?.verseText || verseText}
+                emet={emet}
+                firstOccurrence={firstOccurrence}
+                keyReferences={keyReferences}
+                principalRenderings={principalRenderings}
+                uniqueVerseCount={uniqueVerseCount}
+                hasConnections={Boolean(seeKnowledge?.available)}
+                readableMorphology={readableMorphology}
+                isSourceOccurrenceSelection={Boolean(sourceOccurrenceId)}
+                returnTo={readingReturnTo}
+                returnLabel={readingLabel}
+                onView={changeView}
+                onOpenSourceEntity={(entityId, label) => {
+                  setSourceEntityId(entityId);
+                  setSourceEntityLabel(label);
+                  setSourceEntityData(null);
+                  requestAnimationFrame(() => {
+                    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+                  });
+                }}
+                onClose={onClose}
+              />
+              {verse &&
+              ((displayTokenIndex !== undefined && displayTokenIndex >= 0) ||
+                (entityId &&
+                  sourceOccurrenceId &&
+                  sourceLexicalId &&
+                  sourceCorpus &&
+                  sourceResolutionAuthority &&
+                  sourceResolutionMethod)) ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.sessionStorage.setItem(
+                      "emetsees-word-question-context",
+                      JSON.stringify({
+                        type: "reader",
+                        book,
+                        chapter,
+                        verse,
+                        translation,
+                        displayWord: word,
+                        displayTokenIndex,
+                        readerRecordId,
+                        verseText: meaningInVerse?.verseText || verseText,
+                        entityId,
+                        sourceOccurrenceId,
+                        sourceLexicalId,
+                        sourceCorpus,
+                        sourceResolutionAuthority,
+                        sourceResolutionMethod,
+                      }),
+                    );
+                    window.dispatchEvent(
+                      new CustomEvent("emetsees:open-emet"),
+                    );
+                  }}
+                  className="mt-2 flex w-full items-center justify-between rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm font-black"
+                >
+                  <span>Ask EMET about this word</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+              ) : null}
+            </>
           ) : view === "lexicon" ? (
             <LexiconView
               word={word}
