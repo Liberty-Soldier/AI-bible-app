@@ -114,13 +114,13 @@ export default function ReaderSelector({
   }
 
 return (
-  <div className="space-y-4">
+  <div className="space-y-5">
     <div>
-      <p className="mb-2 text-xs uppercase tracking-[0.25em] text-neutral-600">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
         Translation
       </p>
 
-      <div className="grid grid-cols-3 gap-2">
+      <div className="flex gap-5 border-b border-[var(--border)]">
         {translations.map((translation) => (
           <button
             key={translation.value}
@@ -128,10 +128,10 @@ return (
             onClick={() =>
               goTo(currentBook, currentChapter, translation.value)
             }
-            className={`rounded-full px-3 py-2 text-sm transition ${
+            className={`border-b-2 px-0.5 pb-2.5 pt-1 text-sm font-semibold transition ${
               currentTranslation === translation.value
-                ? "bg-white text-black"
-                : "bg-neutral-900 text-neutral-400 hover:bg-neutral-800"
+                ? "border-[var(--foreground)] text-[var(--foreground)]"
+                : "border-transparent text-[var(--muted)]"
             }`}
           >
             {translation.label}
@@ -140,9 +140,9 @@ return (
       </div>
     </div>
 
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-[minmax(0,1fr)_7rem] gap-3">
       <label>
-        <span className="mb-2 block text-xs uppercase tracking-[0.25em] text-neutral-600">
+        <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
           Book
         </span>
 
@@ -150,7 +150,7 @@ return (
           aria-label="Book"
           value={currentBook}
           onChange={(e) => goTo(e.target.value, 1, currentTranslation)}
-          className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-sm text-white"
+          className="min-h-12 w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--foreground)] outline-none"
         >
           {bookGroups.map((group) => (
             <optgroup key={group.label} label={group.label}>
@@ -165,7 +165,7 @@ return (
       </label>
 
       <label>
-        <span className="mb-2 block text-xs uppercase tracking-[0.25em] text-neutral-600">
+        <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
           Chapter
         </span>
 
@@ -175,7 +175,7 @@ return (
           onChange={(e) =>
             goTo(currentBook, Number(e.target.value), currentTranslation)
           }
-          className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-sm text-white"
+          className="min-h-12 w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--foreground)] outline-none"
         >
           {Array.from({ length: maxChapter }, (_, i) => i + 1).map(
             (chapter) => (
@@ -189,7 +189,7 @@ return (
     </div>
 
     <label>
-      <span className="mb-2 block text-xs uppercase tracking-[0.25em] text-neutral-600">
+      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
         Verse
       </span>
 
@@ -204,7 +204,7 @@ return (
             e.target.value || null
           )
         }
-        className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-3 py-3 text-sm text-white"
+        className="min-h-12 w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--foreground)] outline-none"
       >
         <option value="">Start of Chapter</option>
 

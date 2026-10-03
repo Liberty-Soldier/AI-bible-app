@@ -400,45 +400,27 @@ return (
                   </span>
                 </summary>
 
-                <div className="border-t border-[var(--border)] pb-3 pl-3">
+                <div className="grid grid-cols-2 gap-x-4 border-t border-[var(--border)] pb-3 sm:grid-cols-3">
                   {sectionBooks.map((item) => (
-                    <details
+                    <Link
                       key={item.book}
-                      className="group/book border-b border-[var(--border)] last:border-b-0"
+                      href={`/read/${encodeURIComponent(
+                        item.book,
+                      )}?translation=${translation}`}
+                      className="flex min-h-16 items-center justify-between gap-2 border-b border-[var(--border)] py-3 text-left transition active:opacity-60"
                     >
-                      <summary className="flex cursor-pointer list-none items-center justify-between py-3 pr-1 [&::-webkit-details-marker]:hidden">
-                        <span>
-                          <span className="block font-semibold">{item.book}</span>
-                          <span className="mt-0.5 block text-xs text-[var(--muted)]">
-                            {item.chapters} chapters
-                          </span>
+                      <span className="min-w-0">
+                        <span className="block truncate text-sm font-semibold">
+                          {item.book}
                         </span>
-                        <span
-                          aria-hidden="true"
-                          className="text-[var(--muted)] transition-transform group-open/book:rotate-90"
-                        >
-                          ›
+                        <span className="mt-0.5 block text-xs text-[var(--muted)]">
+                          {item.chapters} chapters
                         </span>
-                      </summary>
-
-                      <div className="grid grid-cols-6 gap-2 pb-3 pr-1">
-                        {Array.from({ length: item.chapters }, (_, index) => {
-                          const chapterNumber = index + 1;
-
-                          return (
-                            <Link
-                              key={chapterNumber}
-                              href={`/read/${encodeURIComponent(
-                                item.book,
-                              )}/${chapterNumber}?translation=${translation}`}
-                              className="rounded-xl border border-[var(--border)] bg-transparent py-2.5 text-center text-sm font-semibold text-[var(--foreground)] transition active:scale-[0.98]"
-                            >
-                              {chapterNumber}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </details>
+                      </span>
+                      <span aria-hidden="true" className="shrink-0 text-[var(--muted)]">
+                        ›
+                      </span>
+                    </Link>
                   ))}
                 </div>
               </details>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import AppNav from "@/app/components/AppNav";
+import MobileBottomNav from "@/app/components/MobileBottomNav";
 import { bookCatalog } from "@/app/data/scripture/bookCatalog";
 
 type Translation = "web" | "kjv" | "brenton";
@@ -35,40 +35,45 @@ export default async function BookPage({
   );
 
   return (
-    <main className="min-h-screen bg-neutral-950 px-6 py-8 text-white">
-      <section className="mx-auto max-w-5xl">
-        <AppNav />
-
-        <Link href="/read" className="text-neutral-400 hover:text-white">
-          ← Choose another book
+    <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-6 text-[var(--foreground)]">
+      <section className="mx-auto max-w-2xl">
+        <Link
+          href="/read"
+          className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--muted)] transition active:opacity-60"
+        >
+          ← All books
         </Link>
 
-        <div className="mb-10 mt-8">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-neutral-500">
-            Choose Chapter
+        <div className="mb-7 mt-5 border-b border-[var(--border)] pb-6">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--muted)]">
+            Choose chapter
           </p>
 
-          <h1 className="text-5xl font-bold">{decodedBook}</h1>
+          <h1 className="text-[2.35rem] font-bold leading-tight tracking-[-0.035em]">
+            {decodedBook}
+          </h1>
 
-          <p className="mt-3 text-sm text-neutral-500">
-            Translation: {activeTranslation.toUpperCase()}
+          <p className="mt-2 text-sm text-[var(--muted)]">
+            {activeTranslation.toUpperCase()} · {bookInfo.chapters} chapters
           </p>
         </div>
 
-        <div className="grid grid-cols-4 gap-3 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10">
+        <div className="grid grid-cols-5 gap-2 sm:grid-cols-8">
           {chapters.map((chapter) => (
             <Link
               key={chapter}
               href={`/read/${encodeURIComponent(
                 decodedBook
               )}/${chapter}?translation=${activeTranslation}`}
-              className="rounded-xl border border-neutral-800 bg-neutral-900 p-4 text-center text-lg font-semibold hover:border-neutral-600"
+              className="grid min-h-12 place-items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] text-base font-semibold transition active:scale-[0.97] active:bg-[var(--surface-strong)]"
             >
               {chapter}
             </Link>
           ))}
         </div>
       </section>
+
+      <MobileBottomNav />
     </main>
   );
 }
