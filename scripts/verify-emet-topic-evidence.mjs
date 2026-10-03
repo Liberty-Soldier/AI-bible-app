@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
 
+import {
+  buildEmetConversationQuestion,
+  parseEmetPreviousQuestions,
+} from "../app/lib/emet/EmetAiConversation.ts";
 import { buildEmetAiTopicEvidence } from "../app/lib/emet/EmetAiTopicEvidence.ts";
 
 const sabbath = buildEmetAiTopicEvidence({
@@ -98,8 +102,31 @@ const unsupported = buildEmetAiTopicEvidence({
 });
 assert.equal(unsupported.status, "insufficient-evidence");
 
+const sabbathFollowUp = buildEmetAiTopicEvidence({
+  question: "Does that still apply today?",
+  previousQuestions: ["What does Scripture establish about the Sabbath?"],
+  builtAt: "2026-01-01T00:00:00.000Z",
+});
+assert.equal(sabbathFollowUp.status, "ready");
+if (sabbathFollowUp.status === "ready") {
+  assert.match(sabbathFollowUp.packet.question, /Earlier reader questions/);
+  assert.match(sabbathFollowUp.packet.question, /Current reader question/);
+  assert.ok(sabbathFollowUp.packet.scope.references.includes("Matthew 5:18"));
+}
+
+assert.deepEqual(parseEmetPreviousQuestions([" one ", "two"]), ["one", "two"]);
+assert.equal(parseEmetPreviousQuestions("not-an-array"), null);
+assert.match(
+  buildEmetConversationQuestion({
+    question: "Does that still apply?",
+    previousQuestions: ["What is the Sabbath command?"],
+  }),
+  /conversational context only, not Scripture evidence/,
+);
+
 console.log("EMET topic evidence verification passed.");
 console.log("- Topic retrieval balances Torah, later Old Testament, and New Testament evidence.");
 console.log("- Normative questions include governing command, duration, and continuity evidence.");
 console.log("- Reader context is loaded from locked Scripture rather than client-supplied text.");
 console.log("- Questions with no honest retrieval terms fail closed.");
+console.log("- Follow-ups retain question context without treating conversation as evidence.");

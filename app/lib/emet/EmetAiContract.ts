@@ -1,6 +1,6 @@
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@1" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@1" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@7" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first@8" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
 export type EmetAiScopeType = "word" | "verse" | "passage" | "topic";

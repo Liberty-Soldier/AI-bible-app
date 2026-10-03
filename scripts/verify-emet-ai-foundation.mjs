@@ -365,6 +365,11 @@ for (const required of [
   "The Old Testament supplies the scriptural foundation",
   "whole scriptural witness as coherent",
   "Hebrew, LXX Greek, and Greek New Testament identities remain distinct",
+  "Sound like a thoughtful Bible reader explaining Scripture",
+  "Never mention an evidence packet",
+  "use them only to understand the current follow-up",
+  "Keep Strong's numbers, lexical IDs, evidence IDs, and corpus identifiers out",
+  "Keep all exact evidence bookkeeping in claims, citations, and limitations",
   "Every substantive claim must cite",
   "insufficient-evidence rather than guessing",
 ]) {
@@ -380,3 +385,4 @@ console.log("- Reader and EMET evidence require the same occurrence-owned identi
 console.log("- Hebrew, LXX, and Greek NT identities stay corpus-scoped.");
 console.log("- Equivalent questions reuse only identity-and-evidence-bound answers.");
 console.log("- Invalid model citations fail closed before caching.");
+console.log("- Reader-facing answers use natural prose without internal evidence jargon.");

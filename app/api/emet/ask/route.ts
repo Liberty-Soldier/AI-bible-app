@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getEmetAiCacheKey } from "@/app/lib/emet/EmetAiCache";
+import { parseEmetPreviousQuestions } from "@/app/lib/emet/EmetAiConversation";
 import {
   completeEmetAiQuestion,
   getEmetAiUsageSummary,
@@ -87,12 +88,22 @@ export async function POST(request: Request) {
 
   const question = clean(body.question);
   const requestId = clean(body.requestId, 64);
+  const previousQuestions = parseEmetPreviousQuestions(body.previousQuestions);
   const context = body.context === undefined ? null : parseContext(body.context);
-  if (!question || !requestId || (body.context !== undefined && !context)) {
+  if (
+    !question ||
+    !requestId ||
+    previousQuestions === null ||
+    (body.context !== undefined && !context)
+  ) {
     return json({ status: "invalid-request" }, 400);
   }
 
-  const evidence = buildEmetAiTopicEvidence({ question, context });
+  const evidence = buildEmetAiTopicEvidence({
+    question,
+    previousQuestions,
+    context,
+  });
   if (evidence.status !== "ready") {
     return json(
       {

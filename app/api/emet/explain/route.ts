@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 
 import type { BibleIQTranslation } from "@/app/data/lexicon/BibleIQTypes";
 import { getEmetAiCacheKey } from "@/app/lib/emet/EmetAiCache";
+import {
+  buildEmetConversationQuestion,
+  parseEmetPreviousQuestions,
+} from "@/app/lib/emet/EmetAiConversation";
 import { buildEmetAiWordEvidence } from "@/app/lib/emet/EmetAiEvidenceBuilder";
 import {
   completeEmetAiQuestion,
@@ -132,8 +136,9 @@ export async function POST(request: Request) {
 
   const question = clean(body.question);
   const requestId = clean(body.requestId, 64);
+  const previousQuestions = parseEmetPreviousQuestions(body.previousQuestions);
   const context = parseContext(body.context);
-  if (!question || !requestId || !context) {
+  if (!question || !requestId || previousQuestions === null || !context) {
     return json({ status: "invalid-request" }, 400);
   }
 
@@ -163,7 +168,7 @@ export async function POST(request: Request) {
   }
 
   const evidence = await buildEmetAiWordEvidence({
-    question,
+    question: buildEmetConversationQuestion({ question, previousQuestions }),
     wordStudy,
     loadVerse: createEmetAiVerseLoader(url.origin, forwardedHeaders),
   });

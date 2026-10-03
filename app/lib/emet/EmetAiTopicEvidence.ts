@@ -9,6 +9,7 @@ import {
   type EmetAiEvidencePacket,
   validateEmetAiEvidencePacket,
 } from "./EmetAiContract";
+import { buildEmetConversationQuestion } from "./EmetAiConversation";
 
 type SearchTranslation = "web" | "kjv" | "brenton";
 type SearchRecord = [book: string, chapter: number, verse: string, text: string];
@@ -477,10 +478,12 @@ function topicRecords(question: string) {
 
 export function buildEmetAiTopicEvidence({
   question,
+  previousQuestions = [],
   context = null,
   builtAt,
 }: {
   question: string;
+  previousQuestions?: string[];
   context?: EmetAiReaderContext | null;
   builtAt?: string;
 }) {
@@ -492,7 +495,11 @@ export function buildEmetAiTopicEvidence({
     };
   }
 
-  const candidates = [...contextRecords(context), ...topicRecords(cleanQuestion)];
+  const retrievalQuestion = [...previousQuestions, cleanQuestion].join("\n");
+  const candidates = [
+    ...contextRecords(context),
+    ...topicRecords(retrievalQuestion),
+  ];
   const seen = new Set<string>();
   const evidence: EmetAiEvidenceItem[] = [];
   const fingerprints = new Set<string>();
@@ -516,7 +523,10 @@ export function buildEmetAiTopicEvidence({
 
   const packet: EmetAiEvidencePacket = {
     schemaVersion: EMET_AI_EVIDENCE_SCHEMA,
-    question: cleanQuestion,
+    question: buildEmetConversationQuestion({
+      question: cleanQuestion,
+      previousQuestions,
+    }),
     scope: {
       type: context ? "passage" : "topic",
       references: evidence

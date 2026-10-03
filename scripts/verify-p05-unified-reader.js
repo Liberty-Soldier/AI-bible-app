@@ -91,13 +91,18 @@ assertPresent(
 );
 assertPresent(
   readerStudy,
-  /presentation="inline"/,
-  "inline deeper Word Overview",
+  /className="fixed inset-0 z-\[60\] overflow-hidden"/,
+  "mobile source-study sheet",
+);
+assertPresent(
+  readerStudy,
+  /<WordStudySheet[\s\S]*?onClose=\{\(\) => setWordOverview\(null\)\}/,
+  "full-width deeper Word Overview sheet",
 );
 assertAbsent(
   readerStudy,
-  /className="fixed inset-0 z-\[110\]"/,
-  "legacy fixed Word Overview wrapper",
+  /presentation="inline"/,
+  "narrow inline Word Overview",
 );
 assertPresent(
   readerStudy,
@@ -201,8 +206,13 @@ assertPresent(
 );
 assertPresent(
   mobileNav,
-  /href(?::|=)\s*["']\/search["']/,
-  "mobile nav Search route",
+  /href(?::|=)\s*["']\/emet["']/,
+  "mobile nav Ask EMET route",
+);
+assertPresent(
+  mobileNav,
+  /emetsees:open-emet/,
+  "mobile nav Ask EMET sheet trigger",
 );
 assertPresent(
   mobileNav,
@@ -222,15 +232,14 @@ assertAbsent(
 );
 
 assertAbsent(layout, /PremiumAccessProvider/, "root layout");
-assertAbsent(layout, /GlobalAskButton/, "root layout");
+assertPresent(layout, /<GlobalAskButton \/>/, "global Ask EMET sheet host");
 assertAbsent(
   mobileNav,
-  /Ask EMET|requestUpgrade\("ask-emet"/,
-  "free-reader navigation",
+  /requestUpgrade\("ask-emet"/,
+  "subscription-gated reader navigation",
 );
-assertPresent(liveEmetRoute, /status:\s*["']disabled["']/, "live EMET route");
-assertPresent(liveEmetRoute, /status:\s*503/, "live EMET route");
-assertAbsent(liveEmetRoute, /openai|explainWithEmet/i, "live EMET route");
+assertPresent(liveEmetRoute, /EMET_LIVE_ENABLED/, "live EMET feature gate");
+assertPresent(liveEmetRoute, /getVerifiedSupabaseUserId/, "live EMET authentication");
 
 assertAbsent(wordSheet, /\/api\/emet\/explain/, "WordStudySheet");
 assertAbsent(
@@ -290,4 +299,4 @@ console.log("- Live EMET is fail-closed");
 console.log("- No live AI runs on ordinary word taps");
 console.log("- Source-owned occurrence routing is preserved");
 console.log("- Exact source correspondence is visual-only and fails closed");
-console.log("- Deeper Word Overview renders inline");
+console.log("- Source study and deeper Word Overview use mobile-safe sheets");

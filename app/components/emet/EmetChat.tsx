@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const CHAT_STORAGE_KEY = "emetsees-conversation";
 
 export type EmetChatUsage = {
   planName: string;
@@ -46,6 +48,39 @@ type Exchange = {
   answer: Answer;
   source?: string;
 };
+
+function storedExchanges(storage: Storage) {
+  const parsed = parseStoredContext<unknown>(storage, CHAT_STORAGE_KEY);
+  if (!Array.isArray(parsed)) return [];
+
+  return parsed.slice(-20).flatMap((candidate) => {
+    if (!candidate || typeof candidate !== "object") return [];
+    const exchange = candidate as Partial<Exchange>;
+    if (
+      typeof exchange.id !== "string" ||
+      typeof exchange.question !== "string" ||
+      !exchange.answer ||
+      typeof exchange.answer.answer !== "string"
+    ) {
+      return [];
+    }
+
+    return [{
+      id: exchange.id,
+      question: exchange.question.slice(0, 800),
+      answer: {
+        answer: exchange.answer.answer,
+        citations: Array.isArray(exchange.answer.citations)
+          ? exchange.answer.citations
+          : [],
+        limitations: Array.isArray(exchange.answer.limitations)
+          ? exchange.answer.limitations
+          : [],
+      },
+      source: exchange.source,
+    }];
+  });
+}
 
 function parseStoredContext<T>(storage: Storage, key: string): T | null {
   const value = storage.getItem(key);
@@ -120,8 +155,10 @@ export default function EmetChat({
   const [wordContext, setWordContext] = useState<WordContext | null>(null);
   const [usage, setUsage] = useState(initialUsage);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
+  const [historyLoaded, setHistoryLoaded] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
+  const conversationEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -135,29 +172,28 @@ export default function EmetChat({
       );
       setReaderContext(reader);
       setWordContext(word);
+      setExchanges(storedExchanges(window.sessionStorage));
+      setHistoryLoaded(true);
       window.sessionStorage.removeItem("emetsees-word-question-context");
     }, 0);
 
     return () => window.clearTimeout(timer);
   }, []);
 
-  const activeContext = wordContext || readerContext;
-  const examples = useMemo(
-    () =>
-      wordContext
-        ? [
-            "What does this word mean here?",
-            "How is this word used earlier in Scripture?",
-            "What does this word contribute to this verse?",
-          ]
-        : [
-            "What does Scripture establish about the Sabbath?",
-            "How does the Old Testament establish the kingdom theme?",
-            "What does Scripture mean by faith?",
-          ],
-    [wordContext],
-  );
+  useEffect(() => {
+    if (!historyLoaded) return;
+    window.sessionStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(exchanges));
+  }, [exchanges, historyLoaded]);
 
+  useEffect(() => {
+    if (!exchanges.length) return;
+    conversationEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [exchanges.length]);
+
+  const activeContext = wordContext || readerContext;
   async function ask(questionOverride?: string) {
     const finalQuestion = (questionOverride || question).trim();
     if (!finalQuestion || pending) return;
@@ -174,6 +210,9 @@ export default function EmetChat({
         body: JSON.stringify({
           question: finalQuestion,
           requestId: crypto.randomUUID(),
+          previousQuestions: exchanges
+            .slice(-4)
+            .map((exchange) => exchange.question),
           ...(activeContext ? { context: activeContext } : {}),
         }),
       });
@@ -284,6 +323,23 @@ export default function EmetChat({
         </button>
       ) : null}
 
+      {exchanges.length ? (
+        <div className="mt-3 flex justify-end">
+          <button
+            type="button"
+            onClick={() => {
+              setExchanges([]);
+              setQuestion("");
+              setError("");
+              window.sessionStorage.removeItem(CHAT_STORAGE_KEY);
+            }}
+            className="border-b border-[var(--border)] pb-0.5 text-xs font-semibold text-[var(--muted)]"
+          >
+            New conversation
+          </button>
+        </div>
+      ) : null}
+
       <div className="mt-6 space-y-6">
         {exchanges.map((exchange) => (
           <article key={exchange.id} className="border-b border-[var(--border)] pb-7">
@@ -336,6 +392,7 @@ export default function EmetChat({
             </div>
           </article>
         ))}
+        <div ref={conversationEndRef} aria-hidden="true" />
       </div>
 
       {error === "quota-exhausted" ? (
@@ -357,26 +414,8 @@ export default function EmetChat({
         </p>
       ) : null}
 
-      {!exchanges.length ? (
-        <div className="mt-7 border-y border-[var(--border)] divide-y divide-[var(--border)]">
-          {examples.map((example) => (
-            <button
-              key={example}
-              type="button"
-              onClick={() => void ask(example)}
-              className="flex w-full items-center justify-between gap-5 py-4 text-left text-sm leading-6 text-[var(--muted)] transition hover:text-[var(--foreground)]"
-            >
-              <span>{example}</span>
-              <span aria-hidden="true" className="shrink-0 text-[var(--brand-strong)]">
-                →
-              </span>
-            </button>
-          ))}
-        </div>
-      ) : null}
-
       <form
-        className="sticky bottom-0 mt-8 border-t border-[var(--border)] bg-[var(--background)]/95 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl"
+        className="sticky bottom-0 mt-5 border-t border-[var(--border)] bg-[var(--background)]/95 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl"
         onSubmit={(event) => {
           event.preventDefault();
           void ask();
@@ -392,7 +431,11 @@ export default function EmetChat({
             onChange={(event) => setQuestion(event.target.value)}
             rows={2}
             maxLength={800}
-            placeholder="Ask a Scripture question…"
+            placeholder={
+              exchanges.length
+                ? "Ask a follow-up…"
+                : "Ask a Scripture question…"
+            }
             disabled={pending || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
             className="min-h-12 flex-1 resize-none bg-transparent px-0 py-2 text-base leading-7 outline-none placeholder:text-[var(--muted)]"
           />
@@ -405,7 +448,9 @@ export default function EmetChat({
           </button>
         </div>
         <p className="mt-2 px-2 text-center text-[0.68rem] leading-5 text-[var(--muted)]">
-          Answers use supplied Scripture evidence only. Unsupported claims fail closed.
+          {exchanges.length
+            ? "Continue naturally. Every reply is checked against Scripture evidence."
+            : "Answers use supplied Scripture evidence only. Unsupported claims fail closed."}
         </p>
       </form>
     </div>

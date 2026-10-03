@@ -225,6 +225,29 @@ export default function ReaderVerseStudy({
     if (!breakdown) void loadBreakdown();
   }
 
+  useEffect(() => {
+    if (!expanded) return;
+
+    const scrollY = window.scrollY;
+    const originalOverflow = document.body.style.overflow;
+    const originalPosition = document.body.style.position;
+    const originalTop = document.body.style.top;
+    const originalWidth = document.body.style.width;
+
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.position = originalPosition;
+      document.body.style.top = originalTop;
+      document.body.style.width = originalWidth;
+      window.scrollTo(0, scrollY);
+    };
+  }, [expanded]);
+
   const uniqueEntityOccurrences = useMemo(() => {
     const byEntity = new Map<string, SourceBreakdownOccurrence>();
 
@@ -350,7 +373,40 @@ export default function ReaderVerseStudy({
         </button>
 
         {expanded ? (
-          <section className="mt-3 rounded-xl border border-[var(--border)] bg-[var(--surface)]/55 px-3 py-3 sm:px-4">
+          <div className="fixed inset-0 z-[60] overflow-hidden">
+            <button
+              type="button"
+              aria-label="Close source study"
+              onClick={toggleStudy}
+              className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
+            />
+
+            <section className="absolute bottom-0 left-1/2 flex max-h-[90dvh] w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl">
+              <div className="flex shrink-0 justify-center pb-1 pt-3">
+                <div className="h-1.5 w-11 rounded-full bg-[var(--border)]" />
+              </div>
+
+              <header className="flex shrink-0 items-start justify-between gap-4 border-b border-[var(--border)] px-5 pb-4 pt-2">
+                <div>
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--muted)]">
+                    Original language
+                  </div>
+                  <h2 className="mt-1 text-xl font-semibold tracking-tight">
+                    {parsed.book} {parsed.chapter}:{parsed.verse}
+                  </h2>
+                </div>
+
+                <button
+                  type="button"
+                  aria-label="Close source study"
+                  onClick={toggleStudy}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-lg text-[var(--muted)]"
+                >
+                  &times;
+                </button>
+              </header>
+
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 pb-20">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
               Original language
@@ -517,61 +573,55 @@ export default function ReaderVerseStudy({
             </div>
           ) : null}
 
-          {wordOverview && breakdown ? (
-            <div className="mt-4 border-t border-[var(--border)] pt-4">
-              <WordStudySheet
-                presentation="inline"
-                entityId={wordOverview.entityId || undefined}
-                word={displaySourceSurface(wordOverview, breakdown.corpus)}
-                book={breakdown.displayedReference.book}
-                chapter={breakdown.displayedReference.chapter}
-                verse={Number(breakdown.displayedReference.verse)}
-                translation={breakdown.translation}
-                selectedText={displaySourceSurface(
-                  wordOverview,
-                  breakdown.corpus,
-                )}
-                originalWord={displaySourceSurface(
-                  wordOverview,
-                  breakdown.corpus,
-                )}
-                verseText={verseText}
-                sourceOccurrenceId={
-                  wordOverview.lexicalId && wordOverview.entityId
-                    ? wordOverview.id
-                    : undefined
-                }
-                sourceLexicalId={
-                  wordOverview.lexicalId && wordOverview.entityId
-                    ? wordOverview.lexicalId || undefined
-                    : undefined
-                }
-                sourceCorpus={
-                  wordOverview.lexicalId && wordOverview.entityId
-                    ? breakdown.corpus
-                    : undefined
-                }
-                sourceResolutionAuthority={
-                  wordOverview.lexicalResolution?.status === "resolved"
-                    ? wordOverview.lexicalResolution.authority
-                    : wordOverview.lexicalId && wordOverview.entityId
-                      ? "canonical-source-breakdown-occurrence"
-                      : undefined
-                }
-                sourceResolutionMethod={
-                  wordOverview.lexicalResolution?.status === "resolved"
-                    ? wordOverview.lexicalResolution.method
-                    : wordOverview.lexicalId && wordOverview.entityId
-                      ? "exact-source-occurrence"
-                      : undefined
-                }
-                onClose={() => setWordOverview(null)}
-              />
-            </div>
-          ) : null}
-          </section>
+              </div>
+            </section>
+          </div>
         ) : null}
       </div>
+
+      {wordOverview && breakdown ? (
+        <WordStudySheet
+          entityId={wordOverview.entityId || undefined}
+          word={displaySourceSurface(wordOverview, breakdown.corpus)}
+          book={breakdown.displayedReference.book}
+          chapter={breakdown.displayedReference.chapter}
+          verse={Number(breakdown.displayedReference.verse)}
+          translation={breakdown.translation}
+          selectedText={displaySourceSurface(wordOverview, breakdown.corpus)}
+          originalWord={displaySourceSurface(wordOverview, breakdown.corpus)}
+          verseText={verseText}
+          sourceOccurrenceId={
+            wordOverview.lexicalId && wordOverview.entityId
+              ? wordOverview.id
+              : undefined
+          }
+          sourceLexicalId={
+            wordOverview.lexicalId && wordOverview.entityId
+              ? wordOverview.lexicalId || undefined
+              : undefined
+          }
+          sourceCorpus={
+            wordOverview.lexicalId && wordOverview.entityId
+              ? breakdown.corpus
+              : undefined
+          }
+          sourceResolutionAuthority={
+            wordOverview.lexicalResolution?.status === "resolved"
+              ? wordOverview.lexicalResolution.authority
+              : wordOverview.lexicalId && wordOverview.entityId
+                ? "canonical-source-breakdown-occurrence"
+                : undefined
+          }
+          sourceResolutionMethod={
+            wordOverview.lexicalResolution?.status === "resolved"
+              ? wordOverview.lexicalResolution.method
+              : wordOverview.lexicalId && wordOverview.entityId
+                ? "exact-source-occurrence"
+                : undefined
+          }
+          onClose={() => setWordOverview(null)}
+        />
+      ) : null}
     </>
   );
 }

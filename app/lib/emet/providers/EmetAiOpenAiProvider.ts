@@ -88,7 +88,8 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
           {
             role: "user",
             content: JSON.stringify({
-              task: "Answer the question using only this evidence packet.",
+              task:
+                "Give the reader a direct, natural Scripture-grounded explanation. Use only the evidence in packet. Keep evidence bookkeeping in claims and citations, not in the reader-facing answer.",
               packet,
             }),
           },
