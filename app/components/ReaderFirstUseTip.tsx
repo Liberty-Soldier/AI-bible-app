@@ -1,52 +1,53 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "emetsees-reader-tip-dismissed-v1";
-const OPEN_HELP_EVENT = "emetsees:open-reader-help";
+const CHANGE_EVENT = "emetsees:reader-tip-dismissed";
 
 function rememberDismissal() {
   localStorage.setItem(STORAGE_KEY, "true");
+  window.dispatchEvent(new Event(CHANGE_EVENT));
+}
+
+function subscribe(onChange: () => void) {
+  function dismissAfterVerseSelect(event: PointerEvent) {
+    const target = event.target;
+    if (
+      target instanceof Element &&
+      target.closest('[data-verse-selector="true"]')
+    ) {
+      rememberDismissal();
+    }
+  }
+
+  function onStorage(event: StorageEvent) {
+    if (event.key === STORAGE_KEY) onChange();
+  }
+
+  document.addEventListener("pointerdown", dismissAfterVerseSelect, true);
+  window.addEventListener(CHANGE_EVENT, onChange);
+  window.addEventListener("storage", onStorage);
+
+  return () => {
+    document.removeEventListener("pointerdown", dismissAfterVerseSelect, true);
+    window.removeEventListener(CHANGE_EVENT, onChange);
+    window.removeEventListener("storage", onStorage);
+  };
 }
 
 export default function ReaderFirstUseTip() {
-  const [ready, setReady] = useState(false);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    setVisible(localStorage.getItem(STORAGE_KEY) !== "true");
-    setReady(true);
-
-    function dismissAfterStudyOpen(event: PointerEvent) {
-      const target = event.target;
-      if (
-        target instanceof Element &&
-        target.closest('[data-verse-study-control="true"]')
-      ) {
-        rememberDismissal();
-        setVisible(false);
-      }
-    }
-
-    function reopenHelp() {
-      setVisible(true);
-    }
-
-    document.addEventListener("pointerdown", dismissAfterStudyOpen, true);
-    window.addEventListener(OPEN_HELP_EVENT, reopenHelp);
-
-    return () => {
-      document.removeEventListener("pointerdown", dismissAfterStudyOpen, true);
-      window.removeEventListener(OPEN_HELP_EVENT, reopenHelp);
-    };
-  }, []);
+  const dismissed = useSyncExternalStore(
+    subscribe,
+    () => localStorage.getItem(STORAGE_KEY) === "true",
+    () => true,
+  );
 
   function dismiss() {
     rememberDismissal();
-    setVisible(false);
   }
 
-  if (!ready || !visible) {
+  if (dismissed) {
     return null;
   }
 
@@ -56,11 +57,7 @@ export default function ReaderFirstUseTip() {
       aria-label="Reader tip"
     >
       <p className="min-w-0 flex-1 text-xs leading-5 text-[var(--muted)]">
-        <strong className="font-bold text-[var(--foreground)]">
-          Study opens the original-language text
-        </strong>
-        <span aria-hidden="true"> · </span>
-        Verse numbers open tools
+        Tap a verse number for highlight, notes, sharing, and source study.
       </p>
 
       <button

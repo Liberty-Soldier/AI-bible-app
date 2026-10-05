@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SelectedVerse } from "@/app/components/VerseActionController";
 import SourceBreakdownVerse from "@/app/components/SourceBreakdownVerse";
+import ReaderVerseStudy from "@/app/components/ReaderVerseStudy";
+import type { BibleIQChapterTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 import {
   areAllBookmarked,
   highlightVerses,
@@ -18,11 +20,13 @@ export default function VerseActionSheet({
   verses,
   onClose,
   onMemoryChange,
+  tokenAvailabilityByVerse,
 }: {
   open: boolean;
   verses: SelectedVerse[];
   onClose: () => void;
   onMemoryChange?: () => void;
+  tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
 }) {
   const [message, setMessage] = useState("");
   const [expanded, setExpanded] = useState(false);
@@ -376,11 +380,23 @@ export default function VerseActionSheet({
 
                 <div className="mt-2 grid grid-cols-5 gap-2">
                   <CompactButton onClick={copySelection}>Copy</CompactButton>
-                  <CompactButton onClick={shareSelection}>Share</CompactButton>
                   <CompactButton onClick={bookmarkSelection}>
                     {bookmarked ? "Unmark" : "Mark"}
                   </CompactButton>
                   <CompactButton onClick={openNoteEditor}>Note</CompactButton>
+                  {verses.length === 1 ? (
+                    <ReaderVerseStudy
+                      reference={firstVerse.reference}
+                      verse={firstVerse.verse}
+                      translation={firstVerse.translation || "web"}
+                      verseText={firstVerse.text}
+                      tokenAvailability={tokenAvailabilityByVerse?.[firstVerse.id]}
+                      displayVerseText={false}
+                      compactTrigger
+                    />
+                  ) : (
+                    <CompactButton onClick={shareSelection}>Share</CompactButton>
+                  )}
                   <CompactButton onClick={() => setExpanded(true)}>
                     More
                   </CompactButton>

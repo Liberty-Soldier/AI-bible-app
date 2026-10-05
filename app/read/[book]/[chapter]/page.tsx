@@ -3,6 +3,7 @@ import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import SacredNameToggle from "@/app/components/SacredNameToggle";
+import ReaderAppearanceControls from "@/app/components/ReaderAppearanceControls";
 import ReaderSelector from "@/app/components/ReaderSelector";
 import SaveReadingPosition from "@/app/components/SaveReadingPosition";
 import ReaderVerseScroller from "@/app/components/ReaderVerseScroller";
@@ -282,18 +283,21 @@ export default async function ReadChapterPage({
           <CollapsibleReaderHeader
             title={`${decodedBook} ${chapterNumber}`}
           >
-            <div className="space-y-4 pt-3">
+            <div className="pt-1">
+              <ReaderAppearanceControls />
               <SacredNameToggle />
 
-              <ReaderSelector
-                books={books}
-                currentBook={decodedBook}
-                currentChapter={chapterNumber}
-                maxChapter={maxChapter}
-                currentTranslation={activeTranslation}
-                currentVerse={highlightedVerse}
-                verseOptions={chapterVerses.map((item) => item.verseLabel)}
-              />
+              <div className="border-t border-[var(--border)] pt-4">
+                <ReaderSelector
+                  books={books}
+                  currentBook={decodedBook}
+                  currentChapter={chapterNumber}
+                  maxChapter={maxChapter}
+                  currentTranslation={activeTranslation}
+                  currentVerse={highlightedVerse}
+                  verseOptions={chapterVerses.map((item) => item.verseLabel)}
+                />
+              </div>
             </div>
           </CollapsibleReaderHeader>
         </ReaderStickyHeader>
@@ -302,7 +306,7 @@ export default async function ReadChapterPage({
           previousChapterHref={previousChapterHref}
           nextChapterHref={nextChapterHref}
         >
-          <article className="pt-24">
+          <article className="pt-20 sm:pt-24">
             {returnTo ? (
               <Link
                 href={returnTo}
@@ -312,12 +316,12 @@ export default async function ReadChapterPage({
               </Link>
             ) : null}
 
-            <div className="mb-8">
+            <div className="mb-7">
               <p className="mb-2 text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
                 {translationLabel}
               </p>
 
-              <h1 className="text-4xl font-semibold tracking-tight text-[var(--foreground)]">
+              <h1 className="reader-serif text-4xl font-semibold tracking-tight text-[var(--foreground)]">
                 {decodedBook} {chapterNumber}
               </h1>
 

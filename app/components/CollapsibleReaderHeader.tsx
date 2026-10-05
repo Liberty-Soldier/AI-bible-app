@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { useReaderChromeVisibility } from "@/app/components/useReaderChromeVisibility";
 
-const OPEN_HELP_EVENT = "emetsees:open-reader-help";
-
 export default function CollapsibleReaderHeader({
   title,
   children,
@@ -17,10 +15,6 @@ export default function CollapsibleReaderHeader({
   const [open, setOpen] = useState(false);
   const visible = useReaderChromeVisibility();
   const shouldShow = !autoHide || visible || open;
-
-  function openReaderHelp() {
-    window.dispatchEvent(new Event(OPEN_HELP_EVENT));
-  }
 
   return (
     <div
@@ -58,11 +52,12 @@ export default function CollapsibleReaderHeader({
 
         <button
           type="button"
-          onClick={openReaderHelp}
-          aria-label="Open reader help"
+          onClick={() => setOpen(!open)}
+          aria-label="Open reading appearance and navigation"
+          aria-expanded={open}
           className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-sm font-bold text-[var(--muted)] transition active:scale-95"
         >
-          ?
+          Aa
         </button>
       </div>
 

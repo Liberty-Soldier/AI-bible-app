@@ -1,7 +1,7 @@
 "use client";
 
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
-import ReaderVerseStudy from "@/app/components/ReaderVerseStudy";
+import ScriptureText from "@/app/components/ScriptureText";
 import type { BibleIQChapterTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 import {
   buildReaderChapterItems,
@@ -20,6 +20,7 @@ import {
   type ReaderNote,
   type ReaderTranslation,
 } from "@/app/lib/readerMemory";
+import { useReaderPreferences } from "@/app/lib/readerPreferences";
 
 export type SelectedVerse = ReaderMemoryVerse;
 
@@ -38,6 +39,7 @@ export default function VerseActionController({
 }) {
   const [selectedVerses, setSelectedVerses] = useState<SelectedVerse[]>([]);
   const [memory, setMemory] = useState(() => getReaderMemory());
+  const readerPreferences = useReaderPreferences();
 
   function refreshReaderMemory() {
     setMemory(getReaderMemory());
@@ -142,9 +144,44 @@ export default function VerseActionController({
     [superscriptions, verses],
   );
 
+  const tokenAvailabilityByReaderVerseId = useMemo(() => {
+    if (!tokenAvailabilityByVerse) return undefined;
+
+    return Object.fromEntries(
+      verses.flatMap((verse) => {
+        const availabilityKey =
+          activeTranslation === "brenton"
+            ? verse.id
+            : readerVerseTokenAvailabilityKey(verse);
+        const availability = availabilityKey
+          ? tokenAvailabilityByVerse[availabilityKey]
+          : undefined;
+
+        return availability ? [[verse.id, availability]] : [];
+      }),
+    );
+  }, [activeTranslation, tokenAvailabilityByVerse, verses]);
+
+  const typefaceClass =
+    readerPreferences.fontFamily === "serif" ? "reader-serif" : "font-sans";
+  const textSizeClass =
+    readerPreferences.textSize === "small"
+      ? "text-[1.04rem] sm:text-[1.1rem]"
+      : readerPreferences.textSize === "large"
+        ? "text-[1.28rem] sm:text-[1.36rem]"
+        : "text-[1.16rem] sm:text-[1.22rem]";
+  const lineSpacingClass =
+    readerPreferences.lineSpacing === "compact"
+      ? "leading-[1.62]"
+      : readerPreferences.lineSpacing === "relaxed"
+        ? "leading-[2.02]"
+        : "leading-[1.82]";
+
   return (
     <>
-      <div className="space-y-5 text-[1.18rem] leading-9 text-[var(--foreground)] sm:text-xl sm:leading-10">
+      <div
+        className={`space-y-1 text-[var(--foreground)] ${typefaceClass} ${textSizeClass} ${lineSpacingClass}`}
+      >
         {chapterItems.map((item) => {
           if (item.type === "superscription") {
             return (
@@ -171,19 +208,11 @@ export default function VerseActionController({
           const storedHighlight = highlightByVerseId.get(verse.id);
           const isBookmarked = bookmarkedIds.has(verse.id);
           const hasNote = (noteByVerseId.get(verse.id) || []).length > 0;
-          const availabilityKey =
-            activeTranslation === "brenton"
-              ? verse.id
-              : readerVerseTokenAvailabilityKey(verse);
-          const verseTokenAvailability = availabilityKey
-            ? tokenAvailabilityByVerse?.[availabilityKey]
-            : undefined;
-
           return (
             <div
               id={readerVerseAnchorId(verseLabel)}
               key={`${verse.id}-${activeTranslation}`}
-              className={`group relative block w-full border-l-2 px-2 py-1 text-left transition ${
+              className={`group relative block w-full rounded-r-lg border-l-2 px-1 py-0.5 text-left transition-colors ${
                 isSelected
                   ? "border-amber-500/70 bg-amber-500/10"
                   : isHighlightedFromUrl
@@ -202,7 +231,7 @@ export default function VerseActionController({
                   event.stopPropagation();
                   toggleVerse(verse);
                 }}
-                className={`mr-3 inline-flex min-h-7 min-w-7 items-center justify-center rounded-full align-super text-xs font-bold transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/50 ${
+                className={`mr-1.5 inline-flex min-h-7 min-w-7 -translate-y-[0.08em] items-center justify-center rounded-full align-baseline font-sans text-[0.66rem] font-bold transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/50 ${
                   isSelected
                     ? "bg-amber-500/20 text-amber-700 dark:text-amber-300"
                     : "text-[var(--muted)] hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
@@ -211,13 +240,7 @@ export default function VerseActionController({
                 {verseLabel}
               </button>
 
-              <ReaderVerseStudy
-                reference={verse.reference}
-                verse={verse.verse}
-                translation={activeTranslation}
-                verseText={selectedText}
-                tokenAvailability={verseTokenAvailability}
-              />
+              <ScriptureText text={selectedText} reference={verse.reference} />
 
 
               {isBookmarked || hasNote ? (
@@ -236,6 +259,7 @@ export default function VerseActionController({
         verses={selectedVerses}
         onClose={clearSelection}
         onMemoryChange={refreshReaderMemory}
+        tokenAvailabilityByVerse={tokenAvailabilityByReaderVerseId}
       />
     </>
   );

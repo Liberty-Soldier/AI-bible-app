@@ -18,6 +18,8 @@ type ReaderVerseStudyProps = {
   translation: SourceBreakdownTranslation;
   verseText: string;
   tokenAvailability?: BibleIQVerseTokenAvailability;
+  displayVerseText?: boolean;
+  compactTrigger?: boolean;
 };
 
 type EntityDetails = {
@@ -138,6 +140,8 @@ export default function ReaderVerseStudy({
   translation,
   verseText,
   tokenAvailability,
+  displayVerseText = true,
+  compactTrigger = false,
 }: ReaderVerseStudyProps) {
   const [expanded, setExpanded] = useState(false);
   const [breakdown, setBreakdown] = useState<SourceBreakdownResult | null>(null);
@@ -355,21 +359,31 @@ export default function ReaderVerseStudy({
 
   return (
     <>
-      <ScriptureText
-        text={verseText}
-        reference={reference}
-        highlightRange={highlightRange}
-      />
+      {displayVerseText ? (
+        <ScriptureText
+          text={verseText}
+          reference={reference}
+          highlightRange={highlightRange}
+        />
+      ) : null}
 
-      <div className="mt-1 pl-10 text-base leading-normal">
+      <div
+        className={
+          compactTrigger ? "contents" : "mt-1 pl-10 text-base leading-normal"
+        }
+      >
         <button
           type="button"
           data-verse-study-control="true"
           aria-expanded={expanded}
           onClick={toggleStudy}
-          className="rounded px-1 py-0.5 text-xs font-semibold tracking-wide text-[var(--muted)] transition hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/45"
+          className={
+            compactTrigger
+              ? "min-h-9 rounded-xl bg-[var(--surface)] px-2 text-center text-[0.7rem] font-semibold text-[var(--foreground)] active:scale-[0.98] disabled:opacity-60"
+              : "rounded px-1 py-0.5 text-xs font-semibold tracking-wide text-[var(--muted)] transition hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/45"
+          }
         >
-          {expanded ? "Hide study" : "Study \u203a"}
+          {loading ? "Loading…" : compactTrigger ? "Source" : expanded ? "Hide study" : "Study \u203a"}
         </button>
 
         {expanded ? (
