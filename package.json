@@ -40,6 +40,7 @@
     "verify:emet-ui": "node scripts/verify-emet-question-ui.mjs",
     "verify:emet-billing": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-billing.mjs",
     "verify:emet-topic": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-topic-evidence.mjs",
+    "verify:reader-navigation": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-reader-navigation.mjs",
     "smoke:emet-live": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/smoke-emet-ai-live.mjs",
     "verify:brenton-overlay": "node scripts/verify-brenton-reader-overlay-contract.mjs",
     "repair:cached-emet": "node --max-old-space-size=4096 scripts/entity/repair-cached-emet-failures.js",

@@ -1,4 +1,4 @@
-import { bookAliasMap } from "@/app/data/bookAliases";
+import { bookAliasMap } from "../data/bookAliases";
 import type { TranslationPreference } from "@/app/lib/translationPreference";
 
 export type ScriptureSearchRecord = [
@@ -136,14 +136,15 @@ export function parseScriptureReference(
   if (!trimmed || /^["“].+["”]$/.test(trimmed)) return null;
 
   const match = trimmed.match(
-    /^(.+?)\s+(\d+)(?:(?::|\s+)(\d+[a-z]?))?$/i,
+    /^(.+?)(?:\s+(\d+)(?:(?::|\s+)(\d+[a-z]?))?)?$/i,
   );
 
   if (!match) return null;
 
   const rawBook = match[1].trim();
-  const chapter = Number(match[2]);
-  const verseLabel = match[3] || null;
+  const bookOnly = !match[2];
+  const chapter = bookOnly ? 1 : Number(match[2]);
+  const verseLabel = match[3] || (bookOnly ? "1" : null);
 
   if (!Number.isInteger(chapter) || chapter < 1) return null;
 

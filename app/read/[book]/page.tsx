@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BookPassageSelector from "@/app/components/BookPassageSelector";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import { bookCatalog } from "@/app/data/scripture/bookCatalog";
 
@@ -29,11 +30,6 @@ export default async function BookPage({
     notFound();
   }
 
-  const chapters = Array.from(
-    { length: bookInfo.chapters },
-    (_, index) => index + 1
-  );
-
   return (
     <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-6 text-[var(--foreground)]">
       <section className="mx-auto max-w-2xl">
@@ -58,19 +54,11 @@ export default async function BookPage({
           </p>
         </div>
 
-        <div className="grid grid-cols-5 gap-2 sm:grid-cols-8">
-          {chapters.map((chapter) => (
-            <Link
-              key={chapter}
-              href={`/read/${encodeURIComponent(
-                decodedBook
-              )}/${chapter}?translation=${activeTranslation}`}
-              className="grid min-h-12 place-items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] text-base font-semibold transition active:scale-[0.97] active:bg-[var(--surface-strong)]"
-            >
-              {chapter}
-            </Link>
-          ))}
-        </div>
+        <BookPassageSelector
+          book={decodedBook}
+          chapterCount={bookInfo.chapters}
+          translation={activeTranslation}
+        />
       </section>
 
       <MobileBottomNav />

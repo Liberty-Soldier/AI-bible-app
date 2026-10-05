@@ -11,6 +11,7 @@ import {
   setPreferredTranslation,
   type TranslationPreference,
 } from "@/app/lib/translationPreference";
+import { parseScriptureReference } from "@/app/lib/scriptureSearch";
 
 type Translation = TranslationPreference;
 
@@ -21,125 +22,6 @@ type Section =
   | "prophets"
   | "septuagint"
   | "new";
-
-  const bookAliases: Record<string, string> = {
-  gen: "Genesis",
-  ge: "Genesis",
-  ex: "Exodus",
-  exod: "Exodus",
-  lev: "Leviticus",
-  num: "Numbers",
-  deut: "Deuteronomy",
-  dt: "Deuteronomy",
-
-  josh: "Joshua",
-  judg: "Judges",
-  jdg: "Judges",
-  ruth: "Ruth",
-
-  "1 sam": "1 Samuel",
-  "1sam": "1 Samuel",
-  "2 sam": "2 Samuel",
-  "2sam": "2 Samuel",
-  "1 kgs": "1 Kings",
-  "1kgs": "1 Kings",
-  "2 kgs": "2 Kings",
-  "2kgs": "2 Kings",
-  "1 chr": "1 Chronicles",
-  "1chr": "1 Chronicles",
-  "2 chr": "2 Chronicles",
-  "2chr": "2 Chronicles",
-
-  ezra: "Ezra",
-  neh: "Nehemiah",
-  job: "Job",
-  ps: "Psalms",
-  psa: "Psalms",
-  pss: "Psalms",
-  prov: "Proverbs",
-  pro: "Proverbs",
-  eccl: "Ecclesiastes",
-  song: "Song of Songs",
-  sos: "Song of Songs",
-
-  isa: "Isaiah",
-  jer: "Jeremiah",
-  lam: "Lamentations",
-  ezek: "Ezekiel",
-  eze: "Ezekiel",
-  dan: "Daniel Greek",
-  hos: "Hosea",
-  joel: "Joel",
-  amos: "Amos",
-  obad: "Obadiah",
-  jonah: "Jonah",
-  mic: "Micah",
-  nah: "Nahum",
-  hab: "Habakkuk",
-  zeph: "Zephaniah",
-  hag: "Haggai",
-  zech: "Zechariah",
-  mal: "Malachi",
-
-  tob: "Tobit",
-  jdt: "Judith",
-  judith: "Judith",
-  wis: "Wisdom",
-  sir: "Sirach",
-  bar: "Baruch",
-  "1 macc": "1 Maccabees",
-  "1macc": "1 Maccabees",
-  "2 macc": "2 Maccabees",
-  "2macc": "2 Maccabees",
-  "3 macc": "3 Maccabees",
-  "3macc": "3 Maccabees",
-  "4 macc": "4 Maccabees",
-  "4macc": "4 Maccabees",
-
-  matt: "Matthew",
-  mt: "Matthew",
-  mark: "Mark",
-  mk: "Mark",
-  luke: "Luke",
-  lk: "Luke",
-  john: "John",
-  jn: "John",
-  acts: "Acts",
-  rom: "Romans",
-  "1 cor": "1 Corinthians",
-  "1cor": "1 Corinthians",
-  "2 cor": "2 Corinthians",
-  "2cor": "2 Corinthians",
-  gal: "Galatians",
-  eph: "Ephesians",
-  phil: "Philippians",
-  col: "Colossians",
-  "1 thess": "1 Thessalonians",
-  "1thess": "1 Thessalonians",
-  "2 thess": "2 Thessalonians",
-  "2thess": "2 Thessalonians",
-  "1 tim": "1 Timothy",
-  "1tim": "1 Timothy",
-  "2 tim": "2 Timothy",
-  "2tim": "2 Timothy",
-  titus: "Titus",
-  phlm: "Philemon",
-  heb: "Hebrews",
-  jas: "James",
-  james: "James",
-  "1 pet": "1 Peter",
-  "1pet": "1 Peter",
-  "2 pet": "2 Peter",
-  "2pet": "2 Peter",
-  "1 john": "1 John",
-  "1john": "1 John",
-  "2 john": "2 John",
-  "2john": "2 John",
-  "3 john": "3 John",
-  "3john": "3 John",
-  jude: "Jude",
-  rev: "Revelation",
-};
 
 type BookInfo = {
   book: string;
@@ -266,6 +148,7 @@ export default function ReadPage() {
 
   const [translation, setTranslation] = useState<Translation>("web");
   const [quickJump, setQuickJump] = useState("");
+  const [quickJumpError, setQuickJumpError] = useState("");
 
   useEffect(() => {
     // Read the device-only preference after hydration; SSR intentionally uses WEB.
@@ -277,26 +160,24 @@ export default function ReadPage() {
     const value = quickJump.trim();
     if (!value) return;
 
-    const match = value.match(/^(.+?)\s+(\d+)(?:(?::|\s+)(\d+))?$/);
+    const parsed = parseScriptureReference(
+      value,
+      books.map((item) => item.book),
+    );
+    const found = parsed
+      ? books.find((item) => item.book === parsed.book)
+      : null;
 
-    if (!match) return;
+    if (!parsed || !found || parsed.chapter > found.chapters) {
+      setQuickJumpError("Enter a valid book, chapter, or verse.");
+      return;
+    }
 
-const jumpBook = match[1].trim();
-const jumpChapter = Number(match[2]);
-const jumpVerse = match[3] ? Number(match[3]) : null;
-
-const normalizedBook =
-  bookAliases[jumpBook.toLowerCase()] || jumpBook;
-
-const found = books.find(
-  (item) => item.book.toLowerCase() === normalizedBook.toLowerCase()
-);
-
-    if (!found) return;
+    setQuickJumpError("");
 
     router.push(
-      `/read/${encodeURIComponent(found.book)}/${jumpChapter}?translation=${translation}${
-        jumpVerse ? `&verse=${jumpVerse}` : ""
+      `/read/${encodeURIComponent(found.book)}/${parsed.chapter}?translation=${translation}${
+        parsed.verseLabel ? `&verse=${encodeURIComponent(parsed.verseLabel)}` : ""
       }`
     );
   }
@@ -322,7 +203,10 @@ return (
         <div className="flex gap-2">
 <input
   value={quickJump}
-  onChange={(event) => setQuickJump(event.target.value)}
+  onChange={(event) => {
+    setQuickJump(event.target.value);
+    if (quickJumpError) setQuickJumpError("");
+  }}
   onKeyDown={(event) => {
     if (event.key === "Enter") handleQuickJump();
   }}
@@ -338,6 +222,11 @@ return (
             Go
           </button>
         </div>
+        {quickJumpError ? (
+          <p role="alert" className="mt-2 text-sm text-red-700 dark:text-red-300">
+            {quickJumpError}
+          </p>
+        ) : null}
       </div>
 
       <div className="mb-5 flex items-center gap-6 overflow-x-auto border-b border-[var(--border)]">

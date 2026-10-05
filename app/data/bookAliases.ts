@@ -1,9 +1,11 @@
 export const bookAliasMap: Record<string, string> = {
   // Torah
   Gen: "Genesis",
+  Ge: "Genesis",
   Genesis: "Genesis",
   Exod: "Exodus",
   Exo: "Exodus",
+  Ex: "Exodus",
   Exodus: "Exodus",
   Lev: "Leviticus",
   Leviticus: "Leviticus",
@@ -11,6 +13,7 @@ export const bookAliasMap: Record<string, string> = {
   Numbers: "Numbers",
   Deut: "Deuteronomy",
   Deu: "Deuteronomy",
+  Dt: "Deuteronomy",
   Deuteronomy: "Deuteronomy",
 
   // History
@@ -68,6 +71,7 @@ export const bookAliasMap: Record<string, string> = {
   Job: "Job",
   Ps: "Psalms",
   Psa: "Psalms",
+  Pss: "Psalms",
   Psalm: "Psalms",
   Psalms: "Psalms",
   Prov: "Proverbs",
@@ -80,6 +84,7 @@ export const bookAliasMap: Record<string, string> = {
   SongOfSolomon: "Song of Solomon",
   "Song of Solomon": "Song of Solomon",
   Cant: "Song of Solomon",
+  SOS: "Song of Solomon",
 
   // Prophets
   Isa: "Isaiah",
@@ -142,13 +147,17 @@ export const bookAliasMap: Record<string, string> = {
   // New Testament
   Matt: "Matthew",
   Mat: "Matthew",
+  Mt: "Matthew",
   Matthew: "Matthew",
   Mark: "Mark",
   Mrk: "Mark",
+  Mk: "Mark",
   Luke: "Luke",
   Luk: "Luke",
+  Lk: "Luke",
   John: "John",
   Jhn: "John",
+  Jn: "John",
   Acts: "Acts",
   Act: "Acts",
   Rom: "Romans",
