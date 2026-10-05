@@ -4,7 +4,8 @@ import type { BibleIQTranslation } from "@/app/data/lexicon/BibleIQTypes";
 import { getEmetAiCacheKey } from "@/app/lib/emet/EmetAiCache";
 import {
   buildEmetConversationQuestion,
-  parseEmetPreviousQuestions,
+  parseEmetConversationContext,
+  relevantEmetConversation,
 } from "@/app/lib/emet/EmetAiConversation";
 import { buildEmetAiWordEvidence } from "@/app/lib/emet/EmetAiEvidenceBuilder";
 import {
@@ -136,9 +137,9 @@ export async function POST(request: Request) {
 
   const question = clean(body.question);
   const requestId = clean(body.requestId, 64);
-  const previousQuestions = parseEmetPreviousQuestions(body.previousQuestions);
+  const conversation = parseEmetConversationContext(body.conversation);
   const context = parseContext(body.context);
-  if (!question || !requestId || previousQuestions === null || !context) {
+  if (!question || !requestId || conversation === null || !context) {
     return json({ status: "invalid-request" }, 400);
   }
 
@@ -168,7 +169,10 @@ export async function POST(request: Request) {
   }
 
   const evidence = await buildEmetAiWordEvidence({
-    question: buildEmetConversationQuestion({ question, previousQuestions }),
+    question: buildEmetConversationQuestion({
+      question,
+      conversation: relevantEmetConversation({ question, conversation }),
+    }),
     wordStudy,
     loadVerse: createEmetAiVerseLoader(url.origin, forwardedHeaders),
   });

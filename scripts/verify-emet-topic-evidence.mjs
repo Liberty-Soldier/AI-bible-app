@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 
 import {
+  buildEmetConversationContext,
   buildEmetConversationQuestion,
-  parseEmetPreviousQuestions,
+  parseEmetConversationContext,
+  relevantEmetConversation,
 } from "../app/lib/emet/EmetAiConversation.ts";
 import { buildEmetAiTopicEvidence } from "../app/lib/emet/EmetAiTopicEvidence.ts";
 
@@ -102,27 +104,98 @@ const unsupported = buildEmetAiTopicEvidence({
 });
 assert.equal(unsupported.status, "insufficient-evidence");
 
+const sabbathConversation = buildEmetConversationContext([
+  {
+    question: "What does Scripture establish about the Sabbath?",
+    answer: "Unsupported prior prose mentions Sukkot and Leviticus 23:34.",
+    references: ["Exodus 20:8", "Exodus 20:10"],
+  },
+]);
 const sabbathFollowUp = buildEmetAiTopicEvidence({
   question: "Does that still apply today?",
-  previousQuestions: ["What does Scripture establish about the Sabbath?"],
+  conversation: sabbathConversation,
   builtAt: "2026-01-01T00:00:00.000Z",
 });
 assert.equal(sabbathFollowUp.status, "ready");
 if (sabbathFollowUp.status === "ready") {
-  assert.match(sabbathFollowUp.packet.question, /Earlier reader questions/);
+  assert.match(sabbathFollowUp.packet.question, /Conversation context/);
   assert.match(sabbathFollowUp.packet.question, /Current reader question/);
   assert.ok(sabbathFollowUp.packet.scope.references.includes("Matthew 5:18"));
+  assert.ok(!sabbathFollowUp.packet.scope.references.includes("Leviticus 23:34"));
 }
 
-assert.deepEqual(parseEmetPreviousQuestions([" one ", "two"]), ["one", "two"]);
-assert.equal(parseEmetPreviousQuestions("not-an-array"), null);
+const longStudy = buildEmetConversationContext(
+  Array.from({ length: 12 }, (_, index) => ({
+    question:
+      index === 0
+        ? "What is Sukkot?"
+        : `Sukkot study follow-up ${index + 1}`,
+    answer: `Supported answer ${index + 1}`,
+    references: index === 0 ? ["Leviticus 23:34"] : [],
+  })),
+);
+assert.equal(longStudy.recentExchanges.length, 8);
+assert.ok(longStudy.summary.topics.includes("sukkot"));
+assert.ok(longStudy.summary.passages.includes("Leviticus 23:34"));
+assert.equal(parseEmetConversationContext("not-an-object"), null);
 assert.match(
   buildEmetConversationQuestion({
     question: "Does that still apply?",
-    previousQuestions: ["What is the Sabbath command?"],
+    conversation: sabbathConversation,
   }),
-  /conversational context only, not Scripture evidence/,
+  /not Scripture evidence/,
 );
+assert.equal(
+  relevantEmetConversation({
+    question: "What does Scripture teach about resurrection?",
+    conversation: longStudy,
+  }),
+  null,
+);
+
+function references(result) {
+  return result.status === "ready" ? result.packet.scope.references : [];
+}
+
+const jeremiahSukkot = buildEmetAiTopicEvidence({
+  question: "What is the Feast of Tabernacles?",
+  context: { book: "Jeremiah", chapter: 7, translation: "web" },
+});
+assert.equal(jeremiahSukkot.status, "ready");
+assert.ok(!references(jeremiahSukkot).some((item) => item.startsWith("Jeremiah 7:")));
+assert.ok(references(jeremiahSukkot).includes("Leviticus 23:34"));
+
+const jeremiahVerseFive = buildEmetAiTopicEvidence({
+  question: "What does verse 5 mean?",
+  context: { book: "Jeremiah", chapter: 7, translation: "web" },
+});
+assert.ok(references(jeremiahVerseFive).includes("Jeremiah 7:5"));
+
+const jeremiahTemple = buildEmetAiTopicEvidence({
+  question: "What did Jeremiah teach about the temple?",
+  context: { book: "Jeremiah", chapter: 7, translation: "web" },
+});
+assert.ok(references(jeremiahTemple).some((item) => item.startsWith("Jeremiah 7:")));
+
+const genesisAtonement = buildEmetAiTopicEvidence({
+  question: "What is the Day of Atonement?",
+  context: { book: "Genesis", chapter: 1, translation: "web" },
+});
+assert.ok(!references(genesisAtonement).some((item) => item.startsWith("Genesis 1:")));
+assert.ok(references(genesisAtonement).includes("Leviticus 23:27"));
+
+const leviticusSukkot = buildEmetAiTopicEvidence({
+  question: "What is the Feast of Tabernacles?",
+  context: { book: "Leviticus", chapter: 23, translation: "web" },
+});
+assert.ok(references(leviticusSukkot).includes("Leviticus 23:34"));
+
+const topicSwitch = buildEmetAiTopicEvidence({
+  question: "What does Scripture teach about resurrection?",
+  conversation: longStudy,
+});
+assert.ok(references(topicSwitch).includes("John 11:25"));
+assert.ok(!references(topicSwitch).includes("Leviticus 23:34"));
 
 console.log("EMET topic evidence verification passed.");
 console.log("- Topic retrieval balances Torah, later Old Testament, and New Testament evidence.");
@@ -130,3 +203,5 @@ console.log("- Normative questions include governing command, duration, and cont
 console.log("- Reader context is loaded from locked Scripture rather than client-supplied text.");
 console.log("- Questions with no honest retrieval terms fail closed.");
 console.log("- Follow-ups retain question context without treating conversation as evidence.");
+console.log("- Independent questions exclude incidental Reader and prior-chat context.");
+console.log("- Eight recent exchanges plus an older structured summary preserve study continuity.");

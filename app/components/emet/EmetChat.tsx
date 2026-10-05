@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
 
 const CHAT_STORAGE_KEY = "emetsees-conversation";
 
@@ -210,9 +211,15 @@ export default function EmetChat({
         body: JSON.stringify({
           question: finalQuestion,
           requestId: crypto.randomUUID(),
-          previousQuestions: exchanges
-            .slice(-4)
-            .map((exchange) => exchange.question),
+          conversation: buildEmetConversationContext(
+            exchanges.map((exchange) => ({
+              question: exchange.question,
+              answer: exchange.answer.answer,
+              references: exchange.answer.citations
+                .map((citation) => citation.reference || "")
+                .filter(Boolean),
+            })),
+          ),
           ...(activeContext ? { context: activeContext } : {}),
         }),
       });
@@ -293,11 +300,26 @@ export default function EmetChat({
       <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-6 border-y border-[var(--border)] py-4">
         <div className="min-w-0">
           <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-            Reading context
+            {activeContext ? "Using context" : "Evidence scope"}
           </p>
-          <p className="mt-1 truncate text-sm font-semibold">
-            {contextLabel(activeContext)}
-          </p>
+          <div className="mt-1 flex min-w-0 items-center gap-2">
+            <p className="truncate text-sm font-semibold">
+              {contextLabel(activeContext)}
+            </p>
+            {activeContext ? (
+              <button
+                type="button"
+                aria-label={`Remove ${contextLabel(activeContext)} context`}
+                onClick={() => {
+                  if (wordContext) setWordContext(null);
+                  else setReaderContext(null);
+                }}
+                className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--border)] text-sm text-[var(--muted)] transition hover:text-[var(--foreground)]"
+              >
+                ×
+              </button>
+            ) : null}
+          </div>
         </div>
         {usage ? (
           <div className="text-right">
@@ -312,16 +334,6 @@ export default function EmetChat({
           </div>
         ) : null}
       </div>
-
-      {wordContext ? (
-        <button
-          type="button"
-          onClick={() => setWordContext(null)}
-          className="mt-3 border-b border-[var(--border)] pb-0.5 text-xs font-semibold text-[var(--muted)]"
-        >
-          Ask without the selected word
-        </button>
-      ) : null}
 
       {exchanges.length ? (
         <div className="mt-3 flex justify-end">

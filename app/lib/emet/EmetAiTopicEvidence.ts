@@ -9,7 +9,12 @@ import {
   type EmetAiEvidencePacket,
   validateEmetAiEvidencePacket,
 } from "./EmetAiContract";
-import { buildEmetConversationQuestion } from "./EmetAiConversation";
+import {
+  buildEmetConversationQuestion,
+  conversationRetrievalQuestion,
+  relevantEmetConversation,
+  type EmetConversationContext,
+} from "./EmetAiConversation";
 
 type SearchTranslation = "web" | "kjv" | "brenton";
 type SearchRecord = [book: string, chapter: number, verse: string, text: string];
@@ -114,6 +119,17 @@ const DIRECT_QUESTION_CONCEPTS = [
     words: new Set(["accomplish", "accomplished", "fulfill", "fulfilled"]),
   },
 ] as const;
+const TOPIC_TERM_GROUPS = [
+  ["tabernacle", "tabernacles", "sukkot", "booth", "booths", "shelter", "shelters", "ingathering"],
+  ["atonement", "kippur", "reconciliation"],
+  ["resurrection", "resurrected"],
+  ["passover", "pascha", "unleavened"],
+] as const;
+const READER_DEPENDENT_PATTERN =
+  /\b(this|that)\s+(verse|chapter|passage|word|text)\b|\b(in|from)\s+this\s+(verse|chapter|passage)\b|\bwho is speaking\b|\bprevious\s+(verse|chapter)\b|\bwhat does (this|that|it) mean\b|\bhere\b|\bverse\s+\d+\b/i;
+const WEAK_CONTEXT_TERMS = new Set([
+  "day", "god", "lord", "yahweh", "people", "person", "today", "year",
+]);
 const GOVERNING_CONCEPTS = [
   {
     id: "command",
@@ -190,7 +206,16 @@ function normalizedWords(value: string) {
 function questionTerms(question: string) {
   const terms = Array.from(new Set(normalizedWords(question)));
   const subjectTerms = terms.filter((term) => !QUESTION_CONTROL_WORDS.has(term));
-  return (subjectTerms.length ? subjectTerms : terms).slice(0, 10);
+  const selected = subjectTerms.length ? subjectTerms : terms;
+  const expanded = new Set(selected);
+
+  for (const group of TOPIC_TERM_GROUPS) {
+    if (group.some((term) => expanded.has(term))) {
+      group.forEach((term) => expanded.add(term));
+    }
+  }
+
+  return Array.from(expanded).slice(0, 18);
 }
 
 function intersects(words: Set<string>, candidates: Set<string>) {
@@ -240,7 +265,10 @@ function scriptureItem({
   };
 }
 
-function contextRecords(context: EmetAiReaderContext | null) {
+function contextRecords(
+  context: EmetAiReaderContext | null,
+  question: string,
+) {
   if (!context) return [];
 
   const index = loadIndex(context.translation);
@@ -252,16 +280,46 @@ function contextRecords(context: EmetAiReaderContext | null) {
     );
   if (!chapter.length) return [];
 
-  const verse = context.verse === null || context.verse === undefined
+  const requestedVerse = question.match(/\bverse\s+(\d+)\b/i)?.[1];
+  const verse = requestedVerse || (context.verse === null || context.verse === undefined
     ? ""
-    : String(context.verse).trim();
-  if (!verse) return chapter.slice(0, 5).map((item) => ({ index, ...item }));
+    : String(context.verse).trim());
+  const contextDependent = READER_DEPENDENT_PATTERN.test(question);
 
-  const selectedIndex = chapter.findIndex(({ record }) => record[2] === verse);
-  if (selectedIndex < 0) return [];
+  if (contextDependent) {
+    if (!verse) return chapter.slice(0, 5).map((item) => ({ index, ...item }));
 
-  return chapter
-    .slice(Math.max(0, selectedIndex - 2), selectedIndex + 3)
+    const selectedIndex = chapter.findIndex(({ record }) => record[2] === verse);
+    if (selectedIndex < 0) return [];
+
+    return chapter
+      .slice(Math.max(0, selectedIndex - 2), selectedIndex + 3)
+      .map((item) => ({ index, ...item }));
+  }
+
+  const terms = questionTerms(question);
+  const contextBookNamed = tokenizedWords(question).includes(
+    context.book.toLocaleLowerCase("en-US"),
+  );
+  const related = chapter
+    .map((item) => {
+      const words = new Set(normalizedWords(item.record[3]));
+      const matches = terms.filter((term) => words.has(term));
+      const strongMatches = matches.filter(
+        (term) => !WEAK_CONTEXT_TERMS.has(term),
+      );
+      return { ...item, score: matches.length, strongMatches };
+    })
+    .filter((item) => item.strongMatches.length > 0)
+    .sort(
+      (left, right) =>
+        right.score - left.score || left.recordIndex - right.recordIndex,
+    );
+
+  if (!related.length && !contextBookNamed) return [];
+
+  return related
+    .slice(0, 3)
     .map((item) => ({ index, ...item }));
 }
 
@@ -286,6 +344,9 @@ function topicRecords(question: string) {
     .map((record, recordIndex) => {
       const words = new Set(normalizedWords(record[3]));
       const directMatches = retrievalTerms.filter((term) => words.has(term));
+      const strongDirectMatches = directMatches.filter(
+        (term) => !WEAK_CONTEXT_TERMS.has(term),
+      );
       const directConceptScore = directMatches.length
         ? activeDirectConcepts
             .filter((concept) => intersects(words, concept.words))
@@ -311,19 +372,27 @@ function topicRecords(question: string) {
         index,
         record,
         recordIndex,
-        directScore: directMatches.length * 20 + directConceptScore,
+        directScore:
+          strongDirectMatches.length * 20 +
+          (directMatches.length - strongDirectMatches.length) * 2 +
+          directConceptScore,
         governingScore,
         applicationScore,
         applicationBridgeScore: applicationScore,
         applicationCommandScore,
         score:
-          directMatches.length * 20 +
+          strongDirectMatches.length * 20 +
+          (directMatches.length - strongDirectMatches.length) * 2 +
           directConceptScore +
           governingScore +
           applicationScore,
       };
     })
-    .filter((item) => item.score > 0);
+    .filter(
+      (item) =>
+        item.score > 0 &&
+        (item.directScore > 2 || item.governingScore > 0 || item.applicationScore > 0),
+    );
 
   const matchesByRecordIndex = new Map(
     matches.map((item) => [item.recordIndex, item] as const),
@@ -478,12 +547,12 @@ function topicRecords(question: string) {
 
 export function buildEmetAiTopicEvidence({
   question,
-  previousQuestions = [],
+  conversation = null,
   context = null,
   builtAt,
 }: {
   question: string;
-  previousQuestions?: string[];
+  conversation?: EmetConversationContext | null;
   context?: EmetAiReaderContext | null;
   builtAt?: string;
 }) {
@@ -495,9 +564,16 @@ export function buildEmetAiTopicEvidence({
     };
   }
 
-  const retrievalQuestion = [...previousQuestions, cleanQuestion].join("\n");
+  const relevantConversation = conversation
+    ? relevantEmetConversation({ question: cleanQuestion, conversation })
+    : null;
+  const retrievalQuestion = conversationRetrievalQuestion({
+    question: cleanQuestion,
+    conversation: relevantConversation,
+  });
+  const readerRecords = contextRecords(context, cleanQuestion);
   const candidates = [
-    ...contextRecords(context),
+    ...readerRecords,
     ...topicRecords(retrievalQuestion),
   ];
   const seen = new Set<string>();
@@ -525,10 +601,10 @@ export function buildEmetAiTopicEvidence({
     schemaVersion: EMET_AI_EVIDENCE_SCHEMA,
     question: buildEmetConversationQuestion({
       question: cleanQuestion,
-      previousQuestions,
+      conversation: relevantConversation,
     }),
     scope: {
-      type: context ? "passage" : "topic",
+      type: readerRecords.length ? "passage" : "topic",
       references: evidence
         .map((item) => item.reference)
         .filter((value): value is string => Boolean(value)),
@@ -537,7 +613,7 @@ export function buildEmetAiTopicEvidence({
     identity: { gate: "not-applicable" },
     evidence,
     provenance: {
-      evidenceVersion: `locked-scripture-topic-search@3:${Array.from(fingerprints).sort().join(":")}`,
+      evidenceVersion: `locked-scripture-topic-search@4:${Array.from(fingerprints).sort().join(":")}`,
       builtAt: builtAt || new Date().toISOString(),
     },
   };
