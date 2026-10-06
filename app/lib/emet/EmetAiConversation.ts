@@ -1,9 +1,13 @@
+import type { EmetAiClaimSupport } from "./EmetAiContract";
+
 const MAX_RECENT_EXCHANGES = 8;
 const MAX_SUMMARY_TOPICS = 12;
 const MAX_SUMMARY_PASSAGES = 16;
 const MAX_SUMMARY_CORRECTIONS = 4;
 const MAX_QUESTION_LENGTH = 800;
 const MAX_ANSWER_LENGTH = 2400;
+const MAX_EXCHANGE_CLAIMS = 12;
+const MAX_SUMMARY_CLAIMS = 16;
 
 const CONTEXT_WORDS = new Set([
   "about", "after", "again", "also", "and", "answer", "apply", "before",
@@ -21,6 +25,13 @@ export type EmetConversationExchange = {
   question: string;
   answer: string;
   references: string[];
+  claims: EmetConversationClaim[];
+};
+
+export type EmetConversationClaim = {
+  text: string;
+  support: EmetAiClaimSupport;
+  references: string[];
 };
 
 export type EmetConversationSummary = {
@@ -28,6 +39,7 @@ export type EmetConversationSummary = {
   passages: string[];
   corrections: string[];
   earlierQuestions: string[];
+  establishedClaims: EmetConversationClaim[];
 };
 
 export type EmetConversationContext = {
@@ -41,6 +53,38 @@ function cleanText(value: unknown, maxLength: number) {
 
 function unique(values: string[], limit: number) {
   return Array.from(new Set(values.filter(Boolean))).slice(0, limit);
+}
+
+const claimSupports = new Set<EmetAiClaimSupport>([
+  "explicit-statement",
+  "strong-implication",
+  "theological-synthesis",
+  "possible-interpretation",
+  "does-not-establish",
+]);
+
+function cleanClaims(value: unknown): EmetConversationClaim[] | null {
+  if (value === undefined) return [];
+  if (!Array.isArray(value)) return null;
+  const claims: EmetConversationClaim[] = [];
+  for (const candidate of value.slice(-MAX_EXCHANGE_CLAIMS)) {
+    if (!candidate || typeof candidate !== "object") return null;
+    const claim = candidate as Record<string, unknown>;
+    const text = cleanText(claim.text, 600);
+    const support = claim.support as EmetAiClaimSupport;
+    if (!text || !claimSupports.has(support) || !Array.isArray(claim.references)) {
+      return null;
+    }
+    claims.push({
+      text,
+      support,
+      references: unique(
+        claim.references.map((reference) => cleanText(reference, 80)),
+        12,
+      ),
+    });
+  }
+  return claims;
 }
 
 function topicTerms(value: string) {
@@ -97,11 +141,18 @@ function summarizeOlderExchanges(
     passages,
     corrections,
     earlierQuestions: exchanges.slice(-4).map((exchange) => exchange.question),
+    establishedClaims: exchanges
+      .flatMap((exchange) => exchange.claims)
+      .slice(-MAX_SUMMARY_CLAIMS),
   };
 }
 
 export function buildEmetConversationContext(
-  exchanges: EmetConversationExchange[],
+  exchanges: Array<
+    Omit<EmetConversationExchange, "claims"> & {
+      claims?: EmetConversationClaim[];
+    }
+  >,
 ): EmetConversationContext {
   const normalized = exchanges
     .slice(-24)
@@ -112,6 +163,7 @@ export function buildEmetConversationContext(
         exchange.references.map((reference) => cleanText(reference, 80)),
         20,
       ),
+      claims: cleanClaims(exchange.claims) || [],
     }))
     .filter((exchange) => exchange.question && exchange.answer);
   const splitIndex = Math.max(0, normalized.length - MAX_RECENT_EXCHANGES);
@@ -137,7 +189,13 @@ export function parseEmetConversationContext(
     const exchange = candidate as Record<string, unknown>;
     const question = cleanText(exchange.question, MAX_QUESTION_LENGTH);
     const answer = cleanText(exchange.answer, MAX_ANSWER_LENGTH);
-    if (!question || !answer || !Array.isArray(exchange.references)) return null;
+    const claims = cleanClaims(exchange.claims);
+    if (
+      !question ||
+      !answer ||
+      !Array.isArray(exchange.references) ||
+      !claims
+    ) return null;
     exchanges.push({
       question,
       answer,
@@ -145,6 +203,7 @@ export function parseEmetConversationContext(
         exchange.references.map((reference) => cleanText(reference, 80)),
         20,
       ),
+      claims,
     });
   }
 
@@ -163,11 +222,24 @@ export function parseEmetConversationContext(
     MAX_QUESTION_LENGTH,
   );
   const earlierQuestions = cleanList(summary.earlierQuestions, 4, MAX_QUESTION_LENGTH);
-  if (!topics || !passages || !corrections || !earlierQuestions) return null;
+  const establishedClaims = cleanClaims(summary.establishedClaims);
+  if (
+    !topics ||
+    !passages ||
+    !corrections ||
+    !earlierQuestions ||
+    !establishedClaims
+  ) return null;
 
   return {
     recentExchanges: exchanges,
-    summary: { topics, passages, corrections, earlierQuestions },
+    summary: {
+      topics,
+      passages,
+      corrections,
+      earlierQuestions,
+      establishedClaims: establishedClaims.slice(-MAX_SUMMARY_CLAIMS),
+    },
   };
 }
 
@@ -178,7 +250,11 @@ export function relevantEmetConversation({
   question: string;
   conversation: EmetConversationContext;
 }) {
-  if (!conversation.recentExchanges.length && !conversation.summary.topics.length) {
+  if (
+    !conversation.recentExchanges.length &&
+    !conversation.summary.topics.length &&
+    !conversation.summary.establishedClaims.length
+  ) {
     return null;
   }
 
@@ -189,10 +265,47 @@ export function relevantEmetConversation({
     ...conversation.recentExchanges.flatMap((exchange) =>
       topicTerms(exchange.question),
     ),
+    ...conversation.summary.establishedClaims.flatMap((claim) =>
+      topicTerms(claim.text),
+    ),
+    ...conversation.recentExchanges.flatMap((exchange) =>
+      exchange.claims.flatMap((claim) => topicTerms(claim.text)),
+    ),
   ]);
   const overlaps = Array.from(currentTerms).some((term) => memoryTerms.has(term));
 
   return FOLLOW_UP_PATTERN.test(question) || overlaps ? conversation : null;
+}
+
+export function relevantEmetConversationClaimReferences(
+  conversation: EmetConversationContext | null,
+) {
+  if (!conversation) return [];
+
+  const recentClaims = conversation.recentExchanges
+    .slice(-2)
+    .flatMap((exchange) => exchange.claims);
+  const claims = recentClaims.length
+    ? recentClaims
+    : conversation.summary.establishedClaims.slice(-MAX_SUMMARY_CLAIMS);
+  const references: Array<{ reference: string; claim: string }> = [];
+  const seen = new Set<string>();
+
+  for (const claim of claims.slice().reverse()) {
+    for (const reference of claim.references) {
+      const key = reference
+        .normalize("NFKC")
+        .toLocaleLowerCase("en-US")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      references.push({ reference, claim: claim.text });
+      if (references.length >= 4) return references;
+    }
+  }
+
+  return references;
 }
 
 export function conversationRetrievalQuestion({
@@ -232,12 +345,20 @@ export function buildEmetConversationQuestion({
     ...conversation.summary.corrections.map(
       (correction) => `Reader correction: ${correction}`,
     ),
+    ...conversation.summary.establishedClaims.map(
+      (claim) =>
+        `Earlier structured claim to re-check (${claim.support}; not evidence): ${claim.text}${claim.references.length ? ` [previously cited: ${claim.references.join(", ")}]` : ""}`,
+    ),
   ].filter(Boolean);
   const recentLines = conversation.recentExchanges.flatMap((exchange) => [
     `Earlier reader question: ${exchange.question}`,
     ...(exchange.references.length
       ? [`Verified passages cited in that exchange: ${exchange.references.join(", ")}`]
       : []),
+    ...exchange.claims.map(
+      (claim) =>
+        `Earlier structured claim to re-check (${claim.support}; not evidence): ${claim.text}${claim.references.length ? ` [previously cited: ${claim.references.join(", ")}]` : ""}`,
+    ),
   ]);
 
   return [

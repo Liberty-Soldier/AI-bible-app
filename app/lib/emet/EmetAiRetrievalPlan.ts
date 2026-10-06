@@ -4,7 +4,7 @@ import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import type { EmetConversationContext } from "./EmetAiConversation";
 
 export const EMET_AI_RETRIEVAL_PLAN_SCHEMA =
-  "emet-ai-retrieval-plan@1" as const;
+  "emet-ai-retrieval-plan@2" as const;
 
 export type EmetAiRetrievalRole =
   | "direct"
@@ -29,9 +29,28 @@ export type EmetAiPlannedSourcePhrase = {
   reason: string;
 };
 
+export type EmetAiPlannedComponent = {
+  id: string;
+  proposition: string;
+  category:
+    | "identity"
+    | "authority"
+    | "nature"
+    | "relationship"
+    | "practice"
+    | "duration"
+    | "other";
+};
+
 export type EmetAiRetrievalPlan = {
   schemaVersion: typeof EMET_AI_RETRIEVAL_PLAN_SCHEMA;
   subject: string;
+  analysisMode:
+    | "simple"
+    | "doctrinal-claim"
+    | "apparent-contradiction";
+  proposition: string;
+  components: EmetAiPlannedComponent[];
   intent:
     | "identity"
     | "meaning"
@@ -71,6 +90,20 @@ const corpora = new Set<EmetAiPlannedSourcePhrase["corpus"]>([
   "lxx",
   "greek-nt",
 ]);
+const analysisModes = new Set<EmetAiRetrievalPlan["analysisMode"]>([
+  "simple",
+  "doctrinal-claim",
+  "apparent-contradiction",
+]);
+const componentCategories = new Set<EmetAiPlannedComponent["category"]>([
+  "identity",
+  "authority",
+  "nature",
+  "relationship",
+  "practice",
+  "duration",
+  "other",
+]);
 
 function clean(value: unknown, maxLength: number) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -91,7 +124,9 @@ export function parseEmetAiRetrievalPlan(
   const candidate = value as Record<string, unknown>;
   if (
     candidate.schemaVersion !== EMET_AI_RETRIEVAL_PLAN_SCHEMA ||
+    !analysisModes.has(candidate.analysisMode as EmetAiRetrievalPlan["analysisMode"]) ||
     !intents.has(candidate.intent as EmetAiRetrievalPlan["intent"]) ||
+    !Array.isArray(candidate.components) ||
     !Array.isArray(candidate.passages) ||
     !Array.isArray(candidate.sourcePhrases) ||
     !Array.isArray(candidate.limitations)
@@ -100,7 +135,35 @@ export function parseEmetAiRetrievalPlan(
   }
 
   const subject = clean(candidate.subject, 160);
-  if (!subject) return null;
+  const proposition = clean(candidate.proposition, 360);
+  if (!subject || !proposition) return null;
+
+  const components: EmetAiPlannedComponent[] = [];
+  const componentIds = new Set<string>();
+  for (const item of candidate.components.slice(0, 8)) {
+    if (!item || typeof item !== "object") return null;
+    const component = item as Record<string, unknown>;
+    const id = clean(component.id, 40);
+    const componentProposition = clean(component.proposition, 260);
+    const category = component.category as EmetAiPlannedComponent["category"];
+    if (
+      !id ||
+      componentIds.has(id) ||
+      !componentProposition ||
+      !componentCategories.has(category)
+    ) {
+      return null;
+    }
+    componentIds.add(id);
+    components.push({ id, proposition: componentProposition, category });
+  }
+
+  if (
+    candidate.analysisMode !== "simple" &&
+    components.length < 2
+  ) {
+    return null;
+  }
 
   const passages: EmetAiPlannedPassage[] = [];
   for (const item of candidate.passages.slice(0, 16)) {
@@ -151,6 +214,9 @@ export function parseEmetAiRetrievalPlan(
   return {
     schemaVersion: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
     subject,
+    analysisMode: candidate.analysisMode as EmetAiRetrievalPlan["analysisMode"],
+    proposition,
+    components,
     intent: candidate.intent as EmetAiRetrievalPlan["intent"],
     passages,
     sourcePhrases,
@@ -192,6 +258,12 @@ export function buildEmetAiRetrievalInput({
               ),
             ),
           ),
+          priorStructuredClaims: [
+            ...conversation.summary.establishedClaims,
+            ...conversation.recentExchanges.flatMap(
+              (exchange) => exchange.claims,
+            ),
+          ].slice(-20),
         }
       : null,
   };

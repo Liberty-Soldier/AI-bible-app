@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
+import type { EmetAiClaimSupport } from "@/app/lib/emet/EmetAiContract";
 
 const CHAT_STORAGE_KEY = "emetsees-conversation";
 
@@ -39,6 +40,12 @@ type WordContext = ReaderContext & {
 
 type Answer = {
   answer: string;
+  conclusionSupport: EmetAiClaimSupport;
+  claims: Array<{
+    text: string;
+    support: EmetAiClaimSupport;
+    evidenceIds: string[];
+  }>;
   citations: Array<{ evidenceId: string; reference?: string }>;
   limitations: string[];
 };
@@ -71,6 +78,11 @@ function storedExchanges(storage: Storage) {
       question: exchange.question.slice(0, 800),
       answer: {
         answer: exchange.answer.answer,
+        conclusionSupport:
+          exchange.answer.conclusionSupport || "possible-interpretation",
+        claims: Array.isArray(exchange.answer.claims)
+          ? exchange.answer.claims
+          : [],
         citations: Array.isArray(exchange.answer.citations)
           ? exchange.answer.citations
           : [],
@@ -108,12 +120,15 @@ function referenceHref(reference: string) {
   return `/read/${encodeURIComponent(match[1])}/${match[2]}?verse=${encodeURIComponent(match[3])}`;
 }
 
-function normalizeAnswer(payload: Record<string, unknown>) {
+function normalizeAnswer(payload: Record<string, unknown>): Answer {
   if (payload.answer && typeof payload.answer === "object") {
     const value = payload.answer as Partial<Answer>;
     if (typeof value.answer === "string") {
       return {
         answer: value.answer,
+        conclusionSupport:
+          value.conclusionSupport || "possible-interpretation",
+        claims: Array.isArray(value.claims) ? value.claims : [],
         citations: Array.isArray(value.citations) ? value.citations : [],
         limitations: Array.isArray(value.limitations) ? value.limitations : [],
       } as Answer;
@@ -125,6 +140,8 @@ function normalizeAnswer(payload: Record<string, unknown>) {
       typeof payload.answer === "string"
         ? payload.answer
         : "EMET could not produce a supported answer.",
+    claims: [],
+    conclusionSupport: "does-not-establish",
     citations: [],
     limitations: Array.isArray(payload.limitations)
       ? (payload.limitations as string[])
@@ -218,6 +235,17 @@ export default function EmetChat({
               references: exchange.answer.citations
                 .map((citation) => citation.reference || "")
                 .filter(Boolean),
+              claims: exchange.answer.claims.map((claim) => ({
+                text: claim.text,
+                support: claim.support,
+                references: claim.evidenceIds
+                  .flatMap((evidenceId) =>
+                    exchange.answer.citations
+                      .filter((citation) => citation.evidenceId === evidenceId)
+                      .map((citation) => citation.reference || ""),
+                  )
+                  .filter(Boolean),
+              })),
             })),
           ),
           ...(activeContext ? { context: activeContext } : {}),

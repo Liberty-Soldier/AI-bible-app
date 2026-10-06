@@ -1,6 +1,6 @@
-export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@2" as const;
-export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@1" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@9" as const;
+export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@3" as const;
+export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@2" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first@10" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
 export type EmetAiScopeType = "word" | "verse" | "passage" | "topic";
@@ -9,6 +9,18 @@ export type EmetAiIdentityGate =
   | "not-applicable"
   | "ambiguous"
   | "unresolved";
+
+export type EmetAiReasoningMode =
+  | "simple"
+  | "doctrinal-claim"
+  | "apparent-contradiction";
+
+export type EmetAiClaimSupport =
+  | "explicit-statement"
+  | "strong-implication"
+  | "theological-synthesis"
+  | "possible-interpretation"
+  | "does-not-establish";
 
 export type EmetAiEvidenceItem = {
   id: string;
@@ -53,6 +65,22 @@ export type EmetAiEvidenceItem = {
 export type EmetAiEvidencePacket = {
   schemaVersion: typeof EMET_AI_EVIDENCE_SCHEMA;
   question: string;
+  reasoning: {
+    mode: EmetAiReasoningMode;
+    proposition: string;
+    components: Array<{
+      id: string;
+      proposition: string;
+      category:
+        | "identity"
+        | "authority"
+        | "nature"
+        | "relationship"
+        | "practice"
+        | "duration"
+        | "other";
+    }>;
+  };
   scope: {
     type: EmetAiScopeType;
     references: string[];
@@ -75,7 +103,7 @@ export type EmetAiEvidencePacket = {
 
 export type EmetAiClaim = {
   text: string;
-  support: "direct" | "scriptural-synthesis" | "scriptural-inference";
+  support: EmetAiClaimSupport;
   evidenceIds: string[];
 };
 
@@ -83,6 +111,7 @@ export type EmetAiAnswer = {
   schemaVersion: typeof EMET_AI_ANSWER_SCHEMA;
   status: "complete" | "insufficient-evidence";
   answer: string;
+  conclusionSupport: EmetAiClaimSupport;
   claims: EmetAiClaim[];
   citations: Array<{
     evidenceId: string;
@@ -98,6 +127,14 @@ export type EmetAiValidationResult<T> =
 function clean(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
+
+const claimSupports = new Set<EmetAiClaimSupport>([
+  "explicit-statement",
+  "strong-implication",
+  "theological-synthesis",
+  "possible-interpretation",
+  "does-not-establish",
+]);
 
 function uniqueNonEmpty(values: string[]) {
   return new Set(values.map((value) => value.trim()).filter(Boolean)).size ===
@@ -115,6 +152,28 @@ export function validateEmetAiEvidencePacket(
 
   if (!clean(packet.question)) {
     errors.push("The question is required.");
+  }
+
+  if (!clean(packet.reasoning?.proposition)) {
+    errors.push("The proposition being tested is required.");
+  }
+
+  if (
+    !["simple", "doctrinal-claim", "apparent-contradiction"].includes(
+      packet.reasoning?.mode,
+    )
+  ) {
+    errors.push("The reasoning mode is invalid.");
+  }
+
+  const componentIds = packet.reasoning?.components?.map((item) => clean(item.id)) || [];
+  if (
+    !Array.isArray(packet.reasoning?.components) ||
+    componentIds.some((id) => !id) ||
+    !uniqueNonEmpty(componentIds) ||
+    packet.reasoning.components.some((item) => !clean(item.proposition))
+  ) {
+    errors.push("Reasoning components must be identified and non-empty.");
   }
 
   if (packet.scope.type === "word") {
@@ -209,6 +268,10 @@ export function validateEmetAiAnswer(
     errors.push("The answer text is required.");
   }
 
+  if (!claimSupports.has(answer.conclusionSupport)) {
+    errors.push("The full proposition requires a valid support classification.");
+  }
+
   const allowedEvidence = new Map(
     packet.evidence.map((item) => [item.id, item] as const),
   );
@@ -244,6 +307,10 @@ export function validateEmetAiAnswer(
         errors.push("Every claim must contain text.");
       }
 
+      if (!claimSupports.has(claim.support)) {
+        errors.push("Every claim requires a valid support classification.");
+      }
+
       if (claim.evidenceIds.length === 0) {
         errors.push("Every complete-answer claim requires evidence.");
       }
@@ -254,6 +321,39 @@ export function validateEmetAiAnswer(
         } else if (!citedEvidenceIds.has(evidenceId)) {
           errors.push(`Claim evidence ${evidenceId} is missing from citations.`);
         }
+      }
+    }
+
+    if (packet.reasoning.mode !== "simple") {
+      const retrievalRoles = new Set(
+        packet.evidence.map((item) => item.provenance.retrieval?.role),
+      );
+      if (
+        !retrievalRoles.has("qualifying") &&
+        !retrievalRoles.has("contrast")
+      ) {
+        errors.push(
+          "A disputed claim requires qualifying or contrasting Scripture evidence.",
+        );
+      }
+
+      if (
+        answer.conclusionSupport !== "explicit-statement" &&
+        /^\s*(yes|no)\s*[.!,:;-]/i.test(answer.answer)
+      ) {
+        errors.push(
+          "A disputed claim without an explicit statement cannot begin with a categorical yes or no.",
+        );
+      }
+      if (
+        answer.conclusionSupport !== "explicit-statement" &&
+        /\b(?:scripture|the bible|these passages|these texts|the passages|the texts|the evidence)\s+(?:clearly\s+|directly\s+)?(?:proves?|proved)\b|\b(?:is|was|has been)\s+proven\b/i.test(
+          answer.answer,
+        )
+      ) {
+        errors.push(
+          "A disputed claim cannot use proof language without an explicit statement.",
+        );
       }
     }
   }
@@ -277,6 +377,7 @@ export function insufficientEmetAiAnswer(
     schemaVersion: EMET_AI_ANSWER_SCHEMA,
     status: "insufficient-evidence",
     answer: explanation,
+    conclusionSupport: "does-not-establish",
     claims: [],
     citations: [],
     limitations,
@@ -292,6 +393,7 @@ export function parseEmetAiAnswer(value: unknown): EmetAiAnswer | null {
     (candidate.status !== "complete" &&
       candidate.status !== "insufficient-evidence") ||
     typeof candidate.answer !== "string" ||
+    !claimSupports.has(candidate.conclusionSupport as EmetAiClaimSupport) ||
     !Array.isArray(candidate.claims) ||
     !Array.isArray(candidate.citations) ||
     !Array.isArray(candidate.limitations)
@@ -305,9 +407,11 @@ export function parseEmetAiAnswer(value: unknown): EmetAiAnswer | null {
     const claim = value as Record<string, unknown>;
     if (
       typeof claim.text !== "string" ||
-      (claim.support !== "direct" &&
-        claim.support !== "scriptural-synthesis" &&
-        claim.support !== "scriptural-inference") ||
+      (claim.support !== "explicit-statement" &&
+        claim.support !== "strong-implication" &&
+        claim.support !== "theological-synthesis" &&
+        claim.support !== "possible-interpretation" &&
+        claim.support !== "does-not-establish") ||
       !Array.isArray(claim.evidenceIds) ||
       claim.evidenceIds.some((id) => typeof id !== "string")
     ) {
@@ -347,6 +451,7 @@ export function parseEmetAiAnswer(value: unknown): EmetAiAnswer | null {
     schemaVersion: EMET_AI_ANSWER_SCHEMA,
     status: candidate.status,
     answer: candidate.answer,
+    conclusionSupport: candidate.conclusionSupport as EmetAiClaimSupport,
     claims,
     citations,
     limitations: candidate.limitations as string[],

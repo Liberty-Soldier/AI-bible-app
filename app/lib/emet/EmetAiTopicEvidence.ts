@@ -98,11 +98,12 @@ function loadIndex(translation: SearchTranslation) {
   return parsed;
 }
 
-function compactReference(value: string) {
-  return value
-    .normalize("NFKC")
-    .toLocaleLowerCase("en-US")
-    .replace(/[^\p{L}\p{N}]+/gu, "");
+function structuredReferenceKey(
+  book: string,
+  chapter: string | number,
+  verse: string | number,
+) {
+  return `${book.normalize("NFKC").toLocaleLowerCase("en-US").trim()}|${Number(chapter)}|${String(verse).toLocaleLowerCase("en-US")}`;
 }
 
 function recordReference(record: SearchRecord) {
@@ -114,7 +115,7 @@ function loadRecordMap(index: SearchIndex) {
   if (cached) return cached;
   const map = new Map(
     index.records.map((record, recordIndex) => [
-      compactReference(recordReference(record)),
+      structuredReferenceKey(record[0], record[1], record[2]),
       recordIndex,
     ]),
   );
@@ -162,12 +163,61 @@ function normalizePlannedReference(value: string) {
     : null;
 }
 
+function expandPlannedReferences(value: string) {
+  const trimmed = value.trim().replace(/[–—]/g, "-");
+  const chapterRange = trimmed.match(
+    /^(.+?)\s+(\d+):(\d+)-(\d+)$/i,
+  );
+  if (chapterRange) {
+    const book = normalizeBookName(chapterRange[1]);
+    const chapter = Number(chapterRange[2]);
+    const start = Number(chapterRange[3]);
+    const end = Number(chapterRange[4]);
+    if (
+      book &&
+      Number.isInteger(chapter) &&
+      Number.isInteger(start) &&
+      Number.isInteger(end) &&
+      end >= start &&
+      end - start <= 12
+    ) {
+      return Array.from(
+        { length: end - start + 1 },
+        (_, offset) => `${book} ${chapter}:${start + offset}`,
+      );
+    }
+  }
+  const singleChapterRange = trimmed.match(/^(.+?)\s+(\d+)-(\d+)$/i);
+  if (singleChapterRange) {
+    const book = normalizeBookName(singleChapterRange[1]);
+    const start = Number(singleChapterRange[2]);
+    const end = Number(singleChapterRange[3]);
+    if (
+      SINGLE_CHAPTER_BOOKS.has(book) &&
+      Number.isInteger(start) &&
+      Number.isInteger(end) &&
+      end >= start &&
+      end - start <= 12
+    ) {
+      return Array.from(
+        { length: end - start + 1 },
+        (_, offset) => `${book} 1:${start + offset}`,
+      );
+    }
+  }
+  const single = normalizePlannedReference(trimmed);
+  return single ? [single] : [];
+}
+
 function resolveReference(reference: string) {
   const normalized = normalizePlannedReference(reference);
   if (!normalized) return null;
+  const parts = normalized.match(/^(.+?)\s+(\d+):(\d+[a-z]?)$/i);
+  if (!parts) return null;
+  const key = structuredReferenceKey(parts[1], parts[2], parts[3]);
   for (const translation of ["web", "brenton"] as const) {
     const index = loadIndex(translation);
-    const recordIndex = loadRecordMap(index).get(compactReference(normalized));
+    const recordIndex = loadRecordMap(index).get(key);
     if (recordIndex === undefined) continue;
     return { index, record: index.records[recordIndex], recordIndex };
   }
@@ -235,8 +285,14 @@ function contextCandidates(
 function plannedCandidates(plan: EmetAiRetrievalPlan | null) {
   if (!plan) return [];
   return plan.passages
-    .map((passage) => {
-      const resolved = resolveReference(passage.reference);
+    .flatMap((passage) =>
+      expandPlannedReferences(passage.reference).map((reference) => ({
+        passage,
+        reference,
+      })),
+    )
+    .map(({ passage, reference }) => {
+      const resolved = resolveReference(reference);
       if (!resolved) return null;
       return {
         ...resolved,
@@ -252,8 +308,7 @@ function plannedCandidates(plan: EmetAiRetrievalPlan | null) {
 function sourcePhraseCandidates(plan: EmetAiRetrievalPlan | null) {
   if (!plan?.sourcePhrases.length) return [];
   const preferredReferences = plan.passages
-    .map((passage) => normalizePlannedReference(passage.reference))
-    .filter((reference): reference is string => Boolean(reference));
+    .flatMap((passage) => expandPlannedReferences(passage.reference));
   return verifiedSourcePhraseMatches({
     phrases: plan.sourcePhrases,
     preferredReferences,
@@ -264,7 +319,7 @@ function sourcePhraseCandidates(plan: EmetAiRetrievalPlan | null) {
       if (!resolved) return null;
       const planned = plan.passages.find(
         (passage) =>
-          normalizePlannedReference(passage.reference) === match.reference,
+          expandPlannedReferences(passage.reference).includes(match.reference),
       );
       return {
         ...resolved,
@@ -372,7 +427,9 @@ function selectedCandidates({
         ...phraseEvidence,
         ...governingEvidence,
         ...plannedEvidence,
-        ...literalEvidence.filter((candidate) => candidate.score >= 65).slice(0, 2),
+        ...(plan.analysisMode === "simple"
+          ? literalEvidence.filter((candidate) => candidate.score >= 65).slice(0, 2)
+          : []),
       ]
     : contextEvidence.length
       ? contextEvidence
@@ -393,6 +450,9 @@ function selectedCandidates({
   );
   if (!plan) return ranked.slice(0, MAX_LITERAL_FALLBACK_VERSES);
 
+  const evidenceLimit =
+    plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 12;
+
   const selected: EvidenceCandidate[] = [];
   const selectedReferences = new Set<string>();
   const chapterCounts = new Map<string, number>();
@@ -410,6 +470,13 @@ function selectedCandidates({
   // Preserve the evidence hierarchy before filling remaining slots. This
   // prevents one long chapter from displacing later witness or qualifying
   // passages merely because the planner returned its verses first.
+  if (plan.analysisMode !== "simple") {
+    for (const candidate of ranked.filter(
+      (item) => item.role === "qualifying" || item.role === "contrast",
+    ).slice(0, 4)) {
+      add(candidate);
+    }
+  }
   for (const role of [
     "direct",
     "foundation",
@@ -423,7 +490,7 @@ function selectedCandidates({
   }
 
   for (const candidate of ranked) {
-    if (selected.length >= MAX_PLANNED_EVIDENCE_VERSES) break;
+    if (selected.length >= evidenceLimit) break;
     add(candidate);
   }
   return selected;
@@ -480,6 +547,27 @@ export function buildEmetAiTopicEvidence({
     };
   }
 
+  if (retrievalPlan && retrievalPlan.analysisMode !== "simple") {
+    const roles = new Set(candidates.map((candidate) => candidate.role));
+    const hasSupportingEvidence = [
+      "direct",
+      "foundation",
+      "later-witness",
+    ].some((role) => roles.has(role as EmetAiRetrievalRole));
+    const qualifyingEvidenceCount = candidates.filter(
+      (candidate) =>
+        candidate.role === "qualifying" || candidate.role === "contrast",
+    ).length;
+    if (!hasSupportingEvidence || qualifyingEvidenceCount < 2) {
+      return {
+        status: "insufficient-evidence" as const,
+        limitations: [
+          "A disputed claim requires verified Scripture on both the proposed support and the material qualification or tension.",
+        ],
+      };
+    }
+  }
+
   const fingerprints = new Set(
     candidates.flatMap((candidate) => [
       candidate.index.sourceFingerprint,
@@ -495,6 +583,17 @@ export function buildEmetAiTopicEvidence({
     question: retrievalPlan
       ? `${resolvedQuestion}\n\nResolved retrieval subject (context only, not evidence): ${retrievalPlan.subject}`
       : resolvedQuestion,
+    reasoning: retrievalPlan
+      ? {
+          mode: retrievalPlan.analysisMode,
+          proposition: retrievalPlan.proposition,
+          components: retrievalPlan.components,
+        }
+      : {
+          mode: "simple",
+          proposition: cleanQuestion,
+          components: [],
+        },
     scope: {
       type: candidates.some((candidate) => candidate.method === "reader-context")
         ? "passage"
@@ -507,7 +606,7 @@ export function buildEmetAiTopicEvidence({
     identity: { gate: "not-applicable" },
     evidence,
     provenance: {
-      evidenceVersion: `semantic-scripture-topic@1:${Array.from(fingerprints).sort().join(":")}`,
+      evidenceVersion: `semantic-scripture-topic@2:${Array.from(fingerprints).sort().join(":")}`,
       builtAt: builtAt || new Date().toISOString(),
     },
   };

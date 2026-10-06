@@ -36,6 +36,7 @@ export function getEmetAiCacheKey(packet: EmetAiEvidencePacket) {
     schemaVersion: packet.schemaVersion,
     promptVersion: EMET_AI_PROMPT_VERSION,
     question: normalizedQuestion(packet.question),
+    reasoning: packet.reasoning,
     scopeType: packet.scope.type,
     references: [...packet.scope.references].sort(),
     entityIds: [...packet.scope.entityIds].sort(),
@@ -70,7 +71,7 @@ export function getEmetAiRequestCacheKey({
   context: EmetAiReaderContext | null;
 }) {
   const stableInput = JSON.stringify({
-    requestSchema: "emet-ai-request-cache@1",
+    requestSchema: "emet-ai-request-cache@2",
     promptVersion: EMET_AI_PROMPT_VERSION,
     retrievalPlanSchema: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
     question: normalizedQuestion(question),
@@ -92,10 +93,22 @@ export function getEmetAiRequestCacheKey({
             corrections: conversation.summary.corrections.map(normalizedQuestion),
             earlierQuestions:
               conversation.summary.earlierQuestions.map(normalizedQuestion),
+            establishedClaims: conversation.summary.establishedClaims.map(
+              (claim) => ({
+                text: normalizedQuestion(claim.text),
+                support: claim.support,
+                references: [...claim.references].sort(),
+              }),
+            ),
           },
           recentExchanges: conversation.recentExchanges.map((exchange) => ({
             question: normalizedQuestion(exchange.question),
             references: [...exchange.references].sort(),
+            claims: exchange.claims.map((claim) => ({
+              text: normalizedQuestion(claim.text),
+              support: claim.support,
+              references: [...claim.references].sort(),
+            })),
           })),
         }
       : null,

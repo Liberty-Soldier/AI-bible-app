@@ -20,6 +20,11 @@ import { answerFromEmetAiEvidence } from "../app/lib/emet/EmetAiService.ts";
 const packet = {
   schemaVersion: EMET_AI_EVIDENCE_SCHEMA,
   question: "What does this word mean?",
+  reasoning: {
+    mode: "simple",
+    proposition: "What does this word mean?",
+    components: [],
+  },
   scope: {
     type: "word",
     references: ["Genesis 1:8"],
@@ -66,15 +71,16 @@ const validAnswer = {
   schemaVersion: EMET_AI_ANSWER_SCHEMA,
   status: "complete",
   answer: "The word describes an expanse, identified here with the sky.",
+  conclusionSupport: "explicit-statement",
   claims: [
     {
       text: "The word describes an expanse.",
-      support: "direct",
+      support: "explicit-statement",
       evidenceIds: ["lexical:word:hebrew:H7549"],
     },
     {
       text: "Genesis 1:8 identifies the expanse with the sky.",
-      support: "direct",
+      support: "explicit-statement",
       evidenceIds: ["scripture:Genesis.1.8"],
     },
   ],
@@ -304,6 +310,13 @@ const requestConversation = buildEmetConversationContext([
     question: "Who are the sons of God in Genesis 6?",
     answer: "First answer wording.",
     references: ["Genesis 6:2", "Job 1:6"],
+    claims: [
+      {
+        text: "Genesis and Job use the same source phrase.",
+        support: "explicit-statement",
+        references: ["Genesis 6:2", "Job 1:6"],
+      },
+    ],
   },
 ]);
 const equivalentRequestConversation = buildEmetConversationContext([
@@ -311,6 +324,13 @@ const equivalentRequestConversation = buildEmetConversationContext([
     question: "Who are the sons of God in Genesis 6?",
     answer: "Different answer wording must not change retrieval identity.",
     references: ["Genesis 6:2", "Job 1:6"],
+    claims: [
+      {
+        text: "Genesis and Job use the same source phrase.",
+        support: "explicit-statement",
+        references: ["Genesis 6:2", "Job 1:6"],
+      },
+    ],
   },
 ]);
 const requestKey = getEmetAiRequestCacheKey({
@@ -344,10 +364,11 @@ const validGeneratedAnswer = {
   schemaVersion: EMET_AI_ANSWER_SCHEMA,
   status: "complete",
   answer: "The source evidence identifies this word with an expanse.",
+  conclusionSupport: "explicit-statement",
   claims: [
     {
       text: "The lexical evidence identifies an expanse.",
-      support: "direct",
+      support: "explicit-statement",
       evidenceIds: ["lexical:word:hebrew:H7549"],
     },
   ],
@@ -399,6 +420,80 @@ const fabricatedProviderResult = await answerFromEmetAiEvidence({
 assert.equal(fabricatedProviderResult.source, "fail-closed");
 assert.equal(fabricatedProviderResult.answer.status, "insufficient-evidence");
 
+const doctrinalPacket = structuredClone(packet);
+doctrinalPacket.scope.type = "topic";
+doctrinalPacket.scope.entityIds = [];
+doctrinalPacket.identity = { gate: "not-applicable" };
+doctrinalPacket.reasoning = {
+  mode: "doctrinal-claim",
+  proposition: "A compound theological proposition",
+  components: [
+    { id: "identity", proposition: "The subjects are identical.", category: "identity" },
+    { id: "nature", proposition: "The subjects share one nature.", category: "nature" },
+  ],
+};
+doctrinalPacket.evidence = doctrinalPacket.evidence.map((item, index) => ({
+  ...item,
+  entityId: undefined,
+  lexicalId: undefined,
+  provenance: {
+    ...item.provenance,
+    retrieval: {
+      method: "semantic-plan",
+      role: index === 0 ? "direct" : "qualifying",
+      reason: index === 0 ? "Proposed support." : "Material textual qualification.",
+      score: 95,
+    },
+  },
+}));
+const calibratedDoctrinalAnswer = {
+  schemaVersion: EMET_AI_ANSWER_SCHEMA,
+  status: "complete",
+  answer: "The passages are related, but that relationship does not by itself state the full compound proposition. The complete claim requires a theological synthesis.",
+  conclusionSupport: "theological-synthesis",
+  claims: [
+    {
+      text: "The passages address related subjects.",
+      support: "explicit-statement",
+      evidenceIds: ["scripture:Genesis.1.8"],
+    },
+    {
+      text: "The related wording does not by itself establish the compound proposition.",
+      support: "does-not-establish",
+      evidenceIds: ["scripture:Genesis.1.8"],
+    },
+    {
+      text: "The complete proposition requires combining claims beyond an individual text.",
+      support: "theological-synthesis",
+      evidenceIds: ["lexical:word:hebrew:H7549", "scripture:Genesis.1.8"],
+    },
+  ],
+  citations: validAnswer.citations,
+  limitations: [],
+};
+assert.equal(
+  validateEmetAiAnswer(doctrinalPacket, calibratedDoctrinalAnswer).ok,
+  true,
+);
+const overstatedDoctrinalAnswer = structuredClone(calibratedDoctrinalAnswer);
+overstatedDoctrinalAnswer.answer = "Yes. These passages prove the full doctrine.";
+overstatedDoctrinalAnswer.conclusionSupport = "theological-synthesis";
+overstatedDoctrinalAnswer.claims = overstatedDoctrinalAnswer.claims.filter(
+  (claim) => claim.support !== "explicit-statement",
+);
+assert.equal(
+  validateEmetAiAnswer(doctrinalPacket, overstatedDoctrinalAnswer).ok,
+  false,
+);
+const oneSidedDoctrinalPacket = structuredClone(doctrinalPacket);
+for (const item of oneSidedDoctrinalPacket.evidence) {
+  item.provenance.retrieval.role = "direct";
+}
+assert.equal(
+  validateEmetAiAnswer(oneSidedDoctrinalPacket, calibratedDoctrinalAnswer).ok,
+  false,
+);
+
 const instruction = fs.readFileSync(
   path.join(process.cwd(), "app", "lib", "emet", "EmetAiConstitution.ts"),
   "utf8",
@@ -415,6 +510,10 @@ for (const required of [
   "Keep Strong's numbers, lexical IDs, evidence IDs, and corpus identifiers out",
   "Keep all exact evidence bookkeeping in claims, citations, and limitations",
   "Every substantive claim must cite",
+  "Association, joint naming, shared action",
+  "Keep identity, authority, nature, relationship",
+  "user's assertion, confidence, or preferred direction",
+  "never silently reverse direction",
   "insufficient-evidence rather than guessing",
 ]) {
   assert.ok(instruction.includes(required), `Missing instruction: ${required}`);
@@ -430,4 +529,7 @@ console.log("- Hebrew, LXX, and Greek NT identities stay corpus-scoped.");
 console.log("- Equivalent questions reuse only identity-and-evidence-bound answers.");
 console.log("- Repeated conversational requests reuse a stable cache without trusting prior answer prose.");
 console.log("- Invalid model citations fail closed before caching.");
+console.log("- Disputed doctrines require supporting and qualifying Scripture.");
+console.log("- Categorical proof language fails closed when the full proposition is not explicit.");
+console.log("- Structured prior claims affect continuity without trusting prior answer prose.");
 console.log("- Reader-facing answers use natural prose without internal evidence jargon.");

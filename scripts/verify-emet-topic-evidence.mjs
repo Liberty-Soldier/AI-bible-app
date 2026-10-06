@@ -5,6 +5,7 @@ import {
   buildEmetConversationQuestion,
   parseEmetConversationContext,
   relevantEmetConversation,
+  relevantEmetConversationClaimReferences,
 } from "../app/lib/emet/EmetAiConversation.ts";
 import {
   EMET_AI_RETRIEVAL_PLAN_SCHEMA,
@@ -15,12 +16,18 @@ import { buildEmetAiTopicEvidence } from "../app/lib/emet/EmetAiTopicEvidence.ts
 function plan({
   subject,
   intent = "other",
+  analysisMode = "simple",
+  proposition = subject,
+  components = [],
   passages,
   sourcePhrases = [],
 }) {
   return {
     schemaVersion: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
     subject,
+    analysisMode,
+    proposition,
+    components,
     intent,
     passages: passages.map((item, index) => ({
       reference: item.reference,
@@ -121,6 +128,43 @@ const angelsSinning = buildEmetAiTopicEvidence({
 });
 requireReferences(angelsSinning, ["2 Peter 2:4", "Jude 1:6"]);
 
+const plannedRange = buildEmetAiTopicEvidence({
+  question: "What does this short passage say?",
+  retrievalPlan: plan({
+    subject: "a short same-chapter passage",
+    intent: "passage",
+    passages: [{ reference: "Acts 5:3-4", role: "direct" }],
+  }),
+  requireSemanticPlan: true,
+});
+requireReferences(plannedRange, ["Acts 5:3", "Acts 5:4"]);
+
+const referenceCollision = buildEmetAiTopicEvidence({
+  question: "Compare these two distinct references.",
+  retrievalPlan: plan({
+    subject: "references whose punctuation-free forms would collide",
+    intent: "comparison",
+    passages: [
+      { reference: "John 1:18", role: "direct" },
+      { reference: "John 11:8", role: "contrast" },
+    ],
+  }),
+  requireSemanticPlan: true,
+});
+requireReferences(referenceCollision, ["John 1:18", "John 11:8"]);
+assert.notEqual(
+  referenceCollision.status === "ready"
+    ? referenceCollision.packet.evidence.find(
+        (item) => item.reference === "John 1:18",
+      )?.text
+    : "",
+  referenceCollision.status === "ready"
+    ? referenceCollision.packet.evidence.find(
+        (item) => item.reference === "John 11:8",
+      )?.text
+    : "",
+);
+
 const judeGenesis = buildEmetAiTopicEvidence({
   question: "Does Jude refer to Genesis 6?",
   retrievalPlan: plan({
@@ -198,6 +242,133 @@ requireReferences(abolishLaw, [
   "Ephesians 2:15",
 ]);
 
+const disputedDoctrinePlan = plan({
+  subject: "whether a later compound doctrine is explicitly stated by Scripture",
+  intent: "relationship",
+  analysisMode: "doctrinal-claim",
+  proposition:
+    "The one God exists as three distinct, coequal, coeternal persons who share one essence.",
+  components: [
+    { id: "one-god", proposition: "Scripture teaches one God.", category: "nature" },
+    { id: "three-subjects", proposition: "Father, Son, and Holy Spirit are each present and distinguishable.", category: "identity" },
+    { id: "one-essence", proposition: "The three share one essence or being.", category: "nature" },
+    { id: "coequality", proposition: "The three are coequal and coeternal.", category: "authority" },
+  ],
+  passages: [
+    { reference: "Deuteronomy 6:4", role: "foundation" },
+    { reference: "Matthew 28:19", role: "direct" },
+    { reference: "John 1:1", role: "later-witness" },
+    { reference: "John 17:3", role: "contrast" },
+    { reference: "1 Timothy 2:5", role: "qualifying" },
+    { reference: "Psalms 110:1", role: "qualifying" },
+  ],
+});
+const disputedDoctrine = buildEmetAiTopicEvidence({
+  question: "What evidence in the Bible proves this compound doctrine?",
+  retrievalPlan: disputedDoctrinePlan,
+  requireSemanticPlan: true,
+});
+requireReferences(disputedDoctrine, [
+  "Deuteronomy 6:4",
+  "Matthew 28:19",
+  "John 1:1",
+  "John 17:3",
+  "1 Timothy 2:5",
+]);
+if (disputedDoctrine.status === "ready") {
+  assert.equal(disputedDoctrine.packet.reasoning.mode, "doctrinal-claim");
+  assert.equal(disputedDoctrine.packet.reasoning.components.length, 4);
+  assert.ok(
+    disputedDoctrine.packet.evidence.some(
+      (item) => item.provenance.retrieval?.role === "contrast",
+    ),
+  );
+}
+
+const doctrineConversation = buildEmetConversationContext([
+  {
+    question: "What evidence in the Bible proves the doctrine?",
+    answer: "Earlier polished prose must not become evidence.",
+    references: ["Deuteronomy 6:4", "Matthew 28:19", "John 17:3"],
+    claims: [
+      {
+        text: "The cited commission names Father, Son, and Holy Spirit together.",
+        support: "explicit-statement",
+        references: ["Matthew 28:19"],
+      },
+      {
+        text: "Joint naming does not by itself state one essence or coequality.",
+        support: "does-not-establish",
+        references: ["Matthew 28:19"],
+      },
+    ],
+  },
+  {
+    question: "How does appointment as high priest fit coequality?",
+    answer: "This answer prose is also excluded.",
+    references: ["Psalms 110:1", "Hebrews 4:14", "Hebrews 5:5"],
+    claims: [
+      {
+        text: "Messiah is described as high priest and as appointed.",
+        support: "explicit-statement",
+        references: ["Hebrews 4:14", "Hebrews 5:5"],
+      },
+    ],
+  },
+]);
+const doctrineFollowUpPlan = plan({
+  subject: "the compound doctrine after the prior textual distinctions",
+  intent: "relationship",
+  analysisMode: "doctrinal-claim",
+  proposition: disputedDoctrinePlan.proposition,
+  components: disputedDoctrinePlan.components,
+  passages: [
+    { reference: "Matthew 28:19", role: "direct" },
+    { reference: "John 1:1", role: "later-witness" },
+    { reference: "John 17:3", role: "contrast" },
+    { reference: "1 Timothy 2:5", role: "qualifying" },
+    { reference: "Psalms 110:1", role: "qualifying" },
+    { reference: "Hebrews 4:14", role: "qualifying" },
+    { reference: "Hebrews 5:5", role: "qualifying" },
+  ],
+});
+assert.deepEqual(
+  relevantEmetConversationClaimReferences(doctrineConversation).map(
+    (item) => item.reference,
+  ),
+  ["Hebrews 4:14", "Hebrews 5:5", "Matthew 28:19"],
+);
+const doctrineFollowUp = buildEmetAiTopicEvidence({
+  question: "So is the doctrine biblical?",
+  conversation: doctrineConversation,
+  retrievalPlan: doctrineFollowUpPlan,
+  requireSemanticPlan: true,
+});
+requireReferences(doctrineFollowUp, [
+  "Matthew 28:19",
+  "John 17:3",
+  "1 Timothy 2:5",
+  "Psalms 110:1",
+  "Hebrews 4:14",
+  "Hebrews 5:5",
+]);
+if (doctrineFollowUp.status === "ready") {
+  assert.match(doctrineFollowUp.packet.question, /Earlier structured claim to re-check/);
+  assert.match(doctrineFollowUp.packet.question, /high priest and as appointed/);
+  assert.doesNotMatch(doctrineFollowUp.packet.question, /polished prose/);
+}
+
+const oneSidedDoctrinePlan = structuredClone(disputedDoctrinePlan);
+oneSidedDoctrinePlan.passages = oneSidedDoctrinePlan.passages.filter(
+  (passage) => !["qualifying", "contrast"].includes(passage.role),
+);
+const oneSidedDoctrine = buildEmetAiTopicEvidence({
+  question: "Prove the doctrine.",
+  retrievalPlan: oneSidedDoctrinePlan,
+  requireSemanticPlan: true,
+});
+assert.equal(oneSidedDoctrine.status, "insufficient-evidence");
+
 const contextual = buildEmetAiTopicEvidence({
   question: "What is happening in this passage?",
   context: {
@@ -229,6 +400,9 @@ assert.equal(noSemanticPlan.status, "insufficient-evidence");
 const badPlan = parseEmetAiRetrievalPlan({
   schemaVersion: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
   subject: "invalid",
+  analysisMode: "simple",
+  proposition: "An invalid reference resolves.",
+  components: [],
   intent: "identity",
   passages: [
     { reference: "Imaginary 99:99", role: "direct", reason: "Invented", priority: 100 },
@@ -290,6 +464,30 @@ assert.equal(
   null,
 );
 
+const claimOnlyConversation = {
+  recentExchanges: [],
+  summary: {
+    topics: [],
+    passages: [],
+    corrections: [],
+    earlierQuestions: [],
+    establishedClaims: [
+      {
+        text: "The Messiah remains high priest.",
+        support: "explicit-statement",
+        references: ["Hebrews 7:24"],
+      },
+    ],
+  },
+};
+assert.equal(
+  relevantEmetConversation({
+    question: "How does the high priest claim affect that?",
+    conversation: claimOnlyConversation,
+  }),
+  claimOnlyConversation,
+);
+
 console.log("EMET semantic topic evidence verification passed.");
 console.log("- Model-planned references are validated against locked Scripture.");
 console.log("- Exact Hebrew source sequences connect Genesis 6 with the matching Job passages.");
@@ -297,4 +495,6 @@ console.log("- Event and canonical-witness questions retain Jude and 2 Peter ins
 console.log("- Known false-positive passages are explicitly excluded.");
 console.log("- Reader context disambiguates passage questions without contaminating independent topics.");
 console.log("- Conversation retains questions and verified references, never earlier answer prose as evidence.");
+console.log("- Disputed doctrines require a defined proposition, decomposed claims, and verified tension evidence.");
+console.log("- Follow-ups retain structured textual findings without treating prior prose as evidence.");
 console.log("- Unresolved plans and unsupported topics fail closed.");

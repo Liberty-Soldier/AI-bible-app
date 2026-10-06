@@ -172,6 +172,9 @@ if (wordMode) {
 
 if (evidence.status !== "ready") {
   console.error("EMET live smoke failed before generation.", evidence.limitations);
+  if (retrievalPlan) {
+    console.error("Retrieval plan:", JSON.stringify(retrievalPlan, null, 2));
+  }
   process.exitCode = 1;
 } else {
   if (!provider) {
@@ -196,6 +199,13 @@ if (evidence.status !== "ready") {
       console.log(`- Evidence packet items: ${evidence.packet.evidence.length}`);
       if (retrievalPlan) {
         console.log(`- Resolved subject: ${retrievalPlan.subject}`);
+        console.log(`- Reasoning mode: ${retrievalPlan.analysisMode}`);
+        console.log(`- Proposition: ${retrievalPlan.proposition}`);
+        console.log(
+          `- Planned passages: ${retrievalPlan.passages
+            .map((item) => `${item.reference} [${item.role}]`)
+            .join("; ")}`,
+        );
       }
       console.log(
         `- Evidence: ${evidence.packet.evidence

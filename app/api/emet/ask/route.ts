@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 
 import { getEmetAiRequestCacheKey } from "@/app/lib/emet/EmetAiCache";
-import { parseEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
+import {
+  parseEmetConversationContext,
+  relevantEmetConversation,
+} from "@/app/lib/emet/EmetAiConversation";
 import {
   completeEmetAiQuestion,
   getEmetAiUsageSummary,
@@ -103,10 +106,15 @@ export async function POST(request: Request) {
     return json({ status: "invalid-request" }, 400);
   }
 
+  const activeConversation = relevantEmetConversation({
+    question,
+    conversation,
+  });
+
   const provider = createEmetAiOpenAiProvider();
   const requestCacheKey = getEmetAiRequestCacheKey({
     question,
-    conversation,
+    conversation: activeConversation,
     context,
   });
   const requestCache = await getSupabaseEmetAiRequestCache(requestCacheKey);
@@ -131,7 +139,7 @@ export async function POST(request: Request) {
   let retrievalPlan = null;
   try {
     retrievalPlan = provider?.plan
-      ? await provider.plan({ question, conversation, context })
+      ? await provider.plan({ question, conversation: activeConversation, context })
       : null;
   } catch {
     retrievalPlan = null;
@@ -139,7 +147,7 @@ export async function POST(request: Request) {
 
   const evidence = buildEmetAiTopicEvidence({
     question,
-    conversation,
+    conversation: activeConversation,
     context,
     retrievalPlan,
     requireSemanticPlan: true,

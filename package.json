@@ -44,6 +44,7 @@
     "verify:reader-navigation": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-reader-navigation.mjs",
     "verify:reader-experience": "node scripts/verify-reader-experience.mjs",
     "smoke:emet-live": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/smoke-emet-ai-live.mjs",
+    "smoke:emet-conversation-live": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/smoke-emet-ai-conversation-live.mjs",
     "verify:brenton-overlay": "node scripts/verify-brenton-reader-overlay-contract.mjs",
     "repair:cached-emet": "node --max-old-space-size=4096 scripts/entity/repair-cached-emet-failures.js",
     "build:word-study-entities": "node --max-old-space-size=4096 scripts/build-word-study-entity-runtime.js",

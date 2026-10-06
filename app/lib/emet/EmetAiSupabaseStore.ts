@@ -55,7 +55,7 @@ export function createSupabaseEmetAiAnswerStore(
   };
 }
 
-const REQUEST_CACHE_SCHEMA = "emet-ai-request-cache@1" as const;
+const REQUEST_CACHE_SCHEMA = "emet-ai-request-cache@2" as const;
 
 type EmetAiRequestCacheRecord = {
   schemaVersion: typeof REQUEST_CACHE_SCHEMA;

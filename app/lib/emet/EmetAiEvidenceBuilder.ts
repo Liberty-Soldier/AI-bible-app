@@ -393,6 +393,11 @@ export async function buildEmetAiWordEvidence(
   const packet: EmetAiEvidencePacket = {
     schemaVersion: EMET_AI_EVIDENCE_SCHEMA,
     question,
+    reasoning: {
+      mode: "simple",
+      proposition: question.trim(),
+      components: [],
+    },
     scope: {
       type: "word",
       references,
