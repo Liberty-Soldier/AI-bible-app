@@ -100,7 +100,10 @@ function buildIndex() {
       const source = fs.readFileSync(filePath);
       sourceFiles.push({
         path: path.relative(root, filePath).replaceAll("\\", "/"),
-        sha256: sha256(source),
+        // Git checks these JSON sources out with CRLF on Windows and LF on
+        // Linux. Hash their normalized text so the sealed derived artifact is
+        // identical on local Windows builds and Vercel's Linux builders.
+        sha256: sha256(source.toString("utf8").replace(/\r\n?/g, "\n")),
       });
       const book = JSON.parse(source.toString("utf8"));
 
