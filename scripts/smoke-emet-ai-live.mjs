@@ -30,16 +30,20 @@ const [
   { buildEmetAiWordEvidence },
   { validateEmetAiAnswer },
   { createEmetAiOpenAiProvider },
+  { buildEmetConversationContext },
 ] =
   await Promise.all([
     import("../app/lib/emet/EmetAiTopicEvidence.ts"),
     import("../app/lib/emet/EmetAiEvidenceBuilder.ts"),
     import("../app/lib/emet/EmetAiContract.ts"),
     import("../app/lib/emet/providers/EmetAiOpenAiProvider.ts"),
+    import("../app/lib/emet/EmetAiConversation.ts"),
   ]);
 
 const wordMode = process.argv.includes("--word");
 let evidence;
+let retrievalPlan = null;
+const provider = createEmetAiOpenAiProvider();
 
 if (wordMode) {
   const origin = process.env.EMET_SMOKE_ORIGIN || "http://localhost:3002";
@@ -137,8 +141,31 @@ if (wordMode) {
   const topicQuestion =
     process.env.EMET_SMOKE_QUESTION ||
     "What does Scripture establish about the Sabbath?";
+  const priorQuestion = process.env.EMET_SMOKE_PRIOR_QUESTION?.trim();
+  const conversation = priorQuestion
+    ? buildEmetConversationContext([
+        {
+          question: priorQuestion,
+          answer: "Earlier answer prose is intentionally excluded from retrieval.",
+          references: (process.env.EMET_SMOKE_PRIOR_REFERENCES || "")
+            .split("|")
+            .map((reference) => reference.trim())
+            .filter(Boolean),
+        },
+      ])
+    : null;
+  retrievalPlan = provider?.plan
+    ? await provider.plan({
+        question: topicQuestion,
+        conversation,
+        context: null,
+      })
+    : null;
   evidence = buildEmetAiTopicEvidence({
     question: topicQuestion,
+    conversation,
+    retrievalPlan,
+    requireSemanticPlan: true,
     builtAt: "2026-01-01T00:00:00.000Z",
   });
 }
@@ -147,7 +174,6 @@ if (evidence.status !== "ready") {
   console.error("EMET live smoke failed before generation.", evidence.limitations);
   process.exitCode = 1;
 } else {
-  const provider = createEmetAiOpenAiProvider();
   if (!provider) {
     console.error("EMET live smoke is not configured.");
     process.exitCode = 1;
@@ -168,6 +194,17 @@ if (evidence.status !== "ready") {
       console.log(`- Claims: ${validation.value.claims.length}`);
       console.log(`- Citations: ${validation.value.citations.length}`);
       console.log(`- Evidence packet items: ${evidence.packet.evidence.length}`);
+      if (retrievalPlan) {
+        console.log(`- Resolved subject: ${retrievalPlan.subject}`);
+      }
+      console.log(
+        `- Evidence: ${evidence.packet.evidence
+          .map(
+            (item) =>
+              `${item.reference || item.id} [${item.provenance.retrieval?.method || item.kind}/${item.provenance.retrieval?.role || "support"}]`,
+          )
+          .join("; ")}`,
+      );
       console.log(`- Answer: ${validation.value.answer}`);
     }
   }

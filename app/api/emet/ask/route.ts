@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getEmetAiCacheKey } from "@/app/lib/emet/EmetAiCache";
+import { getEmetAiRequestCacheKey } from "@/app/lib/emet/EmetAiCache";
 import { parseEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
 import {
   completeEmetAiQuestion,
@@ -13,7 +13,11 @@ import {
   type EmetAiReaderContext,
 } from "@/app/lib/emet/EmetAiTopicEvidence";
 import { answerFromEmetAiEvidence } from "@/app/lib/emet/EmetAiService";
-import { createSupabaseEmetAiAnswerStore } from "@/app/lib/emet/EmetAiSupabaseStore";
+import {
+  createSupabaseEmetAiAnswerStore,
+  getSupabaseEmetAiRequestCache,
+  setSupabaseEmetAiRequestCache,
+} from "@/app/lib/emet/EmetAiSupabaseStore";
 import { createEmetAiOpenAiProvider } from "@/app/lib/emet/providers/EmetAiOpenAiProvider";
 import { getVerifiedSupabaseUserId } from "@/app/lib/supabase/server";
 
@@ -99,40 +103,71 @@ export async function POST(request: Request) {
     return json({ status: "invalid-request" }, 400);
   }
 
-  const evidence = buildEmetAiTopicEvidence({
+  const provider = createEmetAiOpenAiProvider();
+  const requestCacheKey = getEmetAiRequestCacheKey({
     question,
     conversation,
     context,
   });
+  const requestCache = await getSupabaseEmetAiRequestCache(requestCacheKey);
+  if (!provider && !requestCache) return disabledResponse();
+
+  const quota = await reserveEmetAiQuestion(requestId, requestCacheKey);
+  if (!quota) return json({ status: "usage-unavailable" }, 503);
+  if (!quota.allowed) {
+    return json({ status: "quota-exhausted", usage: quota }, 429);
+  }
+
+  if (requestCache) {
+    await completeEmetAiQuestion(requestId, "cache");
+    return json({
+      status: requestCache.answer.status,
+      answer: requestCache.answer,
+      source: "cache",
+      usage: quota,
+    });
+  }
+
+  let retrievalPlan = null;
+  try {
+    retrievalPlan = provider?.plan
+      ? await provider.plan({ question, conversation, context })
+      : null;
+  } catch {
+    retrievalPlan = null;
+  }
+
+  const evidence = buildEmetAiTopicEvidence({
+    question,
+    conversation,
+    context,
+    retrievalPlan,
+    requireSemanticPlan: true,
+  });
   if (evidence.status !== "ready") {
+    await refundFailedEmetAiQuestion(requestId);
     return json(
       {
         status: "insufficient-evidence",
-        answer: "The available Scripture evidence cannot support a reliable answer.",
+        answer: "I couldn't assemble enough directly relevant Scripture to answer that reliably.",
         limitations: evidence.limitations,
+        usage: (await getEmetAiUsageSummary()) || quota,
       },
       422,
     );
   }
 
   const store = createSupabaseEmetAiAnswerStore(evidence.packet);
-  if (!store) return disabledResponse();
-
-  const cacheKey = getEmetAiCacheKey(evidence.packet);
-  const provider = createEmetAiOpenAiProvider();
-  if (!provider && !(await store.get(cacheKey))) return disabledResponse();
-
-  const quota = await reserveEmetAiQuestion(requestId, cacheKey);
-  if (!quota) return json({ status: "usage-unavailable" }, 503);
-  if (!quota.allowed) {
-    return json({ status: "quota-exhausted", usage: quota }, 429);
+  if (!store || !provider) {
+    await refundFailedEmetAiQuestion(requestId);
+    return disabledResponse();
   }
 
   const result = await answerFromEmetAiEvidence({
     packet: evidence.packet,
     store,
-    provider: provider || undefined,
-    allowLive: Boolean(provider),
+    provider,
+    allowLive: true,
   });
 
   let responseUsage: unknown = quota;
@@ -141,6 +176,15 @@ export async function POST(request: Request) {
     responseUsage = (await getEmetAiUsageSummary()) || quota;
   } else {
     await completeEmetAiQuestion(requestId, result.source);
+    if (result.answer.status === "complete") {
+      await setSupabaseEmetAiRequestCache({
+        key: requestCacheKey,
+        packet: evidence.packet,
+        answer: result.answer,
+        model: provider.model,
+        createdAt: new Date().toISOString(),
+      });
+    }
   }
 
   return json({

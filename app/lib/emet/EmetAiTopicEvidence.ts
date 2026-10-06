@@ -3,6 +3,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
+import { normalizeBookName } from "../../data/bookAliases";
 import {
   EMET_AI_EVIDENCE_SCHEMA,
   type EmetAiEvidenceItem,
@@ -11,10 +12,14 @@ import {
 } from "./EmetAiContract";
 import {
   buildEmetConversationQuestion,
-  conversationRetrievalQuestion,
   relevantEmetConversation,
   type EmetConversationContext,
 } from "./EmetAiConversation";
+import type {
+  EmetAiRetrievalPlan,
+  EmetAiRetrievalRole,
+} from "./EmetAiRetrievalPlan";
+import { verifiedSourcePhraseMatches } from "./EmetAiSourcePhrase";
 
 type SearchTranslation = "web" | "kjv" | "brenton";
 type SearchRecord = [book: string, chapter: number, verse: string, text: string];
@@ -24,6 +29,21 @@ type SearchIndex = {
   records: SearchRecord[];
 };
 
+type RetrievalMethod = NonNullable<
+  EmetAiEvidenceItem["provenance"]["retrieval"]
+>["method"];
+
+type EvidenceCandidate = {
+  index: SearchIndex;
+  record: SearchRecord;
+  recordIndex: number;
+  method: RetrievalMethod;
+  role: EmetAiRetrievalRole;
+  reason: string;
+  score: number;
+  sourceFingerprint?: string;
+};
+
 export type EmetAiReaderContext = {
   book: string;
   chapter: number;
@@ -31,152 +51,41 @@ export type EmetAiReaderContext = {
   translation: SearchTranslation;
 };
 
-const MAX_EVIDENCE_VERSES = 20;
-const TORAH_BOOKS = new Set([
-  "Genesis",
-  "Exodus",
-  "Leviticus",
-  "Numbers",
-  "Deuteronomy",
-]);
-const NEW_TESTAMENT_BOOKS = new Set([
-  "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians",
-  "2 Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians",
-  "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus",
-  "Philemon", "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John",
-  "3 John", "Jude", "Revelation",
-]);
+const MAX_PLANNED_EVIDENCE_VERSES = 10;
+const MAX_LITERAL_FALLBACK_VERSES = 8;
+const READER_DEPENDENT_PATTERN =
+  /\b(this|that)\s+(verse|chapter|passage|word|text)\b|\b(in|from)\s+this\s+(verse|chapter|passage)\b|\bwho is speaking\b|\bprevious\s+(verse|chapter)\b|\bwhat does (this|that|it) mean\b|\bhere\b|\bverse\s+\d+\b/i;
 const STOP_WORDS = new Set([
   "about", "according", "after", "also", "and", "are", "because", "before",
-  "bible", "but", "can", "could", "did", "does", "establish", "established",
-  "evidence", "explain", "for", "from", "has", "have", "how", "into", "is",
-  "its", "mean", "means", "of", "on", "or", "say", "says", "scripture",
-  "should", "teach", "teaches", "testament", "that", "the", "their", "theme", "then",
-  "there", "these", "they", "this", "through", "to", "was", "what", "when",
-  "where", "which", "who", "why", "will", "with", "would", "you", "your",
-  "understand",
+  "bible", "but", "called", "can", "could", "did", "does", "establish",
+  "established", "evidence", "explain", "for", "from", "has", "have", "how",
+  "into", "is", "its", "mean", "means", "of", "on", "or", "say", "says",
+  "scripture", "should", "teach", "teaches", "tell", "testament", "that", "the",
+  "their", "theme", "then", "there", "these", "they", "this", "through", "to",
+  "was", "what", "when", "where", "which", "who", "why", "will", "with",
+  "would", "you", "your", "understand",
 ]);
-
-const NORMATIVE_QUESTION_WORDS = new Set([
-  "command", "commanded", "commandment", "commandments", "duty", "establish",
-  "established", "keep", "keeping", "must", "obey", "obedience", "observe",
-  "required", "requirement", "should",
-]);
-const CONTINUITY_QUESTION_WORDS = new Set([
-  "abolish", "abolished", "continue", "continued", "ended", "forever", "modern",
-  "remain", "remains", "still", "today", "until",
-]);
-const QUESTION_CONTROL_WORDS = new Set([
-  "establish", "established", "keep", "keeping", "modern", "must", "obey",
-  "observe", "required", "should", "still", "today",
-]);
-const APPLICATION_QUESTION_WORDS = new Set([
-  "believer", "believers", "christian", "christians", "church", "modern",
-  "people", "today",
-]);
-const APPLICATION_CONCEPTS = [
-  {
-    id: "disciples",
-    weight: 8,
-    words: new Set(["disciple", "disciples"]),
-  },
-  {
-    id: "saints",
-    weight: 20,
-    words: new Set(["saint", "saints"]),
-  },
-  {
-    id: "assembly",
-    weight: 5,
-    words: new Set(["assembly", "assemblies", "believers"]),
-  },
-  {
-    id: "nations",
-    weight: 7,
-    words: new Set(["gentile", "gentiles", "nation", "nations"]),
-  },
-] as const;
-const DIRECT_QUESTION_CONCEPTS = [
-  {
-    id: "ending-or-abolition",
-    weight: 30,
-    words: new Set([
-      "abolish", "abolished", "cancel", "canceled", "cancelled", "destroy",
-      "destroyed", "end", "ended", "nullified", "nullify", "overthrow", "void",
-    ]),
-  },
-  {
-    id: "continuing-or-enduring",
-    weight: 24,
-    words: new Set([
-      "continue", "continued", "eternal", "forever", "perpetual", "remain",
-      "remains", "until",
-    ]),
-  },
-  {
-    id: "fulfillment",
-    weight: 24,
-    words: new Set(["accomplish", "accomplished", "fulfill", "fulfilled"]),
-  },
-] as const;
 const TOPIC_TERM_GROUPS = [
   ["tabernacle", "tabernacles", "sukkot", "booth", "booths", "shelter", "shelters", "ingathering"],
   ["atonement", "kippur", "reconciliation"],
-  ["resurrection", "resurrected"],
+  ["resurrection", "resurrected", "raised"],
   ["passover", "pascha", "unleavened"],
 ] as const;
-const READER_DEPENDENT_PATTERN =
-  /\b(this|that)\s+(verse|chapter|passage|word|text)\b|\b(in|from)\s+this\s+(verse|chapter|passage)\b|\bwho is speaking\b|\bprevious\s+(verse|chapter)\b|\bwhat does (this|that|it) mean\b|\bhere\b|\bverse\s+\d+\b/i;
-const WEAK_CONTEXT_TERMS = new Set([
-  "day", "god", "lord", "yahweh", "people", "person", "today", "year",
+const SINGLE_CHAPTER_BOOKS = new Set([
+  "Obadiah",
+  "Philemon",
+  "2 John",
+  "3 John",
+  "Jude",
 ]);
-const GOVERNING_CONCEPTS = [
-  {
-    id: "command",
-    weight: 4,
-    words: new Set(["command", "commanded", "commandment", "commandments"]),
-  },
-  {
-    id: "obedience",
-    weight: 3,
-    words: new Set(["keep", "keeps", "keeping", "obey", "obeyed", "observe", "observed"]),
-  },
-  {
-    id: "law",
-    weight: 4,
-    words: new Set(["law", "laws", "statute", "statutes", "ordinance", "ordinances"]),
-  },
-  {
-    id: "duration",
-    weight: 4,
-    words: new Set(["forever", "perpetual", "generation", "generations", "until"]),
-  },
-  {
-    id: "continuity",
-    weight: 4,
-    words: new Set([
-      "abolish", "abolished", "accomplished", "destroy", "fulfill", "fulfilled",
-      "remain", "remains",
-    ]),
-  },
-  {
-    id: "cosmic-duration",
-    weight: 3,
-    words: new Set(["earth", "heaven", "heavens", "pass", "passed"]),
-  },
-  {
-    id: "covenant",
-    weight: 3,
-    words: new Set(["covenant", "covenants"]),
-  },
-] as const;
 
 const indexes = new Map<SearchTranslation, SearchIndex>();
+const recordMaps = new Map<SearchTranslation, Map<string, number>>();
+let webDocumentFrequency: Map<string, number> | null = null;
 
 function loadIndex(translation: SearchTranslation) {
   const cached = indexes.get(translation);
   if (cached) return cached;
-
   const filePath = path.join(
     process.cwd(),
     "public",
@@ -189,88 +98,108 @@ function loadIndex(translation: SearchTranslation) {
   return parsed;
 }
 
-function tokenizedWords(value: string) {
+function compactReference(value: string) {
   return value
     .normalize("NFKC")
     .toLocaleLowerCase("en-US")
-    .replace(/[^\p{L}\p{N}\s'-]+/gu, " ")
-    .split(/\s+/)
-    .map((word) => word.replace(/^['-]+|['-]+$/g, ""))
-    .filter((word) => word.length > 2 && word.length <= 32);
-}
-
-function normalizedWords(value: string) {
-  return tokenizedWords(value).filter((word) => !STOP_WORDS.has(word));
-}
-
-function questionTerms(question: string) {
-  const terms = Array.from(new Set(normalizedWords(question)));
-  const subjectTerms = terms.filter((term) => !QUESTION_CONTROL_WORDS.has(term));
-  const selected = subjectTerms.length ? subjectTerms : terms;
-  const expanded = new Set(selected);
-
-  for (const group of TOPIC_TERM_GROUPS) {
-    if (group.some((term) => expanded.has(term))) {
-      group.forEach((term) => expanded.add(term));
-    }
-  }
-
-  return Array.from(expanded).slice(0, 18);
-}
-
-function intersects(words: Set<string>, candidates: Set<string>) {
-  return Array.from(candidates).some((candidate) => words.has(candidate));
-}
-
-function questionNeedsGoverningEvidence(question: string) {
-  const words = new Set(tokenizedWords(question));
-  return (
-    intersects(words, NORMATIVE_QUESTION_WORDS) ||
-    intersects(words, CONTINUITY_QUESTION_WORDS)
-  );
-}
-
-function questionNeedsApplicationEvidence(question: string) {
-  return intersects(new Set(tokenizedWords(question)), APPLICATION_QUESTION_WORDS);
+    .replace(/[^\p{L}\p{N}]+/gu, "");
 }
 
 function recordReference(record: SearchRecord) {
   return `${record[0]} ${record[1]}:${record[2]}`;
 }
 
-function recordKey(record: SearchRecord) {
-  return `${record[0]}|${record[1]}|${record[2]}`;
+function loadRecordMap(index: SearchIndex) {
+  const cached = recordMaps.get(index.translation);
+  if (cached) return cached;
+  const map = new Map(
+    index.records.map((record, recordIndex) => [
+      compactReference(recordReference(record)),
+      recordIndex,
+    ]),
+  );
+  recordMaps.set(index.translation, map);
+  return map;
 }
 
-function scriptureItem({
-  index,
-  record,
-  recordIndex,
-}: {
-  index: SearchIndex;
-  record: SearchRecord;
-  recordIndex: number;
-}): EmetAiEvidenceItem {
+function tokenizedWords(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("en-US")
+    .replace(/[’']/g, "")
+    .replace(/[^\p{L}\p{N}\s-]+/gu, " ")
+    .split(/\s+/)
+    .map((word) => word.replace(/^-+|-+$/g, ""))
+    .filter((word) => word.length > 2 && word.length <= 40);
+}
+
+function questionTerms(question: string) {
+  const expanded = new Set(
+    tokenizedWords(question).filter((word) => !STOP_WORDS.has(word)),
+  );
+  for (const group of TOPIC_TERM_GROUPS) {
+    if (group.some((term) => expanded.has(term))) {
+      group.forEach((term) => expanded.add(term));
+    }
+  }
+  return Array.from(expanded).slice(0, 20);
+}
+
+function normalizePlannedReference(value: string) {
+  const trimmed = value.trim().replace(/[–—]/g, "-");
+  const match = trimmed.match(/^(.+?)\s+(\d+):(\d+[a-z]?)$/i);
+  if (match) {
+    const book = normalizeBookName(match[1]);
+    if (!book) return null;
+    return `${book} ${Number(match[2])}:${match[3]}`;
+  }
+  const singleChapter = trimmed.match(/^(.+?)\s+(\d+[a-z]?)$/i);
+  if (!singleChapter) return null;
+  const book = normalizeBookName(singleChapter[1]);
+  return SINGLE_CHAPTER_BOOKS.has(book)
+    ? `${book} 1:${singleChapter[2]}`
+    : null;
+}
+
+function resolveReference(reference: string) {
+  const normalized = normalizePlannedReference(reference);
+  if (!normalized) return null;
+  for (const translation of ["web", "brenton"] as const) {
+    const index = loadIndex(translation);
+    const recordIndex = loadRecordMap(index).get(compactReference(normalized));
+    if (recordIndex === undefined) continue;
+    return { index, record: index.records[recordIndex], recordIndex };
+  }
+  return null;
+}
+
+function scriptureItem(candidate: EvidenceCandidate): EmetAiEvidenceItem {
   return {
-    id: `scripture:${index.translation}:${recordIndex + 1}`,
+    id: `scripture:${candidate.index.translation}:${candidate.recordIndex + 1}`,
     kind: "scripture",
     corpus: "translation",
-    text: record[3],
-    reference: recordReference(record),
+    text: candidate.record[3],
+    reference: recordReference(candidate.record),
     provenance: {
       authority: "locked-scripture-search-runtime",
-      sourceId: `${index.translation}:${recordIndex + 1}`,
-      checksum: index.sourceFingerprint,
+      sourceId: `${candidate.index.translation}:${candidate.recordIndex + 1}`,
+      checksum: candidate.index.sourceFingerprint,
+      retrieval: {
+        method: candidate.method,
+        role: candidate.role,
+        reason: candidate.reason,
+        score: Math.max(0, Math.min(100, Math.round(candidate.score))),
+      },
     },
   };
 }
 
-function contextRecords(
+function contextCandidates(
   context: EmetAiReaderContext | null,
   question: string,
 ) {
-  if (!context) return [];
-
+  if (!context || !READER_DEPENDENT_PATTERN.test(question)) return [];
   const index = loadIndex(context.translation);
   const chapter = index.records
     .map((record, recordIndex) => ({ record, recordIndex }))
@@ -281,279 +210,238 @@ function contextRecords(
   if (!chapter.length) return [];
 
   const requestedVerse = question.match(/\bverse\s+(\d+)\b/i)?.[1];
-  const verse = requestedVerse || (context.verse === null || context.verse === undefined
-    ? ""
-    : String(context.verse).trim());
-  const contextDependent = READER_DEPENDENT_PATTERN.test(question);
+  const verse = requestedVerse || String(context.verse ?? "").trim();
+  const selection = !verse
+    ? chapter.slice(0, 3)
+    : (() => {
+        const position = chapter.findIndex(({ record }) => record[2] === verse);
+        return position < 0
+          ? []
+          : chapter.slice(Math.max(0, position - 1), position + 2);
+      })();
 
-  if (contextDependent) {
-    if (!verse) return chapter.slice(0, 5).map((item) => ({ index, ...item }));
-
-    const selectedIndex = chapter.findIndex(({ record }) => record[2] === verse);
-    if (selectedIndex < 0) return [];
-
-    return chapter
-      .slice(Math.max(0, selectedIndex - 2), selectedIndex + 3)
-      .map((item) => ({ index, ...item }));
-  }
-
-  const terms = questionTerms(question);
-  const contextBookNamed = tokenizedWords(question).includes(
-    context.book.toLocaleLowerCase("en-US"),
+  return selection.map(
+    (item, position): EvidenceCandidate => ({
+      index,
+      ...item,
+      method: "reader-context",
+      role: "context",
+      reason: "The reader explicitly asked about the open passage.",
+      score: 100 - position,
+    }),
   );
-  const related = chapter
-    .map((item) => {
-      const words = new Set(normalizedWords(item.record[3]));
-      const matches = terms.filter((term) => words.has(term));
-      const strongMatches = matches.filter(
-        (term) => !WEAK_CONTEXT_TERMS.has(term),
-      );
-      return { ...item, score: matches.length, strongMatches };
-    })
-    .filter((item) => item.strongMatches.length > 0)
-    .sort(
-      (left, right) =>
-        right.score - left.score || left.recordIndex - right.recordIndex,
-    );
-
-  if (!related.length && !contextBookNamed) return [];
-
-  return related
-    .slice(0, 3)
-    .map((item) => ({ index, ...item }));
 }
 
-function topicRecords(question: string) {
-  const index = loadIndex("web");
+function plannedCandidates(plan: EmetAiRetrievalPlan | null) {
+  if (!plan) return [];
+  return plan.passages
+    .map((passage) => {
+      const resolved = resolveReference(passage.reference);
+      if (!resolved) return null;
+      return {
+        ...resolved,
+        method: "semantic-plan" as const,
+        role: passage.role,
+        reason: passage.reason,
+        score: 78 + passage.priority * 0.2,
+      };
+    })
+    .filter((value): value is NonNullable<typeof value> => value !== null);
+}
+
+function sourcePhraseCandidates(plan: EmetAiRetrievalPlan | null) {
+  if (!plan?.sourcePhrases.length) return [];
+  const preferredReferences = plan.passages
+    .map((passage) => normalizePlannedReference(passage.reference))
+    .filter((reference): reference is string => Boolean(reference));
+  return verifiedSourcePhraseMatches({
+    phrases: plan.sourcePhrases,
+    preferredReferences,
+    limit: 8,
+  })
+    .map((match) => {
+      const resolved = resolveReference(match.reference);
+      if (!resolved) return null;
+      const planned = plan.passages.find(
+        (passage) =>
+          normalizePlannedReference(passage.reference) === match.reference,
+      );
+      return {
+        ...resolved,
+        method: "exact-source-phrase" as const,
+        role: planned?.role || ("foundation" as const),
+        reason: `${match.phrase.reason} Verified as the same ${match.phrase.corpus} source sequence (${match.phrase.label}).`,
+        score: 100,
+        sourceFingerprint: match.sourceFingerprint,
+      };
+    })
+    .filter((value): value is NonNullable<typeof value> => value !== null);
+}
+
+function governingCandidates(plan: EmetAiRetrievalPlan | null) {
+  if (!plan || !["continuity", "application"].includes(plan.intent)) return [];
+  const governing = [
+    ["Matthew 5:17", "direct", "Jesus directly addresses abolishing the Law and the Prophets."],
+    ["Matthew 5:18", "direct", "Jesus states the law's duration and stated end condition."],
+    ["Matthew 5:19", "later-witness", "Jesus addresses doing and teaching the commandments."],
+    ["Romans 3:31", "later-witness", "Paul directly addresses whether faith nullifies or establishes the law."],
+    ["Revelation 14:12", "later-witness", "A later canonical witness describes the saints in relation to God's commandments."],
+  ] as const;
+
+  return governing
+    .map(([reference, role, reason], position) => {
+      const resolved = resolveReference(reference);
+      if (!resolved) return null;
+      return {
+        ...resolved,
+        method: "governing-scripture" as const,
+        role,
+        reason,
+        score: 99 - position * 0.2,
+      };
+    })
+    .filter((value): value is NonNullable<typeof value> => value !== null);
+}
+
+function documentFrequency() {
+  if (webDocumentFrequency) return webDocumentFrequency;
+  const frequency = new Map<string, number>();
+  for (const record of loadIndex("web").records) {
+    for (const word of new Set(tokenizedWords(record[3]))) {
+      frequency.set(word, (frequency.get(word) || 0) + 1);
+    }
+  }
+  webDocumentFrequency = frequency;
+  return frequency;
+}
+
+function literalCandidates(question: string) {
   const terms = questionTerms(question);
   if (!terms.length) return [];
+  const index = loadIndex("web");
+  const frequency = documentFrequency();
 
-  const questionWords = new Set(tokenizedWords(question));
-  const activeDirectConcepts = DIRECT_QUESTION_CONCEPTS.filter((concept) =>
-    intersects(questionWords, concept.words),
-  );
-  const activeDirectConceptWords = new Set(
-    activeDirectConcepts.flatMap((concept) => Array.from(concept.words)),
-  );
-  const subjectTerms = terms.filter((term) => !activeDirectConceptWords.has(term));
-  const retrievalTerms = subjectTerms.length ? subjectTerms : terms;
-  const needsGoverningEvidence = questionNeedsGoverningEvidence(question);
-  const needsApplicationEvidence = questionNeedsApplicationEvidence(question);
-
-  const matches = index.records
+  return index.records
     .map((record, recordIndex) => {
-      const words = new Set(normalizedWords(record[3]));
-      const directMatches = retrievalTerms.filter((term) => words.has(term));
-      const strongDirectMatches = directMatches.filter(
-        (term) => !WEAK_CONTEXT_TERMS.has(term),
-      );
-      const directConceptScore = directMatches.length
-        ? activeDirectConcepts
-            .filter((concept) => intersects(words, concept.words))
-            .reduce((score, concept) => score + concept.weight, 0)
-        : 0;
-      const governingMatches = needsGoverningEvidence
-        ? GOVERNING_CONCEPTS.filter((concept) => intersects(words, concept.words))
-        : [];
-      const governingScore = governingMatches.reduce(
-        (score, concept) => score + concept.weight,
-        0,
-      );
-      const applicationCommandScore = governingMatches
-        .filter(
-          (concept) => concept.id === "command" || concept.id === "obedience",
-        )
-        .reduce((score, concept) => score + concept.weight, 0);
-      const applicationScore = needsApplicationEvidence
-        ? APPLICATION_CONCEPTS.filter((concept) => intersects(words, concept.words))
-            .reduce((score, concept) => score + concept.weight, 0)
-        : 0;
-      return {
-        index,
-        record,
-        recordIndex,
-        directScore:
-          strongDirectMatches.length * 20 +
-          (directMatches.length - strongDirectMatches.length) * 2 +
-          directConceptScore,
-        governingScore,
-        applicationScore,
-        applicationBridgeScore: applicationScore,
-        applicationCommandScore,
-        score:
-          strongDirectMatches.length * 20 +
-          (directMatches.length - strongDirectMatches.length) * 2 +
-          directConceptScore +
-          governingScore +
-          applicationScore,
-      };
+      const words = new Set(tokenizedWords(record[3]));
+      const matches = terms.filter((term) => words.has(term));
+      const rareMatches = matches.filter((term) => (frequency.get(term) || 0) <= 16);
+      const score = matches.length * 18 + rareMatches.length * 34;
+      return { record, recordIndex, matches, rareMatches, score };
     })
     .filter(
       (item) =>
-        item.score > 0 &&
-        (item.directScore > 2 || item.governingScore > 0 || item.applicationScore > 0),
+        item.rareMatches.length > 0 ||
+        item.matches.length >= Math.min(2, terms.length),
+    )
+    .sort(
+      (left, right) =>
+        right.score - left.score || left.recordIndex - right.recordIndex,
+    )
+    .slice(0, MAX_LITERAL_FALLBACK_VERSES)
+    .map(
+      (item): EvidenceCandidate => ({
+        index,
+        record: item.record,
+        recordIndex: item.recordIndex,
+        method: "literal-text-match",
+        role: "direct",
+        reason: `The locked verse text contains the question's material term${item.matches.length === 1 ? "" : "s"}: ${item.matches.join(", ")}.`,
+        score: Math.min(72, 35 + item.score / 2),
+      }),
     );
+}
 
-  const matchesByRecordIndex = new Map(
-    matches.map((item) => [item.recordIndex, item] as const),
-  );
-  for (const item of matches) {
-    if (item.applicationScore <= 0) continue;
-    item.applicationBridgeScore += item.applicationCommandScore * 2;
-    item.applicationBridgeScore += [-1, 1].reduce(
-      (score, offset) =>
-        score +
-        (matchesByRecordIndex.get(item.recordIndex + offset)?.applicationCommandScore || 0) * 2,
-      0,
-    );
-  }
-  matches.sort(
-    (left, right) => right.score - left.score || left.recordIndex - right.recordIndex,
-  );
+function selectedCandidates({
+  question,
+  plan,
+  context,
+}: {
+  question: string;
+  plan: EmetAiRetrievalPlan | null;
+  context: EmetAiReaderContext | null;
+}) {
+  const contextEvidence = contextCandidates(context, question);
+  const plannedEvidence = plannedCandidates(plan);
+  const phraseEvidence = sourcePhraseCandidates(plan);
+  const governingEvidence = governingCandidates(plan);
+  const literalEvidence = literalCandidates(question);
+  const candidates = plan
+    ? [
+        ...contextEvidence,
+        ...phraseEvidence,
+        ...governingEvidence,
+        ...plannedEvidence,
+        ...literalEvidence.filter((candidate) => candidate.score >= 65).slice(0, 2),
+      ]
+    : contextEvidence.length
+      ? contextEvidence
+      : literalEvidence;
+  const byReference = new Map<string, EvidenceCandidate>();
 
-  const bands = [
-    matches.filter((item) => TORAH_BOOKS.has(item.record[0])),
-    matches.filter(
-      (item) =>
-        !TORAH_BOOKS.has(item.record[0]) &&
-        !NEW_TESTAMENT_BOOKS.has(item.record[0]),
-    ),
-    matches.filter((item) => NEW_TESTAMENT_BOOKS.has(item.record[0])),
-  ];
-  const selected = bands.flatMap((band, bandIndex) => {
-    if (!needsGoverningEvidence) return band.slice(0, 6);
-
-    // Earlier Scripture establishes the topic itself. Reserve governing-only
-    // evidence for the New Testament band, where later statements can define
-    // continuity, fulfillment, or change without displacing the foundation.
-    if (bandIndex < 2) {
-      const limit = needsApplicationEvidence && bandIndex === 1 ? 2 : 6;
-      return band.filter((item) => item.directScore > 0).slice(0, limit);
+  for (const candidate of candidates) {
+    const reference = recordReference(candidate.record);
+    const existing = byReference.get(reference);
+    if (!existing || candidate.score > existing.score) {
+      byReference.set(reference, candidate);
     }
-
-    const direct = band.filter((item) => item.directScore > 0).slice(0, 3);
-    const directIndexes = new Set(direct.map((item) => item.recordIndex));
-    const governingCandidates = band
-      .filter(
-        (item) => item.governingScore > 0 && !directIndexes.has(item.recordIndex),
-      )
-      .sort(
-        (left, right) =>
-          right.governingScore - left.governingScore ||
-          right.directScore - left.directScore ||
-          left.recordIndex - right.recordIndex,
-      );
-    const governing: typeof band = [];
-    const governingIndexes = new Set<number>();
-
-    for (const seed of governingCandidates) {
-      if (governing.length >= 3) break;
-      if (!governingIndexes.has(seed.recordIndex)) {
-        governing.push(seed);
-        governingIndexes.add(seed.recordIndex);
-      }
-
-      for (const offset of [-1, 1]) {
-        if (governing.length >= 3) break;
-        const neighbor = governingCandidates.find(
-          (item) =>
-            item.recordIndex === seed.recordIndex + offset &&
-            item.record[0] === seed.record[0] &&
-            item.record[1] === seed.record[1],
-        );
-        if (!neighbor || governingIndexes.has(neighbor.recordIndex)) continue;
-        governing.push(neighbor);
-        governingIndexes.add(neighbor.recordIndex);
-      }
-    }
-    const application: typeof band = [];
-    const applicationIndexes = new Set<number>();
-    const applicationPassageCounts = new Map<string, number>();
-    const reservedIndexes = new Set([
-      ...direct.map((item) => item.recordIndex),
-      ...governing.map((item) => item.recordIndex),
-    ]);
-    const applicationCandidates = band
-      .filter(
-        (item) =>
-          item.applicationScore > 0 && !reservedIndexes.has(item.recordIndex),
-      )
-      .sort(
-        (left, right) =>
-          right.applicationBridgeScore - left.applicationBridgeScore ||
-          right.applicationScore - left.applicationScore ||
-          left.recordIndex - right.recordIndex,
-      );
-
-    for (const seed of applicationCandidates) {
-      if (application.length >= 5) break;
-      const seedPassageKey = `${seed.record[0]}|${seed.record[1]}`;
-      if ((applicationPassageCounts.get(seedPassageKey) || 0) >= 2) continue;
-      if (!applicationIndexes.has(seed.recordIndex)) {
-        application.push(seed);
-        applicationIndexes.add(seed.recordIndex);
-        applicationPassageCounts.set(
-          seedPassageKey,
-          (applicationPassageCounts.get(seedPassageKey) || 0) + 1,
-        );
-      }
-
-      for (const offset of [-1, 1]) {
-        if (application.length >= 5) break;
-        const neighbor = band.find(
-          (item) =>
-            item.recordIndex === seed.recordIndex + offset &&
-            item.record[0] === seed.record[0] &&
-            item.record[1] === seed.record[1] &&
-            (item.applicationScore > 0 || item.applicationCommandScore > 0) &&
-            !reservedIndexes.has(item.recordIndex),
-        );
-        if (!neighbor || applicationIndexes.has(neighbor.recordIndex)) continue;
-        const neighborPassageKey = `${neighbor.record[0]}|${neighbor.record[1]}`;
-        if ((applicationPassageCounts.get(neighborPassageKey) || 0) >= 2) continue;
-        application.push(neighbor);
-        applicationIndexes.add(neighbor.recordIndex);
-        applicationPassageCounts.set(
-          neighborPassageKey,
-          (applicationPassageCounts.get(neighborPassageKey) || 0) + 1,
-        );
-      }
-    }
-
-    const bandLimit = needsApplicationEvidence ? 11 : 6;
-    const bandSelection = [...direct, ...governing, ...application];
-    const bandIndexes = new Set(bandSelection.map((item) => item.recordIndex));
-
-    for (const item of band) {
-      if (bandSelection.length >= bandLimit) break;
-      if (bandIndexes.has(item.recordIndex)) continue;
-      bandSelection.push(item);
-      bandIndexes.add(item.recordIndex);
-    }
-
-    return bandSelection;
-  });
-  const seen = new Set(selected.map((item) => item.recordIndex));
-
-  for (const match of matches) {
-    if (selected.length >= MAX_EVIDENCE_VERSES) break;
-    if (seen.has(match.recordIndex)) continue;
-    selected.push(match);
-    seen.add(match.recordIndex);
   }
 
-  return selected.sort((left, right) => left.recordIndex - right.recordIndex);
+  const ranked = Array.from(byReference.values()).sort(
+    (left, right) =>
+      right.score - left.score || left.recordIndex - right.recordIndex,
+  );
+  if (!plan) return ranked.slice(0, MAX_LITERAL_FALLBACK_VERSES);
+
+  const selected: EvidenceCandidate[] = [];
+  const selectedReferences = new Set<string>();
+  const chapterCounts = new Map<string, number>();
+  const add = (candidate: EvidenceCandidate) => {
+    const reference = recordReference(candidate.record);
+    if (selectedReferences.has(reference)) return false;
+    const chapterKey = `${candidate.record[0]}|${candidate.record[1]}`;
+    if ((chapterCounts.get(chapterKey) || 0) >= 3) return false;
+    selected.push(candidate);
+    selectedReferences.add(reference);
+    chapterCounts.set(chapterKey, (chapterCounts.get(chapterKey) || 0) + 1);
+    return true;
+  };
+
+  // Preserve the evidence hierarchy before filling remaining slots. This
+  // prevents one long chapter from displacing later witness or qualifying
+  // passages merely because the planner returned its verses first.
+  for (const role of [
+    "direct",
+    "foundation",
+    "later-witness",
+    "qualifying",
+    "contrast",
+    "context",
+  ] as const) {
+    const candidate = ranked.find((item) => item.role === role);
+    if (candidate) add(candidate);
+  }
+
+  for (const candidate of ranked) {
+    if (selected.length >= MAX_PLANNED_EVIDENCE_VERSES) break;
+    add(candidate);
+  }
+  return selected;
 }
 
 export function buildEmetAiTopicEvidence({
   question,
   conversation = null,
   context = null,
+  retrievalPlan = null,
+  requireSemanticPlan = false,
   builtAt,
 }: {
   question: string;
   conversation?: EmetConversationContext | null;
   context?: EmetAiReaderContext | null;
+  retrievalPlan?: EmetAiRetrievalPlan | null;
+  requireSemanticPlan?: boolean;
   builtAt?: string;
 }) {
   const cleanQuestion = question.trim();
@@ -567,44 +455,50 @@ export function buildEmetAiTopicEvidence({
   const relevantConversation = conversation
     ? relevantEmetConversation({ question: cleanQuestion, conversation })
     : null;
-  const retrievalQuestion = conversationRetrievalQuestion({
-    question: cleanQuestion,
-    conversation: relevantConversation,
-  });
-  const readerRecords = contextRecords(context, cleanQuestion);
-  const candidates = [
-    ...readerRecords,
-    ...topicRecords(retrievalQuestion),
-  ];
-  const seen = new Set<string>();
-  const evidence: EmetAiEvidenceItem[] = [];
-  const fingerprints = new Set<string>();
-
-  for (const candidate of candidates) {
-    const key = recordKey(candidate.record);
-    if (seen.has(key) || evidence.length >= MAX_EVIDENCE_VERSES) continue;
-    seen.add(key);
-    fingerprints.add(candidate.index.sourceFingerprint);
-    evidence.push(scriptureItem(candidate));
-  }
-
-  if (!evidence.length) {
+  const readerDependent = READER_DEPENDENT_PATTERN.test(cleanQuestion);
+  if (requireSemanticPlan && !retrievalPlan && !readerDependent) {
     return {
       status: "insufficient-evidence" as const,
       limitations: [
-        "The locked Scripture index did not supply enough directly relevant passages for this question.",
+        "The semantic Scripture retrieval plan could not be verified for this question.",
       ],
     };
   }
 
+  const candidates = selectedCandidates({
+    question: cleanQuestion,
+    plan: retrievalPlan,
+    context,
+  });
+  const evidence = candidates.map(scriptureItem);
+  if (!evidence.length) {
+    return {
+      status: "insufficient-evidence" as const,
+      limitations: [
+        "The locked Scripture indexes did not supply directly relevant passages for this question.",
+      ],
+    };
+  }
+
+  const fingerprints = new Set(
+    candidates.flatMap((candidate) => [
+      candidate.index.sourceFingerprint,
+      ...(candidate.sourceFingerprint ? [candidate.sourceFingerprint] : []),
+    ]),
+  );
+  const resolvedQuestion = buildEmetConversationQuestion({
+    question: cleanQuestion,
+    conversation: relevantConversation,
+  });
   const packet: EmetAiEvidencePacket = {
     schemaVersion: EMET_AI_EVIDENCE_SCHEMA,
-    question: buildEmetConversationQuestion({
-      question: cleanQuestion,
-      conversation: relevantConversation,
-    }),
+    question: retrievalPlan
+      ? `${resolvedQuestion}\n\nResolved retrieval subject (context only, not evidence): ${retrievalPlan.subject}`
+      : resolvedQuestion,
     scope: {
-      type: readerRecords.length ? "passage" : "topic",
+      type: candidates.some((candidate) => candidate.method === "reader-context")
+        ? "passage"
+        : "topic",
       references: evidence
         .map((item) => item.reference)
         .filter((value): value is string => Boolean(value)),
@@ -613,12 +507,11 @@ export function buildEmetAiTopicEvidence({
     identity: { gate: "not-applicable" },
     evidence,
     provenance: {
-      evidenceVersion: `locked-scripture-topic-search@4:${Array.from(fingerprints).sort().join(":")}`,
+      evidenceVersion: `semantic-scripture-topic@1:${Array.from(fingerprints).sort().join(":")}`,
       builtAt: builtAt || new Date().toISOString(),
     },
   };
   const validation = validateEmetAiEvidencePacket(packet);
-
   return validation.ok
     ? { status: "ready" as const, packet: validation.value }
     : {

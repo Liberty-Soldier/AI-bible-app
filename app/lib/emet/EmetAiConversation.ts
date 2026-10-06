@@ -234,12 +234,14 @@ export function buildEmetConversationQuestion({
     ),
   ].filter(Boolean);
   const recentLines = conversation.recentExchanges.flatMap((exchange) => [
-    `Reader: ${exchange.question}`,
-    `Earlier EMET response (conversation only; not evidence): ${exchange.answer}`,
+    `Earlier reader question: ${exchange.question}`,
+    ...(exchange.references.length
+      ? [`Verified passages cited in that exchange: ${exchange.references.join(", ")}`]
+      : []),
   ]);
 
   return [
-    "Conversation context below is for resolving the current question only. It is not Scripture evidence:",
+    "Conversation context below is for resolving the current subject only. It is not Scripture evidence. Earlier answer prose is intentionally excluded:",
     ...summaryLines,
     ...recentLines,
     "",

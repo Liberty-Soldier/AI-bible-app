@@ -12,7 +12,9 @@ import { buildEmetAiWordEvidence } from "../app/lib/emet/EmetAiEvidenceBuilder.t
 import {
   createMemoryEmetAiAnswerStore,
   getEmetAiCacheKey,
+  getEmetAiRequestCacheKey,
 } from "../app/lib/emet/EmetAiCache.ts";
+import { buildEmetConversationContext } from "../app/lib/emet/EmetAiConversation.ts";
 import { answerFromEmetAiEvidence } from "../app/lib/emet/EmetAiService.ts";
 
 const packet = {
@@ -297,6 +299,47 @@ assert.notEqual(
   getEmetAiCacheKey(differentIdentityPacket),
 );
 
+const requestConversation = buildEmetConversationContext([
+  {
+    question: "Who are the sons of God in Genesis 6?",
+    answer: "First answer wording.",
+    references: ["Genesis 6:2", "Job 1:6"],
+  },
+]);
+const equivalentRequestConversation = buildEmetConversationContext([
+  {
+    question: "Who are the sons of God in Genesis 6?",
+    answer: "Different answer wording must not change retrieval identity.",
+    references: ["Genesis 6:2", "Job 1:6"],
+  },
+]);
+const requestKey = getEmetAiRequestCacheKey({
+  question: "Were they angels?",
+  conversation: requestConversation,
+  context: null,
+});
+assert.equal(
+  requestKey,
+  getEmetAiRequestCacheKey({
+    question: "  WERE they angels? ",
+    conversation: equivalentRequestConversation,
+    context: null,
+  }),
+);
+assert.notEqual(
+  requestKey,
+  getEmetAiRequestCacheKey({
+    question: "Were they angels?",
+    conversation: requestConversation,
+    context: {
+      book: "Genesis",
+      chapter: 6,
+      verse: 2,
+      translation: "web",
+    },
+  }),
+);
+
 const validGeneratedAnswer = {
   schemaVersion: EMET_AI_ANSWER_SCHEMA,
   status: "complete",
@@ -385,5 +428,6 @@ console.log("- Ambiguous source identities fail closed.");
 console.log("- Reader and EMET evidence require the same occurrence-owned identity.");
 console.log("- Hebrew, LXX, and Greek NT identities stay corpus-scoped.");
 console.log("- Equivalent questions reuse only identity-and-evidence-bound answers.");
+console.log("- Repeated conversational requests reuse a stable cache without trusting prior answer prose.");
 console.log("- Invalid model citations fail closed before caching.");
 console.log("- Reader-facing answers use natural prose without internal evidence jargon.");

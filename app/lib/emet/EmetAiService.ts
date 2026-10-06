@@ -12,9 +12,19 @@ import {
   getEmetAiCacheKey,
   type EmetAiAnswerStore,
 } from "./EmetAiCache";
+import type {
+  EmetAiRetrievalPlan,
+} from "./EmetAiRetrievalPlan";
+import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
+import type { EmetConversationContext } from "./EmetAiConversation";
 
 export interface EmetAiProvider {
   model: string;
+  plan?(input: {
+    question: string;
+    conversation: EmetConversationContext | null;
+    context: EmetAiReaderContext | null;
+  }): Promise<EmetAiRetrievalPlan | null>;
   generate(packet: EmetAiEvidencePacket): Promise<unknown>;
 }
 

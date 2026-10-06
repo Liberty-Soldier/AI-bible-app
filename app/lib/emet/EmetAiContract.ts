@@ -1,6 +1,6 @@
-export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@1" as const;
+export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@2" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@1" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@8" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first@9" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
 export type EmetAiScopeType = "word" | "verse" | "passage" | "topic";
@@ -29,6 +29,24 @@ export type EmetAiEvidenceItem = {
     authority: string;
     sourceId?: string;
     checksum?: string;
+    retrieval?: {
+      method:
+        | "explicit-reference"
+        | "reader-context"
+        | "exact-source-phrase"
+        | "semantic-plan"
+        | "literal-text-match"
+        | "governing-scripture";
+      role:
+        | "direct"
+        | "foundation"
+        | "later-witness"
+        | "qualifying"
+        | "contrast"
+        | "context";
+      reason: string;
+      score: number;
+    };
   };
 };
 
@@ -57,7 +75,7 @@ export type EmetAiEvidencePacket = {
 
 export type EmetAiClaim = {
   text: string;
-  support: "direct" | "scriptural-synthesis";
+  support: "direct" | "scriptural-synthesis" | "scriptural-inference";
   evidenceIds: string[];
 };
 
@@ -146,6 +164,19 @@ export function validateEmetAiEvidencePacket(
 
     if (!clean(item.provenance?.authority)) {
       errors.push(`Evidence ${item.id || "<missing>"} has no authority.`);
+    }
+
+    if (item.provenance.retrieval) {
+      if (!clean(item.provenance.retrieval.reason)) {
+        errors.push(`Evidence ${item.id} has no retrieval reason.`);
+      }
+      if (
+        !Number.isFinite(item.provenance.retrieval.score) ||
+        item.provenance.retrieval.score < 0 ||
+        item.provenance.retrieval.score > 100
+      ) {
+        errors.push(`Evidence ${item.id} has an invalid retrieval score.`);
+      }
     }
 
     if (
@@ -275,7 +306,8 @@ export function parseEmetAiAnswer(value: unknown): EmetAiAnswer | null {
     if (
       typeof claim.text !== "string" ||
       (claim.support !== "direct" &&
-        claim.support !== "scriptural-synthesis") ||
+        claim.support !== "scriptural-synthesis" &&
+        claim.support !== "scriptural-inference") ||
       !Array.isArray(claim.evidenceIds) ||
       claim.evidenceIds.some((id) => typeof id !== "string")
     ) {
