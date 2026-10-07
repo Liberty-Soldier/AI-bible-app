@@ -4,9 +4,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
-import type { EmetAiClaimSupport } from "@/app/lib/emet/EmetAiContract";
+import type {
+  EmetAiClaim,
+  EmetAiClaimSupport,
+  EmetAiComponentCheck,
+  EmetAiContinuityCheck,
+} from "@/app/lib/emet/EmetAiContract";
 
 const CHAT_STORAGE_KEY = "emetsees-conversation";
+const CHAT_ID_STORAGE_KEY = "emetsees-conversation-id";
 
 export type EmetChatUsage = {
   planName: string;
@@ -41,14 +47,35 @@ type WordContext = ReaderContext & {
 type Answer = {
   answer: string;
   conclusionSupport: EmetAiClaimSupport;
-  claims: Array<{
-    text: string;
-    support: EmetAiClaimSupport;
-    evidenceIds: string[];
-  }>;
+  componentChecks: EmetAiComponentCheck[];
+  claims: EmetAiClaim[];
+  continuityChecks: EmetAiContinuityCheck[];
   citations: Array<{ evidenceId: string; reference?: string }>;
   limitations: string[];
 };
+
+function normalizedClaims(value: unknown): EmetAiClaim[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((candidate, index) => {
+    if (!candidate || typeof candidate !== "object") return [];
+    const claim = candidate as Partial<EmetAiClaim>;
+    if (typeof claim.text !== "string" || !Array.isArray(claim.evidenceIds)) {
+      return [];
+    }
+    return [{
+      id: claim.id || `legacy-proposition-${index + 1}`,
+      text: claim.text,
+      support: claim.support || "possible-interpretation",
+      category: claim.category || "other",
+      polarity: claim.polarity || "affirms",
+      scope: claim.scope || "the proposition as stated",
+      timing: claim.timing || "uncertain",
+      evidenceIds: claim.evidenceIds.filter(
+        (item): item is string => typeof item === "string",
+      ),
+    }];
+  });
+}
 
 type Exchange = {
   id: string;
@@ -80,8 +107,12 @@ function storedExchanges(storage: Storage) {
         answer: exchange.answer.answer,
         conclusionSupport:
           exchange.answer.conclusionSupport || "possible-interpretation",
-        claims: Array.isArray(exchange.answer.claims)
-          ? exchange.answer.claims
+        componentChecks: Array.isArray(exchange.answer.componentChecks)
+          ? exchange.answer.componentChecks
+          : [],
+        claims: normalizedClaims(exchange.answer.claims),
+        continuityChecks: Array.isArray(exchange.answer.continuityChecks)
+          ? exchange.answer.continuityChecks
           : [],
         citations: Array.isArray(exchange.answer.citations)
           ? exchange.answer.citations
@@ -128,7 +159,13 @@ function normalizeAnswer(payload: Record<string, unknown>): Answer {
         answer: value.answer,
         conclusionSupport:
           value.conclusionSupport || "possible-interpretation",
-        claims: Array.isArray(value.claims) ? value.claims : [],
+        componentChecks: Array.isArray(value.componentChecks)
+          ? value.componentChecks
+          : [],
+        claims: normalizedClaims(value.claims),
+        continuityChecks: Array.isArray(value.continuityChecks)
+          ? value.continuityChecks
+          : [],
         citations: Array.isArray(value.citations) ? value.citations : [],
         limitations: Array.isArray(value.limitations) ? value.limitations : [],
       } as Answer;
@@ -141,6 +178,8 @@ function normalizeAnswer(payload: Record<string, unknown>): Answer {
         ? payload.answer
         : "EMET could not produce a supported answer.",
     claims: [],
+    componentChecks: [],
+    continuityChecks: [],
     conclusionSupport: "does-not-establish",
     citations: [],
     limitations: Array.isArray(payload.limitations)
@@ -173,6 +212,7 @@ export default function EmetChat({
   const [wordContext, setWordContext] = useState<WordContext | null>(null);
   const [usage, setUsage] = useState(initialUsage);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
+  const [conversationId, setConversationId] = useState("");
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
@@ -191,6 +231,12 @@ export default function EmetChat({
       setReaderContext(reader);
       setWordContext(word);
       setExchanges(storedExchanges(window.sessionStorage));
+      const storedConversationId = window.sessionStorage.getItem(
+        CHAT_ID_STORAGE_KEY,
+      );
+      const nextConversationId = storedConversationId || crypto.randomUUID();
+      window.sessionStorage.setItem(CHAT_ID_STORAGE_KEY, nextConversationId);
+      setConversationId(nextConversationId);
       setHistoryLoaded(true);
       window.sessionStorage.removeItem("emetsees-word-question-context");
     }, 0);
@@ -221,6 +267,14 @@ export default function EmetChat({
     setError("");
 
     try {
+      const activeConversationId = conversationId || crypto.randomUUID();
+      if (!conversationId) {
+        window.sessionStorage.setItem(
+          CHAT_ID_STORAGE_KEY,
+          activeConversationId,
+        );
+        setConversationId(activeConversationId);
+      }
       const endpoint = wordContext ? "/api/emet/explain" : "/api/emet/ask";
       const response = await fetch(endpoint, {
         method: "POST",
@@ -228,6 +282,7 @@ export default function EmetChat({
         body: JSON.stringify({
           question: finalQuestion,
           requestId: crypto.randomUUID(),
+          conversationId: activeConversationId,
           conversation: buildEmetConversationContext(
             exchanges.map((exchange) => ({
               question: exchange.question,
@@ -236,8 +291,13 @@ export default function EmetChat({
                 .map((citation) => citation.reference || "")
                 .filter(Boolean),
               claims: exchange.answer.claims.map((claim) => ({
+                id: claim.id,
                 text: claim.text,
                 support: claim.support,
+                category: claim.category,
+                polarity: claim.polarity,
+                scope: claim.scope,
+                timing: claim.timing,
                 references: claim.evidenceIds
                   .flatMap((evidenceId) =>
                     exchange.answer.citations
@@ -323,15 +383,57 @@ export default function EmetChat({
     }
   }
 
+  const composer = (
+    <form
+      className={`border-t border-[var(--border)] bg-[var(--canvas)]/95 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl ${
+        exchanges.length ? "sticky bottom-0 mt-5" : "mb-3"
+      }`}
+      onSubmit={(event) => {
+        event.preventDefault();
+        void ask();
+      }}
+    >
+      <label htmlFor="emet-question" className="sr-only">
+        Ask EMET a Scripture question
+      </label>
+      <div className="flex items-end gap-3 border-b border-[var(--border)] bg-[var(--canvas)] py-2">
+        <textarea
+          id="emet-question"
+          value={question}
+          onChange={(event) => setQuestion(event.target.value)}
+          rows={2}
+          maxLength={800}
+          placeholder={exchanges.length ? "Ask a follow-up…" : "Ask a Scripture question…"}
+          disabled={pending || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
+          className="min-h-12 flex-1 resize-none bg-transparent px-0 py-2 text-base leading-7 outline-none placeholder:text-[var(--muted)]"
+        />
+        <button
+          type="submit"
+          disabled={pending || !question.trim() || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
+          className="mb-1 shrink-0 border-b-2 border-[var(--brand)] px-1 py-2 text-sm font-black text-[var(--foreground)] disabled:cursor-not-allowed disabled:border-[var(--border)] disabled:opacity-40"
+        >
+          {pending ? "Tracing…" : "Ask →"}
+        </button>
+      </div>
+      <p className="mt-2 text-center text-[0.66rem] leading-5 text-[var(--muted)]">
+        {exchanges.length
+          ? "Continue naturally. Every reply is checked against Scripture evidence."
+          : "Answers use supplied Scripture evidence only. Unsupported claims fail closed."}
+      </p>
+    </form>
+  );
+
   return (
     <div>
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-6 border-y border-[var(--border)] py-4">
+      {exchanges.length === 0 ? composer : null}
+
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-[var(--border)] py-2 text-xs text-[var(--muted)]">
         <div className="min-w-0">
-          <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-            {activeContext ? "Using context" : "Evidence scope"}
-          </p>
-          <div className="mt-1 flex min-w-0 items-center gap-2">
-            <p className="truncate text-sm font-semibold">
+          <div className="flex min-w-0 items-center gap-2">
+            <span className="shrink-0 font-bold uppercase tracking-[0.16em]">
+              {activeContext ? "Context" : "Scope"}
+            </span>
+            <p className="truncate font-semibold text-[var(--foreground)]">
               {contextLabel(activeContext)}
             </p>
             {activeContext ? (
@@ -342,7 +444,7 @@ export default function EmetChat({
                   if (wordContext) setWordContext(null);
                   else setReaderContext(null);
                 }}
-                className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[var(--border)] text-sm text-[var(--muted)] transition hover:text-[var(--foreground)]"
+                className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--border)] text-sm text-[var(--muted)] transition hover:text-[var(--foreground)]"
               >
                 ×
               </button>
@@ -350,16 +452,12 @@ export default function EmetChat({
           </div>
         </div>
         {usage ? (
-          <div className="text-right">
-            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-              {usage.planName}
-            </p>
-            <p className="mt-1 text-sm font-semibold text-[var(--muted)]">
+          <p className="shrink-0 font-semibold">
+              {usage.planName} · {" "}
               {usage.unlimited
                 ? "Unlimited testing"
                 : `${usage.questionsRemaining} of ${usage.questionLimit} left`}
-            </p>
-          </div>
+          </p>
         ) : null}
       </div>
 
@@ -372,6 +470,9 @@ export default function EmetChat({
               setQuestion("");
               setError("");
               window.sessionStorage.removeItem(CHAT_STORAGE_KEY);
+              const nextConversationId = crypto.randomUUID();
+              window.sessionStorage.setItem(CHAT_ID_STORAGE_KEY, nextConversationId);
+              setConversationId(nextConversationId);
             }}
             className="border-b border-[var(--border)] pb-0.5 text-xs font-semibold text-[var(--muted)]"
           >
@@ -454,45 +555,7 @@ export default function EmetChat({
         </p>
       ) : null}
 
-      <form
-        className="sticky bottom-0 mt-5 border-t border-[var(--border)] bg-[var(--background)]/95 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl"
-        onSubmit={(event) => {
-          event.preventDefault();
-          void ask();
-        }}
-      >
-        <label htmlFor="emet-question" className="sr-only">
-          Ask EMET a Scripture question
-        </label>
-        <div className="flex items-end gap-3 border-b border-[var(--border)] bg-[var(--background)] py-2">
-          <textarea
-            id="emet-question"
-            value={question}
-            onChange={(event) => setQuestion(event.target.value)}
-            rows={2}
-            maxLength={800}
-            placeholder={
-              exchanges.length
-                ? "Ask a follow-up…"
-                : "Ask a Scripture question…"
-            }
-            disabled={pending || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
-            className="min-h-12 flex-1 resize-none bg-transparent px-0 py-2 text-base leading-7 outline-none placeholder:text-[var(--muted)]"
-          />
-          <button
-            type="submit"
-            disabled={pending || !question.trim() || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
-            className="mb-1 shrink-0 border-b-2 border-[var(--brand)] px-1 py-2 text-sm font-black text-[var(--foreground)] disabled:cursor-not-allowed disabled:border-[var(--border)] disabled:opacity-40"
-          >
-            {pending ? "Tracing…" : "Ask →"}
-          </button>
-        </div>
-        <p className="mt-2 px-2 text-center text-[0.68rem] leading-5 text-[var(--muted)]">
-          {exchanges.length
-            ? "Continue naturally. Every reply is checked against Scripture evidence."
-            : "Answers use supplied Scripture evidence only. Unsupported claims fail closed."}
-        </p>
-      </form>
+      {exchanges.length ? composer : null}
     </div>
   );
 }

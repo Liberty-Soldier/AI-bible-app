@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   buildEmetConversationContext,
   buildEmetConversationQuestion,
+  parseEmetConversationClaims,
   parseEmetConversationContext,
   relevantEmetConversation,
   relevantEmetConversationClaimReferences,
@@ -19,6 +20,8 @@ function plan({
   analysisMode = "simple",
   proposition = subject,
   components = [],
+  requiresScopeAnalysis = analysisMode !== "simple",
+  requiresTimeline = false,
   passages,
   sourcePhrases = [],
 }) {
@@ -27,6 +30,8 @@ function plan({
     subject,
     analysisMode,
     proposition,
+    requiresScopeAnalysis,
+    requiresTimeline,
     components,
     intent,
     passages: passages.map((item, index) => ({
@@ -369,6 +374,125 @@ const oneSidedDoctrine = buildEmetAiTopicEvidence({
 });
 assert.equal(oneSidedDoctrine.status, "insufficient-evidence");
 
+const covenantConversation = buildEmetConversationContext([
+  {
+    question: "Who is the new covenant made with?",
+    answer: "Earlier answer prose is not evidence.",
+    references: ["Jeremiah 31:31"],
+    claims: [{
+      id: "new-covenant-parties",
+      text: "Jeremiah names the house of Israel and the house of Judah as the new-covenant parties.",
+      support: "explicit-statement",
+      category: "covenant-participants",
+      polarity: "affirms",
+      scope: "the parties named in Jeremiah's new-covenant promise",
+      timing: "promised",
+      references: ["Jeremiah 31:31"],
+    }],
+  },
+  {
+    question: "What does Yahweh write on their hearts?",
+    answer: "This prose is also excluded.",
+    references: ["Jeremiah 31:33", "Hebrews 8:10"],
+    claims: [{
+      id: "torah-written-within",
+      text: "Yahweh puts His law within the new-covenant participants and writes it on their hearts.",
+      support: "explicit-statement",
+      category: "command",
+      polarity: "affirms",
+      scope: "Yahweh's law within the new-covenant participants",
+      timing: "promised",
+      references: ["Jeremiah 31:33", "Hebrews 8:10"],
+    }],
+  },
+]);
+const covenantPlan = plan({
+  subject: "the relationship between first-covenant obsolescence and Yahweh's Torah",
+  intent: "continuity",
+  analysisMode: "apparent-contradiction",
+  proposition: "Hebrews' statement that the first covenant becomes obsolete must be reconciled with the quoted promise that Yahweh writes His law within the new-covenant participants.",
+  requiresScopeAnalysis: true,
+  requiresTimeline: true,
+  components: [
+    { id: "covenant", proposition: "The first covenant becomes obsolete.", category: "covenant" },
+    { id: "torah", proposition: "Yahweh writes His law within the new-covenant participants.", category: "command" },
+    { id: "priesthood", proposition: "Hebrews describes a scoped priesthood-related legal change.", category: "priesthood" },
+    { id: "timing", proposition: "Hebrews preserves becoming-old and near-disappearance timing.", category: "timing" },
+  ],
+  passages: [
+    { reference: "Jeremiah 31:31", role: "foundation" },
+    { reference: "Jeremiah 31:33", role: "direct" },
+    { reference: "Hebrews 8:10", role: "later-witness" },
+    { reference: "Hebrews 8:13", role: "qualifying" },
+    { reference: "Hebrews 7:12", role: "qualifying" },
+    { reference: "Hebrews 7:18", role: "qualifying" },
+    { reference: "Hebrews 7:28", role: "context" },
+    { reference: "Hebrews 9:15", role: "later-witness" },
+    { reference: "Hebrews 10:10", role: "later-witness" },
+  ],
+});
+const covenantEvidence = buildEmetAiTopicEvidence({
+  question: "Does Hebrews say Yahweh's Torah is abolished?",
+  conversation: covenantConversation,
+  retrievalPlan: covenantPlan,
+  requireSemanticPlan: true,
+});
+requireReferences(covenantEvidence, [
+  "Jeremiah 31:31",
+  "Jeremiah 31:33",
+  "Hebrews 8:10",
+  "Hebrews 8:13",
+  "Hebrews 7:12",
+]);
+if (covenantEvidence.status === "ready") {
+  assert.equal(covenantEvidence.packet.reasoning.requiresScopeAnalysis, true);
+  assert.equal(covenantEvidence.packet.reasoning.requiresTimeline, true);
+  assert.deepEqual(
+    covenantEvidence.packet.reasoning.establishedPropositions.map(
+      (item) => item.id,
+    ).sort(),
+    ["new-covenant-parties", "torah-written-within"],
+  );
+  assert.doesNotMatch(covenantEvidence.packet.question, /This prose is also excluded/);
+}
+
+const longCovenantStudy = buildEmetConversationContext(
+  Array.from({ length: 13 }, (_, index) => ({
+    question: `Covenant study turn ${index + 1}`,
+    answer: `Untrusted prose ${index + 1}`,
+    references: [index % 2 ? "Hebrews 8:10" : "Jeremiah 31:33"],
+    claims: [{
+      id: `covenant-proposition-${index + 1}`,
+      text: `Established covenant proposition ${index + 1}`,
+      support: "explicit-statement",
+      category: index % 2 ? "covenant" : "command",
+      polarity: "affirms",
+      scope: `covenant component ${index + 1}`,
+      timing: index % 2 ? "presently-operating" : "promised",
+      references: [index % 2 ? "Hebrews 8:10" : "Jeremiah 31:33"],
+    }],
+  })),
+);
+assert.equal(longCovenantStudy.recentExchanges.length, 8);
+assert.equal(longCovenantStudy.summary.establishedClaims.length, 5);
+assert.equal(
+  longCovenantStudy.summary.establishedClaims[0].id,
+  "covenant-proposition-1",
+);
+const ledgerClaims = parseEmetConversationClaims(
+  Array.from({ length: 40 }, (_, index) => ({
+    id: `ledger-proposition-${index + 1}`,
+    text: `Ledger proposition ${index + 1}`,
+    support: "explicit-statement",
+    category: "covenant",
+    polarity: "affirms",
+    scope: `ledger scope ${index + 1}`,
+    timing: "presently-operating",
+    references: ["Jeremiah 31:33"],
+  })),
+);
+assert.equal(ledgerClaims?.length, 40);
+
 const contextual = buildEmetAiTopicEvidence({
   question: "What is happening in this passage?",
   context: {
@@ -402,6 +526,8 @@ const badPlan = parseEmetAiRetrievalPlan({
   subject: "invalid",
   analysisMode: "simple",
   proposition: "An invalid reference resolves.",
+  requiresScopeAnalysis: false,
+  requiresTimeline: false,
   components: [],
   intent: "identity",
   passages: [

@@ -14,6 +14,7 @@ type SourceBreakdownVerseProps = {
   verse: number;
   translation: SourceBreakdownTranslation;
   verseText: string;
+  prominent?: boolean;
 };
 
 function parseDisplayedReference(
@@ -61,6 +62,7 @@ export default function SourceBreakdownVerse({
   verse,
   translation,
   verseText,
+  prominent = false,
 }: SourceBreakdownVerseProps) {
   const [
     breakdown,
@@ -175,11 +177,31 @@ export default function SourceBreakdownVerse({
         }}
         disabled={loading}
         aria-busy={loading}
-        className="min-h-11 rounded-xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
+        className={
+          prominent
+            ? "col-span-full flex min-h-14 w-full items-center justify-between rounded-2xl border border-[color:var(--border)] bg-[var(--canvas)] px-4 text-left shadow-[var(--shadow-sm)] transition active:scale-[0.99] disabled:cursor-wait disabled:opacity-60"
+            : "min-h-11 rounded-xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
+        }
       >
-        {loading
-          ? "Loading..."
-          : "Source Text"}
+        {prominent ? (
+          <>
+            <span>
+              <span className="block text-sm font-bold text-[var(--foreground)]">
+                {loading ? "Loading Source Text..." : "Source Text"}
+              </span>
+              <span className="mt-0.5 block text-[0.7rem] font-medium text-[var(--muted)]">
+                Read the original-language text
+              </span>
+            </span>
+            <span aria-hidden="true" className="text-lg text-[var(--brand-strong)]">
+              →
+            </span>
+          </>
+        ) : loading ? (
+          "Loading..."
+        ) : (
+          "Source Text"
+        )}
       </button>
 
       {error ? (

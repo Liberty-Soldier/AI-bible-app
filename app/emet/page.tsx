@@ -28,7 +28,7 @@ export default async function EmetPage({
   const usage = await getEmetAiUsageSummary();
 
   return (
-    <main className="min-h-screen bg-[var(--background)] px-4 pb-4 pt-5 text-[var(--foreground)] sm:px-6">
+    <main className="min-h-screen bg-[var(--canvas)] px-4 pb-4 pt-5 text-[var(--foreground)] sm:px-6">
       <section className="mx-auto max-w-2xl">
         <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] pb-4">
           <EmetseesWordmark compact />
@@ -40,15 +40,12 @@ export default async function EmetPage({
           </Link>
         </header>
 
-        <div className="py-6">
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-[var(--brand-strong)]">
+        <div className="py-5">
+          <h1 className="text-2xl font-bold tracking-[-0.035em]">
             Ask EMET
-          </p>
-          <h1 className="mt-2 text-3xl font-black tracking-[-0.04em]">
-            Ask, then inspect the evidence.
           </h1>
-          <p className="mt-3 max-w-xl text-sm leading-6 text-[var(--muted)]">
-            EMET answers from the Scripture evidence supplied to it, reading earlier passages as the foundation for later ones.
+          <p className="mt-1 max-w-xl text-sm leading-6 text-[var(--muted)]">
+            Ask a Scripture question and inspect the supporting evidence.
           </p>
         </div>
 

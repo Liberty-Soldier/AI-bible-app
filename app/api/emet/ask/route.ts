@@ -4,6 +4,7 @@ import { getEmetAiRequestCacheKey } from "@/app/lib/emet/EmetAiCache";
 import {
   parseEmetConversationContext,
   relevantEmetConversation,
+  withAuthoritativeEmetClaims,
 } from "@/app/lib/emet/EmetAiConversation";
 import {
   completeEmetAiQuestion,
@@ -18,6 +19,9 @@ import {
 import { answerFromEmetAiEvidence } from "@/app/lib/emet/EmetAiService";
 import {
   createSupabaseEmetAiAnswerStore,
+  appendSupabaseEmetConversationLedger,
+  emetConversationClaimsFromAnswer,
+  getSupabaseEmetConversationLedger,
   getSupabaseEmetAiRequestCache,
   setSupabaseEmetAiRequestCache,
 } from "@/app/lib/emet/EmetAiSupabaseStore";
@@ -39,6 +43,13 @@ function json(body: unknown, status = 200) {
 
 function clean(value: unknown, maxLength = 800) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function cleanUuid(value: unknown) {
+  const uuid = clean(value, 64);
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(uuid)
+    ? uuid
+    : "";
 }
 
 function parseContext(value: unknown): EmetAiReaderContext | null {
@@ -82,7 +93,8 @@ function disabledResponse() {
 
 export async function POST(request: Request) {
   if (process.env.EMET_LIVE_ENABLED !== "true") return disabledResponse();
-  if (!(await getVerifiedSupabaseUserId())) {
+  const userId = await getVerifiedSupabaseUserId();
+  if (!userId) {
     return json({ status: "authentication-required" }, 401);
   }
 
@@ -95,20 +107,34 @@ export async function POST(request: Request) {
 
   const question = clean(body.question);
   const requestId = clean(body.requestId, 64);
+  const conversationId = cleanUuid(body.conversationId);
   const conversation = parseEmetConversationContext(body.conversation);
   const context = body.context === undefined ? null : parseContext(body.context);
   if (
     !question ||
     !requestId ||
+    !conversationId ||
     conversation === null ||
     (body.context !== undefined && !context)
   ) {
     return json({ status: "invalid-request" }, 400);
   }
 
+  const ledger = await getSupabaseEmetConversationLedger({
+    userId,
+    conversationId,
+  });
+  if (!ledger) {
+    return json({ status: "reasoning-ledger-unavailable" }, 503);
+  }
+  const authoritativeConversation = withAuthoritativeEmetClaims(
+    conversation,
+    ledger,
+  );
+
   const activeConversation = relevantEmetConversation({
     question,
-    conversation,
+    conversation: authoritativeConversation,
   });
 
   const provider = createEmetAiOpenAiProvider();
@@ -127,6 +153,15 @@ export async function POST(request: Request) {
   }
 
   if (requestCache) {
+    const ledgerSaved = await appendSupabaseEmetConversationLedger({
+      userId,
+      conversationId,
+      claims: emetConversationClaimsFromAnswer(requestCache.answer),
+    });
+    if (!ledgerSaved) {
+      await refundFailedEmetAiQuestion(requestId);
+      return json({ status: "reasoning-ledger-unavailable" }, 503);
+    }
     await completeEmetAiQuestion(requestId, "cache");
     return json({
       status: requestCache.answer.status,
@@ -183,6 +218,15 @@ export async function POST(request: Request) {
     await refundFailedEmetAiQuestion(requestId);
     responseUsage = (await getEmetAiUsageSummary()) || quota;
   } else {
+    const ledgerSaved = await appendSupabaseEmetConversationLedger({
+      userId,
+      conversationId,
+      claims: emetConversationClaimsFromAnswer(result.answer),
+    });
+    if (!ledgerSaved) {
+      await refundFailedEmetAiQuestion(requestId);
+      return json({ status: "reasoning-ledger-unavailable" }, 503);
+    }
     await completeEmetAiQuestion(requestId, result.source);
     if (result.answer.status === "complete") {
       await setSupabaseEmetAiRequestCache({

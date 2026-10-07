@@ -396,7 +396,10 @@ export async function buildEmetAiWordEvidence(
     reasoning: {
       mode: "simple",
       proposition: question.trim(),
+      requiresScopeAnalysis: false,
+      requiresTimeline: false,
       components: [],
+      establishedPropositions: [],
     },
     scope: {
       type: "word",

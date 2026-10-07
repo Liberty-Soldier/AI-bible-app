@@ -79,7 +79,7 @@ export default function GlobalAskButton() {
             onClick={() => setOpen(false)}
             className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
           />
-          <section className="absolute bottom-0 left-1/2 flex h-[92dvh] w-full max-w-2xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl sm:bottom-5 sm:h-auto sm:max-h-[min(88dvh,52rem)] sm:rounded-[2rem]">
+          <section className="absolute bottom-0 left-1/2 flex h-[92dvh] w-full max-w-2xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--canvas)] text-[var(--foreground)] shadow-2xl sm:bottom-5 sm:h-auto sm:max-h-[min(88dvh,52rem)] sm:rounded-[2rem]">
             <header className="flex shrink-0 items-center justify-between gap-4 border-b border-[var(--border)] px-5 py-4">
               <EmetseesWordmark compact />
               <button
@@ -90,14 +90,14 @@ export default function GlobalAskButton() {
                 Close
               </button>
             </header>
-            <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
-              <div className="mb-5">
-                <p className="text-xs font-black uppercase tracking-[0.28em] text-[var(--brand-strong)]">
+            <div className="min-h-0 flex-1 overflow-y-auto bg-[var(--canvas)] px-5 py-5">
+              <div className="mb-3">
+                <h2 className="text-2xl font-bold tracking-[-0.035em]">
                   Ask EMET
-                </p>
-                <h2 className="mt-2 font-serif text-2xl font-semibold tracking-[-0.02em]">
-                  Ask, then follow the evidence.
                 </h2>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  Ask a Scripture question and inspect the supporting evidence.
+                </p>
               </div>
               <EmetChat
                 key={panelKey}

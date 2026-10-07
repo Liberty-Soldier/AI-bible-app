@@ -2,9 +2,10 @@ import "server-only";
 
 import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import type { EmetConversationContext } from "./EmetAiConversation";
+import type { EmetAiReasoningCategory } from "./EmetAiContract";
 
 export const EMET_AI_RETRIEVAL_PLAN_SCHEMA =
-  "emet-ai-retrieval-plan@2" as const;
+  "emet-ai-retrieval-plan@3" as const;
 
 export type EmetAiRetrievalRole =
   | "direct"
@@ -32,14 +33,7 @@ export type EmetAiPlannedSourcePhrase = {
 export type EmetAiPlannedComponent = {
   id: string;
   proposition: string;
-  category:
-    | "identity"
-    | "authority"
-    | "nature"
-    | "relationship"
-    | "practice"
-    | "duration"
-    | "other";
+  category: EmetAiReasoningCategory;
 };
 
 export type EmetAiRetrievalPlan = {
@@ -50,6 +44,8 @@ export type EmetAiRetrievalPlan = {
     | "doctrinal-claim"
     | "apparent-contradiction";
   proposition: string;
+  requiresScopeAnalysis: boolean;
+  requiresTimeline: boolean;
   components: EmetAiPlannedComponent[];
   intent:
     | "identity"
@@ -102,6 +98,19 @@ const componentCategories = new Set<EmetAiPlannedComponent["category"]>([
   "relationship",
   "practice",
   "duration",
+  "command",
+  "covenant",
+  "covenant-participants",
+  "priesthood",
+  "mediator",
+  "sanctuary",
+  "sacrifice",
+  "promise",
+  "timing",
+  "prophecy",
+  "chronology",
+  "event",
+  "application",
   "other",
 ]);
 
@@ -125,6 +134,8 @@ export function parseEmetAiRetrievalPlan(
   if (
     candidate.schemaVersion !== EMET_AI_RETRIEVAL_PLAN_SCHEMA ||
     !analysisModes.has(candidate.analysisMode as EmetAiRetrievalPlan["analysisMode"]) ||
+    typeof candidate.requiresScopeAnalysis !== "boolean" ||
+    typeof candidate.requiresTimeline !== "boolean" ||
     !intents.has(candidate.intent as EmetAiRetrievalPlan["intent"]) ||
     !Array.isArray(candidate.components) ||
     !Array.isArray(candidate.passages) ||
@@ -216,6 +227,8 @@ export function parseEmetAiRetrievalPlan(
     subject,
     analysisMode: candidate.analysisMode as EmetAiRetrievalPlan["analysisMode"],
     proposition,
+    requiresScopeAnalysis: candidate.requiresScopeAnalysis,
+    requiresTimeline: candidate.requiresTimeline,
     components,
     intent: candidate.intent as EmetAiRetrievalPlan["intent"],
     passages,

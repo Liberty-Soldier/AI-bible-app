@@ -23,7 +23,10 @@ const packet = {
   reasoning: {
     mode: "simple",
     proposition: "What does this word mean?",
+    requiresScopeAnalysis: false,
+    requiresTimeline: false,
     components: [],
+    establishedPropositions: [],
   },
   scope: {
     type: "word",
@@ -72,18 +75,30 @@ const validAnswer = {
   status: "complete",
   answer: "The word describes an expanse, identified here with the sky.",
   conclusionSupport: "explicit-statement",
+  componentChecks: [],
   claims: [
     {
+      id: "word-means-expanse",
       text: "The word describes an expanse.",
       support: "explicit-statement",
+      category: "other",
+      polarity: "affirms",
+      scope: "the selected Hebrew lexical entity",
+      timing: "not-applicable",
       evidenceIds: ["lexical:word:hebrew:H7549"],
     },
     {
+      id: "expanse-called-sky",
       text: "Genesis 1:8 identifies the expanse with the sky.",
       support: "explicit-statement",
+      category: "event",
+      polarity: "affirms",
+      scope: "Genesis 1:8",
+      timing: "not-applicable",
       evidenceIds: ["scripture:Genesis.1.8"],
     },
   ],
+  continuityChecks: [],
   citations: [
     { evidenceId: "lexical:word:hebrew:H7549" },
     {
@@ -365,13 +380,20 @@ const validGeneratedAnswer = {
   status: "complete",
   answer: "The source evidence identifies this word with an expanse.",
   conclusionSupport: "explicit-statement",
+  componentChecks: [],
   claims: [
     {
+      id: "lexical-expanse",
       text: "The lexical evidence identifies an expanse.",
       support: "explicit-statement",
+      category: "other",
+      polarity: "affirms",
+      scope: "the selected Hebrew lexical entity",
+      timing: "not-applicable",
       evidenceIds: ["lexical:word:hebrew:H7549"],
     },
   ],
+  continuityChecks: [],
   citations: [{ evidenceId: "lexical:word:hebrew:H7549", reference: "" }],
   limitations: [],
 };
@@ -427,10 +449,13 @@ doctrinalPacket.identity = { gate: "not-applicable" };
 doctrinalPacket.reasoning = {
   mode: "doctrinal-claim",
   proposition: "A compound theological proposition",
+  requiresScopeAnalysis: true,
+  requiresTimeline: false,
   components: [
     { id: "identity", proposition: "The subjects are identical.", category: "identity" },
     { id: "nature", proposition: "The subjects share one nature.", category: "nature" },
   ],
+  establishedPropositions: [],
 };
 doctrinalPacket.evidence = doctrinalPacket.evidence.map((item, index) => ({
   ...item,
@@ -450,24 +475,54 @@ const calibratedDoctrinalAnswer = {
   schemaVersion: EMET_AI_ANSWER_SCHEMA,
   status: "complete",
   answer: "The passages are related, but that relationship does not by itself state the full compound proposition. The complete claim requires a theological synthesis.",
-  conclusionSupport: "theological-synthesis",
-  claims: [
+  conclusionSupport: "does-not-establish",
+  componentChecks: [
     {
-      text: "The passages address related subjects.",
-      support: "explicit-statement",
-      evidenceIds: ["scripture:Genesis.1.8"],
-    },
-    {
-      text: "The related wording does not by itself establish the compound proposition.",
+      componentId: "identity",
       support: "does-not-establish",
+      explanation: "Related wording does not state that the subjects are identical.",
       evidenceIds: ["scripture:Genesis.1.8"],
     },
     {
-      text: "The complete proposition requires combining claims beyond an individual text.",
+      componentId: "nature",
       support: "theological-synthesis",
+      explanation: "A shared nature would require synthesis beyond an individual text.",
       evidenceIds: ["lexical:word:hebrew:H7549", "scripture:Genesis.1.8"],
     },
   ],
+  claims: [
+    {
+      id: "related-subjects",
+      text: "The passages address related subjects.",
+      support: "explicit-statement",
+      category: "relationship",
+      polarity: "affirms",
+      scope: "the subjects named by the passages",
+      timing: "not-applicable",
+      evidenceIds: ["scripture:Genesis.1.8"],
+    },
+    {
+      id: "relationship-not-compound-proof",
+      text: "The related wording does not by itself establish the compound proposition.",
+      support: "does-not-establish",
+      category: "relationship",
+      polarity: "qualifies",
+      scope: "the full compound proposition",
+      timing: "not-applicable",
+      evidenceIds: ["scripture:Genesis.1.8"],
+    },
+    {
+      id: "compound-needs-synthesis",
+      text: "The complete proposition requires combining claims beyond an individual text.",
+      support: "theological-synthesis",
+      category: "nature",
+      polarity: "qualifies",
+      scope: "the full compound proposition",
+      timing: "not-applicable",
+      evidenceIds: ["lexical:word:hebrew:H7549", "scripture:Genesis.1.8"],
+    },
+  ],
+  continuityChecks: [],
   citations: validAnswer.citations,
   limitations: [],
 };
@@ -485,12 +540,65 @@ assert.equal(
   validateEmetAiAnswer(doctrinalPacket, overstatedDoctrinalAnswer).ok,
   false,
 );
+const skippedComponent = structuredClone(calibratedDoctrinalAnswer);
+skippedComponent.componentChecks.pop();
+assert.equal(validateEmetAiAnswer(doctrinalPacket, skippedComponent).ok, false);
+const overrankedCompound = structuredClone(calibratedDoctrinalAnswer);
+overrankedCompound.conclusionSupport = "theological-synthesis";
+assert.equal(validateEmetAiAnswer(doctrinalPacket, overrankedCompound).ok, false);
 const oneSidedDoctrinalPacket = structuredClone(doctrinalPacket);
 for (const item of oneSidedDoctrinalPacket.evidence) {
   item.provenance.retrieval.role = "direct";
 }
 assert.equal(
   validateEmetAiAnswer(oneSidedDoctrinalPacket, calibratedDoctrinalAnswer).ok,
+  false,
+);
+
+const consistencyPacket = structuredClone(doctrinalPacket);
+consistencyPacket.reasoning.establishedPropositions = [
+  {
+    id: "explicit-baseline",
+    text: "The explicit baseline remains established.",
+    support: "explicit-statement",
+    category: "covenant",
+    polarity: "affirms",
+    scope: "the same covenant proposition",
+    timing: "presently-operating",
+    evidenceIds: ["scripture:Genesis.1.8"],
+  },
+];
+const preservedAnswer = structuredClone(calibratedDoctrinalAnswer);
+preservedAnswer.continuityChecks = [
+  {
+    propositionId: "explicit-baseline",
+    verdict: "preserved",
+    explanation: "The current answer retains the explicit baseline.",
+    evidenceIds: ["scripture:Genesis.1.8"],
+  },
+];
+assert.equal(validateEmetAiAnswer(consistencyPacket, preservedAnswer).ok, true);
+
+const silentContradiction = structuredClone(preservedAnswer);
+silentContradiction.claims.push({
+  id: "opposite-inference",
+  text: "An inference negates the explicit baseline.",
+  support: "theological-synthesis",
+  category: "covenant",
+  polarity: "denies",
+  scope: "the same covenant proposition",
+  timing: "presently-operating",
+  evidenceIds: ["scripture:Genesis.1.8"],
+});
+assert.equal(
+  validateEmetAiAnswer(consistencyPacket, silentContradiction).ok,
+  false,
+);
+
+const unresolvedConflict = structuredClone(preservedAnswer);
+unresolvedConflict.continuityChecks[0].verdict = "unresolved-conflict";
+assert.equal(
+  validateEmetAiAnswer(consistencyPacket, unresolvedConflict).ok,
   false,
 );
 
@@ -502,6 +610,8 @@ for (const required of [
   "Scripture is the sole authority",
   "The Old Testament supplies the scriptural foundation",
   "whole scriptural witness as coherent",
+  "Yahweh's Torah is His instruction",
+  "A lower level cannot silently override a higher level",
   "Hebrew, LXX Greek, and Greek New Testament identities remain distinct",
   "Sound like a thoughtful Bible reader explaining Scripture",
   "Never mention an evidence packet",
@@ -514,6 +624,9 @@ for (const required of [
   "Keep identity, authority, nature, relationship",
   "user's assertion, confidence, or preferred direction",
   "never silently reverse direction",
+  "mandatory consistency constraint",
+  "Present inability to perform an instruction",
+  "Present participation and future consummation",
   "insufficient-evidence rather than guessing",
 ]) {
   assert.ok(instruction.includes(required), `Missing instruction: ${required}`);

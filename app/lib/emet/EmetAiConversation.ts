@@ -1,4 +1,9 @@
-import type { EmetAiClaimSupport } from "./EmetAiContract";
+import type {
+  EmetAiClaimSupport,
+  EmetAiPropositionPolarity,
+  EmetAiReasoningCategory,
+  EmetAiTiming,
+} from "./EmetAiContract";
 
 const MAX_RECENT_EXCHANGES = 8;
 const MAX_SUMMARY_TOPICS = 12;
@@ -6,8 +11,8 @@ const MAX_SUMMARY_PASSAGES = 16;
 const MAX_SUMMARY_CORRECTIONS = 4;
 const MAX_QUESTION_LENGTH = 800;
 const MAX_ANSWER_LENGTH = 2400;
-const MAX_EXCHANGE_CLAIMS = 12;
-const MAX_SUMMARY_CLAIMS = 16;
+const MAX_EXCHANGE_CLAIMS = 16;
+const MAX_SUMMARY_CLAIMS = 64;
 
 const CONTEXT_WORDS = new Set([
   "about", "after", "again", "also", "and", "answer", "apply", "before",
@@ -29,8 +34,13 @@ export type EmetConversationExchange = {
 };
 
 export type EmetConversationClaim = {
+  id: string;
   text: string;
   support: EmetAiClaimSupport;
+  category: EmetAiReasoningCategory;
+  polarity: EmetAiPropositionPolarity;
+  scope: string;
+  timing: EmetAiTiming;
   references: string[];
 };
 
@@ -62,12 +72,38 @@ const claimSupports = new Set<EmetAiClaimSupport>([
   "possible-interpretation",
   "does-not-establish",
 ]);
+const claimCategories = new Set<EmetAiReasoningCategory>([
+  "identity", "authority", "nature", "relationship", "practice", "duration",
+  "command", "covenant", "covenant-participants", "priesthood", "mediator",
+  "sanctuary", "sacrifice", "promise", "timing", "prophecy", "chronology",
+  "event", "application", "other",
+]);
+const claimPolarities = new Set<EmetAiPropositionPolarity>([
+  "affirms", "denies", "qualifies",
+]);
+const claimTimings = new Set<EmetAiTiming>([
+  "not-applicable", "promised", "inaugurated", "presently-operating",
+  "transitioning", "fulfilled", "awaiting-full-realization", "uncertain",
+]);
 
-function cleanClaims(value: unknown): EmetConversationClaim[] | null {
+function fallbackClaimId(text: string, references: string[]) {
+  const source = `${text}|${references.join("|")}`.normalize("NFKC");
+  let hash = 2166136261;
+  for (let index = 0; index < source.length; index += 1) {
+    hash ^= source.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `proposition-${(hash >>> 0).toString(16)}`;
+}
+
+function cleanClaims(
+  value: unknown,
+  limit = MAX_EXCHANGE_CLAIMS,
+): EmetConversationClaim[] | null {
   if (value === undefined) return [];
   if (!Array.isArray(value)) return null;
   const claims: EmetConversationClaim[] = [];
-  for (const candidate of value.slice(-MAX_EXCHANGE_CLAIMS)) {
+  for (const candidate of value.slice(-limit)) {
     if (!candidate || typeof candidate !== "object") return null;
     const claim = candidate as Record<string, unknown>;
     const text = cleanText(claim.text, 600);
@@ -75,16 +111,45 @@ function cleanClaims(value: unknown): EmetConversationClaim[] | null {
     if (!text || !claimSupports.has(support) || !Array.isArray(claim.references)) {
       return null;
     }
+    const references = unique(
+      claim.references.map((reference) => cleanText(reference, 80)),
+      12,
+    );
+    const category = claim.category as EmetAiReasoningCategory;
+    const polarity = claim.polarity as EmetAiPropositionPolarity;
+    const timing = claim.timing as EmetAiTiming;
     claims.push({
+      id: cleanText(claim.id, 80) || fallbackClaimId(text, references),
       text,
       support,
-      references: unique(
-        claim.references.map((reference) => cleanText(reference, 80)),
-        12,
-      ),
+      category: claimCategories.has(category) ? category : "other",
+      polarity: claimPolarities.has(polarity) ? polarity : "affirms",
+      scope: cleanText(claim.scope, 240) || "the proposition as stated",
+      timing: claimTimings.has(timing) ? timing : "uncertain",
+      references,
     });
   }
   return claims;
+}
+
+export function parseEmetConversationClaims(value: unknown) {
+  return cleanClaims(value, MAX_SUMMARY_CLAIMS);
+}
+
+export function withAuthoritativeEmetClaims(
+  conversation: EmetConversationContext,
+  claims: EmetConversationClaim[],
+): EmetConversationContext {
+  return {
+    recentExchanges: conversation.recentExchanges.map((exchange) => ({
+      ...exchange,
+      claims: [],
+    })),
+    summary: {
+      ...conversation.summary,
+      establishedClaims: claims.slice(-MAX_SUMMARY_CLAIMS),
+    },
+  };
 }
 
 function topicTerms(value: string) {
@@ -222,7 +287,10 @@ export function parseEmetConversationContext(
     MAX_QUESTION_LENGTH,
   );
   const earlierQuestions = cleanList(summary.earlierQuestions, 4, MAX_QUESTION_LENGTH);
-  const establishedClaims = cleanClaims(summary.establishedClaims);
+  const establishedClaims = cleanClaims(
+    summary.establishedClaims,
+    MAX_SUMMARY_CLAIMS,
+  );
   if (
     !topics ||
     !passages ||
@@ -261,9 +329,13 @@ export function relevantEmetConversation({
   const currentTerms = new Set(topicTerms(question));
   const memoryTerms = new Set([
     ...conversation.summary.topics,
+    ...conversation.summary.passages.flatMap(topicTerms),
     ...conversation.summary.earlierQuestions.flatMap(topicTerms),
     ...conversation.recentExchanges.flatMap((exchange) =>
       topicTerms(exchange.question),
+    ),
+    ...conversation.recentExchanges.flatMap((exchange) =>
+      exchange.references.flatMap(topicTerms),
     ),
     ...conversation.summary.establishedClaims.flatMap((claim) =>
       topicTerms(claim.text),
@@ -279,6 +351,8 @@ export function relevantEmetConversation({
 
 export function relevantEmetConversationClaimReferences(
   conversation: EmetConversationContext | null,
+  question = "",
+  categories: EmetAiReasoningCategory[] = [],
 ) {
   if (!conversation) return [];
 
@@ -288,10 +362,23 @@ export function relevantEmetConversationClaimReferences(
   const claims = recentClaims.length
     ? recentClaims
     : conversation.summary.establishedClaims.slice(-MAX_SUMMARY_CLAIMS);
+  const questionTerms = new Set(topicTerms(question));
+  const categorySet = new Set(categories);
+  const rankedClaims = claims
+    .map((claim, index) => ({
+      claim,
+      index,
+      score:
+        topicTerms(claim.text).filter((term) => questionTerms.has(term)).length * 10 +
+        (categorySet.has(claim.category) ? 5 : 0) +
+        index / Math.max(claims.length, 1),
+    }))
+    .sort((left, right) => right.score - left.score)
+    .map((item) => item.claim);
   const references: Array<{ reference: string; claim: string }> = [];
   const seen = new Set<string>();
 
-  for (const claim of claims.slice().reverse()) {
+  for (const claim of rankedClaims) {
     for (const reference of claim.references) {
       const key = reference
         .normalize("NFKC")
@@ -301,7 +388,7 @@ export function relevantEmetConversationClaimReferences(
       if (!key || seen.has(key)) continue;
       seen.add(key);
       references.push({ reference, claim: claim.text });
-      if (references.length >= 4) return references;
+      if (references.length >= 6) return references;
     }
   }
 

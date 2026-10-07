@@ -6,6 +6,7 @@ import {
   buildEmetConversationQuestion,
   parseEmetConversationContext,
   relevantEmetConversation,
+  withAuthoritativeEmetClaims,
 } from "@/app/lib/emet/EmetAiConversation";
 import { buildEmetAiWordEvidence } from "@/app/lib/emet/EmetAiEvidenceBuilder";
 import {
@@ -16,7 +17,12 @@ import {
 } from "@/app/lib/emet/EmetAiQuota";
 import { createEmetAiVerseLoader } from "@/app/lib/emet/EmetAiScriptureRuntime";
 import { answerFromEmetAiEvidence } from "@/app/lib/emet/EmetAiService";
-import { createSupabaseEmetAiAnswerStore } from "@/app/lib/emet/EmetAiSupabaseStore";
+import {
+  appendSupabaseEmetConversationLedger,
+  createSupabaseEmetAiAnswerStore,
+  emetConversationClaimsFromAnswer,
+  getSupabaseEmetConversationLedger,
+} from "@/app/lib/emet/EmetAiSupabaseStore";
 import {
   resolveEmetAiReaderWord,
   type EmetAiReaderWordContext,
@@ -60,6 +66,13 @@ function clean(value: unknown, maxLength = 1000) {
 function finiteInteger(value: unknown) {
   const number = Number(value);
   return Number.isInteger(number) ? number : -1;
+}
+
+function cleanUuid(value: unknown) {
+  const uuid = clean(value, 64);
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(uuid)
+    ? uuid
+    : "";
 }
 
 function parseContext(value: unknown): EmetAiReaderWordContext | null {
@@ -124,7 +137,8 @@ export async function POST(request: Request) {
     return disabledResponse();
   }
 
-  if (!(await getVerifiedSupabaseUserId())) {
+  const userId = await getVerifiedSupabaseUserId();
+  if (!userId) {
     return json({ status: "authentication-required" }, 401);
   }
 
@@ -137,11 +151,23 @@ export async function POST(request: Request) {
 
   const question = clean(body.question);
   const requestId = clean(body.requestId, 64);
+  const conversationId = cleanUuid(body.conversationId);
   const conversation = parseEmetConversationContext(body.conversation);
   const context = parseContext(body.context);
-  if (!question || !requestId || conversation === null || !context) {
+  if (!question || !requestId || !conversationId || conversation === null || !context) {
     return json({ status: "invalid-request" }, 400);
   }
+  const ledger = await getSupabaseEmetConversationLedger({
+    userId,
+    conversationId,
+  });
+  if (!ledger) {
+    return json({ status: "reasoning-ledger-unavailable" }, 503);
+  }
+  const authoritativeConversation = withAuthoritativeEmetClaims(
+    conversation,
+    ledger,
+  );
 
   const url = new URL(request.url);
   const forwardedHeaders: Record<string, string> = {};
@@ -171,7 +197,10 @@ export async function POST(request: Request) {
   const evidence = await buildEmetAiWordEvidence({
     question: buildEmetConversationQuestion({
       question,
-      conversation: relevantEmetConversation({ question, conversation }),
+      conversation: relevantEmetConversation({
+        question,
+        conversation: authoritativeConversation,
+      }),
     }),
     wordStudy,
     loadVerse: createEmetAiVerseLoader(url.origin, forwardedHeaders),
@@ -213,6 +242,15 @@ export async function POST(request: Request) {
     await refundFailedEmetAiQuestion(requestId);
     responseUsage = (await getEmetAiUsageSummary()) || quota;
   } else {
+    const ledgerSaved = await appendSupabaseEmetConversationLedger({
+      userId,
+      conversationId,
+      claims: emetConversationClaimsFromAnswer(result.answer),
+    });
+    if (!ledgerSaved) {
+      await refundFailedEmetAiQuestion(requestId);
+      return json({ status: "reasoning-ledger-unavailable" }, 503);
+    }
     await completeEmetAiQuestion(requestId, result.source);
   }
 

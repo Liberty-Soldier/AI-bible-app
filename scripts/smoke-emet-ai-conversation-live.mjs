@@ -96,8 +96,13 @@ for (const [index, question] of questions.entries()) {
       .map((citation) => citation.reference || "")
       .filter(Boolean),
     claims: answer.claims.map((claim) => ({
+      id: claim.id,
       text: claim.text,
       support: claim.support,
+      category: claim.category,
+      polarity: claim.polarity,
+      scope: claim.scope,
+      timing: claim.timing,
       references: claim.evidenceIds
         .map((evidenceId) => referenceByEvidenceId.get(evidenceId) || "")
         .filter(Boolean),

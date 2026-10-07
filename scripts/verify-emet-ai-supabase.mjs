@@ -21,6 +21,19 @@ const admin = fs.readFileSync(
   path.join(root, "app", "lib", "supabase", "admin.ts"),
   "utf8",
 );
+const ledgerMigration = fs.readFileSync(
+  path.join(
+    root,
+    "supabase",
+    "migrations",
+    "20261007110000_emet_conversation_ledger.sql",
+  ),
+  "utf8",
+);
+const store = fs.readFileSync(
+  path.join(root, "app", "lib", "emet", "EmetAiSupabaseStore.ts"),
+  "utf8",
+);
 
 for (const table of [
   "emet_plans",
@@ -86,6 +99,39 @@ assert.match(server, /auth\.getClaims\(\)/);
 assert.doesNotMatch(server, /auth\.getSession\(\)/);
 assert.match(admin, /SUPABASE_SECRET_KEY/);
 assert.doesNotMatch(admin, /NEXT_PUBLIC_SUPABASE_SECRET/);
+assert.match(
+  ledgerMigration,
+  /alter table public\.emet_conversation_ledgers enable row level security/i,
+);
+assert.match(
+  ledgerMigration,
+  /revoke all on table public\.emet_conversation_ledgers\s+from public, anon, authenticated/i,
+);
+assert.match(ledgerMigration, /primary key \(user_id, conversation_id\)/i);
+assert.match(
+  ledgerMigration,
+  /create or replace function public\.append_emet_conversation_ledger/i,
+  "conversation propositions must be appended transactionally",
+);
+assert.match(
+  ledgerMigration,
+  /select ledger[\s\S]*for update;/i,
+  "conversation append must lock the ledger row",
+);
+assert.match(
+  ledgerMigration,
+  /grant execute on function public\.append_emet_conversation_ledger\(uuid, uuid, jsonb\)[\s\S]*to service_role/i,
+  "only the server role may append conversation propositions",
+);
+assert.doesNotMatch(
+  ledgerMigration,
+  /grant .*emet_conversation_ledgers to authenticated/i,
+  "the proposition ledger must remain server-owned",
+);
+assert.match(store, /getSupabaseEmetConversationLedger/);
+assert.match(store, /appendSupabaseEmetConversationLedger/);
+assert.match(store, /createHash\("sha256"\)/);
+assert.match(store, /supabase\.rpc\("append_emet_conversation_ledger"/);
 
 console.log("EMET AI Supabase foundation verification passed.");
 console.log("- Five monthly plan limits are explicit.");
@@ -94,3 +140,5 @@ console.log("- Failed provider attempts restore the reserved question credit.");
 console.log("- User tables use RLS with explicit grants.");
 console.log("- Shared verified answers remain server-only.");
 console.log("- Server identity checks use verified claims, not getSession().");
+console.log("- Conversation proposition ledgers are server-owned and user-scoped.");
+console.log("- Conversation claims use stable content IDs and atomic append semantics.");

@@ -2,6 +2,7 @@
 
 :root {
   --background: #fffdf9;
+  --canvas: #ffffff;
   --surface: #f7f4ed;
   --surface-soft: #efeae0;
   --foreground: #111214;
@@ -18,6 +19,7 @@
 
 :root[data-theme="dark"] {
   --background: #08090a;
+  --canvas: #0d0e10;
   --surface: #121315;
   --surface-soft: #1b1c1f;
   --foreground: #f6f4ef;
@@ -34,6 +36,7 @@
 
 :root[data-theme="light"] {
   --background: #fffdf9;
+  --canvas: #ffffff;
   --surface: #f7f4ed;
   --surface-soft: #efeae0;
   --foreground: #111214;

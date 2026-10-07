@@ -34,11 +34,20 @@ requireText(
   "tokenAvailabilityByReaderVerseId",
   "canonical token-availability forwarding",
 );
-requireText(actionSheet, "compactTrigger", "compact Source Study action");
 requireText(
   actionSheet,
-  "tokenAvailabilityByVerse?.[firstVerse.id]",
-  "Source Study canonical token availability",
+  "<SourceBreakdownVerse",
+  "canonical Source Text action",
+);
+requireText(actionSheet, "prominent", "primary Source Text presentation");
+forbidText(actionSheet, "compactTrigger", "legacy compact Source Study action");
+if (actionSheet.indexOf("<SourceBreakdownVerse") > actionSheet.indexOf("<CompactButton")) {
+  throw new Error("Source Text must precede verse utility actions.");
+}
+requireText(
+  actionSheet,
+  "onTouchStart={onHandleTouchStart}",
+  "handle-owned sheet gesture",
 );
 requireText(header, ">\n          Aa\n", "reader appearance button");
 forbidText(header, "Open reader help", "obsolete help button");

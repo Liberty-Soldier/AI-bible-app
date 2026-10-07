@@ -6,6 +6,7 @@ import path from "node:path";
 import { normalizeBookName } from "../../data/bookAliases";
 import {
   EMET_AI_EVIDENCE_SCHEMA,
+  type EmetAiEstablishedProposition,
   type EmetAiEvidenceItem,
   type EmetAiEvidencePacket,
   validateEmetAiEvidencePacket,
@@ -53,6 +54,53 @@ export type EmetAiReaderContext = {
 
 const MAX_PLANNED_EVIDENCE_VERSES = 10;
 const MAX_LITERAL_FALLBACK_VERSES = 8;
+
+function reestablishedConversationPropositions(
+  conversation: EmetConversationContext | null,
+  evidence: EmetAiEvidenceItem[],
+) {
+  if (!conversation) return [];
+  const evidenceByReference = new Map<string, string[]>();
+  for (const item of evidence) {
+    if (!item.reference) continue;
+    const ids = evidenceByReference.get(item.reference) || [];
+    ids.push(item.id);
+    evidenceByReference.set(item.reference, ids);
+  }
+
+  const result: EmetAiEstablishedProposition[] = [];
+  const seen = new Set<string>();
+  const claims = [
+    ...conversation.summary.establishedClaims,
+    ...conversation.recentExchanges.flatMap((exchange) => exchange.claims),
+  ];
+  for (const claim of claims) {
+    if (
+      claim.support !== "explicit-statement" &&
+      claim.support !== "strong-implication"
+    ) continue;
+    const evidenceIds = Array.from(
+      new Set(
+        claim.references.flatMap(
+          (reference) => evidenceByReference.get(reference) || [],
+        ),
+      ),
+    );
+    if (!evidenceIds.length || seen.has(claim.id)) continue;
+    seen.add(claim.id);
+    result.push({
+      id: claim.id,
+      text: claim.text,
+      support: claim.support,
+      category: claim.category,
+      polarity: claim.polarity,
+      scope: claim.scope,
+      timing: claim.timing,
+      evidenceIds,
+    });
+  }
+  return result.slice(-32);
+}
 const READER_DEPENDENT_PATTERN =
   /\b(this|that)\s+(verse|chapter|passage|word|text)\b|\b(in|from)\s+this\s+(verse|chapter|passage)\b|\bwho is speaking\b|\bprevious\s+(verse|chapter)\b|\bwhat does (this|that|it) mean\b|\bhere\b|\bverse\s+\d+\b/i;
 const STOP_WORDS = new Set([
@@ -451,7 +499,7 @@ function selectedCandidates({
   if (!plan) return ranked.slice(0, MAX_LITERAL_FALLBACK_VERSES);
 
   const evidenceLimit =
-    plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 12;
+    plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 16;
 
   const selected: EvidenceCandidate[] = [];
   const selectedReferences = new Set<string>();
@@ -587,12 +635,21 @@ export function buildEmetAiTopicEvidence({
       ? {
           mode: retrievalPlan.analysisMode,
           proposition: retrievalPlan.proposition,
+          requiresScopeAnalysis: retrievalPlan.requiresScopeAnalysis,
+          requiresTimeline: retrievalPlan.requiresTimeline,
           components: retrievalPlan.components,
+          establishedPropositions: reestablishedConversationPropositions(
+            relevantConversation,
+            evidence,
+          ),
         }
       : {
           mode: "simple",
           proposition: cleanQuestion,
+          requiresScopeAnalysis: false,
+          requiresTimeline: false,
           components: [],
+          establishedPropositions: [],
         },
     scope: {
       type: candidates.some((candidate) => candidate.method === "reader-context")

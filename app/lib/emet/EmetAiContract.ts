@@ -1,6 +1,6 @@
-export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@3" as const;
-export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@2" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@10" as const;
+export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
+export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first@12" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
 export type EmetAiScopeType = "word" | "verse" | "passage" | "topic";
@@ -21,6 +21,54 @@ export type EmetAiClaimSupport =
   | "theological-synthesis"
   | "possible-interpretation"
   | "does-not-establish";
+
+export type EmetAiReasoningCategory =
+  | "identity"
+  | "authority"
+  | "nature"
+  | "relationship"
+  | "practice"
+  | "duration"
+  | "command"
+  | "covenant"
+  | "covenant-participants"
+  | "priesthood"
+  | "mediator"
+  | "sanctuary"
+  | "sacrifice"
+  | "promise"
+  | "timing"
+  | "prophecy"
+  | "chronology"
+  | "event"
+  | "application"
+  | "other";
+
+export type EmetAiPropositionPolarity =
+  | "affirms"
+  | "denies"
+  | "qualifies";
+
+export type EmetAiTiming =
+  | "not-applicable"
+  | "promised"
+  | "inaugurated"
+  | "presently-operating"
+  | "transitioning"
+  | "fulfilled"
+  | "awaiting-full-realization"
+  | "uncertain";
+
+export type EmetAiEstablishedProposition = {
+  id: string;
+  text: string;
+  support: EmetAiClaimSupport;
+  category: EmetAiReasoningCategory;
+  polarity: EmetAiPropositionPolarity;
+  scope: string;
+  timing: EmetAiTiming;
+  evidenceIds: string[];
+};
 
 export type EmetAiEvidenceItem = {
   id: string;
@@ -68,18 +116,14 @@ export type EmetAiEvidencePacket = {
   reasoning: {
     mode: EmetAiReasoningMode;
     proposition: string;
+    requiresScopeAnalysis: boolean;
+    requiresTimeline: boolean;
     components: Array<{
       id: string;
       proposition: string;
-      category:
-        | "identity"
-        | "authority"
-        | "nature"
-        | "relationship"
-        | "practice"
-        | "duration"
-        | "other";
+      category: EmetAiReasoningCategory;
     }>;
+    establishedPropositions: EmetAiEstablishedProposition[];
   };
   scope: {
     type: EmetAiScopeType;
@@ -102,8 +146,27 @@ export type EmetAiEvidencePacket = {
 };
 
 export type EmetAiClaim = {
+  id: string;
   text: string;
   support: EmetAiClaimSupport;
+  category: EmetAiReasoningCategory;
+  polarity: EmetAiPropositionPolarity;
+  scope: string;
+  timing: EmetAiTiming;
+  evidenceIds: string[];
+};
+
+export type EmetAiContinuityCheck = {
+  propositionId: string;
+  verdict: "preserved" | "narrowed" | "reconciled" | "unresolved-conflict";
+  explanation: string;
+  evidenceIds: string[];
+};
+
+export type EmetAiComponentCheck = {
+  componentId: string;
+  support: EmetAiClaimSupport;
+  explanation: string;
   evidenceIds: string[];
 };
 
@@ -112,7 +175,9 @@ export type EmetAiAnswer = {
   status: "complete" | "insufficient-evidence";
   answer: string;
   conclusionSupport: EmetAiClaimSupport;
+  componentChecks: EmetAiComponentCheck[];
   claims: EmetAiClaim[];
+  continuityChecks: EmetAiContinuityCheck[];
   citations: Array<{
     evidenceId: string;
     reference?: string;
@@ -135,6 +200,38 @@ const claimSupports = new Set<EmetAiClaimSupport>([
   "possible-interpretation",
   "does-not-establish",
 ]);
+const reasoningCategories = new Set<EmetAiReasoningCategory>([
+  "identity", "authority", "nature", "relationship", "practice", "duration",
+  "command", "covenant", "covenant-participants", "priesthood", "mediator",
+  "sanctuary", "sacrifice", "promise", "timing", "prophecy", "chronology",
+  "event", "application", "other",
+]);
+const propositionPolarities = new Set<EmetAiPropositionPolarity>([
+  "affirms", "denies", "qualifies",
+]);
+const timings = new Set<EmetAiTiming>([
+  "not-applicable", "promised", "inaugurated", "presently-operating",
+  "transitioning", "fulfilled", "awaiting-full-realization", "uncertain",
+]);
+const continuityVerdicts = new Set<EmetAiContinuityCheck["verdict"]>([
+  "preserved", "narrowed", "reconciled", "unresolved-conflict",
+]);
+
+const supportRank: Record<EmetAiClaimSupport, number> = {
+  "does-not-establish": 0,
+  "possible-interpretation": 1,
+  "theological-synthesis": 2,
+  "strong-implication": 3,
+  "explicit-statement": 4,
+};
+
+function normalizedScope(value: string) {
+  return value
+    .normalize("NFKC")
+    .toLocaleLowerCase("en-US")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+}
 
 function uniqueNonEmpty(values: string[]) {
   return new Set(values.map((value) => value.trim()).filter(Boolean)).size ===
@@ -174,6 +271,54 @@ export function validateEmetAiEvidencePacket(
     packet.reasoning.components.some((item) => !clean(item.proposition))
   ) {
     errors.push("Reasoning components must be identified and non-empty.");
+  }
+
+  if (
+    typeof packet.reasoning?.requiresScopeAnalysis !== "boolean" ||
+    typeof packet.reasoning?.requiresTimeline !== "boolean"
+  ) {
+    errors.push("Reasoning scope and timeline requirements must be explicit.");
+  }
+
+  if (
+    packet.reasoning.components.some(
+      (item) => !reasoningCategories.has(item.category),
+    )
+  ) {
+    errors.push("A reasoning component uses an invalid category.");
+  }
+
+  const establishedIds = packet.reasoning?.establishedPropositions?.map(
+    (item) => clean(item.id),
+  ) || [];
+  if (
+    !Array.isArray(packet.reasoning?.establishedPropositions) ||
+    establishedIds.some((id) => !id) ||
+    !uniqueNonEmpty(establishedIds)
+  ) {
+    errors.push("Established propositions must have unique non-empty IDs.");
+  } else {
+    const availableEvidenceIds = new Set(packet.evidence.map((item) => item.id));
+    for (const proposition of packet.reasoning.establishedPropositions) {
+      if (
+        !clean(proposition.text) ||
+        !claimSupports.has(proposition.support) ||
+        !reasoningCategories.has(proposition.category) ||
+        !propositionPolarities.has(proposition.polarity) ||
+        !clean(proposition.scope) ||
+        !timings.has(proposition.timing) ||
+        !proposition.evidenceIds.length ||
+        proposition.evidenceIds.some((id) => !availableEvidenceIds.has(id))
+      ) {
+        errors.push(`Established proposition ${proposition.id || "<missing>"} is not re-established by current evidence.`);
+      }
+      if (
+        proposition.support !== "explicit-statement" &&
+        proposition.support !== "strong-implication"
+      ) {
+        errors.push(`Established proposition ${proposition.id} is too inferential to constrain later answers.`);
+      }
+    }
   }
 
   if (packet.scope.type === "word") {
@@ -302,6 +447,47 @@ export function validateEmetAiAnswer(
       errors.push("A complete answer requires evidence citations.");
     }
 
+    const components = new Map(
+      packet.reasoning.components.map((item) => [item.id, item]),
+    );
+    const componentCheckIds = answer.componentChecks.map(
+      (item) => item.componentId,
+    );
+    if (
+      componentCheckIds.some((id) => !components.has(id)) ||
+      new Set(componentCheckIds).size !== componentCheckIds.length ||
+      components.size !== componentCheckIds.length
+    ) {
+      errors.push("Every proposition component requires exactly one component check.");
+    }
+
+    for (const check of answer.componentChecks) {
+      if (
+        !claimSupports.has(check.support) ||
+        !clean(check.explanation) ||
+        !check.evidenceIds.length ||
+        check.evidenceIds.some((id) => !allowedEvidence.has(id))
+      ) {
+        errors.push(`Component check ${check.componentId || "<missing>"} is invalid or unsupported.`);
+      }
+    }
+
+    if (answer.componentChecks.length) {
+      const weakestComponent = Math.min(
+        ...answer.componentChecks.map((item) => supportRank[item.support]),
+      );
+      if (supportRank[answer.conclusionSupport] > weakestComponent) {
+        errors.push(
+          "The full proposition cannot receive stronger support than its weakest material component.",
+        );
+      }
+    }
+
+    const claimIds = answer.claims.map((claim) => clean(claim.id));
+    if (claimIds.some((id) => !id) || !uniqueNonEmpty(claimIds)) {
+      errors.push("Answer claims require unique non-empty proposition IDs.");
+    }
+
     for (const claim of answer.claims) {
       if (!clean(claim.text)) {
         errors.push("Every claim must contain text.");
@@ -309,6 +495,15 @@ export function validateEmetAiAnswer(
 
       if (!claimSupports.has(claim.support)) {
         errors.push("Every claim requires a valid support classification.");
+      }
+
+      if (
+        !reasoningCategories.has(claim.category) ||
+        !propositionPolarities.has(claim.polarity) ||
+        !clean(claim.scope) ||
+        !timings.has(claim.timing)
+      ) {
+        errors.push(`Claim ${claim.id || "<missing>"} has invalid scope, category, polarity, or timing.`);
       }
 
       if (claim.evidenceIds.length === 0) {
@@ -320,6 +515,56 @@ export function validateEmetAiAnswer(
           errors.push(`Claim cites unavailable evidence ${evidenceId}.`);
         } else if (!citedEvidenceIds.has(evidenceId)) {
           errors.push(`Claim evidence ${evidenceId} is missing from citations.`);
+        }
+      }
+    }
+
+    const established = new Map(
+      packet.reasoning.establishedPropositions.map((item) => [item.id, item]),
+    );
+    const continuityIds = answer.continuityChecks.map((item) => item.propositionId);
+    if (
+      continuityIds.some((id) => !established.has(id)) ||
+      new Set(continuityIds).size !== continuityIds.length ||
+      established.size !== continuityIds.length
+    ) {
+      errors.push("Every established proposition requires exactly one continuity check.");
+    }
+
+    for (const check of answer.continuityChecks) {
+      if (
+        !continuityVerdicts.has(check.verdict) ||
+        !clean(check.explanation) ||
+        !check.evidenceIds.length ||
+        check.evidenceIds.some((id) => !allowedEvidence.has(id))
+      ) {
+        errors.push(`Continuity check ${check.propositionId || "<missing>"} is invalid or unsupported.`);
+      }
+      if (check.verdict === "unresolved-conflict") {
+        errors.push(`Established proposition ${check.propositionId} has an unresolved conflict.`);
+      }
+    }
+
+    for (const claim of answer.claims) {
+      for (const proposition of established.values()) {
+        const sameDomain =
+          claim.category === proposition.category &&
+          normalizedScope(claim.scope) === normalizedScope(proposition.scope);
+        const opposite =
+          (claim.polarity === "affirms" && proposition.polarity === "denies") ||
+          (claim.polarity === "denies" && proposition.polarity === "affirms");
+        if (!sameDomain || !opposite) continue;
+        const check = answer.continuityChecks.find(
+          (item) => item.propositionId === proposition.id,
+        );
+        if (!check || check.verdict !== "reconciled") {
+          errors.push(`Claim ${claim.id} contradicts established proposition ${proposition.id} without reconciliation.`);
+        }
+        if (
+          proposition.support === "explicit-statement" &&
+          claim.support !== "explicit-statement"
+        ) {
+          errors.push(`Claim ${claim.id} uses lower-level inference against explicit proposition ${proposition.id}.`);
         }
       }
     }
@@ -379,6 +624,8 @@ export function insufficientEmetAiAnswer(
     answer: explanation,
     conclusionSupport: "does-not-establish",
     claims: [],
+    componentChecks: [],
+    continuityChecks: [],
     citations: [],
     limitations,
   };
@@ -395,6 +642,8 @@ export function parseEmetAiAnswer(value: unknown): EmetAiAnswer | null {
     typeof candidate.answer !== "string" ||
     !claimSupports.has(candidate.conclusionSupport as EmetAiClaimSupport) ||
     !Array.isArray(candidate.claims) ||
+    !Array.isArray(candidate.componentChecks) ||
+    !Array.isArray(candidate.continuityChecks) ||
     !Array.isArray(candidate.citations) ||
     !Array.isArray(candidate.limitations)
   ) {
@@ -406,21 +655,69 @@ export function parseEmetAiAnswer(value: unknown): EmetAiAnswer | null {
     if (!value || typeof value !== "object") return null;
     const claim = value as Record<string, unknown>;
     if (
+      typeof claim.id !== "string" ||
       typeof claim.text !== "string" ||
       (claim.support !== "explicit-statement" &&
         claim.support !== "strong-implication" &&
         claim.support !== "theological-synthesis" &&
         claim.support !== "possible-interpretation" &&
         claim.support !== "does-not-establish") ||
+      !reasoningCategories.has(claim.category as EmetAiReasoningCategory) ||
+      !propositionPolarities.has(claim.polarity as EmetAiPropositionPolarity) ||
+      typeof claim.scope !== "string" ||
+      !timings.has(claim.timing as EmetAiTiming) ||
       !Array.isArray(claim.evidenceIds) ||
       claim.evidenceIds.some((id) => typeof id !== "string")
     ) {
       return null;
     }
     claims.push({
+      id: claim.id as string,
       text: claim.text,
       support: claim.support,
+      category: claim.category as EmetAiReasoningCategory,
+      polarity: claim.polarity as EmetAiPropositionPolarity,
+      scope: claim.scope as string,
+      timing: claim.timing as EmetAiTiming,
       evidenceIds: claim.evidenceIds as string[],
+    });
+  }
+
+  const componentChecks: EmetAiComponentCheck[] = [];
+  for (const value of candidate.componentChecks) {
+    if (!value || typeof value !== "object") return null;
+    const check = value as Record<string, unknown>;
+    if (
+      typeof check.componentId !== "string" ||
+      !claimSupports.has(check.support as EmetAiClaimSupport) ||
+      typeof check.explanation !== "string" ||
+      !Array.isArray(check.evidenceIds) ||
+      check.evidenceIds.some((id) => typeof id !== "string")
+    ) return null;
+    componentChecks.push({
+      componentId: check.componentId,
+      support: check.support as EmetAiClaimSupport,
+      explanation: check.explanation,
+      evidenceIds: check.evidenceIds as string[],
+    });
+  }
+
+  const continuityChecks: EmetAiContinuityCheck[] = [];
+  for (const value of candidate.continuityChecks) {
+    if (!value || typeof value !== "object") return null;
+    const check = value as Record<string, unknown>;
+    if (
+      typeof check.propositionId !== "string" ||
+      !continuityVerdicts.has(check.verdict as EmetAiContinuityCheck["verdict"]) ||
+      typeof check.explanation !== "string" ||
+      !Array.isArray(check.evidenceIds) ||
+      check.evidenceIds.some((id) => typeof id !== "string")
+    ) return null;
+    continuityChecks.push({
+      propositionId: check.propositionId,
+      verdict: check.verdict as EmetAiContinuityCheck["verdict"],
+      explanation: check.explanation,
+      evidenceIds: check.evidenceIds as string[],
     });
   }
 
@@ -452,7 +749,9 @@ export function parseEmetAiAnswer(value: unknown): EmetAiAnswer | null {
     status: candidate.status,
     answer: candidate.answer,
     conclusionSupport: candidate.conclusionSupport as EmetAiClaimSupport,
+    componentChecks,
     claims,
+    continuityChecks,
     citations,
     limitations: candidate.limitations as string[],
   };

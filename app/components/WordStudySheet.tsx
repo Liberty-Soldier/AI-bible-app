@@ -1236,7 +1236,7 @@ export default function WordStudySheet({
     <div
       className={
         presentation === "inline"
-          ? "overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--background)]"
+          ? "overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--canvas)]"
           : "fixed inset-0 z-[70] overflow-hidden"
       }
     >
@@ -1251,13 +1251,13 @@ export default function WordStudySheet({
       <section
         className={
           presentation === "inline"
-            ? "flex w-full flex-col bg-[var(--background)] text-[var(--foreground)]"
-            : `absolute bottom-0 left-1/2 flex w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] shadow-2xl ${
+            ? "flex w-full flex-col bg-[var(--canvas)] text-[var(--foreground)]"
+            : `absolute bottom-0 left-1/2 flex w-full max-w-xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--canvas)] text-[var(--foreground)] shadow-2xl ${
                 snap === "expanded" ? "h-[96dvh]" : "h-[86dvh]"
               }`
         }
       >
-        <div className="shrink-0 border-b border-[var(--border)] bg-[var(--background)] px-5 py-3">
+        <div className="shrink-0 border-b border-[var(--border)] bg-[var(--canvas)] px-5 py-3">
           {presentation === "sheet" ? (
             <button
               type="button"
@@ -1418,10 +1418,10 @@ export default function WordStudySheet({
                       new CustomEvent("emetsees:open-emet"),
                     );
                   }}
-                  className="mt-2 flex w-full items-center justify-between rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm font-black"
+                  className="mt-3 flex w-full items-center justify-between rounded-2xl border border-[var(--border)] bg-[var(--canvas)] px-4 py-3 text-sm font-bold shadow-[var(--shadow-sm)]"
                 >
                   <span>Ask EMET about this word</span>
-                  <span aria-hidden="true">→</span>
+                  <span aria-hidden="true" className="text-[var(--brand-strong)]">→</span>
                 </button>
               ) : null}
             </>
@@ -1861,7 +1861,7 @@ function OverviewView({
                         disabled={
                           !canOpenLexicalEvidence && component.kind !== "grammar"
                         }
-                        className="w-full rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-left transition enabled:active:scale-[0.995] disabled:cursor-default"
+                        className="w-full rounded-xl border border-[var(--border)] bg-[var(--canvas)] px-3 py-3 text-left transition enabled:active:scale-[0.995] disabled:cursor-default"
                       >
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                           <div className="min-w-0 flex-1">
@@ -2286,7 +2286,7 @@ function SourceEntityDrilldown({
               {definitions[0]}
             </p>
             {definitions.length > 1 ? (
-              <details className="mt-3 rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-2">
+              <details className="mt-3 rounded-xl border border-[var(--border)] bg-[var(--canvas)] px-3 py-2">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-xs font-bold text-[var(--muted)]">
                   <span>Raw lexicon glosses and usage</span>
                   <Chevron />
@@ -2490,7 +2490,7 @@ function LexiconView({
             {definitions[0]}
           </p>
           {definitions.length > 1 ? (
-            <details className="mt-4 rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-2">
+            <details className="mt-4 rounded-xl border border-[var(--border)] bg-[var(--canvas)] px-3 py-2">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-bold text-[var(--muted)]">
                 <span>Raw lexicon glosses and usage</span>
                 <Chevron />
@@ -2756,7 +2756,7 @@ function OccurrencesView({
           <button
             type="button"
             onClick={onLoadMore}
-            className="mt-5 w-full rounded-2xl border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-sm font-bold text-[var(--muted)]"
+            className="mt-5 w-full rounded-2xl border border-[var(--border)] bg-[var(--canvas)] px-4 py-3 text-sm font-bold text-[var(--muted)]"
           >
             Load more passages
           </button>
@@ -3019,7 +3019,7 @@ function BackToReadingButton({
     <button
       type="button"
       onClick={onClick}
-      className="w-full rounded-2xl border border-amber-500/25 bg-amber-500/10 px-4 py-3 text-sm font-bold text-amber-800 dark:text-amber-200"
+      className="w-full rounded-2xl border border-[var(--border)] bg-[var(--canvas)] px-4 py-3 text-sm font-bold text-[var(--foreground)] shadow-[var(--shadow-sm)]"
     >
       Back to reading at {label}
     </button>

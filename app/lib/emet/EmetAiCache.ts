@@ -71,7 +71,7 @@ export function getEmetAiRequestCacheKey({
   context: EmetAiReaderContext | null;
 }) {
   const stableInput = JSON.stringify({
-    requestSchema: "emet-ai-request-cache@2",
+    requestSchema: "emet-ai-request-cache@4",
     promptVersion: EMET_AI_PROMPT_VERSION,
     retrievalPlanSchema: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
     question: normalizedQuestion(question),
@@ -95,8 +95,13 @@ export function getEmetAiRequestCacheKey({
               conversation.summary.earlierQuestions.map(normalizedQuestion),
             establishedClaims: conversation.summary.establishedClaims.map(
               (claim) => ({
+                id: claim.id,
                 text: normalizedQuestion(claim.text),
                 support: claim.support,
+                category: claim.category,
+                polarity: claim.polarity,
+                scope: normalizedQuestion(claim.scope),
+                timing: claim.timing,
                 references: [...claim.references].sort(),
               }),
             ),
@@ -105,8 +110,13 @@ export function getEmetAiRequestCacheKey({
             question: normalizedQuestion(exchange.question),
             references: [...exchange.references].sort(),
             claims: exchange.claims.map((claim) => ({
+              id: claim.id,
               text: normalizedQuestion(claim.text),
               support: claim.support,
+              category: claim.category,
+              polarity: claim.polarity,
+              scope: normalizedQuestion(claim.scope),
+              timing: claim.timing,
               references: [...claim.references].sort(),
             })),
           })),
