@@ -546,13 +546,43 @@ assert.equal(validateEmetAiAnswer(doctrinalPacket, skippedComponent).ok, false);
 const overrankedCompound = structuredClone(calibratedDoctrinalAnswer);
 overrankedCompound.conclusionSupport = "theological-synthesis";
 assert.equal(validateEmetAiAnswer(doctrinalPacket, overrankedCompound).ok, false);
+const leakedInternalProcess = structuredClone(calibratedDoctrinalAnswer);
+leakedInternalProcess.answer = "The draft's conclusion needs to be narrowed.";
+assert.equal(
+  validateEmetAiAnswer(doctrinalPacket, leakedInternalProcess).ok,
+  false,
+);
+const omissionAsRepeal = structuredClone(calibratedDoctrinalAnswer);
+omissionAsRepeal.answer =
+  "The later passages do not directly establish that new covenant believers remain obligated to keep the law as a binding covenant code.";
+const continuityDoctrinalPacket = structuredClone(doctrinalPacket);
+continuityDoctrinalPacket.evidence[0].provenance.retrieval.method =
+  "governing-scripture";
+assert.equal(
+  validateEmetAiAnswer(continuityDoctrinalPacket, omissionAsRepeal).ok,
+  false,
+);
+const nonRestatementAsRepeal = structuredClone(calibratedDoctrinalAnswer);
+nonRestatementAsRepeal.answer =
+  "The New Testament does not directly state that all new covenant believers are obligated to keep the seventh-day Sabbath.";
+assert.equal(
+  validateEmetAiAnswer(continuityDoctrinalPacket, nonRestatementAsRepeal).ok,
+  false,
+);
+const selectiveListAsRepeal = structuredClone(calibratedDoctrinalAnswer);
+selectiveListAsRepeal.answer =
+  "Acts 15 places no Sabbath burden on Gentile believers, so it is not binding.";
+assert.equal(
+  validateEmetAiAnswer(continuityDoctrinalPacket, selectiveListAsRepeal).ok,
+  false,
+);
 const oneSidedDoctrinalPacket = structuredClone(doctrinalPacket);
 for (const item of oneSidedDoctrinalPacket.evidence) {
   item.provenance.retrieval.role = "direct";
 }
 assert.equal(
   validateEmetAiAnswer(oneSidedDoctrinalPacket, calibratedDoctrinalAnswer).ok,
-  false,
+  true,
 );
 
 const consistencyPacket = structuredClone(doctrinalPacket);
@@ -611,6 +641,7 @@ for (const required of [
   "The Old Testament supplies the scriptural foundation",
   "whole scriptural witness as coherent",
   "Yahweh's Torah is His instruction",
+  "The law of Moses",
   "A lower level cannot silently override a higher level",
   "Hebrew, LXX Greek, and Greek New Testament identities remain distinct",
   "Sound like a thoughtful Bible reader explaining Scripture",
@@ -626,11 +657,43 @@ for (const required of [
   "never silently reverse direction",
   "mandatory consistency constraint",
   "Present inability to perform an instruction",
+  "Do not require an earlier command to be restated",
+  "does not change another command unless its wording identifies that command",
+  "A change of covenant, mediator, priesthood, sacrifice, sanctuary, justification, or condemnation does not by itself remove Torah",
+  "under law",
   "Present participation and future consummation",
   "insufficient-evidence rather than guessing",
 ]) {
   assert.ok(instruction.includes(required), `Missing instruction: ${required}`);
 }
+
+const providerSource = fs.readFileSync(
+  path.join(
+    process.cwd(),
+    "app",
+    "lib",
+    "emet",
+    "providers",
+    "EmetAiOpenAiProvider.ts",
+  ),
+  "utf8",
+);
+assert.doesNotMatch(providerSource, /adversarial supplement/i);
+assert.doesNotMatch(providerSource, /minimumUniqueQualifyingReferences/);
+assert.doesNotMatch(providerSource, /at least three high-value individual verses marked qualifying/i);
+assert.match(providerSource, /Never manufacture an opposing channel/);
+assert.match(providerSource, /only when the passage itself identifies the same command/);
+assert.match(providerSource, /an explicit command with an unsatisfied duration/);
+assert.match(providerSource, /never mention a draft, packet, prompt, model, method, or proposition/);
+assert.match(providerSource, /Do not treat "law of Moses," Torah, first covenant/);
+assert.match(
+  providerSource,
+  /draft\.intent === "continuity" \|\| draft\.intent === "application"/,
+);
+assert.match(providerSource, /passage\.role !== "qualifying"/);
+assert.match(providerSource, /isUnsolicitedContinuityQualifier/);
+assert.match(providerSource, /Colossians 2:16/);
+assert.match(providerSource, /Mandatory canonical continuity finding/);
 
 console.log("EMET AI foundation verification passed.");
 console.log("- Scripture-first constitution is versioned.");
@@ -642,7 +705,9 @@ console.log("- Hebrew, LXX, and Greek NT identities stay corpus-scoped.");
 console.log("- Equivalent questions reuse only identity-and-evidence-bound answers.");
 console.log("- Repeated conversational requests reuse a stable cache without trusting prior answer prose.");
 console.log("- Invalid model citations fail closed before caching.");
-console.log("- Disputed doctrines require supporting and qualifying Scripture.");
+console.log("- Doctrinal answers accept direct Scripture without manufactured countertext quotas.");
+console.log("- Command continuity does not depend on modern-label restatement or selective-list omission.");
+console.log("- Internal draft and packet language is rejected from reader-facing answers.");
 console.log("- Categorical proof language fails closed when the full proposition is not explicit.");
 console.log("- Structured prior claims affect continuity without trusting prior answer prose.");
 console.log("- Reader-facing answers use natural prose without internal evidence jargon.");

@@ -24,6 +24,13 @@ function loadLocalEnvironment(fileName) {
 
 loadLocalEnvironment(".env.local");
 loadLocalEnvironment(".env.development.local");
+if (process.env.EMET_SMOKE_MODEL?.trim()) {
+  process.env.EMET_AI_MODEL = process.env.EMET_SMOKE_MODEL.trim();
+}
+if (process.env.EMET_SMOKE_PLANNER_MODEL?.trim()) {
+  process.env.EMET_AI_PLANNER_MODEL =
+    process.env.EMET_SMOKE_PLANNER_MODEL.trim();
+}
 
 const [
   { buildEmetAiTopicEvidence },

@@ -388,6 +388,14 @@ function governingCandidates(plan: EmetAiRetrievalPlan | null) {
     ["Matthew 5:18", "direct", "Jesus states the law's duration and stated end condition."],
     ["Matthew 5:19", "later-witness", "Jesus addresses doing and teaching the commandments."],
     ["Romans 3:31", "later-witness", "Paul directly addresses whether faith nullifies or establishes the law."],
+    ["Jeremiah 31:33", "foundation", "The new-covenant promise places Yahweh's law within His people and writes it on their hearts."],
+    ["Hebrews 8:10", "later-witness", "Hebrews repeats the new-covenant promise that Yahweh puts His laws into His people's mind and heart."],
+    ["Isaiah 56:6", "foundation", "Isaiah describes foreigners who join themselves to Yahweh, love His name, hold His covenant, and keep the Sabbath."],
+    ["Mark 2:27", "direct", "Jesus states that the Sabbath was made for man."],
+    ["Romans 11:17", "later-witness", "Paul describes Gentile believers as grafted among the covenant people and sharing the root's richness."],
+    ["Ephesians 2:12", "foundation", "Paul identifies the former condition of Gentiles as alienated from Israel's commonwealth and strangers to the covenants."],
+    ["Ephesians 2:19", "later-witness", "Paul says those former strangers are now fellow citizens with the saints and members of God's household."],
+    ["Galatians 3:29", "later-witness", "Paul says those who belong to Messiah are Abraham's seed and heirs according to promise."],
     ["Revelation 14:12", "later-witness", "A later canonical witness describes the saints in relation to God's commandments."],
   ] as const;
 
@@ -499,7 +507,7 @@ function selectedCandidates({
   if (!plan) return ranked.slice(0, MAX_LITERAL_FALLBACK_VERSES);
 
   const evidenceLimit =
-    plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 16;
+    plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 24;
 
   const selected: EvidenceCandidate[] = [];
   const selectedReferences = new Set<string>();
@@ -515,16 +523,9 @@ function selectedCandidates({
     return true;
   };
 
-  // Preserve the evidence hierarchy before filling remaining slots. This
-  // prevents one long chapter from displacing later witness or qualifying
-  // passages merely because the planner returned its verses first.
-  if (plan.analysisMode !== "simple") {
-    for (const candidate of ranked.filter(
-      (item) => item.role === "qualifying" || item.role === "contrast",
-    ).slice(0, 4)) {
-      add(candidate);
-    }
-  }
+  // Preserve the canonical evidence hierarchy before filling remaining
+  // slots. Direct statements and earlier foundations govern; a genuinely
+  // relevant qualification remains available without displacing them.
   for (const role of [
     "direct",
     "foundation",
@@ -593,27 +594,6 @@ export function buildEmetAiTopicEvidence({
         "The locked Scripture indexes did not supply directly relevant passages for this question.",
       ],
     };
-  }
-
-  if (retrievalPlan && retrievalPlan.analysisMode !== "simple") {
-    const roles = new Set(candidates.map((candidate) => candidate.role));
-    const hasSupportingEvidence = [
-      "direct",
-      "foundation",
-      "later-witness",
-    ].some((role) => roles.has(role as EmetAiRetrievalRole));
-    const qualifyingEvidenceCount = candidates.filter(
-      (candidate) =>
-        candidate.role === "qualifying" || candidate.role === "contrast",
-    ).length;
-    if (!hasSupportingEvidence || qualifyingEvidenceCount < 2) {
-      return {
-        status: "insufficient-evidence" as const,
-        limitations: [
-          "A disputed claim requires verified Scripture on both the proposed support and the material qualification or tension.",
-        ],
-      };
-    }
   }
 
   const fingerprints = new Set(

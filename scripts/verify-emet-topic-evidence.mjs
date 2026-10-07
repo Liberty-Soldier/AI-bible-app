@@ -372,7 +372,16 @@ const oneSidedDoctrine = buildEmetAiTopicEvidence({
   retrievalPlan: oneSidedDoctrinePlan,
   requireSemanticPlan: true,
 });
-assert.equal(oneSidedDoctrine.status, "insufficient-evidence");
+assert.equal(oneSidedDoctrine.status, "ready");
+if (oneSidedDoctrine.status === "ready") {
+  assert.ok(
+    oneSidedDoctrine.packet.evidence.every(
+      (item) => !["qualifying", "contrast"].includes(
+        item.provenance.retrieval?.role || "",
+      ),
+    ),
+  );
+}
 
 const covenantConversation = buildEmetConversationContext([
   {
@@ -621,6 +630,6 @@ console.log("- Event and canonical-witness questions retain Jude and 2 Peter ins
 console.log("- Known false-positive passages are explicitly excluded.");
 console.log("- Reader context disambiguates passage questions without contaminating independent topics.");
 console.log("- Conversation retains questions and verified references, never earlier answer prose as evidence.");
-console.log("- Disputed doctrines require a defined proposition, decomposed claims, and verified tension evidence.");
+console.log("- Disputed doctrines retain defined propositions and decomposed claims without forced countertexts.");
 console.log("- Follow-ups retain structured textual findings without treating prior prose as evidence.");
 console.log("- Unresolved plans and unsupported topics fail closed.");

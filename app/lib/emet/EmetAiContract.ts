@@ -1,6 +1,6 @@
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@12" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first@18" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
 export type EmetAiScopeType = "word" | "verse" | "passage" | "topic";
@@ -570,24 +570,56 @@ export function validateEmetAiAnswer(
     }
 
     if (packet.reasoning.mode !== "simple") {
-      const retrievalRoles = new Set(
-        packet.evidence.map((item) => item.provenance.retrieval?.role),
+      const hasGoverningContinuityEvidence = packet.evidence.some(
+        (item) => item.provenance.retrieval?.method === "governing-scripture",
       );
       if (
-        !retrievalRoles.has("qualifying") &&
-        !retrievalRoles.has("contrast")
+        /\b(?:the\s+)?(?:draft|packet|prompt|system instruction|model output)\b/i.test(
+          answer.answer,
+        )
       ) {
         errors.push(
-          "A disputed claim requires qualifying or contrasting Scripture evidence.",
+          "The reader-facing answer exposes internal generation language.",
         );
       }
-
       if (
-        answer.conclusionSupport !== "explicit-statement" &&
+        /\b(?:not|does not|do not|did not)\s+(?:explicitly\s+|directly\s+)?(?:say|state|restate|repeat|reissue|list|include)\b[^.]{0,180}\b(?:therefore|so|thus|obligat|required|binding|continue|modern|christian|believer)/i.test(
+          answer.answer,
+        )
+      ) {
+        errors.push(
+          "The answer turns later non-repetition or omission into a continuity conclusion.",
+        );
+      }
+      if (
+        hasGoverningContinuityEvidence &&
+        (/(?:do not|does not|did not)\s+(?:explicitly\s+|directly\s+)?establish\b[^.]{0,220}\b(?:modern christians?|new covenant believers?|believers?)\b[^.]{0,120}\b(?:obligat|required|must|binding)/i.test(
+          answer.answer,
+        ) ||
+          /\b(?:not|no longer)\s+(?:placed\s+)?under\s+(?:the\s+)?law of moses\b[^.]{0,160}\b(?:binding|administration|code)/i.test(
+            answer.answer,
+          ) ||
+          /\b(?:apostolic\s+)?(?:list|decree)\b[^.]{0,160}\b(?:does not|did not|no)\b[^.]{0,100}\b(?:include|mention|require|burden)\b[^.]{0,100}\b(?:therefore|so|thus|not|required|binding|obligat)/i.test(
+            answer.answer,
+          ) ||
+          /\bacts\s+15\b[^.]{0,160}\b(?:places?|put|imposes?)\s+no\b[^.]{0,80}\b(?:sabbath|law|torah)\b[^.]{0,80}\b(?:burden|requirement|obligation)/i.test(
+            answer.answer,
+          ) ||
+          /\b(?:same|original)\s+covenant(?:al)?\s+(?:form|way|setting)\b/i.test(
+            answer.answer,
+          ))
+      ) {
+        errors.push(
+          "The answer replaces governing continuity evidence with a modern-audience or covenant-code restatement test.",
+        );
+      }
+      if (
+        (answer.conclusionSupport === "possible-interpretation" ||
+          answer.conclusionSupport === "does-not-establish") &&
         /^\s*(yes|no)\s*[.!,:;-]/i.test(answer.answer)
       ) {
         errors.push(
-          "A disputed claim without an explicit statement cannot begin with a categorical yes or no.",
+          "An unestablished or merely possible conclusion cannot begin with a categorical yes or no.",
         );
       }
       if (
