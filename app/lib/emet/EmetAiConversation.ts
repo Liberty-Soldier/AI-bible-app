@@ -31,6 +31,7 @@ export type EmetConversationExchange = {
   answer: string;
   references: string[];
   claims: EmetConversationClaim[];
+  outcome: "answered" | "failed";
 };
 
 export type EmetConversationClaim = {
@@ -229,6 +230,7 @@ export function buildEmetConversationContext(
         20,
       ),
       claims: cleanClaims(exchange.claims) || [],
+      outcome: exchange.outcome === "failed" ? "failed" as const : "answered" as const,
     }))
     .filter((exchange) => exchange.question && exchange.answer);
   const splitIndex = Math.max(0, normalized.length - MAX_RECENT_EXCHANGES);
@@ -269,6 +271,7 @@ export function parseEmetConversationContext(
         20,
       ),
       claims,
+      outcome: exchange.outcome === "failed" ? "failed" : "answered",
     });
   }
 

@@ -264,6 +264,10 @@ export function buildEmetAiRetrievalInput({
           recentQuestions: conversation.recentExchanges.map(
             (exchange) => exchange.question,
           ),
+          recentTurns: conversation.recentExchanges.map((exchange) => ({
+            question: exchange.question,
+            outcome: exchange.outcome,
+          })),
           recentReferences: Array.from(
             new Set(
               conversation.recentExchanges.flatMap(

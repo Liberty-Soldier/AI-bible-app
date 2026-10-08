@@ -174,9 +174,20 @@ export async function POST(request: Request) {
   let retrievalPlan = null;
   try {
     retrievalPlan = provider?.plan
-      ? await provider.plan({ question, conversation: activeConversation, context })
+      ? await provider.plan({
+          question,
+          // Keep recent dialogue available for references such as "the first
+          // question". Evidence and established claims remain independently
+          // topic-filtered below so an unrelated prior study cannot control a
+          // new question.
+          conversation: authoritativeConversation,
+          context,
+        })
       : null;
-  } catch {
+  } catch (error) {
+    console.error("EMET retrieval planning failed.", {
+      error: error instanceof Error ? error.message : String(error),
+    });
     retrievalPlan = null;
   }
 

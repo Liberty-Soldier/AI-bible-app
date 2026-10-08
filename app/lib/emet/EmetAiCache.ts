@@ -108,6 +108,7 @@ export function getEmetAiRequestCacheKey({
           },
           recentExchanges: conversation.recentExchanges.map((exchange) => ({
             question: normalizedQuestion(exchange.question),
+            outcome: exchange.outcome,
             references: [...exchange.references].sort(),
             claims: exchange.claims.map((claim) => ({
               id: claim.id,

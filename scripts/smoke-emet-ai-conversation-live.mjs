@@ -92,6 +92,7 @@ for (const [index, question] of questions.entries()) {
   exchanges.push({
     question,
     answer: answer.answer,
+    outcome: "answered",
     references: answer.citations
       .map((citation) => citation.reference || "")
       .filter(Boolean),

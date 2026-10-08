@@ -26,6 +26,7 @@ export interface EmetAiProvider {
     context: EmetAiReaderContext | null;
   }): Promise<EmetAiRetrievalPlan | null>;
   generate(packet: EmetAiEvidencePacket): Promise<unknown>;
+  getLastFailure?(): string[];
 }
 
 export type EmetAiServiceResult = {
@@ -95,10 +96,13 @@ export async function answerFromEmetAiEvidence({
     try {
       const parsed = parseEmetAiAnswer(await provider.generate(packet));
       if (!parsed) {
+        const providerFailure = provider.getLastFailure?.() || [];
         return failClosed(
           packet,
-          "EMET AI could not produce a verifiable answer.",
-          ["The model response did not match the required answer schema."],
+          "EMET temporarily couldn't complete a verified answer. Please try again.",
+          providerFailure.length
+            ? providerFailure
+            : ["The model response did not match the required answer schema."],
         );
       }
 

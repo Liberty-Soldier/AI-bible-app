@@ -348,6 +348,15 @@ const equivalentRequestConversation = buildEmetConversationContext([
     ],
   },
 ]);
+const failedRequestConversation = buildEmetConversationContext([
+  {
+    question: "Who are the sons of God in Genesis 6?",
+    answer: "EMET temporarily couldn't complete a verified answer.",
+    outcome: "failed",
+    references: [],
+    claims: [],
+  },
+]);
 const requestKey = getEmetAiRequestCacheKey({
   question: "Were they angels?",
   conversation: requestConversation,
@@ -358,6 +367,14 @@ assert.equal(
   getEmetAiRequestCacheKey({
     question: "  WERE they angels? ",
     conversation: equivalentRequestConversation,
+    context: null,
+  }),
+);
+assert.notEqual(
+  requestKey,
+  getEmetAiRequestCacheKey({
+    question: "Were they angels?",
+    conversation: failedRequestConversation,
     context: null,
   }),
 );
@@ -703,7 +720,10 @@ assert.match(providerSource, /initiating question or accusation/);
 assert.match(providerSource, /gpt-5\.4-2026-03-05/);
 assert.match(providerSource, /emet_ai_plan_and_answer/);
 assert.match(providerSource, /pendingTopicAnswer/);
-assert.match(providerSource, /deterministic validation found the listed defects/);
+assert.match(providerSource, /Build a fresh answer using only the verified evidence packet/);
+assert.match(providerSource, /Remove or qualify an unsupported secondary claim/);
+assert.match(providerSource, /getLastFailure/);
+assert.match(providerSource, /Conversation turn outcomes are product context/);
 assert.doesNotMatch(providerSource, /independent final consistency auditor/);
 assert.doesNotMatch(providerSource, /Complete the local discourse context/);
 

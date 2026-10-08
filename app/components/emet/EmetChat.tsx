@@ -210,6 +210,7 @@ export default function EmetChat({
   const router = useRouter();
   const [question, setQuestion] = useState(initialQuestion.slice(0, 800));
   const [readerContext, setReaderContext] = useState<ReaderContext | null>(null);
+  const [useReaderContext, setUseReaderContext] = useState(false);
   const [wordContext, setWordContext] = useState<WordContext | null>(null);
   const [usage, setUsage] = useState(initialUsage);
   const [exchanges, setExchanges] = useState<Exchange[]>([]);
@@ -267,7 +268,10 @@ export default function EmetChat({
     textarea.style.height = `${Math.min(textarea.scrollHeight, 160)}px`;
   }, [question]);
 
-  const activeContext = wordContext || readerContext;
+  // A remembered reading position is a convenience, not an implicit scope.
+  // Word-study launches are explicit; ordinary Ask EMET questions default to
+  // the whole canon unless the reader opts into the displayed verse.
+  const activeContext = wordContext || (useReaderContext ? readerContext : null);
   async function ask(questionOverride?: string) {
     const finalQuestion = (questionOverride || question).trim();
     if (!finalQuestion || pending) return;
@@ -298,6 +302,7 @@ export default function EmetChat({
             exchanges.map((exchange) => ({
               question: exchange.question,
               answer: exchange.answer.answer,
+              outcome: exchange.source === "fail-closed" ? "failed" : "answered",
               references: exchange.answer.citations
                 .map((citation) => citation.reference || "")
                 .filter(Boolean),
@@ -347,8 +352,15 @@ export default function EmetChat({
       }
       if (!response.ok) {
         const answer = normalizeAnswer(payload);
-        setError(answer.answer);
-        setQuestion(finalQuestion);
+        setExchanges((current) => [
+          ...current,
+          {
+            id: crypto.randomUUID(),
+            question: finalQuestion,
+            answer,
+            source: typeof payload.source === "string" ? payload.source : "fail-closed",
+          },
+        ]);
         return;
       }
 
@@ -469,11 +481,19 @@ export default function EmetChat({
                 aria-label={`Remove ${contextLabel(activeContext)} context`}
                 onClick={() => {
                   if (wordContext) setWordContext(null);
-                  else setReaderContext(null);
+                  else setUseReaderContext(false);
                 }}
                 className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--border)] text-sm text-[var(--muted)] transition hover:text-[var(--foreground)]"
               >
                 ×
+              </button>
+            ) : readerContext ? (
+              <button
+                type="button"
+                onClick={() => setUseReaderContext(true)}
+                className="shrink-0 border-b border-[var(--brand)] pb-0.5 font-semibold text-[var(--foreground)]"
+              >
+                Use {contextLabel(readerContext)}
               </button>
             ) : null}
           </div>

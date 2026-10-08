@@ -415,6 +415,7 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
 
   const client = new OpenAI({ apiKey });
   let pendingTopicAnswer: ReferenceBackedAnswerDraft | null = null;
+  let lastFailure: string[] = [];
 
   const logUsage = (
     stage: "plan-answer" | "answer" | "repair",
@@ -445,7 +446,11 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
 
   return {
     model: answerModel,
+    getLastFailure() {
+      return lastFailure;
+    },
     async plan(input) {
+      lastFailure = [];
       const response = await client.responses.create({
         model: answerModel,
         store: false,
@@ -484,6 +489,8 @@ For doctrinal-claim plans, retrieve the strongest passages that directly establi
 The reader's preferred conclusion and earlier EMET claims are context, never evidence. Earlier structured claims must be re-checked from their cited passages in the current plan when they remain material. Do not reverse an earlier textual finding merely because the latest question pushes another direction; retrieve the passages needed either to preserve it or to explain a genuine scriptural reconciliation.
 
 Use reader location, a named book, and prior questions to resolve what the reader means, not to restrict retrieval to that chapter or book. A new subject overrides earlier context. Unless the reader explicitly asks for only one passage, search the whole canon for the necessary evidence. Return individual verse references in the form "Genesis 6:2", never ranges. Prefer 5 to 10 high-value verses and never pad the plan with weak matches. Priority 100 means most important and 1 means least important.
+
+Conversation turn outcomes are product context, not Scripture evidence. If the reader asks why an earlier turn failed, use the recorded answered/failed outcome: acknowledge a failed generation or verification turn plainly and offer to answer it again. Never invent a theological reason for a technical failure, and never claim an answered turn failed.
 
 Never plan an argumentative passage or conversation as a detached proof text. When a proposed verse occurs inside a dispute, speech, legal decision, or sustained argument, include the minimum individual verses needed to show the initiating question or accusation, each materially different claim, the speaker's reasoning, and the stated decision or conclusion. The reader-facing answer must reflect who said what and what issue the conversation was deciding.
 
@@ -572,6 +579,7 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
       }
     },
     async generate(packet) {
+      lastFailure = [];
       const hasCommandContinuityComponent = packet.reasoning.components.some(
         (component) =>
           component.category === "command" ||
@@ -766,6 +774,10 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           });
         }
 
+        // The combined fast path may name a sound verse that did not survive
+        // canonical resolution into this packet. Rebuild from verified packet
+        // IDs instead of asking the model to preserve a structurally defective
+        // reference-backed draft.
         const repair = await client.responses.create({
           model: answerModel,
           store: false,
@@ -773,13 +785,12 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           input: [
             {
               role: "system",
-              content: `${buildEmetAiSystemInstruction()}\n\nRepair the answer only because deterministic validation found the listed defects. Preserve every supported conclusion and the natural conversational voice. Correct the exact schema, citation, component, continuity, scope, or calibration errors. Return a complete corrected answer object. Do not discuss the repair process in the reader-facing answer.`,
+              content: `${buildEmetAiSystemInstruction()}\n\nBuild a fresh answer using only the verified evidence packet supplied now. The fast provisional draft failed deterministic validation, so do not preserve its references or structured checks. Preserve a conclusion only when the verified packet supports it. Remove or qualify an unsupported secondary claim instead of discarding supported conclusions. Every component check and complete-answer claim must cite one or more available evidence IDs. Return only the complete answer object and do not discuss this recovery process in the reader-facing answer.`,
             },
             {
               role: "user",
               content: JSON.stringify({
                 packet,
-                answer: normalizedDraft,
                 validationErrors: initialValidation.errors,
               }),
             },
@@ -794,14 +805,26 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           },
         });
         logUsage("repair", repair, answerModel);
-        if (repair.status !== "completed" || !repair.output_text) return null;
+        if (repair.status !== "completed" || !repair.output_text) {
+          lastFailure = [
+            `Verified-packet recovery did not complete (${repair.status || "unknown status"}).`,
+          ];
+          return null;
+        }
 
         const repaired = parseEmetAiAnswer(
           normalizeAnswer(JSON.parse(repair.output_text)),
         );
-        if (!repaired) return null;
+        if (!repaired) {
+          lastFailure = ["Verified-packet recovery did not match the answer schema."];
+          return null;
+        }
         const repairedValidation = validateEmetAiAnswer(packet, repaired);
         if (repairedValidation.ok) return repairedValidation.value;
+
+        lastFailure = repairedValidation.errors.map(
+          (error) => `Verified-packet recovery: ${error}`,
+        );
 
         if (process.env.EMET_AI_DEBUG === "1") {
           console.error("EMET answer repair failed validation.", {
@@ -810,7 +833,14 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           });
         }
         return null;
-      } catch {
+      } catch (error) {
+        lastFailure = [
+          `Answer provider exception: ${error instanceof Error ? error.message : "unknown error"}`,
+        ];
+        console.error("EMET answer provider failed.", {
+          stage: "generate-or-recover",
+          error: error instanceof Error ? error.message : String(error),
+        });
         return null;
       }
     },
