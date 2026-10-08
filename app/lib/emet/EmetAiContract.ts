@@ -1,6 +1,7 @@
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
 export const EMET_AI_PROMPT_VERSION = "scripture-first@22" as const;
+export const EMET_AI_COVERAGE_VERSION = "deterministic-coverage@1" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
 export type EmetAiScopeType = "word" | "verse" | "passage" | "topic";
@@ -129,6 +130,28 @@ export type EmetAiEvidencePacket = {
     type: EmetAiScopeType;
     references: string[];
     entityIds: string[];
+  };
+  requestedCoverage?: {
+    version: typeof EMET_AI_COVERAGE_VERSION;
+    passages: Array<{ id: string; label: string; references: string[] }>;
+    competingInterpretations: boolean;
+    comparisonPassages: Array<{
+      reference: string;
+      evidenceId: string;
+    }>;
+    language: Array<{
+      id: string;
+      corpora: Array<"hebrew" | "greek-nt">;
+      subject: string;
+      terms: Array<{
+        corpus: "hebrew" | "greek-nt";
+        lexicalId: string;
+        lemma: string;
+        transliteration: string;
+        meaning: string;
+      }>;
+    }>;
+    subquestions: Array<{ id: string; text: string }>;
   };
   identity: {
     gate: EmetAiIdentityGate;
@@ -271,6 +294,64 @@ export function validateEmetAiEvidencePacket(
     packet.reasoning.components.some((item) => !clean(item.proposition))
   ) {
     errors.push("Reasoning components must be identified and non-empty.");
+  }
+
+  if (packet.requestedCoverage) {
+    if (packet.requestedCoverage.version !== EMET_AI_COVERAGE_VERSION) {
+      errors.push("Unsupported requested-coverage contract.");
+    }
+    const requirementIds = packet.requestedCoverage.subquestions.map((item) => item.id);
+    if (!uniqueNonEmpty(requirementIds) || requirementIds.some((id) => !componentIds.includes(id))) {
+      errors.push("Every requested coverage requirement must have a reasoning component.");
+    }
+    for (const passage of packet.requestedCoverage.passages) {
+      if (!clean(passage.label) || !passage.references.length) {
+        errors.push(`Requested passage ${passage.label || passage.id} could not be resolved from locked Scripture.`);
+      }
+      for (const reference of passage.references) {
+        if (!packet.evidence.some((item) => item.kind === "scripture" && item.reference === reference)) {
+          errors.push(`Requested passage reference ${reference} is missing from evidence.`);
+        }
+      }
+    }
+    for (const language of packet.requestedCoverage.language) {
+      for (const corpus of language.corpora) {
+        if (!packet.evidence.some((item) => item.kind === "lexical" && item.corpus === corpus)) {
+          errors.push(`Requested ${corpus} analysis has no verified lexical evidence.`);
+        }
+        if (!language.terms.some((term) => term.corpus === corpus && clean(term.lemma) && clean(term.transliteration) && clean(term.meaning))) {
+          errors.push(`Requested ${corpus} analysis has no verified reader-visible lexical term.`);
+        }
+      }
+    }
+    if (packet.requestedCoverage.competingInterpretations) {
+      const comparisonIds = new Set(
+        packet.requestedCoverage.comparisonPassages.map((item) => item.evidenceId),
+      );
+      const comparisonEvidence = packet.evidence.filter((item) =>
+        comparisonIds.has(item.id),
+      );
+      if (
+        !packet.evidence.some((item) => item.provenance.retrieval?.role === "contrast") ||
+        !packet.evidence.some((item) =>
+          item.provenance.retrieval?.role === "direct" ||
+          item.provenance.retrieval?.role === "foundation" ||
+          item.provenance.retrieval?.role === "later-witness"
+        )
+      ) {
+        errors.push("A requested comparison requires verified supporting and contrasting Scripture evidence.");
+      }
+      if (
+        packet.requestedCoverage.comparisonPassages.some((item) =>
+          !item.reference || !item.evidenceId ||
+          !comparisonEvidence.some((evidence) =>
+            evidence.id === item.evidenceId && evidence.reference === item.reference
+          )
+        )
+      ) {
+        errors.push("A required comparison passage is missing from locked Scripture evidence.");
+      }
+    }
   }
 
   if (
@@ -469,6 +550,68 @@ export function validateEmetAiAnswer(
         check.evidenceIds.some((id) => !allowedEvidence.has(id))
       ) {
         errors.push(`Component check ${check.componentId || "<missing>"} is invalid or unsupported.`);
+      }
+    }
+
+    if (packet.requestedCoverage) {
+      const meaningfullyUsedEvidenceIds = new Set([
+        ...answer.componentChecks.flatMap((item) => item.evidenceIds),
+        ...answer.claims.flatMap((item) => item.evidenceIds),
+      ]);
+      for (const passage of packet.requestedCoverage.passages) {
+        const requiredEvidenceIds = packet.evidence
+          .filter((item) => item.kind === "scripture" && item.reference && passage.references.includes(item.reference))
+          .map((item) => item.id);
+        if (
+          requiredEvidenceIds.some((id) => !meaningfullyUsedEvidenceIds.has(id)) ||
+          requiredEvidenceIds.some((id) => !citedEvidenceIds.has(id))
+        ) {
+          errors.push(`Requested passage ${passage.label} must be retrieved, cited, and meaningfully discussed.`);
+        }
+      }
+      for (const language of packet.requestedCoverage.language) {
+        const lexicalIdsByCorpus = language.corpora.map((corpus) => packet.evidence
+          .filter((item) => item.kind === "lexical" && item.corpus === corpus)
+          .map((item) => item.id));
+        if (
+          lexicalIdsByCorpus.some((ids) => !ids.length) ||
+          lexicalIdsByCorpus.some((ids) => !ids.some((id) => meaningfullyUsedEvidenceIds.has(id))) ||
+          lexicalIdsByCorpus.some((ids) => !ids.some((id) => citedEvidenceIds.has(id)))
+        ) {
+          errors.push(`Requested ${language.corpora.join(" and ")} analysis requires verified lexical evidence and contextual discussion.`);
+        }
+        for (const corpus of language.corpora) {
+          const terms = language.terms.filter((term) => term.corpus === corpus);
+          const displaysVerifiedTerm = terms.some((term) =>
+            answer.answer.includes(term.lemma) &&
+            answer.answer.toLocaleLowerCase("en-US").includes(term.transliteration.toLocaleLowerCase("en-US")),
+          );
+          if (!displaysVerifiedTerm) {
+            errors.push(`The reader-facing answer must name a verified ${corpus} source word and transliteration.`);
+          }
+        }
+      }
+      if (packet.requestedCoverage.competingInterpretations) {
+        const contrastEvidenceIds = packet.evidence
+          .filter((item) => item.provenance.retrieval?.role === "contrast")
+          .map((item) => item.id);
+        const supportingEvidenceIds = packet.evidence
+          .filter((item) => ["direct", "foundation", "later-witness"].includes(item.provenance.retrieval?.role || ""))
+          .map((item) => item.id);
+        if (
+          !contrastEvidenceIds.some((id) => meaningfullyUsedEvidenceIds.has(id) && citedEvidenceIds.has(id)) ||
+          !supportingEvidenceIds.some((id) => meaningfullyUsedEvidenceIds.has(id) && citedEvidenceIds.has(id))
+        ) {
+          errors.push("A requested comparison must meaningfully discuss and cite verified evidence associated with each interpretation.");
+        }
+        for (const passage of packet.requestedCoverage.comparisonPassages) {
+          if (
+            !meaningfullyUsedEvidenceIds.has(passage.evidenceId) ||
+            !citedEvidenceIds.has(passage.evidenceId)
+          ) {
+            errors.push(`Comparison passage ${passage.reference} must be cited and meaningfully discussed.`);
+          }
+        }
       }
     }
 

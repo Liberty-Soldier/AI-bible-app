@@ -15,6 +15,7 @@ import {
   parseEmetAiRetrievalPlan,
 } from "../EmetAiRetrievalPlan";
 import type { EmetAiProvider } from "../EmetAiService";
+import { expandPlannedReferences } from "../EmetAiTopicEvidence";
 
 const reasoningCategoryValues = [
   "identity", "authority", "nature", "relationship", "practice", "duration",
@@ -80,7 +81,7 @@ function retrievalPlanSchema() {
       },
       passages: {
         type: "array",
-        maxItems: 12,
+        maxItems: 16,
         items: {
           type: "object",
           properties: {
@@ -429,6 +430,7 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
       } | null;
     },
     modelName: string,
+    elapsedMs: number,
   ) => {
     if (process.env.EMET_AI_USAGE_LOG !== "1" || !response.usage) return;
     console.info("EMET AI usage", {
@@ -441,6 +443,7 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
       reasoningTokens:
         response.usage.output_tokens_details?.reasoning_tokens || 0,
       totalTokens: response.usage.total_tokens || 0,
+      elapsedMs: Math.round(elapsedMs),
     });
   };
 
@@ -451,6 +454,7 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
     },
     async plan(input) {
       lastFailure = [];
+      const planStartedAt = performance.now();
       const response = await client.responses.create({
         model: answerModel,
         store: false,
@@ -486,6 +490,10 @@ For every subject, earlier structured claims are propositions to re-check, not c
 
 For doctrinal-claim plans, retrieve the strongest passages that directly establish the proposition and its necessary canonical foundations. Include a qualifying or contrasting passage only when that passage's own wording materially addresses the same proposition, command, scope, duration, audience, or condition. Never manufacture an opposing channel, impose a quota of countertexts, or include a passage merely because it is commonly used against the proposition. For apparent-contradiction plans, retrieve both named sides of the apparent contradiction so their actual objects and contexts can be compared. Association, joint naming, shared action, honor, agency, and authority do not by themselves prove identity, ontology, equality, or eternality. Plan enough evidence to test each component rather than treating related subject matter as proof of the whole claim.
 
+When the reader explicitly asks for the strongest biblical cases for and against a proposition or asks to compare competing interpretations, frame the proposition neutrally as whether the claim is established. Retrieve the strongest passages whose actual wording materially supports each reading, including passages commonly offered against the claim when they address the same practice or governing category. Presenting both readings does not require artificial neutrality: grade each passage honestly, explain its actual object and limits, and reach the conclusion supported by the full scriptural context.
+
+This comparison instruction is mandatory when the question says "for and against," "both sides," or "competing interpretations." The proposition must remain neutral rather than assume either conclusion, and the plan must contain materially relevant supporting and contrast passages when Scripture contains them. A plan that merely argues one side and calls one of its own supporting passages the opposing case does not answer that request.
+
 The reader's preferred conclusion and earlier EMET claims are context, never evidence. Earlier structured claims must be re-checked from their cited passages in the current plan when they remain material. Do not reverse an earlier textual finding merely because the latest question pushes another direction; retrieve the passages needed either to preserve it or to explain a genuine scriptural reconciliation.
 
 Use reader location, a named book, and prior questions to resolve what the reader means, not to restrict retrieval to that chapter or book. A new subject overrides earlier context. Unless the reader explicitly asks for only one passage, search the whole canon for the necessary evidence. Return individual verse references in the form "Genesis 6:2", never ranges. Prefer 5 to 10 high-value verses and never pad the plan with weak matches. Priority 100 means most important and 1 means least important.
@@ -503,6 +511,8 @@ For obligation, law, covenant, or continuity questions, the plan must include th
 Do not demand that an earlier command be repeated using a modern audience label before it can remain applicable. A continuity conclusion may follow strongly from the command's stated duration together with later governing statements that Torah is not abolished and is written within the new-covenant people. Distinguish the command's continuing authority from its person-, role-, place-, and condition-specific application.
 
 When a repeated source-language phrase is materially relevant, add a source phrase hypothesis. Supply verified-looking Strong IDs when known (for example H1121), and/or normalized Hebrew or Greek lemmas. Leave an unknown array empty. Do not use an English gloss as if it proved a source identity. The application will independently validate every reference and source sequence and will discard anything that does not exist in its locked data.
+
+The input's requestedCoverage was extracted deterministically from the reader's wording. Include every requested passage and every requestedCoverage.comparisonPassages reference in the plan even when it would otherwise be omitted. When requestedCoverage.subquestions is nonempty, use exactly those IDs as the plan components and return exactly one answer component check for every one of those IDs; do not substitute newly invented component IDs. Every requested passage reference must appear in at least one answer claim or component check. When language analysis is requested, plan the relevant Hebrew and/or Greek source form at the requested passages; never invent a lexical ID or map an English gloss to a source word without verification. In the finished reader-facing prose, name each verified source word in its original script, give its transliteration, explain its contextual meaning, and compare how the verified words function in the requested passages. Do not hide lexical work behind phrases such as "the Hebrew term" or "the Greek word."
 
 Do not use denominational doctrine, consensus, or historical literature as proof. Do not put noncanonical references in passages. If the question asks about historical literature, record that limitation; EMETSEES handles such sources separately.
 
@@ -522,7 +532,7 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           },
         },
       });
-      logUsage("plan-answer", response, answerModel);
+      logUsage("plan-answer", response, answerModel, performance.now() - planStartedAt);
 
       if (response.status !== "completed" || !response.output_text) {
         return null;
@@ -555,7 +565,23 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           priority: 99,
         }));
 
-        const plannedPassages = draft.passages;
+        const answerReferences = new Set(
+          [
+            ...combined.answer.componentChecks,
+            ...combined.answer.claims,
+            ...combined.answer.continuityChecks,
+          ]
+            .flatMap((item) => item.references)
+            .flatMap((reference) => expandPlannedReferences(reference))
+            .map(referenceKey),
+        );
+        const plannedPassages = draft.passages.map((passage) => ({
+          ...passage,
+          priority: expandPlannedReferences(passage.reference)
+            .some((reference) => answerReferences.has(referenceKey(reference)))
+            ? 100
+            : passage.priority,
+        }));
 
         const mergedPassages = [];
         const seenPassages = new Set<string>();
@@ -567,7 +593,7 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           if (seenPassages.has(key)) continue;
           seenPassages.add(key);
           mergedPassages.push(passage);
-          if (mergedPassages.length >= 12) break;
+          if (mergedPassages.length >= 16) break;
         }
 
         return {
@@ -614,17 +640,28 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
             .toLocaleLowerCase("en-US")
             .replace(/\s+/g, " ")
             .trim();
-        const evidenceByReference = new Map(
-          packet.evidence.flatMap((item) =>
-            item.reference ? [[referenceKey(item.reference), item] as const] : [],
-          ),
-        );
+        const evidenceByReference = new Map<string, (typeof packet.evidence)[number]>();
+        for (const item of packet.evidence) {
+          if (!item.reference) continue;
+          const key = referenceKey(item.reference);
+          const existing = evidenceByReference.get(key);
+          if (!existing || (existing.kind !== "scripture" && item.kind === "scripture")) {
+            evidenceByReference.set(key, item);
+          }
+        }
         const evidenceIdsFor = (references: string[]) =>
           Array.from(
             new Set(
               references.flatMap((reference) => {
-                const item = evidenceByReference.get(referenceKey(reference));
-                return item ? [item.id] : [];
+                const exact = evidenceByReference.get(referenceKey(reference));
+                if (exact) return [exact.id];
+                return reference
+                  .split(/\s*;\s*/)
+                  .flatMap((part) => expandPlannedReferences(part))
+                  .flatMap((expanded) => {
+                    const item = evidenceByReference.get(referenceKey(expanded));
+                    return item ? [item.id] : [];
+                  });
               }),
             ),
           );
@@ -679,6 +716,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           draft = hydrateReferenceDraft(pendingTopicAnswer);
           pendingTopicAnswer = null;
         } else {
+          const answerStartedAt = performance.now();
           const response = await client.responses.create({
             model: answerModel,
             store: false,
@@ -702,7 +740,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
               },
             },
           });
-          logUsage("answer", response, answerModel);
+          logUsage("answer", response, answerModel, performance.now() - answerStartedAt);
           if (response.status !== "completed" || !response.output_text) {
             return null;
           }
@@ -715,6 +753,53 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
         const normalizeAnswer = (value: unknown) => {
           if (!value || typeof value !== "object") return value;
           const candidate = value as Record<string, unknown>;
+          if (
+            typeof candidate.answer === "string" &&
+            packet.requestedCoverage?.language.length
+          ) {
+            const verifiedTerms = Array.from(new Map(
+              packet.requestedCoverage.language
+                .flatMap((requirement) => requirement.terms)
+                .map((term) => [`${term.corpus}:${term.lexicalId}`, term]),
+            ).values());
+            const missingTerms = verifiedTerms.filter((term) =>
+              !candidate.answer!.toString().includes(term.lemma) ||
+              !candidate.answer!.toString().toLocaleLowerCase("en-US")
+                .includes(term.transliteration.toLocaleLowerCase("en-US"))
+            );
+            if (missingTerms.length) {
+              candidate.answer = `${candidate.answer.toString().trim()}\n\nVerified source-language terms: ${missingTerms
+                .map((term) => `${term.lemma} (${term.transliteration}) means ${term.meaning}`)
+                .join("; ")}. These identities come from the locked source indexes; their contextual force is governed by the cited passages above.`;
+            }
+          }
+          if (
+            packet.requestedCoverage?.language.length &&
+            Array.isArray(candidate.componentChecks)
+          ) {
+            const lexicalEvidenceIds = packet.evidence
+              .filter((item) => item.kind === "lexical")
+              .map((item) => item.id);
+            const languageComponentIds = new Set(
+              packet.reasoning.components
+                .filter((component) =>
+                  /\b(?:hebrew|greek|language|lexical|source word|word term)\b/i.test(component.proposition)
+                )
+                .map((component) => component.id),
+            );
+            for (const check of candidate.componentChecks) {
+              if (!check || typeof check !== "object") continue;
+              const component = check as Record<string, unknown>;
+              if (!languageComponentIds.has(String(component.componentId || ""))) continue;
+              const evidenceIds = Array.isArray(component.evidenceIds)
+                ? component.evidenceIds.filter((id): id is string => typeof id === "string")
+                : [];
+              component.evidenceIds = Array.from(new Set([
+                ...evidenceIds,
+                ...lexicalEvidenceIds,
+              ]));
+            }
+          }
           if (Array.isArray(candidate.continuityChecks)) {
             candidate.continuityChecks = candidate.continuityChecks.filter(
               (item) =>
@@ -755,6 +840,32 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
               }
             }
           }
+          if (Array.isArray(candidate.citations)) {
+            const cited = new Set(candidate.citations.flatMap((item) => {
+              if (!item || typeof item !== "object") return [];
+              const evidenceId = (item as Record<string, unknown>).evidenceId;
+              return typeof evidenceId === "string" ? [evidenceId] : [];
+            }));
+            const used = [candidate.componentChecks, candidate.claims, candidate.continuityChecks]
+              .flatMap((items) => Array.isArray(items) ? items : [])
+              .flatMap((item) => {
+                if (!item || typeof item !== "object") return [];
+                const ids = (item as Record<string, unknown>).evidenceIds;
+                return Array.isArray(ids)
+                  ? ids.filter((id): id is string => typeof id === "string")
+                  : [];
+              });
+            for (const evidenceId of used) {
+              if (cited.has(evidenceId)) continue;
+              const item = packet.evidence.find((entry) => entry.id === evidenceId);
+              if (!item) continue;
+              candidate.citations.push({
+                evidenceId,
+                ...(item.reference ? { reference: item.reference } : {}),
+              });
+              cited.add(evidenceId);
+            }
+          }
           return candidate;
         };
 
@@ -778,6 +889,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
         // canonical resolution into this packet. Rebuild from verified packet
         // IDs instead of asking the model to preserve a structurally defective
         // reference-backed draft.
+        const repairStartedAt = performance.now();
         const repair = await client.responses.create({
           model: answerModel,
           store: false,
@@ -804,7 +916,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
             },
           },
         });
-        logUsage("repair", repair, answerModel);
+        logUsage("repair", repair, answerModel, performance.now() - repairStartedAt);
         if (repair.status !== "completed" || !repair.output_text) {
           lastFailure = [
             `Verified-packet recovery did not complete (${repair.status || "unknown status"}).`,

@@ -3,6 +3,7 @@ import "server-only";
 import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import type { EmetConversationContext } from "./EmetAiConversation";
 import type { EmetAiReasoningCategory } from "./EmetAiContract";
+import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 
 export const EMET_AI_RETRIEVAL_PLAN_SCHEMA =
   "emet-ai-retrieval-plan@3" as const;
@@ -212,7 +213,7 @@ export function parseEmetAiRetrievalPlan(
       !reason ||
       !lexicalIds ||
       !lemmas ||
-      (lexicalIds.length < 2 && lemmas.length < 2)
+      (lexicalIds.length < 1 && lemmas.length < 1)
     ) {
       continue;
     }
@@ -248,6 +249,7 @@ export function buildEmetAiRetrievalInput({
 }) {
   return {
     question: question.trim(),
+    requestedCoverage: extractEmetAiRequestedCoverage(question),
     readerContext: context
       ? {
           book: context.book,
@@ -261,10 +263,10 @@ export function buildEmetAiRetrievalInput({
           earlierTopics: conversation.summary.topics,
           earlierPassages: conversation.summary.passages,
           corrections: conversation.summary.corrections,
-          recentQuestions: conversation.recentExchanges.map(
+          recentQuestions: conversation.recentExchanges.slice(-4).map(
             (exchange) => exchange.question,
           ),
-          recentTurns: conversation.recentExchanges.map((exchange) => ({
+          recentTurns: conversation.recentExchanges.slice(-4).map((exchange) => ({
             question: exchange.question,
             outcome: exchange.outcome,
           })),
@@ -274,13 +276,13 @@ export function buildEmetAiRetrievalInput({
                 (exchange) => exchange.references,
               ),
             ),
-          ),
+          ).slice(-12),
           priorStructuredClaims: [
             ...conversation.summary.establishedClaims,
             ...conversation.recentExchanges.flatMap(
               (exchange) => exchange.claims,
             ),
-          ].slice(-20),
+          ].slice(-8),
         }
       : null,
   };

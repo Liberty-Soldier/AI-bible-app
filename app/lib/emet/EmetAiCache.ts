@@ -3,6 +3,7 @@ import "server-only";
 import { createHash } from "node:crypto";
 
 import {
+  EMET_AI_COVERAGE_VERSION,
   EMET_AI_PROMPT_VERSION,
   type EmetAiAnswer,
   type EmetAiEvidencePacket,
@@ -10,6 +11,7 @@ import {
 import type { EmetConversationContext } from "./EmetAiConversation";
 import { EMET_AI_RETRIEVAL_PLAN_SCHEMA } from "./EmetAiRetrievalPlan";
 import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
+import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 
 export type EmetAiCachedAnswer = {
   answer: EmetAiAnswer;
@@ -70,11 +72,20 @@ export function getEmetAiRequestCacheKey({
   conversation: EmetConversationContext | null;
   context: EmetAiReaderContext | null;
 }) {
+  const requestedCoverage = extractEmetAiRequestedCoverage(question);
+  const hasRequestedCoverage =
+    requestedCoverage.passages.length > 0 ||
+    requestedCoverage.language.length > 0 ||
+    requestedCoverage.subquestions.length > 0 ||
+    requestedCoverage.competingInterpretations;
   const stableInput = JSON.stringify({
     requestSchema: "emet-ai-request-cache@4",
     promptVersion: EMET_AI_PROMPT_VERSION,
     retrievalPlanSchema: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
     question: normalizedQuestion(question),
+    ...(hasRequestedCoverage
+      ? { coverageVersion: EMET_AI_COVERAGE_VERSION, requestedCoverage }
+      : {}),
     context: context
       ? {
           book: context.book,

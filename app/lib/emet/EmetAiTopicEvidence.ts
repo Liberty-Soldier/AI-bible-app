@@ -6,6 +6,7 @@ import path from "node:path";
 import { normalizeBookName } from "../../data/bookAliases";
 import {
   EMET_AI_EVIDENCE_SCHEMA,
+  EMET_AI_COVERAGE_VERSION,
   type EmetAiEstablishedProposition,
   type EmetAiEvidenceItem,
   type EmetAiEvidencePacket,
@@ -21,6 +22,10 @@ import type {
   EmetAiRetrievalRole,
 } from "./EmetAiRetrievalPlan";
 import { verifiedSourcePhraseMatches } from "./EmetAiSourcePhrase";
+import {
+  extractEmetAiRequestedCoverage,
+  requestedCoverageComponents,
+} from "./EmetAiRequestedCoverage";
 
 type SearchTranslation = "web" | "kjv" | "brenton";
 type SearchRecord = [book: string, chapter: number, verse: string, text: string];
@@ -211,7 +216,7 @@ function normalizePlannedReference(value: string) {
     : null;
 }
 
-function expandPlannedReferences(value: string) {
+export function expandPlannedReferences(value: string) {
   const trimmed = value.trim().replace(/[–—]/g, "-");
   const chapterRange = trimmed.match(
     /^(.+?)\s+(\d+):(\d+)-(\d+)$/i,
@@ -381,6 +386,51 @@ function sourcePhraseCandidates(plan: EmetAiRetrievalPlan | null) {
     .filter((value): value is NonNullable<typeof value> => value !== null);
 }
 
+function requestedPassageCandidates(question: string, plan: EmetAiRetrievalPlan | null) {
+  const coverage = extractEmetAiRequestedCoverage(question);
+  return coverage.passages.flatMap((passage) => {
+    const index = loadIndex("web");
+    const plannedChapterReferences = (plan?.passages || [])
+      .flatMap((item) => expandPlannedReferences(item.reference))
+      .filter((reference) => reference.startsWith(`${passage.book} ${passage.chapter}:`));
+    const references = passage.startVerse === undefined
+      ? plannedChapterReferences.length
+        ? plannedChapterReferences
+        : index.records
+            .filter((record) => record[0] === passage.book && record[1] === passage.chapter)
+            .slice(0, 24)
+            .map(recordReference)
+      : Array.from(
+          { length: (passage.endVerse || passage.startVerse) - passage.startVerse + 1 },
+          (_, offset) => `${passage.book} ${passage.chapter}:${passage.startVerse! + offset}`,
+        );
+    return references.map((reference) => {
+      const resolved = resolveReference(reference);
+      return resolved ? {
+        ...resolved,
+        method: "explicit-reference" as const,
+        role: "direct" as const,
+        reason: `The user explicitly requested ${passage.label}.`,
+        score: 100,
+      } : null;
+    }).filter((value): value is NonNullable<typeof value> => value !== null);
+  });
+}
+
+function requiredComparisonCandidates(question: string) {
+  const coverage = extractEmetAiRequestedCoverage(question);
+  return coverage.comparisonPassages.map((passage) => {
+    const resolved = resolveReference(passage.reference);
+    return resolved ? {
+      ...resolved,
+      method: "explicit-reference" as const,
+      role: "contrast" as const,
+      reason: passage.reason,
+      score: 99,
+    } : null;
+  }).filter((value): value is NonNullable<typeof value> => value !== null);
+}
+
 function documentFrequency() {
   if (webDocumentFrequency) return webDocumentFrequency;
   const frequency = new Map<string, number>();
@@ -440,11 +490,15 @@ function selectedCandidates({
   context: EmetAiReaderContext | null;
 }) {
   const contextEvidence = contextCandidates(context, question);
+  const explicitEvidence = requestedPassageCandidates(question, plan);
+  const requiredComparisonEvidence = requiredComparisonCandidates(question);
   const plannedEvidence = plannedCandidates(plan);
   const phraseEvidence = sourcePhraseCandidates(plan);
   const literalEvidence = literalCandidates(question);
   const candidates = plan
     ? [
+        ...explicitEvidence,
+        ...requiredComparisonEvidence,
         ...contextEvidence,
         ...phraseEvidence,
         ...plannedEvidence,
@@ -452,9 +506,11 @@ function selectedCandidates({
           ? literalEvidence.filter((candidate) => candidate.score >= 65).slice(0, 2)
           : []),
       ]
-    : contextEvidence.length
-      ? contextEvidence
-      : literalEvidence;
+    : explicitEvidence.length
+      ? [...explicitEvidence, ...contextEvidence]
+      : contextEvidence.length
+        ? contextEvidence
+        : literalEvidence;
   const byReference = new Map<string, EvidenceCandidate>();
 
   for (const candidate of candidates) {
@@ -477,18 +533,21 @@ function selectedCandidates({
   const selected: EvidenceCandidate[] = [];
   const selectedReferences = new Set<string>();
   const chapterCounts = new Map<string, number>();
-  const add = (candidate: EvidenceCandidate) => {
+  const add = (candidate: EvidenceCandidate, force = false) => {
     const reference = recordReference(candidate.record);
     if (selectedReferences.has(reference)) return false;
     const chapterKey = `${candidate.record[0]}|${candidate.record[1]}`;
     const chapterLimit =
       plan.analysisMode === "simple" ? 3 : 10;
-    if ((chapterCounts.get(chapterKey) || 0) >= chapterLimit) return false;
+    if (!force && (chapterCounts.get(chapterKey) || 0) >= chapterLimit) return false;
     selected.push(candidate);
     selectedReferences.add(reference);
     chapterCounts.set(chapterKey, (chapterCounts.get(chapterKey) || 0) + 1);
     return true;
   };
+
+  for (const candidate of explicitEvidence) add(candidate, true);
+  for (const candidate of requiredComparisonEvidence) add(candidate, true);
 
   // Preserve the canonical evidence hierarchy before filling remaining
   // slots. Direct statements and earlier foundations govern; a genuinely
@@ -528,6 +587,7 @@ export function buildEmetAiTopicEvidence({
   builtAt?: string;
 }) {
   const cleanQuestion = question.trim();
+  const requestedCoverage = extractEmetAiRequestedCoverage(cleanQuestion);
   if (!cleanQuestion) {
     return {
       status: "insufficient-evidence" as const,
@@ -573,6 +633,72 @@ export function buildEmetAiTopicEvidence({
     question: cleanQuestion,
     conversation: relevantConversation,
   });
+  const rawSourcePhraseMatches = retrievalPlan
+    ? verifiedSourcePhraseMatches({
+        phrases: retrievalPlan.sourcePhrases,
+        preferredReferences: candidates.map((candidate) => recordReference(candidate.record)),
+        limit: 8,
+        allowIndividualTerms: requestedCoverage.language.length > 0,
+      })
+    : [];
+  const sourcePhraseMatches = Array.from(new Map(
+    rawSourcePhraseMatches.map((match) => [
+      `${match.phrase.corpus}|${match.reference}|${match.verifiedLexicalIds.join("+")}`,
+      match,
+    ]),
+  ).values());
+  evidence.push(...sourcePhraseMatches.map((match, index): EmetAiEvidenceItem => ({
+    id: `lexical:${match.phrase.corpus}:${index + 1}`,
+    kind: "lexical",
+    corpus: match.phrase.corpus,
+    text: `Verified ${match.phrase.corpus} source term(s) in ${match.reference}: ${match.verifiedTerms
+      .map((term) => `${term.lemma} (${term.transliteration}) — ${term.meaning}`)
+      .join("; ")}.`,
+    reference: match.reference,
+    lexicalId: match.verifiedLexicalIds.join("+"),
+    provenance: {
+      authority: "locked-source-phrase-index",
+      sourceId: match.matchMethod,
+      checksum: match.sourceFingerprint,
+      retrieval: {
+        method: "exact-source-phrase",
+        role: "direct",
+        reason: `Verified as the same ${match.phrase.corpus} source sequence in a requested passage.`,
+        score: 100,
+      },
+    },
+  })));
+  const requestedPassages = requestedCoverage.passages.map((requirement) => ({
+    id: requirement.id,
+    label: requirement.label,
+    references: Array.from(new Set(
+      requestedPassageCandidates(cleanQuestion, retrievalPlan)
+        .map((candidate) => recordReference(candidate.record))
+        .filter((reference) => requirement.startVerse === undefined
+          ? reference.startsWith(`${requirement.book} ${requirement.chapter}:`)
+          : Array.from(
+              { length: (requirement.endVerse || requirement.startVerse) - requirement.startVerse + 1 },
+              (_, offset) => `${requirement.book} ${requirement.chapter}:${requirement.startVerse! + offset}`,
+            ).includes(reference)),
+    )),
+  }));
+  const comparisonPassages = requestedCoverage.comparisonPassages.map((requirement) => {
+    const evidenceItem = evidence.find((item) =>
+      item.kind === "scripture" && item.reference === requirement.reference
+    );
+    return {
+      reference: requirement.reference,
+      evidenceId: evidenceItem?.id || "",
+    };
+  });
+  const deterministicComponents = requestedCoverageComponents(requestedCoverage);
+  const plannedComponents = retrievalPlan?.components || [];
+  const components = [
+    ...plannedComponents,
+    ...deterministicComponents.filter(
+      (required) => !plannedComponents.some((planned) => planned.id === required.id),
+    ),
+  ];
   const packet: EmetAiEvidencePacket = {
     schemaVersion: EMET_AI_EVIDENCE_SCHEMA,
     question: retrievalPlan
@@ -584,7 +710,7 @@ export function buildEmetAiTopicEvidence({
           proposition: retrievalPlan.proposition,
           requiresScopeAnalysis: retrievalPlan.requiresScopeAnalysis,
           requiresTimeline: retrievalPlan.requiresTimeline,
-          components: retrievalPlan.components,
+          components,
           establishedPropositions: reestablishedConversationPropositions(
             relevantConversation,
             evidence,
@@ -595,7 +721,7 @@ export function buildEmetAiTopicEvidence({
           proposition: cleanQuestion,
           requiresScopeAnalysis: false,
           requiresTimeline: false,
-          components: [],
+          components,
           establishedPropositions: [],
         },
     scope: {
@@ -603,9 +729,29 @@ export function buildEmetAiTopicEvidence({
         ? "passage"
         : "topic",
       references: evidence
+        .filter((item) => item.kind === "scripture")
         .map((item) => item.reference)
         .filter((value): value is string => Boolean(value)),
       entityIds: [],
+    },
+    requestedCoverage: {
+      version: EMET_AI_COVERAGE_VERSION,
+      passages: requestedPassages,
+      competingInterpretations: requestedCoverage.competingInterpretations,
+      comparisonPassages,
+      language: requestedCoverage.language.map((requirement) => ({
+        ...requirement,
+        terms: Array.from(new Map(
+          sourcePhraseMatches
+            .filter((match) => requirement.corpora.includes(match.phrase.corpus as "hebrew" | "greek-nt"))
+            .flatMap((match) => match.verifiedTerms.map((term) => ({
+              ...term,
+              corpus: match.phrase.corpus as "hebrew" | "greek-nt",
+            })))
+            .map((term) => [`${term.corpus}:${term.lexicalId}`, term]),
+        ).values()),
+      })),
+      subquestions: requestedCoverage.subquestions,
     },
     identity: { gate: "not-applicable" },
     evidence,
