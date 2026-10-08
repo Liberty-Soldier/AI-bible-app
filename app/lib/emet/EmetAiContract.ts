@@ -1,6 +1,6 @@
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@18" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first@22" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
 export type EmetAiScopeType = "word" | "verse" | "passage" | "topic";
@@ -570,8 +570,11 @@ export function validateEmetAiAnswer(
     }
 
     if (packet.reasoning.mode !== "simple") {
-      const hasGoverningContinuityEvidence = packet.evidence.some(
-        (item) => item.provenance.retrieval?.method === "governing-scripture",
+      const hasContinuityQuestion = packet.reasoning.components.some(
+        (component) =>
+          component.category === "command" ||
+          component.category === "duration" ||
+          component.category === "application",
       );
       if (
         /\b(?:the\s+)?(?:draft|packet|prompt|system instruction|model output)\b/i.test(
@@ -583,17 +586,20 @@ export function validateEmetAiAnswer(
         );
       }
       if (
-        /\b(?:not|does not|do not|did not)\s+(?:explicitly\s+|directly\s+)?(?:say|state|restate|repeat|reissue|list|include)\b[^.]{0,180}\b(?:therefore|so|thus|obligat|required|binding|continue|modern|christian|believer)/i.test(
+        /\b(?:the\s+)?supplied\s+(?:passages|texts|scripture|evidence)\b|\bthis\s+(?:scripture|evidence)\s+set\b/i.test(
           answer.answer,
         )
       ) {
         errors.push(
-          "The answer turns later non-repetition or omission into a continuity conclusion.",
+          "The reader-facing answer describes the internal evidence selection instead of speaking naturally from Scripture.",
         );
       }
       if (
-        hasGoverningContinuityEvidence &&
-        (/(?:do not|does not|did not)\s+(?:explicitly\s+|directly\s+)?establish\b[^.]{0,220}\b(?:modern christians?|new covenant believers?|believers?)\b[^.]{0,120}\b(?:obligat|required|must|binding)/i.test(
+        hasContinuityQuestion &&
+        (/\b(?:the\s+)?(?:new testament|later scripture|later passages)\b[^.]{0,120}(?:do not|does not|did not)\s+(?:explicitly\s+|directly\s+)?(?:say|state|restate|repeat|establish)\b[^.]{0,220}\b(?:modern christians?|new covenant believers?|believers?)\b[^.]{0,120}\b(?:obligat|required|must|binding)/i.test(
+          answer.answer,
+        ) ||
+          /(?:do not|does not|did not)\s+(?:explicitly\s+|directly\s+)?establish\b[^.]{0,220}\b(?:modern christians?|new covenant believers?|believers?)\b[^.]{0,120}\b(?:obligat|required|must|binding)/i.test(
           answer.answer,
         ) ||
           /\b(?:not|no longer)\s+(?:placed\s+)?under\s+(?:the\s+)?law of moses\b[^.]{0,160}\b(?:binding|administration|code)/i.test(
@@ -614,8 +620,7 @@ export function validateEmetAiAnswer(
         );
       }
       if (
-        (answer.conclusionSupport === "possible-interpretation" ||
-          answer.conclusionSupport === "does-not-establish") &&
+        answer.conclusionSupport === "possible-interpretation" &&
         /^\s*(yes|no)\s*[.!,:;-]/i.test(answer.answer)
       ) {
         errors.push(

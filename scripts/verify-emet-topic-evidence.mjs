@@ -383,6 +383,47 @@ if (oneSidedDoctrine.status === "ready") {
   );
 }
 
+const discourseContextPlan = plan({
+  subject: "the dispute and decision recorded in Acts 15",
+  intent: "application",
+  analysisMode: "doctrinal-claim",
+  proposition:
+    "Acts 15 must be read from the initiating salvation-and-circumcision claim through the council's reasoning and conclusion.",
+  components: [
+    {
+      id: "dispute",
+      proposition: "The dispute begins with a claim connecting circumcision to salvation.",
+      category: "event",
+    },
+    {
+      id: "decision",
+      proposition: "The council answers that dispute in its stated decision.",
+      category: "application",
+    },
+  ],
+  passages: [
+    { reference: "Acts 15:1", role: "context" },
+    { reference: "Acts 15:5", role: "context" },
+    { reference: "Acts 15:10", role: "context" },
+    { reference: "Acts 15:19", role: "context" },
+    { reference: "Acts 15:20", role: "context" },
+    { reference: "Acts 15:21", role: "context" },
+  ],
+});
+const discourseContext = buildEmetAiTopicEvidence({
+  question: "What issue is the conversation in Acts 15 deciding?",
+  retrievalPlan: discourseContextPlan,
+  requireSemanticPlan: true,
+});
+requireReferences(discourseContext, [
+  "Acts 15:1",
+  "Acts 15:5",
+  "Acts 15:10",
+  "Acts 15:19",
+  "Acts 15:20",
+  "Acts 15:21",
+]);
+
 const covenantConversation = buildEmetConversationContext([
   {
     question: "Who is the new covenant made with?",
@@ -631,5 +672,6 @@ console.log("- Known false-positive passages are explicitly excluded.");
 console.log("- Reader context disambiguates passage questions without contaminating independent topics.");
 console.log("- Conversation retains questions and verified references, never earlier answer prose as evidence.");
 console.log("- Disputed doctrines retain defined propositions and decomposed claims without forced countertexts.");
+console.log("- Argumentative passages retain their verified dispute, reasoning, decision, and conclusion context.");
 console.log("- Follow-ups retain structured textual findings without treating prior prose as evidence.");
 console.log("- Unresolved plans and unsupported topics fail closed.");

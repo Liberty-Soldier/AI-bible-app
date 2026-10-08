@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
 import type {
   EmetAiClaim,
@@ -215,8 +216,10 @@ export default function EmetChat({
   const [conversationId, setConversationId] = useState("");
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const [pending, setPending] = useState(false);
+  const [pendingQuestion, setPendingQuestion] = useState("");
   const [error, setError] = useState("");
   const conversationEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -250,19 +253,27 @@ export default function EmetChat({
   }, [exchanges, historyLoaded]);
 
   useEffect(() => {
-    if (!exchanges.length) return;
+    if (!exchanges.length && !pending) return;
     conversationEndRef.current?.scrollIntoView({
       behavior: "smooth",
-      block: "start",
+      block: "end",
     });
-  }, [exchanges.length]);
+  }, [exchanges.length, pending]);
+
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+    textarea.style.height = "auto";
+    textarea.style.height = `${Math.min(textarea.scrollHeight, 160)}px`;
+  }, [question]);
 
   const activeContext = wordContext || readerContext;
   async function ask(questionOverride?: string) {
     const finalQuestion = (questionOverride || question).trim();
     if (!finalQuestion || pending) return;
 
-    setQuestion(finalQuestion);
+    setQuestion("");
+    setPendingQuestion(finalQuestion);
     setPending(true);
     setError("");
 
@@ -331,11 +342,13 @@ export default function EmetChat({
           }));
         }
         setError("quota-exhausted");
+        setQuestion(finalQuestion);
         return;
       }
       if (!response.ok) {
         const answer = normalizeAnswer(payload);
         setError(answer.answer);
+        setQuestion(finalQuestion);
         return;
       }
 
@@ -361,10 +374,12 @@ export default function EmetChat({
           source: typeof payload.source === "string" ? payload.source : undefined,
         },
       ]);
-      setQuestion("");
+      window.requestAnimationFrame(() => textareaRef.current?.focus());
     } catch {
       setError("EMET could not connect. Please try again.");
+      setQuestion(finalQuestion);
     } finally {
+      setPendingQuestion("");
       setPending(false);
     }
   }
@@ -385,8 +400,8 @@ export default function EmetChat({
 
   const composer = (
     <form
-      className={`border-t border-[var(--border)] bg-[var(--canvas)]/95 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl ${
-        exchanges.length ? "sticky bottom-0 mt-5" : "mb-3"
+      className={`z-20 bg-[var(--canvas)]/95 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl ${
+        exchanges.length ? "sticky bottom-0 mt-6" : "mt-6"
       }`}
       onSubmit={(event) => {
         event.preventDefault();
@@ -396,38 +411,50 @@ export default function EmetChat({
       <label htmlFor="emet-question" className="sr-only">
         Ask EMET a Scripture question
       </label>
-      <div className="flex items-end gap-3 border-b border-[var(--border)] bg-[var(--canvas)] py-2">
+      <div className="flex items-end gap-2 rounded-[1.6rem] border border-[var(--border)] bg-[var(--surface)] p-2 pl-4 shadow-[var(--shadow-sm)] transition focus-within:border-[color-mix(in_srgb,var(--brand)_55%,var(--border))] focus-within:bg-[var(--canvas)]">
         <textarea
+          ref={textareaRef}
           id="emet-question"
           value={question}
           onChange={(event) => setQuestion(event.target.value)}
-          rows={2}
+          onKeyDown={(event) => {
+            if (
+              event.key === "Enter" &&
+              !event.shiftKey &&
+              !event.nativeEvent.isComposing
+            ) {
+              event.preventDefault();
+              event.currentTarget.form?.requestSubmit();
+            }
+          }}
+          rows={1}
           maxLength={800}
           placeholder={exchanges.length ? "Ask a follow-up…" : "Ask a Scripture question…"}
           disabled={pending || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
-          className="min-h-12 flex-1 resize-none bg-transparent px-0 py-2 text-base leading-7 outline-none placeholder:text-[var(--muted)]"
+          className="max-h-40 min-h-11 flex-1 resize-none overflow-y-auto bg-transparent py-2.5 text-base leading-6 outline-none placeholder:text-[var(--muted)]"
         />
         <button
           type="submit"
+          aria-label={pending ? "EMET is thinking" : "Send question"}
           disabled={pending || !question.trim() || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
-          className="mb-1 shrink-0 border-b-2 border-[var(--brand)] px-1 py-2 text-sm font-black text-[var(--foreground)] disabled:cursor-not-allowed disabled:border-[var(--border)] disabled:opacity-40"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[var(--foreground)] text-lg font-semibold text-[var(--canvas)] transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
         >
-          {pending ? "Tracing…" : "Ask →"}
+          {pending ? (
+            <span className="h-4 w-4 animate-pulse rounded-full bg-current" />
+          ) : (
+            <span aria-hidden="true">↑</span>
+          )}
         </button>
       </div>
-      <p className="mt-2 text-center text-[0.66rem] leading-5 text-[var(--muted)]">
-        {exchanges.length
-          ? "Continue naturally. Every reply is checked against Scripture evidence."
-          : "Answers use supplied Scripture evidence only. Unsupported claims fail closed."}
+      <p className="mt-2 text-center text-[0.65rem] leading-5 text-[var(--muted)]">
+        Enter to send · Shift+Enter for a new line · Citations are verified
       </p>
     </form>
   );
 
   return (
     <div>
-      {exchanges.length === 0 ? composer : null}
-
-      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-[var(--border)] py-2 text-xs text-[var(--muted)]">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-y border-[var(--border)] py-2.5 text-xs text-[var(--muted)]">
         <div className="min-w-0">
           <div className="flex min-w-0 items-center gap-2">
             <span className="shrink-0 font-bold uppercase tracking-[0.16em]">
@@ -474,65 +501,108 @@ export default function EmetChat({
               window.sessionStorage.setItem(CHAT_ID_STORAGE_KEY, nextConversationId);
               setConversationId(nextConversationId);
             }}
-            className="border-b border-[var(--border)] pb-0.5 text-xs font-semibold text-[var(--muted)]"
+            className="rounded-full px-3 py-1.5 text-xs font-semibold text-[var(--muted)] transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
           >
             New conversation
           </button>
         </div>
       ) : null}
 
-      <div className="mt-6 space-y-6">
+      {!exchanges.length && !pending ? (
+        <div className="mx-auto max-w-lg pb-2 pt-10 text-center sm:pt-14">
+          <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-[var(--brand-soft)]">
+            <EmetseesLogo size={28} variant="gold" />
+          </div>
+          <p className="mt-4 text-lg font-bold tracking-[-0.02em]">
+            What would you like to understand?
+          </p>
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+            Ask naturally. EMET follows the question through Scripture and shows the passages behind its answer.
+          </p>
+        </div>
+      ) : null}
+
+      <div className="mt-7 space-y-9">
         {exchanges.map((exchange) => (
-          <article key={exchange.id} className="border-b border-[var(--border)] pb-7">
-            <div className="border-l-2 border-[var(--brand)] pl-4">
-              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
-                You asked
-              </p>
-              <p className="mt-1 text-base font-semibold leading-7">
+          <article key={exchange.id} className="space-y-6">
+            <div className="flex justify-end">
+              <p className="max-w-[88%] rounded-[1.45rem] rounded-br-md bg-[var(--surface-soft)] px-4 py-3 text-[0.98rem] font-medium leading-7 sm:max-w-[78%]">
                 {exchange.question}
               </p>
             </div>
-            <div className="mt-6">
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--brand-strong)]">
-                EMET answer
-              </p>
-              <p className="mt-3 whitespace-pre-wrap font-serif text-[1.08rem] leading-8">
-                {exchange.answer.answer}
-              </p>
+            <div className="flex items-start gap-3 sm:gap-4">
+              <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[var(--brand-soft)]">
+                <EmetseesLogo size={19} variant="gold" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="mb-2 text-[0.68rem] font-black uppercase tracking-[0.18em] text-[var(--brand-strong)]">
+                  EMET
+                </p>
+                <p className="whitespace-pre-wrap text-[1.02rem] leading-8">
+                  {exchange.answer.answer}
+                </p>
 
-              {exchange.answer.citations.length ? (
-                <div className="mt-5 border-t border-[var(--border)] pt-4">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--muted)]">
-                    Scripture evidence
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
-                    {exchange.answer.citations.map((citation) => {
-                      const reference = citation.reference;
-                      const href = reference ? referenceHref(reference) : null;
-                      return href && reference ? (
-                        <Link
-                          key={`${exchange.id}-${citation.evidenceId}`}
-                          href={href}
-                          className="border-b border-[var(--brand)] pb-0.5 text-xs font-bold"
-                        >
-                          {reference}
-                        </Link>
-                      ) : null;
-                    })}
-                  </div>
+                <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-[var(--muted)]">
+                  {exchange.answer.citations.length ? (
+                    <details className="group">
+                      <summary className="cursor-pointer list-none rounded-full border border-[var(--border)] px-3 py-1.5 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)] [&::-webkit-details-marker]:hidden">
+                        Sources · {exchange.answer.citations.length}
+                        <span className="ml-1.5 inline-block transition group-open:rotate-180" aria-hidden="true">⌄</span>
+                      </summary>
+                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-l-2 border-[var(--brand)] pl-3">
+                        {exchange.answer.citations.map((citation) => {
+                          const reference = citation.reference;
+                          const href = reference ? referenceHref(reference) : null;
+                          return href && reference ? (
+                            <Link
+                              key={`${exchange.id}-${citation.evidenceId}`}
+                              href={href}
+                              className="border-b border-[var(--brand)] pb-0.5 font-bold text-[var(--foreground)]"
+                            >
+                              {reference}
+                            </Link>
+                          ) : null;
+                        })}
+                      </div>
+                    </details>
+                  ) : null}
+
+                  <button
+                    type="button"
+                    aria-label="Share this answer"
+                    onClick={() => void share(exchange)}
+                    className="rounded-full px-2 py-1.5 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
+                  >
+                    Share
+                  </button>
                 </div>
-              ) : null}
-
-              <button
-                type="button"
-                onClick={() => void share(exchange)}
-                className="mt-5 border-b border-[var(--border)] pb-0.5 text-xs font-semibold text-[var(--muted)]"
-              >
-                Share this answer
-              </button>
+              </div>
             </div>
           </article>
         ))}
+
+        {pending && pendingQuestion ? (
+          <article className="space-y-6" aria-live="polite">
+            <div className="flex justify-end">
+              <p className="max-w-[88%] rounded-[1.45rem] rounded-br-md bg-[var(--surface-soft)] px-4 py-3 text-[0.98rem] font-medium leading-7 sm:max-w-[78%]">
+                {pendingQuestion}
+              </p>
+            </div>
+            <div className="flex items-center gap-3 sm:gap-4">
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[var(--brand-soft)]">
+                <EmetseesLogo size={19} variant="gold" />
+              </span>
+              <div className="flex items-center gap-2 text-sm font-semibold text-[var(--muted)]">
+                <span>Following the evidence</span>
+                <span className="flex gap-1" aria-hidden="true">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand)]" />
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand)] [animation-delay:160ms]" />
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand)] [animation-delay:320ms]" />
+                </span>
+              </div>
+            </div>
+          </article>
+        ) : null}
         <div ref={conversationEndRef} aria-hidden="true" />
       </div>
 
@@ -555,7 +625,7 @@ export default function EmetChat({
         </p>
       ) : null}
 
-      {exchanges.length ? composer : null}
+      {composer}
     </div>
   );
 }

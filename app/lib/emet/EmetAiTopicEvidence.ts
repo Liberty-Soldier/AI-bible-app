@@ -381,39 +381,6 @@ function sourcePhraseCandidates(plan: EmetAiRetrievalPlan | null) {
     .filter((value): value is NonNullable<typeof value> => value !== null);
 }
 
-function governingCandidates(plan: EmetAiRetrievalPlan | null) {
-  if (!plan || !["continuity", "application"].includes(plan.intent)) return [];
-  const governing = [
-    ["Matthew 5:17", "direct", "Jesus directly addresses abolishing the Law and the Prophets."],
-    ["Matthew 5:18", "direct", "Jesus states the law's duration and stated end condition."],
-    ["Matthew 5:19", "later-witness", "Jesus addresses doing and teaching the commandments."],
-    ["Romans 3:31", "later-witness", "Paul directly addresses whether faith nullifies or establishes the law."],
-    ["Jeremiah 31:33", "foundation", "The new-covenant promise places Yahweh's law within His people and writes it on their hearts."],
-    ["Hebrews 8:10", "later-witness", "Hebrews repeats the new-covenant promise that Yahweh puts His laws into His people's mind and heart."],
-    ["Isaiah 56:6", "foundation", "Isaiah describes foreigners who join themselves to Yahweh, love His name, hold His covenant, and keep the Sabbath."],
-    ["Mark 2:27", "direct", "Jesus states that the Sabbath was made for man."],
-    ["Romans 11:17", "later-witness", "Paul describes Gentile believers as grafted among the covenant people and sharing the root's richness."],
-    ["Ephesians 2:12", "foundation", "Paul identifies the former condition of Gentiles as alienated from Israel's commonwealth and strangers to the covenants."],
-    ["Ephesians 2:19", "later-witness", "Paul says those former strangers are now fellow citizens with the saints and members of God's household."],
-    ["Galatians 3:29", "later-witness", "Paul says those who belong to Messiah are Abraham's seed and heirs according to promise."],
-    ["Revelation 14:12", "later-witness", "A later canonical witness describes the saints in relation to God's commandments."],
-  ] as const;
-
-  return governing
-    .map(([reference, role, reason], position) => {
-      const resolved = resolveReference(reference);
-      if (!resolved) return null;
-      return {
-        ...resolved,
-        method: "governing-scripture" as const,
-        role,
-        reason,
-        score: 99 - position * 0.2,
-      };
-    })
-    .filter((value): value is NonNullable<typeof value> => value !== null);
-}
-
 function documentFrequency() {
   if (webDocumentFrequency) return webDocumentFrequency;
   const frequency = new Map<string, number>();
@@ -475,13 +442,11 @@ function selectedCandidates({
   const contextEvidence = contextCandidates(context, question);
   const plannedEvidence = plannedCandidates(plan);
   const phraseEvidence = sourcePhraseCandidates(plan);
-  const governingEvidence = governingCandidates(plan);
   const literalEvidence = literalCandidates(question);
   const candidates = plan
     ? [
         ...contextEvidence,
         ...phraseEvidence,
-        ...governingEvidence,
         ...plannedEvidence,
         ...(plan.analysisMode === "simple"
           ? literalEvidence.filter((candidate) => candidate.score >= 65).slice(0, 2)
@@ -507,7 +472,7 @@ function selectedCandidates({
   if (!plan) return ranked.slice(0, MAX_LITERAL_FALLBACK_VERSES);
 
   const evidenceLimit =
-    plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 24;
+    plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 16;
 
   const selected: EvidenceCandidate[] = [];
   const selectedReferences = new Set<string>();
@@ -516,7 +481,9 @@ function selectedCandidates({
     const reference = recordReference(candidate.record);
     if (selectedReferences.has(reference)) return false;
     const chapterKey = `${candidate.record[0]}|${candidate.record[1]}`;
-    if ((chapterCounts.get(chapterKey) || 0) >= 3) return false;
+    const chapterLimit =
+      plan.analysisMode === "simple" ? 3 : 10;
+    if ((chapterCounts.get(chapterKey) || 0) >= chapterLimit) return false;
     selected.push(candidate);
     selectedReferences.add(reference);
     chapterCounts.set(chapterKey, (chapterCounts.get(chapterKey) || 0) + 1);

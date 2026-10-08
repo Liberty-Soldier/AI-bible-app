@@ -45,7 +45,7 @@ export default async function EmetPage({
             Ask EMET
           </h1>
           <p className="mt-1 max-w-xl text-sm leading-6 text-[var(--muted)]">
-            Ask a Scripture question and inspect the supporting evidence.
+            A natural conversation grounded in Scripture, with evidence you can inspect.
           </p>
         </div>
 

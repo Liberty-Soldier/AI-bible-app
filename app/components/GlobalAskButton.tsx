@@ -96,7 +96,7 @@ export default function GlobalAskButton() {
                   Ask EMET
                 </h2>
                 <p className="mt-1 text-sm text-[var(--muted)]">
-                  Ask a Scripture question and inspect the supporting evidence.
+                  A natural conversation grounded in Scripture, with evidence you can inspect.
                 </p>
               </div>
               <EmetChat

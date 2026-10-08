@@ -552,12 +552,20 @@ assert.equal(
   validateEmetAiAnswer(doctrinalPacket, leakedInternalProcess).ok,
   false,
 );
+const leakedEvidenceSelection = structuredClone(calibratedDoctrinalAnswer);
+leakedEvidenceSelection.answer =
+  "The supplied passages support part of the conclusion, but this Scripture set is incomplete.";
+assert.equal(
+  validateEmetAiAnswer(doctrinalPacket, leakedEvidenceSelection).ok,
+  false,
+);
 const omissionAsRepeal = structuredClone(calibratedDoctrinalAnswer);
 omissionAsRepeal.answer =
   "The later passages do not directly establish that new covenant believers remain obligated to keep the law as a binding covenant code.";
 const continuityDoctrinalPacket = structuredClone(doctrinalPacket);
 continuityDoctrinalPacket.evidence[0].provenance.retrieval.method =
   "governing-scripture";
+continuityDoctrinalPacket.reasoning.components[0].category = "command";
 assert.equal(
   validateEmetAiAnswer(continuityDoctrinalPacket, omissionAsRepeal).ok,
   false,
@@ -639,6 +647,7 @@ const instruction = fs.readFileSync(
 for (const required of [
   "Scripture is the sole authority",
   "The Old Testament supplies the scriptural foundation",
+  "Read arguments and conversations as discourse",
   "whole scriptural witness as coherent",
   "Yahweh's Torah is His instruction",
   "The law of Moses",
@@ -683,17 +692,20 @@ assert.doesNotMatch(providerSource, /minimumUniqueQualifyingReferences/);
 assert.doesNotMatch(providerSource, /at least three high-value individual verses marked qualifying/i);
 assert.match(providerSource, /Never manufacture an opposing channel/);
 assert.match(providerSource, /only when the passage itself identifies the same command/);
-assert.match(providerSource, /an explicit command with an unsatisfied duration/);
-assert.match(providerSource, /never mention a draft, packet, prompt, model, method, or proposition/);
-assert.match(providerSource, /Do not treat "law of Moses," Torah, first covenant/);
+assert.match(providerSource, /An explicit command with a stated duration/);
 assert.match(
   providerSource,
-  /draft\.intent === "continuity" \|\| draft\.intent === "application"/,
+  /Do not make the proposition harder than the reader's actual question/,
 );
-assert.match(providerSource, /passage\.role !== "qualifying"/);
-assert.match(providerSource, /isUnsolicitedContinuityQualifier/);
-assert.match(providerSource, /Colossians 2:16/);
-assert.match(providerSource, /Mandatory canonical continuity finding/);
+assert.doesNotMatch(providerSource, /isUnsolicitedContinuityQualifier/);
+assert.match(providerSource, /Mandatory canonical continuity method/);
+assert.match(providerSource, /initiating question or accusation/);
+assert.match(providerSource, /gpt-5\.4-2026-03-05/);
+assert.match(providerSource, /emet_ai_plan_and_answer/);
+assert.match(providerSource, /pendingTopicAnswer/);
+assert.match(providerSource, /deterministic validation found the listed defects/);
+assert.doesNotMatch(providerSource, /independent final consistency auditor/);
+assert.doesNotMatch(providerSource, /Complete the local discourse context/);
 
 console.log("EMET AI foundation verification passed.");
 console.log("- Scripture-first constitution is versioned.");
