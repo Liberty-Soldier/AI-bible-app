@@ -17,6 +17,7 @@ import type {
 } from "./EmetAiRetrievalPlan";
 import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import type { EmetConversationContext } from "./EmetAiConversation";
+import type { EmetAiPerformanceObserver } from "./EmetAiPerformance";
 
 export interface EmetAiProvider {
   model: string;
@@ -55,14 +56,18 @@ export async function answerFromEmetAiEvidence({
   provider,
   allowLive = false,
   generatedAt,
+  performanceObserver,
 }: {
   packet: EmetAiEvidencePacket;
   store: EmetAiAnswerStore;
   provider?: EmetAiProvider;
   allowLive?: boolean;
   generatedAt?: string;
+  performanceObserver?: EmetAiPerformanceObserver;
 }): Promise<EmetAiServiceResult> {
+  let stageStartedAt = performance.now();
   const packetValidation = validateEmetAiEvidencePacket(packet);
+  performanceObserver?.stage("validation", performance.now() - stageStartedAt);
   if (!packetValidation.ok) {
     return failClosed(
       packet,
@@ -72,10 +77,14 @@ export async function answerFromEmetAiEvidence({
   }
 
   const cacheKey = getEmetAiCacheKey(packet);
+  stageStartedAt = performance.now();
   const cached = await store.get(cacheKey);
+  performanceObserver?.stage("evidence-cache-lookup", performance.now() - stageStartedAt);
   if (cached) {
+    stageStartedAt = performance.now();
     const parsed = parseEmetAiAnswer(cached.answer);
     const validation = parsed && validateEmetAiAnswer(packet, parsed);
+    performanceObserver?.stage("validation", performance.now() - stageStartedAt);
     if (validation?.ok) {
       return { answer: validation.value, source: "cache", cacheKey };
     }
@@ -106,7 +115,9 @@ export async function answerFromEmetAiEvidence({
         );
       }
 
+      const validationStartedAt = performance.now();
       const validation = validateEmetAiAnswer(packet, parsed);
+      performanceObserver?.stage("validation", performance.now() - validationStartedAt);
       if (!validation.ok) {
         return failClosed(
           packet,
@@ -116,11 +127,13 @@ export async function answerFromEmetAiEvidence({
       }
 
       if (validation.value.status === "complete") {
+        const storageStartedAt = performance.now();
         await store.set(cacheKey, {
           answer: validation.value,
           createdAt: generatedAt || new Date().toISOString(),
           model: provider.model,
         });
+        performanceObserver?.stage("storage", performance.now() - storageStartedAt);
       }
 
       return {

@@ -12,7 +12,10 @@ import {
   EMET_AI_RETRIEVAL_PLAN_SCHEMA,
   parseEmetAiRetrievalPlan,
 } from "../app/lib/emet/EmetAiRetrievalPlan.ts";
-import { buildEmetAiTopicEvidence } from "../app/lib/emet/EmetAiTopicEvidence.ts";
+import {
+  buildEmetAiTopicEvidence,
+  isEmetAiDeterministicFastPathEligible,
+} from "../app/lib/emet/EmetAiTopicEvidence.ts";
 
 function plan({
   subject,
@@ -664,6 +667,46 @@ assert.equal(
   claimOnlyConversation,
 );
 
+for (const [question, expectedReferences] of [
+  [
+    "Did Messiah abolish the commandments?",
+    ["Matthew 5:17", "Matthew 5:18", "Matthew 5:19"],
+  ],
+  [
+    "Should believers keep Yahweh's commandments?",
+    ["Revelation 14:12", "Matthew 19:17"],
+  ],
+]) {
+  assert.equal(isEmetAiDeterministicFastPathEligible({ question }), true);
+  const direct = buildEmetAiTopicEvidence({
+    question,
+    deterministicFastPath: true,
+  });
+  assert.equal(direct.status, "ready", question);
+  requireReferences(direct, expectedReferences);
+  if (direct.status === "ready") {
+    assert.equal(direct.packet.reasoning.mode, "simple");
+    assert.equal(direct.packet.responseDesign?.depth, "concise");
+    assert.ok(direct.packet.evidence.length <= 4);
+  }
+}
+
+for (const question of [
+  "What does this passage mean?",
+  "Is Messiah the same being as Yahweh?",
+  "Compare the strongest evidence for and against seventh-day Sabbath observance.",
+  "Examine the Hebrew and Greek words for righteousness.",
+  "Romans 3:10 mentions righteousness; how does that relate to Genesis 6:9?",
+]) {
+  assert.equal(isEmetAiDeterministicFastPathEligible({ question }), false, question);
+}
+
+const ambiguousDefinition = buildEmetAiTopicEvidence({
+  question: "What is sin?",
+  deterministicFastPath: true,
+});
+assert.equal(ambiguousDefinition.status, "insufficient-evidence");
+
 console.log("EMET semantic topic evidence verification passed.");
 console.log("- Model-planned references are validated against locked Scripture.");
 console.log("- Exact Hebrew source sequences connect Genesis 6 with the matching Job passages.");
@@ -675,3 +718,4 @@ console.log("- Disputed doctrines retain defined propositions and decomposed cla
 console.log("- Argumentative passages retain their verified dispute, reasoning, decision, and conclusion context.");
 console.log("- Follow-ups retain structured textual findings without treating prior prose as evidence.");
 console.log("- Unresolved plans and unsupported topics fail closed.");
+console.log("- High-confidence direct questions use locked deterministic evidence; ambiguous and deep questions retain semantic planning.");

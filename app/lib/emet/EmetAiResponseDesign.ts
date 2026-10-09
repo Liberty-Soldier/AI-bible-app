@@ -1,9 +1,11 @@
 import type { EmetConversationContext } from "./EmetAiConversation";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
+import type { EmetAiInstructionProfile } from "./EmetAiConstitution";
 
 export type EmetAiResponseDepth = "concise" | "standard" | "deep";
 
 export const EMET_AI_CONCISE_STYLE_VERSION = "answer-first-concise@1" as const;
+export const EMET_AI_RESPONSE_POLICY_VERSION = "scripture-first-response-policy@2" as const;
 
 export type EmetAiResponseDesign = {
   depth: EmetAiResponseDepth;
@@ -14,7 +16,7 @@ export type EmetAiResponseDesign = {
 };
 
 const DEEP_PATTERN =
-  /\b(?:deep study|comprehensive|in detail|thorough|compare|comparison|reconcile|contradict|original[- ]language|source[- ]language|hebrew|greek|septuagint|lxx|lexical|lemma|word study|etymolog|for and against|both sides|competing interpretations)\b/i;
+  /\b(?:deep study|comprehensive|in detail|thorough|compare|comparison|reconcile|contradict|original[- ]language|source[- ]language|hebrew|greek|septuagint|lxx|lexical|lemma|word study|etymolog|for and against|both sides|competing interpretations|same being|same person|same entity|divine nature|one essence|coequal|coeternal|trinity|triune)\b/i;
 const FOLLOW_UP_PATTERN =
   /^(?:so|then)\b|\b(?:why|how so|explain|what about|but what about|however|you said|earlier answer|previous answer|objection|challenge|doesn['’]t|wouldn['’]t|isn['’]t|aren['’]t)\b/i;
 
@@ -67,4 +69,25 @@ export function classifyEmetAiResponseDesign({
     maxScriptureCitations: 4,
     progressiveFollowUp,
   };
+}
+
+export function classifyEmetAiInstructionProfile({
+  question,
+  conversation = null,
+}: {
+  question: string;
+  conversation?: EmetConversationContext | null;
+}): EmetAiInstructionProfile {
+  const coverage = extractEmetAiRequestedCoverage(question);
+  const design = classifyEmetAiResponseDesign({ question, conversation });
+  if (coverage.language.length > 0) return "lexical";
+  if (coverage.competingInterpretations || /\b(?:compare|comparison|reconcile|contradict|for and against|both sides)\b/i.test(question)) {
+    return "comparison";
+  }
+  if (design.progressiveFollowUp) return "challenge";
+  if (/^\s*(?:what\s+is|define)\b|\bwhat\s+does\s+.+\s+mean\b/i.test(question)) {
+    return "definition";
+  }
+  if (design.depth === "deep" || coverage.subquestions.length > 1) return "complex";
+  return design.depth === "concise" ? "direct" : "definition";
 }

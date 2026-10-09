@@ -15,7 +15,9 @@ import {
   parseEmetAiRetrievalPlan,
 } from "../EmetAiRetrievalPlan";
 import type { EmetAiProvider } from "../EmetAiService";
+import type { EmetAiPerformanceObserver } from "../EmetAiPerformance";
 import { expandPlannedReferences } from "../EmetAiTopicEvidence";
+import { classifyEmetAiInstructionProfile } from "../EmetAiResponseDesign";
 
 const reasoningCategoryValues = [
   "identity", "authority", "nature", "relationship", "practice", "duration",
@@ -272,6 +274,20 @@ function answerSchema(evidenceIds: string[]) {
   } as const;
 }
 
+function conciseAnswerSchema(evidenceIds: string[]) {
+  const full = answerSchema(evidenceIds);
+  const properties: Record<string, unknown> = { ...full.properties };
+  delete properties.componentChecks;
+  delete properties.continuityChecks;
+  return {
+    ...full,
+    properties,
+    required: full.required.filter(
+      (field) => field !== "componentChecks" && field !== "continuityChecks",
+    ),
+  };
+}
+
 type ReferenceBackedAnswerDraft = {
   status: "complete" | "insufficient-evidence";
   answer: string;
@@ -399,7 +415,11 @@ function planAndAnswerSchema() {
   } as const;
 }
 
-export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
+export function createEmetAiOpenAiProvider({
+  performanceObserver,
+}: {
+  performanceObserver?: EmetAiPerformanceObserver;
+} = {}): EmetAiProvider | null {
   const apiKey = process.env.OPENAI_API_KEY?.trim();
   const answerModel =
     process.env.EMET_AI_ANSWER_MODEL?.trim() ||
@@ -432,7 +452,16 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
     modelName: string,
     elapsedMs: number,
   ) => {
-    if (process.env.EMET_AI_USAGE_LOG !== "1" || !response.usage) return;
+    if (!response.usage) return;
+    performanceObserver?.usage({
+      stage,
+      inputTokens: response.usage.input_tokens || 0,
+      cachedInputTokens: response.usage.input_tokens_details?.cached_tokens || 0,
+      outputTokens: response.usage.output_tokens || 0,
+      reasoningTokens: response.usage.output_tokens_details?.reasoning_tokens || 0,
+      totalTokens: response.usage.total_tokens || 0,
+    });
+    if (process.env.EMET_AI_USAGE_LOG !== "1") return;
     console.info("EMET AI usage", {
       stage,
       model: modelName,
@@ -454,6 +483,7 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
     },
     async plan(input) {
       lastFailure = [];
+      const instructionProfile = classifyEmetAiInstructionProfile(input);
       const planStartedAt = performance.now();
       const response = await client.responses.create({
         model: answerModel,
@@ -462,7 +492,7 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
         input: [
           {
             role: "system",
-            content: `${buildEmetAiSystemInstruction()}
+            content: `${buildEmetAiSystemInstruction(instructionProfile)}
 
 You are answering and selecting evidence in one pass. Use your trained biblical understanding to reason through the whole canon naturally. Return both a concise retrieval plan and the finished reader-facing answer. Every Scripture reference used by a component check, claim, or continuity check must also appear as an individual verse in plan.passages so the application can verify it against locked Scripture data.
 
@@ -620,6 +650,23 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
     },
     async generate(packet) {
       lastFailure = [];
+      const instructionProfile = packet.requestedCoverage?.language.length
+        ? "lexical"
+        : packet.requestedCoverage?.competingInterpretations
+          ? "comparison"
+          : packet.responseDesign?.progressiveFollowUp
+            ? "challenge"
+            : packet.reasoning.mode !== "simple" || packet.responseDesign?.depth === "deep"
+              ? "complex"
+              : /^\s*(?:what\s+is|define)\b|\bwhat\s+does\s+.+\s+mean\b/i.test(packet.question)
+                ? "definition"
+                : "direct";
+      const directProfile = instructionProfile === "direct" &&
+        packet.reasoning.mode === "simple" &&
+        packet.reasoning.establishedPropositions.length === 0;
+      const systemInstruction = buildEmetAiSystemInstruction(
+        instructionProfile,
+      );
       const hasCommandContinuityComponent = packet.reasoning.components.some(
         (component) =>
           component.category === "command" ||
@@ -627,7 +674,7 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           component.category === "application",
       );
       const canonicalContinuityDirective =
-        hasCommandContinuityComponent
+        !directProfile && hasCommandContinuityComponent
           ? `\n\nMandatory canonical continuity method: begin with the original instruction and its stated audience, duration, and conditions; then read the verified later passages in that established frame. If those passages establish non-abolition, new-covenant internalization of Yahweh's law, faith establishing the law, or covenant-participant continuity, synthesize them instead of demanding a second one-line issuance to a modern audience. Conclude that believers obey Yahweh's instructions that apply to them when the verified Scripture supports that conclusion, unless verified Scripture explicitly changes or ends the same command. Narrow application only from the instruction's own stated audience, role, land, sanctuary, priesthood, judicial, or other performance conditions.`
           : "";
       const responseDesignDirective = packet.responseDesign
@@ -742,7 +789,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
             input: [
               {
                 role: "system",
-                content: buildEmetAiSystemInstruction(),
+                content: systemInstruction,
               },
               {
                 role: "user",
@@ -754,11 +801,14 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
                 type: "json_schema",
                 name: "emet_ai_answer",
                 strict: true,
-                schema: answerSchema(packet.evidence.map((item) => item.id)),
+                schema: directProfile
+                  ? conciseAnswerSchema(packet.evidence.map((item) => item.id))
+                  : answerSchema(packet.evidence.map((item) => item.id)),
               },
             },
           });
           logUsage("answer", response, answerModel, performance.now() - answerStartedAt);
+          performanceObserver?.stage("generation", performance.now() - answerStartedAt);
           if (response.status !== "completed" || !response.output_text) {
             return null;
           }
@@ -771,6 +821,29 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
         const normalizeAnswer = (value: unknown) => {
           if (!value || typeof value !== "object") return value;
           const candidate = value as Record<string, unknown>;
+          if (typeof candidate.answer === "string") {
+            candidate.answer = candidate.answer
+              .replace(/\s*\([^)]*\b(?:scripture|lexical|morphology):[^)]*\)/gi, "")
+              .replace(/[ \t]+\n/g, "\n")
+              .trim();
+          }
+          if (directProfile) {
+            const claims = Array.isArray(candidate.claims)
+              ? candidate.claims.filter((claim) => claim && typeof claim === "object") as Array<Record<string, unknown>>
+              : [];
+            const evidenceIds = Array.from(new Set(claims.flatMap((claim) =>
+              Array.isArray(claim.evidenceIds)
+                ? claim.evidenceIds.filter((id): id is string => typeof id === "string")
+                : [],
+            )));
+            candidate.componentChecks = packet.reasoning.components.map((component) => ({
+              componentId: component.id,
+              support: candidate.conclusionSupport,
+              explanation: typeof candidate.answer === "string" ? candidate.answer : "",
+              evidenceIds,
+            }));
+            candidate.continuityChecks = [];
+          }
           if (
             typeof candidate.answer === "string" &&
             packet.requestedCoverage?.language.length
@@ -780,11 +853,17 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
                 .flatMap((requirement) => requirement.terms)
                 .map((term) => [`${term.corpus}:${term.lexicalId}`, term]),
             ).values());
-            const missingTerms = verifiedTerms.filter((term) =>
-              !candidate.answer!.toString().includes(term.lemma) ||
-              !candidate.answer!.toString().toLocaleLowerCase("en-US")
-                .includes(term.transliteration.toLocaleLowerCase("en-US"))
-            );
+            const answerText = candidate.answer.toString();
+            const missingTerms = Array.from(new Set(verifiedTerms.map((term) => term.corpus)))
+              .flatMap((corpus) => {
+                const corpusTerms = verifiedTerms.filter((term) => term.corpus === corpus);
+                const hasVisibleTerm = corpusTerms.some((term) =>
+                  answerText.includes(term.lemma) &&
+                  answerText.toLocaleLowerCase("en-US")
+                    .includes(term.transliteration.toLocaleLowerCase("en-US")),
+                );
+                return hasVisibleTerm ? [] : corpusTerms.slice(0, 1);
+              });
             if (missingTerms.length) {
               candidate.answer = `${candidate.answer.toString().trim()}\n\nVerified source-language terms: ${missingTerms
                 .map((term) => `${term.lemma} (${term.transliteration}) means ${term.meaning}`)
@@ -892,12 +971,14 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
 
         const normalizedDraft = normalizeAnswer(draft);
         const parsedDraft = parseEmetAiAnswer(normalizedDraft);
+        const validationStartedAt = performance.now();
         const initialValidation = parsedDraft
           ? validateEmetAiAnswer(packet, parsedDraft)
           : {
               ok: false as const,
               errors: ["The answer did not satisfy the required answer schema."],
             };
+        performanceObserver?.stage("validation", performance.now() - validationStartedAt);
         if (initialValidation.ok) return initialValidation.value;
 
         if (process.env.EMET_AI_USAGE_LOG === "1") {
@@ -918,7 +999,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           input: [
             {
               role: "system",
-              content: `${buildEmetAiSystemInstruction()}\n\nBuild a fresh answer using only the verified evidence packet supplied now. The fast provisional draft failed deterministic validation, so do not preserve its references or structured checks. Preserve a conclusion only when the verified packet supports it. Remove or qualify an unsupported secondary claim instead of discarding supported conclusions. Every component check and complete-answer claim must cite one or more available evidence IDs. Obey packet.responseDesign: concise means a direct 1–3 sentence answer, normally 30–65 words, with no unasked debate and no more than four strongest citations; standard and deep answers should remain proportionate to the request. Return only the complete answer object and do not discuss this recovery process in the reader-facing answer.`,
+              content: `${systemInstruction}\n\nBuild a fresh answer using only the verified evidence packet supplied now. The fast provisional draft failed deterministic validation, so do not preserve its references or structured checks. Preserve a conclusion only when the verified packet supports it. Remove or qualify an unsupported secondary claim instead of discarding supported conclusions. Every component check and complete-answer claim must cite one or more available evidence IDs. Obey packet.responseDesign: concise means a direct 1–3 sentence answer, normally 30–65 words, with no unasked debate and no more than four strongest citations; standard and deep answers should remain proportionate to the request. Return only the complete answer object and do not discuss this recovery process in the reader-facing answer.`,
             },
             {
               role: "user",
@@ -938,6 +1019,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           },
         });
         logUsage("repair", repair, answerModel, performance.now() - repairStartedAt);
+        performanceObserver?.stage("repair", performance.now() - repairStartedAt);
         if (repair.status !== "completed" || !repair.output_text) {
           lastFailure = [
             `Verified-packet recovery did not complete (${repair.status || "unknown status"}).`,

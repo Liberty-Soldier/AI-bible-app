@@ -14,8 +14,10 @@ import {
 } from "@/app/lib/emet/EmetAiQuota";
 import {
   buildEmetAiTopicEvidence,
+  isEmetAiDeterministicFastPathEligible,
   type EmetAiReaderContext,
 } from "@/app/lib/emet/EmetAiTopicEvidence";
+import { createEmetAiPerformanceTrace } from "@/app/lib/emet/EmetAiPerformance";
 import { answerFromEmetAiEvidence } from "@/app/lib/emet/EmetAiService";
 import {
   createSupabaseEmetAiAnswerStore,
@@ -120,10 +122,11 @@ export async function POST(request: Request) {
     return json({ status: "invalid-request" }, 400);
   }
 
-  const ledger = await getSupabaseEmetConversationLedger({
-    userId,
-    conversationId,
-  });
+  const performanceTrace = createEmetAiPerformanceTrace();
+
+  const ledger = await performanceTrace.measureAsync("ledger", () =>
+    getSupabaseEmetConversationLedger({ userId, conversationId }),
+  );
   if (!ledger) {
     return json({ status: "reasoning-ledger-unavailable" }, 503);
   }
@@ -137,13 +140,17 @@ export async function POST(request: Request) {
     conversation: authoritativeConversation,
   });
 
-  const provider = createEmetAiOpenAiProvider();
+  const provider = createEmetAiOpenAiProvider({
+    performanceObserver: performanceTrace.observer,
+  });
   const requestCacheKey = getEmetAiRequestCacheKey({
     question,
     conversation: activeConversation,
     context,
   });
-  const requestCache = await getSupabaseEmetAiRequestCache(requestCacheKey);
+  const requestCache = await performanceTrace.measureAsync("cache-lookup", () =>
+    getSupabaseEmetAiRequestCache(requestCacheKey),
+  );
   if (!provider && !requestCache) return disabledResponse();
 
   const quota = await reserveEmetAiQuestion(requestId, requestCacheKey);
@@ -153,16 +160,19 @@ export async function POST(request: Request) {
   }
 
   if (requestCache) {
-    const ledgerSaved = await appendSupabaseEmetConversationLedger({
-      userId,
-      conversationId,
-      claims: emetConversationClaimsFromAnswer(requestCache.answer),
-    });
+    const ledgerSaved = await performanceTrace.measureAsync("storage", () =>
+      appendSupabaseEmetConversationLedger({
+        userId,
+        conversationId,
+        claims: emetConversationClaimsFromAnswer(requestCache.answer),
+      }),
+    );
     if (!ledgerSaved) {
       await refundFailedEmetAiQuestion(requestId);
       return json({ status: "reasoning-ledger-unavailable" }, 503);
     }
     await completeEmetAiQuestion(requestId, "cache");
+    performanceTrace.report({ source: "request-cache", fastPath: false });
     return json({
       status: requestCache.answer.status,
       answer: requestCache.answer,
@@ -172,9 +182,25 @@ export async function POST(request: Request) {
   }
 
   let retrievalPlan = null;
-  try {
+  let fastPath = false;
+  let evidence = isEmetAiDeterministicFastPathEligible({
+    question,
+    conversation: activeConversation,
+    context,
+  })
+    ? performanceTrace.measure("retrieval", () =>
+        buildEmetAiTopicEvidence({
+          question,
+          conversation: activeConversation,
+          context,
+          deterministicFastPath: true,
+        }),
+      )
+    : null;
+  fastPath = evidence?.status === "ready";
+  if (!fastPath) try {
     retrievalPlan = provider?.plan
-      ? await provider.plan({
+      ? await performanceTrace.measureAsync("planning", () => provider.plan!({
           question,
           // Keep recent dialogue available for references such as "the first
           // question". Evidence and established claims remain independently
@@ -182,7 +208,7 @@ export async function POST(request: Request) {
           // new question.
           conversation: authoritativeConversation,
           context,
-        })
+        }))
       : null;
   } catch (error) {
     console.error("EMET retrieval planning failed.", {
@@ -191,15 +217,25 @@ export async function POST(request: Request) {
     retrievalPlan = null;
   }
 
-  const evidence = buildEmetAiTopicEvidence({
-    question,
-    conversation: activeConversation,
-    context,
-    retrievalPlan,
-    requireSemanticPlan: true,
-  });
+  if (!fastPath) {
+    evidence = performanceTrace.measure("retrieval", () =>
+      buildEmetAiTopicEvidence({
+        question,
+        conversation: activeConversation,
+        context,
+        retrievalPlan,
+        requireSemanticPlan: true,
+      }),
+    );
+  }
+  if (!evidence) {
+    await refundFailedEmetAiQuestion(requestId);
+    performanceTrace.report({ source: "fail-closed", fastPath });
+    return json({ status: "insufficient-evidence" }, 422);
+  }
   if (evidence.status !== "ready") {
     await refundFailedEmetAiQuestion(requestId);
+    performanceTrace.report({ source: "insufficient-evidence", fastPath });
     return json(
       {
         status: "insufficient-evidence",
@@ -222,6 +258,7 @@ export async function POST(request: Request) {
     store,
     provider,
     allowLive: true,
+    performanceObserver: performanceTrace.observer,
   });
 
   let responseUsage: unknown = quota;
@@ -229,27 +266,32 @@ export async function POST(request: Request) {
     await refundFailedEmetAiQuestion(requestId);
     responseUsage = (await getEmetAiUsageSummary()) || quota;
   } else {
-    const ledgerSaved = await appendSupabaseEmetConversationLedger({
-      userId,
-      conversationId,
-      claims: emetConversationClaimsFromAnswer(result.answer),
-    });
+    const ledgerSaved = await performanceTrace.measureAsync("storage", () =>
+      appendSupabaseEmetConversationLedger({
+        userId,
+        conversationId,
+        claims: emetConversationClaimsFromAnswer(result.answer),
+      }),
+    );
     if (!ledgerSaved) {
       await refundFailedEmetAiQuestion(requestId);
       return json({ status: "reasoning-ledger-unavailable" }, 503);
     }
     await completeEmetAiQuestion(requestId, result.source);
     if (result.answer.status === "complete") {
-      await setSupabaseEmetAiRequestCache({
-        key: requestCacheKey,
-        packet: evidence.packet,
-        answer: result.answer,
-        model: provider.model,
-        createdAt: new Date().toISOString(),
-      });
+      await performanceTrace.measureAsync("storage", () =>
+        setSupabaseEmetAiRequestCache({
+          key: requestCacheKey,
+          packet: evidence.packet,
+          answer: result.answer,
+          model: provider.model,
+          createdAt: new Date().toISOString(),
+        }),
+      );
     }
   }
 
+  performanceTrace.report({ source: result.source, fastPath });
   return json({
     status: result.answer.status,
     answer: result.answer,

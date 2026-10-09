@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   classifyEmetAiResponseDesign,
   EMET_AI_CONCISE_STYLE_VERSION,
+  EMET_AI_RESPONSE_POLICY_VERSION,
 } from "../app/lib/emet/EmetAiResponseDesign.ts";
 import { getEmetAiRequestCacheKey } from "../app/lib/emet/EmetAiCache.ts";
 
@@ -29,6 +30,19 @@ const conciseStyleKey = getEmetAiRequestCacheKey({
 });
 assert.notEqual(conciseStyleKey, legacyDirectQuestionKey);
 assert.equal(EMET_AI_CONCISE_STYLE_VERSION, "answer-first-concise@1");
+assert.equal(EMET_AI_RESPONSE_POLICY_VERSION, "scripture-first-response-policy@2");
+
+const standardKey = getEmetAiRequestCacheKey({
+  question: "Why did Paul write Colossians 2:16?",
+  conversation: null,
+  context: null,
+});
+const deepKey = getEmetAiRequestCacheKey({
+  question: "Compare the Sabbath passages in Exodus, Isaiah, the Gospels, and Hebrews.",
+  conversation: null,
+  context: null,
+});
+assert.notEqual(standardKey, deepKey);
 
 assert.equal(
   classifyEmetAiResponseDesign({
@@ -73,3 +87,4 @@ console.log("- Why questions receive standard explanatory depth.");
 console.log("- Comparisons and deep studies retain comprehensive treatment.");
 console.log("- Follow-up objections deepen the existing conversation instead of restarting it.");
 console.log("- Legacy long-form request caches cannot satisfy concise answer-first requests.");
+console.log("- The complete response-policy version participates in every request-cache identity.");

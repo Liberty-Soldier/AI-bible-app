@@ -125,6 +125,17 @@ const TOPIC_TERM_GROUPS = [
   ["resurrection", "resurrected", "raised"],
   ["passover", "pascha", "unleavened"],
 ] as const;
+const DIRECT_TERM_GROUPS = [
+  ["abolish", "abolished", "abolishing", "destroy", "destroyed", "nullify", "nullified", "void"],
+  ["command", "commands", "commandment", "commandments", "law", "laws", "torah", "instruction", "instructions"],
+  ["keep", "keeps", "keeping", "obey", "obeys", "obeying", "observe", "observes", "observing"],
+  ["messiah", "christ", "jesus"],
+  ["yahweh", "lord", "god", "father"],
+  ["believer", "believers", "disciple", "disciples", "saint", "saints"],
+  ["sabbath", "seventh-day", "seventh", "rest"],
+  ["resurrection", "resurrected", "raised", "rise"],
+  ["die", "dies", "died", "death", "dead"],
+] as const;
 const SINGLE_CHAPTER_BOOKS = new Set([
   "Obadiah",
   "Philemon",
@@ -481,6 +492,124 @@ function literalCandidates(question: string) {
     );
 }
 
+function deterministicDirectCandidates(question: string) {
+  const questionWords = new Set(tokenizedWords(question));
+  const concepts = DIRECT_TERM_GROUPS.filter((group) =>
+    group.some((term) => questionWords.has(term)),
+  );
+  const ungrouped = questionTerms(question).filter(
+    (term) => !DIRECT_TERM_GROUPS.some((group) => group.includes(term as never)),
+  );
+  const index = loadIndex("web");
+  const scored = index.records.map((record, recordIndex) => {
+    const verseWords = tokenizedWords(record[3]);
+    const words = new Set(verseWords);
+    const matchedConcepts = concepts.filter((group) =>
+      group.some((term) => words.has(term)),
+    );
+    const matchedUngrouped = ungrouped.filter((term) => words.has(term));
+    const definitionMatch = /^\s*(?:what\s+is|define)\b/i.test(question) &&
+      matchedUngrouped.some((term) =>
+        new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s+(?:is|means)\\b`, "i")
+          .test(record[3]),
+      );
+    const conceptPositions = matchedConcepts.map((group) =>
+      verseWords.flatMap((word, position) => group.includes(word as never) ? [position] : []),
+    );
+    const minimumConceptSpan = conceptPositions.length >= 2
+      ? Math.min(...conceptPositions[0].flatMap((left) =>
+          conceptPositions.slice(1).flatMap((positions) =>
+            positions.map((right) => Math.abs(left - right)),
+          ),
+        ))
+      : Number.POSITIVE_INFINITY;
+    const proximityBonus = minimumConceptSpan <= 3 ? 54 : minimumConceptSpan <= 7 ? 24 : 0;
+    const score = matchedConcepts.length * 36 + matchedUngrouped.length * 14 +
+      proximityBonus + (definitionMatch ? 48 : 0);
+    return {
+      record,
+      recordIndex,
+      matchedConcepts,
+      matchedUngrouped,
+      definitionMatch,
+      minimumConceptSpan,
+      score,
+    };
+  }).filter((item) => item.score > 0).sort(
+    (left, right) => right.score - left.score || left.recordIndex - right.recordIndex,
+  );
+  const anchor = scored[0];
+  const runnerUp = scored[1];
+  const strongAnchor = Boolean(
+    anchor &&
+    anchor.matchedConcepts.length >= 2 &&
+    anchor.score >= 72 &&
+    (!runnerUp ||
+      anchor.score >= runnerUp.score + 18 ||
+      anchor.matchedConcepts.length > runnerUp.matchedConcepts.length ||
+      anchor.matchedConcepts.length >= 3 ||
+      (anchor.minimumConceptSpan <= 3 && anchor.score >= 120)),
+  );
+  if (!strongAnchor) return [];
+
+  const asksBelieverApplication = DIRECT_TERM_GROUPS[5].some((term) =>
+    questionWords.has(term),
+  );
+  const gospelWitness = asksBelieverApplication
+    ? scored.find((item) =>
+        ["Matthew", "Mark", "Luke", "John"].includes(item.record[0]) &&
+        item.matchedConcepts.length >= 2 &&
+        item.minimumConceptSpan <= 7,
+      )
+    : null;
+  const sameChapter = scored.filter((item) =>
+    item.record[0] === anchor.record[0] &&
+    item.record[1] === anchor.record[1] &&
+    Math.abs(Number(item.record[2]) - Number(anchor.record[2])) <= 2 &&
+    (item.matchedConcepts.length > 0 || item.matchedUngrouped.length > 0),
+  );
+  const selectionPool = asksBelieverApplication && gospelWitness
+    ? [anchor, gospelWitness]
+    : sameChapter.length >= 2
+      ? [anchor, ...sameChapter]
+      : [anchor, ...sameChapter, ...scored];
+  const selected = selectionPool
+    .filter((item, position, items) =>
+      items.findIndex((candidate) => candidate.recordIndex === item.recordIndex) === position,
+    )
+    .slice(0, 4);
+  return selected.map((item): EvidenceCandidate => ({
+    index,
+    record: item.record,
+    recordIndex: item.recordIndex,
+    method: "literal-text-match",
+    role: "direct",
+    reason: "The locked verse text strongly matches multiple material concepts in the direct question.",
+    score: Math.min(100, item.score),
+  }));
+}
+
+export function isEmetAiDeterministicFastPathEligible({
+  question,
+  conversation = null,
+  context = null,
+}: {
+  question: string;
+  conversation?: EmetConversationContext | null;
+  context?: EmetAiReaderContext | null;
+}) {
+  const design = classifyEmetAiResponseDesign({ question, conversation });
+  const coverage = extractEmetAiRequestedCoverage(question);
+  return design.depth === "concise" &&
+    !design.progressiveFollowUp &&
+    !context &&
+    coverage.passages.length === 0 &&
+    coverage.language.length === 0 &&
+    coverage.subquestions.length === 0 &&
+    !coverage.competingInterpretations &&
+    !READER_DEPENDENT_PATTERN.test(question);
+}
+
 function selectedCandidates({
   question,
   plan,
@@ -599,6 +728,7 @@ export function buildEmetAiTopicEvidence({
   context = null,
   retrievalPlan = null,
   requireSemanticPlan = false,
+  deterministicFastPath = false,
   builtAt,
 }: {
   question: string;
@@ -606,6 +736,7 @@ export function buildEmetAiTopicEvidence({
   context?: EmetAiReaderContext | null;
   retrievalPlan?: EmetAiRetrievalPlan | null;
   requireSemanticPlan?: boolean;
+  deterministicFastPath?: boolean;
   builtAt?: string;
 }) {
   const cleanQuestion = question.trim();
@@ -639,12 +770,14 @@ export function buildEmetAiTopicEvidence({
     };
   }
 
-  const candidates = selectedCandidates({
-    question: cleanQuestion,
-    plan: retrievalPlan,
-    context,
-    conversation,
-  });
+  const candidates = deterministicFastPath
+    ? deterministicDirectCandidates(cleanQuestion)
+    : selectedCandidates({
+        question: cleanQuestion,
+        plan: retrievalPlan,
+        context,
+        conversation,
+      });
   const evidence = candidates.map(scriptureItem);
   if (!evidence.length) {
     return {

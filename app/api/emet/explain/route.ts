@@ -17,6 +17,7 @@ import {
 } from "@/app/lib/emet/EmetAiQuota";
 import { createEmetAiVerseLoader } from "@/app/lib/emet/EmetAiScriptureRuntime";
 import { answerFromEmetAiEvidence } from "@/app/lib/emet/EmetAiService";
+import { createEmetAiPerformanceTrace } from "@/app/lib/emet/EmetAiPerformance";
 import {
   appendSupabaseEmetConversationLedger,
   createSupabaseEmetAiAnswerStore,
@@ -157,10 +158,10 @@ export async function POST(request: Request) {
   if (!question || !requestId || !conversationId || conversation === null || !context) {
     return json({ status: "invalid-request" }, 400);
   }
-  const ledger = await getSupabaseEmetConversationLedger({
-    userId,
-    conversationId,
-  });
+  const performanceTrace = createEmetAiPerformanceTrace();
+  const ledger = await performanceTrace.measureAsync("ledger", () =>
+    getSupabaseEmetConversationLedger({ userId, conversationId }),
+  );
   if (!ledger) {
     return json({ status: "reasoning-ledger-unavailable" }, 503);
   }
@@ -176,11 +177,13 @@ export async function POST(request: Request) {
   if (cookie) forwardedHeaders.cookie = cookie;
   if (authorization) forwardedHeaders.authorization = authorization;
 
-  const wordStudy = await resolveEmetAiReaderWord({
-    context,
-    origin: url.origin,
-    requestHeaders: forwardedHeaders,
-  });
+  const wordStudy = await performanceTrace.measureAsync("retrieval", () =>
+    resolveEmetAiReaderWord({
+      context,
+      origin: url.origin,
+      requestHeaders: forwardedHeaders,
+    }),
+  );
   if (!wordStudy) {
     return json(
       {
@@ -194,17 +197,19 @@ export async function POST(request: Request) {
     );
   }
 
-  const evidence = await buildEmetAiWordEvidence({
-    question: buildEmetConversationQuestion({
-      question,
-      conversation: relevantEmetConversation({
+  const evidence = await performanceTrace.measureAsync("retrieval", () =>
+    buildEmetAiWordEvidence({
+      question: buildEmetConversationQuestion({
         question,
-        conversation: authoritativeConversation,
+        conversation: relevantEmetConversation({
+          question,
+          conversation: authoritativeConversation,
+        }),
       }),
+      wordStudy,
+      loadVerse: createEmetAiVerseLoader(url.origin, forwardedHeaders),
     }),
-    wordStudy,
-    loadVerse: createEmetAiVerseLoader(url.origin, forwardedHeaders),
-  });
+  );
   if (evidence.status !== "ready") {
     return json(
       {
@@ -220,7 +225,9 @@ export async function POST(request: Request) {
   if (!store) return disabledResponse();
 
   const cacheKey = getEmetAiCacheKey(evidence.packet);
-  const provider = createEmetAiOpenAiProvider();
+  const provider = createEmetAiOpenAiProvider({
+    performanceObserver: performanceTrace.observer,
+  });
   if (!provider && !(await store.get(cacheKey))) return disabledResponse();
 
   const quota = await reserveEmetAiQuestion(requestId, cacheKey);
@@ -236,17 +243,20 @@ export async function POST(request: Request) {
     store,
     provider: provider || undefined,
     allowLive: Boolean(provider),
+    performanceObserver: performanceTrace.observer,
   });
   let responseUsage: unknown = quota;
   if (result.source === "fail-closed") {
     await refundFailedEmetAiQuestion(requestId);
     responseUsage = (await getEmetAiUsageSummary()) || quota;
   } else {
-    const ledgerSaved = await appendSupabaseEmetConversationLedger({
-      userId,
-      conversationId,
-      claims: emetConversationClaimsFromAnswer(result.answer),
-    });
+    const ledgerSaved = await performanceTrace.measureAsync("storage", () =>
+      appendSupabaseEmetConversationLedger({
+        userId,
+        conversationId,
+        claims: emetConversationClaimsFromAnswer(result.answer),
+      }),
+    );
     if (!ledgerSaved) {
       await refundFailedEmetAiQuestion(requestId);
       return json({ status: "reasoning-ledger-unavailable" }, 503);
@@ -254,6 +264,7 @@ export async function POST(request: Request) {
     await completeEmetAiQuestion(requestId, result.source);
   }
 
+  performanceTrace.report({ source: result.source, fastPath: false, wordStudy: true });
   return json({
     status: result.answer.status,
     answer: result.answer,

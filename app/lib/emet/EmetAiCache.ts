@@ -15,6 +15,7 @@ import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 import {
   classifyEmetAiResponseDesign,
   EMET_AI_CONCISE_STYLE_VERSION,
+  EMET_AI_RESPONSE_POLICY_VERSION,
 } from "./EmetAiResponseDesign";
 
 export type EmetAiCachedAnswer = {
@@ -47,6 +48,8 @@ export function getEmetAiCacheKey(packet: EmetAiEvidencePacket) {
   const stableInput = JSON.stringify({
     schemaVersion: packet.schemaVersion,
     promptVersion: EMET_AI_PROMPT_VERSION,
+    responsePolicyVersion: EMET_AI_RESPONSE_POLICY_VERSION,
+    responseDesign: packet.responseDesign || null,
     question: normalizedQuestion(packet.question),
     reasoning: packet.reasoning,
     scopeType: packet.scope.type,
@@ -93,7 +96,9 @@ export function getEmetAiRequestCacheKey({
   const stableInput = JSON.stringify({
     requestSchema: "emet-ai-request-cache@4",
     promptVersion: EMET_AI_PROMPT_VERSION,
+    responsePolicyVersion: EMET_AI_RESPONSE_POLICY_VERSION,
     retrievalPlanSchema: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
+    responseDesign,
     question: normalizedQuestion(question),
     ...(responseDesign.depth === "concise"
       ? {
