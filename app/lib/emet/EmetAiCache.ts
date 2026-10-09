@@ -12,6 +12,10 @@ import type { EmetConversationContext } from "./EmetAiConversation";
 import { EMET_AI_RETRIEVAL_PLAN_SCHEMA } from "./EmetAiRetrievalPlan";
 import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
+import {
+  classifyEmetAiResponseDesign,
+  EMET_AI_CONCISE_STYLE_VERSION,
+} from "./EmetAiResponseDesign";
 
 export type EmetAiCachedAnswer = {
   answer: EmetAiAnswer;
@@ -34,6 +38,12 @@ function normalizedQuestion(question: string) {
 
 export function getEmetAiCacheKey(packet: EmetAiEvidencePacket) {
   const identity = packet.identity.canonicalEntityId || "no-entity";
+  const conciseStyle = packet.responseDesign?.depth === "concise"
+    ? {
+        responseStyleVersion: EMET_AI_CONCISE_STYLE_VERSION,
+        responseDesign: packet.responseDesign,
+      }
+    : {};
   const stableInput = JSON.stringify({
     schemaVersion: packet.schemaVersion,
     promptVersion: EMET_AI_PROMPT_VERSION,
@@ -43,6 +53,7 @@ export function getEmetAiCacheKey(packet: EmetAiEvidencePacket) {
     references: [...packet.scope.references].sort(),
     entityIds: [...packet.scope.entityIds].sort(),
     identity,
+    ...conciseStyle,
     evidenceVersion: packet.provenance.evidenceVersion,
     evidence: packet.evidence.map((item) => ({
       id: item.id,
@@ -73,6 +84,7 @@ export function getEmetAiRequestCacheKey({
   context: EmetAiReaderContext | null;
 }) {
   const requestedCoverage = extractEmetAiRequestedCoverage(question);
+  const responseDesign = classifyEmetAiResponseDesign({ question, conversation });
   const hasRequestedCoverage =
     requestedCoverage.passages.length > 0 ||
     requestedCoverage.language.length > 0 ||
@@ -83,6 +95,12 @@ export function getEmetAiRequestCacheKey({
     promptVersion: EMET_AI_PROMPT_VERSION,
     retrievalPlanSchema: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
     question: normalizedQuestion(question),
+    ...(responseDesign.depth === "concise"
+      ? {
+          responseStyleVersion: EMET_AI_CONCISE_STYLE_VERSION,
+          responseDesign,
+        }
+      : {}),
     ...(hasRequestedCoverage
       ? { coverageVersion: EMET_AI_COVERAGE_VERSION, requestedCoverage }
       : {}),

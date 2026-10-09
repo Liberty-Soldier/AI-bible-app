@@ -3,6 +3,8 @@ import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 
 export type EmetAiResponseDepth = "concise" | "standard" | "deep";
 
+export const EMET_AI_CONCISE_STYLE_VERSION = "answer-first-concise@1" as const;
+
 export type EmetAiResponseDesign = {
   depth: EmetAiResponseDepth;
   targetMinWords: number;
