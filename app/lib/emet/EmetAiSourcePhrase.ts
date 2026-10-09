@@ -13,10 +13,14 @@ type SourcePhraseEntry = [
 ];
 
 type SourcePhraseIndex = {
-  schemaVersion: "emet-source-phrase-index@1";
+  schemaVersion: "emet-source-phrase-index@2";
   sourceFingerprint: string;
   bodyChecksum: string;
   corpora: Record<EmetAiPlannedSourcePhrase["corpus"], SourcePhraseEntry[]>;
+  lexicalDetails: Record<
+    EmetAiPlannedSourcePhrase["corpus"],
+    Array<[lexicalId: string, lemma: string, transliteration: string, meaning: string]>
+  >;
 };
 
 export type VerifiedSourcePhraseMatch = {
@@ -54,10 +58,11 @@ function loadIndex() {
   );
   const parsed = JSON.parse(fs.readFileSync(filePath, "utf8")) as SourcePhraseIndex;
   if (
-    parsed.schemaVersion !== "emet-source-phrase-index@1" ||
+    parsed.schemaVersion !== "emet-source-phrase-index@2" ||
     !parsed.sourceFingerprint ||
     !parsed.bodyChecksum ||
-    !parsed.corpora
+    !parsed.corpora ||
+    !parsed.lexicalDetails
   ) {
     throw new Error("The EMET source phrase index failed validation.");
   }
@@ -89,22 +94,6 @@ function verifiedLexicalIdsForLemmas(
 ) {
   let lookup = lexicalIdsByLemma.get(corpus);
   if (!lookup) {
-    const fileName = corpus === "hebrew"
-      ? "generatedHebrewLexiconV12.json"
-      : corpus === "greek-nt"
-        ? "generatedNTGreekLexiconV12.json"
-        : "generatedLXXGreekLexiconV12.json";
-    const records = JSON.parse(fs.readFileSync(
-      path.join(process.cwd(), "app", "data", "lexicon", fileName),
-      "utf8",
-    )) as Array<{
-      lemma?: string;
-      strong?: string;
-      id?: string;
-      transliteration?: string;
-      shortDefinition?: string;
-      gloss?: string;
-    }>;
     lookup = new Map();
     const details = new Map<string, {
       lexicalId: string;
@@ -112,21 +101,14 @@ function verifiedLexicalIdsForLemmas(
       transliteration: string;
       meaning: string;
     }>();
-    for (const record of records) {
-      const lemma = normalizedLemma(record.lemma || "");
-      const lexicalId = normalizedLexicalId(record.strong || record.id?.split(":").pop() || "");
+    for (const [rawLexicalId, rawLemma, transliteration, meaning] of loadIndex().lexicalDetails[corpus] || []) {
+      const lemma = normalizedLemma(rawLemma);
+      const lexicalId = normalizedLexicalId(rawLexicalId);
       if (!lemma || !lexicalId) continue;
       const ids = lookup.get(lemma) || [];
       if (!ids.includes(lexicalId)) ids.push(lexicalId);
       lookup.set(lemma, ids);
-      if (record.lemma && record.transliteration && (record.shortDefinition || record.gloss)) {
-        details.set(lexicalId, {
-          lexicalId,
-          lemma: record.lemma,
-          transliteration: record.transliteration,
-          meaning: record.shortDefinition || record.gloss || "",
-        });
-      }
+      details.set(lexicalId, { lexicalId, lemma: rawLemma, transliteration, meaning });
     }
     lexicalIdsByLemma.set(corpus, lookup);
     lexicalDetailsByCorpus.set(corpus, details);

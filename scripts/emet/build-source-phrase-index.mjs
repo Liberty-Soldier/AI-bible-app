@@ -12,9 +12,9 @@ const outputPath = path.join(
 const verifyOnly = process.argv.includes("--verify");
 
 const corpora = [
-  { id: "hebrew", directory: "hebrew" },
-  { id: "lxx", directory: "lxx" },
-  { id: "greek-nt", directory: "greek-nt" },
+  { id: "hebrew", directory: "hebrew", lexicon: "generatedHebrewLexiconV12.json" },
+  { id: "lxx", directory: "lxx", lexicon: "generatedLXXGreekLexiconV12.json" },
+  { id: "greek-nt", directory: "greek-nt", lexicon: "generatedNTGreekLexiconV12.json" },
 ];
 
 function sha256(value) {
@@ -79,6 +79,7 @@ function authoritativeTokens(verse, corpus) {
 function buildIndex() {
   const sourceFiles = [];
   const outputCorpora = {};
+  const lexicalDetails = {};
 
   for (const corpus of corpora) {
     const directory = path.join(
@@ -123,16 +124,33 @@ function buildIndex() {
     }
 
     outputCorpora[corpus.id] = entries;
+
+    const lexiconPath = path.join(root, "app", "data", "lexicon", corpus.lexicon);
+    const lexiconSource = fs.readFileSync(lexiconPath);
+    sourceFiles.push({
+      path: path.relative(root, lexiconPath).replaceAll("\\", "/"),
+      sha256: sha256(lexiconSource.toString("utf8").replace(/\r\n?/g, "\n")),
+    });
+    const records = JSON.parse(lexiconSource.toString("utf8"));
+    lexicalDetails[corpus.id] = records.flatMap((record) => {
+      const id = corpus.id === "lxx"
+        ? String(record.lxxId || record.id || "").replace(/^lxx-greek:/, "")
+        : String(record.strong || record.id || "").split(":").at(-1);
+      const meaning = String(record.shortDefinition || record.gloss || "").trim();
+      if (!id || !record.lemma || !record.transliteration || !meaning) return [];
+      return [[id, record.lemma, record.transliteration, meaning]];
+    });
   }
 
   const sourceFingerprint = sha256(
     JSON.stringify(sourceFiles.map((file) => [file.path, file.sha256])),
   );
   const body = {
-    schemaVersion: "emet-source-phrase-index@1",
+    schemaVersion: "emet-source-phrase-index@2",
     sourceFingerprint,
     sourceFiles,
     corpora: outputCorpora,
+    lexicalDetails,
   };
   const bodyChecksum = sha256(JSON.stringify(body));
   return { ...body, bodyChecksum };
