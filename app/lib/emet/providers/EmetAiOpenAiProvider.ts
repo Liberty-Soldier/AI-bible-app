@@ -466,6 +466,8 @@ export function createEmetAiOpenAiProvider(): EmetAiProvider | null {
 
 You are answering and selecting evidence in one pass. Use your trained biblical understanding to reason through the whole canon naturally. Return both a concise retrieval plan and the finished reader-facing answer. Every Scripture reference used by a component check, claim, or continuity check must also appear as an individual verse in plan.passages so the application can verify it against locked Scripture data.
 
+The input's responseDesign is mandatory. For concise questions, answer the question immediately in 1–3 sentences, normally 30–65 words, and select only 2–4 of the strongest direct Scripture witnesses. Do not preemptively introduce objections, denominational debates, historical background, or passages from Paul merely because someone might later raise them. For standard questions and follow-up objections, explain the requested reason or objection directly and build on the recorded conversation. For deep comparisons, multi-part questions, contradictions, and original-language studies, use the detail needed for complete coverage. Progressive depth means the first answer stays proportionate; later questions may deepen it without restarting the study.
+
 Identify the biblical subject and select the smallest set of passages that can honestly support the answer. Read Scripture canonically: include the necessary earlier foundation, the most direct passage, relevant later witness, and any passage that materially qualifies the conclusion. Do not select verses merely because they repeat a common English word.
 
 First classify the reasoning task. Use simple for ordinary factual or passage questions. Use doctrinal-claim when the reader asks whether Scripture teaches, proves, or supports a disputed doctrine, obligation, covenant claim, prophecy interpretation, or theological identity claim. Use apparent-contradiction when the question asks Scripture to reconcile statements that appear to pull in different directions. Set requiresScopeAnalysis whenever audience, role, covenant participants, conditions, location, institution, jurisdiction, or command applicability could change the answer. Set requiresTimeline whenever promise, inauguration, transition, fulfillment, resurrection, or future completion could change the answer.
@@ -496,7 +498,7 @@ This comparison instruction is mandatory when the question says "for and against
 
 The reader's preferred conclusion and earlier EMET claims are context, never evidence. Earlier structured claims must be re-checked from their cited passages in the current plan when they remain material. Do not reverse an earlier textual finding merely because the latest question pushes another direction; retrieve the passages needed either to preserve it or to explain a genuine scriptural reconciliation.
 
-Use reader location, a named book, and prior questions to resolve what the reader means, not to restrict retrieval to that chapter or book. A new subject overrides earlier context. Unless the reader explicitly asks for only one passage, search the whole canon for the necessary evidence. Return individual verse references in the form "Genesis 6:2", never ranges. Prefer 5 to 10 high-value verses and never pad the plan with weak matches. Priority 100 means most important and 1 means least important.
+Use reader location, a named book, and prior questions to resolve what the reader means, not to restrict retrieval to that chapter or book. A new subject overrides earlier context. Search as broadly as the question requires, but return only the proportionate evidence defined by responseDesign: normally 2–4 high-value verses for concise questions, 4–8 for standard explanations, and enough verified witnesses for deep studies. Return individual verse references in the form "Genesis 6:2", never ranges. Never pad the plan with weak matches. Priority 100 means most important and 1 means least important.
 
 Conversation turn outcomes are product context, not Scripture evidence. If the reader asks why an earlier turn failed, use the recorded answered/failed outcome: acknowledge a failed generation or verification turn plainly and offer to answer it again. Never invent a theological reason for a technical failure, and never claim an answered turn failed.
 
@@ -506,7 +508,7 @@ For identity, relationship, comparison, and event questions, deliberately check 
 
 Do not stop at identical labels. A later passage may recall an earlier event through a cluster such as actor class, transgression, punishment, chronology, named people, and surrounding judgment. When two or more distinctive features overlap, include the strongest retrospective passages as later-witness or qualifying evidence so the answer can distinguish an explicit identification from a supported canonical inference.
 
-For obligation, law, covenant, or continuity questions, the plan must include the original command or institution, its named audience, its stated duration or end condition, later governing statements about the law or commandments as a class, and directly relevant application passages. Include a proposed change or qualification only when the passage itself identifies the same command or governing class and explicitly changes its scope, duration, audience, condition, or required practice. A passage about justification, condemnation, priesthood, sacrifice, covenant administration, or an unnamed practice is not automatically evidence that a different command ended. Omission from a later list is not cancellation.
+For obligation, law, covenant, or continuity questions that require scope analysis, reconciliation, or deep treatment, include the original command or institution, its named audience, its stated duration or end condition, later governing statements about the law or commandments as a class, and directly relevant application passages. For a concise question that is explicitly answered by direct Scripture, lead with that text and do not automatically expand into every possible covenant objection. Include a proposed change or qualification only when the passage itself identifies the same command or governing class and explicitly changes its scope, duration, audience, condition, or required practice. A passage about justification, condemnation, priesthood, sacrifice, covenant administration, or an unnamed practice is not automatically evidence that a different command ended. Omission from a later list is not cancellation.
 
 Do not demand that an earlier command be repeated using a modern audience label before it can remain applicable. A continuity conclusion may follow strongly from the command's stated duration together with later governing statements that Torah is not abolished and is written within the new-covenant people. Distinguish the command's continuing authority from its person-, role-, place-, and condition-specific application.
 
@@ -516,7 +518,7 @@ The input's requestedCoverage was extracted deterministically from the reader's 
 
 Do not use denominational doctrine, consensus, or historical literature as proof. Do not put noncanonical references in passages. If the question asks about historical literature, record that limitation; EMETSEES handles such sources separately.
 
-Give short retrieval reasons. Write the answer in natural connected prose, not as a report about selected evidence. Do not say "supplied passages," "the evidence set," or similar internal wording. Return only the required combined structured result.`,
+Give short retrieval reasons. Write the answer in natural connected prose, not as a report about selected evidence. Start with the direct answer. Obey responseDesign.targetMinWords and responseDesign.targetMaxWords unless additional words are genuinely required for accuracy or explicit requested coverage. Do not repeat the conclusion. Do not say "supplied passages," "the evidence set," or similar internal wording. Return only the required combined structured result.`,
           },
           {
             role: "user",
@@ -544,7 +546,16 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           answer?: ReferenceBackedAnswerDraft;
         };
         const draft = parseEmetAiRetrievalPlan(combined.plan);
-        if (!draft || !combined.answer) return null;
+        if (!draft || !combined.answer) {
+          if (process.env.EMET_AI_DEBUG === "1") {
+            console.error("EMET combined plan/answer failed parsing.", {
+              parsedPlan: Boolean(draft),
+              hasAnswer: Boolean(combined.answer),
+              rawPlan: combined.plan,
+            });
+          }
+          return null;
+        }
         pendingTopicAnswer = combined.answer;
         if (!draft || draft.analysisMode === "simple") return draft;
 
@@ -600,7 +611,10 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           ...draft,
           passages: mergedPassages,
         };
-      } catch {
+      } catch (error) {
+        if (process.env.EMET_AI_DEBUG === "1") {
+          console.error("EMET combined plan/answer parsing threw.", error);
+        }
         return null;
       }
     },
@@ -616,6 +630,9 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
         hasCommandContinuityComponent
           ? `\n\nMandatory canonical continuity method: begin with the original instruction and its stated audience, duration, and conditions; then read the verified later passages in that established frame. If those passages establish non-abolition, new-covenant internalization of Yahweh's law, faith establishing the law, or covenant-participant continuity, synthesize them instead of demanding a second one-line issuance to a modern audience. Conclude that believers obey Yahweh's instructions that apply to them when the verified Scripture supports that conclusion, unless verified Scripture explicitly changes or ends the same command. Narrow application only from the instruction's own stated audience, role, land, sanctuary, priesthood, judicial, or other performance conditions.`
           : "";
+      const responseDesignDirective = packet.responseDesign
+        ? `\n\nResponse design: ${packet.responseDesign.depth}. Target ${packet.responseDesign.targetMinWords}–${packet.responseDesign.targetMaxWords} reader-facing words and no more than ${packet.responseDesign.maxScriptureCitations} Scripture citations. Begin with the answer. ${packet.responseDesign.depth === "concise" ? "Use 1–3 sentences and do not introduce unasked objections or broad theological debate." : packet.responseDesign.progressiveFollowUp ? "Answer the follow-up directly using the established conversation context; do not restart the whole study." : "Use only the depth needed for the request."}`
+        : "";
       const task = packet.reasoning.mode === "simple"
         ? "Give the reader a direct, concise Scripture-grounded explanation. Use your biblical understanding to read the passages naturally, while citing every biblical conclusion only to verified evidence in the packet. Keep evidence bookkeeping in componentChecks, claims, and citations, not in the reader-facing answer. Return exactly one componentCheck for every reasoning component and an empty continuityChecks array when no established propositions are supplied."
         : `Test the exact proposition in packet.reasoning from the complete supplied Scripture evidence. This is universal biblical reasoning, not advocacy for a theological camp.
@@ -633,6 +650,7 @@ Use packet.reasoning.establishedPropositions as mandatory consistency constraint
 Return exactly one componentCheck for every component in packet.reasoning.components. Grade the actual component proposition, not a weaker substitute. The full conclusionSupport may not be stronger than the weakest material component. If one required assertion is only possible or is not established, do not say the named compound proposition is established; explain naturally which parts Scripture states and which part it does not establish.
 
 For each answer claim, provide a stable ID, evidence level, category, polarity, exact scope, and timing. The reader-facing answer must remain natural, direct, and concise. Begin with the answer, never with commentary about a draft, packet, model, method, or proposition. State the conclusion the supplied Scripture establishes; do not weaken an explicit command, duration, or governing statement merely because the reader used modern wording. Use a qualification only when its cited passage materially addresses the exact proposition. Do not introduce labels such as "Sinai administration" or "covenant setting" unless the cited text itself makes that distinction relevant to the answer. Give the precise conclusion justified by all materially relevant supplied Scripture.${canonicalContinuityDirective}`;
+      const designedTask = `${task}${responseDesignDirective}`;
       try {
         const referenceKey = (reference: string) =>
           reference
@@ -728,7 +746,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
               },
               {
                 role: "user",
-                content: JSON.stringify({ task, packet }),
+                content: JSON.stringify({ task: designedTask, packet }),
               },
             ],
             text: {
@@ -828,7 +846,10 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
                 ? [support]
                 : [];
             });
-            if (supports.length === candidate.componentChecks.length) {
+            if (
+              supports.length > 0 &&
+              supports.length === candidate.componentChecks.length
+            ) {
               const weakest = supports.reduce((left, right) =>
                 (rank.get(left) || 0) <= (rank.get(right) || 0) ? left : right,
               );
@@ -897,7 +918,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           input: [
             {
               role: "system",
-              content: `${buildEmetAiSystemInstruction()}\n\nBuild a fresh answer using only the verified evidence packet supplied now. The fast provisional draft failed deterministic validation, so do not preserve its references or structured checks. Preserve a conclusion only when the verified packet supports it. Remove or qualify an unsupported secondary claim instead of discarding supported conclusions. Every component check and complete-answer claim must cite one or more available evidence IDs. Return only the complete answer object and do not discuss this recovery process in the reader-facing answer.`,
+              content: `${buildEmetAiSystemInstruction()}\n\nBuild a fresh answer using only the verified evidence packet supplied now. The fast provisional draft failed deterministic validation, so do not preserve its references or structured checks. Preserve a conclusion only when the verified packet supports it. Remove or qualify an unsupported secondary claim instead of discarding supported conclusions. Every component check and complete-answer claim must cite one or more available evidence IDs. Obey packet.responseDesign: concise means a direct 1–3 sentence answer, normally 30–65 words, with no unasked debate and no more than four strongest citations; standard and deep answers should remain proportionate to the request. Return only the complete answer object and do not discuss this recovery process in the reader-facing answer.`,
             },
             {
               role: "user",

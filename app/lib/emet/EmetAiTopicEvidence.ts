@@ -26,6 +26,7 @@ import {
   extractEmetAiRequestedCoverage,
   requestedCoverageComponents,
 } from "./EmetAiRequestedCoverage";
+import { classifyEmetAiResponseDesign } from "./EmetAiResponseDesign";
 
 type SearchTranslation = "web" | "kjv" | "brenton";
 type SearchRecord = [book: string, chapter: number, verse: string, text: string];
@@ -484,11 +485,19 @@ function selectedCandidates({
   question,
   plan,
   context,
+  conversation,
 }: {
   question: string;
   plan: EmetAiRetrievalPlan | null;
   context: EmetAiReaderContext | null;
+  conversation: EmetConversationContext | null;
 }) {
+  const responseDesign = classifyEmetAiResponseDesign({ question, conversation });
+  const effectiveDepth = plan?.sourcePhrases.length
+    ? "deep"
+    : plan?.analysisMode === "apparent-contradiction"
+      ? "standard"
+    : responseDesign.depth;
   const contextEvidence = contextCandidates(context, question);
   const explicitEvidence = requestedPassageCandidates(question, plan);
   const requiredComparisonEvidence = requiredComparisonCandidates(question);
@@ -527,8 +536,11 @@ function selectedCandidates({
   );
   if (!plan) return ranked.slice(0, MAX_LITERAL_FALLBACK_VERSES);
 
-  const evidenceLimit =
-    plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 16;
+  const evidenceLimit = effectiveDepth === "concise"
+    ? 4
+    : effectiveDepth === "standard"
+      ? 8
+      : plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 16;
 
   const selected: EvidenceCandidate[] = [];
   const selectedReferences = new Set<string>();
@@ -537,8 +549,11 @@ function selectedCandidates({
     const reference = recordReference(candidate.record);
     if (selectedReferences.has(reference)) return false;
     const chapterKey = `${candidate.record[0]}|${candidate.record[1]}`;
-    const chapterLimit =
-      plan.analysisMode === "simple" ? 3 : 10;
+    const chapterLimit = effectiveDepth === "concise"
+      ? 4
+      : effectiveDepth === "standard"
+        ? 4
+        : plan.analysisMode === "simple" ? 3 : 10;
     if (!force && (chapterCounts.get(chapterKey) || 0) >= chapterLimit) return false;
     selected.push(candidate);
     selectedReferences.add(reference);
@@ -548,6 +563,13 @@ function selectedCandidates({
 
   for (const candidate of explicitEvidence) add(candidate, true);
   for (const candidate of requiredComparisonEvidence) add(candidate, true);
+
+  // Direct witnesses outrank background and qualifications. Preserve more
+  // than one when Scripture gives independent direct statements.
+  for (const candidate of ranked.filter((item) => item.role === "direct")) {
+    if (selected.length >= evidenceLimit) break;
+    add(candidate);
+  }
 
   // Preserve the canonical evidence hierarchy before filling remaining
   // slots. Direct statements and earlier foundations govern; a genuinely
@@ -588,6 +610,15 @@ export function buildEmetAiTopicEvidence({
 }) {
   const cleanQuestion = question.trim();
   const requestedCoverage = extractEmetAiRequestedCoverage(cleanQuestion);
+  const baseResponseDesign = classifyEmetAiResponseDesign({
+    question: cleanQuestion,
+    conversation,
+  });
+  const responseDesign = retrievalPlan?.sourcePhrases.length
+    ? { ...baseResponseDesign, depth: "deep" as const, targetMinWords: 120, targetMaxWords: 500, maxScriptureCitations: 16 }
+    : retrievalPlan?.analysisMode === "apparent-contradiction" && baseResponseDesign.depth === "concise"
+      ? { ...baseResponseDesign, depth: "standard" as const, targetMinWords: 65, targetMaxWords: 220, maxScriptureCitations: 8 }
+      : baseResponseDesign;
   if (!cleanQuestion) {
     return {
       status: "insufficient-evidence" as const,
@@ -612,6 +643,7 @@ export function buildEmetAiTopicEvidence({
     question: cleanQuestion,
     plan: retrievalPlan,
     context,
+    conversation,
   });
   const evidence = candidates.map(scriptureItem);
   if (!evidence.length) {
@@ -704,6 +736,7 @@ export function buildEmetAiTopicEvidence({
     question: retrievalPlan
       ? `${resolvedQuestion}\n\nResolved retrieval subject (context only, not evidence): ${retrievalPlan.subject}`
       : resolvedQuestion,
+    responseDesign,
     reasoning: retrievalPlan
       ? {
           mode: retrievalPlan.analysisMode,

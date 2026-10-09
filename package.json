@@ -41,6 +41,7 @@
     "verify:emet-billing": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-billing.mjs",
     "verify:emet-topic": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-topic-evidence.mjs",
     "verify:emet-coverage": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-requested-coverage.mjs",
+    "verify:emet-response-design": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-response-design.mjs",
     "verify:emet-source-phrases": "node scripts/emet/build-source-phrase-index.mjs --verify",
     "verify:reader-navigation": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-reader-navigation.mjs",
     "verify:reader-experience": "node scripts/verify-reader-experience.mjs",

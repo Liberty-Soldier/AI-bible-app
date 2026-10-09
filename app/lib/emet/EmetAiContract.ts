@@ -114,6 +114,13 @@ export type EmetAiEvidenceItem = {
 export type EmetAiEvidencePacket = {
   schemaVersion: typeof EMET_AI_EVIDENCE_SCHEMA;
   question: string;
+  responseDesign?: {
+    depth: "concise" | "standard" | "deep";
+    targetMinWords: number;
+    targetMaxWords: number;
+    maxScriptureCitations: number;
+    progressiveFollowUp: boolean;
+  };
   reasoning: {
     mode: EmetAiReasoningMode;
     proposition: string;
@@ -272,6 +279,22 @@ export function validateEmetAiEvidencePacket(
 
   if (!clean(packet.question)) {
     errors.push("The question is required.");
+  }
+
+  if (
+    packet.responseDesign &&
+    (
+      !["concise", "standard", "deep"].includes(packet.responseDesign.depth) ||
+      !Number.isInteger(packet.responseDesign.targetMinWords) ||
+      !Number.isInteger(packet.responseDesign.targetMaxWords) ||
+      packet.responseDesign.targetMinWords < 1 ||
+      packet.responseDesign.targetMaxWords < packet.responseDesign.targetMinWords ||
+      !Number.isInteger(packet.responseDesign.maxScriptureCitations) ||
+      packet.responseDesign.maxScriptureCitations < 1 ||
+      typeof packet.responseDesign.progressiveFollowUp !== "boolean"
+    )
+  ) {
+    errors.push("The response-design contract is invalid.");
   }
 
   if (!clean(packet.reasoning?.proposition)) {
@@ -526,6 +549,18 @@ export function validateEmetAiAnswer(
 
     if (answer.citations.length === 0) {
       errors.push("A complete answer requires evidence citations.");
+    }
+    if (
+      packet.responseDesign?.depth === "concise" &&
+      answer.citations.length > packet.responseDesign.maxScriptureCitations
+    ) {
+      errors.push("A concise answer includes more Scripture references than its response design permits.");
+    }
+    if (
+      packet.responseDesign?.depth === "concise" &&
+      clean(answer.answer).split(/\s+/).filter(Boolean).length > 90
+    ) {
+      errors.push("A concise reader-facing answer is unnecessarily long.");
     }
 
     const components = new Map(

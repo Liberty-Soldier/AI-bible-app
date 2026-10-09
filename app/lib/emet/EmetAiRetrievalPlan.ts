@@ -4,6 +4,7 @@ import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import type { EmetConversationContext } from "./EmetAiConversation";
 import type { EmetAiReasoningCategory } from "./EmetAiContract";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
+import { classifyEmetAiResponseDesign } from "./EmetAiResponseDesign";
 
 export const EMET_AI_RETRIEVAL_PLAN_SCHEMA =
   "emet-ai-retrieval-plan@3" as const;
@@ -171,8 +172,8 @@ export function parseEmetAiRetrievalPlan(
   }
 
   if (
-    candidate.analysisMode !== "simple" &&
-    components.length < 2
+    (candidate.analysisMode === "doctrinal-claim" && components.length < 1) ||
+    (candidate.analysisMode === "apparent-contradiction" && components.length < 1)
   ) {
     return null;
   }
@@ -250,6 +251,7 @@ export function buildEmetAiRetrievalInput({
   return {
     question: question.trim(),
     requestedCoverage: extractEmetAiRequestedCoverage(question),
+    responseDesign: classifyEmetAiResponseDesign({ question, conversation }),
     readerContext: context
       ? {
           book: context.book,
