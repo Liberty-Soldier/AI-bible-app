@@ -112,6 +112,10 @@ const validAnswer = {
 assert.equal(validateEmetAiEvidencePacket(packet).ok, true);
 assert.equal(validateEmetAiAnswer(packet, validAnswer).ok, true);
 
+const unverifiedGreekAnswer = structuredClone(validAnswer);
+unverifiedGreekAnswer.answer = `${unverifiedGreekAnswer.answer} λόγος`;
+assert.equal(validateEmetAiAnswer(packet, unverifiedGreekAnswer).ok, false);
+
 const fabricatedCitation = structuredClone(validAnswer);
 fabricatedCitation.citations.push({
   evidenceId: "scripture:Revelation.22.21",

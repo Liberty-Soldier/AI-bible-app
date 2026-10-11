@@ -218,6 +218,7 @@ export default function EmetChat({
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const [pending, setPending] = useState(false);
   const [pendingQuestion, setPendingQuestion] = useState("");
+  const [pendingStatus, setPendingStatus] = useState("Searching Scripture…");
   const [error, setError] = useState("");
   const conversationEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -262,6 +263,22 @@ export default function EmetChat({
   }, [exchanges.length, pending]);
 
   useEffect(() => {
+    if (!pending) return;
+    const readingTimer = window.setTimeout(
+      () => setPendingStatus("Reading the relevant passages…"),
+      3500,
+    );
+    const verificationTimer = window.setTimeout(
+      () => setPendingStatus("Verifying the answer…"),
+      9500,
+    );
+    return () => {
+      window.clearTimeout(readingTimer);
+      window.clearTimeout(verificationTimer);
+    };
+  }, [pending]);
+
+  useEffect(() => {
     const textarea = textareaRef.current;
     if (!textarea) return;
     textarea.style.height = "auto";
@@ -278,6 +295,7 @@ export default function EmetChat({
 
     setQuestion("");
     setPendingQuestion(finalQuestion);
+    setPendingStatus("Searching Scripture…");
     setPending(true);
     setError("");
 
@@ -613,7 +631,7 @@ export default function EmetChat({
                 <EmetseesLogo size={19} variant="gold" />
               </span>
               <div className="flex items-center gap-2 text-sm font-semibold text-[var(--muted)]">
-                <span>Following the evidence</span>
+                <span>{pendingStatus}</span>
                 <span className="flex gap-1" aria-hidden="true">
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand)]" />
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand)] [animation-delay:160ms]" />

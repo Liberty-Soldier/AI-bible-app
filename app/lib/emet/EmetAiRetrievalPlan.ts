@@ -179,7 +179,7 @@ export function parseEmetAiRetrievalPlan(
   }
 
   const passages: EmetAiPlannedPassage[] = [];
-  for (const item of candidate.passages.slice(0, 16)) {
+  for (const item of candidate.passages.slice(0, 24)) {
     if (!item || typeof item !== "object") return null;
     const passage = item as Record<string, unknown>;
     const reference = clean(passage.reference, 80);

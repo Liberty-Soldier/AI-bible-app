@@ -693,6 +693,10 @@ for (const [question, expectedReferences] of [
 
 for (const question of [
   "What does this passage mean?",
+  "What commandments should I keep?",
+  "What are the Ten Commandments?",
+  "How do I keep the Sabbath?",
+  "What foods does Scripture prohibit?",
   "Is Messiah the same being as Yahweh?",
   "Compare the strongest evidence for and against seventh-day Sabbath observance.",
   "Examine the Hebrew and Greek words for righteousness.",

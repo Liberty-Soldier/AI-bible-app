@@ -1,6 +1,11 @@
+import {
+  validateEmetAiConcreteAnswer,
+  validateEmetAiScriptureOnlyFraming,
+} from "./EmetAiAnswerCompleteness";
+
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@22" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first@23" as const;
 export const EMET_AI_COVERAGE_VERSION = "deterministic-coverage@1" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
@@ -517,6 +522,34 @@ export function validateEmetAiAnswer(
     errors.push("The answer text is required.");
   }
 
+  if (answer.status === "complete") {
+    const concreteAnswerError = validateEmetAiConcreteAnswer({
+      question: packet.question,
+      answer: answer.answer,
+      evidence: packet.evidence,
+    });
+    if (concreteAnswerError) errors.push(concreteAnswerError);
+    const scriptureOnlyError = validateEmetAiScriptureOnlyFraming({
+      question: packet.question,
+      answer: answer.answer,
+    });
+    if (scriptureOnlyError) errors.push(scriptureOnlyError);
+    const answerUsesHebrew = /[\u0590-\u05ff]/u.test(answer.answer);
+    const answerUsesGreek = /[\u0370-\u03ff\u1f00-\u1fff]/u.test(answer.answer);
+    if (
+      answerUsesHebrew &&
+      !packet.evidence.some((item) => item.kind === "lexical" && item.corpus === "hebrew")
+    ) {
+      errors.push("Reader-facing Hebrew requires verified Hebrew lexical evidence.");
+    }
+    if (
+      answerUsesGreek &&
+      !packet.evidence.some((item) => item.kind === "lexical" && ["greek-nt", "lxx"].includes(item.corpus || ""))
+    ) {
+      errors.push("Reader-facing Greek requires verified Greek lexical evidence.");
+    }
+  }
+
   if (!claimSupports.has(answer.conclusionSupport)) {
     errors.push("The full proposition requires a valid support classification.");
   }
@@ -764,7 +797,7 @@ export function validateEmetAiAnswer(
         );
       }
       if (
-        /\b(?:the\s+)?supplied\s+(?:passages|texts|scripture|evidence)\b|\bthis\s+(?:scripture|evidence)\s+set\b/i.test(
+        /\b(?:the\s+)?(?:supplied|provided)\s+(?:passages|texts|scripture|evidence)\b|\bthis\s+(?:scripture|evidence)\s+set\b/i.test(
           answer.answer,
         )
       ) {

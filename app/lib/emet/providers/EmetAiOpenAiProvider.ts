@@ -83,7 +83,7 @@ function retrievalPlanSchema() {
       },
       passages: {
         type: "array",
-        maxItems: 16,
+        maxItems: 24,
         items: {
           type: "object",
           properties: {
@@ -243,7 +243,7 @@ function answerSchema(evidenceIds: string[]) {
     },
     citations: {
       type: "array",
-      maxItems: 16,
+      maxItems: 24,
       items: {
         type: "object",
         properties: {
@@ -484,6 +484,9 @@ export function createEmetAiOpenAiProvider({
     async plan(input) {
       lastFailure = [];
       const instructionProfile = classifyEmetAiInstructionProfile(input);
+      const subjectRetrievalDirective = /\b(?:earth|sun|moon|heavens?|expanse|firmament|cosmolog|heliocentr|geocentr)\b/i.test(input.question)
+        ? `\n\nFor broad questions about Scripture's descriptions of the earth, sun, moon, heavens, or expanse, examine all materially distinct textual categories: the earth's establishment or stability, the narrated movement or stillness of the sun and moon, the expanse, and the created lights and their functions. Relevant witnesses include Genesis 1:6–8, Genesis 1:14–17, Joshua 10:12–13, 1 Chronicles 16:30, Psalms 19:4–6, 93:1, and 104:5, Ecclesiastes 1:5, and Job 37:18. These are neutral retrieval anchors, not a predetermined cosmological conclusion; include other material passages and conclude only what their wording establishes. Do not volunteer a phenomenological, observational, poetic, or human-vantage explanation unless the reader explicitly asks for that comparison.`
+        : "";
       const planStartedAt = performance.now();
       const response = await client.responses.create({
         model: answerModel,
@@ -499,6 +502,8 @@ You are answering and selecting evidence in one pass. Use your trained biblical 
 The input's responseDesign is mandatory. For concise questions, answer the question immediately in 1–3 sentences, normally 30–65 words, and select only 2–4 of the strongest direct Scripture witnesses. Do not preemptively introduce objections, denominational debates, historical background, or passages from Paul merely because someone might later raise them. For standard questions and follow-up objections, explain the requested reason or objection directly and build on the recorded conversation. For deep comparisons, multi-part questions, contradictions, and original-language studies, use the detail needed for complete coverage. Progressive depth means the first answer stays proportionate; later questions may deepen it without restarting the study.
 
 Identify the biblical subject and select the smallest set of passages that can honestly support the answer. Read Scripture canonically: include the necessary earlier foundation, the most direct passage, relevant later witness, and any passage that materially qualifies the conclusion. Do not select verses merely because they repeat a common English word.
+
+Answer-completeness rule: a question asking which or what items requires passages that state the actual items or meaningful categories; a question asking how to perform or observe something requires passages that state concrete actions, conditions, boundaries, or examples. A general command to obey, keep, avoid, or remember is not sufficient by itself. For a named multi-item list, retrieve and identify every requested item. For a comprehensive question, decompose the subject into its materially distinct textual categories and retrieve the strongest passage for each; do not add an external interpretive framework the reader did not request.
 
 First classify the reasoning task. Use simple for ordinary factual or passage questions. Use doctrinal-claim when the reader asks whether Scripture teaches, proves, or supports a disputed doctrine, obligation, covenant claim, prophecy interpretation, or theological identity claim. Use apparent-contradiction when the question asks Scripture to reconcile statements that appear to pull in different directions. Set requiresScopeAnalysis whenever audience, role, covenant participants, conditions, location, institution, jurisdiction, or command applicability could change the answer. Set requiresTimeline whenever promise, inauguration, transition, fulfillment, resurrection, or future completion could change the answer.
 
@@ -548,7 +553,7 @@ The input's requestedCoverage was extracted deterministically from the reader's 
 
 Do not use denominational doctrine, consensus, or historical literature as proof. Do not put noncanonical references in passages. If the question asks about historical literature, record that limitation; EMETSEES handles such sources separately.
 
-Give short retrieval reasons. Write the answer in natural connected prose, not as a report about selected evidence. Start with the direct answer. Obey responseDesign.targetMinWords and responseDesign.targetMaxWords unless additional words are genuinely required for accuracy or explicit requested coverage. Do not repeat the conclusion. Do not say "supplied passages," "the evidence set," or similar internal wording. Return only the required combined structured result.`,
+Give short retrieval reasons. Write the answer in natural connected prose, not as a report about selected evidence. Start with the direct answer. Obey responseDesign.targetMinWords and responseDesign.targetMaxWords unless additional words are genuinely required for accuracy or explicit requested coverage. Do not repeat the conclusion. Do not say "supplied passages," "the evidence set," or similar internal wording. Never print Hebrew or Greek script, transliterations, lexical identities, or source-word meanings unless the application supplies verified lexical evidence for them. Return only the required combined structured result.${subjectRetrievalDirective}`,
           },
           {
             role: "user",
@@ -587,13 +592,45 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           return null;
         }
         pendingTopicAnswer = combined.answer;
-        if (!draft || draft.analysisMode === "simple") return draft;
-
         const referenceKey = (reference: string) => reference
           .normalize("NFKC")
           .toLocaleLowerCase("en-US")
           .replace(/\s+/g, " ")
           .trim();
+
+        const requiredSubjectPassages = /\b(?:earth|sun|moon|heavens?|expanse|firmament|cosmolog|heliocentr|geocentr)\b/i.test(input.question)
+          ? [
+              "Genesis 1:6-8", "Genesis 1:14-17", "Joshua 10:12-13",
+              "1 Chronicles 16:30", "Psalms 19:4-6", "Psalms 93:1",
+              "Psalms 104:5", "Ecclesiastes 1:5", "Job 37:18",
+            ].map((reference) => ({
+              reference,
+              role: "foundation" as const,
+              reason: "Neutral subject-coverage anchor requested for a comprehensive biblical cosmology question.",
+              priority: 98,
+            }))
+          : [];
+        if (requiredSubjectPassages.length) {
+          const plannedReferences = new Set(
+            draft.passages
+              .flatMap((passage) => expandPlannedReferences(passage.reference))
+              .map(referenceKey),
+          );
+          const missingRequiredSubjectPassage = requiredSubjectPassages.some((passage) =>
+            expandPlannedReferences(passage.reference)
+              .some((reference) => !plannedReferences.has(referenceKey(reference))),
+          );
+          if (missingRequiredSubjectPassage) pendingTopicAnswer = null;
+          const seen = new Set(draft.passages.map((passage) => referenceKey(passage.reference)));
+          draft.passages.push(...requiredSubjectPassages.filter((passage) => {
+            const key = referenceKey(passage.reference);
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          }));
+          draft.passages = draft.passages.slice(0, 24);
+        }
+        if (draft.analysisMode === "simple") return draft;
 
         const continuityPassages = relevantEmetConversationClaimReferences(
           input.conversation,
@@ -634,7 +671,7 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           if (seenPassages.has(key)) continue;
           seenPassages.add(key);
           mergedPassages.push(passage);
-          if (mergedPassages.length >= 16) break;
+          if (mergedPassages.length >= 24) break;
         }
 
         return {
@@ -681,7 +718,7 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
         ? `\n\nResponse design: ${packet.responseDesign.depth}. Target ${packet.responseDesign.targetMinWords}–${packet.responseDesign.targetMaxWords} reader-facing words and no more than ${packet.responseDesign.maxScriptureCitations} Scripture citations. Begin with the answer. ${packet.responseDesign.depth === "concise" ? "Use 1–3 sentences and do not introduce unasked objections or broad theological debate." : packet.responseDesign.progressiveFollowUp ? "Answer the follow-up directly using the established conversation context; do not restart the whole study." : "Use only the depth needed for the request."}`
         : "";
       const task = packet.reasoning.mode === "simple"
-        ? "Give the reader a direct, concise Scripture-grounded explanation. Use your biblical understanding to read the passages naturally, while citing every biblical conclusion only to verified evidence in the packet. Keep evidence bookkeeping in componentChecks, claims, and citations, not in the reader-facing answer. Return exactly one componentCheck for every reasoning component and an empty continuityChecks array when no established propositions are supplied."
+        ? "Give the reader a direct, concise Scripture-grounded explanation. Use your biblical understanding to read the passages naturally, while citing every biblical conclusion only to verified evidence in the packet. If the question asks what or which items, name the actual items or meaningful categories; if it asks how, state concrete actions and conditions. Do not answer by merely repeating the duty or category named in the question. Keep evidence bookkeeping in componentChecks, claims, and citations, not in the reader-facing answer. Return exactly one componentCheck for every reasoning component and an empty continuityChecks array when no established propositions are supplied."
         : `Test the exact proposition in packet.reasoning from the complete supplied Scripture evidence. This is universal biblical reasoning, not advocacy for a theological camp.
 
 Separate every material component. Do not exchange identity for authority, covenant for Torah, priesthood for every command, sacrifice for morality, association for ontology, present participation for final consummation, or change in one administration for abolition of unrelated instruction.

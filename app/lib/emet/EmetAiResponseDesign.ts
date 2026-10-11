@@ -1,11 +1,15 @@
 import type { EmetConversationContext } from "./EmetAiConversation";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 import type { EmetAiInstructionProfile } from "./EmetAiConstitution";
+import {
+  classifyEmetAiConcreteAnswerRequirement,
+  expectedEmetAiNamedListCount,
+} from "./EmetAiAnswerCompleteness";
 
 export type EmetAiResponseDepth = "concise" | "standard" | "deep";
 
 export const EMET_AI_CONCISE_STYLE_VERSION = "answer-first-concise@1" as const;
-export const EMET_AI_RESPONSE_POLICY_VERSION = "scripture-first-response-policy@2" as const;
+export const EMET_AI_RESPONSE_POLICY_VERSION = "scripture-first-response-policy@3" as const;
 
 export type EmetAiResponseDesign = {
   depth: EmetAiResponseDepth;
@@ -28,10 +32,13 @@ export function classifyEmetAiResponseDesign({
   conversation?: EmetConversationContext | null;
 }): EmetAiResponseDesign {
   const coverage = extractEmetAiRequestedCoverage(question);
+  const namedListCount = expectedEmetAiNamedListCount(question);
+  const concreteRequirement = classifyEmetAiConcreteAnswerRequirement(question);
   const progressiveFollowUp = Boolean(
     conversation?.recentExchanges.length && FOLLOW_UP_PATTERN.test(question),
   );
   const isDeep =
+    Boolean(namedListCount) ||
     DEEP_PATTERN.test(question) ||
     coverage.competingInterpretations ||
     coverage.language.length > 0 ||
@@ -50,6 +57,15 @@ export function classifyEmetAiResponseDesign({
       targetMinWords: 120,
       targetMaxWords: 500,
       maxScriptureCitations: 16,
+      progressiveFollowUp,
+    };
+  }
+  if (concreteRequirement) {
+    return {
+      depth: "standard",
+      targetMinWords: 30,
+      targetMaxWords: 140,
+      maxScriptureCitations: 5,
       progressiveFollowUp,
     };
   }
@@ -80,11 +96,13 @@ export function classifyEmetAiInstructionProfile({
 }): EmetAiInstructionProfile {
   const coverage = extractEmetAiRequestedCoverage(question);
   const design = classifyEmetAiResponseDesign({ question, conversation });
+  const concreteRequirement = classifyEmetAiConcreteAnswerRequirement(question);
   if (coverage.language.length > 0) return "lexical";
   if (coverage.competingInterpretations || /\b(?:compare|comparison|reconcile|contradict|for and against|both sides)\b/i.test(question)) {
     return "comparison";
   }
   if (design.progressiveFollowUp) return "challenge";
+  if (concreteRequirement) return "definition";
   if (/^\s*(?:what\s+is|define)\b|\bwhat\s+does\s+.+\s+mean\b/i.test(question)) {
     return "definition";
   }

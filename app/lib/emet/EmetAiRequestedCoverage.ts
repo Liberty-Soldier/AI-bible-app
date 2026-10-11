@@ -50,16 +50,12 @@ export function extractEmetAiRequestedCoverage(
 ): EmetAiRequestedCoverage {
   const passages: EmetAiRequestedPassage[] = [];
   const passageKeys = new Set<string>();
-  for (const match of question.matchAll(referencePattern)) {
-    const book = normalizeBookName(match[1]);
-    const chapter = Number(match[2]);
-    const startVerse = match[3] ? Number(match[3]) : undefined;
-    const endVerse = match[4] ? Number(match[4]) : startVerse;
-    if (!book || !Number.isInteger(chapter) || chapter < 1) continue;
-    if (startVerse !== undefined && (!Number.isInteger(startVerse) || startVerse < 1)) continue;
-    if (endVerse !== undefined && (!Number.isInteger(endVerse) || endVerse < startVerse! || endVerse - startVerse! > 24)) continue;
+  const addPassage = (book: string, chapter: number, startVerse?: number, endVerse = startVerse) => {
+    if (!book || !Number.isInteger(chapter) || chapter < 1) return;
+    if (startVerse !== undefined && (!Number.isInteger(startVerse) || startVerse < 1)) return;
+    if (endVerse !== undefined && (!Number.isInteger(endVerse) || endVerse < startVerse! || endVerse - startVerse! > 24)) return;
     const key = `${book}|${chapter}|${startVerse || "chapter"}|${endVerse || "chapter"}`;
-    if (passageKeys.has(key)) continue;
+    if (passageKeys.has(key)) return;
     passageKeys.add(key);
     const label = startVerse === undefined
       ? `${book} ${chapter}`
@@ -71,6 +67,27 @@ export function extractEmetAiRequestedCoverage(
       chapter,
       ...(startVerse === undefined ? {} : { startVerse, endVerse }),
     });
+  };
+  const fullReferences = Array.from(question.matchAll(referencePattern));
+  for (const match of fullReferences) {
+    const book = normalizeBookName(match[1]);
+    const chapter = Number(match[2]);
+    const startVerse = match[3] ? Number(match[3]) : undefined;
+    const endVerse = match[4] ? Number(match[4]) : startVerse;
+    if (!book) continue;
+    addPassage(book, chapter, startVerse, endVerse);
+
+    const matchEnd = (match.index || 0) + match[0].length;
+    const nextMatchIndex = fullReferences.find((candidate) => (candidate.index || 0) > (match.index || 0))?.index ?? question.length;
+    const continuation = question.slice(matchEnd, nextMatchIndex);
+    for (const shorthand of continuation.matchAll(/(?:,|\band\b)\s*(\d+):(\d+)(?:\s*[-–—]\s*(\d+))?/gi)) {
+      addPassage(
+        book,
+        Number(shorthand[1]),
+        Number(shorthand[2]),
+        shorthand[3] ? Number(shorthand[3]) : Number(shorthand[2]),
+      );
+    }
   }
 
   const asksHebrew = /\b(Hebrew|Masoretic|Tanakh|Old Testament source (?:word|language))\b/i.test(question);

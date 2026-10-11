@@ -27,6 +27,10 @@ import {
   requestedCoverageComponents,
 } from "./EmetAiRequestedCoverage";
 import { classifyEmetAiResponseDesign } from "./EmetAiResponseDesign";
+import {
+  classifyEmetAiConcreteAnswerRequirement,
+  expectedEmetAiNamedListCount,
+} from "./EmetAiAnswerCompleteness";
 
 type SearchTranslation = "web" | "kjv" | "brenton";
 type SearchRecord = [book: string, chapter: number, verse: string, text: string];
@@ -58,7 +62,6 @@ export type EmetAiReaderContext = {
   translation: SearchTranslation;
 };
 
-const MAX_PLANNED_EVIDENCE_VERSES = 10;
 const MAX_LITERAL_FALLBACK_VERSES = 8;
 
 function reestablishedConversationPropositions(
@@ -601,6 +604,7 @@ export function isEmetAiDeterministicFastPathEligible({
   const design = classifyEmetAiResponseDesign({ question, conversation });
   const coverage = extractEmetAiRequestedCoverage(question);
   return design.depth === "concise" &&
+    !classifyEmetAiConcreteAnswerRequirement(question) &&
     !design.progressiveFollowUp &&
     !context &&
     coverage.passages.length === 0 &&
@@ -622,6 +626,7 @@ function selectedCandidates({
   conversation: EmetConversationContext | null;
 }) {
   const responseDesign = classifyEmetAiResponseDesign({ question, conversation });
+  const namedListCount = expectedEmetAiNamedListCount(question);
   const effectiveDepth = plan?.sourcePhrases.length
     ? "deep"
     : plan?.analysisMode === "apparent-contradiction"
@@ -665,11 +670,13 @@ function selectedCandidates({
   );
   if (!plan) return ranked.slice(0, MAX_LITERAL_FALLBACK_VERSES);
 
-  const evidenceLimit = effectiveDepth === "concise"
-    ? 4
-    : effectiveDepth === "standard"
-      ? 8
-      : plan.analysisMode === "simple" ? MAX_PLANNED_EVIDENCE_VERSES : 16;
+  const evidenceLimit = namedListCount
+    ? Math.min(16, namedListCount + 4)
+    : effectiveDepth === "concise"
+      ? 4
+      : effectiveDepth === "standard"
+        ? 8
+        : 24;
 
   const selected: EvidenceCandidate[] = [];
   const selectedReferences = new Set<string>();
@@ -678,11 +685,13 @@ function selectedCandidates({
     const reference = recordReference(candidate.record);
     if (selectedReferences.has(reference)) return false;
     const chapterKey = `${candidate.record[0]}|${candidate.record[1]}`;
-    const chapterLimit = effectiveDepth === "concise"
+    const chapterLimit = namedListCount
+      ? Math.min(24, namedListCount + 4)
+      : effectiveDepth === "concise"
       ? 4
       : effectiveDepth === "standard"
         ? 4
-        : plan.analysisMode === "simple" ? 3 : 10;
+      : 10;
     if (!force && (chapterCounts.get(chapterKey) || 0) >= chapterLimit) return false;
     selected.push(candidate);
     selectedReferences.add(reference);

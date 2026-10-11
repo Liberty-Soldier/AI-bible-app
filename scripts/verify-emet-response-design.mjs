@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 
 import {
   classifyEmetAiResponseDesign,
+  classifyEmetAiInstructionProfile,
   EMET_AI_CONCISE_STYLE_VERSION,
   EMET_AI_RESPONSE_POLICY_VERSION,
 } from "../app/lib/emet/EmetAiResponseDesign.ts";
@@ -30,7 +31,12 @@ const conciseStyleKey = getEmetAiRequestCacheKey({
 });
 assert.notEqual(conciseStyleKey, legacyDirectQuestionKey);
 assert.equal(EMET_AI_CONCISE_STYLE_VERSION, "answer-first-concise@1");
-assert.equal(EMET_AI_RESPONSE_POLICY_VERSION, "scripture-first-response-policy@2");
+assert.equal(EMET_AI_RESPONSE_POLICY_VERSION, "scripture-first-response-policy@3");
+
+assert.equal(
+  classifyEmetAiInstructionProfile({ question: "What commandments should I keep?" }),
+  "definition",
+);
 
 const standardKey = getEmetAiRequestCacheKey({
   question: "Why did Paul write Colossians 2:16?",

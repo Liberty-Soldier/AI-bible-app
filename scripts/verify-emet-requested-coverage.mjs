@@ -8,6 +8,14 @@ import {
   EMET_AI_RETRIEVAL_PLAN_SCHEMA,
 } from "../app/lib/emet/EmetAiRetrievalPlan.ts";
 import { buildEmetAiTopicEvidence } from "../app/lib/emet/EmetAiTopicEvidence.ts";
+import { extractEmetAiRequestedCoverage } from "../app/lib/emet/EmetAiRequestedCoverage.ts";
+
+assert.deepEqual(
+  extractEmetAiRequestedCoverage(
+    "Examine Genesis 1:6-8 and 1:14-17, then Psalms 19:4-6, 93:1, and 104:5.",
+  ).passages.map((passage) => passage.label),
+  ["Genesis 1:6-8", "Genesis 1:14-17", "Psalms 19:4-6", "Psalms 93:1", "Psalms 104:5"],
+);
 
 const question = "Compare Romans 3:10, Genesis 6:9, Luke 1:6, Ezekiel 18:5–9, and Psalm 14. What do the Hebrew and Greek righteousness terms mean in context?";
 const passages = [
