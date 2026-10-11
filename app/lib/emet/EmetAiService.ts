@@ -18,6 +18,7 @@ import type {
 import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import type { EmetConversationContext } from "./EmetAiConversation";
 import type { EmetAiPerformanceObserver } from "./EmetAiPerformance";
+import type { EmetAiQuestionContract } from "./EmetAiQuestionContract";
 
 export interface EmetAiProvider {
   model: string;
@@ -25,6 +26,7 @@ export interface EmetAiProvider {
     question: string;
     conversation: EmetConversationContext | null;
     context: EmetAiReaderContext | null;
+    questionContract?: EmetAiQuestionContract;
   }): Promise<EmetAiRetrievalPlan | null>;
   generate(packet: EmetAiEvidencePacket): Promise<unknown>;
   getLastFailure?(): string[];

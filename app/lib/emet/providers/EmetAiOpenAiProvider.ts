@@ -16,8 +16,8 @@ import {
 } from "../EmetAiRetrievalPlan";
 import type { EmetAiProvider } from "../EmetAiService";
 import type { EmetAiPerformanceObserver } from "../EmetAiPerformance";
-import { expandPlannedReferences } from "../EmetAiTopicEvidence";
 import { classifyEmetAiInstructionProfile } from "../EmetAiResponseDesign";
+import { buildEmetAiQuestionContract } from "../EmetAiQuestionContract";
 
 const reasoningCategoryValues = [
   "identity", "authority", "nature", "relationship", "practice", "duration",
@@ -288,133 +288,6 @@ function conciseAnswerSchema(evidenceIds: string[]) {
   };
 }
 
-type ReferenceBackedAnswerDraft = {
-  status: "complete" | "insufficient-evidence";
-  answer: string;
-  conclusionSupport: (typeof claimSupportValues)[number];
-  componentChecks: Array<{
-    componentId: string;
-    support: (typeof claimSupportValues)[number];
-    explanation: string;
-    references: string[];
-  }>;
-  claims: Array<{
-    id: string;
-    text: string;
-    support: (typeof claimSupportValues)[number];
-    category: (typeof reasoningCategoryValues)[number];
-    polarity: "affirms" | "denies" | "qualifies";
-    scope: string;
-    timing: (typeof timingValues)[number];
-    references: string[];
-  }>;
-  continuityChecks: Array<{
-    propositionId: string;
-    verdict: "preserved" | "narrowed" | "reconciled" | "unresolved-conflict";
-    explanation: string;
-    references: string[];
-  }>;
-  limitations: string[];
-};
-
-function referenceBackedAnswerSchema() {
-  const references = {
-    type: "array",
-    maxItems: 12,
-    items: { type: "string" },
-  } as const;
-  return {
-    type: "object",
-    properties: {
-      status: {
-        type: "string",
-        enum: ["complete", "insufficient-evidence"],
-      },
-      answer: { type: "string" },
-      conclusionSupport: { type: "string", enum: claimSupportValues },
-      componentChecks: {
-        type: "array",
-        maxItems: 6,
-        items: {
-          type: "object",
-          properties: {
-            componentId: { type: "string" },
-            support: { type: "string", enum: claimSupportValues },
-            explanation: { type: "string" },
-            references,
-          },
-          required: ["componentId", "support", "explanation", "references"],
-          additionalProperties: false,
-        },
-      },
-      claims: {
-        type: "array",
-        maxItems: 6,
-        items: {
-          type: "object",
-          properties: {
-            id: { type: "string" },
-            text: { type: "string" },
-            support: { type: "string", enum: claimSupportValues },
-            category: { type: "string", enum: reasoningCategoryValues },
-            polarity: {
-              type: "string",
-              enum: ["affirms", "denies", "qualifies"],
-            },
-            scope: { type: "string" },
-            timing: { type: "string", enum: timingValues },
-            references,
-          },
-          required: [
-            "id", "text", "support", "category", "polarity", "scope",
-            "timing", "references",
-          ],
-          additionalProperties: false,
-        },
-      },
-      continuityChecks: {
-        type: "array",
-        items: {
-          type: "object",
-          properties: {
-            propositionId: { type: "string" },
-            verdict: {
-              type: "string",
-              enum: ["preserved", "narrowed", "reconciled", "unresolved-conflict"],
-            },
-            explanation: { type: "string" },
-            references,
-          },
-          required: ["propositionId", "verdict", "explanation", "references"],
-          additionalProperties: false,
-        },
-      },
-      limitations: {
-        type: "array",
-        maxItems: 6,
-        items: { type: "string" },
-      },
-    },
-    required: [
-      "status", "answer", "conclusionSupport", "componentChecks", "claims",
-      "continuityChecks", "limitations",
-    ],
-    additionalProperties: false,
-  } as const;
-}
-
-function planAndAnswerSchema() {
-  return {
-    type: "object",
-    properties: {
-      plan: retrievalPlanSchema(),
-      answer: referenceBackedAnswerSchema(),
-    },
-    required: ["plan", "answer"],
-    additionalProperties: false,
-  } as const;
-}
-
 export function createEmetAiOpenAiProvider({
   performanceObserver,
 }: {
@@ -435,11 +308,10 @@ export function createEmetAiOpenAiProvider({
   if (!apiKey) return null;
 
   const client = new OpenAI({ apiKey });
-  let pendingTopicAnswer: ReferenceBackedAnswerDraft | null = null;
   let lastFailure: string[] = [];
 
   const logUsage = (
-    stage: "plan-answer" | "answer" | "repair",
+    stage: "plan" | "answer" | "repair",
     response: {
       usage?: {
         input_tokens?: number;
@@ -483,8 +355,10 @@ export function createEmetAiOpenAiProvider({
     },
     async plan(input) {
       lastFailure = [];
-      const instructionProfile = classifyEmetAiInstructionProfile(input);
-      const subjectRetrievalDirective = /\b(?:earth|sun|moon|heavens?|expanse|firmament|cosmolog|heliocentr|geocentr)\b/i.test(input.question)
+      const questionContract = input.questionContract || buildEmetAiQuestionContract(input);
+      const instructionProfile = questionContract.instructionProfile ||
+        classifyEmetAiInstructionProfile(input);
+      const subjectRetrievalDirective = questionContract.topicDomains.includes("cosmology")
         ? `\n\nFor broad questions about Scripture's descriptions of the earth, sun, moon, heavens, or expanse, examine all materially distinct textual categories: the earth's establishment or stability, the narrated movement or stillness of the sun and moon, the expanse, and the created lights and their functions. Relevant witnesses include Genesis 1:6–8, Genesis 1:14–17, Joshua 10:12–13, 1 Chronicles 16:30, Psalms 19:4–6, 93:1, and 104:5, Ecclesiastes 1:5, and Job 37:18. These are neutral retrieval anchors, not a predetermined cosmological conclusion; include other material passages and conclude only what their wording establishes. Do not volunteer a phenomenological, observational, poetic, or human-vantage explanation unless the reader explicitly asks for that comparison.`
         : "";
       const planStartedAt = performance.now();
@@ -497,7 +371,7 @@ export function createEmetAiOpenAiProvider({
             role: "system",
             content: `${buildEmetAiSystemInstruction(instructionProfile)}
 
-You are answering and selecting evidence in one pass. Use your trained biblical understanding to reason through the whole canon naturally. Return both a concise retrieval plan and the finished reader-facing answer. Every Scripture reference used by a component check, claim, or continuity check must also appear as an individual verse in plan.passages so the application can verify it against locked Scripture data.
+You are selecting an evidence strategy, not writing a reader-facing answer. Use trained biblical understanding to identify the smallest complete set of passages and verified-source hypotheses needed to answer the canonical question contract. Return only the retrieval plan. The application will resolve every planned reference against locked Scripture data before a separate answer-generation stage.
 
 The input's responseDesign is mandatory. For concise questions, answer the question immediately in 1–3 sentences, normally 30–65 words, and select only 2–4 of the strongest direct Scripture witnesses. Do not preemptively introduce objections, denominational debates, historical background, or passages from Paul merely because someone might later raise them. For standard questions and follow-up objections, explain the requested reason or objection directly and build on the recorded conversation. For deep comparisons, multi-part questions, contradictions, and original-language studies, use the detail needed for complete coverage. Progressive depth means the first answer stays proportionate; later questions may deepen it without restarting the study.
 
@@ -553,52 +427,46 @@ The input's requestedCoverage was extracted deterministically from the reader's 
 
 Do not use denominational doctrine, consensus, or historical literature as proof. Do not put noncanonical references in passages. If the question asks about historical literature, record that limitation; EMETSEES handles such sources separately.
 
-Give short retrieval reasons. Write the answer in natural connected prose, not as a report about selected evidence. Start with the direct answer. Obey responseDesign.targetMinWords and responseDesign.targetMaxWords unless additional words are genuinely required for accuracy or explicit requested coverage. Do not repeat the conclusion. Do not say "supplied passages," "the evidence set," or similar internal wording. Never print Hebrew or Greek script, transliterations, lexical identities, or source-word meanings unless the application supplies verified lexical evidence for them. Return only the required combined structured result.${subjectRetrievalDirective}`,
+Give short retrieval reasons. Do not draft, summarize, or anticipate the final answer. Never assert an unverified lexical identity. Return only the required retrieval-plan structure.${subjectRetrievalDirective}`,
           },
           {
             role: "user",
-            content: JSON.stringify(buildEmetAiRetrievalInput(input)),
+            content: JSON.stringify(buildEmetAiRetrievalInput({
+              ...input,
+              questionContract,
+            })),
           },
         ],
         text: {
           format: {
             type: "json_schema",
-            name: "emet_ai_plan_and_answer",
+            name: "emet_ai_retrieval_plan",
             strict: true,
-            schema: planAndAnswerSchema(),
+            schema: retrievalPlanSchema(),
           },
         },
       });
-      logUsage("plan-answer", response, answerModel, performance.now() - planStartedAt);
+      logUsage("plan", response, answerModel, performance.now() - planStartedAt);
 
       if (response.status !== "completed" || !response.output_text) {
         return null;
       }
 
       try {
-        const combined = JSON.parse(response.output_text) as {
-          plan?: unknown;
-          answer?: ReferenceBackedAnswerDraft;
-        };
-        const draft = parseEmetAiRetrievalPlan(combined.plan);
-        if (!draft || !combined.answer) {
+        const draft = parseEmetAiRetrievalPlan(JSON.parse(response.output_text));
+        if (!draft) {
           if (process.env.EMET_AI_DEBUG === "1") {
-            console.error("EMET combined plan/answer failed parsing.", {
-              parsedPlan: Boolean(draft),
-              hasAnswer: Boolean(combined.answer),
-              rawPlan: combined.plan,
-            });
+            console.error("EMET retrieval plan failed parsing.");
           }
           return null;
         }
-        pendingTopicAnswer = combined.answer;
         const referenceKey = (reference: string) => reference
           .normalize("NFKC")
           .toLocaleLowerCase("en-US")
           .replace(/\s+/g, " ")
           .trim();
 
-        const requiredSubjectPassages = /\b(?:earth|sun|moon|heavens?|expanse|firmament|cosmolog|heliocentr|geocentr)\b/i.test(input.question)
+        const requiredSubjectPassages = questionContract.topicDomains.includes("cosmology")
           ? [
               "Genesis 1:6-8", "Genesis 1:14-17", "Joshua 10:12-13",
               "1 Chronicles 16:30", "Psalms 19:4-6", "Psalms 93:1",
@@ -611,16 +479,6 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
             }))
           : [];
         if (requiredSubjectPassages.length) {
-          const plannedReferences = new Set(
-            draft.passages
-              .flatMap((passage) => expandPlannedReferences(passage.reference))
-              .map(referenceKey),
-          );
-          const missingRequiredSubjectPassage = requiredSubjectPassages.some((passage) =>
-            expandPlannedReferences(passage.reference)
-              .some((reference) => !plannedReferences.has(referenceKey(reference))),
-          );
-          if (missingRequiredSubjectPassage) pendingTopicAnswer = null;
           const seen = new Set(draft.passages.map((passage) => referenceKey(passage.reference)));
           draft.passages.push(...requiredSubjectPassages.filter((passage) => {
             const key = referenceKey(passage.reference);
@@ -643,28 +501,10 @@ Give short retrieval reasons. Write the answer in natural connected prose, not a
           priority: 99,
         }));
 
-        const answerReferences = new Set(
-          [
-            ...combined.answer.componentChecks,
-            ...combined.answer.claims,
-            ...combined.answer.continuityChecks,
-          ]
-            .flatMap((item) => item.references)
-            .flatMap((reference) => expandPlannedReferences(reference))
-            .map(referenceKey),
-        );
-        const plannedPassages = draft.passages.map((passage) => ({
-          ...passage,
-          priority: expandPlannedReferences(passage.reference)
-            .some((reference) => answerReferences.has(referenceKey(reference)))
-            ? 100
-            : passage.priority,
-        }));
-
         const mergedPassages = [];
         const seenPassages = new Set<string>();
         for (const passage of [
-          ...plannedPassages,
+          ...draft.passages,
           ...continuityPassages,
         ]) {
           const key = referenceKey(passage.reference);
@@ -736,90 +576,8 @@ Return exactly one componentCheck for every component in packet.reasoning.compon
 For each answer claim, provide a stable ID, evidence level, category, polarity, exact scope, and timing. The reader-facing answer must remain natural, direct, and concise. Begin with the answer, never with commentary about a draft, packet, model, method, or proposition. State the conclusion the supplied Scripture establishes; do not weaken an explicit command, duration, or governing statement merely because the reader used modern wording. Use a qualification only when its cited passage materially addresses the exact proposition. Do not introduce labels such as "Sinai administration" or "covenant setting" unless the cited text itself makes that distinction relevant to the answer. Give the precise conclusion justified by all materially relevant supplied Scripture.${canonicalContinuityDirective}`;
       const designedTask = `${task}${responseDesignDirective}`;
       try {
-        const referenceKey = (reference: string) =>
-          reference
-            .normalize("NFKC")
-            .toLocaleLowerCase("en-US")
-            .replace(/\s+/g, " ")
-            .trim();
-        const evidenceByReference = new Map<string, (typeof packet.evidence)[number]>();
-        for (const item of packet.evidence) {
-          if (!item.reference) continue;
-          const key = referenceKey(item.reference);
-          const existing = evidenceByReference.get(key);
-          if (!existing || (existing.kind !== "scripture" && item.kind === "scripture")) {
-            evidenceByReference.set(key, item);
-          }
-        }
-        const evidenceIdsFor = (references: string[]) =>
-          Array.from(
-            new Set(
-              references.flatMap((reference) => {
-                const exact = evidenceByReference.get(referenceKey(reference));
-                if (exact) return [exact.id];
-                return reference
-                  .split(/\s*;\s*/)
-                  .flatMap((part) => expandPlannedReferences(part))
-                  .flatMap((expanded) => {
-                    const item = evidenceByReference.get(referenceKey(expanded));
-                    return item ? [item.id] : [];
-                  });
-              }),
-            ),
-          );
-        const hydrateReferenceDraft = (source: ReferenceBackedAnswerDraft) => {
-          const componentChecks = source.componentChecks.map((check) => ({
-            componentId: check.componentId,
-            support: check.support,
-            explanation: check.explanation,
-            evidenceIds: evidenceIdsFor(check.references),
-          }));
-          const claims = source.claims.map((claim) => ({
-            id: claim.id,
-            text: claim.text,
-            support: claim.support,
-            category: claim.category,
-            polarity: claim.polarity,
-            scope: claim.scope,
-            timing: claim.timing,
-            evidenceIds: evidenceIdsFor(claim.references),
-          }));
-          const continuityChecks = source.continuityChecks.map((check) => ({
-            propositionId: check.propositionId,
-            verdict: check.verdict,
-            explanation: check.explanation,
-            evidenceIds: evidenceIdsFor(check.references),
-          }));
-          const citedIds = new Set([
-            ...componentChecks.flatMap((check) => check.evidenceIds),
-            ...claims.flatMap((claim) => claim.evidenceIds),
-            ...continuityChecks.flatMap((check) => check.evidenceIds),
-          ]);
-          return {
-            schemaVersion: EMET_AI_ANSWER_SCHEMA,
-            status: source.status,
-            answer: source.answer,
-            conclusionSupport: source.conclusionSupport,
-            componentChecks,
-            claims,
-            continuityChecks,
-            citations: Array.from(citedIds).flatMap((evidenceId) => {
-              const item = packet.evidence.find((candidate) => candidate.id === evidenceId);
-              return item
-                ? [{ evidenceId, reference: item.reference || "" }]
-                : [];
-            }),
-            limitations: source.limitations,
-          };
-        };
-
-        let draft: unknown;
-        if (packet.scope.type === "topic" && pendingTopicAnswer) {
-          draft = hydrateReferenceDraft(pendingTopicAnswer);
-          pendingTopicAnswer = null;
-        } else {
-          const answerStartedAt = performance.now();
-          const response = await client.responses.create({
+        const answerStartedAt = performance.now();
+        const response = await client.responses.create({
             model: answerModel,
             store: false,
             reasoning: { effort: answerReasoningEffort },
@@ -843,14 +601,13 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
                   : answerSchema(packet.evidence.map((item) => item.id)),
               },
             },
-          });
-          logUsage("answer", response, answerModel, performance.now() - answerStartedAt);
-          performanceObserver?.stage("generation", performance.now() - answerStartedAt);
-          if (response.status !== "completed" || !response.output_text) {
-            return null;
-          }
-          draft = JSON.parse(response.output_text) as unknown;
+        });
+        logUsage("answer", response, answerModel, performance.now() - answerStartedAt);
+        performanceObserver?.stage("generation", performance.now() - answerStartedAt);
+        if (response.status !== "completed" || !response.output_text) {
+          return null;
         }
+        const draft: unknown = JSON.parse(response.output_text);
 
         const allowedContinuityIds = new Set(
           packet.reasoning.establishedPropositions.map((item) => item.id),

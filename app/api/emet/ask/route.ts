@@ -18,6 +18,7 @@ import {
   type EmetAiReaderContext,
 } from "@/app/lib/emet/EmetAiTopicEvidence";
 import { createEmetAiPerformanceTrace } from "@/app/lib/emet/EmetAiPerformance";
+import { buildEmetAiQuestionContract } from "@/app/lib/emet/EmetAiQuestionContract";
 import { answerFromEmetAiEvidence } from "@/app/lib/emet/EmetAiService";
 import {
   createSupabaseEmetAiAnswerStore,
@@ -139,6 +140,11 @@ export async function POST(request: Request) {
     question,
     conversation: authoritativeConversation,
   });
+  const questionContract = buildEmetAiQuestionContract({
+    question,
+    conversation: activeConversation,
+    context,
+  });
 
   const provider = createEmetAiOpenAiProvider({
     performanceObserver: performanceTrace.observer,
@@ -187,6 +193,7 @@ export async function POST(request: Request) {
     question,
     conversation: activeConversation,
     context,
+    questionContract,
   })
     ? performanceTrace.measure("retrieval", () =>
         buildEmetAiTopicEvidence({
@@ -194,6 +201,7 @@ export async function POST(request: Request) {
           conversation: activeConversation,
           context,
           deterministicFastPath: true,
+          questionContract,
         }),
       )
     : null;
@@ -208,6 +216,7 @@ export async function POST(request: Request) {
           // new question.
           conversation: authoritativeConversation,
           context,
+          questionContract,
         }))
       : null;
   } catch (error) {
@@ -225,6 +234,7 @@ export async function POST(request: Request) {
         context,
         retrievalPlan,
         requireSemanticPlan: true,
+        questionContract,
       }),
     );
   }

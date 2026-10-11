@@ -5,6 +5,7 @@ import type { EmetConversationContext } from "./EmetAiConversation";
 import type { EmetAiReasoningCategory } from "./EmetAiContract";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 import { classifyEmetAiResponseDesign } from "./EmetAiResponseDesign";
+import type { EmetAiQuestionContract } from "./EmetAiQuestionContract";
 
 export const EMET_AI_RETRIEVAL_PLAN_SCHEMA =
   "emet-ai-retrieval-plan@3" as const;
@@ -243,15 +244,21 @@ export function buildEmetAiRetrievalInput({
   question,
   conversation,
   context,
+  questionContract,
 }: {
   question: string;
   conversation: EmetConversationContext | null;
   context: EmetAiReaderContext | null;
+  questionContract?: EmetAiQuestionContract;
 }) {
   return {
     question: question.trim(),
-    requestedCoverage: extractEmetAiRequestedCoverage(question),
-    responseDesign: classifyEmetAiResponseDesign({ question, conversation }),
+    questionContract: questionContract || null,
+    requestedCoverage:
+      questionContract?.requestedCoverage || extractEmetAiRequestedCoverage(question),
+    responseDesign:
+      questionContract?.responseDesign ||
+      classifyEmetAiResponseDesign({ question, conversation }),
     readerContext: context
       ? {
           book: context.book,

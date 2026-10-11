@@ -28,6 +28,10 @@ import {
 } from "./EmetAiRequestedCoverage";
 import { classifyEmetAiResponseDesign } from "./EmetAiResponseDesign";
 import {
+  buildEmetAiQuestionContract,
+  type EmetAiQuestionContract,
+} from "./EmetAiQuestionContract";
+import {
   classifyEmetAiConcreteAnswerRequirement,
   expectedEmetAiNamedListCount,
 } from "./EmetAiAnswerCompleteness";
@@ -596,13 +600,21 @@ export function isEmetAiDeterministicFastPathEligible({
   question,
   conversation = null,
   context = null,
+  questionContract,
 }: {
   question: string;
   conversation?: EmetConversationContext | null;
   context?: EmetAiReaderContext | null;
+  questionContract?: EmetAiQuestionContract;
 }) {
-  const design = classifyEmetAiResponseDesign({ question, conversation });
-  const coverage = extractEmetAiRequestedCoverage(question);
+  const contract = questionContract || buildEmetAiQuestionContract({
+    question,
+    conversation,
+    context,
+  });
+  const design = contract.responseDesign;
+  const coverage = contract.requestedCoverage;
+  if (contract.requiresSemanticPlanning) return false;
   return design.depth === "concise" &&
     !classifyEmetAiConcreteAnswerRequirement(question) &&
     !design.progressiveFollowUp &&
@@ -619,13 +631,16 @@ function selectedCandidates({
   plan,
   context,
   conversation,
+  questionContract,
 }: {
   question: string;
   plan: EmetAiRetrievalPlan | null;
   context: EmetAiReaderContext | null;
   conversation: EmetConversationContext | null;
+  questionContract?: EmetAiQuestionContract;
 }) {
-  const responseDesign = classifyEmetAiResponseDesign({ question, conversation });
+  const responseDesign = questionContract?.responseDesign ||
+    classifyEmetAiResponseDesign({ question, conversation });
   const namedListCount = expectedEmetAiNamedListCount(question);
   const effectiveDepth = plan?.sourcePhrases.length
     ? "deep"
@@ -738,6 +753,7 @@ export function buildEmetAiTopicEvidence({
   retrievalPlan = null,
   requireSemanticPlan = false,
   deterministicFastPath = false,
+  questionContract,
   builtAt,
 }: {
   question: string;
@@ -746,14 +762,17 @@ export function buildEmetAiTopicEvidence({
   retrievalPlan?: EmetAiRetrievalPlan | null;
   requireSemanticPlan?: boolean;
   deterministicFastPath?: boolean;
+  questionContract?: EmetAiQuestionContract;
   builtAt?: string;
 }) {
   const cleanQuestion = question.trim();
-  const requestedCoverage = extractEmetAiRequestedCoverage(cleanQuestion);
-  const baseResponseDesign = classifyEmetAiResponseDesign({
+  const contract = questionContract || buildEmetAiQuestionContract({
     question: cleanQuestion,
     conversation,
+    context,
   });
+  const requestedCoverage = contract.requestedCoverage;
+  const baseResponseDesign = contract.responseDesign;
   const responseDesign = retrievalPlan?.sourcePhrases.length
     ? { ...baseResponseDesign, depth: "deep" as const, targetMinWords: 120, targetMaxWords: 500, maxScriptureCitations: 16 }
     : retrievalPlan?.analysisMode === "apparent-contradiction" && baseResponseDesign.depth === "concise"
@@ -786,6 +805,7 @@ export function buildEmetAiTopicEvidence({
         plan: retrievalPlan,
         context,
         conversation,
+        questionContract: contract,
       });
   const evidence = candidates.map(scriptureItem);
   if (!evidence.length) {

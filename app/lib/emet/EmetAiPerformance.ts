@@ -10,7 +10,7 @@ export type EmetAiPerformanceStage =
   | "storage";
 
 export type EmetAiUsageMeasurement = {
-  stage: "plan-answer" | "answer" | "repair";
+  stage: "plan" | "answer" | "repair";
   inputTokens: number;
   cachedInputTokens: number;
   outputTokens: number;
