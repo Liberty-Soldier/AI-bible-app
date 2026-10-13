@@ -87,10 +87,15 @@ const visibleTerms = packet.requestedCoverage.language
   .flatMap((requirement) => requirement.terms)
   .map((term) => `${term.lemma} (${term.transliteration}) means ${term.meaning}`)
   .join("; ");
+const requestedPassageDiscussion = packet.evidence
+  .filter((item) => item.kind === "scripture" && packet.requestedCoverage.passages
+    .some((requirement) => requirement.references.includes(item.reference)))
+  .map((item) => `${item.reference}: ${item.text}`)
+  .join(" ");
 const answer = {
   schemaVersion: EMET_AI_ANSWER_SCHEMA,
   status: "complete",
-  answer: `The requested passages use related Hebrew and Greek righteousness language in contexts that must be read together: ${visibleTerms}.`,
+  answer: `The requested passages use related Hebrew and Greek righteousness language in contexts that must be read together: ${visibleTerms}. ${requestedPassageDiscussion}`,
   conclusionSupport: "theological-synthesis",
   componentChecks: packet.reasoning.components.map((component) => ({
     componentId: component.id,
@@ -143,8 +148,8 @@ const sabbathPlan = {
   proposition: "Whether Scripture requires believers to keep the seventh-day Sabbath",
   requiresScopeAnalysis: true,
   components: [
-    { id: "observance", proposition: "The biblical case for continued observance", category: "command" },
-    { id: "qualification", proposition: "The biblical case offered against continued observance", category: "application" },
+    { id: "observance", proposition: "The biblical case for continued observance", category: "command", governingReferences: ["Exodus 20:8", "Matthew 5:17"] },
+    { id: "qualification", proposition: "The biblical case offered against continued observance", category: "application", governingReferences: ["Colossians 2:16", "Romans 14:5", "Galatians 4:10"] },
   ],
   passages: [
     { reference: "Exodus 20:8", role: "foundation", reason: "The Sabbath command.", priority: 100 },

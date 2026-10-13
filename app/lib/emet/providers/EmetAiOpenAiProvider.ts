@@ -4,6 +4,7 @@ import OpenAI from "openai";
 
 import {
   EMET_AI_ANSWER_SCHEMA,
+  classifyEmetAiValidationIssue,
   parseEmetAiAnswer,
   validateEmetAiAnswer,
 } from "../EmetAiContract";
@@ -18,6 +19,13 @@ import type { EmetAiProvider } from "../EmetAiService";
 import type { EmetAiPerformanceObserver } from "../EmetAiPerformance";
 import { classifyEmetAiInstructionProfile } from "../EmetAiResponseDesign";
 import { buildEmetAiQuestionContract } from "../EmetAiQuestionContract";
+import { emetAiLockedScriptureReferenceExists } from "../EmetAiTopicEvidence";
+import {
+  normalizeEmetAiPlannedReferences,
+  validateEmetAiPlanningCompleteness,
+  validateEmetAiPlanningNeutrality,
+} from "../EmetAiPlanningIntegrity";
+import { normalizeEmetAiMechanicalAnswerText } from "../EmetAiAnswerNormalization";
 
 const reasoningCategoryValues = [
   "identity", "authority", "nature", "relationship", "practice", "duration",
@@ -52,7 +60,7 @@ function retrievalPlanSchema() {
       requiresTimeline: { type: "boolean" },
       components: {
         type: "array",
-        maxItems: 6,
+        maxItems: 8,
         items: {
           type: "object",
           properties: {
@@ -62,8 +70,14 @@ function retrievalPlanSchema() {
               type: "string",
               enum: reasoningCategoryValues,
             },
+            governingReferences: {
+              type: "array",
+              minItems: 1,
+              maxItems: 8,
+              items: { type: "string" },
+            },
           },
-          required: ["id", "proposition", "category"],
+          required: ["id", "proposition", "category", "governingReferences"],
           additionalProperties: false,
         },
       },
@@ -156,7 +170,11 @@ function retrievalPlanSchema() {
   } as const;
 }
 
-function answerSchema(evidenceIds: string[]) {
+function answerSchema(
+  evidenceIds: string[],
+  componentIds: string[] = [],
+  continuityIds: string[] = [],
+) {
   return {
   type: "object",
   properties: {
@@ -175,10 +193,14 @@ function answerSchema(evidenceIds: string[]) {
     },
     componentChecks: {
       type: "array",
+      minItems: componentIds.length,
+      maxItems: componentIds.length,
       items: {
         type: "object",
         properties: {
-          componentId: { type: "string" },
+          componentId: componentIds.length
+            ? { type: "string", enum: componentIds }
+            : { type: "string" },
           support: { type: "string", enum: claimSupportValues },
           explanation: { type: "string" },
           evidenceIds: {
@@ -223,10 +245,14 @@ function answerSchema(evidenceIds: string[]) {
     },
     continuityChecks: {
       type: "array",
+      minItems: continuityIds.length,
+      maxItems: continuityIds.length,
       items: {
         type: "object",
         properties: {
-          propositionId: { type: "string" },
+          propositionId: continuityIds.length
+            ? { type: "string", enum: continuityIds }
+            : { type: "string" },
           verdict: {
             type: "string",
             enum: ["preserved", "narrowed", "reconciled", "unresolved-conflict"],
@@ -309,6 +335,7 @@ export function createEmetAiOpenAiProvider({
 
   const client = new OpenAI({ apiKey });
   let lastFailure: string[] = [];
+  let lastAudit: Record<string, unknown> = {};
 
   const logUsage = (
     stage: "plan" | "answer" | "repair",
@@ -353,8 +380,12 @@ export function createEmetAiOpenAiProvider({
     getLastFailure() {
       return lastFailure;
     },
+    getLastAudit() {
+      return structuredClone(lastAudit);
+    },
     async plan(input) {
       lastFailure = [];
+      lastAudit = {};
       const questionContract = input.questionContract || buildEmetAiQuestionContract(input);
       const instructionProfile = questionContract.instructionProfile ||
         classifyEmetAiInstructionProfile(input);
@@ -377,7 +408,13 @@ The input's responseDesign is mandatory. For concise questions, answer the quest
 
 Identify the biblical subject and select the smallest set of passages that can honestly support the answer. Read Scripture canonically: include the necessary earlier foundation, the most direct passage, relevant later witness, and any passage that materially qualifies the conclusion. Do not select verses merely because they repeat a common English word.
 
-Answer-completeness rule: a question asking which or what items requires passages that state the actual items or meaningful categories; a question asking how to perform or observe something requires passages that state concrete actions, conditions, boundaries, or examples. A general command to obey, keep, avoid, or remember is not sufficient by itself. For a named multi-item list, retrieve and identify every requested item. For a comprehensive question, decompose the subject into its materially distinct textual categories and retrieve the strongest passage for each; do not add an external interpretive framework the reader did not request.
+OT-foundation requirement: when a New Testament passage quotes, alludes to, or addresses a subject established in the Torah, Prophets, or Writings, retrieve and consider that relevant earlier foundation before finalizing the interpretation. Apply this to Sabbath, commandments, covenant, resurrection, Messiah, prophecy, and every other materially dependent subject. Do not assume continuity or change: report the actual earlier statement, then any explicit later qualification, fulfillment, change, or application, distinguishing direct statement from implication and theological synthesis.
+
+For a simple factual authorship question, use the named book's own opening, closing, sender identification, and internal self-identification. Do not introduce an external candidate-author comparison unless the reader asks who the possible authors are or the external passage explicitly identifies the named writing. If deterministic retrieval cannot establish an absence claim safely, semantic planning remains required; speed never justifies inventing an author or treating silence in a few verses as proof.
+
+Answer-completeness rule: a question asking which or what items requires passages that state the actual items or meaningful categories; a question asking how to perform or observe something requires passages that state concrete actions, conditions, boundaries, or examples. A general command to obey, keep, avoid, remember, love, or believe is not by itself an enumeration of the requested instructions. For an enumeration, include representative concrete commands or categories that Scripture itself states, while saying when the answer is representative rather than exhaustive. For a named multi-item list, retrieve and identify every requested item. For a comprehensive question, decompose the subject into its materially distinct textual categories and retrieve the strongest passage for each; do not add an external interpretive framework the reader did not request.
+
+For every material component, populate governingReferences with the smallest set of passages whose actual wording directly governs that component. Every governing reference must also appear in passages. A thematic parallel, repeated English word, or general statement is not a governing passage when Scripture contains a passage that directly states the instruction, event, identification, sequence, condition, or qualification being asked about. Check the whole canonical subject before finalizing these references. If the question names an author, corpus, or biblical speaker, include that speaker's materially relevant passages. If a material qualification complicates a categorical conclusion, make it governing evidence rather than background that can be dropped.
 
 First classify the reasoning task. Use simple for ordinary factual or passage questions. Use doctrinal-claim when the reader asks whether Scripture teaches, proves, or supports a disputed doctrine, obligation, covenant claim, prophecy interpretation, or theological identity claim. Use apparent-contradiction when the question asks Scripture to reconcile statements that appear to pull in different directions. Set requiresScopeAnalysis whenever audience, role, covenant participants, conditions, location, institution, jurisdiction, or command applicability could change the answer. Set requiresTimeline whenever promise, inauguration, transition, fulfillment, resurrection, or future completion could change the answer.
 
@@ -399,6 +436,8 @@ When the reader asks about "the law of Moses," preserve Scripture's presentation
 
 For every subject, earlier structured claims are propositions to re-check, not conclusions to repeat. Plan the current evidence needed to preserve, narrow, or explicitly reconcile them. An ambiguous or inferential proposition may not override a previously established explicit proposition.
 
+Planning is evidence selection, not interpretation selection. First identify the biblical question, the relevant earlier-scripture foundation, later passages, audience, wording, context, genre, and any genuine textual tension. Do not write a provisional answer into the plan proposition or component propositions. OT-first means examining the relevant Torah, Prophets, and Writings foundation; it does not predetermine continuity, discontinuity, abolition, fulfillment, or unchanged application. Leave those conclusions for generation from the finalized verified packet.
+
 For doctrinal-claim plans, retrieve the strongest passages that directly establish the proposition and its necessary canonical foundations. Include a qualifying or contrasting passage only when that passage's own wording materially addresses the same proposition, command, scope, duration, audience, or condition. Never manufacture an opposing channel, impose a quota of countertexts, or include a passage merely because it is commonly used against the proposition. For apparent-contradiction plans, retrieve both named sides of the apparent contradiction so their actual objects and contexts can be compared. Association, joint naming, shared action, honor, agency, and authority do not by themselves prove identity, ontology, equality, or eternality. Plan enough evidence to test each component rather than treating related subject matter as proof of the whole claim.
 
 When the reader explicitly asks for the strongest biblical cases for and against a proposition or asks to compare competing interpretations, frame the proposition neutrally as whether the claim is established. Retrieve the strongest passages whose actual wording materially supports each reading, including passages commonly offered against the claim when they address the same practice or governing category. Presenting both readings does not require artificial neutrality: grade each passage honestly, explain its actual object and limits, and reach the conclusion supported by the full scriptural context.
@@ -407,7 +446,9 @@ This comparison instruction is mandatory when the question says "for and against
 
 The reader's preferred conclusion and earlier EMET claims are context, never evidence. Earlier structured claims must be re-checked from their cited passages in the current plan when they remain material. Do not reverse an earlier textual finding merely because the latest question pushes another direction; retrieve the passages needed either to preserve it or to explain a genuine scriptural reconciliation.
 
-Use reader location, a named book, and prior questions to resolve what the reader means, not to restrict retrieval to that chapter or book. A new subject overrides earlier context. Search as broadly as the question requires, but return only the proportionate evidence defined by responseDesign: normally 2–4 high-value verses for concise questions, 4–8 for standard explanations, and enough verified witnesses for deep studies. Return individual verse references in the form "Genesis 6:2", never ranges. Never pad the plan with weak matches. Priority 100 means most important and 1 means least important.
+Use reader location, a named book, and prior questions to resolve what the reader means, not to restrict retrieval to that chapter or book. A new subject overrides earlier context. Search as broadly as the question requires, but return only the proportionate evidence defined by responseDesign: normally 2–4 high-value verses for concise questions, 4–8 for standard explanations, and enough verified witnesses for deep studies. Return only fully specified Scripture references. Every governingReferences array item must contain exactly one reference; never serialize multiple references inside one string with embedded quotes or delimiters. Never emit question marks, unfinished ranges, placeholder endpoints, or speculative reference syntax. Return individual verse references in the form "Genesis 6:2", never ranges. Never pad the plan with weak matches. Priority 100 means most important and 1 means least important.
+
+Do not return a plan whose limitations admit that essential or materially necessary evidence is missing. Include that evidence before returning the plan. If Scripture or the locked corpus cannot establish a required component, identify the unresolved component without inventing a reference and ensure the eventual conclusion cannot be categorical.
 
 Conversation turn outcomes are product context, not Scripture evidence. If the reader asks why an earlier turn failed, use the recorded answered/failed outcome: acknowledge a failed generation or verification turn plainly and offer to answer it again. Never invent a theological reason for a technical failure, and never claim an answered turn failed.
 
@@ -453,13 +494,115 @@ Give short retrieval reasons. Do not draft, summarize, or anticipate the final a
       }
 
       try {
-        const draft = parseEmetAiRetrievalPlan(JSON.parse(response.output_text));
-        if (!draft) {
-          if (process.env.EMET_AI_DEBUG === "1") {
-            console.error("EMET retrieval plan failed parsing.");
+        const inspectPlan = (rawOutput: string) => {
+          let parsed: unknown;
+          try {
+            parsed = JSON.parse(rawOutput);
+          } catch {
+            return {
+              normalizedPlan: null,
+              draft: null,
+              errors: ["The retrieval plan was not valid JSON."],
+            };
           }
+          const normalizedPlan = normalizeEmetAiPlannedReferences(
+            parsed,
+            questionContract,
+            emetAiLockedScriptureReferenceExists,
+          );
+          const draft = normalizedPlan.requiredReferenceErrors.length
+            ? null
+            : parseEmetAiRetrievalPlan(normalizedPlan.value);
+          const errors = [
+            ...normalizedPlan.requiredReferenceErrors,
+            ...(draft
+              ? [
+                  ...validateEmetAiPlanningNeutrality(draft),
+                  ...validateEmetAiPlanningCompleteness(draft),
+                ]
+              : normalizedPlan.requiredReferenceErrors.length
+                ? []
+                : ["The normalized retrieval plan did not satisfy the retrieval-plan contract."]),
+          ];
+          return { normalizedPlan, draft, errors };
+        };
+
+        let inspected = inspectPlan(response.output_text);
+        const initialPlanningAudit = {
+          rawOutput: response.output_text,
+          requiredReferenceErrors: inspected.normalizedPlan?.requiredReferenceErrors || [],
+          recoveredMalformedGoverningReferences:
+            inspected.normalizedPlan?.recoveredMalformedGoverningReferences || [],
+          recoveredSerializedGoverningReferences:
+            inspected.normalizedPlan?.recoveredSerializedGoverningReferences || [],
+          rejectedOptionalReferences: inspected.normalizedPlan?.rejectedOptionalReferences || [],
+          validationErrors: inspected.errors,
+        };
+        lastAudit.planning = {
+          ...initialPlanningAudit,
+        };
+
+        const recoverableCompletenessFailure =
+          inspected.draft &&
+          inspected.errors.length > 0 &&
+          inspected.errors.every((error) =>
+            /explicitly identifies unresolved essential evidence/i.test(error)
+          );
+        if (recoverableCompletenessFailure) {
+          const recoveryStartedAt = performance.now();
+          const recovery = await client.responses.create({
+            model: answerModel,
+            store: false,
+            reasoning: { effort: answerReasoningEffort },
+            input: [
+              {
+                role: "system",
+                content: `${buildEmetAiSystemInstruction(instructionProfile)}\n\nCorrect this retrieval plan once. Return only a complete retrieval plan matching the schema. This is evidence planning, not answer generation. Include every materially necessary Scripture reference that the draft itself identified as missing. Use only fully specified individual verse references that can be independently verified. Do not guess a missing endpoint, emit placeholders, select a theological conclusion, remove the relevant OT foundation, or treat silence as repeal. If essential coverage cannot be supplied, retain an explicit unresolved component rather than fabricating Scripture.`,
+              },
+              {
+                role: "user",
+                content: JSON.stringify({
+                  questionContract,
+                  rejectedPlan: JSON.parse(response.output_text),
+                  validationErrors: inspected.errors,
+                }),
+              },
+            ],
+            text: {
+              format: {
+                type: "json_schema",
+                name: "emet_ai_retrieval_plan_recovery",
+                strict: true,
+                schema: retrievalPlanSchema(),
+              },
+            },
+          });
+          logUsage("plan", recovery, answerModel, performance.now() - recoveryStartedAt);
+          lastAudit.planningRecovery = {
+            status: recovery.status,
+            rawOutput: recovery.output_text || "",
+          };
+          if (recovery.status === "completed" && recovery.output_text) {
+            inspected = inspectPlan(recovery.output_text);
+            lastAudit.planningRecovery = {
+              ...(lastAudit.planningRecovery as Record<string, unknown>),
+              requiredReferenceErrors: inspected.normalizedPlan?.requiredReferenceErrors || [],
+              recoveredMalformedGoverningReferences:
+                inspected.normalizedPlan?.recoveredMalformedGoverningReferences || [],
+              recoveredSerializedGoverningReferences:
+                inspected.normalizedPlan?.recoveredSerializedGoverningReferences || [],
+              rejectedOptionalReferences: inspected.normalizedPlan?.rejectedOptionalReferences || [],
+              validationErrors: inspected.errors,
+            };
+          }
+        }
+        if (!inspected.draft || inspected.errors.length) {
+          lastFailure = inspected.errors.length
+            ? inspected.errors
+            : ["The normalized retrieval plan did not satisfy the retrieval-plan contract."];
           return null;
         }
+        const draft = inspected.draft;
         const referenceKey = (reference: string) => reference
           .normalize("NFKC")
           .toLocaleLowerCase("en-US")
@@ -573,6 +716,8 @@ Use packet.reasoning.establishedPropositions as mandatory consistency constraint
 
 Return exactly one componentCheck for every component in packet.reasoning.components. Grade the actual component proposition, not a weaker substitute. The full conclusionSupport may not be stronger than the weakest material component. If one required assertion is only possible or is not established, do not say the named compound proposition is established; explain naturally which parts Scripture states and which part it does not establish.
 
+Packet.governingCoverage identifies the verified Scripture that directly governs each material component. Every corresponding componentCheck must use at least one of those evidence IDs, and the reader-facing answer must account for any governing passage that materially qualifies the conclusion. Do not replace governing evidence with a more convenient thematic verse. Grade explicit statement, strong implication, synthesis, possibility, and non-establishment according to what the cited wording actually supports. A categorical yes or no requires an explicit statement or a strong implication from the complete governing evidence.
+
 For each answer claim, provide a stable ID, evidence level, category, polarity, exact scope, and timing. The reader-facing answer must remain natural, direct, and concise. Begin with the answer, never with commentary about a draft, packet, model, method, or proposition. State the conclusion the supplied Scripture establishes; do not weaken an explicit command, duration, or governing statement merely because the reader used modern wording. Use a qualification only when its cited passage materially addresses the exact proposition. Do not introduce labels such as "Sinai administration" or "covenant setting" unless the cited text itself makes that distinction relevant to the answer. Give the precise conclusion justified by all materially relevant supplied Scripture.${canonicalContinuityDirective}`;
       const designedTask = `${task}${responseDesignDirective}`;
       try {
@@ -598,7 +743,11 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
                 strict: true,
                 schema: directProfile
                   ? conciseAnswerSchema(packet.evidence.map((item) => item.id))
-                  : answerSchema(packet.evidence.map((item) => item.id)),
+                  : answerSchema(
+                      packet.evidence.map((item) => item.id),
+                      packet.reasoning.components.map((item) => item.id),
+                      packet.reasoning.establishedPropositions.map((item) => item.id),
+                    ),
               },
             },
         });
@@ -608,6 +757,9 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           return null;
         }
         const draft: unknown = JSON.parse(response.output_text);
+        lastAudit.answerDraft = {
+          rawOutput: response.output_text,
+        };
 
         const allowedContinuityIds = new Set(
           packet.reasoning.establishedPropositions.map((item) => item.id),
@@ -616,10 +768,10 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           if (!value || typeof value !== "object") return value;
           const candidate = value as Record<string, unknown>;
           if (typeof candidate.answer === "string") {
-            candidate.answer = candidate.answer
-              .replace(/\s*\([^)]*\b(?:scripture|lexical|morphology):[^)]*\)/gi, "")
-              .replace(/[ \t]+\n/g, "\n")
-              .trim();
+            candidate.answer = normalizeEmetAiMechanicalAnswerText(
+              candidate.answer,
+              packet.evidence,
+            );
           }
           if (directProfile) {
             const claims = Array.isArray(candidate.claims)
@@ -734,12 +886,18 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
               }
             }
           }
+          if (
+            typeof candidate.answer === "string" &&
+            (candidate.conclusionSupport === "possible-interpretation" ||
+              candidate.conclusionSupport === "theological-synthesis" ||
+              candidate.conclusionSupport === "does-not-establish")
+          ) {
+            candidate.answer = candidate.answer
+              .replace(/^\s*(?:yes|no)\s*[.!,:;-]\s*/i, "")
+              .replace(/^\s*(?:yes|no)\s*$/i, "Scripture does not establish a categorical answer.")
+              .trim();
+          }
           if (Array.isArray(candidate.citations)) {
-            const cited = new Set(candidate.citations.flatMap((item) => {
-              if (!item || typeof item !== "object") return [];
-              const evidenceId = (item as Record<string, unknown>).evidenceId;
-              return typeof evidenceId === "string" ? [evidenceId] : [];
-            }));
             const used = [candidate.componentChecks, candidate.claims, candidate.continuityChecks]
               .flatMap((items) => Array.isArray(items) ? items : [])
               .flatMap((item) => {
@@ -749,16 +907,34 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
                   ? ids.filter((id): id is string => typeof id === "string")
                   : [];
               });
+            const usedIds = new Set(used);
+            const cited = new Set<string>();
+            const normalizedCitations = candidate.citations.flatMap((value) => {
+              if (!value || typeof value !== "object") return [];
+              const citation = value as Record<string, unknown>;
+              const evidenceId = typeof citation.evidenceId === "string"
+                ? citation.evidenceId
+                : "";
+              if (!evidenceId || cited.has(evidenceId)) return [];
+              const item = packet.evidence.find((entry) => entry.id === evidenceId);
+              if (!item) return usedIds.has(evidenceId) ? [value] : [];
+              cited.add(evidenceId);
+              return [{
+                evidenceId,
+                ...(item.reference ? { reference: item.reference } : {}),
+              }];
+            });
             for (const evidenceId of used) {
               if (cited.has(evidenceId)) continue;
               const item = packet.evidence.find((entry) => entry.id === evidenceId);
               if (!item) continue;
-              candidate.citations.push({
+              normalizedCitations.push({
                 evidenceId,
                 ...(item.reference ? { reference: item.reference } : {}),
               });
               cited.add(evidenceId);
             }
+            candidate.citations = normalizedCitations;
           }
           return candidate;
         };
@@ -772,19 +948,25 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
               ok: false as const,
               errors: ["The answer did not satisfy the required answer schema."],
             };
+        lastAudit.answerDraft = {
+          ...(lastAudit.answerDraft as Record<string, unknown>),
+          validationErrors: initialValidation.ok ? [] : initialValidation.errors,
+        };
         performanceObserver?.stage("validation", performance.now() - validationStartedAt);
         if (initialValidation.ok) return initialValidation.value;
 
         if (process.env.EMET_AI_USAGE_LOG === "1") {
           console.info("EMET AI repair requested", {
             validationErrors: initialValidation.errors,
+            issueKinds: Array.from(new Set(
+              initialValidation.errors.map(classifyEmetAiValidationIssue),
+            )),
           });
         }
 
-        // The combined fast path may name a sound verse that did not survive
-        // canonical resolution into this packet. Rebuild from verified packet
-        // IDs instead of asking the model to preserve a structurally defective
-        // reference-backed draft.
+        // Rebuild substantive failures from verified packet IDs. Formatting,
+        // duplicate-citation, and reference-label defects have already been
+        // normalized deterministically above and do not spend a repair call.
         const repairStartedAt = performance.now();
         const repair = await client.responses.create({
           model: answerModel,
@@ -793,13 +975,16 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           input: [
             {
               role: "system",
-              content: `${systemInstruction}\n\nBuild a fresh answer using only the verified evidence packet supplied now. The fast provisional draft failed deterministic validation, so do not preserve its references or structured checks. Preserve a conclusion only when the verified packet supports it. Remove or qualify an unsupported secondary claim instead of discarding supported conclusions. Every component check and complete-answer claim must cite one or more available evidence IDs. Obey packet.responseDesign: concise means a direct 1–3 sentence answer, normally 30–65 words, with no unasked debate and no more than four strongest citations; standard and deep answers should remain proportionate to the request. Return only the complete answer object and do not discuss this recovery process in the reader-facing answer.`,
+              content: `${systemInstruction}\n\nBuild a fresh answer using only the verified evidence packet supplied now. The fast provisional draft failed deterministic validation, so do not preserve its references or structured checks. Preserve a conclusion only when the verified packet supports it. Remove or qualify an unsupported secondary claim instead of discarding supported conclusions. Every component check and complete-answer claim must cite one or more available evidence IDs. Do not name, quote, or allude to a Scripture reference that is absent from packet.evidence. If conclusionSupport is possible-interpretation, theological-synthesis, or does-not-establish, do not begin with a categorical yes or no. For continuity questions, reason from packet.governingCoverage and the actual objects of its passages; do not replace that evidence with a modern-audience restatement test or covenant-code shorthand. If the question requests a broad set of concrete items, give representative concrete examples from the governing evidence and explicitly say that they are representative rather than exhaustive. Obey packet.responseDesign: concise means a direct 1–3 sentence answer, normally 30–65 words, with no unasked debate and no more than four strongest citations; standard and deep answers should remain proportionate to the request. Return only the complete answer object and do not discuss this recovery process in the reader-facing answer.`,
             },
             {
               role: "user",
               content: JSON.stringify({
                 packet,
                 validationErrors: initialValidation.errors,
+                validationIssueKinds: Array.from(new Set(
+                  initialValidation.errors.map(classifyEmetAiValidationIssue),
+                )),
               }),
             },
           ],
@@ -808,11 +993,19 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
               type: "json_schema",
               name: "emet_ai_answer_repair",
               strict: true,
-              schema: answerSchema(packet.evidence.map((item) => item.id)),
+              schema: answerSchema(
+                packet.evidence.map((item) => item.id),
+                packet.reasoning.components.map((item) => item.id),
+                packet.reasoning.establishedPropositions.map((item) => item.id),
+              ),
             },
           },
         });
         logUsage("repair", repair, answerModel, performance.now() - repairStartedAt);
+        lastAudit.repairDraft = {
+          status: repair.status,
+          rawOutput: repair.output_text || "",
+        };
         performanceObserver?.stage("repair", performance.now() - repairStartedAt);
         if (repair.status !== "completed" || !repair.output_text) {
           lastFailure = [
@@ -829,10 +1022,14 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           return null;
         }
         const repairedValidation = validateEmetAiAnswer(packet, repaired);
+        lastAudit.repairDraft = {
+          ...(lastAudit.repairDraft as Record<string, unknown>),
+          validationErrors: repairedValidation.ok ? [] : repairedValidation.errors,
+        };
         if (repairedValidation.ok) return repairedValidation.value;
 
         lastFailure = repairedValidation.errors.map(
-          (error) => `Verified-packet recovery: ${error}`,
+          (error) => `Verified-packet recovery (${classifyEmetAiValidationIssue(error)}): ${error}`,
         );
 
         if (process.env.EMET_AI_DEBUG === "1") {

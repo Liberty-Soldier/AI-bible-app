@@ -19,6 +19,7 @@ import {
   type ReaderChapter,
 } from "@/app/data/scripture/ReaderVerseAdapter";
 import ReaderFirstUseTip from "@/app/components/ReaderFirstUseTip";
+import RestoredWordStudyNavigation from "@/app/components/RestoredWordStudyNavigation";
 import { getCanonicalChapterTokenAvailability } from "@/app/data/scripture/CanonicalVerseStore";
 
 export const dynamic = "force-dynamic";
@@ -194,6 +195,7 @@ export default async function ReadChapterPage({
     translation?: string;
     returnTo?: string;
     returnLabel?: string;
+    restoreWordStudy?: string;
   }>;
 }) {
   const { book, chapter } = await params;
@@ -202,6 +204,7 @@ export default async function ReadChapterPage({
     translation,
     returnTo,
     returnLabel,
+    restoreWordStudy,
   } = await searchParams;
 
   const decodedBook = decodeURIComponent(book);
@@ -265,6 +268,7 @@ export default async function ReadChapterPage({
     <main className="min-h-screen bg-[var(--background)] px-4 pb-20 text-[var(--foreground)] sm:px-6">
       <section className="mx-auto max-w-2xl">
         <ReaderVerseScroller verseLabel={highlightedVerse} />
+        <RestoredWordStudyNavigation active={restoreWordStudy === "1"} />
 
         <SaveBibleIQContext
           book={decodedBook}

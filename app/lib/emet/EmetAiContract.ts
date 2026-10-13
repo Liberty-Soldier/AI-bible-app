@@ -2,6 +2,7 @@ import {
   validateEmetAiConcreteAnswer,
   validateEmetAiScriptureOnlyFraming,
 } from "./EmetAiAnswerCompleteness";
+import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
@@ -138,6 +139,10 @@ export type EmetAiEvidencePacket = {
     }>;
     establishedPropositions: EmetAiEstablishedProposition[];
   };
+  governingCoverage?: Array<{
+    componentId: string;
+    evidenceIds: string[];
+  }>;
   scope: {
     type: EmetAiScopeType;
     references: string[];
@@ -224,8 +229,99 @@ export type EmetAiValidationResult<T> =
   | { ok: true; value: T }
   | { ok: false; errors: string[] };
 
+export type EmetAiValidationIssueKind =
+  | "formatting"
+  | "missing-essential-evidence"
+  | "unsupported-claim"
+  | "evidence-integrity"
+  | "genuine-uncertainty";
+
+export function classifyEmetAiValidationIssue(
+  error: string,
+): EmetAiValidationIssueKind {
+  if (/schema|exactly one|unique non-empty|invalid scope|answer text is required|internal generation language|internal evidence selection/i.test(error)) {
+    return "formatting";
+  }
+  if (/requested passage|requested .* analysis|comparison passage|each interpretation|concrete actions|concrete items|named multi-item list/i.test(error)) {
+    return "missing-essential-evidence";
+  }
+  if (/quotation|source term|citation|unavailable evidence|requires evidence|unsupported|missing from citations/i.test(error)) {
+    return "evidence-integrity";
+  }
+  if (/possible conclusion|does-not-establish|unresolved conflict|cannot receive stronger support/i.test(error)) {
+    return "genuine-uncertainty";
+  }
+  return "unsupported-claim";
+}
+
 function clean(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
+}
+
+function normalizedVisibleText(value: string) {
+  return value
+    .normalize("NFKC")
+    .toLocaleLowerCase("en-US")
+    .replace(/[“”‘’'"`]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const MEANINGFUL_COVERAGE_STOP_WORDS = new Set([
+  "a", "an", "and", "are", "as", "at", "be", "because", "been", "but", "by",
+  "for", "from", "had", "has", "have", "he", "her", "him", "his", "i", "in",
+  "is", "it", "its", "lord", "god", "messiah", "of", "on", "or", "said", "says",
+  "scripture", "shall", "she", "that", "the", "their", "them", "there", "they",
+  "this", "those", "to", "was", "were", "what", "when", "which", "who", "will",
+  "with", "you", "your",
+]);
+
+function meaningfulCoverageTerms(value: string) {
+  return Array.from(new Set(
+    normalizedVisibleText(value)
+      .split(" ")
+      .filter((term) => term.length >= 4 && !MEANINGFUL_COVERAGE_STOP_WORDS.has(term)),
+  ));
+}
+
+function readerMeaningfullyAddressesEvidence(answer: string, evidenceText: string) {
+  const answerTerms = new Set(meaningfulCoverageTerms(answer));
+  const evidenceTerms = meaningfulCoverageTerms(evidenceText);
+  const requiredOverlap = Math.min(2, evidenceTerms.length);
+  return requiredOverlap > 0 && evidenceTerms.filter((term) => answerTerms.has(term)).length >= requiredOverlap;
+}
+
+function expandedRequestedReferences(value: string) {
+  const coverage = extractEmetAiRequestedCoverage(value);
+  return coverage.passages.flatMap((passage) => {
+    if (passage.startVerse === undefined) return [];
+    const endVerse = passage.endVerse || passage.startVerse;
+    return Array.from(
+      { length: endVerse - passage.startVerse + 1 },
+      (_, offset) => `${passage.book} ${passage.chapter}:${passage.startVerse! + offset}`,
+    );
+  });
+}
+
+function scriptureQuotations(value: string) {
+  return Array.from(value.matchAll(/[“"]([^”"\n]{8,300})[”"]/g))
+    .flatMap((match) => {
+      const quote = match[1].trim();
+      if (quote.split(/\s+/).length < 4) return [];
+      const start = match.index || 0;
+      const before = value.slice(Math.max(0, start - 90), start);
+      const after = value.slice(start + match[0].length, start + match[0].length + 90);
+      const attributedAsScripture =
+        /\b(?:scripture|the\s+(?:text|verse|passage)|\w+\s+\d+:\d+)[^.]{0,70}\b(?:says?|said|writes?|wrote|declares?|reads?|answers?)\s*[:,]?\s*$/i.test(before) ||
+        /^\s*(?:\([^)]*\b(?:[1-3]\s+)?[A-Z][A-Za-z]+\s+\d+:\d+)/.test(after);
+      return attributedAsScripture ? [{ quote, before, after }] : [];
+    });
+}
+
+function visibleSourceTerms(value: string) {
+  return Array.from(value.matchAll(/[\u0590-\u05ff]+|[\u0370-\u03ff\u1f00-\u1fff]+/gu))
+    .map((match) => match[0].normalize("NFKC"));
 }
 
 const claimSupports = new Set<EmetAiClaimSupport>([
@@ -322,6 +418,19 @@ export function validateEmetAiEvidencePacket(
     packet.reasoning.components.some((item) => !clean(item.proposition))
   ) {
     errors.push("Reasoning components must be identified and non-empty.");
+  }
+  if (packet.governingCoverage) {
+    const coverageIds = packet.governingCoverage.map((item) => item.componentId);
+    if (
+      !uniqueNonEmpty(coverageIds) ||
+      coverageIds.some((id) => !componentIds.includes(id)) ||
+      packet.governingCoverage.some((item) =>
+        !item.evidenceIds.length ||
+        item.evidenceIds.some((id) => !packet.evidence.some((evidence) => evidence.id === id)),
+      )
+    ) {
+      errors.push("Every governing component must identify available verified evidence.");
+    }
   }
 
   if (packet.requestedCoverage) {
@@ -521,6 +630,25 @@ export function validateEmetAiAnswer(
   if (!clean(answer.answer)) {
     errors.push("The answer text is required.");
   }
+  if (
+    /\b(?:the|this|a)?\s*(?:draft|packet|prompt|system instruction|model output|evidence packet)\b/i.test(
+      answer.answer,
+    )
+  ) {
+    errors.push("The reader-facing answer exposes internal generation language.");
+  }
+  if (
+    /\b(?:the\s+)?(?:supplied|provided)\s+(?:passages|texts|scriptures?|evidence)\b|\bthis\s+(?:scripture|evidence)\s+set\b/i.test(
+      answer.answer,
+    )
+  ) {
+    errors.push("The reader-facing answer describes the internal evidence selection instead of speaking naturally from Scripture.");
+  }
+  if (
+    /(?:scripture|lexical|morphology):[A-Za-z0-9._:-]+/i.test(answer.answer)
+  ) {
+    errors.push("The reader-facing answer exposes an internal evidence identifier.");
+  }
 
   if (answer.status === "complete") {
     const concreteAnswerError = validateEmetAiConcreteAnswer({
@@ -575,6 +703,57 @@ export function validateEmetAiAnswer(
     citedEvidenceIds.add(citation.evidenceId);
   }
 
+  const scriptureByReference = new Map<string, string[]>();
+  for (const item of packet.evidence) {
+    if (item.kind !== "scripture" || !item.reference) continue;
+    const ids = scriptureByReference.get(item.reference) || [];
+    ids.push(item.id);
+    scriptureByReference.set(item.reference, ids);
+  }
+  for (const reference of expandedRequestedReferences(answer.answer)) {
+    const evidenceIds = scriptureByReference.get(reference) || [];
+    if (!evidenceIds.length) {
+      errors.push(`Reader-facing reference ${reference} is not in the verified evidence packet.`);
+    } else if (!evidenceIds.some((id) => citedEvidenceIds.has(id))) {
+      errors.push(`Reader-facing reference ${reference} is missing from structured citations.`);
+    }
+  }
+
+  const normalizedScripture = packet.evidence
+    .filter((item) => item.kind === "scripture")
+    .map((item) => normalizedVisibleText(item.text));
+  for (const { quote } of scriptureQuotations(answer.answer)) {
+    const segments = quote
+      .split(/(?:\.{3}|…)/)
+      .map(normalizedVisibleText)
+      .filter((segment) => segment.split(/\s+/).length >= 2);
+    if (
+      !segments.length ||
+      !normalizedScripture.some((text) => segments.every((segment) => text.includes(segment)))
+    ) {
+      errors.push(`Reader-facing Scripture quotation is not exact verified packet text: “${quote.slice(0, 80)}”.`);
+    }
+  }
+
+  const verifiedSourceTerms = new Set(
+    [
+      ...(packet.identity.gate === "verified" && packet.identity.lemma
+        ? [packet.identity.lemma]
+        : []),
+      ...packet.evidence
+        .filter((item) => item.kind === "lexical")
+        .flatMap((item) => visibleSourceTerms(item.text)),
+      ...(packet.requestedCoverage?.language || [])
+        .flatMap((requirement) => requirement.terms)
+        .map((term) => term.lemma),
+    ].flatMap(visibleSourceTerms),
+  );
+  for (const term of visibleSourceTerms(answer.answer)) {
+    if (!verifiedSourceTerms.has(term)) {
+      errors.push(`Reader-facing source term ${term} has no exact verified lexical identity in the packet.`);
+    }
+  }
+
   if (answer.status === "complete") {
     if (answer.claims.length === 0) {
       errors.push("A complete answer requires at least one supported claim.");
@@ -583,19 +762,6 @@ export function validateEmetAiAnswer(
     if (answer.citations.length === 0) {
       errors.push("A complete answer requires evidence citations.");
     }
-    if (
-      packet.responseDesign?.depth === "concise" &&
-      answer.citations.length > packet.responseDesign.maxScriptureCitations
-    ) {
-      errors.push("A concise answer includes more Scripture references than its response design permits.");
-    }
-    if (
-      packet.responseDesign?.depth === "concise" &&
-      clean(answer.answer).split(/\s+/).filter(Boolean).length > 90
-    ) {
-      errors.push("A concise reader-facing answer is unnecessarily long.");
-    }
-
     const components = new Map(
       packet.reasoning.components.map((item) => [item.id, item]),
     );
@@ -619,6 +785,15 @@ export function validateEmetAiAnswer(
       ) {
         errors.push(`Component check ${check.componentId || "<missing>"} is invalid or unsupported.`);
       }
+      const governing = packet.governingCoverage?.find(
+        (item) => item.componentId === check.componentId,
+      );
+      if (
+        governing &&
+        !governing.evidenceIds.some((id) => check.evidenceIds.includes(id))
+      ) {
+        errors.push(`Component check ${check.componentId} does not use its governing Scripture evidence.`);
+      }
     }
 
     if (packet.requestedCoverage) {
@@ -627,14 +802,32 @@ export function validateEmetAiAnswer(
         ...answer.claims.flatMap((item) => item.evidenceIds),
       ]);
       for (const passage of packet.requestedCoverage.passages) {
-        const requiredEvidenceIds = packet.evidence
+        const requiredEvidence = packet.evidence
           .filter((item) => item.kind === "scripture" && item.reference && passage.references.includes(item.reference))
-          .map((item) => item.id);
-        if (
-          requiredEvidenceIds.some((id) => !meaningfullyUsedEvidenceIds.has(id)) ||
-          requiredEvidenceIds.some((id) => !citedEvidenceIds.has(id))
-        ) {
+        const requiredEvidenceIds = requiredEvidence.map((item) => item.id);
+        const meaningfullyCovered = passage.label.includes(":")
+          ? requiredEvidenceIds.every((id) =>
+              meaningfullyUsedEvidenceIds.has(id) && citedEvidenceIds.has(id),
+            )
+          : requiredEvidenceIds.some((id) =>
+              meaningfullyUsedEvidenceIds.has(id) && citedEvidenceIds.has(id),
+            );
+        if (!meaningfullyCovered) {
           errors.push(`Requested passage ${passage.label} must be retrieved, cited, and meaningfully discussed.`);
+        }
+        // A specifically requested range (for example Colossians 2:16-17)
+        // requires visible treatment of each verse. A chapter-level request
+        // may be answered by grouping its material passages and must not turn
+        // every retrieved contextual verse into a separate prose obligation.
+        if (passage.label.includes(":") && passage.references.length > 1) {
+          for (const evidence of requiredEvidence) {
+            if (
+              evidence.reference &&
+              !readerMeaningfullyAddressesEvidence(answer.answer, evidence.text)
+            ) {
+              errors.push(`Requested verse ${evidence.reference} is retrieved and cited but not substantively addressed in the reader-facing answer.`);
+            }
+          }
         }
       }
       for (const language of packet.requestedCoverage.language) {
@@ -788,24 +981,6 @@ export function validateEmetAiAnswer(
           component.category === "application",
       );
       if (
-        /\b(?:the\s+)?(?:draft|packet|prompt|system instruction|model output)\b/i.test(
-          answer.answer,
-        )
-      ) {
-        errors.push(
-          "The reader-facing answer exposes internal generation language.",
-        );
-      }
-      if (
-        /\b(?:the\s+)?(?:supplied|provided)\s+(?:passages|texts|scripture|evidence)\b|\bthis\s+(?:scripture|evidence)\s+set\b/i.test(
-          answer.answer,
-        )
-      ) {
-        errors.push(
-          "The reader-facing answer describes the internal evidence selection instead of speaking naturally from Scripture.",
-        );
-      }
-      if (
         hasContinuityQuestion &&
         (/\b(?:the\s+)?(?:new testament|later scripture|later passages)\b[^.]{0,120}(?:do not|does not|did not)\s+(?:explicitly\s+|directly\s+)?(?:say|state|restate|repeat|establish)\b[^.]{0,220}\b(?:modern christians?|new covenant believers?|believers?)\b[^.]{0,120}\b(?:obligat|required|must|binding)/i.test(
           answer.answer,
@@ -831,7 +1006,9 @@ export function validateEmetAiAnswer(
         );
       }
       if (
-        answer.conclusionSupport === "possible-interpretation" &&
+        (answer.conclusionSupport === "possible-interpretation" ||
+          answer.conclusionSupport === "theological-synthesis" ||
+          answer.conclusionSupport === "does-not-establish") &&
         /^\s*(yes|no)\s*[.!,:;-]/i.test(answer.answer)
       ) {
         errors.push(

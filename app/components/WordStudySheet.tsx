@@ -12,6 +12,7 @@ import {
 } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { normalizeBookName } from "@/app/data/bookAliases";
+import { WORD_STUDY_NAVIGATION_KEY, type PreservedWordStudyState, wordStudyRestoreReturnTo } from "@/app/lib/wordStudyNavigation";
 import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
 import type {
   BibleIQEmet,
@@ -946,6 +947,24 @@ export default function WordStudySheet({
   }, [word, data?.entity?.id]);
 
   useEffect(() => {
+    const identity = data?.entity?.id || entityId || sourceLexicalId;
+    if (!identity) return;
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(WORD_STUDY_NAVIGATION_KEY) || "null") as PreservedWordStudyState | null;
+      if (!saved || saved.identity !== identity) return;
+      setView(saved.view);
+      setSelectedBook(saved.selectedBook);
+      setSelectedRendering(saved.selectedRendering);
+      setVisibleOccurrenceCount(Math.max(OCCURRENCE_PAGE_SIZE, saved.visibleOccurrenceCount));
+      requestAnimationFrame(() => {
+        if (scrollRef.current) scrollRef.current.scrollTop = saved.scrollTop;
+      });
+    } catch {
+      sessionStorage.removeItem(WORD_STUDY_NAVIGATION_KEY);
+    }
+  }, [data?.entity?.id, entityId, sourceLexicalId]);
+
+  useEffect(() => {
     if (!word) return;
 
     const activeWord = word;
@@ -1211,6 +1230,36 @@ export default function WordStudySheet({
     requestAnimationFrame(() => {
       if (scrollRef.current) scrollRef.current.scrollTop = 0;
     });
+  }
+
+  function preserveOccurrenceState() {
+    const identity = data?.entity?.id || entityId || sourceLexicalId;
+    if (!identity) return;
+    const preserved: PreservedWordStudyState = {
+      identity,
+      view: "occurrences",
+      selectedBook,
+      selectedRendering,
+      visibleOccurrenceCount,
+      scrollTop: scrollRef.current?.scrollTop || 0,
+      context: {
+        entityId: data?.entity?.id || entityId,
+        word: word || originalWord || sourceLexicalId || identity,
+        book,
+        chapter,
+        verse,
+        translation,
+        selectedText,
+        originalWord,
+        verseText,
+        sourceOccurrenceId,
+        sourceLexicalId,
+        sourceCorpus,
+        sourceResolutionAuthority,
+        sourceResolutionMethod,
+      },
+    };
+    sessionStorage.setItem(WORD_STUDY_NAVIGATION_KEY, JSON.stringify(preserved));
   }
 
   function handlePointerDown(event: PointerEvent<HTMLButtonElement>) {
@@ -1479,7 +1528,8 @@ export default function WordStudySheet({
                   (current) => current + OCCURRENCE_PAGE_SIZE,
                 )
               }
-              returnTo={readingReturnTo}
+              onOpenOccurrence={preserveOccurrenceState}
+              returnTo={wordStudyRestoreReturnTo(readingReturnTo)}
               returnLabel={readingLabel}
               readingLabel={readingLabel}
               onClose={onClose}
@@ -2682,6 +2732,7 @@ function OccurrencesView({
   totalInSelectedBook,
   onSelectBook,
   onLoadMore,
+  onOpenOccurrence,
   returnTo,
   returnLabel,
   readingLabel,
@@ -2694,6 +2745,7 @@ function OccurrencesView({
   totalInSelectedBook: number;
   onSelectBook: (book: string) => void;
   onLoadMore: () => void;
+  onOpenOccurrence: () => void;
   returnTo: string;
   returnLabel: string;
   readingLabel: string;
@@ -2748,6 +2800,7 @@ function OccurrencesView({
               occurrence={occurrence}
               returnTo={returnTo}
               returnLabel={returnLabel}
+              onOpen={onOpenOccurrence}
             />
           ))}
         </div>
@@ -3072,10 +3125,12 @@ function OccurrenceCard({
   occurrence,
   returnTo,
   returnLabel,
+  onOpen,
 }: {
   occurrence: BibleIQOccurrence;
   returnTo: string;
   returnLabel: string;
+  onOpen: () => void;
 }) {
   const href = buildReferenceHref(occurrence, returnTo, returnLabel);
   const content = (
@@ -3102,7 +3157,7 @@ function OccurrenceCard({
   );
 
   return href ? (
-    <Link href={href} className="block">
+    <Link href={href} onClick={onOpen} className="block">
       {content}
     </Link>
   ) : (

@@ -18,13 +18,18 @@ export default async function EmetPage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const user = await getVerifiedSupabaseUser();
-  if (!user) redirect("/auth?next=%2Femet");
-
   const queryValue = (await searchParams).q;
   const initialQuestion = Array.isArray(queryValue)
     ? queryValue[0] || ""
     : queryValue || "";
+  const user = await getVerifiedSupabaseUser();
+  if (!user) {
+    const next = initialQuestion
+      ? `/emet?q=${encodeURIComponent(initialQuestion)}`
+      : "/emet";
+    redirect(`/auth?next=${encodeURIComponent(next)}`);
+  }
+
   const usage = await getEmetAiUsageSummary();
 
   return (

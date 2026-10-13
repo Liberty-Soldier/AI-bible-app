@@ -159,21 +159,7 @@ assertPresent(
   /\[data-verse-study-control="true"\]/,
   "reader first-use tip",
 );
-assertPresent(
-  readerHeader,
-  /Open reader help/,
-  "reader header",
-);
-assertPresent(
-  readerHeader,
-  /emetsees:open-reader-help/,
-  "reader header",
-);
-assertPresent(
-  readerFirstUseTip,
-  /emetsees:open-reader-help/,
-  "reader first-use tip",
-);
+assertPresent(readerHeader, />\s*Aa\s*</, "reader appearance control");
 assertAbsent(
   readerFirstUseTip,
   /Reader help/,

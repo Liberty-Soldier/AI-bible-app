@@ -30,6 +30,7 @@ export interface EmetAiProvider {
   }): Promise<EmetAiRetrievalPlan | null>;
   generate(packet: EmetAiEvidencePacket): Promise<unknown>;
   getLastFailure?(): string[];
+  getLastAudit?(): Record<string, unknown>;
 }
 
 export type EmetAiServiceResult = {

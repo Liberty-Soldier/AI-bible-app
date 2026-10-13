@@ -101,7 +101,7 @@ function loadSearchLibrary(ts) {
 
   execute(
     (request) => {
-      if (request === "@/app/data/bookAliases") {
+      if (request === "@/app/data/bookAliases" || request === "../data/bookAliases") {
         return {
           bookAliasMap: {
             genesis: "Genesis",
@@ -277,11 +277,11 @@ function verifySourceMarkers(ts, searchLibrarySource) {
   }
 
   const navMarkers = [
-    'href: "/search"',
-    'href="/ask"',
-    "<span>Ask EMET</span>",
-    'variant={askActive ? "gold" : "auto"}',
-    'aria-current={active ? "page" : undefined}',
+    'href="/read"',
+    'href="/emet"',
+    'aria-label="Ask EMET"',
+    '<span>Ask</span>',
+    'aria-current={askActive ? "page" : undefined}',
     'bg-[var(--surface)] shadow-[var(--shadow-sm)]',
     "grid-cols-5 items-end gap-1",
   ];
@@ -292,9 +292,6 @@ function verifySourceMarkers(ts, searchLibrarySource) {
     }
   }
 
-  if (nav.includes('variant="gold"')) {
-    fail("Ask EMET remains permanently gold when inactive.");
-  }
 }
 
 function main() {

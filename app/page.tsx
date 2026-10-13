@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Suspense, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
 import {
@@ -24,29 +25,36 @@ function getTranslationLabel(translation: string) {
   return "World English Bible";
 }
 
+function subscribeToLocalStorage(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  return () => window.removeEventListener("storage", onChange);
+}
+
 function HomePage() {
+  const router = useRouter();
   const [search, setSearch] = useState("");
-  const [lastReading, setLastReading] =
-    useState<LastReadingPosition | null>(null);
-  const [memory, setMemory] = useState<ReaderMemory>({
-    bookmarks: [],
-    highlights: [],
-    notes: [],
-  });
-
-  useEffect(() => {
-    const saved = localStorage.getItem("lastReadingPosition");
-
-    if (saved) {
-      try {
-        setLastReading(JSON.parse(saved));
-      } catch {
-        setLastReading(null);
-      }
-    }
-
-    setMemory(getReaderMemory());
-  }, []);
+  const [submittingQuestion, setSubmittingQuestion] = useState(false);
+  const submitLockRef = useRef(false);
+  const lastReadingJson = useSyncExternalStore(
+    subscribeToLocalStorage,
+    () => localStorage.getItem("lastReadingPosition") || "",
+    () => "",
+  );
+  const memoryJson = useSyncExternalStore(
+    subscribeToLocalStorage,
+    () => localStorage.getItem("scripture-search-reader-memory") || "",
+    () => "",
+  );
+  const lastReading = useMemo(() => {
+    try { return JSON.parse(lastReadingJson || "null") as LastReadingPosition | null; }
+    catch { return null; }
+  }, [lastReadingJson]);
+  const memory = useMemo<ReaderMemory>(() => {
+    void memoryJson;
+    return typeof window === "undefined"
+      ? { bookmarks: [], highlights: [], notes: [] }
+      : getReaderMemory();
+  }, [memoryJson]);
 
   const recentBookmarks = useMemo(
     () => memory.bookmarks.slice(-3).reverse(),
@@ -73,11 +81,14 @@ function HomePage() {
           action="/emet"
           onSubmit={(event) => {
             event.preventDefault();
-            window.dispatchEvent(
-              new CustomEvent("emetsees:open-emet", {
-                detail: { question: search },
-              }),
-            );
+            const question = search.trim();
+            if (!question || submitLockRef.current) return;
+            submitLockRef.current = true;
+            setSubmittingQuestion(true);
+            if (document.activeElement instanceof HTMLElement) {
+              document.activeElement.blur();
+            }
+            router.push(`/emet?q=${encodeURIComponent(question)}`);
           }}
           className="flex items-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-3 shadow-[var(--shadow-sm)]"
         >
@@ -88,14 +99,17 @@ function HomePage() {
             aria-label="Ask EMET a question about Scripture"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            disabled={submittingQuestion}
             className="min-w-0 flex-1 bg-transparent text-base text-[var(--foreground)] outline-none placeholder:text-[var(--muted)]"
           />
 
           <button
             type="submit"
+            disabled={submittingQuestion || !search.trim()}
+            aria-live="polite"
             className="ml-3 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-bold text-[var(--accent-text)] transition active:scale-[0.98]"
           >
-            Ask EMET
+            {submittingQuestion ? "Opening…" : "Ask EMET"}
           </button>
         </form>
 

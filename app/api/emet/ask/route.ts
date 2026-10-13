@@ -13,13 +13,14 @@ import {
   reserveEmetAiQuestion,
 } from "@/app/lib/emet/EmetAiQuota";
 import {
+  assessEmetAiDeterministicSufficiency,
   buildEmetAiTopicEvidence,
-  isEmetAiDeterministicFastPathEligible,
   type EmetAiReaderContext,
 } from "@/app/lib/emet/EmetAiTopicEvidence";
 import { createEmetAiPerformanceTrace } from "@/app/lib/emet/EmetAiPerformance";
 import { buildEmetAiQuestionContract } from "@/app/lib/emet/EmetAiQuestionContract";
 import { answerFromEmetAiEvidence } from "@/app/lib/emet/EmetAiService";
+import { saveSharedStudyCandidate } from "@/app/lib/emet/EmetSharedStudy";
 import {
   createSupabaseEmetAiAnswerStore,
   appendSupabaseEmetConversationLedger,
@@ -179,22 +180,27 @@ export async function POST(request: Request) {
     }
     await completeEmetAiQuestion(requestId, "cache");
     performanceTrace.report({ source: "request-cache", fastPath: false });
+    const shareStudyId = await saveSharedStudyCandidate({ userId, question, packet: requestCache.packet, answer: requestCache.answer });
     return json({
       status: requestCache.answer.status,
       answer: requestCache.answer,
       source: "cache",
       usage: quota,
+      shareStudyId,
     });
   }
 
   let retrievalPlan = null;
   let fastPath = false;
-  let evidence = isEmetAiDeterministicFastPathEligible({
-    question,
-    conversation: activeConversation,
-    context,
-    questionContract,
-  })
+  const deterministicSufficiency = performanceTrace.measure("retrieval", () =>
+    assessEmetAiDeterministicSufficiency({
+      question,
+      conversation: activeConversation,
+      context,
+      questionContract,
+    }),
+  );
+  let evidence = deterministicSufficiency.sufficient
     ? performanceTrace.measure("retrieval", () =>
         buildEmetAiTopicEvidence({
           question,
@@ -302,10 +308,14 @@ export async function POST(request: Request) {
   }
 
   performanceTrace.report({ source: result.source, fastPath });
+  const shareStudyId = result.answer.status === "complete"
+    ? await saveSharedStudyCandidate({ userId, question, packet: evidence.packet, answer: result.answer })
+    : null;
   return json({
     status: result.answer.status,
     answer: result.answer,
     source: result.source,
     usage: responseUsage,
+    shareStudyId,
   });
 }

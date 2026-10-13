@@ -15,7 +15,7 @@ function subscribe(onChange: () => void) {
     const target = event.target;
     if (
       target instanceof Element &&
-      target.closest('[data-verse-selector="true"]')
+      target.closest('[data-verse-selector="true"], [data-verse-study-control="true"]')
     ) {
       rememberDismissal();
     }
@@ -57,7 +57,7 @@ export default function ReaderFirstUseTip() {
       aria-label="Reader tip"
     >
       <p className="min-w-0 flex-1 text-xs leading-5 text-[var(--muted)]">
-        Tap a verse number for highlight, notes, sharing, and source study.
+        Verse numbers open tools. Study opens the original-language text and source words.
       </p>
 
       <button

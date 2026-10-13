@@ -7,6 +7,7 @@ import {
   EMET_AI_RESPONSE_POLICY_VERSION,
 } from "../app/lib/emet/EmetAiResponseDesign.ts";
 import { getEmetAiRequestCacheKey } from "../app/lib/emet/EmetAiCache.ts";
+import { validateEmetAiConcreteAnswer } from "../app/lib/emet/EmetAiAnswerCompleteness.ts";
 
 const directQuestions = [
   "Did Messiah abolish the commandments?",
@@ -86,6 +87,28 @@ const followUp = classifyEmetAiResponseDesign({
 });
 assert.equal(followUp.depth, "standard");
 assert.equal(followUp.progressiveFollowUp, true);
+
+const concreteEvidence = [{
+  id: "scripture:Exodus:20:8",
+  kind: "scripture",
+  text: "Remember the Sabbath. Honor your father and mother. You shall not murder. You shall not steal.",
+}];
+assert.match(
+  validateEmetAiConcreteAnswer({
+    question: "What commandments should I keep?",
+    answer: "Remember the Sabbath, honor your father and mother, do not murder, and do not steal.",
+    evidence: concreteEvidence,
+  }),
+  /representative rather than.*exhaustive/i,
+);
+assert.equal(
+  validateEmetAiConcreteAnswer({
+    question: "What commandments should I keep?",
+    answer: "Representative examples include the Sabbath, honoring your father and mother, not murdering, and not stealing; this is not exhaustive.",
+    evidence: concreteEvidence,
+  }),
+  null,
+);
 
 console.log("EMET response-design verification passed.");
 console.log("- Direct questions use concise 30–65 word answers and 2–4 strongest witnesses.");

@@ -39,6 +39,17 @@ export type VerifiedSourcePhraseMatch = {
   }>;
 };
 
+export type VerifiedSourceTermAtReference = {
+  reference: string;
+  corpus: EmetAiPlannedSourcePhrase["corpus"];
+  sourceFingerprint: string;
+  morphologySignature: string;
+  lexicalId: string;
+  lemma: string;
+  transliteration: string;
+  meaning: string;
+};
+
 let index: SourcePhraseIndex | null = null;
 const lexicalIdsByLemma = new Map<EmetAiPlannedSourcePhrase["corpus"], Map<string, string[]>>();
 const lexicalDetailsByCorpus = new Map<EmetAiPlannedSourcePhrase["corpus"], Map<string, {
@@ -143,6 +154,58 @@ function sequenceStart(values: string[], sequence: string[]) {
     if (matched) return start;
   }
   return -1;
+}
+
+function normalizedLookupWords(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f\u0591-\u05c7]/g, "")
+    .toLocaleLowerCase("en-US")
+    .match(/[\p{L}\p{N}]+/gu) || [];
+}
+
+/**
+ * Resolves an English lookup label to a source term only inside one explicitly
+ * requested verse. This is intentionally narrower than semantic lexical
+ * planning: every returned identity and occurrence comes from the locked
+ * source-phrase index, and ambiguous matches are rejected by the caller.
+ */
+export function verifiedSourceTermsAtReference({
+  corpus,
+  reference,
+  lookup,
+}: {
+  corpus: EmetAiPlannedSourcePhrase["corpus"];
+  reference: string;
+  lookup: string;
+}) {
+  const sourceIndex = loadIndex();
+  const entry = (sourceIndex.corpora[corpus] || []).find(
+    (candidate) => candidate[0] === reference,
+  );
+  if (!entry) return [];
+  const lookupWords = normalizedLookupWords(lookup);
+  if (lookupWords.length !== 1) return [];
+  const lookupWord = lookupWords[0];
+
+  return entry[1].flatMap((rawLexicalId, position): VerifiedSourceTermAtReference[] => {
+    const term = verifiedTerms(corpus, [rawLexicalId])[0];
+    if (!term) return [];
+    const searchable = new Set(normalizedLookupWords(
+      `${term.lemma} ${term.transliteration} ${term.meaning}`,
+    ));
+    if (!searchable.has(lookupWord)) return [];
+    return [{
+      reference,
+      corpus,
+      sourceFingerprint: sourceIndex.sourceFingerprint,
+      morphologySignature: entry[3]?.[position] || "",
+      lexicalId: term.lexicalId,
+      lemma: term.lemma,
+      transliteration: term.transliteration,
+      meaning: term.meaning,
+    }];
+  });
 }
 
 export function verifiedSourcePhraseMatches({

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
 import type {
@@ -55,6 +55,13 @@ type Answer = {
   limitations: string[];
 };
 
+type InitialScriptureItem = {
+  id: string;
+  reference: string;
+  text: string;
+  translation: "web" | "kjv" | "brenton";
+};
+
 function normalizedClaims(value: unknown): EmetAiClaim[] {
   if (!Array.isArray(value)) return [];
   return value.flatMap((candidate, index) => {
@@ -83,6 +90,8 @@ type Exchange = {
   question: string;
   answer: Answer;
   source?: string;
+  initialScripture?: InitialScriptureItem[];
+  shareStudyId?: string;
 };
 
 function storedExchanges(storage: Storage) {
@@ -123,6 +132,18 @@ function storedExchanges(storage: Storage) {
           : [],
       },
       source: exchange.source,
+      initialScripture: Array.isArray(exchange.initialScripture)
+        ? exchange.initialScripture.slice(0, 5).flatMap((item) =>
+            item &&
+            typeof item.id === "string" &&
+            typeof item.reference === "string" &&
+            typeof item.text === "string" &&
+            ["web", "kjv", "brenton"].includes(item.translation)
+              ? [item as InitialScriptureItem]
+              : [],
+          )
+        : [],
+      shareStudyId: typeof exchange.shareStudyId === "string" ? exchange.shareStudyId : undefined,
     }];
   });
 }
@@ -200,6 +221,50 @@ function resetLabel(value?: string) {
   }).format(date);
 }
 
+function InitialScripture({
+  items,
+  pending,
+}: {
+  items: InitialScriptureItem[];
+  pending: boolean;
+}) {
+  const translationLabel = (translation: InitialScriptureItem["translation"]) =>
+    translation === "brenton" ? "Brenton LXX" : translation.toUpperCase();
+  return (
+    <section className="border-y border-[var(--border)] py-3" aria-label="Initial verified Scripture">
+      <p className="text-[0.65rem] font-black uppercase tracking-[0.16em] text-[var(--brand-strong)]">
+        {pending ? "Initial Scripture — analysis in progress" : "Initial Scripture"}
+      </p>
+      {items.length ? (
+        <div className="mt-2.5 space-y-3">
+          {items.map((item) => {
+            const href = referenceHref(item.reference);
+            return (
+              <div key={item.id} className="border-l-2 border-[var(--brand)] pl-3">
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  {href ? (
+                    <Link href={href} className="text-xs font-black text-[var(--foreground)] underline decoration-[var(--brand)] underline-offset-4">
+                      {item.reference}
+                    </Link>
+                  ) : (
+                    <p className="text-xs font-black text-[var(--foreground)]">{item.reference}</p>
+                  )}
+                  <span className="text-[0.6rem] font-bold uppercase tracking-[0.12em] text-[var(--muted)]">
+                    {translationLabel(item.translation)}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{item.text}</p>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <p className="mt-2 text-sm font-semibold text-[var(--muted)]">Finding relevant passages</p>
+      )}
+    </section>
+  );
+}
+
 export default function EmetChat({
   initialUsage,
   initialQuestion = "",
@@ -219,9 +284,15 @@ export default function EmetChat({
   const [pending, setPending] = useState(false);
   const [pendingQuestion, setPendingQuestion] = useState("");
   const [pendingStatus, setPendingStatus] = useState("Searching Scripture…");
+  const [initialScripture, setInitialScripture] = useState<InitialScriptureItem[]>([]);
   const [error, setError] = useState("");
   const conversationEndRef = useRef<HTMLDivElement>(null);
+  const latestAnswerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const submissionInFlightRef = useRef(false);
+  const initialSubmissionRef = useRef(false);
+  const progressiveRequestRef = useRef("");
+  const pendingInitialScriptureRef = useRef<InitialScriptureItem[]>([]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -255,12 +326,22 @@ export default function EmetChat({
   }, [exchanges, historyLoaded]);
 
   useEffect(() => {
-    if (!exchanges.length && !pending) return;
+    if (!pending) return;
     conversationEndRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "end",
     });
-  }, [exchanges.length, pending]);
+  }, [pending]);
+
+  useEffect(() => {
+    if (!exchanges.length) return;
+    window.requestAnimationFrame(() => {
+      latestAnswerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  }, [exchanges.length]);
 
   useEffect(() => {
     if (!pending) return;
@@ -291,11 +372,16 @@ export default function EmetChat({
   const activeContext = wordContext || (useReaderContext ? readerContext : null);
   async function ask(questionOverride?: string) {
     const finalQuestion = (questionOverride || question).trim();
-    if (!finalQuestion || pending) return;
+    if (!finalQuestion || pending || submissionInFlightRef.current) return;
+
+    submissionInFlightRef.current = true;
+    textareaRef.current?.blur();
 
     setQuestion("");
     setPendingQuestion(finalQuestion);
     setPendingStatus("Searching Scripture…");
+    setInitialScripture([]);
+    pendingInitialScriptureRef.current = [];
     setPending(true);
     setError("");
 
@@ -308,41 +394,75 @@ export default function EmetChat({
         );
         setConversationId(activeConversationId);
       }
+      const conversationContext = buildEmetConversationContext(
+        exchanges.map((exchange) => ({
+          question: exchange.question,
+          answer: exchange.answer.answer,
+          outcome: exchange.source === "fail-closed" ? "failed" : "answered",
+          references: exchange.answer.citations
+            .map((citation) => citation.reference || "")
+            .filter(Boolean),
+          claims: exchange.answer.claims.map((claim) => ({
+            id: claim.id,
+            text: claim.text,
+            support: claim.support,
+            category: claim.category,
+            polarity: claim.polarity,
+            scope: claim.scope,
+            timing: claim.timing,
+            references: claim.evidenceIds
+              .flatMap((evidenceId) =>
+                exchange.answer.citations
+                  .filter((citation) => citation.evidenceId === evidenceId)
+                  .map((citation) => citation.reference || ""),
+              )
+              .filter(Boolean),
+          })),
+        })),
+      );
+      const sharedRequest = {
+        question: finalQuestion,
+        conversation: conversationContext,
+        ...(activeContext ? { context: activeContext } : {}),
+      };
+      const progressiveToken = crypto.randomUUID();
+      progressiveRequestRef.current = progressiveToken;
+      if (!wordContext) {
+        void fetch("/api/emet/evidence", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sharedRequest),
+        }).then(async (initialResponse) => {
+          if (!initialResponse.ok) return null;
+          return await initialResponse.json() as {
+            status?: string;
+            items?: InitialScriptureItem[];
+          };
+        }).then((initialPayload) => {
+          if (progressiveRequestRef.current !== progressiveToken) return;
+          const items = initialPayload?.status === "ready" && Array.isArray(initialPayload.items)
+            ? initialPayload.items.slice(0, 5)
+            : [];
+          pendingInitialScriptureRef.current = items;
+          setInitialScripture(items);
+          setPendingStatus(items.length ? "Analyzing these passages…" : "Finding relevant passages…");
+        }).catch(() => {
+          if (progressiveRequestRef.current === progressiveToken) {
+            setPendingStatus("Finding relevant passages…");
+          }
+        });
+      } else {
+        setPendingStatus("Finding relevant passages…");
+      }
+
       const endpoint = wordContext ? "/api/emet/explain" : "/api/emet/ask";
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          question: finalQuestion,
+          ...sharedRequest,
           requestId: crypto.randomUUID(),
           conversationId: activeConversationId,
-          conversation: buildEmetConversationContext(
-            exchanges.map((exchange) => ({
-              question: exchange.question,
-              answer: exchange.answer.answer,
-              outcome: exchange.source === "fail-closed" ? "failed" : "answered",
-              references: exchange.answer.citations
-                .map((citation) => citation.reference || "")
-                .filter(Boolean),
-              claims: exchange.answer.claims.map((claim) => ({
-                id: claim.id,
-                text: claim.text,
-                support: claim.support,
-                category: claim.category,
-                polarity: claim.polarity,
-                scope: claim.scope,
-                timing: claim.timing,
-                references: claim.evidenceIds
-                  .flatMap((evidenceId) =>
-                    exchange.answer.citations
-                      .filter((citation) => citation.evidenceId === evidenceId)
-                      .map((citation) => citation.reference || ""),
-                  )
-                  .filter(Boolean),
-              })),
-            })),
-          ),
-          ...(activeContext ? { context: activeContext } : {}),
         }),
       });
       const payload = (await response.json()) as Record<string, unknown>;
@@ -377,6 +497,7 @@ export default function EmetChat({
             question: finalQuestion,
             answer,
             source: typeof payload.source === "string" ? payload.source : "fail-closed",
+            initialScripture: pendingInitialScriptureRef.current,
           },
         ]);
         return;
@@ -402,29 +523,53 @@ export default function EmetChat({
           question: finalQuestion,
           answer,
           source: typeof payload.source === "string" ? payload.source : undefined,
+          initialScripture: pendingInitialScriptureRef.current,
+          shareStudyId: typeof payload.shareStudyId === "string" ? payload.shareStudyId : undefined,
         },
       ]);
-      window.requestAnimationFrame(() => textareaRef.current?.focus());
     } catch {
       setError("EMET could not connect. Please try again.");
       setQuestion(finalQuestion);
     } finally {
+      progressiveRequestRef.current = "";
       setPendingQuestion("");
       setPending(false);
+      submissionInFlightRef.current = false;
     }
   }
 
+  const launchInitialQuestion = useEffectEvent((value: string) => {
+    void ask(value);
+  });
+
+  useEffect(() => {
+    const launchQuestion = initialQuestion.trim().slice(0, 800);
+    if (!historyLoaded || !launchQuestion || initialSubmissionRef.current) return;
+    initialSubmissionRef.current = true;
+    window.history.replaceState(window.history.state, "", "/emet");
+    launchInitialQuestion(launchQuestion);
+  }, [historyLoaded, initialQuestion]);
+
   async function share(exchange: Exchange) {
+    if (!exchange.shareStudyId) return;
+    const response = await fetch("/api/emet/share", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ studyId: exchange.shareStudyId }),
+    });
+    if (!response.ok) throw new Error("Study publication failed.");
+    const payload = await response.json() as { path: string };
+    const url = new URL(payload.path, window.location.origin).toString();
     const references = exchange.answer.citations
       .map((citation) => citation.reference)
       .filter(Boolean)
       .join(" · ");
-    const text = `${exchange.question}\n\n${exchange.answer.answer}${references ? `\n\nEvidence: ${references}` : ""}\n\nEMETSEES · https://emetsees.com`;
+    const text = `${exchange.question}\n\n${exchange.answer.answer}${references ? `\n\nEvidence: ${references}` : ""}`;
 
     if (navigator.share) {
-      await navigator.share({ title: "EMETSEES answer", text });
+      await navigator.share({ title: exchange.question, text, url });
     } else {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(url);
     }
   }
 
@@ -534,6 +679,8 @@ export default function EmetChat({
               setExchanges([]);
               setQuestion("");
               setError("");
+              setInitialScripture([]);
+              pendingInitialScriptureRef.current = [];
               window.sessionStorage.removeItem(CHAT_STORAGE_KEY);
               const nextConversationId = crypto.randomUUID();
               window.sessionStorage.setItem(CHAT_ID_STORAGE_KEY, nextConversationId);
@@ -561,14 +708,23 @@ export default function EmetChat({
       ) : null}
 
       <div className="mt-7 space-y-9">
-        {exchanges.map((exchange) => (
-          <article key={exchange.id} className="space-y-6">
+        {exchanges.map((exchange, index) => (
+          <article
+            key={exchange.id}
+            className="scroll-mt-4 space-y-6"
+          >
             <div className="flex justify-end">
               <p className="max-w-[88%] rounded-[1.45rem] rounded-br-md bg-[var(--surface-soft)] px-4 py-3 text-[0.98rem] font-medium leading-7 sm:max-w-[78%]">
                 {exchange.question}
               </p>
             </div>
-            <div className="flex items-start gap-3 sm:gap-4">
+            {exchange.initialScripture?.length ? (
+              <InitialScripture items={exchange.initialScripture} pending={false} />
+            ) : null}
+            <div
+              ref={index === exchanges.length - 1 ? latestAnswerRef : undefined}
+              className="flex scroll-mt-4 items-start gap-3 sm:gap-4"
+            >
               <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[var(--brand-soft)]">
                 <EmetseesLogo size={19} variant="gold" />
               </span>
@@ -605,14 +761,16 @@ export default function EmetChat({
                     </details>
                   ) : null}
 
-                  <button
-                    type="button"
-                    aria-label="Share this answer"
-                    onClick={() => void share(exchange)}
-                    className="rounded-full px-2 py-1.5 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
-                  >
-                    Share
-                  </button>
+                  {exchange.shareStudyId ? (
+                    <button
+                      type="button"
+                      aria-label="Publish and share this answer"
+                      onClick={() => void share(exchange)}
+                      className="rounded-full px-2 py-1.5 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
+                    >
+                      Share
+                    </button>
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -626,6 +784,7 @@ export default function EmetChat({
                 {pendingQuestion}
               </p>
             </div>
+            <InitialScripture items={initialScripture} pending />
             <div className="flex items-center gap-3 sm:gap-4">
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[var(--brand-soft)]">
                 <EmetseesLogo size={19} variant="gold" />

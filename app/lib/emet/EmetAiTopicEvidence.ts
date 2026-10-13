@@ -21,7 +21,11 @@ import type {
   EmetAiRetrievalPlan,
   EmetAiRetrievalRole,
 } from "./EmetAiRetrievalPlan";
-import { verifiedSourcePhraseMatches } from "./EmetAiSourcePhrase";
+import {
+  verifiedSourcePhraseMatches,
+  verifiedSourceTermsAtReference,
+  type VerifiedSourcePhraseMatch,
+} from "./EmetAiSourcePhrase";
 import {
   extractEmetAiRequestedCoverage,
   requestedCoverageComponents,
@@ -31,10 +35,7 @@ import {
   buildEmetAiQuestionContract,
   type EmetAiQuestionContract,
 } from "./EmetAiQuestionContract";
-import {
-  classifyEmetAiConcreteAnswerRequirement,
-  expectedEmetAiNamedListCount,
-} from "./EmetAiAnswerCompleteness";
+import { expectedEmetAiNamedListCount } from "./EmetAiAnswerCompleteness";
 
 type SearchTranslation = "web" | "kjv" | "brenton";
 type SearchRecord = [book: string, chapter: number, verse: string, text: string];
@@ -67,6 +68,27 @@ export type EmetAiReaderContext = {
 };
 
 const MAX_LITERAL_FALLBACK_VERSES = 8;
+
+export type EmetAiDeterministicEvidenceRoute =
+  | "direct-factual"
+  | "exact-reference-text"
+  | "single-reference-lexical"
+  | "named-list"
+  | "conversation-recall";
+
+export type EmetAiDeterministicSufficiency = {
+  sufficient: boolean;
+  route: EmetAiDeterministicEvidenceRoute | null;
+  reason: string;
+  references: string[];
+};
+
+export type EmetAiInitialScriptureItem = {
+  id: string;
+  reference: string;
+  text: string;
+  translation: SearchTranslation;
+};
 
 function reestablishedConversationPropositions(
   conversation: EmetConversationContext | null,
@@ -153,6 +175,7 @@ const SINGLE_CHAPTER_BOOKS = new Set([
 
 const indexes = new Map<SearchTranslation, SearchIndex>();
 const recordMaps = new Map<SearchTranslation, Map<string, number>>();
+const deterministicEvidenceCache = new Map<string, ReturnType<typeof resolveDeterministicEvidence>>();
 let webDocumentFrequency: Map<string, number> | null = null;
 
 function loadIndex(translation: SearchTranslation) {
@@ -296,6 +319,10 @@ function resolveReference(reference: string) {
   return null;
 }
 
+export function emetAiLockedScriptureReferenceExists(reference: string) {
+  return resolveReference(reference) !== null;
+}
+
 function scriptureItem(candidate: EvidenceCandidate): EmetAiEvidenceItem {
   return {
     id: `scripture:${candidate.index.translation}:${candidate.recordIndex + 1}`,
@@ -375,6 +402,31 @@ function plannedCandidates(plan: EmetAiRetrievalPlan | null) {
       };
     })
     .filter((value): value is NonNullable<typeof value> => value !== null);
+}
+
+function governingCandidates(plan: EmetAiRetrievalPlan | null) {
+  if (!plan) return [];
+  const plannedByReference = new Map(
+    plan.passages.flatMap((passage) =>
+      expandPlannedReferences(passage.reference).map((reference) => [reference, passage] as const),
+    ),
+  );
+  return plan.components.flatMap((component) =>
+    (component.governingReferences || []).flatMap((plannedReference) =>
+      expandPlannedReferences(plannedReference).flatMap((reference) => {
+        const resolved = resolveReference(reference);
+        if (!resolved) return [];
+        const planned = plannedByReference.get(reference);
+        return [{
+          ...resolved,
+          method: "semantic-plan" as const,
+          role: planned?.role || ("direct" as const),
+          reason: `Governing Scripture selected for ${component.proposition}`,
+          score: 100,
+        }];
+      }),
+    ),
+  );
 }
 
 function sourcePhraseCandidates(plan: EmetAiRetrievalPlan | null) {
@@ -547,15 +599,23 @@ function deterministicDirectCandidates(question: string) {
   );
   const anchor = scored[0];
   const runnerUp = scored[1];
+  const strongFactualTextAnchor = Boolean(
+    anchor &&
+    /^\s*(?:who|what|where|when)\b/i.test(question) &&
+    anchor.matchedUngrouped.length >= Math.max(3, ungrouped.length) &&
+    anchor.score >= 42
+  );
   const strongAnchor = Boolean(
     anchor &&
-    anchor.matchedConcepts.length >= 2 &&
-    anchor.score >= 72 &&
-    (!runnerUp ||
-      anchor.score >= runnerUp.score + 18 ||
-      anchor.matchedConcepts.length > runnerUp.matchedConcepts.length ||
-      anchor.matchedConcepts.length >= 3 ||
-      (anchor.minimumConceptSpan <= 3 && anchor.score >= 120)),
+    (strongFactualTextAnchor || (
+      anchor.matchedConcepts.length >= 2 &&
+      anchor.score >= 72 &&
+      (!runnerUp ||
+        anchor.score >= runnerUp.score + 18 ||
+        anchor.matchedConcepts.length > runnerUp.matchedConcepts.length ||
+        anchor.matchedConcepts.length >= 3 ||
+        (anchor.minimumConceptSpan <= 3 && anchor.score >= 120))
+    )),
   );
   if (!strongAnchor) return [];
 
@@ -575,7 +635,14 @@ function deterministicDirectCandidates(question: string) {
     Math.abs(Number(item.record[2]) - Number(anchor.record[2])) <= 2 &&
     (item.matchedConcepts.length > 0 || item.matchedUngrouped.length > 0),
   );
-  const selectionPool = asksBelieverApplication && gospelWitness
+  const selectionPool = strongFactualTextAnchor
+    ? [
+        anchor,
+        ...scored.filter((item) =>
+          item.matchedUngrouped.length >= Math.max(3, ungrouped.length),
+        ),
+      ]
+    : asksBelieverApplication && gospelWitness
     ? [anchor, gospelWitness]
     : sameChapter.length >= 2
       ? [anchor, ...sameChapter]
@@ -596,6 +663,339 @@ function deterministicDirectCandidates(question: string) {
   }));
 }
 
+const EXACT_REFERENCE_TEXT_PATTERN =
+  /\bwhat\s+(?:does|do)\s+[^?]{1,90}\s+(?:say|read)\b|\b(?:quote|recite)\b|\b(?:show|give)\s+(?:me\s+)?(?:the\s+)?(?:wording|text)\b/i;
+const LEXICAL_LOOKUP_PATTERN =
+  /\b(?:word|term)\b.{0,50}\b(?:translated|rendered|means?)\b|\b(?:translated|rendered)\b.{0,35}\b(?:as\s+)?["'“”‘’]/i;
+const UNSAFE_DEEP_INTENT = new Set<EmetAiQuestionContract["intent"]>([
+  "symbolic",
+  "historical",
+  "doctrinal",
+  "comparison",
+  "apparent-contradiction",
+  "procedure",
+  "enumeration",
+  "multi-part",
+]);
+const THEOLOGICAL_APPLICABILITY_PATTERN =
+  /\b(?:should|must|required?|obligated?|under\s+(?:the\s+)?law|appl(?:y|ies|icable)|binding)\b.{0,90}\b(?:believers?|christians?|gentiles?|israel|church|sabbath|commandments?|torah|law|covenant)\b|\b(?:believers?|christians?|gentiles?|israel|church)\b.{0,90}\b(?:should|must|required?|obligated?|sabbath|commandments?|torah|law|covenant)\b/i;
+const THEOLOGICAL_IDENTITY_PATTERN =
+  /\b(?:same|one)\s+(?:being|person|essence|nature)\b|\b(?:messiah|christ|jesus|holy spirit|spirit)\b.{0,45}\b(?:yahweh|god|father)\b|\b(?:yahweh|god|father)\b.{0,45}\b(?:messiah|christ|jesus|holy spirit|spirit)\b/i;
+
+const DETERMINISTIC_NAMED_LISTS: Array<{
+  pattern: RegExp;
+  count: number;
+  references: string[];
+}> = [
+  {
+    pattern: /^\s*what\s+are\s+the\s+ten\s+commandments\s*[?.!]*\s*$/i,
+    count: 10,
+    references: Array.from({ length: 16 }, (_, offset) => `Exodus 20:${offset + 2}`),
+  },
+];
+
+function resolvedCandidates(
+  references: string[],
+  reason: string,
+  method: RetrievalMethod = "explicit-reference",
+) {
+  return references.flatMap((reference): EvidenceCandidate[] => {
+    const resolved = resolveReference(reference);
+    return resolved ? [{
+      ...resolved,
+      method,
+      role: "direct",
+      reason,
+      score: 100,
+    }] : [];
+  });
+}
+
+function exactReferenceTextCandidates(
+  question: string,
+  contract: EmetAiQuestionContract,
+) {
+  if (!EXACT_REFERENCE_TEXT_PATTERN.test(question)) return [];
+  if (contract.requestedCoverage.passages.length !== 1) return [];
+  const passage = contract.requestedCoverage.passages[0];
+  if (passage.startVerse === undefined) return [];
+  const references = Array.from(
+    { length: (passage.endVerse || passage.startVerse) - passage.startVerse + 1 },
+    (_, offset) => `${passage.book} ${passage.chapter}:${passage.startVerse! + offset}`,
+  );
+  const candidates = resolvedCandidates(
+    references,
+    `The user requested the wording of ${passage.label}.`,
+  );
+  return candidates.length === references.length ? candidates : [];
+}
+
+function lexicalLookupLabel(question: string) {
+  const quoted = question.match(/["'“”‘’]([^"'“”‘’]{1,40})["'“”‘’]/)?.[1];
+  if (quoted) return quoted.trim();
+  return question.match(/\b(?:translated|rendered)\s+(?:as\s+)?([\p{L}\p{N}-]{1,30})\b/iu)?.[1] || "";
+}
+
+function deterministicLexicalMatches(
+  question: string,
+  contract: EmetAiQuestionContract,
+): VerifiedSourcePhraseMatch[] {
+  if (!LEXICAL_LOOKUP_PATTERN.test(question)) return [];
+  if (contract.requestedCoverage.passages.length !== 1 || contract.requestedCoverage.language.length !== 1) return [];
+  const passage = contract.requestedCoverage.passages[0];
+  if (passage.startVerse === undefined || passage.endVerse !== passage.startVerse) return [];
+  const language = contract.requestedCoverage.language[0];
+  if (language.corpora.length !== 1) return [];
+  const lookup = lexicalLookupLabel(question);
+  if (!lookup) return [];
+  const reference = `${passage.book} ${passage.chapter}:${passage.startVerse}`;
+  const corpus = language.corpora[0];
+  const terms = verifiedSourceTermsAtReference({ corpus, reference, lookup });
+  if (terms.length !== 1) return [];
+  const term = terms[0];
+  return [{
+    reference,
+    phrase: {
+      corpus,
+      label: lookup,
+      lexicalIds: [term.lexicalId],
+      lemmas: [term.lemma],
+      reason: `The user requested the verified source identity of “${lookup}” in ${reference}.`,
+    },
+    sourceFingerprint: term.sourceFingerprint,
+    matchMethod: "lexical-id-sequence",
+    morphologySignature: term.morphologySignature,
+    verifiedLexicalIds: [term.lexicalId],
+    verifiedLemmas: [term.lemma],
+    verifiedTerms: [{
+      lexicalId: term.lexicalId,
+      lemma: term.lemma,
+      transliteration: term.transliteration,
+      meaning: term.meaning,
+    }],
+  }];
+}
+
+function namedListCandidates(question: string) {
+  const expectedCount = expectedEmetAiNamedListCount(question);
+  if (!expectedCount) return [];
+  const definition = DETERMINISTIC_NAMED_LISTS.find(
+    (item) => item.count === expectedCount && item.pattern.test(question),
+  );
+  if (!definition) return [];
+  const candidates = resolvedCandidates(
+    definition.references,
+    "The locked passage contains the complete named list requested by the user.",
+  );
+  return candidates.length === definition.references.length ? candidates : [];
+}
+
+function conversationRecallCandidates(
+  question: string,
+  conversation: EmetConversationContext | null,
+) {
+  if (!conversation || !/\b(?:first question|previous question|earlier question|what did i ask|what was my)\b/i.test(question)) return [];
+  const exchanges = conversation.recentExchanges;
+  const target = /\bfirst question\b/i.test(question)
+    ? exchanges[0]
+    : exchanges.at(-1);
+  if (!target?.references.length) return [];
+  const candidates = resolvedCandidates(
+    target.references,
+    "Verified Scripture previously cited in the recalled conversation exchange.",
+  );
+  return candidates.length === target.references.length ? candidates : [];
+}
+
+function resolveDeterministicEvidence({
+  question,
+  conversation,
+  contract,
+}: {
+  question: string;
+  conversation: EmetConversationContext | null;
+  contract: EmetAiQuestionContract;
+}) {
+  const lexical = deterministicLexicalMatches(question, contract);
+  if (lexical.length) {
+    const references = lexical.map((item) => item.reference);
+    return {
+      route: "single-reference-lexical" as const,
+      candidates: resolvedCandidates(
+        references,
+        "The explicitly requested verse contains the unambiguous verified source term.",
+        "exact-source-phrase",
+      ),
+      lexical,
+    };
+  }
+
+  const exact = exactReferenceTextCandidates(question, contract);
+  if (exact.length) return { route: "exact-reference-text" as const, candidates: exact };
+
+  const named = namedListCandidates(question);
+  if (named.length) return { route: "named-list" as const, candidates: named };
+
+  const recall = conversationRecallCandidates(question, conversation);
+  if (recall.length) return { route: "conversation-recall" as const, candidates: recall };
+
+  if (
+    !contract.conversation.relevant &&
+    !UNSAFE_DEEP_INTENT.has(contract.intent) &&
+    !THEOLOGICAL_APPLICABILITY_PATTERN.test(question) &&
+    !THEOLOGICAL_IDENTITY_PATTERN.test(question) &&
+    !contract.requestedCoverage.passages.length &&
+    !contract.requestedCoverage.language.length &&
+    !contract.requestedCoverage.subquestions.length &&
+    !contract.requestedCoverage.competingInterpretations
+  ) {
+    const direct = deterministicDirectCandidates(question);
+    if (direct.length) return { route: "direct-factual" as const, candidates: direct };
+  }
+  return null;
+}
+
+function deterministicEvidenceCandidates(input: {
+  question: string;
+  conversation: EmetConversationContext | null;
+  contract: EmetAiQuestionContract;
+}) {
+  // A single request assesses sufficiency and then constructs the packet. Keep
+  // locked-index work reusable between those two stages, and across identical
+  // context-free cold questions handled by the same server instance.
+  if (!input.conversation) {
+    const key = `${input.contract.version}|${input.question.normalize("NFKC").trim().toLocaleLowerCase("en-US")}`;
+    if (deterministicEvidenceCache.has(key)) {
+      return deterministicEvidenceCache.get(key) || null;
+    }
+    const resolved = resolveDeterministicEvidence(input);
+    if (deterministicEvidenceCache.size >= 256) {
+      const oldest = deterministicEvidenceCache.keys().next().value;
+      if (oldest) deterministicEvidenceCache.delete(oldest);
+    }
+    deterministicEvidenceCache.set(key, resolved);
+    return resolved;
+  }
+  return resolveDeterministicEvidence(input);
+}
+
+export function assessEmetAiDeterministicSufficiency({
+  question,
+  conversation = null,
+  context = null,
+  questionContract,
+}: {
+  question: string;
+  conversation?: EmetConversationContext | null;
+  context?: EmetAiReaderContext | null;
+  questionContract?: EmetAiQuestionContract;
+}): EmetAiDeterministicSufficiency {
+  const contract = questionContract || buildEmetAiQuestionContract({ question, conversation, context });
+  if (
+    context ||
+    (READER_DEPENDENT_PATTERN.test(question) && !contract.requestedCoverage.passages.length)
+  ) {
+    return { sufficient: false, route: null, reason: "Reader-dependent questions require contextual planning.", references: [] };
+  }
+  const resolved = deterministicEvidenceCandidates({ question, conversation, contract });
+  if (!resolved?.candidates.length) {
+    return { sufficient: false, route: null, reason: "Locked evidence did not independently establish complete governing coverage.", references: [] };
+  }
+  return {
+    sufficient: true,
+    route: resolved.route,
+    reason: "Every required component resolved from locked evidence before generation.",
+    references: Array.from(new Set(resolved.candidates.map((item) => recordReference(item.record)))),
+  };
+}
+
+/**
+ * Supplies only Scripture whose relevance can be established without semantic
+ * planning. These items are a progressive reading aid, never the finalized
+ * evidence packet used to generate or validate an answer.
+ */
+export function buildEmetAiInitialScriptureEvidence({
+  question,
+  conversation = null,
+  context = null,
+  limit = 5,
+}: {
+  question: string;
+  conversation?: EmetConversationContext | null;
+  context?: EmetAiReaderContext | null;
+  limit?: number;
+}): {
+  status: "ready" | "finding";
+  route: EmetAiDeterministicEvidenceRoute | "explicit-reference" | "reader-context" | null;
+  items: EmetAiInitialScriptureItem[];
+} {
+  const cleanQuestion = question.trim();
+  const safeLimit = Math.max(1, Math.min(5, Math.floor(limit)));
+  const contract = buildEmetAiQuestionContract({
+    question: cleanQuestion,
+    conversation,
+    context,
+  });
+  const sufficiency = assessEmetAiDeterministicSufficiency({
+    question: cleanQuestion,
+    conversation,
+    context,
+    questionContract: contract,
+  });
+
+  let route: EmetAiDeterministicEvidenceRoute | "explicit-reference" | "reader-context" | null = null;
+  let candidates: EvidenceCandidate[] = [];
+  if (sufficiency.sufficient && sufficiency.route !== "conversation-recall") {
+    const resolved = deterministicEvidenceCandidates({
+      question: cleanQuestion,
+      conversation,
+      contract,
+    });
+    route = resolved?.route || null;
+    candidates = resolved?.candidates || [];
+  } else {
+    const boundedRequestedReferences = new Set(
+      contract.requestedCoverage.passages.flatMap((passage) =>
+        passage.startVerse === undefined
+          ? []
+          : Array.from(
+              { length: (passage.endVerse || passage.startVerse) - passage.startVerse + 1 },
+              (_, offset) => `${passage.book} ${passage.chapter}:${passage.startVerse! + offset}`,
+            ),
+      ),
+    );
+    const explicit = requestedPassageCandidates(cleanQuestion, null).filter((candidate) =>
+      boundedRequestedReferences.has(recordReference(candidate.record)),
+    );
+    const contextual = contextCandidates(context, cleanQuestion);
+    if (explicit.length) {
+      route = "explicit-reference";
+      candidates = explicit;
+    } else if (contextual.length) {
+      route = "reader-context";
+      candidates = contextual;
+    }
+  }
+
+  const unique = Array.from(new Map(
+    candidates.map((candidate) => [recordReference(candidate.record), candidate]),
+  ).values()).slice(0, safeLimit);
+  const items = unique.map((candidate) => {
+    const item = scriptureItem(candidate);
+    return {
+      id: item.id,
+      reference: item.reference || recordReference(candidate.record),
+      text: item.text,
+      translation: candidate.index.translation,
+    };
+  });
+  return {
+    status: items.length ? "ready" : "finding",
+    route,
+    items,
+  };
+}
+
 export function isEmetAiDeterministicFastPathEligible({
   question,
   conversation = null,
@@ -607,23 +1007,12 @@ export function isEmetAiDeterministicFastPathEligible({
   context?: EmetAiReaderContext | null;
   questionContract?: EmetAiQuestionContract;
 }) {
-  const contract = questionContract || buildEmetAiQuestionContract({
+  return assessEmetAiDeterministicSufficiency({
     question,
     conversation,
     context,
-  });
-  const design = contract.responseDesign;
-  const coverage = contract.requestedCoverage;
-  if (contract.requiresSemanticPlanning) return false;
-  return design.depth === "concise" &&
-    !classifyEmetAiConcreteAnswerRequirement(question) &&
-    !design.progressiveFollowUp &&
-    !context &&
-    coverage.passages.length === 0 &&
-    coverage.language.length === 0 &&
-    coverage.subquestions.length === 0 &&
-    !coverage.competingInterpretations &&
-    !READER_DEPENDENT_PATTERN.test(question);
+    questionContract,
+  }).sufficient;
 }
 
 function selectedCandidates({
@@ -651,12 +1040,14 @@ function selectedCandidates({
   const explicitEvidence = requestedPassageCandidates(question, plan);
   const requiredComparisonEvidence = requiredComparisonCandidates(question);
   const plannedEvidence = plannedCandidates(plan);
+  const governingEvidence = governingCandidates(plan);
   const phraseEvidence = sourcePhraseCandidates(plan);
   const literalEvidence = literalCandidates(question);
   const candidates = plan
     ? [
         ...explicitEvidence,
         ...requiredComparisonEvidence,
+        ...governingEvidence,
         ...contextEvidence,
         ...phraseEvidence,
         ...plannedEvidence,
@@ -716,6 +1107,7 @@ function selectedCandidates({
 
   for (const candidate of explicitEvidence) add(candidate, true);
   for (const candidate of requiredComparisonEvidence) add(candidate, true);
+  for (const candidate of governingEvidence) add(candidate, true);
 
   // Direct witnesses outrank background and qualifications. Preserve more
   // than one when Scripture gives independent direct statements.
@@ -798,8 +1190,15 @@ export function buildEmetAiTopicEvidence({
     };
   }
 
+  const deterministicEvidence = deterministicFastPath
+    ? deterministicEvidenceCandidates({
+        question: cleanQuestion,
+        conversation: relevantConversation,
+        contract,
+      })
+    : null;
   const candidates = deterministicFastPath
-    ? deterministicDirectCandidates(cleanQuestion)
+    ? deterministicEvidence?.candidates || []
     : selectedCandidates({
         question: cleanQuestion,
         plan: retrievalPlan,
@@ -827,14 +1226,14 @@ export function buildEmetAiTopicEvidence({
     question: cleanQuestion,
     conversation: relevantConversation,
   });
-  const rawSourcePhraseMatches = retrievalPlan
+  const rawSourcePhraseMatches = deterministicEvidence?.lexical || (retrievalPlan
     ? verifiedSourcePhraseMatches({
         phrases: retrievalPlan.sourcePhrases,
         preferredReferences: candidates.map((candidate) => recordReference(candidate.record)),
         limit: 8,
         allowIndividualTerms: requestedCoverage.language.length > 0,
       })
-    : [];
+    : []);
   const sourcePhraseMatches = Array.from(new Map(
     rawSourcePhraseMatches.map((match) => [
       `${match.phrase.corpus}|${match.reference}|${match.verifiedLexicalIds.join("+")}`,
@@ -893,6 +1292,16 @@ export function buildEmetAiTopicEvidence({
       (required) => !plannedComponents.some((planned) => planned.id === required.id),
     ),
   ];
+  const governingCoverage = (retrievalPlan?.components || []).map((component) => ({
+    componentId: component.id,
+    evidenceIds: Array.from(new Set(
+      (component.governingReferences || [])
+        .flatMap(expandPlannedReferences)
+        .flatMap((reference) => evidence
+          .filter((item) => item.kind === "scripture" && item.reference === reference)
+          .map((item) => item.id)),
+    )),
+  })).filter((item) => item.evidenceIds.length);
   const packet: EmetAiEvidencePacket = {
     schemaVersion: EMET_AI_EVIDENCE_SCHEMA,
     question: retrievalPlan
@@ -919,6 +1328,7 @@ export function buildEmetAiTopicEvidence({
           components,
           establishedPropositions: [],
         },
+    ...(governingCoverage.length ? { governingCoverage } : {}),
     scope: {
       type: candidates.some((candidate) => candidate.method === "reader-context")
         ? "passage"

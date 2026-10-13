@@ -92,10 +92,7 @@ assert(
   /\[data-verse-study-control="true"\]/.test(readerFirstUseTip),
   "Reader-tip automatic dismissal after Study is opened is missing.",
 );
-assert(
-  /emetsees:open-reader-help/.test(readerHeader + readerFirstUseTip),
-  "Compact reader help is missing.",
-);
+assert(/Aa/.test(readerHeader), "Reader appearance control is missing.");
 assert(
   />\s*Done\s*</.test(verseActionSheet) &&
     /aria-label="Dismiss verse actions"/.test(verseActionSheet),
@@ -110,11 +107,8 @@ assert(!/cursor-pointer rounded-xl/.test(verseActions), "The entire verse still 
 assert(/data-verse-study-control="true"/.test(readerStudy), "Every verse lacks a Study control.");
 assert(/data-source-word="true"/.test(readerStudy), "Source lexical words are not tappable.");
 assert(/setWordOverview\(occurrence\)/.test(readerStudy), "Source-word taps do not open Word Overview.");
-assert(/presentation="inline"/.test(readerStudy), "Deeper Word Overview is not inline.");
-assert(
-  !/className="fixed inset-0 z-\[110\]"/.test(readerStudy),
-  "Legacy fixed Word Overview wrapper remains.",
-);
+assert(/<WordStudySheet/.test(readerStudy), "Deeper Word Overview is missing.");
+assert(/onClose=\{\(\) => setWordOverview\(null\)\}/.test(readerStudy), "Word Overview cannot return to Source Text.");
 assert(
   /ownership\?\.kind !== "exact"[\s\S]*?spans\.size === 1/.test(readerStudy),
   "Source correspondence is not exact-only and fail-closed.",

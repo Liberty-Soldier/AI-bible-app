@@ -13,6 +13,7 @@ import {
   parseEmetAiRetrievalPlan,
 } from "../app/lib/emet/EmetAiRetrievalPlan.ts";
 import {
+  assessEmetAiDeterministicSufficiency,
   buildEmetAiTopicEvidence,
   isEmetAiDeterministicFastPathEligible,
 } from "../app/lib/emet/EmetAiTopicEvidence.ts";
@@ -35,7 +36,12 @@ function plan({
     proposition,
     requiresScopeAnalysis,
     requiresTimeline,
-    components,
+    components: components.map((component, index) => ({
+      ...component,
+      governingReferences: component.governingReferences || [
+        passages[Math.min(index, passages.length - 1)]?.reference,
+      ].filter(Boolean),
+    })),
     intent,
     passages: passages.map((item, index) => ({
       reference: item.reference,
@@ -667,16 +673,10 @@ assert.equal(
   claimOnlyConversation,
 );
 
-for (const [question, expectedReferences] of [
-  [
-    "Did Messiah abolish the commandments?",
-    ["Matthew 5:17", "Matthew 5:18", "Matthew 5:19"],
-  ],
-  [
-    "Should believers keep Yahweh's commandments?",
-    ["Revelation 14:12", "Matthew 19:17"],
-  ],
-]) {
+for (const [question, expectedReferences] of [[
+  "Did Messiah abolish the commandments?",
+  ["Matthew 5:17", "Matthew 5:18", "Matthew 5:19"],
+]]) {
   assert.equal(isEmetAiDeterministicFastPathEligible({ question }), true);
   const direct = buildEmetAiTopicEvidence({
     question,
@@ -691,12 +691,72 @@ for (const [question, expectedReferences] of [
   }
 }
 
+const creationSufficiency = assessEmetAiDeterministicSufficiency({
+  question: "Who created the heavens and the earth?",
+});
+assert.equal(creationSufficiency.sufficient, true);
+assert.equal(creationSufficiency.route, "direct-factual");
+assert.ok(creationSufficiency.references.includes("Genesis 1:1"));
+
+const exactWording = buildEmetAiTopicEvidence({
+  question: "What does John 3:16 say?",
+  deterministicFastPath: true,
+});
+requireReferences(exactWording, ["John 3:16"]);
+assert.equal(
+  assessEmetAiDeterministicSufficiency({ question: "What does John 3:16 say?" }).route,
+  "exact-reference-text",
+);
+
+const lexicalLookup = buildEmetAiTopicEvidence({
+  question: 'What Hebrew word is translated "one" in Deuteronomy 6:4, and what does it mean?',
+  deterministicFastPath: true,
+});
+requireReferences(lexicalLookup, ["Deuteronomy 6:4"]);
+assert.equal(
+  assessEmetAiDeterministicSufficiency({
+    question: 'What Hebrew word is translated "one" in Deuteronomy 6:4, and what does it mean?',
+  }).route,
+  "single-reference-lexical",
+);
+if (lexicalLookup.status === "ready") {
+  const terms = lexicalLookup.packet.requestedCoverage.language.flatMap((item) => item.terms);
+  assert.deepEqual(terms.map((term) => term.lexicalId), ["H259"]);
+  assert.equal(terms[0].lemma, "אֶחָד");
+}
+
+const tenCommandments = buildEmetAiTopicEvidence({
+  question: "What are the Ten Commandments?",
+  deterministicFastPath: true,
+});
+requireReferences(tenCommandments, ["Exodus 20:2", "Exodus 20:17"]);
+assert.equal(references(tenCommandments).length, 16);
+assert.equal(
+  assessEmetAiDeterministicSufficiency({ question: "What are the Ten Commandments?" }).route,
+  "named-list",
+);
+
+const recallConversation = buildEmetConversationContext([{
+  question: "What happens when we die?",
+  answer: "The dead await resurrection.",
+  references: ["Ecclesiastes 9:5", "Daniel 12:2"],
+  outcome: "answered",
+}]);
+assert.equal(
+  assessEmetAiDeterministicSufficiency({
+    question: "What was my first question?",
+    conversation: recallConversation,
+  }).route,
+  "conversation-recall",
+);
+
 for (const question of [
   "What does this passage mean?",
   "What commandments should I keep?",
-  "What are the Ten Commandments?",
   "How do I keep the Sabbath?",
   "What foods does Scripture prohibit?",
+  "Should believers keep Yahweh's commandments?",
+  "Does Scripture require believers to keep the seventh-day Sabbath?",
   "Is Messiah the same being as Yahweh?",
   "Compare the strongest evidence for and against seventh-day Sabbath observance.",
   "Examine the Hebrew and Greek words for righteousness.",
@@ -705,11 +765,59 @@ for (const question of [
   assert.equal(isEmetAiDeterministicFastPathEligible({ question }), false, question);
 }
 
+assert.equal(
+  assessEmetAiDeterministicSufficiency({
+    question: 'What Hebrew word is translated "set" in Genesis 1:1?',
+  }).sufficient,
+  false,
+  "An absent or ambiguous lexical mapping must retain semantic planning.",
+);
+
 const ambiguousDefinition = buildEmetAiTopicEvidence({
   question: "What is sin?",
   deterministicFastPath: true,
 });
 assert.equal(ambiguousDefinition.status, "insufficient-evidence");
+
+const governingPlanDraft = plan({
+  subject: "whether baptism is required for salvation",
+  intent: "application",
+  analysisMode: "doctrinal-claim",
+  proposition: "Whether Scripture presents baptism as part of the salvation response",
+  components: [{
+    id: "salvation-response",
+    proposition: "Scripture's direct instructions connecting repentance, baptism, faith, and salvation must govern the conclusion.",
+    category: "application",
+    governingReferences: ["Acts 2:38", "Mark 16:16"],
+  }],
+  passages: [
+    { reference: "Acts 16:31", role: "direct", priority: 100 },
+    { reference: "Romans 10:9", role: "direct", priority: 99 },
+    { reference: "Romans 10:13", role: "direct", priority: 98 },
+    { reference: "Acts 10:44", role: "context", priority: 97 },
+    { reference: "Acts 10:47", role: "context", priority: 96 },
+    { reference: "Acts 10:48", role: "context", priority: 95 },
+    { reference: "1 Peter 3:21", role: "qualifying", priority: 94 },
+    { reference: "John 3:16", role: "foundation", priority: 93 },
+    { reference: "Acts 2:38", role: "direct", priority: 40 },
+    { reference: "Mark 16:16", role: "direct", priority: 39 },
+  ],
+});
+assert.ok(parseEmetAiRetrievalPlan(governingPlanDraft));
+const invalidGoverningPlan = structuredClone(governingPlanDraft);
+invalidGoverningPlan.components[0].governingReferences = ["Acts 2:39"];
+assert.equal(parseEmetAiRetrievalPlan(invalidGoverningPlan), null);
+const governingEvidence = buildEmetAiTopicEvidence({
+  question: "Is baptism required for salvation?",
+  retrievalPlan: governingPlanDraft,
+  requireSemanticPlan: true,
+});
+requireReferences(governingEvidence, ["Acts 2:38", "Mark 16:16"]);
+assert.ok(
+  governingEvidence.status === "ready" &&
+    governingEvidence.packet.governingCoverage?.[0].evidenceIds.length === 2,
+  "Governing evidence must remain selected and attached to its component.",
+);
 
 console.log("EMET semantic topic evidence verification passed.");
 console.log("- Model-planned references are validated against locked Scripture.");
@@ -723,3 +831,4 @@ console.log("- Argumentative passages retain their verified dispute, reasoning, 
 console.log("- Follow-ups retain structured textual findings without treating prior prose as evidence.");
 console.log("- Unresolved plans and unsupported topics fail closed.");
 console.log("- High-confidence direct questions use locked deterministic evidence; ambiguous and deep questions retain semantic planning.");
+console.log("- Every planned material component retains verified governing Scripture even beyond ordinary evidence limits.");

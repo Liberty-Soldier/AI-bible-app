@@ -53,7 +53,7 @@ assert.equal(
 assert.equal(
   validateEmetAiConcreteAnswer({
     question: "What commandments should I keep?",
-    answer: "Do not murder, commit adultery, steal, or give false testimony.",
+    answer: "Representative examples include: do not murder, commit adultery, steal, or give false testimony.",
     evidence,
   }),
   null,

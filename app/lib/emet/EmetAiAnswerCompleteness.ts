@@ -80,6 +80,11 @@ export function validateEmetAiConcreteAnswer({
     if (listSeparators < Math.max(1, namedCount - 3)) {
       return "A question asking for a named multi-item list must actually identify the requested items rather than merely describe the list.";
     }
+  } else if (
+    requirement === "enumeration" &&
+    !/\b(?:examples?|include[sd]?|including|among|representative|not exhaustive|rather than (?:an|a) exhaustive|scripture also)\b/i.test(answer)
+  ) {
+    return "A broad enumeration answer must tell the reader that its concrete items are representative rather than silently presenting a partial list as exhaustive.";
   }
   return null;
 }

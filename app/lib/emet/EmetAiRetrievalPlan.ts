@@ -1,5 +1,6 @@
 import "server-only";
 
+import { normalizeBookName } from "../../data/bookAliases";
 import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import type { EmetConversationContext } from "./EmetAiConversation";
 import type { EmetAiReasoningCategory } from "./EmetAiContract";
@@ -8,7 +9,97 @@ import { classifyEmetAiResponseDesign } from "./EmetAiResponseDesign";
 import type { EmetAiQuestionContract } from "./EmetAiQuestionContract";
 
 export const EMET_AI_RETRIEVAL_PLAN_SCHEMA =
-  "emet-ai-retrieval-plan@3" as const;
+  "emet-ai-retrieval-plan@4" as const;
+
+const SINGLE_CHAPTER_BOOKS = new Set([
+  "Obadiah", "Philemon", "2 John", "3 John", "Jude",
+]);
+
+export type EmetAiPlanReferenceNormalization =
+  | { status: "resolved"; references: string[] }
+  | { status: "ambiguous" | "invalid"; reason: string };
+
+export function normalizeEmetAiPlanReference(
+  value: string,
+  exists: (reference: string) => boolean,
+): EmetAiPlanReferenceNormalization {
+  const trimmed = value.trim().replace(/[–—]/g, "-");
+  const ordinary = expandEmetAiPlanReferences(trimmed);
+  if (ordinary.length) {
+    if (ordinary.every(exists)) return { status: "resolved", references: ordinary };
+    return {
+      status: "invalid",
+      reason: `Planned Scripture reference does not exist in the locked corpus: ${value}`,
+    };
+  }
+
+  // Models occasionally express one verse as editorial halves (for example
+  // Luke 1:6a-1:6b?). Collapse only when both endpoints name the same actual
+  // verse. Different base verses or chapters are not safe to guess.
+  const subverseRange = trimmed.match(
+    /^(.+?)\s+(\d+):(\d+)[a-z]\s*-\s*(?:(\d+):)?(\d+)[a-z]\??$/i,
+  );
+  if (subverseRange) {
+    const book = normalizeBookName(subverseRange[1]);
+    const chapter = Number(subverseRange[2]);
+    const endChapter = subverseRange[4] ? Number(subverseRange[4]) : chapter;
+    const startVerse = Number(subverseRange[3]);
+    const endVerse = Number(subverseRange[5]);
+    if (book && chapter === endChapter && startVerse === endVerse) {
+      const reference = `${book} ${chapter}:${startVerse}`;
+      return exists(reference)
+        ? { status: "resolved", references: [reference] }
+        : {
+            status: "invalid",
+            reason: `Normalized planned Scripture reference does not exist in the locked corpus: ${reference}`,
+          };
+    }
+    return {
+      status: "ambiguous",
+      reason: `Editorial subverse range cannot be mapped unambiguously to one locked Scripture passage: ${value}`,
+    };
+  }
+
+  if (/^.+?\s+\d+$/.test(trimmed)) {
+    return {
+      status: "ambiguous",
+      reason: `A chapter reference does not identify which individual governing verse is intended: ${value}`,
+    };
+  }
+  return {
+    status: "invalid",
+    reason: `Planned Scripture reference is malformed or unsupported: ${value}`,
+  };
+}
+
+export function expandEmetAiPlanReferences(value: string) {
+  const trimmed = value.trim().replace(/[–—]/g, "-");
+  const ranged = trimmed.match(/^(.+?)\s+(\d+):(\d+)-(\d+)$/i);
+  if (ranged) {
+    const book = normalizeBookName(ranged[1]);
+    const chapter = Number(ranged[2]);
+    const start = Number(ranged[3]);
+    const end = Number(ranged[4]);
+    if (book && end >= start && end - start <= 12) {
+      return Array.from({ length: end - start + 1 }, (_, offset) =>
+        `${book} ${chapter}:${start + offset}`,
+      );
+    }
+  }
+  const standard = trimmed.match(/^(.+?)\s+(\d+):(\d+[a-z]?)$/i);
+  if (standard) {
+    const book = normalizeBookName(standard[1]);
+    return book ? [`${book} ${Number(standard[2])}:${standard[3]}`] : [];
+  }
+  const singleChapter = trimmed.match(/^(.+?)\s+(\d+[a-z]?)$/i);
+  if (singleChapter) {
+    const book = normalizeBookName(singleChapter[1]);
+    return SINGLE_CHAPTER_BOOKS.has(book)
+      ? [`${book} 1:${singleChapter[2]}`]
+      : [];
+  }
+  return [];
+}
 
 export type EmetAiRetrievalRole =
   | "direct"
@@ -37,6 +128,7 @@ export type EmetAiPlannedComponent = {
   id: string;
   proposition: string;
   category: EmetAiReasoningCategory;
+  governingReferences: string[];
 };
 
 export type EmetAiRetrievalPlan = {
@@ -160,16 +252,24 @@ export function parseEmetAiRetrievalPlan(
     const id = clean(component.id, 40);
     const componentProposition = clean(component.proposition, 260);
     const category = component.category as EmetAiPlannedComponent["category"];
+    const governingReferences = cleanList(component.governingReferences, 8, 80);
     if (
       !id ||
       componentIds.has(id) ||
       !componentProposition ||
-      !componentCategories.has(category)
+      !componentCategories.has(category) ||
+      !governingReferences ||
+      !governingReferences.length
     ) {
       return null;
     }
     componentIds.add(id);
-    components.push({ id, proposition: componentProposition, category });
+    components.push({
+      id,
+      proposition: componentProposition,
+      category,
+      governingReferences,
+    });
   }
 
   if (
@@ -198,6 +298,21 @@ export function parseEmetAiRetrievalPlan(
       return null;
     }
     passages.push({ reference, reason, role, priority });
+  }
+
+  const plannedReferences = new Set(
+    passages.flatMap((passage) => expandEmetAiPlanReferences(passage.reference)),
+  );
+  if (
+    components.some((component) =>
+      component.governingReferences.some((reference) =>
+        !expandEmetAiPlanReferences(reference).some((expanded) =>
+          plannedReferences.has(expanded),
+        ),
+      ),
+    )
+  ) {
+    return null;
   }
 
   const sourcePhrases: EmetAiPlannedSourcePhrase[] = [];

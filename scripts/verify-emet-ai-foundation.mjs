@@ -112,6 +112,49 @@ const validAnswer = {
 assert.equal(validateEmetAiEvidencePacket(packet).ok, true);
 assert.equal(validateEmetAiAnswer(packet, validAnswer).ok, true);
 
+const conciseButCompletePacket = structuredClone(packet);
+conciseButCompletePacket.responseDesign = {
+  depth: "concise",
+  targetMinWords: 20,
+  targetMaxWords: 40,
+  maxScriptureCitations: 1,
+  progressiveFollowUp: false,
+};
+assert.equal(
+  validateEmetAiAnswer(conciseButCompletePacket, validAnswer).ok,
+  true,
+  "A style citation target must not override complete verified evidence.",
+);
+
+const visibleUnverifiedReference = structuredClone(validAnswer);
+visibleUnverifiedReference.answer += " See Exodus 20:8.";
+assert.equal(validateEmetAiAnswer(packet, visibleUnverifiedReference).ok, false);
+
+const fabricatedQuotation = structuredClone(validAnswer);
+fabricatedQuotation.answer = 'Scripture says, “God named the heavens firmament forever” (Genesis 1:8).';
+assert.equal(validateEmetAiAnswer(packet, fabricatedQuotation).ok, false);
+
+const exactQuotation = structuredClone(validAnswer);
+exactQuotation.answer = 'Scripture says, “God called the expanse sky” (Genesis 1:8).';
+assert.equal(validateEmetAiAnswer(packet, exactQuotation).ok, true);
+
+const exactEllipsisQuotation = structuredClone(validAnswer);
+exactEllipsisQuotation.answer = 'Scripture says, “God called … sky” (Genesis 1:8).';
+assert.equal(validateEmetAiAnswer(packet, exactEllipsisQuotation).ok, true);
+
+const interpretiveScareQuote = structuredClone(validAnswer);
+interpretiveScareQuote.answer = 'The verse does not use the later phrase “a complete technical cosmological model.”';
+assert.equal(validateEmetAiAnswer(packet, interpretiveScareQuote).ok, true);
+
+const insufficientWithInternalLanguage = structuredClone(validAnswer);
+insufficientWithInternalLanguage.status = "insufficient-evidence";
+insufficientWithInternalLanguage.answer = "This evidence packet does not settle the question.";
+assert.equal(validateEmetAiAnswer(packet, insufficientWithInternalLanguage).ok, false);
+
+const verifiedHebrewVisible = structuredClone(validAnswer);
+verifiedHebrewVisible.answer += " The verified lemma is רָקִיעַ.";
+assert.equal(validateEmetAiAnswer(packet, verifiedHebrewVisible).ok, true);
+
 const unverifiedGreekAnswer = structuredClone(validAnswer);
 unverifiedGreekAnswer.answer = `${unverifiedGreekAnswer.answer} λόγος`;
 assert.equal(validateEmetAiAnswer(packet, unverifiedGreekAnswer).ok, false);
@@ -713,8 +756,15 @@ assert.match(providerSource, /gpt-5\.4-2026-03-05/);
 assert.match(providerSource, /emet_ai_retrieval_plan/);
 assert.doesNotMatch(providerSource, /pendingTopicAnswer/);
 assert.match(providerSource, /selecting an evidence strategy, not writing a reader-facing answer/);
+assert.match(providerSource, /representative concrete commands or categories/);
+assert.match(providerSource, /governingReferences/);
+assert.match(providerSource, /Packet\.governingCoverage/);
 assert.match(providerSource, /Build a fresh answer using only the verified evidence packet/);
 assert.match(providerSource, /Remove or qualify an unsupported secondary claim/);
+assert.match(providerSource, /absent from packet\.evidence/);
+assert.match(providerSource, /do not begin with a categorical yes or no/i);
+assert.match(providerSource, /modern-audience restatement test/);
+assert.match(providerSource, /Scripture does not/);
 assert.match(providerSource, /getLastFailure/);
 assert.match(providerSource, /Conversation turn outcomes are product context/);
 assert.doesNotMatch(providerSource, /independent final consistency auditor/);
