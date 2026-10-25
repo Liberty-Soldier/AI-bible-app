@@ -7,18 +7,20 @@ import {
 import {
   classifyEmetAiInstructionProfile,
   classifyEmetAiResponseDesign,
+  analyzeEmetAiCommandApplicabilityQuestion,
   type EmetAiResponseDesign,
 } from "./EmetAiResponseDesign";
 import type { EmetAiInstructionProfile } from "./EmetAiConstitution";
 
 export const EMET_AI_QUESTION_CONTRACT_VERSION =
-  "canonical-question-contract@1" as const;
+  "canonical-question-contract@3" as const;
 
 export type EmetAiQuestionIntent =
   | "direct"
   | "definition"
   | "symbolic"
   | "historical"
+  | "obligation"
   | "doctrinal"
   | "comparison"
   | "apparent-contradiction"
@@ -40,6 +42,9 @@ export type EmetAiQuestionContract = {
   subquestions: string[];
   requestedLanguages: Array<"hebrew" | "greek-nt">;
   topicDomains: Array<"cosmology">;
+  temporalRelationship: boolean;
+  commandApplicability: boolean;
+  commandApplicabilityKind: "none" | "audience" | "authority-change" | "audience-and-authority-change";
   requiresSemanticPlanning: boolean;
   conversation: {
     relevant: boolean;
@@ -61,6 +66,8 @@ const SYMBOLIC_PATTERN =
   /\b(?:symbol(?:ize|ic)?|represent|signif(?:y|ies)|image(?:ry)?|vision|beast|dragon|woman clothed|morning star|jezebel)\b/i;
 const HISTORICAL_PATTERN =
   /\b(?:histor(?:y|ical|ically)|first[- ]century|setting|circumstances|custom|practice|roman|synagogue)\b/i;
+const TEMPORAL_RELATIONSHIP_PATTERN =
+  /\b(?:before|after|during|prior\s+to|earlier\s+than|later\s+than|already|begin|began|start(?:ed)?|exist(?:ed)?|known)\b[^?]{0,120}\b(?:sinai|moses|mosaic|covenant|priesthood|temple|tabernacle|exile|resurrection|creation|flood)\b|\b(?:sinai|moses|mosaic|covenant|priesthood|temple|tabernacle|exile|resurrection|creation|flood)\b[^?]{0,120}\b(?:before|after|during|prior\s+to|earlier\s+than|later\s+than|already|begin|began|start(?:ed)?|exist(?:ed)?|known)\b/i;
 const DOCTRINAL_PATTERN =
   /\b(?:doctrine|trinity|under the law|law of moses|new covenant|required for salvation|saved by|justified by|does paul teach|paul teach(?:es)?)\b/i;
 const CONFLICT_PATTERN =
@@ -82,6 +89,14 @@ const ENTITY_PATTERNS: Array<[string, RegExp]> = [
   ["resurrection", /\b(?:resurrection|raised from the dead|dead raised)\b/i],
   ["new covenant", /\bnew covenant\b/i],
   ["Holy Spirit", /\b(?:holy spirit|spirit of god)\b/i],
+  ["Moses", /\bmoses(?:'s)?\b/i],
+  ["Sinai", /\bsinai\b/i],
+  ["Noah", /\bnoah(?:'s)?\b/i],
+  ["Abraham", /\babraham(?:'s)?\b/i],
+  ["Cain", /\bcain(?:'s)?\b/i],
+  ["Abel", /\babel(?:'s)?\b/i],
+  ["sacrifice", /\b(?:sacrifice|sacrifices|offering|offerings)\b/i],
+  ["clean and unclean animals", /\bclean\b[^?.]{0,45}\bunclean\b|\bunclean\b[^?.]{0,45}\bclean\b/i],
 ];
 
 function requestedReferenceLabels(coverage: EmetAiRequestedCoverage) {
@@ -92,13 +107,15 @@ function classifyIntent(
   question: string,
   coverage: EmetAiRequestedCoverage,
   hasConversation: boolean,
+  commandApplicability: boolean,
 ): EmetAiQuestionIntent {
   if (coverage.language.length) return "lexical";
   if (RECALL_PATTERN.test(question) && hasConversation) return "conversation-recall";
   if (coverage.competingInterpretations || /\b(?:compare|both sides|for and against)\b/i.test(question)) return "comparison";
   if (CONFLICT_PATTERN.test(question)) return "apparent-contradiction";
   if (SYMBOLIC_PATTERN.test(question)) return "symbolic";
-  if (HISTORICAL_PATTERN.test(question)) return "historical";
+  if (commandApplicability) return "obligation";
+  if (HISTORICAL_PATTERN.test(question) || TEMPORAL_RELATIONSHIP_PATTERN.test(question)) return "historical";
   if (coverage.subquestions.length > 1 || MULTI_PART_PATTERN.test(question)) return "multi-part";
   if (PROCEDURE_PATTERN.test(question)) return "procedure";
   if (ENUMERATION_PATTERN.test(question)) return "enumeration";
@@ -118,18 +135,22 @@ export function buildEmetAiQuestionContract({
 }): EmetAiQuestionContract {
   const cleanQuestion = question.trim();
   const requestedCoverage = extractEmetAiRequestedCoverage(cleanQuestion);
+  const commandApplicabilityAnalysis = analyzeEmetAiCommandApplicabilityQuestion(cleanQuestion);
   const intent = classifyIntent(
     cleanQuestion,
     requestedCoverage,
     Boolean(conversation?.recentExchanges.length),
+    commandApplicabilityAnalysis.applicable,
   );
   const instructionProfile = classifyEmetAiInstructionProfile({
     question: cleanQuestion,
     conversation,
+    commandApplicability: commandApplicabilityAnalysis,
   });
   const responseDesign = classifyEmetAiResponseDesign({
     question: cleanQuestion,
     conversation,
+    commandApplicability: commandApplicabilityAnalysis,
   });
   const topicDomains: Array<"cosmology"> = COSMOLOGY_PATTERN.test(cleanQuestion)
     ? ["cosmology"]
@@ -138,6 +159,8 @@ export function buildEmetAiQuestionContract({
     new Set(requestedCoverage.language.flatMap((item) => item.corpora)),
   );
   const subquestions = requestedCoverage.subquestions.map((item) => item.text);
+  const temporalRelationship = TEMPORAL_RELATIONSHIP_PATTERN.test(cleanQuestion);
+  const commandApplicability = commandApplicabilityAnalysis.applicable;
   const requiresSemanticPlanning = Boolean(conversation?.recentExchanges.length) || !(
     (intent === "direct" || intent === "definition") &&
     responseDesign.depth === "concise" &&
@@ -163,6 +186,15 @@ export function buildEmetAiQuestionContract({
     subquestions,
     requestedLanguages,
     topicDomains,
+    temporalRelationship,
+    commandApplicability,
+    commandApplicabilityKind: commandApplicabilityAnalysis.audienceApplicability
+      ? commandApplicabilityAnalysis.authorityChange
+        ? "audience-and-authority-change"
+        : "audience"
+      : commandApplicabilityAnalysis.authorityChange
+        ? "authority-change"
+        : "none",
     requiresSemanticPlanning,
     conversation: {
       relevant: Boolean(conversation?.recentExchanges.length),

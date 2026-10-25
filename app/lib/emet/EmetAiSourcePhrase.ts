@@ -48,6 +48,8 @@ export type VerifiedSourceTermAtReference = {
   lemma: string;
   transliteration: string;
   meaning: string;
+  position: number;
+  surfaceForm?: string;
 };
 
 let index: SourcePhraseIndex | null = null;
@@ -58,6 +60,24 @@ const lexicalDetailsByCorpus = new Map<EmetAiPlannedSourcePhrase["corpus"], Map<
   transliteration: string;
   meaning: string;
 }>>();
+const readerSourceBookCache = new Map<string, {
+  corpus: string;
+  verses: Record<string, { s?: Array<[string, string, string, string, string, string]> }>;
+} | null>();
+const orderedSourceBookCache = new Map<string, {
+  verses?: Record<string, {
+    orderAuthority?: string;
+    occurrences?: Array<{
+      id?: string;
+      sourceSlotOrder?: number;
+      readingOrder?: number;
+      surface?: string;
+      lexicalId?: string;
+      morphology?: string;
+      grammarOnly?: boolean;
+    }>;
+  }>;
+} | null>();
 
 function loadIndex() {
   if (index) return index;
@@ -204,8 +224,161 @@ export function verifiedSourceTermsAtReference({
       lemma: term.lemma,
       transliteration: term.transliteration,
       meaning: term.meaning,
+      position,
     }];
   });
+}
+
+/**
+ * Returns the complete, ordered source-token sequence for one locked verse.
+ * This supports verse-scoped phrase and translation-rendering questions without
+ * asking an English gloss lookup to stand in for source-language alignment.
+ */
+export function verifiedSourceTermSequenceAtReference({
+  corpus,
+  reference,
+}: {
+  corpus: EmetAiPlannedSourcePhrase["corpus"];
+  reference: string;
+}) {
+  const sourceIndex = loadIndex();
+  const referenceMatch = reference.match(/^(.+)\s+(\d+):(\d+)$/);
+  if (referenceMatch) {
+    const [, book, chapter, verse] = referenceMatch;
+    const bookSlug = book.toLocaleLowerCase("en-US").replace(/[^a-z0-9]/g, "");
+    const cacheKey = `${corpus}:${bookSlug}`;
+    let orderedBook = orderedSourceBookCache.get(cacheKey);
+    if (orderedBook === undefined) {
+      const orderedPath = path.join(
+        process.cwd(), "public", "data", "bibleiq", "source-breakdown", "runtime", corpus, `${bookSlug}.json`,
+      );
+      try {
+        orderedBook = JSON.parse(fs.readFileSync(orderedPath, "utf8"));
+      } catch {
+        orderedBook = null;
+      }
+      orderedSourceBookCache.set(cacheKey, orderedBook ?? null);
+    }
+    const orderedVerse = orderedBook?.verses?.[`${corpus}:${bookSlug}:${chapter}:${verse}`];
+    if (orderedVerse?.orderAuthority === "sourceSlotOrder") {
+      const occurrences = (orderedVerse.occurrences || [])
+        .filter((occurrence) => occurrence.grammarOnly !== true && Number.isInteger(occurrence.sourceSlotOrder))
+        .sort((left, right) =>
+          Number(left.sourceSlotOrder) - Number(right.sourceSlotOrder) ||
+          Number(left.readingOrder || 0) - Number(right.readingOrder || 0)
+        );
+      const seenSlots = new Set<number>();
+      const sequence = occurrences.flatMap((occurrence): VerifiedSourceTermAtReference[] => {
+        const position = Number(occurrence.sourceSlotOrder);
+        if (seenSlots.has(position) || !occurrence.lexicalId) return [];
+        const term = verifiedTerms(corpus, [occurrence.lexicalId])[0];
+        if (!term) return [];
+        seenSlots.add(position);
+        return [{
+          reference,
+          corpus,
+          sourceFingerprint: sourceIndex.sourceFingerprint,
+          morphologySignature: occurrence.morphology || "",
+          lexicalId: term.lexicalId,
+          lemma: term.lemma,
+          transliteration: term.transliteration,
+          meaning: term.meaning,
+          position,
+          surfaceForm: occurrence.surface,
+        }];
+      });
+      if (sequence.length === occurrences.length && sequence.length > 0) return sequence;
+    }
+
+    if (corpus === "hebrew" || corpus === "greek-nt") {
+    let readerBook = readerSourceBookCache.get(book);
+    if (readerBook === undefined) {
+      const readerPath = path.join(
+        process.cwd(), "public", "data", "bibleiq", "word-study-kjv-reader", `${book}.json`,
+      );
+      try {
+        readerBook = JSON.parse(fs.readFileSync(readerPath, "utf8"));
+      } catch {
+        readerBook = null;
+      }
+      readerSourceBookCache.set(book, readerBook ?? null);
+    }
+    const sourceTokens = readerBook?.corpus === corpus
+      ? readerBook.verses?.[`${chapter}:${verse}`]?.s || []
+      : [];
+    if (sourceTokens.length) {
+      return sourceTokens.flatMap((token, position): VerifiedSourceTermAtReference[] => {
+        const [, surfaceForm, lemma, rawLexicalId, , morphologySignature] = token;
+        const term = verifiedTerms(corpus, [rawLexicalId])[0];
+        if (!term || normalizedLemma(term.lemma) !== normalizedLemma(lemma)) return [];
+        return [{
+          reference,
+          corpus,
+          sourceFingerprint: sourceIndex.sourceFingerprint,
+          morphologySignature: morphologySignature || "",
+          lexicalId: term.lexicalId,
+          lemma: term.lemma,
+          transliteration: term.transliteration,
+          meaning: term.meaning,
+          position,
+          surfaceForm,
+        }];
+      });
+    }
+    }
+  }
+  const entry = (sourceIndex.corpora[corpus] || []).find(
+    (candidate) => candidate[0] === reference,
+  );
+  if (!entry) return [];
+
+  return entry[1].flatMap((rawLexicalId, position): VerifiedSourceTermAtReference[] => {
+    const term = verifiedTerms(corpus, [rawLexicalId])[0];
+    if (!term) return [];
+    return [{
+      reference,
+      corpus,
+      sourceFingerprint: sourceIndex.sourceFingerprint,
+      morphologySignature: entry[3]?.[position] || "",
+      lexicalId: term.lexicalId,
+      lemma: term.lemma,
+      transliteration: term.transliteration,
+      meaning: term.meaning,
+      position,
+    }];
+  });
+}
+
+function normalizedSourceSurface(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f\u0591-\u05c7]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, "")
+    .toLocaleLowerCase("en-US");
+}
+
+/** Verifies a reader-visible phrase against contiguous tokens in canonical source order. */
+export function verifiedSourcePhraseAtReference({
+  corpus,
+  reference,
+  phrase,
+}: {
+  corpus: EmetAiPlannedSourcePhrase["corpus"];
+  reference: string;
+  phrase: string;
+}) {
+  const phraseTokens = phrase
+    .normalize("NFKD")
+    .replace(/[\u05be\-–—/]+/g, " ")
+    .replace(/[\u0300-\u036f\u0591-\u05c7]/g, "")
+    .split(/[^\p{L}\p{N}]+/gu)
+    .map(normalizedSourceSurface)
+    .filter(Boolean);
+  if (!phraseTokens.length) return false;
+  const sourceTokens = verifiedSourceTermSequenceAtReference({ corpus, reference })
+    .map((term) => normalizedSourceSurface(term.surfaceForm || term.lemma))
+    .filter(Boolean);
+  return sequenceStart(sourceTokens, phraseTokens) !== -1;
 }
 
 export function verifiedSourcePhraseMatches({

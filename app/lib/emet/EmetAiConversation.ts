@@ -144,6 +144,11 @@ export function withAuthoritativeEmetClaims(
   return {
     recentExchanges: conversation.recentExchanges.map((exchange) => ({
       ...exchange,
+      // A failed turn's references describe the evidence used by the failed
+      // attempt, not an established conversational fact. Preserve the
+      // question so a follow-up can refer to it, but never let those references
+      // steer retrieval or inflate the next planning prompt.
+      references: exchange.outcome === "failed" ? [] : exchange.references,
       claims: [],
     })),
     summary: {

@@ -24,13 +24,15 @@ assert.equal(death.intent, "multi-part");
 assert.equal(death.requiresSemanticPlanning, true);
 
 const paul = contract("Does Paul teach that the commandments were abolished?");
-assert.equal(paul.intent, "doctrinal");
+assert.equal(paul.intent, "obligation");
+assert.equal(paul.commandApplicability, true);
 assert.equal(paul.requiresSemanticPlanning, true);
 assert.ok(paul.biblicalEntities.includes("Paul"));
 assert.ok(paul.biblicalEntities.includes("commandments"));
 
 const law = contract("Are believers under the law of Moses?");
-assert.equal(law.intent, "doctrinal");
+assert.equal(law.intent, "obligation");
+assert.equal(law.commandApplicability, true);
 assert.equal(law.requiresSemanticPlanning, true);
 assert.ok(law.biblicalEntities.includes("Torah"));
 

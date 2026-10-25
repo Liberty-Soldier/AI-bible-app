@@ -12,10 +12,12 @@ import type { EmetConversationContext } from "./EmetAiConversation";
 import { EMET_AI_RETRIEVAL_PLAN_SCHEMA } from "./EmetAiRetrievalPlan";
 import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
+import { buildEmetAiQuestionContract } from "./EmetAiQuestionContract";
 import {
-  classifyEmetAiResponseDesign,
   EMET_AI_CONCISE_STYLE_VERSION,
+  EMET_AI_OBLIGATION_POLICY_VERSION,
   EMET_AI_RESPONSE_POLICY_VERSION,
+  isEmetAiCommandApplicabilityQuestion,
 } from "./EmetAiResponseDesign";
 
 export type EmetAiCachedAnswer = {
@@ -49,6 +51,9 @@ export function getEmetAiCacheKey(packet: EmetAiEvidencePacket) {
     schemaVersion: packet.schemaVersion,
     promptVersion: EMET_AI_PROMPT_VERSION,
     responsePolicyVersion: EMET_AI_RESPONSE_POLICY_VERSION,
+    ...((packet.reasoning.commandApplicability ?? isEmetAiCommandApplicabilityQuestion(packet.question))
+      ? { obligationPolicyVersion: EMET_AI_OBLIGATION_POLICY_VERSION }
+      : {}),
     responseDesign: packet.responseDesign || null,
     question: normalizedQuestion(packet.question),
     reasoning: packet.reasoning,
@@ -81,13 +86,16 @@ export function getEmetAiRequestCacheKey({
   question,
   conversation,
   context,
+  engineProfile = "legacy",
 }: {
   question: string;
   conversation: EmetConversationContext | null;
   context: EmetAiReaderContext | null;
+  engineProfile?: "legacy" | "fast-two-path";
 }) {
   const requestedCoverage = extractEmetAiRequestedCoverage(question);
-  const responseDesign = classifyEmetAiResponseDesign({ question, conversation });
+  const questionContract = buildEmetAiQuestionContract({ question, conversation, context });
+  const responseDesign = questionContract.responseDesign;
   const hasRequestedCoverage =
     requestedCoverage.passages.length > 0 ||
     requestedCoverage.language.length > 0 ||
@@ -95,8 +103,12 @@ export function getEmetAiRequestCacheKey({
     requestedCoverage.competingInterpretations;
   const stableInput = JSON.stringify({
     requestSchema: "emet-ai-request-cache@4",
+    engineProfile,
     promptVersion: EMET_AI_PROMPT_VERSION,
     responsePolicyVersion: EMET_AI_RESPONSE_POLICY_VERSION,
+    ...(questionContract.commandApplicability
+      ? { obligationPolicyVersion: EMET_AI_OBLIGATION_POLICY_VERSION }
+      : {}),
     retrievalPlanSchema: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
     responseDesign,
     question: normalizedQuestion(question),

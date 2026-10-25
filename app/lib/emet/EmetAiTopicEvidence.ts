@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { normalizeBookName } from "../../data/bookAliases";
+import { EMET_AI_MAX_PLANNED_RANGE_VERSES } from "./EmetAiReferenceLimits";
 import {
   EMET_AI_EVIDENCE_SCHEMA,
   EMET_AI_COVERAGE_VERSION,
@@ -72,6 +73,7 @@ const MAX_LITERAL_FALLBACK_VERSES = 8;
 export type EmetAiDeterministicEvidenceRoute =
   | "direct-factual"
   | "exact-reference-text"
+  | "bounded-reference-explanation"
   | "single-reference-lexical"
   | "named-list"
   | "conversation-recall";
@@ -260,6 +262,33 @@ function normalizePlannedReference(value: string) {
 
 export function expandPlannedReferences(value: string) {
   const trimmed = value.trim().replace(/[–—]/g, "-");
+  const commaList = trimmed.match(/^(.+?)\s+(\d+):(.+,.+)$/i);
+  if (commaList) {
+    const book = normalizeBookName(commaList[1]);
+    const chapter = Number(commaList[2]);
+    if (!book || !Number.isInteger(chapter)) return [];
+    const expanded: string[] = [];
+    for (const rawPart of commaList[3].split(",")) {
+      const part = rawPart.trim();
+      const single = part.match(/^(\d+[a-z]?)$/i);
+      if (single) {
+        expanded.push(`${book} ${chapter}:${single[1]}`);
+        continue;
+      }
+      const range = part.match(/^(\d+)-(\d+)$/);
+      if (!range) return [];
+      const start = Number(range[1]);
+      const end = Number(range[2]);
+      if (
+        !Number.isInteger(start) ||
+        !Number.isInteger(end) ||
+        end < start ||
+        end - start + 1 > EMET_AI_MAX_PLANNED_RANGE_VERSES
+      ) return [];
+      for (let verse = start; verse <= end; verse += 1) expanded.push(`${book} ${chapter}:${verse}`);
+    }
+    return Array.from(new Set(expanded));
+  }
   const chapterRange = trimmed.match(
     /^(.+?)\s+(\d+):(\d+)-(\d+)$/i,
   );
@@ -274,7 +303,7 @@ export function expandPlannedReferences(value: string) {
       Number.isInteger(start) &&
       Number.isInteger(end) &&
       end >= start &&
-      end - start <= 12
+      end - start + 1 <= EMET_AI_MAX_PLANNED_RANGE_VERSES
     ) {
       return Array.from(
         { length: end - start + 1 },
@@ -292,7 +321,7 @@ export function expandPlannedReferences(value: string) {
       Number.isInteger(start) &&
       Number.isInteger(end) &&
       end >= start &&
-      end - start <= 12
+      end - start + 1 <= EMET_AI_MAX_PLANNED_RANGE_VERSES
     ) {
       return Array.from(
         { length: end - start + 1 },
@@ -429,6 +458,90 @@ function governingCandidates(plan: EmetAiRetrievalPlan | null) {
   );
 }
 
+/**
+ * Turn point references from a plan into bounded units of meaning. The model
+ * may name only the decisive clauses of an argument (for example Romans 14:1,
+ * 2, 5, and 23); generation still needs the intervening verses to understand
+ * the argument rather than treating those clauses as detached proof texts.
+ *
+ * This is deliberately structural rather than doctrinal: fill short spans in
+ * the same chapter and retain their immediate boundaries. Very large spans are
+ * left to the planner so an accidental pair of distant references cannot pull
+ * an entire chapter into every packet.
+ */
+function governingMeaningfulContextCandidates(
+  governing: EvidenceCandidate[],
+  contract?: EmetAiQuestionContract,
+  limit = 48,
+) {
+  const spans = new Map<string, {
+    index: SearchIndex;
+    book: string;
+    chapter: number;
+    verses: number[];
+    reasons: string[];
+  }>();
+  for (const candidate of governing) {
+    const verse = Number.parseInt(candidate.record[2], 10);
+    if (!Number.isInteger(verse)) continue;
+    const key = `${candidate.index.translation}|${candidate.record[0]}|${candidate.record[1]}`;
+    const span = spans.get(key) || {
+      index: candidate.index,
+      book: candidate.record[0],
+      chapter: candidate.record[1],
+      verses: [],
+      reasons: [],
+    };
+    span.verses.push(verse);
+    span.reasons.push(candidate.reason);
+    spans.set(key, span);
+  }
+
+  return Array.from(spans.values()).flatMap((span): EvidenceCandidate[] => {
+    const ordered = Array.from(new Set(span.verses)).sort((left, right) => left - right);
+    const first = ordered[0];
+    const last = ordered.at(-1)!;
+    const spanWidth = last - first;
+    const explicitlyRequestedChapter = contract?.requestedCoverage.passages.some(
+      (passage) =>
+        passage.startVerse === undefined &&
+        passage.book === span.book &&
+        passage.chapter === span.chapter,
+    ) || false;
+    const sustainedDiscourse =
+      ordered.length >= 3 &&
+      spanWidth <= 12 &&
+      span.reasons.some((reason) =>
+        /\b(?:dispute|argument|conversation|council|speech|dialogue)\b/i.test(reason),
+      );
+    const contextStart = sustainedDiscourse && first <= 20
+      ? 1
+      : Math.max(1, first - 1);
+    const contextEnd = last + 1;
+    const contextVerses = spanWidth <= 12 || explicitlyRequestedChapter
+      ? Array.from(
+          { length: Math.min(28, contextEnd - contextStart + 1) },
+          (_, offset) => contextStart + offset,
+        )
+      : [first - 1, last + 1];
+    return contextVerses.filter((verse) => verse > 0).flatMap((verse) => {
+      const recordIndex = loadRecordMap(span.index).get(
+        structuredReferenceKey(span.book, span.chapter, verse),
+      );
+      if (recordIndex === undefined) return [];
+      return [{
+        index: span.index,
+        record: span.index.records[recordIndex],
+        recordIndex,
+        method: "semantic-plan" as const,
+        role: "context" as const,
+        reason: "Bounded complete-passage context for a governing Scripture span.",
+        score: 96,
+      }];
+    });
+  }).slice(0, limit);
+}
+
 function sourcePhraseCandidates(plan: EmetAiRetrievalPlan | null) {
   if (!plan?.sourcePhrases.length) return [];
   const preferredReferences = plan.passages
@@ -551,8 +664,31 @@ function literalCandidates(question: string) {
     );
 }
 
-function deterministicDirectCandidates(question: string) {
+const DIRECT_NAMED_ENTITY_TERMS: Partial<Record<string, string[]>> = {
+  Messiah: ["jesus", "yeshua", "messiah", "christ"],
+  Paul: ["paul"],
+  Moses: ["moses"],
+  Noah: ["noah"],
+  Abraham: ["abraham"],
+  Cain: ["cain"],
+  Abel: ["abel"],
+};
+
+function deterministicDirectCandidates(
+  question: string,
+  contract: EmetAiQuestionContract,
+) {
   const questionWords = new Set(tokenizedWords(question));
+  const namedPersonQuestion = contract.biblicalEntities.some((entity) =>
+    Boolean(DIRECT_NAMED_ENTITY_TERMS[entity]),
+  );
+  const distinctiveAction = [DIRECT_TERM_GROUPS[0], DIRECT_TERM_GROUPS[7], DIRECT_TERM_GROUPS[8]]
+    .some((group) => group.some((term) => questionWords.has(term)));
+  if (
+    namedPersonQuestion &&
+    /^\s*(?:did|does|do|is|was|were|are|has|have)\b/i.test(question) &&
+    !distinctiveAction
+  ) return [];
   const concepts = DIRECT_TERM_GROUPS.filter((group) =>
     group.some((term) => questionWords.has(term)),
   );
@@ -560,6 +696,11 @@ function deterministicDirectCandidates(question: string) {
     (term) => !DIRECT_TERM_GROUPS.some((group) => group.includes(term as never)),
   );
   const index = loadIndex("web");
+  const requiredEntityGroups = contract.biblicalEntities.flatMap(
+    (entity) => DIRECT_NAMED_ENTITY_TERMS[entity]
+      ? [DIRECT_NAMED_ENTITY_TERMS[entity]!]
+      : [],
+  );
   const scored = index.records.map((record, recordIndex) => {
     const verseWords = tokenizedWords(record[3]);
     const words = new Set(verseWords);
@@ -594,7 +735,11 @@ function deterministicDirectCandidates(question: string) {
       minimumConceptSpan,
       score,
     };
-  }).filter((item) => item.score > 0).sort(
+  }).filter((item) =>
+    item.score > 0 && requiredEntityGroups.every((terms) =>
+      terms.some((term) => new Set(tokenizedWords(item.record[3])).has(term)),
+    )
+  ).sort(
     (left, right) => right.score - left.score || left.recordIndex - right.recordIndex,
   );
   const anchor = scored[0];
@@ -667,9 +812,12 @@ const EXACT_REFERENCE_TEXT_PATTERN =
   /\bwhat\s+(?:does|do)\s+[^?]{1,90}\s+(?:say|read)\b|\b(?:quote|recite)\b|\b(?:show|give)\s+(?:me\s+)?(?:the\s+)?(?:wording|text)\b/i;
 const LEXICAL_LOOKUP_PATTERN =
   /\b(?:word|term)\b.{0,50}\b(?:translated|rendered|means?)\b|\b(?:translated|rendered)\b.{0,35}\b(?:as\s+)?["'“”‘’]/i;
+const BOUNDED_REFERENCE_EXPLANATION_PATTERN =
+  /\b(?:explain|meaning|mean|understand|context)\b/i;
 const UNSAFE_DEEP_INTENT = new Set<EmetAiQuestionContract["intent"]>([
   "symbolic",
   "historical",
+  "obligation",
   "doctrinal",
   "comparison",
   "apparent-contradiction",
@@ -728,6 +876,54 @@ function exactReferenceTextCandidates(
     `The user requested the wording of ${passage.label}.`,
   );
   return candidates.length === references.length ? candidates : [];
+}
+
+function boundedReferenceExplanationCandidates(
+  question: string,
+  contract: EmetAiQuestionContract,
+) {
+  if (!BOUNDED_REFERENCE_EXPLANATION_PATTERN.test(question)) return [];
+  if (
+    contract.requestedCoverage.passages.length !== 1 ||
+    contract.requestedCoverage.language.length ||
+    contract.requestedCoverage.competingInterpretations ||
+    contract.requestedCoverage.subquestions.length > 1 ||
+    contract.commandApplicability ||
+    contract.intent === "comparison" ||
+    contract.intent === "apparent-contradiction" ||
+    contract.intent === "doctrinal" ||
+    contract.intent === "multi-part"
+  ) return [];
+  const passage = contract.requestedCoverage.passages[0];
+  if (passage.startVerse === undefined) return [];
+  const endVerse = passage.endVerse || passage.startVerse;
+  if (endVerse - passage.startVerse > 4) return [];
+  const requested = Array.from(
+    { length: endVerse - passage.startVerse + 1 },
+    (_, offset) => `${passage.book} ${passage.chapter}:${passage.startVerse! + offset}`,
+  );
+  const direct = resolvedCandidates(
+    requested,
+    `The user requested an explanation of ${passage.label}.`,
+  );
+  if (direct.length !== requested.length) return [];
+  const asksForContext = /\b(?:in\s+context|context\s+of|surrounding\s+(?:passage|argument|conversation)|immediate\s+context)\b/i.test(question);
+  const contextStart = Math.max(
+    1,
+    passage.startVerse - (asksForContext ? 15 : 3),
+  );
+  const contextEnd = endVerse + (asksForContext ? 5 : 3);
+  const boundedContextEnd = Math.min(contextEnd, contextStart + 23);
+  const contextReferences = Array.from(
+    { length: boundedContextEnd - contextStart + 1 },
+    (_, offset) => `${passage.book} ${passage.chapter}:${contextStart + offset}`,
+  ).filter((reference) => !requested.includes(reference));
+  const context = resolvedCandidates(
+    contextReferences,
+    `Bounded complete-passage context for ${passage.label}.`,
+    "reader-context",
+  ).map((candidate) => ({ ...candidate, role: "context" as const, score: 92 }));
+  return [...direct, ...context];
 }
 
 function lexicalLookupLabel(question: string) {
@@ -833,6 +1029,11 @@ function resolveDeterministicEvidence({
   const exact = exactReferenceTextCandidates(question, contract);
   if (exact.length) return { route: "exact-reference-text" as const, candidates: exact };
 
+  const boundedExplanation = boundedReferenceExplanationCandidates(question, contract);
+  if (boundedExplanation.length) {
+    return { route: "bounded-reference-explanation" as const, candidates: boundedExplanation };
+  }
+
   const named = namedListCandidates(question);
   if (named.length) return { route: "named-list" as const, candidates: named };
 
@@ -849,7 +1050,7 @@ function resolveDeterministicEvidence({
     !contract.requestedCoverage.subquestions.length &&
     !contract.requestedCoverage.competingInterpretations
   ) {
-    const direct = deterministicDirectCandidates(question);
+    const direct = deterministicDirectCandidates(question, contract);
     if (direct.length) return { route: "direct-factual" as const, candidates: direct };
   }
   return null;
@@ -1035,12 +1236,18 @@ function selectedCandidates({
     ? "deep"
     : plan?.analysisMode === "apparent-contradiction"
       ? "standard"
+    : questionContract?.commandApplicability
+      ? "standard"
     : responseDesign.depth;
   const contextEvidence = contextCandidates(context, question);
   const explicitEvidence = requestedPassageCandidates(question, plan);
   const requiredComparisonEvidence = requiredComparisonCandidates(question);
   const plannedEvidence = plannedCandidates(plan);
   const governingEvidence = governingCandidates(plan);
+  const governingMeaningfulContext = governingMeaningfulContextCandidates(
+    governingEvidence,
+    questionContract,
+  );
   const phraseEvidence = sourcePhraseCandidates(plan);
   const literalEvidence = literalCandidates(question);
   const candidates = plan
@@ -1135,6 +1342,9 @@ function selectedCandidates({
     if (selected.length >= evidenceLimit) break;
     add(candidate);
   }
+  // Meaningful-unit context supplements the selected governing material; it never
+  // consumes the ordinary evidence budget ahead of planned direct witnesses.
+  for (const candidate of governingMeaningfulContext) add(candidate, true);
   return selected;
 }
 
@@ -1314,6 +1524,7 @@ export function buildEmetAiTopicEvidence({
           proposition: retrievalPlan.proposition,
           requiresScopeAnalysis: retrievalPlan.requiresScopeAnalysis,
           requiresTimeline: retrievalPlan.requiresTimeline,
+          commandApplicability: contract.commandApplicability,
           components,
           establishedPropositions: reestablishedConversationPropositions(
             relevantConversation,
@@ -1325,6 +1536,7 @@ export function buildEmetAiTopicEvidence({
           proposition: cleanQuestion,
           requiresScopeAnalysis: false,
           requiresTimeline: false,
+          commandApplicability: contract.commandApplicability,
           components,
           establishedPropositions: [],
         },

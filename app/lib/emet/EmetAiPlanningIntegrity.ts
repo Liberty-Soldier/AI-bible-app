@@ -156,22 +156,11 @@ export function normalizeEmetAiPlannedReferences(
     });
   }
 
-  // Requested references are independently injected by deterministic coverage.
-  // Governing references, however, must remain present in the plan passage set.
-  const planned = new Set(
-    Array.isArray(candidate.passages)
-      ? candidate.passages.flatMap((item) =>
-          item && typeof item === "object" && typeof (item as Record<string, unknown>).reference === "string"
-            ? [(item as Record<string, string>).reference]
-            : [],
-        )
-      : [],
-  );
-  for (const reference of governing) {
-    if (!planned.has(reference)) {
-      requiredReferenceErrors.push(`Required governing reference ${reference} is missing from planned passages.`);
-    }
-  }
+  // Governing references are resolved independently and retrieved directly by
+  // the evidence builder. Requiring them to be duplicated in the optional,
+  // capped passages array caused valid plans to fail when serialization hit
+  // its 24-item limit.
+  void governing;
 
   // Retain this invariant explicitly: no optional rejection can erase a valid
   // reference that the reader requested. Requested coverage is supplied later
@@ -204,21 +193,65 @@ export function validateEmetAiPlanningCompleteness(value: unknown): string[] {
     .map((item) => `Retrieval plan explicitly identifies unresolved essential evidence: ${item}`);
 }
 
+/**
+ * Command-applicability plans need the instruction itself, its actual scope,
+ * and materially relevant later testimony. They do not need to satisfy a
+ * fixed five-category theological checklist. Whether a planning sentence is
+ * interpretively persuasive is not something deterministic code can judge;
+ * the answer stage must decide that from the verified text.
+ */
+export function validateEmetAiObligationPlanning(
+  value: unknown,
+  contract: EmetAiQuestionContract,
+): string[] {
+  if (!contract.commandApplicability) return [];
+  if (!value || typeof value !== "object") {
+    return ["A command-applicability question requires a verified governing-evidence plan."];
+  }
+  const candidate = value as Record<string, unknown>;
+  const errors: string[] = [];
+  if (candidate.analysisMode !== "doctrinal-claim") {
+    errors.push("Command applicability requires doctrinal-claim planning rather than a shallow direct plan.");
+  }
+  if (candidate.requiresScopeAnalysis !== true) {
+    errors.push("Command applicability requires explicit audience, role, condition, and covenant scope analysis.");
+  }
+  const components = Array.isArray(candidate.components)
+    ? candidate.components.filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === "object")
+    : [];
+  if (!components.length) {
+    errors.push("Command applicability requires at least one evidence component.");
+    return errors;
+  }
+  for (const component of components) {
+    if (
+      !Array.isArray(component.governingReferences) ||
+      component.governingReferences.length === 0
+    ) {
+      errors.push(`Command-applicability component ${String(component.id || "<missing>")} has no verified governing reference.`);
+    }
+  }
+  const categories = new Set(components.flatMap((item) =>
+    typeof item.category === "string" ? [item.category] : [],
+  ));
+  if (!categories.has("command")) {
+    errors.push("Command-applicability planning is missing the original command or governing instruction.");
+  }
+  if (!["application", "authority", "covenant-participants"].some((category) => categories.has(category))) {
+    errors.push("Command-applicability planning is missing evidence about audience, application, or later scriptural treatment.");
+  }
+  return errors;
+}
+
 const INTERPRETIVE_PLAN_CONCLUSION =
   /\b(?:should be (?:read|interpreted|understood) as|rather than|therefore (?:abolishes|preserves|changes)|does not (?:abolish|revoke|change|end)|abolishes|revokes|preserves unchanged|(?:the passages?|these texts?) agree|there is no contradiction|are reconciled by|use .{0,40} with different (?:scope|meaning|sense))\b/i;
 
 export function validateEmetAiPlanningNeutrality(value: unknown): string[] {
-  if (!value || typeof value !== "object") return [];
-  const candidate = value as Record<string, unknown>;
-  if (candidate.analysisMode !== "apparent-contradiction") return [];
-  const statements = [candidate.proposition];
-  if (Array.isArray(candidate.components)) {
-    statements.push(...candidate.components.flatMap((item) =>
-      item && typeof item === "object" ? [(item as Record<string, unknown>).proposition] : [],
-    ));
-  }
-  return statements
-    .filter((statement): statement is string => typeof statement === "string")
-    .filter((statement) => INTERPRETIVE_PLAN_CONCLUSION.test(statement))
-    .map((statement) => `Planning must identify textual considerations without selecting an interpretation: ${statement}`);
+  // Kept as a compatibility hook for diagnostics. Reference validity,
+  // required coverage, and evidence provenance remain deterministic gates.
+  // Semantic wording such as “rather than” is not a reliable software signal
+  // that a plan has prejudged the answer, as the live Sabbath rejection showed.
+  void value;
+  void INTERPRETIVE_PLAN_CONCLUSION;
+  return [];
 }

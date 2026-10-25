@@ -3,10 +3,12 @@ import {
   validateEmetAiScriptureOnlyFraming,
 } from "./EmetAiAnswerCompleteness";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
+import { isEmetAiCommandApplicabilityQuestion } from "./EmetAiResponseDesign";
+import { validateEmetAiDirectAnswerPolarity } from "./EmetAiAnswerNormalization";
 
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@23" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first@25" as const;
 export const EMET_AI_COVERAGE_VERSION = "deterministic-coverage@1" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
@@ -132,6 +134,7 @@ export type EmetAiEvidencePacket = {
     proposition: string;
     requiresScopeAnalysis: boolean;
     requiresTimeline: boolean;
+    commandApplicability?: boolean;
     components: Array<{
       id: string;
       proposition: string;
@@ -630,6 +633,11 @@ export function validateEmetAiAnswer(
   if (!clean(answer.answer)) {
     errors.push("The answer text is required.");
   }
+  const directAnswerPolarityError = validateEmetAiDirectAnswerPolarity(
+    packet.question.split(/\n\nResolved retrieval subject/)[0],
+    answer,
+  );
+  if (directAnswerPolarityError) errors.push(directAnswerPolarityError);
   if (
     /\b(?:the|this|a)?\s*(?:draft|packet|prompt|system instruction|model output|evidence packet)\b/i.test(
       answer.answer,
@@ -648,6 +656,13 @@ export function validateEmetAiAnswer(
     /(?:scripture|lexical|morphology):[A-Za-z0-9._:-]+/i.test(answer.answer)
   ) {
     errors.push("The reader-facing answer exposes an internal evidence identifier.");
+  }
+  if (
+    packet.evidence.some((item) => item.kind === "scripture" && item.reference === "Ecclesiastes 12:13") &&
+    /\bduty\b/i.test(answer.answer) &&
+    !/\b(?:english\s+)?(?:translation|rendering)\b[^.]{0,100}\b(?:supplies|uses|renders?)\b[^.]{0,60}\bduty\b|\bduty\b[^.]{0,100}\b(?:supplied|translation|rendering)\b/i.test(answer.answer)
+  ) {
+    errors.push("Ecclesiastes 12:13 may use “duty” as identified English rendering language, but not as though it were a distinct Hebrew noun.");
   }
 
   if (answer.status === "complete") {
@@ -788,11 +803,15 @@ export function validateEmetAiAnswer(
       const governing = packet.governingCoverage?.find(
         (item) => item.componentId === check.componentId,
       );
+      const materiallyUsedEvidence = new Set([
+        ...check.evidenceIds,
+        ...answer.claims.flatMap((claim) => claim.evidenceIds),
+      ]);
       if (
         governing &&
-        !governing.evidenceIds.some((id) => check.evidenceIds.includes(id))
+        !governing.evidenceIds.some((id) => materiallyUsedEvidence.has(id))
       ) {
-        errors.push(`Component check ${check.componentId} does not use its governing Scripture evidence.`);
+        errors.push(`Answer component ${check.componentId} does not use its governing Scripture evidence.`);
       }
     }
 
@@ -980,6 +999,11 @@ export function validateEmetAiAnswer(
           component.category === "duration" ||
           component.category === "application",
       );
+      const commandApplicability = packet.reasoning.commandApplicability ??
+        isEmetAiCommandApplicabilityQuestion(packet.question);
+      const absenceAsNonApplicability =
+        /\b(?:this|the|supplied|available|current|limited)\s+(?:scripture\s+)?evidence\b[^.]{0,100}\b(?:does not|doesn['’]t|cannot|can['’]t)\s+(?:explicitly\s+|directly\s+)?establish\b[^.]{0,180}\b(?:categorical\s+)?(?:new testament|later scripture|apostolic)\s+(?:command|requirement|obligation|mandate)\b/i.test(answer.answer) ||
+        /\b(?:no|without)\s+(?:explicit\s+|direct\s+|categorical\s+)?(?:new testament|later scripture|apostolic)\s+(?:command|restatement|repetition|requirement|mandate)\b[^.]{0,140}\b(?:not|required|binding|obligat|need not|does not apply)/i.test(answer.answer);
       if (
         hasContinuityQuestion &&
         (/\b(?:the\s+)?(?:new testament|later scripture|later passages)\b[^.]{0,120}(?:do not|does not|did not)\s+(?:explicitly\s+|directly\s+)?(?:say|state|restate|repeat|establish)\b[^.]{0,220}\b(?:modern christians?|new covenant believers?|believers?)\b[^.]{0,120}\b(?:obligat|required|must|binding)/i.test(
@@ -999,7 +1023,8 @@ export function validateEmetAiAnswer(
           ) ||
           /\b(?:same|original)\s+covenant(?:al)?\s+(?:form|way|setting)\b/i.test(
             answer.answer,
-          ))
+          ) ||
+          (commandApplicability && absenceAsNonApplicability))
       ) {
         errors.push(
           "The answer replaces governing continuity evidence with a modern-audience or covenant-code restatement test.",

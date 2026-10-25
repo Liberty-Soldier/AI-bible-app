@@ -7,6 +7,7 @@ import {
   classifyEmetAiValidationIssue,
   parseEmetAiAnswer,
   validateEmetAiAnswer,
+  type EmetAiEvidencePacket,
 } from "../EmetAiContract";
 import { buildEmetAiSystemInstruction } from "../EmetAiConstitution";
 import { relevantEmetConversationClaimReferences } from "../EmetAiConversation";
@@ -17,15 +18,18 @@ import {
 } from "../EmetAiRetrievalPlan";
 import type { EmetAiProvider } from "../EmetAiService";
 import type { EmetAiPerformanceObserver } from "../EmetAiPerformance";
-import { classifyEmetAiInstructionProfile } from "../EmetAiResponseDesign";
 import { buildEmetAiQuestionContract } from "../EmetAiQuestionContract";
 import { emetAiLockedScriptureReferenceExists } from "../EmetAiTopicEvidence";
 import {
   normalizeEmetAiPlannedReferences,
+  validateEmetAiObligationPlanning,
   validateEmetAiPlanningCompleteness,
   validateEmetAiPlanningNeutrality,
 } from "../EmetAiPlanningIntegrity";
-import { normalizeEmetAiMechanicalAnswerText } from "../EmetAiAnswerNormalization";
+import {
+  normalizeEmetAiDirectAnswerPolarity,
+  normalizeEmetAiMechanicalAnswerText,
+} from "../EmetAiAnswerNormalization";
 
 const reasoningCategoryValues = [
   "identity", "authority", "nature", "relationship", "practice", "duration",
@@ -314,6 +318,64 @@ function conciseAnswerSchema(evidenceIds: string[]) {
   };
 }
 
+function compactPlanningInstruction(profile: Parameters<typeof buildEmetAiSystemInstruction>[0]) {
+  return `${buildEmetAiSystemInstruction(profile)}
+
+Select Scripture evidence; do not draft the answer. Return only the retrieval-plan schema.
+
+- Identify the user's actual proposition and only its material subquestions.
+- Retrieve every explicit reference. Use fully specified individual verse references that exist in Scripture.
+- Select the smallest sufficient evidence set: the governing earlier-scripture foundation, the direct text, and later testimony or qualification that materially addresses the same question.
+- Preserve complete units of meaning. For a dispute, speech, vision, legal decision, or sustained argument, include its initiating issue, material reasoning, qualifications, and conclusion—not isolated clauses.
+- Before relating passages, preserve each passage's speaker, audience, command or assertion, conditions, exceptions, duration, and immediate conclusion.
+- Use apparent-contradiction mode only when the user actually asks to reconcile texts. Retrieve both complete statements without deciding the reconciliation in the plan.
+- For command applicability, include the command itself, its stated audience and performance conditions, and later Scripture that explicitly addresses its authority, application, change, or fulfillment. Silence and absence from a later list are not evidence of repeal. Do not require modern audience wording.
+- When an NT question depends on a Torah, Prophets, or Writings foundation, include that foundation. This does not predetermine continuity or change.
+- Include source-language hypotheses only when requested or materially necessary. Never infer a source identity from an English gloss.
+- Use only as many components as the question requires. Each component must have at least one independently verifiable governing reference. The passages list may contain a smaller ranked display set; do not duplicate references merely to satisfy serialization.
+- Do not admit that essential evidence is missing while returning an otherwise complete plan. If locked Scripture cannot resolve a required component, record the limitation without inventing a reference.
+- Conversation and reader context clarify the question but are not evidence.`;
+}
+
+function compactAnswerTask(packet: EmetAiEvidencePacket) {
+  const design = packet.responseDesign;
+  return `Answer the user's actual question from the verified packet.
+
+Read each supplied passage as a complete statement before combining it: identify speaker, audience, subject, conditions, qualifications, and conclusion. Begin with what Scripture positively establishes. Relate earlier and later Scripture without treating silence as repeal, inventing a contradiction, or forcing agreement. Distinguish explicit statements, strong implications, synthesis, possible interpretations, and what the evidence does not establish. Apply commands according to their stated audience, role, place, institution, and conditions.
+
+Write natural reader-facing prose. Begin with the direct answer when the evidence supports one. Do not mention packets, models, IDs, validation, or internal method. Quote only exact packet wording; otherwise paraphrase. Use no Scripture reference or lexical claim outside the packet. If material evidence is insufficient, return insufficient-evidence rather than inventing support.
+
+Return the required structured answer. Every claim and component check must use verified evidence IDs, every used ID must appear in citations, and every reasoning component must have exactly one component check. Do not create a theological objection the user did not ask about.
+
+Response depth: ${design?.depth || "standard"}; target ${design?.targetMinWords || 65}-${design?.targetMaxWords || 220} reader-facing words; maximum ${design?.maxScriptureCitations || 8} citations.`;
+}
+
+/** Keep the complete packet for validation/audit, but send the model only the
+ * verified source material and reasoning fields it can use. Provenance
+ * checksums, retrieval scores, duplicated scope references, and build metadata
+ * previously consumed substantial input without changing the available text.
+ */
+export function buildEmetAiModelFacingPacket(packet: EmetAiEvidencePacket) {
+  return {
+    schemaVersion: packet.schemaVersion,
+    question: packet.question,
+    responseDesign: packet.responseDesign,
+    reasoning: packet.reasoning,
+    governingCoverage: packet.governingCoverage,
+    requestedCoverage: packet.requestedCoverage,
+    identity: packet.identity,
+    evidence: packet.evidence.map((item) => ({
+      id: item.id,
+      kind: item.kind,
+      corpus: item.corpus,
+      text: item.text,
+      ...(item.reference ? { reference: item.reference } : {}),
+      ...(item.entityId ? { entityId: item.entityId } : {}),
+      ...(item.lexicalId ? { lexicalId: item.lexicalId } : {}),
+    })),
+  };
+}
+
 export function createEmetAiOpenAiProvider({
   performanceObserver,
 }: {
@@ -387,8 +449,7 @@ export function createEmetAiOpenAiProvider({
       lastFailure = [];
       lastAudit = {};
       const questionContract = input.questionContract || buildEmetAiQuestionContract(input);
-      const instructionProfile = questionContract.instructionProfile ||
-        classifyEmetAiInstructionProfile(input);
+      const instructionProfile = questionContract.instructionProfile;
       const subjectRetrievalDirective = questionContract.topicDomains.includes("cosmology")
         ? `\n\nFor broad questions about Scripture's descriptions of the earth, sun, moon, heavens, or expanse, examine all materially distinct textual categories: the earth's establishment or stability, the narrated movement or stillness of the sun and moon, the expanse, and the created lights and their functions. Relevant witnesses include Genesis 1:6–8, Genesis 1:14–17, Joshua 10:12–13, 1 Chronicles 16:30, Psalms 19:4–6, 93:1, and 104:5, Ecclesiastes 1:5, and Job 37:18. These are neutral retrieval anchors, not a predetermined cosmological conclusion; include other material passages and conclude only what their wording establishes. Do not volunteer a phenomenological, observational, poetic, or human-vantage explanation unless the reader explicitly asks for that comparison.`
         : "";
@@ -400,13 +461,16 @@ export function createEmetAiOpenAiProvider({
         input: [
           {
             role: "system",
-            content: `${buildEmetAiSystemInstruction(instructionProfile)}
+            content: process.env.EMET_AI_LEGACY_PROMPTS === "1"
+              ? `${buildEmetAiSystemInstruction(instructionProfile)}
 
 You are selecting an evidence strategy, not writing a reader-facing answer. Use trained biblical understanding to identify the smallest complete set of passages and verified-source hypotheses needed to answer the canonical question contract. Return only the retrieval plan. The application will resolve every planned reference against locked Scripture data before a separate answer-generation stage.
 
 The input's responseDesign is mandatory. For concise questions, answer the question immediately in 1–3 sentences, normally 30–65 words, and select only 2–4 of the strongest direct Scripture witnesses. Do not preemptively introduce objections, denominational debates, historical background, or passages from Paul merely because someone might later raise them. For standard questions and follow-up objections, explain the requested reason or objection directly and build on the recorded conversation. For deep comparisons, multi-part questions, contradictions, and original-language studies, use the detail needed for complete coverage. Progressive depth means the first answer stays proportionate; later questions may deepen it without restarting the study.
 
 Identify the biblical subject and select the smallest set of passages that can honestly support the answer. Read Scripture canonically: include the necessary earlier foundation, the most direct passage, relevant later witness, and any passage that materially qualifies the conclusion. Do not select verses merely because they repeat a common English word.
+
+Before combining passages, preserve each governing statement as a complete meaningful unit. Identify its speaker, audience, literary action, stated conditions, qualifications, exceptions, reasons, and conclusion. When an adjacent verse completes a conditional clause or supplies the stated reason or contrast, include it rather than planning from an isolated phrase. Do not infer a contradiction, repeal, exemption, or universal application until those complete statements have been compared.
 
 OT-foundation requirement: when a New Testament passage quotes, alludes to, or addresses a subject established in the Torah, Prophets, or Writings, retrieve and consider that relevant earlier foundation before finalizing the interpretation. Apply this to Sabbath, commandments, covenant, resurrection, Messiah, prophecy, and every other materially dependent subject. Do not assume continuity or change: report the actual earlier statement, then any explicit later qualification, fulfillment, change, or application, distinguishing direct statement from implication and theological synthesis.
 
@@ -418,6 +482,8 @@ For every material component, populate governingReferences with the smallest set
 
 First classify the reasoning task. Use simple for ordinary factual or passage questions. Use doctrinal-claim when the reader asks whether Scripture teaches, proves, or supports a disputed doctrine, obligation, covenant claim, prophecy interpretation, or theological identity claim. Use apparent-contradiction when the question asks Scripture to reconcile statements that appear to pull in different directions. Set requiresScopeAnalysis whenever audience, role, covenant participants, conditions, location, institution, jurisdiction, or command applicability could change the answer. Set requiresTimeline whenever promise, inauguration, transition, fulfillment, resurrection, or future completion could change the answer.
 
+When the canonical question contract marks temporalRelationship, the question asks whether a practice, command, distinction, event, or institution existed before, after, or during another biblical event. Set requiresTimeline and retrieve evidence on the relevant side or sides of that boundary. A verse that merely contains the same names or English keywords does not establish chronology. Distinguish evidence that a practice or command existed earlier from evidence for the later formal covenant, codification, priesthood, or administration.
+
 Define the exact proposition before selecting passages. Do not replace a strong doctrine with a weaker proposition that is easier to prove. When the reader names an established compound doctrine, include every material assertion ordinarily entailed by that doctrine—such as claims about identity, number, essence or nature, equality, duration, authority, and relationship—rather than silently omitting the hardest assertion. For example, if coequality or coeternity belongs to the named doctrine, do not replace it with the weaker observation that subjects are named together or share divine work. For a compound doctrinal claim, decompose it into separately testable components. Keep identity, authority, nature, relationship, practice, and duration distinct: evidence for one does not automatically prove the others. A later theological label may name the subject, but it is not wording found in Scripture unless a selected passage actually uses it.
 
 Do not make the proposition harder than the reader's actual question. Scope analysis, timeline analysis, interpretive method, and the need to account for genuine biblical changes are reasoning requirements, not extra assertions to append to the proposition. For a question asking whether believers should obey Torah or the law of Moses, the main proposition is whether believers are to obey Yahweh's instructions that apply to them. Do not append an "unchanged Levitical system," "old covenant package," or similar assertion that the reader did not make. Put necessary person-, role-, place-, and condition-specific qualifications in the explanation without using them to evade the core question.
@@ -427,6 +493,8 @@ Keep the proposition exactly responsive to the reader's question. Do not add a h
 This component discipline is universal, not limited to doctrine labels. Keep covenant, Torah or command, covenant participants, priesthood, mediator, sanctuary, sacrifice, promise, timing, prophecy, chronology, and application distinct. A change in one component does not change another unless Scripture connects them. Preserve the Bible's own earlier definitions when reading later passages. The whole biblical witness is coherent: later inference may qualify scope or administration when the text establishes that change, but may not silently negate an earlier explicit proposition.
 
 For command and application questions, retrieve the instruction itself and evidence that identifies its audience, role, triggering condition, location, institutional requirements, duration, and any explicit later change. A command assigned to priests, judges, landowners, parents, men, women, Israel, resident foreigners, or another stated group must not be indiscriminately reassigned or abolished. Present inability or absence of a sanctuary, land, court, or office concerns performance conditions; it is not by itself textual repeal.
+
+For every canonical question contract marked commandApplicability, use doctrinal-claim planning with requiresScopeAnalysis true. Include separately governed components in these categories: command for the original instruction; covenant-participants for its named audience and covenant participation; duration for its stated duration or the evidence needed to determine whether an explicit duration or end condition exists; application for role, land, institutional, and circumstantial conditions; and authority for later Scripture that materially addresses continuity, modification, fulfillment, or repeal. Every category needs at least one independently verifiable governing reference; a component may cite the original instruction when that text itself governs the category. Phrase the plan proposition and component propositions as neutral textual questions to investigate. Do not state in the plan that the command continues, ended, was abolished, remains binding, or applies to the reader. Those are answer-stage conclusions. For broad questions about humanity's general responsibility to obey Elohim, consider Ecclesiastes 12:13–14 and its verified Hebrew wording when materially relevant; do not import the KJV's supplied word “duty” as though it were a Hebrew lexical token or force this passage into a question about a particular unrelated command.
 
 When the reader asks whether a command given to Israel applies to Gentile or new-covenant believers, retrieve Scripture that actually establishes covenant identity and participation: the treatment of resident foreigners, prophetic foreigners who join themselves to Yahweh, the new covenant's named parties, grafting into the covenant people, former alienation from Israel's commonwealth followed by fellow citizenship, and belonging to Messiah as Abraham's seed. Do not assume either separation from or inclusion in the covenant people without testing that audience bridge from the text.
 
@@ -468,7 +536,8 @@ The input's requestedCoverage was extracted deterministically from the reader's 
 
 Do not use denominational doctrine, consensus, or historical literature as proof. Do not put noncanonical references in passages. If the question asks about historical literature, record that limitation; EMETSEES handles such sources separately.
 
-Give short retrieval reasons. Do not draft, summarize, or anticipate the final answer. Never assert an unverified lexical identity. Return only the required retrieval-plan structure.${subjectRetrievalDirective}`,
+Give short retrieval reasons. Do not draft, summarize, or anticipate the final answer. Never assert an unverified lexical identity. Return only the required retrieval-plan structure.${subjectRetrievalDirective}`
+              : `${compactPlanningInstruction(instructionProfile)}${subjectRetrievalDirective}`,
           },
           {
             role: "user",
@@ -519,6 +588,7 @@ Give short retrieval reasons. Do not draft, summarize, or anticipate the final a
               ? [
                   ...validateEmetAiPlanningNeutrality(draft),
                   ...validateEmetAiPlanningCompleteness(draft),
+                  ...validateEmetAiObligationPlanning(draft, questionContract),
                 ]
               : normalizedPlan.requiredReferenceErrors.length
                 ? []
@@ -701,10 +771,12 @@ Give short retrieval reasons. Do not draft, summarize, or anticipate the final a
         ? `\n\nResponse design: ${packet.responseDesign.depth}. Target ${packet.responseDesign.targetMinWords}–${packet.responseDesign.targetMaxWords} reader-facing words and no more than ${packet.responseDesign.maxScriptureCitations} Scripture citations. Begin with the answer. ${packet.responseDesign.depth === "concise" ? "Use 1–3 sentences and do not introduce unasked objections or broad theological debate." : packet.responseDesign.progressiveFollowUp ? "Answer the follow-up directly using the established conversation context; do not restart the whole study." : "Use only the depth needed for the request."}`
         : "";
       const task = packet.reasoning.mode === "simple"
-        ? "Give the reader a direct, concise Scripture-grounded explanation. Use your biblical understanding to read the passages naturally, while citing every biblical conclusion only to verified evidence in the packet. If the question asks what or which items, name the actual items or meaningful categories; if it asks how, state concrete actions and conditions. Do not answer by merely repeating the duty or category named in the question. Keep evidence bookkeeping in componentChecks, claims, and citations, not in the reader-facing answer. Return exactly one componentCheck for every reasoning component and an empty continuityChecks array when no established propositions are supplied."
+        ? "Give the reader a direct, concise Scripture-grounded explanation. Use your biblical understanding to read the passages naturally, while citing every biblical conclusion only to verified evidence in the packet. If the question asks what or which items, name the actual items or meaningful categories; if it asks how, state concrete actions and conditions. For a yes-or-no question, ensure the opening yes or no answers the question's actual modal proposition, including any negation, exception, authorization, prohibition, or role restriction, and agrees with the structured claims. Do not answer by merely repeating the duty or category named in the question. Keep evidence bookkeeping in componentChecks, claims, and citations, not in the reader-facing answer. Return exactly one componentCheck for every reasoning component and an empty continuityChecks array when no established propositions are supplied."
         : `Test the exact proposition in packet.reasoning from the complete supplied Scripture evidence. This is universal biblical reasoning, not advocacy for a theological camp.
 
 Separate every material component. Do not exchange identity for authority, covenant for Torah, priesthood for every command, sacrifice for morality, association for ontology, present participation for final consummation, or change in one administration for abolition of unrelated instruction.
+
+Before synthesizing the evidence, read every governing passage as a complete statement: who speaks, who is addressed, what kind of statement it is, and which conditions, qualifications, exceptions, reasons, or conclusions its immediate context supplies. First state what the passages share. Then explain whether one passage extends, specifies, or qualifies another. Call something a contradiction only when the complete verified statements genuinely cannot stand together.
 
 When requiresScopeAnalysis is true, state the relevant audience, role, conditions, location, institution, and jurisdiction before applying the text. A command assigned to another office or activated only under stated conditions is not thereby abolished. When requiresTimeline is true, distinguish promised, inaugurated, presently operating, transitioning, fulfilled, awaiting full realization, and uncertain claims. Do not collapse an unfolding scriptural sequence into one instant.
 
@@ -718,8 +790,11 @@ Return exactly one componentCheck for every component in packet.reasoning.compon
 
 Packet.governingCoverage identifies the verified Scripture that directly governs each material component. Every corresponding componentCheck must use at least one of those evidence IDs, and the reader-facing answer must account for any governing passage that materially qualifies the conclusion. Do not replace governing evidence with a more convenient thematic verse. Grade explicit statement, strong implication, synthesis, possibility, and non-establishment according to what the cited wording actually supports. A categorical yes or no requires an explicit statement or a strong implication from the complete governing evidence.
 
-For each answer claim, provide a stable ID, evidence level, category, polarity, exact scope, and timing. The reader-facing answer must remain natural, direct, and concise. Begin with the answer, never with commentary about a draft, packet, model, method, or proposition. State the conclusion the supplied Scripture establishes; do not weaken an explicit command, duration, or governing statement merely because the reader used modern wording. Use a qualification only when its cited passage materially addresses the exact proposition. Do not introduce labels such as "Sinai administration" or "covenant setting" unless the cited text itself makes that distinction relevant to the answer. Give the precise conclusion justified by all materially relevant supplied Scripture.${canonicalContinuityDirective}`;
-      const designedTask = `${task}${responseDesignDirective}`;
+For each answer claim, provide a stable ID, evidence level, category, polarity, exact scope, and timing. The reader-facing answer must remain natural, direct, and concise. Begin with the answer, never with commentary about a draft, packet, model, method, or proposition. For a yes-or-no question, ensure the opening yes or no answers the question's actual modal proposition, including any negation, exception, authorization, prohibition, or role restriction, and agrees with the structured claims. State the conclusion the supplied Scripture establishes; do not weaken an explicit command, duration, or governing statement merely because the reader used modern wording. Use a qualification only when its cited passage materially addresses the exact proposition. Do not introduce labels such as "Sinai administration" or "covenant setting" unless the cited text itself makes that distinction relevant to the answer. Give the precise conclusion justified by all materially relevant supplied Scripture.${canonicalContinuityDirective}`;
+      const designedTask = process.env.EMET_AI_LEGACY_PROMPTS === "1"
+        ? `${task}${responseDesignDirective}`
+        : compactAnswerTask(packet);
+      const modelFacingPacket = buildEmetAiModelFacingPacket(packet);
       try {
         const answerStartedAt = performance.now();
         const response = await client.responses.create({
@@ -733,7 +808,10 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
               },
               {
                 role: "user",
-                content: JSON.stringify({ task: designedTask, packet }),
+                content: JSON.stringify({
+                  task: designedTask,
+                  packet: modelFacingPacket,
+                }),
               },
             ],
             text: {
@@ -773,7 +851,7 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
               packet.evidence,
             );
           }
-          if (directProfile) {
+          if (directProfile && !Array.isArray(candidate.componentChecks)) {
             const claims = Array.isArray(candidate.claims)
               ? candidate.claims.filter((claim) => claim && typeof claim === "object") as Array<Record<string, unknown>>
               : [];
@@ -940,7 +1018,13 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
         };
 
         const normalizedDraft = normalizeAnswer(draft);
-        const parsedDraft = parseEmetAiAnswer(normalizedDraft);
+        const parsedDraftValue = parseEmetAiAnswer(normalizedDraft);
+        const parsedDraft = parsedDraftValue
+          ? normalizeEmetAiDirectAnswerPolarity(
+              packet.question.split(/\n\nResolved retrieval subject/)[0],
+              parsedDraftValue,
+            )
+          : null;
         const validationStartedAt = performance.now();
         const initialValidation = parsedDraft
           ? validateEmetAiAnswer(packet, parsedDraft)
@@ -954,6 +1038,18 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
         };
         performanceObserver?.stage("validation", performance.now() - validationStartedAt);
         if (initialValidation.ok) return initialValidation.value;
+
+        // The production default is one answer call. Deterministic validation
+        // may reject unsupported or malformed output, but another model call
+        // is not an integrity check and previously turned harmless structure
+        // defects into slow generic failures. Keep the legacy recovery path
+        // available only for explicitly controlled diagnostics.
+        if (process.env.EMET_AI_ENABLE_REPAIR !== "1") {
+          lastFailure = initialValidation.errors.map(
+            (error) => `Answer validation (${classifyEmetAiValidationIssue(error)}): ${error}`,
+          );
+          return null;
+        }
 
         if (process.env.EMET_AI_USAGE_LOG === "1") {
           console.info("EMET AI repair requested", {
@@ -1014,9 +1110,15 @@ For each answer claim, provide a stable ID, evidence level, category, polarity, 
           return null;
         }
 
-        const repaired = parseEmetAiAnswer(
+        const repairedValue = parseEmetAiAnswer(
           normalizeAnswer(JSON.parse(repair.output_text)),
         );
+        const repaired = repairedValue
+          ? normalizeEmetAiDirectAnswerPolarity(
+              packet.question.split(/\n\nResolved retrieval subject/)[0],
+              repairedValue,
+            )
+          : null;
         if (!repaired) {
           lastFailure = ["Verified-packet recovery did not match the answer schema."];
           return null;

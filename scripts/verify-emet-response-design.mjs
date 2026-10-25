@@ -11,7 +11,6 @@ import { validateEmetAiConcreteAnswer } from "../app/lib/emet/EmetAiAnswerComple
 
 const directQuestions = [
   "Did Messiah abolish the commandments?",
-  "Should Christians keep the commandments?",
   "Which day is the biblical Sabbath?",
 ];
 
@@ -22,6 +21,14 @@ for (const question of directQuestions) {
   assert.equal(design.targetMaxWords, 65);
   assert.equal(design.maxScriptureCitations, 4);
 }
+
+const obligationDesign = classifyEmetAiResponseDesign({
+  question: "Should Christians keep the commandments?",
+});
+assert.equal(obligationDesign.depth, "standard");
+assert.equal(obligationDesign.targetMinWords, 65);
+assert.equal(obligationDesign.targetMaxWords, 220);
+assert.equal(obligationDesign.maxScriptureCitations, 8);
 
 const legacyDirectQuestionKey =
   "emet-ai-request:f891a8782eff484cbd650384bdc696fbbed28b6775c9320cb397a9b6ee593e64";
@@ -36,7 +43,7 @@ assert.equal(EMET_AI_RESPONSE_POLICY_VERSION, "scripture-first-response-policy@3
 
 assert.equal(
   classifyEmetAiInstructionProfile({ question: "What commandments should I keep?" }),
-  "definition",
+  "complex",
 );
 
 const standardKey = getEmetAiRequestCacheKey({

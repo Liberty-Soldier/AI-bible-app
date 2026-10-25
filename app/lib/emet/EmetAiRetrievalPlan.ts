@@ -7,6 +7,7 @@ import type { EmetAiReasoningCategory } from "./EmetAiContract";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 import { classifyEmetAiResponseDesign } from "./EmetAiResponseDesign";
 import type { EmetAiQuestionContract } from "./EmetAiQuestionContract";
+import { EMET_AI_MAX_PLANNED_RANGE_VERSES } from "./EmetAiReferenceLimits";
 
 export const EMET_AI_RETRIEVAL_PLAN_SCHEMA =
   "emet-ai-retrieval-plan@4" as const;
@@ -80,7 +81,11 @@ export function expandEmetAiPlanReferences(value: string) {
     const chapter = Number(ranged[2]);
     const start = Number(ranged[3]);
     const end = Number(ranged[4]);
-    if (book && end >= start && end - start <= 12) {
+    if (
+      book &&
+      end >= start &&
+      end - start + 1 <= EMET_AI_MAX_PLANNED_RANGE_VERSES
+    ) {
       return Array.from({ length: end - start + 1 }, (_, offset) =>
         `${book} ${chapter}:${start + offset}`,
       );
@@ -298,21 +303,6 @@ export function parseEmetAiRetrievalPlan(
       return null;
     }
     passages.push({ reference, reason, role, priority });
-  }
-
-  const plannedReferences = new Set(
-    passages.flatMap((passage) => expandEmetAiPlanReferences(passage.reference)),
-  );
-  if (
-    components.some((component) =>
-      component.governingReferences.some((reference) =>
-        !expandEmetAiPlanReferences(reference).some((expanded) =>
-          plannedReferences.has(expanded),
-        ),
-      ),
-    )
-  ) {
-    return null;
   }
 
   const sourcePhrases: EmetAiPlannedSourcePhrase[] = [];

@@ -40,7 +40,7 @@ assert.match(page, /redirect\(`\/auth\?next=\$\{encodeURIComponent\(next\)\}`\)/
 assert.match(chat, /crypto\.randomUUID\(\)/);
 assert.match(chat, /\/api\/emet\/explain/);
 assert.match(chat, /\/api\/emet\/ask/);
-assert.match(chat, /Share this answer/);
+assert.match(chat, /Publish and share this answer/);
 assert.match(chat, /buildEmetConversationContext/);
 assert.match(chat, /useReaderContext/);
 assert.match(chat, /Use \{contextLabel\(readerContext\)\}/);
@@ -79,6 +79,9 @@ assert.match(route, /EMET_LIVE_ENABLED/);
 assert.match(route, /getVerifiedSupabaseUserId/);
 assert.match(route, /reserveEmetAiQuestion/);
 assert.match(route, /refundFailedEmetAiQuestion/);
+assert.match(route, /EMET_AI_FAST_ENGINE/);
+assert.match(route, /answerWithFastTwoPathEmet/);
+assert.match(route, /engineProfile: useFastEngine \? "fast-two-path" : "legacy"/);
 assert.match(route, /parseEmetConversationContext/);
 assert.match(progressiveRoute, /buildEmetAiInitialScriptureEvidence/);
 assert.match(progressiveRoute, /getVerifiedSupabaseUserId/);

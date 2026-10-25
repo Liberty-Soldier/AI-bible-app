@@ -17,6 +17,7 @@ import {
   buildEmetAiTopicEvidence,
   isEmetAiDeterministicFastPathEligible,
 } from "../app/lib/emet/EmetAiTopicEvidence.ts";
+import { buildEmetAiQuestionContract } from "../app/lib/emet/EmetAiQuestionContract.ts";
 
 function plan({
   subject,
@@ -673,22 +674,15 @@ assert.equal(
   claimOnlyConversation,
 );
 
-for (const [question, expectedReferences] of [[
+for (const question of [
   "Did Messiah abolish the commandments?",
-  ["Matthew 5:17", "Matthew 5:18", "Matthew 5:19"],
-]]) {
-  assert.equal(isEmetAiDeterministicFastPathEligible({ question }), true);
-  const direct = buildEmetAiTopicEvidence({
-    question,
-    deterministicFastPath: true,
-  });
-  assert.equal(direct.status, "ready", question);
-  requireReferences(direct, expectedReferences);
-  if (direct.status === "ready") {
-    assert.equal(direct.packet.reasoning.mode, "simple");
-    assert.equal(direct.packet.responseDesign?.depth, "concise");
-    assert.ok(direct.packet.evidence.length <= 4);
-  }
+  "Does Paul teach that the commandments were abolished?",
+]) {
+  assert.equal(isEmetAiDeterministicFastPathEligible({ question }), false);
+  const questionContract = buildEmetAiQuestionContract({ question });
+  assert.equal(questionContract.intent, "obligation");
+  assert.equal(questionContract.commandApplicability, true);
+  assert.equal(questionContract.requiresSemanticPlanning, true);
 }
 
 const creationSufficiency = assessEmetAiDeterministicSufficiency({
@@ -707,6 +701,29 @@ assert.equal(
   assessEmetAiDeterministicSufficiency({ question: "What does John 3:16 say?" }).route,
   "exact-reference-text",
 );
+
+const boundedExplanation = buildEmetAiTopicEvidence({
+  question: "Explain John 3:16 in context.",
+  deterministicFastPath: true,
+});
+requireReferences(boundedExplanation, [
+  "John 3:1", "John 3:14", "John 3:16", "John 3:18", "John 3:21",
+]);
+assert.equal(
+  assessEmetAiDeterministicSufficiency({ question: "Explain John 3:16 in context." }).route,
+  "bounded-reference-explanation",
+);
+for (const question of [
+  "Does John 3:16 prove that the law was abolished?",
+  "Compare John 3:16 and James 2:24.",
+  "Explain the Greek word in John 3:16.",
+]) {
+  assert.notEqual(
+    assessEmetAiDeterministicSufficiency({ question }).route,
+    "bounded-reference-explanation",
+    question,
+  );
+}
 
 const lexicalLookup = buildEmetAiTopicEvidence({
   question: 'What Hebrew word is translated "one" in Deuteronomy 6:4, and what does it mean?',
@@ -806,7 +823,10 @@ const governingPlanDraft = plan({
 assert.ok(parseEmetAiRetrievalPlan(governingPlanDraft));
 const invalidGoverningPlan = structuredClone(governingPlanDraft);
 invalidGoverningPlan.components[0].governingReferences = ["Acts 2:39"];
-assert.equal(parseEmetAiRetrievalPlan(invalidGoverningPlan), null);
+assert.ok(
+  parseEmetAiRetrievalPlan(invalidGoverningPlan),
+  "A verified governing reference does not need duplicate serialization in passages.",
+);
 const governingEvidence = buildEmetAiTopicEvidence({
   question: "Is baptism required for salvation?",
   retrievalPlan: governingPlanDraft,
@@ -817,6 +837,99 @@ assert.ok(
   governingEvidence.status === "ready" &&
     governingEvidence.packet.governingCoverage?.[0].evidenceIds.length === 2,
   "Governing evidence must remain selected and attached to its component.",
+);
+
+// Governing verses retain a bounded meaningful-unit window so conditions and
+// conclusions immediately beside the anchor cannot be silently dropped.
+const conditionalPlan = plan({
+  subject: "ancestral consequences and personal responsibility",
+  intent: "explanation",
+  analysisMode: "apparent-contradiction",
+  proposition: "How Exodus 20 and Ezekiel 18 describe consequences and personal responsibility",
+  components: [{
+    id: "conditions-and-responsibility",
+    proposition: "Compare each passage's complete conditional statement and conclusion.",
+    category: "application",
+    governingReferences: ["Exodus 20:5", "Ezekiel 18:20"],
+  }],
+  passages: [
+    { reference: "Exodus 20:5", role: "direct", priority: 100 },
+    { reference: "Ezekiel 18:20", role: "direct", priority: 100 },
+  ],
+});
+const conditionalEvidence = buildEmetAiTopicEvidence({
+  question: "Do Exodus 20:5-6 and Ezekiel 18 contradict each other?",
+  retrievalPlan: conditionalPlan,
+  requireSemanticPlan: true,
+});
+requireReferences(conditionalEvidence, [
+  "Exodus 20:4", "Exodus 20:5", "Exodus 20:6",
+  "Ezekiel 18:19", "Ezekiel 18:20", "Ezekiel 18:21",
+]);
+
+for (const regression of [
+  {
+    question: "Does Mark 7 abolish the dietary instructions, and how does Acts 10 explain Peter's vision?",
+    anchors: ["Mark 7:15", "Acts 10:28"],
+    expected: ["Mark 7:14", "Mark 7:15", "Mark 7:16", "Acts 10:27", "Acts 10:28", "Acts 10:29"],
+  },
+  {
+    question: "When do Messiah's people receive resurrection life?",
+    anchors: ["John 5:28", "1 Corinthians 15:23"],
+    expected: ["John 5:27", "John 5:28", "John 5:29", "1 Corinthians 15:22", "1 Corinthians 15:23", "1 Corinthians 15:24"],
+  },
+  {
+    question: "How should assemblies care for widows?",
+    anchors: ["James 1:27", "1 Timothy 5:3"],
+    expected: ["James 1:26", "James 1:27", "1 Timothy 5:2", "1 Timothy 5:3", "1 Timothy 5:4"],
+  },
+]) {
+  const regressionPlan = plan({
+    subject: regression.question,
+    intent: "explanation",
+    analysisMode: "doctrinal-claim",
+    proposition: regression.question,
+    components: [{
+      id: "complete-passage-context",
+      proposition: "Explain the governing passages with their stated context and qualifications.",
+      category: "application",
+      governingReferences: regression.anchors,
+    }],
+    passages: regression.anchors.map((reference) => ({ reference, role: "direct", priority: 100 })),
+  });
+  const regressionEvidence = buildEmetAiTopicEvidence({
+    question: regression.question,
+    retrievalPlan: regressionPlan,
+    requireSemanticPlan: true,
+  });
+  requireReferences(regressionEvidence, regression.expected);
+}
+
+const romansArgumentPlan = plan({
+  subject: "Romans 14 in context",
+  intent: "passage",
+  analysisMode: "simple",
+  proposition: "What issue Paul addresses throughout Romans 14",
+  components: [{
+    id: "romans-argument",
+    proposition: "Follow the complete food, days, conscience, judgment, and acceptance argument.",
+    category: "application",
+    governingReferences: ["Romans 14:1", "Romans 14:5", "Romans 14:23"],
+  }],
+  passages: [
+    { reference: "Romans 14:1", role: "direct", priority: 100 },
+    { reference: "Romans 14:5", role: "direct", priority: 99 },
+    { reference: "Romans 14:23", role: "direct", priority: 98 },
+  ],
+});
+const romansArgumentEvidence = buildEmetAiTopicEvidence({
+  question: "Explain Romans 14 in context. What is Paul actually discussing?",
+  retrievalPlan: romansArgumentPlan,
+  requireSemanticPlan: true,
+});
+requireReferences(
+  romansArgumentEvidence,
+  Array.from({ length: 23 }, (_, offset) => `Romans 14:${offset + 1}`),
 );
 
 console.log("EMET semantic topic evidence verification passed.");

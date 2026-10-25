@@ -14,6 +14,7 @@ import {
 import { buildEmetAiQuestionContract } from "../app/lib/emet/EmetAiQuestionContract.ts";
 import {
   normalizeEmetAiPlannedReferences,
+  validateEmetAiObligationPlanning,
   validateEmetAiPlanningCompleteness,
   validateEmetAiPlanningNeutrality,
 } from "../app/lib/emet/EmetAiPlanningIntegrity.ts";
@@ -23,6 +24,16 @@ const normalize = (reference) => normalizeEmetAiPlanReference(
   reference,
   emetAiLockedScriptureReferenceExists,
 );
+
+assert.deepEqual(normalize("Exodus 20:1-17"), {
+  status: "resolved",
+  references: Array.from({ length: 17 }, (_, index) => `Exodus 20:${index + 1}`),
+});
+assert.deepEqual(normalize("Deuteronomy 5:1-22"), {
+  status: "resolved",
+  references: Array.from({ length: 22 }, (_, index) => `Deuteronomy 5:${index + 1}`),
+});
+assert.equal(normalize("Exodus 20:1-49").status, "invalid");
 
 assert.deepEqual(normalize("Luke 1:6"), {
   status: "resolved",
@@ -47,6 +58,46 @@ assert.equal(normalize("not a reference").status, "invalid");
 const planningContract = buildEmetAiQuestionContract({
   question: "How should Colossians 2:16-17 be understood in light of the Torah's Sabbath instructions?",
 });
+
+const obligationContract = buildEmetAiQuestionContract({
+  question: "Should Christians keep the Sabbath?",
+});
+const completeObligationPlan = {
+  schemaVersion: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
+  subject: "the applicability of the Sabbath command",
+  analysisMode: "doctrinal-claim",
+  proposition: "What does Scripture establish about the Sabbath command's authority and application?",
+  requiresScopeAnalysis: true,
+  requiresTimeline: false,
+  components: [
+    { id: "instruction", proposition: "What is the original instruction?", category: "command", governingReferences: ["Exodus 20:8"] },
+    { id: "audience", proposition: "Who is addressed and included?", category: "covenant-participants", governingReferences: ["Exodus 31:13"] },
+    { id: "duration", proposition: "What duration or end condition is stated?", category: "duration", governingReferences: ["Exodus 31:16"] },
+    { id: "conditions", proposition: "What role, place, or performance conditions govern application?", category: "application", governingReferences: ["Exodus 20:10"] },
+    { id: "later-witness", proposition: "What does later Scripture explicitly preserve, modify, fulfill, or end?", category: "authority", governingReferences: ["Matthew 5:17"] },
+  ],
+  intent: "application",
+  passages: [],
+  sourcePhrases: [],
+  limitations: [],
+};
+assert.deepEqual(validateEmetAiObligationPlanning(completeObligationPlan, obligationContract), []);
+const incompleteObligationPlan = structuredClone(completeObligationPlan);
+incompleteObligationPlan.components = incompleteObligationPlan.components.filter(
+  (component) => component.category !== "command",
+);
+assert.match(
+  validateEmetAiObligationPlanning(incompleteObligationPlan, obligationContract).join(" "),
+  /original command or governing instruction/i,
+);
+assert.equal(emetAiLockedScriptureReferenceExists("Ecclesiastes 12:13"), true);
+assert.equal(emetAiLockedScriptureReferenceExists("Ecclesiastes 12:14"), true);
+const ecclesiastes = JSON.parse(fs.readFileSync("app/data/bibleiq/canonical/hebrew/Eccl.json", "utf8"));
+const ecclesiastesTerms = ecclesiastes["Eccl:12:13"].sourceTokens;
+assert.ok(ecclesiastesTerms.some((term) => term.strong === "H120" && term.lemma === "אָדָם"));
+assert.ok(ecclesiastesTerms.some((term) => term.strong === "H8104" && term.lemma === "שָׁמַר"));
+assert.ok(ecclesiastesTerms.some((term) => term.strong === "H4687" && term.lemma === "מִצְוָה"));
+assert.equal(ecclesiastesTerms.some((term) => /duty/i.test(term.lemma || "")), false);
 const rawPlan = {
   schemaVersion: EMET_AI_RETRIEVAL_PLAN_SCHEMA,
   subject: "Sabbath",
@@ -225,16 +276,16 @@ assert.deepEqual(explicitResult.requiredReferenceErrors, []);
 assert.deepEqual(explicitResult.recoveredSerializedGoverningReferences, []);
 
 assert.deepEqual(validateEmetAiPlanningNeutrality(rawPlan), []);
-assert.ok(validateEmetAiPlanningNeutrality({
+assert.deepEqual(validateEmetAiPlanningNeutrality({
   ...rawPlan,
   proposition: "Colossians 2:16-17 should be interpreted as preserving the Sabbath rather than abolishing it.",
-}).length > 0);
+}), []);
 
-assert.ok(validateEmetAiPlanningNeutrality({
+assert.deepEqual(validateEmetAiPlanningNeutrality({
   analysisMode: "apparent-contradiction",
   proposition: "The passages agree because they use righteous with different scope.",
   components: [],
-}).length > 0);
+}), []);
 
 assert.deepEqual(validateEmetAiPlanningNeutrality({
   analysisMode: "apparent-contradiction",
@@ -353,7 +404,7 @@ assert.match(providerSource, /rawOutput: response\.output_text/);
 console.log("EMET stabilization Phase 5 deterministic verification passed.");
 console.log("- Locked-corpus reference normalization accepts only unambiguous real passages.");
 console.log("- Invalid optional references are diagnosed and discarded without erasing a sound plan; invalid governing references fail closed.");
-console.log("- Apparent-contradiction plans are rejected when their propositions preselect an interpretation.");
+console.log("- Planning neutrality remains diagnostic while reference and coverage integrity stay fail-closed.");
 console.log("- Explicit verse ranges require reader-visible substantive coverage of every verse.");
 console.log("- Hebrews authorship remains eligible for fast-path probing but safely falls back when evidence is insufficient.");
 console.log("- OT foundations survive retrieval for Sabbath, commandments, covenant, resurrection, Messiah, and prophecy.");

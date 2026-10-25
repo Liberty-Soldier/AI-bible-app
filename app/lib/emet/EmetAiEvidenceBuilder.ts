@@ -398,6 +398,7 @@ export async function buildEmetAiWordEvidence(
       proposition: question.trim(),
       requiresScopeAnalysis: false,
       requiresTimeline: false,
+      commandApplicability: false,
       components: [],
       establishedPropositions: [],
     },

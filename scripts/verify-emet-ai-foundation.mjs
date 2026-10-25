@@ -409,6 +409,15 @@ const requestKey = getEmetAiRequestCacheKey({
   conversation: requestConversation,
   context: null,
 });
+assert.notEqual(
+  requestKey,
+  getEmetAiRequestCacheKey({
+    question: "Were they angels?",
+    conversation: requestConversation,
+    context: null,
+    engineProfile: "fast-two-path",
+  }),
+);
 assert.equal(
   requestKey,
   getEmetAiRequestCacheKey({
@@ -639,6 +648,16 @@ nonRestatementAsRepeal.answer =
   "The New Testament does not directly state that all new covenant believers are obligated to keep the seventh-day Sabbath.";
 assert.equal(
   validateEmetAiAnswer(continuityDoctrinalPacket, nonRestatementAsRepeal).ok,
+  false,
+);
+const categoricalNtCommandAsRepeal = structuredClone(calibratedDoctrinalAnswer);
+categoricalNtCommandAsRepeal.answer =
+  "No—this evidence does not establish a categorical New Testament command requiring Christians to keep the Sabbath.";
+categoricalNtCommandAsRepeal.conclusionSupport = "explicit-statement";
+const sabbathApplicabilityPacket = structuredClone(continuityDoctrinalPacket);
+sabbathApplicabilityPacket.question = "Should Christians keep the Sabbath?";
+assert.equal(
+  validateEmetAiAnswer(sabbathApplicabilityPacket, categoricalNtCommandAsRepeal).ok,
   false,
 );
 const selectiveListAsRepeal = structuredClone(calibratedDoctrinalAnswer);
