@@ -67,6 +67,7 @@ function authoritativeTokens(verse, corpus) {
       lexicalId: lexicalId(token, corpus),
       lemma: normalizedLemma(token.normalizedLemma || token.lemma),
       morphology: normalizedMorphology(token.morph || token.morphology),
+      surface: String(token.surface || token.text || token.word || "").trim(),
     }))
     .filter(
       (token) =>
@@ -74,6 +75,32 @@ function authoritativeTokens(verse, corpus) {
         (token.lexicalId || token.lemma),
     )
     .sort((left, right) => left.order - right.order);
+}
+
+function orderedRuntimeTokens(runtimeBook, verse, corpus, bookSlug) {
+  const runtimeVerse = runtimeBook?.verses?.[
+    `${corpus}:${bookSlug}:${verse?.chapter}:${verse?.verse}`
+  ];
+  if (runtimeVerse?.orderAuthority !== "sourceSlotOrder") return [];
+  return (runtimeVerse.occurrences || [])
+    .filter(
+      (occurrence) =>
+        occurrence?.grammarOnly !== true &&
+        Number.isInteger(occurrence?.sourceSlotOrder) &&
+        occurrence?.lexicalId,
+    )
+    .sort(
+      (left, right) =>
+        Number(left.sourceSlotOrder) - Number(right.sourceSlotOrder) ||
+        Number(left.readingOrder || 0) - Number(right.readingOrder || 0),
+    )
+    .map((occurrence) => ({
+      order: Number(occurrence.sourceSlotOrder),
+      lexicalId: String(occurrence.lexicalId),
+      lemma: normalizedLemma(occurrence.lemma),
+      morphology: normalizedMorphology(occurrence.morphology),
+      surface: String(occurrence.surface || "").trim(),
+    }));
 }
 
 function buildIndex() {
@@ -107,9 +134,42 @@ function buildIndex() {
         sha256: sha256(source.toString("utf8").replace(/\r\n?/g, "\n")),
       });
       const book = JSON.parse(source.toString("utf8"));
+      const firstVerse = Object.values(book)[0];
+      const runtimeBookName = String(
+        firstVerse?.translations?.web?.v2LockedWebAuthority?.readerWebReference ||
+        firstVerse?.book ||
+        path.basename(file, ".json"),
+      ).replace(/\s+\d+:\d+.*$/, "");
+      const runtimeBookSlug = runtimeBookName
+        .toLocaleLowerCase("en-US")
+        .replace(/[^a-z0-9]/g, "");
+      const runtimePath = path.join(
+        root,
+        "public",
+        "data",
+        "bibleiq",
+        "source-breakdown",
+        "runtime",
+        corpus.id,
+        `${runtimeBookSlug}.json`,
+      );
+      const runtimeSource = fs.readFileSync(runtimePath);
+      sourceFiles.push({
+        path: path.relative(root, runtimePath).replaceAll("\\", "/"),
+        sha256: sha256(runtimeSource.toString("utf8").replace(/\r\n?/g, "\n")),
+      });
+      const runtimeBook = JSON.parse(runtimeSource.toString("utf8"));
 
       for (const verse of Object.values(book)) {
-        const tokens = authoritativeTokens(verse, corpus.id);
+        const runtimeTokens = orderedRuntimeTokens(
+          runtimeBook,
+          verse,
+          corpus.id,
+          runtimeBookSlug,
+        );
+        const tokens = runtimeTokens.length
+          ? runtimeTokens
+          : authoritativeTokens(verse, corpus.id);
         if (!tokens.length) continue;
         const readerReference =
           verse?.translations?.web?.v2LockedWebAuthority?.readerWebReference ||
@@ -119,6 +179,7 @@ function buildIndex() {
           tokens.map((token) => token.lexicalId),
           tokens.map((token) => token.lemma),
           tokens.map((token) => token.morphology),
+          tokens.map((token) => token.surface),
         ]);
       }
     }
@@ -146,7 +207,7 @@ function buildIndex() {
     JSON.stringify(sourceFiles.map((file) => [file.path, file.sha256])),
   );
   const body = {
-    schemaVersion: "emet-source-phrase-index@2",
+    schemaVersion: "emet-source-phrase-index@3",
     sourceFingerprint,
     sourceFiles,
     corpora: outputCorpora,

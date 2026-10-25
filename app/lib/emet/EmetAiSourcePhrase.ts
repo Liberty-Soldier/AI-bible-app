@@ -10,10 +10,11 @@ type SourcePhraseEntry = [
   lexicalIds: string[],
   lemmas: string[],
   morphology: string[],
+  surfaceForms: string[],
 ];
 
 type SourcePhraseIndex = {
-  schemaVersion: "emet-source-phrase-index@2";
+  schemaVersion: "emet-source-phrase-index@3";
   sourceFingerprint: string;
   bodyChecksum: string;
   corpora: Record<EmetAiPlannedSourcePhrase["corpus"], SourcePhraseEntry[]>;
@@ -60,24 +61,6 @@ const lexicalDetailsByCorpus = new Map<EmetAiPlannedSourcePhrase["corpus"], Map<
   transliteration: string;
   meaning: string;
 }>>();
-const readerSourceBookCache = new Map<string, {
-  corpus: string;
-  verses: Record<string, { s?: Array<[string, string, string, string, string, string]> }>;
-} | null>();
-const orderedSourceBookCache = new Map<string, {
-  verses?: Record<string, {
-    orderAuthority?: string;
-    occurrences?: Array<{
-      id?: string;
-      sourceSlotOrder?: number;
-      readingOrder?: number;
-      surface?: string;
-      lexicalId?: string;
-      morphology?: string;
-      grammarOnly?: boolean;
-    }>;
-  }>;
-} | null>();
 
 function loadIndex() {
   if (index) return index;
@@ -89,7 +72,7 @@ function loadIndex() {
   );
   const parsed = JSON.parse(fs.readFileSync(filePath, "utf8")) as SourcePhraseIndex;
   if (
-    parsed.schemaVersion !== "emet-source-phrase-index@2" ||
+    parsed.schemaVersion !== "emet-source-phrase-index@3" ||
     !parsed.sourceFingerprint ||
     !parsed.bodyChecksum ||
     !parsed.corpora ||
@@ -242,91 +225,6 @@ export function verifiedSourceTermSequenceAtReference({
   reference: string;
 }) {
   const sourceIndex = loadIndex();
-  const referenceMatch = reference.match(/^(.+)\s+(\d+):(\d+)$/);
-  if (referenceMatch) {
-    const [, book, chapter, verse] = referenceMatch;
-    const bookSlug = book.toLocaleLowerCase("en-US").replace(/[^a-z0-9]/g, "");
-    const cacheKey = `${corpus}:${bookSlug}`;
-    let orderedBook = orderedSourceBookCache.get(cacheKey);
-    if (orderedBook === undefined) {
-      const orderedPath = path.join(
-        process.cwd(), "public", "data", "bibleiq", "source-breakdown", "runtime", corpus, `${bookSlug}.json`,
-      );
-      try {
-        orderedBook = JSON.parse(fs.readFileSync(orderedPath, "utf8"));
-      } catch {
-        orderedBook = null;
-      }
-      orderedSourceBookCache.set(cacheKey, orderedBook ?? null);
-    }
-    const orderedVerse = orderedBook?.verses?.[`${corpus}:${bookSlug}:${chapter}:${verse}`];
-    if (orderedVerse?.orderAuthority === "sourceSlotOrder") {
-      const occurrences = (orderedVerse.occurrences || [])
-        .filter((occurrence) => occurrence.grammarOnly !== true && Number.isInteger(occurrence.sourceSlotOrder))
-        .sort((left, right) =>
-          Number(left.sourceSlotOrder) - Number(right.sourceSlotOrder) ||
-          Number(left.readingOrder || 0) - Number(right.readingOrder || 0)
-        );
-      const seenSlots = new Set<number>();
-      const sequence = occurrences.flatMap((occurrence): VerifiedSourceTermAtReference[] => {
-        const position = Number(occurrence.sourceSlotOrder);
-        if (seenSlots.has(position) || !occurrence.lexicalId) return [];
-        const term = verifiedTerms(corpus, [occurrence.lexicalId])[0];
-        if (!term) return [];
-        seenSlots.add(position);
-        return [{
-          reference,
-          corpus,
-          sourceFingerprint: sourceIndex.sourceFingerprint,
-          morphologySignature: occurrence.morphology || "",
-          lexicalId: term.lexicalId,
-          lemma: term.lemma,
-          transliteration: term.transliteration,
-          meaning: term.meaning,
-          position,
-          surfaceForm: occurrence.surface,
-        }];
-      });
-      if (sequence.length === occurrences.length && sequence.length > 0) return sequence;
-    }
-
-    if (corpus === "hebrew" || corpus === "greek-nt") {
-    let readerBook = readerSourceBookCache.get(book);
-    if (readerBook === undefined) {
-      const readerPath = path.join(
-        process.cwd(), "public", "data", "bibleiq", "word-study-kjv-reader", `${book}.json`,
-      );
-      try {
-        readerBook = JSON.parse(fs.readFileSync(readerPath, "utf8"));
-      } catch {
-        readerBook = null;
-      }
-      readerSourceBookCache.set(book, readerBook ?? null);
-    }
-    const sourceTokens = readerBook?.corpus === corpus
-      ? readerBook.verses?.[`${chapter}:${verse}`]?.s || []
-      : [];
-    if (sourceTokens.length) {
-      return sourceTokens.flatMap((token, position): VerifiedSourceTermAtReference[] => {
-        const [, surfaceForm, lemma, rawLexicalId, , morphologySignature] = token;
-        const term = verifiedTerms(corpus, [rawLexicalId])[0];
-        if (!term || normalizedLemma(term.lemma) !== normalizedLemma(lemma)) return [];
-        return [{
-          reference,
-          corpus,
-          sourceFingerprint: sourceIndex.sourceFingerprint,
-          morphologySignature: morphologySignature || "",
-          lexicalId: term.lexicalId,
-          lemma: term.lemma,
-          transliteration: term.transliteration,
-          meaning: term.meaning,
-          position,
-          surfaceForm,
-        }];
-      });
-    }
-    }
-  }
   const entry = (sourceIndex.corpora[corpus] || []).find(
     (candidate) => candidate[0] === reference,
   );
@@ -345,6 +243,7 @@ export function verifiedSourceTermSequenceAtReference({
       transliteration: term.transliteration,
       meaning: term.meaning,
       position,
+      surfaceForm: entry[4]?.[position] || undefined,
     }];
   });
 }
