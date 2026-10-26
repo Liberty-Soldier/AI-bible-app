@@ -503,13 +503,29 @@ export function retrieveFastScriptureEvidence({
   addParallelTextCandidates(index, candidates);
   let selected = selectBalanced(index, candidates, effectiveLimit);
 
-  // For applicability questions involving Messiah or believers, reserve room for both foundations
-  // and later testimony. This is evidence balance, not a conclusion about continuity or repeal.
-  if (contract.commandApplicability && /\b(?:messiah|christians?|believers?|followers?|new testament)\b/i.test(question)) {
-    const ranked = Array.from(candidates).sort((left, right) => right[1].score - left[1].score);
-    const bestOt = ranked.filter(([id]) => index.verses[id].testament === "ot").slice(0, 6).map(([id]) => id);
-    const bestNt = ranked.filter(([id]) => index.verses[id].testament === "nt").slice(0, 6).map(([id]) => id);
-    selected = Array.from(new Set([...bestOt, ...bestNt, ...selected])).slice(0, effectiveLimit);
+  // For broad Scriptural subjects, preserve the strongest relevant testimony
+  // from earlier and later books. This balances evidence rather than asking
+  // whether a command has been exempted, repealed, or reauthorized.
+  const cumulativeStudy = !contract.requestedCoverage.passages.length &&
+    !contract.requestedLanguages.length &&
+    ["obligation", "doctrinal"].includes(contract.intent);
+  if (cumulativeStudy) {
+    const subjectStems = Array.from(new Set(contentTokens(contract.biblicalEntities.join(" ")).map(stem)));
+    const ranked = Array.from(candidates)
+      .filter(([id, value]) => value.score >= 4 &&
+        (!subjectStems.length || subjectStems.some((term) => index.verses[id].stems.includes(term))))
+      .sort((left, right) => right[1].score - left[1].score);
+    const from = (predicate: (book: string, testament: string) => boolean, n: number) =>
+      ranked.filter(([id]) => predicate(index.verses[id].book, index.verses[id].testament))
+        .slice(0, n).map(([id]) => id);
+    const torah = from((book) => /^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 3);
+    const writingsAndProphets = from((book, testament) =>
+      testament === "ot" && !/^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 3);
+    const gospels = from((book) => /^(?:Matthew|Mark|Luke|John)$/.test(book), 3);
+    const later = from((book, testament) =>
+      testament === "nt" && !/^(?:Matthew|Mark|Luke|John)$/.test(book), 2);
+    selected = Array.from(new Set([...torah, ...writingsAndProphets, ...gospels, ...later, ...selected]))
+      .slice(0, effectiveLimit);
   }
   const exactReferenceRequestForSelection = contract.requestedCoverage.passages.length > 0
     && contract.requestedCoverage.passages.every((passage) => passage.startVerse !== undefined);
@@ -588,9 +604,6 @@ export function retrieveFastScriptureEvidence({
 
   if (contract.temporalRelationship) {
     limitations.push("Temporal questions require bounded chronology-aware evidence discovery.");
-  }
-  if (contract.commandApplicability && !exactReferenceRequest) {
-    limitations.push("Command-applicability questions require bounded governing-evidence discovery.");
   }
   if (contract.intent === "apparent-contradiction") {
     limitations.push("Apparent contradictions require bounded source-context and allusion discovery.");
