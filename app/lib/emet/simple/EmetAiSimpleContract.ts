@@ -164,7 +164,8 @@ function lexicalMeaningSupported(evidenceText: string, claimedMeaning: string) {
 export function usesOmissionAsNonApplicability(answer: string) {
   const omission = /\b(?:acts\s+15|a\s+(?:later\s+)?list|the\s+(?:apostolic\s+)?decree|later scripture|the new testament)\b[^.]{0,220}\b(?:does not|did not|doesn't|didn't|no)\b[^.]{0,160}\b(?:include|mention|list|place|restate|repeat|command|require)/i;
   const resultingNegative = /\b(?:therefore|so|thus|for that reason|on that basis)\b[^.]{0,260}\b(?:not\s+(?:required|commanded|binding|applicable)|need not|exempt|does not (?:apply|bind|require)|do not directly command)/i;
-  return omission.test(answer) && resultingNegative.test(answer);
+  const compressedExemption = /\b(?:acts\s+15|apostles?|apostolic\s+decree|later\s+(?:list|scripture)|new testament)\b[^.]{0,420}\b(?:only\s+(?:the\s+)?(?:listed|following)?\s*(?:necessities|requirements|instructions)|did\s+not\s+(?:include|mention|list|restate|repeat))\b[^.]{0,260}\b(?:not\s+[^.]{0,100}\b(?:requirement|required|binding|obligation)|need\s+not|exempt|does\s+not\s+(?:apply|bind|require))/i;
+  return (omission.test(answer) && resultingNegative.test(answer)) || compressedExemption.test(answer);
 }
 
 export function validateEmetAiSimpleAnswer({

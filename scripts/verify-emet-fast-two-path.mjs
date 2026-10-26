@@ -430,6 +430,9 @@ assert.equal(usesOmissionAsNonApplicability(
   "Acts 15 does not place Sabbath-keeping among the listed requirements. So these passages do not directly command all believers to keep it.",
 ), true);
 assert.equal(usesOmissionAsNonApplicability(
+  "The apostles gave Gentile believers only the listed necessities in Acts 15 and not Sabbath-keeping as a requirement.",
+), true);
+assert.equal(usesOmissionAsNonApplicability(
   "Acts 15 lists several immediate instructions and verse 21 says Moses is read every Sabbath; the passage must be interpreted from what it states.",
 ), false);
 

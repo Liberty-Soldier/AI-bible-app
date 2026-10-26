@@ -78,7 +78,8 @@ const STOP_WORDS = new Set([
   "a", "about", "an", "and", "are", "as", "at", "be", "before", "by", "did", "do", "does",
   "for", "from", "how", "i", "in", "is", "it", "its", "of", "on", "or", "should", "someone",
   "that", "the", "their", "them", "they", "this", "to", "us", "was", "we", "what", "when",
-  "which", "who", "with", "would", "yet",
+  "which", "who", "with", "would", "yet", "modern", "suppose", "supposed", "supposedly",
+  "require", "required", "requirement",
 ]);
 
 // General lexical/concept families only. These add search vocabulary, never references or conclusions.

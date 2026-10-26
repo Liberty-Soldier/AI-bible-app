@@ -10,7 +10,7 @@ export type EmetAiResponseDepth = "concise" | "standard" | "deep";
 
 export const EMET_AI_CONCISE_STYLE_VERSION = "answer-first-concise@1" as const;
 export const EMET_AI_RESPONSE_POLICY_VERSION = "scripture-first-response-policy@3" as const;
-export const EMET_AI_OBLIGATION_POLICY_VERSION = "command-applicability@2" as const;
+export const EMET_AI_OBLIGATION_POLICY_VERSION = "command-applicability@3" as const;
 
 export type EmetAiResponseDesign = {
   depth: EmetAiResponseDepth;

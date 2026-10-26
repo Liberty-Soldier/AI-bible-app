@@ -148,7 +148,8 @@ const STOP_WORDS = new Set([
   "scripture", "should", "teach", "teaches", "tell", "testament", "that", "the",
   "their", "theme", "then", "there", "these", "they", "this", "through", "to",
   "was", "what", "when", "where", "which", "who", "why", "will", "with",
-  "would", "you", "your", "understand",
+  "would", "you", "your", "understand", "modern", "suppose", "supposed",
+  "supposedly", "require", "required", "requirement",
 ]);
 const TOPIC_TERM_GROUPS = [
   ["tabernacle", "tabernacles", "sukkot", "booth", "booths", "shelter", "shelters", "ingathering"],
@@ -1187,15 +1188,23 @@ export function buildEmetAiInitialScriptureEvidence({
         "happen", "happens", "happened",
       ]);
       const frequency = documentFrequency();
-      const rareQuestionTerms = questionTerms(cleanQuestion).filter(
+      const materialQuestionTerms = questionTerms(cleanQuestion);
+      const rareQuestionTerms = materialQuestionTerms.filter(
         (term) =>
           !nonMaterialInitialTerms.has(term) &&
           (frequency.get(term) || Number.POSITIVE_INFINITY) <= 16,
       );
-      const literal = rareQuestionTerms.length
+      const directTopicTerms = DIRECT_TERM_GROUPS
+        .filter((group) => group.some((term) => materialQuestionTerms.includes(term)))
+        .flatMap((group) => group);
+      const initialAnchorTerms = Array.from(new Set([
+        ...rareQuestionTerms,
+        ...directTopicTerms,
+      ])).filter((term) => !nonMaterialInitialTerms.has(term));
+      const literal = initialAnchorTerms.length
         ? literalCandidates(cleanQuestion).filter((candidate) => {
             const verseWords = new Set(tokenizedWords(candidate.record[3]));
-            return rareQuestionTerms.some((term) => verseWords.has(term));
+            return initialAnchorTerms.some((term) => verseWords.has(term));
           })
         : [];
       if (literal.length) {

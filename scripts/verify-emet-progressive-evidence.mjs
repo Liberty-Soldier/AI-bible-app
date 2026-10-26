@@ -9,6 +9,8 @@ const readyCases = [
   ['What Hebrew word is translated "one" in Deuteronomy 6:4, and what does it mean?', "Deuteronomy 6:4"],
   ["What are the Ten Commandments?", "Exodus 20:2"],
   ["Romans 3:10 says none are righteous, yet Genesis 6:9 describes Noah as righteous. How do these passages agree?", "Romans 3:10"],
+  ["Does Scripture require believers to keep the seventh-day Sabbath? Examine the Torah and relevant New Testament passages.", "Exodus 20:8"],
+  ["Is a modern Christian supposed to observe or keep the sabbath?", "Exodus 20:8"],
 ];
 
 const firstPassTimes = [];
@@ -24,7 +26,6 @@ for (const [question, expectedReference] of readyCases) {
 }
 
 for (const question of [
-  "Does Scripture require believers to keep the seventh-day Sabbath? Examine the Torah and relevant New Testament passages.",
   "How does Jeremiah 31 connect to Hebrews 8?",
   "Explain the symbolism in Revelation 12.",
 ]) {
@@ -52,7 +53,7 @@ assert.ok(readerContext.items.every((item) => item.translation === "kjv"));
 firstPassTimes.sort((left, right) => left - right);
 console.log("EMET progressive Scripture evidence verification passed.");
 console.log(`- Ready fixtures: ${readyCases.length}`);
-console.log("- Complex fixtures without immediately decisive passages remained in finding state: 3");
+console.log("- Complex fixtures without immediately decisive passages remained in finding state: 2");
 console.log("- An unresolved lexical mapping exposed only its explicit verse, not an invented lexical identity.");
 console.log(`- Local first-pass median: ${firstPassTimes[Math.floor(firstPassTimes.length / 2)].toFixed(3)} ms`);
 console.log(`- Local first-pass max: ${firstPassTimes.at(-1).toFixed(3)} ms`);
