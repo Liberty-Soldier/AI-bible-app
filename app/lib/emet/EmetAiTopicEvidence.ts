@@ -1175,6 +1175,33 @@ export function buildEmetAiInitialScriptureEvidence({
     } else if (contextual.length) {
       route = "reader-context";
       candidates = contextual;
+    } else {
+      // Progressive Scripture is a reading aid, not a claim that the final
+      // evidence set is complete. A rare, literal match can be safely shown
+      // while deeper discovery continues (for example, “Messiah” in John
+      // 1:41), provided the locked verse itself contains the material term.
+      // Weak/common keyword matches remain hidden behind the finding state.
+      const nonMaterialInitialTerms = new Set([
+        "scripture", "passage", "passages", "testament", "believer",
+        "believers", "christian", "christians", "examine", "relevant",
+        "happen", "happens", "happened",
+      ]);
+      const frequency = documentFrequency();
+      const rareQuestionTerms = questionTerms(cleanQuestion).filter(
+        (term) =>
+          !nonMaterialInitialTerms.has(term) &&
+          (frequency.get(term) || Number.POSITIVE_INFINITY) <= 16,
+      );
+      const literal = rareQuestionTerms.length
+        ? literalCandidates(cleanQuestion).filter((candidate) => {
+            const verseWords = new Set(tokenizedWords(candidate.record[3]));
+            return rareQuestionTerms.some((term) => verseWords.has(term));
+          })
+        : [];
+      if (literal.length) {
+        route = "direct-factual";
+        candidates = literal;
+      }
     }
   }
 
