@@ -8,7 +8,7 @@ import { validateEmetAiDirectAnswerPolarity } from "./EmetAiAnswerNormalization"
 
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first@25" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first-fast@26" as const;
 export const EMET_AI_COVERAGE_VERSION = "deterministic-coverage@1" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
