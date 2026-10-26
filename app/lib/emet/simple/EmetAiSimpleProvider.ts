@@ -107,8 +107,11 @@ export function compactEvidenceForSimpleAnswer(packet: EmetAiEvidencePacket | nu
 function requiredApplicabilityEvidence(packet: EmetAiEvidencePacket | null) {
   if (!packet?.reasoning.commandApplicability) return null;
   const referencesMatching = (pattern: RegExp) => packet.evidence
-    .filter((item) => item.kind === "scripture" && item.reference && pattern.test(item.text))
-    .map((item) => item.reference)
+    .flatMap((item) => (
+      item.kind === "scripture" && typeof item.reference === "string" && pattern.test(item.text)
+        ? [item.reference]
+        : []
+    ))
     .slice(0, 6);
   const sabbathQuestion = /\bsabbath\b/i.test(packet.question);
   const foundationReferences = sabbathQuestion
