@@ -116,7 +116,7 @@ export function normalizeEmetAiSimpleReferences(references: string[]) {
     const reference = raw.trim().replace(/[–—]/g, "-");
     const expanded = expandAnswerReference(reference);
     return expanded.length ? expanded : [reference];
-  }), 24);
+  }), 96);
 }
 
 const ANSWER_RANGE_LIMIT = 48;
@@ -162,10 +162,14 @@ function lexicalMeaningSupported(evidenceText: string, claimedMeaning: string) {
 }
 
 export function usesOmissionAsNonApplicability(answer: string) {
-  const omission = /\b(?:acts\s+15|a\s+(?:later\s+)?list|the\s+(?:apostolic\s+)?decree|later scripture|the new testament)\b[^.]{0,220}\b(?:does not|did not|doesn't|didn't|no)\b[^.]{0,160}\b(?:include|mention|list|place|restate|repeat|command|require)/i;
-  const resultingNegative = /\b(?:therefore|so|thus|for that reason|on that basis)\b[^.]{0,260}\b(?:not\s+(?:required|commanded|binding|applicable)|need not|exempt|does not (?:apply|bind|require)|do not directly command)/i;
-  const compressedExemption = /\b(?:acts\s+15|apostles?|apostolic\s+decree|later\s+(?:list|scripture)|new testament)\b[^.]{0,420}\b(?:only\s+(?:the\s+)?(?:listed|following)?\s*(?:necessities|requirements|instructions)|did\s+not\s+(?:include|mention|list|restate|repeat))\b[^.]{0,260}\b(?:not\s+[^.]{0,100}\b(?:requirement|required|binding|obligation)|need\s+not|exempt|does\s+not\s+(?:apply|bind|require))/i;
-  return (omission.test(answer) && resultingNegative.test(answer)) || compressedExemption.test(answer);
+  const omission = /\b(?:acts\s+(?:15|21)|a\s+(?:later\s+)?list|the\s+(?:apostolic\s+)?decree|later scripture|the new testament)\b[^.]{0,220}\b(?:does not|did not|doesn't|didn't|no)\b[^.]{0,160}\b(?:include|mention|list|place|restate|repeat|command|require)/i;
+  const resultingNegative = /\b(?:therefore|so|thus|for that reason|on that basis)\b[^.]{0,260}\b(?:not\s+(?:required|commanded|binding|applicable)|not\s+shown\s+as\s+(?:being\s+)?required|need not|exempt|does not (?:apply|bind|require)|do not directly command)/i;
+  const compressedExemption = /\b(?:acts\s+(?:15|21)|apostles?|apostolic\s+decree|later\s+(?:list|scripture)|new testament)\b[^.]{0,420}\b(?:only\s+(?:the\s+)?(?:listed|following)?\s*(?:necessities|requirements|instructions)|did\s+not\s+(?:include|mention|list|restate|repeat))\b[^.]{0,260}\b(?:not\s+[^.]{0,100}\b(?:requirement|required|binding|obligation)|need\s+not|exempt|does\s+not\s+(?:apply|bind|require))/i;
+  const unstatedCommandExemption = /\bnot\s+(?:explicitly|directly|plainly|textually)\s+(?:commanded|required)\b[^.]{0,320}\b(?:as\s+(?:a\s+)?binding|as\s+(?:a\s+)?binding\s+(?:covenant\s+)?(?:command|obligation)|not\s+binding|nonbinding|need\s+not|does\s+not\s+(?:apply|bind)|rather\s+than\s+(?:as\s+)?(?:a\s+)?binding|instead\s+of\s+(?:a\s+)?binding)\b/i;
+  const statedGentileExemption = /\b(?:acts\s+(?:15|21)|gentile\s+believers?)\b[^.]{0,260}\b(?:not\s+(?:required|burdened|bound)|were\s+not\s+(?:required|burdened|bound))\b/i;
+  const modernRestatementLimitation = /\b(?:new testament|supplied texts?|texts? here)\b[^.]{0,180}\b(?:does not|do not|doesn't|don't)\b[^.]{0,120}\b(?:direct|explicit|modern)\b[^.]{0,100}\b(?:command|require)/i;
+  const absenceOfRepeal = /\b(?:nothing|no supplied (?:text|passage|evidence)|none of (?:these|the supplied))\b[^.]{0,160}\b(?:repeals?|revokes?|abolishes?)\b|\b(?:texts?|evidence|passages?)\b[^.]{0,100}\b(?:do not|does not)\b[^.]{0,100}\b(?:provide|state|show)\b[^.]{0,100}\b(?:repeal|exemption)\b/i;
+  return (omission.test(answer) && resultingNegative.test(answer)) || compressedExemption.test(answer) || unstatedCommandExemption.test(answer) || statedGentileExemption.test(answer) || modernRestatementLimitation.test(answer) || absenceOfRepeal.test(answer);
 }
 
 export function validateEmetAiSimpleAnswer({
@@ -257,6 +261,40 @@ export function validateEmetAiSimpleAnswer({
     answer: draft.answer,
   });
   if (framingError) errors.push(framingError);
+  if (packet.reasoning.commandApplicability) {
+    const sabbathQuestion = /\bsabbath\b/i.test(packet.question);
+    const cited = new Set(citations.map((citation) => citation.evidenceId));
+    const materiallyUsed = (pattern: RegExp) => packet.evidence.some((item) =>
+      item.kind === "scripture" && pattern.test(item.text) && cited.has(item.id)
+    );
+    const available = (pattern: RegExp) => packet.evidence.some((item) => item.kind === "scripture" && pattern.test(item.text));
+    const foundation = /\bseventh day\b.{0,140}\b(?:rested|blessed|sanctified)\b|\b(?:rested|blessed|sanctified)\b.{0,140}\bseventh day\b/i;
+    const governing = /\b(?:remember|observe|keep)\b.{0,100}\bSabbath\b|\bSabbath\b.{0,100}\b(?:holy|observe|keep)\b/i;
+    const incorporation = /\b(?:grafted|commonwealth of Israel|covenants? of (?:the )?promise|fellow citizens|heirs? according to promise|join themselves to Yahweh)\b/i;
+    const messiahCommand = /\benter into life\b.{0,100}\bkeep the commandments\b/i;
+    const finalCommand = /\b(?:tree of life|faith of Jesus|Jesus.? testimony)\b.{0,140}\bcommandments\b|\bcommandments\b.{0,140}\b(?:tree of life|faith of Jesus|Jesus.? testimony)\b/i;
+    const genesisFoundationIds = sabbathQuestion ? packet.evidence
+      .filter((item) => item.kind === "scripture" && item.reference?.startsWith("Genesis ") && foundation.test(item.text))
+      .map((item) => item.id) : [];
+    if (genesisFoundationIds.length && !genesisFoundationIds.some((id) => cited.has(id))) {
+      errors.push("The applicability answer omitted the supplied Genesis foundation.");
+    }
+    if (sabbathQuestion && available(foundation) && !materiallyUsed(foundation)) {
+      errors.push("The applicability answer omitted the supplied earliest biblical foundation.");
+    }
+    if (sabbathQuestion && available(governing) && !materiallyUsed(governing)) {
+      errors.push("The applicability answer omitted the supplied governing command.");
+    }
+    if (available(incorporation) && !materiallyUsed(incorporation)) {
+      errors.push("The applicability answer omitted supplied Scripture establishing covenant incorporation or shared participation.");
+    }
+    if (available(messiahCommand) && !materiallyUsed(messiahCommand)) {
+      errors.push("The applicability answer omitted supplied Messiah teaching that materially connects commandments with life.");
+    }
+    if (available(finalCommand) && !materiallyUsed(finalCommand)) {
+      errors.push("The applicability answer omitted supplied final-canonical commandment testimony.");
+    }
+  }
   if (packet.reasoning.commandApplicability && usesOmissionAsNonApplicability(draft.answer)) {
     errors.push("The answer treats omission from a later list as evidence of repeal, exemption, or nonapplicability.");
   }

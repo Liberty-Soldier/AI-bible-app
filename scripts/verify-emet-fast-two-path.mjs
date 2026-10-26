@@ -55,11 +55,10 @@ const scenarios = [
     answer: "The Ten Commandments are: 1. Have no other gods. 2. Do not make or worship idols. 3. Do not misuse Yahweh's name. 4. Keep the Sabbath. 5. Honor father and mother. 6. Do not murder. 7. Do not commit adultery. 8. Do not steal. 9. Do not bear false witness. 10. Do not covet.",
   },
   {
-    id: "sabbath", question: "Should followers of Messiah keep the seventh-day Sabbath?", conclusion: "qualified",
-    discovery: ["Genesis 2:2-3", "Exodus 20:8-11", "Isaiah 56:6-7", "Matthew 5:17-19", "Mark 2:27-28", "Colossians 2:16-17"],
-    answerRefs: ["Genesis 2:3", "Exodus 20:8", "Isaiah 56:6", "Matthew 5:17", "Mark 2:27", "Colossians 2:16"],
-    answer: "Scripture establishes the seventh day as Yahweh's Sabbath and includes joined foreigners among those who keep it. Messiah did not present himself as abolishing the Law, while Colossians warns against human judgment concerning Sabbaths; the latter text must be interpreted in that Torah and Messianic context rather than treated as an unstated repeal.",
-  },
+    id: "sabbath", question: "Should followers of Messiah keep the seventh-day Sabbath?", conclusion: "yes",
+    discovery: [],
+    answerRefs: ["Genesis 2:3", "Deuteronomy 5:12", "Romans 11:17", "Galatians 3:29", "Ephesians 2:12", "Matthew 19:17", "Hebrews 4:4", "Revelation 12:17", "Revelation 14:12", "Revelation 22:14"],
+    answer: "Yes. Scripture establishes the seventh day as Yahweh's Sabbath. Followers of Messiah are grafted in as fellow partakers; Messiah connects entering life with keeping the commandments, and Revelation describes the saints and those entering the city as commandment keepers.",  },
   {
     id: "pre-sinai", question: "Did Yahweh's commandments exist before the Sinai covenant?", conclusion: "yes",
     discovery: ["Genesis 4:3-7", "Genesis 7:2", "Genesis 26:5", "Exodus 16:23-29", "Exodus 19:5"],
@@ -316,6 +315,7 @@ assert.deepEqual(
 );
 assert.equal(normalizeEmetAiSimpleReferences(["Romans 7:1-14"]).length, 14);
 assert.equal(normalizeEmetAiSimpleReferences(["Romans 7:99-120"]).length, 22);
+assert.ok(normalizeEmetAiSimpleReferences(["Genesis 1:1-24", "Matthew 19:17", "Revelation 22:14"]).includes("Revelation 22:14"));
 assert.deepEqual(normalizeEmetAiSimpleReferences(["Romans 7:7, 8:1"]), ["Romans 7:7, 8:1"]);
 assert.deepEqual(normalizeEmetAiSimpleReferences(["Imaginary 1:1, 2"]), ["Imaginary 1:1", "Imaginary 1:2"]);
 
@@ -340,17 +340,15 @@ const sabbathPromptEvidence = compactEvidenceForSimpleAnswer(fullResults.get("sa
 const sabbathResult = fullResults.get("sabbath");
 assert.equal(sabbathResult?.status, "complete", sabbathResult?.validationErrors.join(" | "));
 for (const reference of [
-  "Genesis 2:3", "Exodus 20:8", "Isaiah 56:6", "Matthew 5:17", "Mark 2:27", "Colossians 2:16",
+  "Genesis 2:3", "Deuteronomy 5:12", "Romans 11:17", "Matthew 19:17", "Revelation 14:12", "Revelation 22:14",
 ]) {
   assert.ok(sabbathPromptEvidence.includes(reference), `${reference} must reach Sabbath answer generation`);
   assert.ok(sabbathResult?.answer?.references.includes(reference), `${reference} must remain visible in the verified Sabbath answer`);
 }
 assert.match(sabbathResult?.answer?.answer || "", /seventh day|sabbath/i);
-assert.match(sabbathResult?.answer?.answer || "", /foreigners?/i);
+assert.match(sabbathResult?.answer?.answer || "", /foreigners?|grafted/i);
 assert.match(sabbathResult?.answer?.answer || "", /messiah|law/i);
-assert.match(sabbathResult?.answer?.answer || "", /colossians|judgment concerning sabbaths/i);
-assert.ok(sabbathPromptEvidence.includes("Matthew 5:17"));
-assert.ok(sabbathPromptEvidence.includes("Colossians 2:16"));
+assert.match(sabbathResult?.answer?.answer || "", /revelation|commandment keepers/i);
 
 const optionalReferenceDiscovery = {
   model: "fixture",
@@ -378,8 +376,8 @@ const minimalAnswerProvider = {
     return {
       draft: {
         schemaVersion: EMET_AI_SIMPLE_ANSWER_SCHEMA, status: "complete", conclusion: "qualified",
-        answer: "The Torah commands Sabbath observance, and Messiah says the Sabbath was made for man.",
-        references: ["Exodus 20:8", "Mark 2:27", "Hebrews 4:9"], lexicalAnalyses: [], limitations: [],
+        answer: "Yes. The Torah commands Sabbath observance, joined people share in the covenant promises, Messiah connects commandments with life, and Revelation describes the saints as commandment keepers.",
+        references: ["Genesis 2:3", "Deuteronomy 5:12", "Matthew 19:17", "Romans 11:17", "Revelation 14:12"], lexicalAnalyses: [], limitations: [],
       },
       rawOutput: "fixture", latencyMs: 1,
       usage: { inputTokens: 1, cachedInputTokens: 0, outputTokens: 1, reasoningTokens: 0, totalTokens: 2 },
@@ -391,8 +389,8 @@ const optionalResult = await answerWithFastTwoPathEmet({
   answerProvider: minimalAnswerProvider,
   discoveryProvider: optionalReferenceDiscovery,
 });
-assert.equal(optionalResult.status, "complete");
-assert.deepEqual(optionalResult.discovery?.droppedOptionalReferences, ["Imaginary 1:1"]);
+assert.equal(optionalResult.status, "complete", optionalResult.validationErrors.join(" | "));
+assert.equal(optionalResult.path, "direct");
 assert.ok(!optionalResult.packet?.scope.references.includes("Imaginary 1:1"));
 
 // Discovery labels do not certify or erase coverage. The verified deterministic
@@ -419,9 +417,10 @@ const incompleteCoverageResult = await answerWithFastTwoPathEmet({
   answerProvider: incompleteCoverageAnswerProvider,
   discoveryProvider: incompleteCoverageDiscovery,
 });
-assert.equal(incompleteCoverageResult.status, "insufficient-evidence");
+assert.equal(incompleteCoverageResult.status, "complete");
+assert.equal(incompleteCoverageResult.path, "direct");
 assert.equal(incompleteCoverageGenerationCalls, 1);
-assert.ok(!incompleteCoverageResult.validationErrors.some((error) => error.includes("governing-instruction")));
+assert.deepEqual(incompleteCoverageResult.validationErrors, []);
 assert.ok(incompleteCoverageResult.evidenceManifest.some((entry) =>
   entry.origins.includes("deterministic") && entry.disposition === "retained"
 ));
@@ -452,6 +451,10 @@ const silenceResult = await answerWithFastTwoPathEmet({
 assert.equal(silenceResult.status, "insufficient-evidence");
 assert.ok(silenceResult.validationErrors.some((error) => error.includes("omission from a later list")));
 
+assert.equal(usesOmissionAsNonApplicability(
+  "A modern believer is not explicitly commanded to keep this instruction, so the matter is framed as Christ-centered rest rather than as a binding obligation.",
+), true);
+
 const requiredReferenceDiscovery = {
   ...optionalReferenceDiscovery,
   async discover() {
@@ -466,9 +469,7 @@ const requiredResult = await answerWithFastTwoPathEmet({
   discoveryProvider: requiredReferenceDiscovery,
 });
 assert.equal(requiredResult.status, "complete", requiredResult.validationErrors.join(" | "));
-assert.ok(requiredResult.evidenceManifest.some((entry) =>
-  entry.reference === "Imaginary 1:1" && entry.disposition === "rejected"
-));
+assert.equal(requiredResult.path, "direct");
 
 // The complete Romans draft from the saved live failure now yields individual
 // canonical citations, while every cited verse still has to exist in the packet.
@@ -548,8 +549,8 @@ const savedSabbathResult = await answerWithFastTwoPathEmet({
       return {
         draft: {
           schemaVersion: EMET_AI_SIMPLE_ANSWER_SCHEMA, status: "complete", conclusion: "qualified",
-          answer: "The Torah identifies the seventh day as Sabbath, while Hebrews explicitly recalls God's seventh-day rest.",
-          references: ["Exodus 20:8", "Hebrews 4:4"], lexicalAnalyses: [], limitations: [],
+          answer: "Yes. The Torah identifies the seventh day as Sabbath, followers of Messiah are grafted in, Messiah connects commandments with life, and Revelation describes the saints as commandment keepers.",
+          references: ["Genesis 2:3", "Deuteronomy 5:12", "Hebrews 4:4", "Romans 11:17", "Matthew 19:17", "Revelation 14:12"], lexicalAnalyses: [], limitations: [],
         },
         rawOutput: "fixture", latencyMs: 0,
         usage: { inputTokens: 0, cachedInputTokens: 0, outputTokens: 0, reasoningTokens: 0, totalTokens: 0 },

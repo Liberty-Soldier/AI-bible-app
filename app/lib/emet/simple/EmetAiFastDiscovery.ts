@@ -10,8 +10,8 @@ export const EMET_AI_FAST_DISCOVERY_SCHEMA = "emet-ai-fast-discovery@1" as const
 
 export const EMET_AI_FAST_COVERAGE_DIMENSIONS = [
   "explicit-request", "foundation", "governing-instruction", "audience-scope",
-  "duration-conditions", "prophetic-testimony", "messiah-teaching",
-  "apostolic-testimony", "timing-sequence", "role-circumstance",
+  "duration-conditions", "covenant-membership", "prophetic-testimony", "messiah-teaching",
+  "apostolic-testimony", "final-canonical-testimony", "timing-sequence", "role-circumstance",
   "source-language-context", "immediate-context",
 ] as const;
 export type EmetAiFastCoverageDimension = typeof EMET_AI_FAST_COVERAGE_DIMENSIONS[number];
@@ -110,7 +110,7 @@ Return the smallest sufficient set of material Bible references needed to answer
 
 The input may contain structural evidenceNeeds selected from the canonical question contract. Use them only as search guidance. Echo them in requiredCoverage and tag references for diagnostics, but these model-produced labels do not certify evidence completeness and do not control which verified passages survive assembly. Prefer direct governing texts over repeated historical examples. Apply the same discipline to timing, covenants, prophecy, righteousness, source-language questions, and role-specific instructions. Do not use a historical practice merely as a substitute for governing teaching.
 
-Retrieve audience, role, circumstances, duration, timing, and nearby context when the actual question requires them. For command-applicability questions, identify the governing instruction and its stated recipients and conditions; include later passages only when they materially address the same command or are needed to answer the user's question. Do not routinely search for counterexamples, repeal, exemptions, contradictions, or opposing positions. Include such evidence only when the user asks about it or Scripture explicitly raises a material issue. Do not assume continuity, repeal, fulfillment, or a doctrinal conclusion. Silence, omission from a later list, or lack of New Testament restatement is not evidence of repeal or exemption. Do not write an essay or conclusion.
+Retrieve audience, role, circumstances, duration, timing, and nearby context when the actual question requires them. A stated audience identifies the original recipients; it is not proof that everyone else is exempt. For command-applicability questions, identify the governing instruction and its stated recipients and conditions. Also retrieve passages that establish whether the people named in the question are joined, grafted, naturalized, or otherwise included in the covenant people and promises under stated Scriptural conditions. Distinguish a person becoming part of the covenant people from a command changing scope. Tag covenant-membership only for a passage that expressly describes joining, grafting in, becoming fellow citizens or heirs, or partaking in the covenant people and promises; merely naming the original recipients does not satisfy it. When the question asks whether someone should keep a command, retrieve Messiah's direct instruction connecting commandments with life when materially applicable, plus the Bible's concluding testimony about commandment-keeping, life, judgment, or the promised inheritance; include other later passages only when they materially address the same command or are needed to answer the user's question. Do not routinely search for counterexamples, repeal, exemptions, contradictions, or opposing positions. Include such evidence only when the user asks about it or Scripture explicitly raises a material issue. Do not assume continuity, repeal, fulfillment, or a doctrinal conclusion. For cumulative questions, begin with the earliest materially relevant biblical foundation, then retrieve the governing instruction, its stated audience and conditions, Messiah's relevant teaching, and material later Scripture. Silence, omission from a later list, or lack of New Testament restatement is not evidence of repeal or exemption. Do not write an essay or conclusion.
 
 Candidate passages are verified but may be incomplete or noisy. You may omit them. Every reference you return will be independently resolved against a locked Bible corpus. Never invent a reference or lexical identity. Describe what a passage actually states; do not characterize an omission as an exemption, assign a named subject to a passage that does not name it, or label a passage disputed merely because interpreters disagree. Mark a reference required only when the answer materially depends on it; otherwise mark it supporting.
 
@@ -188,7 +188,7 @@ export function createEmetAiFastDiscoveryProvider({
         model,
         store: false,
         reasoning: { effort: "none" },
-        max_output_tokens: 900,
+        max_output_tokens: 1_200,
         input: [
           { role: "system", content: EMET_AI_FAST_DISCOVERY_INSTRUCTION },
           { role: "user", content: JSON.stringify(inputObject) },

@@ -43,7 +43,7 @@ export function assembleFastTwoPathEvidence({
   initialLexicalTerms,
   discovery = null,
   deterministicLexicalLookups = [],
-  passageBudget = 36,
+  passageBudget = 64,
 }: {
   contract: EmetAiQuestionContract;
   initialPassages: FastScripturePassage[];
@@ -75,11 +75,26 @@ export function assembleFastTwoPathEvidence({
       .filter((candidate) => candidate > 0)
       .map((candidate) => `${match[1]}:${candidate}`);
   }));
-  const initialCore = initialPassages.slice(0, 6);
+  const applicabilitySubjectTerms = contract.commandApplicability
+    ? unique([
+        ...contract.biblicalEntities
+          .filter((entity) => !/^(?:Messiah|Christian|believer|follower)$/i.test(entity))
+          .flatMap((entity) => entity.toLocaleLowerCase("en-US").match(/[a-z0-9]+/g) || []),
+        ...(contract.question.toLocaleLowerCase("en-US").match(/[a-z0-9]+/g) || [])
+          .filter((term) => term.length > 4 && !/^(?:modern|christian|supposed|observe|should|followers|messiah)$/.test(term)),
+      ])
+    : [];
+  const subjectRelevantInitial = applicabilitySubjectTerms.length
+    ? initialPassages.filter((passage) => {
+        const text = passage.text.toLocaleLowerCase("en-US");
+        return applicabilitySubjectTerms.some((term) => text.includes(term));
+      })
+    : initialPassages;
+  const initialCore = subjectRelevantInitial.slice(0, 6);
   const needsCrossTestament = contract.commandApplicability &&
     /\b(?:messiah|christians?|believers?|followers?|new testament|new covenant)\b/i.test(contract.question);
   const firstNt = needsCrossTestament
-    ? initialPassages.find((passage) => /^(?:Matthew|Mark|Luke|John|Acts|Romans|[12] Corinthians|Galatians|Ephesians|Philippians|Colossians|[12] Thessalonians|[12] Timothy|Titus|Philemon|Hebrews|James|[12] Peter|[123] John|Jude|Revelation)\b/.test(passage.reference))
+    ? subjectRelevantInitial.find((passage) => /^(?:Matthew|Mark|Luke|John|Acts|Romans|[12] Corinthians|Galatians|Ephesians|Philippians|Colossians|[12] Thessalonians|[12] Timothy|Titus|Philemon|Hebrews|James|[12] Peter|[123] John|Jude|Revelation)\b/.test(passage.reference))
     : undefined;
   const messiahTopicTestimony = needsCrossTestament
     ? retrieveLockedMessiahTopicTestimony({
@@ -90,6 +105,7 @@ export function assembleFastTwoPathEvidence({
   const selectedInitial = discovery
     ? Array.from(new Map([
         ...initialCore,
+        ...(contract.commandApplicability ? initialPassages : []),
         ...chapterAnchors,
         ...messiahTopicTestimony,
         ...(firstNt ? [firstNt] : []),
@@ -98,6 +114,24 @@ export function assembleFastTwoPathEvidence({
   const initialByReference = new Map(selectedInitial.map((passage) => [passage.reference, passage]));
 
   const discovered = (discovery?.references || []).flatMap((item) => {
+    if (
+      contract.commandApplicability &&
+      (
+        /(?:\bwithout\b.{0,40}\b(?:including|listing|naming)\b|\bnot\s+(?:among|included|listed|named)\b|\bdoes not\s+(?:include|list|name)\b|\bno\b.{0,50}\b(?:requirement|instruction|obligation)\b|\b(?:not|without|omit(?:s|ted)?|absence)\b.{0,80}\b(?:requirement|command|instruction|obligation|sabbath)\b)/i.test(item.relevance) ||
+        (/(?:\b(?:lists?|listed|specified)\b.{0,80}\b(?:requirements?|abstentions?|obligations?|instructions?)\b|\b(?:written\s+decision|items?\s+named)\b)/i.test(item.relevance) &&
+          applicabilitySubjectTerms.length > 0 &&
+          !applicabilitySubjectTerms.some((term) => item.relevance.toLocaleLowerCase("en-US").includes(term)))
+      )
+    ) {
+      manifest.push({
+        reference: item.reference,
+        origins: ["discovery"],
+        priority: 3,
+        disposition: "rejected",
+        reason: "Discovery relevance relied on omission from a later list.",
+      });
+      return [];
+    }
     const expanded = expandPlannedReferences(item.reference);
     if (!expanded.length) {
       manifest.push({
@@ -162,7 +196,8 @@ export function assembleFastTwoPathEvidence({
     if (chapterContextReferences.includes(reference)) origins.push("explicit");
     if (initialByReference.has(reference)) origins.push("deterministic");
     if (discovered.some((item) => item.reference === reference)) origins.push("discovery");
-    const priority = origins.includes("explicit") ? 1 : origins.includes("deterministic") ? 2 : 3;
+    const requiredDiscovery = discovered.some((item) => item.reference === reference && item.required);
+    const priority = origins.includes("explicit") ? 1 : origins.includes("deterministic") || requiredDiscovery ? 2 : 3;
     return [{ passage, origins, priority }];
   });
   const baseSet = new Set(baseEntries.map((entry) => entry.passage.reference));
@@ -176,7 +211,27 @@ export function assembleFastTwoPathEvidence({
   if (requiredEntries.length > passageBudget) {
     errors.push(`The ${passageBudget}-passage evidence budget cannot preserve every material base reference.`);
   }
-  const retained = ordered.slice(0, passageBudget);
+  const retained: typeof ordered = [];
+  for (const priority of [1, 2, 3, 5]) {
+    const entries = ordered.filter((entry) => entry.priority === priority);
+    const byChapter = new Map<string, typeof entries>();
+    for (const entry of entries) {
+      const chapter = entry.passage.reference.replace(/:\d+$/, "");
+      byChapter.set(chapter, [...(byChapter.get(chapter) || []), entry]);
+    }
+    const groups = Array.from(byChapter.values());
+    for (let verseIndex = 0; retained.length < passageBudget; verseIndex += 1) {
+      let added = false;
+      for (const group of groups) {
+        const entry = group[verseIndex];
+        if (!entry || retained.includes(entry)) continue;
+        retained.push(entry);
+        added = true;
+        if (retained.length >= passageBudget) break;
+      }
+      if (!added) break;
+    }
+  }
   for (const entry of ordered) {
     const kept = retained.includes(entry);
     manifest.push({
