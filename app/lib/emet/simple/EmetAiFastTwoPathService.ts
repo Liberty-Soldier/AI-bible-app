@@ -159,12 +159,9 @@ function buildFastCoveragePlan(
   if (contract.temporalRelationship) required.add("timing-sequence");
   if (contract.commandApplicability) {
     required.add("governing-instruction");
-    if (contract.commandApplicabilityKind === "audience" || contract.commandApplicabilityKind === "audience-and-authority-change") {
-      required.add("audience-scope");
-    }
-    if (contract.commandApplicabilityKind === "authority-change" || contract.commandApplicabilityKind === "audience-and-authority-change") {
-      required.add("duration-conditions");
-    }
+    // Avoid turning ordinary command questions into automatic exemption inquiries.
+    // The discovery model can still obtain audience or duration details when the
+    // actual text or question needs them.
     if (/\b(?:priest|king|servant|slave|parent|child|husband|wife|levite)\w*\b/i.test(question)) {
       required.add("role-circumstance");
     }
