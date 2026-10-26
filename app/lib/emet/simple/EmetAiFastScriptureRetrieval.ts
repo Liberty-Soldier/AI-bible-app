@@ -301,6 +301,31 @@ function addCorpusMatches(index: ScriptureIndex, terms: string[], candidates: Ma
   }
 }
 
+function addCommandApplicabilitySupport(
+  index: ScriptureIndex,
+  candidates: Map<number, { score: number; reasons: Set<string>; explicit: boolean }>,
+  question: string,
+) {
+  const patterns: Array<[string, RegExp]> = [
+    ["foundation", /\bseventh day\b.{0,140}\b(?:rested|blessed|sanctified)\b|\b(?:rested|blessed|sanctified)\b.{0,140}\bseventh day\b/i],
+    ["governing", /\b(?:remember|observe|keep)\b.{0,100}\bSabbath\b|\bSabbath\b.{0,100}\b(?:holy|observe|keep)\b/i],
+    ["membership-grafted", /\bgrafted\b/i],
+    ["membership-commonwealth", /\bcommonwealth of israel\b/i],
+    ["membership-covenant", /\bcovenants? of (?:the )?promise\b/i],
+    ["membership-citizens", /\bfellow citizens\b/i],
+    ["membership-heirs", /\bheirs? according to promise\b/i],
+    ["messiah-life", /\benter into life\b.{0,80}\bkeep the commandments\b/i],
+    ["final-tree", /\bcommandments\b.{0,100}\btree of life\b|\btree of life\b.{0,100}\bcommandments\b/i],
+    ["final-faith", /\bkeep (?:god’s|god's|the) commandments\b.{0,100}\b(?:faith of jesus|jesus.? testimony)\b/i],
+  ];
+  const includeSabbathEvidence = /\bsabbath\b/i.test(question);
+  for (const [id, verse] of index.verses.entries()) {
+    for (const [category, pattern] of patterns) {
+      if (!includeSabbathEvidence && ["foundation", "governing"].includes(category)) continue;
+      if (pattern.test(verse.text)) addCandidate(candidates, id, 32, `command-applicability-support:${category}`);
+    }
+  }
+}
 function addPhraseMatches(index: ScriptureIndex, question: string, candidates: Map<number, { score: number; reasons: Set<string>; explicit: boolean }>) {
   const normalizedQuestion = normalizeText(question);
   const questionWords = normalizedQuestion.split(" ").filter((word) => word.length > 2 && !STOP_WORDS.has(word));
@@ -483,7 +508,11 @@ export function retrieveFastScriptureEvidence({
   const totalStartedAt = performance.now();
   const { index, loadMs } = loadScriptureIndex();
   const contract = buildEmetAiQuestionContract({ question, conversation });
-  const effectiveLimit = contract.intent === "enumeration" ? Math.max(maxPassages, 22) : maxPassages;
+  const effectiveLimit = contract.intent === "enumeration"
+    ? Math.max(maxPassages, 22)
+    : contract.commandApplicability
+      ? Math.max(maxPassages, 24)
+      : maxPassages;
   const conversationText = conversation?.recentExchanges.slice(-2).map((item) => item.question).join(" ") || "";
   const queryTokens = contentTokens(question);
   const expandedTerms = expandTerms(queryTokens);
@@ -494,6 +523,9 @@ export function retrieveFastScriptureEvidence({
   addCorpusMatches(index, expandedTerms.filter((term) => !queryTokens.includes(term)), candidates, 0.55);
   if (conversationText) addCorpusMatches(index, expandTerms(contentTokens(conversationText)), candidates, 0.38);
   addPhraseMatches(index, `${question} ${conversationText}`, candidates);
+  if (contract.commandApplicability && /\b(?:christians?|believers?|followers?|messiah|gentiles?)\b/i.test(question)) {
+    addCommandApplicabilitySupport(index, candidates, question);
+  }
   addExplicitChapterConnections(index, contract.requestedCoverage.passages, candidates);
   addNamedEnumerationContext(index, question, candidates);
   addParallelTextCandidates(index, candidates);
@@ -515,16 +547,59 @@ export function retrieveFastScriptureEvidence({
       .filter(([id, value]) => value.score >= 4 &&
         (!subjectStems.length || subjectStems.some((term) => index.verses[id].stems.includes(term))))
       .sort((left, right) => right[1].score - left[1].score);
-    const from = (predicate: (book: string, testament: string) => boolean, n: number) =>
-      ranked.filter(([id]) => predicate(index.verses[id].book, index.verses[id].testament))
-        .slice(0, n).map(([id]) => id);
-    const torah = from((book) => /^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 3);
+    const from = (predicate: (book: string, testament: string) => boolean, n: number) => {
+      const seenChapters = new Set<string>();
+      return ranked.filter(([id]) => {
+        const verse = index.verses[id];
+        if (!predicate(verse.book, verse.testament)) return false;
+        const chapter = `${verse.book} ${verse.chapter}`;
+        if (seenChapters.has(chapter)) return false;
+        seenChapters.add(chapter);
+        return true;
+      }).slice(0, n).map(([id]) => id);
+    };
+    const applicabilitySupport = contract.commandApplicability
+      ? (() => {
+          const entries = Array.from(candidates)
+            .filter(([, value]) => Array.from(value.reasons).some((reason) => reason.startsWith("command-applicability-support:")))
+            .sort((left, right) => right[1].score - left[1].score);
+          const categories = Array.from(new Set(entries.flatMap(([, value]) =>
+            Array.from(value.reasons).filter((reason) => reason.startsWith("command-applicability-support:"))
+          )));
+          const selectedSupport: number[] = [];
+          const seenChapters = new Set<string>();
+          for (const category of categories) {
+            const categoryEntries = entries.filter(([, value]) => value.reasons.has(category));
+            if (category.endsWith(":foundation")) categoryEntries.sort((left, right) => left[0] - right[0]);
+            const match = categoryEntries.find(([id]) => {
+              const verse = index.verses[id];
+              return !seenChapters.has(`${verse.book} ${verse.chapter}`);
+            });
+            if (!match) continue;
+            const [id] = match;
+            selectedSupport.push(id);
+            const verse = index.verses[id];
+            seenChapters.add(`${verse.book} ${verse.chapter}`);
+          }
+          for (const [id] of entries) {
+            if (selectedSupport.includes(id)) continue;
+            selectedSupport.push(id);
+            if (selectedSupport.length >= 16) break;
+          }
+          return selectedSupport.slice(0, 16);
+        })()
+      : [];    const torah = from((book) => /^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 2);
     const writingsAndProphets = from((book, testament) =>
-      testament === "ot" && !/^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 3);
-    const gospels = from((book) => /^(?:Matthew|Mark|Luke|John)$/.test(book), 3);
+      testament === "ot" && !/^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 2);
+    const gospels = from((book) => /^(?:Matthew|Mark|Luke|John)$/.test(book), 2);
     const later = from((book, testament) =>
       testament === "nt" && !/^(?:Matthew|Mark|Luke|John)$/.test(book), 2);
-    selected = Array.from(new Set([...torah, ...writingsAndProphets, ...gospels, ...later, ...selected]))
+    const bestNt = Array.from(candidates)
+      .filter(([id]) => index.verses[id].testament === "nt")
+      .sort((left, right) => right[1].score - left[1].score)
+      .slice(0, 6)
+      .map(([id]) => id);
+    selected = Array.from(new Set([...torah, ...writingsAndProphets, ...gospels, ...later, ...applicabilitySupport, ...bestNt, ...selected]))
       .slice(0, effectiveLimit);
   }
   const exactReferenceRequestForSelection = contract.requestedCoverage.passages.length > 0
@@ -602,6 +677,17 @@ export function retrieveFastScriptureEvidence({
     return directQuestionTerms.length >= 2 && directQuestionTerms.filter((term) => passageTerms.has(term)).length >= Math.min(3, directQuestionTerms.length);
   });
 
+  const completeApplicabilityEvidence = contract.commandApplicability && [
+    /\bseventh day\b.{0,140}\b(?:rested|blessed|sanctified)\b|\b(?:rested|blessed|sanctified)\b.{0,140}\bseventh day\b/i,
+    /\b(?:remember|observe|keep)\b.{0,100}\bSabbath\b|\bSabbath\b.{0,100}\b(?:holy|observe|keep)\b/i,
+    /\b(?:remember|observe|keep)\b.{0,100}\bSabbath\b|\bSabbath\b.{0,100}\b(?:holy|observe|keep)\b/i,
+    /\b(?:grafted|commonwealth of Israel|covenants? of (?:the )?promise|fellow citizens|heirs? according to promise|join themselves to Yahweh)\b/i,
+    /\benter into life\b.{0,100}\bkeep the commandments\b/i,
+    /\b(?:tree of life|faith of Jesus|Jesus.? testimony)\b.{0,140}\bcommandments\b|\bcommandments\b.{0,140}\b(?:tree of life|faith of Jesus|Jesus.? testimony)\b/i,
+  ].every((pattern) => passages.some((passage) => pattern.test(passage.text)));
+  if (cumulativeStudy && !exactReferenceRequest && !completeApplicabilityEvidence) {
+    limitations.push("Broad command and doctrinal questions require bounded cumulative Scripture discovery.");
+  }
   if (contract.temporalRelationship) {
     limitations.push("Temporal questions require bounded chronology-aware evidence discovery.");
   }

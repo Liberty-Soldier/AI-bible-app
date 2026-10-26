@@ -158,7 +158,16 @@ function buildFastCoveragePlan(
   if (contract.requestedLanguages.length) required.add("source-language-context");
   if (contract.temporalRelationship) required.add("timing-sequence");
   if (contract.commandApplicability) {
+    required.add("foundation");
     required.add("governing-instruction");
+    required.add("audience-scope");
+    required.add("duration-conditions");
+    if (/\b(?:christians?|believers?|followers?|messiah|gentiles?)\b/i.test(question)) {
+      required.add("covenant-membership");
+      required.add("messiah-teaching");
+      required.add("apostolic-testimony");
+      required.add("final-canonical-testimony");
+    }
     // Avoid turning ordinary command questions into automatic exemption inquiries.
     // The discovery model can still obtain audience or duration details when the
     // actual text or question needs them.

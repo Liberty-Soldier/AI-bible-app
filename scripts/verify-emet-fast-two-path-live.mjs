@@ -48,16 +48,30 @@ const acceptanceScenarios = [
     question: "Does Paul teach that Yahweh's law was abolished under the new covenant? Explain Romans 7 in light of Jeremiah 31:31–34 and Matthew 5:17–19.",
   },
 ];
+const universalScenarios = [
+  { id: "sabbath-exact", question: "Is a modern Christian supposed to observe or keep the Sabbath?" },
+  { id: "prophecy", question: "What does Jeremiah 31:31–34 prophesy about the new covenant, and how does Hebrews 8 develop it?" },
+  { id: "history", question: "Why did Josiah tear his clothes when the Book of the Law was read to him?" },
+  { id: "messiah-identity", question: "What does Scripture establish about who the Messiah is?" },
+  { id: "salvation", question: "According to Scripture, how is a person saved?" },
+  { id: "passage-explanation", question: "What does Psalm 1 teach?" },
+];
+const universalSix = process.argv.includes("--universal-six");
 const finalAcceptance = process.argv.includes("--final-acceptance");
 const finalThree = process.argv.includes("--final-three");
-const scenarios = finalAcceptance
+const requestedId = process.argv.find((value) => value.startsWith("--only="))?.slice(7) || "";
+const scenarios = requestedId
+  ? universalScenarios.filter((scenario) => scenario.id === requestedId)
+  : universalSix
+  ? universalScenarios
+  : finalAcceptance
   ? acceptanceScenarios
   : finalThree
   ? allScenarios.filter((scenario) => ["sabbath", "resurrection-follow-up", "hebrew-one"].includes(scenario.id))
   : process.argv.includes("--failed-four")
     ? allScenarios.filter((scenario) => ["sabbath", "pre-sinai", "hebrew-one", "resurrection-follow-up"].includes(scenario.id))
     : allScenarios;
-const maximumCalls = finalAcceptance ? 6 : finalThree ? 5 : process.argv.includes("--failed-four") ? 7 : 9;
+const maximumCalls = universalSix ? 12 : finalAcceptance ? 6 : finalThree ? 5 : process.argv.includes("--failed-four") ? 7 : 9;
 
 const model = "gpt-5.4-mini";
 const answerProvider = createEmetAiSimpleOpenAiProvider({ model, reasoningEffort: "none", verifiedEvidenceOnly: true });
@@ -65,7 +79,7 @@ const discoveryProvider = createEmetAiFastDiscoveryProvider({ model });
 if (!answerProvider || !discoveryProvider) throw new Error("OPENAI_API_KEY is not configured.");
 
 const estimatedBlendedUsdPerToken = 0.0176 / 11_977;
-const ceilingUsd = finalAcceptance ? 0.05 : 0.08;
+const ceilingUsd = universalSix ? 0.2 : finalAcceptance ? 0.05 : 0.08;
 let consumedTokens = 0;
 let actualCalls = 0;
 
