@@ -1201,7 +1201,11 @@ export function buildEmetAiInitialScriptureEvidence({
         ...rareQuestionTerms,
         ...directTopicTerms,
       ])).filter((term) => !nonMaterialInitialTerms.has(term));
-      const literal = initialAnchorTerms.length
+      // A temporal word such as "exist" can be lexically rare while being
+      // unrelated to the requested before/after comparison. Do not present a
+      // bare literal match as preliminary evidence when chronology still
+      // requires semantic planning.
+      const literal = initialAnchorTerms.length && !contract.temporalRelationship
         ? literalCandidates(cleanQuestion).filter((candidate) => {
             const verseWords = new Set(tokenizedWords(candidate.record[3]));
             return initialAnchorTerms.some((term) => verseWords.has(term));

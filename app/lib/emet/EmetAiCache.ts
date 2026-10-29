@@ -14,6 +14,13 @@ import type { EmetAiReaderContext } from "./EmetAiTopicEvidence";
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 import { buildEmetAiQuestionContract } from "./EmetAiQuestionContract";
 import {
+  EMET_AI_PRETRAINED_ADAPTER_VERSION,
+  EMET_AI_PRETRAINED_ENGINE_PROFILE,
+  EMET_AI_PRETRAINED_PROMPT_SHA256,
+  EMET_AI_PRETRAINED_RESPONSE_SCHEMA,
+  EMET_AI_PRETRAINED_VERIFIER_VERSION,
+} from "./pretrained/EmetAiPretrainedContract";
+import {
   EMET_AI_CONCISE_STYLE_VERSION,
   EMET_AI_OBLIGATION_POLICY_VERSION,
   EMET_AI_RESPONSE_POLICY_VERSION,
@@ -82,16 +89,23 @@ export function getEmetAiCacheKey(packet: EmetAiEvidencePacket) {
     .digest("hex")}`;
 }
 
+export type EmetAiEngineProfile = "legacy" | "fast-two-path" | typeof EMET_AI_PRETRAINED_ENGINE_PROFILE;
+
 export function getEmetAiRequestCacheKey({
   question,
   conversation,
   context,
   engineProfile = "legacy",
+  pretrainedIdentity,
 }: {
   question: string;
   conversation: EmetConversationContext | null;
   context: EmetAiReaderContext | null;
-  engineProfile?: "legacy" | "fast-two-path";
+  engineProfile?: EmetAiEngineProfile;
+  pretrainedIdentity?: {
+    model: string;
+    sourceIdentity: string;
+  };
 }) {
   const requestedCoverage = extractEmetAiRequestedCoverage(question);
   const questionContract = buildEmetAiQuestionContract({ question, conversation, context });
@@ -101,11 +115,27 @@ export function getEmetAiRequestCacheKey({
     requestedCoverage.language.length > 0 ||
     requestedCoverage.subquestions.length > 0 ||
     requestedCoverage.competingInterpretations;
+  if (engineProfile === EMET_AI_PRETRAINED_ENGINE_PROFILE && !pretrainedIdentity) {
+    throw new Error("Pretrained-first cache keys require explicit model and source identity.");
+  }
   const stableInput = JSON.stringify({
-    requestSchema: "emet-ai-request-cache@4",
+    requestSchema: engineProfile === EMET_AI_PRETRAINED_ENGINE_PROFILE
+      ? "emet-ai-pretrained-request-cache@1"
+      : "emet-ai-request-cache@4",
     engineProfile,
-    promptVersion: EMET_AI_PROMPT_VERSION,
-    responsePolicyVersion: EMET_AI_RESPONSE_POLICY_VERSION,
+    ...(engineProfile === EMET_AI_PRETRAINED_ENGINE_PROFILE
+      ? {
+          model: pretrainedIdentity!.model,
+          systemInstructionHash: EMET_AI_PRETRAINED_PROMPT_SHA256,
+          responseSchema: EMET_AI_PRETRAINED_RESPONSE_SCHEMA,
+          verifierVersion: EMET_AI_PRETRAINED_VERIFIER_VERSION,
+          adapterVersion: EMET_AI_PRETRAINED_ADAPTER_VERSION,
+          sourceIdentity: pretrainedIdentity!.sourceIdentity,
+        }
+      : {
+          promptVersion: EMET_AI_PROMPT_VERSION,
+          responsePolicyVersion: EMET_AI_RESPONSE_POLICY_VERSION,
+        }),
     ...(questionContract.commandApplicability
       ? { obligationPolicyVersion: EMET_AI_OBLIGATION_POLICY_VERSION }
       : {}),

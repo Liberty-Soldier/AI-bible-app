@@ -10,7 +10,7 @@ import {
   type FastScripturePassage,
 } from "./EmetAiFastScriptureRetrieval";
 
-export type EmetAiEvidenceOrigin = "explicit" | "deterministic" | "discovery" | "context";
+export type EmetAiEvidenceOrigin = "explicit" | "deterministic" | "contract" | "discovery" | "context";
 export type EmetAiEvidenceDisposition = "retained" | "rejected" | "excluded";
 
 export type EmetAiEvidenceManifestEntry = {
@@ -42,13 +42,15 @@ export function assembleFastTwoPathEvidence({
   initialPassages,
   initialLexicalTerms,
   discovery = null,
+  contractReferences = [],
   deterministicLexicalLookups = [],
-  passageBudget = 64,
+  passageBudget,
 }: {
   contract: EmetAiQuestionContract;
   initialPassages: FastScripturePassage[];
   initialLexicalTerms: FastScriptureLexicalTerm[];
   discovery?: EmetAiFastDiscoveryDraft | null;
+  contractReferences?: string[];
   deterministicLexicalLookups?: Array<{
     reference: string;
     corpus: "hebrew" | "greek-nt" | "lxx";
@@ -58,9 +60,13 @@ export function assembleFastTwoPathEvidence({
   passageBudget?: number;
 }): EmetAiAssembledEvidence {
   const startedAt = performance.now();
+  const effectivePassageBudget = passageBudget ?? (contract.responseDesign.depth === "deep"
+    ? 48
+    : contract.responseDesign.depth === "standard" ? 32 : 24);
   const manifest: EmetAiEvidenceManifestEntry[] = [];
   const errors: string[] = [];
   const explicitReferences = unique(contract.explicitReferences.flatMap(expandPlannedReferences));
+  const requiredContractReferences = unique(contractReferences.flatMap(expandPlannedReferences));
   const requestedChapters = contract.requestedCoverage.passages
     .filter((passage) => passage.startVerse === undefined)
     .map((passage) => `${passage.book} ${passage.chapter}`);
@@ -90,6 +96,9 @@ export function assembleFastTwoPathEvidence({
         return applicabilitySubjectTerms.some((term) => text.includes(term));
       })
     : initialPassages;
+  const directIdentityInitial = initialPassages
+    .filter((passage) => passage.reasons.includes("direct-identity-statement"))
+    .slice(0, 8);
   const initialCore = subjectRelevantInitial.slice(0, 6);
   const needsCrossTestament = contract.commandApplicability &&
     /\b(?:messiah|christians?|believers?|followers?|new testament|new covenant)\b/i.test(contract.question);
@@ -104,8 +113,8 @@ export function assembleFastTwoPathEvidence({
     : [];
   const selectedInitial = discovery
     ? Array.from(new Map([
+        ...directIdentityInitial,
         ...initialCore,
-        ...(contract.commandApplicability ? initialPassages : []),
         ...chapterAnchors,
         ...messiahTopicTestimony,
         ...(firstNt ? [firstNt] : []),
@@ -143,11 +152,18 @@ export function assembleFastTwoPathEvidence({
       });
       return [];
     }
-    return expanded.map((reference) => ({ reference, required: item.required, relevance: item.relevance }));
+    return expanded.map((reference, index) => ({
+      reference,
+      required: item.required,
+      rangeBoundary: index === 0 || index === expanded.length - 1,
+      relevance: item.relevance,
+      covers: item.covers || [],
+    }));
   });
 
   const baseReferences = unique([
     ...explicitReferences,
+    ...requiredContractReferences,
     ...chapterContextReferences,
     ...selectedInitial.map((passage) => passage.reference),
     ...discovered.map((item) => item.reference),
@@ -172,6 +188,12 @@ export function assembleFastTwoPathEvidence({
       manifest.push({ reference, origins: ["explicit"], priority: 1, disposition: "rejected", reason: "Absent from locked Scripture." });
     }
   }
+  for (const reference of requiredContractReferences) {
+    if (!lockedByReference.has(reference)) {
+      errors.push(`Foundational identity reference ${reference} is absent from locked Scripture.`);
+      manifest.push({ reference, origins: ["contract"], priority: 2, disposition: "rejected", reason: "Absent from locked Scripture." });
+    }
+  }
   for (const item of discovered) {
     if (lockedByReference.has(item.reference)) continue;
     manifest.push({
@@ -189,15 +211,41 @@ export function assembleFastTwoPathEvidence({
   }
 
   const baseEntries = baseReferences.flatMap((reference) => {
-    const passage = lockedByReference.get(reference) || initialByReference.get(reference);
+    const lockedPassage = lockedByReference.get(reference);
+    const initialPassage = initialByReference.get(reference);
+    const discoveredPassage = discovered.find((item) => item.reference === reference);
+    // Locked retrieval certifies the text. Preserve the deterministic or
+    // discovery relevance metadata that caused the reference to be selected;
+    // replacing it with a generic "discovered-reference" record previously
+    // erased why material passages belonged in the final answer.
+    const passage = lockedPassage ? {
+      ...lockedPassage,
+      score: initialPassage?.score ?? lockedPassage.score,
+      reasons: unique([
+        ...(initialPassage?.reasons || []),
+        ...(discoveredPassage ? [`discovery:${discoveredPassage.relevance}`] : []),
+      ]),
+      explicit: initialPassage?.explicit ?? false,
+      covers: unique([
+        ...(initialPassage?.covers || []),
+        ...(discoveredPassage?.covers || []),
+      ]),
+    } : initialPassage;
     if (!passage) return [];
     const origins: EmetAiEvidenceOrigin[] = [];
     if (explicitReferences.includes(reference)) origins.push("explicit");
     if (chapterContextReferences.includes(reference)) origins.push("explicit");
     if (initialByReference.has(reference)) origins.push("deterministic");
+    if (requiredContractReferences.includes(reference)) origins.push("contract");
     if (discovered.some((item) => item.reference === reference)) origins.push("discovery");
-    const requiredDiscovery = discovered.some((item) => item.reference === reference && item.required);
-    const priority = origins.includes("explicit") ? 1 : origins.includes("deterministic") || requiredDiscovery ? 2 : 3;
+    const discoveredMetadata = discovered.find((item) => item.reference === reference);
+    const requiredDiscoveryBoundary = Boolean(discoveredMetadata?.required && discoveredMetadata.rangeBoundary);
+    const requiredDiscovery = Boolean(discoveredMetadata?.required);
+    // Explicit reader requests are inviolable. Discovery's required label is
+    // advisory relevance metadata, not authority to consume the whole packet.
+    const priority = origins.includes("explicit")
+      ? 1
+      : origins.includes("deterministic") || origins.includes("contract") || requiredDiscovery || requiredDiscoveryBoundary ? 2 : 3;
     return [{ passage, origins, priority }];
   });
   const baseSet = new Set(baseEntries.map((entry) => entry.passage.reference));
@@ -208,8 +256,8 @@ export function assembleFastTwoPathEvidence({
     .sort((left, right) => left.priority - right.priority);
 
   const requiredEntries = baseEntries.filter((entry) => entry.priority === 1);
-  if (requiredEntries.length > passageBudget) {
-    errors.push(`The ${passageBudget}-passage evidence budget cannot preserve every material base reference.`);
+  if (requiredEntries.length > effectivePassageBudget) {
+    errors.push(`The ${effectivePassageBudget}-passage evidence budget cannot preserve every material base reference.`);
   }
   const retained: typeof ordered = [];
   for (const priority of [1, 2, 3, 5]) {
@@ -220,14 +268,14 @@ export function assembleFastTwoPathEvidence({
       byChapter.set(chapter, [...(byChapter.get(chapter) || []), entry]);
     }
     const groups = Array.from(byChapter.values());
-    for (let verseIndex = 0; retained.length < passageBudget; verseIndex += 1) {
+    for (let verseIndex = 0; retained.length < effectivePassageBudget; verseIndex += 1) {
       let added = false;
       for (const group of groups) {
         const entry = group[verseIndex];
         if (!entry || retained.includes(entry)) continue;
         retained.push(entry);
         added = true;
-        if (retained.length >= passageBudget) break;
+        if (retained.length >= effectivePassageBudget) break;
       }
       if (!added) break;
     }

@@ -5,10 +5,11 @@ import {
 import { extractEmetAiRequestedCoverage } from "./EmetAiRequestedCoverage";
 import { isEmetAiCommandApplicabilityQuestion } from "./EmetAiResponseDesign";
 import { validateEmetAiDirectAnswerPolarity } from "./EmetAiAnswerNormalization";
+import { verifiedSourcePhraseAtReference } from "./EmetAiSourcePhrase";
 
 export const EMET_AI_EVIDENCE_SCHEMA = "emet-ai-evidence@4" as const;
 export const EMET_AI_ANSWER_SCHEMA = "emet-ai-answer@4" as const;
-export const EMET_AI_PROMPT_VERSION = "scripture-first-fast@26" as const;
+export const EMET_AI_PROMPT_VERSION = "scripture-first-fast@53-identity-authority1" as const;
 export const EMET_AI_COVERAGE_VERSION = "deterministic-coverage@1" as const;
 
 export type EmetAiCorpus = "hebrew" | "lxx" | "greek-nt" | "translation";
@@ -77,6 +78,50 @@ export type EmetAiEstablishedProposition = {
   scope: string;
   timing: EmetAiTiming;
   evidenceIds: string[];
+};
+
+export type EmetAiIdentityQuestionSense =
+  | "father-personal-identity"
+  | "divine-designation"
+  | "yahweh-identification"
+  | "passage-referent";
+
+export type EmetAiIdentityEvidenceLevel =
+  | "direct-scripture"
+  | "contextual-inference"
+  | "project-governed-synthesis";
+
+export type EmetAiFoundationalIdentityContract = {
+  version: "foundational-identity@1";
+  senses: EmetAiIdentityQuestionSense[];
+  propositions: Array<{
+    id: string;
+    text: string;
+    support: "explicit-statement";
+    evidenceLevel: "direct-scripture";
+    evidenceReferences: string[];
+    evidenceIds: string[];
+  }>;
+  termDistinctions: Array<{
+    term: "Yahweh" | "God" | "Elohim" | "Father" | "Son" | "Lord" | "divine";
+    meaning: string;
+  }>;
+  interpretations: Array<{
+    id: string;
+    text: string;
+    evidenceLevel: Exclude<EmetAiIdentityEvidenceLevel, "direct-scripture">;
+    basisIds: string[];
+    evidenceReferences: string[];
+    evidenceIds: string[];
+  }>;
+  answerRequirements: Array<{
+    id: string;
+    sense: EmetAiIdentityQuestionSense;
+    authorityId: string;
+    required: true;
+    answerBearing: true;
+  }>;
+  acceptanceRules: string[];
 };
 
 export type EmetAiEvidenceItem = {
@@ -181,6 +226,7 @@ export type EmetAiEvidencePacket = {
     lemma?: string;
     morphology?: string;
   };
+  foundationalIdentityContract?: EmetAiFoundationalIdentityContract;
   evidence: EmetAiEvidenceItem[];
   provenance: {
     evidenceVersion: string;
@@ -573,6 +619,83 @@ export function validateEmetAiEvidencePacket(
     }
   }
 
+  if (packet.foundationalIdentityContract) {
+    const identityContract = packet.foundationalIdentityContract;
+    const availableEvidenceIds = new Set(packet.evidence.map((item) => item.id));
+    const propositionIds = identityContract.propositions.map((item) => clean(item.id));
+    const interpretationIds = identityContract.interpretations.map((item) => clean(item.id));
+    const contractStatementIds = new Set([...propositionIds, ...interpretationIds]);
+    const answerRequirements = identityContract.answerRequirements || [];
+    const answerRequirementIds = answerRequirements.map((item) => clean(item.id));
+    if (
+      identityContract.version !== "foundational-identity@1" ||
+      identityContract.senses.length === 0 ||
+      identityContract.propositions.length === 0 ||
+      propositionIds.some((id) => !id) ||
+      !uniqueNonEmpty(propositionIds) ||
+      interpretationIds.some((id) => !id) ||
+      !uniqueNonEmpty(interpretationIds) ||
+      answerRequirementIds.some((id) => !id) ||
+      !uniqueNonEmpty(answerRequirementIds) ||
+      identityContract.termDistinctions.length === 0 ||
+      identityContract.acceptanceRules.length === 0
+    ) {
+      errors.push("The foundational identity contract is incomplete or has an unsupported version.");
+    }
+    for (const proposition of identityContract.propositions) {
+      const resolvedReferences = proposition.evidenceIds.flatMap((id) => {
+        const reference = packet.evidence.find((item) => item.id === id)?.reference;
+        return reference ? [reference] : [];
+      });
+      if (
+        !clean(proposition.text) ||
+        proposition.support !== "explicit-statement" ||
+        proposition.evidenceLevel !== "direct-scripture" ||
+        proposition.evidenceIds.length === 0 ||
+        proposition.evidenceIds.some((id) => !availableEvidenceIds.has(id)) ||
+        proposition.evidenceReferences.length !== resolvedReferences.length ||
+        proposition.evidenceReferences.some((reference) => !resolvedReferences.includes(reference))
+      ) {
+        errors.push(`Foundational identity proposition ${proposition.id || "<missing>"} is not backed by verified packet evidence.`);
+      }
+    }
+    for (const interpretation of identityContract.interpretations) {
+      const resolvedReferences = interpretation.evidenceIds.flatMap((id) => {
+        const reference = packet.evidence.find((item) => item.id === id)?.reference;
+        return reference ? [reference] : [];
+      });
+      if (
+        !clean(interpretation.text) ||
+        (interpretation.evidenceLevel !== "contextual-inference" &&
+          interpretation.evidenceLevel !== "project-governed-synthesis") ||
+        interpretation.basisIds.length === 0 ||
+        interpretation.basisIds.some((id) => !contractStatementIds.has(id)) ||
+        interpretation.evidenceIds.length === 0 ||
+        interpretation.evidenceIds.some((id) => !availableEvidenceIds.has(id)) ||
+        interpretation.evidenceReferences.length !== resolvedReferences.length ||
+        interpretation.evidenceReferences.some((reference) => !resolvedReferences.includes(reference))
+      ) {
+        errors.push(`Foundational identity interpretation ${interpretation.id || "<missing>"} is not traceable to its stated premise and verified packet evidence.`);
+      }
+    }
+    if (
+      identityContract.senses.some((sense) => sense === "divine-designation" || sense === "father-personal-identity" || sense === "yahweh-identification") &&
+      answerRequirements.length === 0
+    ) {
+      errors.push("The foundational identity contract is missing typed answer requirements for its identity sense.");
+    }
+    for (const requirement of answerRequirements) {
+      if (
+        !identityContract.senses.includes(requirement.sense) ||
+        !contractStatementIds.has(requirement.authorityId) ||
+        requirement.required !== true ||
+        requirement.answerBearing !== true
+      ) {
+        errors.push(`Foundational identity answer requirement ${requirement.id || "<missing>"} is not bound to an available typed authority.`);
+      }
+    }
+  }
+
   if (packet.evidence.length === 0) {
     errors.push("No evidence is available for generation.");
   }
@@ -646,7 +769,7 @@ export function validateEmetAiAnswer(
     errors.push("The reader-facing answer exposes internal generation language.");
   }
   if (
-    /\b(?:the\s+)?(?:supplied|provided)\s+(?:passages|texts|scriptures?|evidence)\b|\bthis\s+(?:scripture|evidence)\s+set\b/i.test(
+    /\b(?:the\s+)?(?:supplied|provided)\s+(?:passages|texts|evidence)\b|\bthis\s+(?:scripture|evidence)\s+set\b/i.test(
       answer.answer,
     )
   ) {
@@ -660,7 +783,7 @@ export function validateEmetAiAnswer(
   if (
     packet.evidence.some((item) => item.kind === "scripture" && item.reference === "Ecclesiastes 12:13") &&
     /\bduty\b/i.test(answer.answer) &&
-    !/\b(?:english\s+)?(?:translation|rendering)\b[^.]{0,100}\b(?:supplies|uses|renders?)\b[^.]{0,60}\bduty\b|\bduty\b[^.]{0,100}\b(?:supplied|translation|rendering)\b/i.test(answer.answer)
+    !/\b(?:english\s+)?(?:translation|rendering)\b[^.]{0,100}\b(?:supplies|uses|renders?)\b[^.]{0,60}\bduty\b|\bduty\b[^.]{0,100}\b(?:supplied|translation|rendering)\b|\bsupplied\s+english\s+word\s+duty\b/i.test(answer.answer)
   ) {
     errors.push("Ecclesiastes 12:13 may use “duty” as identified English rendering language, but not as though it were a distinct Hebrew noun.");
   }
@@ -764,7 +887,15 @@ export function validateEmetAiAnswer(
     ].flatMap(visibleSourceTerms),
   );
   for (const term of visibleSourceTerms(answer.answer)) {
-    if (!verifiedSourceTerms.has(term)) {
+    const phraseVerified = !verifiedSourceTerms.has(term) && packet.evidence.some((item) =>
+      item.kind === "lexical" && item.reference && ["hebrew", "greek-nt", "lxx"].includes(item.corpus) &&
+      verifiedSourcePhraseAtReference({
+        corpus: item.corpus as "hebrew" | "greek-nt" | "lxx",
+        reference: item.reference,
+        phrase: term,
+      })
+    );
+    if (!verifiedSourceTerms.has(term) && !phraseVerified) {
       errors.push(`Reader-facing source term ${term} has no exact verified lexical identity in the packet.`);
     }
   }
@@ -895,13 +1026,13 @@ export function validateEmetAiAnswer(
       }
     }
 
-    if (answer.componentChecks.length) {
-      const weakestComponent = Math.min(
-        ...answer.componentChecks.map((item) => supportRank[item.support]),
+    if (answer.claims.length) {
+      const strongestClaim = Math.max(
+        ...answer.claims.map((item) => supportRank[item.support]),
       );
-      if (supportRank[answer.conclusionSupport] > weakestComponent) {
+      if (supportRank[answer.conclusionSupport] > strongestClaim) {
         errors.push(
-          "The full proposition cannot receive stronger support than its weakest material component.",
+          "The full proposition claims stronger support than any material claim assessment.",
         );
       }
     }
@@ -1032,7 +1163,6 @@ export function validateEmetAiAnswer(
       }
       if (
         (answer.conclusionSupport === "possible-interpretation" ||
-          answer.conclusionSupport === "theological-synthesis" ||
           answer.conclusionSupport === "does-not-establish") &&
         /^\s*(yes|no)\s*[.!,:;-]/i.test(answer.answer)
       ) {

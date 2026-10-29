@@ -231,9 +231,12 @@ function InitialScripture({
   const translationLabel = (translation: InitialScriptureItem["translation"]) =>
     translation === "brenton" ? "Brenton LXX" : translation.toUpperCase();
   return (
-    <section className="border-y border-[var(--border)] py-3" aria-label="Initial verified Scripture">
+    <section className="border-y border-[var(--border)] py-3" aria-label="Preliminary verified Scripture">
       <p className="text-[0.65rem] font-black uppercase tracking-[0.16em] text-[var(--brand-strong)]">
-        {pending ? "Initial Scripture — analysis in progress" : "Initial Scripture"}
+        {pending ? "Preliminary Scripture — answer analysis in progress" : "Preliminary Scripture"}
+      </p>
+      <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
+        Shown early for reading; the final answer may use a different verified evidence set.
       </p>
       {items.length ? (
         <div className="mt-2.5 space-y-3">

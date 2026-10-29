@@ -2,6 +2,7 @@ import "server-only";
 
 import {
   EMET_AI_EVIDENCE_SCHEMA,
+  validateEmetAiAnswer,
   validateEmetAiEvidencePacket,
   type EmetAiEvidenceItem,
   type EmetAiEvidencePacket,
@@ -24,6 +25,12 @@ import {
   assembleFastTwoPathEvidence,
   type EmetAiEvidenceManifestEntry,
 } from "./EmetAiFastEvidenceAssembler";
+import { adaptFastEmetAnswer } from "./EmetAiFastAnswerAdapter";
+import {
+  materializeFoundationalIdentityContract,
+  planFoundationalIdentityContract,
+  type EmetAiFoundationalIdentityPlan,
+} from "./EmetAiFoundationalIdentityContract";
 
 export type EmetAiFastTwoPathResult = {
   status: "complete" | "insufficient-evidence";
@@ -77,11 +84,15 @@ function buildPacket({
   passages,
   lexicalTerms,
   contract,
+  coveragePlan,
+  identityPlan,
 }: {
   question: string;
   passages: FastScripturePassage[];
   lexicalTerms: FastScriptureLexicalTerm[];
   contract: ReturnType<typeof buildEmetAiQuestionContract>;
+  coveragePlan: EmetAiFastCoverageDimension[];
+  identityPlan: EmetAiFoundationalIdentityPlan | null;
 }) {
   const scriptureEvidence: EmetAiEvidenceItem[] = passages.map((passage, index) => ({
     id: `scripture:web:${index + 1}`,
@@ -94,7 +105,11 @@ function buildPacket({
       sourceId: "public/scripture/search/web.json",
       retrieval: {
         method: passage.explicit ? "explicit-reference" : "governing-scripture",
-        role: passage.reasons.some((reason) => reason.startsWith("context:")) ? "context" : "direct",
+        role: passage.covers?.includes("foundation")
+          ? "foundation"
+          : passage.covers?.includes("apostolic-testimony") || passage.covers?.includes("final-canonical-testimony")
+            ? "later-witness"
+            : passage.reasons.some((reason) => reason.startsWith("context:")) ? "context" : "direct",
         reason: passage.reasons.join("; ") || "Verified fast retrieval.",
         score: Math.max(0, Math.min(100, passage.score)),
       },
@@ -121,6 +136,10 @@ function buildPacket({
     },
   }));
   const evidence = [...scriptureEvidence, ...lexicalEvidence];
+  const foundationalIdentityContract = materializeFoundationalIdentityContract({
+    plan: identityPlan,
+    evidence,
+  });
   const packet: EmetAiEvidencePacket = {
     schemaVersion: EMET_AI_EVIDENCE_SCHEMA,
     question,
@@ -131,15 +150,43 @@ function buildPacket({
       requiresScopeAnalysis: contract.commandApplicability,
       requiresTimeline: contract.temporalRelationship,
       commandApplicability: contract.commandApplicability,
-      components: [],
+      components: coveragePlan.map((dimension) => {
+        const requestedPart = contract.subquestions.length
+          ? dimension === "prophetic-testimony" || dimension === "foundation"
+            ? contract.subquestions[0]
+            : contract.subquestions[contract.subquestions.length - 1]
+          : question;
+        return {
+        id: dimension,
+        proposition: `Assess this requested proposition using the verified ${dimension.replace(/-/g, " ")}: ${requestedPart}`,
+        category: dimension === "governing-instruction" || dimension === "messiah-teaching"
+          ? "command"
+          : dimension === "duration-conditions" || dimension === "timing-sequence"
+            ? "duration"
+            : dimension === "audience-scope" || dimension === "covenant-membership"
+              ? "covenant-participants"
+              : dimension === "foundation"
+                ? "covenant"
+                : "application",
+        };
+      }),
       establishedPropositions: [],
     },
+    governingCoverage: coveragePlan.map((dimension) => ({
+      componentId: dimension,
+      evidenceIds: dimension === "source-language-context"
+        ? lexicalEvidence.map((item) => item.id)
+        : scriptureEvidence
+            .filter((_, index) => passages[index].covers?.includes(dimension))
+            .map((item) => item.id),
+    })),
     scope: {
       type: "topic",
       references: scriptureEvidence.flatMap((item) => item.reference ? [item.reference] : []),
       entityIds: [],
     },
     identity: { gate: "not-applicable" },
+    foundationalIdentityContract,
     evidence,
     provenance: {
       evidenceVersion: "fast-two-path-locked-evidence@1",
@@ -157,11 +204,16 @@ function buildFastCoveragePlan(
   if (contract.requestedCoverage.passages.length) required.add("explicit-request");
   if (contract.requestedLanguages.length) required.add("source-language-context");
   if (contract.temporalRelationship) required.add("timing-sequence");
-  if (contract.commandApplicability) {
-    required.add("foundation");
+  if (contract.commandApplicability && !contract.requestedCoverage.passages.length) {
+    const roleScoped = /\b(?:priest|king|servant|slave|parent|child|husband|wife|levite)\w*\b/i.test(question);
+    const asksContinuity = /\b(?:modern|today|still|continue|forever|perpetual|remain|new covenant|christians?|believers?|followers?)\b/i.test(question);
+    // The governing assignment is itself the foundation for a role-scoped
+    // question. Requiring an additional generic label made direct governing
+    // passages fail coverage before answer generation.
+    if (!roleScoped) required.add("foundation");
     required.add("governing-instruction");
     required.add("audience-scope");
-    required.add("duration-conditions");
+    if (!roleScoped || asksContinuity) required.add("duration-conditions");
     if (/\b(?:christians?|believers?|followers?|messiah|gentiles?)\b/i.test(question)) {
       required.add("covenant-membership");
       required.add("messiah-teaching");
@@ -171,8 +223,40 @@ function buildFastCoveragePlan(
     // Avoid turning ordinary command questions into automatic exemption inquiries.
     // The discovery model can still obtain audience or duration details when the
     // actual text or question needs them.
-    if (/\b(?:priest|king|servant|slave|parent|child|husband|wife|levite)\w*\b/i.test(question)) {
+    if (roleScoped) {
       required.add("role-circumstance");
+    }
+  }
+  const identitySubjects = [
+    ["messiah", /\b(?:jesus|yeshua|yahshua|messiah|christ)\b/i],
+    ["yahweh", /\b(?:yahweh|yhwh|the most high)\b/i],
+    ["god", /\b(?:god|elohim)\b/i],
+    ["father", /\b(?:the )?father\b/i],
+    ["holy-spirit", /\b(?:holy spirit|spirit of god|ruach ha[ -]?kodesh)\b/i],
+  ] as const;
+  const namedIdentitySubjects = identitySubjects
+    .filter(([, pattern]) => pattern.test(question))
+    .map(([subject]) => subject);
+  const asksIdentity =
+    /\b(?:who|what)\s+(?:is|are)\b|\b(?:identity|identify|same person|same being|difference between)\b/i.test(question) ||
+    /\bis\b[^?]{0,55}\b(?:god|elohim|yahweh|yhwh|father|messiah|christ)\b/i.test(question);
+  if (
+    !contract.commandApplicability &&
+    !contract.requestedCoverage.passages.length &&
+    asksIdentity &&
+    namedIdentitySubjects.includes("messiah")
+  ) {
+    const relationalIdentityQuestion = contract.subquestions.length > 1 ||
+      namedIdentitySubjects.includes("father") ||
+      namedIdentitySubjects.includes("yahweh") ||
+      /\b(?:same person|same being|difference between)\b/i.test(question);
+    if (relationalIdentityQuestion) required.add("messiah-teaching");
+    required.add("apostolic-testimony");
+    if (
+      namedIdentitySubjects.some((subject) => subject === "god" || subject === "yahweh") ||
+      /\b(?:who|identity|nature)\b[^?]{0,80}\b(?:jesus|yeshua|yahshua|messiah|christ)\b|\b(?:jesus|yeshua|yahshua|messiah|christ)\b[^?]{0,80}\b(?:who|identity|nature)\b/i.test(question)
+    ) {
+      required.add("prophetic-testimony");
     }
   }
   return Array.from(required);
@@ -190,6 +274,7 @@ function failure({
   generatedDraft,
   generatedRawOutput,
   evidenceManifest = [],
+  packet = null,
 }: {
   path: "direct" | "discovery";
   errors: string[];
@@ -202,9 +287,10 @@ function failure({
   generatedDraft?: EmetAiSimpleDraft | null;
   generatedRawOutput?: string;
   evidenceManifest?: EmetAiEvidenceManifestEntry[];
+  packet?: EmetAiEvidencePacket | null;
 }): EmetAiFastTwoPathResult {
   return {
-    status: "insufficient-evidence", path, answer: null, packet: null,
+    status: "insufficient-evidence", path, answer: null, packet,
     generatedDraft: generatedDraft || null,
     generatedRawOutput: generatedRawOutput || "",
     validationErrors: errors, modelCalls: calls, usage, discovery, initialCandidates, evidenceManifest,
@@ -226,7 +312,13 @@ export async function answerWithFastTwoPathEmet({
   const startedAt = performance.now();
   const initial = retrieveFastScriptureEvidence({ question, conversation });
   const contract = buildEmetAiQuestionContract({ question, conversation });
+  const identityPlan = planFoundationalIdentityContract(contract);
   const coveragePlan = buildFastCoveragePlan(contract, question);
+  const missingInitialCoverage = coveragePlan.filter((dimension) =>
+    dimension === "source-language-context"
+      ? !initial.lexicalTerms.length
+      : !initial.passages.some((passage) => passage.covers?.includes(dimension))
+  );
   const initialCandidates = initial.passages.map(({ reference, score, reasons }) => ({ reference, score, reasons }));
   const commonStages = {
     initialRetrievalMs: initial.diagnostics.retrievalMs,
@@ -242,7 +334,7 @@ export async function answerWithFastTwoPathEmet({
   let discoveryUsage = sumUsage();
   let discoveryDraft: Awaited<ReturnType<EmetAiFastDiscoveryProvider["discover"]>>["draft"] = null;
 
-  if (initial.status === "insufficient") {
+  if (initial.status === "insufficient" || missingInitialCoverage.length) {
     path = "discovery";
     const found = await discoveryProvider.discover({ question, conversation, candidates: initial.passages, coveragePlan });
     commonStages.discoveryMs = found.latencyMs;
@@ -269,6 +361,7 @@ export async function answerWithFastTwoPathEmet({
     initialPassages: initial.passages,
     initialLexicalTerms: initial.lexicalTerms,
     discovery: discoveryDraft,
+    contractReferences: identityPlan?.requiredReferences || [],
     deterministicLexicalLookups: deterministicLexicalLookups({ question, contract }),
   });
   passages = assembled.passages;
@@ -293,7 +386,26 @@ export async function answerWithFastTwoPathEmet({
     });
   }
 
-  const packetValidation = buildPacket({ question, passages, lexicalTerms, contract });
+  const missingAssembledCoverage = coveragePlan.filter((dimension) =>
+    dimension === "source-language-context"
+      ? !lexicalTerms.length
+      : !passages.some((passage) => passage.covers?.includes(dimension))
+  );
+  if (missingAssembledCoverage.length) {
+    return failure({
+      path,
+      errors: [`Verified evidence is missing required coverage: ${missingAssembledCoverage.join(", ")}.`],
+      calls: path === "direct" ? 0 : 1,
+      usage: discoveryUsage,
+      discovery,
+      stages: commonStages,
+      startedAt,
+      initialCandidates,
+      evidenceManifest: assembled.manifest,
+    });
+  }
+
+  const packetValidation = buildPacket({ question, passages, lexicalTerms, contract, coveragePlan, identityPlan });
   if (!packetValidation.ok) {
     return failure({ path, errors: packetValidation.errors, calls: path === "direct" ? 0 : 1,
       usage: discoveryUsage, discovery, stages: commonStages, startedAt, initialCandidates,
@@ -306,21 +418,35 @@ export async function answerWithFastTwoPathEmet({
     commonStages.verificationMs = performance.now() - verificationStartedAt;
     return failure({ path, errors: ["The answer response was invalid."], calls: path === "direct" ? 1 : 2,
       usage: sumUsage(discoveryUsage, generated.usage), discovery, stages: commonStages, startedAt, initialCandidates,
-      generatedRawOutput: generated.rawOutput, evidenceManifest: assembled.manifest });
+      generatedRawOutput: generated.rawOutput, evidenceManifest: assembled.manifest, packet: packetValidation.value });
   }
-  const answerValidation = validateEmetAiSimpleAnswer({ packet: packetValidation.value, draft: generated.draft });
+  // Validation may make deterministic presentation repairs. Preserve the parsed
+  // model draft so live-evaluation artifacts can audit model output separately
+  // from the reader-facing answer.
+  const generatedDraft = structuredClone(generated.draft);
+  const validationDraft = structuredClone(generated.draft);
+  const answerValidation = validateEmetAiSimpleAnswer({ packet: packetValidation.value, draft: validationDraft });
+  const fullAnswerValidation = answerValidation.ok
+    ? validateEmetAiAnswer(
+        packetValidation.value,
+        adaptFastEmetAnswer({ answer: answerValidation.value, packet: packetValidation.value }),
+      )
+    : null;
   commonStages.verificationMs = performance.now() - verificationStartedAt;
-  if (!answerValidation.ok) {
-    return failure({ path, errors: answerValidation.errors, calls: path === "direct" ? 1 : 2,
+  if (!answerValidation.ok || (fullAnswerValidation && !fullAnswerValidation.ok)) {
+    const validationErrors = !answerValidation.ok
+      ? answerValidation.errors
+      : fullAnswerValidation && !fullAnswerValidation.ok ? fullAnswerValidation.errors : [];
+    return failure({ path, errors: validationErrors, calls: path === "direct" ? 1 : 2,
       usage: sumUsage(discoveryUsage, generated.usage), discovery, stages: commonStages, startedAt, initialCandidates,
-      generatedDraft: generated.draft, generatedRawOutput: generated.rawOutput,
-      evidenceManifest: assembled.manifest });
+      generatedDraft, generatedRawOutput: generated.rawOutput,
+      evidenceManifest: assembled.manifest, packet: packetValidation.value });
   }
   return {
     status: answerValidation.value.status,
     path,
     answer: answerValidation.value,
-    generatedDraft: generated.draft,
+    generatedDraft,
     generatedRawOutput: generated.rawOutput,
     packet: packetValidation.value,
     validationErrors: [],

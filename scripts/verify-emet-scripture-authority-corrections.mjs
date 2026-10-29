@@ -56,8 +56,15 @@ for (const [index, [question, intent]] of expected.entries()) {
         question,
       );
     } else {
-      assert.equal(initial.status, "finding", question);
-      assert.deepEqual(initial.items, [], question);
+      // Progressive "ready" means locked reading aids are available, not that
+      // governing coverage is complete. Sufficiency must remain false above:
+      // the final answer still requires the verified semantic evidence plan.
+      assert.equal(initial.status, "ready", question);
+      assert.equal(initial.route, "direct-factual", question);
+      assert.ok(initial.items.length >= 1 && initial.items.length <= 5, question);
+      const expectedAnchor = index === 0 ? "Exodus 20:8" : "Numbers 8:26";
+      assert.ok(initial.items.some((item) => item.reference === expectedAnchor), question);
+      assert.ok(initial.items.every((item) => item.id.startsWith("scripture:") && item.text.length > 0), question);
     }
   }
 

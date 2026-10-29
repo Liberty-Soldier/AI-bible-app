@@ -81,14 +81,16 @@ const COSMOLOGY_PATTERN =
 
 const ENTITY_PATTERNS: Array<[string, RegExp]> = [
   ["Yahweh", /\b(?:yahweh|yhwh|the most high)\b/i],
-  ["Messiah", /\b(?:jesus|yeshua|messiah|christ)\b/i],
+  ["Messiah", /\b(?:jesus|yeshua|yahshua|messiah|christ)\b/i],
+  ["God", /\b(?:god|elohim)\b/i],
+  ["Father", /\b(?:the )?father\b/i],
   ["Paul", /\bpaul(?:'s)?\b/i],
   ["Torah", /\b(?:torah|law of moses)\b/i],
   ["commandments", /\bcommandments?\b/i],
   ["Sabbath", /\bsabbath\b/i],
   ["resurrection", /\b(?:resurrection|raised from the dead|dead raised)\b/i],
   ["new covenant", /\bnew covenant\b/i],
-  ["Holy Spirit", /\b(?:holy spirit|spirit of god)\b/i],
+  ["Holy Spirit", /\b(?:holy spirit|spirit of god|ruach ha[ -]?kodesh)\b/i],
   ["Moses", /\bmoses(?:'s)?\b/i],
   ["Sinai", /\bsinai\b/i],
   ["Noah", /\bnoah(?:'s)?\b/i],
@@ -98,6 +100,18 @@ const ENTITY_PATTERNS: Array<[string, RegExp]> = [
   ["sacrifice", /\b(?:sacrifice|sacrifices|offering|offerings)\b/i],
   ["clean and unclean animals", /\bclean\b[^?.]{0,45}\bunclean\b|\bunclean\b[^?.]{0,45}\bclean\b/i],
 ];
+
+const COORDINATED_QUESTION_PATTERN =
+  /\s*,?\s+(?:and|also)\s+(?=(?:when|why|how|what|which|who|does|do|did|are|is|was|were|can|could|should|would|will|has|have|had)\b)/i;
+
+function naturalSubquestions(question: string) {
+  const parts = question
+    .replace(/\?+\s*$/u, "")
+    .split(new RegExp(`\\?\\s*|${COORDINATED_QUESTION_PATTERN.source}`, "i"))
+    .map((part) => part.trim())
+    .filter((part) => part.length >= 4);
+  return parts.length > 1 ? parts.slice(0, 6) : [];
+}
 
 function requestedReferenceLabels(coverage: EmetAiRequestedCoverage) {
   return coverage.passages.map((passage) => passage.label);
@@ -158,7 +172,10 @@ export function buildEmetAiQuestionContract({
   const requestedLanguages = Array.from(
     new Set(requestedCoverage.language.flatMap((item) => item.corpora)),
   );
-  const subquestions = requestedCoverage.subquestions.map((item) => item.text);
+  const requestedSubquestions = requestedCoverage.subquestions.map((item) => item.text);
+  const subquestions = requestedSubquestions.length
+    ? requestedSubquestions
+    : naturalSubquestions(cleanQuestion);
   const temporalRelationship = TEMPORAL_RELATIONSHIP_PATTERN.test(cleanQuestion);
   const commandApplicability = commandApplicabilityAnalysis.applicable;
   const requiresSemanticPlanning = Boolean(conversation?.recentExchanges.length) || !(

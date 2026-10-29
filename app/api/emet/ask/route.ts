@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getEmetAiRequestCacheKey } from "@/app/lib/emet/EmetAiCache";
+import { isEmetAiCachedAnswerAuthorityVerified } from "@/app/lib/emet/EmetAiCachedAnswerAuthority";
 import {
   parseEmetConversationContext,
   relevantEmetConversation,
@@ -27,9 +28,22 @@ import {
   emetConversationClaimsFromAnswer,
   getSupabaseEmetConversationLedger,
   getSupabaseEmetAiRequestCache,
+  getSupabaseEmetAiPretrainedRequestCache,
   setSupabaseEmetAiRequestCache,
+  setSupabaseEmetAiPretrainedRequestCache,
 } from "@/app/lib/emet/EmetAiSupabaseStore";
 import { createEmetAiOpenAiProvider } from "@/app/lib/emet/providers/EmetAiOpenAiProvider";
+import {
+  EMET_AI_PRETRAINED_ENGINE_PROFILE,
+  EMET_AI_PRETRAINED_MODEL,
+} from "@/app/lib/emet/pretrained/EmetAiPretrainedContract";
+import { createEmetAiPretrainedProvider } from "@/app/lib/emet/pretrained/EmetAiPretrainedProvider";
+import {
+  answerWithPretrainedEmet,
+  isEmetAiPretrainedFirstEnabled,
+  type EmetAiPretrainedAudit,
+} from "@/app/lib/emet/pretrained/EmetAiPretrainedService";
+import { getEmetAiPretrainedSourceIdentity } from "@/app/lib/emet/pretrained/EmetAiPretrainedVerifier";
 import { adaptFastEmetAnswer } from "@/app/lib/emet/simple/EmetAiFastAnswerAdapter";
 import { createEmetAiFastDiscoveryProvider } from "@/app/lib/emet/simple/EmetAiFastDiscovery";
 import { answerWithFastTwoPathEmet } from "@/app/lib/emet/simple/EmetAiFastTwoPathService";
@@ -130,6 +144,9 @@ export async function POST(request: Request) {
 
   const performanceTrace = createEmetAiPerformanceTrace();
   const useFastEngine = process.env.EMET_AI_FAST_ENGINE === "true";
+  const usePretrainedEngine = isEmetAiPretrainedFirstEnabled();
+  const fallbackEngine = useFastEngine ? "fast-two-path" as const : "legacy" as const;
+  let pretrainedFallbackAudit: EmetAiPretrainedAudit | null = null;
 
   const ledger = await performanceTrace.measureAsync("ledger", () =>
     getSupabaseEmetConversationLedger({ userId, conversationId }),
@@ -163,27 +180,49 @@ export async function POST(request: Request) {
         model: process.env.EMET_AI_SIMPLE_MODEL?.trim() || "gpt-5.4-mini",
       })
     : null;
-  const requestCacheKey = getEmetAiRequestCacheKey({
+  const pretrainedProvider = usePretrainedEngine
+    ? createEmetAiPretrainedProvider({ model: EMET_AI_PRETRAINED_MODEL })
+    : null;
+  let pretrainedPreflightError: string | null = null;
+  let sourceIdentity = "";
+  if (usePretrainedEngine) {
+    try {
+      sourceIdentity = getEmetAiPretrainedSourceIdentity(context?.translation || "web");
+    } catch (error) {
+      sourceIdentity = "source-unavailable";
+      pretrainedPreflightError = error instanceof Error ? error.message : String(error);
+    }
+  }
+  let requestCacheKey = getEmetAiRequestCacheKey({
     question,
     conversation: activeConversation,
     context,
-    engineProfile: useFastEngine ? "fast-two-path" : "legacy",
+    engineProfile: usePretrainedEngine ? EMET_AI_PRETRAINED_ENGINE_PROFILE : fallbackEngine,
+    ...(usePretrainedEngine
+      ? { pretrainedIdentity: { model: pretrainedProvider?.model || EMET_AI_PRETRAINED_MODEL, sourceIdentity } }
+      : {}),
   });
-  const requestCache = await performanceTrace.measureAsync("cache-lookup", () =>
-    getSupabaseEmetAiRequestCache(requestCacheKey),
-  );
-  if (
-    !requestCache &&
-    (useFastEngine
-      ? (!fastAnswerProvider || !fastDiscoveryProvider)
-      : !provider)
-  ) return disabledResponse();
+  const cachedRequest = usePretrainedEngine
+    ? pretrainedPreflightError
+      ? null
+      : await performanceTrace.measureAsync("cache-lookup", () =>
+          getSupabaseEmetAiPretrainedRequestCache(requestCacheKey),
+        )
+    : await performanceTrace.measureAsync("cache-lookup", () =>
+        getSupabaseEmetAiRequestCache(requestCacheKey, question),
+      );
+  const requestCache = cachedRequest && (usePretrainedEngine || isEmetAiCachedAnswerAuthorityVerified({
+    packet: cachedRequest.packet, answer: cachedRequest.answer, question,
+  })) ? cachedRequest : null;
+  const fallbackProviderAvailable = useFastEngine
+    ? Boolean(fastAnswerProvider && fastDiscoveryProvider)
+    : Boolean(provider);
+  if (!requestCache && !usePretrainedEngine && !fallbackProviderAvailable) return disabledResponse();
+  if (!requestCache && usePretrainedEngine && !pretrainedProvider && !fallbackProviderAvailable) return disabledResponse();
 
   const quota = await reserveEmetAiQuestion(requestId, requestCacheKey);
   if (!quota) return json({ status: "usage-unavailable" }, 503);
-  if (!quota.allowed) {
-    return json({ status: "quota-exhausted", usage: quota }, 429);
-  }
+  if (!quota.allowed) return json({ status: "quota-exhausted", usage: quota }, 429);
 
   if (requestCache) {
     const ledgerSaved = await performanceTrace.measureAsync("storage", () =>
@@ -198,17 +237,100 @@ export async function POST(request: Request) {
       return json({ status: "reasoning-ledger-unavailable" }, 503);
     }
     await completeEmetAiQuestion(requestId, "cache");
-    performanceTrace.report({ source: "request-cache", fastPath: false });
+    const architecture = usePretrainedEngine && "audit" in requestCache
+      ? { ...requestCache.audit, displayedEngine: EMET_AI_PRETRAINED_ENGINE_PROFILE, fallbackReason: null, cacheSource: "pretrained-cache" as const, usage: { inputTokens: 0, cachedInputTokens: 0, outputTokens: 0, reasoningTokens: 0, totalTokens: 0 }, estimatedCostUsd: 0, generationLatencyMs: 0, verificationLatencyMs: 0 }
+      : null;
+    performanceTrace.report({ source: "request-cache", fastPath: false, architecture });
     const shareStudyId = await saveSharedStudyCandidate({ userId, question, packet: requestCache.packet, answer: requestCache.answer });
-    return json({
-      status: requestCache.answer.status,
-      answer: requestCache.answer,
-      source: "cache",
-      usage: quota,
-      shareStudyId,
-    });
+    return json({ status: requestCache.answer.status, answer: requestCache.answer, source: "cache", usage: quota, shareStudyId, architecture });
   }
 
+  if (usePretrainedEngine) {
+    const pretrainedResult = await answerWithPretrainedEmet({
+      question,
+      conversation: activeConversation,
+      context,
+      provider: pretrainedProvider,
+      fallbackEngine,
+      preflightError: pretrainedPreflightError,
+    });
+    performanceTrace.observer.stage("generation", pretrainedResult.audit.generationLatencyMs);
+    performanceTrace.observer.stage("validation", pretrainedResult.audit.verificationLatencyMs);
+    if (pretrainedResult.audit.usage.totalTokens) {
+      performanceTrace.observer.usage({ stage: "answer", ...pretrainedResult.audit.usage });
+    }
+    if (pretrainedResult.status === "complete" && pretrainedResult.packet && pretrainedResult.answer && pretrainedResult.draft) {
+      const ledgerSaved = await performanceTrace.measureAsync("storage", () =>
+        appendSupabaseEmetConversationLedger({
+          userId,
+          conversationId,
+          claims: emetConversationClaimsFromAnswer(pretrainedResult.answer!),
+        }),
+      );
+      if (!ledgerSaved) {
+        await refundFailedEmetAiQuestion(requestId);
+        return json({ status: "reasoning-ledger-unavailable" }, 503);
+      }
+      await completeEmetAiQuestion(requestId, "model");
+      if (pretrainedResult.answer.status === "complete") {
+        await performanceTrace.measureAsync("storage", () =>
+          setSupabaseEmetAiPretrainedRequestCache({
+            key: requestCacheKey,
+            packet: pretrainedResult.packet!,
+            answer: pretrainedResult.answer!,
+            draft: pretrainedResult.draft!,
+            audit: pretrainedResult.audit,
+            model: pretrainedProvider?.model || EMET_AI_PRETRAINED_MODEL,
+            createdAt: new Date().toISOString(),
+          }),
+        );
+      }
+      const shareStudyId = await saveSharedStudyCandidate({ userId, question, packet: pretrainedResult.packet, answer: pretrainedResult.answer });
+      performanceTrace.report({ source: "pretrained-first-model", fastPath: true, architecture: pretrainedResult.audit });
+      return json({ status: pretrainedResult.answer.status, answer: pretrainedResult.answer, source: "pretrained-first-model", usage: quota, shareStudyId, architecture: pretrainedResult.audit });
+    }
+
+    pretrainedFallbackAudit = pretrainedResult.audit;
+    console.warn("EMET pretrained-first fallback", {
+      reason: pretrainedResult.audit.fallbackReason,
+      errors: pretrainedResult.errors,
+      model: pretrainedResult.audit.model,
+      promptVersion: pretrainedResult.audit.promptVersion,
+    });
+    requestCacheKey = getEmetAiRequestCacheKey({
+      question,
+      conversation: activeConversation,
+      context,
+      engineProfile: fallbackEngine,
+    });
+    const cachedFallback = await performanceTrace.measureAsync("cache-lookup", () =>
+      getSupabaseEmetAiRequestCache(requestCacheKey, question),
+    );
+    const fallbackCache = cachedFallback && isEmetAiCachedAnswerAuthorityVerified({
+      packet: cachedFallback.packet, answer: cachedFallback.answer, question,
+    }) ? cachedFallback : null;
+    if (fallbackCache) {
+      const ledgerSaved = await performanceTrace.measureAsync("storage", () => appendSupabaseEmetConversationLedger({
+        userId,
+        conversationId,
+        claims: emetConversationClaimsFromAnswer(fallbackCache.answer),
+      }));
+      if (!ledgerSaved) {
+        await refundFailedEmetAiQuestion(requestId);
+        return json({ status: "reasoning-ledger-unavailable" }, 503);
+      }
+      await completeEmetAiQuestion(requestId, "cache");
+      const architecture = { ...pretrainedFallbackAudit, cacheSource: "fallback-cache" as const };
+      const shareStudyId = await saveSharedStudyCandidate({ userId, question, packet: fallbackCache.packet, answer: fallbackCache.answer });
+      performanceTrace.report({ source: "fallback-request-cache", fastPath: false, architecture });
+      return json({ status: fallbackCache.answer.status, answer: fallbackCache.answer, source: "fallback-cache", usage: quota, shareStudyId, architecture });
+    }
+    if (!fallbackProviderAvailable) {
+      await refundFailedEmetAiQuestion(requestId);
+      performanceTrace.report({ source: "pretrained-fallback-unavailable", fastPath: false, architecture: pretrainedFallbackAudit });
+      return disabledResponse();
+    }
+  }
   if (useFastEngine && fastAnswerProvider && fastDiscoveryProvider) {
     const fastResult = await answerWithFastTwoPathEmet({
       question,
@@ -228,12 +350,14 @@ export async function POST(request: Request) {
         modelCalls: fastResult.modelCalls,
         tokenUsage: fastResult.usage,
         path: fastResult.path,
+        architecture: pretrainedFallbackAudit,
       });
       return json({
         status: "insufficient-evidence",
         answer: "I couldn't assemble enough verified Scripture to answer that reliably.",
         limitations: fastResult.validationErrors,
         usage: (await getEmetAiUsageSummary()) || quota,
+        architecture: pretrainedFallbackAudit,
       }, 422);
     }
 
@@ -271,6 +395,7 @@ export async function POST(request: Request) {
       modelCalls: fastResult.modelCalls,
       tokenUsage: fastResult.usage,
       path: fastResult.path,
+      architecture: pretrainedFallbackAudit,
     });
     return json({
       status: answer.status,
@@ -278,6 +403,7 @@ export async function POST(request: Request) {
       source: `fast-two-path-${fastResult.path}`,
       usage: quota,
       shareStudyId,
+      architecture: pretrainedFallbackAudit,
     });
   }
 
@@ -337,18 +463,19 @@ export async function POST(request: Request) {
   }
   if (!evidence) {
     await refundFailedEmetAiQuestion(requestId);
-    performanceTrace.report({ source: "fail-closed", fastPath });
-    return json({ status: "insufficient-evidence" }, 422);
+    performanceTrace.report({ source: "fail-closed", fastPath, architecture: pretrainedFallbackAudit });
+    return json({ status: "insufficient-evidence", architecture: pretrainedFallbackAudit }, 422);
   }
   if (evidence.status !== "ready") {
     await refundFailedEmetAiQuestion(requestId);
-    performanceTrace.report({ source: "insufficient-evidence", fastPath });
+    performanceTrace.report({ source: "insufficient-evidence", fastPath, architecture: pretrainedFallbackAudit });
     return json(
       {
         status: "insufficient-evidence",
         answer: "I couldn't assemble enough directly relevant Scripture to answer that reliably.",
         limitations: evidence.limitations,
         usage: (await getEmetAiUsageSummary()) || quota,
+        architecture: pretrainedFallbackAudit,
       },
       422,
     );
@@ -398,7 +525,7 @@ export async function POST(request: Request) {
     }
   }
 
-  performanceTrace.report({ source: result.source, fastPath });
+  performanceTrace.report({ source: result.source, fastPath, architecture: pretrainedFallbackAudit });
   const shareStudyId = result.answer.status === "complete"
     ? await saveSharedStudyCandidate({ userId, question, packet: evidence.packet, answer: result.answer })
     : null;
@@ -408,5 +535,6 @@ export async function POST(request: Request) {
     source: result.source,
     usage: responseUsage,
     shareStudyId,
+    architecture: pretrainedFallbackAudit,
   });
 }

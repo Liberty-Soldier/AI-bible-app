@@ -10,6 +10,7 @@ import {
   verifiedSourceTermsAtReference,
 } from "../EmetAiSourcePhrase";
 import { expandPlannedReferences } from "../EmetAiTopicEvidence";
+import type { EmetAiFastCoverageDimension } from "./EmetAiFastDiscovery";
 
 export type FastScripturePassage = {
   reference: string;
@@ -17,6 +18,7 @@ export type FastScripturePassage = {
   score: number;
   reasons: string[];
   explicit: boolean;
+  covers?: EmetAiFastCoverageDimension[];
 };
 
 export type FastScriptureLexicalTerm = {
@@ -80,6 +82,7 @@ const STOP_WORDS = new Set([
   "that", "the", "their", "them", "they", "this", "to", "us", "was", "we", "what", "when",
   "which", "who", "with", "would", "yet", "modern", "suppose", "supposed", "supposedly",
   "require", "required", "requirement",
+  "scripture", "bible", "biblical", "establish", "according",
 ]);
 
 // General lexical/concept families only. These add search vocabulary, never references or conclusions.
@@ -96,7 +99,11 @@ const TERM_FAMILIES: string[][] = [
   ["sacrifice", "offering", "altar", "offered"],
   ["clean", "unclean", "animal", "beast"],
   ["one", "single", "alone", "united"],
-  ["messiah", "christ", "jesus", "lord", "master"],
+  ["messiah", "christ", "jesus", "yeshua", "yahshua"],
+  ["yahweh", "yhwh"],
+  ["god", "elohim"],
+  ["spirit", "ruach"],
+  ["holy", "hakodesh"],
 ];
 
 let cachedIndex: ScriptureIndex | null = null;
@@ -184,6 +191,7 @@ export function retrieveLockedMessiahTopicTestimony({
         score: directTerms * 10 + (explicitMessiah ? 5 : 0) + (teachingForm ? 3 : 0),
         reasons: ["locked-gospel-topic-testimony"],
         explicit: false,
+        covers: ["messiah-teaching"],
       } satisfies FastScripturePassage;
     })
     .sort((left, right) => right.score - left.score)
@@ -301,6 +309,26 @@ function addCorpusMatches(index: ScriptureIndex, terms: string[], candidates: Ma
   }
 }
 
+function addDirectIdentityWeights(
+  index: ScriptureIndex,
+  terms: string[],
+  candidates: Map<number, { score: number; reasons: Set<string>; explicit: boolean }>,
+) {
+  const subjectWords = Array.from(new Set(terms.map(normalizeText).filter((term) => /^\p{L}+$/u.test(term))));
+  if (!subjectWords.length) return;
+  const alternatives = subjectWords
+    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|");
+  const directIdentity = new RegExp(
+    `(?<!whether )(?<!if )\\b(?:you are|this is|he is|she is|i am|we have found)\\s+(?:the\\s+)?(?:${alternatives})\\b|\\bmade him both\\b[^.!?;:]{0,50}\\b(?:${alternatives})\\b`,
+    "i",
+  );
+  for (const [id] of candidates) {
+    if (!directIdentity.test(normalizeText(index.verses[id].text))) continue;
+    addCandidate(candidates, id, 40, "direct-identity-statement");
+  }
+}
+
 function addCommandApplicabilitySupport(
   index: ScriptureIndex,
   candidates: Map<number, { score: number; reasons: Set<string>; explicit: boolean }>,
@@ -322,9 +350,64 @@ function addCommandApplicabilitySupport(
   for (const [id, verse] of index.verses.entries()) {
     for (const [category, pattern] of patterns) {
       if (!includeSabbathEvidence && ["foundation", "governing"].includes(category)) continue;
+      if (
+        category === "governing" &&
+        !/\b(?:remember|observe|command(?:ed|ment)?|you shall|shall (?:keep|observe)|keep it holy)\b/i.test(verse.text)
+      ) continue;
       if (pattern.test(verse.text)) addCandidate(candidates, id, 32, `command-applicability-support:${category}`);
     }
   }
+}
+
+const NT_APOSTOLIC_BOOKS = new Set([
+  "Romans", "1 Corinthians", "2 Corinthians", "Galatians", "Ephesians", "Philippians",
+  "Colossians", "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus",
+  "Philemon", "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude",
+]);
+
+function inferCoverage({
+  verse,
+  reasons,
+  commandApplicability,
+  queryStems,
+}: {
+  verse: IndexedVerse;
+  reasons: Set<string>;
+  commandApplicability: boolean;
+  queryStems: string[];
+}) {
+  const covers = new Set<EmetAiFastCoverageDimension>();
+  if (reasons.has("explicit-reference") || reasons.has("explicit-chapter")) covers.add("explicit-request");
+  if (Array.from(reasons).some((reason) => reason.endsWith(":foundation"))) covers.add("foundation");
+  if (Array.from(reasons).some((reason) => reason.endsWith(":governing"))) covers.add("governing-instruction");
+  const membershipReasons = Array.from(reasons).filter((reason) => reason.includes(":membership-"));
+  if (membershipReasons.length) {
+    covers.add("audience-scope");
+    if (/\b(?:grafted|fellow citizens|heirs? according to promise|join(?:ed)? themselves|partaker)\b/i.test(verse.text)) {
+      covers.add("covenant-membership");
+    }
+  }
+  if (/\bjoin themselves to Yahweh\b/i.test(verse.text)) {
+    covers.add("covenant-membership");
+    covers.add("audience-scope");
+  }
+  if (Array.from(reasons).some((reason) => reason.endsWith(":messiah-life")) || reasons.has("locked-gospel-topic-testimony")) {
+    covers.add("messiah-teaching");
+  }
+  if (Array.from(reasons).some((reason) => reason.startsWith("command-applicability-support:final-"))) {
+    covers.add("final-canonical-testimony");
+  }
+  if (!commandApplicability) return Array.from(covers);
+
+  const subjectMatch = queryStems.some((term) => verse.stems.includes(term));
+  if (subjectMatch && NT_APOSTOLIC_BOOKS.has(verse.book)) covers.add("apostolic-testimony");
+  if (subjectMatch && /\b(?:forever|perpetual|throughout|generation|remain(?:s|ed)?|until)\b/i.test(verse.text)) {
+    covers.add("duration-conditions");
+  }
+  if (subjectMatch && /\b(?:people|children|sons|daughters|foreigner|stranger|citizen|heir|servant|priest|believer)\b/i.test(verse.text)) {
+    covers.add("audience-scope");
+  }
+  return Array.from(covers);
 }
 function addPhraseMatches(index: ScriptureIndex, question: string, candidates: Map<number, { score: number; reasons: Set<string>; explicit: boolean }>) {
   const normalizedQuestion = normalizeText(question);
@@ -476,6 +559,31 @@ function addContext(index: ScriptureIndex, selected: number[], candidates: Map<n
   }
 }
 
+type ObservanceKind = "weekly" | "annual" | "land-year";
+
+function requestedObservanceKind(question: string): ObservanceKind | null {
+  if (/\b(?:land|sabbatical|seventh year|year of rest|sow|reap|vineyard)\b/i.test(question)) return "land-year";
+  if (/\b(?:atonement|feast|festival|annual|holy day|convocation|month|evening to evening)\b/i.test(question)) return "annual";
+  if (/\b(?:weekly|week|seventh day|commandment|sabbath)\b/i.test(question)) return "weekly";
+  return null;
+}
+
+function passageObservanceKind(text: string): ObservanceKind | null {
+  if (/\bland\b/i.test(text) && /\b(?:sabbath|rest|year|sow|reap|vineyard|increase|produce)\b/i.test(text)) return "land-year";
+  if (/\b(?:atonement|convocation|afflict your souls|evening to evening)\b/i.test(text) ||
+      (/\b(?:feast|festival)\b/i.test(text) && /\b(?:keep|observe|seven days|first day|eighth day)\b/i.test(text)) ||
+      /\b(?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth) month\b/i.test(text)) return "annual";
+  if (/\b(?:seventh day|six days|every sabbath|week)\b/i.test(text)) return "weekly";
+  return null;
+}
+
+function observanceMatchesQuestion(question: string, verse: IndexedVerse, reasons: Set<string>) {
+  if (reasons.has("explicit-reference") || reasons.has("explicit-chapter")) return true;
+  const requested = requestedObservanceKind(question);
+  const passage = passageObservanceKind(verse.text);
+  return !requested || !passage || requested === passage;
+}
+
 function selectBalanced(index: ScriptureIndex, candidates: Map<number, { score: number; reasons: Set<string>; explicit: boolean }>, limit: number) {
   const ranked = Array.from(candidates)
     .filter(([id]) => Boolean(index.verses[id]))
@@ -511,7 +619,7 @@ export function retrieveFastScriptureEvidence({
   const effectiveLimit = contract.intent === "enumeration"
     ? Math.max(maxPassages, 22)
     : contract.commandApplicability
-      ? Math.max(maxPassages, 24)
+      ? Math.max(maxPassages, 30)
       : maxPassages;
   const conversationText = conversation?.recentExchanges.slice(-2).map((item) => item.question).join(" ") || "";
   const queryTokens = contentTokens(question);
@@ -523,6 +631,9 @@ export function retrieveFastScriptureEvidence({
   addCorpusMatches(index, expandedTerms.filter((term) => !queryTokens.includes(term)), candidates, 0.55);
   if (conversationText) addCorpusMatches(index, expandTerms(contentTokens(conversationText)), candidates, 0.38);
   addPhraseMatches(index, `${question} ${conversationText}`, candidates);
+  if (/\bwho\b.{0,100}\b(?:is|are|was|were)\b|\b(?:identity|identify)\b/i.test(question)) {
+    addDirectIdentityWeights(index, expandedTerms, candidates);
+  }
   if (contract.commandApplicability && /\b(?:christians?|believers?|followers?|messiah|gentiles?)\b/i.test(question)) {
     addCommandApplicabilitySupport(index, candidates, question);
   }
@@ -567,19 +678,13 @@ export function retrieveFastScriptureEvidence({
             Array.from(value.reasons).filter((reason) => reason.startsWith("command-applicability-support:"))
           )));
           const selectedSupport: number[] = [];
-          const seenChapters = new Set<string>();
           for (const category of categories) {
             const categoryEntries = entries.filter(([, value]) => value.reasons.has(category));
             if (category.endsWith(":foundation")) categoryEntries.sort((left, right) => left[0] - right[0]);
-            const match = categoryEntries.find(([id]) => {
-              const verse = index.verses[id];
-              return !seenChapters.has(`${verse.book} ${verse.chapter}`);
-            });
+            const match = categoryEntries.find(([id]) => !selectedSupport.includes(id));
             if (!match) continue;
             const [id] = match;
             selectedSupport.push(id);
-            const verse = index.verses[id];
-            seenChapters.add(`${verse.book} ${verse.chapter}`);
           }
           for (const [id] of entries) {
             if (selectedSupport.includes(id)) continue;
@@ -588,7 +693,39 @@ export function retrieveFastScriptureEvidence({
           }
           return selectedSupport.slice(0, 16);
         })()
-      : [];    const torah = from((book) => /^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 2);
+      : [];
+    const queryStems = Array.from(new Set(queryTokens.map(stem)));
+    const coverageDimensions: EmetAiFastCoverageDimension[] = contract.commandApplicability
+      ? [
+          "foundation",
+          "governing-instruction",
+          "audience-scope",
+          "duration-conditions",
+          "covenant-membership",
+          "messiah-teaching",
+          "apostolic-testimony",
+          "final-canonical-testimony",
+        ]
+      : [];
+    const coverageSupport: number[] = [];
+    for (const dimension of coverageDimensions) {
+      const match = ranked
+        .filter(([id]) => !coverageSupport.includes(id))
+        .map(([id, value]) => ({
+          id,
+          score: value.score,
+          covers: inferCoverage({
+            verse: index.verses[id],
+            reasons: value.reasons,
+            commandApplicability: contract.commandApplicability,
+            queryStems,
+          }),
+        }))
+        .filter((entry) => entry.covers.includes(dimension))
+        .sort((left, right) => right.covers.length - left.covers.length || right.score - left.score)[0];
+      if (match) coverageSupport.push(match.id);
+    }
+    const torah = from((book) => /^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 2);
     const writingsAndProphets = from((book, testament) =>
       testament === "ot" && !/^(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy)$/.test(book), 2);
     const gospels = from((book) => /^(?:Matthew|Mark|Luke|John)$/.test(book), 2);
@@ -599,7 +736,16 @@ export function retrieveFastScriptureEvidence({
       .sort((left, right) => right[1].score - left[1].score)
       .slice(0, 6)
       .map(([id]) => id);
-    selected = Array.from(new Set([...torah, ...writingsAndProphets, ...gospels, ...later, ...applicabilitySupport, ...bestNt, ...selected]))
+    selected = Array.from(new Set([
+      ...torah,
+      ...writingsAndProphets,
+      ...gospels,
+      ...later,
+      ...coverageSupport,
+      ...applicabilitySupport,
+      ...bestNt,
+      ...selected,
+    ]))
       .slice(0, effectiveLimit);
   }
   const exactReferenceRequestForSelection = contract.requestedCoverage.passages.length > 0
@@ -618,6 +764,12 @@ export function retrieveFastScriptureEvidence({
     selected = selected.slice(0, 8);
   }
 
+  selected = selected.filter((id) => observanceMatchesQuestion(
+    question,
+    index.verses[id],
+    candidates.get(id)?.reasons || new Set<string>(),
+  ));
+
   const passages = selected.map((id): FastScripturePassage => {
     const verse = index.verses[id];
     const candidate = candidates.get(id)!;
@@ -627,6 +779,12 @@ export function retrieveFastScriptureEvidence({
       score: Math.round(candidate.score * 100) / 100,
       reasons: Array.from(candidate.reasons),
       explicit: candidate.explicit,
+      covers: inferCoverage({
+        verse,
+        reasons: candidate.reasons,
+        commandApplicability: contract.commandApplicability,
+        queryStems: Array.from(new Set(queryTokens.map(stem))),
+      }),
     };
   });
 

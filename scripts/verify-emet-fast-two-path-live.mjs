@@ -5,6 +5,9 @@ import process from "node:process";
 import { createEmetAiFastDiscoveryProvider } from "../app/lib/emet/simple/EmetAiFastDiscovery.ts";
 import { createEmetAiSimpleOpenAiProvider } from "../app/lib/emet/simple/EmetAiSimpleProvider.ts";
 import { answerWithFastTwoPathEmet } from "../app/lib/emet/simple/EmetAiFastTwoPathService.ts";
+import { validateEmetAiSimpleAnswer } from "../app/lib/emet/simple/EmetAiSimpleContract.ts";
+import { adaptFastEmetAnswer } from "../app/lib/emet/simple/EmetAiFastAnswerAdapter.ts";
+import { validateEmetAiAnswer } from "../app/lib/emet/EmetAiContract.ts";
 
 async function loadEnvFile(file) {
   try {
@@ -49,21 +52,27 @@ const acceptanceScenarios = [
   },
 ];
 const universalScenarios = [
-  { id: "sabbath-exact", question: "Is a modern Christian supposed to observe or keep the Sabbath?" },
-  { id: "prophecy", question: "What does Jeremiah 31:31–34 prophesy about the new covenant, and how does Hebrews 8 develop it?" },
-  { id: "history", question: "Why did Josiah tear his clothes when the Book of the Law was read to him?" },
+  { id: "sabbath-exact", question: "Should Christians keep the Sabbath?" },
+  { id: "nt-direct", question: "According to 1 Corinthians 15:52, what happens at the last trumpet?" },
+  { id: "lexical", question: "What Hebrew word is translated one in Deuteronomy 6:4, and what does it mean?" },
   { id: "messiah-identity", question: "What does Scripture establish about who the Messiah is?" },
-  { id: "salvation", question: "According to Scripture, how is a person saved?" },
-  { id: "passage-explanation", question: "What does Psalm 1 teach?" },
+  { id: "command-role", question: "Must someone who is not a priest perform priestly duties assigned to Aaron and his sons?" },
+  { id: "prophecy", question: "What does Jeremiah 31:31–34 prophesy about the new covenant, and how does Hebrews 8 develop it?" },
+];
+const phase2cSacredScenario = [
+  { id: "phase2c-yahweh-yahshua", question: "Who is Yahweh, and is Yahshua the same person as Yahweh?" },
 ];
 const universalSix = process.argv.includes("--universal-six");
 const finalAcceptance = process.argv.includes("--final-acceptance");
 const finalThree = process.argv.includes("--final-three");
+const phase2cSacred = process.argv.includes("--phase2c-sacred");
 const requestedId = process.argv.find((value) => value.startsWith("--only="))?.slice(7) || "";
 const scenarios = requestedId
   ? universalScenarios.filter((scenario) => scenario.id === requestedId)
   : universalSix
   ? universalScenarios
+  : phase2cSacred
+  ? phase2cSacredScenario
   : finalAcceptance
   ? acceptanceScenarios
   : finalThree
@@ -71,7 +80,7 @@ const scenarios = requestedId
   : process.argv.includes("--failed-four")
     ? allScenarios.filter((scenario) => ["sabbath", "pre-sinai", "hebrew-one", "resurrection-follow-up"].includes(scenario.id))
     : allScenarios;
-const maximumCalls = universalSix ? 12 : finalAcceptance ? 6 : finalThree ? 5 : process.argv.includes("--failed-four") ? 7 : 9;
+const maximumCalls = phase2cSacred ? 2 : universalSix ? 12 : finalAcceptance ? 6 : finalThree ? 5 : process.argv.includes("--failed-four") ? 7 : 9;
 
 const model = "gpt-5.4-mini";
 const answerProvider = createEmetAiSimpleOpenAiProvider({ model, reasoningEffort: "none", verifiedEvidenceOnly: true });
@@ -79,7 +88,7 @@ const discoveryProvider = createEmetAiFastDiscoveryProvider({ model });
 if (!answerProvider || !discoveryProvider) throw new Error("OPENAI_API_KEY is not configured.");
 
 const estimatedBlendedUsdPerToken = 0.0176 / 11_977;
-const ceilingUsd = universalSix ? 0.2 : finalAcceptance ? 0.05 : 0.08;
+const ceilingUsd = phase2cSacred ? 0.025 : universalSix ? 0.2 : finalAcceptance ? 0.05 : 0.08;
 let consumedTokens = 0;
 let actualCalls = 0;
 
@@ -115,6 +124,20 @@ function meteredDiscoveryProvider() {
   };
 }
 
+function validationSummary(validation) {
+  return validation
+    ? { ok: validation.ok, errors: validation.ok ? [] : validation.errors }
+    : null;
+}
+
+function changedFields(before, after) {
+  if (!before || !after) return [];
+  return [
+    "status", "conclusion", "conclusionSupport", "answer", "references",
+    "claims", "componentChecks", "lexicalAnalyses", "limitations",
+  ].filter((field) => JSON.stringify(before[field]) !== JSON.stringify(after[field]));
+}
+
 const results = [];
 for (const scenario of scenarios) {
   const result = await answerWithFastTwoPathEmet({
@@ -123,11 +146,49 @@ for (const scenario of scenarios) {
     answerProvider: meteredAnswerProvider(),
     discoveryProvider: meteredDiscoveryProvider(),
   });
-  results.push({ id: scenario.id, question: scenario.question, ...result });
+  const rawSimpleValidation = result.packet && result.generatedDraft
+    ? validateEmetAiSimpleAnswer({ packet: result.packet, draft: structuredClone(result.generatedDraft) })
+    : null;
+  const rawFullValidation = result.packet && rawSimpleValidation?.ok
+    ? validateEmetAiAnswer(
+        result.packet,
+        adaptFastEmetAnswer({ answer: rawSimpleValidation.value, packet: result.packet }),
+      )
+    : null;
+  const finalSimpleValidation = result.packet && result.answer
+    ? validateEmetAiSimpleAnswer({ packet: result.packet, draft: structuredClone(result.answer) })
+    : null;
+  const finalFullValidation = result.packet && finalSimpleValidation?.ok
+    ? validateEmetAiAnswer(
+        result.packet,
+        adaptFastEmetAnswer({ answer: finalSimpleValidation.value, packet: result.packet }),
+      )
+    : null;
+  results.push({
+    id: scenario.id,
+    question: scenario.question,
+    ...result,
+    postprocessing: {
+      changedFields: changedFields(result.generatedDraft, result.answer),
+      substantiveConclusionChanged: Boolean(
+        result.generatedDraft && result.answer && result.generatedDraft.conclusion !== result.answer.conclusion
+      ),
+    },
+    validatorResults: {
+      rawModel: {
+        simple: validationSummary(rawSimpleValidation),
+        full: validationSummary(rawFullValidation),
+      },
+      finalDisplayed: {
+        simple: validationSummary(finalSimpleValidation),
+        full: validationSummary(finalFullValidation),
+      },
+    },
+  });
 }
 
 const artifact = {
-  schemaVersion: "emet-fast-two-path-live-evaluation@1",
+  schemaVersion: "emet-fast-two-path-live-evaluation@2",
   createdAt: new Date().toISOString(),
   model,
   reasoningEffort: "none",
@@ -156,6 +217,7 @@ console.log(JSON.stringify({
     usage: result.usage,
     stages: result.stages,
     errors: result.validationErrors,
+    validatorResults: result.validatorResults,
     answer: result.answer?.answer || null,
     references: result.answer?.references || [],
     discoveredReferences: result.discovery?.references || [],

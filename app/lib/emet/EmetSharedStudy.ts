@@ -3,6 +3,7 @@ import "server-only";
 import { createHash } from "node:crypto";
 
 import type { EmetAiAnswer, EmetAiEvidencePacket } from "./EmetAiContract";
+import { isEmetAiCachedAnswerAuthorityVerified } from "./EmetAiCachedAnswerAuthority";
 import { createSupabaseAdminClient } from "../supabase/admin";
 
 export type SharedStudyCitation = {
@@ -51,6 +52,7 @@ export async function saveSharedStudyCandidate({
   answer: EmetAiAnswer;
 }) {
   if (answer.status !== "complete") return null;
+  if (!isEmetAiCachedAnswerAuthorityVerified({ packet, answer, question })) return null;
   const supabase = createSupabaseAdminClient();
   if (!supabase) return null;
   const hash = snapshotHash(question, answer);

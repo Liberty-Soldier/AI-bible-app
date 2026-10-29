@@ -1,4 +1,5 @@
 import "server-only";
+import { isEmetAiCachedAnswerAuthorityVerified } from "./EmetAiCachedAnswerAuthority";
 
 import {
   insufficientEmetAiAnswer,
@@ -88,7 +89,7 @@ export async function answerFromEmetAiEvidence({
     const parsed = parseEmetAiAnswer(cached.answer);
     const validation = parsed && validateEmetAiAnswer(packet, parsed);
     performanceObserver?.stage("validation", performance.now() - stageStartedAt);
-    if (validation?.ok) {
+    if (validation?.ok && isEmetAiCachedAnswerAuthorityVerified({ packet, answer: validation.value })) {
       return { answer: validation.value, source: "cache", cacheKey };
     }
   }
@@ -129,7 +130,7 @@ export async function answerFromEmetAiEvidence({
         );
       }
 
-      if (validation.value.status === "complete") {
+      if (validation.value.status === "complete" && isEmetAiCachedAnswerAuthorityVerified({ packet, answer: validation.value })) {
         const storageStartedAt = performance.now();
         await store.set(cacheKey, {
           answer: validation.value,

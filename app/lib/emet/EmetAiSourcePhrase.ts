@@ -163,6 +163,10 @@ function normalizedLookupWords(value: string) {
   return value
     .normalize("NFKD")
     .replace(/[\u0300-\u036f\u0591-\u05c7]/g, "")
+    // Transliteration systems encode aleph/ayin and apostrophe-like signs with
+    // Unicode modifier letters. They are orthographic markers, not part of the
+    // base lookup spelling (for example, ʼechâd and echad).
+    .replace(/[\u02b9-\u02c1]/gi, "")
     .toLocaleLowerCase("en-US")
     .match(/[\p{L}\p{N}]+/gu) || [];
 }
@@ -191,11 +195,11 @@ export function verifiedSourceTermsAtReference({
   if (lookupWords.length !== 1) return [];
   const lookupWord = lookupWords[0];
 
-  return entry[1].flatMap((rawLexicalId, position): VerifiedSourceTermAtReference[] => {
+  const matches = entry[1].flatMap((rawLexicalId, position): VerifiedSourceTermAtReference[] => {
     const term = verifiedTerms(corpus, [rawLexicalId])[0];
     if (!term) return [];
     const searchable = new Set(normalizedLookupWords(
-      `${term.lemma} ${term.transliteration} ${term.meaning}`,
+      `${term.lexicalId} ${term.lemma} ${term.transliteration} ${term.meaning}`,
     ));
     if (!searchable.has(lookupWord)) return [];
     return [{
@@ -210,6 +214,10 @@ export function verifiedSourceTermsAtReference({
       position,
     }];
   });
+  // A verse and corpus may contain the same normalized spelling for different
+  // lexical identities. Repeated occurrences of one identity are safe; distinct
+  // identities are ambiguous and must fail closed instead of being guessed.
+  return new Set(matches.map((term) => term.lexicalId)).size === 1 ? matches : [];
 }
 
 /**

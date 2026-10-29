@@ -35,6 +35,7 @@
     "emet:generate:reset": "node --max-old-space-size=4096 scripts/entity/schedule-cached-emet-generation.js --reset",
     "test:emet-reader": "node --max-old-space-size=4096 scripts/entity/test-emet-reader-explanation.js",
     "verify:emet-ai": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-ai-foundation.mjs",
+    "verify:emet-pretrained": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-emet-pretrained-first.mjs",
     "verify:emet-ai-db": "node scripts/verify-emet-ai-supabase.mjs",
     "verify:emet-auth": "node scripts/verify-emet-auth.mjs",
     "verify:emet-ui": "node scripts/verify-emet-question-ui.mjs",

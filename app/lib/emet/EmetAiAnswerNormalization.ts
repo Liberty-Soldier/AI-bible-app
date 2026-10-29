@@ -117,15 +117,28 @@ function claimDirection(text: string): DirectAnswerPolarity | null {
   return null;
 }
 
+const MODAL_ACTION_GROUPS = [
+  ["keep", "keeps", "keeping", "kept", "observe", "observes", "observing", "obey", "obeys", "obeying", "practice", "practices", "practicing", "follow", "follows", "following"],
+  ["perform", "performs", "performing", "do", "does", "doing", "serve", "serves", "serving"],
+  ["approach", "approaches", "approaching", "come", "comes", "coming"],
+] as const;
+
+function predicateMarkers(question: string) {
+  const value = normalizedPolarityText(question);
+  return MODAL_ACTION_GROUPS.find((group) => group.some((term) => new RegExp(`\\b${term}\\b`).test(value))) || [];
+}
+
 export function expectedEmetAiDirectAnswerPolarity(
   question: string,
   answer: Pick<EmetAiAnswer, "claims">,
 ): DirectAnswerPolarity | null {
   if (!DIRECT_MODAL_QUESTION.test(question)) return null;
   const markers = subjectMarkers(question);
+  const predicates = predicateMarkers(question);
   const directional = answer.claims.flatMap((claim) => {
     const text = normalizedPolarityText(claim.text);
     if (markers.length && !markers.some((marker) => text.includes(marker))) return [];
+    if (predicates.length && !predicates.some((predicate) => new RegExp(`\\b${predicate}\\b`).test(text))) return [];
     const direction = claimDirection(text);
     return direction ? [direction] : [];
   });

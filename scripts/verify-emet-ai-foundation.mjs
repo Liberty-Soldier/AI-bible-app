@@ -617,7 +617,11 @@ const skippedComponent = structuredClone(calibratedDoctrinalAnswer);
 skippedComponent.componentChecks.pop();
 assert.equal(validateEmetAiAnswer(doctrinalPacket, skippedComponent).ok, false);
 const overrankedCompound = structuredClone(calibratedDoctrinalAnswer);
-overrankedCompound.conclusionSupport = "theological-synthesis";
+overrankedCompound.conclusionSupport = "explicit-statement";
+overrankedCompound.claims = overrankedCompound.claims.map((claim) => ({
+  ...claim,
+  support: "theological-synthesis",
+}));
 assert.equal(validateEmetAiAnswer(doctrinalPacket, overrankedCompound).ok, false);
 const leakedInternalProcess = structuredClone(calibratedDoctrinalAnswer);
 leakedInternalProcess.answer = "The draft's conclusion needs to be narrowed.";
