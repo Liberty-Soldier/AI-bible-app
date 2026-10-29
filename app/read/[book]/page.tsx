@@ -6,9 +6,9 @@ import { bookCatalog } from "@/app/data/scripture/bookCatalog";
 
 type Translation = "web" | "kjv" | "brenton";
 
-function getActiveTranslation(value?: string): Translation {
+function getActiveTranslation(value?: string): Translation | undefined {
   if (value === "kjv" || value === "brenton" || value === "web") return value;
-  return "web";
+  return undefined;
 }
 
 export default async function BookPage({
@@ -34,7 +34,7 @@ export default async function BookPage({
     <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-6 text-[var(--foreground)]">
       <section className="mx-auto max-w-2xl">
         <Link
-          href="/read"
+          href={activeTranslation ? `/read?translation=${activeTranslation}` : "/read"}
           className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--muted)] transition active:opacity-60"
         >
           ← All books
@@ -50,7 +50,7 @@ export default async function BookPage({
           </h1>
 
           <p className="mt-2 text-sm text-[var(--muted)]">
-            {activeTranslation.toUpperCase()} · {bookInfo.chapters} chapters
+            {activeTranslation ? `${activeTranslation.toUpperCase()} · ` : ""}{bookInfo.chapters} chapters
           </p>
         </div>
 

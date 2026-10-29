@@ -51,14 +51,16 @@ const picker = fs.readFileSync(
   new URL("../app/components/BookPassageSelector.tsx", import.meta.url),
   "utf8",
 );
-assert.match(picker, /Select a chapter to choose a verse/);
-assert.match(picker, /normalizeReaderChapter/);
-assert.match(picker, /verse\.verseLabel/);
-assert.match(picker, /Read chapter →/);
-assert.match(picker, /translation, "web", "kjv", "brenton"/);
-
+assert.match(picker, /<Link/);
+assert.match(picker, /href=\{buildReaderHref\(\{ book, chapter, translation \}\)\}/);
+assert.match(picker, /getPreferredTranslation/);
+assert.doesNotMatch(picker, /selectedChapter|loadVerses|fetch\(/);
+const selector = fs.readFileSync(new URL("../app/components/ReaderSelector.tsx", import.meta.url), "utf8");
+assert.match(selector, /<BookPassageSelector/);
+assert.match(selector, /Go to verse \(optional\)/);
+assert.match(selector, /verseOptions.map/);
 console.log("Reader navigation verification passed.");
 console.log("- Full book names and abbreviations open chapter 1, verse 1.");
 console.log("- Chapter-only and exact-verse references preserve their intent.");
-console.log("- Chapter selection exposes optional, runtime-owned verse labels.");
+console.log("- Chapter links open reading directly; optional verse navigation uses runtime-owned labels.");
 console.log("- Translation fallback remains available for corpus-specific books.");

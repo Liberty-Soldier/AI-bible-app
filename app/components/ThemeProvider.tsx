@@ -29,14 +29,27 @@ function normalizeTheme(value: string | null): Theme {
   return value === "dark" ? "dark" : "light";
 }
 
-function writeStoredTheme(theme: Theme) {
-  localStorage.setItem(PRIMARY_STORAGE_KEY, theme);
+function readStoredTheme(): Theme {
+  try {
+    for (const key of [PRIMARY_STORAGE_KEY, ...LEGACY_STORAGE_KEYS]) {
+      const stored = localStorage.getItem(key);
+      if (stored === "light" || stored === "dark") return stored;
+    }
+  } catch {
+    // The light default remains usable when storage is blocked.
+  }
+  return "light";
+}
 
-  // Keep the existing Settings page compatible until its own visual redesign.
-  // The old key is synchronized from the new authoritative preference; it is
-  // never allowed to choose the first-visit default.
-  for (const key of LEGACY_STORAGE_KEYS) {
-    localStorage.setItem(key, theme);
+function writeStoredTheme(theme: Theme) {
+  try {
+    localStorage.setItem(PRIMARY_STORAGE_KEY, theme);
+    // Preserve compatibility with saved preferences from earlier versions.
+    for (const key of LEGACY_STORAGE_KEYS) {
+      localStorage.setItem(key, theme);
+    }
+  } catch {
+    // Theme selection still works for this page without persistent storage.
   }
 }
 
@@ -61,8 +74,7 @@ export default function ThemeProvider({
   }, []);
 
   useLayoutEffect(() => {
-    const stored = normalizeTheme(localStorage.getItem(PRIMARY_STORAGE_KEY));
-    commitTheme(stored);
+    commitTheme(readStoredTheme());
   }, [commitTheme]);
 
   useEffect(() => {
@@ -93,10 +105,7 @@ export default function ThemeProvider({
         return;
       }
 
-      const authoritative = normalizeTheme(
-        localStorage.getItem(PRIMARY_STORAGE_KEY),
-      );
-      commitTheme(authoritative);
+      commitTheme(readStoredTheme());
     }
 
     window.addEventListener("storage", syncTheme);

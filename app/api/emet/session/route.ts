@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { getEmetAiUsageSummary } from "@/app/lib/emet/EmetAiQuota";
 import { getVerifiedSupabaseUserId } from "@/app/lib/supabase/server";
+import { canUseSimpleEmet } from "@/app/lib/emet/experimental/SimpleEmetAccess";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +13,8 @@ const headers = {
 };
 
 export async function GET() {
-  if (!(await getVerifiedSupabaseUserId())) {
+  const userId = await getVerifiedSupabaseUserId();
+  if (!userId) {
     return NextResponse.json(
       { authenticated: false },
       { status: 401, headers },
@@ -23,6 +25,7 @@ export async function GET() {
     {
       authenticated: true,
       usage: await getEmetAiUsageSummary(),
+      simpleAvailable: await canUseSimpleEmet(userId),
     },
     { headers },
   );

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
+import { safeChatReturnHref } from "@/app/components/emet/chatPresentation";
 import EmetChat from "@/app/components/emet/EmetChat";
 import { getEmetAiUsageSummary } from "@/app/lib/emet/EmetAiQuota";
 import { getVerifiedSupabaseUser } from "@/app/lib/supabase/server";
+import { canUseSimpleEmet } from "@/app/lib/emet/experimental/SimpleEmetAccess";
 
 export const metadata: Metadata = {
   title: "Ask EMET",
@@ -18,43 +18,29 @@ export default async function EmetPage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const queryValue = (await searchParams).q;
+  const resolvedParams = await searchParams;
+  const queryValue = resolvedParams.q;
+  const returnValue = resolvedParams.returnTo;
+  const returnTo = safeChatReturnHref(Array.isArray(returnValue) ? returnValue[0] : returnValue);
   const initialQuestion = Array.isArray(queryValue)
     ? queryValue[0] || ""
     : queryValue || "";
   const user = await getVerifiedSupabaseUser();
   if (!user) {
-    const next = initialQuestion
+    let next = initialQuestion
       ? `/emet?q=${encodeURIComponent(initialQuestion)}`
       : "/emet";
+    if (returnTo) next += `${initialQuestion ? "&" : "?"}returnTo=${encodeURIComponent(returnTo)}`;
     redirect(`/auth?next=${encodeURIComponent(next)}`);
   }
 
   const usage = await getEmetAiUsageSummary();
+  const simpleAvailable = await canUseSimpleEmet(user.id);
 
   return (
-    <main className="min-h-screen bg-[var(--canvas)] px-4 pb-4 pt-5 text-[var(--foreground)] sm:px-6">
-      <section className="mx-auto max-w-2xl">
-        <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] pb-4">
-          <EmetseesWordmark compact />
-          <Link
-            href="/"
-            className="rounded-full border border-[var(--border)] px-3 py-2 text-xs font-bold text-[var(--muted)]"
-          >
-            Close
-          </Link>
-        </header>
-
-        <div className="py-5">
-          <h1 className="text-2xl font-bold tracking-[-0.035em]">
-            Ask EMET
-          </h1>
-          <p className="mt-1 max-w-xl text-sm leading-6 text-[var(--muted)]">
-            A natural conversation grounded in Scripture, with evidence you can inspect.
-          </p>
-        </div>
-
-        <EmetChat initialUsage={usage} initialQuestion={initialQuestion} />
+    <main className="h-dvh min-h-0 overflow-hidden bg-[var(--canvas)] text-[var(--foreground)]">
+      <section className="mx-auto h-full max-w-2xl">
+        <EmetChat initialUsage={usage} initialQuestion={initialQuestion} returnTo={returnTo} initialSimpleAvailable={simpleAvailable} />
       </section>
     </main>
   );

@@ -53,17 +53,17 @@ export default function ReaderFirstUseTip() {
 
   return (
     <aside
-      className="mb-3 flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 shadow-[var(--shadow-sm)]"
+      className="mt-3 flex items-center gap-2 text-[var(--muted)]"
       aria-label="Reader tip"
     >
       <p className="min-w-0 flex-1 text-xs leading-5 text-[var(--muted)]">
-        Verse numbers open tools. Study opens the original-language text and source words.
+        Select verse numbers, then use ⋯ for notes, highlights, and original-language study.
       </p>
 
       <button
         type="button"
         onClick={dismiss}
-        className="grid h-7 w-7 shrink-0 place-items-center rounded-full text-base text-[var(--muted)] transition hover:bg-[var(--surface-soft)] active:scale-95"
+        className="grid h-11 w-11 shrink-0 place-items-center rounded-lg text-base text-[var(--muted)] transition hover:bg-[var(--surface-soft)] active:scale-95"
         aria-label="Dismiss reader tip"
       >
         ×

@@ -49,6 +49,7 @@ import { createEmetAiFastDiscoveryProvider } from "@/app/lib/emet/simple/EmetAiF
 import { answerWithFastTwoPathEmet } from "@/app/lib/emet/simple/EmetAiFastTwoPathService";
 import { createEmetAiSimpleOpenAiProvider } from "@/app/lib/emet/simple/EmetAiSimpleProvider";
 import { getVerifiedSupabaseUserId } from "@/app/lib/supabase/server";
+import { handleSimpleEmet } from "@/app/lib/emet/experimental/SimpleEmetRequest";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -140,6 +141,15 @@ export async function POST(request: Request) {
     (body.context !== undefined && !context)
   ) {
     return json({ status: "invalid-request" }, 400);
+  }
+
+  if (body.engine !== undefined && body.engine !== "current" && body.engine !== "simple") return json({ status: "invalid-request" }, 400);
+  if (body.engine === "simple") {
+    try {
+      const selectedWord = context ? clean((body.context as Record<string, unknown>).displayWord, 120) : "";
+      const result = await handleSimpleEmet({ userId, requestId, conversationId, question, history: body.simpleHistory, context: context ? { ...context, ...(selectedWord ? { selectedWord } : {}) } : null });
+      return json(result.body, result.status);
+    } catch { return json({ status: "answer-unavailable" }, 503); }
   }
 
   const performanceTrace = createEmetAiPerformanceTrace();

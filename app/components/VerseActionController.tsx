@@ -180,14 +180,14 @@ export default function VerseActionController({
   return (
     <>
       <div
-        className={`space-y-1 text-[var(--foreground)] ${typefaceClass} ${textSizeClass} ${lineSpacingClass}`}
+        className={`space-y-1 text-[var(--foreground)] ${typefaceClass} ${textSizeClass} ${lineSpacingClass} ${selectedVerses.length ? "pb-28" : ""}`}
       >
         {chapterItems.map((item) => {
           if (item.type === "superscription") {
             return (
               <div
                 key={item.value.id}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]/55 px-4 py-3"
+                className="px-1 py-3"
               >
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">
                   Superscription
@@ -212,7 +212,7 @@ export default function VerseActionController({
             <div
               id={readerVerseAnchorId(verseLabel)}
               key={`${verse.id}-${activeTranslation}`}
-              className={`group relative block w-full rounded-r-lg border-l-2 px-1 py-0.5 text-left transition-colors ${
+              className={`group relative block w-full scroll-mt-28 rounded-r-lg border-l-2 px-1 py-0.5 text-left transition-colors ${
                 isSelected
                   ? "border-amber-500/70 bg-amber-500/10"
                   : isHighlightedFromUrl
@@ -225,13 +225,14 @@ export default function VerseActionController({
               <button
                 type="button"
                 data-verse-selector="true"
+                aria-pressed={isSelected}
                 aria-label={`${isSelected ? "Unselect" : "Select"} ${verse.reference} for highlight, note, copy, or share`}
                 onClick={(event: MouseEvent<HTMLButtonElement>) => {
                   event.preventDefault();
                   event.stopPropagation();
                   toggleVerse(verse);
                 }}
-                className={`mr-1.5 inline-flex min-h-7 min-w-7 -translate-y-[0.08em] items-center justify-center rounded-full align-baseline font-sans text-[0.66rem] font-bold transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/50 ${
+                className={`mr-1 inline-flex min-h-11 min-w-11 -translate-y-[0.08em] items-center justify-center rounded-lg align-baseline font-sans text-xs font-medium transition focus-visible:outline-2 focus-visible:outline-[var(--brand)] ${
                   isSelected
                     ? "bg-amber-500/20 text-amber-700 dark:text-amber-300"
                     : "text-[var(--muted)] hover:bg-[var(--surface)] hover:text-[var(--foreground)]"

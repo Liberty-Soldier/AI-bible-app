@@ -39,17 +39,16 @@ requireText(
   "<SourceBreakdownVerse",
   "canonical Source Text action",
 );
-requireText(actionSheet, "prominent", "primary Source Text presentation");
-forbidText(actionSheet, "compactTrigger", "legacy compact Source Study action");
-if (actionSheet.indexOf("<SourceBreakdownVerse") > actionSheet.indexOf("<CompactButton")) {
-  throw new Error("Source Text must precede verse utility actions.");
-}
-requireText(
-  actionSheet,
-  "onTouchStart={onHandleTouchStart}",
-  "handle-owned sheet gesture",
-);
+requireText(actionSheet, 'aria-label="Selected verse actions"', "compact contextual selection strip");
+requireText(actionSheet, 'aria-label="Open verse actions"', "explicit action disclosure");
+requireText(actionSheet, 'panel === "highlight"', "on-demand highlight palette");
+requireText(actionSheet, 'label="Original language / Word Study"', "on-demand source-study access");
+forbidText(actionSheet, 'h-[262px]', "oversized automatic action sheet");
+forbidText(actionSheet, 'fixed inset-0', "full-screen selection interception");
 requireText(header, ">\n          Aa\n", "reader appearance button");
+requireText(header, 'panel === "passage" ? passage', "separate passage panel");
+requireText(header, 'panel === "translation" ? translation : children', "separate translation and appearance panels");
+requireText(header, "max-h-[min(50dvh,26rem)]", "bounded mobile panels");
 forbidText(header, "Open reader help", "obsolete help button");
 requireText(
   preferences,
@@ -67,6 +66,6 @@ requireText(
 
 console.log("Reader experience verification passed.");
 console.log("- Chapter text defaults to a book-style serif surface without repeated study links.");
-console.log("- Verse selection exposes Source Study through the canonical occurrence path.");
+console.log("- Verse selection shows a compact strip; the menu exposes the canonical Source Text path.");
 console.log("- Typeface, text size, and spacing preferences persist on the device.");
-console.log("- The Aa header control keeps navigation and appearance tools out of the reading flow.");
+console.log("- Passage, translation, and Aa controls open separate bounded panels.");

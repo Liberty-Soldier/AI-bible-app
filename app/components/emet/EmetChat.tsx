@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
+import { buildReaderHref } from "@/app/lib/translationPreference";
+import { boundedSimpleHistory, followsLatest, publicQualification, safeChatReturnHref, supportQualification } from "./chatPresentation";
+import { buildScriptureCitationHref, getCitationTranslation } from "@/app/lib/scriptureCitationNavigation";
 import type {
   EmetAiClaim,
   EmetAiClaimSupport,
@@ -14,6 +17,8 @@ import type {
 
 const CHAT_STORAGE_KEY = "emetsees-conversation";
 const CHAT_ID_STORAGE_KEY = "emetsees-conversation-id";
+const CHAT_DRAFT_KEY = "emetsees-conversation-draft";
+const CHAT_SCROLL_KEY = "emetsees-conversation-scroll";
 
 export type EmetChatUsage = {
   planName: string;
@@ -46,6 +51,7 @@ type WordContext = ReaderContext & {
 };
 
 type Answer = {
+  status?: "complete" | "insufficient-evidence";
   answer: string;
   conclusionSupport: EmetAiClaimSupport;
   componentChecks: EmetAiComponentCheck[];
@@ -92,10 +98,12 @@ type Exchange = {
   source?: string;
   initialScripture?: InitialScriptureItem[];
   shareStudyId?: string;
+  outcome?: "answered" | "insufficient-evidence" | "failed";
+  transportFailure?: boolean;
 };
 
-function storedExchanges(storage: Storage) {
-  const parsed = parseStoredContext<unknown>(storage, CHAT_STORAGE_KEY);
+function storedExchanges(storage: Storage, key = CHAT_STORAGE_KEY) {
+  const parsed = parseStoredContext<unknown>(storage, key);
   if (!Array.isArray(parsed)) return [];
 
   return parsed.slice(-20).flatMap((candidate) => {
@@ -113,7 +121,10 @@ function storedExchanges(storage: Storage) {
     return [{
       id: exchange.id,
       question: exchange.question.slice(0, 800),
+      outcome: exchange.outcome,
+      transportFailure: exchange.transportFailure,
       answer: {
+        status: exchange.answer.status,
         answer: exchange.answer.answer,
         conclusionSupport:
           exchange.answer.conclusionSupport || "possible-interpretation",
@@ -160,17 +171,11 @@ function parseStoredContext<T>(storage: Storage, key: string): T | null {
 }
 
 function contextLabel(context: ReaderContext | WordContext | null) {
-  if (!context) return "Whole-Scripture evidence search";
+  if (!context) return "All Scripture";
   const reference = `${context.book} ${context.chapter}${context.verse ? `:${context.verse}` : ""}`;
   return "displayWord" in context
     ? `${context.displayWord} · ${reference}`
     : reference;
-}
-
-function referenceHref(reference: string) {
-  const match = reference.match(/^(.*?)\s+(\d+):([^\s]+)$/);
-  if (!match) return null;
-  return `/read/${encodeURIComponent(match[1])}/${match[2]}?verse=${encodeURIComponent(match[3])}`;
 }
 
 function normalizeAnswer(payload: Record<string, unknown>): Answer {
@@ -178,6 +183,7 @@ function normalizeAnswer(payload: Record<string, unknown>): Answer {
     const value = payload.answer as Partial<Answer>;
     if (typeof value.answer === "string") {
       return {
+        status: value.status,
         answer: value.answer,
         conclusionSupport:
           value.conclusionSupport || "possible-interpretation",
@@ -189,12 +195,13 @@ function normalizeAnswer(payload: Record<string, unknown>): Answer {
           ? value.continuityChecks
           : [],
         citations: Array.isArray(value.citations) ? value.citations : [],
-        limitations: Array.isArray(value.limitations) ? value.limitations : [],
+        limitations: [...new Set([...(Array.isArray(value.limitations) ? value.limitations : []), ...(Array.isArray(payload.limitations) ? payload.limitations.filter((item): item is string => typeof item === "string") : [])])],
       } as Answer;
     }
   }
 
   return {
+    status: payload.status === "insufficient-evidence" ? "insufficient-evidence" : undefined,
     answer:
       typeof payload.answer === "string"
         ? payload.answer
@@ -224,59 +231,81 @@ function resetLabel(value?: string) {
 function InitialScripture({
   items,
   pending,
+  onNavigate,
 }: {
   items: InitialScriptureItem[];
   pending: boolean;
+  onNavigate?: () => void;
 }) {
-  const translationLabel = (translation: InitialScriptureItem["translation"]) =>
-    translation === "brenton" ? "Brenton LXX" : translation.toUpperCase();
   return (
-    <section className="border-y border-[var(--border)] py-3" aria-label="Preliminary verified Scripture">
-      <p className="text-[0.65rem] font-black uppercase tracking-[0.16em] text-[var(--brand-strong)]">
-        {pending ? "Preliminary Scripture — answer analysis in progress" : "Preliminary Scripture"}
+    <details key={pending ? "pending" : "finished"} open={pending ? true : undefined} className="text-sm" data-preliminary-scripture="true">
+      <summary className="min-h-11 cursor-pointer py-2 text-sm font-medium text-[var(--muted)]">
+        Preliminary passages{items.length ? ` · ${items.length}` : ""}{pending ? " · preparing answer" : ""}
+      </summary>
+      <p className="mb-2 text-xs leading-5 text-[var(--muted)]">
+        Shown while preparing the answer. These are not final supporting citations; the final answer may use a different verified evidence set.
       </p>
-      <p className="mt-1 text-xs leading-5 text-[var(--muted)]">
-        Shown early for reading; the final answer may use a different verified evidence set.
-      </p>
-      {items.length ? (
-        <div className="mt-2.5 space-y-3">
-          {items.map((item) => {
-            const href = referenceHref(item.reference);
-            return (
-              <div key={item.id} className="border-l-2 border-[var(--brand)] pl-3">
-                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  {href ? (
-                    <Link href={href} className="text-xs font-black text-[var(--foreground)] underline decoration-[var(--brand)] underline-offset-4">
-                      {item.reference}
-                    </Link>
-                  ) : (
-                    <p className="text-xs font-black text-[var(--foreground)]">{item.reference}</p>
-                  )}
-                  <span className="text-[0.6rem] font-bold uppercase tracking-[0.12em] text-[var(--muted)]">
-                    {translationLabel(item.translation)}
-                  </span>
-                </div>
-                <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{item.text}</p>
+      <div className="max-h-40 space-y-3 overflow-y-auto overscroll-contain border-l-2 border-[var(--border)] pl-3">
+        {items.length ? items.map((item) => {
+          const href = buildScriptureCitationHref(item);
+          return (
+            <div key={item.id}>
+              <div className="flex flex-wrap items-baseline gap-2">
+                {href ? <Link href={href} onClick={onNavigate} className="font-medium underline underline-offset-4">{item.reference}</Link> : <span className="font-medium">{item.reference}</span>}
+                <span className="text-xs text-[var(--muted)]">{item.translation === "brenton" ? "Brenton LXX" : item.translation.toUpperCase()}</span>
               </div>
-            );
-          })}
-        </div>
-      ) : (
-        <p className="mt-2 text-sm font-semibold text-[var(--muted)]">Finding relevant passages</p>
-      )}
-    </section>
+              <p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-[var(--muted)]">{item.text}</p>
+            </div>
+          );
+        }) : <p className="text-sm text-[var(--muted)]">Finding relevant passages…</p>}
+      </div>
+    </details>
   );
+}
+
+function qualifications(answer: Answer) {
+  const ids = [
+    ...answer.claims.map((claim) => claim.id),
+    ...answer.citations.map((citation) => citation.evidenceId),
+    ...answer.componentChecks.map((check) => check.componentId),
+    ...answer.continuityChecks.map((check) => check.propositionId),
+  ];
+  const messages = [
+    supportQualification[answer.conclusionSupport],
+    ...answer.limitations,
+    ...answer.componentChecks.filter((check) => check.support !== "explicit-statement").map((check) => check.explanation),
+    ...answer.continuityChecks.filter((check) => check.verdict !== "preserved").map((check) => check.explanation),
+    ...answer.claims.filter((claim) => ["possible-interpretation", "does-not-establish"].includes(claim.support))
+      .map((claim) => `${claim.support === "possible-interpretation" ? "Interpretation" : "Not established"}: ${claim.text}`),
+  ];
+  return [...new Set(messages.filter((message): message is string => typeof message === "string" && Boolean(message.trim()))
+    .map((message) => publicQualification(message, ids)))];
 }
 
 export default function EmetChat({
   initialUsage,
   initialQuestion = "",
+  initialSimpleAvailable = false,
+  active = true,
+  launchKey = 0,
+  returnTo,
+  onClose,
 }: {
   initialUsage: EmetChatUsage | null;
   initialQuestion?: string;
+  initialSimpleAvailable?: boolean;
+  active?: boolean;
+  launchKey?: number;
+  returnTo?: string | null;
+  onClose?: () => void;
 }) {
   const router = useRouter();
-  const [question, setQuestion] = useState(initialQuestion.slice(0, 800));
+  const [engine, setEngine] = useState<"current" | "simple">("current");
+  const chatStorageKey = engine === "simple" ? "emetsees-simple-conversation" : CHAT_STORAGE_KEY;
+  const chatIdStorageKey = engine === "simple" ? "emetsees-simple-conversation-id" : CHAT_ID_STORAGE_KEY;
+  const draftStorageKey = engine === "simple" ? "emetsees-simple-conversation-draft" : CHAT_DRAFT_KEY;
+  const scrollStorageKey = engine === "simple" ? "emetsees-simple-conversation-scroll" : CHAT_SCROLL_KEY;
+  const [question, setQuestion] = useState("");
   const [readerContext, setReaderContext] = useState<ReaderContext | null>(null);
   const [useReaderContext, setUseReaderContext] = useState(false);
   const [wordContext, setWordContext] = useState<WordContext | null>(null);
@@ -289,27 +318,52 @@ export default function EmetChat({
   const [pendingStatus, setPendingStatus] = useState("Searching Scripture…");
   const [initialScripture, setInitialScripture] = useState<InitialScriptureItem[]>([]);
   const [error, setError] = useState("");
-  const conversationEndRef = useRef<HTMLDivElement>(null);
-  const latestAnswerRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const followingRef = useRef(true);
+  const scrollRestoredRef = useRef(false);
+  const savedScrollRef = useRef<{ conversationId: string; top: number; following: boolean } | null>(null);
+  const draftRef = useRef("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const submissionInFlightRef = useRef(false);
-  const initialSubmissionRef = useRef(false);
+  const initialSubmissionRef = useRef<string | null>(null);
   const progressiveRequestRef = useRef("");
   const pendingInitialScriptureRef = useRef<InitialScriptureItem[]>([]);
 
+  function changeEngine(next: "current" | "simple") {
+    if (submissionInFlightRef.current || !historyLoaded || next === engine || (next === "simple" && !initialSimpleAvailable)) return;
+    window.sessionStorage.setItem(chatStorageKey, JSON.stringify(exchanges));
+    window.sessionStorage.setItem(draftStorageKey, draftRef.current);
+    const prefix = next === "simple" ? "emetsees-simple-conversation" : "emetsees-conversation";
+    const nextId = window.sessionStorage.getItem(`${prefix}-id`) || crypto.randomUUID();
+    window.sessionStorage.setItem(`${prefix}-id`, nextId);
+    const draft = window.sessionStorage.getItem(`${prefix}-draft`) || "";
+    draftRef.current = draft;
+    setEngine(next);
+    setQuestion(draft);
+    setExchanges(storedExchanges(window.sessionStorage, prefix));
+    setConversationId(nextId);
+    savedScrollRef.current = parseStoredContext(window.sessionStorage, `${prefix}-scroll`);
+    scrollRestoredRef.current = false;
+    followingRef.current = true;
+    setError("");
+    setInitialScripture([]);
+    pendingInitialScriptureRef.current = [];
+  }
+
+  const revokeSimpleSelection = useEffectEvent(() => changeEngine("current"));
+  useEffect(() => {
+    if (!initialSimpleAvailable && engine === "simple" && !pending) revokeSimpleSelection();
+  }, [initialSimpleAvailable, engine, pending]);
+
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      const reader = parseStoredContext<ReaderContext>(
-        window.localStorage,
-        "bibleiq-current-context",
-      );
-      const word = parseStoredContext<WordContext>(
-        window.sessionStorage,
-        "emetsees-word-question-context",
-      );
-      setReaderContext(reader);
-      setWordContext(word);
-      setExchanges(storedExchanges(window.sessionStorage));
+      const draft = window.sessionStorage.getItem(CHAT_DRAFT_KEY) || "";
+      draftRef.current = draft;
+      setQuestion(draft);
+      savedScrollRef.current = parseStoredContext(window.sessionStorage, CHAT_SCROLL_KEY);
+      setExchanges(storedExchanges(window.sessionStorage, CHAT_STORAGE_KEY));
       const storedConversationId = window.sessionStorage.getItem(
         CHAT_ID_STORAGE_KEY,
       );
@@ -317,7 +371,6 @@ export default function EmetChat({
       window.sessionStorage.setItem(CHAT_ID_STORAGE_KEY, nextConversationId);
       setConversationId(nextConversationId);
       setHistoryLoaded(true);
-      window.sessionStorage.removeItem("emetsees-word-question-context");
     }, 0);
 
     return () => window.clearTimeout(timer);
@@ -325,29 +378,84 @@ export default function EmetChat({
 
   useEffect(() => {
     if (!historyLoaded) return;
-    window.sessionStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(exchanges));
-  }, [exchanges, historyLoaded]);
+    window.sessionStorage.setItem(chatStorageKey, JSON.stringify(exchanges));
+  }, [exchanges, historyLoaded, chatStorageKey]);
+
+  useEffect(() => { setUsage(initialUsage); }, [initialUsage]);
 
   useEffect(() => {
-    if (!pending) return;
-    conversationEndRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-    });
-  }, [pending]);
+    if (!active) return;
+    const reader = parseStoredContext<ReaderContext>(window.localStorage, "bibleiq-current-context");
+    const word = parseStoredContext<WordContext>(window.sessionStorage, "emetsees-word-question-context");
+    setReaderContext(reader);
+    setWordContext(word);
+    if (word) setUseReaderContext(false);
+    window.sessionStorage.removeItem("emetsees-word-question-context");
+  }, [active, launchKey]);
 
   useEffect(() => {
-    if (!exchanges.length) return;
-    window.requestAnimationFrame(() => {
-      latestAnswerRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
-  }, [exchanges.length]);
+    if (historyLoaded) window.sessionStorage.setItem(draftStorageKey, question);
+  }, [question, historyLoaded, draftStorageKey]);
 
   useEffect(() => {
-    if (!pending) return;
+    const viewport = viewportRef.current;
+    if (!active || !historyLoaded || !viewport) return;
+    if (!scrollRestoredRef.current) {
+      const saved = savedScrollRef.current;
+      if (saved?.conversationId === conversationId && !saved.following) {
+        viewport.scrollTop = saved.top;
+        followingRef.current = false;
+      } else viewport.scrollTop = viewport.scrollHeight;
+      scrollRestoredRef.current = true;
+    } else if (followingRef.current) {
+      viewport.scrollTop = viewport.scrollHeight;
+    }
+  }, [active, historyLoaded, conversationId, exchanges.length, pending, initialScripture, error]);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    const viewport = viewportRef.current;
+    const content = contentRef.current;
+    if (!active || !root || !viewport) return;
+    const visualViewport = window.visualViewport;
+    function resize() {
+      if (!root || !viewport) return;
+      const keyboardOpen = visualViewport && window.innerHeight - visualViewport.height > 80;
+      root.style.height = keyboardOpen
+        ? `${Math.max(0, visualViewport.offsetTop + visualViewport.height - root.getBoundingClientRect().top)}px`
+        : "";
+      if (followingRef.current) viewport.scrollTop = viewport.scrollHeight;
+    }
+    resize();
+    visualViewport?.addEventListener("resize", resize);
+    visualViewport?.addEventListener("scroll", resize);
+    window.addEventListener("resize", resize);
+    const observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(() => {
+      if (followingRef.current) viewport.scrollTop = viewport.scrollHeight;
+    }) : null;
+    if (content) observer?.observe(content);
+    observer?.observe(viewport);
+    return () => {
+      visualViewport?.removeEventListener("resize", resize);
+      visualViewport?.removeEventListener("scroll", resize);
+      window.removeEventListener("resize", resize);
+      observer?.disconnect();
+      root.style.height = "";
+    };
+  }, [active]);
+
+  function updateQuestion(value: string) {
+    draftRef.current = value;
+    setQuestion(value);
+    if (historyLoaded) window.sessionStorage.setItem(draftStorageKey, value);
+  }
+
+  function restoreSubmittedQuestion(value: string) {
+    if (!draftRef.current) updateQuestion(value);
+  }
+
+  useEffect(() => {
+    if (!pending || engine === "simple") return;
     const readingTimer = window.setTimeout(
       () => setPendingStatus("Reading the relevant passages…"),
       3500,
@@ -360,7 +468,7 @@ export default function EmetChat({
       window.clearTimeout(readingTimer);
       window.clearTimeout(verificationTimer);
     };
-  }, [pending]);
+  }, [pending, engine]);
 
   useEffect(() => {
     const textarea = textareaRef.current;
@@ -373,16 +481,19 @@ export default function EmetChat({
   // Word-study launches are explicit; ordinary Ask EMET questions default to
   // the whole canon unless the reader opts into the displayed verse.
   const activeContext = wordContext || (useReaderContext ? readerContext : null);
+  const backHref = safeChatReturnHref(returnTo) || (readerContext
+    ? buildReaderHref({ book: readerContext.book, chapter: readerContext.chapter, verse: readerContext.verse, translation: readerContext.translation })
+    : "/");
+  const conversationHref = backHref === "/" ? "/emet" : `/emet?returnTo=${encodeURIComponent(backHref)}`;
+
   async function ask(questionOverride?: string) {
     const finalQuestion = (questionOverride || question).trim();
     if (!finalQuestion || pending || submissionInFlightRef.current) return;
 
     submissionInFlightRef.current = true;
-    textareaRef.current?.blur();
-
-    setQuestion("");
+    if (questionOverride === undefined) updateQuestion("");
     setPendingQuestion(finalQuestion);
-    setPendingStatus("Searching Scripture…");
+    setPendingStatus(engine === "simple" ? "Preparing Simple EMET answer…" : "Searching Scripture…");
     setInitialScripture([]);
     pendingInitialScriptureRef.current = [];
     setPending(true);
@@ -392,13 +503,13 @@ export default function EmetChat({
       const activeConversationId = conversationId || crypto.randomUUID();
       if (!conversationId) {
         window.sessionStorage.setItem(
-          CHAT_ID_STORAGE_KEY,
+          chatIdStorageKey,
           activeConversationId,
         );
         setConversationId(activeConversationId);
       }
       const conversationContext = buildEmetConversationContext(
-        exchanges.map((exchange) => ({
+        exchanges.filter((exchange) => !exchange.transportFailure).map((exchange) => ({
           question: exchange.question,
           answer: exchange.answer.answer,
           outcome: exchange.source === "fail-closed" ? "failed" : "answered",
@@ -427,10 +538,15 @@ export default function EmetChat({
         question: finalQuestion,
         conversation: conversationContext,
         ...(activeContext ? { context: activeContext } : {}),
+        ...(engine === "simple" ? {
+          engine: "simple",
+          simpleHistory: boundedSimpleHistory(exchanges.filter((exchange) => !exchange.transportFailure)
+            .map((exchange) => ({ question: exchange.question, answer: exchange.answer.answer }))),
+        } : {}),
       };
       const progressiveToken = crypto.randomUUID();
       progressiveRequestRef.current = progressiveToken;
-      if (!wordContext) {
+      if (!wordContext && engine === "current") {
         void fetch("/api/emet/evidence", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -458,7 +574,7 @@ export default function EmetChat({
         setPendingStatus("Finding relevant passages…");
       }
 
-      const endpoint = wordContext ? "/api/emet/explain" : "/api/emet/ask";
+      const endpoint = wordContext && engine === "current" ? "/api/emet/explain" : "/api/emet/ask";
       const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -471,7 +587,13 @@ export default function EmetChat({
       const payload = (await response.json()) as Record<string, unknown>;
 
       if (response.status === 401) {
-        router.push("/auth?next=%2Femet");
+        restoreSubmittedQuestion(finalQuestion);
+        router.push(`/auth?next=${encodeURIComponent(`/emet?returnTo=${encodeURIComponent(backHref)}`)}`);
+        return;
+      }
+      if (response.status === 429 && payload.status === "rate-limited") {
+        setError("Please wait a few seconds before testing another Simple EMET question.");
+        restoreSubmittedQuestion(finalQuestion);
         return;
       }
       if (response.status === 429) {
@@ -488,7 +610,7 @@ export default function EmetChat({
           }));
         }
         setError("quota-exhausted");
-        setQuestion(finalQuestion);
+        restoreSubmittedQuestion(finalQuestion);
         return;
       }
       if (!response.ok) {
@@ -499,6 +621,7 @@ export default function EmetChat({
             id: crypto.randomUUID(),
             question: finalQuestion,
             answer,
+            outcome: payload.status === "insufficient-evidence" || answer.status === "insufficient-evidence" || response.status === 422 ? "insufficient-evidence" : "failed",
             source: typeof payload.source === "string" ? payload.source : "fail-closed",
             initialScripture: pendingInitialScriptureRef.current,
           },
@@ -525,14 +648,23 @@ export default function EmetChat({
           id: crypto.randomUUID(),
           question: finalQuestion,
           answer,
+          outcome: answer.status === "insufficient-evidence" || payload.status === "insufficient-evidence" ? "insufficient-evidence" : "answered",
           source: typeof payload.source === "string" ? payload.source : undefined,
           initialScripture: pendingInitialScriptureRef.current,
           shareStudyId: typeof payload.shareStudyId === "string" ? payload.shareStudyId : undefined,
         },
       ]);
     } catch {
-      setError("EMET could not connect. Please try again.");
-      setQuestion(finalQuestion);
+      setExchanges((current) => [...current, {
+        id: crypto.randomUUID(),
+        question: finalQuestion,
+        answer: normalizeAnswer({ answer: "EMET could not connect. Please try again." }),
+        source: "fail-closed",
+        outcome: "failed",
+        transportFailure: true,
+        initialScripture: pendingInitialScriptureRef.current,
+      }]);
+      restoreSubmittedQuestion(finalQuestion);
     } finally {
       progressiveRequestRef.current = "";
       setPendingQuestion("");
@@ -547,11 +679,16 @@ export default function EmetChat({
 
   useEffect(() => {
     const launchQuestion = initialQuestion.trim().slice(0, 800);
-    if (!historyLoaded || !launchQuestion || initialSubmissionRef.current) return;
-    initialSubmissionRef.current = true;
-    window.history.replaceState(window.history.state, "", "/emet");
+    const submissionKey = `${launchKey}:${launchQuestion}`;
+    if (!active || pending || !historyLoaded || !launchQuestion || initialSubmissionRef.current === submissionKey) return;
+    initialSubmissionRef.current = submissionKey;
+    if (window.location.pathname === "/emet") {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("q");
+      window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
+    }
     launchInitialQuestion(launchQuestion);
-  }, [historyLoaded, initialQuestion]);
+  }, [active, pending, historyLoaded, initialQuestion, launchKey]);
 
   async function share(exchange: Exchange) {
     if (!exchange.shareStudyId) return;
@@ -576,256 +713,202 @@ export default function EmetChat({
     }
   }
 
-  const composer = (
-    <form
-      className={`z-20 bg-[var(--canvas)]/95 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-xl ${
-        exchanges.length ? "sticky bottom-0 mt-6" : "mt-6"
-      }`}
-      onSubmit={(event) => {
-        event.preventDefault();
-        void ask();
-      }}
-    >
-      <label htmlFor="emet-question" className="sr-only">
-        Ask EMET a Scripture question
-      </label>
-      <div className="flex items-end gap-2 rounded-[1.6rem] border border-[var(--border)] bg-[var(--surface)] p-2 pl-4 shadow-[var(--shadow-sm)] transition focus-within:border-[color-mix(in_srgb,var(--brand)_55%,var(--border))] focus-within:bg-[var(--canvas)]">
-        <textarea
-          ref={textareaRef}
-          id="emet-question"
-          value={question}
-          onChange={(event) => setQuestion(event.target.value)}
-          onKeyDown={(event) => {
-            if (
-              event.key === "Enter" &&
-              !event.shiftKey &&
-              !event.nativeEvent.isComposing
-            ) {
-              event.preventDefault();
-              event.currentTarget.form?.requestSubmit();
-            }
-          }}
-          rows={1}
-          maxLength={800}
-          placeholder={exchanges.length ? "Ask a follow-up…" : "Ask a Scripture question…"}
-          disabled={pending || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
-          className="max-h-40 min-h-11 flex-1 resize-none overflow-y-auto bg-transparent py-2.5 text-base leading-6 outline-none placeholder:text-[var(--muted)]"
-        />
-        <button
-          type="submit"
-          aria-label={pending ? "EMET is thinking" : "Send question"}
-          disabled={pending || !question.trim() || (usage ? !usage.unlimited && usage.questionsRemaining < 1 : false)}
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[var(--foreground)] text-lg font-semibold text-[var(--canvas)] transition hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-30"
-        >
-          {pending ? (
-            <span className="h-4 w-4 animate-pulse rounded-full bg-current" />
-          ) : (
-            <span aria-hidden="true">↑</span>
-          )}
-        </button>
-      </div>
-      <p className="mt-2 text-center text-[0.65rem] leading-5 text-[var(--muted)]">
-        Enter to send · Shift+Enter for a new line · Citations are verified
-      </p>
-    </form>
-  );
+  const quotaExhausted = usage ? !usage.unlimited && usage.questionsRemaining < 1 : false;
+
+  function resetConversation() {
+    if (submissionInFlightRef.current || !historyLoaded) return;
+    setExchanges([]);
+    updateQuestion("");
+    setError("");
+    setInitialScripture([]);
+    pendingInitialScriptureRef.current = [];
+    window.sessionStorage.removeItem(chatStorageKey);
+    const nextConversationId = crypto.randomUUID();
+    window.sessionStorage.setItem(chatIdStorageKey, nextConversationId);
+    setConversationId(nextConversationId);
+    followingRef.current = true;
+    savedScrollRef.current = null;
+  }
 
   return (
-    <div>
-      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-y border-[var(--border)] py-2.5 text-xs text-[var(--muted)]">
-        <div className="min-w-0">
-          <div className="flex min-w-0 items-center gap-2">
-            <span className="shrink-0 font-bold uppercase tracking-[0.16em]">
-              {activeContext ? "Context" : "Scope"}
-            </span>
-            <p className="truncate font-semibold text-[var(--foreground)]">
-              {contextLabel(activeContext)}
-            </p>
-            {activeContext ? (
-              <button
-                type="button"
-                aria-label={`Remove ${contextLabel(activeContext)} context`}
-                onClick={() => {
-                  if (wordContext) setWordContext(null);
-                  else setUseReaderContext(false);
-                }}
-                className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[var(--border)] text-sm text-[var(--muted)] transition hover:text-[var(--foreground)]"
-              >
-                ×
-              </button>
-            ) : readerContext ? (
-              <button
-                type="button"
-                onClick={() => setUseReaderContext(true)}
-                className="shrink-0 border-b border-[var(--brand)] pb-0.5 font-semibold text-[var(--foreground)]"
-              >
-                Use {contextLabel(readerContext)}
-              </button>
-            ) : null}
-          </div>
+    <div ref={rootRef} className="flex h-full min-h-0 flex-col bg-[var(--canvas)] text-[var(--foreground)]" data-emet-chat="true">
+      <header className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 border-b border-[var(--border)] px-4 pb-1 pt-[max(0.25rem,env(safe-area-inset-top))] sm:px-6">
+        <h1 className="flex min-h-11 items-center gap-2 text-base font-semibold">
+          <EmetseesLogo size={20} variant="gold" />
+          Ask EMET
+        </h1>
+        <div className="flex items-center gap-1">
+          <button type="button" disabled={pending || !historyLoaded} onClick={resetConversation} className="min-h-11 rounded-lg px-2 text-sm text-[var(--muted)] disabled:cursor-not-allowed disabled:opacity-50">New conversation</button>
+          {onClose ? (
+            <button type="button" onClick={onClose} aria-label="Close Ask EMET" className="min-h-11 rounded-lg px-2 text-sm font-medium">Close</button>
+          ) : (
+            <Link href={backHref} className="inline-flex min-h-11 items-center rounded-lg px-2 text-sm font-medium">Back</Link>
+          )}
+        </div>
+      </header>
+
+      {initialSimpleAvailable ? (
+        <label className="flex shrink-0 flex-wrap items-center gap-2 px-4 py-1 text-xs text-[var(--muted)] sm:px-6">
+          Owner testing
+          <select aria-label="Owner testing engine" value={engine} disabled={pending || !historyLoaded} onChange={(event) => changeEngine(event.target.value === "simple" ? "simple" : "current")} className="min-h-11 rounded-lg border border-[var(--border)] bg-[var(--canvas)] px-2 text-sm text-[var(--foreground)]">
+            <option value="current">Current EMET</option>
+            <option value="simple">Simple EMET · experimental</option>
+          </select>
+          {engine === "simple" ? <span>Private owner test · not published</span> : null}
+        </label>
+      ) : null}
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 px-4 py-1 text-xs text-[var(--muted)] sm:px-6">
+        <div className="flex min-w-0 flex-wrap items-center gap-x-2">
+          <span className="break-words">{contextLabel(activeContext)}</span>
+          {activeContext ? (
+            <button type="button" aria-label={`Remove ${contextLabel(activeContext)} context`} onClick={() => {
+              if (wordContext) setWordContext(null);
+              else setUseReaderContext(false);
+            }} className="min-h-11 px-2 text-sm">Clear</button>
+          ) : readerContext ? (
+            <button type="button" onClick={() => setUseReaderContext(true)} className="min-h-11 px-1 text-xs underline underline-offset-4">Use {contextLabel(readerContext)}</button>
+          ) : null}
         </div>
         {usage ? (
-          <p className="shrink-0 font-semibold">
-              {usage.planName} · {" "}
-              {usage.unlimited
-                ? "Unlimited testing"
-                : `${usage.questionsRemaining} of ${usage.questionLimit} left`}
-          </p>
+          <details>
+            <summary className="min-h-11 cursor-pointer py-3">Usage</summary>
+            <p className="pb-2">{usage.planName} · {usage.unlimited ? "Unlimited" : `${usage.questionsRemaining} of ${usage.questionLimit} left`}</p>
+          </details>
         ) : null}
       </div>
 
-      {exchanges.length ? (
-        <div className="mt-3 flex justify-end">
-          <button
-            type="button"
-            onClick={() => {
-              setExchanges([]);
-              setQuestion("");
-              setError("");
-              setInitialScripture([]);
-              pendingInitialScriptureRef.current = [];
-              window.sessionStorage.removeItem(CHAT_STORAGE_KEY);
-              const nextConversationId = crypto.randomUUID();
-              window.sessionStorage.setItem(CHAT_ID_STORAGE_KEY, nextConversationId);
-              setConversationId(nextConversationId);
+      <div
+        ref={viewportRef}
+        role="region"
+        aria-label="Conversation"
+        tabIndex={0}
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 focus-visible:outline-2 focus-visible:outline-[var(--brand)] sm:px-6"
+        style={{ overflowAnchor: "none" }}
+        onScroll={(event) => {
+          if (!active) return;
+          const viewport = event.currentTarget;
+          followingRef.current = followsLatest(viewport);
+          if (historyLoaded) window.sessionStorage.setItem(scrollStorageKey, JSON.stringify({ conversationId, top: viewport.scrollTop, following: followingRef.current }));
+        }}
+        onPointerDownCapture={(event) => {
+          if (event.target instanceof Element && event.target.closest("details")) followingRef.current = false;
+        }}
+        onKeyDownCapture={(event) => {
+          if (["Enter", " "].includes(event.key) && event.target instanceof Element && event.target.closest("details")) followingRef.current = false;
+        }}
+      >
+        <div ref={contentRef} className="space-y-6">
+          {!exchanges.length && !pending ? (
+            <div className="py-8 text-center">
+              <p className="text-lg font-medium">What would you like to understand?</p>
+              <p className="mt-2 text-sm leading-6 text-[var(--muted)]">Ask naturally. Inspect the Scripture behind each answer.</p>
+            </div>
+          ) : null}
+
+          {exchanges.map((exchange) => {
+            const outcome = exchange.outcome || (exchange.answer.status === "insufficient-evidence" ? "insufficient-evidence" : exchange.source === "fail-closed" ? "failed" : "answered");
+            const notes = qualifications(exchange.answer);
+            return (
+              <article key={exchange.id} className="space-y-3" aria-label="Question and response">
+                <div className="flex justify-end">
+                  <p className="max-w-[90%] whitespace-pre-wrap break-words rounded-xl bg-[var(--surface-soft)] px-3 py-2 text-base leading-7"><span className="sr-only">Question: </span>{exchange.question}</p>
+                </div>
+                {exchange.initialScripture?.length ? <InitialScripture items={exchange.initialScripture} pending={false} onNavigate={onClose} /> : null}
+                <div className="min-w-0 space-y-3">
+                  {outcome !== "answered" ? (
+                    <p role={outcome === "failed" ? "alert" : "status"} className="text-sm font-semibold">{outcome === "insufficient-evidence" ? "Insufficient evidence" : "Answer unavailable"}</p>
+                  ) : null}
+                  <div aria-label="EMET response" className="whitespace-pre-wrap break-words text-base leading-7" data-emet-answer="true">{exchange.answer.answer}</div>
+                  {notes.length ? (
+                    <section aria-label="Answer qualifications" className="border-l-2 border-[var(--border)] pl-3 text-sm leading-6 text-[var(--muted)]">
+                      <p className="font-medium">Qualifications</p>
+                      <ul className="mt-1 space-y-1">
+                        {notes.map((note, index) => <li key={index} className="whitespace-pre-wrap break-words">{note}</li>)}
+                      </ul>
+                    </section>
+                  ) : null}
+                  <div className="flex flex-wrap items-start gap-x-4 gap-y-1 text-sm">
+                    {exchange.answer.citations.length ? (
+                      <details className="group">
+                        <summary className="min-h-11 cursor-pointer py-3 font-medium text-[var(--muted)]">Sources · {exchange.answer.citations.length}</summary>
+                        <p className="mb-1 text-xs text-[var(--muted)]">Final supporting citations</p>
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 pb-2">
+                          {exchange.answer.citations.map((citation) => {
+                            const reference = citation.reference;
+                            const translation = getCitationTranslation(citation);
+                            const href = buildScriptureCitationHref(citation, { returnTo: conversationHref, returnLabel: "Ask EMET" });
+                            return href && reference ? (
+                              <Link key={`${exchange.id}-${citation.evidenceId}`} href={href} onClick={onClose} className="inline-flex min-h-11 flex-wrap items-center gap-x-1 underline decoration-[var(--brand)] underline-offset-4">
+                                {reference}{translation ? <span className="text-xs text-[var(--muted)]">· {translation === "brenton" ? "Brenton" : translation.toUpperCase()}</span> : null}
+                              </Link>
+                            ) : reference ? <span key={`${exchange.id}-${citation.evidenceId}`} className="py-3">{reference}</span> : null;
+                          })}
+                        </div>
+                      </details>
+                    ) : null}
+                    {exchange.shareStudyId ? (
+                      <button type="button" aria-label="Publish and share this answer" onClick={() => {
+                        void share(exchange).catch((error: unknown) => {
+                          if (!(error instanceof DOMException && error.name === "AbortError")) setError("Sharing could not be completed. Please try again.");
+                        });
+                      }} className="min-h-11 px-1 text-[var(--muted)]">Share</button>
+                    ) : null}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+
+          {pending && pendingQuestion ? (
+            <article className="space-y-3" aria-label="Pending question">
+              <div className="flex justify-end">
+                <p className="max-w-[90%] whitespace-pre-wrap break-words rounded-xl bg-[var(--surface-soft)] px-3 py-2 text-base leading-7">{pendingQuestion}</p>
+              </div>
+              {engine === "current" ? <InitialScripture items={initialScripture} pending onNavigate={onClose} /> : null}
+            </article>
+          ) : null}
+          {!pending && error === "quota-exhausted" && initialScripture.length ? <InitialScripture items={initialScripture} pending={false} onNavigate={onClose} /> : null}
+          {error === "quota-exhausted" ? (
+            <section role="alert" className="text-sm leading-6">
+              <p className="font-medium">Your monthly questions are used.</p>
+              <p className="mt-1 text-[var(--muted)]">Your {usage?.planName || "current plan"} allowance resets on {resetLabel(usage?.resetsAt)}.</p>
+              <Link href="/settings#emet-plans" onClick={onClose} className="inline-flex min-h-11 items-center underline underline-offset-4">See EMET plans</Link>
+            </section>
+          ) : error ? <p role="alert" className="text-sm leading-6">{error}</p> : null}
+        </div>
+      </div>
+
+      <form
+        className="shrink-0 border-t border-[var(--border)] px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 sm:px-6"
+        aria-busy={pending}
+        onSubmit={(event) => { event.preventDefault(); void ask(); }}
+      >
+        {pending ? <p role="status" className="mb-2 text-xs leading-5 text-[var(--muted)]">{pendingStatus} You can draft a follow-up.</p> : null}
+        <label htmlFor="emet-question" className="sr-only">Ask EMET a Scripture question</label>
+        <div className="flex items-end gap-2 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-2 pl-3 focus-within:border-[var(--brand)]">
+          <textarea
+            ref={textareaRef}
+            id="emet-question"
+            value={question}
+            onChange={(event) => updateQuestion(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
+                event.preventDefault();
+                event.currentTarget.form?.requestSubmit();
+              }
             }}
-            className="rounded-full px-3 py-1.5 text-xs font-semibold text-[var(--muted)] transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
-          >
-            New conversation
+            rows={1}
+            maxLength={800}
+            placeholder={pending || exchanges.length ? "Ask a follow-up…" : "Ask a Scripture question…"}
+            disabled={!historyLoaded}
+            className="max-h-40 min-h-11 min-w-0 flex-1 resize-none overflow-y-auto bg-transparent py-2.5 text-base leading-6 outline-none placeholder:text-[var(--muted)]"
+          />
+          <button type="submit" aria-label={pending ? "EMET is preparing an answer" : "Send question"} disabled={!historyLoaded || pending || !question.trim() || quotaExhausted} className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[var(--foreground)] text-lg text-[var(--canvas)] disabled:cursor-not-allowed disabled:opacity-30">
+            {pending ? <span aria-hidden="true" className="h-3 w-3 animate-pulse rounded-full bg-current" /> : <span aria-hidden="true">↑</span>}
           </button>
         </div>
-      ) : null}
-
-      {!exchanges.length && !pending ? (
-        <div className="mx-auto max-w-lg pb-2 pt-10 text-center sm:pt-14">
-          <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-[var(--brand-soft)]">
-            <EmetseesLogo size={28} variant="gold" />
-          </div>
-          <p className="mt-4 text-lg font-bold tracking-[-0.02em]">
-            What would you like to understand?
-          </p>
-          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-            Ask naturally. EMET follows the question through Scripture and shows the passages behind its answer.
-          </p>
-        </div>
-      ) : null}
-
-      <div className="mt-7 space-y-9">
-        {exchanges.map((exchange, index) => (
-          <article
-            key={exchange.id}
-            className="scroll-mt-4 space-y-6"
-          >
-            <div className="flex justify-end">
-              <p className="max-w-[88%] rounded-[1.45rem] rounded-br-md bg-[var(--surface-soft)] px-4 py-3 text-[0.98rem] font-medium leading-7 sm:max-w-[78%]">
-                {exchange.question}
-              </p>
-            </div>
-            {exchange.initialScripture?.length ? (
-              <InitialScripture items={exchange.initialScripture} pending={false} />
-            ) : null}
-            <div
-              ref={index === exchanges.length - 1 ? latestAnswerRef : undefined}
-              className="flex scroll-mt-4 items-start gap-3 sm:gap-4"
-            >
-              <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[var(--brand-soft)]">
-                <EmetseesLogo size={19} variant="gold" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="mb-2 text-[0.68rem] font-black uppercase tracking-[0.18em] text-[var(--brand-strong)]">
-                  EMET
-                </p>
-                <p className="whitespace-pre-wrap text-[1.02rem] leading-8">
-                  {exchange.answer.answer}
-                </p>
-
-                <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-[var(--muted)]">
-                  {exchange.answer.citations.length ? (
-                    <details className="group">
-                      <summary className="cursor-pointer list-none rounded-full border border-[var(--border)] px-3 py-1.5 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)] [&::-webkit-details-marker]:hidden">
-                        Sources · {exchange.answer.citations.length}
-                        <span className="ml-1.5 inline-block transition group-open:rotate-180" aria-hidden="true">⌄</span>
-                      </summary>
-                      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 border-l-2 border-[var(--brand)] pl-3">
-                        {exchange.answer.citations.map((citation) => {
-                          const reference = citation.reference;
-                          const href = reference ? referenceHref(reference) : null;
-                          return href && reference ? (
-                            <Link
-                              key={`${exchange.id}-${citation.evidenceId}`}
-                              href={href}
-                              className="border-b border-[var(--brand)] pb-0.5 font-bold text-[var(--foreground)]"
-                            >
-                              {reference}
-                            </Link>
-                          ) : null;
-                        })}
-                      </div>
-                    </details>
-                  ) : null}
-
-                  {exchange.shareStudyId ? (
-                    <button
-                      type="button"
-                      aria-label="Publish and share this answer"
-                      onClick={() => void share(exchange)}
-                      className="rounded-full px-2 py-1.5 transition hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
-                    >
-                      Share
-                    </button>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </article>
-        ))}
-
-        {pending && pendingQuestion ? (
-          <article className="space-y-6" aria-live="polite">
-            <div className="flex justify-end">
-              <p className="max-w-[88%] rounded-[1.45rem] rounded-br-md bg-[var(--surface-soft)] px-4 py-3 text-[0.98rem] font-medium leading-7 sm:max-w-[78%]">
-                {pendingQuestion}
-              </p>
-            </div>
-            <InitialScripture items={initialScripture} pending />
-            <div className="flex items-center gap-3 sm:gap-4">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[var(--brand-soft)]">
-                <EmetseesLogo size={19} variant="gold" />
-              </span>
-              <div className="flex items-center gap-2 text-sm font-semibold text-[var(--muted)]">
-                <span>{pendingStatus}</span>
-                <span className="flex gap-1" aria-hidden="true">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand)]" />
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand)] [animation-delay:160ms]" />
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand)] [animation-delay:320ms]" />
-                </span>
-              </div>
-            </div>
-          </article>
-        ) : null}
-        <div ref={conversationEndRef} aria-hidden="true" />
-      </div>
-
-      {error === "quota-exhausted" ? (
-        <section role="alert" className="mt-5 border-y border-[var(--border)] py-4">
-          <p className="text-sm font-bold">Your monthly questions are used.</p>
-          <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
-            Your {usage?.planName || "current plan"} allowance resets on {resetLabel(usage?.resetsAt)}.
-          </p>
-          <Link
-            href="/settings#emet-plans"
-            className="mt-3 inline-flex border-b-2 border-[var(--brand)] pb-0.5 text-sm font-bold"
-          >
-            See EMET plans
-          </Link>
-        </section>
-      ) : error ? (
-        <p role="alert" className="mt-5 border-l-2 border-amber-500 bg-amber-500/8 px-4 py-3 text-sm font-semibold leading-6">
-          {error}
-        </p>
-      ) : null}
-
-      {composer}
+        <p className="mt-1 hidden text-center text-xs leading-5 text-[var(--muted)] pointer-fine:block">Enter to send · Shift+Enter for a new line</p>
+      </form>
     </div>
   );
 }

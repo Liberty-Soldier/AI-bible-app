@@ -15,6 +15,8 @@ type SourceBreakdownVerseProps = {
   translation: SourceBreakdownTranslation;
   verseText: string;
   prominent?: boolean;
+  label?: string;
+  className?: string;
 };
 
 function parseDisplayedReference(
@@ -63,6 +65,8 @@ export default function SourceBreakdownVerse({
   translation,
   verseText,
   prominent = false,
+  label = "Source Text",
+  className,
 }: SourceBreakdownVerseProps) {
   const [
     breakdown,
@@ -177,11 +181,11 @@ export default function SourceBreakdownVerse({
         }}
         disabled={loading}
         aria-busy={loading}
-        className={
+        className={className || (
           prominent
             ? "col-span-full flex min-h-14 w-full items-center justify-between rounded-2xl border border-[color:var(--border)] bg-[var(--canvas)] px-4 text-left shadow-[var(--shadow-sm)] transition active:scale-[0.99] disabled:cursor-wait disabled:opacity-60"
             : "min-h-11 rounded-xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
-        }
+        )}
       >
         {prominent ? (
           <>
@@ -200,7 +204,7 @@ export default function SourceBreakdownVerse({
         ) : loading ? (
           "Loading..."
         ) : (
-          "Source Text"
+          label
         )}
       </button>
 

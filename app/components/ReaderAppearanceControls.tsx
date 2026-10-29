@@ -20,7 +20,7 @@ function OptionGroup<T extends string>({
   onChange: (value: T) => void;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-b border-[var(--border)] py-3 last:border-b-0">
+    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-[var(--border)] py-2 last:border-b-0">
       <span className="text-xs font-semibold text-[var(--muted)]">{label}</span>
       <div
         className="inline-flex rounded-xl bg-[var(--surface)] p-1"
@@ -34,7 +34,7 @@ function OptionGroup<T extends string>({
             aria-label={option.ariaLabel || option.label}
             aria-pressed={value === option.value}
             onClick={() => onChange(option.value)}
-            className={`min-h-8 rounded-lg px-3 text-xs font-semibold transition ${
+            className={`min-h-11 rounded-lg px-3 text-sm font-medium transition ${
               value === option.value
                 ? "bg-[var(--background)] text-[var(--foreground)] shadow-sm"
                 : "text-[var(--muted)]"

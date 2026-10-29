@@ -72,13 +72,13 @@ forbidText(
 );
 requireText(
   bookPassageSelector,
-  "Select a chapter to choose a verse.",
-  "optional verse-selection step",
+  "href={buildReaderHref({ book, chapter, translation })}",
+  "direct chapter reading links",
 );
 requireText(
-  bookPassageSelector,
-  "normalizeReaderChapter",
-  "runtime-owned verse labels",
+  readerSelector,
+  "verseOptions.map",
+  "runtime-owned optional verse labels",
 );
 
 requireText(navigation, 'href="/library"', "free Library navigation");
@@ -168,7 +168,7 @@ console.log("- Home prompt opens authenticated Ask EMET while preserving direct 
 console.log("- Home description accurately identifies Hebrew and Greek source-word study.");
 console.log("- Reader book selector explicitly groups Matthew through Revelation as New Testament.");
 console.log("- Mobile section and book selection uses native disclosures with real chapter links.");
-console.log("- Book selection supports an optional runtime-owned verse step.");
+console.log("- Chapter selection opens reading directly, with optional verse navigation in the reader.");
 console.log("- Primary navigation restores Ask EMET as the central action.");
 console.log("- Legacy Ask and Study URLs redirect to their current working routes.");
 console.log("- Live EMET API remains environment-gated and requires verified auth, canonical identity, and quota.");

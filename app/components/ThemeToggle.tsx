@@ -1,31 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-type Theme = "dark" | "light";
-
-function applyTheme(theme: Theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("bibleiq-theme", theme);
-}
+import { useTheme } from "@/app/components/ThemeProvider";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("dark");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("bibleiq-theme");
-    const initialTheme: Theme = saved === "light" ? "light" : "dark";
-
-    setTheme(initialTheme);
-    document.documentElement.setAttribute("data-theme", initialTheme);
-  }, []);
-
-  function toggleTheme() {
-    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
-
-    setTheme(nextTheme);
-    applyTheme(nextTheme);
-  }
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <button

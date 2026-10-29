@@ -81,7 +81,7 @@ assert(
   "English-word interaction styles remain.",
 );
 assert(
-  /Study opens the original-language text/.test(readerFirstUseTip),
+  /original-language study/.test(readerFirstUseTip),
   "First-use reader tip is missing.",
 );
 assert(
@@ -95,7 +95,7 @@ assert(
 assert(/Aa/.test(readerHeader), "Reader appearance control is missing.");
 assert(
   />\s*Done\s*</.test(verseActionSheet) &&
-    /aria-label="Dismiss verse actions"/.test(verseActionSheet),
+    /aria-label="Clear verse selection"/.test(verseActionSheet),
   "Verse-action dismiss behavior is missing.",
 );
 assert(
@@ -119,7 +119,7 @@ assert(
 );
 assert(/Loading gloss/.test(readerStudy), "English lexical glosses are missing.");
 assert(/transliteration/.test(readerStudy), "Source transliterations are missing.");
-assert(/Verse numbers open tools/.test(readerFirstUseTip), "Reader instructions do not match the interaction.");
+assert(/Select verse numbers/.test(readerFirstUseTip), "Reader instructions do not match the interaction.");
 assert(!/\/api\/emet\/explain/.test(sheet), "Ordinary word taps still invoke live AI.");
 
 console.log("P05 word-study UX verification passed.");

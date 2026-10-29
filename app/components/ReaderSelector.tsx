@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import BookPassageSelector from "@/app/components/BookPassageSelector";
+import { bookCatalog } from "@/app/data/scripture/bookCatalog";
 import { useRouter } from "next/navigation";
 import {
+  AVAILABLE_TRANSLATION_OPTIONS,
   setPreferredTranslation,
   type TranslationPreference,
 } from "@/app/lib/translationPreference";
@@ -16,13 +20,11 @@ type Props = {
   currentTranslation: Translation;
   currentVerse?: string | null;
   verseOptions: string[];
+  mode?: "passage" | "translation";
+  strictCitation?: boolean;
+  returnTo?: string;
+  returnLabel?: string;
 };
-
-const translations: { value: Translation; label: string }[] = [
-  { value: "web", label: "WEB" },
-  { value: "kjv", label: "KJV" },
-  { value: "brenton", label: "Brenton" },
-];
 
 const newTestamentBooks = new Set([
   "Matthew",
@@ -74,8 +76,13 @@ export default function ReaderSelector({
   currentTranslation,
   currentVerse,
   verseOptions,
+  mode = "passage",
+  strictCitation = false,
+  returnTo,
+  returnLabel,
 }: Props) {
   const router = useRouter();
+  const [selectedBook, setSelectedBook] = useState(currentBook);
   const bookGroups = [
     {
       label: "Old Testament",
@@ -100,121 +107,79 @@ export default function ReaderSelector({
     translation: Translation,
     verse?: string | null
   ) {
-    const verseParam = verse
-      ? `&verse=${encodeURIComponent(verse)}`
-      : "";
-
     const preferredTranslation = setPreferredTranslation(translation);
-
-    router.push(
-      `/read/${encodeURIComponent(
-        book
-      )}/${chapter}?translation=${preferredTranslation}${verseParam}`
-    );
+    const params = new URLSearchParams({ translation: preferredTranslation });
+    if (verse) params.set("verse", verse);
+    if (strictCitation) params.set("citation", "1");
+    if (returnTo) params.set("returnTo", returnTo);
+    if (returnLabel) params.set("returnLabel", returnLabel);
+    router.push(`/read/${encodeURIComponent(book)}/${chapter}?${params.toString()}`);
   }
 
-return (
-  <div className="space-y-5">
-    <div>
-      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-        Translation
-      </p>
-
-      <div className="flex gap-5 border-b border-[var(--border)]">
-        {translations.map((translation) => (
+  if (mode === "translation") {
+    return (
+      <div className="space-y-1" aria-label="Translation selection">
+        {AVAILABLE_TRANSLATION_OPTIONS.map((option) => (
           <button
-            key={translation.value}
+            key={option.id}
             type="button"
-            onClick={() =>
-              goTo(currentBook, currentChapter, translation.value)
-            }
-            className={`border-b-2 px-0.5 pb-2.5 pt-1 text-sm font-semibold transition ${
-              currentTranslation === translation.value
-                ? "border-[var(--foreground)] text-[var(--foreground)]"
-                : "border-transparent text-[var(--muted)]"
-            }`}
+            aria-pressed={currentTranslation === option.id}
+            onClick={() => goTo(currentBook, currentChapter, option.id, currentVerse)}
+            className="flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left text-sm hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
           >
-            {translation.label}
+            <span>{option.label}</span>
+            <span className="font-semibold">{option.shortLabel}{currentTranslation === option.id ? " ✓" : ""}</span>
           </button>
         ))}
       </div>
-    </div>
+    );
+  }
 
-    <div className="grid grid-cols-[minmax(0,1fr)_7rem] gap-3">
-      <label>
-        <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-          Book
-        </span>
-
+  const chapterCount = bookCatalog.find((item) => item.book === selectedBook)?.chapters || maxChapter;
+  return (
+    <div className="space-y-4">
+      <label className="block">
+        <span className="mb-2 block text-sm font-medium">Book</span>
         <select
           aria-label="Book"
-          value={currentBook}
-          onChange={(e) => goTo(e.target.value, 1, currentTranslation)}
-          className="min-h-12 w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--foreground)] outline-none"
+          value={selectedBook}
+          onChange={(event) => setSelectedBook(event.target.value)}
+          className="min-h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-base focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
         >
           {bookGroups.map((group) => (
             <optgroup key={group.label} label={group.label}>
-              {group.books.map((book) => (
-                <option key={book} value={book}>
-                  {book}
-                </option>
-              ))}
+              {group.books.map((book) => <option key={book} value={book}>{book}</option>)}
             </optgroup>
           ))}
         </select>
       </label>
-
-      <label>
-        <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-          Chapter
-        </span>
-
-        <select
-          aria-label="Chapter"
-          value={currentChapter}
-          onChange={(e) =>
-            goTo(currentBook, Number(e.target.value), currentTranslation)
-          }
-          className="min-h-12 w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--foreground)] outline-none"
-        >
-          {Array.from({ length: maxChapter }, (_, i) => i + 1).map(
-            (chapter) => (
-              <option key={chapter} value={chapter}>
-                {chapter}
-              </option>
-            )
-          )}
-        </select>
-      </label>
+      <div>
+        <p className="mb-2 text-sm font-medium">Chapter</p>
+        <BookPassageSelector
+          key={selectedBook}
+          book={selectedBook}
+          chapterCount={chapterCount}
+          translation={currentTranslation}
+          currentChapter={selectedBook === currentBook ? currentChapter : undefined}
+        />
+      </div>
+      {selectedBook === currentBook ? (
+        <details className="border-t border-[var(--border)]">
+          <summary className="min-h-11 cursor-pointer py-3 text-sm font-medium">Go to verse (optional)</summary>
+          <label className="block pb-2">
+            <span className="sr-only">Verse in {currentBook} {currentChapter}</span>
+            <select
+              aria-label="Verse"
+              value={currentVerse || ""}
+              onChange={(event) => goTo(currentBook, currentChapter, currentTranslation, event.target.value || null)}
+              className="min-h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-base"
+            >
+              <option value="">Start of chapter</option>
+              {verseOptions.map((label) => <option key={label} value={label}>Verse {label}</option>)}
+            </select>
+          </label>
+        </details>
+      ) : null}
     </div>
-
-    <label>
-      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-        Verse
-      </span>
-
-      <select
-        aria-label="Verse"
-        value={currentVerse || ""}
-        onChange={(e) =>
-          goTo(
-            currentBook,
-            currentChapter,
-            currentTranslation,
-            e.target.value || null
-          )
-        }
-        className="min-h-12 w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold text-[var(--foreground)] outline-none"
-      >
-        <option value="">Start of Chapter</option>
-
-        {verseOptions.map((verseLabel) => (
-          <option key={verseLabel} value={verseLabel}>
-            Verse {verseLabel}
-          </option>
-        ))}
-      </select>
-    </label>
-  </div>
-);
+  );
 }

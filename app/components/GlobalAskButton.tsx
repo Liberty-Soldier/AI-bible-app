@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-import EmetseesWordmark from "@/app/components/branding/EmetseesWordmark";
+import { safeChatReturnHref } from "@/app/components/emet/chatPresentation";
 import EmetChat, {
   type EmetChatUsage,
 } from "@/app/components/emet/EmetChat";
@@ -21,27 +21,41 @@ export default function GlobalAskButton() {
   const [initialQuestion, setInitialQuestion] = useState("");
   const [usage, setUsage] = useState<EmetChatUsage | null>(null);
   const [panelKey, setPanelKey] = useState(0);
+  const [hasOpened, setHasOpened] = useState(false);
+  const [simpleAvailable, setSimpleAvailable] = useState(false);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLElement | null>(null);
 
   async function openEmet(question = "") {
+    returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     try {
       const response = await fetch("/api/emet/session", { cache: "no-store" });
       if (response.status === 401) {
-        router.push("/auth?next=%2Femet");
+        const returnTo = safeChatReturnHref(`${window.location.pathname}${window.location.search}${window.location.hash}`);
+        const params = new URLSearchParams();
+        if (question.trim()) params.set("q", question.trim().slice(0, 800));
+        if (returnTo) params.set("returnTo", returnTo);
+        const next = `/emet${params.size ? `?${params.toString()}` : ""}`;
+        router.push(`/auth?next=${encodeURIComponent(next)}`);
         return;
       }
 
       if (response.ok) {
         const payload = (await response.json()) as {
           usage?: EmetChatUsage | null;
+          simpleAvailable?: boolean;
         };
         setUsage(payload.usage || null);
+        setSimpleAvailable(payload.simpleAvailable === true);
       }
     } catch {
       setUsage(null);
+      setSimpleAvailable(false);
     }
 
     setInitialQuestion(question.trim().slice(0, 800));
     setPanelKey((value) => value + 1);
+    setHasOpened(true);
     setOpen(true);
   }
 
@@ -59,11 +73,15 @@ export default function GlobalAskButton() {
     if (!open) return;
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    dialogRef.current?.focus({ preventScroll: true });
 
     return () => {
       document.body.style.overflow = originalOverflow;
+      returnFocusRef.current?.focus({ preventScroll: true });
     };
   }, [open]);
+
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   if (pathname.startsWith("/auth") || pathname.startsWith("/emet")) {
     return null;
@@ -71,40 +89,50 @@ export default function GlobalAskButton() {
 
   return (
     <>
-      {open ? (
-        <div className="fixed inset-0 z-[130]">
+      {hasOpened ? (
+        <div hidden={!open} className="fixed inset-0 z-[130]">
           <button
             type="button"
             aria-label="Close Ask EMET"
             onClick={() => setOpen(false)}
             className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
           />
-          <section className="absolute bottom-0 left-1/2 flex h-[92dvh] w-full max-w-2xl -translate-x-1/2 flex-col overflow-hidden rounded-t-[2rem] border border-[var(--border)] bg-[var(--canvas)] text-[var(--foreground)] shadow-2xl sm:bottom-5 sm:h-auto sm:max-h-[min(88dvh,52rem)] sm:rounded-[2rem]">
-            <header className="flex shrink-0 items-center justify-between gap-4 border-b border-[var(--border)] px-5 py-4">
-              <EmetseesWordmark compact />
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="border-b border-[var(--border)] px-1 py-1 text-sm font-semibold text-[var(--muted)] transition hover:text-[var(--foreground)]"
-              >
-                Close
-              </button>
-            </header>
-            <div className="min-h-0 flex-1 overflow-y-auto bg-[var(--canvas)] px-5 py-5">
-              <div className="mb-3">
-                <h2 className="text-2xl font-bold tracking-[-0.035em]">
-                  Ask EMET
-                </h2>
-                <p className="mt-1 text-sm text-[var(--muted)]">
-                  A natural conversation grounded in Scripture, with evidence you can inspect.
-                </p>
-              </div>
-              <EmetChat
-                key={panelKey}
-                initialUsage={usage}
-                initialQuestion={initialQuestion}
-              />
-            </div>
+          <section
+            ref={dialogRef}
+            role="dialog"
+            aria-modal={open ? true : undefined}
+            aria-label="Ask EMET"
+            tabIndex={-1}
+            onKeyDown={(event) => {
+              if (event.key === "Escape") {
+                event.preventDefault();
+                setOpen(false);
+              }
+              if (event.key === "Tab") {
+                const controls = Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], textarea:not(:disabled), select:not(:disabled), summary, [tabindex="0"]') || [])
+                  .filter((control) => control.getClientRects().length > 0);
+                if (!controls?.length) return;
+                const first = controls[0];
+                const last = controls[controls.length - 1];
+                if (event.shiftKey && (document.activeElement === first || document.activeElement === dialogRef.current)) {
+                  event.preventDefault();
+                  last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                  event.preventDefault();
+                  first.focus();
+                }
+              }
+            }}
+            className="absolute bottom-0 left-1/2 h-[92dvh] w-full max-w-2xl -translate-x-1/2 overflow-hidden rounded-t-2xl border border-[var(--border)] bg-[var(--canvas)] text-[var(--foreground)] sm:bottom-4 sm:h-[min(88dvh,52rem)] sm:rounded-2xl"
+          >
+            <EmetChat
+              active={open}
+              launchKey={panelKey}
+              initialUsage={usage}
+              initialSimpleAvailable={simpleAvailable}
+              initialQuestion={initialQuestion}
+              onClose={() => setOpen(false)}
+            />
           </section>
         </div>
       ) : null}

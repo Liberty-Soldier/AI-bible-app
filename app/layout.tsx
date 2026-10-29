@@ -82,8 +82,15 @@ export default function RootLayout({
           id="emetsees-theme-bootstrap"
           dangerouslySetInnerHTML={{
             __html: `try {
-  var stored = localStorage.getItem("emetsees-theme");
-  var theme = stored === "dark" ? "dark" : "light";
+  var keys = ["emetsees-theme", "bibleiq-theme", "theme"];
+  var theme = "light";
+  for (var i = 0; i < keys.length; i++) {
+    var stored = localStorage.getItem(keys[i]);
+    if (stored === "light" || stored === "dark") {
+      theme = stored;
+      break;
+    }
+  }
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
   localStorage.setItem("emetsees-theme", theme);

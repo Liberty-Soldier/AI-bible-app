@@ -21,6 +21,7 @@ import {
 import ReaderFirstUseTip from "@/app/components/ReaderFirstUseTip";
 import RestoredWordStudyNavigation from "@/app/components/RestoredWordStudyNavigation";
 import { getCanonicalChapterTokenAvailability } from "@/app/data/scripture/CanonicalVerseStore";
+import { getTranslationShortLabel, isTranslationPreference } from "@/app/lib/translationPreference";
 
 export const dynamic = "force-dynamic";
 
@@ -196,6 +197,7 @@ export default async function ReadChapterPage({
     returnTo?: string;
     returnLabel?: string;
     restoreWordStudy?: string;
+    citation?: string;
   }>;
 }) {
   const { book, chapter } = await params;
@@ -205,6 +207,7 @@ export default async function ReadChapterPage({
     returnTo,
     returnLabel,
     restoreWordStudy,
+    citation,
   } = await searchParams;
 
   const decodedBook = decodeURIComponent(book);
@@ -217,11 +220,13 @@ export default async function ReadChapterPage({
       ? translation
       : "web";
 
-  const activeTranslation = await getBestTranslation(
-    decodedBook,
-    chapterNumber,
-    requestedTranslation,
-  );
+  // Evidence links must retain their verified wording. Ordinary reading keeps
+  // the existing fallback for books unavailable in the preferred translation.
+  const isCitation = citation === "1";
+  if (isCitation && !isTranslationPreference(translation)) notFound();
+  const activeTranslation = isCitation
+    ? requestedTranslation
+    : await getBestTranslation(decodedBook, chapterNumber, requestedTranslation);
 
   const chapterData = await loadChapter(
     activeTranslation,
@@ -232,6 +237,22 @@ export default async function ReadChapterPage({
   const chapterSuperscriptions = chapterData.superscriptions;
 
   if (!chapterVerses.length) {
+    if (isCitation) {
+      return (
+        <main className="min-h-screen bg-[var(--background)] px-5 py-10 text-[var(--foreground)]">
+          <section className="mx-auto max-w-2xl">
+            <h1 className="text-2xl font-semibold">Citation unavailable</h1>
+            <p className="mt-3 text-base leading-7">
+              {decodedBook} {chapterNumber}{highlightedVerse ? `:${highlightedVerse}` : ""} could not be loaded in {getTranslationLabel(activeTranslation)}.
+              No other translation has been substituted.
+            </p>
+            <Link href={returnTo || "/emet"} className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold underline">
+              Back to {returnLabel || "Ask EMET"}
+            </Link>
+          </section>
+        </main>
+      );
+    }
     notFound();
   }
 
@@ -285,24 +306,41 @@ export default async function ReadChapterPage({
 
         <ReaderStickyHeader>
           <CollapsibleReaderHeader
+            key={`${decodedBook}-${chapterNumber}-${activeTranslation}-${highlightedVerse || ""}`}
             title={`${decodedBook} ${chapterNumber}`}
+            translationLabel={getTranslationShortLabel(activeTranslation)}
+            passage={
+              <ReaderSelector
+                books={books}
+                currentBook={decodedBook}
+                currentChapter={chapterNumber}
+                maxChapter={maxChapter}
+                currentTranslation={activeTranslation}
+                currentVerse={highlightedVerse}
+                verseOptions={chapterVerses.map((item) => item.verseLabel)}
+                strictCitation={isCitation}
+                returnTo={returnTo}
+                returnLabel={returnLabel}
+              />
+            }
+            translation={
+              <ReaderSelector
+                books={books}
+                currentBook={decodedBook}
+                currentChapter={chapterNumber}
+                maxChapter={maxChapter}
+                currentTranslation={activeTranslation}
+                currentVerse={highlightedVerse}
+                verseOptions={chapterVerses.map((item) => item.verseLabel)}
+                mode="translation"
+                strictCitation={isCitation}
+                returnTo={returnTo}
+                returnLabel={returnLabel}
+              />
+            }
           >
-            <div className="pt-1">
-              <ReaderAppearanceControls />
-              <SacredNameToggle />
-
-              <div className="border-t border-[var(--border)] pt-4">
-                <ReaderSelector
-                  books={books}
-                  currentBook={decodedBook}
-                  currentChapter={chapterNumber}
-                  maxChapter={maxChapter}
-                  currentTranslation={activeTranslation}
-                  currentVerse={highlightedVerse}
-                  verseOptions={chapterVerses.map((item) => item.verseLabel)}
-                />
-              </div>
-            </div>
+            <ReaderAppearanceControls />
+            <SacredNameToggle />
           </CollapsibleReaderHeader>
         </ReaderStickyHeader>
 
@@ -310,7 +348,7 @@ export default async function ReadChapterPage({
           previousChapterHref={previousChapterHref}
           nextChapterHref={nextChapterHref}
         >
-          <article className="pt-20 sm:pt-24">
+          <article className="pt-6 sm:pt-8">
             {returnTo ? (
               <Link
                 href={returnTo}
@@ -320,12 +358,12 @@ export default async function ReadChapterPage({
               </Link>
             ) : null}
 
-            <div className="mb-7">
-              <p className="mb-2 text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
+            <div className="mb-5">
+              <p className="mb-1 text-xs text-[var(--muted)]">
                 {translationLabel}
               </p>
 
-              <h1 className="reader-serif text-4xl font-semibold tracking-tight text-[var(--foreground)]">
+              <h1 className="reader-serif text-3xl font-medium tracking-tight text-[var(--foreground)]">
                 {decodedBook} {chapterNumber}
               </h1>
 
@@ -333,6 +371,7 @@ export default async function ReadChapterPage({
             </div>
 
             <VerseActionController
+              key={`${decodedBook}-${chapterNumber}-${activeTranslation}`}
               verses={chapterVerses}
               superscriptions={chapterSuperscriptions}
               activeTranslation={activeTranslation}
@@ -346,9 +385,9 @@ export default async function ReadChapterPage({
           {previousChapterHref ? (
             <Link
               href={previousChapterHref}
-              className="text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
+              className="inline-flex min-h-11 items-center text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
             >
-              ← Previous
+              ← Previous chapter
             </Link>
           ) : (
             <span />
@@ -357,9 +396,9 @@ export default async function ReadChapterPage({
           {nextChapterHref ? (
             <Link
               href={nextChapterHref}
-              className="text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
+              className="inline-flex min-h-11 items-center text-sm text-[var(--muted)] hover:text-[var(--foreground)]"
             >
-              Next →
+              Next chapter →
             </Link>
           ) : (
             <span />

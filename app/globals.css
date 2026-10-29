@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
   --background: #fffdf9;
   --canvas: #ffffff;
@@ -85,12 +87,14 @@ body {
   letter-spacing: 0;
 }
 
-button,
-a,
-input,
-textarea,
-select {
-  font: inherit;
+@layer base {
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
 }
 
 button,

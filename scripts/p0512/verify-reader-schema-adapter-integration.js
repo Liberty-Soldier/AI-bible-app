@@ -67,9 +67,16 @@ requireText("scripts/split-scripture-runtime.js", [
   "verseLabel",
 ]);
 
-requireText("app/components/ReaderWordStudyController.tsx", [
-  "numericSelectedVerse",
-  "/^\\d+$/.test(selectedVerse)",
+requireText("app/components/SourceBreakdownVerse.tsx", [
+  "parseDisplayedReference",
+  "String(parsed.verse)",
+  "/api/source-breakdown",
+]);
+
+requireText("app/components/SourceBreakdownSheet.tsx", [
+  "sourceOccurrenceId",
+  "sourceLexicalId",
+  "canonical-source-breakdown-occurrence",
 ]);
 
 requireText("app/verse/[id]/page.tsx", [

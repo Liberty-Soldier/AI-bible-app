@@ -141,12 +141,12 @@ assertPresent(
 );
 assertPresent(
   readerFirstUseTip,
-  /Study opens the original-language text/,
+  /original-language study/,
   "reader first-use tip",
 );
 assertPresent(
   readerFirstUseTip,
-  /Verse numbers open tools/,
+  /Select verse numbers/,
   "reader first-use tip",
 );
 assertPresent(
@@ -172,7 +172,7 @@ assertPresent(
 );
 assertPresent(
   verseActionSheet,
-  /aria-label="Dismiss verse actions"/,
+  /aria-label="Clear verse selection"/,
   "verse action sheet dismiss control",
 );
 assertPresent(
