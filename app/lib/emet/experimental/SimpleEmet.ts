@@ -2,7 +2,7 @@ import "server-only";
 
 import OpenAI from "openai";
 
-export const SIMPLE_EMET_SYSTEM = `You are EMET, a knowledgeable Scripture teacher approaching the Bible from a Torah-observant, non-Trinitarian Messianic perspective.
+export const SIMPLE_EMET_SYSTEM = `You are EMET, a Scripture-first study assistant. Your task is to examine the Biblical text carefully, reason consistently across Scripture, and answer questions using Scripture as the highest authority rather than religious traditions, denominational doctrines, or theological creeds.
 
 Your purpose is to help people understand Scripture through careful contextual reading and sound reasoning.
 
@@ -28,17 +28,19 @@ The Church has not replaced Israel, and Gentile believers do not belong to a sep
 
 Reasoning and communication
 
-- Begin with the Torah and Prophets as foundational Scripture.
+- Ground conclusions directly in Scripture. Begin with the Torah and Prophets as foundational Scripture.
 - Understand the New Testament in continuity with the earlier Scriptures.
 - Consider the context, speaker, audience, and purpose of relevant passages.
 - Examine passages that appear to challenge the conclusion.
-- Distinguish explicit statements from interpretations.
-- Answer simple questions simply.
+- Distinguish explicit statements from interpretations. Do not present disputed interpretive conclusions as direct quotations or indisputable explicit statements.
+- Answer straightforward questions directly and concisely.
+- Show the Scriptural evidence and explain how the conclusion follows; do not substitute religious perspectives or denominational positions for Scriptural reasoning.
+- Use natural wording such as "Scripture teaches," "According to these passages," or "The Biblical evidence indicates" only when the passages substantiate the claim.
 - Cite Scripture accurately.
 - Follow the conversation across turns.
 - Reconsider previous conclusions when the user identifies an apparent contradiction.
 - Do not invent verses or present an interpretation as an explicit quotation.
-- Explain meaningful alternative interpretations fairly when relevant, while making EMET's perspective clear.
+- Explain meaningful alternative interpretations fairly when materially relevant, without making every simple answer a theological debate.
 
 Scripture is the authority, not the assistant's previous answers.
 
@@ -49,8 +51,7 @@ export type SimpleDraft = {
   status: "complete" | "insufficient-evidence";
   answer: string;
   support: "explicit-statement" | "strong-implication" | "theological-synthesis" | "possible-interpretation" | "does-not-establish";
-  references: Array<{ reference: string; translation: "web" | "kjv" | "brenton" }>;
-  quotations: Array<{ reference: string; translation: "web" | "kjv" | "brenton"; text: string }>;
+  references: unknown;
   limitations: string[];
 };
 
@@ -80,7 +81,7 @@ export const SIMPLE_EMET_SCHEMA = {
   additionalProperties: false,
   properties: {
     status: { type: "string", enum: ["complete", "insufficient-evidence"] },
-    answer: { type: "string", description: "The natural conversational explanation. Sources belong in references. Declare any Scripture quotations in quotations with their exact passage and translation; incidental quoted explanatory phrases are not Scripture quotations." },
+    answer: { type: "string", description: "The natural conversational explanation. Identify relevant Scripture in references; the server supplies its actual text. Distinguish interpretation from explicit Scriptural statements." },
     support: { type: "string", enum: ["explicit-statement", "strong-implication", "theological-synthesis", "possible-interpretation", "does-not-establish"] },
     references: {
       type: "array", maxItems: 16,
@@ -90,31 +91,24 @@ export const SIMPLE_EMET_SCHEMA = {
         required: ["reference", "translation"],
       },
     },
-    quotations: {
-      type: "array", maxItems: 16,
-      description: "Explicit Scripture quotations only. Use an empty array when none. Each quotation must match its own referenced passage and translation, also included in references.",
-      items: {
-        type: "object", additionalProperties: false,
-        properties: { reference: { type: "string" }, translation: { type: "string", enum: ["web", "kjv", "brenton"] }, text: { type: "string" } },
-        required: ["reference", "translation", "text"],
-      },
-    },
     limitations: { type: "array", maxItems: 8, items: { type: "string" } },
   },
-  required: ["status", "answer", "support", "references", "quotations", "limitations"],
+  required: ["status", "answer", "support", "references", "limitations"],
 } as const;
 
 export function parseSimpleDraft(value: unknown): SimpleDraft | null {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   const keys = SIMPLE_EMET_SCHEMA.required;
-  if (Object.keys(value).some((key) => !keys.includes(key as typeof keys[number]))) return null;
+  if (Object.keys(value).some((key) => key !== "quotations" && !keys.includes(key as typeof keys[number]))) return null;
   const draft = value as SimpleDraft;
   if (!["complete", "insufficient-evidence"].includes(draft.status) || typeof draft.answer !== "string" || !draft.answer.trim() || draft.answer.length > 16_000 ||
-    !SIMPLE_EMET_SCHEMA.properties.support.enum.includes(draft.support) || !Array.isArray(draft.references) || draft.references.length > 16 ||
-    draft.references.some((item) => !item || typeof item !== "object" || Array.isArray(item) || Object.keys(item).some((key) => key !== "reference" && key !== "translation") || typeof item.reference !== "string" || !item.reference.trim() || item.reference.length > 160 || !["web", "kjv", "brenton"].includes(item.translation)) ||
-    !Array.isArray(draft.quotations) || draft.quotations.length > 16 || draft.quotations.some((item) => !item || typeof item !== "object" || Array.isArray(item) || Object.keys(item).some((key) => !["reference", "translation", "text"].includes(key)) || typeof item.reference !== "string" || !item.reference.trim() || item.reference.length > 160 || !["web", "kjv", "brenton"].includes(item.translation) || typeof item.text !== "string" || !item.text.trim() || item.text.length > 10_000) ||
+    !SIMPLE_EMET_SCHEMA.properties.support.enum.includes(draft.support) ||
+    (draft.references !== undefined && JSON.stringify(draft.references).length > 8192) ||
     !Array.isArray(draft.limitations) || draft.limitations.length > 8 || draft.limitations.some((item) => typeof item !== "string" || item.length > 1000)) return null;
-  return draft;
+  // Ignore obsolete quotation metadata, including malformed values. It is never
+  // verified, displayed as Scripture, or allowed to conceal a natural answer.
+  return { status: draft.status, answer: draft.answer, support: draft.support,
+    references: draft.references, limitations: draft.limitations };
 }
 
 export type SimpleGenerationDiagnostics = {

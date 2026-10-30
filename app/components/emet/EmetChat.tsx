@@ -58,6 +58,8 @@ type Answer = {
   claims: EmetAiClaim[];
   continuityChecks: EmetAiContinuityCheck[];
   sourceVerification?: "locked-corpus-text";
+  verificationStatus?: "references-verified" | "unverified";
+  unresolvedReferences?: Array<{ reference: string; translation?: string; reason: string }>;
   citations: Array<{ evidenceId: string; reference?: string; text?: string; translation?: string; verification?: "locked-corpus-text" }>;
   limitations: string[];
 };
@@ -136,6 +138,7 @@ function storedExchanges(storage: Storage, key = CHAT_STORAGE_KEY) {
         continuityChecks: Array.isArray(exchange.answer.continuityChecks)
           ? exchange.answer.continuityChecks
           : [],
+        ...simpleInspection(exchange.answer),
         sourceVerification: exchange.answer.sourceVerification === "locked-corpus-text" ? "locked-corpus-text" as const : undefined,
         citations: Array.isArray(exchange.answer.citations)
           ? exchange.answer.citations
@@ -180,6 +183,15 @@ function contextLabel(context: ReaderContext | WordContext | null) {
     : reference;
 }
 
+function simpleInspection(value: Partial<Answer>) {
+  return {
+    verificationStatus: value.verificationStatus === "unverified" ? "unverified" as const : value.verificationStatus === "references-verified" ? "references-verified" as const : undefined,
+    unresolvedReferences: Array.isArray(value.unresolvedReferences) ? value.unresolvedReferences.slice(0, 17)
+      .filter((item) => item && typeof item.reference === "string" && typeof item.reason === "string")
+      .map((item) => ({ reference: item.reference.slice(0, 160), reason: item.reason.slice(0, 64), translation: typeof item.translation === "string" ? item.translation.slice(0, 32) : undefined })) : [],
+  };
+}
+
 function normalizeAnswer(payload: Record<string, unknown>): Answer {
   if (payload.answer && typeof payload.answer === "object") {
     const value = payload.answer as Partial<Answer>;
@@ -196,6 +208,7 @@ function normalizeAnswer(payload: Record<string, unknown>): Answer {
         continuityChecks: Array.isArray(value.continuityChecks)
           ? value.continuityChecks
           : [],
+        ...simpleInspection(value),
         sourceVerification: value.sourceVerification === "locked-corpus-text" ? "locked-corpus-text" as const : undefined,
         citations: Array.isArray(value.citations) ? value.citations : [],
         limitations: [...new Set([...(Array.isArray(value.limitations) ? value.limitations : []), ...(Array.isArray(payload.limitations) ? payload.limitations.filter((item): item is string => typeof item === "string") : [])])],
@@ -822,6 +835,17 @@ export default function EmetChat({
                   {outcome !== "answered" ? (
                     <p role={outcome === "failed" ? "alert" : "status"} className="text-sm font-semibold">{outcome === "insufficient-evidence" ? "Insufficient evidence" : "Answer unavailable"}</p>
                   ) : null}
+                  {simpleSources && exchange.answer.verificationStatus === "unverified" ? (
+                    <section role="alert" aria-label="Unverified model answer" className="rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3 text-sm leading-6">
+                      <p className="font-semibold">Unverified model answer · owner inspection only</p>
+                      <p>The answer is shown as generated. Its references or conclusion could not be verified. It cannot be shared as verified Scripture.</p>
+                      {exchange.answer.unresolvedReferences?.length ? (
+                        <ul aria-label="Unresolved references (not verified)" className="mt-2 space-y-1">
+                          {exchange.answer.unresolvedReferences.map((item, index) => <li key={index}>{item.reference}{item.translation ? ` · ${item.translation}` : ""} — not verified</li>)}
+                        </ul>
+                      ) : null}
+                    </section>
+                  ) : null}
                   <div aria-label="EMET response" className="whitespace-pre-wrap break-words text-base leading-7" data-emet-answer="true">{exchange.answer.answer}</div>
                   {notes.length ? (
                     <section aria-label="Answer qualifications" className="border-l-2 border-[var(--border)] pl-3 text-sm leading-6 text-[var(--muted)]">
@@ -835,7 +859,7 @@ export default function EmetChat({
                     {exchange.answer.citations.length ? (
                       <details className="group">
                         <summary className="min-h-11 cursor-pointer py-3 font-medium text-[var(--muted)]">{simpleSources ? "Scripture passages" : "Sources"} · {exchange.answer.citations.length}</summary>
-                        <p className="mb-1 text-xs text-[var(--muted)]">{simpleSources ? "Passage text is checked against the stated translation. The explanation is model-generated; these checks do not verify every inference or unattributed quotation." : "Final supporting citations"}</p>
+                        <p className="mb-1 text-xs text-[var(--muted)]">{simpleSources ? "Passage text is checked against the stated translation. The explanation is model-generated, including any quoted wording; these checks do not independently verify it." : "Final supporting citations"}</p>
                         <div className="flex flex-wrap gap-x-4 gap-y-1 pb-2">
                           {exchange.answer.citations.map((citation) => {
                             const reference = citation.reference;
@@ -860,7 +884,7 @@ export default function EmetChat({
                         </div>
                       </details>
                     ) : null}
-                    {exchange.shareStudyId ? (
+                    {!simpleSources && exchange.shareStudyId ? (
                       <button type="button" aria-label="Publish and share this answer" onClick={() => {
                         void share(exchange).catch((error: unknown) => {
                           if (!(error instanceof DOMException && error.name === "AbortError")) setError("Sharing could not be completed. Please try again.");

@@ -76,38 +76,34 @@ export function resolveSimpleReference(raw: string, translation: Translation): A
   return result;
 }
 
-const normalizeQuote = (value: string) => value.normalize("NFC").replace(/[’]/g, "'").replace(/\s+/g, " ").trim();
+type SourceIssue = { reference: string; translation?: string; reason: "citation-unresolved" | "invalid-reference" | "citation-limit" | "citations-missing" };
 
-// This boundary certifies source text, never theological entailment. Prose is
-// deliberately neither parsed for references nor promoted to verified sources.
+// Only structured, locked-corpus source records become links. Natural prose and
+// obsolete quotation fields never participate in this boundary.
 export function verifySimpleDraft(draft: SimpleDraft) {
   const sources = new Map<string, { reference: string; text: string; translation: Translation }>();
+  const unresolved: SourceIssue[] = [];
+  const candidates = Array.isArray(draft.references) ? draft.references : [];
+  if (!Array.isArray(draft.references)) unresolved.push({ reference: "Malformed or missing source list", reason: "invalid-reference" });
+  if (candidates.length > 16) unresolved.push({ reference: "Source list exceeds the bounded limit", reason: "citation-limit" });
   let expanded = 0;
-  for (const citation of draft.references) {
-    const resolved = resolveSimpleReference(citation.reference, citation.translation);
-    if (!resolved) return { ok: false as const, stage: "citation-resolution" as const, code: "citation-unresolved" as const, reason: "A cited passage could not be verified in its stated translation." };
+  for (const candidate of candidates.slice(0, 16)) {
+    const item = candidate && typeof candidate === "object" && !Array.isArray(candidate) ? candidate as Record<string, unknown> : {};
+    const reference = typeof item.reference === "string" ? item.reference.slice(0, 160) : "Malformed source reference";
+    const translation = typeof item.translation === "string" ? item.translation.slice(0, 32) : undefined;
+    if (Object.keys(item).some((key) => key !== "reference" && key !== "translation") || typeof item.reference !== "string" || !item.reference.trim() || item.reference.length > 160 || !["web", "kjv", "brenton"].includes(translation || "")) {
+      unresolved.push({ reference, translation, reason: "invalid-reference" }); continue;
+    }
+    const resolved = resolveSimpleReference(item.reference, translation as Translation);
+    if (!resolved) { unresolved.push({ reference, translation, reason: "citation-unresolved" }); continue; }
     expanded += resolved.length;
-    if (expanded > 80) return { ok: false as const, stage: "citation-resolution" as const, code: "citation-limit" as const, reason: "The answer exceeds the bounded citation limit." };
+    if (expanded > 80) { unresolved.push({ reference, translation, reason: "citation-limit" }); continue; }
     for (const verse of resolved) sources.set(`${verse.translation}:${verse.reference}`, verse);
   }
-  if (draft.status === "complete" && !sources.size) return { ok: false as const, stage: "citation-resolution" as const, code: "citations-missing" as const, reason: "The answer did not supply verifiable Scripture sources." };
-  const quotations = [];
-  for (const quotation of draft.quotations) {
-    // A quotation must identify one contiguous passage, not pooled sources.
-    const resolved = quotation.reference.includes(",") ? null : resolveSimpleReference(quotation.reference, quotation.translation);
-    if (!resolved || resolved.some((verse) => !sources.has(`${verse.translation}:${verse.reference}`)) ||
-      !normalizeQuote(resolved.map((verse) => verse.text).join(" ")).includes(normalizeQuote(quotation.text))) {
-      return { ok: false as const, stage: "quotation-verification" as const, code: "quotation-unverified" as const, reason: "A declared quotation did not match its particular source passage and translation." };
-    }
-    const first = resolved[0].reference;
-    const last = resolved[resolved.length - 1].reference;
-    quotations.push({
-      text: quotation.text, translation: quotation.translation,
-      reference: resolved.length === 1 ? first : `${first}–${last.slice(last.lastIndexOf(" ") + 1)}`,
-    });
-  }
+  if (!sources.size && !unresolved.length && draft.status === "complete") unresolved.push({ reference: "No Scripture sources supplied", reason: "citations-missing" });
   return {
-    ok: true as const, quotations,
+    ok: unresolved.length === 0, code: unresolved[0]?.reason,
+    stage: "citation-resolution" as const, unresolved,
     citations: [...sources.values()].map((verse) => ({
       evidenceId: `scripture:${verse.translation}:simple:${verse.reference}`,
       ...verse, verification: "locked-corpus-text" as const,

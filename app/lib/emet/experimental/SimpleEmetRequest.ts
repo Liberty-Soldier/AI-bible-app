@@ -45,36 +45,35 @@ export async function handleSimpleEmet(input: { userId: string; requestId: strin
     }
     stage = "citation-verification";
     const verified = verifySimpleDraft(draft);
-    if (!verified.ok || draft.status !== "complete") {
+    if (draft.status !== "complete") {
       stage = "usage-completion";
       await refundFailedEmetAiQuestion(input.requestId);
       await completeEmetAiQuestion(input.requestId, "fail-closed");
-      // Only a valid, verified model-declared insufficiency is insufficient evidence.
-      const code = !verified.ok ? verified.code : "model-insufficient-evidence";
-      const resultStage = !verified.ok ? verified.stage : "model-answer";
-      const status = !verified.ok ? 502 : 422;
-      const diagnostics = report(code, resultStage, status);
-      return { status, body: {
-        status: !verified.ok ? "verification-failed" : "insufficient-evidence", engine: "simple", diagnostics,
-        answer: !verified.ok
-          ? "Simple EMET's answer did not pass Scripture verification. Please try again."
-          : "Simple EMET could not establish an answer from the available Scripture evidence.",
-        limitations: [!verified.ok ? verified.reason : "The model reported insufficient evidence.", `Owner diagnostic: ${code} (${resultStage}).`],
-        usage: await getEmetAiUsageSummary(),
+      return { status: 422, body: {
+        status: "insufficient-evidence", engine: "simple", source: "simple-owner-model",
+        diagnostics: report("model-insufficient-evidence", "model-answer", 422),
+        answer: {
+          status: "insufficient-evidence", answer: draft.answer, conclusionSupport: draft.support,
+          claims: [], componentChecks: [], continuityChecks: [], citations: verified.citations,
+          sourceVerification: "locked-corpus-text", verificationStatus: "unverified",
+          unresolvedReferences: verified.unresolved,
+          limitations: [...draft.limitations, "The model reported insufficient evidence. This explanation is unverified and available only for owner inspection."],
+        }, usage: await getEmetAiUsageSummary(),
       } };
     }
     stage = "usage-completion";
     if (!await completeEmetAiQuestion(input.requestId, "model")) return { status: 503, body: { status: "usage-unavailable", diagnostics: report("usage-completion-failed", stage, 503) } };
-    const diagnostics = report("complete", "api-response", 200);
+    const diagnostics = report(verified.ok ? "complete" : verified.code || "references-unverified", verified.ok ? "api-response" : "citation-resolution", 200);
     return {
       status: 200,
       body: {
-        status: "complete", engine: "simple", source: "simple-owner-model", usage: quota, diagnostics,
+        status: verified.ok ? "complete" : "complete-unverified", engine: "simple", source: "simple-owner-model", usage: quota, diagnostics,
         answer: {
           status: "complete", answer: draft.answer, conclusionSupport: draft.support,
           claims: [], componentChecks: [], continuityChecks: [], citations: verified.citations,
-          sourceVerification: "locked-corpus-text", scriptureQuotations: verified.quotations,
-          limitations: [...draft.limitations, "Owner experiment: The explanation and any unattributed prose references or quotations are model-generated and not independently verified. Only the Scripture passages and explicitly attributed quotations are checked against their stated translations; this does not establish support for every theological inference."],
+          sourceVerification: "locked-corpus-text", verificationStatus: verified.ok ? "references-verified" : "unverified",
+          unresolvedReferences: verified.unresolved,
+          limitations: [...draft.limitations, ...(!verified.ok ? ["Unverified model answer: some Scripture references could not be resolved. Only the separately displayed passages have verified corpus text."] : []), "Owner experiment: The explanation, its prose references, and any quoted wording are model-generated and not independently verified. Only the server-supplied Scripture passages are checked against their stated translations; this does not establish support for every theological inference."],
         },
       },
     };
