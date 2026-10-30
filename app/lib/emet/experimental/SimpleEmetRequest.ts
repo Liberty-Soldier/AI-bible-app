@@ -73,7 +73,8 @@ export async function handleSimpleEmet(input: { userId: string; requestId: strin
         answer: {
           status: "complete", answer: draft.answer, conclusionSupport: draft.support,
           claims: [], componentChecks: [], continuityChecks: [], citations: verified.citations,
-          limitations: [...draft.limitations, "Owner experiment: Scripture references and quotations are checked; the conclusions remain model interpretations."],
+          sourceVerification: "locked-corpus-text", scriptureQuotations: verified.quotations,
+          limitations: [...draft.limitations, "Owner experiment: The explanation and any unattributed prose references or quotations are model-generated and not independently verified. Only the Scripture passages and explicitly attributed quotations are checked against their stated translations; this does not establish support for every theological inference."],
         },
       },
     };

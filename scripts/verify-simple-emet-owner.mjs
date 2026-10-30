@@ -7,7 +7,7 @@ const env = { EMET_SIMPLE_OWNER_ENABLED: 'true', EMET_OWNER_EMAILS: 'owner@examp
 const user = { id: 'owner-id', email: 'owner@example.invalid', email_confirmed_at: '2026-01-01' };
 let authenticated = user;
 let calls = [];
-const draft = { status: 'complete', answer: 'John 17:3 distinguishes the Father from His Messiah.', support: 'theological-synthesis', references: [{ reference: 'John 17:3', translation: 'web' }], limitations: [] };
+const draft = { status: 'complete', answer: 'John 17:3 distinguishes the Father from His Messiah.', support: 'theological-synthesis', references: [{ reference: 'John 17:3', translation: 'web' }], quotations: [], limitations: [] };
 const rows = [];
 const admin = { from(table) {
   assert.equal(table, 'emet_question_requests');
@@ -60,7 +60,8 @@ for (const translation of ['web','kjv','brenton']) {
   const checked = scripture.verifySimpleDraft({ ...draft, answer: `Genesis 1:1 says “${verse.text}”`, references: [{ reference: 'Genesis 1:1', translation }] });
   assert.equal(checked.ok, true); assert.match(checked.citations[0].evidenceId, new RegExp(`scripture:${translation}:`));
 }
-for (const answer of ['John 999:3 is explicit.', 'John 999 teaches this.', 'John 17:3 says “A completely fabricated divine quotation.”', 'John 17:3 and Genesis 1:1 support this.', 'John 17:3 and Invented 8:9 support this.']) assert.equal(scripture.verifySimpleDraft({ ...draft, answer }).ok, false, answer);
+for (const reference of ['John 999:3', 'Invented 8:9']) assert.equal(scripture.verifySimpleDraft({ ...draft, references: [{ reference, translation: 'web' }] }).ok, false, reference);
+assert.equal(scripture.verifySimpleDraft({ ...draft, quotations: [{ reference: 'John 17:3', translation: 'web', text: 'A completely fabricated divine quotation.' }] }).ok, false);
 assert.equal(scripture.verifySimpleDraft({ ...draft, references: [{ reference: 'John 17:3', translation: 'brenton' }] }).ok, false);
 let allowed = true, claim = 'claimed', quota = { allowed: true, charged: false }, fail = false, generated = draft;
 const events = [];
@@ -78,7 +79,7 @@ claim = 'duplicate'; assert.equal((await service.handleSimpleEmet(input)).status
 claim = 'rate-limited'; assert.equal((await service.handleSimpleEmet(input)).status,429); claim = 'claimed';
 assert.equal((await service.handleSimpleEmet({ ...input, history: Array(7).fill(history[0]) })).status,400);
 quota = { allowed: false }; assert.equal((await service.handleSimpleEmet(input)).status,429); quota = { allowed: true };
-generated = { ...draft, answer: 'John 999:3' }; assert.equal((await service.handleSimpleEmet(input)).status,502); assert.ok(events.includes('refund'));
+generated = { ...draft, references: [{ reference: 'John 999:3', translation: 'web' }] }; assert.equal((await service.handleSimpleEmet(input)).status,502); assert.ok(events.includes('refund'));
 generated = { ...draft, status: 'insufficient-evidence' }; assert.equal((await service.handleSimpleEmet(input)).status,422);
 fail = true; result = await service.handleSimpleEmet(input); assert.equal(result.status,503); assert.doesNotMatch(JSON.stringify(result),/private detail/);
 for (const file of fs.readdirSync('app/lib/emet/experimental')) assert.doesNotMatch(fs.readFileSync(`app/lib/emet/experimental/${file}`,'utf8'), /EmetAiIdentity|setSupabaseEmetAiRequestCache|appendSupabaseEmetConversationLedger|EmetAiPlanner/);

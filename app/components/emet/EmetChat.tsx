@@ -57,7 +57,8 @@ type Answer = {
   componentChecks: EmetAiComponentCheck[];
   claims: EmetAiClaim[];
   continuityChecks: EmetAiContinuityCheck[];
-  citations: Array<{ evidenceId: string; reference?: string }>;
+  sourceVerification?: "locked-corpus-text";
+  citations: Array<{ evidenceId: string; reference?: string; text?: string; translation?: string; verification?: "locked-corpus-text" }>;
   limitations: string[];
 };
 
@@ -135,6 +136,7 @@ function storedExchanges(storage: Storage, key = CHAT_STORAGE_KEY) {
         continuityChecks: Array.isArray(exchange.answer.continuityChecks)
           ? exchange.answer.continuityChecks
           : [],
+        sourceVerification: exchange.answer.sourceVerification === "locked-corpus-text" ? "locked-corpus-text" as const : undefined,
         citations: Array.isArray(exchange.answer.citations)
           ? exchange.answer.citations
           : [],
@@ -194,6 +196,7 @@ function normalizeAnswer(payload: Record<string, unknown>): Answer {
         continuityChecks: Array.isArray(value.continuityChecks)
           ? value.continuityChecks
           : [],
+        sourceVerification: value.sourceVerification === "locked-corpus-text" ? "locked-corpus-text" as const : undefined,
         citations: Array.isArray(value.citations) ? value.citations : [],
         limitations: [...new Set([...(Array.isArray(value.limitations) ? value.limitations : []), ...(Array.isArray(payload.limitations) ? payload.limitations.filter((item): item is string => typeof item === "string") : [])])],
       } as Answer;
@@ -808,6 +811,7 @@ export default function EmetChat({
           {exchanges.map((exchange) => {
             const outcome = exchange.outcome || (exchange.answer.status === "insufficient-evidence" ? "insufficient-evidence" : exchange.source === "fail-closed" ? "failed" : "answered");
             const notes = qualifications(exchange.answer);
+            const simpleSources = exchange.source === "simple-owner-model" || exchange.answer.sourceVerification === "locked-corpus-text";
             return (
               <article key={exchange.id} className="space-y-3" aria-label="Question and response">
                 <div className="flex justify-end">
@@ -830,13 +834,23 @@ export default function EmetChat({
                   <div className="flex flex-wrap items-start gap-x-4 gap-y-1 text-sm">
                     {exchange.answer.citations.length ? (
                       <details className="group">
-                        <summary className="min-h-11 cursor-pointer py-3 font-medium text-[var(--muted)]">Sources · {exchange.answer.citations.length}</summary>
-                        <p className="mb-1 text-xs text-[var(--muted)]">Final supporting citations</p>
+                        <summary className="min-h-11 cursor-pointer py-3 font-medium text-[var(--muted)]">{simpleSources ? "Scripture passages" : "Sources"} · {exchange.answer.citations.length}</summary>
+                        <p className="mb-1 text-xs text-[var(--muted)]">{simpleSources ? "Passage text is checked against the stated translation. The explanation is model-generated; these checks do not verify every inference or unattributed quotation." : "Final supporting citations"}</p>
                         <div className="flex flex-wrap gap-x-4 gap-y-1 pb-2">
                           {exchange.answer.citations.map((citation) => {
                             const reference = citation.reference;
                             const translation = getCitationTranslation(citation);
                             const href = buildScriptureCitationHref(citation, { returnTo: conversationHref, returnLabel: "Ask EMET" });
+                            if (simpleSources && citation.verification === "locked-corpus-text" && typeof citation.text === "string" && href && reference) {
+                              return (
+                                <div key={`${exchange.id}-${citation.evidenceId}`} className="w-full space-y-1 pb-3">
+                                  <Link href={href} onClick={onClose} className="inline-flex min-h-11 items-center gap-x-1 underline decoration-[var(--brand)] underline-offset-4">
+                                    {reference}<span className="text-xs text-[var(--muted)]">· {translation === "brenton" ? "Brenton" : translation?.toUpperCase()}</span>
+                                  </Link>
+                                  <blockquote className="whitespace-pre-wrap break-words leading-6">{citation.text}</blockquote>
+                                </div>
+                              );
+                            }
                             return href && reference ? (
                               <Link key={`${exchange.id}-${citation.evidenceId}`} href={href} onClick={onClose} className="inline-flex min-h-11 flex-wrap items-center gap-x-1 underline decoration-[var(--brand)] underline-offset-4">
                                 {reference}{translation ? <span className="text-xs text-[var(--muted)]">· {translation === "brenton" ? "Brenton" : translation.toUpperCase()}</span> : null}

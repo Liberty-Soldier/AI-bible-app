@@ -407,3 +407,16 @@ selector = elements(ownerChat.tree(), x => x.type === 'select')[0]; selector.pro
 assert.equal(elements(ownerChat.tree(), x => x.type === 'textarea')[0].props.value,'Current draft');
 assert.equal(elements(chatFixture().tree(), x => x.type === 'select').length,0);
 console.log('PASS: owner testing control, current default, isolated engine history/drafts, full immediate follow-up context and ordinary-user control visibility.');
+const sourceText='Exact server-constructed Scripture text.';
+const simplePayload={status:'complete',source:'simple-owner-model',answer:{...answerPayload.answer,claims:[],componentChecks:[],continuityChecks:[],sourceVerification:'locked-corpus-text',citations:[{evidenceId:'scripture:kjv:simple:Genesis 1:1',reference:'Genesis 1:1',translation:'kjv',text:sourceText,verification:'locked-corpus-text'}]}};
+const sourceChat=chatFixture({history:[],props:{initialSimpleAvailable:true}});
+elements(sourceChat.tree(),x=>x.type==='select')[0].props.onChange({target:{value:'simple'}});sourceChat.render();sourceChat.type('A source display fixture');sourceChat.send();sourceChat.requests[0].finish(simplePayload);await tick();sourceChat.render();
+assert.match(text(sourceChat.tree()),/Scripture passages · 1/);
+assert.doesNotMatch(text(sourceChat.tree()),/Final supporting citations/);
+assert.equal(elements(sourceChat.tree(),x=>x.type==='blockquote')[0].props.children,sourceText);
+assert.match(text(sourceChat.tree()),/explanation is model-generated/);
+const sourceLink=elements(sourceChat.tree(),x=>x.type==='a'&&x.props.href?.includes('translation=kjv'))[0];assert.ok(sourceLink);
+const reopened=chatFixture({history:[{id:'source-fixture',question:'A saved source fixture',source:'simple-owner-model',answer:simplePayload.answer}]});
+assert.match(text(reopened.tree()),/Scripture passages · 1/);assert.equal(elements(reopened.tree(),x=>x.type==='blockquote')[0].props.children,sourceText);
+const currentChat=chatFixture({history:[{...prior,answer:{...prior.answer,citations:answerPayload.answer.citations}}]});assert.match(text(currentChat.tree()),/Final supporting citations/);assert.equal(elements(currentChat.tree(),x=>x.type==='blockquote').length,0);
+console.log('PASS: integrated Simple source disclosure, server text rendering, translation-aware navigation, API normalization and saved-history restoration; current engine disclosure unchanged.');

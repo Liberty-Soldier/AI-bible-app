@@ -35,7 +35,7 @@ const model = fixture.load('app/lib/emet/experimental/SimpleEmet.ts');
 const input = { userId: 'fixture-owner', requestId: '11111111-1111-4111-8111-111111111111', conversationId: '11111111-1111-4111-8111-111111111111', history: [], context: null };
 const draft = {
   status: 'complete', answer: 'He is the Messiah, sent by the Father, and mediator (John 17:3, 1 Timothy 2:5).',
-  support: 'theological-synthesis', references: [{ reference: 'John 17:3', translation: 'web' }, { reference: '1 Timothy 2:5', translation: 'web' }], limitations: [],
+  support: 'theological-synthesis', references: [{ reference: 'John 17:3', translation: 'web' }, { reference: '1 Timothy 2:5', translation: 'web' }], quotations: [], limitations: [],
 };
 const completed = (value) => ({ status: 'completed', output_text: JSON.stringify(value), usage: { output_tokens: 250, output_tokens_details: { reasoning_tokens: 100 } } });
 async function run(question, value) { response = value; events = []; return handleSimpleEmet({ ...input, question }); }
@@ -64,12 +64,12 @@ for (const question of questions) {
     [completed(null), 502, 'invalid-structure', 'structured-output'],
     [completed({ ...draft, references: [] }), 502, 'citations-missing', 'citation-resolution'],
     [completed({ ...draft, references: [{ reference:'John 999:3',translation:'web' }] }), 502, 'citation-unresolved', 'citation-resolution'],
-    [completed({ ...draft, answer: 'John 17:3, 1 Timothy 2:999', references: draft.references }), 502, 'inline-citation-unverified', 'citation-resolution'],
+    [completed({ ...draft, references: [{ reference: '1 Timothy 2:999', translation: 'web' }] }), 502, 'citation-unresolved', 'citation-resolution'],
     [completed({ ...draft, references: [{ reference:'John 17:3',translation:'brenton' }] }), 502, 'citation-unresolved', 'citation-resolution'],
-    [completed({ ...draft, answer: 'John 17:3 says “A fabricated quotation from Scripture.”' }), 502, 'quotation-unverified', 'quotation-verification'],
-    [completed({ ...draft, limitations: ['CONFIDENTIAL_UNVERIFIED John 999:1'] }), 502, 'inline-citation-unverified', 'citation-resolution'],
+    [completed({ ...draft, quotations: [{ reference: 'John 17:3', translation: 'web', text: 'A fabricated quotation from Scripture.' }] }), 502, 'quotation-unverified', 'quotation-verification'],
+    [completed({ ...draft, quotations: [{ reference: 'John 17:3', text: 'Missing translation' }] }), 502, 'invalid-structure', 'structured-output'],
     [completed({ ...draft, status:'insufficient-evidence', answer:'The evidence does not establish this.', references:[] }), 422, 'model-insufficient-evidence', 'model-answer'],
-    [completed({ ...draft, status:'insufficient-evidence', answer:'John 999:1', references:[] }), 502, 'inline-citation-unverified', 'citation-resolution'],
+    [completed({ ...draft, status:'insufficient-evidence', references:[{ reference:'John 999:1', translation:'web' }] }), 502, 'citation-unresolved', 'citation-resolution'],
   ];
   for (const [value,status,code,stage] of failures) {
     result = await run(question,value);
@@ -92,8 +92,8 @@ for (const book of ['1 Timothy','2 Timothy','1 John','2 John','3 John']) {
   assert.equal(verifySimpleDraft({ ...draft, answer:`John 17:3, ${ref}`, references:refs }).ok,true,book);
 }
 assert.equal(verifySimpleDraft({ ...draft, answer:'John 17:3, 5', references:[{reference:'John 17:3,5',translation:'web'}] }).ok,true);
-assert.equal(verifySimpleDraft({ ...draft, answer:'John 17:3, 1 says this.', references:draft.references }).ok,false);
-assert.equal(verifySimpleDraft({ ...draft, answer:'John 17:3, 999', references:draft.references }).ok,false);
+assert.equal(verifySimpleDraft({ ...draft, answer:'John 17:3, 1 says this.', references:draft.references }).ok,true);
+assert.equal(verifySimpleDraft({ ...draft, answer:'John 17:3, 999', references:draft.references }).ok,true);
 for (const translation of ['web','kjv','brenton']) {
  const verse=resolveSimpleReference('Genesis 1:1',translation)[0];
  const value={...draft,answer:`Genesis 1:1 says “${verse.text}”`,references:[{reference:'Genesis 1:1',translation}]};
@@ -105,3 +105,48 @@ allow=false; const before=logs.length; assert.equal((await run(questions[0],comp
 complete=false; const quotaFailure=await run(questions[0],completed(draft));assert.equal(quotaFailure.status,503);assert.equal(quotaFailure.body.diagnostics.code,'usage-completion-failed');complete=true;
 assert.doesNotMatch(JSON.stringify(logs),/CONFIDENTIAL|Who is|Jesus|Yahushua|apiKey|fixture-only|reasoning_summary/);
 console.log('PASS: both reported questions, real response pipeline with All Scripture fixtures, numbered-book comma regression, incomplete/refusal/empty/malformed/schema failures, genuine insufficiency, false references/quotes, strict translation preservation, safe owner diagnostics, authorization and usage settlement. No paid calls.');
+
+// Integrated citation envelope: these are actual provider/verifier/request handlers.
+for (const [question,answer,references] of [
+ ['Should a believer sin?', 'Compare 1 John 1:8–2:2. At 10:30 we discussed the phrase “deliberately choosing to sin”.', [{ reference:'1 John 1:8-2:2',translation:'web' }]],
+ ['Can a believer eat pork?', 'The phrase “eating pork is permissible” is an interpretation to examine, not a Scripture quotation (Leviticus 11:7–8).', [{ reference:'Leviticus 11:7-8',translation:'web' }]],
+]) {
+ const result=await run(question,completed({...draft,answer,references}));
+ assert.equal(result.status,200);assert.equal(result.body.answer.answer,answer);
+ assert.equal(result.body.answer.sourceVerification,'locked-corpus-text');
+ assert.equal(result.body.answer.scriptureQuotations.length,0);
+ assert.equal(result.body.answer.claims.length,0);
+ for(const citation of result.body.answer.citations) {
+  const locked=resolveSimpleReference(citation.reference,citation.translation)[0];
+  assert.equal(citation.text,locked.text);assert.equal(citation.verification,'locked-corpus-text');
+ }
+ assert.match(result.body.answer.limitations.at(-1),/not independently verified/);
+}
+for(const answer of ['At 10:30 we discussed Romans 6:1–2.','Rom. 999:1','1 John 1:8–2:2','“This unattributed explanatory phrase is not a verified Scripture quotation.”']) {
+ const result=await run(questions[0],completed({...draft,answer}));assert.equal(result.status,200);
+ assert.equal(result.body.answer.citations.length,2);assert.equal(result.body.answer.scriptureQuotations.length,0);
+ assert.equal(result.body.answer.answer,answer);
+}
+for(const reference of ['Romans 999:1','Invented 1:1','Romans 6:1garbage','Romans 6:1; Invented 8:1','1 John 2:2-1:8','1 John 1:8-999:1','John 1:1-21:25']) {
+ const result=await run(questions[0],completed({...draft,references:[{reference,translation:'web'}]}));
+ assert.equal(result.status,502,reference);assert.equal(result.body.diagnostics.code,'citation-unresolved');
+ assert.equal(result.body.answer.citations,undefined);
+}
+const quoteReferences=[{reference:'Genesis 1:1',translation:'web'},{reference:'Romans 6:1',translation:'web'}];
+const genesis=resolveSimpleReference('Genesis 1:1','web')[0];
+let result=await run(questions[0],completed({...draft,references:quoteReferences,quotations:[{reference:'Genesis 1:1',translation:'web',text:genesis.text}]}));
+assert.equal(result.status,200);assert.equal(result.body.answer.scriptureQuotations.length,1);
+for(const quotation of [
+ {reference:'Romans 6:1',translation:'web',text:genesis.text}, // real text, wrong attribution, pooled rescue prohibited
+ {reference:'Genesis 1:1',translation:'kjv',text:resolveSimpleReference('Genesis 1:1','kjv')[0].text}, // undeclared translation
+ {reference:'Genesis 1:1',translation:'web',text:'Fabricated Scripture quotation.'},
+ {reference:'John 999:1',translation:'web',text:genesis.text},
+]) {
+ result=await run(questions[0],completed({...draft,references:quoteReferences,quotations:[quotation]}));
+ assert.equal(result.status,502);assert.equal(result.body.diagnostics.code,'quotation-unverified');
+}
+const range='1 John 1:8-2:2';const rangeText=resolveSimpleReference(range,'web').map(v=>v.text).join(' ');
+result=await run(questions[0],completed({...draft,references:[{reference:range,translation:'web'}],quotations:[{reference:range,translation:'web',text:rangeText}]}));assert.equal(result.status,200);
+const missingQuotations={...draft};delete missingQuotations.quotations;
+assert.equal(model.inspectSimpleResponse(completed(missingQuotations)).diagnostics.code,'invalid-structure');
+console.log('PASS: integrated envelope for sin/pork fixtures, cross-chapter source/quote resolution, prose preservation, server corpus text, malformed/invented sources, attributed/false quotations, translation isolation, no implicit source promotion and no claim-support certification.');

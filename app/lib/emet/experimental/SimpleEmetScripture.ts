@@ -31,6 +31,19 @@ function loadIndex(translation: Translation): Index {
 }
 
 export function resolveSimpleReference(raw: string, translation: Translation): Array<{ reference: string; text: string; translation: Translation }> | null {
+  const crossChapter = raw.trim().replace(/[–—]/g, "-").match(/^(.+?)\s+(\d+):(\d+[a-z]?)-(\d+):(\d+[a-z]?)$/i);
+  if (crossChapter) {
+    const index = loadIndex(translation);
+    const book = canonicalBook(crossChapter[1], index.books);
+    const first = `${book} ${Number(crossChapter[2])}:${crossChapter[3]}`;
+    const last = `${book} ${Number(crossChapter[4])}:${crossChapter[5]}`;
+    const start = index.records.findIndex((row) => `${row[0]} ${row[1]}:${row[2]}` === first);
+    const end = index.records.findIndex((row) => `${row[0]} ${row[1]}:${row[2]}` === last);
+    if (start < 0 || end < start || end - start >= 40) return null;
+    const rows = index.records.slice(start, end + 1);
+    if (rows.some((row) => row[0] !== book)) return null;
+    return rows.map((row) => ({ reference: `${row[0]} ${row[1]}:${row[2]}`, text: row[3], translation }));
+  }
   const match = raw.trim().replace(/[–—]/g, "-").match(/^(.+?)\s+(\d+):(.+)$/);
   if (!match) return null;
   const index = loadIndex(translation);
@@ -63,61 +76,41 @@ export function resolveSimpleReference(raw: string, translation: Translation): A
   return result;
 }
 
-function inlineReferences(answer: string) {
-  const found: string[] = [];
-  // A comma before a numbered book begins a new citation, not another verse.
-  const pattern = /\b((?:[1-4]\s*)?[A-Za-z]+(?:\s+[A-Za-z]+){0,5})\s*(\d+):([0-9]+[a-z]?(?:[-–—][0-9]+[a-z]?)?(?:\s*,\s*(?![1-4]\s*[A-Za-z]+(?:\s+[A-Za-z]+){0,5}\s+\d+:)(?:[0-9]+:)?[0-9]+[a-z]?(?:[-–—][0-9]+[a-z]?)?)*)/g;
-  const known = new Set(["web", "kjv", "brenton"].flatMap((translation) => [...loadIndex(translation as Translation).books]));
-  for (const match of answer.matchAll(pattern)) {
-    const words = match[1].split(/\s+/);
-    let book = "";
-    for (let start = 0; start < words.length; start++) {
-      const candidate = canonicalBook(words.slice(start).join(" "), known);
-      if (known.has(candidate)) { book = candidate; break; }
-    }
-    found.push(`${book || match[1]} ${match[2]}:${match[3]}`);
-  }
-  return found;
-}
-
 const normalizeQuote = (value: string) => value.normalize("NFC").replace(/[’]/g, "'").replace(/\s+/g, " ").trim();
 
+// This boundary certifies source text, never theological entailment. Prose is
+// deliberately neither parsed for references nor promoted to verified sources.
 export function verifySimpleDraft(draft: SimpleDraft) {
-  const verses: Array<{ reference: string; text: string; translation: Translation }> = [];
+  const sources = new Map<string, { reference: string; text: string; translation: Translation }>();
+  let expanded = 0;
   for (const citation of draft.references) {
     const resolved = resolveSimpleReference(citation.reference, citation.translation);
     if (!resolved) return { ok: false as const, stage: "citation-resolution" as const, code: "citation-unresolved" as const, reason: "A cited passage could not be verified in its stated translation." };
-    verses.push(...resolved);
-    if (verses.length > 80) return { ok: false as const, stage: "citation-resolution" as const, code: "citation-limit" as const, reason: "The answer exceeds the bounded citation limit." };
+    expanded += resolved.length;
+    if (expanded > 80) return { ok: false as const, stage: "citation-resolution" as const, code: "citation-limit" as const, reason: "The answer exceeds the bounded citation limit." };
+    for (const verse of resolved) sources.set(`${verse.translation}:${verse.reference}`, verse);
   }
-  if (draft.status === "complete" && !verses.length) return { ok: false as const, stage: "citation-resolution" as const, code: "citations-missing" as const, reason: "The answer did not supply verifiable Scripture citations." };
-  const references = new Set(verses.map((verse) => verse.reference));
-  const displayedText = [draft.answer, ...draft.limitations].join("\n");
-  const plainAnswer = displayedText.replace(/[*_`]/g, "");
-  for (const inline of inlineReferences(plainAnswer)) {
-    const resolved = draft.references.flatMap((citation) => resolveSimpleReference(inline, citation.translation) || []);
-    if (!resolved.length || resolved.some((verse) => !references.has(verse.reference))) return { ok: false as const, stage: "citation-resolution" as const, code: "inline-citation-unverified" as const, reason: "A reference in the answer is not covered by verified citations." };
+  if (draft.status === "complete" && !sources.size) return { ok: false as const, stage: "citation-resolution" as const, code: "citations-missing" as const, reason: "The answer did not supply verifiable Scripture sources." };
+  const quotations = [];
+  for (const quotation of draft.quotations) {
+    // A quotation must identify one contiguous passage, not pooled sources.
+    const resolved = quotation.reference.includes(",") ? null : resolveSimpleReference(quotation.reference, quotation.translation);
+    if (!resolved || resolved.some((verse) => !sources.has(`${verse.translation}:${verse.reference}`)) ||
+      !normalizeQuote(resolved.map((verse) => verse.text).join(" ")).includes(normalizeQuote(quotation.text))) {
+      return { ok: false as const, stage: "quotation-verification" as const, code: "quotation-unverified" as const, reason: "A declared quotation did not match its particular source passage and translation." };
+    }
+    const first = resolved[0].reference;
+    const last = resolved[resolved.length - 1].reference;
+    quotations.push({
+      text: quotation.text, translation: quotation.translation,
+      reference: resolved.length === 1 ? first : `${first}–${last.slice(last.lastIndexOf(" ") + 1)}`,
+    });
   }
-  const books = new Set(["web", "kjv", "brenton"].flatMap((translation) => [...loadIndex(translation as Translation).books]));
-  const escape = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const chapterPattern = new RegExp(`\\b(${[...books].sort((a, b) => b.length - a.length).map(escape).join("|")})\\s+(\\d+)\\b(?!:)`, "gi");
-  for (const match of plainAnswer.matchAll(chapterPattern)) {
-    const book = canonicalBook(match[1], books);
-    if (!draft.references.some((citation) => loadIndex(citation.translation).records.some((row) => row[0] === book && row[1] === Number(match[2])))) return { ok: false as const, stage: "citation-resolution" as const, code: "chapter-unverified" as const, reason: "A chapter reference could not be verified in the cited translations." };
-  }
-  const quotationPattern = /[“"]([^”"]+)[”"]|‘([^’]+)’|(?<![\p{L}\p{N}])'((?:[^'\n]|'(?=[\p{L}]))+)'(?![\p{L}\p{N}])/gu;
-  const corpusText = [...new Set(draft.references.map((item) => item.translation))].map((translation) =>
-    normalizeQuote(verses.filter((verse) => verse.translation === translation).map((verse) => verse.text).join(" ")),
-  );
-  for (const match of displayedText.matchAll(quotationPattern)) {
-    const quote = normalizeQuote(match[1] || match[2] || match[3]);
-    const nearby = displayedText.slice(Math.max(0, (match.index || 0) - 80), (match.index || 0) + match[0].length + 30);
-    const claimedScripture = /\b(says?|reads?|states?|written|declares?|quotation|quoted)\b/i.test(nearby);
-    if ((claimedScripture || quote.split(" ").length >= 3) && !corpusText.some((text) => text.includes(quote))) return { ok: false as const, stage: "quotation-verification" as const, code: "quotation-unverified" as const, reason: "A quotation could not be matched to the cited locked Scripture." };
-  }
-  const unique = [...new Map(verses.map((verse) => [`${verse.translation}:${verse.reference}`, verse])).values()];
   return {
-    ok: true as const,
-    citations: unique.map((verse) => ({ evidenceId: `scripture:${verse.translation}:simple:${verse.reference}`, reference: verse.reference })),
+    ok: true as const, quotations,
+    citations: [...sources.values()].map((verse) => ({
+      evidenceId: `scripture:${verse.translation}:simple:${verse.reference}`,
+      ...verse, verification: "locked-corpus-text" as const,
+    })),
   };
 }

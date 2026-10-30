@@ -50,6 +50,7 @@ export type SimpleDraft = {
   answer: string;
   support: "explicit-statement" | "strong-implication" | "theological-synthesis" | "possible-interpretation" | "does-not-establish";
   references: Array<{ reference: string; translation: "web" | "kjv" | "brenton" }>;
+  quotations: Array<{ reference: string; translation: "web" | "kjv" | "brenton"; text: string }>;
   limitations: string[];
 };
 
@@ -79,7 +80,7 @@ export const SIMPLE_EMET_SCHEMA = {
   additionalProperties: false,
   properties: {
     status: { type: "string", enum: ["complete", "insufficient-evidence"] },
-    answer: { type: "string", description: "The complete natural answer. Include every cited passage in references; quote Scripture exactly in its selected translation." },
+    answer: { type: "string", description: "The natural conversational explanation. Sources belong in references. Declare any Scripture quotations in quotations with their exact passage and translation; incidental quoted explanatory phrases are not Scripture quotations." },
     support: { type: "string", enum: ["explicit-statement", "strong-implication", "theological-synthesis", "possible-interpretation", "does-not-establish"] },
     references: {
       type: "array", maxItems: 16,
@@ -89,9 +90,18 @@ export const SIMPLE_EMET_SCHEMA = {
         required: ["reference", "translation"],
       },
     },
+    quotations: {
+      type: "array", maxItems: 16,
+      description: "Explicit Scripture quotations only. Use an empty array when none. Each quotation must match its own referenced passage and translation, also included in references.",
+      items: {
+        type: "object", additionalProperties: false,
+        properties: { reference: { type: "string" }, translation: { type: "string", enum: ["web", "kjv", "brenton"] }, text: { type: "string" } },
+        required: ["reference", "translation", "text"],
+      },
+    },
     limitations: { type: "array", maxItems: 8, items: { type: "string" } },
   },
-  required: ["status", "answer", "support", "references", "limitations"],
+  required: ["status", "answer", "support", "references", "quotations", "limitations"],
 } as const;
 
 export function parseSimpleDraft(value: unknown): SimpleDraft | null {
@@ -102,6 +112,7 @@ export function parseSimpleDraft(value: unknown): SimpleDraft | null {
   if (!["complete", "insufficient-evidence"].includes(draft.status) || typeof draft.answer !== "string" || !draft.answer.trim() || draft.answer.length > 16_000 ||
     !SIMPLE_EMET_SCHEMA.properties.support.enum.includes(draft.support) || !Array.isArray(draft.references) || draft.references.length > 16 ||
     draft.references.some((item) => !item || typeof item !== "object" || Array.isArray(item) || Object.keys(item).some((key) => key !== "reference" && key !== "translation") || typeof item.reference !== "string" || !item.reference.trim() || item.reference.length > 160 || !["web", "kjv", "brenton"].includes(item.translation)) ||
+    !Array.isArray(draft.quotations) || draft.quotations.length > 16 || draft.quotations.some((item) => !item || typeof item !== "object" || Array.isArray(item) || Object.keys(item).some((key) => !["reference", "translation", "text"].includes(key)) || typeof item.reference !== "string" || !item.reference.trim() || item.reference.length > 160 || !["web", "kjv", "brenton"].includes(item.translation) || typeof item.text !== "string" || !item.text.trim() || item.text.length > 10_000) ||
     !Array.isArray(draft.limitations) || draft.limitations.length > 8 || draft.limitations.some((item) => typeof item !== "string" || item.length > 1000)) return null;
   return draft;
 }
