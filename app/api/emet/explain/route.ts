@@ -1,3 +1,5 @@
+import { handleSimpleEmet } from "@/app/lib/emet/experimental/SimpleEmetRequest";
+import { getPublicEmetEngine } from "@/app/lib/emet/EmetPublicRouting";
 import { NextResponse } from "next/server";
 
 import type { BibleIQTranslation } from "@/app/data/lexicon/BibleIQTypes";
@@ -150,6 +152,7 @@ export async function POST(request: Request) {
     return json({ status: "invalid-request" }, 400);
   }
 
+  if (!body || typeof body !== "object" || Array.isArray(body)) return json({ status: "invalid-request" }, 400);
   const question = clean(body.question);
   const requestId = clean(body.requestId, 64);
   const conversationId = cleanUuid(body.conversationId);
@@ -157,6 +160,15 @@ export async function POST(request: Request) {
   const context = parseContext(body.context);
   if (!question || !requestId || !conversationId || conversation === null || !context) {
     return json({ status: "invalid-request" }, 400);
+  }
+  const publicEngine = getPublicEmetEngine();
+  if (!publicEngine) return json({ status: "answer-unavailable" }, 503);
+  if (publicEngine === "simple") {
+    try {
+      const history = body.simpleHistory ?? conversation.recentExchanges.filter((turn) => turn.outcome !== "failed").slice(-6).map(({ question, answer }) => ({ question, answer }));
+      const result = await handleSimpleEmet({ userId, requestId, conversationId, question: question.slice(0, 800), history, context });
+      return json(result.body, result.status);
+    } catch { return json({ status: "answer-unavailable" }, 503); }
   }
   const performanceTrace = createEmetAiPerformanceTrace();
   const ledger = await performanceTrace.measureAsync("ledger", () =>

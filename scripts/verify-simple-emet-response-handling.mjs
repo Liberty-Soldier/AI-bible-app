@@ -7,7 +7,7 @@ import { createUiFixture } from './lib/ui-fixture-runtime.mjs';
 // Synthetic responses exercise the real provider -> verifier -> API construction.
 // They are not captures of the two production model responses (not retained).
 const questions = ['Who is Jesus Christ?', 'Who is Yahushua the Messiah?'];
-let response, calls = [], events = [], logs = [], allow = true, complete = true, unavailableCorpus = false, providerFailure = false;
+let response, calls = [], events = [], logs = [], allow = true, complete = true, unavailableCorpus = false, providerFailure = false, ownerDiagnostics = true;
 class FakeOpenAI {
   constructor(options) {
     assert.equal(options.maxRetries, 0);
@@ -21,16 +21,16 @@ const fixture = createUiFixture({ globals: {
   'server-only': {}, 'node:path': { default: path }, 'node:crypto': crypto,
   'node:fs': { default: { readFileSync: (...args) => { if (unavailableCorpus) throw Error('CONFIDENTIAL_FILE_PATH'); return fs.readFileSync(...args); } } },
   openai: { default: FakeOpenAI },
-  './SimpleEmetAccess': { canUseSimpleEmet: async () => allow, claimSimpleRequest: async () => 'claimed', simpleRequestKey: () => 'simple-emet@1:fixture' },
+  './SimpleEmetAccess': { getSimpleEmetAccess: async () => ({ authorized: allow, ownerDiagnostics: allow && ownerDiagnostics }), claimSimpleRequest: async () => 'claimed', recordUnlimitedSimpleRequest: async () => 'recorded', simpleRequestKey: () => 'simple-emet@1:fixture' },
   '../EmetAiQuota': {
-    reserveEmetAiQuestion: async () => { events.push('reserve'); return { allowed: true, charged: false }; },
+    reserveEmetAiQuestion: async () => { events.push('reserve'); return { allowed: true, charged: true, unlimited: false }; },
     completeEmetAiQuestion: async (_,source) => { events.push(source); return complete; },
     refundFailedEmetAiQuestion: async () => { events.push('refund'); return true; },
     getEmetAiUsageSummary: async () => ({ allowed: true }),
   },
 } });
 const { handleSimpleEmet } = fixture.load('app/lib/emet/experimental/SimpleEmetRequest.ts');
-const { resolveSimpleReference, verifySimpleDraft } = fixture.load('app/lib/emet/experimental/SimpleEmetScripture.ts');
+const { resolveSimpleReference } = fixture.load('app/lib/emet/experimental/SimpleEmetScripture.ts');
 const model = fixture.load('app/lib/emet/experimental/SimpleEmet.ts');
 const input = { userId: 'fixture-owner', requestId: '11111111-1111-4111-8111-111111111111', conversationId: '11111111-1111-4111-8111-111111111111', history: [], context: null };
 const draft = {
@@ -112,3 +112,11 @@ assert.doesNotMatch(JSON.stringify(logs),/CONFIDENTIAL|Who is|Jesus|Yahushua|api
 assert.ok(model.SIMPLE_EMET_SYSTEM.startsWith('You are EMET, a Scripture-first study assistant. Your task is to examine the Biblical text carefully, reason consistently across Scripture, and answer questions using Scripture as the highest authority rather than religious traditions, denominational doctrines, or theological creeds.'));
 for(const principle of ['Yahweh is the Father, the one true God.','Yahweh\'s commandments remain authoritative for His people.','Gentile believers are grafted into Israel'])assert.ok(model.SIMPLE_EMET_SYSTEM.includes(principle));
 console.log('PASS: six named owner questions through the real response pipeline, no quotation dependency, exact prose preservation, partial/absent/malformed source inspection, strict translations and corpus text, no invented verified citations, no sharing records, genuine insufficiency vs processing errors, accounting, owner authorization, unchanged model settings and Scripture-first framing. No paid calls.');
+
+ownerDiagnostics=false;
+let publicResult=await run(questions[0],completed(draft));
+assert.equal(publicResult.status,200);assert.equal(publicResult.body.diagnostics,undefined);assert.equal(publicResult.body.answer.unresolvedReferences,undefined);assert.doesNotMatch(JSON.stringify(publicResult.body),/Owner experiment|Owner diagnostic/);
+publicResult=await run(questions[0],completed({...draft,references:[{reference:'Invented 999:1',translation:'web'}]}));
+assert.equal(publicResult.status,200);assert.equal(publicResult.body.status,'complete-unverified');assert.equal(publicResult.body.diagnostics,undefined);assert.equal(publicResult.body.unresolvedReferences,undefined);assert.equal(publicResult.body.shareStudyId,undefined);assert.equal(publicResult.body.answer.answer,draft.answer);assert.equal(publicResult.body.answer.verificationStatus,'unverified');assert.equal(publicResult.body.answer.citations.length,0);assert.equal(publicResult.body.answer.unresolvedReferences,undefined);assert.deepEqual(events,['reserve','model']);
+publicResult=await run(questions[0],{status:'incomplete',incomplete_details:{reason:'max_output_tokens'}});assert.equal(publicResult.status,502);assert.equal(publicResult.body.diagnostics,undefined);assert.equal(publicResult.body.limitations.length,0);
+console.log('PASS: public verified answers omit owner diagnostics; unresolved answers remain visibly unverified without private diagnostics and consume normal usage; incomplete output exposes no internal diagnostic codes.');

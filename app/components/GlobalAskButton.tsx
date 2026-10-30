@@ -22,7 +22,8 @@ export default function GlobalAskButton() {
   const [usage, setUsage] = useState<EmetChatUsage | null>(null);
   const [panelKey, setPanelKey] = useState(0);
   const [hasOpened, setHasOpened] = useState(false);
-  const [simpleAvailable, setSimpleAvailable] = useState(false);
+  const [serverEngine, setServerEngine] = useState<"simple" | "current">("simple");
+  const [ownerDiagnostics, setOwnerDiagnostics] = useState(false);
   const returnFocusRef = useRef<HTMLElement | null>(null);
   const dialogRef = useRef<HTMLElement | null>(null);
 
@@ -43,14 +44,18 @@ export default function GlobalAskButton() {
       if (response.ok) {
         const payload = (await response.json()) as {
           usage?: EmetChatUsage | null;
-          simpleAvailable?: boolean;
+          engine?: "simple" | "current";
+          ownerDiagnostics?: boolean;
         };
         setUsage(payload.usage || null);
-        setSimpleAvailable(payload.simpleAvailable === true);
+        setServerEngine(payload.engine === "current" ? "current" : "simple");
+        setOwnerDiagnostics(payload.ownerDiagnostics === true);
+      } else {
+        setOwnerDiagnostics(false);
       }
     } catch {
       setUsage(null);
-      setSimpleAvailable(false);
+      setOwnerDiagnostics(false);
     }
 
     setInitialQuestion(question.trim().slice(0, 800));
@@ -123,13 +128,14 @@ export default function GlobalAskButton() {
                 }
               }
             }}
-            className="absolute bottom-0 left-1/2 h-[92dvh] w-full max-w-2xl -translate-x-1/2 overflow-hidden rounded-t-2xl border border-[var(--border)] bg-[var(--canvas)] text-[var(--foreground)] sm:bottom-4 sm:h-[min(88dvh,52rem)] sm:rounded-2xl"
+            className="absolute bottom-0 left-1/2 h-[96dvh] w-full max-w-3xl -translate-x-1/2 overflow-hidden rounded-t-2xl border border-[var(--border)] bg-[var(--canvas)] text-[var(--foreground)] sm:bottom-3 sm:h-[calc(100dvh-1.5rem)] sm:rounded-2xl"
           >
             <EmetChat
               active={open}
               launchKey={panelKey}
               initialUsage={usage}
-              initialSimpleAvailable={simpleAvailable}
+              initialEngine={serverEngine}
+              initialOwnerDiagnostics={ownerDiagnostics}
               initialQuestion={initialQuestion}
               onClose={() => setOpen(false)}
             />

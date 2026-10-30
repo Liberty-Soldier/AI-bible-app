@@ -1,5 +1,6 @@
 import "server-only";
 
+import { getPublicEmetEngine } from "../EmetPublicRouting";
 import { createHash } from "node:crypto";
 import { createSupabaseServerClient } from "../../supabase/server";
 import { createSupabaseAdminClient } from "../../supabase/admin";
@@ -22,6 +23,17 @@ export async function canUseSimpleEmet(expectedId?: string) {
   } catch { return false; }
 }
 
+export async function getSimpleEmetAccess(expectedId: string) {
+  if (getPublicEmetEngine() !== "simple") return { authorized: false, ownerDiagnostics: false };
+  try {
+    const client = await createSupabaseServerClient();
+    if (!client) return { authorized: false, ownerDiagnostics: false };
+    const { data, error } = await client.auth.getUser();
+    const authorized = !error && Boolean(data.user?.id && data.user.id === expectedId);
+    return { authorized, ownerDiagnostics: authorized && isSimpleEmetOwner(data.user, expectedId) };
+  } catch { return { authorized: false, ownerDiagnostics: false }; }
+}
+
 export function simpleRequestKey(userId: string, requestId: string, model: string) {
   return `simple-emet@1:${createHash("sha256").update(JSON.stringify([userId, requestId, model])).digest("hex")}`;
 }
@@ -31,9 +43,9 @@ export function simpleRateLockId(userId: string, now = Date.now()) {
   return `${hash.slice(0, 8)}-${hash.slice(8, 12)}-4${hash.slice(13, 16)}-8${hash.slice(17, 20)}-${hash.slice(20, 32)}`;
 }
 
-// Existing private request records provide durable idempotency and an atomic
-// ten-second rate bucket. No answers or experimental claims enter normal caches.
-export async function claimSimpleRequest(userId: string, requestId: string, key: string) {
+// Private request records provide duplicate/pending detection and an atomic
+// ten-second rate bucket. Answer data never enters the original engine caches.
+export async function claimSimpleRequest(userId: string, requestId: string) {
   const admin = createSupabaseAdminClient();
   if (!admin) return "unavailable" as const;
   const prior = await admin.from("emet_question_requests").select("id").eq("user_id", userId).eq("request_id", requestId).maybeSingle();
@@ -49,7 +61,17 @@ export async function claimSimpleRequest(userId: string, requestId: string, key:
     completed_at: new Date().toISOString(),
   });
   if (lock.error) return lock.error.code === "23505" ? "rate-limited" as const : "unavailable" as const;
+  return "claimed" as const;
+}
+
+// The existing quota RPC must create charged ordinary-user rows. Inserting an
+// allowed row before that RPC would cause it to treat a request as already paid.
+// Only the existing unlimited owner reservation bypasses row creation in the
+// quota layer; record that reservation here, after it has been authorized.
+export async function recordUnlimitedSimpleRequest(userId: string, requestId: string, key: string) {
+  const admin = createSupabaseAdminClient();
+  if (!admin) return "unavailable" as const;
   const record = await admin.from("emet_question_requests").insert({ user_id: userId, request_id: requestId, cache_key: key, allowed: true, charged: false });
   if (record.error) return record.error.code === "23505" ? "duplicate" as const : "unavailable" as const;
-  return "claimed" as const;
+  return "recorded" as const;
 }

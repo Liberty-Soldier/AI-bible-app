@@ -1,3 +1,4 @@
+import { getPublicEmetEngine } from "@/app/lib/emet/EmetPublicRouting";
 import { NextResponse } from "next/server";
 
 import { getEmetAiRequestCacheKey } from "@/app/lib/emet/EmetAiCache";
@@ -128,6 +129,7 @@ export async function POST(request: Request) {
     return json({ status: "invalid-request" }, 400);
   }
 
+  if (!body || typeof body !== "object" || Array.isArray(body)) return json({ status: "invalid-request" }, 400);
   const question = clean(body.question);
   const requestId = clean(body.requestId, 64);
   const conversationId = cleanUuid(body.conversationId);
@@ -144,10 +146,12 @@ export async function POST(request: Request) {
   }
 
   if (body.engine !== undefined && body.engine !== "current" && body.engine !== "simple") return json({ status: "invalid-request" }, 400);
-  if (body.engine === "simple") {
+  const publicEngine = getPublicEmetEngine();
+  if (!publicEngine) return json({ status: "answer-unavailable" }, 503);
+  if (publicEngine === "simple") {
     try {
       const selectedWord = context ? clean((body.context as Record<string, unknown>).displayWord, 120) : "";
-      const result = await handleSimpleEmet({ userId, requestId, conversationId, question, history: body.simpleHistory, context: context ? { ...context, ...(selectedWord ? { selectedWord } : {}) } : null });
+      const result = await handleSimpleEmet({ userId, requestId, conversationId, question, history: body.simpleHistory ?? conversation.recentExchanges.filter((turn) => turn.outcome !== "failed").slice(-6).map(({ question, answer }) => ({ question, answer })), context: context ? { ...context, ...(selectedWord ? { selectedWord } : {}) } : null });
       return json(result.body, result.status);
     } catch { return json({ status: "answer-unavailable" }, 503); }
   }

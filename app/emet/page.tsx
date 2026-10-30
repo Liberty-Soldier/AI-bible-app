@@ -1,3 +1,4 @@
+import { getPublicEmetEngine } from "@/app/lib/emet/EmetPublicRouting";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -35,12 +36,12 @@ export default async function EmetPage({
   }
 
   const usage = await getEmetAiUsageSummary();
-  const simpleAvailable = await canUseSimpleEmet(user.id);
+  const ownerDiagnostics = await canUseSimpleEmet(user.id);
 
   return (
     <main className="h-dvh min-h-0 overflow-hidden bg-[var(--canvas)] text-[var(--foreground)]">
-      <section className="mx-auto h-full max-w-2xl">
-        <EmetChat initialUsage={usage} initialQuestion={initialQuestion} returnTo={returnTo} initialSimpleAvailable={simpleAvailable} />
+      <section className="mx-auto h-full max-w-3xl">
+        <EmetChat initialUsage={usage} initialQuestion={initialQuestion} returnTo={returnTo} initialEngine={getPublicEmetEngine() || "simple"} initialOwnerDiagnostics={ownerDiagnostics} />
       </section>
     </main>
   );

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useEffectEvent, useRef, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from "react";
 import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
 import { buildReaderHref } from "@/app/lib/translationPreference";
@@ -16,9 +16,6 @@ import type {
 } from "@/app/lib/emet/EmetAiContract";
 
 const CHAT_STORAGE_KEY = "emetsees-conversation";
-const CHAT_ID_STORAGE_KEY = "emetsees-conversation-id";
-const CHAT_DRAFT_KEY = "emetsees-conversation-draft";
-const CHAT_SCROLL_KEY = "emetsees-conversation-scroll";
 
 export type EmetChatUsage = {
   planName: string;
@@ -258,7 +255,7 @@ function InitialScripture({
       <summary className="min-h-11 cursor-pointer py-2 text-sm font-medium text-[var(--muted)]">
         Preliminary passages{items.length ? ` · ${items.length}` : ""}{pending ? " · preparing answer" : ""}
       </summary>
-      <p className="mb-2 text-xs leading-5 text-[var(--muted)]">
+      <p className="mb-1 text-xs leading-5 text-[var(--muted)]">
         Shown while preparing the answer. These are not final supporting citations; the final answer may use a different verified evidence set.
       </p>
       <div className="max-h-40 space-y-3 overflow-y-auto overscroll-contain border-l-2 border-[var(--border)] pl-3">
@@ -279,7 +276,7 @@ function InitialScripture({
   );
 }
 
-function qualifications(answer: Answer) {
+function qualifications(answer: Answer, simple = false) {
   const ids = [
     ...answer.claims.map((claim) => claim.id),
     ...answer.citations.map((citation) => citation.evidenceId),
@@ -287,7 +284,10 @@ function qualifications(answer: Answer) {
     ...answer.continuityChecks.map((check) => check.propositionId),
   ];
   const messages = [
-    supportQualification[answer.conclusionSupport],
+    // Simple EMET already discloses the scope of source verification. Avoid
+    // adding a generic inference/synthesis disclaimer to every supported answer;
+    // retain all supplied limitations and genuine uncertainty categories.
+    ...(simple && ["strong-implication", "theological-synthesis"].includes(answer.conclusionSupport) ? [] : [supportQualification[answer.conclusionSupport]]),
     ...answer.limitations,
     ...answer.componentChecks.filter((check) => check.support !== "explicit-statement").map((check) => check.explanation),
     ...answer.continuityChecks.filter((check) => check.verdict !== "preserved").map((check) => check.explanation),
@@ -298,10 +298,24 @@ function qualifications(answer: Answer) {
     .map((message) => publicQualification(message, ids)))];
 }
 
+type ChatReadingPosition = { anchor: string | null; offset: number; top: number };
+const chatAnchors = (viewport: HTMLElement) => Array.from(viewport.querySelectorAll<HTMLElement>("[data-emet-scroll-anchor]"));
+const chatAnchor = (viewport: HTMLElement, key: string) => chatAnchors(viewport).find((node) => node.dataset.emetScrollAnchor === key);
+
+function readingPosition(viewport: HTMLElement): ChatReadingPosition {
+  const top = viewport.getBoundingClientRect().top;
+  const anchors = chatAnchors(viewport).map((node) => ({ node, rect: node.getBoundingClientRect() }));
+  // Prefer the response over its containing question when reading inside it.
+  const visible = [...anchors].reverse().find(({ rect }) => rect.top <= top + 1 && rect.bottom > top + 1)
+    || anchors.find(({ rect }) => rect.bottom > top + 1);
+  return { anchor: visible?.node.dataset.emetScrollAnchor || null, offset: visible ? visible.rect.top - top : 0, top: viewport.scrollTop };
+}
+
 export default function EmetChat({
   initialUsage,
   initialQuestion = "",
-  initialSimpleAvailable = false,
+  initialEngine = "simple",
+  initialOwnerDiagnostics = false,
   active = true,
   launchKey = 0,
   returnTo,
@@ -309,18 +323,22 @@ export default function EmetChat({
 }: {
   initialUsage: EmetChatUsage | null;
   initialQuestion?: string;
-  initialSimpleAvailable?: boolean;
+  initialEngine?: "simple" | "current";
+  initialOwnerDiagnostics?: boolean;
   active?: boolean;
   launchKey?: number;
   returnTo?: string | null;
   onClose?: () => void;
 }) {
   const router = useRouter();
-  const [engine, setEngine] = useState<"current" | "simple">("current");
-  const chatStorageKey = engine === "simple" ? "emetsees-simple-conversation" : CHAT_STORAGE_KEY;
-  const chatIdStorageKey = engine === "simple" ? "emetsees-simple-conversation-id" : CHAT_ID_STORAGE_KEY;
-  const draftStorageKey = engine === "simple" ? "emetsees-simple-conversation-draft" : CHAT_DRAFT_KEY;
-  const scrollStorageKey = engine === "simple" ? "emetsees-simple-conversation-scroll" : CHAT_SCROLL_KEY;
+  const engine = initialEngine;
+  // Storage follows the conversation, not a deployment's engine selection. A
+  // rollback therefore keeps the current thread, draft and reading position.
+  const [historyPrefix, setHistoryPrefix] = useState(CHAT_STORAGE_KEY);
+  const chatStorageKey = historyPrefix;
+  const chatIdStorageKey = `${historyPrefix}-id`;
+  const draftStorageKey = `${historyPrefix}-draft`;
+  const scrollStorageKey = `${historyPrefix}-scroll`;
   const [question, setQuestion] = useState("");
   const [readerContext, setReaderContext] = useState<ReaderContext | null>(null);
   const [useReaderContext, setUseReaderContext] = useState(false);
@@ -331,6 +349,7 @@ export default function EmetChat({
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const [pending, setPending] = useState(false);
   const [pendingQuestion, setPendingQuestion] = useState("");
+  const [pendingExchangeId, setPendingExchangeId] = useState("");
   const [pendingStatus, setPendingStatus] = useState("Searching Scripture…");
   const [initialScripture, setInitialScripture] = useState<InitialScriptureItem[]>([]);
   const [error, setError] = useState("");
@@ -339,7 +358,10 @@ export default function EmetChat({
   const contentRef = useRef<HTMLDivElement>(null);
   const followingRef = useRef(true);
   const scrollRestoredRef = useRef(false);
-  const savedScrollRef = useRef<{ conversationId: string; top: number; following: boolean } | null>(null);
+  const savedScrollRef = useRef<{ conversationId: string; top: number; following: boolean; anchor?: string | null; offset?: number } | null>(null);
+  const readingPositionRef = useRef<ChatReadingPosition | null>(null);
+  const expectedScrollTopRef = useRef<number | null>(null);
+  const arrivingRef = useRef<{ id: string; reveal: boolean; pendingShown: boolean } | null>(null);
   const draftRef = useRef("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const submissionInFlightRef = useRef(false);
@@ -347,50 +369,77 @@ export default function EmetChat({
   const progressiveRequestRef = useRef("");
   const pendingInitialScriptureRef = useRef<InitialScriptureItem[]>([]);
 
-  function changeEngine(next: "current" | "simple") {
-    if (submissionInFlightRef.current || !historyLoaded || next === engine || (next === "simple" && !initialSimpleAvailable)) return;
-    window.sessionStorage.setItem(chatStorageKey, JSON.stringify(exchanges));
-    window.sessionStorage.setItem(draftStorageKey, draftRef.current);
-    const prefix = next === "simple" ? "emetsees-simple-conversation" : "emetsees-conversation";
-    const nextId = window.sessionStorage.getItem(`${prefix}-id`) || crypto.randomUUID();
-    window.sessionStorage.setItem(`${prefix}-id`, nextId);
-    const draft = window.sessionStorage.getItem(`${prefix}-draft`) || "";
-    draftRef.current = draft;
-    setEngine(next);
-    setQuestion(draft);
-    setExchanges(storedExchanges(window.sessionStorage, prefix));
-    setConversationId(nextId);
-    savedScrollRef.current = parseStoredContext(window.sessionStorage, `${prefix}-scroll`);
-    scrollRestoredRef.current = false;
-    followingRef.current = true;
-    setError("");
-    setInitialScripture([]);
-    pendingInitialScriptureRef.current = [];
+  const setConversationTop = useCallback((top: number) => {
+    const viewport = viewportRef.current;
+    if (!viewport || Math.abs(viewport.scrollTop - top) < 0.5) return;
+    viewport.scrollTop = Math.max(0, top);
+    expectedScrollTopRef.current = viewport.scrollTop;
+  }, []);
+
+  const rememberReadingPosition = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!active || !historyLoaded || !viewport) return;
+    const position = readingPosition(viewport);
+    readingPositionRef.current = position;
+    window.sessionStorage.setItem(scrollStorageKey, JSON.stringify({ conversationId, ...position, following: followingRef.current }));
+  }, [active, historyLoaded, conversationId, scrollStorageKey]);
+
+  const preserveReadingPosition = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!active || !viewport) return;
+    const saved = readingPositionRef.current;
+    const anchor = saved?.anchor ? chatAnchor(viewport, saved.anchor) : null;
+    if (anchor && saved) {
+      const offset = anchor.getBoundingClientRect().top - viewport.getBoundingClientRect().top;
+      setConversationTop(viewport.scrollTop + offset - saved.offset);
+    } else if (saved) setConversationTop(saved.top);
+    rememberReadingPosition();
+  }, [active, rememberReadingPosition, setConversationTop]);
+
+  const revealResponse = useCallback((id: string, pendingOnly = false) => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const questionAnchor = chatAnchor(viewport, `${id}:question`);
+    const responseAnchor = chatAnchor(viewport, `${id}:answer`);
+    const top = viewport.getBoundingClientRect().top;
+    const questionTop = questionAnchor?.getBoundingClientRect().top;
+    const responseTop = responseAnchor?.getBoundingClientRect().top;
+    const keepQuestion = questionTop !== undefined && (pendingOnly || responseTop === undefined || responseTop - questionTop <= Math.max(0, viewport.clientHeight - 120));
+    const target = keepQuestion ? questionTop : responseTop;
+    if (target !== undefined) setConversationTop(viewport.scrollTop + target - top - 8);
+  }, [setConversationTop]);
+
+  function pauseFollowing() {
+    followingRef.current = false;
+    expectedScrollTopRef.current = null;
+    if (arrivingRef.current) arrivingRef.current.reveal = false;
+    rememberReadingPosition();
   }
 
-  const revokeSimpleSelection = useEffectEvent(() => changeEngine("current"));
   useEffect(() => {
-    if (!initialSimpleAvailable && engine === "simple" && !pending) revokeSimpleSelection();
-  }, [initialSimpleAvailable, engine, pending]);
-
-  useEffect(() => {
+    if (historyLoaded) return;
     const timer = window.setTimeout(() => {
-      const draft = window.sessionStorage.getItem(CHAT_DRAFT_KEY) || "";
+      // Preserve existing owner test conversations without merging unrelated
+      // threads or deleting the public conversation kept in its original key.
+      const prefix = initialOwnerDiagnostics && storedExchanges(window.sessionStorage, "emetsees-simple-conversation").length
+        ? "emetsees-simple-conversation" : CHAT_STORAGE_KEY;
+      setHistoryPrefix(prefix);
+      const draft = window.sessionStorage.getItem(`${prefix}-draft`) || "";
       draftRef.current = draft;
       setQuestion(draft);
-      savedScrollRef.current = parseStoredContext(window.sessionStorage, CHAT_SCROLL_KEY);
-      setExchanges(storedExchanges(window.sessionStorage, CHAT_STORAGE_KEY));
+      savedScrollRef.current = parseStoredContext(window.sessionStorage, `${prefix}-scroll`);
+      setExchanges(storedExchanges(window.sessionStorage, prefix));
       const storedConversationId = window.sessionStorage.getItem(
-        CHAT_ID_STORAGE_KEY,
+        `${prefix}-id`,
       );
       const nextConversationId = storedConversationId || crypto.randomUUID();
-      window.sessionStorage.setItem(CHAT_ID_STORAGE_KEY, nextConversationId);
+      window.sessionStorage.setItem(`${prefix}-id`, nextConversationId);
       setConversationId(nextConversationId);
       setHistoryLoaded(true);
     }, 0);
 
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [initialOwnerDiagnostics, historyLoaded]);
 
   useEffect(() => {
     if (!historyLoaded) return;
@@ -413,20 +462,34 @@ export default function EmetChat({
     if (historyLoaded) window.sessionStorage.setItem(draftStorageKey, question);
   }, [question, historyLoaded, draftStorageKey]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const viewport = viewportRef.current;
     if (!active || !historyLoaded || !viewport) return;
     if (!scrollRestoredRef.current) {
       const saved = savedScrollRef.current;
-      if (saved?.conversationId === conversationId && !saved.following) {
-        viewport.scrollTop = saved.top;
-        followingRef.current = false;
-      } else viewport.scrollTop = viewport.scrollHeight;
+      if (saved?.conversationId === conversationId) {
+        setConversationTop(Number.isFinite(saved.top) ? saved.top : 0);
+        followingRef.current = saved.following;
+        if (saved.anchor && typeof saved.offset === "number") {
+          readingPositionRef.current = { anchor: saved.anchor, offset: saved.offset, top: saved.top };
+          preserveReadingPosition();
+        }
+      } else if (exchanges.length) revealResponse(exchanges[exchanges.length - 1].id);
+      else setConversationTop(0);
       scrollRestoredRef.current = true;
-    } else if (followingRef.current) {
-      viewport.scrollTop = viewport.scrollHeight;
+      rememberReadingPosition();
     }
-  }, [active, historyLoaded, conversationId, exchanges.length, pending, initialScripture, error]);
+    const arriving = arrivingRef.current;
+    if (arriving && !pending) {
+      if (arriving.reveal && exchanges.some((exchange) => exchange.id === arriving.id)) revealResponse(arriving.id);
+      else preserveReadingPosition();
+      arrivingRef.current = null; // One reveal per response; later disclosures only preserve position.
+    } else if (arriving && pending && !arriving.pendingShown) {
+      if (arriving.reveal) revealResponse(arriving.id, true);
+      arriving.pendingShown = true;
+    } else preserveReadingPosition();
+    rememberReadingPosition();
+  }, [active, historyLoaded, conversationId, exchanges, pending, initialScripture, error, preserveReadingPosition, rememberReadingPosition, revealResponse, setConversationTop]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -435,20 +498,18 @@ export default function EmetChat({
     if (!active || !root || !viewport) return;
     const visualViewport = window.visualViewport;
     function resize() {
-      if (!root || !viewport) return;
+      if (!root) return;
       const keyboardOpen = visualViewport && window.innerHeight - visualViewport.height > 80;
       root.style.height = keyboardOpen
         ? `${Math.max(0, visualViewport.offsetTop + visualViewport.height - root.getBoundingClientRect().top)}px`
         : "";
-      if (followingRef.current) viewport.scrollTop = viewport.scrollHeight;
+      preserveReadingPosition();
     }
     resize();
     visualViewport?.addEventListener("resize", resize);
     visualViewport?.addEventListener("scroll", resize);
     window.addEventListener("resize", resize);
-    const observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(() => {
-      if (followingRef.current) viewport.scrollTop = viewport.scrollHeight;
-    }) : null;
+    const observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(preserveReadingPosition) : null;
     if (content) observer?.observe(content);
     observer?.observe(viewport);
     return () => {
@@ -458,7 +519,7 @@ export default function EmetChat({
       observer?.disconnect();
       root.style.height = "";
     };
-  }, [active]);
+  }, [active, preserveReadingPosition]);
 
   function updateQuestion(value: string) {
     draftRef.current = value;
@@ -506,10 +567,13 @@ export default function EmetChat({
     const finalQuestion = (questionOverride || question).trim();
     if (!finalQuestion || pending || submissionInFlightRef.current) return;
 
+    const exchangeId = crypto.randomUUID();
+    arrivingRef.current = { id: exchangeId, reveal: followingRef.current, pendingShown: false };
+    setPendingExchangeId(exchangeId);
     submissionInFlightRef.current = true;
     if (questionOverride === undefined) updateQuestion("");
     setPendingQuestion(finalQuestion);
-    setPendingStatus(engine === "simple" ? "Preparing Simple EMET answer…" : "Searching Scripture…");
+    setPendingStatus(engine === "simple" ? "Preparing an answer…" : "Searching Scripture…");
     setInitialScripture([]);
     pendingInitialScriptureRef.current = [];
     setPending(true);
@@ -554,11 +618,8 @@ export default function EmetChat({
         question: finalQuestion,
         conversation: conversationContext,
         ...(activeContext ? { context: activeContext } : {}),
-        ...(engine === "simple" ? {
-          engine: "simple",
-          simpleHistory: boundedSimpleHistory(exchanges.filter((exchange) => !exchange.transportFailure)
-            .map((exchange) => ({ question: exchange.question, answer: exchange.answer.answer }))),
-        } : {}),
+        simpleHistory: boundedSimpleHistory(exchanges.filter((exchange) => !exchange.transportFailure)
+          .map((exchange) => ({ question: exchange.question, answer: exchange.answer.answer }))),
       };
       const progressiveToken = crypto.randomUUID();
       progressiveRequestRef.current = progressiveToken;
@@ -608,7 +669,7 @@ export default function EmetChat({
         return;
       }
       if (response.status === 429 && payload.status === "rate-limited") {
-        setError("Please wait a few seconds before testing another Simple EMET question.");
+        setError("Please wait a few seconds before asking another question.");
         restoreSubmittedQuestion(finalQuestion);
         return;
       }
@@ -634,7 +695,7 @@ export default function EmetChat({
         setExchanges((current) => [
           ...current,
           {
-            id: crypto.randomUUID(),
+            id: exchangeId,
             question: finalQuestion,
             answer,
             outcome: payload.status === "insufficient-evidence" || answer.status === "insufficient-evidence" || response.status === 422 ? "insufficient-evidence" : "failed",
@@ -661,7 +722,7 @@ export default function EmetChat({
       setExchanges((current) => [
         ...current,
         {
-          id: crypto.randomUUID(),
+          id: exchangeId,
           question: finalQuestion,
           answer,
           outcome: answer.status === "insufficient-evidence" || payload.status === "insufficient-evidence" ? "insufficient-evidence" : "answered",
@@ -672,7 +733,7 @@ export default function EmetChat({
       ]);
     } catch {
       setExchanges((current) => [...current, {
-        id: crypto.randomUUID(),
+        id: exchangeId,
         question: finalQuestion,
         answer: normalizeAnswer({ answer: "EMET could not connect. Please try again." }),
         source: "fail-closed",
@@ -744,11 +805,15 @@ export default function EmetChat({
     setConversationId(nextConversationId);
     followingRef.current = true;
     savedScrollRef.current = null;
+    readingPositionRef.current = null;
+    arrivingRef.current = null;
+    scrollRestoredRef.current = false;
+    expectedScrollTopRef.current = null;
   }
 
   return (
     <div ref={rootRef} className="flex h-full min-h-0 flex-col bg-[var(--canvas)] text-[var(--foreground)]" data-emet-chat="true">
-      <header className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 border-b border-[var(--border)] px-4 pb-1 pt-[max(0.25rem,env(safe-area-inset-top))] sm:px-6">
+      <header className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 border-b border-[var(--border)] px-3 pt-[max(0.25rem,env(safe-area-inset-top))] sm:px-5">
         <h1 className="flex min-h-11 items-center gap-2 text-base font-semibold">
           <EmetseesLogo size={20} variant="gold" />
           Ask EMET
@@ -763,17 +828,7 @@ export default function EmetChat({
         </div>
       </header>
 
-      {initialSimpleAvailable ? (
-        <label className="flex shrink-0 flex-wrap items-center gap-2 px-4 py-1 text-xs text-[var(--muted)] sm:px-6">
-          Owner testing
-          <select aria-label="Owner testing engine" value={engine} disabled={pending || !historyLoaded} onChange={(event) => changeEngine(event.target.value === "simple" ? "simple" : "current")} className="min-h-11 rounded-lg border border-[var(--border)] bg-[var(--canvas)] px-2 text-sm text-[var(--foreground)]">
-            <option value="current">Current EMET</option>
-            <option value="simple">Simple EMET · experimental</option>
-          </select>
-          {engine === "simple" ? <span>Private owner test · not published</span> : null}
-        </label>
-      ) : null}
-      <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 px-4 py-1 text-xs text-[var(--muted)] sm:px-6">
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 px-3 py-0 text-xs text-[var(--muted)] sm:px-5">
         <div className="flex min-w-0 flex-wrap items-center gap-x-2">
           <span className="break-words">{contextLabel(activeContext)}</span>
           {activeContext ? (
@@ -798,24 +853,31 @@ export default function EmetChat({
         role="region"
         aria-label="Conversation"
         tabIndex={0}
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 focus-visible:outline-2 focus-visible:outline-[var(--brand)] sm:px-6"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-2 focus-visible:outline-2 focus-visible:outline-[var(--brand)] sm:px-5"
         style={{ overflowAnchor: "none" }}
         onScroll={(event) => {
           if (!active) return;
           const viewport = event.currentTarget;
-          followingRef.current = followsLatest(viewport);
-          if (historyLoaded) window.sessionStorage.setItem(scrollStorageKey, JSON.stringify({ conversationId, top: viewport.scrollTop, following: followingRef.current }));
+          const expected = expectedScrollTopRef.current;
+          expectedScrollTopRef.current = null;
+          if (expected === null || Math.abs(viewport.scrollTop - expected) > 1) {
+            followingRef.current = followsLatest(viewport);
+            if (!followingRef.current && arrivingRef.current) arrivingRef.current.reveal = false;
+          }
+          rememberReadingPosition();
         }}
+        onWheelCapture={(event) => { if (event.deltaY < 0) pauseFollowing(); }}
+        onTouchMoveCapture={pauseFollowing}
         onPointerDownCapture={(event) => {
-          if (event.target instanceof Element && event.target.closest("details")) followingRef.current = false;
+          if (event.target === event.currentTarget || (event.target instanceof Element && event.target.closest("details"))) pauseFollowing();
         }}
         onKeyDownCapture={(event) => {
-          if (["Enter", " "].includes(event.key) && event.target instanceof Element && event.target.closest("details")) followingRef.current = false;
+          if (["PageUp", "ArrowUp", "Home"].includes(event.key) || (["Enter", " "].includes(event.key) && event.target instanceof Element && event.target.closest("details"))) pauseFollowing();
         }}
       >
-        <div ref={contentRef} className="space-y-6">
+        <div ref={contentRef} className="space-y-5" data-emet-content="true">
           {!exchanges.length && !pending ? (
-            <div className="py-8 text-center">
+            <div className="py-6 text-center">
               <p className="text-lg font-medium">What would you like to understand?</p>
               <p className="mt-2 text-sm leading-6 text-[var(--muted)]">Ask naturally. Inspect the Scripture behind each answer.</p>
             </div>
@@ -823,23 +885,26 @@ export default function EmetChat({
 
           {exchanges.map((exchange) => {
             const outcome = exchange.outcome || (exchange.answer.status === "insufficient-evidence" ? "insufficient-evidence" : exchange.source === "fail-closed" ? "failed" : "answered");
-            const notes = qualifications(exchange.answer);
             const simpleSources = exchange.source === "simple-owner-model" || exchange.answer.sourceVerification === "locked-corpus-text";
+            const notes = qualifications(exchange.answer, simpleSources);
+            if (exchange.source === "simple-owner-model" && exchange.answer.verificationStatus === "unverified" && !initialOwnerDiagnostics) {
+              return <article key={exchange.id} role="status" className="text-sm text-[var(--muted)]">This saved unverified response is available only for authorized owner inspection.</article>;
+            }
             return (
-              <article key={exchange.id} className="space-y-3" aria-label="Question and response">
-                <div className="flex justify-end">
-                  <p className="max-w-[90%] whitespace-pre-wrap break-words rounded-xl bg-[var(--surface-soft)] px-3 py-2 text-base leading-7"><span className="sr-only">Question: </span>{exchange.question}</p>
+              <article key={exchange.id} className="space-y-2" aria-label="Question and response">
+                <div className="flex justify-end" data-emet-scroll-anchor={`${exchange.id}:question`}>
+                  <p className="max-w-[94%] sm:max-w-[86%] whitespace-pre-wrap break-words rounded-xl bg-[var(--surface-soft)] px-3 py-1.5 text-base leading-7"><span className="sr-only">Question: </span>{exchange.question}</p>
                 </div>
                 {exchange.initialScripture?.length ? <InitialScripture items={exchange.initialScripture} pending={false} onNavigate={onClose} /> : null}
-                <div className="min-w-0 space-y-3">
+                <div className="min-w-0 space-y-2" data-emet-scroll-anchor={`${exchange.id}:answer`}>
                   {outcome !== "answered" ? (
                     <p role={outcome === "failed" ? "alert" : "status"} className="text-sm font-semibold">{outcome === "insufficient-evidence" ? "Insufficient evidence" : "Answer unavailable"}</p>
                   ) : null}
                   {simpleSources && exchange.answer.verificationStatus === "unverified" ? (
                     <section role="alert" aria-label="Unverified model answer" className="rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3 text-sm leading-6">
-                      <p className="font-semibold">Unverified model answer · owner inspection only</p>
-                      <p>The answer is shown as generated. Its references or conclusion could not be verified. It cannot be shared as verified Scripture.</p>
-                      {exchange.answer.unresolvedReferences?.length ? (
+                      <p className="font-semibold">{initialOwnerDiagnostics ? "Unverified model answer · owner inspection only" : "Unverified model answer"}</p>
+                      <p>The answer is shown as generated. Its references or conclusion could not be verified. Only the separately displayed passages have verified Scripture text. This answer cannot be published as a verified study.</p>
+                      {initialOwnerDiagnostics && exchange.answer.unresolvedReferences?.length ? (
                         <ul aria-label="Unresolved references (not verified)" className="mt-2 space-y-1">
                           {exchange.answer.unresolvedReferences.map((item, index) => <li key={index}>{item.reference}{item.translation ? ` · ${item.translation}` : ""} — not verified</li>)}
                         </ul>
@@ -898,9 +963,9 @@ export default function EmetChat({
           })}
 
           {pending && pendingQuestion ? (
-            <article className="space-y-3" aria-label="Pending question">
-              <div className="flex justify-end">
-                <p className="max-w-[90%] whitespace-pre-wrap break-words rounded-xl bg-[var(--surface-soft)] px-3 py-2 text-base leading-7">{pendingQuestion}</p>
+            <article key={pendingExchangeId} className="space-y-2" aria-label="Pending question">
+              <div className="flex justify-end" data-emet-scroll-anchor={`${pendingExchangeId}:question`}>
+                <p className="max-w-[94%] sm:max-w-[86%] whitespace-pre-wrap break-words rounded-xl bg-[var(--surface-soft)] px-3 py-1.5 text-base leading-7">{pendingQuestion}</p>
               </div>
               {engine === "current" ? <InitialScripture items={initialScripture} pending onNavigate={onClose} /> : null}
             </article>
@@ -917,11 +982,11 @@ export default function EmetChat({
       </div>
 
       <form
-        className="shrink-0 border-t border-[var(--border)] px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2 sm:px-6"
+        className="shrink-0 px-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 sm:px-5"
         aria-busy={pending}
         onSubmit={(event) => { event.preventDefault(); void ask(); }}
       >
-        {pending ? <p role="status" className="mb-2 text-xs leading-5 text-[var(--muted)]">{pendingStatus} You can draft a follow-up.</p> : null}
+        {pending ? <p role="status" className="mb-1 text-xs leading-5 text-[var(--muted)]">{pendingStatus} You can draft a follow-up.</p> : null}
         <label htmlFor="emet-question" className="sr-only">Ask EMET a Scripture question</label>
         <div className="flex items-end gap-2 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-2 pl-3 focus-within:border-[var(--brand)]">
           <textarea

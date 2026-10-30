@@ -35,6 +35,8 @@ authenticated = user;
 assert.equal(await access.canUseSimpleEmet('spoofed-id'), false);
 env.EMET_SIMPLE_OWNER_ENABLED = 'false'; assert.equal(await access.canUseSimpleEmet(), false); env.EMET_SIMPLE_OWNER_ENABLED = 'true';
 assert.equal(await access.claimSimpleRequest('owner-id','request-a','simple-emet@1:fixture'), 'claimed');
+assert.equal(rows.filter(row => row.allowed).length,0,'Rate claim must not create a quota-bypassing allowed row');
+assert.equal(await access.recordUnlimitedSimpleRequest('owner-id','request-a','simple-emet@1:fixture'),'recorded');
 assert.equal(await access.claimSimpleRequest('owner-id','request-a','simple-emet@1:fixture'), 'duplicate');
 assert.equal(await access.claimSimpleRequest('owner-id','request-b','simple-emet@1:fixture'), 'rate-limited');
 rows.find(row => row.request_id === 'request-a').completed_at = 'complete';
@@ -63,10 +65,10 @@ for (const translation of ['web','kjv','brenton']) {
 for (const reference of ['John 999:3', 'Invented 8:9']) assert.equal(scripture.verifySimpleDraft({ ...draft, references: [{ reference, translation: 'web' }] }).ok, false, reference);
 assert.equal(scripture.verifySimpleDraft({ ...draft, quotations: [{ reference: 'John 17:3', translation: 'web', text: 'Obsolete quotation metadata is ignored.' }] }).ok, true);
 assert.equal(scripture.verifySimpleDraft({ ...draft, references: [{ reference: 'John 17:3', translation: 'brenton' }] }).ok, false);
-let allowed = true, claim = 'claimed', quota = { allowed: true, charged: false }, fail = false, generated = draft;
+let allowed = true, claim = 'claimed', quota = { allowed: true, charged: false, unlimited: true }, fail = false, generated = draft;
 const events = [];
 const serviceFixture = createUiFixture({ modules: {
- 'server-only': {}, './SimpleEmetAccess': { canUseSimpleEmet: async () => allowed, claimSimpleRequest: async () => claim, simpleRequestKey: () => 'simple-emet@1:isolated' },
+ 'server-only': {}, './SimpleEmetAccess': { getSimpleEmetAccess: async () => ({ authorized: allowed, ownerDiagnostics: allowed }), recordUnlimitedSimpleRequest: async () => "recorded", claimSimpleRequest: async () => claim, simpleRequestKey: () => 'simple-emet@1:isolated' },
  './SimpleEmet': { ...model, generateSimpleEmet: async () => { events.push('generate'); if (fail) throw Error('private detail'); return model.inspectSimpleResponse({ status: "completed", output_text: JSON.stringify(generated) }); } },
  './SimpleEmetScripture': scripture,
  '../EmetAiQuota': { reserveEmetAiQuestion: async (_,key) => { assert.match(key,/^simple-emet@1:/); events.push('reserve'); return quota; }, completeEmetAiQuestion: async (_,source) => { events.push(source); return true; }, refundFailedEmetAiQuestion: async () => events.push('refund'), getEmetAiUsageSummary: async () => quota },
@@ -78,18 +80,19 @@ allowed = false; assert.equal((await service.handleSimpleEmet(input)).status,403
 claim = 'duplicate'; assert.equal((await service.handleSimpleEmet(input)).status,409);
 claim = 'rate-limited'; assert.equal((await service.handleSimpleEmet(input)).status,429); claim = 'claimed';
 assert.equal((await service.handleSimpleEmet({ ...input, history: Array(7).fill(history[0]) })).status,400);
-quota = { allowed: false }; assert.equal((await service.handleSimpleEmet(input)).status,429); quota = { allowed: true };
+quota = { allowed: false }; assert.equal((await service.handleSimpleEmet(input)).status,429); quota = { allowed: true, charged: true, unlimited: false };
 generated = { ...draft, references: [{ reference: 'John 999:3', translation: 'web' }] }; const unresolved = await service.handleSimpleEmet(input); assert.equal(unresolved.status,200); assert.equal(unresolved.body.status,'complete-unverified'); assert.equal(unresolved.body.answer.citations.length,0);
 generated = { ...draft, status: 'insufficient-evidence' }; assert.equal((await service.handleSimpleEmet(input)).status,422);
 fail = true; result = await service.handleSimpleEmet(input); assert.equal(result.status,503); assert.doesNotMatch(JSON.stringify(result),/private detail/);
 for (const file of fs.readdirSync('app/lib/emet/experimental')) assert.doesNotMatch(fs.readFileSync(`app/lib/emet/experimental/${file}`,'utf8'), /EmetAiIdentity|setSupabaseEmetAiRequestCache|appendSupabaseEmetConversationLedger|EmetAiPlanner/);
 const route = fs.readFileSync('app/api/emet/ask/route.ts','utf8');
-assert.ok(route.indexOf('getVerifiedSupabaseUserId()') < route.indexOf('if (body.engine === "simple")'));
-assert.ok(route.indexOf('if (body.engine === "simple")') < route.indexOf('const performanceTrace'));
+assert.ok(route.indexOf('getVerifiedSupabaseUserId()') < route.indexOf('if (publicEngine === "simple")'));
+assert.ok(route.indexOf('if (publicEngine === "simple")') < route.indexOf('const performanceTrace'));
 console.log('PASS: owner authorization, authenticated identity, disabled flag, atomic rate limits/idempotency, configured model, bounded multi-turn history, one mocked call, all translation verification, fabricated references/quotes, usage reservation/completion/refunds, safe failures, cache/ledger isolation and unchanged existing engine. No paid calls.');
 const routeModules = {};
 for (const match of route.matchAll(/from "([^"]+)"/g)) routeModules[match[1]] = new Proxy({}, { get: (_,name) => () => { throw Error(`Unexpected existing-engine call: ${String(name)}`); } });
-let routeUser = null, currentEntered = false;
+let routeUser = null, currentEntered = false, publicEngine = 'simple';
+routeModules['@/app/lib/emet/EmetPublicRouting'] = { getPublicEmetEngine: () => publicEngine };
 routeModules['next/server'] = { NextResponse: { json: (body,options) => ({ body, ...options }) } };
 routeModules['@/app/lib/supabase/server'] = { getVerifiedSupabaseUserId: async () => routeUser };
 routeModules['@/app/lib/emet/EmetAiConversation'] = { parseEmetConversationContext: () => ({}) };
@@ -105,7 +108,8 @@ allowed = true; fail = false; generated = draft;
 assert.equal((await post({ json: async () => body })).status,200);
 assert.equal(currentEntered,false);
 assert.equal((await post({ json: async () => ({ ...body, engine: 'unknown' }) })).status,400);
-for (const engine of [undefined,'current']) {
+publicEngine = 'current';
+for (const engine of [undefined,'current','simple']) {
  await assert.rejects(() => post({ json: async () => ({ ...body, engine }) }),/current-path-marker/);
  assert.equal(currentEntered,true); currentEntered = false;
 }

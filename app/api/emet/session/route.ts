@@ -1,3 +1,4 @@
+import { getPublicEmetEngine } from "@/app/lib/emet/EmetPublicRouting";
 import { NextResponse } from "next/server";
 
 import { getEmetAiUsageSummary } from "@/app/lib/emet/EmetAiQuota";
@@ -25,7 +26,8 @@ export async function GET() {
     {
       authenticated: true,
       usage: await getEmetAiUsageSummary(),
-      simpleAvailable: await canUseSimpleEmet(userId),
+      engine: getPublicEmetEngine(),
+      ownerDiagnostics: await canUseSimpleEmet(userId),
     },
     { headers },
   );

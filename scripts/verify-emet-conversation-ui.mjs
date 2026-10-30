@@ -64,33 +64,66 @@ function environment(initial = {}) {
     set scrollTop(value) { top = Math.max(0, Math.min(value, this.scrollHeight - this.clientHeight)); },
   };
   const content = {};
+  const geometry = new Map();
+  const overrides = new Map();
+  const anchorNodes = new Map();
+  let anchors = [];
+  viewport.top = 100;
+  viewport.getBoundingClientRect = () => ({ top: viewport.top, bottom: viewport.top + viewport.clientHeight, height: viewport.clientHeight });
+  viewport.querySelectorAll = () => anchors;
+  const positionAnchor = (key, position) => overrides.set(key, { ...geometry.get(key), ...position });
+  const anchorTop = (key) => (overrides.get(key) || geometry.get(key))?.top;
+  function layoutContent(element) {
+    let cursor = 0;
+    anchors = elements(element, (x) => typeof x.props["data-emet-scroll-anchor"] === "string").map((anchor) => {
+      const key = anchor.props["data-emet-scroll-anchor"];
+      const question = key.endsWith(":question");
+      const height = question ? Math.max(40, Math.ceil(text(anchor).length / 70) * 28) : Math.max(160, Math.ceil(text(anchor).length / 70) * 28);
+      geometry.set(key, { top: cursor, height });
+      cursor += height + (question ? 8 : 20);
+      if (!anchorNodes.has(key)) anchorNodes.set(key, {
+        dataset: { emetScrollAnchor: key },
+        getBoundingClientRect() {
+          const box = overrides.get(key) || geometry.get(key);
+          const top = viewport.top + box.top - viewport.scrollTop;
+          return { top, bottom: top + box.height, height: box.height };
+        },
+      });
+      return anchorNodes.get(key);
+    });
+  }
   const textarea = { style: {}, scrollHeight: 44 };
   const flushTimers = () => {
     for (const [id, timer] of [...timers]) if (timer.delay === 0) { timers.delete(id); timer.fn(); }
   };
   return {
-    sessionStorage, localStorage, window, document, listeners, viewportListeners, observers, root, viewport, textarea, flushTimers,
+    sessionStorage, localStorage, window, document, listeners, viewportListeners, observers, root, viewport, textarea, flushTimers, positionAnchor, anchorTop,
     globals: { window, document, Element, HTMLElement, DOMException,
       crypto: { randomUUID: (() => { let count = 0; return () => `fixture-${++count}`; })() },
-      ResizeObserver: class { constructor(fn) { observers.push(fn); } observe() {} disconnect() {} },
+      ResizeObserver: class { constructor(fn) { this.callback = fn; observers.push(fn); } observe() {} disconnect() { const index = observers.indexOf(this.callback); if (index >= 0) observers.splice(index, 1); } },
     },
     onElement(element) {
       if (!element.props.ref || typeof element.props.ref !== "object") return;
       if (element.props["data-emet-chat"]) element.props.ref.current = root;
       else if (element.props["aria-label"] === "Conversation") element.props.ref.current = viewport;
       else if (element.type === "textarea") element.props.ref.current = textarea;
-      else if (element.type === "div" && element.props.className === "space-y-6") element.props.ref.current = content;
+      else if (element.type === "div" && element.props["data-emet-content"]) { element.props.ref.current = content; layoutContent(element); }
     },
   };
 }
 
-function chatFixture({ history = [prior], draft = "", scroll, props = {}, evidenceLate = false, location } = {}) {
+function chatFixture({ history = [prior], draft = "", scroll, props = {}, evidenceLate = false, location, legacyHistory, legacyDraft = "" } = {}) {
   const env = environment({
     "emetsees-conversation": JSON.stringify(history),
     "emetsees-conversation-id": "conversation-before",
     "emetsees-conversation-draft": draft,
     ...(scroll ? { "emetsees-conversation-scroll": JSON.stringify({ conversationId: "conversation-before", ...scroll }) } : {}),
   });
+  if (legacyHistory) {
+    env.sessionStorage.setItem("emetsees-simple-conversation", JSON.stringify(legacyHistory));
+    env.sessionStorage.setItem("emetsees-simple-conversation-id", "preserved-owner-conversation");
+    env.sessionStorage.setItem("emetsees-simple-conversation-draft", legacyDraft);
+  }
   if (location) env.window.location = new URL(location);
   const requests = [];
   const shared = [];
@@ -125,7 +158,7 @@ function chatFixture({ history = [prior], draft = "", scroll, props = {}, eviden
     onElement: env.onElement,
   });
   const Chat = fixture.load("app/components/emet/EmetChat.tsx").default;
-  let currentProps = { initialUsage: null, ...props };
+  let currentProps = { initialUsage: null, initialEngine: "current", ...props };
   fixture.render(Chat, currentProps);
   env.flushTimers();
   let tree = fixture.render();
@@ -182,7 +215,9 @@ assert.match(text(tree), /The conclusion is limited to this setting/);
 assert.doesNotMatch(text(tree), /private-claim-47|private-part-2/);
 const finalLinks = elements(tree, (x) => x.type === "a" && x.props.href.startsWith("/read/"));
 assert.deepEqual(finalLinks.map((x) => new URL(x.props.href, live.window.location.origin).searchParams.get("translation")), ["brenton", "web", "kjv", "brenton"]);
-assert.equal(live.viewport.scrollTop, 1200, "A follower should remain at the newest content");
+const latestId = elements(tree, x => x.props["data-emet-scroll-anchor"]?.endsWith(":answer")).at(-1).props["data-emet-scroll-anchor"].replace(":answer", "");
+assert.equal(live.viewport.scrollTop, live.anchorTop(`${latestId}:question`) - 8, "An arriving answer should reveal its beginning with the question");
+assert.ok(live.viewport.scrollTop < 1200, "Do not jump to the end of a completed response");
 button(tree, "Publish and share this answer").props.onClick();
 await tick();
 assert.equal(live.shared[0].url, "https://fixture.invalid/shared/local-shared-study");
@@ -220,14 +255,14 @@ reading.viewport.scrollTop = reading.viewport.scrollHeight;
 region.props.onScroll({ currentTarget: reading.viewport });
 reading.viewport.scrollHeight = 2200;
 reading.observers.forEach((fn) => fn());
-assert.equal(reading.viewport.scrollTop, 1800);
+assert.equal(reading.viewport.scrollTop, 1400, "Layout growth should preserve the reading position even when previously at the bottom");
 const disclosureTarget = new reading.globals.Element();
 disclosureTarget.closest = () => ({});
 region.props.onPointerDownCapture({ target: disclosureTarget });
 reading.viewport.scrollHeight = 2400;
 reading.observers.forEach((fn) => fn());
-assert.equal(reading.viewport.scrollTop, 1800, "Expanding evidence must stop follow-to-bottom behavior");
-console.log("PASS: older-message scroll restoration/stability, following-only auto-scroll, evidence inspection, and visual-viewport composer sizing with fixtures");
+assert.equal(reading.viewport.scrollTop, 1400, "Expanding evidence must preserve position");
+console.log("PASS: older-message scroll restoration/stability, one-shot answer reveal, evidence inspection, and visual-viewport composer sizing with fixtures");
 
 for (const [status, payload, expected] of [
   [422, { status: "insufficient-evidence", answer: "Exact insufficient-evidence wording.", limitations: ["The passages do not establish that timing."] }, "Insufficient evidence"],
@@ -355,6 +390,7 @@ for (const authenticated of [true, false]) {
   if (authenticated) {
     let chat = elements(tree, (x) => x.type === "chat")[0];
     assert.equal(chat.props.active, true);
+    assert.match(elements(tree, x => x.props.role === "dialog")[0].props.className, /max-w-3xl.*100dvh/);
     assert.equal(chat.key, undefined, "Reopening must not key/remount the active request owner");
     chat.props.onClose();
     tree = fixture.render();
@@ -372,6 +408,7 @@ for (const authenticated of [true, false]) {
 }
 const page = createUiFixture({ modules: {
   "@/app/lib/emet/experimental/SimpleEmetAccess": { canUseSimpleEmet: async () => false },
+  "@/app/lib/emet/EmetPublicRouting": { getPublicEmetEngine: () => "simple" },
   "next/navigation": { redirect: (href) => { throw new Error(href); } },
   "@/app/components/emet/EmetChat": component("chat"),
   "@/app/lib/emet/EmetAiQuota": { getEmetAiUsageSummary: async () => null },
@@ -387,30 +424,22 @@ assert.equal(helpers.safeChatReturnHref("/emet"), null);
 assert.equal(helpers.publicQualification('{"claimId":"internal-1","message":"Only this setting is established."}'), "Only this setting is established.");
 console.log("PASS: common page/panel chat layout, mounted contextual close, original reading URL, authenticated return path, and public qualification formatting");
 console.log("Ask EMET conversation UI fixture regressions passed. No external or AI requests were made.");
-const ownerChat = chatFixture({ draft: 'Current draft', props: { initialSimpleAvailable: true } });
-let selector = elements(ownerChat.tree(), x => x.type === 'select' && x.props.value === 'current')[0];
-assert.ok(selector);
-selector.props.onChange({ target: { value: 'simple' } });
-ownerChat.render();
-assert.equal(elements(ownerChat.tree(), x => x.type === 'textarea')[0].props.value, '');
-ownerChat.type('Who is the Father?'); ownerChat.send();
-assert.equal(ownerChat.requests[0].body.engine,'simple');
-assert.equal(ownerChat.requests[0].body.simpleHistory.length,0);
-ownerChat.requests[0].finish({ ...answerPayload, shareStudyId: undefined });
-await tick(); ownerChat.render();
-ownerChat.type('Your previous answer contradicts Scripture'); ownerChat.send();
-assert.equal(ownerChat.requests[1].body.simpleHistory.length,1);
-assert.equal(ownerChat.requests[1].body.simpleHistory[0].question,'Who is the Father?');
-assert.equal(ownerChat.requests[1].body.simpleHistory[0].answer, answerPayload.answer.answer);
-ownerChat.requests[1].finish({ ...answerPayload, shareStudyId: undefined }); await tick(); ownerChat.render();
-selector = elements(ownerChat.tree(), x => x.type === 'select')[0]; selector.props.onChange({ target: { value: 'current' } }); ownerChat.render();
-assert.equal(elements(ownerChat.tree(), x => x.type === 'textarea')[0].props.value,'Current draft');
-assert.equal(elements(chatFixture().tree(), x => x.type === 'select').length,0);
-console.log('PASS: owner testing control, current default, isolated engine history/drafts, full immediate follow-up context and ordinary-user control visibility.');
+const publicHistory=chatFixture({draft:'Public draft',props:{initialEngine:'simple'}});
+assert.equal(elements(publicHistory.tree(),x=>x.type==='select').length,0);
+publicHistory.type('Who is the Father?');publicHistory.send();assert.equal(publicHistory.requests[0].body.engine,undefined);
+assert.equal(publicHistory.requests[0].body.simpleHistory.length,1,'Existing public history must reach Simple EMET');
+publicHistory.requests[0].finish({...answerPayload,shareStudyId:undefined});await tick();publicHistory.render();
+publicHistory.type('Your previous answer contradicts Scripture');publicHistory.send();assert.equal(publicHistory.requests[1].body.simpleHistory.at(-1).question,'Who is the Father?');
+publicHistory.requests[1].finish({...answerPayload,shareStudyId:undefined});await tick();publicHistory.render();
+publicHistory.type('Draft before rollback');publicHistory.render({initialEngine:'current'});
+assert.equal(elements(publicHistory.tree(),x=>x.type==='textarea')[0].props.value,'Draft before rollback');
+assert.equal(elements(publicHistory.tree(),x=>x.props['data-emet-answer']).length,3,'Server routing changes must not switch stored threads');
+assert.doesNotMatch(text(publicHistory.tree()),/Owner testing|experimental|Private owner test/);
+console.log('PASS: no engine selector, server-selected Simple requests, existing public history, follow-up context and draft/history preservation across rollback.');
 const sourceText='Exact server-constructed Scripture text.';
 const simplePayload={status:'complete',source:'simple-owner-model',answer:{...answerPayload.answer,claims:[],componentChecks:[],continuityChecks:[],sourceVerification:'locked-corpus-text',citations:[{evidenceId:'scripture:kjv:simple:Genesis 1:1',reference:'Genesis 1:1',translation:'kjv',text:sourceText,verification:'locked-corpus-text'}]}};
-const sourceChat=chatFixture({history:[],props:{initialSimpleAvailable:true}});
-elements(sourceChat.tree(),x=>x.type==='select')[0].props.onChange({target:{value:'simple'}});sourceChat.render();sourceChat.type('A source display fixture');sourceChat.send();sourceChat.requests[0].finish(simplePayload);await tick();sourceChat.render();
+const sourceChat=chatFixture({history:[],props:{initialEngine:"simple",initialOwnerDiagnostics:true}});
+sourceChat.render();sourceChat.type('A source display fixture');sourceChat.send();sourceChat.requests[0].finish(simplePayload);await tick();sourceChat.render();
 assert.match(text(sourceChat.tree()),/Scripture passages · 1/);
 assert.doesNotMatch(text(sourceChat.tree()),/Final supporting citations/);
 assert.equal(elements(sourceChat.tree(),x=>x.type==='blockquote')[0].props.children,sourceText);
@@ -422,8 +451,8 @@ const currentChat=chatFixture({history:[{...prior,answer:{...prior.answer,citati
 console.log('PASS: integrated Simple source disclosure, server text rendering, translation-aware navigation, API normalization and saved-history restoration; current engine disclosure unchanged.');
 const unresolvedAnswer='An exact model answer, including “a quoted explanatory phrase” and Invented 999:1.';
 const unresolvedPayload={...simplePayload,status:'complete-unverified',shareStudyId:'must-never-be-published',answer:{...simplePayload.answer,answer:unresolvedAnswer,verificationStatus:'unverified',unresolvedReferences:[{reference:'Invented 999:1',translation:'web',reason:'citation-unresolved'}]}};
-const inspectChat=chatFixture({history:[],props:{initialSimpleAvailable:true}});
-elements(inspectChat.tree(),x=>x.type==='select')[0].props.onChange({target:{value:'simple'}});inspectChat.render();inspectChat.type('Can a Christian eat pork?');inspectChat.send();inspectChat.requests[0].finish(unresolvedPayload);await tick();inspectChat.render();
+const inspectChat=chatFixture({history:[],props:{initialEngine:"simple",initialOwnerDiagnostics:true}});
+inspectChat.render();inspectChat.type('Can a Christian eat pork?');inspectChat.send();inspectChat.requests[0].finish(unresolvedPayload);await tick();inspectChat.render();
 assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='EMET response')[0].props.children,unresolvedAnswer);
 assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='Unverified model answer'&&x.props.role==='alert').length,1);
 assert.match(text(inspectChat.tree()),/owner inspection only/);
@@ -434,12 +463,165 @@ assert.equal(elements(inspectChat.tree(),x=>x.type==='blockquote')[0].props.chil
 inspectChat.type('Does your previous answer follow from Scripture?');inspectChat.send();
 assert.equal(inspectChat.requests[1].body.simpleHistory[0].answer,unresolvedAnswer);
 inspectChat.requests[1].finish(unresolvedPayload);await tick();inspectChat.render();
-const restoredInspection=chatFixture({history:[{id:'unverified-stored',question:'An owner question',source:'simple-owner-model',shareStudyId:'must-stay-hidden',answer:unresolvedPayload.answer}]});
+const restoredInspection=chatFixture({props:{initialOwnerDiagnostics:true},history:[{id:'unverified-stored',question:'An owner question',source:'simple-owner-model',shareStudyId:'must-stay-hidden',answer:unresolvedPayload.answer}]});
 assert.equal(elements(restoredInspection.tree(),x=>x.props['aria-label']==='Unverified model answer').length,1);
 assert.equal(elements(restoredInspection.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
 assert.match(text(restoredInspection.tree()),/Invented 999:1/);
-const noSources=chatFixture({history:[{id:'no-sources',question:'An owner question',source:'simple-owner-model',answer:{...unresolvedPayload.answer,citations:[]}}]});
+const noSources=chatFixture({props:{initialOwnerDiagnostics:true},history:[{id:'no-sources',question:'An owner question',source:'simple-owner-model',answer:{...unresolvedPayload.answer,citations:[]}}]});
 assert.equal(elements(noSources.tree(),x=>x.props['aria-label']==='EMET response')[0].props.children,unresolvedAnswer);
 assert.equal(elements(noSources.tree(),x=>x.type==='blockquote').length,0);
 assert.equal(elements(noSources.tree(),x=>x.type==='a'&&text(x).includes('Invented')).length,0);
 console.log('PASS: exact unresolved answer inspection, prominent warning, invalid references remain unlinked, verified subset source text, sharing blocked, follow-up context and persisted warning state.');
+for(const support of ['strong-implication','theological-synthesis']){
+ const message=support==='strong-implication'?'This answer includes an inference from Scripture.':'This answer brings several passages together in interpretation.';
+ const material='The passage addresses this audience; extending the conclusion requires additional evidence.';
+ const notice='Owner experiment: passage text is checked; the explanation remains model-generated.';
+ const styleAnswer={...simplePayload.answer,conclusionSupport:support,limitations:[material,notice]};
+ const calm=chatFixture({history:[{id:'style-simple',question:'Explain the passage',source:'simple-owner-model',answer:styleAnswer}]});
+ assert.ok(!text(calm.tree()).includes(message));assert.ok(text(calm.tree()).includes(material));assert.ok(text(calm.tree()).includes(notice));
+ assert.equal(elements(calm.tree(),x=>x.props['aria-label']==='EMET response')[0].props.children,styleAnswer.answer);
+ const publicStyle=chatFixture({history:[{id:'style-current',question:'Explain the passage',source:'model',answer:{...prior.answer,conclusionSupport:support,limitations:[material]}}]});
+ assert.ok(text(publicStyle.tree()).includes(message));assert.ok(text(publicStyle.tree()).includes(material));
+}
+for(const[support,message]of [['possible-interpretation','This is a possible interpretation, rather than an explicit statement of Scripture.'],['does-not-establish','The available evidence does not establish this conclusion.']]){
+ const uncertain=chatFixture({history:[{id:'material-uncertainty',question:'What follows?',source:'simple-owner-model',answer:{...simplePayload.answer,conclusionSupport:support}}]});
+ assert.ok(text(uncertain.tree()).includes(message));
+}
+console.log('PASS: Simple supported-answer generic notices omitted; all supplied material limitations, owner notices and genuine uncertainty retained; public engine qualifications and answer text unchanged.');
+
+// Deterministic DOM-geometry fixtures, not a browser layout/keyboard simulation.
+const scrollRegion = chat => elements(chat.tree(), x => x.props['aria-label'] === 'Conversation')[0];
+const lastAnswerAnchor = chat => elements(chat.tree(), x => x.props['data-emet-scroll-anchor']?.endsWith(':answer')).at(-1).props['data-emet-scroll-anchor'];
+const questionAnchorFor = answerAnchor => answerAnchor.replace(/:answer$/, ':question');
+function assertResponseBeginning(chat) {
+ const answerKey = lastAnswerAnchor(chat);
+ const responseOffset = chat.anchorTop(answerKey) - chat.viewport.scrollTop;
+ assert.ok(responseOffset >= 0 && responseOffset < chat.viewport.clientHeight - 80, `Response beginning must be visible, offset=${responseOffset}`);
+}
+const shortArrival = chatFixture({history:[]});
+shortArrival.viewport.scrollHeight=400;
+shortArrival.type('A short answer question');shortArrival.send();await tick();shortArrival.render();
+shortArrival.requests[0].finish({...answerPayload,answer:{...answerPayload.answer,answer:'A short answer.'}});await tick();shortArrival.render();
+assert.equal(shortArrival.viewport.scrollTop,0);assertResponseBeginning(shortArrival);
+
+const longArrival = chatFixture();
+longArrival.viewport.scrollHeight=6000;
+longArrival.type('A long answer question');longArrival.send();await tick();longArrival.render();
+const longText='A paragraph requiring natural downward reading.\n\n'.repeat(120);
+longArrival.requests[0].finish({...answerPayload,answer:{...answerPayload.answer,answer:longText}});await tick();longArrival.render();
+assertResponseBeginning(longArrival);
+assert.equal(longArrival.viewport.scrollTop,longArrival.anchorTop(questionAnchorFor(lastAnswerAnchor(longArrival)))-8);
+assert.ok(longArrival.viewport.scrollTop < longArrival.viewport.scrollHeight-longArrival.viewport.clientHeight);
+assert.equal(elements(longArrival.tree(),x=>x.props['data-emet-answer']).at(-1).props.children,longText);
+// A later observer callback must not repeat the arrival scroll or chase the end.
+const arrivalTop=longArrival.viewport.scrollTop;
+longArrival.viewport.scrollHeight+=200;longArrival.observers.forEach(fn=>fn());assert.equal(longArrival.viewport.scrollTop,arrivalTop);
+// The next explicit question gets its own stable anchor after following the end.
+longArrival.viewport.scrollTop=longArrival.viewport.scrollHeight;
+scrollRegion(longArrival).props.onScroll({currentTarget:longArrival.viewport});
+longArrival.type('A second consecutive question');longArrival.send();await tick();longArrival.render();
+longArrival.viewport.scrollHeight=12000;
+longArrival.requests[1].finish({...answerPayload,answer:{...answerPayload.answer,answer:longText}});await tick();longArrival.render();assertResponseBeginning(longArrival);
+const secondTop=longArrival.viewport.scrollTop;
+longArrival.observers.forEach(fn=>fn());assert.equal(longArrival.viewport.scrollTop,secondTop);
+
+const interrupted = chatFixture();interrupted.viewport.scrollHeight=7000;
+interrupted.type('Read older material while waiting');interrupted.send();await tick();interrupted.render();
+scrollRegion(interrupted).props.onWheelCapture({deltaY:-100});
+interrupted.viewport.scrollTop=100;scrollRegion(interrupted).props.onScroll({currentTarget:interrupted.viewport});
+interrupted.requests[0].finish({...answerPayload,answer:{...answerPayload.answer,answer:longText}});await tick();interrupted.render();
+assert.equal(interrupted.viewport.scrollTop,100,'Manual upward scrolling during generation cancels the reveal');
+interrupted.observers.forEach(fn=>fn());assert.equal(interrupted.viewport.scrollTop,100);
+// Reading farther down after arrival must also survive observers and drafts.
+interrupted.viewport.scrollTop=150;scrollRegion(interrupted).props.onScroll({currentTarget:interrupted.viewport});
+interrupted.type('A preserved follow-up draft');interrupted.render();interrupted.observers.forEach(fn=>fn());assert.equal(interrupted.viewport.scrollTop,150);
+
+// If preliminary content consumes the viewport, prefer the actual response
+// instead of scrolling to a question that would hide the response beginning.
+const tallPreliminary = chatFixture();tallPreliminary.viewport.scrollHeight=6000;
+tallPreliminary.type('A question with large preliminary evidence');tallPreliminary.send();await tick();tallPreliminary.render();
+const pendingKey=elements(tallPreliminary.tree(),x=>x.props['aria-label']==='Pending question')[0].key;
+const questionTop=tallPreliminary.anchorTop(`${pendingKey}:question`);
+tallPreliminary.positionAnchor(`${pendingKey}:answer`,{top:questionTop+600,height:2500});
+tallPreliminary.requests[0].finish({...answerPayload,answer:{...answerPayload.answer,answer:longText}});await tick();tallPreliminary.render();
+assert.equal(tallPreliminary.viewport.scrollTop,questionTop+600-8);assertResponseBeginning(tallPreliminary);
+
+// Preserve a stable reading offset when content above it expands or collapses.
+const anchored = chatFixture();anchored.viewport.scrollHeight=6000;
+anchored.type('A layout preservation question');anchored.send();await tick();anchored.render();anchored.requests[0].finish({...answerPayload,answer:{...answerPayload.answer,answer:longText}});await tick();anchored.render();
+const key=lastAnswerAnchor(anchored);
+anchored.viewport.scrollTop=anchored.anchorTop(key)+100;scrollRegion(anchored).props.onScroll({currentTarget:anchored.viewport});
+const originalOffset=anchored.anchorTop(key)-anchored.viewport.scrollTop;
+const disclosure=new anchored.globals.Element();disclosure.closest=()=>({});
+scrollRegion(anchored).props.onPointerDownCapture({target:disclosure});
+const beforeExpansion=anchored.viewport.scrollTop;
+anchored.positionAnchor(key,{top:anchored.anchorTop(key)+180});anchored.viewport.scrollHeight+=180;
+anchored.observers.forEach(fn=>fn());
+assert.equal(anchored.viewport.scrollTop,beforeExpansion+180);assert.equal(anchored.anchorTop(key)-anchored.viewport.scrollTop,originalOffset);
+anchored.observers.forEach(fn=>fn());assert.equal(anchored.viewport.scrollTop,beforeExpansion+180,'No repeated movement for an unchanged expanded source');
+scrollRegion(anchored).props.onKeyDownCapture({key:'Enter',target:disclosure});
+anchored.positionAnchor(key,{top:anchored.anchorTop(key)-80});anchored.observers.forEach(fn=>fn());
+assert.equal(anchored.anchorTop(key)-anchored.viewport.scrollTop,originalOffset,'Qualifications/content changes preserve the same reading offset');
+// Composer and keyboard resizing preserve position rather than jump to the end.
+const beforeKeyboard=anchored.viewport.scrollTop;
+anchored.viewport.clientHeight=240;anchored.window.visualViewport.height=420;anchored.viewportListeners.resize();
+assert.equal(anchored.root.style.height,'360px');assert.equal(anchored.viewport.scrollTop,beforeKeyboard);
+anchored.viewport.top+=24;anchored.window.visualViewport.offsetTop=24;anchored.viewportListeners.scroll();
+assert.equal(anchored.anchorTop(key)-anchored.viewport.scrollTop,originalOffset);
+anchored.viewport.top-=24;anchored.window.visualViewport.height=800;anchored.window.visualViewport.offsetTop=0;anchored.viewport.clientHeight=400;anchored.viewportListeners.resize();
+assert.equal(anchored.root.style.height,'');assert.equal(anchored.viewport.scrollTop,beforeKeyboard);
+anchored.type('A multiline\nfollow-up\ndraft');anchored.observers.forEach(fn=>fn());assert.equal(anchored.viewport.scrollTop,beforeKeyboard);
+// Hide/reopen and persisted following=true both retain saved reading positions.
+anchored.render({active:false});anchored.render({active:true});assert.equal(anchored.viewport.scrollTop,beforeKeyboard);
+const restoredFollower = chatFixture({scroll:{top:125,following:true}});
+assert.equal(restoredFollower.viewport.scrollTop,125);restoredFollower.observers.forEach(fn=>fn());assert.equal(restoredFollower.viewport.scrollTop,125);
+// Completion while a panel is hidden reveals once on reopening, not while hidden.
+const hiddenArrival=chatFixture();hiddenArrival.viewport.scrollHeight=6000;
+hiddenArrival.type('A hidden pending answer');hiddenArrival.send();await tick();hiddenArrival.render();const hiddenTop=hiddenArrival.viewport.scrollTop;
+hiddenArrival.render({active:false});hiddenArrival.requests[0].finish({...answerPayload,answer:{...answerPayload.answer,answer:longText}});await tick();hiddenArrival.render();assert.equal(hiddenArrival.viewport.scrollTop,hiddenTop);
+hiddenArrival.render({active:true});assertResponseBeginning(hiddenArrival);
+
+const simpleArrival=chatFixture({history:[],props:{initialEngine:"simple",initialOwnerDiagnostics:true}});
+simpleArrival.render();simpleArrival.viewport.scrollHeight=6000;
+simpleArrival.type('A Simple EMET reading fixture');simpleArrival.send();simpleArrival.requests[0].finish({...unresolvedPayload,answer:{...unresolvedPayload.answer,answer:longText}});await tick();simpleArrival.render();assertResponseBeginning(simpleArrival);
+assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Unverified model answer').length,1);
+assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
+assert.match(scrollRegion(simpleArrival).props.className,/px-3.*sm:px-5/);
+assert.match(elements(simpleArrival.tree(),x=>x.props['data-emet-content'])[0].props.className,/space-y-5/);
+assert.match(elements(simpleArrival.tree(),x=>x.type==='form')[0].props.className,/shrink-0.*safe-area-inset-bottom/);
+console.log('PASS: short/long answers, consecutive questions, question visibility, large preliminary sections, manual scrolling during/after generation, stable source/qualification anchors, reopening including followers, hidden completion, keyboard/composer resize, and current/Simple rendering with deterministic geometry fixtures. Browser/device verification remains separate.');
+
+for (const gesture of ["touch", "keyboard"]) {
+  const manual = chatFixture(); manual.viewport.scrollHeight = 6000;
+  manual.type(`A ${gesture} reading fixture`); manual.send(); await tick(); manual.render();
+  if (gesture === "touch") scrollRegion(manual).props.onTouchMoveCapture();
+  else scrollRegion(manual).props.onKeyDownCapture({ key: "PageUp", target: new manual.globals.Element() });
+  manual.viewport.scrollTop = 100;
+  scrollRegion(manual).props.onScroll({ currentTarget: manual.viewport });
+  manual.requests[0].finish({ ...answerPayload, answer: { ...answerPayload.answer, answer: longText } }); await tick(); manual.render();
+  assert.equal(manual.viewport.scrollTop, 100, `${gesture} reading intent prevents an arrival jump`);
+}
+const widthPageTree = await page.load("app/emet/page.tsx").default({ searchParams: Promise.resolve({}) });
+assert.equal(elements(widthPageTree, x => /max-w-3xl/.test(x.props.className || "")).length, 1);
+console.log("PASS: touch/keyboard manual reading guards and matching wider page/panel shells; no browser rendering is implied.");
+
+const publicDefault=chatFixture({history:[prior],props:{initialEngine:undefined}});
+assert.equal(elements(publicDefault.tree(),x=>x.type==='select').length,0);
+publicDefault.type('Default public question');publicDefault.send();assert.equal(publicDefault.requests[0].url,'/api/emet/ask');assert.equal(publicDefault.requests[0].body.simpleHistory[0].answer,prior.answer.answer);assert.equal(elements(publicDefault.tree(),x=>x.props['data-preliminary-scripture']).length,0);
+publicDefault.requests[0].finish({...simplePayload,source:'simple-model'});await tick();publicDefault.render();assert.match(text(publicDefault.tree()),/Scripture passages/);assert.doesNotMatch(text(publicDefault.tree()),/Owner testing|experimental|Private owner test/);
+const legacyOwner={...prior,id:'legacy-owner',question:'A preserved owner question',source:'simple-model',answer:simplePayload.answer};
+const migrated=chatFixture({history:[prior],legacyHistory:[legacyOwner],legacyDraft:'Owner follow-up',props:{initialEngine:'simple',initialOwnerDiagnostics:true}});
+assert.match(text(migrated.tree()),/A preserved owner question/);assert.equal(elements(migrated.tree(),x=>x.type==='textarea')[0].props.value,'Owner follow-up');
+assert.equal(JSON.parse(migrated.sessionStorage.getItem('emetsees-conversation'))[0].question,prior.question,'Public history must not be overwritten when preserving a legacy owner thread');
+migrated.render({initialEngine:'current'});assert.match(text(migrated.tree()),/A preserved owner question/);assert.equal(elements(migrated.tree(),x=>x.type==='textarea')[0].props.value,'Owner follow-up');
+const noOwner=chatFixture({history:[prior],legacyHistory:[legacyOwner],props:{initialEngine:'simple',initialOwnerDiagnostics:false}});assert.doesNotMatch(text(noOwner.tree()),/A preserved owner question/);
+const privateHistory=chatFixture({history:[{...legacyOwner,source:'simple-owner-model',answer:unresolvedPayload.answer}],props:{initialOwnerDiagnostics:false}});assert.doesNotMatch(text(privateHistory.tree()),/Invented 999:1|An exact model answer/);assert.match(text(privateHistory.tree()),/authorized owner inspection/);
+console.log('PASS: actual public default, no selector/experimental labels, public history preserved, legacy owner history/draft preserved without merging threads, rollback continuity and private saved diagnostics hidden from non-owners.');
+
+const publicUnverified=chatFixture({history:[{...legacyOwner,source:'simple-model',answer:{...unresolvedPayload.answer,unresolvedReferences:undefined}}],props:{initialEngine:'simple',initialOwnerDiagnostics:false}});
+assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Unverified model answer').length,1);
+assert.equal(elements(publicUnverified.tree(),x=>x.props['data-emet-answer'])[0].props.children,unresolvedPayload.answer.answer);
+assert.doesNotMatch(text(publicUnverified.tree()),/owner inspection only|Unresolved references/);
+assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Unresolved references (not verified)').length,0);
+assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
+console.log('PASS: public unresolved answers keep exact prose and a visible warning, private source diagnostics stay hidden, publishing remains blocked.');
