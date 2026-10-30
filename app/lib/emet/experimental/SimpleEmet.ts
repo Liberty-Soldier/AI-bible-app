@@ -95,16 +95,72 @@ export const SIMPLE_EMET_SCHEMA = {
 } as const;
 
 export function parseSimpleDraft(value: unknown): SimpleDraft | null {
-  if (!value || typeof value !== "object") return null;
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const keys = SIMPLE_EMET_SCHEMA.required;
+  if (Object.keys(value).some((key) => !keys.includes(key as typeof keys[number]))) return null;
   const draft = value as SimpleDraft;
   if (!["complete", "insufficient-evidence"].includes(draft.status) || typeof draft.answer !== "string" || !draft.answer.trim() || draft.answer.length > 16_000 ||
     !SIMPLE_EMET_SCHEMA.properties.support.enum.includes(draft.support) || !Array.isArray(draft.references) || draft.references.length > 16 ||
-    draft.references.some((item) => !item || typeof item.reference !== "string" || item.reference.length > 160 || !["web", "kjv", "brenton"].includes(item.translation)) ||
+    draft.references.some((item) => !item || typeof item !== "object" || Array.isArray(item) || Object.keys(item).some((key) => key !== "reference" && key !== "translation") || typeof item.reference !== "string" || !item.reference.trim() || item.reference.length > 160 || !["web", "kjv", "brenton"].includes(item.translation)) ||
     !Array.isArray(draft.limitations) || draft.limitations.length > 8 || draft.limitations.some((item) => typeof item !== "string" || item.length > 1000)) return null;
   return draft;
 }
 
-export async function generateSimpleEmet(question: string, history: SimpleTurn[], context: unknown, model = configuredSimpleEmetModel()) {
+export type SimpleGenerationDiagnostics = {
+  stage: "model-response" | "json-parsing" | "structured-output" | "model-answer";
+  code: "model-incomplete" | "model-not-completed" | "model-refusal" | "empty-output" | "invalid-json" | "invalid-structure" | "model-insufficient-evidence" | "draft-ready";
+  responseStatus: "completed" | "incomplete" | "failed" | "cancelled" | "queued" | "in_progress" | "unknown";
+  incompleteReason: "max_output_tokens" | "content_filter" | "other" | null;
+  outputCharacters: number;
+  outputTokens: number | null;
+  reasoningTokens: number | null;
+  json: "not-attempted" | "invalid" | "valid";
+  structure: "not-checked" | "invalid" | "valid";
+  modelAnswerStatus: SimpleDraft["status"] | null;
+};
+export type SimpleGenerationResult = { draft: SimpleDraft | null; diagnostics: SimpleGenerationDiagnostics };
+
+// Only allowlisted statuses and bounded counters leave the provider boundary.
+// Never retain output items, refusal text, model reasoning, prompts or API errors.
+export function inspectSimpleResponse(response: {
+  status?: string; incomplete_details?: { reason?: string } | null; output_text?: string;
+  output?: Array<{ type: string; content?: Array<{ type: string }> }>;
+  usage?: { output_tokens?: number; output_tokens_details?: { reasoning_tokens?: number } | null } | null;
+}): SimpleGenerationResult {
+  const count = (value: unknown) => typeof value === "number" && Number.isSafeInteger(value) && value >= 0 ? Math.min(value, 1_000_000) : null;
+  const text = typeof response.output_text === "string" ? response.output_text : "";
+  const diagnostics: SimpleGenerationDiagnostics = {
+    stage: "model-response", code: "model-not-completed",
+    responseStatus: (["completed", "incomplete", "failed", "cancelled", "queued", "in_progress"].includes(response.status || "") ? response.status : "unknown") as SimpleGenerationDiagnostics["responseStatus"],
+    incompleteReason: response.incomplete_details?.reason ? (["max_output_tokens", "content_filter"].includes(response.incomplete_details.reason) ? response.incomplete_details.reason as "max_output_tokens" | "content_filter" : "other") : null,
+    outputCharacters: Math.min(text.length, 1_000_000), outputTokens: count(response.usage?.output_tokens),
+    reasoningTokens: count(response.usage?.output_tokens_details?.reasoning_tokens),
+    json: "not-attempted", structure: "not-checked", modelAnswerStatus: null,
+  };
+  if (response.status !== "completed") {
+    diagnostics.code = response.status === "incomplete" ? "model-incomplete" : "model-not-completed";
+    return { draft: null, diagnostics };
+  }
+  if (response.output?.some((item) => item.type === "message" && item.content?.some((part) => part.type === "refusal"))) {
+    diagnostics.code = "model-refusal";
+    return { draft: null, diagnostics };
+  }
+  if (!text.trim()) { diagnostics.code = "empty-output"; return { draft: null, diagnostics }; }
+  diagnostics.stage = "json-parsing";
+  let value: unknown;
+  try { value = JSON.parse(text); diagnostics.json = "valid"; }
+  catch { diagnostics.json = "invalid"; diagnostics.code = "invalid-json"; return { draft: null, diagnostics }; }
+  diagnostics.stage = "structured-output";
+  const draft = parseSimpleDraft(value);
+  diagnostics.structure = draft ? "valid" : "invalid";
+  if (!draft) { diagnostics.code = "invalid-structure"; return { draft: null, diagnostics }; }
+  diagnostics.stage = "model-answer";
+  diagnostics.modelAnswerStatus = draft.status;
+  diagnostics.code = draft.status === "complete" ? "draft-ready" : "model-insufficient-evidence";
+  return { draft, diagnostics };
+}
+
+export async function generateSimpleEmet(question: string, history: SimpleTurn[], context: unknown, model = configuredSimpleEmetModel()): Promise<SimpleGenerationResult> {
   const key = process.env.OPENAI_API_KEY?.trim();
   if (!key) throw new Error("Model unavailable");
   const client = new OpenAI({ apiKey: key, maxRetries: 0, timeout: 90_000 });
@@ -117,6 +173,5 @@ export async function generateSimpleEmet(question: string, history: SimpleTurn[]
     ],
     text: { format: { type: "json_schema", name: "simple_emet_owner_answer", strict: true, schema: SIMPLE_EMET_SCHEMA } },
   });
-  if (response.status !== "completed") return null;
-  try { return parseSimpleDraft(JSON.parse(response.output_text || "null")); } catch { return null; }
+  return inspectSimpleResponse(response);
 }

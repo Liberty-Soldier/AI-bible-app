@@ -65,7 +65,8 @@ export function resolveSimpleReference(raw: string, translation: Translation): A
 
 function inlineReferences(answer: string) {
   const found: string[] = [];
-  const pattern = /\b((?:[1-4]\s*)?[A-Za-z]+(?:\s+[A-Za-z]+){0,5})\s*(\d+):([0-9]+[a-z]?(?:[-–—][0-9]+[a-z]?)?(?:\s*,\s*(?:[0-9]+:)?[0-9]+[a-z]?(?:[-–—][0-9]+[a-z]?)?)*)/g;
+  // A comma before a numbered book begins a new citation, not another verse.
+  const pattern = /\b((?:[1-4]\s*)?[A-Za-z]+(?:\s+[A-Za-z]+){0,5})\s*(\d+):([0-9]+[a-z]?(?:[-–—][0-9]+[a-z]?)?(?:\s*,\s*(?![1-4]\s*[A-Za-z]+(?:\s+[A-Za-z]+){0,5}\s+\d+:)(?:[0-9]+:)?[0-9]+[a-z]?(?:[-–—][0-9]+[a-z]?)?)*)/g;
   const known = new Set(["web", "kjv", "brenton"].flatMap((translation) => [...loadIndex(translation as Translation).books]));
   for (const match of answer.matchAll(pattern)) {
     const words = match[1].split(/\s+/);
@@ -85,24 +86,24 @@ export function verifySimpleDraft(draft: SimpleDraft) {
   const verses: Array<{ reference: string; text: string; translation: Translation }> = [];
   for (const citation of draft.references) {
     const resolved = resolveSimpleReference(citation.reference, citation.translation);
-    if (!resolved) return { ok: false as const, reason: "A cited passage could not be verified in its stated translation." };
+    if (!resolved) return { ok: false as const, stage: "citation-resolution" as const, code: "citation-unresolved" as const, reason: "A cited passage could not be verified in its stated translation." };
     verses.push(...resolved);
-    if (verses.length > 80) return { ok: false as const, reason: "The answer exceeds the bounded citation limit." };
+    if (verses.length > 80) return { ok: false as const, stage: "citation-resolution" as const, code: "citation-limit" as const, reason: "The answer exceeds the bounded citation limit." };
   }
-  if (draft.status === "complete" && !verses.length) return { ok: false as const, reason: "The answer did not supply verifiable Scripture citations." };
+  if (draft.status === "complete" && !verses.length) return { ok: false as const, stage: "citation-resolution" as const, code: "citations-missing" as const, reason: "The answer did not supply verifiable Scripture citations." };
   const references = new Set(verses.map((verse) => verse.reference));
   const displayedText = [draft.answer, ...draft.limitations].join("\n");
   const plainAnswer = displayedText.replace(/[*_`]/g, "");
   for (const inline of inlineReferences(plainAnswer)) {
     const resolved = draft.references.flatMap((citation) => resolveSimpleReference(inline, citation.translation) || []);
-    if (!resolved.length || resolved.some((verse) => !references.has(verse.reference))) return { ok: false as const, reason: "A reference in the answer is not covered by verified citations." };
+    if (!resolved.length || resolved.some((verse) => !references.has(verse.reference))) return { ok: false as const, stage: "citation-resolution" as const, code: "inline-citation-unverified" as const, reason: "A reference in the answer is not covered by verified citations." };
   }
   const books = new Set(["web", "kjv", "brenton"].flatMap((translation) => [...loadIndex(translation as Translation).books]));
   const escape = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const chapterPattern = new RegExp(`\\b(${[...books].sort((a, b) => b.length - a.length).map(escape).join("|")})\\s+(\\d+)\\b(?!:)`, "gi");
   for (const match of plainAnswer.matchAll(chapterPattern)) {
     const book = canonicalBook(match[1], books);
-    if (!draft.references.some((citation) => loadIndex(citation.translation).records.some((row) => row[0] === book && row[1] === Number(match[2])))) return { ok: false as const, reason: "A chapter reference could not be verified in the cited translations." };
+    if (!draft.references.some((citation) => loadIndex(citation.translation).records.some((row) => row[0] === book && row[1] === Number(match[2])))) return { ok: false as const, stage: "citation-resolution" as const, code: "chapter-unverified" as const, reason: "A chapter reference could not be verified in the cited translations." };
   }
   const quotationPattern = /[“"]([^”"]+)[”"]|‘([^’]+)’|(?<![\p{L}\p{N}])'((?:[^'\n]|'(?=[\p{L}]))+)'(?![\p{L}\p{N}])/gu;
   const corpusText = [...new Set(draft.references.map((item) => item.translation))].map((translation) =>
@@ -112,7 +113,7 @@ export function verifySimpleDraft(draft: SimpleDraft) {
     const quote = normalizeQuote(match[1] || match[2] || match[3]);
     const nearby = displayedText.slice(Math.max(0, (match.index || 0) - 80), (match.index || 0) + match[0].length + 30);
     const claimedScripture = /\b(says?|reads?|states?|written|declares?|quotation|quoted)\b/i.test(nearby);
-    if ((claimedScripture || quote.split(" ").length >= 3) && !corpusText.some((text) => text.includes(quote))) return { ok: false as const, reason: "A quotation could not be matched to the cited locked Scripture." };
+    if ((claimedScripture || quote.split(" ").length >= 3) && !corpusText.some((text) => text.includes(quote))) return { ok: false as const, stage: "quotation-verification" as const, code: "quotation-unverified" as const, reason: "A quotation could not be matched to the cited locked Scripture." };
   }
   const unique = [...new Map(verses.map((verse) => [`${verse.translation}:${verse.reference}`, verse])).values()];
   return {

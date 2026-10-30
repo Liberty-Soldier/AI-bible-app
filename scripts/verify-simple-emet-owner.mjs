@@ -66,7 +66,7 @@ let allowed = true, claim = 'claimed', quota = { allowed: true, charged: false }
 const events = [];
 const serviceFixture = createUiFixture({ modules: {
  'server-only': {}, './SimpleEmetAccess': { canUseSimpleEmet: async () => allowed, claimSimpleRequest: async () => claim, simpleRequestKey: () => 'simple-emet@1:isolated' },
- './SimpleEmet': { ...model, generateSimpleEmet: async () => { events.push('generate'); if (fail) throw Error('private detail'); return generated; } },
+ './SimpleEmet': { ...model, generateSimpleEmet: async () => { events.push('generate'); if (fail) throw Error('private detail'); return model.inspectSimpleResponse({ status: "completed", output_text: JSON.stringify(generated) }); } },
  './SimpleEmetScripture': scripture,
  '../EmetAiQuota': { reserveEmetAiQuestion: async (_,key) => { assert.match(key,/^simple-emet@1:/); events.push('reserve'); return quota; }, completeEmetAiQuestion: async (_,source) => { events.push(source); return true; }, refundFailedEmetAiQuestion: async () => events.push('refund'), getEmetAiUsageSummary: async () => quota },
 } });
@@ -78,7 +78,7 @@ claim = 'duplicate'; assert.equal((await service.handleSimpleEmet(input)).status
 claim = 'rate-limited'; assert.equal((await service.handleSimpleEmet(input)).status,429); claim = 'claimed';
 assert.equal((await service.handleSimpleEmet({ ...input, history: Array(7).fill(history[0]) })).status,400);
 quota = { allowed: false }; assert.equal((await service.handleSimpleEmet(input)).status,429); quota = { allowed: true };
-generated = { ...draft, answer: 'John 999:3' }; assert.equal((await service.handleSimpleEmet(input)).status,422); assert.ok(events.includes('refund'));
+generated = { ...draft, answer: 'John 999:3' }; assert.equal((await service.handleSimpleEmet(input)).status,502); assert.ok(events.includes('refund'));
 generated = { ...draft, status: 'insufficient-evidence' }; assert.equal((await service.handleSimpleEmet(input)).status,422);
 fail = true; result = await service.handleSimpleEmet(input); assert.equal(result.status,503); assert.doesNotMatch(JSON.stringify(result),/private detail/);
 for (const file of fs.readdirSync('app/lib/emet/experimental')) assert.doesNotMatch(fs.readFileSync(`app/lib/emet/experimental/${file}`,'utf8'), /EmetAiIdentity|setSupabaseEmetAiRequestCache|appendSupabaseEmetConversationLedger|EmetAiPlanner/);
