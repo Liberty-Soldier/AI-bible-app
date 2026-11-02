@@ -70,17 +70,20 @@ export default function DailyPassage() {
         return () => { controller?.abort(); clearInterval(timer); clearTimeout(midnightTimer); window.removeEventListener('focus', load); window.removeEventListener('storage', load); };
     }, []);
     const verses: ReaderMemoryVerse[] = passage?.verses.map(v => { const m = v.reference.match(/^(.+) (\d+):(\d+[a-z]?)$/)!; return { id: `${v.translation}:${m[1]}:${m[2]}:${m[3]}`, book: m[1], chapter: Number(m[2]), verse: Number.parseInt(m[3]), verseLabel: m[3], reference: v.reference, text: v.text, translation: v.translation }; }) || [];
-    const exactText = passage ? `${passage.reference} (${passage.translation === 'brenton' ? 'Brenton' : passage.translation.toUpperCase()})\n\n${passage.verses.map(v => v.text).join('\n')}` : '';
+    const excerpt = passage && passage.verses.length > 3 ? passage.verses.slice(0, 2) : passage?.verses || [];
+    const isExcerpt = !!passage && excerpt.length < passage.verses.length;
+    const excerptReference = isExcerpt ? `${excerpt[0].reference}–${excerpt.at(-1)!.reference.split(':').at(-1)}` : passage?.reference || '';
+    const exactText = passage ? `${excerptReference} · ${passage.translation === 'brenton' ? 'Brenton' : passage.translation.toUpperCase()}\n\n${excerpt.map(v => v.text).join('\n')}` : '';
     const first = verses[0];
     const readerHref = passage && first ? buildReaderHref({ book: first.book, chapter: first.chapter, verse: first.verseLabel, translation: passage.translation }) : '';
-    const shareText = `${exactText}\n\nExplore Scripture with EMETSEES\n${new URL(readerHref || '/read', 'https://www.emetsees.com').toString()}`;
+    const shareText = `${exactText}\n\nRead ${passage?.reference} on EMETSEES:\n${new URL(readerHref || '/read', 'https://www.emetsees.com').toString()}`;
     async function act(action: 'copy' | 'share') {
         setFeedback('');
         try {
             if (action === 'share' && navigator.share)
-                await navigator.share({ title: passage?.reference, text: shareText });
+                await navigator.share({ title: excerptReference, text: shareText });
             else {
-                await navigator.clipboard.writeText(action === 'share' ? shareText : exactText);
+                await navigator.clipboard.writeText(shareText);
                 setFeedback(action === 'copy' ? 'Copied.' : 'Copied for sharing.');
             }
         }
@@ -89,8 +92,6 @@ export default function DailyPassage() {
                 setFeedback('Sharing was unavailable. Please try copying the passage.');
         }
     }
-    const excerpt = passage && passage.verses.length > 3 ? passage.verses.slice(0, 2) : passage?.verses || [];
-    const isExcerpt = !!passage && excerpt.length < passage.verses.length;
     return <section aria-labelledby="daily-passage-title" className="my-9 py-2">
   <h2 id="daily-passage-title" className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">Scripture for today</h2>
   {passage && first ? <>
@@ -101,7 +102,7 @@ export default function DailyPassage() {
    <div className="mt-4 flex flex-wrap gap-x-5 text-sm">
     <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href={readerHref}>Read full passage</Link>
     <button className="min-h-11" disabled={!bookmarkVerses.length} aria-pressed={saved} onClick={() => { toggleBookmarks(bookmarkVerses); setSaved(areAllBookmarked(bookmarkVerses)); }}> {saved ? 'Bookmarked' : 'Bookmark'}</button>
-    <button aria-label="Copy full passage" className="min-h-11" onClick={() => void act('copy')}>Copy</button><button aria-label="Share full passage" className="min-h-11" onClick={() => void act('share')}>Share</button>
+    <button aria-label="Copy displayed passage" className="min-h-11" onClick={() => void act('copy')}>Copy</button><button aria-label="Share displayed passage" className="min-h-11" onClick={() => void act('share')}>Share</button>
    </div>
   </> : <p className="mt-4 text-sm text-[var(--muted)]">{message || 'Opening today’s Scripture…'}</p>}
   {passage && message ? <p role="status" className="text-sm text-[var(--muted)]">{message}</p> : null}
