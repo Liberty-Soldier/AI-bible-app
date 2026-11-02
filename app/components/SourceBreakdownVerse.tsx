@@ -73,6 +73,7 @@ export default function SourceBreakdownVerse({
   onOpen,
 }: SourceBreakdownVerseProps) {
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const requestInFlightRef = useRef(false);
   const [
     breakdown,
     setBreakdown,
@@ -96,7 +97,7 @@ export default function SourceBreakdownVerse({
     );
 
   async function openBreakdown() {
-    if (loading) {
+    if (requestInFlightRef.current) {
       return;
     }
 
@@ -120,6 +121,7 @@ export default function SourceBreakdownVerse({
       return;
     }
 
+    requestInFlightRef.current = true;
     setLoading(true);
     setError(null);
 
@@ -173,6 +175,7 @@ export default function SourceBreakdownVerse({
           : "Source Text unavailable.",
       );
     } finally {
+      requestInFlightRef.current = false;
       setLoading(false);
     }
   }
@@ -196,7 +199,7 @@ export default function SourceBreakdownVerse({
             : "min-h-11 rounded-xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
         )}
       >
-        {icon ? icon : prominent ? (
+        {icon ? (loading ? <svg data-source-loading="true" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" className="animate-spin motion-reduce:animate-none"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" opacity="0.25" /><path d="M12 3a9 9 0 0 1 9 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg> : icon) : prominent ? (
           <>
             <span>
               <span className="block text-sm font-bold text-[var(--foreground)]">
@@ -217,12 +220,14 @@ export default function SourceBreakdownVerse({
         )}
       </button>
 
+      {loading ? <span role="status" className="sr-only">Opening original language for {reference}…</span> : null}
       {error ? (
         <div
-          role="status"
-          className="col-span-2 rounded-xl border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)]"
+          role="alert"
+          className={icon ? "absolute inset-x-0 bottom-full mb-2 rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm" : "col-span-2 rounded-xl border border-[var(--border)] px-3 py-2 text-xs text-[var(--muted)]"}
         >
-          {error}
+          <p>{error}</p>
+          <button type="button" onClick={() => { void openBreakdown(); }} className="min-h-11 underline" aria-label={`Retry original language for ${reference}`}>Try again</button>
         </div>
       ) : null}
 

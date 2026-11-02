@@ -8,7 +8,7 @@ import { useCallback, useEffect, useEffectEvent, useLayoutEffect, useRef, useSta
 import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
 import { buildReaderHref } from "@/app/lib/translationPreference";
-import { boundedSimpleHistory, followsLatest, publicQualification, safeChatReturnHref, supportQualification } from "./chatPresentation";
+import { boundedSimpleHistory, followsLatest, publicQualification, safeChatReturnHref, supportQualification, CITATION_VERIFICATION_NOTICE, UNVERIFIED_REFERENCE_WARNING, isGeneralAnswerNotice, isOwnerAnswerDiagnostic, formatAnswerForSharing } from "./chatPresentation";
 import { buildScriptureCitationHref, getCitationTranslation } from "@/app/lib/scriptureCitationNavigation";
 import type {
   EmetAiClaim,
@@ -800,7 +800,7 @@ export default function EmetChat({
   }, [active, pending, historyLoaded, initialUserId, cloudReady, initialQuestion, launchKey]);
 
   function answerText(exchange: Exchange) {
-    return `AI-generated explanation${exchange.imported || exchange.answer.verificationStatus === "unverified" ? " — unverified references" : "; interpretation is not independently verified"}.\n\n${exchange.question}\n\n${exchange.answer.answer}${exchange.answer.limitations.length ? `\n\nAbout this answer:\n${exchange.answer.limitations.join("\n")}` : ""}\n\nScripture references:\n${exchange.answer.citations.map(c => `${c.reference || ""} (${c.translation || getCitationTranslation(c) || "translation unspecified"})`).join("\n")}`;
+    return formatAnswerForSharing({ question: exchange.question, answer: exchange.answer.answer, limitations: exchange.answer.limitations, unverified: exchange.answer.verificationStatus === "unverified", imported: exchange.imported });
   }
   async function copyOrShare(exchange: Exchange, native: boolean) {
     try { const text = answerText(exchange); if(native && navigator.share) await navigator.share({title: exchange.question,text}); else await navigator.clipboard.writeText(text); setError(native ? "Text shared or copied. No public page was created." : "Answer copied. No public page was created."); }
@@ -939,8 +939,9 @@ export default function EmetChat({
             const outcome = exchange.outcome || (exchange.answer.status === "insufficient-evidence" ? "insufficient-evidence" : exchange.source === "fail-closed" ? "failed" : "answered");
             const simpleSources = exchange.source === "simple-owner-model" || exchange.answer.sourceVerification === "locked-corpus-text";
             const allNotes = qualifications(exchange.answer, simpleSources);
-            const technicalNotes: string[] = allNotes.filter(note => note === "The explanation, its prose references, and any quoted wording are model-generated and not independently verified. Only the server-supplied Scripture passages are checked against their stated translations; this does not establish support for every theological inference.");
-            const notes = allNotes.filter(note => !technicalNotes.includes(note));
+            const technicalNotes = allNotes.filter(isGeneralAnswerNotice);
+            const ownerNotes = allNotes.filter(isOwnerAnswerDiagnostic);
+            const notes = allNotes.filter(note => !isGeneralAnswerNotice(note) && !isOwnerAnswerDiagnostic(note));
             if (exchange.source === "simple-owner-model" && exchange.answer.verificationStatus === "unverified" && !initialOwnerDiagnostics) {
               return <article key={exchange.id} role="status" className="text-sm text-[var(--muted)]">This saved unverified response is available only for authorized owner inspection.</article>;
             }
@@ -957,11 +958,11 @@ export default function EmetChat({
                   {exchange.imported || (simpleSources && exchange.answer.verificationStatus === "unverified") ? (
                     <section role="alert" aria-label="Unverified model answer" className="rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3 text-sm leading-6">
                       <p className="font-semibold">{exchange.imported ? "Imported browser answer · not reverified" : initialOwnerDiagnostics ? "Unverified model answer · owner inspection only" : "Unverified model answer"}</p>
-                      <p>The answer is shown as generated. Its references or conclusion could not be verified. Only the separately displayed passages have verified Scripture text. This answer cannot be published as a verified study.</p>
+                      <p>{exchange.imported ? "Imported browser content has not been reverified and cannot be published as a verified study." : UNVERIFIED_REFERENCE_WARNING}</p>
                       {initialOwnerDiagnostics && exchange.answer.unresolvedReferences?.length ? (
-                        <ul aria-label="Unresolved references (not verified)" className="mt-2 space-y-1">
+                        <details className="mt-2"><summary className="min-h-11 cursor-pointer py-2">Owner diagnostics</summary><ul aria-label="Unresolved references (not verified)" className="space-y-1">
                           {exchange.answer.unresolvedReferences.map((item, index) => <li key={index}>{item.reference}{item.translation ? ` · ${item.translation}` : ""} — not verified</li>)}
-                        </ul>
+                        </ul></details>
                       ) : null}
                     </section>
                   ) : null}
@@ -978,7 +979,7 @@ export default function EmetChat({
                     {exchange.answer.citations.length ? (
                       <details className="group">
                         <summary className="min-h-11 cursor-pointer py-3 font-medium text-[var(--muted)]">{simpleSources ? "Scripture passages" : "Sources"} · {exchange.answer.citations.length}</summary>
-                        <p className="mb-1 text-xs text-[var(--muted)]">{simpleSources ? "The explanation, its prose references, and any quoted wording are model-generated and not independently verified. Only the server-supplied Scripture passages are checked against their stated translations; this does not establish support for every theological inference." : "Final supporting citations"}</p>
+                        {!simpleSources ? <p className="mb-1 text-xs text-[var(--muted)]">Final supporting citations</p> : null}
                         <div className="flex flex-wrap gap-x-4 gap-y-1 pb-2">
                           {exchange.answer.citations.map((citation) => {
                             const reference = citation.reference;
@@ -1004,6 +1005,8 @@ export default function EmetChat({
                         </div>
                       </details>
                     ) : null}
+                    {simpleSources || technicalNotes.length ? <details className="text-[var(--muted)]"><summary className="min-h-11 cursor-pointer py-3">About this answer</summary><p className="max-w-prose pb-2 text-xs leading-5">{CITATION_VERIFICATION_NOTICE}</p></details> : null}
+                    {initialOwnerDiagnostics && ownerNotes.length ? <details className="text-[var(--muted)]"><summary className="min-h-11 cursor-pointer py-3">Owner diagnostics</summary>{ownerNotes.map((note, index) => <p key={index} className="pb-2 text-xs">{note}</p>)}</details> : null}
                     {!exchange.remotePending ? <><button type="button" className="min-h-11 px-1 text-[var(--muted)]" onClick={()=>void copyOrShare(exchange,false)} aria-label="Copy answer">Copy</button><button type="button" className="min-h-11 px-1 text-[var(--muted)]" onClick={()=>void copyOrShare(exchange,true)} aria-label="Share answer text">Share</button></> : null}
                     {exchange.shareStudyId && !exchange.imported ? <PublicLinkControl studyId={exchange.shareStudyId} version={publicationVersion} label="More sharing options" onPublish={!simpleSources || exchange.answer.verificationStatus === "references-verified" ? () => share(exchange) : undefined} /> : null}
                   </div>

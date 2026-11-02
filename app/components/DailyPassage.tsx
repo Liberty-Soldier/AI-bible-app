@@ -12,9 +12,15 @@ export function localCalendarDate(now = new Date()) { return `${now.getFullYear(
 export default function DailyPassage() {
     const [passage, setPassage] = useState<Passage | null>(null);
     const [message, setMessage] = useState('');
+    const [feedback, setFeedback] = useState('');
     const [saved, setSaved] = useState(false);
     const [bookmarkVerses, setBookmarkVerses] = useState<ReaderMemoryVerse[]>([]);
     const { sacredNames } = useSacredNames();
+    useEffect(() => {
+        if (!feedback) return;
+        const timer = window.setTimeout(() => setFeedback(''), 4000);
+        return () => window.clearTimeout(timer);
+    }, [feedback]);
     useEffect(() => {
         let controller: AbortController | undefined;
         let lastKey = '';
@@ -66,16 +72,18 @@ export default function DailyPassage() {
     const verses: ReaderMemoryVerse[] = passage?.verses.map(v => { const m = v.reference.match(/^(.+) (\d+):(\d+[a-z]?)$/)!; return { id: `${v.translation}:${m[1]}:${m[2]}:${m[3]}`, book: m[1], chapter: Number(m[2]), verse: Number.parseInt(m[3]), verseLabel: m[3], reference: v.reference, text: v.text, translation: v.translation }; }) || [];
     const exactText = passage ? `${passage.reference} (${passage.translation === 'brenton' ? 'Brenton' : passage.translation.toUpperCase()})\n\n${passage.verses.map(v => v.text).join('\n')}` : '';
     async function act(action: 'copy' | 'share') {
+        setFeedback('');
         try {
             if (action === 'share' && navigator.share)
                 await navigator.share({ title: passage?.reference, text: exactText });
-            else
+            else {
                 await navigator.clipboard.writeText(exactText);
-            setMessage(action === 'copy' ? 'Copied exact corpus wording.' : 'Passage ready to share.');
+                setFeedback(action === 'copy' ? 'Copied.' : 'Copied for sharing.');
+            }
         }
         catch (e) {
             if (!(e instanceof DOMException && e.name === 'AbortError'))
-                setMessage('Sharing was unavailable. Please try copying the passage.');
+                setFeedback('Sharing was unavailable. Please try copying the passage.');
         }
     }
     const first = verses[0];
@@ -93,9 +101,8 @@ export default function DailyPassage() {
     <button className="min-h-11" disabled={!bookmarkVerses.length} aria-pressed={saved} onClick={() => { toggleBookmarks(bookmarkVerses); setSaved(areAllBookmarked(bookmarkVerses)); }}> {saved ? 'Bookmarked' : 'Bookmark'}</button>
     <button aria-label="Copy full passage" className="min-h-11" onClick={() => void act('copy')}>Copy</button><button aria-label="Share full passage" className="min-h-11" onClick={() => void act('share')}>Share</button>
    </div>
-   {isExcerpt ? <p className="text-xs text-[var(--muted)]">Bookmark, Copy and Share use the full scheduled passage.</p> : null}
-   {sacredNames ? <p className="text-xs text-[var(--muted)]">Sacred-name display is enabled. Copy and Share preserve the exact translation wording.</p> : null}
   </> : <p className="mt-4 text-sm text-[var(--muted)]">{message || 'Opening today’s Scripture…'}</p>}
   {passage && message ? <p role="status" className="text-sm text-[var(--muted)]">{message}</p> : null}
+  {feedback ? <p role="status" className="text-sm text-[var(--muted)]">{feedback}</p> : null}
  </section>;
 }

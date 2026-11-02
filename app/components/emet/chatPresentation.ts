@@ -51,3 +51,28 @@ export function publicQualification(value: string, internalIds: string[] = []): 
   }
   return result.replace(/\b(?:scripture|lexical|word|claim|component|proposition|authority):[^\s,;)\]]+/gi, "a source record");
 }
+
+// Presentation only: these exact service notices are not Scriptural qualifications.
+export const CITATION_VERIFICATION_NOTICE = "The explanation, its prose references, and any quoted wording are model-generated and not independently verified. Only the server-supplied Scripture passages are checked against their stated translations; this does not establish support for every theological inference.";
+export const UNVERIFIED_SERVICE_NOTICE = "Unverified model answer: some Scripture references could not be resolved. Only the separately displayed passages have verified corpus text.";
+export const UNVERIFIED_REFERENCE_WARNING = "Some Scripture references in this answer could not be verified. Please check them before relying on this explanation.";
+export function isGeneralAnswerNotice(note: string) {
+  return note === CITATION_VERIFICATION_NOTICE || note === UNVERIFIED_SERVICE_NOTICE;
+}
+export function isOwnerAnswerDiagnostic(note: string) {
+  return note.startsWith("Owner diagnostic:");
+}
+export function formatAnswerForSharing({ question, answer, limitations = [], unverified = false, imported = false }: {
+  question: string; answer: string; limitations?: string[]; unverified?: boolean; imported?: boolean;
+}) {
+  const notes = [...new Set(limitations.map(note => publicQualification(note)).filter(note => !isGeneralAnswerNotice(note) && !isOwnerAnswerDiagnostic(note)))];
+  return [
+    "AI-generated explanation",
+    question,
+    answer,
+    ...(unverified ? [UNVERIFIED_REFERENCE_WARNING] : []),
+    ...(imported ? ["Imported browser answer. Its references have not been reverified."] : []),
+    ...(notes.length ? [`Notes:\n${notes.join("\n\n")}`] : []),
+    "Explore Scripture with EMETSEES\nhttps://www.emetsees.com",
+  ].join("\n\n");
+}

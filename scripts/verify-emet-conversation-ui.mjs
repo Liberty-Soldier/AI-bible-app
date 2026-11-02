@@ -226,7 +226,8 @@ await elements(tree, x => x.type?.name === "PublicLinkControl")[0].props.onPubli
 await tick();
 assert.equal(live.shared[0].url, "https://fixture.invalid/shared/local-shared-study");
 assert(live.shared[0].text.includes(exactAnswer));
-assert.match(live.shared[0].text, /Genesis 1:1/);
+assert.ok(live.shared[0].text.endsWith("Explore Scripture with EMETSEES\nhttps://www.emetsees.com"));
+assert.doesNotMatch(live.shared[0].text, /Scripture references:/);
 assert.match(elements(tree, (x) => x.type === "form")[0].props.className, /shrink-0.*safe-area-inset-bottom/);
 assert.match(elements(tree, (x) => x.type === "p" && text(x).includes("Shift+Enter"))[0].props.className, /hidden.*pointer-fine:block/);
 console.log("PASS: pending preliminary passages, automatic collapse, exact answer/source preservation, visible qualifications without internal IDs, editable pending drafts, reset guard, and shared-answer publication compatibility");
@@ -458,12 +459,12 @@ const standardNotice = "The explanation, its prose references, and any quoted wo
 const materialExtension = `${standardNotice} This particular passage does not establish the proposed chronology.`;
 const disclosureChat = chatFixture({history:[{id:'disclosure',question:'Fixture question',source:'simple-model',answer:{...simplePayload.answer,limitations:[standardNotice,'A supplied material qualification.',materialExtension]}}]});
 const disclosureTree = disclosureChat.tree();
-assert.equal(elements(disclosureTree,x=>x.type==='summary'&&text(x)==='About this answer').length,0);
+assert.equal(elements(disclosureTree,x=>x.type==='summary'&&text(x)==='About this answer').length,1);
 const qualificationSection=elements(disclosureTree,x=>x.props['aria-label']==='Answer qualifications')[0];
 assert.match(text(qualificationSection),/A supplied material qualification/);
 assert.ok(text(qualificationSection).includes(materialExtension));
 assert.equal(elements(qualificationSection,x=>x.type==='li'&&text(x)===standardNotice).length,0);
-assert.ok(elements(disclosureTree,x=>x.type==='details').some(x=>text(x).includes('Scripture passages')&&text(x).includes(standardNotice)));
+assert.ok(elements(disclosureTree,x=>x.type==='details').some(x=>text(x).includes('About this answer')&&text(x).includes(standardNotice)));
 console.log('PASS: one folded source-verification disclosure, no duplicate About headings, material qualifications and extensions preserved verbatim.');
 console.log('PASS: integrated Simple source disclosure, server text rendering, translation-aware navigation, API normalization and saved-history restoration; current engine disclosure unchanged.');
 const unresolvedAnswer='An exact model answer, including “a quoted explanatory phrase” and Invented 999:1.';
@@ -642,3 +643,14 @@ assert.doesNotMatch(text(publicUnverified.tree()),/owner inspection only|Unresol
 assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Unresolved references (not verified)').length,0);
 assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
 console.log('PASS: public unresolved answers keep exact prose and a visible warning, private source diagnostics stay hidden, publishing remains blocked.');
+
+// Text sharing preserves exact content and includes attribution without publishing.
+const maintenancePayload = {...simplePayload, shareStudyId:'existing-candidate', answer:{...simplePayload.answer, verificationStatus:'references-verified', limitations:[standardNotice,'The evidence is limited to the stated audience.']}};
+const sharingUi = chatFixture({history:[]});sharingUi.type('Exact question?');sharingUi.send();sharingUi.requests[0].finish(maintenancePayload);await tick();sharingUi.render();
+await button(sharingUi.tree(),'Copy answer').props.onClick();await button(sharingUi.tree(),'Share answer text').props.onClick();
+for(const value of [sharingUi.copied.at(-1),sharingUi.shared.at(-1).text]){assert.ok(value.includes('Exact question?'));assert.ok(value.includes(exactAnswer));assert.ok(value.includes('The evidence is limited to the stated audience.'));assert.ok(value.endsWith('Explore Scripture with EMETSEES\nhttps://www.emetsees.com'));assert.ok(!value.includes(standardNotice));assert.doesNotMatch(value,/Scripture references:/);}
+assert.equal(sharingUi.shared.at(-1).url,undefined,'Regular text sharing must not publish or attach a study URL');assert.equal(sharingUi.requests.length,1,'Copy/Share must make no publication/model request');
+const injectedDiagnostic=chatFixture({history:[{id:'private-diagnostic',question:'Fixture question',source:'simple-model',answer:{...unresolvedPayload.answer,limitations:[standardNotice,'Owner diagnostic: private-failure-code (private-stage).','Material uncertainty stays visible.']}}],props:{initialOwnerDiagnostics:false}});
+assert.match(text(injectedDiagnostic.tree()),/Some Scripture references in this answer could not be verified. Please check them before relying on this explanation./);assert.match(text(injectedDiagnostic.tree()),/Material uncertainty stays visible/);assert.doesNotMatch(text(injectedDiagnostic.tree()),/Owner diagnostic:|private-failure-code|private-stage|Unresolved references/);
+await button(injectedDiagnostic.tree(),'Copy answer').props.onClick();assert.doesNotMatch(injectedDiagnostic.copied.at(-1),/private-failure-code|private-stage/);assert.match(injectedDiagnostic.copied.at(-1),/Some Scripture references/);
+console.log('PASS: attributed Copy/Web Share, exact question/answer/material notes, no publication, concise unverified warning and private owner diagnostics.');
