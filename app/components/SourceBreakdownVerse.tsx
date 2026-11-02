@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 
 import SourceBreakdownSheet from "@/app/components/SourceBreakdownSheet";
 
@@ -17,6 +17,8 @@ type SourceBreakdownVerseProps = {
   prominent?: boolean;
   label?: string;
   className?: string;
+  icon?: ReactNode;
+  onOpen?: () => void;
 };
 
 function parseDisplayedReference(
@@ -67,7 +69,10 @@ export default function SourceBreakdownVerse({
   prominent = false,
   label = "Source Text",
   className,
+  icon,
+  onOpen,
 }: SourceBreakdownVerseProps) {
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const [
     breakdown,
     setBreakdown,
@@ -175,8 +180,12 @@ export default function SourceBreakdownVerse({
   return (
     <div className="contents">
       <button
+        ref={triggerRef}
         type="button"
+        aria-label={label}
+        title={icon ? "Original language" : undefined}
         onClick={() => {
+          onOpen?.();
           void openBreakdown();
         }}
         disabled={loading}
@@ -187,7 +196,7 @@ export default function SourceBreakdownVerse({
             : "min-h-11 rounded-xl bg-[var(--surface)] px-3 text-center text-xs font-semibold text-[var(--foreground)] active:scale-[0.98] disabled:cursor-wait disabled:opacity-60"
         )}
       >
-        {prominent ? (
+        {icon ? icon : prominent ? (
           <>
             <span>
               <span className="block text-sm font-bold text-[var(--foreground)]">
@@ -221,9 +230,7 @@ export default function SourceBreakdownVerse({
         <SourceBreakdownSheet
           data={breakdown}
           verseText={verseText}
-          onClose={() =>
-            setBreakdown(null)
-          }
+          onClose={() => { setBreakdown(null); triggerRef.current?.focus({ preventScroll: true }); }}
         />
       ) : null}
     </div>

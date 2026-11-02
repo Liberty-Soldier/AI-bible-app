@@ -97,6 +97,7 @@ console.log('PASS: actual public access/quota/service modules with transaction-c
 for(const file of ['app/api/emet/ask/route.ts','app/api/emet/explain/route.ts']){
  const source=fs.readFileSync(file,'utf8');const modules={};let selected='simple',routeUser=ordinary.id,seen=[],legacy=false;
  for(const match of source.matchAll(/from "([^"]+)"/g))modules[match[1]]=new Proxy({}, {get:(_,key)=>()=>{throw Error(`Unexpected original-engine call ${String(key)}`);}});
+ modules['@/app/lib/conversations/withConversation']={withConversation:async(request,generate)=>generate(request)};
  modules['next/server']={NextResponse:{json:(body,options)=>({body,...options})}};
  modules['@/app/lib/emet/EmetPublicRouting']={getPublicEmetEngine:()=>selected};
  modules['@/app/lib/supabase/server']={getVerifiedSupabaseUserId:async()=>routeUser};

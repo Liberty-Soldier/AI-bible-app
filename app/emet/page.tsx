@@ -41,7 +41,7 @@ export default async function EmetPage({
   return (
     <main className="h-dvh min-h-0 overflow-hidden bg-[var(--canvas)] text-[var(--foreground)]">
       <section className="mx-auto h-full max-w-3xl">
-        <EmetChat initialUsage={usage} initialQuestion={initialQuestion} returnTo={returnTo} initialEngine={getPublicEmetEngine() || "simple"} initialOwnerDiagnostics={ownerDiagnostics} />
+        <EmetChat key={user.id} initialUserId={user.id} initialUsage={usage} initialQuestion={initialQuestion} returnTo={returnTo} initialEngine={getPublicEmetEngine() || "simple"} initialOwnerDiagnostics={ownerDiagnostics} />
       </section>
     </main>
   );

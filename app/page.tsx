@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import DailyPassage from "./components/DailyPassage";
 import { useRouter } from "next/navigation";
 import { Suspense, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
@@ -27,7 +28,11 @@ function getTranslationLabel(translation: string) {
 
 function subscribeToLocalStorage(onChange: () => void) {
   window.addEventListener("storage", onChange);
-  return () => window.removeEventListener("storage", onChange);
+  window.addEventListener("reader-memory-updated", onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener("reader-memory-updated", onChange);
+  };
 }
 
 function HomePage() {
@@ -68,7 +73,7 @@ function HomePage() {
 
   return (
     <main className="min-h-screen bg-[var(--background)] px-5 pb-28 pt-4 text-[var(--foreground)]">
-      <section className="mx-auto max-w-xl">
+      <section className="mx-auto max-w-2xl">
         <div className="mb-4 flex flex-col items-center pt-1 text-center">
           <EmetseesWordmark showDescriptor />
           <p className="mt-2 max-w-sm text-sm leading-5 text-[var(--muted)]">
@@ -76,6 +81,35 @@ function HomePage() {
             follow the evidence without leaving the reader.
           </p>
         </div>
+
+        {lastReading ? (
+          <Link
+            href={`/read/${encodeURIComponent(lastReading.book)}/${
+              lastReading.chapter
+            }?translation=${lastReading.translation}`}
+            className="mb-5 block border-b border-[var(--border)] py-4 transition active:opacity-70"
+          >
+            <p className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
+              Continue Reading
+            </p>
+
+            <div className="mt-3 flex items-center justify-between gap-4">
+              <div>
+                <p className="font-serif text-2xl">
+                  {lastReading.book} {lastReading.chapter}
+                </p>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  {getTranslationLabel(lastReading.translation)}
+                </p>
+              </div>
+
+              <span className="text-sm font-medium text-[var(--muted)]">
+                Resume →
+              </span>
+            </div>
+          </Link>
+        ) : null}
+
 
         <form
           action="/emet"
@@ -123,35 +157,10 @@ function HomePage() {
           </Link>
         </p>
 
-        {lastReading ? (
-          <Link
-            href={`/read/${encodeURIComponent(lastReading.book)}/${
-              lastReading.chapter
-            }?translation=${lastReading.translation}`}
-            className="mt-8 block border-y border-[var(--border)] py-5 transition active:opacity-70"
-          >
-            <p className="text-xs uppercase tracking-[0.25em] text-[var(--muted)]">
-              Continue Reading
-            </p>
 
-            <div className="mt-3 flex items-center justify-between gap-4">
-              <div>
-                <p className="text-lg font-semibold">
-                  {lastReading.book} {lastReading.chapter}
-                </p>
-                <p className="mt-1 text-sm text-[var(--muted)]">
-                  {getTranslationLabel(lastReading.translation)}
-                </p>
-              </div>
+        <DailyPassage />
 
-              <span className="text-sm font-medium text-[var(--muted)]">
-                Resume →
-              </span>
-            </div>
-          </Link>
-        ) : null}
-
-        <section className="mt-8">
+        {memory.bookmarks.length + memory.highlights.length + memory.notes.length > 0 ? <section className="mt-8">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-lg font-semibold">Library</h2>
             <p className="text-xs text-[var(--muted)]">
@@ -229,7 +238,7 @@ function HomePage() {
               </div>
             </div>
           ) : null}
-        </section>
+        </section> : null}
       </section>
 
       <MobileBottomNav />

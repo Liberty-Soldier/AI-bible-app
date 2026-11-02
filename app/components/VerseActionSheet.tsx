@@ -317,23 +317,18 @@ export default function VerseActionSheet({
           </div>
           {panel === "actions" ? (
             <div className="pt-1">
+              <button type="button" className={actionClass} onClick={() => {
+                const first=verses[0]; if(!first)return;
+                window.sessionStorage.setItem("emetsees-passage-question-context",JSON.stringify({type:"reader",book:first.book,chapter:first.chapter,verse:verses.length>1?`${first.verseLabel||first.verse}-${verses[verses.length-1].verseLabel||verses[verses.length-1].verse}`:first.verseLabel||first.verse,translation:first.translation||"web"}));
+                window.dispatchEvent(new CustomEvent("emetsees:open-emet"));
+                onClose();
+              }}>Ask about passage</button>
               <button type="button" onClick={copySelection} className={actionClass}>Copy</button>
               <button type="button" onClick={bookmarkSelection} className={actionClass}>{bookmarked ? "Remove bookmark" : "Bookmark"}</button>
               <button type="button" onClick={() => setPanel("highlight")} className={actionClass}>Highlight</button>
               <button type="button" onClick={openNoteEditor} className={actionClass}>Note</button>
               <button type="button" onClick={shareSelection} className={actionClass}>Share</button>
-              {verses.length === 1 ? (
-                <SourceBreakdownVerse
-                  reference={firstVerse.reference}
-                  verse={firstVerse.verse}
-                  translation={shareTranslation}
-                  verseText={firstVerse.text}
-                  label="Original language / Word Study"
-                  className={actionClass}
-                />
-              ) : (
-                <button type="button" onClick={() => setPanel("source")} className={actionClass}>Original language / Word Study</button>
-              )}
+              <button type="button" onClick={onClose} className={actionClass}>Clear selection</button>
             </div>
           ) : panel === "highlight" ? (
             <div className="px-3 py-3">
@@ -389,18 +384,20 @@ export default function VerseActionSheet({
             {referenceLabel}
             {verses.length > 1 ? <span className="ml-2 text-xs text-[var(--muted)]">{verses.length} selected</span> : null}
           </p>
+          {verses.length === 1 ? <SourceBreakdownVerse reference={firstVerse.reference} verse={firstVerse.verse} translation={shareTranslation} verseText={firstVerse.text} label={`Original language for ${firstVerse.reference}`} icon={<ReaderActionIcon name="languages" />} className="grid min-h-11 min-w-11 place-items-center rounded-lg focus-visible:outline-2 focus-visible:outline-[var(--brand)]" onOpen={() => setPanel(null)} /> : <button type="button" aria-label="Choose a verse for original language" title="Original language" aria-expanded={panel === "source"} aria-controls="reader-verse-actions" onClick={() => setPanel(panel === "source" ? null : "source")} className="grid min-h-11 min-w-11 place-items-center rounded-lg focus-visible:outline-2 focus-visible:outline-[var(--brand)]"><ReaderActionIcon name="languages" /></button>}
           <button
             ref={menuButtonRef}
             type="button"
-            aria-label="Open verse actions"
-            aria-expanded={panel !== null}
+            aria-label="Verse actions"
+            title="Verse actions"
+            aria-expanded={panel === "actions"}
             aria-controls="reader-verse-actions"
-            onClick={() => panel ? closePanel() : setPanel("actions")}
+            onClick={() => panel === "actions" ? closePanel() : setPanel("actions")}
             className="min-h-11 min-w-11 rounded-lg px-2 text-xl focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
           >
-            <span aria-hidden="true">⋯</span>
+            <ReaderActionIcon name="list" />
           </button>
-          <button type="button" onClick={onClose} aria-label="Clear verse selection" className="min-h-11 px-2 text-sm font-medium text-[var(--muted)]">Done</button>
+
         </div>
         <p role="status" className={message ? "pb-1 text-center text-xs text-[var(--muted)]" : "sr-only"}>{message}</p>
       </div>
@@ -414,4 +411,8 @@ function ColorButton({ label, onClick, className }: { label: string; onClick: ()
       <span aria-hidden="true" className={`h-7 w-7 rounded-full border border-black/10 ${className}`} />
     </button>
   );
+}
+
+function ReaderActionIcon({ name }: { name: "languages" | "list" }) {
+  return <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{name === "languages" ? <><path d="m5 8 6 6m-7 0 6-6 2-5M2 5h12M7 2v3m7 17 5-11 5 11m-8-4h6" /></> : <><path d="M9 6h12M9 12h12M9 18h12" /><path d="M3 6h.01M3 12h.01M3 18h.01" /></>}</svg>;
 }

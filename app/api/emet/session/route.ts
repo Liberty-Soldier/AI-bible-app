@@ -25,6 +25,7 @@ export async function GET() {
   return NextResponse.json(
     {
       authenticated: true,
+      userId,
       usage: await getEmetAiUsageSummary(),
       engine: getPublicEmetEngine(),
       ownerDiagnostics: await canUseSimpleEmet(userId),

@@ -1,3 +1,4 @@
+import { withConversation } from "@/app/lib/conversations/withConversation";
 import { getPublicEmetEngine } from "@/app/lib/emet/EmetPublicRouting";
 import { NextResponse } from "next/server";
 
@@ -115,7 +116,7 @@ function disabledResponse() {
   );
 }
 
-export async function POST(request: Request) {
+async function generateResponse(request: Request) {
   if (process.env.EMET_LIVE_ENABLED !== "true") return disabledResponse();
   const userId = await getVerifiedSupabaseUserId();
   if (!userId) {
@@ -552,3 +553,5 @@ export async function POST(request: Request) {
     architecture: pretrainedFallbackAudit,
   });
 }
+
+export async function POST(request: Request) { return withConversation(request, generateResponse); }

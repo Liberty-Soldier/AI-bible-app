@@ -1,6 +1,8 @@
 import "server-only";
+import { eligibleSimpleSources } from "../conversations/simplePublication";
 
 import { createHash } from "node:crypto";
+import { publicQualification } from "../../components/emet/chatPresentation";
 
 import type { EmetAiAnswer, EmetAiEvidencePacket } from "./EmetAiContract";
 import { isEmetAiCachedAnswerAuthorityVerified } from "./EmetAiCachedAnswerAuthority";
@@ -17,6 +19,8 @@ export type SharedStudySnapshot = {
   answer: string;
   citations: SharedStudyCitation[];
   publishedAt: string | null;
+  qualifications: string[];
+  sourceKind: string;
 };
 
 function snapshotHash(question: string, answer: EmetAiAnswer) {
@@ -65,6 +69,15 @@ export async function saveSharedStudyCandidate({
         question,
         answer: answer.answer,
         citations: publicCitations(packet, answer),
+        qualifications: [...new Set([
+          ...answer.limitations,
+          ...(answer.componentChecks || []).filter(c => c.support !== "explicit-statement").map(c => c.explanation),
+          ...(answer.continuityChecks || []).filter(c => c.verdict !== "preserved").map(c => c.explanation),
+        ].filter((text): text is string => typeof text === "string" && Boolean(text.trim())).map(text => publicQualification(text, [
+          ...answer.claims.map(c => c.id),
+          ...(answer.componentChecks || []).map(c => c.componentId),
+          ...(answer.continuityChecks || []).map(c => c.propositionId),
+        ])))],
       },
       { onConflict: "owner_user_id,snapshot_hash" },
     )
@@ -76,6 +89,9 @@ export async function saveSharedStudyCandidate({
 export async function publishSharedStudy(userId: string, id: string) {
   const supabase = createSupabaseAdminClient();
   if (!supabase) return null;
+  const { data: candidate, error: candidateError } = await supabase.from("emet_shared_studies").select("source_kind,source_passages").eq("id",id).eq("owner_user_id",userId).maybeSingle();
+  if(candidateError || !candidate) return null;
+  if(candidate.source_kind === "simple" && !eligibleSimpleSources(candidate.source_passages)) return null;
   const publishedAt = new Date().toISOString();
   const { data, error } = await supabase
     .from("emet_shared_studies")
@@ -92,16 +108,36 @@ export async function getPublishedSharedStudy(id: string): Promise<SharedStudySn
   if (!supabase) return null;
   const { data, error } = await supabase
     .from("emet_shared_studies")
-    .select("id, question, answer, citations, published_at")
+    .select("id, question, answer, citations, published_at, qualifications, source_kind, source_passages")
     .eq("id", id)
     .not("published_at", "is", null)
     .maybeSingle();
   if (error || !data) return null;
+  if(data.source_kind === "simple" && !eligibleSimpleSources(data.source_passages))return null;
   return {
+    qualifications: Array.isArray(data.qualifications) ? data.qualifications as string[] : [],
+    sourceKind: data.source_kind as string,
     id: data.id as string,
     question: data.question as string,
     answer: data.answer as string,
     citations: Array.isArray(data.citations) ? data.citations as SharedStudyCitation[] : [],
     publishedAt: data.published_at as string,
   };
+}
+
+export async function getOwnedSharedStudyState(userId: string, id: string) {
+  const supabase = createSupabaseAdminClient();
+  if (!supabase) return null;
+  const { data, error } = await supabase.from("emet_shared_studies")
+    .select("id,published_at").eq("id", id).eq("owner_user_id", userId).maybeSingle();
+  return error || !data ? null : { id: data.id as string, published: Boolean(data.published_at) };
+}
+
+export async function revokeSharedStudy(userId: string, id: string) {
+  const supabase = createSupabaseAdminClient();
+  if (!supabase) return null;
+  const { data, error } = await supabase.from("emet_shared_studies")
+    .update({ published_at: null }).eq("id", id).eq("owner_user_id", userId)
+    .select("id").maybeSingle();
+  return error || !data ? null : data.id as string;
 }

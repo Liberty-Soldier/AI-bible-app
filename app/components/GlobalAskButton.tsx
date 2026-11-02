@@ -19,6 +19,7 @@ export default function GlobalAskButton() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [initialQuestion, setInitialQuestion] = useState("");
+  const [userId, setUserId] = useState<string>();
   const [usage, setUsage] = useState<EmetChatUsage | null>(null);
   const [panelKey, setPanelKey] = useState(0);
   const [hasOpened, setHasOpened] = useState(false);
@@ -43,10 +44,12 @@ export default function GlobalAskButton() {
 
       if (response.ok) {
         const payload = (await response.json()) as {
+          userId?: string;
           usage?: EmetChatUsage | null;
           engine?: "simple" | "current";
           ownerDiagnostics?: boolean;
         };
+        setUserId(payload.userId);
         setUsage(payload.usage || null);
         setServerEngine(payload.engine === "current" ? "current" : "simple");
         setOwnerDiagnostics(payload.ownerDiagnostics === true);
@@ -130,7 +133,8 @@ export default function GlobalAskButton() {
             }}
             className="absolute bottom-0 left-1/2 h-[96dvh] w-full max-w-3xl -translate-x-1/2 overflow-hidden rounded-t-2xl border border-[var(--border)] bg-[var(--canvas)] text-[var(--foreground)] sm:bottom-3 sm:h-[calc(100dvh-1.5rem)] sm:rounded-2xl"
           >
-            <EmetChat
+            <EmetChat key={userId || "signed-out"}
+              initialUserId={userId}
               active={open}
               launchKey={panelKey}
               initialUsage={usage}

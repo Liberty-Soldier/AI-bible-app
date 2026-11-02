@@ -1,3 +1,4 @@
+import { withConversation } from "@/app/lib/conversations/withConversation";
 import { handleSimpleEmet } from "@/app/lib/emet/experimental/SimpleEmetRequest";
 import { getPublicEmetEngine } from "@/app/lib/emet/EmetPublicRouting";
 import { NextResponse } from "next/server";
@@ -135,7 +136,7 @@ export async function GET() {
     : disabledResponse();
 }
 
-export async function POST(request: Request) {
+async function generateResponse(request: Request) {
   if (process.env.EMET_LIVE_ENABLED !== "true") {
     return disabledResponse();
   }
@@ -284,3 +285,5 @@ export async function POST(request: Request) {
     usage: responseUsage,
   });
 }
+
+export async function POST(request: Request) { return withConversation(request, generateResponse); }

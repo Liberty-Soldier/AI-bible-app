@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import PublicLinkControl from "./PublicLinkControl";
+import ConversationHistory, { type HistoryTurn } from "./ConversationHistory";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from "react";
 import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
@@ -100,13 +102,15 @@ type Exchange = {
   shareStudyId?: string;
   outcome?: "answered" | "insufficient-evidence" | "failed";
   transportFailure?: boolean;
+  imported?: boolean;
+  remotePending?: boolean;
 };
 
 function storedExchanges(storage: Storage, key = CHAT_STORAGE_KEY) {
   const parsed = parseStoredContext<unknown>(storage, key);
   if (!Array.isArray(parsed)) return [];
 
-  return parsed.slice(-20).flatMap((candidate) => {
+  return parsed.flatMap((candidate) => {
     if (!candidate || typeof candidate !== "object") return [];
     const exchange = candidate as Partial<Exchange>;
     if (
@@ -123,6 +127,8 @@ function storedExchanges(storage: Storage, key = CHAT_STORAGE_KEY) {
       question: exchange.question.slice(0, 800),
       outcome: exchange.outcome,
       transportFailure: exchange.transportFailure,
+      imported: exchange.imported,
+      remotePending: exchange.remotePending,
       answer: {
         status: exchange.answer.status,
         answer: exchange.answer.answer,
@@ -162,13 +168,19 @@ function storedExchanges(storage: Storage, key = CHAT_STORAGE_KEY) {
 }
 
 function parseStoredContext<T>(storage: Storage, key: string): T | null {
-  const value = storage.getItem(key);
-  if (!value) return null;
-
   try {
+    const value = storage.getItem(key);
+    if (!value) return null;
     return JSON.parse(value) as T;
   } catch {
     return null;
+  }
+}
+
+function saveRecovery(key: string, value: unknown) {
+  const encoded = JSON.stringify(value);
+  for (const storage of [window.sessionStorage, window.localStorage]) {
+    try { storage.setItem(key, encoded); } catch { /* The answer stays on screen even if browser storage is full. */ }
   }
 }
 
@@ -313,6 +325,7 @@ function readingPosition(viewport: HTMLElement): ChatReadingPosition {
 
 export default function EmetChat({
   initialUsage,
+  initialUserId,
   initialQuestion = "",
   initialEngine = "simple",
   initialOwnerDiagnostics = false,
@@ -322,6 +335,7 @@ export default function EmetChat({
   onClose,
 }: {
   initialUsage: EmetChatUsage | null;
+  initialUserId?: string;
   initialQuestion?: string;
   initialEngine?: "simple" | "current";
   initialOwnerDiagnostics?: boolean;
@@ -334,7 +348,11 @@ export default function EmetChat({
   const engine = initialEngine;
   // Storage follows the conversation, not a deployment's engine selection. A
   // rollback therefore keeps the current thread, draft and reading position.
-  const [historyPrefix, setHistoryPrefix] = useState(CHAT_STORAGE_KEY);
+  const [historyPrefix, setHistoryPrefix] = useState(initialUserId ? `${CHAT_STORAGE_KEY}:${initialUserId}` : CHAT_STORAGE_KEY);
+  const [cloudRevision, setCloudRevision] = useState(0);
+  const [cloudReady, setCloudReady] = useState(false);
+  const [historyNotice, setHistoryNotice] = useState("");
+  const [publicationVersion, setPublicationVersion] = useState(0);
   const chatStorageKey = historyPrefix;
   const chatIdStorageKey = `${historyPrefix}-id`;
   const draftStorageKey = `${historyPrefix}-draft`;
@@ -367,6 +385,7 @@ export default function EmetChat({
   const submissionInFlightRef = useRef(false);
   const initialSubmissionRef = useRef<string | null>(null);
   const progressiveRequestRef = useRef("");
+  const openingConversationRef = useRef<string | null>(null);
   const pendingInitialScriptureRef = useRef<InitialScriptureItem[]>([]);
 
   const setConversationTop = useCallback((top: number) => {
@@ -421,7 +440,7 @@ export default function EmetChat({
     const timer = window.setTimeout(() => {
       // Preserve existing owner test conversations without merging unrelated
       // threads or deleting the public conversation kept in its original key.
-      const prefix = initialOwnerDiagnostics && storedExchanges(window.sessionStorage, "emetsees-simple-conversation").length
+      const prefix = initialUserId ? `${CHAT_STORAGE_KEY}:${initialUserId}` : initialOwnerDiagnostics && storedExchanges(window.sessionStorage, "emetsees-simple-conversation").length
         ? "emetsees-simple-conversation" : CHAT_STORAGE_KEY;
       setHistoryPrefix(prefix);
       const draft = window.sessionStorage.getItem(`${prefix}-draft`) || "";
@@ -435,11 +454,13 @@ export default function EmetChat({
       const nextConversationId = storedConversationId || crypto.randomUUID();
       window.sessionStorage.setItem(`${prefix}-id`, nextConversationId);
       setConversationId(nextConversationId);
+      const recovery = parseStoredContext<{id:string;question:string;response:Record<string,unknown>;history?:Exchange[]}>(window.localStorage, `${prefix}:recovery:${nextConversationId}`);
+      if (recovery) { setExchanges([...(recovery.history || []),{id:recovery.id,question:recovery.question,answer:normalizeAnswer(recovery.response),source:typeof recovery.response.source === "string" ? recovery.response.source : undefined,outcome:"answered"}]); setHistoryNotice("This answer could not be saved to your account. A browser recovery copy is available; copy it before leaving."); }
       setHistoryLoaded(true);
     }, 0);
 
     return () => window.clearTimeout(timer);
-  }, [initialOwnerDiagnostics, historyLoaded]);
+  }, [initialOwnerDiagnostics, initialUserId, historyLoaded]);
 
   useEffect(() => {
     if (!historyLoaded) return;
@@ -451,11 +472,14 @@ export default function EmetChat({
   useEffect(() => {
     if (!active) return;
     const reader = parseStoredContext<ReaderContext>(window.localStorage, "bibleiq-current-context");
+    const passage = parseStoredContext<ReaderContext>(window.sessionStorage, "emetsees-passage-question-context");
     const word = parseStoredContext<WordContext>(window.sessionStorage, "emetsees-word-question-context");
-    setReaderContext(reader);
+    setReaderContext(passage || reader);
+    setUseReaderContext(Boolean(passage));
     setWordContext(word);
     if (word) setUseReaderContext(false);
     window.sessionStorage.removeItem("emetsees-word-question-context");
+    window.sessionStorage.removeItem("emetsees-passage-question-context");
   }, [active, launchKey]);
 
   useEffect(() => {
@@ -566,6 +590,7 @@ export default function EmetChat({
   async function ask(questionOverride?: string) {
     const finalQuestion = (questionOverride || question).trim();
     if (!finalQuestion || pending || submissionInFlightRef.current) return;
+    if (initialUserId && !cloudReady) { setHistoryNotice("History is not ready. Please reopen History or start a new conversation after synchronization recovers."); return; }
 
     const exchangeId = crypto.randomUUID();
     arrivingRef.current = { id: exchangeId, reveal: followingRef.current, pendingShown: false };
@@ -657,11 +682,18 @@ export default function EmetChat({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...sharedRequest,
-          requestId: crypto.randomUUID(),
+          requestId: exchangeId,
           conversationId: activeConversationId,
+          persistConversation: Boolean(initialUserId),
+          conversationRevision: cloudRevision,
         }),
       });
       const payload = (await response.json()) as Record<string, unknown>;
+      if (payload.historySave === "failed") { saveRecovery(`${chatStorageKey}:recovery:${activeConversationId}`, { id: exchangeId, question: finalQuestion, response: payload, history: exchanges }); setHistoryNotice("This answer could not be saved to your account. Your browser copy is retained; copy the answer before leaving."); }
+      if (response.status === 409 || response.status === 410 || payload.status === "history-unavailable") {
+        setHistoryNotice(response.status === 410 ? "This conversation was deleted. Start a new conversation." : response.status === 409 ? "Another request is active or was interrupted. Reopen History before continuing." : "Cloud history could not reserve this question. Please retry later.");
+        restoreSubmittedQuestion(finalQuestion); return;
+      }
 
       if (response.status === 401) {
         restoreSubmittedQuestion(finalQuestion);
@@ -757,7 +789,7 @@ export default function EmetChat({
   useEffect(() => {
     const launchQuestion = initialQuestion.trim().slice(0, 800);
     const submissionKey = `${launchKey}:${launchQuestion}`;
-    if (!active || pending || !historyLoaded || !launchQuestion || initialSubmissionRef.current === submissionKey) return;
+    if (!active || pending || !historyLoaded || (initialUserId && !cloudReady) || !launchQuestion || initialSubmissionRef.current === submissionKey) return;
     initialSubmissionRef.current = submissionKey;
     if (window.location.pathname === "/emet") {
       const url = new URL(window.location.href);
@@ -765,10 +797,17 @@ export default function EmetChat({
       window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
     }
     launchInitialQuestion(launchQuestion);
-  }, [active, pending, historyLoaded, initialQuestion, launchKey]);
+  }, [active, pending, historyLoaded, initialUserId, cloudReady, initialQuestion, launchKey]);
 
+  function answerText(exchange: Exchange) {
+    return `AI-generated explanation${exchange.imported || exchange.answer.verificationStatus === "unverified" ? " — unverified references" : "; interpretation is not independently verified"}.\n\n${exchange.question}\n\n${exchange.answer.answer}${exchange.answer.limitations.length ? `\n\nAbout this answer:\n${exchange.answer.limitations.join("\n")}` : ""}\n\nScripture references:\n${exchange.answer.citations.map(c => `${c.reference || ""} (${c.translation || getCitationTranslation(c) || "translation unspecified"})`).join("\n")}`;
+  }
+  async function copyOrShare(exchange: Exchange, native: boolean) {
+    try { const text = answerText(exchange); if(native && navigator.share) await navigator.share({title: exchange.question,text}); else await navigator.clipboard.writeText(text); setError(native ? "Text shared or copied. No public page was created." : "Answer copied. No public page was created."); }
+    catch(error) { if(!(error instanceof DOMException && error.name === "AbortError"))setError("Copy or text sharing was unavailable. Please try again."); }
+  }
   async function share(exchange: Exchange) {
-    if (!exchange.shareStudyId) return;
+    if (!exchange.shareStudyId || !window.confirm("Publish this question and answer on a public page? Your other conversation messages stay private. The explanation is AI-generated.")) return;
     const response = await fetch("/api/emet/share", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -776,12 +815,9 @@ export default function EmetChat({
     });
     if (!response.ok) throw new Error("Study publication failed.");
     const payload = await response.json() as { path: string };
+    setPublicationVersion(v => v + 1);
     const url = new URL(payload.path, window.location.origin).toString();
-    const references = exchange.answer.citations
-      .map((citation) => citation.reference)
-      .filter(Boolean)
-      .join(" · ");
-    const text = `${exchange.question}\n\n${exchange.answer.answer}${references ? `\n\nEvidence: ${references}` : ""}`;
+    const text = answerText(exchange);
 
     if (navigator.share) {
       await navigator.share({ title: exchange.question, text, url });
@@ -794,6 +830,9 @@ export default function EmetChat({
 
   function resetConversation() {
     if (submissionInFlightRef.current || !historyLoaded) return;
+    window.sessionStorage.setItem(`${chatStorageKey}:archive:${conversationId}`, JSON.stringify(exchanges));
+    setHistoryNotice("");
+    setCloudRevision(0);
     setExchanges([]);
     updateQuestion("");
     setError("");
@@ -828,25 +867,38 @@ export default function EmetChat({
         </div>
       </header>
 
-      <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 px-3 py-0 text-xs text-[var(--muted)] sm:px-5">
-        <div className="flex min-w-0 flex-wrap items-center gap-x-2">
-          <span className="break-words">{contextLabel(activeContext)}</span>
-          {activeContext ? (
-            <button type="button" aria-label={`Remove ${contextLabel(activeContext)} context`} onClick={() => {
-              if (wordContext) setWordContext(null);
-              else setUseReaderContext(false);
-            }} className="min-h-11 px-2 text-sm">Clear</button>
-          ) : readerContext ? (
-            <button type="button" onClick={() => setUseReaderContext(true)} className="min-h-11 px-1 text-xs underline underline-offset-4">Use {contextLabel(readerContext)}</button>
-          ) : null}
-        </div>
-        {usage ? (
-          <details>
-            <summary className="min-h-11 cursor-pointer py-3">Usage</summary>
-            <p className="pb-2">{usage.planName} · {usage.unlimited ? "Unlimited" : `${usage.questionsRemaining} of ${usage.questionLimit} left`}</p>
-          </details>
-        ) : null}
-      </div>
+      <ConversationHistory userId={initialUserId} activeId={conversationId} pending={pending} enabled={active && historyLoaded && !historyNotice.startsWith("This answer could not be saved")} onAvailability={setCloudReady}
+        ownerLegacy={initialOwnerDiagnostics ? () => storedExchanges(window.sessionStorage, "emetsees-simple-conversation").map(e => ({question:e.question,response:{status:e.outcome === "failed" ? "answer-unavailable" : e.outcome === "insufficient-evidence" || e.answer.status === "insufficient-evidence" ? "insufficient-evidence" : "complete",answer:e.answer,source:e.source,outcome:e.outcome}})) : undefined}
+        legacy={() => storedExchanges(window.sessionStorage, CHAT_STORAGE_KEY).map(e => ({ question: e.question, response: { status: e.outcome === "failed" ? "answer-unavailable" : e.outcome === "insufficient-evidence" || e.answer.status === "insufficient-evidence" ? "insufficient-evidence" : "complete", answer: e.answer, source: e.source, outcome:e.outcome } }))}
+        onOpen={(id, turns: HistoryTurn[], revision = 0) => {
+          setCloudRevision(revision);
+          if (pending) return;
+          if (id !== conversationId) { window.sessionStorage.setItem(`${chatStorageKey}:archive:${conversationId}`, JSON.stringify(exchanges)); openingConversationRef.current = id; setWordContext(null); setUseReaderContext(false); setConversationId(id); window.sessionStorage.setItem(chatIdStorageKey, id); scrollRestoredRef.current = false; savedScrollRef.current = null; readingPositionRef.current = null; }
+          if (openingConversationRef.current === id && turns.length) {
+            const context = turns.at(-1)?.context as ReaderContext | WordContext | null;
+            if (context && typeof context.book === "string" && Number.isInteger(context.chapter) && ["web","kjv","brenton"].includes(context.translation)) {
+              setReaderContext(context); if ("displayWord" in context) setWordContext(context); else setUseReaderContext(true);
+            }
+            openingConversationRef.current = null;
+          }
+          const complete = turns.map(t => {
+            if (t.response) return { id: t.request_id, question: t.question, answer: normalizeAnswer(t.response), imported: t.imported, source: typeof t.response.source === "string" ? t.response.source : undefined, initialScripture: exchanges.find(e => e.id === t.request_id)?.initialScripture, shareStudyId: !t.imported && typeof t.response.shareStudyId === "string" ? t.response.shareStudyId : undefined, outcome: t.response.status === "insufficient-evidence" || (t.response.answer as Answer)?.status === "insufficient-evidence" ? "insufficient-evidence" as const : t.response.outcome === "failed" || (t.http_status && t.http_status >= 400) ? "failed" as const : "answered" as const };
+            return { id: t.request_id, question: t.question, answer: normalizeAnswer({ answer: t.state === "pending" ? "An answer is being prepared on another device. History will update when it finishes." : "This request was interrupted. It will not be retried automatically." }), outcome: "failed" as const, transportFailure: true, remotePending: t.state === "pending" };
+          });
+          const recovery = parseStoredContext<{id:string;question:string;response:Record<string,unknown>;history?:Exchange[]}>(window.sessionStorage, `${chatStorageKey}:recovery:${id}`) || parseStoredContext<{id:string;question:string;response:Record<string,unknown>;history?:Exchange[]}>(window.localStorage, `${chatStorageKey}:recovery:${id}`);
+          if (recovery) {
+            const archive = storedExchanges(window.sessionStorage, `${chatStorageKey}:archive:${id}`);
+            const local = id === conversationId && exchanges.length ? exchanges : archive.length ? archive : recovery.history || [];
+            const savedIds = new Set(complete.map(e => e.id));
+            const retained = [...complete,...local.filter(e => !savedIds.has(e.id))];
+            if (!retained.some(e => e.id === recovery.id)) retained.push({id:recovery.id,question:recovery.question,answer:normalizeAnswer(recovery.response),source:typeof recovery.response.source === "string" ? recovery.response.source : undefined,outcome:"answered"});
+            setExchanges(retained);
+            setHistoryNotice("An unsaved browser answer is available. Copy it before reopening cloud history."); return;
+          }
+          setExchanges(complete);
+        }} />
+      {historyNotice ? <p role="status" className="px-3 py-2 text-sm sm:px-5">{historyNotice}</p> : null}
+      {activeContext ? <div className="flex items-center gap-2 px-3 text-sm text-[var(--muted)] sm:px-5"><span>{contextLabel(activeContext)}</span><button type="button" className="min-h-11 px-2" aria-label={`Remove ${contextLabel(activeContext)} context`} onClick={() => { setWordContext(null); setUseReaderContext(false); }}>Remove</button></div> : null}
 
       <div
         ref={viewportRef}
@@ -875,7 +927,7 @@ export default function EmetChat({
           if (["PageUp", "ArrowUp", "Home"].includes(event.key) || (["Enter", " "].includes(event.key) && event.target instanceof Element && event.target.closest("details"))) pauseFollowing();
         }}
       >
-        <div ref={contentRef} className="space-y-5" data-emet-content="true">
+        <div ref={contentRef} className="space-y-4" data-emet-content="true">
           {!exchanges.length && !pending ? (
             <div className="py-6 text-center">
               <p className="text-lg font-medium">What would you like to understand?</p>
@@ -886,7 +938,9 @@ export default function EmetChat({
           {exchanges.map((exchange) => {
             const outcome = exchange.outcome || (exchange.answer.status === "insufficient-evidence" ? "insufficient-evidence" : exchange.source === "fail-closed" ? "failed" : "answered");
             const simpleSources = exchange.source === "simple-owner-model" || exchange.answer.sourceVerification === "locked-corpus-text";
-            const notes = qualifications(exchange.answer, simpleSources);
+            const allNotes = qualifications(exchange.answer, simpleSources);
+            const technicalNotes: string[] = allNotes.filter(note => note === "The explanation, its prose references, and any quoted wording are model-generated and not independently verified. Only the server-supplied Scripture passages are checked against their stated translations; this does not establish support for every theological inference.");
+            const notes = allNotes.filter(note => !technicalNotes.includes(note));
             if (exchange.source === "simple-owner-model" && exchange.answer.verificationStatus === "unverified" && !initialOwnerDiagnostics) {
               return <article key={exchange.id} role="status" className="text-sm text-[var(--muted)]">This saved unverified response is available only for authorized owner inspection.</article>;
             }
@@ -898,11 +952,11 @@ export default function EmetChat({
                 {exchange.initialScripture?.length ? <InitialScripture items={exchange.initialScripture} pending={false} onNavigate={onClose} /> : null}
                 <div className="min-w-0 space-y-2" data-emet-scroll-anchor={`${exchange.id}:answer`}>
                   {outcome !== "answered" ? (
-                    <p role={outcome === "failed" ? "alert" : "status"} className="text-sm font-semibold">{outcome === "insufficient-evidence" ? "Insufficient evidence" : "Answer unavailable"}</p>
+                    <p role={outcome === "failed" ? "alert" : "status"} className="text-sm font-semibold">{exchange.remotePending ? "Preparing answer" : outcome === "insufficient-evidence" ? "Insufficient evidence" : "Answer unavailable"}</p>
                   ) : null}
-                  {simpleSources && exchange.answer.verificationStatus === "unverified" ? (
+                  {exchange.imported || (simpleSources && exchange.answer.verificationStatus === "unverified") ? (
                     <section role="alert" aria-label="Unverified model answer" className="rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3 text-sm leading-6">
-                      <p className="font-semibold">{initialOwnerDiagnostics ? "Unverified model answer · owner inspection only" : "Unverified model answer"}</p>
+                      <p className="font-semibold">{exchange.imported ? "Imported browser answer · not reverified" : initialOwnerDiagnostics ? "Unverified model answer · owner inspection only" : "Unverified model answer"}</p>
                       <p>The answer is shown as generated. Its references or conclusion could not be verified. Only the separately displayed passages have verified Scripture text. This answer cannot be published as a verified study.</p>
                       {initialOwnerDiagnostics && exchange.answer.unresolvedReferences?.length ? (
                         <ul aria-label="Unresolved references (not verified)" className="mt-2 space-y-1">
@@ -914,22 +968,23 @@ export default function EmetChat({
                   <div aria-label="EMET response" className="whitespace-pre-wrap break-words text-base leading-7" data-emet-answer="true">{exchange.answer.answer}</div>
                   {notes.length ? (
                     <section aria-label="Answer qualifications" className="border-l-2 border-[var(--border)] pl-3 text-sm leading-6 text-[var(--muted)]">
-                      <p className="font-medium">Qualifications</p>
                       <ul className="mt-1 space-y-1">
                         {notes.map((note, index) => <li key={index} className="whitespace-pre-wrap break-words">{note}</li>)}
                       </ul>
                     </section>
                   ) : null}
+
                   <div className="flex flex-wrap items-start gap-x-4 gap-y-1 text-sm">
                     {exchange.answer.citations.length ? (
                       <details className="group">
                         <summary className="min-h-11 cursor-pointer py-3 font-medium text-[var(--muted)]">{simpleSources ? "Scripture passages" : "Sources"} · {exchange.answer.citations.length}</summary>
-                        <p className="mb-1 text-xs text-[var(--muted)]">{simpleSources ? "Passage text is checked against the stated translation. The explanation is model-generated, including any quoted wording; these checks do not independently verify it." : "Final supporting citations"}</p>
+                        <p className="mb-1 text-xs text-[var(--muted)]">{simpleSources ? "The explanation, its prose references, and any quoted wording are model-generated and not independently verified. Only the server-supplied Scripture passages are checked against their stated translations; this does not establish support for every theological inference." : "Final supporting citations"}</p>
                         <div className="flex flex-wrap gap-x-4 gap-y-1 pb-2">
                           {exchange.answer.citations.map((citation) => {
                             const reference = citation.reference;
                             const translation = getCitationTranslation(citation);
                             const href = buildScriptureCitationHref(citation, { returnTo: conversationHref, returnLabel: "Ask EMET" });
+                            if (exchange.imported) return <div key={`${exchange.id}-${citation.evidenceId}`} className="w-full pb-2"><p>{reference} · browser-saved reference, not reverified</p>{citation.text ? <blockquote>{citation.text}</blockquote> : null}</div>;
                             if (simpleSources && citation.verification === "locked-corpus-text" && typeof citation.text === "string" && href && reference) {
                               return (
                                 <div key={`${exchange.id}-${citation.evidenceId}`} className="w-full space-y-1 pb-3">
@@ -949,13 +1004,8 @@ export default function EmetChat({
                         </div>
                       </details>
                     ) : null}
-                    {!simpleSources && exchange.shareStudyId ? (
-                      <button type="button" aria-label="Publish and share this answer" onClick={() => {
-                        void share(exchange).catch((error: unknown) => {
-                          if (!(error instanceof DOMException && error.name === "AbortError")) setError("Sharing could not be completed. Please try again.");
-                        });
-                      }} className="min-h-11 px-1 text-[var(--muted)]">Share</button>
-                    ) : null}
+                    {!exchange.remotePending ? <><button type="button" className="min-h-11 px-1 text-[var(--muted)]" onClick={()=>void copyOrShare(exchange,false)} aria-label="Copy answer">Copy</button><button type="button" className="min-h-11 px-1 text-[var(--muted)]" onClick={()=>void copyOrShare(exchange,true)} aria-label="Share answer text">Share</button></> : null}
+                    {exchange.shareStudyId && !exchange.imported ? <PublicLinkControl studyId={exchange.shareStudyId} version={publicationVersion} label="More sharing options" onPublish={!simpleSources || exchange.answer.verificationStatus === "references-verified" ? () => share(exchange) : undefined} /> : null}
                   </div>
                 </div>
               </article>
@@ -1010,6 +1060,7 @@ export default function EmetChat({
             {pending ? <span aria-hidden="true" className="h-3 w-3 animate-pulse rounded-full bg-current" /> : <span aria-hidden="true">↑</span>}
           </button>
         </div>
+        <p data-emet-disclaimer="true" className="-mx-3 mt-1 text-center text-[clamp(0.625rem,2.8vw,0.75rem)] leading-4 tracking-tight text-[var(--muted)]">EMET can make mistakes. Always verify its answers against Scripture.</p>
         <p className="mt-1 hidden text-center text-xs leading-5 text-[var(--muted)] pointer-fine:block">Enter to send · Shift+Enter for a new line</p>
       </form>
     </div>

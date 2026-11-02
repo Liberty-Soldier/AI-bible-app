@@ -44,7 +44,7 @@ function environment(initial = {}) {
   }
   const document = { activeElement: new HTMLElement(), body: { style: { overflow: "" } } };
   const window = {
-    sessionStorage, localStorage, location: new URL("https://fixture.invalid/emet"), innerHeight: 800,
+    confirm: () => true, sessionStorage, localStorage, location: new URL("https://fixture.invalid/emet"), innerHeight: 800,
     visualViewport: {
       height: 800, offsetTop: 0,
       addEventListener: (key, fn) => { viewportListeners[key] = fn; },
@@ -216,9 +216,13 @@ assert.doesNotMatch(text(tree), /private-claim-47|private-part-2/);
 const finalLinks = elements(tree, (x) => x.type === "a" && x.props.href.startsWith("/read/"));
 assert.deepEqual(finalLinks.map((x) => new URL(x.props.href, live.window.location.origin).searchParams.get("translation")), ["brenton", "web", "kjv", "brenton"]);
 const latestId = elements(tree, x => x.props["data-emet-scroll-anchor"]?.endsWith(":answer")).at(-1).props["data-emet-scroll-anchor"].replace(":answer", "");
+const disclaimer = elements(tree, x => x.props["data-emet-disclaimer"] === "true");
+assert.equal(disclaimer.length, 1);
+assert.equal(text(disclaimer[0]), "EMET can make mistakes. Always verify its answers against Scripture.");
+assert.match(disclaimer[0].props.className, /text-\[var\(--muted\)\]/);
 assert.equal(live.viewport.scrollTop, live.anchorTop(`${latestId}:question`) - 8, "An arriving answer should reveal its beginning with the question");
 assert.ok(live.viewport.scrollTop < 1200, "Do not jump to the end of a completed response");
-button(tree, "Publish and share this answer").props.onClick();
+await elements(tree, x => x.type?.name === "PublicLinkControl")[0].props.onPublish();
 await tick();
 assert.equal(live.shared[0].url, "https://fixture.invalid/shared/local-shared-study");
 assert(live.shared[0].text.includes(exactAnswer));
@@ -391,7 +395,7 @@ for (const authenticated of [true, false]) {
     let chat = elements(tree, (x) => x.type === "chat")[0];
     assert.equal(chat.props.active, true);
     assert.match(elements(tree, x => x.props.role === "dialog")[0].props.className, /max-w-3xl.*100dvh/);
-    assert.equal(chat.key, undefined, "Reopening must not key/remount the active request owner");
+    assert.equal(chat.key, "signed-out", "The account key stays stable across contextual reopening; account changes remount private state");
     chat.props.onClose();
     tree = fixture.render();
     chat = elements(tree, (x) => x.type === "chat")[0];
@@ -443,11 +447,24 @@ sourceChat.render();sourceChat.type('A source display fixture');sourceChat.send(
 assert.match(text(sourceChat.tree()),/Scripture passages · 1/);
 assert.doesNotMatch(text(sourceChat.tree()),/Final supporting citations/);
 assert.equal(elements(sourceChat.tree(),x=>x.type==='blockquote')[0].props.children,sourceText);
-assert.match(text(sourceChat.tree()),/explanation is model-generated/);
+assert.match(text(sourceChat.tree()),/wording are model-generated/);
 const sourceLink=elements(sourceChat.tree(),x=>x.type==='a'&&x.props.href?.includes('translation=kjv'))[0];assert.ok(sourceLink);
 const reopened=chatFixture({history:[{id:'source-fixture',question:'A saved source fixture',source:'simple-owner-model',answer:simplePayload.answer}]});
 assert.match(text(reopened.tree()),/Scripture passages · 1/);assert.equal(elements(reopened.tree(),x=>x.type==='blockquote')[0].props.children,sourceText);
 const currentChat=chatFixture({history:[{...prior,answer:{...prior.answer,citations:answerPayload.answer.citations}}]});assert.match(text(currentChat.tree()),/Final supporting citations/);assert.equal(elements(currentChat.tree(),x=>x.type==='blockquote').length,0);
+// A known technical notice belongs once inside the source disclosure. A note
+// sharing its opening but containing a material restriction must stay visible.
+const standardNotice = "The explanation, its prose references, and any quoted wording are model-generated and not independently verified. Only the server-supplied Scripture passages are checked against their stated translations; this does not establish support for every theological inference.";
+const materialExtension = `${standardNotice} This particular passage does not establish the proposed chronology.`;
+const disclosureChat = chatFixture({history:[{id:'disclosure',question:'Fixture question',source:'simple-model',answer:{...simplePayload.answer,limitations:[standardNotice,'A supplied material qualification.',materialExtension]}}]});
+const disclosureTree = disclosureChat.tree();
+assert.equal(elements(disclosureTree,x=>x.type==='summary'&&text(x)==='About this answer').length,0);
+const qualificationSection=elements(disclosureTree,x=>x.props['aria-label']==='Answer qualifications')[0];
+assert.match(text(qualificationSection),/A supplied material qualification/);
+assert.ok(text(qualificationSection).includes(materialExtension));
+assert.equal(elements(qualificationSection,x=>x.type==='li'&&text(x)===standardNotice).length,0);
+assert.ok(elements(disclosureTree,x=>x.type==='details').some(x=>text(x).includes('Scripture passages')&&text(x).includes(standardNotice)));
+console.log('PASS: one folded source-verification disclosure, no duplicate About headings, material qualifications and extensions preserved verbatim.');
 console.log('PASS: integrated Simple source disclosure, server text rendering, translation-aware navigation, API normalization and saved-history restoration; current engine disclosure unchanged.');
 const unresolvedAnswer='An exact model answer, including “a quoted explanatory phrase” and Invented 999:1.';
 const unresolvedPayload={...simplePayload,status:'complete-unverified',shareStudyId:'must-never-be-published',answer:{...simplePayload.answer,answer:unresolvedAnswer,verificationStatus:'unverified',unresolvedReferences:[{reference:'Invented 999:1',translation:'web',reason:'citation-unresolved'}]}};
@@ -587,7 +604,7 @@ simpleArrival.type('A Simple EMET reading fixture');simpleArrival.send();simpleA
 assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Unverified model answer').length,1);
 assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
 assert.match(scrollRegion(simpleArrival).props.className,/px-3.*sm:px-5/);
-assert.match(elements(simpleArrival.tree(),x=>x.props['data-emet-content'])[0].props.className,/space-y-5/);
+assert.match(elements(simpleArrival.tree(),x=>x.props['data-emet-content'])[0].props.className,/space-y-4/);
 assert.match(elements(simpleArrival.tree(),x=>x.type==='form')[0].props.className,/shrink-0.*safe-area-inset-bottom/);
 console.log('PASS: short/long answers, consecutive questions, question visibility, large preliminary sections, manual scrolling during/after generation, stable source/qualification anchors, reopening including followers, hidden completion, keyboard/composer resize, and current/Simple rendering with deterministic geometry fixtures. Browser/device verification remains separate.');
 

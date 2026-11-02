@@ -2,6 +2,8 @@ import { ImageResponse } from "next/og";
 
 import { getPublishedSharedStudy } from "@/app/lib/emet/EmetSharedStudy";
 
+export const dynamic = "force-dynamic";
+
 export const runtime = "nodejs";
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -14,8 +16,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
         <div style={{ display: "flex", fontSize: 22, textTransform: "uppercase", letterSpacing: 4, color: "#8b6d31" }}>Shared Scripture study</div>
         <div style={{ display: "flex", marginTop: 24, fontSize: 56, fontWeight: 700, lineHeight: 1.12 }}>{study.question}</div>
       </div>
-      <div style={{ display: "flex", fontSize: 24, color: "#6b6256" }}>Scripture evidence · original-language study · verified citations</div>
+      <div style={{ display: "flex", fontSize: 24, color: "#6b6256" }}>AI-generated explanation · Scripture passages</div>
     </div>,
-    { width: 1200, height: 630 },
+    { width: 1200, height: 630, headers: { "Cache-Control": "no-store" } },
   );
 }

@@ -159,14 +159,19 @@ console.log("PASS: citation links preserve WEB/KJV/Brenton, numbered books, vers
 // Render the shared-answer page from a local snapshot: no database or publication.
 const shared = createUiFixture({ modules: {
   ...defaultModules,
+  "@/app/lib/supabase/server": { getVerifiedSupabaseUserId: async () => null },
   "@/app/lib/emet/EmetSharedStudy": { getPublishedSharedStudy: async () => ({
-    id: "fixture", question: "Fixture question", answer: "Fixture answer",
+    id: "fixture", question: "Fixture question", answer: "Fixture answer", qualifications: ["A material qualification."], sourceKind: "simple",
     citations: ["web", "kjv", "brenton", "unknown"].map((translation) => ({ reference: "Genesis 1:1", translation })),
   }) },
 } });
 const sharedTree = await shared.load("app/shared/[id]/page.tsx").default({ params: Promise.resolve({ id: "fixture" }) });
 const sharedLinks = elements(sharedTree, (x) => x.type === "a");
 assert.equal(sharedLinks.length, 3);
+assert.equal(elements(sharedTree, x => x.props["data-emet-disclaimer"] === "true").length, 1);
+assert.match(text(sharedTree), /EMET can make mistakes\. Always verify its answers against Scripture\./);
+assert.match(text(sharedTree), /A material qualification/);
+assert.match(text(sharedTree), /AI-generated explanation/);
 assert.deepEqual(sharedLinks.map((x) => new URL(x.props.href, "https://fixture.invalid").searchParams.get("translation")), ["web", "kjv", "brenton"]);
 assert.match(text(sharedTree), /UNKNOWN/);
 console.log("PASS: actual shared-answer rendering preserves translations and leaves unknown citations readable without guessed links");

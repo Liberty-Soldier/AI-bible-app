@@ -93,6 +93,7 @@ const routeModules = {};
 for (const match of route.matchAll(/from "([^"]+)"/g)) routeModules[match[1]] = new Proxy({}, { get: (_,name) => () => { throw Error(`Unexpected existing-engine call: ${String(name)}`); } });
 let routeUser = null, currentEntered = false, publicEngine = 'simple';
 routeModules['@/app/lib/emet/EmetPublicRouting'] = { getPublicEmetEngine: () => publicEngine };
+routeModules['@/app/lib/conversations/withConversation'] = { withConversation: async (request,generate) => generate(request) };
 routeModules['next/server'] = { NextResponse: { json: (body,options) => ({ body, ...options }) } };
 routeModules['@/app/lib/supabase/server'] = { getVerifiedSupabaseUserId: async () => routeUser };
 routeModules['@/app/lib/emet/EmetAiConversation'] = { parseEmetConversationContext: () => ({}) };

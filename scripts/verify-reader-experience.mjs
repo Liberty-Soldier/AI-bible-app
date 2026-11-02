@@ -40,9 +40,9 @@ requireText(
   "canonical Source Text action",
 );
 requireText(actionSheet, 'aria-label="Selected verse actions"', "compact contextual selection strip");
-requireText(actionSheet, 'aria-label="Open verse actions"', "explicit action disclosure");
+requireText(actionSheet, 'aria-label="Verse actions"', "explicit action disclosure");
 requireText(actionSheet, 'panel === "highlight"', "on-demand highlight palette");
-requireText(actionSheet, 'label="Original language / Word Study"', "on-demand source-study access");
+requireText(actionSheet, 'label={`Original language for ${firstVerse.reference}`}', "on-demand source-study access");
 forbidText(actionSheet, 'h-[262px]', "oversized automatic action sheet");
 forbidText(actionSheet, 'fixed inset-0', "full-screen selection interception");
 requireText(header, ">\n          Aa\n", "reader appearance button");

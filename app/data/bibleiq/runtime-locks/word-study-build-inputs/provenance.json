@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "emet-word-study-recovered-build-inputs/v1",
+  "overlay": {
+    "archive": "EMETSEES-BRENTON-PRESERVATION-CONTRACT-20260910T102054.zip",
+    "archiveSha256": "97d7f76f29d92658b28b5f2d453cd2aefc0a2a376189659daf324f87ddb261a3",
+    "member": "public\\data\\bibleiq\\word-study-brenton-reader-record\\manifest.json",
+    "sha256": "b25d7f3af3093b26dc0889e11de51f061cfb3a1ed80f59a26ac35affb81037ea",
+    "manifestChecksum": "2361cc32b763d13d3a611ad47c46897df31abf6d9c71297e78199b85ccc59de6",
+    "schemaVersion": "emet-p0812r2-brenton-reader-record-routes/v1",
+    "counts": {
+      "records": 2017,
+      "routes": 9915
+    }
+  },
+  "consumer": {
+    "commit": "13e16e84a4571d39a0c230b51d0da31fe186b958",
+    "path": "app/data/scripture/CanonicalVerseStore.ts",
+    "serialization": "raw",
+    "sha256": "2bc980850c58457c513f0c0a0faf6a10b9adf00d4fa7d66e300b0ce014d8517a"
+  },
+  "result": {
+    "manifestSha256": "40cdb6a8c540d778da0db4369630fa95b6d094ec504d7aee6908356bddb105ec",
+    "manifestChecksum": "44cae127aee72f26e2d4ee99589696151fa1fccc7acef8ac0224b3b7228f11e6",
+    "books": 115,
+    "finalOverlaySha256": "18da5639bb2bc82df9b771505ea8e7a888eabbdb9adc82079dfc043e8dacd549"
+  },
+  "process": [
+    "scripts/build-word-study-runtime.js",
+    "scripts/p08/final-reader-alignment-completion/reconcile-brenton-reader-runtime.cjs"
+  ],
+  "note": "Recovered inputs only. Historical consumer is a sealed build input, never installed as application code. Existing replay scripts enforce their unchanged contracts."
+}

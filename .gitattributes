@@ -1,3 +1,5 @@
 app/data/scripture/generatedBrenton.json text eol=lf
 app/data/scripture/generatedWEB.json text eol=lf
 public/data/bibleiq/word-study/**/*.json text eol=lf
+# Recovered sealed build inputs must retain their verified LF bytes on checkout.
+app/data/bibleiq/runtime-locks/word-study-build-inputs/* text eol=lf

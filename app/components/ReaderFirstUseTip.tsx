@@ -11,7 +11,7 @@ function rememberDismissal() {
 }
 
 function subscribe(onChange: () => void) {
-  function dismissAfterVerseSelect(event: PointerEvent) {
+  function dismissAfterVerseSelect(event: MouseEvent) {
     const target = event.target;
     if (
       target instanceof Element &&
@@ -25,12 +25,14 @@ function subscribe(onChange: () => void) {
     if (event.key === STORAGE_KEY) onChange();
   }
 
-  document.addEventListener("pointerdown", dismissAfterVerseSelect, true);
+  // Dismiss on activation, after the browser has chosen the click target.
+  // Removing the tip on pointerdown moves verse buttons before tap completion.
+  document.addEventListener("click", dismissAfterVerseSelect, true);
   window.addEventListener(CHANGE_EVENT, onChange);
   window.addEventListener("storage", onStorage);
 
   return () => {
-    document.removeEventListener("pointerdown", dismissAfterVerseSelect, true);
+    document.removeEventListener("click", dismissAfterVerseSelect, true);
     window.removeEventListener(CHANGE_EVENT, onChange);
     window.removeEventListener("storage", onStorage);
   };
@@ -57,7 +59,7 @@ export default function ReaderFirstUseTip() {
       aria-label="Reader tip"
     >
       <p className="min-w-0 flex-1 text-xs leading-5 text-[var(--muted)]">
-        Select verse numbers, then use ⋯ for notes, highlights, and original-language study.
+        Select verse numbers, then choose Original language or Verse actions.
       </p>
 
       <button

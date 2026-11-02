@@ -40,10 +40,12 @@ assert.match(page, /redirect\(`\/auth\?next=\$\{encodeURIComponent\(next\)\}`\)/
 assert.match(chat, /crypto\.randomUUID\(\)/);
 assert.match(chat, /\/api\/emet\/explain/);
 assert.match(chat, /\/api\/emet\/ask/);
-assert.match(chat, /Publish and share this answer/);
+assert.match(chat, /onPublish=.*references-verified/);
+assert.match(fs.readFileSync("app/components/emet/PublicLinkControl.tsx", "utf8"), /Publish and share this answer/);
 assert.match(chat, /buildEmetConversationContext/);
 assert.match(chat, /useReaderContext/);
-assert.match(chat, /Use \{contextLabel\(readerContext\)\}/);
+assert.doesNotMatch(chat, /Use \{contextLabel\(readerContext\)\}/);
+assert.match(chat, /emetsees-passage-question-context/);
 assert.match(chat, /wordContext \|\| \(useReaderContext \? readerContext : null\)/);
 assert.match(chat, /Ask a follow-up/);
 assert.match(chat, /Searching Scripture/);
