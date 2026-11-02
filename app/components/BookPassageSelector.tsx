@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { getBookTranslation, getBookChapters } from "@/app/data/scripture/bookCatalog";
 import { useEffect, useState } from "react";
 import {
   buildReaderHref,
@@ -19,15 +20,15 @@ export default function BookPassageSelector({
   translation?: TranslationPreference;
   currentChapter?: number;
 }) {
-  const [translation, setTranslation] = useState(suppliedTranslation || "web");
+  const [translation, setTranslation] = useState(getBookTranslation(book, suppliedTranslation || "web"));
 
   useEffect(() => {
-    setTranslation(suppliedTranslation || getPreferredTranslation());
-  }, [suppliedTranslation]);
+    setTranslation(getBookTranslation(book, suppliedTranslation || getPreferredTranslation()));
+  }, [book, suppliedTranslation]);
 
   return (
     <div className="grid grid-cols-5 gap-1.5 sm:grid-cols-8" aria-label={`${book} chapters`}>
-      {Array.from({ length: chapterCount }, (_, index) => index + 1).map((chapter) => (
+      {(getBookChapters(book, translation).length ? getBookChapters(book, translation) : Array.from({ length: chapterCount }, (_, index) => index + 1)).map((chapter) => (
         <Link
           key={chapter}
           href={buildReaderHref({ book, chapter, translation })}

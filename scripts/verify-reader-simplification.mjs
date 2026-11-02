@@ -36,13 +36,13 @@ for (const translation of ["web", "kjv", "brenton"]) {
   for (const explicit of [undefined, translation]) {
     const fixture = createUiFixture({ modules: { "next/link": link }, globals: globals(env) });
     const tree = fixture.render(fixture.load("app/components/BookPassageSelector.tsx").default, {
-      book: "1 Corinthians", chapterCount: 16, translation: explicit, currentChapter: 3,
+      book: "Genesis", chapterCount: 50, translation: explicit, currentChapter: 3,
     });
     const links = elements(tree, (x) => x.type === "a");
-    assert.equal(links.length, 16);
+    assert.equal(links.length, 50);
     for (const [index, chapterLink] of links.entries()) {
       const url = new URL(chapterLink.props.href, env.window.location.origin);
-      assert.equal(decodeURIComponent(url.pathname), `/read/1 Corinthians/${index + 1}`);
+      assert.equal(decodeURIComponent(url.pathname), `/read/Genesis/${index + 1}`);
       assert.equal(url.searchParams.get("translation"), translation);
       assert.equal(url.searchParams.has("verse"), false);
     }

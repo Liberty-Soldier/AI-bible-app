@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { bookCatalog } from "@/app/data/scripture/bookCatalog";
+import { bookCatalog, getBookTranslation, getBookChapters, type BookInfo } from "@/app/data/scripture/bookCatalog";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import {
   AVAILABLE_TRANSLATION_OPTIONS,
@@ -22,11 +22,6 @@ type Section =
   | "prophets"
   | "septuagint"
   | "new";
-
-type BookInfo = {
-  book: string;
-  chapters: number;
-};
 
 const torahBooks = new Set([
   "Genesis",
@@ -48,6 +43,7 @@ const historyBooks = new Set([
   "2 Chronicles",
   "Ezra",
   "Nehemiah",
+  "Esther",
 ]);
 
 const wisdomBooks = new Set([
@@ -56,6 +52,7 @@ const wisdomBooks = new Set([
   "Proverbs",
   "Ecclesiastes",
   "Song of Songs",
+  "Song of Solomon",
 ]);
 
 const prophetsBooks = new Set([
@@ -63,6 +60,7 @@ const prophetsBooks = new Set([
   "Jeremiah",
   "Lamentations",
   "Ezekiel",
+  "Daniel",
   "Hosea",
   "Joel",
   "Amos",
@@ -144,9 +142,10 @@ function getSection(book: string): Section {
 export default function ReadPage() {
   const router = useRouter();
 
-  const books = useMemo(() => getBooksFromScripture(), []);
+  const allBooks = useMemo(() => getBooksFromScripture(), []);
 
   const [translation, setTranslation] = useState<Translation>("web");
+  const books = allBooks.filter(item => item.translations?.includes(translation));
   const [quickJump, setQuickJump] = useState("");
   const [quickJumpError, setQuickJumpError] = useState("");
 
@@ -168,7 +167,7 @@ export default function ReadPage() {
       ? books.find((item) => item.book === parsed.book)
       : null;
 
-    if (!parsed || !found || parsed.chapter > found.chapters) {
+    if (!parsed || !found || !getBookChapters(found.book, translation).includes(parsed.chapter)) {
       setQuickJumpError("Enter a valid book, chapter, or verse.");
       return;
     }
@@ -176,7 +175,7 @@ export default function ReadPage() {
     setQuickJumpError("");
 
     router.push(
-      `/read/${encodeURIComponent(found.book)}/${parsed.chapter}?translation=${translation}${
+      `/read/${encodeURIComponent(found.book)}/${parsed.chapter}?translation=${getBookTranslation(found.book, translation)}${
         parsed.verseLabel ? `&verse=${encodeURIComponent(parsed.verseLabel)}` : ""
       }`
     );
@@ -259,7 +258,7 @@ return (
         <div className="grid grid-cols-1 gap-x-5 sm:grid-cols-2">
           {([
             ["torah", "Torah", "Genesis–Deuteronomy"],
-            ["history", "History", "Joshua–Nehemiah"],
+            ["history", "History", "Joshua–Esther"],
             ["wisdom", "Wisdom", "Job–Song"],
             ["prophets", "Prophets", "Isaiah–Malachi"],
             ["septuagint", "Septuagint", "Greek books"],
@@ -295,16 +294,18 @@ return (
                       key={item.book}
                       href={`/read/${encodeURIComponent(
                         item.book,
-                      )}?translation=${translation}`}
+                      )}?translation=${getBookTranslation(item.book, translation)}`}
                       className="flex min-h-16 items-center justify-between gap-2 border-b border-[var(--border)] py-3 text-left transition active:opacity-60"
                     >
                       <span className="min-w-0">
-                        <span className="block truncate text-sm font-semibold">
+                        <span className={`block text-sm font-semibold ${item.translations?.length === 1 ? "" : "truncate"}`}>
                           {item.book}
                         </span>
                         <span className="mt-0.5 block text-xs text-[var(--muted)]">
-                          {item.chapters} chapters
+                          {getBookChapters(item.book, translation).length} {getBookChapters(item.book, translation).length === 1 ? "chapter" : "chapters"}{item.translations?.length === 1 ? " · Brenton" : ""}
                         </span>
+                        {item.book === "Proverbs" && translation === "brenton" ? <span className="mt-1 block text-xs text-[var(--muted)]">Chapter 30 is unavailable; original numbering is preserved.</span> : null}
+                        {item.note ? <span className="mt-1 block text-xs leading-5 text-[var(--muted)]">{item.note}</span> : null}
                       </span>
                       <span aria-hidden="true" className="shrink-0 text-[var(--muted)]">
                         ›

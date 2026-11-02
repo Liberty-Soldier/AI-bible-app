@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import BookPassageSelector from "@/app/components/BookPassageSelector";
-import { bookCatalog } from "@/app/data/scripture/bookCatalog";
+import { bookCatalog, getBookTranslation, getBookChapters } from "@/app/data/scripture/bookCatalog";
 import { useRouter } from "next/navigation";
 import {
   AVAILABLE_TRANSLATION_OPTIONS,
@@ -57,6 +57,13 @@ const newTestamentBooks = new Set([
 ]);
 
 const septuagintOnlyBooks = new Set([
+  "1 Esdras",
+  "Esther Greek",
+  "Letter of Jeremiah",
+  "Prayer of Manasseh",
+  "Daniel Greek",
+  "Susanna",
+  "Bel and the Dragon",
   "Tobit",
   "Judith",
   "Wisdom",
@@ -107,7 +114,7 @@ export default function ReaderSelector({
     translation: Translation,
     verse?: string | null
   ) {
-    const preferredTranslation = setPreferredTranslation(translation);
+    const preferredTranslation = setPreferredTranslation(strictCitation ? translation : getBookTranslation(book, translation));
     const params = new URLSearchParams({ translation: preferredTranslation });
     if (verse) params.set("verse", verse);
     if (strictCitation) params.set("citation", "1");
@@ -124,8 +131,9 @@ export default function ReaderSelector({
             key={option.id}
             type="button"
             aria-pressed={currentTranslation === option.id}
+            disabled={!getBookChapters(currentBook, option.id).includes(currentChapter)}
             onClick={() => goTo(currentBook, currentChapter, option.id, currentVerse)}
-            className="flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left text-sm hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
+            className="flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left text-sm hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)] disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <span>{option.label}</span>
             <span className="font-semibold">{option.shortLabel}{currentTranslation === option.id ? " ✓" : ""}</span>
@@ -159,7 +167,7 @@ export default function ReaderSelector({
           key={selectedBook}
           book={selectedBook}
           chapterCount={chapterCount}
-          translation={currentTranslation}
+          translation={getBookTranslation(selectedBook, currentTranslation)}
           currentChapter={selectedBook === currentBook ? currentChapter : undefined}
         />
       </div>

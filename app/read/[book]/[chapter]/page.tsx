@@ -13,7 +13,7 @@ import CollapsibleReaderHeader from "@/app/components/CollapsibleReaderHeader";
 import SaveBibleIQContext from "@/app/components/SaveBibleIQContext";
 import VerseActionController from "@/app/components/VerseActionController";
 import ReaderStickyHeader from "@/app/components/ReaderStickyHeader";
-import { bookCatalog } from "../../../data/scripture/bookCatalog";
+import { bookCatalog, getBookChapters } from "../../../data/scripture/bookCatalog";
 import {
   normalizeReaderChapter,
   type ReaderChapter,
@@ -164,9 +164,9 @@ function getAvailableBooks() {
   return bookCatalog.map((item) => item.book);
 }
 
-function getMaxChapter(book: string) {
+function getMaxChapter(book: string, translation: Translation) {
   return (
-    bookCatalog.find((item) => item.book === book)?.chapters || 1
+    Math.max(...getBookChapters(book, translation), 1)
   );
 }
 
@@ -268,20 +268,23 @@ export default async function ReadChapterPage({
   });
 
   const books = getAvailableBooks();
-  const maxChapter = getMaxChapter(decodedBook);
+  const maxChapter = getMaxChapter(decodedBook, activeTranslation);
+  const chapterNumbers = getBookChapters(decodedBook, activeTranslation);
+  const previousNumber = chapterNumbers.filter(value => value < chapterNumber).at(-1);
+  const nextNumber = chapterNumbers.find(value => value > chapterNumber);
   const translationLabel = getTranslationLabel(activeTranslation);
 
   const previousChapterHref =
-    chapterNumber > 1
+    previousNumber !== undefined
       ? `/read/${encodeURIComponent(decodedBook)}/${
-          chapterNumber - 1
+          previousNumber
         }?translation=${activeTranslation}`
       : null;
 
   const nextChapterHref =
-    chapterNumber < maxChapter
+    nextNumber !== undefined
       ? `/read/${encodeURIComponent(decodedBook)}/${
-          chapterNumber + 1
+          nextNumber
         }?translation=${activeTranslation}`
       : null;
 

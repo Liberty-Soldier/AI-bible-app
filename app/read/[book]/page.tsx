@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import BookPassageSelector from "@/app/components/BookPassageSelector";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
-import { bookCatalog } from "@/app/data/scripture/bookCatalog";
+import { bookCatalog, getBookTranslation, getBookChapters } from "@/app/data/scripture/bookCatalog";
 
 type Translation = "web" | "kjv" | "brenton";
 
@@ -22,13 +22,16 @@ export default async function BookPage({
   const { translation } = await searchParams;
 
   const decodedBook = decodeURIComponent(book);
-  const activeTranslation = getActiveTranslation(translation);
+  const requestedTranslation = getActiveTranslation(translation);
 
   const bookInfo = bookCatalog.find((item) => item.book === decodedBook);
 
   if (!bookInfo) {
     notFound();
   }
+  const activeTranslation = requestedTranslation
+    ? getBookTranslation(decodedBook, requestedTranslation)
+    : bookInfo.translations?.length === 1 ? bookInfo.translations[0] : undefined;
 
   return (
     <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-6 text-[var(--foreground)]">
@@ -50,10 +53,12 @@ export default async function BookPage({
           </h1>
 
           <p className="mt-2 text-sm text-[var(--muted)]">
-            {activeTranslation ? `${activeTranslation.toUpperCase()} · ` : ""}{bookInfo.chapters} chapters
+            {activeTranslation ? `${activeTranslation.toUpperCase()} · ` : ""}{activeTranslation ? getBookChapters(decodedBook, activeTranslation).length : bookInfo.chapters} chapters
           </p>
         </div>
 
+        {decodedBook === "Proverbs" && activeTranslation === "brenton" ? <p className="mb-5 text-sm text-[var(--muted)]">Chapter 30 is unavailable in the verified Brenton corpus; original numbering is preserved.</p> : null}
+        {bookInfo.note ? <p className="mb-5 text-sm leading-6 text-[var(--muted)]">{bookInfo.note}</p> : null}
         <BookPassageSelector
           book={decodedBook}
           chapterCount={bookInfo.chapters}

@@ -71,13 +71,16 @@ export default function DailyPassage() {
     }, []);
     const verses: ReaderMemoryVerse[] = passage?.verses.map(v => { const m = v.reference.match(/^(.+) (\d+):(\d+[a-z]?)$/)!; return { id: `${v.translation}:${m[1]}:${m[2]}:${m[3]}`, book: m[1], chapter: Number(m[2]), verse: Number.parseInt(m[3]), verseLabel: m[3], reference: v.reference, text: v.text, translation: v.translation }; }) || [];
     const exactText = passage ? `${passage.reference} (${passage.translation === 'brenton' ? 'Brenton' : passage.translation.toUpperCase()})\n\n${passage.verses.map(v => v.text).join('\n')}` : '';
+    const first = verses[0];
+    const readerHref = passage && first ? buildReaderHref({ book: first.book, chapter: first.chapter, verse: first.verseLabel, translation: passage.translation }) : '';
+    const shareText = `${exactText}\n\nExplore Scripture with EMETSEES\n${new URL(readerHref || '/read', 'https://www.emetsees.com').toString()}`;
     async function act(action: 'copy' | 'share') {
         setFeedback('');
         try {
             if (action === 'share' && navigator.share)
-                await navigator.share({ title: passage?.reference, text: exactText });
+                await navigator.share({ title: passage?.reference, text: shareText });
             else {
-                await navigator.clipboard.writeText(exactText);
+                await navigator.clipboard.writeText(action === 'share' ? shareText : exactText);
                 setFeedback(action === 'copy' ? 'Copied.' : 'Copied for sharing.');
             }
         }
@@ -86,7 +89,6 @@ export default function DailyPassage() {
                 setFeedback('Sharing was unavailable. Please try copying the passage.');
         }
     }
-    const first = verses[0];
     const excerpt = passage && passage.verses.length > 3 ? passage.verses.slice(0, 2) : passage?.verses || [];
     const isExcerpt = !!passage && excerpt.length < passage.verses.length;
     return <section aria-labelledby="daily-passage-title" className="my-9 py-2">
@@ -97,7 +99,7 @@ export default function DailyPassage() {
    <blockquote data-daily-excerpt className="mt-3 space-y-2 font-serif text-lg leading-7 sm:text-2xl sm:leading-relaxed">{excerpt.map(v => <p key={v.reference}>{sacredNames ? renderSacredNames(v.text, v.reference) : v.text}</p>)}</blockquote>
    {passage.fallback ? <p className="mt-3 text-sm text-[var(--muted)]">{passage.fallback}</p> : null}
    <div className="mt-4 flex flex-wrap gap-x-5 text-sm">
-    <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href={buildReaderHref({ book: first.book, chapter: first.chapter, verse: first.verseLabel, translation: passage.translation })}>Read full passage</Link>
+    <Link className="inline-flex min-h-11 items-center underline underline-offset-4" href={readerHref}>Read full passage</Link>
     <button className="min-h-11" disabled={!bookmarkVerses.length} aria-pressed={saved} onClick={() => { toggleBookmarks(bookmarkVerses); setSaved(areAllBookmarked(bookmarkVerses)); }}> {saved ? 'Bookmarked' : 'Bookmark'}</button>
     <button aria-label="Copy full passage" className="min-h-11" onClick={() => void act('copy')}>Copy</button><button aria-label="Share full passage" className="min-h-11" onClick={() => void act('share')}>Share</button>
    </div>

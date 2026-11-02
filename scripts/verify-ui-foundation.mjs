@@ -189,7 +189,6 @@ for (const [translation, available, citation] of [
       ...defaultModules,
       ...Object.fromEntries(readerComponents.map((name) => [`@/app/components/${name}`, { __esModule: true, default: name }])),
       "next/headers": { headers: async () => new Map([["host", "fixture.invalid"]]) },
-      "../../../data/scripture/bookCatalog": { bookCatalog: [{ book: "Genesis", chapters: 50 }] },
       "@/app/data/scripture/ReaderVerseAdapter": { normalizeReaderChapter: (data) => data },
       "@/app/data/scripture/CanonicalVerseStore": { getCanonicalChapterTokenAvailability: async () => ({}) },
     },
