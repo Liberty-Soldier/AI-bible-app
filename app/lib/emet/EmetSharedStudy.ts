@@ -1,4 +1,5 @@
 import "server-only";
+import { publicAnswerNotes } from "./answerPrivacy";
 import { eligibleSimpleSources } from "../conversations/simplePublication";
 
 import { createHash } from "node:crypto";
@@ -115,7 +116,7 @@ export async function getPublishedSharedStudy(id: string): Promise<SharedStudySn
   if (error || !data) return null;
   if(data.source_kind === "simple" && !eligibleSimpleSources(data.source_passages))return null;
   return {
-    qualifications: Array.isArray(data.qualifications) ? data.qualifications as string[] : [],
+    qualifications: publicAnswerNotes(data.qualifications),
     sourceKind: data.source_kind as string,
     id: data.id as string,
     question: data.question as string,

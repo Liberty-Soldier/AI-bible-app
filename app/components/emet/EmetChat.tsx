@@ -58,6 +58,7 @@ type Answer = {
   continuityChecks: EmetAiContinuityCheck[];
   sourceVerification?: "locked-corpus-text";
   verificationStatus?: "references-verified" | "unverified";
+  referenceVerificationStatus?: "references-verified" | "unverified";
   unresolvedReferences?: Array<{ reference: string; translation?: string; reason: string }>;
   citations: Array<{ evidenceId: string; reference?: string; text?: string; translation?: string; verification?: "locked-corpus-text" }>;
   limitations: string[];
@@ -195,6 +196,7 @@ function contextLabel(context: ReaderContext | WordContext | null) {
 function simpleInspection(value: Partial<Answer>) {
   return {
     verificationStatus: value.verificationStatus === "unverified" ? "unverified" as const : value.verificationStatus === "references-verified" ? "references-verified" as const : undefined,
+    referenceVerificationStatus: value.referenceVerificationStatus,
     unresolvedReferences: Array.isArray(value.unresolvedReferences) ? value.unresolvedReferences.slice(0, 17)
       .filter((item) => item && typeof item.reference === "string" && typeof item.reason === "string")
       .map((item) => ({ reference: item.reference.slice(0, 160), reason: item.reason.slice(0, 64), translation: typeof item.translation === "string" ? item.translation.slice(0, 32) : undefined })) : [],
@@ -938,13 +940,10 @@ export default function EmetChat({
           {exchanges.map((exchange) => {
             const outcome = exchange.outcome || (exchange.answer.status === "insufficient-evidence" ? "insufficient-evidence" : exchange.source === "fail-closed" ? "failed" : "answered");
             const simpleSources = exchange.source === "simple-owner-model" || exchange.answer.sourceVerification === "locked-corpus-text";
-            const allNotes = qualifications(exchange.answer, simpleSources);
+            const allNotes = outcome === "failed" ? exchange.answer.limitations : qualifications(exchange.answer, simpleSources);
             const technicalNotes = allNotes.filter(isGeneralAnswerNotice);
             const ownerNotes = allNotes.filter(isOwnerAnswerDiagnostic);
             const notes = allNotes.filter(note => !isGeneralAnswerNotice(note) && !isOwnerAnswerDiagnostic(note));
-            if (exchange.source === "simple-owner-model" && exchange.answer.verificationStatus === "unverified" && !initialOwnerDiagnostics) {
-              return <article key={exchange.id} role="status" className="text-sm text-[var(--muted)]">This saved unverified response is available only for authorized owner inspection.</article>;
-            }
             return (
               <article key={exchange.id} className="space-y-2" aria-label="Question and response">
                 <div className="flex justify-end" data-emet-scroll-anchor={`${exchange.id}:question`}>
@@ -952,13 +951,12 @@ export default function EmetChat({
                 </div>
                 {exchange.initialScripture?.length ? <InitialScripture items={exchange.initialScripture} pending={false} onNavigate={onClose} /> : null}
                 <div className="min-w-0 space-y-2" data-emet-scroll-anchor={`${exchange.id}:answer`}>
-                  {outcome !== "answered" ? (
-                    <p role={outcome === "failed" ? "alert" : "status"} className="text-sm font-semibold">{exchange.remotePending ? "Preparing answer" : outcome === "insufficient-evidence" ? "Insufficient evidence" : "Answer unavailable"}</p>
+                  {outcome === "failed" || exchange.remotePending ? (
+                    <p role={outcome === "failed" ? "alert" : "status"} className="text-sm font-semibold">{exchange.remotePending ? "Preparing answer" : "Please try again"}</p>
                   ) : null}
                   {exchange.imported || (simpleSources && exchange.answer.verificationStatus === "unverified") ? (
-                    <section role="alert" aria-label="Unverified model answer" className="rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3 text-sm leading-6">
-                      <p className="font-semibold">{exchange.imported ? "Imported browser answer · not reverified" : initialOwnerDiagnostics ? "Unverified model answer · owner inspection only" : "Unverified model answer"}</p>
-                      <p>{exchange.imported ? "Imported browser content has not been reverified and cannot be published as a verified study." : UNVERIFIED_REFERENCE_WARNING}</p>
+                    <section role="alert" aria-label="Check this answer" className="rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3 text-sm leading-6">
+                      <p>{exchange.imported ? "Imported browser content has not been reverified and cannot be published as a verified study." : exchange.answer.referenceVerificationStatus === "references-verified" ? "Please check the passages and limitations below before relying on this explanation." : UNVERIFIED_REFERENCE_WARNING}</p>
                       {initialOwnerDiagnostics && exchange.answer.unresolvedReferences?.length ? (
                         <details className="mt-2"><summary className="min-h-11 cursor-pointer py-2">Owner diagnostics</summary><ul aria-label="Unresolved references (not verified)" className="space-y-1">
                           {exchange.answer.unresolvedReferences.map((item, index) => <li key={index}>{item.reference}{item.translation ? ` · ${item.translation}` : ""} — not verified</li>)}

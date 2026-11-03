@@ -270,8 +270,8 @@ assert.equal(reading.viewport.scrollTop, 1400, "Expanding evidence must preserve
 console.log("PASS: older-message scroll restoration/stability, one-shot answer reveal, evidence inspection, and visual-viewport composer sizing with fixtures");
 
 for (const [status, payload, expected] of [
-  [422, { status: "insufficient-evidence", answer: "Exact insufficient-evidence wording.", limitations: ["The passages do not establish that timing."] }, "Insufficient evidence"],
-  [503, { answer: "Exact service response.", limitations: ["No complete answer was verified."] }, "Answer unavailable"],
+  [422, { status: "insufficient-evidence", answer: "Exact insufficient-evidence wording.", limitations: ["The passages do not establish that timing."] }, "Exact insufficient-evidence wording"],
+  [503, { answer: "Exact service response.", limitations: ["No complete answer was verified."] }, "Please try again"],
 ]) {
   const failed = chatFixture();
   failed.type("Question without enough evidence");
@@ -298,7 +298,7 @@ disconnected.type("Keep this newer follow-up");
 disconnected.requests[0].reject(new Error("Fixture network failure"));
 await tick();
 tree = disconnected.render();
-assert.match(text(tree), /Answer unavailable/);
+assert.match(text(tree), /Please try again/);
 assert.equal(elements(tree, (x) => x.props["data-preliminary-scripture"])[0].props.open, undefined);
 assert.equal(elements(tree, (x) => x.type === "textarea")[0].props.value, "Keep this newer follow-up");
 disconnected.send();
@@ -472,8 +472,8 @@ const unresolvedPayload={...simplePayload,status:'complete-unverified',shareStud
 const inspectChat=chatFixture({history:[],props:{initialEngine:"simple",initialOwnerDiagnostics:true}});
 inspectChat.render();inspectChat.type('Can a Christian eat pork?');inspectChat.send();inspectChat.requests[0].finish(unresolvedPayload);await tick();inspectChat.render();
 assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='EMET response')[0].props.children,unresolvedAnswer);
-assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='Unverified model answer'&&x.props.role==='alert').length,1);
-assert.match(text(inspectChat.tree()),/owner inspection only/);
+assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='Check this answer'&&x.props.role==='alert').length,1);
+assert.doesNotMatch(text(inspectChat.tree()),/owner inspection only|Unverified model answer/);
 assert.match(text(inspectChat.tree()),/Invented 999:1 · web — not verified/);
 assert.equal(elements(inspectChat.tree(),x=>x.type==='a'&&text(x).includes('Invented')).length,0);
 assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
@@ -482,7 +482,7 @@ inspectChat.type('Does your previous answer follow from Scripture?');inspectChat
 assert.equal(inspectChat.requests[1].body.simpleHistory[0].answer,unresolvedAnswer);
 inspectChat.requests[1].finish(unresolvedPayload);await tick();inspectChat.render();
 const restoredInspection=chatFixture({props:{initialOwnerDiagnostics:true},history:[{id:'unverified-stored',question:'An owner question',source:'simple-owner-model',shareStudyId:'must-stay-hidden',answer:unresolvedPayload.answer}]});
-assert.equal(elements(restoredInspection.tree(),x=>x.props['aria-label']==='Unverified model answer').length,1);
+assert.equal(elements(restoredInspection.tree(),x=>x.props['aria-label']==='Check this answer').length,1);
 assert.equal(elements(restoredInspection.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
 assert.match(text(restoredInspection.tree()),/Invented 999:1/);
 const noSources=chatFixture({props:{initialOwnerDiagnostics:true},history:[{id:'no-sources',question:'An owner question',source:'simple-owner-model',answer:{...unresolvedPayload.answer,citations:[]}}]});
@@ -602,7 +602,7 @@ hiddenArrival.render({active:true});assertResponseBeginning(hiddenArrival);
 const simpleArrival=chatFixture({history:[],props:{initialEngine:"simple",initialOwnerDiagnostics:true}});
 simpleArrival.render();simpleArrival.viewport.scrollHeight=6000;
 simpleArrival.type('A Simple EMET reading fixture');simpleArrival.send();simpleArrival.requests[0].finish({...unresolvedPayload,answer:{...unresolvedPayload.answer,answer:longText}});await tick();simpleArrival.render();assertResponseBeginning(simpleArrival);
-assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Unverified model answer').length,1);
+assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Check this answer').length,1);
 assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
 assert.match(scrollRegion(simpleArrival).props.className,/px-3.*sm:px-5/);
 assert.match(elements(simpleArrival.tree(),x=>x.props['data-emet-content'])[0].props.className,/space-y-4/);
@@ -633,11 +633,11 @@ assert.match(text(migrated.tree()),/A preserved owner question/);assert.equal(el
 assert.equal(JSON.parse(migrated.sessionStorage.getItem('emetsees-conversation'))[0].question,prior.question,'Public history must not be overwritten when preserving a legacy owner thread');
 migrated.render({initialEngine:'current'});assert.match(text(migrated.tree()),/A preserved owner question/);assert.equal(elements(migrated.tree(),x=>x.type==='textarea')[0].props.value,'Owner follow-up');
 const noOwner=chatFixture({history:[prior],legacyHistory:[legacyOwner],props:{initialEngine:'simple',initialOwnerDiagnostics:false}});assert.doesNotMatch(text(noOwner.tree()),/A preserved owner question/);
-const privateHistory=chatFixture({history:[{...legacyOwner,source:'simple-owner-model',answer:unresolvedPayload.answer}],props:{initialOwnerDiagnostics:false}});assert.doesNotMatch(text(privateHistory.tree()),/Invented 999:1|An exact model answer/);assert.match(text(privateHistory.tree()),/authorized owner inspection/);
+const privateHistory=chatFixture({history:[{...legacyOwner,source:'simple-owner-model',answer:unresolvedPayload.answer}],props:{initialOwnerDiagnostics:false}});assert.match(text(privateHistory.tree()),/An exact model answer/);assert.doesNotMatch(text(privateHistory.tree()),/owner inspection only|authorized owner inspection/);assert.equal(elements(privateHistory.tree(),x=>x.props['aria-label']==='Unresolved references (not verified)').length,0);
 console.log('PASS: actual public default, no selector/experimental labels, public history preserved, legacy owner history/draft preserved without merging threads, rollback continuity and private saved diagnostics hidden from non-owners.');
 
 const publicUnverified=chatFixture({history:[{...legacyOwner,source:'simple-model',answer:{...unresolvedPayload.answer,unresolvedReferences:undefined}}],props:{initialEngine:'simple',initialOwnerDiagnostics:false}});
-assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Unverified model answer').length,1);
+assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Check this answer').length,1);
 assert.equal(elements(publicUnverified.tree(),x=>x.props['data-emet-answer'])[0].props.children,unresolvedPayload.answer.answer);
 assert.doesNotMatch(text(publicUnverified.tree()),/owner inspection only|Unresolved references/);
 assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Unresolved references (not verified)').length,0);

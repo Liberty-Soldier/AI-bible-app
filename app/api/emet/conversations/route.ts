@@ -25,7 +25,7 @@ export async function GET(request: Request) {
             const { data, error } = await db.from("emet_conversation_turns").select("request_id,sequence,question,context,state,response,http_status,imported,created_at").eq("conversation_id", id).gt("sequence", after).order("sequence").limit(200);
             if (error)
                 throw error;
-            return reply({ userId: owner, conversation, turns: data });
+            return reply({ userId: owner, conversation, turns: data?.map(turn => ({ ...turn, response: turn.response ? privateResponse(turn.response) : turn.response })) });
         }
         const cursor = new URL(request.url).searchParams.get("cursor");
         let query = db.from("emet_conversations").select("id,title,revision,updated_at").eq("owner_user_id", owner).is("deleted_at", null).order("updated_at", { ascending: false }).order("id", { ascending: false }).limit(100);

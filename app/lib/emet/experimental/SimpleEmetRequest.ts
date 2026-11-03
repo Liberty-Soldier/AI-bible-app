@@ -1,4 +1,5 @@
 import "server-only";
+import { publicAnswerNotes } from "../answerPrivacy";
 
 import { getSimpleEmetAccess, claimSimpleRequest, recordUnlimitedSimpleRequest, simpleRequestKey } from "./SimpleEmetAccess";
 import { configuredSimpleEmetModel, generateSimpleEmet, parseSimpleHistory, type SimpleGenerationDiagnostics } from "./SimpleEmet";
@@ -46,8 +47,8 @@ export async function handleSimpleEmet(input: { userId: string; requestId: strin
       const diagnosticFields = report(generation.code, generation.stage, 502);
       return { status: 502, body: {
         status: "answer-unavailable", engine: "simple", ...diagnosticFields,
-        answer: "EMET did not return a complete, valid answer. Please try again.",
-        limitations: access.ownerDiagnostics ? [`Owner diagnostic: ${generation.code} (${generation.stage}).`] : [],
+        answer: "EMET could not finish this answer. Please try again.",
+        limitations: [],
         usage: await getEmetAiUsageSummary(),
       } };
     }
@@ -57,15 +58,16 @@ export async function handleSimpleEmet(input: { userId: string; requestId: strin
       stage = "usage-completion";
       await refundFailedEmetAiQuestion(input.requestId);
       await completeEmetAiQuestion(input.requestId, "fail-closed");
-      return { status: 422, body: {
-        status: "insufficient-evidence", engine: "simple", source: "simple-model",
-        ...report("model-insufficient-evidence", "model-answer", 422),
+      return { status: 200, body: {
+        status: "complete-unverified", engine: "simple", source: "simple-model",
+        ...report("model-insufficient-evidence", "model-answer", 200),
         answer: {
           status: "insufficient-evidence", answer: draft.answer, conclusionSupport: draft.support,
           claims: [], componentChecks: [], continuityChecks: [], citations: verified.citations,
           sourceVerification: "locked-corpus-text", verificationStatus: "unverified",
+          referenceVerificationStatus: verified.ok ? "references-verified" : "unverified",
           ...(access.ownerDiagnostics ? { unresolvedReferences: verified.unresolved } : {}),
-          limitations: [...draft.limitations, "The model reported insufficient evidence. This explanation is unverified."],
+          limitations: publicAnswerNotes(draft.limitations),
         }, usage: await getEmetAiUsageSummary(),
       } };
     }
@@ -80,8 +82,9 @@ export async function handleSimpleEmet(input: { userId: string; requestId: strin
           status: "complete", answer: draft.answer, conclusionSupport: draft.support,
           claims: [], componentChecks: [], continuityChecks: [], citations: verified.citations,
           sourceVerification: "locked-corpus-text", verificationStatus: verified.ok ? "references-verified" : "unverified",
+          referenceVerificationStatus: verified.ok ? "references-verified" : "unverified",
           ...(access.ownerDiagnostics ? { unresolvedReferences: verified.unresolved } : {}),
-          limitations: [...draft.limitations, ...(!verified.ok ? ["Unverified model answer: some Scripture references could not be resolved. Only the separately displayed passages have verified corpus text."] : []), "The explanation, its prose references, and any quoted wording are model-generated and not independently verified. Only the server-supplied Scripture passages are checked against their stated translations; this does not establish support for every theological inference."],
+          limitations: publicAnswerNotes(draft.limitations),
         },
       },
     };

@@ -82,7 +82,7 @@ claim = 'rate-limited'; assert.equal((await service.handleSimpleEmet(input)).sta
 assert.equal((await service.handleSimpleEmet({ ...input, history: Array(7).fill(history[0]) })).status,400);
 quota = { allowed: false }; assert.equal((await service.handleSimpleEmet(input)).status,429); quota = { allowed: true, charged: true, unlimited: false };
 generated = { ...draft, references: [{ reference: 'John 999:3', translation: 'web' }] }; const unresolved = await service.handleSimpleEmet(input); assert.equal(unresolved.status,200); assert.equal(unresolved.body.status,'complete-unverified'); assert.equal(unresolved.body.answer.citations.length,0);
-generated = { ...draft, status: 'insufficient-evidence' }; assert.equal((await service.handleSimpleEmet(input)).status,422);
+generated = { ...draft, status: 'insufficient-evidence' }; assert.equal((await service.handleSimpleEmet(input)).status,200);
 fail = true; result = await service.handleSimpleEmet(input); assert.equal(result.status,503); assert.doesNotMatch(JSON.stringify(result),/private detail/);
 for (const file of fs.readdirSync('app/lib/emet/experimental')) assert.doesNotMatch(fs.readFileSync(`app/lib/emet/experimental/${file}`,'utf8'), /EmetAiIdentity|setSupabaseEmetAiRequestCache|appendSupabaseEmetConversationLedger|EmetAiPlanner/);
 const route = fs.readFileSync('app/api/emet/ask/route.ts','utf8');

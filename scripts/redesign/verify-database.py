@@ -79,6 +79,14 @@ assert used=='1'
 sql(f"set role authenticated;set request.jwt.claim.sub='{a}';select count(*) from emet_conversations;select count(*) from emet_conversation_turns")
 assert sql(f"select questions_used from emet_usage_periods where user_id='{a}'")==used
 print('PASS: original billing RPC reserves the expected single question after migration; history reads do not change usage. No provider call.')
+# Private JSON is available only through sanitizing authenticated application routes.
+prior_turns=sql("select count(*) from emet_conversation_turns")
+sql((root/'supabase/migrations/20261103140000_private_answer_transport.sql').read_text())
+assert sql("select has_table_privilege('authenticated','emet_conversation_turns','select')")=='f'
+assert sql("select has_column_privilege('authenticated','emet_conversation_turns','response','select')")=='f'
+assert sql("select has_table_privilege('service_role','emet_conversation_turns','select')")=='t'
+assert sql("select count(*) from emet_conversation_turns")==prior_turns
+print('PASS: security migration denies direct raw-response reads without changing any stored turns; server history access and existing RLS remain intact.')
 sql(f"delete from auth.users where id='{a}'")
 assert sql(f"select count(*) from emet_conversations where owner_user_id='{a}'")=='0'
 assert sql("select count(*) from emet_conversation_turns")=='0'

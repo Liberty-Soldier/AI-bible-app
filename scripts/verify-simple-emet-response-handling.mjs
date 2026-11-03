@@ -102,7 +102,7 @@ for(const [value,code]of errors){const result=await run(questions[0],value);asse
 for(const references of [[],[{reference:'Invented 1:1',translation:'web'}]]){
  const answer='These passages do not establish the requested conclusion.';
  const result=await run(questions[0],completed({...draft,status:'insufficient-evidence',answer,references}));
- assert.equal(result.status,422);assert.equal(result.body.status,'insufficient-evidence');assert.equal(result.body.diagnostics.code,'model-insufficient-evidence');
+ assert.equal(result.status,200);assert.equal(result.body.status,'complete-unverified');assert.equal(result.body.diagnostics.code,'model-insufficient-evidence');
  assert.equal(result.body.answer.answer,answer);assert.equal(result.body.answer.verificationStatus,'unverified');assert.deepEqual(events,['reserve','refund','fail-closed']);
 }
 allow=false;const count=calls.length,logCount=logs.length;assert.equal((await run(questions[0],completed(draft))).status,403);assert.equal(calls.length,count);assert.equal(logs.length,logCount);allow=true;

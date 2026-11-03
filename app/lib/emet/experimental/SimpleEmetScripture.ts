@@ -3,7 +3,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
-import { normalizeBookName } from "../../../data/bookAliases";
+import { normalizeBookName, bookAliasMap } from "../../../data/bookAliases";
 import type { SimpleDraft } from "./SimpleEmet";
 
 type Translation = "web" | "kjv" | "brenton";
@@ -12,7 +12,11 @@ type Index = { records: RecordRow[]; byReference: Map<string, RecordRow>; books:
 const indexes = new Map<Translation, Index>();
 
 function canonicalBook(value: string, books: Set<string>) {
-  const normalized = normalizeBookName(value);
+  const key = (name: string) => name.replace(/[.\s]/g, "").toLowerCase();
+  const exact = [...books].find(book => key(book) === key(value));
+  if (exact) return exact;
+  const alias = Object.entries(bookAliasMap).find(([name]) => key(name) === key(value))?.[1];
+  const normalized = alias || normalizeBookName(value);
   return [...books].find((book) => book.toLowerCase() === normalized.toLowerCase()) || normalized;
 }
 
@@ -31,12 +35,27 @@ function loadIndex(translation: Translation): Index {
 }
 
 export function resolveSimpleReference(raw: string, translation: Translation): Array<{ reference: string; text: string; translation: Translation }> | null {
-  const crossChapter = raw.trim().replace(/[–—]/g, "-").match(/^(.+?)\s+(\d+):(\d+[a-z]?)-(\d+):(\d+[a-z]?)$/i);
+  // Normalize reference syntax only; never guess a different passage/translation.
+  const suffix = raw.match(/\s*\((WEB|KJV|Brenton)\)\s*$/i);
+  if (suffix && suffix[1].toLowerCase() !== translation) return null;
+  const reference = (suffix ? raw.slice(0, suffix.index) : raw).trim()
+    .replace(/[–—]/g, "-").replace(/\s*([:,;-])\s*/g, "$1").replace(/\s+/g, " ");
+  if (reference.includes(";")) {
+    const parts = reference.split(";");
+    if (parts.length > 16 || parts.some(part => !part)) return null;
+    const firstBook = /^(.+?)\s+\d+:/.exec(parts[0])?.[1];
+    if (!firstBook) return null;
+    const resolved = parts.map(part => resolveSimpleReference(/^\d+:/.test(part) ? `${firstBook} ${part}` : part, translation));
+    if (resolved.some(part => !part)) return null;
+    const rows = resolved.flatMap(part => part!);
+    return rows.length <= 40 ? [...new Map(rows.map(row => [row.reference, row])).values()] : null;
+  }
+  const crossChapter = reference.match(/^(.+?)\s+(\d+):(\d+[a-z]?)-(\d+):(\d+[a-z]?)$/i);
   if (crossChapter) {
     const index = loadIndex(translation);
     const book = canonicalBook(crossChapter[1], index.books);
-    const first = `${book} ${Number(crossChapter[2])}:${crossChapter[3]}`;
-    const last = `${book} ${Number(crossChapter[4])}:${crossChapter[5]}`;
+    const first = `${book} ${Number(crossChapter[2])}:${crossChapter[3].toLowerCase()}`;
+    const last = `${book} ${Number(crossChapter[4])}:${crossChapter[5].toLowerCase()}`;
     const start = index.records.findIndex((row) => `${row[0]} ${row[1]}:${row[2]}` === first);
     const end = index.records.findIndex((row) => `${row[0]} ${row[1]}:${row[2]}` === last);
     if (start < 0 || end < start || end - start >= 40) return null;
@@ -44,7 +63,7 @@ export function resolveSimpleReference(raw: string, translation: Translation): A
     if (rows.some((row) => row[0] !== book)) return null;
     return rows.map((row) => ({ reference: `${row[0]} ${row[1]}:${row[2]}`, text: row[3], translation }));
   }
-  const match = raw.trim().replace(/[–—]/g, "-").match(/^(.+?)\s+(\d+):(.+)$/);
+  const match = reference.match(/^(.+?)\s+(\d+):(.+)$/);
   if (!match) return null;
   const index = loadIndex(translation);
   const book = canonicalBook(match[1], index.books);
@@ -56,12 +75,12 @@ export function resolveSimpleReference(raw: string, translation: Translation): A
     if (!part) return null;
     if (part[1]) chapter = Number(part[1]);
     if (chapter < 1) return null;
-    if (!part[3]) references.push(`${book} ${chapter}:${part[2]}`);
+    if (!part[3]) references.push(`${book} ${chapter}:${part[2].toLowerCase()}`);
     else {
       if (!/^\d+$/.test(part[2]) || !/^\d+$/.test(part[3])) return null;
       const first = Number(part[2]);
       const last = Number(part[3]);
-      if (last < first || last - first >= 20) return null;
+      if (last < first || last - first >= 40) return null;
       for (let verse = first; verse <= last; verse++) references.push(`${book} ${chapter}:${verse}`);
     }
     if (references.length > 40) return null;
@@ -100,7 +119,7 @@ export function verifySimpleDraft(draft: SimpleDraft) {
     if (expanded > 80) { unresolved.push({ reference, translation, reason: "citation-limit" }); continue; }
     for (const verse of resolved) sources.set(`${verse.translation}:${verse.reference}`, verse);
   }
-  if (!sources.size && !unresolved.length && draft.status === "complete") unresolved.push({ reference: "No Scripture sources supplied", reason: "citations-missing" });
+  if (!sources.size && !unresolved.length) unresolved.push({ reference: "No Scripture sources supplied", reason: "citations-missing" });
   return {
     ok: unresolved.length === 0, code: unresolved[0]?.reason,
     stage: "citation-resolution" as const, unresolved,

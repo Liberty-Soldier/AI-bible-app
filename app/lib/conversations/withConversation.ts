@@ -38,7 +38,7 @@ export async function withConversation(request: Request, generate: (r: Request) 
     if (error)
         return fail('history-unavailable', 503);
     if (data?.status === 'complete')
-        return Response.json(data.response, { status: data.httpStatus, headers });
+        return Response.json(privateResponse(data.response), { status: data.httpStatus, headers });
     if (data?.status !== 'created')
         return fail(data?.status === 'not-found' ? 'conversation-deleted' : 'conversation-busy', data?.status === 'not-found' ? 410 : 409);
     let response: Response;

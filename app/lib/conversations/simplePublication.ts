@@ -1,4 +1,5 @@
 import "server-only";
+import { publicAnswerNotes } from "../emet/answerPrivacy";
 import { createHash } from "node:crypto";
 import { conversationStore } from "./store";
 import { resolveSimpleReference } from "../emet/experimental/SimpleEmetScripture";
@@ -19,7 +20,7 @@ export async function saveSimplePublication(owner: string, question: string, bod
     const db = conversationStore();
     if (!db)
         return null;
-    const snapshot = { question, answer: a.answer, citations: a.citations, qualifications: Array.isArray(a.limitations) ? a.limitations : [] };
+    const snapshot = { question, answer: a.answer, citations: a.citations, qualifications: publicAnswerNotes(a.limitations) };
     const hash = createHash('sha256').update(JSON.stringify(snapshot)).digest('hex');
     const { data, error } = await db.from('emet_shared_studies').upsert({ owner_user_id: owner, snapshot_hash: `simple:${hash}`, question, answer: a.answer, citations: (a.citations as Array<{
             reference: string;

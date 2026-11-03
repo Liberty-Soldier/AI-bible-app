@@ -1,3 +1,4 @@
+import { isPrivateAnswerNote } from "@/app/lib/emet/answerPrivacy";
 import type { EmetAiClaimSupport } from "@/app/lib/emet/EmetAiContract";
 
 export function followsLatest(viewport: { scrollHeight: number; scrollTop: number; clientHeight: number }) {
@@ -57,10 +58,10 @@ export const CITATION_VERIFICATION_NOTICE = "The explanation, its prose referenc
 export const UNVERIFIED_SERVICE_NOTICE = "Unverified model answer: some Scripture references could not be resolved. Only the separately displayed passages have verified corpus text.";
 export const UNVERIFIED_REFERENCE_WARNING = "Some Scripture references in this answer could not be verified. Please check them before relying on this explanation.";
 export function isGeneralAnswerNotice(note: string) {
-  return note === CITATION_VERIFICATION_NOTICE || note === UNVERIFIED_SERVICE_NOTICE;
+  return note === CITATION_VERIFICATION_NOTICE || note === UNVERIFIED_SERVICE_NOTICE || note === "The model reported insufficient evidence. This explanation is unverified.";
 }
 export function isOwnerAnswerDiagnostic(note: string) {
-  return note.startsWith("Owner diagnostic:");
+  return isPrivateAnswerNote(note);
 }
 export function formatAnswerForSharing({ question, answer, limitations = [], unverified = false, imported = false }: {
   question: string; answer: string; limitations?: string[]; unverified?: boolean; imported?: boolean;
