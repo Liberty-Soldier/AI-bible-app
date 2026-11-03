@@ -76,10 +76,6 @@ function HomePage() {
       <section className="mx-auto max-w-2xl">
         <div className="mb-4 flex flex-col items-center pt-1 text-center">
           <EmetseesWordmark showDescriptor />
-          <p className="mt-2 max-w-sm text-sm leading-5 text-[var(--muted)]">
-            Read Scripture, explore its Hebrew and Greek source words, and
-            follow the evidence without leaving the reader.
-          </p>
         </div>
 
         {lastReading ? (

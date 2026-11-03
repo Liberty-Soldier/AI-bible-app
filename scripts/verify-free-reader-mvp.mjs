@@ -41,11 +41,12 @@ requireText(home, 'href="/search"', "home Scripture-search access");
 forbidText(home, "usePremiumAccess", "home premium dependency");
 forbidText(home, "requestUpgrade", "home upgrade interception");
 forbidText(home, "tap any word", "obsolete English-word tapping claim");
-requireText(
+forbidText(
   home,
   "explore its Hebrew and Greek source words",
-  "source-word home description",
+  "removed home introduction",
 );
+requireText(home, "<EmetseesWordmark showDescriptor />", "home logo, title and subtitle");
 requireText(readerSelector, 'label: "New Testament"', "New Testament book group");
 requireText(readerSelector, '"Matthew"', "first New Testament book");
 requireText(readerSelector, '"Revelation"', "last New Testament book");
@@ -165,7 +166,7 @@ for (const relativePath of publicTestRoutes) {
 
 console.log("Free-reader MVP verification passed.");
 console.log("- Home prompt opens authenticated Ask EMET while preserving direct Scripture search access.");
-console.log("- Home description accurately identifies Hebrew and Greek source-word study.");
+console.log("- Home keeps its branded header without the introductory paragraph.");
 console.log("- Reader book selector explicitly groups Matthew through Revelation as New Testament.");
 console.log("- Mobile section and book selection uses native disclosures with real chapter links.");
 console.log("- Chapter selection opens reading directly, with optional verse navigation in the reader.");
