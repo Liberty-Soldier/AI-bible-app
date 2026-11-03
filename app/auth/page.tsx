@@ -113,6 +113,8 @@ export default async function AuthPage({
               ) : null}
             </label>
 
+            {!isSignUp ? <Link href="/auth/forgot-password" className="inline-flex min-h-11 items-center text-sm font-semibold underline decoration-[var(--brand)] underline-offset-4">Forgot password?</Link> : null}
+
             <button
               type="submit"
               className="w-full rounded-2xl bg-[var(--foreground)] px-5 py-3.5 text-sm font-black text-[var(--background)] transition active:scale-[0.99]"

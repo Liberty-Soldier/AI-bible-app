@@ -59,7 +59,7 @@ async function requestOrigin() {
 
 export async function signInAction(formData: FormData) {
   const email = formValue(formData, "email").toLowerCase();
-  const password = formValue(formData, "password");
+  const password = String(formData.get("password") ?? "");
   const next = normalizeAuthNextPath(formValue(formData, "next"));
 
   if (!email || !password) {
@@ -102,7 +102,7 @@ export async function signInAction(formData: FormData) {
 
 export async function signUpAction(formData: FormData) {
   const email = formValue(formData, "email").toLowerCase();
-  const password = formValue(formData, "password");
+  const password = String(formData.get("password") ?? "");
   const next = normalizeAuthNextPath(formValue(formData, "next"));
 
   if (!email || !email.includes("@")) {
