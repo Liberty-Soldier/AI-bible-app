@@ -9,8 +9,9 @@ export type RecoveryState = { status: "idle" | "sent" | "error" | "expired" | "c
 
 export async function requestRecoveryAction(_previous: RecoveryState, form: FormData): Promise<RecoveryState> {
   const origin = (await headers()).get("origin");
-  // Keep the PKCE verifier and callback on the same allowed production host.
-  if (process.env.NODE_ENV === "production" && origin !== "https://emetsees.com") redirect("https://emetsees.com/auth/forgot-password");
+  // Requests stay on the canonical www host. Supabase permits the apex callback,
+  // which the existing Vercel redirect forwards (including its code) to www.
+  if (process.env.NODE_ENV === "production" && origin !== "https://emetsees.com" && origin !== "https://www.emetsees.com") redirect("https://www.emetsees.com/auth/forgot-password");
   const email = form.get("email");
   if (typeof email !== "string" || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
     return { status: "error", message: "Enter a valid email address." };
