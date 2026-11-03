@@ -60,3 +60,20 @@ const replayResult=await replay(new Request('https://fixture.invalid/api/emet/as
 const replayBody=await replayResult.json();assert.equal(replayResult.status,422,'Preserve historical transport status');assert.equal(replayBody.answer.answer,oldResponse.answer.answer);assert(!JSON.stringify(replayBody).includes('PRIVATE_'));assert.equal(generatedAgain,false);
 session=null;assert.equal((await replay(new Request('https://fixture.invalid/api/emet/ask',{method:'POST',body:JSON.stringify({persistConversation:true})}),async()=>{throw Error('Unauthenticated generation');})).status,401);
 console.log('PASS actual history GET and idempotent replay redact historical owner metadata, retain text/status, enforce ownership and authentication, and make zero generation or quota calls.');
+// Production framing correction: test the actual provider/parser/service and
+// authenticated historical transport, rather than only hiding client labels.
+const preamble='Please check the passages and limitations below before relying on this explanation.';
+const footer='EMET can make mistakes. Always verify its answers against Scripture.';
+for(const [i,user] of users.entries()){
+ session=sessions[i];
+ for(const [question,draft] of fixtures){
+  const response=await run(user,question,{...draft,status:'insufficient-evidence',answer:preamble+'\n\n'+draft.answer+'\n\n'+footer,limitations:[preamble,footer,'A material scope limitation remains.']});
+  assert.equal(response.status,200);assert.equal(response.body.answer.answer,draft.answer);assert.deepEqual(Array.from(response.body.answer.limitations),['A material scope limitation remains.']);assert.equal(response.body.answer.status,'insufficient-evidence');assert.equal(response.body.answer.verificationStatus,'unverified');assert.equal(response.body.answer.referenceVerificationStatus,'references-verified');assert.equal(Boolean(response.body.diagnostics),i===0);assert.equal(response.body.shareStudyId,undefined);
+ }
+}
+const exact='The passage does not explicitly establish that detail; this remains uncertain.';
+const safe=privateResponse({status:'insufficient-evidence',answer:{answer:preamble+'\n\n'+exact,status:'insufficient-evidence',verificationStatus:'unverified',limitations:[footer,'The date is not supplied.']}});
+assert.equal(safe.answer.answer,exact);assert.equal(safe.answer.status,'insufficient-evidence');assert.equal(safe.answer.verificationStatus,'unverified');assert.deepEqual(Array.from(safe.answer.limitations),['The date is not supplied.']);
+oldResponse.answer.answer=preamble+'\n\n'+fixtures[0][1].answer;session=sessions[0];
+const replayed=await historyApi.GET(new Request(`https://fixture.invalid/api/emet/conversations?id=${conversation}`));const replayedBody=await replayed.json();assert.equal(replayedBody.turns[0].response.answer.answer,fixtures[0][1].answer);assert.equal(oldResponse.answer.answer,preamble+'\n\n'+fixtures[0][1].answer,'Stored legacy data must not be overwritten by a read');
+console.log('PASS exact Trinity and other questions across provider/parser/service, separately authenticated signed-identity fixtures and historical GET: application preambles/footers removed, actual uncertainty and original verification status retained, no fabricated citations or publication eligibility.');

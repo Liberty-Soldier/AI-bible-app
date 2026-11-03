@@ -15,6 +15,13 @@ currentUser=crypto.randomUUID();for(const method of ['POST','DELETE','GET'])asse
 currentUser=owner;assert.equal((await api.DELETE(req('DELETE',{studyId:id},'https://attacker.invalid'))).status,403);assert.ok(row.published_at);
 assert.equal((await api.DELETE(req('DELETE',{studyId:id}))).status,200);assert.equal(row.published_at,null);assert.equal(await service.getPublishedSharedStudy(id),null);assert.equal((await api.DELETE(req('DELETE',{studyId:id}))).status,200);
 row.source_passages=[{...source,text:'Fabricated text'}];assert.equal((await api.POST(req('POST',{studyId:id}))).status,404);assert.equal(row.published_at,null);
+// Old published snapshots receive the same exact service-framing cleanup as chat.
+row.source_passages=[source];row.published_at=new Date().toISOString();
+row.answer='Please check the passages and limitations below before relying on this explanation.\n\nExact substantive answer';
+row.qualifications=['EMET can make mistakes. Always verify its answers against Scripture.','Material qualification'];
+const historical=await service.getPublishedSharedStudy(id);
+assert.equal(historical.answer,'Exact substantive answer');assert.deepEqual(Array.from(historical.qualifications),['Material qualification']);
+assert.match(row.answer,/^Please check/);assert.equal(row.qualifications.length,2);
 currentUser=null;for(const method of ['POST','GET','DELETE'])assert.equal((await api[method](req(method,method==='GET'?null:{studyId:id}))).status,401);
 for(const file of ['app/shared/[id]/page.tsx','app/shared/[id]/og/route.tsx'])assert.match(fs.readFileSync(file,'utf8'),/dynamic = "force-dynamic"/);
 assert.match(fs.readFileSync('app/shared/[id]/og/route.tsx','utf8'),/"Cache-Control": "no-store"/);

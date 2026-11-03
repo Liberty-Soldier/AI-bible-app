@@ -101,6 +101,7 @@ export default async function VersePage({
         sourceName: verse.sources?.[0]?.sourceName || getLabel(translation),
         tradition: translation === "brenton" ? "Septuagint" : "Translation",
         text: verse.sources?.[0]?.text || "",
+        reference: verse.reference,
         isOriginalLanguage: false,
       };
     })
@@ -157,7 +158,7 @@ export default async function VersePage({
               </div>
 
               <p className="leading-relaxed text-neutral-200">
-                <ScriptureText text={source?.text || ""} />
+                <ScriptureText text={source?.text || ""} reference={source?.reference} />
               </p>
             </div>
           ))}

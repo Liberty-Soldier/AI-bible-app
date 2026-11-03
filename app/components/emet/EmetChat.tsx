@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { answerWithoutServiceNotices, withoutServiceNotices } from "@/app/lib/emet/answerPrivacy";
 import PublicLinkControl from "./PublicLinkControl";
 import ConversationHistory, { type HistoryTurn } from "./ConversationHistory";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,7 @@ import { useCallback, useEffect, useEffectEvent, useLayoutEffect, useRef, useSta
 import EmetseesLogo from "@/app/components/branding/EmetseesLogo";
 import { buildEmetConversationContext } from "@/app/lib/emet/EmetAiConversation";
 import { buildReaderHref } from "@/app/lib/translationPreference";
-import { boundedSimpleHistory, followsLatest, publicQualification, safeChatReturnHref, supportQualification, CITATION_VERIFICATION_NOTICE, UNVERIFIED_REFERENCE_WARNING, isGeneralAnswerNotice, isOwnerAnswerDiagnostic, formatAnswerForSharing } from "./chatPresentation";
+import { boundedSimpleHistory, followsLatest, publicQualification, safeChatReturnHref, isGeneralAnswerNotice, isOwnerAnswerDiagnostic, formatAnswerForSharing } from "./chatPresentation";
 import { buildScriptureCitationHref, getCitationTranslation } from "@/app/lib/scriptureCitationNavigation";
 import type {
   EmetAiClaim,
@@ -209,7 +210,7 @@ function normalizeAnswer(payload: Record<string, unknown>): Answer {
     if (typeof value.answer === "string") {
       return {
         status: value.status,
-        answer: value.answer,
+        answer: answerWithoutServiceNotices(value.answer),
         conclusionSupport:
           value.conclusionSupport || "possible-interpretation",
         componentChecks: Array.isArray(value.componentChecks)
@@ -231,8 +232,8 @@ function normalizeAnswer(payload: Record<string, unknown>): Answer {
     status: payload.status === "insufficient-evidence" ? "insufficient-evidence" : undefined,
     answer:
       typeof payload.answer === "string"
-        ? payload.answer
-        : "EMET could not produce a supported answer.",
+        ? answerWithoutServiceNotices(payload.answer)
+        : "EMET could not finish this answer. Please try again.",
     claims: [],
     componentChecks: [],
     continuityChecks: [],
@@ -290,7 +291,7 @@ function InitialScripture({
   );
 }
 
-function qualifications(answer: Answer, simple = false) {
+function qualifications(answer: Answer) {
   const ids = [
     ...answer.claims.map((claim) => claim.id),
     ...answer.citations.map((citation) => citation.evidenceId),
@@ -298,10 +299,8 @@ function qualifications(answer: Answer, simple = false) {
     ...answer.continuityChecks.map((check) => check.propositionId),
   ];
   const messages = [
-    // Simple EMET already discloses the scope of source verification. Avoid
-    // adding a generic inference/synthesis disclaimer to every supported answer;
-    // retain all supplied limitations and genuine uncertainty categories.
-    ...(simple && ["strong-implication", "theological-synthesis"].includes(answer.conclusionSupport) ? [] : [supportQualification[answer.conclusionSupport]]),
+    // Do not turn internal support categories into generic cautionary prose.
+    // Retain the actual supplied limitations and specific claim qualifications.
     ...answer.limitations,
     ...answer.componentChecks.filter((check) => check.support !== "explicit-statement").map((check) => check.explanation),
     ...answer.continuityChecks.filter((check) => check.verdict !== "preserved").map((check) => check.explanation),
@@ -618,7 +617,7 @@ export default function EmetChat({
       const conversationContext = buildEmetConversationContext(
         exchanges.filter((exchange) => !exchange.transportFailure).map((exchange) => ({
           question: exchange.question,
-          answer: exchange.answer.answer,
+          answer: answerWithoutServiceNotices(exchange.answer.answer),
           outcome: exchange.source === "fail-closed" ? "failed" : "answered",
           references: exchange.answer.citations
             .map((citation) => citation.reference || "")
@@ -802,7 +801,7 @@ export default function EmetChat({
   }, [active, pending, historyLoaded, initialUserId, cloudReady, initialQuestion, launchKey]);
 
   function answerText(exchange: Exchange) {
-    return formatAnswerForSharing({ question: exchange.question, answer: exchange.answer.answer, limitations: exchange.answer.limitations, unverified: exchange.answer.verificationStatus === "unverified", imported: exchange.imported });
+    return formatAnswerForSharing({ question: exchange.question, answer: answerWithoutServiceNotices(exchange.answer.answer), limitations: exchange.answer.limitations, unverified: exchange.answer.referenceVerificationStatus === "unverified" || (!exchange.answer.referenceVerificationStatus && exchange.answer.verificationStatus === "unverified"), imported: exchange.imported });
   }
   async function copyOrShare(exchange: Exchange, native: boolean) {
     try { const text = answerText(exchange); if(native && navigator.share) await navigator.share({title: exchange.question,text}); else await navigator.clipboard.writeText(text); setError(native ? "Text shared or copied. No public page was created." : "Answer copied. No public page was created."); }
@@ -940,10 +939,10 @@ export default function EmetChat({
           {exchanges.map((exchange) => {
             const outcome = exchange.outcome || (exchange.answer.status === "insufficient-evidence" ? "insufficient-evidence" : exchange.source === "fail-closed" ? "failed" : "answered");
             const simpleSources = exchange.source === "simple-owner-model" || exchange.answer.sourceVerification === "locked-corpus-text";
-            const allNotes = outcome === "failed" ? exchange.answer.limitations : qualifications(exchange.answer, simpleSources);
-            const technicalNotes = allNotes.filter(isGeneralAnswerNotice);
+            const allNotes = (outcome === "failed" ? exchange.answer.limitations : qualifications(exchange.answer)).map(withoutServiceNotices).filter(Boolean);
             const ownerNotes = allNotes.filter(isOwnerAnswerDiagnostic);
             const notes = allNotes.filter(note => !isGeneralAnswerNotice(note) && !isOwnerAnswerDiagnostic(note));
+            const unresolvedSources = simpleSources && exchange.answer.referenceVerificationStatus === "unverified";
             return (
               <article key={exchange.id} className="space-y-2" aria-label="Question and response">
                 <div className="flex justify-end" data-emet-scroll-anchor={`${exchange.id}:question`}>
@@ -951,22 +950,10 @@ export default function EmetChat({
                 </div>
                 {exchange.initialScripture?.length ? <InitialScripture items={exchange.initialScripture} pending={false} onNavigate={onClose} /> : null}
                 <div className="min-w-0 space-y-2" data-emet-scroll-anchor={`${exchange.id}:answer`}>
-                  {outcome === "failed" || exchange.remotePending ? (
-                    <p role={outcome === "failed" ? "alert" : "status"} className="text-sm font-semibold">{exchange.remotePending ? "Preparing answer" : "Please try again"}</p>
-                  ) : null}
-                  {exchange.imported || (simpleSources && exchange.answer.verificationStatus === "unverified") ? (
-                    <section role="alert" aria-label="Check this answer" className="rounded-lg border border-[var(--border)] bg-[var(--surface-soft)] p-3 text-sm leading-6">
-                      <p>{exchange.imported ? "Imported browser content has not been reverified and cannot be published as a verified study." : exchange.answer.referenceVerificationStatus === "references-verified" ? "Please check the passages and limitations below before relying on this explanation." : UNVERIFIED_REFERENCE_WARNING}</p>
-                      {initialOwnerDiagnostics && exchange.answer.unresolvedReferences?.length ? (
-                        <details className="mt-2"><summary className="min-h-11 cursor-pointer py-2">Owner diagnostics</summary><ul aria-label="Unresolved references (not verified)" className="space-y-1">
-                          {exchange.answer.unresolvedReferences.map((item, index) => <li key={index}>{item.reference}{item.translation ? ` · ${item.translation}` : ""} — not verified</li>)}
-                        </ul></details>
-                      ) : null}
-                    </section>
-                  ) : null}
-                  <div aria-label="EMET response" className="whitespace-pre-wrap break-words text-base leading-7" data-emet-answer="true">{exchange.answer.answer}</div>
+                  {exchange.remotePending ? <p role="status" className="text-sm">Preparing answer</p> : null}
+                  <div role={outcome === "failed" ? "alert" : undefined} aria-label="EMET response" className="whitespace-pre-wrap break-words text-base leading-7" data-emet-answer="true">{answerWithoutServiceNotices(exchange.answer.answer)}</div>
                   {notes.length ? (
-                    <section aria-label="Answer qualifications" className="border-l-2 border-[var(--border)] pl-3 text-sm leading-6 text-[var(--muted)]">
+                    <section aria-label="Answer qualifications" className="text-sm leading-6 text-[var(--muted)]">
                       <ul className="mt-1 space-y-1">
                         {notes.map((note, index) => <li key={index} className="whitespace-pre-wrap break-words">{note}</li>)}
                       </ul>
@@ -974,9 +961,10 @@ export default function EmetChat({
                   ) : null}
 
                   <div className="flex flex-wrap items-start gap-x-4 gap-y-1 text-sm">
-                    {exchange.answer.citations.length ? (
+                    {exchange.answer.citations.length || unresolvedSources || exchange.imported ? (
                       <details className="group">
                         <summary className="min-h-11 cursor-pointer py-3 font-medium text-[var(--muted)]">{simpleSources ? "Scripture passages" : "Sources"} · {exchange.answer.citations.length}</summary>
+                        {exchange.imported ? <p className="mb-2 text-sm">Browser-saved references have not been rechecked and cannot be published as a verified study.</p> : unresolvedSources ? <p className="mb-2 text-sm">{exchange.answer.citations.length ? "Some referenced passages could not be resolved. The available Scripture passages are listed here." : "No checked passages are available for this response."}</p> : null}
                         {!simpleSources ? <p className="mb-1 text-xs text-[var(--muted)]">Final supporting citations</p> : null}
                         <div className="flex flex-wrap gap-x-4 gap-y-1 pb-2">
                           {exchange.answer.citations.map((citation) => {
@@ -1003,7 +991,7 @@ export default function EmetChat({
                         </div>
                       </details>
                     ) : null}
-                    {simpleSources || technicalNotes.length ? <details className="text-[var(--muted)]"><summary className="min-h-11 cursor-pointer py-3">About this answer</summary><p className="max-w-prose pb-2 text-xs leading-5">{CITATION_VERIFICATION_NOTICE}</p></details> : null}
+                    {initialOwnerDiagnostics && exchange.answer.unresolvedReferences?.length ? <details className="text-[var(--muted)]"><summary className="min-h-11 cursor-pointer py-3">Owner diagnostics</summary><ul aria-label="Unresolved references (not verified)">{exchange.answer.unresolvedReferences.map((item, index) => <li key={index}>{item.reference}{item.translation ? ` · ${item.translation}` : ""} — not verified</li>)}</ul></details> : null}
                     {initialOwnerDiagnostics && ownerNotes.length ? <details className="text-[var(--muted)]"><summary className="min-h-11 cursor-pointer py-3">Owner diagnostics</summary>{ownerNotes.map((note, index) => <p key={index} className="pb-2 text-xs">{note}</p>)}</details> : null}
                     {!exchange.remotePending ? <><button type="button" className="min-h-11 px-1 text-[var(--muted)]" onClick={()=>void copyOrShare(exchange,false)} aria-label="Copy answer">Copy</button><button type="button" className="min-h-11 px-1 text-[var(--muted)]" onClick={()=>void copyOrShare(exchange,true)} aria-label="Share answer text">Share</button></> : null}
                     {exchange.shareStudyId && !exchange.imported ? <PublicLinkControl studyId={exchange.shareStudyId} version={publicationVersion} label="More sharing options" onPublish={!simpleSources || exchange.answer.verificationStatus === "references-verified" ? () => share(exchange) : undefined} /> : null}

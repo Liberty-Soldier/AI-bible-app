@@ -22,3 +22,29 @@ export function sameOrigin(request: Request) {
     const origin = request.headers.get("origin");
     return !origin || origin === new URL(request.url).origin;
 }
+
+// Freeze the two previously deployed import serializers for identity lookup only.
+// Display cleanup must not change an existing browser-import deduplication key.
+// These payloads are hashed, never returned or persisted; writes use privateResponse.
+export function legacyImportPayloads(turns: Array<{ question: string; response: Record<string, unknown> }>) {
+    const oldPrivateNote = (note: string) => /owner\s*(?:diagnostic|inspection)|owner[- ]only|citation-resolution|inline-citation-unverified|quotation-unverified/i.test(note)
+        || (/^\s*[\[{]/.test(note) && /"(?:diagnostics?|debug|claimId|authority|unresolvedReferences)"\s*:/i.test(note));
+    const keys = new Set(['diagnostics', 'diagnostic', 'unresolvedreferences', 'ownerdiagnostics', 'debug', 'debugrecords', 'authoritymetadata']);
+    function v1(value: unknown): unknown {
+        if (Array.isArray(value)) return value.map(v1);
+        if (!value || typeof value !== 'object') return value;
+        return Object.fromEntries(Object.entries(value).flatMap(([key, item]) => keys.has(key.replace(/[_-]/g, '').toLowerCase()) ? []
+            : [[key, key === 'limitations' || key === 'qualifications'
+                ? (Array.isArray(item) ? item.filter(note => typeof note === 'string' && !oldPrivateNote(note) && note !== 'The model reported insufficient evidence. This explanation is unverified.') : []) : v1(item)]]));
+    }
+    return [0, 1].map(version => turns.map(turn => {
+        const body = version ? v1(turn.response) as Record<string, unknown> : { ...turn.response };
+        const { diagnostics: _diagnostics, usage: _usage, ...response } = body;
+        void _diagnostics; void _usage;
+        if (!version && response.answer && typeof response.answer === 'object') {
+            const { unresolvedReferences: _unresolved, ...answer } = response.answer as Record<string, unknown>;
+            void _unresolved; response.answer = answer;
+        }
+        return { question: turn.question, response };
+    }));
+}

@@ -1,4 +1,4 @@
-import { isPrivateAnswerNote } from "@/app/lib/emet/answerPrivacy";
+import { isPrivateAnswerNote, publicAnswerNotes, answerWithoutServiceNotices } from "@/app/lib/emet/answerPrivacy";
 import type { EmetAiClaimSupport } from "@/app/lib/emet/EmetAiContract";
 
 export function followsLatest(viewport: { scrollHeight: number; scrollTop: number; clientHeight: number }) {
@@ -9,7 +9,7 @@ export function boundedSimpleHistory(turns: Array<{ question: string; answer: st
   const result: Array<{ question: string; answer: string }> = [];
   let remaining = 32_000;
   for (const turn of turns.slice(-6).reverse()) {
-    const bounded = { question: turn.question.slice(0, 800), answer: turn.answer.slice(0, 10_000) };
+    const bounded = { question: turn.question.slice(0, 800), answer: answerWithoutServiceNotices(turn.answer).slice(0, 10_000) };
     const size = bounded.question.length + bounded.answer.length;
     if (size > remaining) break;
     result.unshift(bounded);
@@ -66,11 +66,11 @@ export function isOwnerAnswerDiagnostic(note: string) {
 export function formatAnswerForSharing({ question, answer, limitations = [], unverified = false, imported = false }: {
   question: string; answer: string; limitations?: string[]; unverified?: boolean; imported?: boolean;
 }) {
-  const notes = [...new Set(limitations.map(note => publicQualification(note)).filter(note => !isGeneralAnswerNotice(note) && !isOwnerAnswerDiagnostic(note)))];
+  const notes = [...new Set(publicAnswerNotes(limitations).map(note => publicQualification(note)).filter(note => !isGeneralAnswerNotice(note) && !isOwnerAnswerDiagnostic(note)))];
   return [
     "AI-generated explanation",
     question,
-    answer,
+    answerWithoutServiceNotices(answer),
     ...(unverified ? [UNVERIFIED_REFERENCE_WARNING] : []),
     ...(imported ? ["Imported browser answer. Its references have not been reverified."] : []),
     ...(notes.length ? [`Notes:\n${notes.join("\n\n")}`] : []),

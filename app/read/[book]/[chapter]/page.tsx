@@ -342,8 +342,8 @@ export default async function ReadChapterPage({
               />
             }
           >
-            <ReaderAppearanceControls />
             <SacredNameToggle />
+            <ReaderAppearanceControls />
           </CollapsibleReaderHeader>
         </ReaderStickyHeader>
 

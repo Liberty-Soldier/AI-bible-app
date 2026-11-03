@@ -271,7 +271,7 @@ console.log("PASS: older-message scroll restoration/stability, one-shot answer r
 
 for (const [status, payload, expected] of [
   [422, { status: "insufficient-evidence", answer: "Exact insufficient-evidence wording.", limitations: ["The passages do not establish that timing."] }, "Exact insufficient-evidence wording"],
-  [503, { answer: "Exact service response.", limitations: ["No complete answer was verified."] }, "Please try again"],
+  [503, { answer: "Exact service response.", limitations: ["No complete answer was verified."] }, "Exact service response"],
 ]) {
   const failed = chatFixture();
   failed.type("Question without enough evidence");
@@ -281,6 +281,7 @@ for (const [status, payload, expected] of [
   await tick();
   tree = failed.render();
   assert.match(text(tree), new RegExp(expected));
+  if (status >= 500) assert.equal(elements(tree, x => x.props["data-emet-answer"] && x.props.role === "alert").length, 1, "The actual retry response remains announced without a redundant heading");
   assert.equal(elements(tree, (x) => x.props["data-emet-answer"])[1].props.children, payload.answer);
   assert.match(text(tree), new RegExp(payload.limitations[0].replace(/\./g, "\\.")));
   assert.equal(elements(tree, (x) => x.props["data-preliminary-scripture"])[0].props.open, undefined);
@@ -448,7 +449,7 @@ sourceChat.render();sourceChat.type('A source display fixture');sourceChat.send(
 assert.match(text(sourceChat.tree()),/Scripture passages · 1/);
 assert.doesNotMatch(text(sourceChat.tree()),/Final supporting citations/);
 assert.equal(elements(sourceChat.tree(),x=>x.type==='blockquote')[0].props.children,sourceText);
-assert.match(text(sourceChat.tree()),/wording are model-generated/);
+assert.doesNotMatch(text(sourceChat.tree()),/wording are model-generated/);
 const sourceLink=elements(sourceChat.tree(),x=>x.type==='a'&&x.props.href?.includes('translation=kjv'))[0];assert.ok(sourceLink);
 const reopened=chatFixture({history:[{id:'source-fixture',question:'A saved source fixture',source:'simple-owner-model',answer:simplePayload.answer}]});
 assert.match(text(reopened.tree()),/Scripture passages · 1/);assert.equal(elements(reopened.tree(),x=>x.type==='blockquote')[0].props.children,sourceText);
@@ -459,20 +460,20 @@ const standardNotice = "The explanation, its prose references, and any quoted wo
 const materialExtension = `${standardNotice} This particular passage does not establish the proposed chronology.`;
 const disclosureChat = chatFixture({history:[{id:'disclosure',question:'Fixture question',source:'simple-model',answer:{...simplePayload.answer,limitations:[standardNotice,'A supplied material qualification.',materialExtension]}}]});
 const disclosureTree = disclosureChat.tree();
-assert.equal(elements(disclosureTree,x=>x.type==='summary'&&text(x)==='About this answer').length,1);
+assert.equal(elements(disclosureTree,x=>x.type==='summary'&&text(x)==='About this answer').length,0);
 const qualificationSection=elements(disclosureTree,x=>x.props['aria-label']==='Answer qualifications')[0];
 assert.match(text(qualificationSection),/A supplied material qualification/);
-assert.ok(text(qualificationSection).includes(materialExtension));
+assert.ok(text(qualificationSection).includes("This particular passage does not establish the proposed chronology."));assert.ok(!text(qualificationSection).includes(standardNotice));
 assert.equal(elements(qualificationSection,x=>x.type==='li'&&text(x)===standardNotice).length,0);
-assert.ok(elements(disclosureTree,x=>x.type==='details').some(x=>text(x).includes('About this answer')&&text(x).includes(standardNotice)));
-console.log('PASS: one folded source-verification disclosure, no duplicate About headings, material qualifications and extensions preserved verbatim.');
+assert.ok(!text(disclosureTree).includes(standardNotice));
+console.log('PASS: generic verification notices omitted, no redundant About disclosure, material qualification text retained after removing a legacy service preamble.');
 console.log('PASS: integrated Simple source disclosure, server text rendering, translation-aware navigation, API normalization and saved-history restoration; current engine disclosure unchanged.');
 const unresolvedAnswer='An exact model answer, including “a quoted explanatory phrase” and Invented 999:1.';
-const unresolvedPayload={...simplePayload,status:'complete-unverified',shareStudyId:'must-never-be-published',answer:{...simplePayload.answer,answer:unresolvedAnswer,verificationStatus:'unverified',unresolvedReferences:[{reference:'Invented 999:1',translation:'web',reason:'citation-unresolved'}]}};
+const unresolvedPayload={...simplePayload,status:'complete-unverified',shareStudyId:'must-never-be-published',answer:{...simplePayload.answer,answer:unresolvedAnswer,verificationStatus:'unverified',referenceVerificationStatus:'unverified',unresolvedReferences:[{reference:'Invented 999:1',translation:'web',reason:'citation-unresolved'}]}};
 const inspectChat=chatFixture({history:[],props:{initialEngine:"simple",initialOwnerDiagnostics:true}});
 inspectChat.render();inspectChat.type('Can a Christian eat pork?');inspectChat.send();inspectChat.requests[0].finish(unresolvedPayload);await tick();inspectChat.render();
 assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='EMET response')[0].props.children,unresolvedAnswer);
-assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='Check this answer'&&x.props.role==='alert').length,1);
+assert.equal(elements(inspectChat.tree(),x=>x.props['aria-label']==='Check this answer'&&x.props.role==='alert').length,0);
 assert.doesNotMatch(text(inspectChat.tree()),/owner inspection only|Unverified model answer/);
 assert.match(text(inspectChat.tree()),/Invented 999:1 · web — not verified/);
 assert.equal(elements(inspectChat.tree(),x=>x.type==='a'&&text(x).includes('Invented')).length,0);
@@ -482,30 +483,30 @@ inspectChat.type('Does your previous answer follow from Scripture?');inspectChat
 assert.equal(inspectChat.requests[1].body.simpleHistory[0].answer,unresolvedAnswer);
 inspectChat.requests[1].finish(unresolvedPayload);await tick();inspectChat.render();
 const restoredInspection=chatFixture({props:{initialOwnerDiagnostics:true},history:[{id:'unverified-stored',question:'An owner question',source:'simple-owner-model',shareStudyId:'must-stay-hidden',answer:unresolvedPayload.answer}]});
-assert.equal(elements(restoredInspection.tree(),x=>x.props['aria-label']==='Check this answer').length,1);
+assert.equal(elements(restoredInspection.tree(),x=>x.props['aria-label']==='Check this answer').length,0);
 assert.equal(elements(restoredInspection.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
 assert.match(text(restoredInspection.tree()),/Invented 999:1/);
 const noSources=chatFixture({props:{initialOwnerDiagnostics:true},history:[{id:'no-sources',question:'An owner question',source:'simple-owner-model',answer:{...unresolvedPayload.answer,citations:[]}}]});
 assert.equal(elements(noSources.tree(),x=>x.props['aria-label']==='EMET response')[0].props.children,unresolvedAnswer);
 assert.equal(elements(noSources.tree(),x=>x.type==='blockquote').length,0);
 assert.equal(elements(noSources.tree(),x=>x.type==='a'&&text(x).includes('Invented')).length,0);
-console.log('PASS: exact unresolved answer inspection, prominent warning, invalid references remain unlinked, verified subset source text, sharing blocked, follow-up context and persisted warning state.');
+console.log('PASS: unresolved answers begin directly, source availability is disclosed with passages, invalid references stay unlinked, owner details remain restricted and publication stays blocked.');
 for(const support of ['strong-implication','theological-synthesis']){
  const message=support==='strong-implication'?'This answer includes an inference from Scripture.':'This answer brings several passages together in interpretation.';
  const material='The passage addresses this audience; extending the conclusion requires additional evidence.';
  const notice='Owner experiment: passage text is checked; the explanation remains model-generated.';
  const styleAnswer={...simplePayload.answer,conclusionSupport:support,limitations:[material,notice]};
  const calm=chatFixture({history:[{id:'style-simple',question:'Explain the passage',source:'simple-owner-model',answer:styleAnswer}]});
- assert.ok(!text(calm.tree()).includes(message));assert.ok(text(calm.tree()).includes(material));assert.ok(text(calm.tree()).includes(notice));
+ assert.ok(!text(calm.tree()).includes(message));assert.ok(text(calm.tree()).includes(material));assert.ok(!text(calm.tree()).includes(notice));
  assert.equal(elements(calm.tree(),x=>x.props['aria-label']==='EMET response')[0].props.children,styleAnswer.answer);
  const publicStyle=chatFixture({history:[{id:'style-current',question:'Explain the passage',source:'model',answer:{...prior.answer,conclusionSupport:support,limitations:[material]}}]});
- assert.ok(text(publicStyle.tree()).includes(message));assert.ok(text(publicStyle.tree()).includes(material));
+ assert.ok(!text(publicStyle.tree()).includes(message));assert.ok(text(publicStyle.tree()).includes(material));
 }
 for(const[support,message]of [['possible-interpretation','This is a possible interpretation, rather than an explicit statement of Scripture.'],['does-not-establish','The available evidence does not establish this conclusion.']]){
  const uncertain=chatFixture({history:[{id:'material-uncertainty',question:'What follows?',source:'simple-owner-model',answer:{...simplePayload.answer,conclusionSupport:support}}]});
- assert.ok(text(uncertain.tree()).includes(message));
+ assert.ok(!text(uncertain.tree()).includes(message));
 }
-console.log('PASS: Simple supported-answer generic notices omitted; all supplied material limitations, owner notices and genuine uncertainty retained; public engine qualifications and answer text unchanged.');
+console.log('PASS: no automatic category disclaimers in current/Simple responses; supplied material limitations and exact answer text remain.');
 
 // Deterministic DOM-geometry fixtures, not a browser layout/keyboard simulation.
 const scrollRegion = chat => elements(chat.tree(), x => x.props['aria-label'] === 'Conversation')[0];
@@ -602,7 +603,7 @@ hiddenArrival.render({active:true});assertResponseBeginning(hiddenArrival);
 const simpleArrival=chatFixture({history:[],props:{initialEngine:"simple",initialOwnerDiagnostics:true}});
 simpleArrival.render();simpleArrival.viewport.scrollHeight=6000;
 simpleArrival.type('A Simple EMET reading fixture');simpleArrival.send();simpleArrival.requests[0].finish({...unresolvedPayload,answer:{...unresolvedPayload.answer,answer:longText}});await tick();simpleArrival.render();assertResponseBeginning(simpleArrival);
-assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Check this answer').length,1);
+assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Check this answer').length,0);
 assert.equal(elements(simpleArrival.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
 assert.match(scrollRegion(simpleArrival).props.className,/px-3.*sm:px-5/);
 assert.match(elements(simpleArrival.tree(),x=>x.props['data-emet-content'])[0].props.className,/space-y-4/);
@@ -637,12 +638,12 @@ const privateHistory=chatFixture({history:[{...legacyOwner,source:'simple-owner-
 console.log('PASS: actual public default, no selector/experimental labels, public history preserved, legacy owner history/draft preserved without merging threads, rollback continuity and private saved diagnostics hidden from non-owners.');
 
 const publicUnverified=chatFixture({history:[{...legacyOwner,source:'simple-model',answer:{...unresolvedPayload.answer,unresolvedReferences:undefined}}],props:{initialEngine:'simple',initialOwnerDiagnostics:false}});
-assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Check this answer').length,1);
+assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Check this answer').length,0);
 assert.equal(elements(publicUnverified.tree(),x=>x.props['data-emet-answer'])[0].props.children,unresolvedPayload.answer.answer);
 assert.doesNotMatch(text(publicUnverified.tree()),/owner inspection only|Unresolved references/);
 assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Unresolved references (not verified)').length,0);
 assert.equal(elements(publicUnverified.tree(),x=>x.props['aria-label']==='Publish and share this answer').length,0);
-console.log('PASS: public unresolved answers keep exact prose and a visible warning, private source diagnostics stay hidden, publishing remains blocked.');
+console.log('PASS: public unresolved answers keep exact prose and source disclosure; private diagnostics stay hidden and publishing remains blocked.');
 
 // Text sharing preserves exact content and includes attribution without publishing.
 const maintenancePayload = {...simplePayload, shareStudyId:'existing-candidate', answer:{...simplePayload.answer, verificationStatus:'references-verified', limitations:[standardNotice,'The evidence is limited to the stated audience.']}};
@@ -651,6 +652,31 @@ await button(sharingUi.tree(),'Copy answer').props.onClick();await button(sharin
 for(const value of [sharingUi.copied.at(-1),sharingUi.shared.at(-1).text]){assert.ok(value.includes('Exact question?'));assert.ok(value.includes(exactAnswer));assert.ok(value.includes('The evidence is limited to the stated audience.'));assert.ok(value.endsWith('Explore Scripture with EMETSEES\nhttps://www.emetsees.com'));assert.ok(!value.includes(standardNotice));assert.doesNotMatch(value,/Scripture references:/);}
 assert.equal(sharingUi.shared.at(-1).url,undefined,'Regular text sharing must not publish or attach a study URL');assert.equal(sharingUi.requests.length,1,'Copy/Share must make no publication/model request');
 const injectedDiagnostic=chatFixture({history:[{id:'private-diagnostic',question:'Fixture question',source:'simple-model',answer:{...unresolvedPayload.answer,limitations:[standardNotice,'Owner diagnostic: private-failure-code (private-stage).','Material uncertainty stays visible.']}}],props:{initialOwnerDiagnostics:false}});
-assert.match(text(injectedDiagnostic.tree()),/Some Scripture references in this answer could not be verified. Please check them before relying on this explanation./);assert.match(text(injectedDiagnostic.tree()),/Material uncertainty stays visible/);assert.doesNotMatch(text(injectedDiagnostic.tree()),/Owner diagnostic:|private-failure-code|private-stage|Unresolved references/);
+assert.match(text(injectedDiagnostic.tree()),/Some referenced passages could not be resolved/);assert.match(text(injectedDiagnostic.tree()),/Material uncertainty stays visible/);assert.doesNotMatch(text(injectedDiagnostic.tree()),/Owner diagnostic:|private-failure-code|private-stage|Unresolved references/);
 await button(injectedDiagnostic.tree(),'Copy answer').props.onClick();assert.doesNotMatch(injectedDiagnostic.copied.at(-1),/private-failure-code|private-stage/);assert.match(injectedDiagnostic.copied.at(-1),/Some Scripture references/);
-console.log('PASS: attributed Copy/Web Share, exact question/answer/material notes, no publication, concise unverified warning and private owner diagnostics.');
+console.log('PASS: attributed Copy/Web Share, exact question/answer/material notes, no publication, accurate source warnings for sharing and private owner diagnostics.');
+
+// Exact reported question and other intents, through actual client normalization.
+const servicePreamble='Please check the passages and limitations below before relying on this explanation.';
+const footerText='EMET can make mistakes. Always verify its answers against Scripture.';
+const directCases=[
+ ['Is the trinity in the bible?','The Bible does not present the Trinity as an explicit doctrine, term, or formulated creed. John 17:3 distinguishes the Father from the Messiah he sent.'],
+ ['Does Yahweh require keeping the Sabbath?','Exodus 20:8–11 commands remembering the Sabbath day and keeping it holy.'],
+ ["Did Abraham keep Yahweh's commandments?",'Genesis 26:5 states that Abraham obeyed Yahweh’s voice and kept his commandments.'],
+ ['Who is Yahweh, and is Yahshua the same person?','John 17:3 identifies the Father and distinguishes him from the Messiah he sent.'],
+ ['Why did the user challenge the Flood explanation?','Genesis 6:4 includes “and also afterward.” The wording must be considered in its immediate context.'],
+ ['Explain Genesis 6:4 in context.','Genesis 6:4 mentions “afterward,” but does not explicitly describe how later Nephilim originated. That genuine textual limitation remains.'],
+];
+for(const [question,answer] of directCases){
+ const client=chatFixture({history:[],props:{initialEngine:'simple',initialOwnerDiagnostics:false}});client.type(question);client.send();
+ client.requests[0].finish({...simplePayload,source:'simple-model',status:'complete-unverified',answer:{...simplePayload.answer,status:'insufficient-evidence',verificationStatus:'unverified',referenceVerificationStatus:'references-verified',conclusionSupport:'does-not-establish',answer:servicePreamble+'\n\n'+answer+'\n\n'+footerText,limitations:[servicePreamble,footerText,'This particular passage does not supply an exact date.']}});
+ await tick();client.render();const rendered=client.tree();assert.equal(elements(rendered,x=>x.props['data-emet-answer'])[0].props.children,answer);assert.doesNotMatch(text(rendered),/Please check the passages|Insufficient evidence|Unverified model answer|The available evidence does not establish this conclusion/);assert.equal(text(rendered).split(footerText).length-1,1);assert.match(text(rendered),/does not supply an exact date/);assert.equal(elements(rendered,x=>x.props['aria-label']==='Check this answer').length,0);assert.equal(elements(rendered,x=>x.props['aria-label']==='Publish and share this answer').length,0);
+ await button(rendered,'Copy answer').props.onClick();assert(client.copied.at(-1).includes(answer));assert(!client.copied.at(-1).includes(servicePreamble));assert(!client.copied.at(-1).includes('Some Scripture references'),'A model-limited answer with verified references must not acquire a false reference warning');
+ client.type('Explain the relevant passage more fully.');client.send();assert.equal(client.requests[1].body.simpleHistory.at(-1).answer,answer,'Follow-up context must preserve the substantive response');client.requests[1].finish({...simplePayload,source:'simple-model'});await tick();client.render();
+ const old=chatFixture({history:[{id:'old-framing',question,source:'simple-model',outcome:'insufficient-evidence',answer:{...simplePayload.answer,status:'insufficient-evidence',answer:servicePreamble+'\n\n'+answer,verificationStatus:'unverified',referenceVerificationStatus:'references-verified',limitations:[footerText]}}],props:{initialEngine:'simple',initialOwnerDiagnostics:false}});
+ assert.equal(elements(old.tree(),x=>x.props['data-emet-answer'])[0].props.children,answer);assert.equal(text(old.tree()).split(footerText).length-1,1);assert(!text(old.tree()).includes(servicePreamble));
+}
+const genuineUncertainty='The passage does not say when this happened; the date cannot be established from these verses.';
+const uncertainHistory=chatFixture({history:[{id:'uncertain-natural',question:'When did this happen?',source:'simple-model',answer:{...simplePayload.answer,conclusionSupport:'does-not-establish',answer:genuineUncertainty,limitations:['The chronology is not explicit.']}}]});
+assert.equal(elements(uncertainHistory.tree(),x=>x.props['data-emet-answer'])[0].props.children,genuineUncertainty);assert.match(text(uncertainHistory.tree()),/chronology is not explicit/);
+console.log('PASS exact Trinity screenshot case plus yes/no, who, why and contextual explanation: direct substantive starts, one unchanged footer, actual limitations retained, no category banners, accurate copy/follow-ups and historical replay. No live-model acceptance is claimed.');

@@ -1,5 +1,5 @@
 import "server-only";
-import { publicAnswerNotes } from "./answerPrivacy";
+import { publicAnswerNotes, answerWithoutServiceNotices } from "./answerPrivacy";
 import { eligibleSimpleSources } from "../conversations/simplePublication";
 
 import { createHash } from "node:crypto";
@@ -120,7 +120,7 @@ export async function getPublishedSharedStudy(id: string): Promise<SharedStudySn
     sourceKind: data.source_kind as string,
     id: data.id as string,
     question: data.question as string,
-    answer: data.answer as string,
+    answer: answerWithoutServiceNotices(data.answer as string),
     citations: Array.isArray(data.citations) ? data.citations as SharedStudyCitation[] : [],
     publishedAt: data.published_at as string,
   };

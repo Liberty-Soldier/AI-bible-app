@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHash, randomUUID } from "node:crypto";
 import { getVerifiedSupabaseUserId } from "@/app/lib/supabase/server";
-import { conversationStore, isUuid, ownedConversation, privateResponse, sameOrigin } from "@/app/lib/conversations/store";
+import { conversationStore, isUuid, ownedConversation, privateResponse, sameOrigin, legacyImportPayloads } from "@/app/lib/conversations/store";
 export const dynamic = "force-dynamic";
 const reply = (value: unknown, status = 200) => NextResponse.json(value, { status, headers: { "Cache-Control": "private, no-store" } });
 export async function GET(request: Request) {
@@ -83,10 +83,15 @@ export async function POST(request: Request) {
         response: Record<string, unknown>;
     }) => ({ question: t.question, response: privateResponse(t.response) }));
     // Imported records preserve original data but can never become share candidates.
-    const key = createHash('sha256').update(JSON.stringify(turns)).digest('hex');
+    const keys = legacyImportPayloads(body.turns).map(payload => createHash('sha256').update(JSON.stringify(payload)).digest('hex'));
+    const key = keys[0];
     const db = conversationStore();
     if (!db)
         return reply({ status: "history-unavailable" }, 503);
+    const existing = await db.from('emet_conversations').select('id').eq('owner_user_id', owner)
+        .in('legacy_key', keys).order('created_at', { ascending: true }).limit(1).maybeSingle();
+    if (existing.error) return reply({ status: 'history-unavailable' }, 503);
+    if (existing.data) return reply({ id: existing.data.id });
     const { data, error } = await db.rpc('emet_import_conversation', { p_owner: owner, p_id: randomUUID(), p_key: key, p_turns: turns });
     return error ? reply({ status: "history-unavailable" }, 503) : reply({ id: data });
 }

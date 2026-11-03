@@ -7,6 +7,18 @@ export type NameRule = {
 
 export const nameRules: NameRule[] = [
   {
+    id: "capitalized-the-lord-god",
+    source: "The LORD God",
+    replacement: "Yahweh Elohim",
+    wholeWord: true,
+  },
+  {
+    id: "capitalized-the-lord",
+    source: "The LORD",
+    replacement: "Yahweh",
+    wholeWord: true,
+  },
+  {
     id: "the-lord-god",
     source: "the LORD God",
     replacement: "Yahweh Elohim",
@@ -66,10 +78,4 @@ export const nameRules: NameRule[] = [
   replacement: "Elohim",
   wholeWord: true,
 },
-  {
-    id: "lord-title",
-    source: "Lord",
-    replacement: "Master",
-    wholeWord: true,
-  },
 ];

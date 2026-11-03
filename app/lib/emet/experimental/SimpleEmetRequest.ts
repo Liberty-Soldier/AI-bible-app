@@ -1,5 +1,5 @@
 import "server-only";
-import { publicAnswerNotes } from "../answerPrivacy";
+import { publicAnswerNotes, answerWithoutServiceNotices } from "../answerPrivacy";
 
 import { getSimpleEmetAccess, claimSimpleRequest, recordUnlimitedSimpleRequest, simpleRequestKey } from "./SimpleEmetAccess";
 import { configuredSimpleEmetModel, generateSimpleEmet, parseSimpleHistory, type SimpleGenerationDiagnostics } from "./SimpleEmet";
@@ -62,7 +62,7 @@ export async function handleSimpleEmet(input: { userId: string; requestId: strin
         status: "complete-unverified", engine: "simple", source: "simple-model",
         ...report("model-insufficient-evidence", "model-answer", 200),
         answer: {
-          status: "insufficient-evidence", answer: draft.answer, conclusionSupport: draft.support,
+          status: "insufficient-evidence", answer: answerWithoutServiceNotices(draft.answer), conclusionSupport: draft.support,
           claims: [], componentChecks: [], continuityChecks: [], citations: verified.citations,
           sourceVerification: "locked-corpus-text", verificationStatus: "unverified",
           referenceVerificationStatus: verified.ok ? "references-verified" : "unverified",
@@ -79,7 +79,7 @@ export async function handleSimpleEmet(input: { userId: string; requestId: strin
       body: {
         status: verified.ok ? "complete" : "complete-unverified", engine: "simple", source: "simple-model", usage: quota, ...diagnosticFields,
         answer: {
-          status: "complete", answer: draft.answer, conclusionSupport: draft.support,
+          status: "complete", answer: answerWithoutServiceNotices(draft.answer), conclusionSupport: draft.support,
           claims: [], componentChecks: [], continuityChecks: [], citations: verified.citations,
           sourceVerification: "locked-corpus-text", verificationStatus: verified.ok ? "references-verified" : "unverified",
           referenceVerificationStatus: verified.ok ? "references-verified" : "unverified",

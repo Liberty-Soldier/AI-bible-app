@@ -1,5 +1,5 @@
 import { nameRules } from "./nameRules";
-import { sacredNameVerseOverrides } from "./sacredNameVerseOverrides";
+import { sacredNameVerseOverrides, sacredNameTitlePreservations } from "./sacredNameVerseOverrides";
 
 function escapeRegex(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -16,11 +16,13 @@ export function renderSacredNames(text: string, reference?: string) {
   const override = reference ? sacredNameVerseOverrides[reference] : null;
 
   if (override?.replaceLordWithYahweh) {
+    renderedText = applyWholeWordReplace(renderedText, "The Lord", "Yahweh");
     renderedText = applyWholeWordReplace(renderedText, "the Lord", "Yahweh");
     renderedText = applyWholeWordReplace(renderedText, "Lord", "Yahweh");
   }
 
   for (const rule of nameRules) {
+    if (reference && sacredNameTitlePreservations[reference] && rule.source.includes("LORD")) continue;
     const source = escapeRegex(rule.source);
 
     const pattern = rule.wholeWord
