@@ -223,6 +223,13 @@ tree = controller.render(controller.load("app/components/VerseActionController.t
   verses: verses.map((verse) => ({ ...verse, sources: [{ text: verse.text }] })), activeTranslation: "kjv", tokenAvailabilityByVerse: {},
 });
 let selectors = elements(tree, (x) => x.props["data-verse-selector"]);
+// Number touch targets must not enlarge the Scripture's first line box.
+for (const selector of selectors) {
+  assert.doesNotMatch(selector.props.className, /(?:^|\s)min-h-11(?:\s|$)/);
+  assert.match(selector.props.className, /h-\[1em\].*leading-none/);
+  assert.match(selector.props.className, /after:absolute.*after:h-11/);
+}
+
 const selectEvent = () => ({ preventDefault() {}, stopPropagation() {} });
 selectors[2].props.onClick(selectEvent());
 tree = controller.render();

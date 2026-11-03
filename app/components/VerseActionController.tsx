@@ -232,7 +232,7 @@ export default function VerseActionController({
                   event.stopPropagation();
                   toggleVerse(verse);
                 }}
-                className={`mr-1 inline-flex min-h-11 min-w-11 -translate-y-[0.08em] items-center justify-center rounded-lg align-baseline font-sans text-xs font-medium transition focus-visible:outline-2 focus-visible:outline-[var(--brand)] ${
+                className={`relative mr-1 inline-flex h-[1em] min-w-11 -translate-y-[0.08em] items-center justify-center rounded-lg align-baseline font-sans text-xs font-medium leading-none transition after:absolute after:inset-x-0 after:top-1/2 after:h-11 after:-translate-y-1/2 focus-visible:outline-2 focus-visible:outline-[var(--brand)] ${
                   isSelected
                     ? "bg-amber-500/20 text-amber-700 dark:text-amber-300"
                     : "text-[var(--muted)] hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
