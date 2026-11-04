@@ -12,16 +12,24 @@ export function dailyPassage(date: string, requested: TranslationPreference) {
     const selection = DAILY_SCHEDULE.find(s => s.date === date.slice(5));
     if (!selection)
         return null;
-    // LXX Psalm numbering is not interchangeable with the Hebrew-based schedule.
-    // Use a disclosed WEB fallback until a reviewed versification map exists.
-    const numberingFallback = requested === 'brenton' && selection.reference.startsWith('Psalms ');
+    // Only editorially reviewed reader references bridge differing editions.
+    // Never infer LXX numbering arithmetically or substitute a same-numbered verse.
+    const numberingFallback = requested === 'brenton' && (selection.brentonReference === null ||
+        (selection.reference.startsWith('Psalms ') && !selection.brentonReference));
+    const requestedReference = requested === 'brenton' ? selection.brentonReference || selection.reference : selection.reference;
     let translation = requested;
-    let verses = numberingFallback ? null : resolveSimpleReference(selection.reference, requested);
+    let reference = requestedReference;
+    let verses = numberingFallback ? null : resolveSimpleReference(reference, requested);
     if (!verses) {
-        translation = 'web';
-        verses = resolveSimpleReference(selection.reference, 'web');
+        translation = selection.sourceTranslation || 'web';
+        reference = selection.reference;
+        verses = resolveSimpleReference(reference, translation);
     }
     if (!verses)
         throw new Error('Scheduled Scripture unavailable');
-    return { date, reference: selection.reference, requestedTranslation: requested, translation, fallback: translation !== requested ? (numberingFallback ? 'WEB used because Septuagint Psalm numbering differs.' : 'WEB used because this passage is unavailable in the selected translation.') : null, verses };
+    const label = translation === 'brenton' ? 'Brenton' : translation.toUpperCase();
+    const fallback = translation !== requested
+        ? (numberingFallback ? 'WEB used because this selection has no verified Brenton reader equivalent.' : `${label} used because this passage is unavailable in the selected translation.`)
+        : reference !== selection.reference ? `Brenton reader reference for ${selection.reference}.` : null;
+    return { date, reference, requestedTranslation: requested, translation, fallback, verses };
 }

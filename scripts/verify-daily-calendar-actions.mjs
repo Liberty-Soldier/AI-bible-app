@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import * as crypto from 'node:crypto';
+import {createUiFixture,elements,text,storage} from './lib/ui-fixture-runtime.mjs';
+const tick=()=>new Promise(resolve=>setImmediate(resolve));
+const corpus=createUiFixture({modules:{'server-only':{},'node:fs':{default:fs},'node:path':{default:path},'node:crypto':crypto},globals:{process:{cwd:()=>process.cwd()}}});
+const {dailyPassage}=corpus.load('app/lib/daily/passage.ts');const {DAILY_SCHEDULE}=corpus.load('app/data/daily/annual.ts');
+for(const [ref,requested] of [['Deuteronomy 6:4-5','web'],['Numbers 6:24-26','kjv'],['Psalms 23:1','brenton'],['Wisdom 7:24-26','web'],['Tobit 4:7h','kjv'],['Esther Greek 4:17l','web'],['Lamentations 3:22-23','brenton'],['Jeremiah 32:17','brenton']]){
+ const date='2028-'+DAILY_SCHEDULE.find(s=>s.reference===ref).date;const passage=dailyPassage(date,requested);const copied=[],shared=[],requests=[];const localStorage=storage();let sacred=true;const intervals=[],listeners={};
+ const nav={clipboard:{writeText:async value=>copied.push(value)},share:async value=>shared.push(value)};
+ class LocalDate extends Date {constructor(...args){super(...(args.length?args:[date+'T12:00:00']));}}
+ const f=createUiFixture({modules:{'next/link':{default:'a'},'../lib/translationPreference':{getPreferredTranslation:()=>requested,buildReaderHref:corpus.load('app/lib/translationPreference.ts').buildReaderHref},'../data/useSacredNames':{useSacredNames:()=>({sacredNames:sacred})}},globals:{Date:LocalDate,navigator:nav,localStorage,Event,AbortController,DOMException,setTimeout:()=>0,clearTimeout(){},clearInterval(){},window:{localStorage,setTimeout:()=>0,clearTimeout(){},setInterval:fn=>{intervals.push(fn);return 0;},addEventListener:(n,fn)=>listeners[n]=fn,removeEventListener(){},dispatchEvent(){}},fetch:async url=>{requests.push(url);if(url.startsWith('/api/daily-passage?'))return{ok:true,json:async()=>passage};const file=path.join('public',url);assert(fs.existsSync(file),file);return{ok:true,json:async()=>JSON.parse(fs.readFileSync(file))};}}});
+ const Component=f.load('app/components/DailyPassage.tsx').default;let tree=f.render(Component);await tick();tree=f.render();
+ const button=label=>elements(tree,e=>e.type==='button'&&(e.props['aria-label']===label||text(e).trim()===label))[0];
+ assert.equal(elements(tree,e=>e.props['data-daily-excerpt']!==undefined)[0].props.children.length,passage.verses.length);
+ assert(text(tree).includes(passage.reference));assert(text(tree).includes(passage.translation==='brenton'?'Brenton':passage.translation.toUpperCase()));
+ const open=elements(tree,e=>e.type==='a'&&text(e)==='Read full passage')[0],url=new URL(open.props.href,'https://www.emetsees.com');const first=passage.verses[0].reference.match(/^(.+) (\d+):(.+)$/);assert.equal(decodeURIComponent(url.pathname),`/read/${first[1]}/${first[2]}`);assert.equal(url.searchParams.get('translation'),passage.translation);assert.equal(url.searchParams.get('verse'),first[3]);
+ assert.equal(button('Bookmark').props.disabled,false);button('Bookmark').props.onClick();tree=f.render();assert.equal(button('Bookmarked').props['aria-pressed'],true);
+ const bookmarks=JSON.parse(localStorage.getItem('scripture-search-reader-memory')).bookmarks;assert.equal(bookmarks.length,passage.verses.length);assert.deepEqual(bookmarks.map(v=>v.reference),Array.from(passage.verses,v=>v.reference));assert(bookmarks.every(v=>v.translation===passage.translation));
+ for(const bookmark of bookmarks){const raw=JSON.parse(fs.readFileSync(`public/scripture/runtime/${bookmark.translation}/${bookmark.book.replaceAll(' ','_')}/${bookmark.chapter}.json`));const row=(Array.isArray(raw)?raw:raw.verses).find(r=>r.reference===bookmark.reference);assert.equal(bookmark.id,row.id);}
+ const expected=`${passage.reference} · ${passage.translation==='brenton'?'Brenton':passage.translation.toUpperCase()}\n\n${passage.verses.map(v=>v.text).join('\n')}\n\nRead ${passage.reference} on EMETSEES:\n${url}`;
+ await button('Copy displayed passage').props.onClick();assert.equal(copied.at(-1),expected);await button('Share displayed passage').props.onClick();assert.equal(shared.at(-1).text,expected);assert.equal(shared.at(-1).title,passage.reference);
+ nav.share=undefined;await button('Share displayed passage').props.onClick();assert.equal(copied.at(-1),expected);sacred=false;tree=f.render();await button('Copy displayed passage').props.onClick();assert.equal(copied.at(-1),expected,'Sacred-name display never mutates the verified share text');
+ const loads=requests.filter(r=>r.startsWith('/api/daily-passage')).length;intervals.forEach(fn=>fn());listeners.focus();await tick();assert.equal(requests.filter(r=>r.startsWith('/api/daily-passage')).length,loads,'Repeated same-day visits do not select again');
+ button('Bookmarked').props.onClick();assert.equal(JSON.parse(localStorage.getItem('scripture-search-reader-memory')).bookmarks.length,0);
+ assert(requests.every(r=>r.startsWith('/api/daily-passage?')||r.startsWith('/scripture/runtime/')));
+ console.log(`PASS ${ref} requested ${requested}: ${passage.translation} exact short Copy/native Share/clipboard fallback, honest label, actual reader URL, canonical bookmark identities, Sacred Names and stable same-day refresh.`);
+}
