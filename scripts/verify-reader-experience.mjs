@@ -41,10 +41,13 @@ requireText(
   "<SourceBreakdownVerse",
   "canonical Source Text action",
 );
-requireText(actionSheet, 'aria-label="Selected verse actions"', "compact contextual selection strip");
-requireText(actionSheet, 'aria-label="Verse actions"', "explicit action disclosure");
+requireText(actionSheet, 'aria-label="Selected passage actions"', "labeled passage action strip");
+requireText(actionSheet, '>Highlight</button>', "primary Highlight action");
+requireText(actionSheet, '>Note</button>', "primary Note action");
+requireText(actionSheet, '>Copy</button>', "primary Copy action");
+requireText(actionSheet, "More", "explicit additional-action disclosure");
 requireText(actionSheet, 'panel === "highlight"', "on-demand highlight palette");
-requireText(actionSheet, 'label={`Original language for ${firstVerse.reference}`}', "on-demand source-study access");
+requireText(actionSheet, "Original language / Word Study", "on-demand source-study access");
 forbidText(actionSheet, 'h-[262px]', "oversized automatic action sheet");
 forbidText(actionSheet, 'fixed inset-0', "full-screen selection interception");
 requireText(header, ">\n          Aa\n", "reader appearance button");
@@ -65,7 +68,7 @@ requireText(
   "<ReaderAppearanceControls />",
   "reader appearance panel",
 );
-requireText(controller, "⋯ Tools", "visible reader Tools control");
+forbidText(controller, "⋯ Tools", "tiny inline reader Tools label");
 requireText(
   controller,
   "applyNativeTextSelection",
@@ -73,12 +76,17 @@ requireText(
 );
 requireText(
   controller,
-  "Open tools for ${verse.reference}",
-  "whole-verse tools target",
+  'data-scripture-text="true"',
+  "Scripture-only native selection boundary",
 );
+requireText(controller, '"selectionchange"', "mobile selection-handle tracking");
+requireText(controller, "suppressNextClickRef", "post-drag tap suppression");
 requireText(libraryPage, 'view="recent"', "recent highlight view");
 requireText(libraryPage, 'view="book"', "book-ordered highlight view");
 requireText(libraryPage, 'view="collections"', "highlight collections view");
+requireText(libraryPage, "Create new collection", "inline collection creation picker");
+requireText(libraryPage, "Add to collection", "enabled selection organization action");
+requireText(libraryPage, "They are not synchronized", "accurate device-local storage wording");
 requireText(
   readerMemory,
   "highlightCollections",
@@ -90,5 +98,6 @@ console.log("- Chapter text defaults to a book-style serif surface without repea
 console.log("- Verse selection shows a compact strip; the menu exposes the canonical Source Text path.");
 console.log("- Typeface, text size, and spacing preferences persist on the device.");
 console.log("- Passage, translation, and Aa controls open separate bounded panels.");
-console.log("- Visible Tools controls, verse taps, and native text selection open verse actions.");
+console.log("- Verse taps and Scripture-only native drag selection share labeled passage actions.");
 console.log("- Highlights support Recent, By Book, and named Collections views.");
+

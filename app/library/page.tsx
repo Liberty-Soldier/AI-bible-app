@@ -79,8 +79,9 @@ function LibraryPageContent() {
   const [selectedHighlightIds, setSelectedHighlightIds] = useState<Set<string>>(
     () => new Set(),
   );
-  const [selectedCollectionId, setSelectedCollectionId] = useState("");
   const [collectionMessage, setCollectionMessage] = useState("");
+  const [collectionPickerOpen, setCollectionPickerOpen] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState("");
 
   const recentHighlightGroups = useMemo(
     () => groupRecentHighlights(memory.highlights),
@@ -129,6 +130,8 @@ function LibraryPageContent() {
     setSelectingHighlights(false);
     setSelectedHighlightIds(new Set());
     setCollectionMessage("");
+    setCollectionPickerOpen(false);
+    setNewCollectionName("");
   }
 
   function toggleHighlightGroup(group: HighlightGroup) {
@@ -147,30 +150,46 @@ function LibraryPageContent() {
     setCollectionMessage("");
   }
 
-  function addSelectedHighlights() {
-    if (!selectedHighlightIds.size || !selectedCollectionId) return;
+  function addSelectedHighlights(collectionId: string) {
+    if (!selectedHighlightIds.size || !collectionId) return;
 
-    if (
-      addHighlightsToCollection(
-        Array.from(selectedHighlightIds),
-        selectedCollectionId,
-      )
-    ) {
+    const result = addHighlightsToCollection(
+      Array.from(selectedHighlightIds),
+      collectionId,
+    );
+    if (result) {
       const collection = memory.highlightCollections.find(
-        (item) => item.id === selectedCollectionId,
+        (item) => item.id === collectionId,
       );
       refreshMemory();
-      setCollectionMessage(
-        `Added ${selectedHighlightIds.size} ${
-          selectedHighlightIds.size === 1 ? "highlight" : "highlights"
-        } to ${collection?.name || "collection"}.`,
-      );
-      setSelectedHighlightIds(new Set());
+      setCollectionPickerOpen(false);
+      setCollectionMessage(result.addedCount
+        ? `Added ${result.addedCount} ${result.addedCount === 1 ? "highlight" : "highlights"} to ${collection?.name || "collection"}.`
+        : `Those highlights are already in ${collection?.name || "that collection"}.`);
     }
   }
 
+  function createCollectionAndAdd() {
+    const collection = createHighlightCollection(newCollectionName);
+    if (!collection) {
+      setCollectionMessage("Enter a collection name.");
+      return;
+    }
+    setNewCollectionName("");
+    setMemory(getReaderMemory());
+    const result = addHighlightsToCollection(
+      Array.from(selectedHighlightIds),
+      collection.id,
+    );
+    refreshMemory();
+    setCollectionPickerOpen(false);
+    setCollectionMessage(result?.addedCount
+      ? `Created ${collection.name} and added ${result.addedCount} ${result.addedCount === 1 ? "highlight" : "highlights"}.`
+      : `${collection.name} is ready. Those highlights were already included.`);
+  }
+
   return (
-    <main className="min-h-screen bg-[var(--background)] px-5 pb-24 pt-10 text-[var(--foreground)]">
+    <main className={`min-h-screen bg-[var(--background)] px-5 pt-10 text-[var(--foreground)] ${selectingHighlights ? "pb-52" : "pb-24"}`}>
       <section className="mx-auto max-w-xl">
         <div className="mb-6">
           <Link
@@ -185,7 +204,8 @@ function LibraryPageContent() {
           </h1>
 
           <p className="mt-2 text-[var(--muted)]">
-            Bookmarks, highlights, and notes saved on this device.
+            Bookmarks, highlights, notes, and collections are stored only in
+            this browser on this device. They are not synchronized.
           </p>
         </div>
 
@@ -288,14 +308,18 @@ function LibraryPageContent() {
                 />
               ) : null}
 
-              {selectingHighlights && highlightView !== "collections" ? (
+              {selectingHighlights ? (
                 <HighlightCollectionToolbar
                   collections={memory.highlightCollections}
                   selectedCount={selectedHighlightIds.size}
-                  selectedCollectionId={selectedCollectionId}
                   message={collectionMessage}
-                  onCollectionChange={setSelectedCollectionId}
-                  onAdd={addSelectedHighlights}
+                  pickerOpen={collectionPickerOpen}
+                  newCollectionName={newCollectionName}
+                  onPickerOpenChange={setCollectionPickerOpen}
+                  onNewCollectionNameChange={setNewCollectionName}
+                  onAddToCollection={addSelectedHighlights}
+                  onCreateAndAdd={createCollectionAndAdd}
+                  onClear={stopSelectingHighlights}
                 />
               ) : null}
             </div>
@@ -438,10 +462,9 @@ function BookHighlights({
         .map(([book, bookGroups]) => (
           <details
             key={book}
-            open
             className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]"
           >
-            <summary className="cursor-pointer list-none px-4 py-3 font-semibold">
+            <summary className="min-h-12 cursor-pointer list-none px-4 py-3 font-semibold">
               <span className="flex items-center justify-between gap-3">
                 <span>{book}</span>
                 <span className="text-xs text-[var(--muted)]">
@@ -449,7 +472,10 @@ function BookHighlights({
                     (count, group) => count + group.items.length,
                     0,
                   )}{" "}
-                  saved
+                  saved {bookGroups.reduce(
+                    (count, group) => count + group.items.length,
+                    0,
+                  ) === 1 ? "highlight" : "highlights"}
                 </span>
               </span>
             </summary>
@@ -484,7 +510,7 @@ function HighlightGroupCard({
   onToggle?: () => void;
 }) {
   const first = group.items[0];
-  const className = `block w-full rounded-2xl border p-4 text-left transition ${
+  const className = `block w-full rounded-2xl border p-3 text-left transition ${
     selected ? "border-amber-500 ring-2 ring-amber-500/20" : "border-[var(--border)]"
   } ${getHighlightColorClass(group.color)}`;
   const content = (
@@ -504,7 +530,7 @@ function HighlightGroupCard({
           </span>
         ) : null}
       </div>
-      <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--muted)]">
+      <p className="mt-1.5 line-clamp-2 text-sm leading-5 text-[var(--muted)]">
         {group.text}
       </p>
     </>
@@ -557,59 +583,110 @@ function EmptyHighlights() {
 function HighlightCollectionToolbar({
   collections,
   selectedCount,
-  selectedCollectionId,
   message,
-  onCollectionChange,
-  onAdd,
+  pickerOpen,
+  newCollectionName,
+  onPickerOpenChange,
+  onNewCollectionNameChange,
+  onAddToCollection,
+  onCreateAndAdd,
+  onClear,
 }: {
   collections: ReaderHighlightCollection[];
   selectedCount: number;
-  selectedCollectionId: string;
   message: string;
-  onCollectionChange: (id: string) => void;
-  onAdd: () => void;
+  pickerOpen: boolean;
+  newCollectionName: string;
+  onPickerOpenChange: (open: boolean) => void;
+  onNewCollectionNameChange: (name: string) => void;
+  onAddToCollection: (id: string) => void;
+  onCreateAndAdd: () => void;
+  onClear: () => void;
 }) {
   return (
-    <div className="sticky bottom-20 z-20 mt-6 rounded-2xl border border-[var(--border)] bg-[var(--background)] p-3 shadow-xl">
-      <p className="mb-2 text-xs font-semibold text-[var(--muted)]">
-        {selectedCount
-          ? `${selectedCount} ${selectedCount === 1 ? "highlight" : "highlights"} selected`
-          : "Select highlights to organize"}
-      </p>
-      {collections.length ? (
-        <div className="flex gap-2">
-          <select
-            value={selectedCollectionId}
-            onChange={(event) => onCollectionChange(event.target.value)}
-            aria-label="Choose a collection"
-            className="min-w-0 flex-1 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
+    <div className="fixed inset-x-4 bottom-[calc(5rem+env(safe-area-inset-bottom))] z-40 mx-auto max-w-xl">
+      {pickerOpen ? (
+        <section
+          role="dialog"
+          aria-label="Add selected highlights to a collection"
+          className="mb-2 max-h-[min(52dvh,26rem)] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--background)] p-3 shadow-xl"
+        >
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-semibold">Add to collection</h2>
+            <button type="button" onClick={() => onPickerOpenChange(false)} className="min-h-11 rounded-lg px-3 text-sm font-semibold text-[var(--muted)]">
+              Cancel
+            </button>
+          </div>
+
+          {collections.length ? (
+            <div className="mt-2 space-y-1" role="list">
+              {collections.map((collection) => (
+                <button
+                  key={collection.id}
+                  type="button"
+                  onClick={() => {
+                    onAddToCollection(collection.id);
+                  }}
+                  className="flex min-h-11 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-semibold hover:bg-[var(--surface)]"
+                >
+                  <span>{collection.name}</span>
+                  <span aria-hidden="true">Add</span>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-2 text-sm text-[var(--muted)]">
+              No collections yet. Create one below.
+            </p>
+          )}
+
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              onCreateAndAdd();
+            }}
+            className="mt-3 border-t border-[var(--border)] pt-3"
           >
-            <option value="">Choose collection</option>
-            {collections.map((collection) => (
-              <option key={collection.id} value={collection.id}>
-                {collection.name}
-              </option>
-            ))}
-          </select>
-          <button
-            type="button"
-            onClick={onAdd}
-            disabled={!selectedCount || !selectedCollectionId}
-            className="rounded-xl bg-[var(--foreground)] px-4 py-2 text-sm font-semibold text-[var(--background)] disabled:opacity-40"
-          >
-            Add
+            <label htmlFor="selection-new-collection" className="text-sm font-semibold">
+              Create new collection
+            </label>
+            <div className="mt-2 flex gap-2">
+              <input
+                id="selection-new-collection"
+                value={newCollectionName}
+                onChange={(event) => onNewCollectionNameChange(event.target.value)}
+                maxLength={60}
+                placeholder="Collection name"
+                className="min-w-0 flex-1 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-base"
+              />
+              <button type="submit" disabled={!selectedCount || !newCollectionName.trim()} className="min-h-11 rounded-xl bg-[var(--foreground)] px-3 text-sm font-semibold text-[var(--background)] disabled:opacity-40">
+                Create & add
+              </button>
+            </div>
+          </form>
+        </section>
+      ) : null}
+
+      <div className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-3 shadow-xl">
+        <div className="flex items-center gap-2">
+          <p className="min-w-0 flex-1 text-sm font-semibold" aria-live="polite">
+            {selectedCount} {selectedCount === 1 ? "highlight" : "highlights"} selected
+          </p>
+          <button type="button" onClick={onClear} className="min-h-11 rounded-xl px-3 text-sm font-semibold text-[var(--muted)]">
+            Clear
           </button>
         </div>
-      ) : (
-        <p className="text-sm text-[var(--muted)]">
-          Create a collection in the Collections view first.
-        </p>
-      )}
-      {message ? (
-        <p aria-live="polite" className="mt-2 text-xs font-semibold">
-          {message}
-        </p>
-      ) : null}
+        <button
+          type="button"
+          onClick={() => onPickerOpenChange(!pickerOpen)}
+          disabled={!selectedCount}
+          aria-expanded={pickerOpen}
+          className="mt-1 min-h-11 w-full rounded-xl bg-[var(--foreground)] px-4 text-sm font-semibold text-[var(--background)] disabled:opacity-40"
+        >
+          Add to collection
+        </button>
+        {message ? <p aria-live="polite" className="mt-2 text-xs font-semibold">{message}</p> : null}
+      </div>
     </div>
   );
 }
@@ -1115,3 +1192,4 @@ export default function LibraryPage() {
     </Suspense>
   );
 }
+

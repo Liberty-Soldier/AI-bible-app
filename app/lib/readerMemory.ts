@@ -362,22 +362,32 @@ export function addHighlightsToCollection(
       (collection) => collection.id === collectionId,
     )
   ) {
-    return false;
+    return null;
   }
 
-  saveReaderMemory({
-    ...memory,
-    highlights: memory.highlights.map((highlight) =>
-      ids.has(highlight.id) && !highlight.collectionIds.includes(collectionId)
-        ? {
-            ...highlight,
-            collectionIds: [...highlight.collectionIds, collectionId],
-          }
-        : highlight,
-    ),
+  let addedCount = 0;
+  let alreadyMemberCount = 0;
+  const nextHighlights = memory.highlights.map((highlight) => {
+    if (!ids.has(highlight.id)) return highlight;
+    if (highlight.collectionIds.includes(collectionId)) {
+      alreadyMemberCount += 1;
+      return highlight;
+    }
+    addedCount += 1;
+    return {
+      ...highlight,
+      collectionIds: [...highlight.collectionIds, collectionId],
+    };
   });
 
-  return true;
+  if (addedCount) {
+    saveReaderMemory({
+      ...memory,
+      highlights: nextHighlights,
+    });
+  }
+
+  return { addedCount, alreadyMemberCount };
 }
 
 export function deleteHighlightCollection(collectionId: string) {
@@ -472,3 +482,4 @@ export function getVerseMemoryState(verseId: string) {
     ),
   };
 }
+

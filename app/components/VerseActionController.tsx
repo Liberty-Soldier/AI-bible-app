@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  type KeyboardEvent,
   type MouseEvent,
+  type PointerEvent,
   useEffect,
   useMemo,
   useRef,
@@ -23,11 +23,19 @@ import VerseActionSheet from "@/app/components/VerseActionSheet";
 import {
   getReaderMemory,
   type ReaderHighlight,
+  type ReaderMemory,
   type ReaderMemoryVerse,
   type ReaderNote,
   type ReaderTranslation,
 } from "@/app/lib/readerMemory";
 import { useReaderPreferences } from "@/app/lib/readerPreferences";
+import {
+  joinSelectedScriptureText,
+  pointerMoved,
+  resolveIntersectingVerses,
+  toggleSelectedVerse,
+  type PointerOrigin,
+} from "@/app/lib/readerSelection";
 
 export type SelectedVerse = ReaderMemoryVerse;
 
@@ -46,9 +54,17 @@ export default function VerseActionController({
 }) {
   const [selectedVerses, setSelectedVerses] = useState<SelectedVerse[]>([]);
   const [selectedTextOverride, setSelectedTextOverride] = useState("");
-  const [toolsHintOpen, setToolsHintOpen] = useState(false);
-  const [memory, setMemory] = useState(() => getReaderMemory());
+  const [memory, setMemory] = useState<ReaderMemory>(() => ({
+    bookmarks: [],
+    highlights: [],
+    notes: [],
+    highlightCollections: [],
+  }));
   const versesContainerRef = useRef<HTMLDivElement | null>(null);
+  const pointerOriginRef = useRef<PointerOrigin | null>(null);
+  const pointerDraggedRef = useRef(false);
+  const suppressNextClickRef = useRef(false);
+  const selectionTimerRef = useRef<number | null>(null);
   const readerPreferences = useReaderPreferences();
 
   function refreshReaderMemory() {
@@ -121,20 +137,14 @@ export default function VerseActionController({
     const nextVerse = toSelectedVerse(verse);
     setSelectedTextOverride("");
 
-    setSelectedVerses((current) => {
-      const exists = current.some((item) => item.id === nextVerse.id);
-
-      if (exists) {
-        return current.filter((item) => item.id !== nextVerse.id);
-      }
-
-      return [...current, nextVerse].sort((left, right) =>
+    setSelectedVerses((current) =>
+      toggleSelectedVerse(current, nextVerse).sort((left, right) =>
         compareReaderVerses(
           { verseLabel: left.verseLabel || String(left.verse) },
           { verseLabel: right.verseLabel || String(right.verse) },
         ),
-      );
-    });
+      ),
+    );
   }
 
   function clearSelection() {
@@ -143,10 +153,22 @@ export default function VerseActionController({
     window.getSelection()?.removeAllRanges();
   }
 
-  function openVerseTools(verse: ReaderVerse) {
-    setSelectedTextOverride("");
-    setSelectedVerses([toSelectedVerse(verse)]);
-    setToolsHintOpen(false);
+  function getRangeTextWithinElement(range: Range, element: HTMLElement) {
+    if (!range.intersectsNode(element)) return "";
+
+    const intersection = document.createRange();
+    intersection.selectNodeContents(element);
+
+    if (
+      range.compareBoundaryPoints(Range.START_TO_START, intersection) > 0
+    ) {
+      intersection.setStart(range.startContainer, range.startOffset);
+    }
+    if (range.compareBoundaryPoints(Range.END_TO_END, intersection) < 0) {
+      intersection.setEnd(range.endContainer, range.endOffset);
+    }
+
+    return intersection.toString();
   }
 
   function applyNativeTextSelection() {
@@ -155,28 +177,35 @@ export default function VerseActionController({
 
     if (!selection || selection.isCollapsed || !container) return false;
 
-    const selectedText = selection.toString().trim();
     const range = selection.rangeCount ? selection.getRangeAt(0) : null;
 
-    if (!selectedText || !range || !container.contains(range.commonAncestorContainer)) {
+    if (!range || !range.intersectsNode(container)) {
       return false;
     }
 
-    const selectedIds = Array.from(
-      container.querySelectorAll<HTMLElement>("[data-reader-verse-id]"),
-    )
-      .filter((element) => {
-        try {
-          return range.intersectsNode(element);
-        } catch {
-          return false;
-        }
-      })
-      .map((element) => element.dataset.readerVerseId)
-      .filter((id): id is string => Boolean(id));
+    const selectedParts: string[] = [];
+    const selectedIds: string[] = [];
 
-    const selected = verses
-      .filter((verse) => selectedIds.includes(verse.id))
+    container
+      .querySelectorAll<HTMLElement>("[data-scripture-text]")
+      .forEach((element) => {
+        try {
+          const text = getRangeTextWithinElement(range, element);
+          const verseElement = element.closest<HTMLElement>(
+            "[data-reader-verse-id]",
+          );
+          const verseId = verseElement?.dataset.readerVerseId;
+          if (text.trim() && verseId) {
+            selectedParts.push(text);
+            selectedIds.push(verseId);
+          }
+        } catch {
+          // Ignore a stale DOM range while the browser updates selection handles.
+        }
+      });
+
+    const selectedText = joinSelectedScriptureText(selectedParts);
+    const selected = resolveIntersectingVerses(verses, selectedIds)
       .map(toSelectedVerse)
       .sort((left, right) =>
         compareReaderVerses(
@@ -185,21 +214,99 @@ export default function VerseActionController({
         ),
       );
 
-    if (!selected.length) return false;
+    if (!selected.length || !selectedText) return false;
 
     setSelectedVerses(selected);
     setSelectedTextOverride(selectedText);
-    setToolsHintOpen(false);
+    suppressNextClickRef.current = true;
     return true;
   }
 
-  function handleVerseTextKeyDown(
-    event: KeyboardEvent<HTMLSpanElement>,
+  function scheduleNativeSelectionRead(delay = 80) {
+    if (selectionTimerRef.current !== null) {
+      window.clearTimeout(selectionTimerRef.current);
+    }
+    selectionTimerRef.current = window.setTimeout(() => {
+      selectionTimerRef.current = null;
+      applyNativeTextSelection();
+    }, delay);
+  }
+
+  useEffect(() => {
+    function handleSelectionChange() {
+      const selection = window.getSelection();
+      const container = versesContainerRef.current;
+      if (
+        !selection ||
+        selection.isCollapsed ||
+        !selection.rangeCount ||
+        !container ||
+        !selection.getRangeAt(0).intersectsNode(container)
+      ) {
+        return;
+      }
+      scheduleNativeSelectionRead();
+    }
+
+    document.addEventListener("selectionchange", handleSelectionChange);
+    return () => {
+      document.removeEventListener("selectionchange", handleSelectionChange);
+      if (selectionTimerRef.current !== null) {
+        window.clearTimeout(selectionTimerRef.current);
+      }
+    };
+  });
+
+  function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
+    pointerOriginRef.current = { x: event.clientX, y: event.clientY };
+    pointerDraggedRef.current = false;
+  }
+
+  function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
+    if (
+      pointerMoved(pointerOriginRef.current, {
+        x: event.clientX,
+        y: event.clientY,
+      })
+    ) {
+      pointerDraggedRef.current = true;
+    }
+  }
+
+  function handlePointerUp() {
+    if (pointerDraggedRef.current) {
+      suppressNextClickRef.current = true;
+      window.setTimeout(() => {
+        suppressNextClickRef.current = false;
+      }, 600);
+    }
+    pointerOriginRef.current = null;
+    scheduleNativeSelectionRead(0);
+  }
+
+  function handleVerseClick(
+    event: MouseEvent<HTMLDivElement>,
     verse: ReaderVerse,
   ) {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    event.preventDefault();
-    openVerseTools(verse);
+    const target = event.target;
+    if (
+      target instanceof Element &&
+      target.closest("button, a, input, textarea, select")
+    ) {
+      return;
+    }
+
+    if (
+      pointerDraggedRef.current ||
+      suppressNextClickRef.current ||
+      applyNativeTextSelection()
+    ) {
+      pointerDraggedRef.current = false;
+      suppressNextClickRef.current = false;
+      return;
+    }
+
+    toggleVerse(verse);
   }
 
   function getHighlightClass(color?: ReaderHighlight["color"]) {
@@ -251,28 +358,17 @@ export default function VerseActionController({
 
   return (
     <>
-      <div className="mb-3 flex items-center justify-end gap-2 font-sans">
-        {toolsHintOpen ? (
-          <span className="text-xs text-[var(--muted)]">
-            Tap a verse, or press and drag to select text.
-          </span>
-        ) : null}
-        <button
-          type="button"
-          aria-expanded={toolsHintOpen}
-          onClick={() => setToolsHintOpen((open) => !open)}
-          className="inline-flex min-h-10 items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold shadow-sm"
-        >
-          ⋯ Tools
-        </button>
-      </div>
-
       <div
         ref={versesContainerRef}
-        onPointerUp={() => {
-          window.setTimeout(applyNativeTextSelection, 0);
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={() => {
+          pointerDraggedRef.current = true;
+          pointerOriginRef.current = null;
+          scheduleNativeSelectionRead(0);
         }}
-        className={`space-y-1 text-[var(--foreground)] ${typefaceClass} ${textSizeClass} ${lineSpacingClass} ${selectedVerses.length ? "pb-28" : ""}`}
+        className={`space-y-1 text-[var(--foreground)] ${typefaceClass} ${textSizeClass} ${lineSpacingClass} ${selectedVerses.length ? "pb-48" : ""}`}
       >
         {chapterItems.map((item) => {
           if (item.type === "superscription") {
@@ -305,6 +401,7 @@ export default function VerseActionController({
               id={readerVerseAnchorId(verseLabel)}
               key={`${verse.id}-${activeTranslation}`}
               data-reader-verse-id={verse.id}
+              onClick={(event) => handleVerseClick(event, verse)}
               className={`group relative block w-full scroll-mt-28 rounded-r-lg border-l-2 px-1 py-0.5 text-left transition-colors ${
                 isSelected
                   ? "border-amber-500/70 bg-amber-500/10"
@@ -335,31 +432,11 @@ export default function VerseActionController({
               </button>
 
               <span
-                role="button"
-                tabIndex={0}
-                aria-label={`Open tools for ${verse.reference}`}
-                onClick={() => {
-                  if (!applyNativeTextSelection()) openVerseTools(verse);
-                }}
-                onKeyDown={(event) => handleVerseTextKeyDown(event, verse)}
-                className="cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/45"
+                data-scripture-text="true"
+                className="cursor-text select-text"
               >
                 <ScriptureText text={selectedText} reference={verse.reference} />
               </span>
-
-              <button
-                type="button"
-                data-verse-tools="true"
-                aria-label={`Open tools for ${verse.reference}`}
-                onClick={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  openVerseTools(verse);
-                }}
-                className="ml-2 inline-flex min-h-7 items-center rounded-lg px-1.5 align-baseline font-sans text-[0.68rem] font-semibold text-[var(--muted)] transition hover:bg-[var(--surface)] hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/50"
-              >
-                ⋯ Tools
-              </button>
 
 
               {isBookmarked || hasNote ? (
@@ -384,3 +461,4 @@ export default function VerseActionController({
     </>
   );
 }
+

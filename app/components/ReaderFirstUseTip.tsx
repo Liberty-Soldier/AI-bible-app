@@ -16,7 +16,7 @@ function subscribe(onChange: () => void) {
     if (
       target instanceof Element &&
       target.closest(
-        '[data-verse-selector="true"], [data-verse-tools="true"], [data-reader-verse-id]',
+        '[data-verse-selector="true"], [data-reader-verse-id]',
       )
     ) {
       rememberDismissal();
@@ -61,8 +61,8 @@ export default function ReaderFirstUseTip() {
       aria-label="Reader tip"
     >
       <p className="min-w-0 flex-1 text-xs leading-5 text-[var(--muted)]">
-        Tap a verse or its Tools button. Press and drag across text to open
-        tools for several verses.
+        Tap verses to select them. Long-press and drag on mobile, or click and
+        drag on desktop, to select exact Scripture text across verses.
       </p>
 
       <button
@@ -76,3 +76,4 @@ export default function ReaderFirstUseTip() {
     </aside>
   );
 }
+

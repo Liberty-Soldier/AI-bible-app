@@ -1,8 +1,8 @@
-import { getCanonicalBookIndex } from "@/app/data/scripture/canonicalBookOrder";
+import { getCanonicalBookIndex } from "../data/scripture/canonicalBookOrder";
 import {
   getReaderMemoryVerseLabel,
   type ReaderHighlight,
-} from "@/app/lib/readerMemory";
+} from "./readerMemory";
 
 export type HighlightGroup = {
   id: string;
@@ -132,3 +132,4 @@ export function formatHighlightDay(timestamp: number, now = new Date()) {
     year: date.getFullYear() === now.getFullYear() ? undefined : "numeric",
   }).format(date);
 }
+

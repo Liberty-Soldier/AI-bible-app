@@ -51,6 +51,7 @@
     "verify:emet-source-phrases": "node scripts/emet/build-source-phrase-index.mjs --verify",
     "verify:reader-navigation": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-reader-navigation.mjs",
     "verify:reader-experience": "node scripts/verify-reader-experience.mjs",
+    "verify:reader-selection-library": "node --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/verify-reader-selection-library.mjs",
     "smoke:emet-live": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/smoke-emet-ai-live.mjs",
     "smoke:emet-conversation-live": "node --conditions=react-server --experimental-strip-types --experimental-loader ./scripts/ts-extension-loader.mjs scripts/smoke-emet-ai-conversation-live.mjs",
     "verify:brenton-overlay": "node scripts/verify-brenton-reader-overlay-contract.mjs",
@@ -97,3 +98,4 @@
     "typescript": "^5"
   }
 }
+

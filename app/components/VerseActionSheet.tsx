@@ -13,6 +13,7 @@ import {
   getReaderMemoryVerseLabel,
   type ReaderHighlight,
 } from "@/app/lib/readerMemory";
+import { getPassageReference } from "@/app/lib/readerSelection";
 
 export default function VerseActionSheet({
   open,
@@ -29,7 +30,7 @@ export default function VerseActionSheet({
   tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
 }) {
   const [message, setMessage] = useState("");
-  const [panel, setPanel] = useState<"actions" | "highlight" | "note" | "source" | null>(null);
+  const [panel, setPanel] = useState<"more" | "highlight" | "note" | "source" | null>(null);
   const noteOpen = panel === "note";
   const [noteText, setNoteText] = useState("");
   const [bookmarked, setBookmarked] = useState(false);
@@ -41,26 +42,13 @@ export default function VerseActionSheet({
   const noteTextareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const firstVerse = verses[0];
-  const lastVerse = verses[verses.length - 1];
-
-  const referenceLabel = useMemo(() => {
-    if (!firstVerse) return "";
-    if (verses.length === 1) return firstVerse.reference;
-    const contiguous = verses.every((verse, index) =>
-      /^\d+$/.test(getReaderMemoryVerseLabel(verse)) &&
-      (index === 0 || verse.verse === verses[index - 1].verse + 1),
-    );
-    const labels = contiguous
-      ? `${getReaderMemoryVerseLabel(firstVerse)}–${getReaderMemoryVerseLabel(lastVerse)}`
-      : verses.map(getReaderMemoryVerseLabel).join(", ");
-    return `${firstVerse.book} ${firstVerse.chapter}:${labels}`;
-  }, [firstVerse, lastVerse, verses]);
+  const referenceLabel = useMemo(() => getPassageReference(verses), [verses]);
 
   const selectedText = useMemo(
     () =>
       selectedTextOverride?.trim() ||
       verses
-        .map((v) => `${getReaderMemoryVerseLabel(v)} ${v.text}`)
+        .map((v) => v.text.trim())
         .join("\n"),
     [selectedTextOverride, verses],
   );
@@ -269,7 +257,7 @@ export default function VerseActionSheet({
 
   function closeNoteEditor() {
     noteTextareaRef.current?.blur();
-    setPanel("actions");
+    setPanel(null);
     setKeyboardInset(0);
     setNoteViewportHeight(0);
   }
@@ -285,7 +273,7 @@ export default function VerseActionSheet({
     saveNote(verses, cleanNote);
     noteTextareaRef.current?.blur();
     setNoteText("");
-    setPanel("actions");
+    setPanel(null);
     setKeyboardInset(0);
     setNoteViewportHeight(0);
     emitMemoryChange();
@@ -307,21 +295,31 @@ export default function VerseActionSheet({
       style={noteOpen && keyboardInset ? { bottom: `${keyboardInset}px` } : undefined}
       onTouchStart={(event) => event.stopPropagation()}
       onTouchEnd={(event) => event.stopPropagation()}
+      onMouseDown={(event) => {
+        const target = event.target;
+        if (
+          panel !== "note" &&
+          target instanceof Element &&
+          target.closest("button")
+        ) {
+          event.preventDefault();
+        }
+      }}
     >
       {panel ? (
         <section
           ref={panelRef}
           id="reader-verse-actions"
-          aria-label={panel === "highlight" ? "Highlight selected verses" : panel === "note" ? "Note for selected verses" : panel === "source" ? "Original language and Word Study" : "Verse actions"}
+          aria-label={panel === "highlight" ? "Highlight selected verses" : panel === "note" ? "Note for selected verses" : panel === "source" ? "Original language and Word Study" : "More passage actions"}
           tabIndex={-1}
           className="absolute inset-x-0 bottom-full mb-2 max-h-[min(55dvh,26rem)] overflow-y-auto overscroll-contain rounded-xl border border-[var(--border)] bg-[var(--background)] p-2 outline-none"
           style={noteOpen && noteViewportHeight ? { maxHeight: `${Math.max(100, noteViewportHeight - 96)}px` } : undefined}
         >
           <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-3 pb-1">
-            <h2 className="text-sm font-semibold">{panel === "actions" ? "Verse actions" : panel === "highlight" ? "Highlight" : panel === "note" ? "Note" : "Original language / Word Study"}</h2>
+            <h2 className="text-sm font-semibold">{panel === "more" ? "More actions" : panel === "highlight" ? "Highlight" : panel === "note" ? "Note" : "Original language / Word Study"}</h2>
             <button type="button" onClick={closePanel} className="min-h-11 px-2 text-sm text-[var(--muted)]">Close</button>
           </div>
-          {panel === "actions" ? (
+          {panel === "more" ? (
             <div className="pt-1">
               <button type="button" className={actionClass} onClick={() => {
                 const first=verses[0]; if(!first)return;
@@ -329,11 +327,9 @@ export default function VerseActionSheet({
                 window.dispatchEvent(new CustomEvent("emetsees:open-emet"));
                 onClose();
               }}>Ask about passage</button>
-              <button type="button" onClick={copySelection} className={actionClass}>Copy</button>
               <button type="button" onClick={bookmarkSelection} className={actionClass}>{bookmarked ? "Remove bookmark" : "Bookmark"}</button>
-              <button type="button" onClick={() => setPanel("highlight")} className={actionClass}>Highlight</button>
-              <button type="button" onClick={openNoteEditor} className={actionClass}>Note</button>
               <button type="button" onClick={shareSelection} className={actionClass}>Share</button>
+              <button type="button" onClick={() => setPanel("source")} className={actionClass}>Original language / Word Study</button>
               <button type="button" onClick={onClose} className={actionClass}>Clear selection</button>
             </div>
           ) : panel === "highlight" ? (
@@ -346,7 +342,7 @@ export default function VerseActionSheet({
                 <ColorButton label="Purple" onClick={() => highlightSelection("purple")} className="bg-purple-300" />
               </div>
               <button type="button" onClick={clearHighlightSelection} className={`${actionClass} mt-2`}>Remove highlight</button>
-              <button type="button" onClick={() => setPanel("actions")} className={actionClass}>Back to actions</button>
+              <button type="button" onClick={() => setPanel(null)} className={actionClass}>Back to actions</button>
             </div>
           ) : panel === "note" ? (
             <form className="space-y-3 p-3" onSubmit={(event) => { event.preventDefault(); submitNote(); }}>
@@ -379,31 +375,37 @@ export default function VerseActionSheet({
                   className={actionClass}
                 />
               ))}
-              <button type="button" onClick={() => setPanel("actions")} className={actionClass}>Back to actions</button>
+              <button type="button" onClick={() => setPanel(null)} className={actionClass}>Back to actions</button>
             </div>
           )}
         </section>
       ) : null}
-      <div className="rounded-xl border border-[var(--border)] bg-[var(--background)] px-3 py-1">
-        <div role="group" aria-label="Selected verse actions" className="flex items-center gap-2">
-          <p className="min-w-0 flex-1 break-words text-sm font-medium" aria-live="polite">
+      <div className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-2 shadow-xl">
+        <div className="flex items-start gap-2 px-1 pb-2">
+          <p className="min-w-0 flex-1 break-words text-sm font-semibold" aria-live="polite">
             {referenceLabel}
-            {verses.length > 1 ? <span className="ml-2 text-xs text-[var(--muted)]">{verses.length} selected</span> : null}
+            <span className="ml-2 text-xs font-normal text-[var(--muted)]">
+              {verses.length} {verses.length === 1 ? "verse" : "verses"} selected
+            </span>
           </p>
-          {verses.length === 1 ? <SourceBreakdownVerse reference={firstVerse.reference} verse={firstVerse.verse} translation={shareTranslation} verseText={firstVerse.text} label={`Original language for ${firstVerse.reference}`} icon={<ReaderActionIcon name="languages" />} className="grid min-h-11 min-w-11 place-items-center rounded-lg focus-visible:outline-2 focus-visible:outline-[var(--brand)]" onOpen={() => setPanel(null)} /> : <button type="button" aria-label="Choose a verse for original language" title="Original language" aria-expanded={panel === "source"} aria-controls="reader-verse-actions" onClick={() => setPanel(panel === "source" ? null : "source")} className="grid min-h-11 min-w-11 place-items-center rounded-lg focus-visible:outline-2 focus-visible:outline-[var(--brand)]"><ReaderActionIcon name="languages" /></button>}
+          <button type="button" onClick={onClose} className="min-h-11 shrink-0 rounded-lg px-2 text-sm font-semibold text-[var(--muted)]">
+            Clear
+          </button>
+        </div>
+        <div role="group" aria-label="Selected passage actions" className="grid grid-cols-4 gap-1">
+          <button type="button" onClick={() => setPanel(panel === "highlight" ? null : "highlight")} className="min-h-11 rounded-xl px-1 text-xs font-semibold hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]">Highlight</button>
+          <button type="button" onClick={openNoteEditor} className="min-h-11 rounded-xl px-1 text-xs font-semibold hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]">Note</button>
+          <button type="button" onClick={copySelection} className="min-h-11 rounded-xl px-1 text-xs font-semibold hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]">Copy</button>
           <button
             ref={menuButtonRef}
             type="button"
-            aria-label="Verse actions"
-            title="Verse actions"
-            aria-expanded={panel === "actions"}
+            aria-expanded={panel === "more"}
             aria-controls="reader-verse-actions"
-            onClick={() => panel === "actions" ? closePanel() : setPanel("actions")}
-            className="min-h-11 min-w-11 rounded-lg px-2 text-xl focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
+            onClick={() => panel === "more" ? closePanel() : setPanel("more")}
+            className="min-h-11 rounded-xl px-1 text-xs font-semibold hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
           >
-            <ReaderActionIcon name="list" />
+            More
           </button>
-
         </div>
         <p role="status" className={message ? "pb-1 text-center text-xs text-[var(--muted)]" : "sr-only"}>{message}</p>
       </div>
@@ -419,6 +421,3 @@ function ColorButton({ label, onClick, className }: { label: string; onClick: ()
   );
 }
 
-function ReaderActionIcon({ name }: { name: "languages" | "list" }) {
-  return <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{name === "languages" ? <><path d="m5 8 6 6m-7 0 6-6 2-5M2 5h12M7 2v3m7 17 5-11 5 11m-8-4h6" /></> : <><path d="M9 6h12M9 12h12M9 18h12" /><path d="M3 6h.01M3 12h.01M3 18h.01" /></>}</svg>;
-}

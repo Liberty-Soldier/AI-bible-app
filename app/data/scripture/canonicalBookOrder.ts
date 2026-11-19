@@ -41,11 +41,21 @@ export const canonicalBookOrder = [
 
   "Tobit",
   "Judith",
+  "Esther Greek",
   "Wisdom",
   "Sirach",
   "Baruch",
+  "Letter of Jeremiah",
+  "Daniel Greek",
+  "Susanna",
+  "Bel and the Dragon",
   "1 Maccabees",
   "2 Maccabees",
+  "3 Maccabees",
+  "4 Maccabees",
+  "1 Esdras",
+  "Prayer of Manasseh",
+  "Song of Songs",
 
   "Matthew",
   "Mark",
@@ -96,3 +106,4 @@ export function isApocryphaBook(book: string) {
     index < getCanonicalBookIndex("Matthew")
   );
 }
+
