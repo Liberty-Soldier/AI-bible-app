@@ -59,8 +59,15 @@ const selector = fs.readFileSync(new URL("../app/components/ReaderSelector.tsx",
 assert.match(selector, /<BookPassageSelector/);
 assert.match(selector, /Go to verse \(optional\)/);
 assert.match(selector, /verseOptions.map/);
+const readPage = fs.readFileSync(new URL("../app/read/page.tsx", import.meta.url), "utf8");
+assert.match(readPage, /const books = allBooks;/);
+assert.doesNotMatch(readPage, /allBooks\.filter\(item => item\.translations\?\.includes\(translation\)\)/);
+assert.match(readPage, /getSelectableBookChapters\(found\.book, translation\)/);
+assert.match(readPage, /getBookTranslation\(item\.book, translation\)/);
 console.log("Reader navigation verification passed.");
 console.log("- Full book names and abbreviations open chapter 1, verse 1.");
 console.log("- Chapter-only and exact-verse references preserve their intent.");
 console.log("- Chapter links open reading directly; optional verse navigation uses runtime-owned labels.");
 console.log("- Translation fallback remains available for corpus-specific books.");
+console.log("- Every book stays visible for WEB, KJV, and Brenton; unsupported books fall back to their available translation.");
+

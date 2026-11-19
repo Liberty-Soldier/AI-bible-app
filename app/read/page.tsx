@@ -129,14 +129,22 @@ function getBooksFromScripture(): BookInfo[] {
 }
 
 function getSection(book: string): Section {
+  if (septuagintBooks.has(book)) return "septuagint";
   if (torahBooks.has(book)) return "torah";
   if (historyBooks.has(book)) return "history";
   if (wisdomBooks.has(book)) return "wisdom";
   if (prophetsBooks.has(book)) return "prophets";
-  if (septuagintBooks.has(book)) return "septuagint";
   if (newTestamentBooks.has(book)) return "new";
 
   return "septuagint";
+}
+
+function getSelectableBookChapters(
+  book: string,
+  preferredTranslation: Translation,
+) {
+  const availableTranslation = getBookTranslation(book, preferredTranslation);
+  return getBookChapters(book, availableTranslation);
 }
 
 export default function ReadPage() {
@@ -145,13 +153,14 @@ export default function ReadPage() {
   const allBooks = useMemo(() => getBooksFromScripture(), []);
 
   const [translation, setTranslation] = useState<Translation>("web");
-  const books = allBooks.filter(item => item.translations?.includes(translation));
+  // Keep the complete catalog visible. Links resolve to the selected
+  // translation when available and fall back to the book's supported text.
+  const books = allBooks;
   const [quickJump, setQuickJump] = useState("");
   const [quickJumpError, setQuickJumpError] = useState("");
 
   useEffect(() => {
     // Read the device-only preference after hydration; SSR intentionally uses WEB.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTranslation(getPreferredTranslation());
   }, []);
 
@@ -167,7 +176,13 @@ export default function ReadPage() {
       ? books.find((item) => item.book === parsed.book)
       : null;
 
-    if (!parsed || !found || !getBookChapters(found.book, translation).includes(parsed.chapter)) {
+    if (
+      !parsed ||
+      !found ||
+      !getSelectableBookChapters(found.book, translation).includes(
+        parsed.chapter,
+      )
+    ) {
       setQuickJumpError("Enter a valid book, chapter, or verse.");
       return;
     }
@@ -302,7 +317,7 @@ return (
                           {item.book}
                         </span>
                         <span className="mt-0.5 block text-xs text-[var(--muted)]">
-                          {getBookChapters(item.book, translation).length} {getBookChapters(item.book, translation).length === 1 ? "chapter" : "chapters"}{item.translations?.length === 1 ? " · Brenton" : ""}
+                          {getSelectableBookChapters(item.book, translation).length} {getSelectableBookChapters(item.book, translation).length === 1 ? "chapter" : "chapters"}{item.translations?.length === 1 ? " · Brenton" : ""}
                         </span>
                         {item.book === "Proverbs" && translation === "brenton" ? <span className="mt-1 block text-xs text-[var(--muted)]">Chapter 30 is unavailable; original numbering is preserved.</span> : null}
                         {item.note ? <span className="mt-1 block text-xs leading-5 text-[var(--muted)]">{item.note}</span> : null}
@@ -324,3 +339,4 @@ return (
   </main>
 );
 }
+
