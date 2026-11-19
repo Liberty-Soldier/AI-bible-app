@@ -18,6 +18,13 @@ export type ReaderBookmark = ReaderMemoryVerse & {
 export type ReaderHighlight = ReaderMemoryVerse & {
   color: "yellow" | "green" | "blue" | "pink" | "purple";
   savedAt: number;
+  collectionIds: string[];
+};
+
+export type ReaderHighlightCollection = {
+  id: string;
+  name: string;
+  createdAt: number;
 };
 
 export type ReaderNote = {
@@ -32,6 +39,7 @@ export type ReaderMemory = {
   bookmarks: ReaderBookmark[];
   highlights: ReaderHighlight[];
   notes: ReaderNote[];
+  highlightCollections: ReaderHighlightCollection[];
 };
 
 const KEY = "scripture-search-reader-memory";
@@ -40,6 +48,7 @@ const defaultMemory: ReaderMemory = {
   bookmarks: [],
   highlights: [],
   notes: [],
+  highlightCollections: [],
 };
 
 export function getReaderMemoryVerseLabel(
@@ -123,6 +132,33 @@ function normalizeHighlight(value: unknown): ReaderHighlight | null {
     ...verse,
     color,
     savedAt: toFiniteNumber(candidate.savedAt, Date.now()),
+    collectionIds: Array.isArray(candidate.collectionIds)
+      ? Array.from(
+          new Set(
+            candidate.collectionIds
+              .map((id) => String(id).trim())
+              .filter(Boolean),
+          ),
+        )
+      : [],
+  };
+}
+
+function normalizeHighlightCollection(
+  value: unknown,
+): ReaderHighlightCollection | null {
+  if (!value || typeof value !== "object") return null;
+
+  const candidate = value as Partial<ReaderHighlightCollection>;
+  const id = String(candidate.id || "").trim();
+  const name = String(candidate.name || "").trim();
+
+  if (!id || !name) return null;
+
+  return {
+    id,
+    name,
+    createdAt: toFiniteNumber(candidate.createdAt, Date.now()),
   };
 }
 
@@ -171,6 +207,13 @@ function normalizeMemory(value: unknown): ReaderMemory {
       ? candidate.notes
           .map(normalizeNote)
           .filter((item): item is ReaderNote => Boolean(item))
+      : [],
+    highlightCollections: Array.isArray(candidate.highlightCollections)
+      ? candidate.highlightCollections
+          .map(normalizeHighlightCollection)
+          .filter(
+            (item): item is ReaderHighlightCollection => Boolean(item),
+          )
       : [],
   };
 }
@@ -251,6 +294,9 @@ export function highlightVerses(
       ...verse,
       color,
       savedAt: Date.now(),
+      collectionIds:
+        memory.highlights.find((highlight) => highlight.id === verse.id)
+          ?.collectionIds || [],
     })),
   ];
 
@@ -275,6 +321,87 @@ export function removeHighlights(verses: ReaderMemoryVerse[]) {
   });
 
   return nextHighlights;
+}
+
+export function createHighlightCollection(name: string) {
+  const cleanName = name.trim().replace(/\s+/g, " ");
+  if (!cleanName) return null;
+
+  const memory = getReaderMemory();
+  const existing = memory.highlightCollections.find(
+    (collection) => collection.name.toLocaleLowerCase() === cleanName.toLocaleLowerCase(),
+  );
+
+  if (existing) return existing;
+
+  const now = Date.now();
+  const collection: ReaderHighlightCollection = {
+    id: `highlight-collection-${now}-${Math.random().toString(36).slice(2, 8)}`,
+    name: cleanName,
+    createdAt: now,
+  };
+
+  saveReaderMemory({
+    ...memory,
+    highlightCollections: [...memory.highlightCollections, collection],
+  });
+
+  return collection;
+}
+
+export function addHighlightsToCollection(
+  highlightIds: string[],
+  collectionId: string,
+) {
+  const memory = getReaderMemory();
+  const ids = new Set(highlightIds);
+
+  if (
+    !ids.size ||
+    !memory.highlightCollections.some(
+      (collection) => collection.id === collectionId,
+    )
+  ) {
+    return false;
+  }
+
+  saveReaderMemory({
+    ...memory,
+    highlights: memory.highlights.map((highlight) =>
+      ids.has(highlight.id) && !highlight.collectionIds.includes(collectionId)
+        ? {
+            ...highlight,
+            collectionIds: [...highlight.collectionIds, collectionId],
+          }
+        : highlight,
+    ),
+  });
+
+  return true;
+}
+
+export function deleteHighlightCollection(collectionId: string) {
+  const memory = getReaderMemory();
+  const exists = memory.highlightCollections.some(
+    (collection) => collection.id === collectionId,
+  );
+
+  if (!exists) return false;
+
+  saveReaderMemory({
+    ...memory,
+    highlightCollections: memory.highlightCollections.filter(
+      (collection) => collection.id !== collectionId,
+    ),
+    highlights: memory.highlights.map((highlight) => ({
+      ...highlight,
+      collectionIds: highlight.collectionIds.filter(
+        (id) => id !== collectionId,
+      ),
+    })),
+  });
+
+  return true;
 }
 
 export function saveNote(verses: ReaderMemoryVerse[], note: string) {

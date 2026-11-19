@@ -15,7 +15,9 @@ function subscribe(onChange: () => void) {
     const target = event.target;
     if (
       target instanceof Element &&
-      target.closest('[data-verse-selector="true"], [data-verse-study-control="true"]')
+      target.closest(
+        '[data-verse-selector="true"], [data-verse-tools="true"], [data-reader-verse-id]',
+      )
     ) {
       rememberDismissal();
     }
@@ -59,7 +61,8 @@ export default function ReaderFirstUseTip() {
       aria-label="Reader tip"
     >
       <p className="min-w-0 flex-1 text-xs leading-5 text-[var(--muted)]">
-        Select verse numbers, then choose Original language or Verse actions.
+        Tap a verse or its Tools button. Press and drag across text to open
+        tools for several verses.
       </p>
 
       <button

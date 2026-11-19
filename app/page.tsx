@@ -57,7 +57,7 @@ function HomePage() {
   const memory = useMemo<ReaderMemory>(() => {
     void memoryJson;
     return typeof window === "undefined"
-      ? { bookmarks: [], highlights: [], notes: [] }
+      ? { bookmarks: [], highlights: [], notes: [], highlightCollections: [] }
       : getReaderMemory();
   }, [memoryJson]);
 

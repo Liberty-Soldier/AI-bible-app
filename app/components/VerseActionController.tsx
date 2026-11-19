@@ -1,6 +1,13 @@
 "use client";
 
-import { type MouseEvent, useEffect, useMemo, useState } from "react";
+import {
+  type KeyboardEvent,
+  type MouseEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import ScriptureText from "@/app/components/ScriptureText";
 import type { BibleIQChapterTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 import {
@@ -38,7 +45,10 @@ export default function VerseActionController({
   tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
 }) {
   const [selectedVerses, setSelectedVerses] = useState<SelectedVerse[]>([]);
+  const [selectedTextOverride, setSelectedTextOverride] = useState("");
+  const [toolsHintOpen, setToolsHintOpen] = useState(false);
   const [memory, setMemory] = useState(() => getReaderMemory());
+  const versesContainerRef = useRef<HTMLDivElement | null>(null);
   const readerPreferences = useReaderPreferences();
 
   function refreshReaderMemory() {
@@ -109,6 +119,7 @@ export default function VerseActionController({
 
   function toggleVerse(verse: ReaderVerse) {
     const nextVerse = toSelectedVerse(verse);
+    setSelectedTextOverride("");
 
     setSelectedVerses((current) => {
       const exists = current.some((item) => item.id === nextVerse.id);
@@ -128,6 +139,67 @@ export default function VerseActionController({
 
   function clearSelection() {
     setSelectedVerses([]);
+    setSelectedTextOverride("");
+    window.getSelection()?.removeAllRanges();
+  }
+
+  function openVerseTools(verse: ReaderVerse) {
+    setSelectedTextOverride("");
+    setSelectedVerses([toSelectedVerse(verse)]);
+    setToolsHintOpen(false);
+  }
+
+  function applyNativeTextSelection() {
+    const selection = window.getSelection();
+    const container = versesContainerRef.current;
+
+    if (!selection || selection.isCollapsed || !container) return false;
+
+    const selectedText = selection.toString().trim();
+    const range = selection.rangeCount ? selection.getRangeAt(0) : null;
+
+    if (!selectedText || !range || !container.contains(range.commonAncestorContainer)) {
+      return false;
+    }
+
+    const selectedIds = Array.from(
+      container.querySelectorAll<HTMLElement>("[data-reader-verse-id]"),
+    )
+      .filter((element) => {
+        try {
+          return range.intersectsNode(element);
+        } catch {
+          return false;
+        }
+      })
+      .map((element) => element.dataset.readerVerseId)
+      .filter((id): id is string => Boolean(id));
+
+    const selected = verses
+      .filter((verse) => selectedIds.includes(verse.id))
+      .map(toSelectedVerse)
+      .sort((left, right) =>
+        compareReaderVerses(
+          { verseLabel: left.verseLabel || String(left.verse) },
+          { verseLabel: right.verseLabel || String(right.verse) },
+        ),
+      );
+
+    if (!selected.length) return false;
+
+    setSelectedVerses(selected);
+    setSelectedTextOverride(selectedText);
+    setToolsHintOpen(false);
+    return true;
+  }
+
+  function handleVerseTextKeyDown(
+    event: KeyboardEvent<HTMLSpanElement>,
+    verse: ReaderVerse,
+  ) {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    openVerseTools(verse);
   }
 
   function getHighlightClass(color?: ReaderHighlight["color"]) {
@@ -179,7 +251,27 @@ export default function VerseActionController({
 
   return (
     <>
+      <div className="mb-3 flex items-center justify-end gap-2 font-sans">
+        {toolsHintOpen ? (
+          <span className="text-xs text-[var(--muted)]">
+            Tap a verse, or press and drag to select text.
+          </span>
+        ) : null}
+        <button
+          type="button"
+          aria-expanded={toolsHintOpen}
+          onClick={() => setToolsHintOpen((open) => !open)}
+          className="inline-flex min-h-10 items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 text-sm font-semibold shadow-sm"
+        >
+          ⋯ Tools
+        </button>
+      </div>
+
       <div
+        ref={versesContainerRef}
+        onPointerUp={() => {
+          window.setTimeout(applyNativeTextSelection, 0);
+        }}
         className={`space-y-1 text-[var(--foreground)] ${typefaceClass} ${textSizeClass} ${lineSpacingClass} ${selectedVerses.length ? "pb-28" : ""}`}
       >
         {chapterItems.map((item) => {
@@ -212,6 +304,7 @@ export default function VerseActionController({
             <div
               id={readerVerseAnchorId(verseLabel)}
               key={`${verse.id}-${activeTranslation}`}
+              data-reader-verse-id={verse.id}
               className={`group relative block w-full scroll-mt-28 rounded-r-lg border-l-2 px-1 py-0.5 text-left transition-colors ${
                 isSelected
                   ? "border-amber-500/70 bg-amber-500/10"
@@ -241,7 +334,32 @@ export default function VerseActionController({
                 {verseLabel}
               </button>
 
-              <ScriptureText text={selectedText} reference={verse.reference} />
+              <span
+                role="button"
+                tabIndex={0}
+                aria-label={`Open tools for ${verse.reference}`}
+                onClick={() => {
+                  if (!applyNativeTextSelection()) openVerseTools(verse);
+                }}
+                onKeyDown={(event) => handleVerseTextKeyDown(event, verse)}
+                className="cursor-pointer rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/45"
+              >
+                <ScriptureText text={selectedText} reference={verse.reference} />
+              </span>
+
+              <button
+                type="button"
+                data-verse-tools="true"
+                aria-label={`Open tools for ${verse.reference}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  openVerseTools(verse);
+                }}
+                className="ml-2 inline-flex min-h-7 items-center rounded-lg px-1.5 align-baseline font-sans text-[0.68rem] font-semibold text-[var(--muted)] transition hover:bg-[var(--surface)] hover:text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-500/50"
+              >
+                ⋯ Tools
+              </button>
 
 
               {isBookmarked || hasNote ? (
@@ -258,6 +376,7 @@ export default function VerseActionController({
       <VerseActionSheet
         open={selectedVerses.length > 0}
         verses={selectedVerses}
+        selectedTextOverride={selectedTextOverride}
         onClose={clearSelection}
         onMemoryChange={refreshReaderMemory}
         tokenAvailabilityByVerse={tokenAvailabilityByReaderVerseId}

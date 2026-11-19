@@ -17,11 +17,13 @@ import {
 export default function VerseActionSheet({
   open,
   verses,
+  selectedTextOverride,
   onClose,
   onMemoryChange,
 }: {
   open: boolean;
   verses: SelectedVerse[];
+  selectedTextOverride?: string;
   onClose: () => void;
   onMemoryChange?: () => void;
   tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
@@ -55,8 +57,12 @@ export default function VerseActionSheet({
   }, [firstVerse, lastVerse, verses]);
 
   const selectedText = useMemo(
-    () => verses.map((v) => `${getReaderMemoryVerseLabel(v)} ${v.text}`).join("\n"),
-    [verses]
+    () =>
+      selectedTextOverride?.trim() ||
+      verses
+        .map((v) => `${getReaderMemoryVerseLabel(v)} ${v.text}`)
+        .join("\n"),
+    [selectedTextOverride, verses],
   );
 
   const shareTranslation = firstVerse?.translation || "web";

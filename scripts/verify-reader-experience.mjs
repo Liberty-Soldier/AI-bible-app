@@ -25,6 +25,8 @@ const header = read("app/components/CollapsibleReaderHeader.tsx");
 const preferences = read("app/lib/readerPreferences.ts");
 const controls = read("app/components/ReaderAppearanceControls.tsx");
 const readerPage = read("app/read/[book]/[chapter]/page.tsx");
+const libraryPage = read("app/library/page.tsx");
+const readerMemory = read("app/lib/readerMemory.ts");
 
 requireText(controller, "<ScriptureText", "quiet Scripture-text renderer");
 forbidText(controller, "<ReaderVerseStudy", "repeated per-verse study control");
@@ -63,9 +65,30 @@ requireText(
   "<ReaderAppearanceControls />",
   "reader appearance panel",
 );
+requireText(controller, "⋯ Tools", "visible reader Tools control");
+requireText(
+  controller,
+  "applyNativeTextSelection",
+  "native text-selection tools",
+);
+requireText(
+  controller,
+  "Open tools for ${verse.reference}",
+  "whole-verse tools target",
+);
+requireText(libraryPage, 'view="recent"', "recent highlight view");
+requireText(libraryPage, 'view="book"', "book-ordered highlight view");
+requireText(libraryPage, 'view="collections"', "highlight collections view");
+requireText(
+  readerMemory,
+  "highlightCollections",
+  "backward-compatible highlight collections storage",
+);
 
 console.log("Reader experience verification passed.");
 console.log("- Chapter text defaults to a book-style serif surface without repeated study links.");
 console.log("- Verse selection shows a compact strip; the menu exposes the canonical Source Text path.");
 console.log("- Typeface, text size, and spacing preferences persist on the device.");
 console.log("- Passage, translation, and Aa controls open separate bounded panels.");
+console.log("- Visible Tools controls, verse taps, and native text selection open verse actions.");
+console.log("- Highlights support Recent, By Book, and named Collections views.");
