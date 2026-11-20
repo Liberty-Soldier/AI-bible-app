@@ -12,22 +12,32 @@ import {
   type HighlightGroup,
 } from "@/app/lib/highlightLibrary";
 import {
-  addHighlightsToCollection,
-  createHighlightCollection,
-  deleteHighlightCollection,
+  addReaderItemsToCollection,
+  createReaderCollection,
+  deleteReaderCollection,
   deleteNote,
   getReaderMemory,
   getReaderMemoryVerseLabel,
   updateNote,
+  type ReaderBookmark,
+  type ReaderCollectionItemType,
   type ReaderHighlightCollection,
   type ReaderMemory,
   type ReaderNote,
 } from "@/app/lib/readerMemory";
 import { getCanonicalBookIndex } from "@/app/data/scripture/canonicalBookOrder";
 import { buildReaderHref } from "@/app/lib/translationPreference";
+import type { ReaderLibrarySyncStatus } from "@/app/components/ReaderLibrarySync";
+import {
+  compareReaderVerses,
+  groupBookmarksByBook,
+  groupNotesByBook,
+  sortRecentBookmarks,
+  sortRecentNotes,
+} from "@/app/lib/readerLibraryOrganization";
 
 type LibraryTab = "bookmarks" | "highlights" | "notes";
-type HighlightView = "recent" | "book" | "collections";
+type LibraryView = "recent" | "book" | "collections";
 
 function formatNoteDate(timestamp: number) {
   return new Intl.DateTimeFormat(undefined, {
@@ -66,7 +76,7 @@ function LibraryPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const activeTab = getValidTab(searchParams.get("tab"));
-  const highlightView = getValidHighlightView(searchParams.get("view"));
+  const activeView = getValidLibraryView(searchParams.get("view"));
   const selectedNoteId = searchParams.get("note");
 
   const [memory, setMemory] = useState<ReaderMemory>({
@@ -75,13 +85,14 @@ function LibraryPageContent() {
     notes: [],
     highlightCollections: [],
   });
-  const [selectingHighlights, setSelectingHighlights] = useState(false);
-  const [selectedHighlightIds, setSelectedHighlightIds] = useState<Set<string>>(
-    () => new Set(),
-  );
+  const [selectingType, setSelectingType] = useState<LibraryTab | null>(null);
+  const [selectedItemIds, setSelectedItemIds] = useState<Set<string>>(() => new Set());
   const [collectionMessage, setCollectionMessage] = useState("");
   const [collectionPickerOpen, setCollectionPickerOpen] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState("");
+  const [syncStatus, setSyncStatus] = useState<ReaderLibrarySyncStatus | "">(
+    "",
+  );
 
   const recentHighlightGroups = useMemo(
     () => groupRecentHighlights(memory.highlights),
@@ -90,6 +101,22 @@ function LibraryPageContent() {
   const bookHighlightGroups = useMemo(
     () => groupHighlightsByBook(memory.highlights),
     [memory.highlights],
+  );
+  const recentBookmarks = useMemo(
+    () => sortRecentBookmarks(memory.bookmarks),
+    [memory.bookmarks],
+  );
+  const bookmarkBooks = useMemo(
+    () => groupBookmarksByBook(memory.bookmarks),
+    [memory.bookmarks],
+  );
+  const recentNotes = useMemo(
+    () => sortRecentNotes(memory.notes),
+    [memory.notes],
+  );
+  const noteBooks = useMemo(
+    () => groupNotesByBook(memory.notes),
+    [memory.notes],
   );
 
   useEffect(() => {
@@ -107,35 +134,77 @@ function LibraryPageContent() {
     };
   }, []);
 
+  useEffect(() => {
+    function refreshSyncStatus(event?: Event) {
+      const detail = (event as CustomEvent<ReaderLibrarySyncStatus> | undefined)
+        ?.detail;
+      const status =
+        detail ||
+        (document.documentElement.dataset
+          .readerLibrarySync as ReaderLibrarySyncStatus | undefined);
+      if (status) setSyncStatus(status);
+    }
+
+    refreshSyncStatus();
+    window.addEventListener("reader-library-sync-status", refreshSyncStatus);
+    return () =>
+      window.removeEventListener(
+        "reader-library-sync-status",
+        refreshSyncStatus,
+      );
+  }, []);
+
   const selectedNote = selectedNoteId
     ? memory.notes.find((note) => note.id === selectedNoteId) || null
     : null;
 
   function openNote(noteId: string) {
     router.push(
-      `/library?tab=notes&note=${encodeURIComponent(noteId)}`,
+      `/library?tab=notes&view=${activeView}&note=${encodeURIComponent(noteId)}`,
       { scroll: false },
     );
   }
 
   function closeNote() {
-    router.replace("/library?tab=notes", { scroll: false });
+    router.replace(`/library?tab=notes&view=${activeView}`, { scroll: false });
   }
 
   function refreshMemory() {
     setMemory(getReaderMemory());
   }
 
-  function stopSelectingHighlights() {
-    setSelectingHighlights(false);
-    setSelectedHighlightIds(new Set());
+  function stopSelecting() {
+    setSelectingType(null);
+    setSelectedItemIds(new Set());
     setCollectionMessage("");
     setCollectionPickerOpen(false);
     setNewCollectionName("");
   }
 
+  function beginSelecting() {
+    if (selectingType === activeTab) {
+      stopSelecting();
+      return;
+    }
+    setSelectingType(activeTab);
+    setSelectedItemIds(new Set());
+    setCollectionMessage("");
+    setCollectionPickerOpen(false);
+    setNewCollectionName("");
+  }
+
+  function toggleItem(itemId: string) {
+    setSelectedItemIds((current) => {
+      const next = new Set(current);
+      if (next.has(itemId)) next.delete(itemId);
+      else next.add(itemId);
+      return next;
+    });
+    setCollectionMessage("");
+  }
+
   function toggleHighlightGroup(group: HighlightGroup) {
-    setSelectedHighlightIds((current) => {
+    setSelectedItemIds((current) => {
       const next = new Set(current);
       const groupIds = group.items.map((item) => item.id);
       const allSelected = groupIds.every((id) => next.has(id));
@@ -150,11 +219,13 @@ function LibraryPageContent() {
     setCollectionMessage("");
   }
 
-  function addSelectedHighlights(collectionId: string) {
-    if (!selectedHighlightIds.size || !collectionId) return;
+  function addSelectedItems(collectionId: string) {
+    if (!selectingType || !selectedItemIds.size || !collectionId) return;
 
-    const result = addHighlightsToCollection(
-      Array.from(selectedHighlightIds),
+    const itemType = getCollectionItemType(selectingType);
+    const result = addReaderItemsToCollection(
+      itemType,
+      Array.from(selectedItemIds),
       collectionId,
     );
     if (result) {
@@ -163,33 +234,45 @@ function LibraryPageContent() {
       );
       refreshMemory();
       setCollectionPickerOpen(false);
+      const noun = getItemNoun(itemType, result.addedCount);
       setCollectionMessage(result.addedCount
-        ? `Added ${result.addedCount} ${result.addedCount === 1 ? "highlight" : "highlights"} to ${collection?.name || "collection"}.`
-        : `Those highlights are already in ${collection?.name || "that collection"}.`);
+        ? `Added ${result.addedCount} ${noun} to ${collection?.name || "collection"}.`
+        : `Those ${getItemNoun(itemType, 2)} are already in ${collection?.name || "that collection"}.`);
     }
   }
 
   function createCollectionAndAdd() {
-    const collection = createHighlightCollection(newCollectionName);
+    if (!selectingType) return;
+    const collection = createReaderCollection(newCollectionName);
     if (!collection) {
       setCollectionMessage("Enter a collection name.");
       return;
     }
     setNewCollectionName("");
     setMemory(getReaderMemory());
-    const result = addHighlightsToCollection(
-      Array.from(selectedHighlightIds),
+    const itemType = getCollectionItemType(selectingType);
+    const result = addReaderItemsToCollection(
+      itemType,
+      Array.from(selectedItemIds),
       collection.id,
     );
     refreshMemory();
     setCollectionPickerOpen(false);
     setCollectionMessage(result?.addedCount
-      ? `Created ${collection.name} and added ${result.addedCount} ${result.addedCount === 1 ? "highlight" : "highlights"}.`
-      : `${collection.name} is ready. Those highlights were already included.`);
+      ? `Created ${collection.name} and added ${result.addedCount} ${getItemNoun(itemType, result.addedCount)}.`
+      : `${collection.name} is ready. Those ${getItemNoun(itemType, 2)} were already included.`);
   }
 
+  const selecting = selectingType === activeTab;
+  const activeItemCount =
+    activeTab === "bookmarks"
+      ? memory.bookmarks.length
+      : activeTab === "highlights"
+        ? memory.highlights.length
+        : memory.notes.length;
+
   return (
-    <main className={`min-h-screen bg-[var(--background)] px-5 pt-10 text-[var(--foreground)] ${selectingHighlights ? "pb-52" : "pb-24"}`}>
+    <main className={`min-h-screen bg-[var(--background)] px-5 pt-10 text-[var(--foreground)] ${selecting ? "pb-52" : "pb-24"}`}>
       <section className="mx-auto max-w-xl">
         <div className="mb-6">
           <Link
@@ -203,9 +286,18 @@ function LibraryPageContent() {
             Library
           </h1>
 
-          <p className="mt-2 text-[var(--muted)]">
-            Bookmarks, highlights, notes, and collections are stored only in
-            this browser on this device. They are not synchronized.
+          <p className="mt-2 text-[var(--muted)]" aria-live="polite">
+            {syncStatus === "synced"
+              ? "Backed up to your account and synchronized across your devices."
+              : syncStatus === "syncing"
+                ? "Saved in this browser. Synchronizing with your account…"
+                : syncStatus === "offline"
+                  ? "Saved in this browser. Changes will synchronize when you are back online."
+                  : syncStatus === "error"
+                    ? "Saved safely in this browser. Account synchronization will retry automatically."
+                    : syncStatus === "signed-out"
+                      ? "Saved in this browser. Sign in to back up and synchronize your Library across devices."
+                      : "Saved in this browser. Signed-in Libraries synchronize across devices."}
           </p>
         </div>
 
@@ -230,112 +322,68 @@ function LibraryPageContent() {
         </div>
 
         <div className="mt-6">
-          {activeTab === "bookmarks" ? (
-            <LibrarySection emptyText="No bookmarks yet.">
-              {memory.bookmarks
-                .slice()
-                .reverse()
-                .map((item) => (
-                  <VerseMemoryCard
-                    key={`${item.id}-${item.savedAt}`}
-                    reference={item.reference}
-                    text={item.text}
-                    href={buildReaderHref({
-                      book: item.book,
-                      chapter: item.chapter,
-                      verse: getReaderMemoryVerseLabel(item),
-                      translation: item.translation,
-                    })}
-                  />
-                ))}
-            </LibrarySection>
-          ) : null}
-
-          {activeTab === "highlights" ? (
-            <div>
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <div className="grid flex-1 grid-cols-3 gap-1 rounded-2xl bg-[var(--surface)] p-1">
-                  <HighlightViewLink view="recent" active={highlightView === "recent"}>
-                    Recent
-                  </HighlightViewLink>
-                  <HighlightViewLink view="book" active={highlightView === "book"}>
-                    By Book
-                  </HighlightViewLink>
-                  <HighlightViewLink
-                    view="collections"
-                    active={highlightView === "collections"}
-                  >
-                    Collections
-                  </HighlightViewLink>
-                </div>
-
-                {memory.highlights.length && highlightView !== "collections" ? (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (selectingHighlights) stopSelectingHighlights();
-                      else setSelectingHighlights(true);
-                    }}
-                    className="shrink-0 rounded-xl border border-[var(--border)] px-3 py-2 text-xs font-semibold"
-                  >
-                    {selectingHighlights ? "Done" : "Select"}
-                  </button>
-                ) : null}
+          <div>
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <div className="grid flex-1 grid-cols-3 gap-1 rounded-2xl bg-[var(--surface)] p-1">
+                <LibraryViewLink tab={activeTab} view="recent" active={activeView === "recent"}>Recent</LibraryViewLink>
+                <LibraryViewLink tab={activeTab} view="book" active={activeView === "book"}>By Book</LibraryViewLink>
+                <LibraryViewLink tab={activeTab} view="collections" active={activeView === "collections"}>Collections</LibraryViewLink>
               </div>
-
-              {highlightView === "recent" ? (
-                <RecentHighlights
-                  groups={recentHighlightGroups}
-                  selecting={selectingHighlights}
-                  selectedIds={selectedHighlightIds}
-                  onToggle={toggleHighlightGroup}
-                />
-              ) : null}
-
-              {highlightView === "book" ? (
-                <BookHighlights
-                  groups={bookHighlightGroups}
-                  selecting={selectingHighlights}
-                  selectedIds={selectedHighlightIds}
-                  onToggle={toggleHighlightGroup}
-                />
-              ) : null}
-
-              {highlightView === "collections" ? (
-                <HighlightCollections
-                  memory={memory}
-                  onMemoryChange={refreshMemory}
-                />
-              ) : null}
-
-              {selectingHighlights ? (
-                <HighlightCollectionToolbar
-                  collections={memory.highlightCollections}
-                  selectedCount={selectedHighlightIds.size}
-                  message={collectionMessage}
-                  pickerOpen={collectionPickerOpen}
-                  newCollectionName={newCollectionName}
-                  onPickerOpenChange={setCollectionPickerOpen}
-                  onNewCollectionNameChange={setNewCollectionName}
-                  onAddToCollection={addSelectedHighlights}
-                  onCreateAndAdd={createCollectionAndAdd}
-                  onClear={stopSelectingHighlights}
-                />
+              {activeItemCount > 0 && activeView !== "collections" ? (
+                <button type="button" onClick={beginSelecting} className="min-h-11 shrink-0 rounded-xl border border-[var(--border)] px-3 text-xs font-semibold">
+                  {selecting ? "Done" : "Select"}
+                </button>
               ) : null}
             </div>
-          ) : null}
 
-          {activeTab === "notes" ? (
-            <LibrarySection emptyText="No notes yet.">
-              {memory.notes.map((note) => (
-                <NoteMemoryCard
-                  key={note.id}
-                  note={note}
-                  onOpen={() => openNote(note.id)}
+            {activeTab === "bookmarks" && activeView === "recent" ? (
+              <BookmarkList items={recentBookmarks} selecting={selecting} selectedIds={selectedItemIds} onToggle={toggleItem} />
+            ) : null}
+            {activeTab === "bookmarks" && activeView === "book" ? (
+              <BookmarkBooks sections={bookmarkBooks} selecting={selecting} selectedIds={selectedItemIds} onToggle={toggleItem} />
+            ) : null}
+            {activeTab === "highlights" && activeView === "recent" ? (
+                <RecentHighlights
+                  groups={recentHighlightGroups}
+                  selecting={selecting}
+                  selectedIds={selectedItemIds}
+                  onToggle={toggleHighlightGroup}
                 />
-              ))}
-            </LibrarySection>
-          ) : null}
+            ) : null}
+            {activeTab === "highlights" && activeView === "book" ? (
+                <BookHighlights
+                  groups={bookHighlightGroups}
+                  selecting={selecting}
+                  selectedIds={selectedItemIds}
+                  onToggle={toggleHighlightGroup}
+                />
+            ) : null}
+            {activeTab === "notes" && activeView === "recent" ? (
+              <NoteList items={recentNotes} selecting={selecting} selectedIds={selectedItemIds} onToggle={toggleItem} onOpen={openNote} />
+            ) : null}
+            {activeTab === "notes" && activeView === "book" ? (
+              <NoteBooks sections={noteBooks} selecting={selecting} selectedIds={selectedItemIds} onToggle={toggleItem} onOpen={openNote} />
+            ) : null}
+            {activeView === "collections" ? (
+              <LibraryCollections memory={memory} onMemoryChange={refreshMemory} onOpenNote={openNote} />
+            ) : null}
+
+            {selecting ? (
+              <CollectionSelectionToolbar
+                collections={memory.highlightCollections}
+                itemType={getCollectionItemType(activeTab)}
+                selectedCount={selectedItemIds.size}
+                message={collectionMessage}
+                pickerOpen={collectionPickerOpen}
+                newCollectionName={newCollectionName}
+                onPickerOpenChange={setCollectionPickerOpen}
+                onNewCollectionNameChange={setNewCollectionName}
+                onAddToCollection={addSelectedItems}
+                onCreateAndAdd={createCollectionAndAdd}
+                onClear={stopSelecting}
+              />
+            ) : null}
+          </div>
         </div>
       </section>
 
@@ -360,23 +408,36 @@ function getValidTab(tab: string | null): LibraryTab {
   return "bookmarks";
 }
 
-function getValidHighlightView(view: string | null): HighlightView {
+function getValidLibraryView(view: string | null): LibraryView {
   if (view === "book" || view === "collections") return view;
   return "recent";
 }
 
-function HighlightViewLink({
+function getCollectionItemType(tab: LibraryTab): ReaderCollectionItemType {
+  if (tab === "bookmarks") return "bookmark";
+  if (tab === "notes") return "note";
+  return "highlight";
+}
+
+function getItemNoun(type: ReaderCollectionItemType, count: number) {
+  const singular = type;
+  return count === 1 ? singular : `${singular}s`;
+}
+
+function LibraryViewLink({
+  tab,
   view,
   active,
   children,
 }: {
-  view: HighlightView;
+  tab: LibraryTab;
+  view: LibraryView;
   active: boolean;
   children: React.ReactNode;
 }) {
   return (
     <Link
-      href={`/library?tab=highlights&view=${view}`}
+      href={`/library?tab=${tab}&view=${view}`}
       scroll={false}
       className={`rounded-xl px-2 py-2 text-center text-[11px] font-semibold ${
         active
@@ -387,6 +448,152 @@ function HighlightViewLink({
       {children}
     </Link>
   );
+}
+
+type SelectableItemsProps = {
+  selecting: boolean;
+  selectedIds: Set<string>;
+  onToggle: (id: string) => void;
+};
+
+function bookmarkHref(item: ReaderBookmark) {
+  return buildReaderHref({
+    book: item.book,
+    chapter: item.chapter,
+    verse: getReaderMemoryVerseLabel(item),
+    translation: item.translation,
+  });
+}
+
+function BookmarkList({
+  items,
+  ...selection
+}: { items: ReaderBookmark[] } & SelectableItemsProps) {
+  if (!items.length) return <LibraryEmpty>No bookmarks yet. Save a verse to find it here.</LibraryEmpty>;
+  return (
+    <div className="space-y-3">
+      {items.map((item) => (
+        <BookmarkCard key={item.id} item={item} {...selection} />
+      ))}
+    </div>
+  );
+}
+
+function BookmarkBooks({
+  sections,
+  ...selection
+}: {
+  sections: Array<{ book: string; items: ReaderBookmark[] }>;
+} & SelectableItemsProps) {
+  if (!sections.length) return <LibraryEmpty>No bookmarked books yet.</LibraryEmpty>;
+  return (
+    <div className="space-y-4">
+      {sections.map(({ book, items }) => (
+        <BookDetails key={book} book={book} count={items.length} noun="bookmark">
+          {items.map((item) => <BookmarkCard key={item.id} item={item} {...selection} />)}
+        </BookDetails>
+      ))}
+    </div>
+  );
+}
+
+function BookmarkCard({
+  item,
+  selecting = false,
+  selectedIds = new Set<string>(),
+  onToggle = () => {},
+  showType = false,
+}: {
+  item: ReaderBookmark;
+  selecting?: boolean;
+  selectedIds?: Set<string>;
+  onToggle?: (id: string) => void;
+  showType?: boolean;
+}) {
+  const selected = selectedIds.has(item.id);
+  const className = selectableCardClass(selected, "bg-[var(--surface)]");
+  const content = (
+    <>
+      <CardHeading reference={item.reference} selecting={selecting} selected={selected} type={showType ? "Bookmark" : undefined} />
+      <p className="mt-1.5 line-clamp-2 text-sm leading-5 text-[var(--muted)]">{item.text}</p>
+    </>
+  );
+  return selecting ? (
+    <button type="button" onClick={() => onToggle(item.id)} aria-pressed={selected} className={className}>{content}</button>
+  ) : (
+    <Link href={bookmarkHref(item)} className={className}>{content}</Link>
+  );
+}
+
+function NoteList({
+  items,
+  onOpen,
+  ...selection
+}: { items: ReaderNote[]; onOpen: (id: string) => void } & SelectableItemsProps) {
+  if (!items.length) return <LibraryEmpty>No notes yet. Add a note to a selected passage to find it here.</LibraryEmpty>;
+  return (
+    <div className="space-y-3">
+      {items.map((note) => <NoteMemoryCard key={note.id} note={note} onOpen={() => onOpen(note.id)} {...selection} />)}
+    </div>
+  );
+}
+
+function NoteBooks({
+  sections,
+  onOpen,
+  ...selection
+}: {
+  sections: Array<{ book: string; items: ReaderNote[] }>;
+  onOpen: (id: string) => void;
+} & SelectableItemsProps) {
+  if (!sections.length) return <LibraryEmpty>No notes grouped by book yet.</LibraryEmpty>;
+  return (
+    <div className="space-y-4">
+      {sections.map(({ book, items }) => (
+        <BookDetails key={book} book={book} count={items.length} noun="note">
+          {items.map((note) => <NoteMemoryCard key={note.id} note={note} onOpen={() => onOpen(note.id)} {...selection} />)}
+        </BookDetails>
+      ))}
+    </div>
+  );
+}
+
+function BookDetails({ book, count, noun, children }: { book: string; count: number; noun: string; children: React.ReactNode }) {
+  return (
+    <details className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+      <summary className="min-h-12 cursor-pointer list-none px-4 py-3 font-semibold">
+        <span className="flex items-center justify-between gap-3">
+          <span>{book}</span>
+          <span className="text-xs text-[var(--muted)]">{count} {count === 1 ? noun : `${noun}s`}</span>
+        </span>
+      </summary>
+      <div className="space-y-3 border-t border-[var(--border)] p-3">{children}</div>
+    </details>
+  );
+}
+
+function CardHeading({ reference, selecting, selected, type }: { reference: string; selecting: boolean; selected: boolean; type?: string }) {
+  return (
+    <div className="flex items-start justify-between gap-3">
+      <div className="min-w-0">
+        {type ? <span className="mb-1 inline-flex rounded-full bg-[var(--background)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--muted)]">{type}</span> : null}
+        <p className="font-semibold">{reference}</p>
+      </div>
+      {selecting ? <SelectionMark selected={selected} /> : null}
+    </div>
+  );
+}
+
+function SelectionMark({ selected }: { selected: boolean }) {
+  return <span aria-hidden="true" className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${selected ? "border-amber-600 bg-amber-600 text-white" : "border-[var(--muted)]"}`}>{selected ? "✓" : ""}</span>;
+}
+
+function selectableCardClass(selected: boolean, background: string) {
+  return `block w-full rounded-2xl border p-3 text-left transition ${selected ? "border-amber-500 ring-2 ring-amber-500/20" : "border-[var(--border)]"} ${background}`;
+}
+
+function LibraryEmpty({ children }: { children: React.ReactNode }) {
+  return <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 text-center text-sm text-[var(--muted)]">{children}</div>;
 }
 
 function RecentHighlights({
@@ -503,11 +710,13 @@ function HighlightGroupCard({
   selecting,
   selected,
   onToggle,
+  showType = false,
 }: {
   group: HighlightGroup;
   selecting?: boolean;
   selected?: boolean;
   onToggle?: () => void;
+  showType?: boolean;
 }) {
   const first = group.items[0];
   const className = `block w-full rounded-2xl border p-3 text-left transition ${
@@ -516,7 +725,10 @@ function HighlightGroupCard({
   const content = (
     <>
       <div className="flex items-start justify-between gap-3">
-        <p className="font-semibold">{group.reference}</p>
+        <div>
+          {showType ? <span className="mb-1 inline-flex rounded-full bg-[var(--background)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--muted)]">Highlight</span> : null}
+          <p className="font-semibold">{group.reference}</p>
+        </div>
         {selecting ? (
           <span
             aria-hidden="true"
@@ -580,8 +792,9 @@ function EmptyHighlights() {
   );
 }
 
-function HighlightCollectionToolbar({
+function CollectionSelectionToolbar({
   collections,
+  itemType,
   selectedCount,
   message,
   pickerOpen,
@@ -593,6 +806,7 @@ function HighlightCollectionToolbar({
   onClear,
 }: {
   collections: ReaderHighlightCollection[];
+  itemType: ReaderCollectionItemType;
   selectedCount: number;
   message: string;
   pickerOpen: boolean;
@@ -603,12 +817,13 @@ function HighlightCollectionToolbar({
   onCreateAndAdd: () => void;
   onClear: () => void;
 }) {
+  const selectedNoun = getItemNoun(itemType, selectedCount);
   return (
     <div className="fixed inset-x-4 bottom-[calc(5rem+env(safe-area-inset-bottom))] z-40 mx-auto max-w-xl">
       {pickerOpen ? (
         <section
           role="dialog"
-          aria-label="Add selected highlights to a collection"
+          aria-label={`Add selected ${getItemNoun(itemType, 2)} to a collection`}
           className="mb-2 max-h-[min(52dvh,26rem)] overflow-y-auto rounded-2xl border border-[var(--border)] bg-[var(--background)] p-3 shadow-xl"
         >
           <div className="flex items-center justify-between gap-3">
@@ -670,7 +885,7 @@ function HighlightCollectionToolbar({
       <div className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-3 shadow-xl">
         <div className="flex items-center gap-2">
           <p className="min-w-0 flex-1 text-sm font-semibold" aria-live="polite">
-            {selectedCount} {selectedCount === 1 ? "highlight" : "highlights"} selected
+            {selectedCount} {selectedNoun} selected
           </p>
           <button type="button" onClick={onClear} className="min-h-11 rounded-xl px-3 text-sm font-semibold text-[var(--muted)]">
             Clear
@@ -691,12 +906,14 @@ function HighlightCollectionToolbar({
   );
 }
 
-function HighlightCollections({
+function LibraryCollections({
   memory,
   onMemoryChange,
+  onOpenNote,
 }: {
   memory: ReaderMemory;
   onMemoryChange: () => void;
+  onOpenNote: (id: string) => void;
 }) {
   const [newName, setNewName] = useState("");
   const [message, setMessage] = useState("");
@@ -705,7 +922,7 @@ function HighlightCollections({
   );
 
   function createCollection() {
-    const collection = createHighlightCollection(newName);
+    const collection = createReaderCollection(newName);
     if (!collection) {
       setMessage("Enter a collection name.");
       return;
@@ -717,9 +934,9 @@ function HighlightCollections({
   }
 
   function removeCollection(collectionId: string) {
-    if (deleteHighlightCollection(collectionId)) {
+    if (deleteReaderCollection(collectionId)) {
       setDeleteCollectionId(null);
-      setMessage("Collection deleted. Your highlights are still saved.");
+      setMessage("Collection deleted. Its bookmarks, highlights, and notes are still saved.");
       onMemoryChange();
     }
   }
@@ -733,12 +950,12 @@ function HighlightCollections({
         }}
         className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4"
       >
-        <label htmlFor="new-highlight-collection" className="text-sm font-semibold">
+        <label htmlFor="new-library-collection" className="text-sm font-semibold">
           New collection
         </label>
         <div className="mt-2 flex gap-2">
           <input
-            id="new-highlight-collection"
+            id="new-library-collection"
             value={newName}
             onChange={(event) => {
               setNewName(event.target.value);
@@ -766,15 +983,27 @@ function HighlightCollections({
       {!memory.highlightCollections.length ? (
         <div className="mt-4 rounded-2xl border border-dashed border-[var(--border)] p-5 text-center text-sm text-[var(--muted)]">
           Create a collection, then use Select in Recent or By Book to add
-          highlights.
+          bookmarks, highlights, or notes.
         </div>
       ) : (
         <div className="mt-4 space-y-4">
           {memory.highlightCollections.map((collection) => {
+            const bookmarks = memory.bookmarks.filter((bookmark) =>
+              bookmark.collectionIds.includes(collection.id),
+            );
             const highlights = memory.highlights.filter((highlight) =>
               highlight.collectionIds.includes(collection.id),
             );
-            const groups = groupHighlightsByBook(highlights);
+            const highlightGroups = groupHighlightsByBook(highlights);
+            const notes = memory.notes.filter((note) =>
+              note.collectionIds.includes(collection.id),
+            );
+            const entries = [
+              ...bookmarks.map((item) => ({ kind: "bookmark" as const, anchor: item, item })),
+              ...highlightGroups.map((item) => ({ kind: "highlight" as const, anchor: item.items[0], item })),
+              ...notes.filter((item) => item.verses[0]).map((item) => ({ kind: "note" as const, anchor: item.verses[0], item })),
+            ].sort((left, right) => compareReaderVerses(left.anchor, right.anchor) || left.kind.localeCompare(right.kind));
+            const itemCount = bookmarks.length + highlights.length + notes.length;
 
             return (
               <section
@@ -785,8 +1014,7 @@ function HighlightCollections({
                   <div>
                     <h2 className="font-semibold">{collection.name}</h2>
                     <p className="text-xs text-[var(--muted)]">
-                      {highlights.length}{" "}
-                      {highlights.length === 1 ? "highlight" : "highlights"}
+                      {itemCount} {itemCount === 1 ? "saved item" : "saved items"}
                     </p>
                   </div>
                   {deleteCollectionId === collection.id ? (
@@ -817,13 +1045,19 @@ function HighlightCollections({
                   )}
                 </div>
                 <div className="space-y-3 border-t border-[var(--border)] p-3">
-                  {groups.length ? (
-                    groups.map((group) => (
-                      <HighlightGroupCard key={group.id} group={group} />
-                    ))
+                  {entries.length ? (
+                    entries.map((entry) =>
+                      entry.kind === "bookmark" ? (
+                        <BookmarkCard key={`bookmark-${entry.item.id}`} item={entry.item} showType />
+                      ) : entry.kind === "highlight" ? (
+                        <HighlightGroupCard key={`highlight-${entry.item.id}`} group={entry.item} showType />
+                      ) : (
+                        <NoteMemoryCard key={`note-${entry.item.id}`} note={entry.item} onOpen={() => onOpenNote(entry.item.id)} showType />
+                      ),
+                    )
                   ) : (
                     <p className="px-2 py-3 text-sm text-[var(--muted)]">
-                      No highlights in this collection yet.
+                      No saved items in this collection yet.
                     </p>
                   )}
                 </div>
@@ -859,93 +1093,54 @@ function TabLink({
   );
 }
 
-function LibrarySection({
-  children,
-  emptyText,
-}: {
-  children: React.ReactNode;
-  emptyText: string;
-}) {
-  const items = Array.isArray(children) ? children.filter(Boolean) : children;
-
-  if (Array.isArray(items) && items.length === 0) {
-    return (
-      <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 text-center text-sm text-[var(--muted)]">
-        {emptyText}
-      </div>
-    );
-  }
-
-  return <div className="space-y-3">{items}</div>;
-}
-
 function NoteMemoryCard({
   note,
   onOpen,
+  selecting = false,
+  selectedIds = new Set<string>(),
+  onToggle = () => {},
+  showType = false,
 }: {
   note: ReaderNote;
   onOpen: () => void;
+  selecting?: boolean;
+  selectedIds?: Set<string>;
+  onToggle?: (id: string) => void;
+  showType?: boolean;
 }) {
   const edited = note.updatedAt > note.savedAt + 1000;
-
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className="block w-full border-b border-[var(--border)] py-4 text-left transition active:opacity-70"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <p className="font-semibold">{getNoteReference(note)}</p>
-        <span className="shrink-0 text-xs font-semibold text-[var(--muted)]">
-          Open
-        </span>
+  const selected = selectedIds.has(note.id);
+  const content = (
+    <>
+      <CardHeading reference={getNoteReference(note)} selecting={selecting} selected={selected} type={showType ? "Note" : undefined} />
+      <p className="mt-1.5 line-clamp-2 text-sm leading-5 text-[var(--muted)]">{note.note}</p>
+      <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-[var(--muted)]">
+        <span>Created {formatNoteDate(note.savedAt)}</span>
+        {edited ? <span>Edited {formatNoteDate(note.updatedAt)}</span> : null}
       </div>
-
-      <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--muted)]">
-        {note.note}
-      </p>
-
-      <p className="mt-3 text-xs text-[var(--muted)]">
-        Created {formatNoteDate(note.savedAt)}
-        {edited ? ` · Edited ${formatNoteDate(note.updatedAt)}` : ""}
-      </p>
-    </button>
+    </>
   );
-}
 
-function VerseMemoryCard({
-  reference,
-  text,
-  href,
-  color,
-}: {
-  reference: string;
-  text: string;
-  href: string;
-  color?: string;
-}) {
+  if (selecting) {
+    return (
+      <button type="button" onClick={() => onToggle(note.id)} aria-pressed={selected} className={selectableCardClass(selected, "bg-[var(--surface)]")}>
+        {content}
+      </button>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className={`block rounded-3xl border border-[var(--border)] p-4 ${
-        color === "green"
-          ? "bg-emerald-500/15"
-          : color === "blue"
-          ? "bg-sky-500/15"
-          : color === "pink"
-          ? "bg-pink-500/15"
-          : color === "purple"
-          ? "bg-purple-500/15"
-          : color === "yellow"
-          ? "bg-yellow-200/35"
-          : "bg-[var(--surface)]"
-      }`}
-    >
-      <p className="font-semibold">{reference}</p>
-      <p className="mt-2 line-clamp-3 text-sm leading-6 text-[var(--muted)]">
-        {text}
-      </p>
-    </Link>
+    <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3">
+      {content}
+      <div className="mt-3 grid grid-cols-2 gap-2 border-t border-[var(--border)] pt-3">
+        <Link href={getNoteScriptureHref(note)} className="min-h-11 rounded-xl border border-[var(--border)] px-3 py-2.5 text-center text-xs font-semibold">
+          View passage
+        </Link>
+        <button type="button" onClick={onOpen} className="min-h-11 rounded-xl bg-[var(--foreground)] px-3 py-2.5 text-xs font-semibold text-[var(--background)]">
+          Open & edit
+        </button>
+      </div>
+    </article>
   );
 }
 
@@ -1192,4 +1387,3 @@ export default function LibraryPage() {
     </Suspense>
   );
 }
-

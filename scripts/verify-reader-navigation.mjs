@@ -70,4 +70,3 @@ console.log("- Chapter-only and exact-verse references preserve their intent.");
 console.log("- Chapter links open reading directly; optional verse navigation uses runtime-owned labels.");
 console.log("- Translation fallback remains available for corpus-specific books.");
 console.log("- Every book stays visible for WEB, KJV, and Brenton; unsupported books fall back to their available translation.");
-

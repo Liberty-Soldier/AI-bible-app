@@ -461,4 +461,3 @@ export default function VerseActionController({
     </>
   );
 }
-

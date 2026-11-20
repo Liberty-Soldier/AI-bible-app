@@ -51,12 +51,16 @@ function copy(relative) {
 }
 function sealedInput(relative, expected) {
   const bytes = fs.readFileSync(path.join(root, relative));
-  let sealed = bytes;
-  if (sha(sealed) !== expected) {
-    // Windows-created seals are reconstructed in the disposable snapshot only.
-    sealed = Buffer.from(bytes.toString('utf8').replace(/\r?\n/g, '\r\n'));
-    if (sha(sealed) !== expected) fail(`sealed input mismatch, beyond line endings: ${relative}`);
-  }
+  // Git may check text seals out with platform line endings. Reconstruct both
+  // deterministic serializations, but accept only the exact approved hash.
+  const text = bytes.toString('utf8');
+  const candidates = [
+    bytes,
+    Buffer.from(text.replace(/\r\n/g, '\n')),
+    Buffer.from(text.replace(/\r?\n/g, '\r\n')),
+  ];
+  const sealed = candidates.find(candidate => sha(candidate) === expected);
+  if (!sealed) fail(`sealed input mismatch, beyond line endings: ${relative}`);
   const target = path.join(stage, relative);
   fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.writeFileSync(target, sealed);
