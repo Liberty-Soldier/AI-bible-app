@@ -84,9 +84,18 @@ requireText(controller, "suppressNextClickRef", "post-drag tap suppression");
 requireText(libraryPage, 'view="recent"', "recent highlight view");
 requireText(libraryPage, 'view="book"', "book-ordered highlight view");
 requireText(libraryPage, 'view="collections"', "highlight collections view");
+requireText(libraryPage, "BookmarkBooks", "bookmark By Book organization");
+requireText(libraryPage, "NoteBooks", "note By Book organization");
+requireText(libraryPage, "LibraryCollections", "mixed Library collections view");
+requireText(libraryPage, "showType", "mixed collection item labels");
 requireText(libraryPage, "Create new collection", "inline collection creation picker");
 requireText(libraryPage, "Add to collection", "enabled selection organization action");
-requireText(libraryPage, "They are not synchronized", "accurate device-local storage wording");
+requireText(readerMemory, "addReaderItemsToCollection", "shared collection membership workflow");
+requireText(
+  libraryPage,
+  "synchronized across your devices",
+  "accurate signed-in Library synchronization wording",
+);
 requireText(
   readerMemory,
   "highlightCollections",
@@ -99,5 +108,5 @@ console.log("- Verse selection shows a compact strip; the menu exposes the canon
 console.log("- Typeface, text size, and spacing preferences persist on the device.");
 console.log("- Passage, translation, and Aa controls open separate bounded panels.");
 console.log("- Verse taps and Scripture-only native drag selection share labeled passage actions.");
-console.log("- Highlights support Recent, By Book, and named Collections views.");
-
+console.log("- Bookmarks, Highlights, and Notes support Recent, By Book, and mixed Collections views.");
+console.log("- Signed-in Library data reports account synchronization state.");

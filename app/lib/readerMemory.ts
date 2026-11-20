@@ -13,6 +13,7 @@ export type ReaderMemoryVerse = {
 
 export type ReaderBookmark = ReaderMemoryVerse & {
   savedAt: number;
+  collectionIds: string[];
 };
 
 export type ReaderHighlight = ReaderMemoryVerse & {
@@ -33,7 +34,10 @@ export type ReaderNote = {
   note: string;
   savedAt: number;
   updatedAt: number;
+  collectionIds: string[];
 };
+
+export type ReaderCollectionItemType = "bookmark" | "highlight" | "note";
 
 export type ReaderMemory = {
   bookmarks: ReaderBookmark[];
@@ -43,6 +47,8 @@ export type ReaderMemory = {
 };
 
 const KEY = "scripture-search-reader-memory";
+const ACTIVE_OWNER_KEY = "scripture-search-reader-memory-owner";
+const LEGACY_CLAIMED_KEY = "scripture-search-reader-memory-claimed-by";
 
 const defaultMemory: ReaderMemory = {
   bookmarks: [],
@@ -50,6 +56,15 @@ const defaultMemory: ReaderMemory = {
   notes: [],
   highlightCollections: [],
 };
+
+export function createEmptyReaderMemory(): ReaderMemory {
+  return {
+    bookmarks: [],
+    highlights: [],
+    notes: [],
+    highlightCollections: [],
+  };
+}
 
 export function getReaderMemoryVerseLabel(
   verse: Pick<ReaderMemoryVerse, "verse" | "verseLabel">,
@@ -112,7 +127,16 @@ function normalizeBookmark(value: unknown): ReaderBookmark | null {
   return {
     ...verse,
     savedAt: toFiniteNumber(candidate.savedAt, Date.now()),
+    collectionIds: normalizeCollectionIds(candidate.collectionIds),
   };
+}
+
+function normalizeCollectionIds(value: unknown) {
+  return Array.isArray(value)
+    ? Array.from(
+        new Set(value.map((id) => String(id).trim()).filter(Boolean)),
+      )
+    : [];
 }
 
 function normalizeHighlight(value: unknown): ReaderHighlight | null {
@@ -132,15 +156,7 @@ function normalizeHighlight(value: unknown): ReaderHighlight | null {
     ...verse,
     color,
     savedAt: toFiniteNumber(candidate.savedAt, Date.now()),
-    collectionIds: Array.isArray(candidate.collectionIds)
-      ? Array.from(
-          new Set(
-            candidate.collectionIds
-              .map((id) => String(id).trim())
-              .filter(Boolean),
-          ),
-        )
-      : [],
+    collectionIds: normalizeCollectionIds(candidate.collectionIds),
   };
 }
 
@@ -184,10 +200,11 @@ function normalizeNote(value: unknown): ReaderNote | null {
     note,
     savedAt,
     updatedAt: toFiniteNumber(candidate.updatedAt, savedAt),
+    collectionIds: normalizeCollectionIds(candidate.collectionIds),
   };
 }
 
-function normalizeMemory(value: unknown): ReaderMemory {
+export function normalizeReaderMemory(value: unknown): ReaderMemory {
   if (!value || typeof value !== "object") return defaultMemory;
 
   const candidate = value as Partial<ReaderMemory>;
@@ -218,6 +235,42 @@ function normalizeMemory(value: unknown): ReaderMemory {
   };
 }
 
+function getReaderMemoryKey() {
+  if (!isBrowser()) return KEY;
+
+  const owner = localStorage.getItem(ACTIVE_OWNER_KEY)?.trim();
+  return owner ? `${KEY}:${owner}` : KEY;
+}
+
+export function activateReaderMemoryOwner(ownerId: string | null) {
+  if (!isBrowser()) return;
+
+  const owner = ownerId?.trim() || "";
+  const previousOwner = localStorage.getItem(ACTIVE_OWNER_KEY) || "";
+
+  if (!owner) {
+    localStorage.removeItem(ACTIVE_OWNER_KEY);
+    if (previousOwner) notifyReaderMemoryUpdated();
+    return;
+  }
+
+  const ownerKey = `${KEY}:${owner}`;
+  if (!localStorage.getItem(ownerKey)) {
+    const claimedBy = localStorage.getItem(LEGACY_CLAIMED_KEY);
+    const legacy = localStorage.getItem(KEY);
+
+    if (legacy && (!claimedBy || claimedBy === owner)) {
+      localStorage.setItem(ownerKey, legacy);
+      localStorage.setItem(LEGACY_CLAIMED_KEY, owner);
+    } else {
+      localStorage.setItem(ownerKey, JSON.stringify(createEmptyReaderMemory()));
+    }
+  }
+
+  localStorage.setItem(ACTIVE_OWNER_KEY, owner);
+  if (previousOwner !== owner) notifyReaderMemoryUpdated();
+}
+
 function notifyReaderMemoryUpdated() {
   if (!isBrowser()) return;
   window.dispatchEvent(new Event("reader-memory-updated"));
@@ -227,10 +280,10 @@ export function getReaderMemory(): ReaderMemory {
   if (!isBrowser()) return defaultMemory;
 
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(getReaderMemoryKey());
     if (!raw) return defaultMemory;
 
-    return normalizeMemory(JSON.parse(raw));
+    return normalizeReaderMemory(JSON.parse(raw));
   } catch {
     return defaultMemory;
   }
@@ -239,7 +292,10 @@ export function getReaderMemory(): ReaderMemory {
 export function saveReaderMemory(memory: ReaderMemory) {
   if (!isBrowser()) return;
 
-  localStorage.setItem(KEY, JSON.stringify(normalizeMemory(memory)));
+  localStorage.setItem(
+    getReaderMemoryKey(),
+    JSON.stringify(normalizeReaderMemory(memory)),
+  );
   notifyReaderMemoryUpdated();
 }
 
@@ -269,6 +325,9 @@ export function toggleBookmarks(verses: ReaderMemoryVerse[]) {
         ...verses.map((verse) => ({
           ...verse,
           savedAt: Date.now(),
+          collectionIds:
+            memory.bookmarks.find((bookmark) => bookmark.id === verse.id)
+              ?.collectionIds || [],
         })),
       ];
 
@@ -349,12 +408,15 @@ export function createHighlightCollection(name: string) {
   return collection;
 }
 
-export function addHighlightsToCollection(
-  highlightIds: string[],
+export const createReaderCollection = createHighlightCollection;
+
+export function addReaderItemsToCollection(
+  itemType: ReaderCollectionItemType,
+  itemIds: string[],
   collectionId: string,
 ) {
   const memory = getReaderMemory();
-  const ids = new Set(highlightIds);
+  const ids = new Set(itemIds);
 
   if (
     !ids.size ||
@@ -367,27 +429,41 @@ export function addHighlightsToCollection(
 
   let addedCount = 0;
   let alreadyMemberCount = 0;
-  const nextHighlights = memory.highlights.map((highlight) => {
-    if (!ids.has(highlight.id)) return highlight;
-    if (highlight.collectionIds.includes(collectionId)) {
+  const addMembership = <T extends { id: string; collectionIds: string[] }>(
+    item: T,
+  ) => {
+    if (!ids.has(item.id)) return item;
+    if (item.collectionIds.includes(collectionId)) {
       alreadyMemberCount += 1;
-      return highlight;
+      return item;
     }
     addedCount += 1;
-    return {
-      ...highlight,
-      collectionIds: [...highlight.collectionIds, collectionId],
-    };
-  });
+    return { ...item, collectionIds: [...item.collectionIds, collectionId] };
+  };
 
-  if (addedCount) {
-    saveReaderMemory({
-      ...memory,
-      highlights: nextHighlights,
-    });
-  }
+  const nextMemory: ReaderMemory = {
+    ...memory,
+    bookmarks:
+      itemType === "bookmark"
+        ? memory.bookmarks.map(addMembership)
+        : memory.bookmarks,
+    highlights:
+      itemType === "highlight"
+        ? memory.highlights.map(addMembership)
+        : memory.highlights,
+    notes:
+      itemType === "note" ? memory.notes.map(addMembership) : memory.notes,
+  };
 
+  if (addedCount) saveReaderMemory(nextMemory);
   return { addedCount, alreadyMemberCount };
+}
+
+export function addHighlightsToCollection(
+  highlightIds: string[],
+  collectionId: string,
+) {
+  return addReaderItemsToCollection("highlight", highlightIds, collectionId);
 }
 
 export function deleteHighlightCollection(collectionId: string) {
@@ -409,10 +485,22 @@ export function deleteHighlightCollection(collectionId: string) {
         (id) => id !== collectionId,
       ),
     })),
+    bookmarks: memory.bookmarks.map((bookmark) => ({
+      ...bookmark,
+      collectionIds: bookmark.collectionIds.filter(
+        (id) => id !== collectionId,
+      ),
+    })),
+    notes: memory.notes.map((note) => ({
+      ...note,
+      collectionIds: note.collectionIds.filter((id) => id !== collectionId),
+    })),
   });
 
   return true;
 }
+
+export const deleteReaderCollection = deleteHighlightCollection;
 
 export function saveNote(verses: ReaderMemoryVerse[], note: string) {
   const memory = getReaderMemory();
@@ -424,6 +512,7 @@ export function saveNote(verses: ReaderMemoryVerse[], note: string) {
     note,
     savedAt: now,
     updatedAt: now,
+    collectionIds: [],
   };
 
   saveReaderMemory({
@@ -482,4 +571,3 @@ export function getVerseMemoryState(verseId: string) {
     ),
   };
 }
-

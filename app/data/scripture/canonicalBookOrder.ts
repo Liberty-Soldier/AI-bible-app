@@ -106,4 +106,3 @@ export function isApocryphaBook(book: string) {
     index < getCanonicalBookIndex("Matthew")
   );
 }
-

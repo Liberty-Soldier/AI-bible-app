@@ -63,4 +63,3 @@ export function getPassageReference(verses: readonly ReaderMemoryVerse[]) {
     : labels.join(", ");
   return first.book + " " + first.chapter + ":" + verseLabel;
 }
-

@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/app/components/ThemeProvider";
 import GlobalAskButton from "@/app/components/GlobalAskButton";
+import ReaderLibrarySync from "@/app/components/ReaderLibrarySync";
+import { getVerifiedSupabaseUserId } from "@/app/lib/supabase/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,11 +68,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userId = await getVerifiedSupabaseUserId();
+
   return (
     <html
       lang="en"
@@ -105,6 +109,7 @@ export default function RootLayout({
       </head>
       <body className="flex min-h-full flex-col">
         <ThemeProvider>
+          <ReaderLibrarySync userId={userId} />
           {children}
           <GlobalAskButton />
         </ThemeProvider>

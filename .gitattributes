@@ -1,5 +1,9 @@
 app/data/scripture/generatedBrenton.json text eol=lf
 app/data/scripture/generatedWEB.json text eol=lf
 public/data/bibleiq/word-study/**/*.json text eol=lf
+# The approved reader overlay is replayed byte-for-byte with an LF terminator.
+public/data/bibleiq/word-study-brenton-reader-record/manifest.json text eol=lf
 # Recovered sealed build inputs must retain their verified LF bytes on checkout.
 app/data/bibleiq/runtime-locks/word-study-build-inputs/* text eol=lf
+# Runtime-lock JSON files are byte-sealed from their LF Git serialization.
+app/data/bibleiq/runtime-locks/**/*.json text eol=lf

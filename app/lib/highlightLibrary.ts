@@ -1,8 +1,8 @@
-import { getCanonicalBookIndex } from "../data/scripture/canonicalBookOrder";
 import {
   getReaderMemoryVerseLabel,
   type ReaderHighlight,
 } from "./readerMemory";
+import { compareReaderVerses } from "./readerLibraryOrganization";
 
 export type HighlightGroup = {
   id: string;
@@ -16,17 +16,7 @@ export type HighlightGroup = {
 };
 
 function compareScriptureOrder(a: ReaderHighlight, b: ReaderHighlight) {
-  return (
-    getCanonicalBookIndex(a.book) - getCanonicalBookIndex(b.book) ||
-    a.book.localeCompare(b.book) ||
-    a.chapter - b.chapter ||
-    a.verse - b.verse ||
-    getReaderMemoryVerseLabel(a).localeCompare(
-      getReaderMemoryVerseLabel(b),
-      undefined,
-      { numeric: true },
-    )
-  );
+  return compareReaderVerses(a, b);
 }
 
 function canJoinHighlights(
@@ -132,4 +122,3 @@ export function formatHighlightDay(timestamp: number, now = new Date()) {
     year: date.getFullYear() === now.getFullYear() ? undefined : "numeric",
   }).format(date);
 }
-
