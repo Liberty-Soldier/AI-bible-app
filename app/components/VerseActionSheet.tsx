@@ -6,12 +6,15 @@ import SourceBreakdownVerse from "@/app/components/SourceBreakdownVerse";
 import type { BibleIQChapterTokenAvailability } from "@/app/data/lexicon/BibleIQTypes";
 import {
   areAllBookmarked,
+  getNotesForSelectedVerses,
+  getReaderMemory,
   highlightVerses,
   removeHighlights,
-  saveNote,
+  saveReaderNoteDraft,
   toggleBookmarks,
   getReaderMemoryVerseLabel,
   type ReaderHighlight,
+  type ReaderNote,
 } from "@/app/lib/readerMemory";
 import { getPassageReference } from "@/app/lib/readerSelection";
 
@@ -30,9 +33,13 @@ export default function VerseActionSheet({
   tokenAvailabilityByVerse?: BibleIQChapterTokenAvailability;
 }) {
   const [message, setMessage] = useState("");
-  const [panel, setPanel] = useState<"more" | "highlight" | "note" | "source" | null>(null);
+  const [panel, setPanel] = useState<"more" | "highlight" | "note-choice" | "note" | "source" | null>(null);
   const noteOpen = panel === "note";
   const [noteText, setNoteText] = useState("");
+  const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
+  const [noteChoices, setNoteChoices] = useState<ReaderNote[]>([]);
+  const [noteError, setNoteError] = useState("");
+  const [isSavingNote, setIsSavingNote] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
   const [keyboardInset, setKeyboardInset] = useState(0);
   const [noteViewportHeight, setNoteViewportHeight] = useState(0);
@@ -40,6 +47,7 @@ export default function VerseActionSheet({
   const panelRef = useRef<HTMLElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const noteTextareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const savingNoteRef = useRef(false);
 
   const firstVerse = verses[0];
   const referenceLabel = useMemo(() => getPassageReference(verses), [verses]);
@@ -84,6 +92,11 @@ export default function VerseActionSheet({
       setPanel(null);
       setMessage("");
       setNoteText("");
+      setEditingNoteId(null);
+      setNoteChoices([]);
+      setNoteError("");
+      setIsSavingNote(false);
+      savingNoteRef.current = false;
       setKeyboardInset(0);
       setNoteViewportHeight(0);
     }
@@ -103,10 +116,10 @@ export default function VerseActionSheet({
         0,
         window.innerHeight - viewport.height - viewport.offsetTop,
       );
-      const nextInset = inset > 80 ? Math.round(inset) : 0;
+      const nextInset = Math.ceil(inset);
       setKeyboardInset(nextInset);
       setNoteViewportHeight(
-        nextInset > 0 ? Math.round(viewport.height) : 0,
+        nextInset > 0 ? Math.floor(viewport.height) : 0,
       );
     };
 
@@ -247,12 +260,48 @@ export default function VerseActionSheet({
     showMessage(saved ? "Bookmark saved" : "Bookmark removed");
   }
 
-  function openNoteEditor() {
-    setPanel("note");
-
+  function focusNoteEditor() {
     window.setTimeout(() => {
       noteTextareaRef.current?.focus({ preventScroll: true });
     }, 80);
+  }
+
+  function openNewNoteEditor() {
+    savingNoteRef.current = false;
+    setEditingNoteId(null);
+    setNoteText("");
+    setNoteError("");
+    setPanel("note");
+    focusNoteEditor();
+  }
+
+  function openExistingNoteEditor(note: ReaderNote) {
+    savingNoteRef.current = false;
+    setEditingNoteId(note.id);
+    setNoteText(note.note);
+    setNoteError("");
+    setPanel("note");
+    focusNoteEditor();
+  }
+
+  function openNoteAction() {
+    const matchingNotes = getNotesForSelectedVerses(
+      getReaderMemory().notes,
+      verses,
+    );
+
+    setNoteChoices(matchingNotes);
+
+    if (matchingNotes.length === 0) {
+      openNewNoteEditor();
+    } else if (matchingNotes.length === 1) {
+      openExistingNoteEditor(matchingNotes[0]);
+    } else {
+      setEditingNoteId(null);
+      setNoteText("");
+      setNoteError("");
+      setPanel("note-choice");
+    }
   }
 
   function closeNoteEditor() {
@@ -264,20 +313,37 @@ export default function VerseActionSheet({
 
   function submitNote() {
     const cleanNote = noteText.trim();
+    if (!cleanNote || savingNoteRef.current) return;
 
-    if (!cleanNote) {
-      showMessage("Add note text first");
+    savingNoteRef.current = true;
+    setIsSavingNote(true);
+    setNoteError("");
+
+    let result: ReturnType<typeof saveReaderNoteDraft>;
+    try {
+      result = saveReaderNoteDraft({
+        noteId: editingNoteId,
+        verses,
+        noteText: cleanNote,
+      });
+    } catch {
+      setNoteError("We couldn't save your note. Your changes are still here. Try again.");
+      savingNoteRef.current = false;
+      setIsSavingNote(false);
       return;
     }
 
-    saveNote(verses, cleanNote);
+    // Keep this submission locked until the next editor opens.
     noteTextareaRef.current?.blur();
     setNoteText("");
+    setEditingNoteId(null);
+    setNoteChoices([]);
     setPanel(null);
     setKeyboardInset(0);
     setNoteViewportHeight(0);
-    emitMemoryChange();
-    showMessage("Note saved");
+    setIsSavingNote(false);
+    onMemoryChange?.();
+    showMessage(result.created ? "Note saved" : "Note updated");
   }
 
   function closePanel() {
@@ -310,13 +376,14 @@ export default function VerseActionSheet({
         <section
           ref={panelRef}
           id="reader-verse-actions"
-          aria-label={panel === "highlight" ? "Highlight selected verses" : panel === "note" ? "Note for selected verses" : panel === "source" ? "Original language and Word Study" : "More passage actions"}
+          aria-label={panel === "highlight" ? "Highlight selected verses" : panel === "note-choice" ? "Choose a note to edit" : panel === "note" ? "Note for selected verses" : panel === "source" ? "Original language and Word Study" : "More passage actions"}
+          role={panel === "note" || panel === "note-choice" ? "dialog" : undefined}
           tabIndex={-1}
-          className="absolute inset-x-0 bottom-full mb-2 max-h-[min(55dvh,26rem)] overflow-y-auto overscroll-contain rounded-xl border border-[var(--border)] bg-[var(--background)] p-2 outline-none"
-          style={noteOpen && noteViewportHeight ? { maxHeight: `${Math.max(100, noteViewportHeight - 96)}px` } : undefined}
+          className={`${noteOpen ? "max-h-[min(55dvh,26rem)]" : "absolute inset-x-0 bottom-full mb-2 max-h-[min(55dvh,26rem)]"} overflow-y-auto overscroll-contain rounded-xl border border-[var(--border)] bg-[var(--background)] p-2 outline-none`}
+          style={noteOpen && noteViewportHeight ? { maxHeight: `min(26rem, ${Math.max(0, noteViewportHeight - 8)}px)` } : undefined}
         >
           <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-3 pb-1">
-            <h2 className="text-sm font-semibold">{panel === "more" ? "More actions" : panel === "highlight" ? "Highlight" : panel === "note" ? "Note" : "Original language / Word Study"}</h2>
+            <h2 className="text-sm font-semibold">{panel === "more" ? "More actions" : panel === "highlight" ? "Highlight" : panel === "note-choice" ? "Notes for this passage" : panel === "note" ? editingNoteId ? "Edit note" : "New note" : "Original language / Word Study"}</h2>
             <button type="button" onClick={closePanel} className="min-h-11 px-2 text-sm text-[var(--muted)]">Close</button>
           </div>
           {panel === "more" ? (
@@ -344,22 +411,53 @@ export default function VerseActionSheet({
               <button type="button" onClick={clearHighlightSelection} className={`${actionClass} mt-2`}>Remove highlight</button>
               <button type="button" onClick={() => setPanel(null)} className={actionClass}>Back to actions</button>
             </div>
+          ) : panel === "note-choice" ? (
+            <div className="space-y-2 p-3">
+              <p className="text-sm text-[var(--muted)]">Choose a note to edit, or create another note for this passage.</p>
+              {noteChoices.map((note) => (
+                <button
+                  key={note.id}
+                  type="button"
+                  onClick={() => openExistingNoteEditor(note)}
+                  className={`${actionClass} h-auto items-start border border-[var(--border)]`}
+                >
+                  <span className="min-w-0">
+                    <span className="block font-semibold">Edit {getPassageReference(note.verses)}</span>
+                    <span className="mt-1 block line-clamp-2 text-xs font-normal text-[var(--muted)]">{note.note || "Empty note"}</span>
+                  </span>
+                </button>
+              ))}
+              <button type="button" onClick={openNewNoteEditor} className={`${actionClass} justify-center border border-[var(--border)]`}>New note</button>
+            </div>
           ) : panel === "note" ? (
-            <form className="space-y-3 p-3" onSubmit={(event) => { event.preventDefault(); submitNote(); }}>
+            <form className="space-y-3 p-3" aria-busy={isSavingNote} onSubmit={(event) => { event.preventDefault(); submitNote(); }}>
+              {editingNoteId ? (
+                <div className="flex items-center justify-between gap-3 rounded-lg bg-[var(--surface)] px-3 py-2 text-xs text-[var(--muted)]">
+                  <span>Editing the existing note</span>
+                  <button type="button" onClick={openNewNoteEditor} className="min-h-11 shrink-0 px-2 font-semibold text-[var(--foreground)]">New note</button>
+                </div>
+              ) : null}
               <label className="block">
                 <span className="sr-only">Note for {referenceLabel}</span>
                 <textarea
                   ref={noteTextareaRef}
                   value={noteText}
-                  onChange={(event) => setNoteText(event.target.value)}
+                  onChange={(event) => {
+                    setNoteText(event.target.value);
+                    if (noteError) setNoteError("");
+                  }}
                   placeholder="Write a note…"
                   rows={4}
                   className="max-h-[25dvh] min-h-20 w-full resize-y rounded-lg border border-[var(--border)] bg-[var(--background)] p-3 text-base leading-7 focus-visible:outline-2 focus-visible:outline-[var(--brand)]"
                 />
               </label>
-              <div className="flex flex-wrap justify-end gap-2">
+              {noteError ? <p role="alert" className="rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-300">{noteError}</p> : null}
+              <div
+                className="sticky bottom-0 -mx-3 -mb-3 flex flex-wrap justify-end gap-2 border-t border-[var(--border)] bg-[var(--background)] px-3 pt-2"
+                style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+              >
                 <button type="button" onClick={closeNoteEditor} className="min-h-11 px-3 text-sm">Cancel</button>
-                <button type="submit" disabled={!noteText.trim()} className="min-h-11 rounded-lg bg-[var(--foreground)] px-4 text-sm font-semibold text-[var(--background)] disabled:opacity-45">Save note</button>
+                <button type="submit" disabled={!noteText.trim() || isSavingNote} className="min-h-11 rounded-lg bg-[var(--foreground)] px-4 text-sm font-semibold text-[var(--background)] disabled:opacity-45">{isSavingNote ? "Saving…" : editingNoteId ? "Save changes" : "Save note"}</button>
               </div>
             </form>
           ) : (
@@ -380,7 +478,7 @@ export default function VerseActionSheet({
           )}
         </section>
       ) : null}
-      <div className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-2 shadow-xl">
+      <div hidden={noteOpen} className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-2 shadow-xl">
         <div className="flex items-start gap-2 px-1 pb-2">
           <p className="min-w-0 flex-1 break-words text-sm font-semibold" aria-live="polite">
             {referenceLabel}
@@ -394,7 +492,7 @@ export default function VerseActionSheet({
         </div>
         <div role="group" aria-label="Selected passage actions" className="grid grid-cols-4 gap-1">
           <button type="button" onClick={() => setPanel(panel === "highlight" ? null : "highlight")} className="min-h-11 rounded-xl px-1 text-xs font-semibold hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]">Highlight</button>
-          <button type="button" onClick={openNoteEditor} className="min-h-11 rounded-xl px-1 text-xs font-semibold hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]">Note</button>
+          <button type="button" onClick={openNoteAction} className="min-h-11 rounded-xl px-1 text-xs font-semibold hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]">Note</button>
           <button type="button" onClick={copySelection} className="min-h-11 rounded-xl px-1 text-xs font-semibold hover:bg-[var(--surface)] focus-visible:outline-2 focus-visible:outline-[var(--brand)]">Copy</button>
           <button
             ref={menuButtonRef}
