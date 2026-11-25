@@ -507,7 +507,7 @@ export function saveNote(verses: ReaderMemoryVerse[], note: string) {
   const now = Date.now();
 
   const newNote: ReaderNote = {
-    id: `note-${now}`,
+    id: `note-${now}-${Math.random().toString(36).slice(2, 10)}`,
     verses,
     note,
     savedAt: now,
@@ -521,6 +521,17 @@ export function saveNote(verses: ReaderMemoryVerse[], note: string) {
   });
 
   return newNote;
+}
+
+export function getNotesForSelectedVerses(
+  notes: ReaderNote[],
+  verses: ReaderMemoryVerse[],
+) {
+  const selectedIds = new Set(verses.map((verse) => verse.id));
+
+  return notes.filter((note) =>
+    note.verses.some((verse) => selectedIds.has(verse.id)),
+  );
 }
 
 export function updateNote(noteId: string, noteText: string) {
@@ -544,6 +555,27 @@ export function updateNote(noteId: string, noteText: string) {
   });
 
   return updated;
+}
+
+export function saveReaderNoteDraft({
+  noteId,
+  verses,
+  noteText,
+}: {
+  noteId?: string | null;
+  verses: ReaderMemoryVerse[];
+  noteText: string;
+}) {
+  if (!noteId) {
+    return { note: saveNote(verses, noteText), created: true };
+  }
+
+  const note = updateNote(noteId, noteText);
+  if (!note) {
+    throw new Error("The note could not be found. Close the editor and try again.");
+  }
+
+  return { note, created: false };
 }
 
 export function deleteNote(noteId: string) {
