@@ -456,6 +456,11 @@ type SelectableItemsProps = {
   onToggle: (id: string) => void;
 };
 
+const entryFocus = "focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--brand)]";
+const entrySeparator = "border-b border-[var(--border)] last:border-b-0";
+const entryAction = `block min-h-11 w-full min-w-0 px-2 py-1.5 text-left ${entryFocus}`;
+const entryPreview = "wrap-anywhere text-sm leading-5 text-[var(--muted)]";
+
 function bookmarkHref(item: ReaderBookmark) {
   return buildReaderHref({
     book: item.book,
@@ -471,9 +476,9 @@ function BookmarkList({
 }: { items: ReaderBookmark[] } & SelectableItemsProps) {
   if (!items.length) return <LibraryEmpty>No bookmarks yet. Save a verse to find it here.</LibraryEmpty>;
   return (
-    <div className="space-y-3">
+    <div>
       {items.map((item) => (
-        <BookmarkCard key={item.id} item={item} {...selection} />
+        <BookmarkEntry key={item.id} item={item} {...selection} />
       ))}
     </div>
   );
@@ -487,17 +492,17 @@ function BookmarkBooks({
 } & SelectableItemsProps) {
   if (!sections.length) return <LibraryEmpty>No bookmarked books yet.</LibraryEmpty>;
   return (
-    <div className="space-y-4">
+    <div>
       {sections.map(({ book, items }) => (
         <BookDetails key={book} book={book} count={items.length} noun="bookmark">
-          {items.map((item) => <BookmarkCard key={item.id} item={item} {...selection} />)}
+          {items.map((item) => <BookmarkEntry key={item.id} item={item} {...selection} />)}
         </BookDetails>
       ))}
     </div>
   );
 }
 
-function BookmarkCard({
+function BookmarkEntry({
   item,
   selecting = false,
   selectedIds = new Set<string>(),
@@ -511,11 +516,11 @@ function BookmarkCard({
   showType?: boolean;
 }) {
   const selected = selectedIds.has(item.id);
-  const className = selectableCardClass(selected, "bg-[var(--surface)]");
+  const className = `${entryAction} ${entrySeparator} ${selected ? "bg-amber-500/10" : ""}`;
   const content = (
     <>
-      <CardHeading reference={item.reference} selecting={selecting} selected={selected} type={showType ? "Bookmark" : undefined} />
-      <p className="mt-1.5 line-clamp-2 text-sm leading-5 text-[var(--muted)]">{item.text}</p>
+      <EntryHeading reference={item.reference} selecting={selecting} selected={selected} type={showType ? "Bookmark" : undefined} />
+      <span className={`${entryPreview} line-clamp-1`}>{item.text}</span>
     </>
   );
   return selecting ? (
@@ -532,8 +537,8 @@ function NoteList({
 }: { items: ReaderNote[]; onOpen: (id: string) => void } & SelectableItemsProps) {
   if (!items.length) return <LibraryEmpty>No notes yet. Add a note to a selected passage to find it here.</LibraryEmpty>;
   return (
-    <div className="space-y-3">
-      {items.map((note) => <NoteMemoryCard key={note.id} note={note} onOpen={() => onOpen(note.id)} {...selection} />)}
+    <div>
+      {items.map((note) => <NoteEntry key={note.id} note={note} onOpen={() => onOpen(note.id)} {...selection} />)}
     </div>
   );
 }
@@ -548,10 +553,10 @@ function NoteBooks({
 } & SelectableItemsProps) {
   if (!sections.length) return <LibraryEmpty>No notes grouped by book yet.</LibraryEmpty>;
   return (
-    <div className="space-y-4">
+    <div>
       {sections.map(({ book, items }) => (
         <BookDetails key={book} book={book} count={items.length} noun="note">
-          {items.map((note) => <NoteMemoryCard key={note.id} note={note} onOpen={() => onOpen(note.id)} {...selection} />)}
+          {items.map((note) => <NoteEntry key={note.id} note={note} onOpen={() => onOpen(note.id)} {...selection} />)}
         </BookDetails>
       ))}
     </div>
@@ -560,36 +565,29 @@ function NoteBooks({
 
 function BookDetails({ book, count, noun, children }: { book: string; count: number; noun: string; children: React.ReactNode }) {
   return (
-    <details className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
-      <summary className="min-h-12 cursor-pointer list-none px-4 py-3 font-semibold">
-        <span className="flex items-center justify-between gap-3">
-          <span>{book}</span>
-          <span className="text-xs text-[var(--muted)]">{count} {count === 1 ? noun : `${noun}s`}</span>
-        </span>
+    <details className={`group ${entrySeparator}`}>
+      <summary className={`flex min-h-11 cursor-pointer list-none items-center gap-2 px-2 py-1.5 font-semibold [&::-webkit-details-marker]:hidden ${entryFocus}`}>
+        <span aria-hidden="true" className="shrink-0 text-[var(--muted)] group-open:rotate-90">›</span>
+        <span className="min-w-0 flex-1 wrap-anywhere">{book}</span>
+        <span className="shrink-0 text-xs font-normal text-[var(--muted)]">{count} {count === 1 ? noun : `${noun}s`}</span>
       </summary>
-      <div className="space-y-3 border-t border-[var(--border)] p-3">{children}</div>
+      <div className="space-y-1 pb-1">{children}</div>
     </details>
   );
 }
 
-function CardHeading({ reference, selecting, selected, type }: { reference: string; selecting: boolean; selected: boolean; type?: string }) {
+function EntryHeading({ reference, selecting, selected, type }: { reference: string; selecting?: boolean; selected?: boolean; type?: string }) {
   return (
-    <div className="flex items-start justify-between gap-3">
-      <div className="min-w-0">
-        {type ? <span className="mb-1 inline-flex rounded-full bg-[var(--background)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--muted)]">{type}</span> : null}
-        <p className="font-semibold">{reference}</p>
-      </div>
-      {selecting ? <SelectionMark selected={selected} /> : null}
-    </div>
+    <span className="flex items-start justify-between gap-2">
+      <span className="min-w-0 wrap-anywhere font-semibold leading-5">{reference}</span>
+      {selecting ? <SelectionMark selected={!!selected} /> : null}
+      {type ? <span className="shrink-0 text-xs leading-5 text-[var(--muted)]">{type}</span> : null}
+    </span>
   );
 }
 
 function SelectionMark({ selected }: { selected: boolean }) {
   return <span aria-hidden="true" className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${selected ? "border-amber-600 bg-amber-600 text-white" : "border-[var(--muted)]"}`}>{selected ? "✓" : ""}</span>;
-}
-
-function selectableCardClass(selected: boolean, background: string) {
-  return `block w-full rounded-2xl border p-3 text-left transition ${selected ? "border-amber-500 ring-2 ring-amber-500/20" : "border-[var(--border)]"} ${background}`;
 }
 
 function LibraryEmpty({ children }: { children: React.ReactNode }) {
@@ -613,15 +611,15 @@ function RecentHighlights({
   });
 
   return (
-    <div className="space-y-7">
+    <div className="space-y-4">
       {Array.from(days.values()).map((dayGroups) => (
         <section key={getHighlightDayKey(dayGroups[0].savedAt)}>
-          <h2 className="mb-3 text-sm font-bold text-[var(--muted)]">
+          <h2 className="mb-1 px-2 text-sm font-bold text-[var(--muted)]">
             {formatHighlightDay(dayGroups[0].savedAt)}
           </h2>
-          <div className="space-y-3">
+          <div className="space-y-1">
             {dayGroups.map((group) => (
-              <HighlightGroupCard
+              <HighlightEntry
                 key={group.id}
                 group={group}
                 selecting={selecting}
@@ -659,7 +657,7 @@ function BookHighlights({
   });
 
   return (
-    <div className="space-y-4">
+    <div>
       {Array.from(books.entries())
         .sort(
           ([a], [b]) =>
@@ -667,45 +665,28 @@ function BookHighlights({
             a.localeCompare(b),
         )
         .map(([book, bookGroups]) => (
-          <details
+          <BookDetails
             key={book}
-            className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]"
+            book={book}
+            count={bookGroups.reduce((count, group) => count + group.items.length, 0)}
+            noun="highlight"
           >
-            <summary className="min-h-12 cursor-pointer list-none px-4 py-3 font-semibold">
-              <span className="flex items-center justify-between gap-3">
-                <span>{book}</span>
-                <span className="text-xs text-[var(--muted)]">
-                  {bookGroups.reduce(
-                    (count, group) => count + group.items.length,
-                    0,
-                  )}{" "}
-                  saved {bookGroups.reduce(
-                    (count, group) => count + group.items.length,
-                    0,
-                  ) === 1 ? "highlight" : "highlights"}
-                </span>
-              </span>
-            </summary>
-            <div className="space-y-3 border-t border-[var(--border)] p-3">
-              {bookGroups.map((group) => (
-                <HighlightGroupCard
-                  key={group.id}
-                  group={group}
-                  selecting={selecting}
-                  selected={group.items.every((item) =>
-                    selectedIds.has(item.id),
-                  )}
-                  onToggle={() => onToggle(group)}
-                />
-              ))}
-            </div>
-          </details>
+            {bookGroups.map((group) => (
+              <HighlightEntry
+                key={group.id}
+                group={group}
+                selecting={selecting}
+                selected={group.items.every((item) => selectedIds.has(item.id))}
+                onToggle={() => onToggle(group)}
+              />
+            ))}
+          </BookDetails>
         ))}
     </div>
   );
 }
 
-function HighlightGroupCard({
+function HighlightEntry({
   group,
   selecting,
   selected,
@@ -719,32 +700,13 @@ function HighlightGroupCard({
   showType?: boolean;
 }) {
   const first = group.items[0];
-  const className = `block w-full rounded-2xl border p-3 text-left transition ${
-    selected ? "border-amber-500 ring-2 ring-amber-500/20" : "border-[var(--border)]"
-  } ${getHighlightColorClass(group.color)}`;
+  const className = `${entryAction} rounded ${selected ? "ring-2 ring-inset ring-amber-600" : ""} ${getHighlightColorClass(group.color)}`;
   const content = (
     <>
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          {showType ? <span className="mb-1 inline-flex rounded-full bg-[var(--background)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--muted)]">Highlight</span> : null}
-          <p className="font-semibold">{group.reference}</p>
-        </div>
-        {selecting ? (
-          <span
-            aria-hidden="true"
-            className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs ${
-              selected
-                ? "border-amber-600 bg-amber-600 text-white"
-                : "border-[var(--muted)]"
-            }`}
-          >
-            {selected ? "✓" : ""}
-          </span>
-        ) : null}
-      </div>
-      <p className="mt-1.5 line-clamp-2 text-sm leading-5 text-[var(--muted)]">
+      <EntryHeading reference={group.reference} selecting={selecting} selected={selected} type={showType ? "Highlight" : undefined} />
+      <span className={`${entryPreview} line-clamp-2`}>
         {group.text}
-      </p>
+      </span>
     </>
   );
 
@@ -1008,10 +970,10 @@ function LibraryCollections({
             return (
               <section
                 key={collection.id}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)]"
+                className="border-b border-[var(--border)] pb-2"
               >
-                <div className="flex items-center justify-between gap-3 px-4 py-3">
-                  <div>
+                <div className="flex items-center justify-between gap-2 px-2">
+                  <div className="min-w-0 wrap-anywhere">
                     <h2 className="font-semibold">{collection.name}</h2>
                     <p className="text-xs text-[var(--muted)]">
                       {itemCount} {itemCount === 1 ? "saved item" : "saved items"}
@@ -1022,14 +984,14 @@ function LibraryCollections({
                       <button
                         type="button"
                         onClick={() => setDeleteCollectionId(null)}
-                        className="text-xs font-semibold text-[var(--muted)]"
+                        className={`min-h-11 px-2 text-xs font-semibold text-[var(--muted)] ${entryFocus}`}
                       >
                         Keep
                       </button>
                       <button
                         type="button"
                         onClick={() => removeCollection(collection.id)}
-                        className="text-xs font-semibold text-red-600 dark:text-red-400"
+                        className={`min-h-11 px-2 text-xs font-semibold text-red-600 dark:text-red-400 ${entryFocus}`}
                       >
                         Confirm delete
                       </button>
@@ -1038,21 +1000,21 @@ function LibraryCollections({
                     <button
                       type="button"
                       onClick={() => setDeleteCollectionId(collection.id)}
-                      className="text-xs font-semibold text-[var(--muted)]"
+                      className={`min-h-11 px-2 text-xs font-semibold text-[var(--muted)] ${entryFocus}`}
                     >
                       Delete
                     </button>
                   )}
                 </div>
-                <div className="space-y-3 border-t border-[var(--border)] p-3">
+                <div className="space-y-1">
                   {entries.length ? (
                     entries.map((entry) =>
                       entry.kind === "bookmark" ? (
-                        <BookmarkCard key={`bookmark-${entry.item.id}`} item={entry.item} showType />
+                        <BookmarkEntry key={`bookmark-${entry.item.id}`} item={entry.item} showType />
                       ) : entry.kind === "highlight" ? (
-                        <HighlightGroupCard key={`highlight-${entry.item.id}`} group={entry.item} showType />
+                        <HighlightEntry key={`highlight-${entry.item.id}`} group={entry.item} showType />
                       ) : (
-                        <NoteMemoryCard key={`note-${entry.item.id}`} note={entry.item} onOpen={() => onOpenNote(entry.item.id)} showType />
+                        <NoteEntry key={`note-${entry.item.id}`} note={entry.item} onOpen={() => onOpenNote(entry.item.id)} showType />
                       ),
                     )
                   ) : (
@@ -1093,7 +1055,7 @@ function TabLink({
   );
 }
 
-function NoteMemoryCard({
+function NoteEntry({
   note,
   onOpen,
   selecting = false,
@@ -1108,38 +1070,44 @@ function NoteMemoryCard({
   onToggle?: (id: string) => void;
   showType?: boolean;
 }) {
-  const edited = note.updatedAt > note.savedAt + 1000;
   const selected = selectedIds.has(note.id);
-  const content = (
-    <>
-      <CardHeading reference={getNoteReference(note)} selecting={selecting} selected={selected} type={showType ? "Note" : undefined} />
-      <p className="mt-1.5 line-clamp-2 text-sm leading-5 text-[var(--muted)]">{note.note}</p>
-      <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-[var(--muted)]">
-        <span>Created {formatNoteDate(note.savedAt)}</span>
-        {edited ? <span>Edited {formatNoteDate(note.updatedAt)}</span> : null}
-      </div>
-    </>
+  const reference = getNoteReference(note);
+  const preview = (
+    <span className={`${entryPreview} line-clamp-2`}>{note.note || "Open note"}</span>
   );
 
   if (selecting) {
     return (
-      <button type="button" onClick={() => onToggle(note.id)} aria-pressed={selected} className={selectableCardClass(selected, "bg-[var(--surface)]")}>
-        {content}
+      <button
+        type="button"
+        onClick={() => onToggle(note.id)}
+        aria-pressed={selected}
+        className={`${entryAction} ${entrySeparator} ${selected ? "bg-amber-500/10" : ""}`}
+      >
+        <EntryHeading reference={reference} selecting selected={selected} type={showType ? "Note" : undefined} />
+        {preview}
       </button>
     );
   }
 
   return (
-    <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3">
-      {content}
-      <div className="mt-3 grid grid-cols-2 gap-2 border-t border-[var(--border)] pt-3">
-        <Link href={getNoteScriptureHref(note)} className="min-h-11 rounded-xl border border-[var(--border)] px-3 py-2.5 text-center text-xs font-semibold">
-          View passage
-        </Link>
-        <button type="button" onClick={onOpen} className="min-h-11 rounded-xl bg-[var(--foreground)] px-3 py-2.5 text-xs font-semibold text-[var(--background)]">
-          Open & edit
-        </button>
-      </div>
+    <article className={`grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] ${entrySeparator}`}>
+      <Link
+        href={getNoteScriptureHref(note)}
+        className={`flex min-h-11 min-w-0 flex-col justify-center px-2 py-1.5 font-semibold leading-5 hover:bg-[var(--surface)] ${entryFocus}`}
+      >
+        {showType ? <span className="text-xs font-normal text-[var(--muted)]">Note</span> : null}
+        <span className="wrap-anywhere underline decoration-[var(--muted)] underline-offset-2">{reference}</span>
+      </Link>
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`Open note for ${reference}: ${note.note.slice(0, 120)}`}
+        className={`flex min-h-11 min-w-0 items-center gap-2 px-2 py-1.5 text-left hover:bg-[var(--surface)] ${entryFocus}`}
+      >
+        <span className="min-w-0 flex-1">{preview}</span>
+        <span aria-hidden="true" className="shrink-0 text-[var(--muted)]">›</span>
+      </button>
     </article>
   );
 }
